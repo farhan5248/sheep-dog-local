@@ -18,10 +18,10 @@ mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=f
 mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
 
 mvn dependency:copy-dependencies -DoutputDirectory=target/dependency
-mvn deploy:deploy-file -DgroupId=todo -DartifactId=todo:todo:jar -Dfile=target/dependency -Durl=https://maven.pkg.github.com/farhan5248/sheep-dog-tools -DrepositoryId=github
+mvn deploy:deploy-file -DgroupId=todo -DartifactId=todo:todo:jar -Dfile=target/dependency -Durl=https://maven.pkg.github.com/sheep-dog-local -DrepositoryId=github
 
 
-mvn deploy:deploy-file -Dfile=target/dependency/ecore.xmi-2.35.0.v20230801-1141.jar -Durl=https://maven.pkg.github.com/farhan5248/sheep-dog-tools -DrepositoryId=github -DgroupId=org.eclipse.emf -DartifactId=ecore.xmi -Dpackaging=jar -Dversion=2.35.0.v20230801-1141
+mvn deploy:deploy-file -Dfile=target/dependency/ecore.xmi-2.35.0.v20230801-1141.jar -Durl=https://maven.pkg.github.com/sheep-dog-local -DrepositoryId=github -DgroupId=org.eclipse.emf -DartifactId=ecore.xmi -Dpackaging=jar -Dversion=2.35.0.v20230801-1141
 
 
 org.eclipse.core:runtime:jar:3.29.0.v20230726-0617

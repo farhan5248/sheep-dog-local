@@ -200,14 +200,14 @@
 	</build>
 
 	<scm>
-		<connection>scm:git:https://github.com/farhan5248/sheep-dog-tools</connection>
+		<connection>scm:git:https://github.com/sheep-dog-local</connection>
 		<tag>HEAD</tag>
 	</scm>
 	
 	<distributionManagement>
 		<repository>
 			<id>github</id>
-			<url>https://maven.pkg.github.com/farhan5248/sheep-dog-tools</url>
+			<url>https://maven.pkg.github.com/sheep-dog-local</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -220,7 +220,7 @@
 	<repositories>
 		<repository>
 			<id>github</id>
-			<url>https://maven.pkg.github.com/farhan5248/sheep-dog-tools</url>
+			<url>https://maven.pkg.github.com/sheep-dog-local</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -269,7 +269,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>github</id>
-			<url>https://maven.pkg.github.com/farhan5248/sheep-dog-tools</url>
+			<url>https://maven.pkg.github.com/sheep-dog-local</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
