@@ -1,0 +1,56 @@
+name: Publish Sheep Dog Local Snapshot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "develop" ]
+    paths:
+      - '.github/**'
+      - '**/docker/**'
+      - '**/src/**'
+      - '**/pom.xml'
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  sheep-dog-test:
+    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    with:
+      project: 'sheep-dog-test'
+    secrets: inherit
+
+  sheep-dog-xtext-plugin:
+    needs: [sheep-dog-test]
+    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    with:
+      project: 'sheepdogxtextplugin.parent'
+    secrets: inherit
+
+  sheep-dog-cucumber:
+    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    with:
+      project: 'sheepdogcucumber.parent'
+    secrets: inherit
+
+  sheep-dog-dev:
+    needs: [sheep-dog-xtext-plugin, sheep-dog-cucumber]
+    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    with:
+      project: 'sheep-dog-dev'
+    secrets: inherit
+
+  sheep-dog-dev-maven-plugin:
+    needs: [sheep-dog-dev]
+    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    with:
+      project: 'sheep-dog-dev-maven-plugin'
+    secrets: inherit
+
+  merge-into-main:
+    needs: [sheep-dog-dev-maven-plugin]
+    uses: farhan5248/sheep-dog-ops/.github/workflows/merge.yml@main
+    with:
+      source: 'develop'
+      target: 'main'
+    secrets: inherit
