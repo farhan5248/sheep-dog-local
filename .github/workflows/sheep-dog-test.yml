@@ -1,0 +1,63 @@
+name: Publish Sheep Dog Test Release
+
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  sheep-dog-test:
+    uses: ./.github/workflows/release.yml
+    with:
+      project: 'sheep-dog-test'
+      plugin: 'Maven'
+    secrets: inherit
+
+  sheep-dog-xtext-plugin:
+    needs: [sheep-dog-test]
+    uses: ./.github/workflows/release.yml
+    with:
+      project: 'sheepdogxtextplugin.parent'
+      plugin: 'Sheep'
+    secrets: inherit
+  
+  sheep-dog-dev:
+    needs: [sheep-dog-xtext-plugin]
+    uses: ./.github/workflows/release.yml
+    with:
+      project: 'sheep-dog-dev'
+      plugin: 'Maven'
+    secrets: inherit
+
+  sheep-dog-dev-maven-plugin:
+    needs: [sheep-dog-dev]
+    uses: ./.github/workflows/release.yml
+    with:
+      project: 'sheep-dog-dev-maven-plugin'
+      plugin: 'Maven'
+    secrets: inherit    
+
+  sheep-dog-dev-svc:
+    needs: [sheep-dog-dev]
+    uses: ./.github/workflows/release.yml
+    with:
+      project: 'sheep-dog-dev-svc'
+      plugin: 'Maven'
+    secrets: inherit
+  
+  sheep-dog-dev-svc-maven-plugin:
+    needs: [sheep-dog-dev-svc]
+    uses: ./.github/workflows/release.yml
+    with:
+      project: 'sheep-dog-dev-svc-maven-plugin'
+      plugin: 'Maven'
+    secrets: inherit            
+    
+  merge-into-develop:
+    needs: [sheep-dog-dev-svc-maven-plugin]
+    uses: ./.github/workflows/merge.yml
+    with:
+      source: 'main'
+      target: 'develop'
+    secrets: inherit      

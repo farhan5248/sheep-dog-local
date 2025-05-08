@@ -1,0 +1,152 @@
+grammar org.farhan.dsl.cucumber.Cucumber with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate cucumber "http://www.farhan.org/dsl/cucumber/Cucumber"
+
+Model:
+	Feature | StepObject;
+
+StepObject:
+	'Object:' name=Phrase EOL
+	statements+=Statement*
+	stepDefinitions+=StepDefinition*;
+
+StepDefinition:
+	'Definition:' name=Phrase EOL
+	statements+=Statement*
+	stepParameters+=StepParameters*;
+
+StepParameters:
+	'Parameters:' name=Phrase EOL
+	statements+=Statement*
+	parametersTable=ParametersTable;
+
+ParametersTable:
+	rows+=Row+;
+
+Feature:
+	(tags+=Tag+ EOL)?
+	'Feature:' name=Phrase EOL
+	statements+=Statement*
+	abstractScenarios+=AbstractScenario*;
+
+// TODO add parameters to step, cell, line tokens
+// This has the side effect of allowing more than 1 Background.
+// Also it allows it to be anywhere, like at the begining or end.
+// I'm doing it this way to make the formatting code simpler by having less duplication
+AbstractScenario:
+	Background | Scenario | ScenarioOutline;
+
+Background:
+	'Background:' name=Phrase EOL
+	statements+=Statement*
+	steps+=Step*;
+
+Scenario:
+	(tags+=Tag+ EOL)?
+	'Scenario:' name=Phrase EOL
+	statements+=Statement*
+	steps+=Step*;
+
+ScenarioOutline:
+	(tags+=Tag+ EOL)?
+	'Scenario Outline:' name=Phrase EOL
+	statements+=Statement*
+	steps+=Step*
+	examples+=Examples+;
+
+Examples:
+	(tags+=Tag+ EOL)?
+	'Examples:' name=Phrase EOL
+	statements+=Statement*
+	theExamplesTable=ExamplesTable;
+
+ExamplesTable:
+	rows+=Row+;
+
+StepTable:
+	rows+=Row+;
+
+Row:
+	cells+=Cell+ '|' EOL;
+
+Cell:
+	'|' name=Phrase;
+
+Step:
+	Given | When | Then | And | But | Asterisk;
+
+DocString:
+	'"""' EOL
+	lines+=Line+
+	'"""' EOL;
+
+Given:
+	'Given' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+When:
+	'When' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+Then:
+	'Then' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+And:
+	'And' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+But:
+	'But' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+Asterisk:
+	'*' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+Statement:
+	name=Phrase EOL;
+
+Phrase:
+	TEXT_LITERAL+;
+
+Tag:
+	'@' name=ID;
+
+Line:
+	name=LineBits EOL;
+
+LineBits:
+	TEXT_LITERAL*;
+
+TEXT_LITERAL:
+	WORD
+	| ID
+	| STRING;
+
+@Override 
+terminal ID:
+	('0'..'9' | 'a'..'z' | 'A'..'Z' | '_' | '-' | '.')+;
+
+terminal WORD:
+	!('@' | '|' | ' ' | '\t' | '\n' | '\r')
+	!(' ' | '\t' | '\n' | '\r')*;
+
+// Not sure how this is helping, will remove it
+@Override 
+terminal STRING:
+	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | '"' | '\r' | '\n'))* '"' |
+	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | "'" | '\r' | '\n'))* "'";
+
+@Override 
+terminal WS:
+	(' ' | '\t' | '\r')+;
+
+// single line comment
+@Override 
+terminal SL_COMMENT:
+	'#' !('\n')* EOL;
+
+terminal EOL:
+	('\n')+;

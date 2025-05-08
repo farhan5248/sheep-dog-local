@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature id="sheepdogxtextplugin.feature"
+	label="SheepDog Feature "
+	version="1.27.0.qualifier">
+	<plugin
+			id="sheepdogxtextplugin"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+	<plugin
+			id="sheepdogxtextplugin.ide"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+	<plugin
+			id="sheepdogxtextplugin.ui"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+</feature>

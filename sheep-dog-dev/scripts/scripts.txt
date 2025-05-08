@@ -1,0 +1,42 @@
+"C:\Users\Farhan\Downloads\org.eclipse.xtext_2.7.3.v201411190455.jar"
+
+"C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.xtext_2.32.0.v20230827-1315.jar"
+"C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.core.runtime_3.29.0.v20230726-0617.jar"
+"C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.emf.ecore.xmi_2.35.0.v20230801-1141.jar"
+"C:\Users\Farhan\.p2\pool\plugins\org.antlr.runtime_3.2.0.v20220404-1927.jar"
+"C:\Users\Farhan\.p2\pool\plugins\org.eclipse.xtext.util_2.32.0.v20230827-1315.jar"
+"C:\Users\Farhan\.p2\pool\plugins\org.eclipse.equinox.common_3.18.100.v20230730-1117.jar"
+"C:\Users\Farhan\Downloads\org.eclipse.uml2.uml.profile.standard_1.5.0.v20221116-1811.jar"
+"C:\Users\Farhan\.p2\pool\plugins\org.eclipse.xtext.xbase.lib_2.33.0.v20231121-0955.jar"
+
+mvn install:install-file -Dfile="C:\Users\Farhan\.p2\pool\plugins\org.eclipse.xtext.xbase.lib_2.33.0.v20231121-0955.jar" -DgroupId=org.eclipse.xtext -DartifactId=xbase.lib:2.33.0.v20231121-0955:jar -DgeneratePom=true
+
+mvn org.farhan:mbt-maven-plugin:cucumber-to-uml -Dtags=debug
+mvn org.farhan:mbt-maven-plugin:uml-to-cucumber -Dtags=debug
+
+mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false
+mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
+
+mvn dependency:copy-dependencies -DoutputDirectory=target/dependency
+mvn deploy:deploy-file -DgroupId=todo -DartifactId=todo:todo:jar -Dfile=target/dependency -Durl=https://maven.pkg.github.com/farhan5248/sheep-dog-tools -DrepositoryId=github
+
+
+mvn deploy:deploy-file -Dfile=target/dependency/ecore.xmi-2.35.0.v20230801-1141.jar -Durl=https://maven.pkg.github.com/farhan5248/sheep-dog-tools -DrepositoryId=github -DgroupId=org.eclipse.emf -DartifactId=ecore.xmi -Dpackaging=jar -Dversion=2.35.0.v20230801-1141
+
+
+org.eclipse.core:runtime:jar:3.29.0.v20230726-0617
+org.eclipse.emf:ecore:jar:2.35.0.v20230829-0934
+org.eclipse.emf:ecore.xmi:jar:2.35.0.v20230801-1141
+org.eclipse.emf:mapping.ecore2xml:jar:2.12.0.v20230211-1150
+org.eclipse.emf:common:jar:2.29.0.v20230916-0637
+org.eclipse.equinox:common:jar:3.18.100.v20230730-1117
+org.antlr:runtime:jar:3.2.0.v20220404-1927
+org.eclipse.xtext:xtext:jar:2.32.0.v20230827-1315
+org.eclipse.xtext:util:jar:2.32.0.v20230827-1315
+org.eclipse.xtext:xbase.lib:jar:2.33.0.v20231121-0955
+org.eclipse.uml2:uml.profile.standard:jar:1.5.0.v20221116-1811
+org.eclipse.uml2:common:jar:2.5.0.v20221116-1811
+org.eclipse.uml2:types:jar:2.5.0.v20221116-1811
+org.eclipse.uml2:uml.resources:jar:5.5.0.v20221116-1811
+org.eclipse.uml2:uml:jar:5.5.0.v20210228-1829
+

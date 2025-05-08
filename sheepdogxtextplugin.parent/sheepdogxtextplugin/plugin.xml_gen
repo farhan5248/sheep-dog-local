@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.farhan.org/dsl/sheepdog"
+			class = "org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage"
+			genModel = "model/generated/SheepDog.genmodel" />
+	</extension>
+</plugin>
