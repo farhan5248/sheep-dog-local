@@ -200,7 +200,7 @@
 	</build>
 
 	<scm>
-		<connection>scm:git:https://github.com/sheep-dog-local</connection>
+		<connection>scm:git:https://github.com/farhan5248/sheep-dog-local</connection>
 		<tag>HEAD</tag>
 	</scm>
 	
