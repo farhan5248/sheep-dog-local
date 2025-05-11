@@ -41,10 +41,14 @@ This was the original problem I was trying to solve, break up a large monolithic
    - **sheep-dog-dev-svc**: Currently wraps **sheep-dog-dev** as a Spring Boot service. This is going to be changed over the next few weeks to be several services and include **sheep-dog-test**.
    - **sheep-dog-dev-svc-maven-plugin**: Maven plug-in for **sheep-dog-dev-svc**.
 
-# Workflows
+# Building and Running
 
-One should be able to clone the Git repos and run `mvn clean install`. 
-Any need for artifacts not in Maven Central are in my GitHub Maven repositories which are configured in the poms.
+These are notes for anyone new to working with an IDE like Eclipse.
+1. Install Eclipse
+2. Clone this repo and the qa one
+3. For each project, do **Run As > Maven install**. The order shouldn't matter since all the dependencies are available online. You can find the order in the GitHub workflow files.
+4. Test the Maven plug-in by running the `/home/developer/git/sheep-dog-qa/sheep-dog-specs/scripts/forward-engineer.bat` script and then `/home/developer/git/sheep-dog-local/sheep-dog-test/scripts/forward-engineer.bat` script.
+5. Test the Xtext plug-in by installing the plugin archive file found in `/home/developer/git/sheep-dog-local/sheepdogxtextplugin.parent/sheepdogxtextplugin.repository/target` and modifying the files in the **sheep-dog-specs** directory.
 
 There's 3 types of GitHub Actions workflows.
 1. Those that run the Maven release plug-in on the `main` branch. They're named after each Maven module. I run these to tag Maven modules. 
