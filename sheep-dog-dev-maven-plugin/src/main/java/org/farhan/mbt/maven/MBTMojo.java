@@ -34,7 +34,7 @@ public abstract class MBTMojo extends AbstractMojo {
 	@Parameter(property = "repoDir", defaultValue = "")
 	public String repoDir;
 
-	public void execute(String goal, String dir) throws MojoExecutionException {
+	public void execute(String goal, String dir, String extension) throws MojoExecutionException {
 		getLog().info("Starting execute");
 		getLog().info("tags: " + tags);
 		getLog().info("baseDir: " + baseDir);
@@ -61,7 +61,8 @@ public abstract class MBTMojo extends AbstractMojo {
 			if (mojo.getClass().getName().endsWith("ToUML")) {
 				mojo.clearProjects();
 				ArrayList<String> tempFiles = new ArrayList<String>();
-				for (String fileName : sr.list(dir, "")) {
+				// TODO this shouldn't be hardcoded, get it from the Converter class since that class knows which file types it converts
+				for (String fileName : sr.list(dir, extension)) {
 					if (fileName.startsWith(dir + "stepdefs")) {
 						tempFiles.add(fileName);
 					} else {

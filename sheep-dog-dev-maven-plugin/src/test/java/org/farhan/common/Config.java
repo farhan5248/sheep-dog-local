@@ -3,7 +3,13 @@ package org.farhan.common;
 import java.io.File;
 import org.farhan.impl.AsciidoctorToUmlGoalImpl;
 import org.farhan.impl.CucumberToUmlGoalImpl;
-import org.farhan.impl.FileImpl;
+import org.farhan.impl.ObjectPageAsciidocFileImpl;
+import org.farhan.impl.ObjectPageJavaFileImpl;
+import org.farhan.impl.ProcessAsciidocFileImpl;
+import org.farhan.impl.ProcessAsciidocFileImpl2;
+import org.farhan.impl.ProcessFeatureFileImpl;
+import org.farhan.impl.ProcessFeatureFileImpl2;
+import org.farhan.impl.BlahObjectPageStepsJavaFileImpl;
 import org.farhan.impl.UmlToAsciidoctorGoalImpl;
 import org.farhan.impl.UmlToCucumberGoalImpl;
 import org.farhan.impl.UmlToCucumberGuiceGoalImpl;
@@ -58,14 +64,16 @@ public final class Config extends AbstractModule implements InjectorSource {
 	@Override
 	protected void configure() {
 		bind(AsciidoctorToUmlGoal.class).to(AsciidoctorToUmlGoalImpl.class);
-		bind(BlahObjectPageStepsJavaFile.class).to(FileImpl.class);
-		bind(ObjectPageJavaFile.class).to(FileImpl.class);
+		bind(BlahObjectPageStepsJavaFile.class).to(BlahObjectPageStepsJavaFileImpl.class);
+		bind(ObjectPageJavaFile.class).to(ObjectPageJavaFileImpl.class);
 		bind(CucumberToUmlGoal.class).to(CucumberToUmlGoalImpl.class);
-		bind(ObjectPageAsciidocFile.class).to(FileImpl.class);
-		bind(ProcessAsciidocFile.class).to(FileImpl.class);
-		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessAsciidocFile.class).to(FileImpl.class);
-		bind(ProcessFeatureFile.class).to(FileImpl.class);
-		bind(org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.ProcessFeatureFile.class).to(FileImpl.class);
+		bind(ObjectPageAsciidocFile.class).to(ObjectPageAsciidocFileImpl.class);
+		bind(ProcessAsciidocFile.class).to(ProcessAsciidocFileImpl.class);
+		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessAsciidocFile.class)
+				.to(ProcessAsciidocFileImpl2.class);
+		bind(ProcessFeatureFile.class).to(ProcessFeatureFileImpl.class);
+		bind(org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.ProcessFeatureFile.class)
+				.to(ProcessFeatureFileImpl2.class);
 		bind(UmlToAsciidoctorGoal.class).to(UmlToAsciidoctorGoalImpl.class);
 		bind(UmlToCucumberGoal.class).to(UmlToCucumberGoalImpl.class);
 		bind(UmlToCucumberSpringGoal.class).to(UmlToCucumberSpringGoalImpl.class);

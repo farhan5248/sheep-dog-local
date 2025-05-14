@@ -11,7 +11,7 @@ import org.junit.platform.suite.api.Suite;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/specs/UMLToCode/UMLDocStringToCode.feature")
+@SelectClasspathResource("cucumber/specs/Language Mapping/Cucumber/Create Cucumber Files/UMLDocStringToCode.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("sheep-dog-dev")

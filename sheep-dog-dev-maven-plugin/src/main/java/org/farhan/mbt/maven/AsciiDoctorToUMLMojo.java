@@ -12,6 +12,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 public class AsciiDoctorToUMLMojo extends MBTMojo {
 
 	public void execute() throws MojoExecutionException {
-		super.execute("org.farhan.mbt.convert.ConvertAsciidoctorToUML", "src/test/resources/asciidoc/");
+		super.execute("org.farhan.mbt.convert.ConvertAsciidoctorToUML", "src/test/resources/asciidoc/", ".asciidoc");
 	}
 }

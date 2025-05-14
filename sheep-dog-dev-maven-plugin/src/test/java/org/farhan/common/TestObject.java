@@ -14,7 +14,11 @@ import io.cucumber.datatable.DataTable;
 // Right now the way I model stuff all the objects are either output ones or input+transition ones
 public abstract class TestObject {
 
-	protected HashMap<String, String> attributes = new HashMap<String, String>();
+	protected HashMap<String, String> attributes;
+
+	public TestObject() {
+		attributes = new HashMap<String, String>();
+	}
 
 	public String getStackTraceAsString(Exception e) {
 		StringWriter sw = new StringWriter();

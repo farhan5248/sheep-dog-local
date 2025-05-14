@@ -11,7 +11,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/specs/DocumentToUML/DocumentStepDefinitionToUML.feature")
+@SelectClasspathResource("cucumber/specs/Language Mapping/UML Model/Create UML Model/DocumentStepDefinitionToUML.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("sheep-dog-dev")
