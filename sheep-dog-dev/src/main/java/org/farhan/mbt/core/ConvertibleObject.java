@@ -1,4 +1,4 @@
-package org.farhan.mbt.convert;
+package org.farhan.mbt.core;
 
 public interface ConvertibleObject {
 

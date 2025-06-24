@@ -14,8 +14,6 @@ import org.farhan.impl.UmlToAsciidoctorGoalImpl;
 import org.farhan.impl.UmlToCucumberGoalImpl;
 import org.farhan.impl.UmlToCucumberGuiceGoalImpl;
 import org.farhan.impl.UmlToCucumberSpringGoalImpl;
-import org.farhan.impl.UmlToJunitGuiceGoalImpl;
-import org.farhan.impl.UmlToJunitSpringGoalImpl;
 import org.farhan.objects.maven.AsciidoctorToUmlGoal;
 import org.farhan.objects.maven.CucumberToUmlGoal;
 import org.farhan.objects.maven.UmlToAsciidoctorGoal;
@@ -75,8 +73,6 @@ public final class Config2 extends AbstractModule {
 		bind(UmlToCucumberGoal.class).to(UmlToCucumberGoalImpl.class);
 		bind(UmlToCucumberSpringGoal.class).to(UmlToCucumberSpringGoalImpl.class);
 		bind(UmlToCucumberGuiceGoal.class).to(UmlToCucumberGuiceGoalImpl.class);
-		bind(UmlToJunitSpringGoal.class).to(UmlToJunitSpringGoalImpl.class);
-		bind(UmlToJunitGuiceGoal.class).to(UmlToJunitGuiceGoalImpl.class);
 	}
 
 }

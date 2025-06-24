@@ -30,7 +30,7 @@ import org.farhan.dsl.cucumber.cucumber.ScenarioOutline;
 import org.farhan.dsl.cucumber.cucumber.Statement;
 import org.farhan.dsl.cucumber.cucumber.Step;
 import org.farhan.dsl.cucumber.cucumber.Tag;
-import org.farhan.mbt.convert.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleObject;
 
 public class CucumberFeature implements ConvertibleObject {
 

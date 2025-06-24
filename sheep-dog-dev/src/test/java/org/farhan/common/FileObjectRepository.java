@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import org.farhan.mbt.convert.ObjectRepository;
+import org.farhan.mbt.core.ObjectRepository;
 
 public class FileObjectRepository implements ObjectRepository {
 

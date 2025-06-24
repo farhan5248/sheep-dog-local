@@ -1,7 +1,7 @@
 package org.farhan.mbt.cucumber;
 
-import org.farhan.mbt.convert.ConvertibleObject;
-import org.farhan.mbt.convert.ObjectRepository;
+import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ObjectRepository;
 
 public class CucumberSpringTestProject extends CucumberTestProject {
 

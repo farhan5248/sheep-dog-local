@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 import org.apache.commons.lang3.StringUtils;
 import org.farhan.dsl.common.TestStepNameHelper;
-import org.farhan.mbt.convert.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleObject;
+
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier.Keyword;

@@ -9,6 +9,6 @@ public class UmlToCucumberGuiceGoalImpl extends GoalObject implements UmlToCucum
 
 	@Override
 	public void transition() {
-		runGoal("org.farhan.mbt.convert.ConvertUMLToCucumberGuice");
+		runGoal("org.farhan.mbt.cucumber.ConvertUMLToCucumberGuice");
 	}
 }

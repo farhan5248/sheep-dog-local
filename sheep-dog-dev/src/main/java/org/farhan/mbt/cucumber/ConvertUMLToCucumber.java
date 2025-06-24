@@ -1,4 +1,4 @@
-package org.farhan.mbt.convert;
+package org.farhan.mbt.cucumber;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,10 @@ import org.farhan.dsl.cucumber.cucumber.Examples;
 import org.farhan.dsl.cucumber.cucumber.Scenario;
 import org.farhan.dsl.cucumber.cucumber.ScenarioOutline;
 import org.farhan.dsl.cucumber.cucumber.Step;
+import org.farhan.mbt.core.Converter;
+
+import org.farhan.mbt.core.Logger;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLStepDefinition;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
@@ -15,12 +19,6 @@ import org.farhan.mbt.core.UMLTestSuite;
 import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.mbt.core.UMLTestSetup;
 import org.farhan.mbt.core.UMLTestStep;
-import org.farhan.mbt.cucumber.CucumberFeature;
-import org.farhan.mbt.cucumber.CucumberClass;
-import org.farhan.mbt.cucumber.CucumberInterface;
-import org.farhan.mbt.cucumber.CucumberJava;
-import org.farhan.mbt.cucumber.CucumberPathConverter;
-import org.farhan.mbt.cucumber.CucumberTestProject;
 
 public class ConvertUMLToCucumber extends Converter {
 

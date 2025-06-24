@@ -9,6 +9,6 @@ public class UmlToCucumberSpringGoalImpl extends GoalObject implements UmlToCucu
 
 	@Override
 	public void transition() {
-		runGoal("org.farhan.mbt.convert.ConvertUMLToCucumberSpring");
+		runGoal("org.farhan.mbt.cucumber.ConvertUMLToCucumberSpring");
 	}
 }

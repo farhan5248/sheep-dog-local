@@ -1,8 +1,6 @@
-package org.farhan.mbt.convert;
+package org.farhan.mbt.core;
 
 import java.util.ArrayList;
-
-import org.farhan.mbt.core.UMLTestProject;
 
 public abstract class Converter {
 

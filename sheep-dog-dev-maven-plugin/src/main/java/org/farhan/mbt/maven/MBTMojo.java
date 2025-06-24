@@ -10,9 +10,9 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.farhan.mbt.convert.Converter;
-import org.farhan.mbt.convert.Logger;
-import org.farhan.mbt.convert.ObjectRepository;
+import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.core.Logger;
+import org.farhan.mbt.core.ObjectRepository;
 
 public abstract class MBTMojo extends AbstractMojo {
 

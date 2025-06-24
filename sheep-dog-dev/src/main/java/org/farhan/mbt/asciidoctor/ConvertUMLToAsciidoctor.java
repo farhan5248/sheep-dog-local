@@ -1,11 +1,10 @@
-package org.farhan.mbt.convert;
+package org.farhan.mbt.asciidoctor;
 
 import java.util.ArrayList;
 
-import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
-import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
-import org.farhan.mbt.asciidoctor.AsciiDoctorTestProject;
-import org.farhan.mbt.asciidoctor.AsciiDoctorStepObject;
+import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.core.Logger;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
 import org.farhan.mbt.core.UMLTestData;

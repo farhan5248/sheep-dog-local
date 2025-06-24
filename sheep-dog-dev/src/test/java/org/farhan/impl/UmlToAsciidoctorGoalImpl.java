@@ -15,6 +15,6 @@ public class UmlToAsciidoctorGoalImpl extends GoalObject implements UmlToAsciido
 	}
 
 	public void transition() {
-		runGoal("org.farhan.mbt.convert.ConvertUMLToAsciidoctor");
+		runGoal("org.farhan.mbt.asciidoctor.ConvertUMLToAsciidoctor");
 	}
 }
