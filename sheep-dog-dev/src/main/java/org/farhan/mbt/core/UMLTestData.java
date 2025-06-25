@@ -42,27 +42,13 @@ public class UMLTestData extends UMLElement {
 		return umlElement.getSource();
 	}
 
-	public ArrayList<String> getTable() {
-		ArrayList<String> paramNames = new ArrayList<String>();
-		for (Entry<String, String> s : umlElement.getDetails().entrySet()) {
-			if (s.getKey().equals("Data")) {
-				for (String cell : s.getValue().split("\n")[0].split("\\|")) {
-					if (!cell.isEmpty()) {
-						paramNames.add(cell);
-					}
-				}
-			}
-		}
-		return paramNames;
-	}
-
 	public ArrayList<ArrayList<String>> getRowList() {
 		ArrayList<ArrayList<String>> examplesRowList = new ArrayList<ArrayList<String>>();
 		for (Entry<String, String> s : umlElement.getDetails().entrySet()) {
 			if (s.getKey().equals("Data")) {
 				String[] rows = s.getValue().split("\n");
 				int rowCnt = rows.length;
-				for (int i = 1; i < rowCnt; i++) {
+				for (int i = 0; i < rowCnt; i++) {
 					String[] row = rows[i].split("\\|");
 					ArrayList<String> cellList = new ArrayList<String>();
 					int cellCnt = row.length;

@@ -383,15 +383,8 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		step.getText().setName("----\n" + docString.replace("----", "\\----") + "\n----");
 	}
 
-	public void setExamplesTable(TestData examples, ArrayList<String> headers) {
+	public void setExamplesTable(TestData examples) {
 		examples.setTable(SheepDogFactory.eINSTANCE.createTable());
-		Row row = SheepDogFactory.eINSTANCE.createRow();
-		for (String srcCell : headers) {
-			Cell cell = SheepDogFactory.eINSTANCE.createCell();
-			cell.setName(srcCell);
-			row.getCellList().add(cell);
-		}
-		examples.getTable().getRowList().add(row);
 	}
 
 	public void setFeatureDescription(String featureDescription) {
