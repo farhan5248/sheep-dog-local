@@ -126,36 +126,13 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 
 		for (UMLTestStep srcStep : srcTestSetup.getTestStepList()) {
-			convertTestStep(tgtObjTestSuite.addStep(background, srcStep.getNameLong()), getUMLTestStep(srcStep));
-		}
-	}
-
-	private UMLTestStep getUMLTestStep(UMLTestStep srcStep) throws Exception {
-		// TODO make a recursive method to get an id list to use temporarily until the
-		// REST api is built. Make another permanent recursive method to get the element
-		// and put it in UMLElement
-		String stepId = srcStep.getId();
-		String suiteId = srcStep.getParent().getParent().getId();
-		String projectId = srcStep.getParent().getParent().getParent().getId();
-		// TODO having a model like this isn't very efficient, but it'll work for now
-		// It's not efficient because it loads the entire model for every query each
-		// time. Even if I kept one model cached per id/tag, I'd have to make sure any
-		// writes to it are updating the same one.
-		UMLTestProject model = new UMLTestProject(projectId, this.fa);
-		model.init();
-
-		if (srcStep.getParent() instanceof UMLTestSetup) {
-			return model.getTestSuiteList().get(Integer.parseInt(suiteId)).getTestSetup().getTestStepList()
-					.get(Integer.parseInt(stepId));
-		} else {
-			String caseId = srcStep.getParent().getId();
-			return model.getTestSuiteList().get(Integer.parseInt(suiteId)).getTestCaseList()
-					.get(Integer.parseInt(caseId)).getTestStepList().get(Integer.parseInt(stepId));
+			convertTestStep(tgtObjTestSuite.addStep(background, srcStep.getNameLong()), srcStep);
 		}
 	}
 
 	protected void convertTestStep(Step step, UMLTestStep srcStep) throws Exception {
 		log.debug("test step: " + srcStep.getName());
+		// TODO make it consistent, has StepText or getDocString
 		if (srcStep.hasDocString()) {
 			DocString docString = tgtObjTestSuite.addDocString(step);
 			for (String l : srcStep.getStepText().split("\n")) {

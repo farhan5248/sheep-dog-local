@@ -66,7 +66,7 @@ public class UMLTestSuite extends UMLElement {
 		if (testCaseList.isEmpty()) {
 			for (Behavior b : umlElement.getOwnedBehaviors()) {
 				if (b.getEAnnotation("background") == null) {
-					testCaseList.add(new UMLTestCase((Interaction) b, String.valueOf(testCaseList.size())));
+					testCaseList.add(new UMLTestCase((Interaction) b, this, String.valueOf(testCaseList.size())));
 				}
 			}
 		}

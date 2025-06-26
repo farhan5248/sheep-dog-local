@@ -13,11 +13,13 @@ public class UMLTestCase extends UMLElement {
 	private Interaction umlElement;
 	private ArrayList<UMLTestStep> testStepList;
 	private ArrayList<UMLTestData> testDataList;
-	public UMLTestCase(Interaction umlElement, String id) {
+	
+	public UMLTestCase(Interaction umlElement, UMLTestSuite parent, String id) {
 		this.id = id;
 		testStepList = new ArrayList<UMLTestStep>();
 		testDataList = new ArrayList<UMLTestData>();
 		this.umlElement = umlElement;
+		this.parent = parent;
 	}
 
 	public UMLTestCase(String name, UMLTestSuite parent, String id) {
@@ -75,7 +77,7 @@ public class UMLTestCase extends UMLElement {
 	public ArrayList<UMLTestStep> getTestStepList() {
 		if (testStepList.isEmpty()) {
 			for (Message m : umlElement.getMessages()) {
-				testStepList.add(new UMLTestStep(m, this, String.valueOf(testDataList.size())));
+				testStepList.add(new UMLTestStep(m, this, String.valueOf(testStepList.size())));
 			}
 		}
 		return testStepList;

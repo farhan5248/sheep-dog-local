@@ -12,6 +12,7 @@ import org.eclipse.uml2.uml.ValueSpecification;
 public class UMLTestStep extends UMLElement {
 
 	private Message umlElement;
+
 	public UMLTestStep(Message umlElement, UMLElement parent, String id) {
 		this.id = id;
 		this.umlElement = umlElement;
@@ -39,7 +40,6 @@ public class UMLTestStep extends UMLElement {
 		}
 		return ls;
 	}
-	
 
 	public String getKeyword() {
 		return umlElement.getEAnnotation("Step").getDetails().get("Keyword");
@@ -54,6 +54,9 @@ public class UMLTestStep extends UMLElement {
 	}
 
 	public ArrayList<ArrayList<String>> getStepData() {
+		if (!hasStepTable()) {
+			return null;
+		}
 		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
 		ArrayList<String> row;
 		ValueSpecification vs = (LiteralString) umlElement.getArgument("dataTable", null);
@@ -68,6 +71,9 @@ public class UMLTestStep extends UMLElement {
 	}
 
 	public String getStepText() {
+		if (!hasDocString()) {
+			return null;
+		}
 		ValueSpecification vs = (LiteralString) umlElement.getArgument("docString", null);
 		EMap<String, String> docString = vs.getEAnnotation("docString").getDetails();
 		String content = "";
