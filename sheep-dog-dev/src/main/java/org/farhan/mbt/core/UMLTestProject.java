@@ -23,10 +23,9 @@ import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 
-public class UMLTestProject {
+public class UMLTestProject extends UMLElement {
 
 	protected ObjectRepository fa;
-	public String tags = "";
 	public final String TEST_CASES = "specs";
 	public final String TEST_STEPS = "stepdefs";
 	private Model umlElement;
@@ -37,7 +36,7 @@ public class UMLTestProject {
 		firstLayerObjects = new ArrayList<UMLTestSuite>();
 		secondLayerObjects = new ArrayList<UMLStepObject>();
 		this.fa = fa;
-		this.tags = tags;
+		this.id = tags;
 		umlElement = UMLFactory.eINSTANCE.createModel();
 		umlElement.setName("pst");
 		umlElement.createNestedPackage(TEST_CASES);
@@ -46,7 +45,8 @@ public class UMLTestProject {
 
 	public UMLStepObject addStepObject(String qualifiedName) {
 		if (getPackagedElement(qualifiedName, null) == null) {
-			UMLStepObject stepObject = new UMLStepObject(qualifiedName, this);
+			UMLStepObject stepObject = new UMLStepObject(qualifiedName, this,
+					String.valueOf(secondLayerObjects.size()));
 			secondLayerObjects.add(stepObject);
 			return stepObject;
 		}
@@ -55,7 +55,7 @@ public class UMLTestProject {
 
 	public UMLTestSuite addTestSuite(String qualifiedName) {
 		if (getPackagedElement(qualifiedName, null) == null) {
-			UMLTestSuite testSuite = new UMLTestSuite(qualifiedName, this);
+			UMLTestSuite testSuite = new UMLTestSuite(qualifiedName, this, String.valueOf(firstLayerObjects.size()));
 			firstLayerObjects.add(testSuite);
 			return testSuite;
 		}
@@ -137,20 +137,20 @@ public class UMLTestProject {
 
 	public void init() throws Exception {
 		String path = getDir() + umlElement.getName() + "." + UMLResource.FILE_EXTENSION;
-		if (fa.contains(tags, path)) {
+		if (fa.contains(id, path)) {
 			URI uri = URI.createFileURI(path);
 			ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
 			Resource resource = resourceSet.createResource(uri);
-			InputStream content = new ByteArrayInputStream(fa.get(tags, path).getBytes(StandardCharsets.UTF_8));
+			InputStream content = new ByteArrayInputStream(fa.get(id, path).getBytes(StandardCharsets.UTF_8));
 			resource.load(content, Collections.EMPTY_MAP);
 			umlElement = (Model) resource.getContents().getFirst();
 			ArrayList<Class> objects = getPackagedElements(umlElement.getNestedPackage(TEST_CASES));
 			for (Class c : objects) {
-				firstLayerObjects.add(new UMLTestSuite(c, this));
+				firstLayerObjects.add(new UMLTestSuite(c, this, String.valueOf(firstLayerObjects.size())));
 			}
 			objects = getPackagedElements(umlElement.getNestedPackage(TEST_STEPS));
 			for (Class c : objects) {
-				secondLayerObjects.add(new UMLStepObject(c, this));
+				secondLayerObjects.add(new UMLStepObject(c, this, String.valueOf(secondLayerObjects.size())));
 			}
 		}
 	}
@@ -168,6 +168,6 @@ public class UMLTestProject {
 		options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, "true");
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
-		fa.put(tags, path, os.toString());
+		fa.put(id, path, os.toString());
 	}
 }

@@ -13,26 +13,30 @@ public class UMLTestSuite extends UMLElement {
 	private UMLTestSetup testSetup;
 	private ArrayList<UMLTestCase> testCaseList;
 
-	public UMLTestSuite(Class umlElement, UMLTestProject parent) {
+	public UMLTestSuite(Class umlElement, UMLTestProject parent, String id) {
+		this.id = id;
 		testCaseList = new ArrayList<UMLTestCase>();
 		testSetup = null;
 		this.umlElement = umlElement;
+		this.parent = parent;
 	}
 
-	public UMLTestSuite(String name, UMLTestProject parent) {
+	public UMLTestSuite(String name, UMLTestProject parent, String id) {
+		this.id = id;
 		testCaseList = new ArrayList<UMLTestCase>();
 		testSetup = null;
 		this.umlElement = addClass(name, parent.getUmlElement());
+		this.parent = parent;
 	}
 
 	public UMLTestCase addTestCase(String name) {
-		UMLTestCase testCase = new UMLTestCase(name, this);
+		UMLTestCase testCase = new UMLTestCase(name, this, String.valueOf(testCaseList.size()));
 		testCaseList.add(testCase);
 		return testCase;
 	}
 
 	public UMLTestSetup addTestSetup(String name) {
-		testSetup = new UMLTestSetup(name, this);
+		testSetup = new UMLTestSetup(name, this, "0");
 		return testSetup;
 	}
 
@@ -58,10 +62,11 @@ public class UMLTestSuite extends UMLElement {
 	}
 
 	public ArrayList<UMLTestCase> getTestCaseList() {
+		// TODO treat this like get abstract scenario list and don't skip background
 		if (testCaseList.isEmpty()) {
 			for (Behavior b : umlElement.getOwnedBehaviors()) {
 				if (b.getEAnnotation("background") == null) {
-					testCaseList.add(new UMLTestCase((Interaction) b));
+					testCaseList.add(new UMLTestCase((Interaction) b, String.valueOf(testCaseList.size())));
 				}
 			}
 		}
@@ -72,7 +77,7 @@ public class UMLTestSuite extends UMLElement {
 		if (testSetup == null) {
 			for (Behavior b : umlElement.getOwnedBehaviors()) {
 				if (b.getEAnnotation("background") != null) {
-					testSetup = new UMLTestSetup((Interaction) b, this);
+					testSetup = new UMLTestSetup((Interaction) b, this, "0");
 				}
 			}
 		}
@@ -90,7 +95,7 @@ public class UMLTestSuite extends UMLElement {
 	public void setDescription(String description) {
 		umlElement.createOwnedComment().setBody(description);
 	}
-	
+
 	public void setTags(ArrayList<String> tags) {
 		if (!tags.isEmpty()) {
 			for (String t : tags) {

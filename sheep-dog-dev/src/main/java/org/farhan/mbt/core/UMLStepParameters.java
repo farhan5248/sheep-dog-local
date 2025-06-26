@@ -7,13 +7,16 @@ import org.eclipse.emf.ecore.EAnnotation;
 public class UMLStepParameters extends UMLElement {
 
 	private EAnnotation umlElement;
-
-	public UMLStepParameters(String name, UMLStepDefinition parent) {
-		umlElement = createAnnotation(parent.getUmlElement(), name);
+	public UMLStepParameters(EAnnotation umlElement, UMLStepDefinition parent, String id) {
+		this.id = id;
+		this.umlElement = umlElement;
+		this.parent = parent;
 	}
 
-	public UMLStepParameters(EAnnotation umlElement, UMLStepDefinition parent) {
-		this.umlElement = umlElement;
+	public UMLStepParameters(String name, UMLStepDefinition parent, String id) {
+		this.id = id;
+		umlElement = createAnnotation(parent.getUmlElement(), name);
+		this.parent = parent;
 	}
 
 	public void addRow(ArrayList<String> stepParametersRow) {
@@ -36,14 +39,6 @@ public class UMLStepParameters extends UMLElement {
 		return umlElement.getSource();
 	}
 
-	public ArrayList<String> getTable() {
-		ArrayList<String> paramNames = new ArrayList<String>();
-		for (String cell : umlElement.getDetails().getFirst().getValue().split("\\|")) {
-			paramNames.add(cell);
-		}
-		return paramNames;
-	}
-
 	public ArrayList<ArrayList<String>> getRowList() {
 		ArrayList<ArrayList<String>> rowList = new ArrayList<ArrayList<String>>();
 		int rowCnt = umlElement.getDetails().size();
@@ -57,6 +52,14 @@ public class UMLStepParameters extends UMLElement {
 			rowList.add(cellList);
 		}
 		return rowList;
+	}
+
+	public ArrayList<String> getTable() {
+		ArrayList<String> paramNames = new ArrayList<String>();
+		for (String cell : umlElement.getDetails().getFirst().getValue().split("\\|")) {
+			paramNames.add(cell);
+		}
+		return paramNames;
 	}
 
 	public EAnnotation getUmlElement() {

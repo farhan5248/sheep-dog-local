@@ -11,38 +11,32 @@ public class UMLTestSetup extends UMLElement {
 
 	private Interaction umlElement;
 	private ArrayList<UMLTestStep> testStepList;
+	public UMLTestSetup(Interaction umlElement, UMLTestSuite parent, String id) {
+		this.id = id;
+		testStepList = new ArrayList<UMLTestStep>();
+		this.umlElement = umlElement;
+		this.parent = parent;
+	}
 
-	public UMLTestSetup(String name, UMLTestSuite parent) {
+	public UMLTestSetup(String name, UMLTestSuite parent, String id) {
+		this.id = id;
 		testStepList = new ArrayList<UMLTestStep>();
 		umlElement = addInteraction((Class) parent.getUmlElement(), name, "");
 		createAnnotation(umlElement, "background", "");
-	}
-
-	public UMLTestSetup(Interaction umlElement, UMLTestSuite parent) {
-		testStepList = new ArrayList<UMLTestStep>();
-		this.umlElement = umlElement;
-	}
-
-	public void setDescription(String backgroundDescription) {
-		umlElement.createOwnedComment().setBody(backgroundDescription);
-	}
-
-	public void setTags(ArrayList<String> tags) {
-		if (!tags.isEmpty()) {
-			for (String t : tags) {
-				createAnnotation(umlElement, "tags", t);
-			}
-		}
+		this.parent = parent;
 	}
 
 	public UMLTestStep addTestStep(String name) {
-		UMLTestStep testStep = new UMLTestStep(name, this);
+		UMLTestStep testStep = new UMLTestStep(name, this, String.valueOf(testStepList.size()));
 		testStepList.add(testStep);
 		return testStep;
 	}
 
-	public Interaction getUmlElement() {
-		return umlElement;
+	public String getDescription() {
+		if (umlElement.getOwnedComments().size() > 0) {
+			return umlElement.getOwnedComments().get(0).getBody();
+		}
+		return "";
 	}
 
 	public String getName() {
@@ -59,19 +53,28 @@ public class UMLTestSetup extends UMLElement {
 		return tags;
 	}
 
-	public String getDescription() {
-		if (umlElement.getOwnedComments().size() > 0) {
-			return umlElement.getOwnedComments().get(0).getBody();
-		}
-		return "";
-	}
-
 	public ArrayList<UMLTestStep> getTestStepList() {
 		if (testStepList.isEmpty()) {
 			for (Message m : umlElement.getMessages()) {
-				testStepList.add(new UMLTestStep(m, this));
+				testStepList.add(new UMLTestStep(m, this, String.valueOf(testStepList.size())));
 			}
 		}
 		return testStepList;
+	}
+
+	public Interaction getUmlElement() {
+		return umlElement;
+	}
+
+	public void setDescription(String backgroundDescription) {
+		umlElement.createOwnedComment().setBody(backgroundDescription);
+	}
+
+	public void setTags(ArrayList<String> tags) {
+		if (!tags.isEmpty()) {
+			for (String t : tags) {
+				createAnnotation(umlElement, "tags", t);
+			}
+		}
 	}
 }

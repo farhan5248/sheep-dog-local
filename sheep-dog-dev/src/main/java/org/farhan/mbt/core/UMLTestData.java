@@ -8,21 +8,16 @@ import org.eclipse.emf.ecore.EAnnotation;
 public class UMLTestData extends UMLElement {
 
 	private EAnnotation umlElement;
-
-	public UMLTestData(String name, UMLTestCase parent) {
-		umlElement = createAnnotation(parent.getUmlElement(), name);
-	}
-
-	public UMLTestData(EAnnotation umlElement, UMLTestCase parent) {
+	public UMLTestData(EAnnotation umlElement, UMLTestCase parent, String id) {
+		this.id = id;
 		this.umlElement = umlElement;
+		this.parent = parent;
 	}
 
-	public void setTable(ArrayList<String> headers) {
-		String value = "";
-		for (String e : headers) {
-			value += e + "|";
-		}
-		umlElement.getDetails().put("Data", value);
+	public UMLTestData(String name, UMLTestCase parent, String id) {
+		this.id = id;
+		umlElement = createAnnotation(parent.getUmlElement(), name);
+		this.parent = parent;
 	}
 
 	public void addRow(ArrayList<String> examplesRow) {
@@ -36,6 +31,15 @@ public class UMLTestData extends UMLElement {
 				umlElement.getDetails().put("Data", value);
 			}
 		}
+	}
+
+	public String getDescription() {
+		for (Entry<String, String> s : umlElement.getDetails().entrySet()) {
+			if (s.getKey().equals("Description")) {
+				return s.getValue();
+			}
+		}
+		return "";
 	}
 
 	public String getName() {
@@ -62,14 +66,6 @@ public class UMLTestData extends UMLElement {
 		return examplesRowList;
 	}
 
-	public void setTags(ArrayList<String> tags) {
-		String value = "";
-		for (String e : tags) {
-			value += e + "\n";
-		}
-		umlElement.getDetails().put("Tags", value.trim());
-	}
-
 	public ArrayList<String> getTags() {
 		ArrayList<String> paramNames = new ArrayList<String>();
 		for (Entry<String, String> s : umlElement.getDetails().entrySet()) {
@@ -88,13 +84,20 @@ public class UMLTestData extends UMLElement {
 		umlElement.getDetails().put("Description", description);
 	}
 
-	public String getDescription() {
-		for (Entry<String, String> s : umlElement.getDetails().entrySet()) {
-			if (s.getKey().equals("Description")) {
-				return s.getValue();
-			}
+	public void setTable(ArrayList<String> headers) {
+		String value = "";
+		for (String e : headers) {
+			value += e + "|";
 		}
-		return "";
+		umlElement.getDetails().put("Data", value);
+	}
+
+	public void setTags(ArrayList<String> tags) {
+		String value = "";
+		for (String e : tags) {
+			value += e + "\n";
+		}
+		umlElement.getDetails().put("Tags", value.trim());
 	}
 
 }

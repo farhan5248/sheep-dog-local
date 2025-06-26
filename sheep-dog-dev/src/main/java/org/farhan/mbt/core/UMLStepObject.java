@@ -12,23 +12,22 @@ public class UMLStepObject extends UMLElement {
 
 	private Class umlElement;
 	private ArrayList<UMLStepDefinition> stepDefinitionList;
-
-	public UMLStepObject(String name, UMLTestProject parent) {
-		stepDefinitionList = new ArrayList<UMLStepDefinition>();
-		umlElement = addClass(name, parent.getUmlElement());
-	}
-
-	public UMLStepObject(Class umlElement, UMLTestProject parent) {
+	public UMLStepObject(Class umlElement, UMLTestProject parent, String id) {
+		this.id = id;
 		stepDefinitionList = new ArrayList<UMLStepDefinition>();
 		this.umlElement = umlElement;
+		this.parent = parent;
 	}
 
-	public void setDescription(String description) {
-		umlElement.createOwnedComment().setBody(description);
+	public UMLStepObject(String name, UMLTestProject parent, String id) {
+		this.id = id;
+		stepDefinitionList = new ArrayList<UMLStepDefinition>();
+		umlElement = addClass(name, parent.getUmlElement());
+		this.parent = parent;
 	}
 
 	public UMLStepDefinition addStepDefinition(String name) {
-		UMLStepDefinition stepDefinition = new UMLStepDefinition(name, this);
+		UMLStepDefinition stepDefinition = new UMLStepDefinition(name, this, String.valueOf(stepDefinitionList.size()));
 		stepDefinitionList.add(stepDefinition);
 		// TODO update round trip doc to doc test to test this
 		TreeMap<String, UMLStepDefinition> sorted = new TreeMap<String, UMLStepDefinition>();
@@ -45,14 +44,6 @@ public class UMLStepObject extends UMLElement {
 		return stepDefinition;
 	}
 
-	public Class getUmlElement() {
-		return umlElement;
-	}
-
-	public String getName() {
-		return umlElement.getName();
-	}
-
 	public String getDescription() {
 		if (umlElement.getOwnedComments().size() > 0) {
 			return umlElement.getOwnedComments().get(0).getBody();
@@ -60,17 +51,30 @@ public class UMLStepObject extends UMLElement {
 		return "";
 	}
 
+	public String getName() {
+		return umlElement.getName();
+	}
+
+	public String getNameLong() {
+		return umlElement.getEAnnotation("StepDefinition").getDetails().get("LongName");
+	}
+
 	public ArrayList<UMLStepDefinition> getStepDefinitionList() {
 		if (stepDefinitionList.isEmpty()) {
 			for (Behavior b : umlElement.getOwnedBehaviors()) {
-				stepDefinitionList.add(new UMLStepDefinition((Interaction) b, this));
+				stepDefinitionList
+						.add(new UMLStepDefinition((Interaction) b, this, String.valueOf(stepDefinitionList.size())));
 			}
 		}
 		return stepDefinitionList;
 	}
 
-	public String getNameLong() {
-		return umlElement.getEAnnotation("StepDefinition").getDetails().get("LongName");
+	public Class getUmlElement() {
+		return umlElement;
+	}
+
+	public void setDescription(String description) {
+		umlElement.createOwnedComment().setBody(description);
 	}
 
 }

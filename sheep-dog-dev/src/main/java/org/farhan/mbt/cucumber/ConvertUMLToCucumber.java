@@ -46,32 +46,16 @@ public class ConvertUMLToCucumber extends Converter {
 			convertTestSuite(srcTestSuite);
 			return tgtObjTestSuite.toString();
 		} else {
-			return convertStepObject(path, content);
-		}
-	}
-
-	protected String convertStepObject(String path, String content) throws Exception {
-		log.debug("step object: " + path);
-		UMLStepObject srcStepObject = model.getStepObject(pathConverter.findUMLPath(path));
-		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
-			tgtObjStepObject = (CucumberClass) project.addFile(path);
-		} else {
-			tgtObjStepObject = (CucumberInterface) project.addFile(path);
-		}
-		tgtObjStepObject.parse(content);
-		for (UMLStepDefinition srcStepDefinition : srcStepObject.getStepDefinitionList()) {
-
-			ArrayList<String> parametersListMerged = new ArrayList<String>();
-			for (org.farhan.mbt.core.UMLStepParameters a : srcStepDefinition.getStepParametersList()) {
-				for (String s : a.getUmlElement().getDetails().getFirst().getValue().split("\\|")) {
-					if (!parametersListMerged.contains(s.trim())) {
-						parametersListMerged.add(s.trim());
-					}
-				}
+			UMLStepObject srcStepObject = model.getStepObject(pathConverter.findUMLPath(path));
+			if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+				tgtObjStepObject = (CucumberClass) project.addFile(path);
+			} else {
+				tgtObjStepObject = (CucumberInterface) project.addFile(path);
 			}
-			tgtObjStepObject.addStepDefinition(srcStepDefinition.getNameLong(), parametersListMerged);
+			tgtObjStepObject.parse(content);
+			convertStepObject(srcStepObject);
+			return tgtObjStepObject.toString();
 		}
-		return tgtObjStepObject.toString();
 	}
 
 	protected void convertTestCase(Scenario scenario, UMLTestCase srcTestCase) throws Exception {
@@ -142,7 +126,31 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 
 		for (UMLTestStep srcStep : srcTestSetup.getTestStepList()) {
-			convertTestStep(tgtObjTestSuite.addStep(background, srcStep.getNameLong()), srcStep);
+			convertTestStep(tgtObjTestSuite.addStep(background, srcStep.getNameLong()), getUMLTestStep(srcStep));
+		}
+	}
+
+	private UMLTestStep getUMLTestStep(UMLTestStep srcStep) throws Exception {
+		// TODO make a recursive method to get an id list to use temporarily until the
+		// REST api is built. Make another permanent recursive method to get the element
+		// and put it in UMLElement
+		String stepId = srcStep.getId();
+		String suiteId = srcStep.getParent().getParent().getId();
+		String projectId = srcStep.getParent().getParent().getParent().getId();
+		// TODO having a model like this isn't very efficient, but it'll work for now
+		// It's not efficient because it loads the entire model for every query each
+		// time. Even if I kept one model cached per id/tag, I'd have to make sure any
+		// writes to it are updating the same one.
+		UMLTestProject model = new UMLTestProject(projectId, this.fa);
+		model.init();
+
+		if (srcStep.getParent() instanceof UMLTestSetup) {
+			return model.getTestSuiteList().get(Integer.parseInt(suiteId)).getTestSetup().getTestStepList()
+					.get(Integer.parseInt(stepId));
+		} else {
+			String caseId = srcStep.getParent().getId();
+			return model.getTestSuiteList().get(Integer.parseInt(suiteId)).getTestCaseList()
+					.get(Integer.parseInt(caseId)).getTestStepList().get(Integer.parseInt(stepId));
 		}
 	}
 
@@ -186,6 +194,22 @@ public class ConvertUMLToCucumber extends Converter {
 			} else {
 				convertTestCase(tgtObjTestSuite.addScenario(srcTestCase.getName()), srcTestCase);
 			}
+		}
+	}
+
+	protected void convertStepObject(UMLStepObject srcStepObject) throws Exception {
+		log.debug("step object: " + srcStepObject.getName());
+		for (UMLStepDefinition srcStepDefinition : srcStepObject.getStepDefinitionList()) {
+
+			ArrayList<String> parametersListMerged = new ArrayList<String>();
+			for (org.farhan.mbt.core.UMLStepParameters a : srcStepDefinition.getStepParametersList()) {
+				for (String s : a.getUmlElement().getDetails().getFirst().getValue().split("\\|")) {
+					if (!parametersListMerged.contains(s.trim())) {
+						parametersListMerged.add(s.trim());
+					}
+				}
+			}
+			tgtObjStepObject.addStepDefinition(srcStepDefinition.getNameLong(), parametersListMerged);
 		}
 	}
 

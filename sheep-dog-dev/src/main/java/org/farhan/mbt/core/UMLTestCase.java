@@ -13,59 +13,38 @@ public class UMLTestCase extends UMLElement {
 	private Interaction umlElement;
 	private ArrayList<UMLTestStep> testStepList;
 	private ArrayList<UMLTestData> testDataList;
-
-	public UMLTestCase(String name, UMLTestSuite parent) {
-		testStepList = new ArrayList<UMLTestStep>();
-		testDataList = new ArrayList<UMLTestData>();
-		umlElement = addInteraction((Class) parent.getUmlElement(), name, "");
-	}
-
-	public UMLTestCase(Interaction umlElement) {
+	public UMLTestCase(Interaction umlElement, String id) {
+		this.id = id;
 		testStepList = new ArrayList<UMLTestStep>();
 		testDataList = new ArrayList<UMLTestData>();
 		this.umlElement = umlElement;
 	}
 
-	public void setTags(ArrayList<String> tags) {
-		if (!tags.isEmpty()) {
-			for (String t : tags) {
-				createAnnotation(umlElement, "tags", t);
-			}
-		}
-	}
-
-	public void setDescription(String scenarioDescription) {
-		umlElement.createOwnedComment().setBody(scenarioDescription);
-	}
-
-	public UMLTestStep addTestStep(String name) {
-		UMLTestStep testStep = new UMLTestStep(name, this);
-		testStepList.add(testStep);
-		return testStep;
-	}
-
-	public Interaction getUmlElement() {
-		return umlElement;
+	public UMLTestCase(String name, UMLTestSuite parent, String id) {
+		this.id = id;
+		testStepList = new ArrayList<UMLTestStep>();
+		testDataList = new ArrayList<UMLTestData>();
+		umlElement = addInteraction((Class) parent.getUmlElement(), name, "");
+		this.parent = parent;
 	}
 
 	public UMLTestData addTestData(String name) {
-		UMLTestData testData = new UMLTestData(name, this);
+		UMLTestData testData = new UMLTestData(name, this, String.valueOf(testDataList.size()));
 		testDataList.add(testData);
 		return testData;
 	}
 
-	public boolean isBackground() {
-		return umlElement.getEAnnotation("background") != null;
+	public UMLTestStep addTestStep(String name) {
+		UMLTestStep testStep = new UMLTestStep(name, this, String.valueOf(testDataList.size()));
+		testStepList.add(testStep);
+		return testStep;
 	}
 
-	public boolean hasTestData() {
-		// if there's an annotation not called tags or background
-		for (EAnnotation a : umlElement.getEAnnotations()) {
-			if (!a.getSource().contentEquals("tags") && !a.getSource().contentEquals("background")) {
-				return true;
-			}
+	public String getDescription() {
+		if (umlElement.getOwnedComments().size() > 0) {
+			return umlElement.getOwnedComments().get(0).getBody();
 		}
-		return false;
+		return "";
 	}
 
 	public String getName() {
@@ -82,31 +61,54 @@ public class UMLTestCase extends UMLElement {
 		return tags;
 	}
 
-	public String getDescription() {
-		if (umlElement.getOwnedComments().size() > 0) {
-			return umlElement.getOwnedComments().get(0).getBody();
+	public ArrayList<UMLTestData> getTestDataList() {
+		if (testDataList.isEmpty()) {
+			for (EAnnotation a : umlElement.getEAnnotations()) {
+				if (!a.getSource().contentEquals("tags")) {
+					testDataList.add(new UMLTestData(a, this, String.valueOf(testDataList.size())));
+				}
+			}
 		}
-		return "";
+		return testDataList;
 	}
 
 	public ArrayList<UMLTestStep> getTestStepList() {
 		if (testStepList.isEmpty()) {
 			for (Message m : umlElement.getMessages()) {
-				testStepList.add(new UMLTestStep(m, this));
+				testStepList.add(new UMLTestStep(m, this, String.valueOf(testDataList.size())));
 			}
 		}
 		return testStepList;
 	}
 
-	public ArrayList<UMLTestData> getTestDataList() {
-		if (testDataList.isEmpty()) {
-			for (EAnnotation a : umlElement.getEAnnotations()) {
-				if (!a.getSource().contentEquals("tags")) {
-					testDataList.add(new UMLTestData(a, this));
-				}
+	public Interaction getUmlElement() {
+		return umlElement;
+	}
+
+	public boolean hasTestData() {
+		// if there's an annotation not called tags or background
+		for (EAnnotation a : umlElement.getEAnnotations()) {
+			if (!a.getSource().contentEquals("tags") && !a.getSource().contentEquals("background")) {
+				return true;
 			}
 		}
-		return testDataList;
+		return false;
+	}
+
+	public boolean isBackground() {
+		return umlElement.getEAnnotation("background") != null;
+	}
+
+	public void setDescription(String scenarioDescription) {
+		umlElement.createOwnedComment().setBody(scenarioDescription);
+	}
+
+	public void setTags(ArrayList<String> tags) {
+		if (!tags.isEmpty()) {
+			for (String t : tags) {
+				createAnnotation(umlElement, "tags", t);
+			}
+		}
 	}
 
 }

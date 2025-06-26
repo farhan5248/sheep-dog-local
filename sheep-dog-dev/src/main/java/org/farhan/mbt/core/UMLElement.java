@@ -12,6 +12,9 @@ import org.eclipse.uml2.uml.ValueSpecification;
 
 public abstract class UMLElement {
 
+	protected String id;
+	protected UMLElement parent;
+
 	protected Class addClass(String qualifiedName, Model theModel) {
 		Class theClass = null;
 		Package owningPackage = theModel;
@@ -88,6 +91,18 @@ public abstract class UMLElement {
 		}
 		a.getDetails().put(key, value);
 		return a;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public UMLElement getParent() {
+		return parent;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }
