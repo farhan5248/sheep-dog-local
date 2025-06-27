@@ -94,7 +94,11 @@ public abstract class UMLElement {
 	}
 
 	public String getId() {
-		return id;
+		if (id.isEmpty()) {
+			return "default";
+		} else {
+			return id;
+		}
 	}
 
 	public UMLElement getParent() {
