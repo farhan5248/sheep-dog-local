@@ -36,7 +36,8 @@ public class UMLTestProject extends UMLElement {
 		firstLayerObjects = new ArrayList<UMLTestSuite>();
 		secondLayerObjects = new ArrayList<UMLStepObject>();
 		this.fa = fa;
-		this.id = tags.contentEquals("default") ? "" : tags;
+		// TODO just assign tags, "default" is handled in the controller
+		this.id = tags;
 		umlElement = UMLFactory.eINSTANCE.createModel();
 		umlElement.setName("pst");
 		umlElement.createNestedPackage(TEST_CASES);
