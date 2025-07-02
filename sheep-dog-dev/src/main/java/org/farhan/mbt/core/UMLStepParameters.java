@@ -6,7 +6,9 @@ import org.eclipse.emf.ecore.EAnnotation;
 
 public class UMLStepParameters extends UMLElement {
 
+	
 	private EAnnotation umlElement;
+	
 	public UMLStepParameters(EAnnotation umlElement, UMLStepDefinition parent, String id) {
 		this.id = id;
 		this.umlElement = umlElement;
@@ -27,6 +29,7 @@ public class UMLStepParameters extends UMLElement {
 		umlElement.getDetails().put(String.valueOf(umlElement.getDetails().size()), value);
 	}
 
+	// TODO this class should mimic TestStep. So this method should be like setTable
 	public void addTable(ArrayList<String> headers) {
 		String value = "";
 		for (String e : headers) {
