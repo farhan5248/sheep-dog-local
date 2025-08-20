@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with the sheep-dog-local repository.
 
-> **📚 Complete Documentation**: See `../sheep-dog-qa/CLAUDE.*.md` files for comprehensive guidance:
-> - `CLAUDE.local.md` - Cross-repository coordination
+> **📚 Complete Documentation**: See the comprehensive guidance files:
+> - `../sheep-dog-main/CLAUDE.md` - Cross-repository coordination
 > - `CLAUDE.architecture.md` - System architecture & design patterns
 > - `CLAUDE.development.md` - Development workflows & practices  
 > - `CLAUDE.testing.md` - BDD/testing methodologies
@@ -19,7 +19,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 - **sheep-dog-test**: Semantic validation rules and language constraints
 
 ### Maven Plugin Used
-- **Plugin**: `sheep-dog-dev-maven-plugin:1.26-SNAPSHOT`
+- **Plugin**: `sheep-dog-dev-maven-plugin:1.28-SNAPSHOT`
 - **Key Requirement**: Always use `-DrepoDir` parameter for cross-repository transformations
 
 ## Development Commands
