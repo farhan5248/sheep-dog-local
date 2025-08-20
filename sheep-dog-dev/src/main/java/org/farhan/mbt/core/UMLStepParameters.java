@@ -6,9 +6,8 @@ import org.eclipse.emf.ecore.EAnnotation;
 
 public class UMLStepParameters extends UMLElement {
 
-	
 	private EAnnotation umlElement;
-	
+
 	public UMLStepParameters(EAnnotation umlElement, UMLStepDefinition parent, String id) {
 		this.id = id;
 		this.umlElement = umlElement;
@@ -29,8 +28,7 @@ public class UMLStepParameters extends UMLElement {
 		umlElement.getDetails().put(String.valueOf(umlElement.getDetails().size()), value);
 	}
 
-	// TODO this class should mimic TestStep. So this method should be like setTable
-	public void addTable(ArrayList<String> headers) {
+	public void setTable(ArrayList<String> headers) {
 		String value = "";
 		for (String e : headers) {
 			value += e + "|";
@@ -43,9 +41,10 @@ public class UMLStepParameters extends UMLElement {
 	}
 
 	public ArrayList<ArrayList<String>> getRowList() {
+		// TODO this and the same method in UMLTestData should be the same but aren't.
 		ArrayList<ArrayList<String>> rowList = new ArrayList<ArrayList<String>>();
 		int rowCnt = umlElement.getDetails().size();
-		for (int i = 1; i < rowCnt; i++) {
+		for (int i = 0; i < rowCnt; i++) {
 			String[] row = umlElement.getDetails().get(i).getValue().split("\\|");
 			ArrayList<String> cellList = new ArrayList<String>();
 			int cellCnt = row.length;
@@ -55,14 +54,6 @@ public class UMLStepParameters extends UMLElement {
 			rowList.add(cellList);
 		}
 		return rowList;
-	}
-
-	public ArrayList<String> getTable() {
-		ArrayList<String> paramNames = new ArrayList<String>();
-		for (String cell : umlElement.getDetails().getFirst().getValue().split("\\|")) {
-			paramNames.add(cell);
-		}
-		return paramNames;
 	}
 
 	public EAnnotation getUmlElement() {

@@ -87,7 +87,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private void convertStepParameters(org.farhan.mbt.core.UMLStepParameters stepParameters,
 			StepParameters srcStepParameters) {
 		log.debug("step parameter: " + srcStepParameters.getName());
-		stepParameters.addTable(srcObjStepObject.getStepParametersTable(srcStepParameters));
+		stepParameters.setTable(srcObjStepObject.getStepParametersTable(srcStepParameters));
 	}
 
 	private void convertTestCase(TestStepContainer srcTestCase, UMLTestCase testCase) {
