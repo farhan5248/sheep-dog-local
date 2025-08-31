@@ -10,27 +10,44 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 ## Agent Delegation Rules
 
-**CRITICAL**: For any Xtext-related work, ALWAYS delegate to the general-purpose agent with Xtext expertise. This includes:
+**CRITICAL**: For any Xtext-related work, ALWAYS delegate to the general-purpose agent with Xtext expertise. DO NOT attempt these tasks directly.
 
 ### Xtext Work That Requires Agent Delegation
 - **Xtext Grammar Development**: Modifying .xtext files, grammar rules, language syntax
 - **Language Server Development**: LSP integration, server launchers, protocol implementation
 - **Eclipse Plugin Development**: Tycho builds, plugin.xml, MANIFEST.MF, Eclipse-specific code
-- **VSCode Extension Creation**: Language client development, extension.ts, package.json for language extensions
+- **VSCode Extension Work**: ANY modification to VSCode extension files including:
+  - Language client development (extension.ts)
+  - Extension configuration (package.json for language extensions)  
+  - Language configuration files (*.configuration.json)
+  - TextMate grammars (*.tmLanguage.json)
+  - Extension file structure analysis or comparison
+  - File renaming within VSCode extension projects
 - **Xtext Code Generation**: MWE2 workflows, code generators, template modifications
 - **IDE Integration**: Content assist, validation, quick fixes, syntax highlighting
 - **Build System Integration**: Gradle/Maven coordination for Xtext projects
+- **Project Structure Analysis**: Comparing Xtext/VSCode projects, analyzing differences
 
-### When to Use Agent Delegation
+### When to Use Agent Delegation - EXPANDED
 ```
-ALWAYS delegate when the user asks for:
-- "Xtext" or "language server" work
-- "Eclipse plugin" development  
-- "VSCode extension" creation for DSL/language
+ALWAYS delegate when:
+- ANY mention of "Xtext", "language server", "LSP"
+- "Eclipse plugin" development work
+- "VSCode extension" creation, modification, or analysis
 - Grammar modifications or language development
-- LSP (Language Server Protocol) implementation
-- Any work involving .xtext, .mwe2, or Xtext-generated files
+- Working with files: .xtext, .mwe2, package.json (for extensions), *.configuration.json
+- Comparing language/extension projects
+- Renaming files within Xtext/VSCode extension contexts
+- Analyzing extension structures or configurations
+- ANY task within org.xtext.example.mydsl.* directories
+- ANY task within *vscode* extension directories
 ```
+
+### What NOT to Delegate
+- Simple file operations unrelated to Xtext (basic read/write/copy)
+- General Maven/Gradle builds not involving Xtext
+- Documentation updates to CLAUDE.md files
+- Git operations (add, commit, push)
 
 Use: `Task tool with subagent_type: "general-purpose"` and clearly specify Xtext expertise needed in the prompt.
 

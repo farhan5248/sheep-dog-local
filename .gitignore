@@ -1,5 +1,6 @@
 **/target
 **/build
+**/node_modules
 **/bin
 release.properties
 **/*._trace
@@ -14,6 +15,7 @@ release.properties
 **/*.class
 **/*.jar
 **/*.tar
+**/*.vsix
 **/*.contrib
 **/*.copyarea.db
 **/*.keep
