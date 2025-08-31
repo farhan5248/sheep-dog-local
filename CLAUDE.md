@@ -8,6 +8,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 > - `CLAUDE.development.md` - Development workflows & practices  
 > - `CLAUDE.testing.md` - BDD/testing methodologies
 
+## Agent Delegation Rules
+
+**CRITICAL**: For any Xtext-related work, ALWAYS delegate to the general-purpose agent with Xtext expertise. This includes:
+
+### Xtext Work That Requires Agent Delegation
+- **Xtext Grammar Development**: Modifying .xtext files, grammar rules, language syntax
+- **Language Server Development**: LSP integration, server launchers, protocol implementation
+- **Eclipse Plugin Development**: Tycho builds, plugin.xml, MANIFEST.MF, Eclipse-specific code
+- **VSCode Extension Creation**: Language client development, extension.ts, package.json for language extensions
+- **Xtext Code Generation**: MWE2 workflows, code generators, template modifications
+- **IDE Integration**: Content assist, validation, quick fixes, syntax highlighting
+- **Build System Integration**: Gradle/Maven coordination for Xtext projects
+
+### When to Use Agent Delegation
+```
+ALWAYS delegate when the user asks for:
+- "Xtext" or "language server" work
+- "Eclipse plugin" development  
+- "VSCode extension" creation for DSL/language
+- Grammar modifications or language development
+- LSP (Language Server Protocol) implementation
+- Any work involving .xtext, .mwe2, or Xtext-generated files
+```
+
+Use: `Task tool with subagent_type: "general-purpose"` and clearly specify Xtext expertise needed in the prompt.
+
 ## Repository Overview
 
 **sheep-dog-local** is the **complete local development environment** with Eclipse IDE integration for the sheep-dog ecosystem.
