@@ -30,7 +30,11 @@
         "extensions": [
           ".mydsl"
         ],
-        "configuration": "./mydsl.configuration.json"
+        "configuration": "./mydsl.configuration.json",
+        "icon": {
+          "light": "./icons/mydsl-icon.svg",
+          "dark": "./icons/mydsl-icon.svg"
+        }
       }
     ],
     "grammars": [
@@ -40,6 +44,80 @@
         "path": "./syntaxes/mydsl.tmLanguage.json"
       }
     ],
+    "commands": [
+      {
+        "command": "mydsl.generateBoilerplate",
+        "title": "Generate MyDsl Boilerplate",
+        "category": "MyDsl"
+      },
+      {
+        "command": "mydsl.generateTests",
+        "title": "Generate Tests from MyDsl",
+        "category": "MyDsl"
+      },
+      {
+        "command": "mydsl.formatDocument",
+        "title": "Format MyDsl Document",
+        "category": "MyDsl"
+      },
+      {
+        "command": "mydsl.validateAllFiles",
+        "title": "Validate All MyDsl Files",
+        "category": "MyDsl"
+      },
+      {
+        "command": "mydsl.helloWorld",
+        "title": "Hello World",
+        "category": "MyDsl"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "mydsl.generateBoilerplate",
+        "key": "ctrl+alt+g",
+        "when": "editorLangId == mydsl"
+      },
+      {
+        "command": "mydsl.generateTests",
+        "key": "ctrl+alt+t",
+        "when": "editorLangId == mydsl"
+      },
+      {
+        "command": "mydsl.formatDocument",
+        "key": "shift+alt+f",
+        "when": "editorLangId == mydsl"
+      },
+      {
+        "command": "mydsl.validateAllFiles",
+        "key": "ctrl+alt+v"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorLangId == mydsl",
+          "command": "mydsl.generateBoilerplate",
+          "group": "mydsl"
+        },
+        {
+          "when": "editorLangId == mydsl",
+          "command": "mydsl.generateTests",
+          "group": "mydsl"
+        },
+        {
+          "when": "editorLangId == mydsl",
+          "command": "mydsl.formatDocument",
+          "group": "mydsl"
+        }
+      ],
+      "explorer/context": [
+        {
+          "when": "resourceExtname == .mydsl",
+          "command": "mydsl.generateTests",
+          "group": "mydsl"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "title": "MyDsl Language Server",
@@ -63,6 +141,21 @@
           ],
           "default": "off",
           "description": "Traces the communication between VS Code and the language server."
+        },
+        "mydsl.formatting.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable custom MyDsl formatting"
+        },
+        "mydsl.validation.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable MyDsl validation"
+        },
+        "mydsl.boilerplate.template": {
+          "type": "string",
+          "default": "// MyDsl Boilerplate File\nHello World!\nHello Claude!\nHello VSCode!",
+          "description": "Template content for new MyDsl files"
         }
       }
     }

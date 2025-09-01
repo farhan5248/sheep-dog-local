@@ -69,6 +69,14 @@ org.xtext.example.mydsl.vscode/
 - Configuration settings for language server
 - Debug and logging capabilities
 
+**3.3 Custom Commands Integration**
+- **Code Generation Commands:**
+  - "Generate MyDsl Boilerplate" - Creates template MyDsl file with standard structure
+  - "Generate Tests from MyDsl" - Auto-generate test cases based on MyDsl content
+- **Language Operations Commands:**
+  - "Format MyDsl Document" - Custom formatting beyond standard LSP formatting
+  - "Validate All MyDsl Files" - Batch validation across entire workspace
+
 ### Phase 4: Testing & Distribution (Week 3-4)
 
 **4.1 Comprehensive Testing**
