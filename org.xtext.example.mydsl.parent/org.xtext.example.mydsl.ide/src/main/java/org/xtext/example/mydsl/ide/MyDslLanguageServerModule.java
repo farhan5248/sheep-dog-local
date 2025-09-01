@@ -1,6 +1,7 @@
 package org.xtext.example.mydsl.ide;
 
 import org.eclipse.xtext.ide.server.ServerModule;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 
 /**
  * Custom Language Server Module for MyDsl.
@@ -10,26 +11,10 @@ import org.eclipse.xtext.ide.server.ServerModule;
 public class MyDslLanguageServerModule extends ServerModule {
 	
 	/**
-	 * This module inherits the default Xtext language server configuration.
-	 * Override methods here to customize language server behavior:
-	 * 
-	 * - bindILanguageServerAccess() for custom language server access
-	 * - bindIResourceServiceProvider() for custom resource services
-	 * - bindIWorkspaceConfigFactory() for workspace configuration
-	 * - etc.
+	 * Configure custom output configuration provider to ensure
+	 * code generation goes to the correct project directory.
 	 */
-	
-	// Example of customization (commented out as we're using defaults for now):
-	
-	/*
-	@Override
-	public Class<? extends ILanguageServerAccess> bindILanguageServerAccess() {
-		return MyDslLanguageServerAccess.class;
+	public Class<? extends IOutputConfigurationProvider> bindIOutputConfigurationProvider() {
+		return MyDslOutputConfigurationProvider.class;
 	}
-	
-	@Override
-	public Class<? extends IWorkspaceConfigFactory> bindIWorkspaceConfigFactory() {
-		return MyDslWorkspaceConfigFactory.class;
-	}
-	*/
 }

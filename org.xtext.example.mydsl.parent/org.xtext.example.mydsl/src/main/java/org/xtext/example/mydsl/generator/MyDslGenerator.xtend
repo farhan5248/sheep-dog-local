@@ -16,10 +16,22 @@ import org.eclipse.xtext.generator.IGeneratorContext
 class MyDslGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
+		// Generate a simple Java class from MyDsl greetings
+		for (greeting : resource.allContents.filter(org.xtext.example.mydsl.myDsl.Greeting).toIterable) {
+			val className = greeting.name.replace(" ", "")
+			fsa.generateFile(className + 'Greeter.java', '''
+				// Generated from «resource.URI.lastSegment»
+				public class «className»Greeter {
+					
+					public static void main(String[] args) {
+						System.out.println("Hello «greeting.name»!");
+					}
+					
+					public String getGreeting() {
+						return "Hello «greeting.name»!";
+					}
+				}
+			''')
+		}
 	}
 }

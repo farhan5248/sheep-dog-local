@@ -1,4 +1,5 @@
 **/target
+**/.gradle
 **/build
 **/node_modules
 **/bin

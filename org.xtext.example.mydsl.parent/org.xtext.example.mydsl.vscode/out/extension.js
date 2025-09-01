@@ -63,17 +63,26 @@ function activate(context) {
         vscode.window.showErrorMessage('Java runtime is required for MyDsl language server. Please install Java 11 or higher.');
         return;
     }
-    // Server options - embedded JAR approach
+    // Determine the correct working directory for the language server
+    const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+    const projectDir = workspaceFolder ?
+        path.join(workspaceFolder.uri.fsPath, 'sheep-dog-local', 'org.xtext.example.mydsl.parent') :
+        undefined;
+    // Server options - embedded JAR approach with correct working directory
     const serverOptions = {
         run: {
             command: javaExecutable,
             args: ['-jar', serverJarPath],
-            options: {}
+            options: {
+                cwd: projectDir // Set working directory to project root
+            }
         },
         debug: {
             command: javaExecutable,
             args: ['-jar', serverJarPath],
-            options: {}
+            options: {
+                cwd: projectDir // Set working directory to project root
+            }
         }
     };
     // Options to control the language client

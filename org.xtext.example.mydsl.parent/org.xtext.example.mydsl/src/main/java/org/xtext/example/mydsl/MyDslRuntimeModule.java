@@ -3,9 +3,17 @@
  */
 package org.xtext.example.mydsl;
 
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class MyDslRuntimeModule extends AbstractMyDslRuntimeModule {
+    
+    /**
+     * Configure output configuration provider for proper src-gen directory setup.
+     */
+    public Class<? extends IOutputConfigurationProvider> bindIOutputConfigurationProvider() {
+        return MyDslOutputConfigurationProvider.class;
+    }
 }
