@@ -4,7 +4,6 @@ import java.util.TreeSet;
 import org.farhan.dsl.common.LanguageHelper;
 import org.farhan.dsl.sheepdog.LanguageAccessImpl;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
@@ -12,6 +11,8 @@ import org.farhan.mbt.core.UMLTestData;
 import org.farhan.mbt.core.UMLTestSetup;
 import org.farhan.mbt.core.UMLTestStep;
 import org.farhan.mbt.core.UMLTestSuite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
@@ -22,6 +23,7 @@ import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 
 public class ConvertAsciidoctorToUML extends Converter {
 
+	private static final Logger logger = LoggerFactory.getLogger(ConvertAsciidoctorToUML.class);
 	// TODO why is this static?
 	private static TreeSet<String> stepObjects = new TreeSet<String>();
 	private static TreeSet<String> stepDefinitions = new TreeSet<String>();
@@ -29,8 +31,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private AsciiDoctorTestSuite srcObjTestSuite;
 	private AsciiDoctorStepObject srcObjStepObject;
 
-	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa, Logger log) {
-		super(tags, fa, log);
+	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa) {
+		super(tags, fa);
 	}
 
 	@Override
@@ -58,7 +60,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertStepDefinition(org.farhan.mbt.core.UMLStepDefinition stepDefinition,
 			StepDefinition srcStepDefinition) {
-		log.debug("step definition: " + srcStepDefinition.getName());
+		logger.debug("step definition: " + srcStepDefinition.getName());
 		stepDefinition.setNameLong(srcObjStepObject.getStepDefinitionNameLong(srcStepDefinition));
 		stepDefinition.setDescription(srcObjStepObject.getStepDefinitionDescription(srcStepDefinition));
 		for (StepParameters sp : srcObjStepObject.getStepParametersList(srcStepDefinition)) {
@@ -67,7 +69,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private void convertStepObject(String path, String content) throws Exception {
-		log.debug("step object: " + path);
+		logger.debug("step object: " + path);
 		srcObjStepObject = (AsciiDoctorStepObject) project.addFile(path);
 		srcObjStepObject.parse(content);
 		if (isStepObjectSelected()) {
@@ -86,12 +88,12 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertStepParameters(org.farhan.mbt.core.UMLStepParameters stepParameters,
 			StepParameters srcStepParameters) {
-		log.debug("step parameter: " + srcStepParameters.getName());
+		logger.debug("step parameter: " + srcStepParameters.getName());
 		stepParameters.setTable(srcObjStepObject.getStepParametersTable(srcStepParameters));
 	}
 
 	private void convertTestCase(TestStepContainer srcTestCase, UMLTestCase testCase) {
-		log.debug("test case: " + srcTestCase.getName());
+		logger.debug("test case: " + srcTestCase.getName());
 		testCase.setTags(srcObjTestSuite.getAbstractScenarioTags(srcTestCase));
 		testCase.setDescription(srcObjTestSuite.getScenarioDescription(srcTestCase));
 		for (TestStep srcStep : srcObjTestSuite.getStepList(srcTestCase)) {
@@ -103,7 +105,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private void convertTestData(UMLTestData examples, TestData srcExamples) {
-		log.debug("test data: " + srcExamples.getName());
+		logger.debug("test data: " + srcExamples.getName());
 		examples.setTags(srcObjTestSuite.getExamplesTags(srcExamples));
 		examples.setDescription(srcObjTestSuite.getExamplesDescription(srcExamples));
 		examples.setTable(srcObjTestSuite.getExamplesTable(srcExamples));
@@ -113,7 +115,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private void convertTestSetup(TestStepContainer srcBackground, UMLTestSetup background) {
-		log.debug("test setup: " + srcBackground.getName());
+		logger.debug("test setup: " + srcBackground.getName());
 		background.setTags(srcObjTestSuite.getAbstractScenarioTags(srcBackground));
 		background.setDescription(srcObjTestSuite.getBackgroundDescription(srcBackground));
 		for (TestStep srcStep : srcObjTestSuite.getStepList(srcBackground)) {
@@ -122,7 +124,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private void convertTestStep(UMLTestStep step, TestStep srcStep) {
-		log.debug("test step: " + srcStep.getName());
+		logger.debug("test step: " + srcStep.getName());
 		stepObjects.add(LanguageHelper.getStepObjectQualifiedName(new LanguageAccessImpl(srcStep)));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
 		step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));
@@ -135,7 +137,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private void convertTestSuite(String path, String content) throws Exception {
-		log.debug("test suite: " + path);
+		logger.debug("test suite: " + path);
 		srcObjTestSuite = (AsciiDoctorTestSuite) project.addFile(path);
 		srcObjTestSuite.parse(content);
 		if (tags.isEmpty() || isTestSuiteSelected() || isAnyTestCaseSelected()) {
@@ -194,7 +196,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private boolean isTestSuiteSelected() throws Exception {
 		// TODO this needs a test case
 		for (String t : srcObjTestSuite.getFeatureTags()) {
-			log.debug("feature tag: " + t);
+			logger.debug("feature tag: " + t);
 			if (t.trim().contentEquals(tags)) {
 				return true;
 			}

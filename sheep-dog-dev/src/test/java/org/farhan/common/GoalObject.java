@@ -3,33 +3,34 @@ package org.farhan.common;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
 import org.junit.jupiter.api.Assertions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class GoalObject extends TestObject {
 
-	// TODO don't hardcode the directories?
+	private static final Logger logger = LoggerFactory.getLogger(GoalObject.class);
+
+	// TODO don't hardcode the directories
 	protected String[] dirs = { "src/test/resources/asciidoc/", "src-gen/test/resources/cucumber/" };
 	protected ObjectRepository or;
 	protected SourceRepository sr;
-	protected LoggerImpl log;
 	protected String tags;
 
 	public GoalObject() {
 		or = new FileObjectRepository();
 		sr = new SourceRepository();
-		log = new LoggerImpl();
 		attributes.put("tags", "");
 	}
 
 	protected void runGoal(String goal) {
-
+		logger.debug("Entering runGoal for goal: {}", goal != null ? goal : "null");
 		try {
 			tags = attributes.get("tags");
 			Class<?> mojoClass = Class.forName(goal);
-			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class, Logger.class)
-					.newInstance(tags, or, log);
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
+					.newInstance(tags, or);
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
 				mojo.clearProjects();
@@ -54,7 +55,9 @@ public abstract class GoalObject extends TestObject {
 					}
 				}
 			}
+			logger.debug("Exiting runGoal");
 		} catch (Exception e) {
+			logger.error("Failed in runGoal for goal '{}': {}", goal != null ? goal : "null", e.getMessage(), e);
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}
 	}

@@ -7,22 +7,24 @@ import org.farhan.dsl.cucumber.cucumber.Scenario;
 import org.farhan.dsl.cucumber.cucumber.ScenarioOutline;
 import org.farhan.dsl.cucumber.cucumber.Step;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLTestCase;
 import org.farhan.mbt.core.UMLTestData;
 import org.farhan.mbt.core.UMLTestSuite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.mbt.core.UMLTestSetup;
 import org.farhan.mbt.core.UMLTestStep;
 
 public class ConvertCucumberToUML extends Converter {
 
+	private static final Logger logger = LoggerFactory.getLogger(ConvertCucumberToUML.class);
 	protected CucumberPathConverter pathConverter;
 	private CucumberFeature srcObjTestSuite;
 
-	public ConvertCucumberToUML(String tags, ObjectRepository fa, Logger log) {
-		super(tags, fa, log);
+	public ConvertCucumberToUML(String tags, ObjectRepository fa) {
+		super(tags, fa);
 	}
 
 	@Override
@@ -33,7 +35,7 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertTestCase(AbstractScenario srcTestCase, UMLTestCase testCase) {
-		log.debug("test case: " + srcTestCase.getName());
+		logger.debug("test case: " + srcTestCase.getName());
 		testCase.setTags(srcObjTestSuite.getScenarioTags(srcTestCase));
 		testCase.setDescription(srcObjTestSuite.getScenarioDescription(srcTestCase));
 		for (Step srcStep : srcObjTestSuite.getStepList(srcTestCase)) {
@@ -42,7 +44,7 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertTestCaseWithTestData(AbstractScenario srcTestCase, UMLTestCase testCase) {
-		log.debug("test case: " + srcTestCase.getName());
+		logger.debug("test case: " + srcTestCase.getName());
 		testCase.setTags(srcObjTestSuite.getScenarioOutlineTags(srcTestCase));
 		testCase.setDescription(srcObjTestSuite.getScenarioOutlineDescription(srcTestCase));
 		for (Step srcStep : srcObjTestSuite.getStepList(srcTestCase)) {
@@ -54,7 +56,7 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertTestData(UMLTestData examples, Examples srcExamples) {
-		log.debug("test data: " + srcExamples.getName());
+		logger.debug("test data: " + srcExamples.getName());
 		examples.setTags(srcObjTestSuite.getExamplesTags(srcExamples));
 		examples.setDescription(srcObjTestSuite.getExamplesDescription(srcExamples));
 		examples.setTable(srcObjTestSuite.getExamplesTable(srcExamples));
@@ -64,7 +66,7 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertTestSetup(AbstractScenario srcAbstractScenario, UMLTestSuite testSuite) {
-		log.debug("test setup: " + srcAbstractScenario.getName());
+		logger.debug("test setup: " + srcAbstractScenario.getName());
 		UMLTestSetup background = testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
 		background.setDescription(srcObjTestSuite.getBackgroundDescription(srcAbstractScenario));
 		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
@@ -73,7 +75,7 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertTestStep(UMLTestStep step, Step srcStep) {
-		log.debug("test step: " + srcStep.getName());
+		logger.debug("test step: " + srcStep.getName());
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
 		step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));
 		if (srcObjTestSuite.hasDocString(srcStep)) {
@@ -84,7 +86,7 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertTestSuite(String path, String content) throws Exception {
-		log.debug("test suite: " + path);
+		logger.debug("test suite: " + path);
 
 		srcObjTestSuite = (CucumberFeature) project.addFile(path);
 		srcObjTestSuite.parse(content);
@@ -124,7 +126,7 @@ public class ConvertCucumberToUML extends Converter {
 	private boolean isAnyTestCaseSelected() {
 		for (AbstractScenario a : srcObjTestSuite.getAbstractScenarioList()) {
 			if (isTestCaseSelected(a)) {
-				return true;				
+				return true;
 			}
 		}
 		return false;

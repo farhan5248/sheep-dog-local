@@ -11,7 +11,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
 
 public abstract class MBTMojo extends AbstractMojo {
@@ -48,20 +47,21 @@ public abstract class MBTMojo extends AbstractMojo {
 		if (repoDir.isEmpty()) {
 			repoDir = baseDir;
 		} else if (!repoDir.endsWith("/")) {
-			repoDir += "/";			
+			repoDir += "/";
 		}
 		ObjectRepository or = new FileObjectRepository(repoDir);
 		SourceRepository sr = new SourceRepository(baseDir);
 		try {
 
 			Class<?> mojoClass = Class.forName(goal);
-			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class, Logger.class)
-					.newInstance(tags, or, new LoggerImpl(getLog()));
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
+					.newInstance(tags, or);
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
 				mojo.clearProjects();
 				ArrayList<String> tempFiles = new ArrayList<String>();
-				// TODO this shouldn't be hardcoded, get it from the Converter class since that class knows which file types it converts
+				// TODO this shouldn't be hardcoded, get it from the Converter class since that
+				// class knows which file types it converts
 				for (String fileName : sr.list(dir, extension)) {
 					if (fileName.startsWith(dir + "stepdefs")) {
 						tempFiles.add(fileName);

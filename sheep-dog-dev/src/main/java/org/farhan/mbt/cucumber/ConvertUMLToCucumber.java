@@ -13,26 +13,28 @@ import org.farhan.dsl.cucumber.cucumber.Step;
 import org.farhan.dsl.cucumber.cucumber.StepTable;
 import org.farhan.mbt.core.Converter;
 
-import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLStepDefinition;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
 import org.farhan.mbt.core.UMLTestData;
 import org.farhan.mbt.core.UMLTestSuite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.mbt.core.UMLTestSetup;
 import org.farhan.mbt.core.UMLTestStep;
 
 public class ConvertUMLToCucumber extends Converter {
+	private static final Logger logger = LoggerFactory.getLogger(ConvertUMLToCucumber.class);
 
 	protected UMLTestSuite srcObj;
 	protected CucumberFeature tgtObjTestSuite;
 	protected CucumberJava tgtObjStepObject;
 	protected CucumberPathConverter pathConverter;
 
-	public ConvertUMLToCucumber(String tags, ObjectRepository fa, Logger log) {
-		super(tags, fa, log);
+	public ConvertUMLToCucumber(String tags, ObjectRepository fa) {
+		super(tags, fa);
 	}
 
 	@Override
@@ -59,7 +61,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	protected void convertTestCase(Scenario scenario, UMLTestCase srcTestCase) throws Exception {
-		log.debug("test case: " + srcTestCase.getName());
+		logger.debug("test case: " + srcTestCase.getName());
 
 		for (String tag : srcTestCase.getTags()) {
 			tgtObjTestSuite.addScenarioTag(scenario, tag);
@@ -77,7 +79,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	protected void convertTestCaseWithData(ScenarioOutline scenarioOutline, UMLTestCase srcTestCase) throws Exception {
-		log.debug("test case: " + srcTestCase.getName());
+		logger.debug("test case: " + srcTestCase.getName());
 		for (String tag : srcTestCase.getTags()) {
 			tgtObjTestSuite.addScenarioOutlineTag(scenarioOutline, tag);
 		}
@@ -96,7 +98,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	protected void convertTestData(Examples examples, UMLTestData srcTestData) {
-		log.debug("test data: " + srcTestData.getName());
+		logger.debug("test data: " + srcTestData.getName());
 		for (String c : srcTestData.getTags()) {
 			tgtObjTestSuite.addExamplesTag(examples, c);
 		}
@@ -117,7 +119,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	protected void convertTestSetup(Background background, UMLTestSetup srcTestSetup) throws Exception {
-		log.debug("test setup: " + srcTestSetup.getName());
+		logger.debug("test setup: " + srcTestSetup.getName());
 		// TODO replace getDescription with getStatementList
 		if (!srcTestSetup.getDescription().isEmpty()) {
 			for (String statement : srcTestSetup.getDescription().split("\n")) {
@@ -131,7 +133,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	protected void convertTestStep(Step step, UMLTestStep srcStep) throws Exception {
-		log.debug("test step: " + srcStep.getName());
+		logger.debug("test step: " + srcStep.getName());
 		// TODO make it consistent, has StepText or getDocString
 		if (srcStep.hasDocString()) {
 			DocString docString = tgtObjTestSuite.addDocString(step);
@@ -150,7 +152,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	protected void convertTestSuite(UMLTestSuite srcTestSuite) throws Exception {
-		log.debug("test suite: " + srcTestSuite.getName());
+		logger.debug("test suite: " + srcTestSuite.getName());
 
 		for (String tag : srcTestSuite.getTags()) {
 			tgtObjTestSuite.addFeatureTag(tag);
@@ -175,7 +177,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	protected void convertStepObject(UMLStepObject srcStepObject) throws Exception {
-		log.debug("step object: " + srcStepObject.getName());
+		logger.debug("step object: " + srcStepObject.getName());
 		for (UMLStepDefinition srcStepDefinition : srcStepObject.getStepDefinitionList()) {
 
 			ArrayList<String> parametersListMerged = new ArrayList<String>();

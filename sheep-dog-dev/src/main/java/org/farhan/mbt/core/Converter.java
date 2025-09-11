@@ -8,12 +8,10 @@ public abstract class Converter {
 	protected ConvertibleProject project;
 	protected UMLTestProject model;
 	protected ObjectRepository fa;
-	protected Logger log;
 
-	public Converter(String tags, ObjectRepository fa, Logger log) {
+	public Converter(String tags, ObjectRepository fa) {
 		this.tags = tags;
 		this.fa = fa;
-		this.log = log;
 	}
 
 	public abstract void initProjects() throws Exception;
