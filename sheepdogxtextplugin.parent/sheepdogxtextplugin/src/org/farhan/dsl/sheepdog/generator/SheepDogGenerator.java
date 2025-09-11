@@ -5,6 +5,7 @@ package org.farhan.dsl.sheepdog.generator;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -23,6 +24,8 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
  * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 public class SheepDogGenerator extends AbstractGenerator {
+
+	private static final Logger logger = Logger.getLogger(SheepDogGenerator.class);
 
 	@Override
 	public void beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
@@ -55,10 +58,9 @@ public class SheepDogGenerator extends AbstractGenerator {
 	}
 
 	private static void logError(Exception e, TestStep step) {
-		// TODO inject the logger instead
-		System.out.println("There was a problem generating for step: " + step.getName());
+		logger.error("There was a problem generating for step: " + step.getName());
 		StringWriter sw = new StringWriter();
-		System.out.println(sw.toString());
+		logger.error(sw.toString());
 		e.printStackTrace(new PrintWriter(sw));
 	}
 }

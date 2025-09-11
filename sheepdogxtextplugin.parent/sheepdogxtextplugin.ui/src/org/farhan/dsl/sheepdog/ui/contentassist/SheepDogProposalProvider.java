@@ -6,7 +6,7 @@ package org.farhan.dsl.sheepdog.ui.contentassist;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map.Entry;
-
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
@@ -29,6 +29,8 @@ import org.farhan.dsl.sheepdog.sheepDog.When;
  * on how to customize the content assistant.
  */
 public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
+
+	private static final Logger logger = Logger.getLogger(SheepDogProposalProvider.class);
 
 	public void completeAnd_Name(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
@@ -161,10 +163,9 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	}
 
 	private void logError(Exception e, String name) {
-		// TODO inject the logger instead
-		System.out.println("There was an error listing proposals for: " + name);
+		logger.error("There was an error listing proposals for: " + name);
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
-		System.out.println(sw.toString());
+		logger.error(sw.toString());
 	}
 }

@@ -5,10 +5,11 @@ package org.farhan.dsl.sheepdog.validation;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.dsl.sheepdog.LanguageAccessImpl;
+import org.farhan.dsl.sheepdog.generator.SheepDogGenerator;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
@@ -25,6 +26,7 @@ import org.farhan.dsl.common.*;
  */
 public class SheepDogValidator extends AbstractSheepDogValidator {
 
+	private static final Logger logger = Logger.getLogger(SheepDogValidator.class);
 	public static final String INVALID_NAME = "invalidName";
 	public static final String INVALID_HEADER = "invalidHeader";
 	public static final String INVALID_STEP_TYPE = "invalidStepType";
@@ -94,10 +96,9 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	}
 
 	private void logError(Exception e, String name) {
-		// TODO inject the logger instead
-		System.out.println("There was a problem listing directories for: " + name);
+		logger.error("There was a problem listing directories for: " + name);
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
-		System.out.println(sw.toString());
+		logger.error(sw.toString());
 	}
 }
