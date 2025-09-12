@@ -104,6 +104,10 @@ public class CucumberFeature implements ConvertibleObject {
 		theFeature.setName(featureName);
 	}
 
+	public void clearFeatureStatement() {
+		theFeature.getStatements().clear();
+	}
+
 	public Statement addFeatureStatement(String statement) {
 		return addStatement(theFeature.getStatements(), statement);
 	}
@@ -171,18 +175,18 @@ public class CucumberFeature implements ConvertibleObject {
 		String keyword = name.split(" ")[0];
 		Step step = null;
 		switch (keyword) {
-		case "Given:":
-			step = CucumberFactory.eINSTANCE.createGiven();
-			break;
-		case "When:":
-			step = CucumberFactory.eINSTANCE.createWhen();
-			break;
-		case "Then:":
-			step = CucumberFactory.eINSTANCE.createThen();
-			break;
-		case "And:":
-			step = CucumberFactory.eINSTANCE.createAnd();
-			break;
+			case "Given:":
+				step = CucumberFactory.eINSTANCE.createGiven();
+				break;
+			case "When:":
+				step = CucumberFactory.eINSTANCE.createWhen();
+				break;
+			case "Then:":
+				step = CucumberFactory.eINSTANCE.createThen();
+				break;
+			case "And:":
+				step = CucumberFactory.eINSTANCE.createAnd();
+				break;
 		}
 		step.setName(name.substring(keyword.length() + 1));
 		abstractScenario.getSteps().add(step);

@@ -159,6 +159,7 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 
 		if (!srcTestSuite.getDescription().isEmpty()) {
+			tgtObjTestSuite.clearFeatureStatement();
 			for (String statement : srcTestSuite.getDescription().split("\n")) {
 				tgtObjTestSuite.addFeatureStatement(statement);
 			}
