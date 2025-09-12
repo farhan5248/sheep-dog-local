@@ -19,58 +19,6 @@ Feature: DocumentScenarioToUML
           | Interaction Name       | Message                                    |
           | specs::Process::Submit | The blah application, Object page is empty |
 
-  Scenario: One tag, one statement, one step
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Case: Submit
-          
-          @tag1
-          Desc line 1
-          
-          * Given: The blah application, Object page is empty
-          """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name       | Annotation Name | Annotation Detail |
-          | specs::Process::Submit | tags            | tag1              |
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name       | Comment            |
-          | specs::Process::Submit | @tag1\nDesc line 1 |
-
-  Scenario: Two tags, two statements, two steps
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Case: Submit
-          
-          @tag1 @tag2
-          Desc line 1
-          Desc line 2
-          
-          * Given: The blah application, Object page is empty
-          
-          * Given: The blah application, Object2 page is empty
-          """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name       | Annotation Name | Annotation Detail |
-          | specs::Process::Submit | tags            | tag1              |
-          | specs::Process::Submit | tags            | tag2              |
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name       | Comment                               |
-          | specs::Process::Submit | @tag1 @tag2\nDesc line 1\nDesc line 2 |
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                     |
-          | specs::Process::Submit | The blah application, Object page is empty  |
-          | specs::Process::Submit | The blah application, Object2 page is empty |
-
   Scenario: Three tags, three statements, three steps
 
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows

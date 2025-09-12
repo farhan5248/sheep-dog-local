@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.farhan</groupId>
@@ -18,7 +20,7 @@
 		<connection>scm:git:https://github.com/farhan5248/sheep-dog-local</connection>
 		<tag>sheep-dog-dev-maven-plugin-1.0</tag>
 	</scm>
-	
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>github</id>
@@ -31,7 +33,7 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	
+
 	<repositories>
 		<repository>
 			<id>github</id>
@@ -145,6 +147,16 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.farhan</groupId>
+				<artifactId>sheep-dog-dev-maven-plugin</artifactId>
+				<version>1.28-SNAPSHOT</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

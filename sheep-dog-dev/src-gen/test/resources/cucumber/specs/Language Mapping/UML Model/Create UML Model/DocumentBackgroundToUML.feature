@@ -3,7 +3,7 @@ Feature: DocumentBackgroundToUML
 
   \@sheep-dog-dev
 
-  Scenario: One tag, one statement, one step
+  Scenario: One statement, one step, one scenario
 
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
@@ -11,21 +11,22 @@ Feature: DocumentBackgroundToUML
           
           == Test-Setup: Setup
           
-          @tag1
           Desc line 1
           
           * Given: The Object0 page is valid
+          
+          == Test-Case: Submit
+          
+          * Given: The Object page is valid
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name      | Annotation Name | Annotation Detail |
-          | specs::Process::Setup | tags            | tag1              |
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name      | Comment            |
-          | specs::Process::Setup | @tag1\nDesc line 1 |
+      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+          | Interaction Name       | Message                   |
+          | specs::Process::Setup  | The Object0 page is valid |
+          | specs::Process::Submit | The Object page is valid  |
 
-  Scenario: Two tags, two statements, two steps
+  Scenario: No statement, one step, three scenarios
 
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
@@ -33,27 +34,53 @@ Feature: DocumentBackgroundToUML
           
           == Test-Setup: Setup
           
-          @tag1 @tag2
-          Desc line 1
-          Desc line 2
+          * Given: The Object0 page is valid
           
-          * Given: The blah application, Object page is empty
+          == Test-Case: Submit 1
           
-          * Given: The blah application, Object2 page is empty
+          * Given: The Object page is valid
+          
+          == Test-Case: Submit 2
+          
+          * Given: The Object2 page is valid
+          
+          == Test-Case: Submit 3
+          
+          * Given: The Object3 page is valid
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name      | Annotation Name | Annotation Detail |
-          | specs::Process::Setup | tags            | tag1              |
-          | specs::Process::Setup | tags            | tag2              |
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name      | Comment                               |
-          | specs::Process::Setup | @tag1 @tag2\nDesc line 1\nDesc line 2 |
       And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name      | Message                                     |
-          | specs::Process::Setup | The blah application, Object page is empty  |
-          | specs::Process::Setup | The blah application, Object2 page is empty |
+          | Interaction Name         | Message                   |
+          | specs::Process::Setup    | The Object0 page is valid |
+          | specs::Process::Submit 1 | The Object page is valid  |
+          | specs::Process::Submit 2 | The Object2 page is valid |
+          | specs::Process::Submit 3 | The Object3 page is valid |
+
+  Scenario: No statement, three steps, one scenario
+
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+          """
+          = Test-Suite: Process
+          
+          == Test-Setup: Setup
+          
+          * Given: The Object page is valid
+          * Given: The Object2 page is valid
+          * Given: The Object3 page is valid
+          
+          == Test-Case: Submit
+          
+          * Given: The Object page is valid
+          """
+     When The maven plugin, asciidoctor-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+          | Interaction Name       | Message                   |
+          | specs::Process::Setup  | The Object page is valid  |
+          | specs::Process::Setup  | The Object2 page is valid |
+          | specs::Process::Setup  | The Object3 page is valid |
+          | specs::Process::Submit | The Object page is valid  |
 
   Scenario: Three tags, three statements, three steps
 
@@ -89,132 +116,6 @@ Feature: DocumentBackgroundToUML
           | specs::Process::Setup | The blah application, Object page is empty  |
           | specs::Process::Setup | The blah application, Object2 page is empty |
           | specs::Process::Setup | The blah application, Object3 page is empty |
-
-  Scenario: No tags, no statements, one step
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Setup: Setup
-          
-          * Given: The Object0 page is valid
-          
-          == Test-Case: Submit
-          
-          * Given: The Object page is valid
-          """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                   |
-          | specs::Process::Setup  | The Object0 page is valid |
-          | specs::Process::Submit | The Object page is valid  |
-
-  Scenario: No statement, one step, two scenarios
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Setup: Setup
-          
-          * Given: The Object0 page is valid
-          
-          == Test-Case: Submit 1
-          
-          * Given: The Object page is valid
-          
-          == Test-Case: Submit 2
-          
-          * Given: The Object2 page is valid
-          """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name         | Message                   |
-          | specs::Process::Setup    | The Object0 page is valid |
-          | specs::Process::Submit 1 | The Object page is valid  |
-          | specs::Process::Submit 2 | The Object2 page is valid |
-
-  Scenario: No statement, one step, three scenarios
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Setup: Setup
-          
-          * Given: The Object0 page is valid
-          
-          == Test-Case: Submit 1
-          
-          * Given: The Object page is valid
-          
-          == Test-Case: Submit 2
-          
-          * Given: The Object2 page is valid
-          
-          == Test-Case: Submit 3
-          
-          * Given: The Object3 page is valid
-          """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name         | Message                   |
-          | specs::Process::Setup    | The Object0 page is valid |
-          | specs::Process::Submit 1 | The Object page is valid  |
-          | specs::Process::Submit 2 | The Object2 page is valid |
-          | specs::Process::Submit 3 | The Object3 page is valid |
-
-  Scenario: No statement, two steps, one scenario
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Setup: Setup
-          
-          * Given: The Object page is valid
-          * Given: The Object2 page is valid
-          
-          == Test-Case: Submit
-          
-          * Given: The Object page is valid
-          """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                   |
-          | specs::Process::Setup  | The Object page is valid  |
-          | specs::Process::Setup  | The Object2 page is valid |
-          | specs::Process::Submit | The Object page is valid  |
-
-  Scenario: No statement, three steps, one scenario
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Setup: Setup
-          
-          * Given: The Object page is valid
-          * Given: The Object2 page is valid
-          * Given: The Object3 page is valid
-          
-          == Test-Case: Submit
-          
-          * Given: The Object page is valid
-          """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                   |
-          | specs::Process::Setup  | The Object page is valid  |
-          | specs::Process::Setup  | The Object2 page is valid |
-          | specs::Process::Setup  | The Object3 page is valid |
-          | specs::Process::Submit | The Object page is valid  |
 
   Scenario: Selected tags
 
