@@ -1,18 +1,18 @@
 package org.farhan.dsl.lang;
 
-public class Proposal {
+public class TestStepIssueProposal {
 
 	private String display;
 	private String documentation;
 	private String replacement;
 
-	public Proposal(String display, String documentation, String replacement) {
+	public TestStepIssueProposal(String display, String documentation, String replacement) {
 		this.display = display;
 		this.documentation = documentation;
 		this.replacement = replacement;
 	}
 
-	public Proposal() {
+	public TestStepIssueProposal() {
 	}
 
 	public String getDisplay() {
