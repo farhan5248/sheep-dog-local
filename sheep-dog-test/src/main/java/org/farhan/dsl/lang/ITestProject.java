@@ -4,11 +4,21 @@ import java.util.ArrayList;
 
 public interface ITestProject {
 
-    ArrayList<String> getStepObjectList();
+	ArrayList<IStepObject> getStepObjectList();
 
-    ArrayList<String> getTestSuiteList();
+	ArrayList<ITestSuite> getTestSuiteList();
 
-    void setStepObjectList(ArrayList<String> stepObjectList);
+	void setStepObjectList(ArrayList<IStepObject> stepObjectList);
 
-    void setTestSuiteList(ArrayList<String> testSuiteList);
+	void setTestSuiteList(ArrayList<ITestSuite> testSuiteList);
+
+	String getFileExtension();
+
+	IStepObject getStepObject(String qualifiedName);
+
+	IStepObject createStepObject(String qualifiedName);
+
+	ArrayList<IStepObject> getStepObjectList(String component);
+
+	ArrayList<String> getComponentList();
 }

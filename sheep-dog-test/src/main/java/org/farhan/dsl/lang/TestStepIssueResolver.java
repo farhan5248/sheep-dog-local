@@ -11,15 +11,15 @@ public class TestStepIssueResolver {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepIssueResolver.class);
 
-	private static ArrayList<TestStepIssueProposal> getComponentCompletions(ILanguageAccess la) {
+	private static ArrayList<TestStepIssueProposal> getComponentCompletions(ITestStep theTestStep) {
 
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
-		if (la.getStepName() != null) {
-			if (la.getStepName().startsWith("The ")) {
+		if (theTestStep.getName() != null) {
+			if (theTestStep.getName().startsWith("The ")) {
 				TestStepIssueProposal proposal;
 				for (TestStepComponentTypes type : TestStepComponentTypes.values()) {
-					proposal = new TestStepIssueProposal(la.getStepName() + " " + type.value, type.description,
-							la.getStepName() + " " + type.value + ",");
+					proposal = new TestStepIssueProposal(theTestStep.getName() + " " + type.value, type.description,
+							theTestStep.getName() + " " + type.value + ",");
 					proposals.add(proposal);
 				}
 			}
@@ -27,75 +27,75 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	private static ArrayList<TestStepIssueProposal> getComponentObjects(ILanguageAccess la, String component)
+	private static ArrayList<TestStepIssueProposal> getComponentObjects(ITestStep theTestStep, String component)
 			throws Exception {
-
+		ITestProject theProject = theTestStep.getParent().getParent().getParent();
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
 		TestStepIssueProposal proposal;
-		for (String fileName : la.getFilesRecursively(component)) {
+		for (IStepObject fileName : theProject.getStepObjectList(component)) {
 			proposal = new TestStepIssueProposal();
-			proposal.setDisplay(fileName.replace(component + "/", "").replaceFirst(la.getFileExtension() + "$", ""));
-			proposal.setDocumentation(la.getStepObjectDescription(fileName));
+			proposal.setDisplay(fileName.getQualifiedName().replace(component + "/", "")
+					.replaceFirst(theProject.getFileExtension() + "$", ""));
+			proposal.setDocumentation(StatementUtility.getStatementListAsString(fileName.getStatementList()));
 			proposal.setReplacement("The " + component + ", " + proposal.getDisplay());
 			proposals.add(proposal);
 		}
 		return proposals;
 	}
 
-	private static ArrayList<TestStepIssueProposal> getObjectCompletion(ILanguageAccess la) {
-		TreeMap<String, String> types;
+	private static ArrayList<TestStepIssueProposal> getObjectCompletion(ITestStep theTestStep) {
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
-		if (la.getStepName() != null) {
-			if (!la.getStepName().replaceFirst(".*,", "").isBlank()) {
+		if (theTestStep.getName() != null) {
+			if (!theTestStep.getName().replaceFirst(".*,", "").isBlank()) {
 				for (TestStepObjectVertexTypes type : TestStepObjectVertexTypes.values()) {
-					proposals
-							.add(new TestStepIssueProposal(la.getStepName().replaceFirst(".*, ", "") + " " + type.value,
-									type.description, la.getStepName() + " " + type.value));
+					proposals.add(
+							new TestStepIssueProposal(theTestStep.getName().replaceFirst(".*, ", "") + " " + type.value,
+									type.description, theTestStep.getName() + " " + type.value));
 				}
 				for (TestStepObjectEdgeTypes type : TestStepObjectEdgeTypes.values()) {
-					proposals
-							.add(new TestStepIssueProposal(la.getStepName().replaceFirst(".*, ", "") + " " + type.value,
-									type.description, la.getStepName() + " " + type.value));
+					proposals.add(
+							new TestStepIssueProposal(theTestStep.getName().replaceFirst(".*, ", "") + " " + type.value,
+									type.description, theTestStep.getName() + " " + type.value));
 				}
 			}
 		}
 		return proposals;
 	}
 
-	private static ArrayList<TestStepIssueProposal> getObjectDefinitionCompletion(ILanguageAccess la) {
+	private static ArrayList<TestStepIssueProposal> getObjectDefinitionCompletion(ITestStep theTestStep) {
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
-		if (la.getStepName() != null) {
-			if (!TestStepUtility.hasState(la.getStepName())) {
-				if (!TestStepUtility.hasStateModality(la.getStepName())) {
-					if (!TestStepUtility.hasDetails(la.getStepName())) {
+		if (theTestStep.getName() != null) {
+			if (!TestStepUtility.hasState(theTestStep.getName())) {
+				if (!TestStepUtility.hasStateModality(theTestStep.getName())) {
+					if (!TestStepUtility.hasDetails(theTestStep.getName())) {
 						for (TestStepDetailTypes type : TestStepDetailTypes.values()) {
 							proposals.add(new TestStepIssueProposal(type.value, type.description,
-									la.getStepName() + " " + type.value));
+									theTestStep.getName() + " " + type.value));
 						}
 						for (TestStepStateModalityTypes type : TestStepStateModalityTypes.values()) {
 							proposals.add(new TestStepIssueProposal(type.value, type.description,
-									la.getStepName() + " " + type.value));
+									theTestStep.getName() + " " + type.value));
 						}
 					} else {
 						for (TestStepStateModalityTypes type : TestStepStateModalityTypes.values()) {
 							proposals.add(new TestStepIssueProposal(type.value, type.description,
-									la.getStepName() + " " + type.value));
+									theTestStep.getName() + " " + type.value));
 						}
 					}
 				} else {
-					if (!TestStepUtility.hasStateAttachment(la.getStepName())) {
+					if (!TestStepUtility.hasStateAttachment(theTestStep.getName())) {
 						for (TestStepAttachmentTypes type : TestStepAttachmentTypes.values()) {
 							proposals.add(new TestStepIssueProposal(type.value, type.description,
-									la.getStepName() + " " + type.value));
+									theTestStep.getName() + " " + type.value));
 						}
 					}
 					// TODO suggest state attribute from list of existing keywords in that object
 				}
 			} else {
-				if (!TestStepUtility.hasStateAttachment(la.getStepName())) {
+				if (!TestStepUtility.hasStateAttachment(theTestStep.getName())) {
 					for (TestStepAttachmentTypes type : TestStepAttachmentTypes.values()) {
 						proposals.add(new TestStepIssueProposal(type.value, type.description,
-								la.getStepName() + " " + type.value));
+								theTestStep.getName() + " " + type.value));
 					}
 				}
 				// TODO suggest time
@@ -104,51 +104,36 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	private static ArrayList<TestStepIssueProposal> getObjectDefinitions(ILanguageAccess la) throws Exception {
-		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
-		TestStepIssueProposal proposal;
-		String objectQualifiedName = TestStepUtility.getObjectQualifiedName(la);
-		String component = TestStepUtility.getComponent(la.getStepName());
-		String object = TestStepUtility.getObject(la.getStepName());
-		if (la.getStepObject(objectQualifiedName) != null) {
-			Object stepObject = la.getStepObject(objectQualifiedName);
-			for (Object stepDef : la.getStepDefinitions(stepObject)) {
-				proposal = new TestStepIssueProposal();
-				proposal.setDisplay(la.getStepDefinitionName((Object) stepDef));
-				proposal.setDocumentation(la.getStepDefinitionDescription((Object) stepDef));
-				if (component.isEmpty()) {
-					proposal.setReplacement("The " + object + " " + proposal.getDisplay());
-				} else {
-					proposal.setReplacement("The " + component + ", " + object + " " + proposal.getDisplay());
-				}
-				proposals.add(proposal);
-			}
-		}
-		return proposals;
-	}
-
-	private static Collection<TestStepIssueProposal> getPreviousObjects(ILanguageAccess la) {
+	private static Collection<TestStepIssueProposal> getPreviousObjects(ITestStep theTestStep) {
 
 		TreeMap<String, TestStepIssueProposal> proposals = new TreeMap<String, TestStepIssueProposal>();
 		TestStepIssueProposal proposal;
-		ArrayList<Object> allSteps = new ArrayList<Object>();
-		allSteps.addAll(la.getBackgroundSteps());
-		allSteps.addAll(la.getPreviousSteps());
+		ArrayList<ITestStep> allSteps = new ArrayList<ITestStep>();
+		ITestSetup testSetup = theTestStep.getParent().getParent().getTestSetup();
+		if (testSetup != null) {
+			if (testSetup.getTestStepList() != null) {
+				for (ITestStep t : testSetup.getTestStepList()) {
+					allSteps.add(t);
+				}
+			}
+		}
 
-		for (Object step : allSteps) {
+		allSteps.addAll(TestStepUtility.getPreviousSteps(theTestStep));
+
+		for (ITestStep step : allSteps) {
 			// TODO make tests for this if statement
-			if (la.getStepName(step) == null) {
+			if (step.getName() == null) {
 				continue;
-			} else if (!TestStepIssueDetector.isValid(la.getStepName(step))) {
+			} else if (!TestStepIssueDetector.isValid(step.getName())) {
 				continue;
 			}
-			String[] objectParts = TestStepUtility.getObject(la.getStepName(step)).split("/");
+			String[] objectParts = TestStepUtility.getObject(step.getName()).split("/");
 			String name = objectParts[objectParts.length - 1];
 			// This suggestion is to make referring to the last fully qualified name less
 			// tedious. However it can only refer to the last object.
 			proposal = new TestStepIssueProposal();
 			proposal.setDisplay(name);
-			proposal.setDocumentation("Referred in: " + la.getStepName(step));
+			proposal.setDocumentation("Referred in: " + step.getName());
 			proposal.setReplacement("The " + proposal.getDisplay());
 			proposals.put(proposal.getDisplay(), proposal);
 
@@ -156,127 +141,149 @@ public class TestStepIssueResolver {
 			// objects with the same simple name have different paths like a batch job file
 			// being moved between directories
 			proposal = new TestStepIssueProposal();
-			proposal.setDisplay(TestStepUtility.getObject(la.getStepName(step)));
-			proposal.setDocumentation("Referred in: " + la.getStepName(step));
+			proposal.setDisplay(TestStepUtility.getObject(step.getName()));
+			proposal.setDocumentation("Referred in: " + step.getName());
 			proposal.setReplacement("The " + proposal.getDisplay());
 			proposals.put(proposal.getDisplay(), proposal);
 		}
 		return proposals.values();
 	}
 
-	private static ArrayList<TestStepIssueProposal> getProjectComponents(ILanguageAccess la) throws Exception {
-
+	private static ArrayList<TestStepIssueProposal> getProjectComponents(ITestStep theTestStep) throws Exception {
+		ITestProject theProject = theTestStep.getParent().getParent().getParent();
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
 		TestStepIssueProposal proposal;
-		for (String fileName : la.getFiles()) {
+		for (String componentName : theProject.getComponentList()) {
 			proposal = new TestStepIssueProposal();
-			proposal.setDisplay(fileName);
-			proposal.setDocumentation(fileName);
-			proposal.setReplacement("The " + fileName + ",");
+			proposal.setDisplay(componentName);
+			proposal.setDocumentation(componentName);
+			proposal.setReplacement("The " + componentName + ",");
 			proposals.add(proposal);
 		}
 		return proposals;
 	}
 
-	private static Object getStepDefinition(Object stepObject, String predicate, ILanguageAccess la) {
-		for (Object stepDef : la.getStepDefinitions(stepObject)) {
-			if (la.getStepDefinitionName((Object) stepDef).contentEquals(predicate)) {
-				return (Object) stepDef;
-			}
-		}
-		return null;
-	}
-
-	public static TreeMap<String, TestStepIssueProposal> proposeName(ILanguageAccess la) throws Exception {
-		logger.debug("Entering proposeName for step: {}", la != null ? la.getStepName() : "null");
+	public static TreeMap<String, TestStepIssueProposal> proposeName(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering proposeName for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			TreeMap<String, TestStepIssueProposal> proposals = new TreeMap<String, TestStepIssueProposal>();
 			String component = "";
 			String object = "";
-			if (la.getStepName() != null) {
-				component = TestStepUtility.getComponent(la.getStepName());
-				object = TestStepUtility.getObject(la.getStepName());
+			if (theTestStep.getName() != null) {
+				component = TestStepUtility.getComponent(theTestStep.getName());
+				object = TestStepUtility.getObject(theTestStep.getName());
 			}
 			if (object.isEmpty()) {
 				if (component.isEmpty()) {
-					for (TestStepIssueProposal proposal : getProjectComponents(la)) {
+					for (TestStepIssueProposal proposal : getProjectComponents(theTestStep)) {
 						proposals.put(proposal.getReplacement(), proposal);
 					}
-					for (TestStepIssueProposal proposal : getComponentCompletions(la)) {
+					for (TestStepIssueProposal proposal : getComponentCompletions(theTestStep)) {
 						proposals.put(proposal.getReplacement(), proposal);
 					}
 				} else {
-					for (TestStepIssueProposal proposal : getComponentObjects(la, component)) {
+					for (TestStepIssueProposal proposal : getComponentObjects(theTestStep, component)) {
 						proposals.put(proposal.getReplacement(), proposal);
 					}
 				}
-				for (TestStepIssueProposal proposal : getPreviousObjects(la)) {
+				for (TestStepIssueProposal proposal : getPreviousObjects(theTestStep)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
-				for (TestStepIssueProposal proposal : getObjectCompletion(la)) {
+				for (TestStepIssueProposal proposal : getObjectCompletion(theTestStep)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
 			} else {
-				for (TestStepIssueProposal proposal : getObjectDefinitions(la)) {
+				for (TestStepIssueProposal proposal : getObjectDefinitions(theTestStep)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
-				for (TestStepIssueProposal proposal : getObjectDefinitionCompletion(la)) {
+				for (TestStepIssueProposal proposal : getObjectDefinitionCompletion(theTestStep)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
 			}
 			logger.debug("Exiting proposeName with {} proposals", proposals.size());
 			return proposals;
 		} catch (Exception e) {
-			logger.error("Failed in proposeName for step '{}': {}", la != null ? la.getStepName() : "null",
-					e.getMessage(), e);
+			logger.error("Failed in proposeName for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}
 
-	public static Object[] proposeStepObject(ILanguageAccess la) throws Exception {
-		logger.debug("Entering proposeStepObject for step: {}", la != null ? la.getStepName() : "null");
+	public static Object[] proposeStepObject(ITestStep theTestStep) throws Exception {
+		// TODO return TreeMap<String, TestStepIssueProposal> or
+		// ArrayList<TestStepIssueProposal> for everything
+		logger.debug("Entering proposeStepObject for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
-			String qualifiedName = TestStepUtility.getObjectQualifiedName(la);
-			String[] nameParts = qualifiedName.split("/");
-			String objectName = TestStepUtility.getObject(la.getStepName());
+			ITestProject theProject = theTestStep.getParent().getParent().getParent();
+			String qualifiedName = TestStepUtility.getObjectQualifiedName(theTestStep);
+			String[] nameParts = qualifiedName.replaceFirst(theProject.getFileExtension() + "$", "").split("/");
 			ArrayList<String> alternateNames = new ArrayList<String>();
-			for (String alternateName : la.getFilesRecursively(nameParts[0])) {
-				if (!alternateName.contentEquals(qualifiedName)
-						&& alternateName.endsWith(nameParts[nameParts.length - 1])) {
-					alternateName = alternateName.replaceFirst(la.getFileExtension() + "$", "");
-					alternateName = alternateName.replaceFirst(nameParts[0] + "/", "");
-					alternateNames.add(la.getStepName().replace(objectName, alternateName));
+			for (IStepObject aStepObject : theProject.getStepObjectList(nameParts[0])) {
+				if (aStepObject.getName().contentEquals(nameParts[nameParts.length - 1])) {
+					alternateNames
+							.add(aStepObject.getQualifiedName().replaceFirst(theProject.getFileExtension() + "$", "")
+									.replaceFirst(nameParts[0] + "/", ""));
 				}
 			}
 			logger.debug("Exiting proposeStepObject");
 			return alternateNames.toArray();
 		} catch (Exception e) {
-			logger.error("Failed in proposeStepObject for step '{}': {}", la != null ? la.getStepName() : "null",
-					e.getMessage(), e);
+			logger.error("Failed in proposeStepObject for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}
 
-	public static TreeMap<String, TestStepIssueProposal> proposeStepParameters(ILanguageAccess la) throws Exception {
-		logger.debug("Entering proposeStepParameters for step: {}", la != null ? la.getStepName() : "null");
+	private static ArrayList<TestStepIssueProposal> getObjectDefinitions(ITestStep theTestStep) throws Exception {
+		ITestProject theProject = theTestStep.getParent().getParent().getParent();
+		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
+		TestStepIssueProposal proposal;
+
+		if (TestStepIssueDetector.isValid(theTestStep.getName())) {
+			IStepObject stepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
+			if (stepObject != null) {
+				IStepDefinition stepDefinition = stepObject
+						.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+				if (stepDefinition != null) {
+					proposal = new TestStepIssueProposal();
+					proposal.setDisplay(stepDefinition.getName());
+					proposal.setDocumentation(
+							StatementUtility.getStatementListAsString(stepDefinition.getStatementList()));
+					String component = TestStepUtility.getComponent(theTestStep.getName());
+					String object = TestStepUtility.getObject(theTestStep.getName());
+					if (component.isEmpty()) {
+						proposal.setReplacement("The " + object + " " + proposal.getDisplay());
+					} else {
+						proposal.setReplacement("The " + component + ", " + object + " " + proposal.getDisplay());
+					}
+					proposals.add(proposal);
+				}
+			}
+		}
+		return proposals;
+	}
+
+	public static TreeMap<String, TestStepIssueProposal> proposeStepParameters(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering proposeStepParameters for step: {}",
+				theTestStep != null ? theTestStep.getName() : "null");
 		try {
+			ITestProject theProject = theTestStep.getParent().getParent().getParent();
 			TreeMap<String, TestStepIssueProposal> proposals = new TreeMap<String, TestStepIssueProposal>();
 			TestStepIssueProposal proposal;
 
-			if (TestStepIssueDetector.isValid(la.getStepName())) {
-				String objectQualifiedName = TestStepUtility.getObjectQualifiedName(la);
-				Object stepObject = la.getStepObject(objectQualifiedName);
+			if (TestStepIssueDetector.isValid(theTestStep.getName())) {
+				IStepObject stepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
 				if (stepObject != null) {
-					Object stepDefinition = getStepDefinition(stepObject,
-							TestStepUtility.getPredicate(la.getStepName()), la);
+					IStepDefinition stepDefinition = stepObject
+							.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
 					if (stepDefinition != null) {
-						for (Object parameters : la.getStepDefinitionParameters(stepDefinition)) {
-							String paramSetString = la.getStepDefinitionParametersString((Object) parameters);
+						for (IStepParameters parameters : stepDefinition.getStepParameterList()) {
 							proposal = new TestStepIssueProposal();
-							proposal.setDisplay(paramSetString);
+							proposal.setDisplay(parameters.toString());
 							// TODO make a test for getStepDefinitionParametersDocumentation
-							proposal.setDocumentation(la.getStepDefinitionParametersDocumentation((Object) parameters));
-							proposal.setReplacement(paramSetString);
+							proposal.setDocumentation(
+									StatementUtility.getStatementListAsString(parameters.getStatementList()));
+							proposal.setReplacement(parameters.toString());
 							proposals.put(proposal.getReplacement(), proposal);
 						}
 					}
@@ -285,8 +292,8 @@ public class TestStepIssueResolver {
 			logger.debug("Exiting proposeStepParameters with {} proposals", proposals.size());
 			return proposals;
 		} catch (Exception e) {
-			logger.error("Failed in proposeStepParameters for step '{}': {}", la != null ? la.getStepName() : "null",
-					e.getMessage(), e);
+			logger.error("Failed in proposeStepParameters for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}

@@ -19,8 +19,16 @@ public interface IStepDefinition {
 	void setName(String value);
 
 	void setNameLong(String value);
-	
+
 	void setParent(IStepObject value);
-	
+
 	void setStepParametersList(ArrayList<IStepParameters> value);
+
+	IStepParameters getStepParameters(ArrayList<String> table);
+
+	IStepParameters createStepParameters(ArrayList<String> table);
+
+	IStepParameters getStepParameters(String text);
+
+	IStepParameters createStepParameters(String text);
 }

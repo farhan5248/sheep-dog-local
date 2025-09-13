@@ -15,8 +15,14 @@ public interface IStepObject {
 	void setName(String value);
 
 	void setParent(ITestProject value);
-	
+
 	void setQualifiedName(String value);
-	
+
 	void setStepDefinitionList(ArrayList<IStepDefinition> value);
+
+	IStepDefinition getStepDefinition(String predicate);
+
+	IStepDefinition createStepDefinition(String predicate);
+
+	ArrayList<IStatement> getStatementList();
 }

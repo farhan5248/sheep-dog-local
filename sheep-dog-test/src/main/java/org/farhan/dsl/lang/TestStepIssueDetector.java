@@ -48,15 +48,15 @@ public class TestStepIssueDetector {
 		return text.matches(TestStepUtility.REGEX);
 	}
 
-	public static String getErrorMessage(ILanguageAccess la) throws Exception {
-		logger.debug("Entering validateError for step: {}", la != null ? la.getStepName() : "null");
+	public static String getErrorMessage(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering validateError for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
-			if (!TestStepIssueDetector.isValid(la.getStepName())) {
+			if (!isValid(theTestStep.getName())) {
 				logger.debug("Exiting validateError");
-				return TestStepIssueDetector.getErrorMessage(la.getStepName());
+				return getErrorMessage(theTestStep.getName());
 			} else {
-				if (la.getAllSteps().getFirst().equals(la.getStep())) {
-					if (TestStepUtility.getComponent(la.getStepName()).isEmpty()) {
+				if (theTestStep.getParent().getTestStepList().getFirst().equals(theTestStep)) {
+					if (TestStepUtility.getComponent(theTestStep.getName()).isEmpty()) {
 						logger.debug("Exiting validateError");
 						return TestStepIssueTypes.FIRST_STEP_COMPONENT.value;
 					}
@@ -65,45 +65,45 @@ public class TestStepIssueDetector {
 				return "";
 			}
 		} catch (Exception e) {
-			logger.error("Failed in validateError for step '{}': {}", la != null ? la.getStepName() : "null",
-					e.getMessage(), e);
+			logger.error("Failed in validateError for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}
 
-	public static String getWarningMessage(ILanguageAccess la) throws Exception {
-		logger.debug("Entering validateWarning for step: {}", la != null ? la.getStepName() : "null");
+	public static String getWarningMessage(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering validateWarning for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
-			String stepObjectQualifiedName = TestStepUtility.getObjectQualifiedName(la);
-			Object stepObject = la.createStepObject(stepObjectQualifiedName);
-			String predicate = TestStepUtility.getPredicate(la.getStepName());
-			Object theStepDef = null;
-			for (Object stepDef : la.getStepDefinitions(stepObject)) {
-				if (la.getStepDefinitionName((Object) stepDef).contentEquals(predicate)) {
-					theStepDef = (Object) stepDef;
-				}
-			}
-			if (la.getStepObject(stepObjectQualifiedName) == null) {
+
+			ITestProject theProject = theTestStep.getParent().getParent().getParent();
+			IStepObject theStepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
+			if (theStepObject == null) {
 				return TestStepIssueTypes.STEP_OBJECT_NOT_FOUND.value;
 			}
-			if (theStepDef == null) {
+			IStepDefinition theStepDefinition = theStepObject
+					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+			if (theStepDefinition == null) {
 				return TestStepIssueTypes.PREDICATE_NOT_FOUND.value;
 			}
-			if (la.hasParameters(theStepDef)) {
-				String headersString = la.getStepParametersString();
-				for (Object parameters : la.getStepDefinitionParameters(theStepDef)) {
-					String paramSetString = la.getStepDefinitionParametersString((Object) parameters);
-					if (headersString.contentEquals(paramSetString)) {
-						return "";
+			if (theTestStep.getTable() != null) {
+				if (!theTestStep.getTable().isEmpty()) {
+					if (theStepDefinition.getStepParameters(theTestStep.getTable().getFirst()) == null) {
+						return TestStepIssueTypes.PARAMETERS_NOT_FOUND.value;
 					}
 				}
-				return TestStepIssueTypes.PARAMETERS_NOT_FOUND.value;
+			}
+			if (theTestStep.getText() != null) {
+				if (!theTestStep.getText().isEmpty()) {
+					if (theStepDefinition.getStepParameters(theTestStep.getText()) == null) {
+						return TestStepIssueTypes.PARAMETERS_NOT_FOUND.value;
+					}
+				}
 			}
 			logger.debug("Exiting validateWarning");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateWarning for step '{}': {}", la != null ? la.getStepName() : "null",
-					e.getMessage(), e);
+			logger.error("Failed in validateWarning for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}

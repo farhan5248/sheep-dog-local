@@ -76,37 +76,49 @@ public class TestStepUtility {
 		return getGroup(REGEX, text, 5);
 	}
 
-	public static String getObjectQualifiedName(ILanguageAccess la) {
-		logger.debug("Entering getStepObjectQualifiedName for step: {}", la != null ? la.getStepName() : "null");
+	public static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep) {
+		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
+		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
+			if (!t.equals(theTestStep)) {
+				steps.add(theTestStep);
+			} else {
+				break;
+			}
+		}
+		return steps;
+	}
+
+	public static String getObjectQualifiedName(ITestStep theStep) {
+		logger.debug("Entering getStepObjectQualifiedName for step: {}", theStep != null ? theStep.getName() : "null");
 		try {
-			String component = getComponent(la.getStepName());
-			String object = getObject(la.getStepName());
+			String component = getComponent(theStep.getName());
+			String object = getObject(theStep.getName());
+			String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
 
 			// if there is a component and the object has a /, we're done
 			if (!component.isEmpty() && object.contains("/")) {
-				String result = component + "/" + object + la.getFileExtension();
+				String result = component + "/" + object + fileExt;
 				logger.debug("Exiting getStepObjectQualifiedName with result: {}", result);
 				return result;
 			}
 			// Create a list of previous steps in reverse order
-			ArrayList<String> previousSteps = new ArrayList<String>();
+			ArrayList<ITestStep> previousSteps = new ArrayList<ITestStep>();
 			String lastComponent = "Unknown service";
-			// TODO test that this checks previous steps in the test setup
-			for (Object aStep : la.getPreviousSteps()) {
-				previousSteps.add(0, la.getStepName(aStep));
+			for (ITestStep aStep : getPreviousSteps(theStep)) {
+				previousSteps.add(0, aStep);
 				// keep track of the last component to assign to undeclared object components
-				if (!getComponent(la.getStepName(aStep)).isEmpty()) {
-					lastComponent = getComponent(la.getStepName(aStep));
+				if (!getComponent(theStep.getName()).isEmpty()) {
+					lastComponent = getComponent(theStep.getName());
 				}
 			}
 			// search all previous steps for a more complete object path. While doing so,
 			// if the component is empty, set it
 			String[] objectParts = object.split("/");
 			String objectKey = objectParts[objectParts.length - 1];
-			for (String previousStep : previousSteps) {
+			for (ITestStep previousStep : previousSteps) {
 				// if the step has a matching object
-				String previousObject = getObject(previousStep);
-				String previousComponent = getComponent(previousStep);
+				String previousObject = getObject(previousStep.getName());
+				String previousComponent = getComponent(previousStep.getName());
 				if (previousObject.endsWith(objectKey)) {
 
 					// if the object doesn't have / and the matching object does. Set it
@@ -125,17 +137,17 @@ public class TestStepUtility {
 				}
 			}
 			if (component.isEmpty()) {
-				String result = lastComponent + "/" + object + la.getFileExtension();
+				String result = lastComponent + "/" + object + fileExt;
 				logger.debug("Exiting getStepObjectQualifiedName with result: {}", result);
 				return result;
 			} else {
-				String result = component + "/" + object + la.getFileExtension();
+				String result = component + "/" + object + fileExt;
 				logger.debug("Exiting getStepObjectQualifiedName with result: {}", result);
 				return result;
 			}
 		} catch (Exception e) {
 			logger.error("Failed in getStepObjectQualifiedName for step '{}': {}",
-					la != null ? la.getStepName() : "null", e.getMessage(), e);
+					theStep != null ? theStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}

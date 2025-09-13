@@ -14,7 +14,7 @@ public interface ITestSuite {
 
 	ArrayList<String> getTags();
 
-	String getTestSetup();
+	ITestSetup getTestSetup();
 
 	ArrayList<ITestStepContainer> getTestStepContainerList();
 
@@ -28,7 +28,7 @@ public interface ITestSuite {
 
 	void setTags(ArrayList<String> value);
 	
-	void setTestSetup(String value);
+	void setTestSetup(ITestSetup value);
 	
 	void setTestStepContainerList(ArrayList<ITestStepContainer> value);
 }

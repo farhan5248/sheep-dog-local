@@ -6,51 +6,42 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class StepObjectBuilder {
+
 	private static final Logger logger = LoggerFactory.getLogger(StepObjectBuilder.class);
 
-	private static Object getStepDefinition(Object stepObject, String predicate, ILanguageAccess la) {
-		for (Object stepDef : la.getStepDefinitions(stepObject)) {
-			if (la.getStepDefinitionName((Object) stepDef).contentEquals(predicate)) {
-				return (Object) stepDef;
+	public static void generateStepDefinition(ITestStep theTestStep, Map<Object, Object> options) throws Exception {
+		logger.debug("Entering generateStepDefinition for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+		try {
+			ITestProject theProject = theTestStep.getParent().getParent().getParent();
+			IStepObject theStepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
+			if (theStepObject == null) {
+				theStepObject = theProject.createStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
 			}
-		}
-		return null;
-	}
-
-	private static Object createStepDefinition(Object stepObject, ILanguageAccess la) {
-		String predicate = TestStepUtility.getPredicate(la.getStepName());
-		Object stepDef = getStepDefinition(stepObject, predicate, la);
-		if (stepDef == null) {
-			return la.createStepDefinition(stepObject, predicate);
-		} else {
-			return stepDef;
-		}
-	}
-
-	private static void createStepParameters(Object theStepDef, ILanguageAccess la) {
-		if (la.hasParameters(theStepDef)) {
-			String headersString = la.getStepParametersString();
-			for (Object parameters : la.getStepDefinitionParameters(theStepDef)) {
-				String paramSetString = la.getStepDefinitionParametersString((Object) parameters);
-				if (headersString.contentEquals(paramSetString)) {
-					return;
+			IStepDefinition theStepDefinition = theStepObject
+					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+			if (theStepDefinition == null) {
+				theStepDefinition = theStepObject.createStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+			}
+			// TODO create ITable
+			if (theTestStep.getTable() != null) {
+				if (!theTestStep.getTable().isEmpty()) {
+					if (theStepDefinition.getStepParameters(theTestStep.getTable().getFirst()) == null) {
+						theStepDefinition.createStepParameters(theTestStep.getTable().getFirst());
+					}
 				}
 			}
-			la.createStepDefinitionParameters(theStepDef);
-		}
-	}
-
-	public static void generateStepDefinition(ILanguageAccess la, Map<Object, Object> options) throws Exception {
-		logger.debug("Entering generateStepDefinition for step: {}", la != null ? la.getStepName() : "null");
-		try {
-			Object stepObject = la.createStepObject(TestStepUtility.getObjectQualifiedName(la));
-			Object stepDefinition = createStepDefinition(stepObject, la);
-			createStepParameters(stepDefinition, la);
-			la.saveObject(stepObject, options);
+			// TODO create IText
+			if (theTestStep.getText() != null) {
+				if (!theTestStep.getText().isEmpty()) {
+					if (theStepDefinition.getStepParameters(theTestStep.getText()) == null) {
+						theStepDefinition.createStepParameters(theTestStep.getText());
+					}
+				}
+			}
 			logger.debug("Exiting generateStepDefinition");
 		} catch (Exception e) {
-			logger.error("Failed in generateStepDefinition for step '{}': {}", la != null ? la.getStepName() : "null",
-					e.getMessage(), e);
+			logger.error("Failed in generateStepDefinition for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}
