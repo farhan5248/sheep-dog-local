@@ -12,7 +12,7 @@ public class GenerateStepDefinitionActionImpl extends TestObject implements Gene
 
     public void transition() {
 		try {
-			LanguageHelper.generate(getEclipseMock(), null);
+			LanguageHelper.generate(getLanguageAccess(), null);
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}

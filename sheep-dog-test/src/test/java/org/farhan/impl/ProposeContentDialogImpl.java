@@ -14,22 +14,22 @@ public class ProposeContentDialogImpl extends TestObject implements ProposeConte
 	@Override
 	public void assertSuggestionName(HashMap<String, String> keyMap) {
 		Assertions.assertEquals(keyMap.get("Suggestion Name"),
-				getEclipseMock().getProposals().get(keyMap.get("Suggestion")).getDisplay());
+				getLanguageAccess().getProposals().get(keyMap.get("Suggestion")).getDisplay());
 	}
 
 	@Override
 	public void assertSuggestion(HashMap<String, String> keyMap) {
-		Assertions.assertNotNull(getEclipseMock().getProposals().get(keyMap.get("Suggestion")));
+		Assertions.assertNotNull(getLanguageAccess().getProposals().get(keyMap.get("Suggestion")));
 	}
 
 	@Override
 	public void assertEmpty(HashMap<String, String> keyMap) {
-		Assertions.assertTrue(getEclipseMock().getProposals().isEmpty());
+		Assertions.assertTrue(getLanguageAccess().getProposals().isEmpty());
 	}
 
 	@Override
 	public void assertSuggestionDescription(HashMap<String, String> keyMap) {
 		Assertions.assertEquals(keyMap.get("Suggestion Description"),
-				getEclipseMock().getProposals().get(keyMap.get("Suggestion")).getDocumentation());
+				getLanguageAccess().getProposals().get(keyMap.get("Suggestion")).getDocumentation());
 	}
 }

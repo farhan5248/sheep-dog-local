@@ -9,17 +9,17 @@ import io.cucumber.guice.ScenarioScoped;
 public class Process2AsciidocFileImpl extends TestObject implements Process2AsciidocFile {
 
 	public void setStepsSnippetStepName(HashMap<String, String> keyMap) {
-		getEclipseMock().addStep(getSpecial(keyMap.get("Step Name")));
+		getLanguageAccess().addStep(getSpecial(keyMap.get("Step Name")));
 	}
 
 	@Override
 	public void setStepsSnippetHeaders(HashMap<String, String> keyMap) {
-		getEclipseMock().setStepParameters(keyMap.get("Headers"));
+		getLanguageAccess().setStepParameters(keyMap.get("Headers"));
 	}
 
 	@Override
 	public void setBackgroundStepsSnippetStepName(HashMap<String, String> keyMap) {
-		getEclipseMock().addBackgroundStep(getSpecial(keyMap.get("Step Name")));
+		getLanguageAccess().addBackgroundStep(getSpecial(keyMap.get("Step Name")));
 	}
 
 }

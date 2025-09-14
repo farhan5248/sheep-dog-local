@@ -27,8 +27,10 @@ public interface ITestSuite {
 	void setStatementList(ArrayList<IStatement> value);
 
 	void setTags(ArrayList<String> value);
-	
+
 	void setTestSetup(ITestSetup value);
-	
+
 	void setTestStepContainerList(ArrayList<ITestStepContainer> value);
+
+	ITestCase createTestCase(String value);
 }

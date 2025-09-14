@@ -15,7 +15,7 @@ public class ValidateErrorActionImpl extends TestObject implements ValidateError
 
 	public void transition() {
 		try {
-			getEclipseMock().setValidationMessage(LanguageHelper.validateError(getEclipseMock()));
+			getLanguageAccess().setValidationMessage(LanguageHelper.validateError(getLanguageAccess()));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}
@@ -23,6 +23,6 @@ public class ValidateErrorActionImpl extends TestObject implements ValidateError
 
 	@Override
 	public void setSelectedStep(HashMap<String, String> keyMap) {
-		getEclipseMock().setStepSelection(keyMap.get("Selected Step"));
+		getLanguageAccess().setStepSelection(keyMap.get("Selected Step"));
 	}
 }

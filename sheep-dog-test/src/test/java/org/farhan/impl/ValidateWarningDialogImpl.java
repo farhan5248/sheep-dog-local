@@ -12,7 +12,7 @@ import io.cucumber.guice.ScenarioScoped;
 public class ValidateWarningDialogImpl extends TestObject implements ValidateWarningDialog {
 
 	public void assertMessage(HashMap<String, String> keyMap) {
-		Assertions.assertEquals(keyMap.get("Message"), getEclipseMock().getValidationMessage());
+		Assertions.assertEquals(keyMap.get("Message"), getLanguageAccess().getValidationMessage());
 	}
 
 }

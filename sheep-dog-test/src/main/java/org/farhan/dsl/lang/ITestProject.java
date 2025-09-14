@@ -21,4 +21,6 @@ public interface ITestProject {
 	ArrayList<IStepObject> getStepObjectList(String component);
 
 	ArrayList<String> getComponentList();
+
+	ITestSuite createTestSuite(String qualifiedName);
 }

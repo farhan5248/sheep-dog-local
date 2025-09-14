@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import org.farhan.common.TestObject;
 import org.farhan.dsl.common.Utilities;
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile;
 import org.junit.jupiter.api.Assertions;
 
@@ -17,7 +19,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void assertObjectName(HashMap<String, String> keyMap) {
 		try {
-			Assertions.assertNotNull(getEclipseMock().getStepObject(keyMap.get("Object Name")));
+			Assertions.assertNotNull(getLanguageAccess().getStepObject(keyMap.get("Object Name")));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -26,10 +28,17 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void assertParameters(HashMap<String, String> keyMap) {
 		try {
-			getEclipseMock().createStepObject(keyMap.get("Object Name"));
-			getEclipseMock().createStepDefinition(keyMap.get("Step Definition Name"));
-			Assertions.assertTrue(getEclipseMock().getStepDefinitionParameters(keyMap.get("Step Definition Name"))
-					.toString().contains("[" + keyMap.get("Parameters") + "]"));
+			getLanguageAccess().createStepObject(keyMap.get("Object Name"));
+			IStepDefinition sd = (IStepDefinition) getLanguageAccess()
+					.createStepDefinition(keyMap.get("Step Definition Name"));
+
+			boolean found = false;
+			for (IStepParameters sp : sd.getStepParameterList()) {
+				if (cellsToString(sp.getTable().getFirst()).contains(keyMap.get("Parameters"))) {
+					found = true;
+				}
+			}
+			Assertions.assertTrue(found);
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -39,10 +48,10 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void assertStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
-			Object stepObject = getEclipseMock().getStepObject(keyMap.get("Object Name"));
+			Object stepObject = getLanguageAccess().getStepObject(keyMap.get("Object Name"));
 			Assertions.assertNotNull(stepObject);
-			for (Object stepDef : getEclipseMock().getStepDefinitions(stepObject)) {
-				if (getEclipseMock().getStepDefinitionName((Object) stepDef)
+			for (Object stepDef : getLanguageAccess().getStepDefinitions(stepObject)) {
+				if (getLanguageAccess().getStepDefinitionName((Object) stepDef)
 						.contentEquals(keyMap.get("Step Definition Name"))) {
 					return;
 				}
@@ -56,7 +65,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setObjectName(HashMap<String, String> keyMap) {
 		try {
-			getEclipseMock().createStepObject(keyMap.get("Object Name"));
+			getLanguageAccess().createStepObject(keyMap.get("Object Name"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -65,13 +74,12 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setParameters(HashMap<String, String> keyMap) {
 		try {
-			getEclipseMock().createStepObject(keyMap.get("Object Name"));
-			@SuppressWarnings("unchecked")
-			ArrayList<ArrayList<String>> stepDefinitionList = (ArrayList<ArrayList<String>>) getEclipseMock()
+			getLanguageAccess().createStepObject(keyMap.get("Object Name"));
+			IStepDefinition stepDefinition = (IStepDefinition) getLanguageAccess()
 					.createStepDefinition(keyMap.get("Step Definition Name"));
 			ArrayList<String> parameters = new ArrayList<String>();
 			parameters.add(keyMap.get("Parameters"));
-			stepDefinitionList.add(parameters);
+			stepDefinition.createStepParameters(parameters);
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -80,8 +88,8 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
-			getEclipseMock().createStepObject(keyMap.get("Object Name"));
-			getEclipseMock().createStepDefinition(keyMap.get("Step Definition Name"));
+			getLanguageAccess().createStepObject(keyMap.get("Object Name"));
+			getLanguageAccess().createStepDefinition(keyMap.get("Step Definition Name"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -90,8 +98,8 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setStepDefinitionDescription(HashMap<String, String> keyMap) {
 		try {
-			getEclipseMock().createStepObject(keyMap.get("Object Name"));
-			getEclipseMock().setStepDefinitionDescription(keyMap.get("Step Definition Name"),
+			getLanguageAccess().createStepObject(keyMap.get("Object Name"));
+			getLanguageAccess().setStepDefinitionDescription(keyMap.get("Step Definition Name"),
 					keyMap.get("Step Definition Description"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
@@ -101,8 +109,8 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setObjectDescription(HashMap<String, String> keyMap) {
 		try {
-			getEclipseMock().createStepObject(keyMap.get("Object Name"));
-			getEclipseMock().setStepObjectDescription(keyMap.get("Object Description"));
+			getLanguageAccess().createStepObject(keyMap.get("Object Name"));
+			getLanguageAccess().setStepObjectDescription(keyMap.get("Object Description"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}

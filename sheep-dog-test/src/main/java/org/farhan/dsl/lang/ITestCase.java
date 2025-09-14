@@ -12,4 +12,6 @@ public interface ITestCase extends ITestStepContainer {
 
 	void setTestDataList(ArrayList<ITestData> value);
 
+	ITestStep createTestStep(String value);
+
 }

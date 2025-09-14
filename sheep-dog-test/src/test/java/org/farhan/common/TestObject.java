@@ -1,6 +1,7 @@
 package org.farhan.common;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,9 +14,22 @@ import io.cucumber.datatable.DataTable;
 // Right now the way I model stuff all the objects are either output ones or input+transition ones
 public abstract class TestObject {
 
-	static EclipseImpl la = null;
+	static LanguageAccessImpl la = null;
 
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
+
+	protected String cellsToString(List<String> cells) {
+		String cellsAsString = "";
+		List<String> sortedCells = new ArrayList<String>();
+		for (String cell : cells) {
+			sortedCells.add(cell);
+		}
+		Collections.sort(sortedCells);
+		for (String cell : sortedCells) {
+			cellsAsString += "| " + cell;
+		}
+		return cellsAsString.trim();
+	}
 
 	public void assertInputOutputs(DataTable dataTable) {
 		processInputOutputs(dataTable, "assert", "");
@@ -51,9 +65,9 @@ public abstract class TestObject {
 		return name.replaceAll("[ \\-\\(\\)/]", "");
 	}
 
-	protected EclipseImpl getEclipseMock() {
+	protected LanguageAccessImpl getLanguageAccess() {
 		if (la == null) {
-			la = new EclipseImpl();
+			la = new LanguageAccessImpl(new TestProjectImpl());
 		}
 		return la;
 	}

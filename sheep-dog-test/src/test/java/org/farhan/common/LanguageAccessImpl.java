@@ -2,49 +2,59 @@ package org.farhan.common;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.farhan.dsl.common.ILanguageAccess;
 import org.farhan.dsl.common.Proposal;
+import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.StatementUtility;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.ITestCase;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.IStepParameters;
 
-public class EclipseImpl implements ILanguageAccess {
+public class LanguageAccessImpl implements ILanguageAccess {
 
-	// TODO when moving the adoc, redo this because it's definitely going to be hard
-	// to understand this 3 months from now when I return to this
-
-	private String validationMessage;
-	private String stepName;
-	private ArrayList<String> stepParameters;
+	private ITestProject testProject;
+	private ITestStep theTestStep;
+	private IStepObject stepObject;
 	private ArrayList<Object> allSteps;
 	private ArrayList<Object> backgroundSteps;
-	private HashMap<String, String> stepDefinitionDescriptions;
-	private String stepObjectName;
-	private HashMap<String, ArrayList<ArrayList<String>>> stepObject;
+	private ArrayList<IStepObject> componentObjects;
+	private ArrayList<ArrayList<String>> stepParametersTable;
+	// UI elements
 	private TreeMap<String, Proposal> proposalMap;
-	private ArrayList<String> componentObjects;
-	private String stepObjectDescription;
+	private String validationMessage;
 	private Object[] alternateObjects;
 
-	public EclipseImpl() {
-		stepName = "";
-		stepObjectName = "";
-		componentObjects = new ArrayList<String>();
-		stepParameters = new ArrayList<String>();
+	public LanguageAccessImpl(TestProjectImpl testProjectImpl) {
+		testProject = testProjectImpl;
+		componentObjects = new ArrayList<IStepObject>();
 		allSteps = new ArrayList<Object>();
 		backgroundSteps = new ArrayList<Object>();
-		stepDefinitionDescriptions = new HashMap<String, String>();
 	}
 
 	public void addBackgroundStep(String stepName) {
-		backgroundSteps.add(stepName);
+		ITestSuite testSuite = testProject.createTestSuite("");
+		ITestCase testCase = testSuite.createTestCase("");
+		theTestStep = testCase.createTestStep(stepName);
+		backgroundSteps.add(theTestStep);
 	}
 
 	public void addStep(String stepName) {
-		this.stepName = stepName;
-		allSteps.add(this.stepName);
+		ITestSuite testSuite = testProject.createTestSuite("");
+		ITestCase testCase = testSuite.createTestCase("");
+		theTestStep = testCase.createTestStep(stepName);
+		allSteps.add(theTestStep);
+		if (stepParametersTable != null) {
+			// this is for situations where the keymap order isn't preserved
+			theTestStep.setTable(stepParametersTable);
+			stepParametersTable = null;
+		}
 	}
 
 	private String cellsToString(List<String> cells) {
@@ -62,28 +72,28 @@ public class EclipseImpl implements ILanguageAccess {
 
 	@Override
 	public Object createStepDefinition(Object stepObject, String predicate) {
-		createStepDefinition(predicate);
-		return predicate;
+		return createStepDefinition(predicate);
 	}
 
-	public Object createStepDefinition(String stepDefinitionName) {
-		if (this.stepObject.get(stepDefinitionName) == null) {
-			this.stepObject.put(stepDefinitionName, new ArrayList<ArrayList<String>>());
+	public Object createStepDefinition(String predicate) {
+		IStepDefinition sd = this.stepObject.getStepDefinition(predicate);
+		if (sd == null) {
+			return this.stepObject.createStepDefinition(predicate);
 		}
-		return this.stepObject.get(stepDefinitionName);
+		return sd;
 	}
 
 	@Override
-	public void createStepDefinitionParameters(Object stepDefinitionName) {
-		this.stepObject.get(stepDefinitionName).add(stepParameters);
+	public void createStepDefinitionParameters(Object predicate) {
+		((IStepDefinition) predicate).createStepParameters(theTestStep.getTable().getFirst());
 	}
 
 	@Override
 	public Object createStepObject(String objectQualifiedName) throws Exception {
+
 		if (stepObject == null) {
-			stepObjectName = objectQualifiedName;
-			stepObject = new HashMap<String, ArrayList<ArrayList<String>>>();
-			componentObjects.add(stepObjectName);
+			stepObject = testProject.createStepObject(objectQualifiedName);
+			componentObjects.add(stepObject);
 		}
 		return stepObject;
 	}
@@ -112,15 +122,19 @@ public class EclipseImpl implements ILanguageAccess {
 
 		// TODO this adds duplicates so change ArrayList to Collection in the interface
 		ArrayList<String> folders = new ArrayList<String>();
-		for (String stepObject : componentObjects) {
-			folders.add(stepObject.split("/")[0]);
+		for (IStepObject stepObject : componentObjects) {
+			folders.add(stepObject.getQualifiedName().split("/")[0]);
 		}
 		return folders;
 	}
 
 	@Override
 	public ArrayList<String> getFilesRecursively(String component) {
-		return componentObjects;
+		ArrayList<String> files = new ArrayList<String>();
+		for (IStepObject so : componentObjects) {
+			files.add(so.getQualifiedName());
+		}
+		return files;
 	}
 
 	@Override
@@ -138,22 +152,22 @@ public class EclipseImpl implements ILanguageAccess {
 
 	@Override
 	public Object getStep() {
-		return stepName;
+		return theTestStep;
 	}
 
 	@Override
 	public String getStepDefinitionDescription(Object stepDefinition) {
-		return stepDefinitionDescriptions.get(stepDefinition);
+		return StatementUtility.getStatementListAsString(((IStepDefinition) stepDefinition).getStatementList());
 	}
 
 	@Override
 	public String getStepDefinitionName(Object stepDefinition) {
-		return (String) stepDefinition;
+		return ((IStepDefinition) stepDefinition).getName();
 	}
 
 	@Override
 	public List<?> getStepDefinitionParameters(Object stepDefinition) {
-		return this.stepObject.get(stepDefinition.toString());
+		return ((IStepDefinition) stepDefinition).getStepParameterList();
 	}
 
 	@Override
@@ -161,48 +175,47 @@ public class EclipseImpl implements ILanguageAccess {
 		return getStepDefinitionParametersString(parameters);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public String getStepDefinitionParametersString(Object parameters) {
-		return cellsToString((ArrayList<String>) parameters);
+		return cellsToString(((IStepParameters) parameters).getTable().getFirst());
 	}
 
 	@Override
 	public List<?> getStepDefinitions(Object stepObject) {
-		ArrayList<String> stepDefinitionNames = new ArrayList<String>();
-		for (String name : this.stepObject.keySet()) {
-			stepDefinitionNames.add(name);
-		}
-		return stepDefinitionNames;
+		return this.stepObject.getStepDefinitionList();
 	}
 
 	@Override
 	public String getStepName() {
-		return stepName;
+		return theTestStep.getName();
 	}
 
 	@Override
 	public String getStepName(Object step) {
-		return step.toString();
+		return ((ITestStep) step).getName();
 	}
 
 	@Override
 	public Object getStepObject(String objectQualifiedName) throws Exception {
-		if (objectQualifiedName.contentEquals(stepObjectName)) {
-			return stepObject;
-		} else {
+		if (stepObject == null) {
 			return null;
+		} else {
+			if (objectQualifiedName.contentEquals(stepObject.getQualifiedName())) {
+				return stepObject;
+			} else {
+				return null;
+			}
 		}
 	}
 
 	@Override
 	public String getStepObjectDescription(String fileName) {
-		return stepObjectDescription;
+		return StatementUtility.getStatementListAsString(stepObject.getStatementList());
 	}
 
 	@Override
 	public String getStepParametersString() {
-		return cellsToString(stepParameters);
+		return cellsToString(theTestStep.getTable().getFirst());
 	}
 
 	public String getValidationMessage() {
@@ -211,7 +224,7 @@ public class EclipseImpl implements ILanguageAccess {
 
 	@Override
 	public boolean hasParameters(Object stepDefinition) {
-		return !this.stepParameters.isEmpty();
+		return !((IStepDefinition) stepDefinition).getStepParameterList().isEmpty();
 	}
 
 	@Override
@@ -226,20 +239,24 @@ public class EclipseImpl implements ILanguageAccess {
 		this.proposalMap = proposalList;
 	}
 
-	public void setStepDefinitionDescription(String stepDefinition, String description) {
-		stepDefinitionDescriptions.put(stepDefinition, description);
+	public void setStepDefinitionDescription(String predicate, String description) {
+		((IStepDefinition) createStepDefinition(predicate)).getStatementList().add(new StatementImpl(description));
 	}
 
 	public void setStepObjectDescription(String description) {
-		this.stepObjectDescription = description;
+		stepObject.getStatementList().add(new StatementImpl(description));
 	}
 
 	public void setStepParameters(String header) {
-		this.stepParameters.add(header);
+		stepParametersTable = new ArrayList<ArrayList<String>>();
+		stepParametersTable.add(new ArrayList<String>());
+		for (String h : header.split("\\|")) {
+			stepParametersTable.getFirst().add(h);
+		}
 	}
 
 	public void setStepSelection(String selection) {
-		this.stepName = (String) allSteps.get(Integer.valueOf(selection) - 1);
+		theTestStep = (ITestStep) allSteps.get(Integer.valueOf(selection) - 1);
 	}
 
 	public void setValidationMessage(String message) {

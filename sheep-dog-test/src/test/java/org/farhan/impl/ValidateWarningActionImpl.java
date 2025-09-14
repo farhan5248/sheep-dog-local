@@ -13,8 +13,8 @@ public class ValidateWarningActionImpl extends TestObject implements ValidateWar
 
 	public void transition() {
 		try {
-			getEclipseMock().setValidationMessage(LanguageHelper.validateWarning(getEclipseMock()));
-			getEclipseMock().setAlternateObjects(LanguageHelper.getAlternateObjects(getEclipseMock()));
+			getLanguageAccess().setValidationMessage(LanguageHelper.validateWarning(getLanguageAccess()));
+			getLanguageAccess().setAlternateObjects(LanguageHelper.getAlternateObjects(getLanguageAccess()));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}

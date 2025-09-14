@@ -14,7 +14,7 @@ public class QuickfixDialogImpl extends TestObject implements QuickfixDialog {
 	public void assertMessage(HashMap<String, String> keyMap) {
 
 		String message = "";
-		for (Object alternateObject : getEclipseMock().getAlternateObjects()) {
+		for (Object alternateObject : getLanguageAccess().getAlternateObjects()) {
 			if (alternateObject.toString().contentEquals(keyMap.get("Message"))) {
 				message = alternateObject.toString();
 				break;

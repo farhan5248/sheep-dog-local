@@ -1,0 +1,112 @@
+package org.farhan.common;
+
+import java.util.ArrayList;
+
+import org.farhan.dsl.lang.IStatement;
+import org.farhan.dsl.lang.ITestCase;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.ITestSetup;
+import org.farhan.dsl.lang.ITestStepContainer;
+import org.farhan.dsl.lang.ITestSuite;
+
+public class TestSuiteImpl implements ITestSuite {
+
+	private ArrayList<ITestStepContainer> testStepContainerList;
+	private String qualifiedName;
+	private String name;
+	private ITestProject testProject;
+
+	public TestSuiteImpl(String qualifiedName) {
+		this.testStepContainerList = new ArrayList<ITestStepContainer>();
+		this.qualifiedName = qualifiedName;
+		String[] nameParts = qualifiedName.split("/");
+		this.name = nameParts[nameParts.length - 1];
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public ITestProject getParent() {
+		return testProject;
+	}
+
+	@Override
+	public String getQualifiedName() {
+		return qualifiedName;
+	}
+
+	@Override
+	public ArrayList<IStatement> getStatementList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getTags() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ITestSetup getTestSetup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<ITestStepContainer> getTestStepContainerList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setName(String value) {
+		this.name = value;
+	}
+
+	@Override
+	public void setParent(ITestProject value) {
+		testProject = value;
+	}
+
+	@Override
+	public void setQualifiedName(String value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setStatementList(ArrayList<IStatement> value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setTags(ArrayList<String> value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setTestSetup(ITestSetup value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setTestStepContainerList(ArrayList<ITestStepContainer> value) {
+		this.testStepContainerList = value;
+	}
+
+	@Override
+	public ITestCase createTestCase(String value) {
+		ITestCase testCase = new TestCaseImpl(value);
+		testCase.setParent(this);
+		testStepContainerList.add(testCase);
+		return testCase;
+	}
+
+}

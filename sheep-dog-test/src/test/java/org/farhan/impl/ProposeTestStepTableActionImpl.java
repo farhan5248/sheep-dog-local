@@ -13,7 +13,7 @@ public class ProposeTestStepTableActionImpl extends TestObject implements Propos
 
 	public void transition() {
 		try {
-			getEclipseMock().setProposalList(LanguageHelper.proposeStepParameters(getEclipseMock()));
+			getLanguageAccess().setProposalList(LanguageHelper.proposeStepParameters(getLanguageAccess()));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}
