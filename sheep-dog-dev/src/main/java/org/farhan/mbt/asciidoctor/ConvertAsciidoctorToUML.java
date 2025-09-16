@@ -1,8 +1,6 @@
 package org.farhan.mbt.asciidoctor;
 
 import java.util.TreeSet;
-import org.farhan.dsl.common.LanguageHelper;
-import org.farhan.dsl.sheepdog.LanguageAccessImpl;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLStepObject;
@@ -16,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
+import org.farhan.dsl.lang.TestStepUtility;
+import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
@@ -125,7 +125,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertTestStep(UMLTestStep step, TestStep srcStep) {
 		logger.debug("test step: " + srcStep.getName());
-		stepObjects.add(LanguageHelper.getStepObjectQualifiedName(new LanguageAccessImpl(srcStep)));
+		stepObjects.add(TestStepUtility.getObjectQualifiedName(new TestStepImpl(srcStep)));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
 		step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));
 		stepDefinitions.add(step.getNameLong().replaceFirst(step.getKeyword(), "").trim());

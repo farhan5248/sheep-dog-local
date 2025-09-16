@@ -24,6 +24,14 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
+	public ITestCase createTestCase(String value) {
+		ITestCase testCase = new TestCaseImpl(value);
+		testCase.setParent(this);
+		testStepContainerList.add(testCase);
+		return testCase;
+	}
+
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -53,6 +61,16 @@ public class TestSuiteImpl implements ITestSuite {
 	@Override
 	public ITestSetup getTestSetup() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ITestStepContainer getTestStepContainer(String name) {
+		for (ITestStepContainer tsc : this.testStepContainerList) {
+			if (tsc.getName().contentEquals(name)) {
+				return tsc;
+			}
+		}
 		return null;
 	}
 
@@ -99,24 +117,6 @@ public class TestSuiteImpl implements ITestSuite {
 	@Override
 	public void setTestStepContainerList(ArrayList<ITestStepContainer> value) {
 		this.testStepContainerList = value;
-	}
-
-	@Override
-	public ITestCase createTestCase(String value) {
-		ITestCase testCase = new TestCaseImpl(value);
-		testCase.setParent(this);
-		testStepContainerList.add(testCase);
-		return testCase;
-	}
-
-	@Override
-	public ITestStepContainer getTestStepContainer(String name) {
-		for (ITestStepContainer tsc : this.testStepContainerList) {
-			if (tsc.getName().contentEquals(name)) {
-				return tsc;
-			}
-		}
-		return null;
 	}
 
 }

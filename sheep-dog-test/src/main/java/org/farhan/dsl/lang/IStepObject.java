@@ -4,11 +4,17 @@ import java.util.ArrayList;
 
 public interface IStepObject {
 
+	IStepDefinition createStepDefinition(String predicate);
+
 	String getName();
 
 	ITestProject getParent();
 
 	String getQualifiedName();
+
+	ArrayList<IStatement> getStatementList();
+
+	IStepDefinition getStepDefinition(String predicate);
 
 	ArrayList<IStepDefinition> getStepDefinitionList();
 
@@ -19,10 +25,4 @@ public interface IStepObject {
 	void setQualifiedName(String value);
 
 	void setStepDefinitionList(ArrayList<IStepDefinition> value);
-
-	IStepDefinition getStepDefinition(String predicate);
-
-	IStepDefinition createStepDefinition(String predicate);
-
-	ArrayList<IStatement> getStatementList();
 }

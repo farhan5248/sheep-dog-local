@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public interface ITestStepContainer {
 
+	ITestStep createTestStep(String stepName);
+
 	String getName();
 
 	ITestSuite getParent();
@@ -13,12 +15,10 @@ public interface ITestStepContainer {
 	ArrayList<ITestStep> getTestStepList();
 
 	void setName(String value);
-
+	
 	void setParent(ITestSuite value);
 	
 	void setStatementList(ArrayList<IStatement> value);
-	
-	void setTestStepList(ArrayList<ITestStep> value);
 
-	ITestStep createTestStep(String stepName);
+	void setTestStepList(ArrayList<ITestStep> value);
 }

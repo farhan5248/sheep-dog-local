@@ -8,15 +8,14 @@ import java.io.StringWriter;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
-import org.farhan.dsl.sheepdog.LanguageAccessImpl;
-import org.farhan.dsl.sheepdog.generator.SheepDogGenerator;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
+import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
-import org.farhan.dsl.common.*;
+import org.farhan.dsl.lang.*;
 
 /**
  * This class contains custom validation rules.
@@ -53,14 +52,14 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public void checkStepName(TestStep step) {
 		try {
 			if (step.getName() != null) {
-				String problems = LanguageHelper.validateError(new LanguageAccessImpl(step));
+				String problems = TestStepIssueDetector.getErrorMessage(new TestStepImpl(step));
 				if (!problems.isEmpty()) {
 					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, INVALID_NAME);
 				} else {
-					problems = LanguageHelper.validateWarning(new LanguageAccessImpl(step));
+					problems = TestStepIssueDetector.getWarningMessage(new TestStepImpl(step));
 					if (!problems.isEmpty()) {
 						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, MISSING_STEP_DEF,
-								getAlternateObjects(new LanguageAccessImpl(step)));
+								getAlternateObjects(new TestStepImpl(step)));
 					}
 				}
 			}
@@ -86,8 +85,8 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	public String[] getAlternateObjects(LanguageAccessImpl la) throws Exception {
-		Object[] alternateProposals = LanguageHelper.getAlternateObjects(la);
+	public String[] getAlternateObjects(ITestStep testStep) throws Exception {
+		Object[] alternateProposals = TestStepIssueResolver.proposeStepObject(testStep);
 		String[] alternates = new String[alternateProposals.length];
 		for (int i = 0; i < alternates.length; i++) {
 			alternates[i] = alternateProposals[i].toString();

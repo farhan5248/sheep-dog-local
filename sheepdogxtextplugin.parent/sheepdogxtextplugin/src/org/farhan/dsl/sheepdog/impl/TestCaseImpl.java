@@ -1,4 +1,4 @@
-package org.farhan.common;
+package org.farhan.dsl.sheepdog.impl;
 
 import java.util.ArrayList;
 
@@ -7,90 +7,95 @@ import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestData;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.sheepdog.sheepDog.Statement;
+import org.farhan.dsl.sheepdog.sheepDog.TestCase;
+import org.farhan.dsl.sheepdog.sheepDog.TestStep;
+import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 
 public class TestCaseImpl implements ITestCase {
 
-	private ArrayList<ITestStep> testStepList;
-	private String name;
-	private ITestSuite testSuite;
+	private TestCase eObject;
 
-	public TestCaseImpl(String value) {
-		name = value;
-		testStepList = new ArrayList<ITestStep>();
+	public TestCaseImpl(TestCase testCase) {
+		this.eObject = testCase;
 	}
 
 	@Override
 	public ITestStep createTestStep(String value) {
-		ITestStep testStep = new TestStepImpl(value);
-		testStep.setParent(this);
-		testStepList.add(testStep);
-		return testStep;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public ITestSuite getParent() {
-		return testSuite;
-	}
-
-	@Override
-	public ArrayList<IStatement> getStatementList() {
-		// TODO Auto-generated method stub
+		// Not needed in this project
 		return null;
 	}
 
 	@Override
+	public String getName() {
+		return eObject.getName();
+	}
+
+	@Override
+	public ITestSuite getParent() {
+		return new TestSuiteImpl((TestSuite) eObject.eContainer());
+	}
+
+	@Override
+	public ArrayList<IStatement> getStatementList() {
+		ArrayList<IStatement> statementList = new ArrayList<IStatement>();
+		for (Statement s : eObject.getStatementList()) {
+			statementList.add(new StatementImpl(s));
+		}
+		return statementList;
+	}
+
+	@Override
 	public ArrayList<String> getTags() {
-		// TODO Auto-generated method stub
+		// Not needed in this project
 		return null;
 	}
 
 	@Override
 	public ArrayList<ITestData> getTestDataList() {
-		// TODO Auto-generated method stub
+		// Not needed in this project
 		return null;
 	}
 
 	@Override
 	public ArrayList<ITestStep> getTestStepList() {
+		ArrayList<ITestStep> testStepList = new ArrayList<ITestStep>();
+		for (TestStep s : eObject.getTestStepList()) {
+			TestStepImpl testStep = new TestStepImpl(s);
+			testStep.setParent(this);
+			testStepList.add(testStep);
+		}
 		return testStepList;
 	}
 
 	@Override
 	public void setName(String value) {
-		this.name = value;
+		// Not needed in this project
 	}
 
 	@Override
 	public void setParent(ITestSuite value) {
-		testSuite = value;
+		// Not needed in this project
 	}
 
 	@Override
 	public void setStatementList(ArrayList<IStatement> value) {
-		// TODO Auto-generated method stub
-
+		// Not needed in this project
 	}
 
 	@Override
 	public void setTags(ArrayList<String> value) {
-		// TODO Auto-generated method stub
-
+		// Not needed in this project
 	}
 
 	@Override
 	public void setTestDataList(ArrayList<ITestData> value) {
-		// TODO Auto-generated method stub
-
+		// Not needed in this project
 	}
 
 	@Override
 	public void setTestStepList(ArrayList<ITestStep> value) {
-		testStepList = value;
+		// Not needed in this project
 	}
 
 }

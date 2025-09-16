@@ -24,6 +24,14 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
+	public IStepDefinition createStepDefinition(String predicate) {
+		IStepDefinition stepDefinition = new StepDefinitionImpl(predicate);
+		stepDefinition.setParent(this);
+		stepDefinitionList.add(stepDefinition);
+		return stepDefinition;
+	}
+
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -36,6 +44,21 @@ public class StepObjectImpl implements IStepObject {
 	@Override
 	public String getQualifiedName() {
 		return qualifiedName;
+	}
+
+	@Override
+	public ArrayList<IStatement> getStatementList() {
+		return statementList;
+	}
+
+	@Override
+	public IStepDefinition getStepDefinition(String predicate) {
+		for (IStepDefinition sd : stepDefinitionList) {
+			if (sd.getName().contentEquals(predicate)) {
+				return sd;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -62,29 +85,6 @@ public class StepObjectImpl implements IStepObject {
 	public void setStepDefinitionList(ArrayList<IStepDefinition> value) {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public IStepDefinition getStepDefinition(String predicate) {
-		for (IStepDefinition sd : stepDefinitionList) {
-			if (sd.getName().contentEquals(predicate)) {
-				return sd;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public IStepDefinition createStepDefinition(String predicate) {
-		IStepDefinition stepDefinition = new StepDefinitionImpl(predicate);
-		stepDefinition.setParent(this);
-		stepDefinitionList.add(stepDefinition);
-		return stepDefinition;
-	}
-
-	@Override
-	public ArrayList<IStatement> getStatementList() {
-		return statementList;
 	}
 
 }

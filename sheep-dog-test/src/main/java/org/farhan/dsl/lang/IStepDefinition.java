@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public interface IStepDefinition {
 
+	IStepParameters createStepParameters(ArrayList<String> table);
+
+	IStepParameters createStepParameters(String text);
+
 	String getName();
 
 	String getNameLong();
@@ -12,9 +16,11 @@ public interface IStepDefinition {
 
 	ArrayList<IStatement> getStatementList();
 
-	void setStatementList(ArrayList<IStatement> value);
-
 	ArrayList<IStepParameters> getStepParameterList();
+
+	IStepParameters getStepParameters(ArrayList<String> table);
+
+	IStepParameters getStepParameters(String text);
 
 	void setName(String value);
 
@@ -22,13 +28,7 @@ public interface IStepDefinition {
 
 	void setParent(IStepObject value);
 
+	void setStatementList(ArrayList<IStatement> value);
+
 	void setStepParametersList(ArrayList<IStepParameters> value);
-
-	IStepParameters getStepParameters(ArrayList<String> table);
-
-	IStepParameters createStepParameters(ArrayList<String> table);
-
-	IStepParameters getStepParameters(String text);
-
-	IStepParameters createStepParameters(String text);
 }

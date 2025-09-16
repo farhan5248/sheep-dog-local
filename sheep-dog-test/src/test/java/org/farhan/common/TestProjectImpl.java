@@ -18,23 +18,30 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public ArrayList<IStepObject> getStepObjectList() {
-		return stepObjectList;
+	public IStepObject createStepObject(String qualifiedName) {
+		IStepObject stepObject = new StepObjectImpl(qualifiedName);
+		stepObject.setParent(this);
+		stepObjectList.add(stepObject);
+		return stepObject;
 	}
 
 	@Override
-	public ArrayList<ITestSuite> getTestSuiteList() {
-		return testSuiteList;
+	public ITestSuite createTestSuite(String qualifiedName) {
+		ITestSuite testSuite = new TestSuiteImpl(qualifiedName);
+		testSuite.setParent(this);
+		testSuiteList.add(testSuite);
+		return testSuite;
 	}
 
 	@Override
-	public void setStepObjectList(ArrayList<IStepObject> stepObjectList) {
-		this.stepObjectList = stepObjectList;
-	}
-
-	@Override
-	public void setTestSuiteList(ArrayList<ITestSuite> testSuiteList) {
-		this.testSuiteList = testSuiteList;
+	public ArrayList<String> getComponentList() {
+		TreeSet<String> componentSet = new TreeSet<String>();
+		for (IStepObject so : this.stepObjectList) {
+			componentSet.add(so.getQualifiedName().split("/")[0]);
+		}
+		ArrayList<String> componentList = new ArrayList<String>();
+		componentList.addAll(componentSet);
+		return componentList;
 	}
 
 	@Override
@@ -54,11 +61,8 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public IStepObject createStepObject(String qualifiedName) {
-		IStepObject stepObject = new StepObjectImpl(qualifiedName);
-		stepObject.setParent(this);
-		stepObjectList.add(stepObject);
-		return stepObject;
+	public ArrayList<IStepObject> getStepObjectList() {
+		return stepObjectList;
 	}
 
 	@Override
@@ -73,25 +77,6 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public ArrayList<String> getComponentList() {
-		TreeSet<String> componentSet = new TreeSet<String>();
-		for (IStepObject so : this.stepObjectList) {
-			componentSet.add(so.getQualifiedName().split("/")[0]);
-		}
-		ArrayList<String> componentList = new ArrayList<String>();
-		componentList.addAll(componentSet);
-		return componentList;
-	}
-
-	@Override
-	public ITestSuite createTestSuite(String qualifiedName) {
-		ITestSuite testSuite = new TestSuiteImpl(qualifiedName);
-		testSuite.setParent(this);
-		testSuiteList.add(testSuite);
-		return testSuite;
-	}
-
-	@Override
 	public ITestSuite getTestSuite(String name) {
 		for (ITestSuite ts : this.testSuiteList) {
 			if (ts.getName().contentEquals(name)) {
@@ -99,6 +84,21 @@ public class TestProjectImpl implements ITestProject {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public ArrayList<ITestSuite> getTestSuiteList() {
+		return testSuiteList;
+	}
+
+	@Override
+	public void setStepObjectList(ArrayList<IStepObject> stepObjectList) {
+		this.stepObjectList = stepObjectList;
+	}
+
+	@Override
+	public void setTestSuiteList(ArrayList<ITestSuite> testSuiteList) {
+		this.testSuiteList = testSuiteList;
 	}
 
 }

@@ -9,7 +9,7 @@ public class StepObjectBuilder {
 
 	private static final Logger logger = LoggerFactory.getLogger(StepObjectBuilder.class);
 
-	public static void generateStepDefinition(ITestStep theTestStep, Map<Object, Object> options) throws Exception {
+	public static IStepDefinition generateStepDefinition(ITestStep theTestStep, Map<Object, Object> options) throws Exception {
 		logger.debug("Entering generateStepDefinition for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {
@@ -41,6 +41,7 @@ public class StepObjectBuilder {
 				}
 			}
 			logger.debug("Exiting generateStepDefinition");
+			return theStepDefinition;
 		} catch (Exception e) {
 			logger.error("Failed in generateStepDefinition for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);

@@ -2,7 +2,7 @@ package org.farhan.dsl.sheepdog.ui.syntaxcoloring;
 
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.farhan.dsl.common.StatementNameHelper;
+import org.farhan.dsl.lang.*;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
@@ -102,9 +102,9 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 			INode node = NodeModelUtils.getNode(statement);
 			int offset = node.getTotalOffset();
 			for (String s : node.getText().split(" ")) {
-				if (StatementNameHelper.isTag(s)) {
+				if (StatementUtility.isTag(s)) {
 					acceptor.addPosition(offset + current, s.length(), SheepDogHighlightingConfiguration.TAG_ID);
-				} else if (StatementNameHelper.isTodo(s)) {
+				} else if (StatementUtility.isTodo(s)) {
 					acceptor.addPosition(offset + current, s.length(), SheepDogHighlightingConfiguration.TODO_ID);
 				} else {
 					acceptor.addPosition(offset + current, s.length(), SheepDogHighlightingConfiguration.STATEMENT_ID);

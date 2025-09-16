@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestStepUtility {
+	// TODO combine has and get into one
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepUtility.class);
 

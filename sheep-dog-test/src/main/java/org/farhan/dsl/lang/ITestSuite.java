@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public interface ITestSuite {
 
+	ITestCase createTestCase(String value);
+
 	String getName();
 
 	ITestProject getParent();
@@ -15,6 +17,8 @@ public interface ITestSuite {
 	ArrayList<String> getTags();
 
 	ITestSetup getTestSetup();
+
+	ITestStepContainer getTestStepContainer(String name);
 
 	ArrayList<ITestStepContainer> getTestStepContainerList();
 
@@ -31,8 +35,4 @@ public interface ITestSuite {
 	void setTestSetup(ITestSetup value);
 
 	void setTestStepContainerList(ArrayList<ITestStepContainer> value);
-
-	ITestCase createTestCase(String value);
-
-	ITestStepContainer getTestStepContainer(String name);
 }

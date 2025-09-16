@@ -35,12 +35,6 @@ public class StepParametersImpl implements IStepParameters {
 	}
 
 	@Override
-	public void setStatementList(ArrayList<IStatement> value) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public ArrayList<ArrayList<String>> getTable() {
 		return table;
 	}
@@ -53,6 +47,12 @@ public class StepParametersImpl implements IStepParameters {
 
 	@Override
 	public void setParent(IStepDefinition value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setStatementList(ArrayList<IStatement> value) {
 		// TODO Auto-generated method stub
 
 	}

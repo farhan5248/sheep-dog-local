@@ -21,6 +21,33 @@ public class StepDefinitionImpl implements IStepDefinition {
 		this.statementList = new ArrayList<IStatement>();
 	}
 
+	private String cellsToString(List<String> cells) {
+		String cellsAsString = "";
+		List<String> sortedCells = new ArrayList<String>();
+		for (String cell : cells) {
+			sortedCells.add(cell);
+		}
+		Collections.sort(sortedCells);
+		for (String cell : sortedCells) {
+			cellsAsString += "| " + cell;
+		}
+		return cellsAsString.trim();
+	}
+
+	@Override
+	public IStepParameters createStepParameters(ArrayList<String> table) {
+		IStepParameters stepParameters = new StepParametersImpl(table);
+		stepParameters.setParent(this);
+		stepParametersList.add(stepParameters);
+		return stepParameters;
+	}
+
+	@Override
+	public IStepParameters createStepParameters(String text) {
+		// Not needed in this project
+		return null;
+	}
+
 	@Override
 	public String getName() {
 
@@ -29,7 +56,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public String getNameLong() {
-		// TODO Auto-generated method stub
+		// Not needed in this project
 		return null;
 	}
 
@@ -45,48 +72,8 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public void setStatementList(ArrayList<IStatement> value) {
-		statementList = value;
-	}
-
-	@Override
 	public ArrayList<IStepParameters> getStepParameterList() {
 		return stepParametersList;
-	}
-
-	@Override
-	public void setName(String value) {
-		this.predicate = value;
-	}
-
-	@Override
-	public void setNameLong(String value) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setParent(IStepObject value) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setStepParametersList(ArrayList<IStepParameters> value) {
-		this.stepParametersList = value;
-	}
-
-	private String cellsToString(List<String> cells) {
-		String cellsAsString = "";
-		List<String> sortedCells = new ArrayList<String>();
-		for (String cell : cells) {
-			sortedCells.add(cell);
-		}
-		Collections.sort(sortedCells);
-		for (String cell : sortedCells) {
-			cellsAsString += "| " + cell;
-		}
-		return cellsAsString.trim();
 	}
 
 	@Override
@@ -100,23 +87,34 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public IStepParameters createStepParameters(ArrayList<String> table) {
-		IStepParameters stepParameters = new StepParametersImpl(table);
-		stepParameters.setParent(this);
-		stepParametersList.add(stepParameters);
-		return stepParameters;
-	}
-
-	@Override
 	public IStepParameters getStepParameters(String text) {
-		// TODO Auto-generated method stub
+		// Not needed in this project
 		return null;
 	}
 
 	@Override
-	public IStepParameters createStepParameters(String text) {
-		// TODO Auto-generated method stub
-		return null;
+	public void setName(String value) {
+		this.predicate = value;
+	}
+
+	@Override
+	public void setNameLong(String value) {
+		// Not needed in this project
+	}
+
+	@Override
+	public void setParent(IStepObject value) {
+		// Not needed in this project
+	}
+
+	@Override
+	public void setStatementList(ArrayList<IStatement> value) {
+		statementList = value;
+	}
+
+	@Override
+	public void setStepParametersList(ArrayList<IStepParameters> value) {
+		this.stepParametersList = value;
 	}
 
 }

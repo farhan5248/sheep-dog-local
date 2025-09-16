@@ -12,9 +12,8 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.farhan.dsl.common.*;
-import org.farhan.dsl.lang.TestStepIssueProposal;
-import org.farhan.dsl.sheepdog.LanguageAccessImpl;
+import org.farhan.dsl.lang.*;
+import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
@@ -72,7 +71,8 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (Entry<String, TestStepIssueProposal> p : LanguageHelper.proposeTestStepName(new LanguageAccessImpl(step))
+
+			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver.proposeName(new TestStepImpl(step))
 					.entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
@@ -95,12 +95,12 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeStepParameters(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (Entry<String, TestStepIssueProposal> p : LanguageHelper.proposeStepParameters(new LanguageAccessImpl(step))
-					.entrySet()) {
+			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver
+					.proposeStepParameters(new TestStepImpl(step)).entrySet()) {
 				// TODO this is an ugly hack to make the proposals work. The |=== and ----
 				// shouldn't be hard-coded here. Move them into the languageAccessImpl class
 				String replacement;
-				if (p.getValue().getReplacement().contentEquals(LanguageAccessImpl.STEP_PARAMETER_TEXT)) {
+				if (p.getValue().getReplacement().contentEquals("| Content")) {
 					replacement = "----\n" + "todo" + "\n----";
 				} else {
 					replacement = "|===\n" + p.getValue().getReplacement() + "\n|===";

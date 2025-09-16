@@ -11,10 +11,10 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.resource.SaveOptions;
-import org.farhan.dsl.sheepdog.LanguageAccessImpl;
-import org.farhan.dsl.common.*;
+import org.farhan.dsl.lang.*;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
+import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 
 /**
@@ -50,7 +50,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 
 	public static void doGenerate(TestStep step) {
 		try {
-			LanguageHelper.generate(new LanguageAccessImpl(step),
+			StepObjectBuilder.generateStepDefinition(new TestStepImpl(step),
 					SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		} catch (Exception e) {
 			logError(e, step);

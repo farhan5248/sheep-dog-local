@@ -17,12 +17,11 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
-import org.farhan.dsl.common.LanguageHelper;
-import org.farhan.dsl.common.StatementNameHelper;
-import org.farhan.dsl.common.TestStepNameHelper;
-import org.farhan.dsl.sheepdog.LanguageAccessImpl;
+import org.farhan.dsl.lang.StatementUtility;
+import org.farhan.dsl.lang.TestStepUtility;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
+import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
@@ -154,7 +153,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	public ArrayList<String> getAbstractScenarioTags(TestStepContainer abstractScenario) {
 		ArrayList<String> tags = new ArrayList<String>();
 		for (Statement s : abstractScenario.getStatementList()) {
-			tags.addAll(StatementNameHelper.getTags(s.getName()));
+			tags.addAll(StatementUtility.getTags(s.getName()));
 		}
 		return tags;
 	}
@@ -208,7 +207,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		ArrayList<String> tags = new ArrayList<String>();
 		if (examples.getStatementList() != null) {
 			for (Statement s : examples.getStatementList().getStatementList()) {
-				tags.addAll(StatementNameHelper.getTags(s.getName()));
+				tags.addAll(StatementUtility.getTags(s.getName()));
 			}
 		}
 		return tags;
@@ -225,7 +224,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	public ArrayList<String> getFeatureTags() {
 		ArrayList<String> tags = new ArrayList<String>();
 		for (Statement s : theFeature.getStatementList()) {
-			tags.addAll(StatementNameHelper.getTags(s.getName()));
+			tags.addAll(StatementUtility.getTags(s.getName()));
 		}
 		return tags;
 	}
@@ -281,11 +280,10 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	}
 
 	public String getStepNameLong(TestStep step) {
-		String stepObjectNameLong = LanguageHelper.getStepObjectQualifiedName(new LanguageAccessImpl(step));
+		String stepObjectNameLong = TestStepUtility.getObjectQualifiedName(new TestStepImpl(step));
 		String component = stepObjectNameLong.split("/")[0];
 		String object = stepObjectNameLong.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
-		String stepNameLong = "The " + component + ", " + object + " "
-				+ TestStepNameHelper.getPredicate(step.getName());
+		String stepNameLong = "The " + component + ", " + object + " " + TestStepUtility.getPredicate(step.getName());
 		return getStepKeyword(step) + " " + stepNameLong;
 	}
 
