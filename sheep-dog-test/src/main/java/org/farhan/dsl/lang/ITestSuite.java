@@ -33,4 +33,6 @@ public interface ITestSuite {
 	void setTestStepContainerList(ArrayList<ITestStepContainer> value);
 
 	ITestCase createTestCase(String value);
+
+	ITestStepContainer getTestStepContainer(String name);
 }

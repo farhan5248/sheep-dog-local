@@ -19,4 +19,6 @@ public interface ITestStepContainer {
 	void setStatementList(ArrayList<IStatement> value);
 	
 	void setTestStepList(ArrayList<ITestStep> value);
+
+	ITestStep createTestStep(String stepName);
 }

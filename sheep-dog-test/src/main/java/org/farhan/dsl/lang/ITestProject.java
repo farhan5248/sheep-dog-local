@@ -23,4 +23,6 @@ public interface ITestProject {
 	ArrayList<String> getComponentList();
 
 	ITestSuite createTestSuite(String qualifiedName);
+
+	ITestSuite getTestSuite(String name);
 }

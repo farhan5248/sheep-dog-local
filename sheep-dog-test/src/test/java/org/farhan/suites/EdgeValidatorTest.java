@@ -1,6 +1,6 @@
 package org.farhan.suites;
 
-import org.farhan.dsl.common.TestStepNameHelper;
+import org.farhan.dsl.deprecated.TestStepNameHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

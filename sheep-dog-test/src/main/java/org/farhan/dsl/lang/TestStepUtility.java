@@ -80,7 +80,7 @@ public class TestStepUtility {
 		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
 		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
 			if (!t.equals(theTestStep)) {
-				steps.add(theTestStep);
+				steps.add(t);
 			} else {
 				break;
 			}
@@ -107,8 +107,8 @@ public class TestStepUtility {
 			for (ITestStep aStep : getPreviousSteps(theStep)) {
 				previousSteps.add(0, aStep);
 				// keep track of the last component to assign to undeclared object components
-				if (!getComponent(theStep.getName()).isEmpty()) {
-					lastComponent = getComponent(theStep.getName());
+				if (!getComponent(aStep.getName()).isEmpty()) {
+					lastComponent = getComponent(aStep.getName());
 				}
 			}
 			// search all previous steps for a more complete object path. While doing so,

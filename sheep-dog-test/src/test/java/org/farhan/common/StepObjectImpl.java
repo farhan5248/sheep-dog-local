@@ -9,21 +9,23 @@ import org.farhan.dsl.lang.ITestProject;
 
 public class StepObjectImpl implements IStepObject {
 
+	private String name;
 	private String qualifiedName;
 	private ITestProject testProject;
 	private ArrayList<IStepDefinition> stepDefinitionList;
-	ArrayList<IStatement> statementList;
+	private ArrayList<IStatement> statementList;
 
 	public StepObjectImpl(String qualifiedName) {
 		this.qualifiedName = qualifiedName;
+		String[] nameParts = qualifiedName.split("/");
+		name = nameParts[nameParts.length - 1].replace(".feature", "");
 		this.stepDefinitionList = new ArrayList<IStepDefinition>();
 		this.statementList = new ArrayList<IStatement>();
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override
@@ -43,8 +45,7 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public void setName(String value) {
-		// TODO Auto-generated method stub
-
+		this.name = value;
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import org.farhan.dsl.common.Utilities;
+import org.farhan.dsl.deprecated.Utilities;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;

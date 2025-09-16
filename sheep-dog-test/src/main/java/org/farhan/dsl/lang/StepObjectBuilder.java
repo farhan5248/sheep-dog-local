@@ -10,17 +10,19 @@ public class StepObjectBuilder {
 	private static final Logger logger = LoggerFactory.getLogger(StepObjectBuilder.class);
 
 	public static void generateStepDefinition(ITestStep theTestStep, Map<Object, Object> options) throws Exception {
-		logger.debug("Entering generateStepDefinition for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+		logger.debug("Entering generateStepDefinition for step: {}",
+				theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			ITestProject theProject = theTestStep.getParent().getParent().getParent();
-			IStepObject theStepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
+			String qualifiedName = TestStepUtility.getObjectQualifiedName(theTestStep);
+			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject == null) {
-				theStepObject = theProject.createStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
+				theStepObject = theProject.createStepObject(qualifiedName);
 			}
-			IStepDefinition theStepDefinition = theStepObject
-					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+			String predicate = TestStepUtility.getPredicate(theTestStep.getName());
+			IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
 			if (theStepDefinition == null) {
-				theStepDefinition = theStepObject.createStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+				theStepDefinition = theStepObject.createStepDefinition(predicate);
 			}
 			// TODO create ITable
 			if (theTestStep.getTable() != null) {

@@ -9,10 +9,12 @@ import org.farhan.dsl.lang.IStepParameters;
 public class StepParametersImpl implements IStepParameters {
 
 	private ArrayList<ArrayList<String>> table;
+	private ArrayList<IStatement> statementList;
 
 	public StepParametersImpl(ArrayList<String> header) {
 		this.table = new ArrayList<ArrayList<String>>();
 		this.table.add(header);
+		this.statementList = new ArrayList<IStatement>();
 	}
 
 	@Override
@@ -29,8 +31,7 @@ public class StepParametersImpl implements IStepParameters {
 
 	@Override
 	public ArrayList<IStatement> getStatementList() {
-		// TODO Auto-generated method stub
-		return null;
+		return statementList;
 	}
 
 	@Override

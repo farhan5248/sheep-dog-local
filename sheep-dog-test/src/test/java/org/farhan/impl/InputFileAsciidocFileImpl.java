@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.farhan.common.TestObject;
-import org.farhan.dsl.common.Utilities;
+import org.farhan.dsl.deprecated.Utilities;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile;

@@ -1,4 +1,4 @@
-package org.farhan.dsl.common;
+package org.farhan.dsl.deprecated;
 
 import java.util.ArrayList;
 import java.util.List;

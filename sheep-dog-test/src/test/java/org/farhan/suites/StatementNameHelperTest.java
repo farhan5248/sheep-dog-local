@@ -2,7 +2,7 @@ package org.farhan.suites;
 
 import java.util.Set;
 
-import org.farhan.dsl.common.StatementNameHelper;
+import org.farhan.dsl.deprecated.StatementNameHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

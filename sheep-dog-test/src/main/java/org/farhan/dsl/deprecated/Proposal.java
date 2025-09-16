@@ -1,4 +1,4 @@
-package org.farhan.dsl.common;
+package org.farhan.dsl.deprecated;
 
 public class Proposal {
 

@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.farhan.dsl.common.ILanguageAccess;
-import org.farhan.dsl.common.Proposal;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.StatementUtility;
+import org.farhan.dsl.lang.TestStepIssueProposal;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.deprecated.ILanguageAccess;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
@@ -27,7 +28,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	private ArrayList<IStepObject> componentObjects;
 	private ArrayList<ArrayList<String>> stepParametersTable;
 	// UI elements
-	private TreeMap<String, Proposal> proposalMap;
+	private TreeMap<String, TestStepIssueProposal> proposalMap;
 	private String validationMessage;
 	private Object[] alternateObjects;
 
@@ -46,8 +47,15 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	public void addStep(String stepName) {
-		ITestSuite testSuite = testProject.createTestSuite("");
-		ITestCase testCase = testSuite.createTestCase("");
+
+		ITestSuite testSuite = testProject.getTestSuite("");
+		if (testSuite == null) {
+			testSuite = testProject.createTestSuite("");
+		}
+		ITestStepContainer testCase = testSuite.getTestStepContainer("");
+		if (testCase == null) {
+			testCase = testSuite.createTestCase("");
+		}
 		theTestStep = testCase.createTestStep(stepName);
 		allSteps.add(theTestStep);
 		if (stepParametersTable != null) {
@@ -146,7 +154,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return previousSteps;
 	}
 
-	public TreeMap<String, Proposal> getProposals() {
+	public TreeMap<String, TestStepIssueProposal> getProposals() {
 		return proposalMap;
 	}
 
@@ -182,7 +190,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	@Override
 	public List<?> getStepDefinitions(Object stepObject) {
-		return this.stepObject.getStepDefinitionList();
+		return ((IStepObject) stepObject).getStepDefinitionList();
 	}
 
 	@Override
@@ -196,16 +204,9 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	@Override
-	public Object getStepObject(String objectQualifiedName) throws Exception {
-		if (stepObject == null) {
-			return null;
-		} else {
-			if (objectQualifiedName.contentEquals(stepObject.getQualifiedName())) {
-				return stepObject;
-			} else {
-				return null;
-			}
-		}
+	public Object getStepObject(String qualifiedName) throws Exception {
+
+		return testProject.getStepObject(qualifiedName);
 	}
 
 	@Override
@@ -235,7 +236,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		this.alternateObjects = alternateObjects;
 	}
 
-	public void setProposalList(TreeMap<String, Proposal> proposalList) {
+	public void setProposalList(TreeMap<String, TestStepIssueProposal> proposalList) {
 		this.proposalMap = proposalList;
 	}
 

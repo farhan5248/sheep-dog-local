@@ -2,6 +2,8 @@ package org.farhan.dsl.lang;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.TreeMap;
 
 import org.slf4j.Logger;
@@ -220,9 +222,10 @@ public class TestStepIssueResolver {
 			ArrayList<String> alternateNames = new ArrayList<String>();
 			for (IStepObject aStepObject : theProject.getStepObjectList(nameParts[0])) {
 				if (aStepObject.getName().contentEquals(nameParts[nameParts.length - 1])) {
-					alternateNames
-							.add(aStepObject.getQualifiedName().replaceFirst(theProject.getFileExtension() + "$", "")
-									.replaceFirst(nameParts[0] + "/", ""));
+					String testStepName = theTestStep.getName();
+					String alternateName = aStepObject.getQualifiedName().replaceFirst(nameParts[0] + "/", "")
+							.replaceFirst(theProject.getFileExtension() + "$", "");
+					alternateNames.add(testStepName.replace(TestStepUtility.getObject(testStepName), alternateName));
 				}
 			}
 			logger.debug("Exiting proposeStepObject");
@@ -239,28 +242,38 @@ public class TestStepIssueResolver {
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
 		TestStepIssueProposal proposal;
 
-		if (TestStepIssueDetector.isValid(theTestStep.getName())) {
-			IStepObject stepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
-			if (stepObject != null) {
-				IStepDefinition stepDefinition = stepObject
-						.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
-				if (stepDefinition != null) {
-					proposal = new TestStepIssueProposal();
-					proposal.setDisplay(stepDefinition.getName());
-					proposal.setDocumentation(
-							StatementUtility.getStatementListAsString(stepDefinition.getStatementList()));
-					String component = TestStepUtility.getComponent(theTestStep.getName());
-					String object = TestStepUtility.getObject(theTestStep.getName());
-					if (component.isEmpty()) {
-						proposal.setReplacement("The " + object + " " + proposal.getDisplay());
-					} else {
-						proposal.setReplacement("The " + component + ", " + object + " " + proposal.getDisplay());
-					}
-					proposals.add(proposal);
+		IStepObject stepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
+		if (stepObject != null) {
+			for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+				proposal = new TestStepIssueProposal();
+				proposal.setDisplay(stepDefinition.getName());
+				proposal.setDocumentation(StatementUtility.getStatementListAsString(stepDefinition.getStatementList()));
+				String component = TestStepUtility.getComponent(theTestStep.getName());
+				String object = TestStepUtility.getObject(theTestStep.getName());
+				if (component.isEmpty()) {
+					proposal.setReplacement("The " + object + " " + proposal.getDisplay());
+				} else {
+					proposal.setReplacement("The " + component + ", " + object + " " + proposal.getDisplay());
 				}
+				proposals.add(proposal);
 			}
 		}
 		return proposals;
+	}
+
+	private static String cellsToString(List<String> cells) {
+		// TODO this should be a csv list, think about it from the perspective of the
+		// test case, \| is ugly
+		String cellsAsString = "";
+		List<String> sortedCells = new ArrayList<String>();
+		for (String cell : cells) {
+			sortedCells.add(cell);
+		}
+		Collections.sort(sortedCells);
+		for (String cell : sortedCells) {
+			cellsAsString += "| " + cell;
+		}
+		return cellsAsString.trim();
 	}
 
 	public static TreeMap<String, TestStepIssueProposal> proposeStepParameters(ITestStep theTestStep) throws Exception {
@@ -279,11 +292,11 @@ public class TestStepIssueResolver {
 					if (stepDefinition != null) {
 						for (IStepParameters parameters : stepDefinition.getStepParameterList()) {
 							proposal = new TestStepIssueProposal();
-							proposal.setDisplay(parameters.toString());
+							proposal.setDisplay(cellsToString(parameters.getTable().getFirst()));
 							// TODO make a test for getStepDefinitionParametersDocumentation
 							proposal.setDocumentation(
 									StatementUtility.getStatementListAsString(parameters.getStatementList()));
-							proposal.setReplacement(parameters.toString());
+							proposal.setReplacement(cellsToString(parameters.getTable().getFirst()));
 							proposals.put(proposal.getReplacement(), proposal);
 						}
 					}

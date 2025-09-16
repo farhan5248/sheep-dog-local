@@ -109,4 +109,14 @@ public class TestSuiteImpl implements ITestSuite {
 		return testCase;
 	}
 
+	@Override
+	public ITestStepContainer getTestStepContainer(String name) {
+		for (ITestStepContainer tsc : this.testStepContainerList) {
+			if (tsc.getName().contentEquals(name)) {
+				return tsc;
+			}
+		}
+		return null;
+	}
+
 }

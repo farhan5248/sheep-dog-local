@@ -1,6 +1,7 @@
 package org.farhan.common;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
@@ -38,13 +39,17 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public String getFileExtension() {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO change to .asciidoc
+		return ".feature";
 	}
 
 	@Override
 	public IStepObject getStepObject(String qualifiedName) {
-		// TODO Auto-generated method stub
+		for (IStepObject so : this.stepObjectList) {
+			if (so.getQualifiedName().contentEquals(qualifiedName)) {
+				return so;
+			}
+		}
 		return null;
 	}
 
@@ -58,14 +63,24 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public ArrayList<IStepObject> getStepObjectList(String component) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<IStepObject> componentStepObjectList = new ArrayList<IStepObject>();
+		for (IStepObject so : this.stepObjectList) {
+			if (so.getQualifiedName().startsWith(component)) {
+				componentStepObjectList.add(so);
+			}
+		}
+		return componentStepObjectList;
 	}
 
 	@Override
 	public ArrayList<String> getComponentList() {
-		// TODO Auto-generated method stub
-		return null;
+		TreeSet<String> componentSet = new TreeSet<String>();
+		for (IStepObject so : this.stepObjectList) {
+			componentSet.add(so.getQualifiedName().split("/")[0]);
+		}
+		ArrayList<String> componentList = new ArrayList<String>();
+		componentList.addAll(componentSet);
+		return componentList;
 	}
 
 	@Override
@@ -74,6 +89,16 @@ public class TestProjectImpl implements ITestProject {
 		testSuite.setParent(this);
 		testSuiteList.add(testSuite);
 		return testSuite;
+	}
+
+	@Override
+	public ITestSuite getTestSuite(String name) {
+		for (ITestSuite ts : this.testSuiteList) {
+			if (ts.getName().contentEquals(name)) {
+				return ts;
+			}
+		}
+		return null;
 	}
 
 }

@@ -3,8 +3,8 @@ package org.farhan.impl;
 import java.util.HashMap;
 
 import org.farhan.common.TestObject;
-import org.farhan.dsl.common.LanguageHelper;
-import org.farhan.dsl.common.Utilities;
+import org.farhan.dsl.deprecated.LanguageHelper;
+import org.farhan.dsl.deprecated.Utilities;
 import org.farhan.objects.xtext.ValidateErrorAction;
 import org.junit.jupiter.api.Assertions;
 
