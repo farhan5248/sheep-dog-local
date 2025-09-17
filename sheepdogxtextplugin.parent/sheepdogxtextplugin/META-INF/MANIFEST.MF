@@ -21,6 +21,7 @@ Export-Package: org.farhan.dsl.lang,
  org.farhan.dsl.sheepdog,
  org.farhan.dsl.sheepdog.formatting2,
  org.farhan.dsl.sheepdog.generator,
+ org.farhan.dsl.sheepdog.impl,
  org.farhan.dsl.sheepdog.parser.antlr,
  org.farhan.dsl.sheepdog.parser.antlr.internal,
  org.farhan.dsl.sheepdog.scoping,
@@ -30,4 +31,5 @@ Export-Package: org.farhan.dsl.lang,
  org.farhan.dsl.sheepdog.sheepDog.impl,
  org.farhan.dsl.sheepdog.sheepDog.util,
  org.farhan.dsl.sheepdog.validation
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.slf4j;version="[2.0.0,3.0.0)"
