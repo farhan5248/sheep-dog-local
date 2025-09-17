@@ -1,34 +1,71 @@
 package org.farhan.common;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.io.PrintWriter;
 
-import org.farhan.dsl.deprecated.Utilities;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.ITestStepContainer;
+import org.farhan.dsl.lang.ITestSuite;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
 
-// Anything that is an input, output, state or transition is a GraphModelObject. 
-// Right now the way I model stuff all the objects are either output ones or input+transition ones
 public abstract class TestObject {
 
-	static LanguageAccessImpl la = null;
+	protected static ITestStep currentStep;
+
+	public static ITestProject testProject;
+
+	protected static String getStackTraceAsString(Exception e) {
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		return sw.toString();
+	}
 
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
 
-	protected String cellsToString(List<String> cells) {
-		String cellsAsString = "";
-		List<String> sortedCells = new ArrayList<String>();
-		for (String cell : cells) {
-			sortedCells.add(cell);
+	protected ArrayList<ArrayList<String>> stepParametersTable;
+
+	protected void addTestCaseStep(String stepName) {
+
+		ITestSuite testSuite = testProject.getTestSuite("");
+		if (testSuite == null) {
+			testSuite = testProject.createTestSuite("");
 		}
-		Collections.sort(sortedCells);
-		for (String cell : sortedCells) {
-			cellsAsString += "| " + cell;
+		ITestStepContainer testCase = testSuite.getTestStepContainer("");
+		if (testCase == null) {
+			testCase = testSuite.createTestCase("");
 		}
-		return cellsAsString.trim();
+		currentStep = testCase.createTestStep(stepName);
+		testCase.getTestStepList().add(currentStep);
+		if (stepParametersTable != null) {
+			// this is for situations where the keymap order isn't preserved
+			currentStep.setTable(stepParametersTable);
+			stepParametersTable = null;
+		}
+	}
+
+	protected void addTestSetupStep(String stepName) {
+		ITestSuite testSuite = testProject.getTestSuite("");
+		if (testSuite == null) {
+			testSuite = testProject.createTestSuite("");
+		}
+		ITestStepContainer testSetup = testSuite.getTestStepContainer("");
+		if (testSetup == null) {
+			testSetup = testSuite.createTestSetup("");
+		}
+		currentStep = testSetup.createTestStep(stepName);
+		testSetup.getTestStepList().add(currentStep);
+		if (stepParametersTable != null) {
+			// this is for situations where the keymap order isn't preserved
+			currentStep.setTable(stepParametersTable);
+			stepParametersTable = null;
+		}
 	}
 
 	public void assertInputOutputs(DataTable dataTable) {
@@ -61,15 +98,21 @@ public abstract class TestObject {
 		processInputOutputs(row, "assert", "");
 	}
 
-	private String cleanName(String name) {
-		return name.replaceAll("[ \\-\\(\\)/]", "");
+	protected String cellsToString(List<String> cells) {
+		String cellsAsString = "";
+		List<String> sortedCells = new ArrayList<String>();
+		for (String cell : cells) {
+			sortedCells.add(cell);
+		}
+		Collections.sort(sortedCells);
+		for (String cell : sortedCells) {
+			cellsAsString += "| " + cell;
+		}
+		return cellsAsString.trim();
 	}
 
-	protected LanguageAccessImpl getLanguageAccess() {
-		if (la == null) {
-			la = new LanguageAccessImpl(new TestProjectImpl());
-		}
-		return la;
+	private String cleanName(String name) {
+		return name.replaceAll("[ \\-\\(\\)/]", "");
 	}
 
 	protected String getSpecial(String value) {
@@ -103,7 +146,7 @@ public abstract class TestObject {
 						.invoke(this, row);
 			}
 		} catch (Exception e) {
-			Assertions.fail(Utilities.getStackTraceAsString(e));
+			Assertions.fail(getStackTraceAsString(e));
 		}
 	}
 
@@ -123,17 +166,17 @@ public abstract class TestObject {
 		processInputOutputs(dataTable, "set", sectionName);
 	}
 
-	public void setInputOutputs(String key, String value) {
-		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, value);
-		processInputOutputs(row, "set", "");
-	}
-
 	public void setInputOutputs(String key) {
 		// TODO in the future, the value can be true/false for is present/valid etc when
 		// is vs isn't is used
 		HashMap<String, String> row = new HashMap<String, String>();
 		row.put(key, "true");
+		processInputOutputs(row, "set", "");
+	}
+
+	public void setInputOutputs(String key, String value) {
+		HashMap<String, String> row = new HashMap<String, String>();
+		row.put(key, value);
 		processInputOutputs(row, "set", "");
 	}
 

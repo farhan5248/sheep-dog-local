@@ -36,7 +36,10 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public IStepParameters createStepParameters(ArrayList<String> table) {
-		IStepParameters stepParameters = new StepParametersImpl(table);
+		IStepParameters stepParameters = getStepParameters(table);
+		if (stepParameters == null) {
+			stepParameters = new StepParametersImpl(table);
+		}
 		stepParameters.setParent(this);
 		stepParametersList.add(stepParameters);
 		return stepParameters;

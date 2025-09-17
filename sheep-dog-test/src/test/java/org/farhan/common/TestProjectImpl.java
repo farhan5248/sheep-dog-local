@@ -19,17 +19,23 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public IStepObject createStepObject(String qualifiedName) {
-		IStepObject stepObject = new StepObjectImpl(qualifiedName);
-		stepObject.setParent(this);
-		stepObjectList.add(stepObject);
+		IStepObject stepObject = getStepObject(qualifiedName);
+		if (stepObject == null) {
+			stepObject = new StepObjectImpl(qualifiedName);
+			stepObject.setParent(this);
+			stepObjectList.add(stepObject);
+		}
 		return stepObject;
 	}
 
 	@Override
 	public ITestSuite createTestSuite(String qualifiedName) {
-		ITestSuite testSuite = new TestSuiteImpl(qualifiedName);
-		testSuite.setParent(this);
-		testSuiteList.add(testSuite);
+		ITestSuite testSuite = getTestSuite(qualifiedName);
+		if (testSuite == null) {
+			testSuite = new TestSuiteImpl(qualifiedName);
+			testSuite.setParent(this);
+			testSuiteList.add(testSuite);
+		}
 		return testSuite;
 	}
 

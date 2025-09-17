@@ -1,8 +1,7 @@
 package org.farhan.impl;
 
 import org.farhan.common.TestObject;
-import org.farhan.dsl.deprecated.LanguageHelper;
-import org.farhan.dsl.deprecated.Utilities;
+import org.farhan.dsl.lang.StepObjectBuilder;
 import org.farhan.objects.xtext.GenerateStepDefinitionAction;
 import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
@@ -10,11 +9,11 @@ import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class GenerateStepDefinitionActionImpl extends TestObject implements GenerateStepDefinitionAction {
 
-    public void transition() {
+	public void transition() {
 		try {
-			LanguageHelper.generate(getLanguageAccess(), null);
+			StepObjectBuilder.generateStepDefinition(currentStep, null);
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
+			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}
 	}
 }

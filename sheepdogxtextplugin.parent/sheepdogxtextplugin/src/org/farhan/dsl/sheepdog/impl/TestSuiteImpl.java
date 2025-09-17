@@ -31,6 +31,12 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
+	public ITestStepContainer createTestSetup(String name) {
+		// Not needed in this project
+		return null;
+	}
+
+	@Override
 	public String getName() {
 		return eObject.getName();
 	}

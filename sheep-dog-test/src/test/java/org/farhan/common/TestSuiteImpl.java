@@ -32,6 +32,14 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
+	public ITestSetup createTestSetup(String name) {
+		ITestSetup testSetup = new TestSetupImpl(name);
+		testSetup.setParent(this);
+		testStepContainerList.add(testSetup);
+		return testSetup;
+	}
+
+	@Override
 	public String getName() {
 		return name;
 	}

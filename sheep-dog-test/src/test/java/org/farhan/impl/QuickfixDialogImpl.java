@@ -2,6 +2,7 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
+import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
 import org.farhan.objects.xtext.QuickfixDialog;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +15,7 @@ public class QuickfixDialogImpl extends TestObject implements QuickfixDialog {
 	public void assertMessage(HashMap<String, String> keyMap) {
 
 		String message = "";
-		for (Object alternateObject : getLanguageAccess().getAlternateObjects()) {
+		for (Object alternateObject : MockIDE.getAlternateObjects()) {
 			if (alternateObject.toString().contentEquals(keyMap.get("Message"))) {
 				message = alternateObject.toString();
 				break;

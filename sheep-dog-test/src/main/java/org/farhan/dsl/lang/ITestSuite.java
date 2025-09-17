@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public interface ITestSuite {
 
-	ITestCase createTestCase(String value);
+	ITestCase createTestCase(String name);
+
+	ITestStepContainer createTestSetup(String name);
 
 	String getName();
 

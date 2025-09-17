@@ -25,9 +25,12 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public IStepDefinition createStepDefinition(String predicate) {
-		IStepDefinition stepDefinition = new StepDefinitionImpl(predicate);
-		stepDefinition.setParent(this);
-		stepDefinitionList.add(stepDefinition);
+		IStepDefinition stepDefinition = getStepDefinition(predicate);
+		if (stepDefinition == null) {
+			stepDefinition = new StepDefinitionImpl(predicate);
+			stepDefinition.setParent(this);
+			stepDefinitionList.add(stepDefinition);
+		}
 		return stepDefinition;
 	}
 

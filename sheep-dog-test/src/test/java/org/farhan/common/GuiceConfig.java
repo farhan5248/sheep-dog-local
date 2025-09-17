@@ -57,7 +57,9 @@ public final class GuiceConfig extends AbstractModule implements InjectorSource 
 	}
 
 	@Before
-	public void deleteFiles() throws Exception {
-		TestObject.la = null;
+	public void resetTestProject() throws Exception {
+		// Not sure I like this approach, feels hacky
+		TestObject.testProject = new TestProjectImpl();
 	}
+
 }

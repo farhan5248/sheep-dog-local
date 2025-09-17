@@ -13,7 +13,6 @@ import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
-import org.farhan.dsl.sheepdog.generator.SheepDogOutputConfigurationProvider;
 
 public class TestProjectImpl implements ITestProject {
 
@@ -24,8 +23,7 @@ public class TestProjectImpl implements ITestProject {
 
 	public TestProjectImpl(String projectPath) {
 		this.projectPath = projectPath;
-		outputPath = SheepDogOutputConfigurationProvider.stepDefsOutput.getOutputDirectory().replace("/",
-				File.separator);
+		outputPath = "src/test/resources/asciidoc/stepdefs/".replace("/", File.separator);
 	}
 
 	@Override

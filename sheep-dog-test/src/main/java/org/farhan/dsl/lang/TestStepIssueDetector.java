@@ -7,43 +7,6 @@ public class TestStepIssueDetector {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
 
-	public static String getErrorMessage(String text) {
-		// TODO make tests for all of these documenting the message content
-
-		if (text == null) {
-			return TestStepIssueTypes.NAME_COMPONENT.value;
-		}
-
-		if (!TestStepUtility.hasObject(text)) {
-			if (!TestStepUtility.hasComponent(text)) {
-				return TestStepIssueTypes.NAME_COMPONENT.value + "\n\n" + TestStepIssueTypes.NAME_OBJECT.value;
-			} else {
-				return TestStepIssueTypes.NAME_OBJECT.value;
-			}
-		} else {
-			// There can't be a predicate since it's invalid so is there at least state
-			if (!TestStepUtility.hasState(text)) {
-				if (!TestStepUtility.hasDetails(text)) {
-					return TestStepIssueTypes.NAME_STATE.value + "\n\n" + TestStepIssueTypes.NAME_DETAILS.value;
-				} else {
-					return TestStepIssueTypes.NAME_STATE.value;
-				}
-			} else {
-				// if there's a state but it's still invalid, the only part after that is time
-				// or
-				// "is as" which passes for "is present" etc
-				if (!TestStepUtility.hasTime(text)) {
-					return TestStepIssueTypes.NAME_TIME.value;
-				} else {
-					// put all the error messages because there's something weird
-					return TestStepIssueTypes.NAME_COMPONENT.value + "\n\n" + TestStepIssueTypes.NAME_OBJECT.value
-							+ "\n\n" + TestStepIssueTypes.NAME_DETAILS.value + "\n\n"
-							+ TestStepIssueTypes.NAME_STATE.value + "\n\n" + TestStepIssueTypes.NAME_TIME.value;
-				}
-			}
-		}
-	}
-
 	public static boolean isValid(String text) {
 		return text.matches(TestStepUtility.REGEX);
 	}
@@ -51,9 +14,43 @@ public class TestStepIssueDetector {
 	public static String getErrorMessage(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering validateError for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
-			if (!isValid(theTestStep.getName())) {
+			String text = theTestStep.getName();
+			if (!isValid(text)) {
 				logger.debug("Exiting validateError");
-				return getErrorMessage(theTestStep.getName());
+				// TODO make tests for all of these documenting the message content
+
+				if (text == null) {
+					return TestStepIssueTypes.NAME_COMPONENT.value;
+				}
+
+				if (!TestStepUtility.hasObject(text)) {
+					if (!TestStepUtility.hasComponent(text)) {
+						return TestStepIssueTypes.NAME_COMPONENT.value + "\n\n" + TestStepIssueTypes.NAME_OBJECT.value;
+					} else {
+						return TestStepIssueTypes.NAME_OBJECT.value;
+					}
+				} else {
+					// There can't be a predicate since it's invalid so is there at least state
+					if (!TestStepUtility.hasState(text)) {
+						if (!TestStepUtility.hasDetails(text)) {
+							return TestStepIssueTypes.NAME_STATE.value + "\n\n" + TestStepIssueTypes.NAME_DETAILS.value;
+						} else {
+							return TestStepIssueTypes.NAME_STATE.value;
+						}
+					} else {
+						// if there's a state but it's still invalid, the only part after that is time
+						// or "is as" which passes for "is present" etc
+						if (!TestStepUtility.hasTime(text)) {
+							return TestStepIssueTypes.NAME_TIME.value;
+						} else {
+							// put all the error messages because there's something weird
+							return TestStepIssueTypes.NAME_COMPONENT.value + "\n\n"
+									+ TestStepIssueTypes.NAME_OBJECT.value + "\n\n"
+									+ TestStepIssueTypes.NAME_DETAILS.value + "\n\n"
+									+ TestStepIssueTypes.NAME_STATE.value + "\n\n" + TestStepIssueTypes.NAME_TIME.value;
+						}
+					}
+				}
 			} else {
 				if (theTestStep.getParent().getTestStepList().getFirst().equals(theTestStep)) {
 					if (TestStepUtility.getComponent(theTestStep.getName()).isEmpty()) {
