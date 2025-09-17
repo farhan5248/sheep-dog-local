@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
@@ -167,6 +168,11 @@ public class StepDefinitionImpl implements IStepDefinition {
 	@Override
 	public void setStepParametersList(ArrayList<IStepParameters> value) {
 		// Not needed in this project
+	}
+
+	public EObject getEObject() {
+		// TODO add this to all interfaces
+		return eObject;
 	}
 
 }

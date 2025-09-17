@@ -28,7 +28,10 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public IStepObject createStepObject(String qualifiedName) {
-		IStepObject stepObject = new StepObjectImpl(SheepDogFactory.eINSTANCE.createStepObject());
+		StepObject eObject = SheepDogFactory.eINSTANCE.createStepObject();
+		Resource theResource = new ResourceSetImpl().createResource(getObjectURI(qualifiedName));
+		theResource.getContents().add(eObject);
+		IStepObject stepObject = new StepObjectImpl(eObject);
 		stepObject.setQualifiedName(qualifiedName);
 		stepObject.setName(
 				(new File(projectPath + outputPath + qualifiedName)).getName().replace(getFileExtension(), ""));
@@ -109,11 +112,15 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public ArrayList<IStepObject> getStepObjectList(String component) {
+		//logger.error("Component is: " + component);
 		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
 		try {
+			//logger.error("Directory is: " + projectPath + outputPath + component);
 			for (String stepObjectFileName : getFiles(new File(projectPath + outputPath + component))) {
+				//logger.error("stepObjectFileName is: " + stepObjectFileName);
 				stepObjectFileName = stepObjectFileName.replace(File.separator, "/");
 				String qualifiedName = stepObjectFileName.replaceFirst(".*" + component + "/", component + "/");
+				//logger.error("qualifiedName is: " + qualifiedName);
 				objects.add(createStepObject(qualifiedName));
 			}
 		} catch (Exception e) {

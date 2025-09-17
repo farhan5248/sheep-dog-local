@@ -3,6 +3,12 @@ package org.farhan.dsl.sheepdog.impl;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.apache.log4j.Logger;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
@@ -15,6 +21,8 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 
 public class TestSuiteImpl implements ITestSuite {
+
+	private static final Logger logger = Logger.getLogger(TestSuiteImpl.class);
 
 	private static ITestProject parent;
 	private TestSuite eObject;
@@ -46,9 +54,11 @@ public class TestSuiteImpl implements ITestSuite {
 		// TODO does eObject.eContainer() have the project from which I can access the
 		// step objects?
 		if (parent == null) {
-			String uriPath = eObject.eResource().getURI().toFileString().replace(File.separator, "/");
-			String projectPath = uriPath.split("src/test/resources/asciidoc/specs/")[0].replace("/", File.separator);
-			parent = new TestProjectImpl(projectPath);
+
+			String uriPath = eObject.eResource().getURI().toPlatformString(true);
+			File projectPath = new File(
+					ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uriPath)).getProject().getLocationURI());
+			parent = new TestProjectImpl(projectPath.getAbsolutePath() + "/");
 		}
 		return parent;
 	}

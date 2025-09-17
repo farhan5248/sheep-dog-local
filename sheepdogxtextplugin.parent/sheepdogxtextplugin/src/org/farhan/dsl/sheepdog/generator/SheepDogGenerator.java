@@ -6,6 +6,7 @@ package org.farhan.dsl.sheepdog.generator;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -14,6 +15,7 @@ import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.dsl.lang.*;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
+import org.farhan.dsl.sheepdog.impl.StepDefinitionImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 
@@ -50,8 +52,9 @@ public class SheepDogGenerator extends AbstractGenerator {
 
 	public static void doGenerate(TestStep step) {
 		try {
-			StepObjectBuilder.generateStepDefinition(new TestStepImpl(step),
-					SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+			StepDefinitionImpl stepDefinition = (StepDefinitionImpl) StepObjectBuilder.generateStepDefinition(
+					new TestStepImpl(step), SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+			stepDefinition.getEObject().eResource().save(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		} catch (Exception e) {
 			logError(e, step);
 		}
@@ -60,7 +63,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 	private static void logError(Exception e, TestStep step) {
 		logger.error("There was a problem generating for step: " + step.getName());
 		StringWriter sw = new StringWriter();
-		logger.error(sw.toString());
 		e.printStackTrace(new PrintWriter(sw));
+		logger.error(sw.toString());
 	}
 }
