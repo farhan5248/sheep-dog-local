@@ -18,11 +18,11 @@ public class TestProjectImpl implements ITestProject {
 
 	private static Logger logger = Logger.getLogger(TestProjectImpl.class);
 
-	private String projectPath;
-	private String outputPath;
+	private static String projectPath;
+	private static String outputPath;
 
-	public TestProjectImpl(String projectPath) {
-		this.projectPath = projectPath;
+	public void setProjectPath(String projectPath) {
+		TestProjectImpl.projectPath = projectPath;
 		outputPath = "src/test/resources/asciidoc/stepdefs/".replace("/", File.separator);
 	}
 
@@ -112,15 +112,15 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public ArrayList<IStepObject> getStepObjectList(String component) {
-		//logger.error("Component is: " + component);
+		// logger.error("Component is: " + component);
 		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
 		try {
-			//logger.error("Directory is: " + projectPath + outputPath + component);
+			// logger.error("Directory is: " + projectPath + outputPath + component);
 			for (String stepObjectFileName : getFiles(new File(projectPath + outputPath + component))) {
-				//logger.error("stepObjectFileName is: " + stepObjectFileName);
+				// logger.error("stepObjectFileName is: " + stepObjectFileName);
 				stepObjectFileName = stepObjectFileName.replace(File.separator, "/");
 				String qualifiedName = stepObjectFileName.replaceFirst(".*" + component + "/", component + "/");
-				//logger.error("qualifiedName is: " + qualifiedName);
+				// logger.error("qualifiedName is: " + qualifiedName);
 				objects.add(createStepObject(qualifiedName));
 			}
 		} catch (Exception e) {

@@ -34,7 +34,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 						Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
 						TestStep TestStep = (TestStep) resource
 								.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-						SheepDogGenerator.doGenerate(TestStep);
+						(new SheepDogGenerator()).doGenerate(TestStep);
 					}
 				});
 

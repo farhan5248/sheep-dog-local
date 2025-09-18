@@ -3,16 +3,20 @@
  */
 package org.farhan.dsl.sheepdog.ui.contentassist;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map.Entry;
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.lang.*;
+import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
@@ -68,10 +72,18 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		completeStepParameters(step, assignment, context, acceptor);
 	}
 
+	private void setProjectPath(TestStep step) {
+		String uriPath = step.eResource().getURI().toPlatformString(true);
+		File projectPath = new File(
+				ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uriPath)).getProject().getLocationURI());
+		TestProjectImpl testProject = new TestProjectImpl();
+		testProject.setProjectPath(projectPath.getAbsolutePath() + "/");
+	}
+
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-
+			setProjectPath(step);
 			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver.proposeName(new TestStepImpl(step))
 					.entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
@@ -95,15 +107,16 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeStepParameters(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
+			setProjectPath(step);
 			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver
 					.proposeStepParameters(new TestStepImpl(step)).entrySet()) {
 				// TODO this is an ugly hack to make the proposals work. The |=== and ----
-				// shouldn't be hard-coded here. Move them into the languageAccessImpl class
+				// shouldn't be hard-coded here. 
 				String replacement;
 				if (p.getValue().getReplacement().contentEquals("| Content")) {
-					replacement = "----\n" + "todo" + "\n----";
+					replacement = "+\n----\n" + "todo" + "\n----";
 				} else {
-					replacement = "|===\n" + p.getValue().getReplacement() + "\n|===";
+					replacement = "+\n|===\n" + p.getValue().getReplacement() + "\n|===";
 				}
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						replacement, p.getValue().getDisplay(), null, context);

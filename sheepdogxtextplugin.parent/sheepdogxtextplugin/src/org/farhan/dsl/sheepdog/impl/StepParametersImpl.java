@@ -33,8 +33,10 @@ public class StepParametersImpl implements IStepParameters {
 	public ArrayList<IStatement> getStatementList() {
 		ArrayList<IStatement> statementList = new ArrayList<IStatement>();
 		// TODO why does this need 2 nested statement list calls?
-		for (Statement s : eObject.getStatementList().getStatementList()) {
-			statementList.add(new StatementImpl(s));
+		if (eObject.getStatementList() != null) {
+			for (Statement s : eObject.getStatementList().getStatementList()) {
+				statementList.add(new StatementImpl(s));
+			}
 		}
 		return statementList;
 	}

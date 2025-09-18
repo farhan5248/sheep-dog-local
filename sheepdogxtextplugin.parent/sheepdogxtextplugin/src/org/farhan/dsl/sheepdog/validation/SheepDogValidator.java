@@ -3,12 +3,16 @@
  */
 package org.farhan.dsl.sheepdog.validation;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
+import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
@@ -48,18 +52,37 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
+	private void setProjectPath(TestStep step) {
+		// TODO I'm not happy with this block of code being needed in different methods
+		// instead of in one place. I need to think about how to specify the project
+		// root from different contexts. In an Eclipse plug-in vs VS Code plug-in vs
+		// Maven plug-in vs SpringBoot service.
+
+		String uriPath = step.eResource().getURI().toPlatformString(true);
+		File projectPath = new File(
+				ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uriPath)).getProject().getLocationURI());
+		TestProjectImpl testProject = new TestProjectImpl();
+		testProject.setProjectPath(projectPath.getAbsolutePath() + "/");
+	}
+
 	@Check(CheckType.FAST)
 	public void checkStepName(TestStep step) {
 		try {
 			if (step.getName() != null) {
-				String problems = TestStepIssueDetector.getErrorMessage(new TestStepImpl(step));
+				ITestStep iTestStep = new TestStepImpl(step);
+				String problems = TestStepIssueDetector.getErrorMessage(iTestStep);
 				if (!problems.isEmpty()) {
 					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, INVALID_NAME);
 				} else {
-					problems = TestStepIssueDetector.getWarningMessage(new TestStepImpl(step));
+					setProjectPath(step);
+					// TODO getWarningMessage is misleading, call it checkStepObjectReferences
+					// Also rename getErrorMessage to something more descriptive
+					problems = TestStepIssueDetector.getWarningMessage(iTestStep);
 					if (!problems.isEmpty()) {
+						// TODO getAlternateObjects should be inside the proposal.
+						// I don't need to pass in any issue data at all.
 						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, MISSING_STEP_DEF,
-								getAlternateObjects(new TestStepImpl(step)));
+								getAlternateObjects(iTestStep));
 					}
 				}
 			}
@@ -85,7 +108,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	public String[] getAlternateObjects(ITestStep testStep) throws Exception {
+	private String[] getAlternateObjects(ITestStep testStep) throws Exception {
 		Object[] alternateProposals = TestStepIssueResolver.proposeStepObject(testStep);
 		String[] alternates = new String[alternateProposals.length];
 		for (int i = 0; i < alternates.length; i++) {
@@ -95,7 +118,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	}
 
 	private void logError(Exception e, String name) {
-		logger.error("There was a problem listing directories for: " + name);
+		logger.error("There was a problem for step: " + name);
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
 		logger.error(sw.toString());

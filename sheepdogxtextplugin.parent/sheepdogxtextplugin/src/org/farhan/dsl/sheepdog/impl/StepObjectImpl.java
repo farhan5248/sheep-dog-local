@@ -15,12 +15,13 @@ import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 
 public class StepObjectImpl implements IStepObject {
 
-	private static ITestProject parent;
+	private ITestProject parent;
 	private StepObject eObject;
 	private String qualifiedName;
 
 	public StepObjectImpl(StepObject eObject) {
 		this.eObject = eObject;
+		parent = new TestProjectImpl();
 	}
 
 	@Override
