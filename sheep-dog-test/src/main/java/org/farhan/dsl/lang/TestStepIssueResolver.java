@@ -100,7 +100,6 @@ public class TestStepIssueResolver {
 								theTestStep.getName() + " " + type.value));
 					}
 				}
-				// TODO suggest time
 			}
 		}
 		return proposals;
@@ -120,7 +119,7 @@ public class TestStepIssueResolver {
 			}
 		}
 
-		allSteps.addAll(TestStepUtility.getPreviousSteps(theTestStep));
+		allSteps.addAll(TestStepUtility.getPreviousSteps(theTestStep, false));
 
 		for (ITestStep step : allSteps) {
 			// TODO make tests for this if statement
@@ -217,15 +216,18 @@ public class TestStepIssueResolver {
 		logger.debug("Entering proposeStepObject for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			ITestProject theProject = theTestStep.getParent().getParent().getParent();
-			String qualifiedName = TestStepUtility.getObjectQualifiedName(theTestStep);
-			String[] nameParts = qualifiedName.replaceFirst(theProject.getFileExtension() + "$", "").split("/");
+			String stepNameLong = TestStepUtility.getNameLong(theTestStep);
+			String component = TestStepUtility.getComponent(stepNameLong);
+			String object = TestStepUtility.getObject(stepNameLong);
+			String objectName = TestStepUtility.getObjectName(stepNameLong);
+			String objectType = TestStepUtility.getObjectType(stepNameLong);
 			ArrayList<String> alternateNames = new ArrayList<String>();
-			for (IStepObject aStepObject : theProject.getStepObjectList(nameParts[0])) {
-				if (aStepObject.getName().contentEquals(nameParts[nameParts.length - 1])) {
+			for (IStepObject aStepObject : theProject.getStepObjectList(component)) {
+				if (aStepObject.getName().contentEquals(objectName + " " + objectType)) {
 					String testStepName = theTestStep.getName();
-					String alternateName = aStepObject.getQualifiedName().replaceFirst(nameParts[0] + "/", "")
+					String alternateName = aStepObject.getQualifiedName().replaceFirst(component + "/", "")
 							.replaceFirst(theProject.getFileExtension() + "$", "");
-					alternateNames.add(testStepName.replace(TestStepUtility.getObject(testStepName), alternateName));
+					alternateNames.add(testStepName.replace(object, alternateName));
 				}
 			}
 			logger.debug("Exiting proposeStepObject");
@@ -241,15 +243,15 @@ public class TestStepIssueResolver {
 		ITestProject theProject = theTestStep.getParent().getParent().getParent();
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
 		TestStepIssueProposal proposal;
-
-		IStepObject stepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
+		String stepName = theTestStep.getName();
+		String component = TestStepUtility.getComponent(stepName);
+		String object = TestStepUtility.getObject(stepName);
+		IStepObject stepObject = theProject.getStepObject(TestStepUtility.getStepObjectQualifiedName(theTestStep));
 		if (stepObject != null) {
 			for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
 				proposal = new TestStepIssueProposal();
 				proposal.setDisplay(stepDefinition.getName());
 				proposal.setDocumentation(StatementUtility.getStatementListAsString(stepDefinition.getStatementList()));
-				String component = TestStepUtility.getComponent(theTestStep.getName());
-				String object = TestStepUtility.getObject(theTestStep.getName());
 				if (component.isEmpty()) {
 					proposal.setReplacement("The " + object + " " + proposal.getDisplay());
 				} else {
@@ -285,9 +287,11 @@ public class TestStepIssueResolver {
 			TestStepIssueProposal proposal;
 
 			if (TestStepIssueDetector.isValid(theTestStep.getName())) {
-				IStepObject stepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
-				if (stepObject != null) {
-					IStepDefinition stepDefinition = stepObject
+
+				String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+				IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+				if (theStepObject != null) {
+					IStepDefinition stepDefinition = theStepObject
 							.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
 					if (stepDefinition != null) {
 						for (IStepParameters parameters : stepDefinition.getStepParameterList()) {

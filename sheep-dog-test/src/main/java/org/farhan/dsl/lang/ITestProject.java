@@ -3,7 +3,7 @@ package org.farhan.dsl.lang;
 import java.util.ArrayList;
 
 public interface ITestProject {
-
+	// TODO change qualifiedName to URI and move to Factory
 	IStepObject createStepObject(String qualifiedName);
 
 	ITestSuite createTestSuite(String qualifiedName);

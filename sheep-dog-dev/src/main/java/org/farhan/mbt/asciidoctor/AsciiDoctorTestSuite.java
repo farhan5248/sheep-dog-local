@@ -36,24 +36,22 @@ import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 
 public class AsciiDoctorTestSuite implements ConvertibleObject {
 
-	private TestSuite theFeature;
+	private TestSuite theTestSuite;
 	private String thePath;
 
 	public AsciiDoctorTestSuite(String thePath) {
 		this.thePath = thePath;
-		// TODO don't assume it's a feature, it could be a StepObject. Mimic the Java
-		// Wrapper and how it handles interfaces vs classes.
 		String[] pathParts = thePath.split("/");
 		String name = pathParts[pathParts.length - 1].replace(".asciidoc", "");
-		theFeature = SheepDogFactory.eINSTANCE.createTestSuite();
-		theFeature.setName(name);
+		theTestSuite = SheepDogFactory.eINSTANCE.createTestSuite();
+		theTestSuite.setName(name);
 	}
 
 	public TestSetup addBackground(String backgroundName) {
 		deleteAbstractScenario(backgroundName);
 		TestSetup background = SheepDogFactory.eINSTANCE.createTestSetup();
 		background.setName(backgroundName);
-		theFeature.getTestStepContainerList().add(background);
+		theTestSuite.getTestStepContainerList().add(background);
 		return background;
 	}
 
@@ -78,7 +76,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		deleteAbstractScenario(scenarioName);
 		TestCase scenario = SheepDogFactory.eINSTANCE.createTestCase();
 		scenario.setName(scenarioName);
-		theFeature.getTestStepContainerList().add(scenario);
+		theTestSuite.getTestStepContainerList().add(scenario);
 		return scenario;
 	}
 
@@ -132,7 +130,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	}
 
 	private void deleteAbstractScenario(String name) {
-		EList<TestStepContainer> list = theFeature.getTestStepContainerList();
+		EList<TestStepContainer> list = theTestSuite.getTestStepContainerList();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getName().contentEquals(name)) {
 				list.remove(i);
@@ -143,11 +141,11 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 
 	@Override
 	public Object get() {
-		return theFeature;
+		return theTestSuite;
 	}
 
 	public EList<TestStepContainer> getAbstractScenarioList() {
-		return theFeature.getTestStepContainerList();
+		return theTestSuite.getTestStepContainerList();
 	}
 
 	public ArrayList<String> getAbstractScenarioTags(TestStepContainer abstractScenario) {
@@ -214,16 +212,16 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	}
 
 	public String getFeatureDescription() {
-		return convertStatementsToString(theFeature.getStatementList());
+		return convertStatementsToString(theTestSuite.getStatementList());
 	}
 
 	public String getFeatureName() {
-		return theFeature.getName();
+		return theTestSuite.getName();
 	}
 
 	public ArrayList<String> getFeatureTags() {
 		ArrayList<String> tags = new ArrayList<String>();
-		for (Statement s : theFeature.getStatementList()) {
+		for (Statement s : theTestSuite.getStatementList()) {
 			tags.addAll(StatementUtility.getTags(s.getName()));
 		}
 		return tags;
@@ -280,11 +278,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	}
 
 	public String getStepNameLong(TestStep step) {
-		String stepObjectNameLong = TestStepUtility.getObjectQualifiedName(new TestStepImpl(step));
-		String component = stepObjectNameLong.split("/")[0];
-		String object = stepObjectNameLong.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
-		String stepNameLong = "The " + component + ", " + object + " " + TestStepUtility.getPredicate(step.getName());
-		return getStepKeyword(step) + " " + stepNameLong;
+		return getStepKeyword(step) + " " + TestStepUtility.getNameLong(new TestStepImpl(step));
 	}
 
 	public EList<StepParameters> getStepParametersList(StepDefinition stepDefinitionSrc) {
@@ -355,7 +349,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 			Resource resource = new ResourceSetImpl().createResource(uri);
 			InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 			resource.load(content, Collections.EMPTY_MAP);
-			theFeature = (TestSuite) resource.getContents().get(0);
+			theTestSuite = (TestSuite) resource.getContents().get(0);
 		} catch (Exception e) {
 			throw new Exception("There was a problem parsing file: " + thePath);
 		}
@@ -387,17 +381,17 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 
 	public void setFeatureDescription(String featureDescription) {
 		if (!featureDescription.isEmpty()) {
-			theFeature.getStatementList().clear();
+			theTestSuite.getStatementList().clear();
 			for (String line : featureDescription.split("\n")) {
 				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
 				statement.setName(line);
-				theFeature.getStatementList().add(statement);
+				theTestSuite.getStatementList().add(statement);
 			}
 		}
 	}
 
 	public void setFeatureName(String featureName) {
-		theFeature.setName(featureName);
+		theTestSuite.setName(featureName);
 	}
 
 	public void setScenarioDescription(TestCase scenario, String scenarioDescription) {
@@ -423,7 +417,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	public String toString() {
 		URI uri = URI.createFileURI(thePath);
 		Resource resource = new ResourceSetImpl().createResource(uri);
-		resource.getContents().add(theFeature);
+		resource.getContents().add(theTestSuite);
 		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
 		OutputStream os = new ByteArrayOutputStream();
 		try {

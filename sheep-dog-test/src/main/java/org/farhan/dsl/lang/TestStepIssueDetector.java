@@ -18,7 +18,6 @@ public class TestStepIssueDetector {
 			if (!isValid(text)) {
 				logger.debug("Exiting validateError");
 				// TODO make tests for all of these documenting the message content
-
 				if (text == null) {
 					return TestStepIssueTypes.NAME_COMPONENT.value;
 				}
@@ -73,7 +72,8 @@ public class TestStepIssueDetector {
 		try {
 
 			ITestProject theProject = theTestStep.getParent().getParent().getParent();
-			IStepObject theStepObject = theProject.getStepObject(TestStepUtility.getObjectQualifiedName(theTestStep));
+			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject == null) {
 				return TestStepIssueTypes.STEP_OBJECT_NOT_FOUND.value;
 			}

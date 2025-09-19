@@ -9,12 +9,13 @@ public class StepObjectBuilder {
 
 	private static final Logger logger = LoggerFactory.getLogger(StepObjectBuilder.class);
 
-	public static IStepDefinition generateStepDefinition(ITestStep theTestStep, Map<Object, Object> options) throws Exception {
+	public static IStepDefinition generateStepDefinition(ITestStep theTestStep, Map<Object, Object> options)
+			throws Exception {
 		logger.debug("Entering generateStepDefinition for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			ITestProject theProject = theTestStep.getParent().getParent().getParent();
-			String qualifiedName = TestStepUtility.getObjectQualifiedName(theTestStep);
+			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject == null) {
 				theStepObject = theProject.createStepObject(qualifiedName);

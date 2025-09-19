@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestStepUtility {
-	// TODO combine has and get into one
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepUtility.class);
 
@@ -28,6 +27,7 @@ public class TestStepUtility {
 			+ ")?" + ")";
 	public static final String REGEX = "The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + PREDICATE_REGEX;
 
+	// TODO combine has and get into one
 	public static String getAttachment(String text) {
 		return getGroup(REGEX, text, 16);
 	}
@@ -77,11 +77,15 @@ public class TestStepUtility {
 		return getGroup(REGEX, text, 5);
 	}
 
-	public static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep) {
+	public static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep, boolean reverse) {
 		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
 		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
 			if (!t.equals(theTestStep)) {
-				steps.add(t);
+				if (reverse) {
+					steps.add(0, t);
+				} else {
+					steps.add(t);
+				}
 			} else {
 				break;
 			}
@@ -89,66 +93,63 @@ public class TestStepUtility {
 		return steps;
 	}
 
-	public static String getObjectQualifiedName(ITestStep theStep) {
-		logger.debug("Entering getStepObjectQualifiedName for step: {}", theStep != null ? theStep.getName() : "null");
+	public static String getStepObjectQualifiedName(ITestStep theStep) {
+		String stepNameLong = getNameLong(theStep);
+		String component = getComponent(stepNameLong);
+		String object = getObject(stepNameLong);
+		String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
+		return component + "/" + object + fileExt;
+	}
+
+	public static String getNameLong(ITestStep theStep) {
+		logger.debug("Entering getNameLong for step: {}", theStep != null ? theStep.getName() : "null");
 		try {
-			String component = getComponent(theStep.getName());
-			String object = getObject(theStep.getName());
-			String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
+			String stepNameLong = theStep.getName();
+			String component = getComponent(stepNameLong);
+			String object = getObject(stepNameLong);
+			String objectName = getObjectName(stepNameLong);
+			String objectType = getObjectType(stepNameLong);
+			String predicate = getPredicate(stepNameLong);
 
-			// if there is a component and the object has a /, we're done
-			if (!component.isEmpty() && object.contains("/")) {
-				String result = component + "/" + object + fileExt;
-				logger.debug("Exiting getStepObjectQualifiedName with result: {}", result);
-				return result;
-			}
-			// Create a list of previous steps in reverse order
-			ArrayList<ITestStep> previousSteps = new ArrayList<ITestStep>();
-			String lastComponent = "Unknown service";
-			for (ITestStep aStep : getPreviousSteps(theStep)) {
-				previousSteps.add(0, aStep);
-				// keep track of the last component to assign to undeclared object components
-				if (!getComponent(aStep.getName()).isEmpty()) {
-					lastComponent = getComponent(aStep.getName());
+			if (component.isEmpty() || !object.contains("/")) {
+				ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep, true);
+				for (ITestStep previousStep : previousSteps) {
+					// if the step has a matching object
+					String previousObject = getObject(previousStep.getName());
+					String previousComponent = getComponent(previousStep.getName());
+					if (previousObject.endsWith("/" + objectName + " " + objectType)) {
+						// if the object doesn't have / and the matching object does. Set it
+						if (!object.contains("/") && previousObject.contains("/")) {
+							object = previousObject;
+						}
+						// if the component is empty and the matching component isn't. Set it
+						if (component.isEmpty() && !previousComponent.isEmpty()) {
+							component = previousComponent;
+						}
+						// if we have both, we're done
+						if (!component.isEmpty() && object.contains("/")) {
+							break;
+						}
+					}
 				}
-			}
-			// search all previous steps for a more complete object path. While doing so,
-			// if the component is empty, set it
-			String[] objectParts = object.split("/");
-			String objectKey = objectParts[objectParts.length - 1];
-			for (ITestStep previousStep : previousSteps) {
-				// if the step has a matching object
-				String previousObject = getObject(previousStep.getName());
-				String previousComponent = getComponent(previousStep.getName());
-				if (previousObject.endsWith(objectKey)) {
-
-					// if the object doesn't have / and the matching object does. Set it
-					if (!object.contains("/") && previousObject.contains("/")) {
-						object = previousObject;
+				if (component.isEmpty()) {
+					String lastComponent = "Unknown component";
+					for (ITestStep aStep : previousSteps) {
+						// keep track of the last component to assign to undeclared object components
+						if (!getComponent(aStep.getName()).isEmpty()) {
+							lastComponent = getComponent(aStep.getName());
+							break;
+						}
 					}
-					// if the component is empty and the matching component isn't. Set it
-					if (component.isEmpty() && !previousComponent.isEmpty()) {
-						component = previousComponent;
-					}
-					// if we have both, we're done
-					if (!component.isEmpty() && object.contains("/")) {
-						break;
-					}
-				} else {
+					component = lastComponent;
 				}
+				stepNameLong = "The " + component + ", " + object + " " + predicate;
 			}
-			if (component.isEmpty()) {
-				String result = lastComponent + "/" + object + fileExt;
-				logger.debug("Exiting getStepObjectQualifiedName with result: {}", result);
-				return result;
-			} else {
-				String result = component + "/" + object + fileExt;
-				logger.debug("Exiting getStepObjectQualifiedName with result: {}", result);
-				return result;
-			}
+			logger.debug("Exiting getNameLong with result: {}", stepNameLong);
+			return stepNameLong;
 		} catch (Exception e) {
-			logger.error("Failed in getStepObjectQualifiedName for step '{}': {}",
-					theStep != null ? theStep.getName() : "null", e.getMessage(), e);
+			logger.error("Failed in getNameLong for step '{}': {}", theStep != null ? theStep.getName() : "null",
+					e.getMessage(), e);
 			throw e;
 		}
 	}

@@ -52,7 +52,6 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public String getFileExtension() {
-		// TODO change to .asciidoc
 		return ".feature";
 	}
 
