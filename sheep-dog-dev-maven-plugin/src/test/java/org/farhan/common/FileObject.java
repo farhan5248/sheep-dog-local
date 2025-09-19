@@ -1,11 +1,11 @@
 package org.farhan.common;
 
-import org.farhan.mbt.maven.SourceRepository;
+import org.farhan.mbt.maven.SourceFileRepository;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends TestObject {
 
-	protected SourceRepository sr = new SourceRepository();
+	protected SourceFileRepository sr = new SourceFileRepository();
 
 	protected void assertObjectExists() {
 		try {

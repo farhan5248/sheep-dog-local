@@ -3,7 +3,7 @@ package org.farhan.common;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 import org.junit.jupiter.api.Assertions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +14,13 @@ public abstract class GoalObject extends TestObject {
 
 	// TODO don't hardcode the directories
 	protected String[] dirs = { "src/test/resources/asciidoc/", "src-gen/test/resources/cucumber/" };
-	protected IObjectRepository or;
-	protected SourceRepository sr;
+	protected IResourceRepository or;
+	protected SourceFileRepository sr;
 	protected String tags;
 
 	public GoalObject() {
-		or = new ServiceRepository();
-		sr = new SourceRepository();
+		or = new ServiceFileRepository();
+		sr = new SourceFileRepository();
 		attributes.put("tags", "");
 	}
 
@@ -29,7 +29,7 @@ public abstract class GoalObject extends TestObject {
 		try {
 			tags = attributes.get("tags");
 			Class<?> mojoClass = Class.forName(goal);
-			Converter mojo = (Converter) mojoClass.getConstructor(String.class, IObjectRepository.class)
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, IResourceRepository.class)
 					.newInstance(tags, or);
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {

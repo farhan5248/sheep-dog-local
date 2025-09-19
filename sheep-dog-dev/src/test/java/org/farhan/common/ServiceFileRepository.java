@@ -1,4 +1,4 @@
-package org.farhan.mbt.maven;
+package org.farhan.common;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -7,17 +7,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 
-public class ServiceRepository implements IObjectRepository {
+public class ServiceFileRepository implements IResourceRepository {
 
 	private final String BASEDIR;
 
-	public ServiceRepository() {
+	public ServiceFileRepository() {
 		BASEDIR = "target/src-gen/repo/";
 	}
 
-	public ServiceRepository(String baseDir) {
+	public ServiceFileRepository(String baseDir) {
 		BASEDIR = baseDir + "target/repo/";
 	}
 
@@ -28,7 +28,6 @@ public class ServiceRepository implements IObjectRepository {
 
 	@Override
 	public boolean contains(String tags, String path) {
-		path = path.replaceAll("\\\\+", "/");
 		path = BASEDIR + tags + "/" + path;
 		return new File(path).exists();
 	}
@@ -50,17 +49,15 @@ public class ServiceRepository implements IObjectRepository {
 			}
 		}
 	}
-	
+
 	@Override
 	public String get(String tags, String path) throws Exception {
-		path = path.replaceAll("\\\\+", "/");
 		path = BASEDIR + tags + "/" + path;
 		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
 	}
 
 	@Override
 	public ArrayList<String> list(String tags, String path, String extension) {
-		path = path.replaceAll("\\\\+", "/");
 		String root = BASEDIR + (tags.isEmpty() ? "" : tags + "/");
 		ArrayList<String> files = new ArrayList<String>();
 		File aDir = new File(root + path);
@@ -80,7 +77,6 @@ public class ServiceRepository implements IObjectRepository {
 
 	@Override
 	public void put(String tags, String path, String content) throws Exception {
-		path = path.replaceAll("\\\\+", "/");
 		path = BASEDIR + tags + "/" + path;
 		new File(path).getParentFile().mkdirs();
 		PrintWriter pw = new PrintWriter(path, StandardCharsets.UTF_8);

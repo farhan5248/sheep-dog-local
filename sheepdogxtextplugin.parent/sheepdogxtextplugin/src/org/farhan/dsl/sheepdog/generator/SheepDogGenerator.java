@@ -13,7 +13,7 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 import org.farhan.dsl.lang.*;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
-import org.farhan.dsl.sheepdog.impl.SourceRepository;
+import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
 import org.farhan.dsl.sheepdog.impl.StepObjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
@@ -45,7 +45,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 	public void doGenerate(TestStep step) {
 		try {
 			
-			TestProjectImpl testProject = new TestProjectImpl(new SourceRepository(step.eResource().getURI().toPlatformString(true)));
+			TestProjectImpl testProject = new TestProjectImpl(new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 			// TODO rename to add step definition and return StepObjectImpl
 			StepObjectImpl stepObjectImpl = (StepObjectImpl) StepObjectBuilder
 					.generateStepDefinition(new TestStepImpl(step), testProject).getParent();

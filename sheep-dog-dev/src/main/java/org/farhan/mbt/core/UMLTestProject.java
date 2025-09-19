@@ -22,17 +22,18 @@ import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
+import org.farhan.dsl.lang.IResourceRepository;
 
 public class UMLTestProject extends UMLElement {
 
-	protected IObjectRepository fa;
+	protected IResourceRepository fa;
 	public final String TEST_CASES = "specs";
 	public final String TEST_STEPS = "stepdefs";
 	private Model umlElement;
 	protected ArrayList<UMLTestSuite> firstLayerObjects;
 	protected ArrayList<UMLStepObject> secondLayerObjects;
 
-	public UMLTestProject(String tags, IObjectRepository fa) {
+	public UMLTestProject(String tags, IResourceRepository fa) {
 		firstLayerObjects = new ArrayList<UMLTestSuite>();
 		secondLayerObjects = new ArrayList<UMLStepObject>();
 		this.fa = fa;

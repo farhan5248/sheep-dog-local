@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.farhan.dsl.lang.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSuite;
@@ -22,10 +22,10 @@ public class TestProjectImpl implements ITestProject {
 
 	private static Logger logger = Logger.getLogger(TestProjectImpl.class);
 
-	private IObjectRepository sr;
+	private IResourceRepository sr;
 	private final String outputPath;
 
-	public TestProjectImpl(IObjectRepository sr) {
+	public TestProjectImpl(IResourceRepository sr) {
 		this.sr = sr;
 		outputPath = "src/test/resources/asciidoc/stepdefs/";
 	}

@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import org.farhan.dsl.sheepdog.SheepDogStandaloneSetup;
 import org.farhan.mbt.core.IConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 
 public class AsciiDoctorTestProject extends ConvertibleProject {
 
-	public AsciiDoctorTestProject(String tags, IObjectRepository fa) {
+	public AsciiDoctorTestProject(String tags, IResourceRepository fa) {
 		super(tags, fa);
 	}
 

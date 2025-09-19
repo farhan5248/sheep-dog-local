@@ -1,4 +1,4 @@
-package org.farhan.mbt.maven;
+package org.farhan.dsl.sheepdog.impl;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -7,38 +7,38 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.IObjectRepository;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.farhan.dsl.lang.IResourceRepository;
 
-public class SourceRepository implements IObjectRepository {
+public class SourceFileRepository implements IResourceRepository {
 
-	private final String BASEDIR;
+	private final String projectPath;
 
-	public SourceRepository() {
-		BASEDIR = "target/src-gen/";
-	}
-
-	public SourceRepository(String baseDir) {
-		BASEDIR = baseDir;
+	public SourceFileRepository(String uriPath) {
+		IFile resource = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uriPath));
+		this.projectPath = (new File(resource.getProject().getLocationURI())).getAbsolutePath();
 	}
 
 	@Override
 	public void clear(String tags) {
-		deleteDir(new File(BASEDIR + tags + "/"));
+		deleteDir(new File(projectPath));
 	}
 
 	@Override
 	public boolean contains(String tags, String path) {
-		path = BASEDIR + path;
+		path = projectPath + path;
 		return new File(path).exists();
 	}
 
 	@Override
 	public void delete(String tags, String path) {
-		path = BASEDIR + path;
+		path = projectPath + path;
 		new File(path).delete();
 	}
-
-	public void deleteDir(File aDir) {
+	
+	private void deleteDir(File aDir) {
 		if (aDir.exists()) {
 			for (String s : aDir.list()) {
 				File f = new File(aDir.getAbsolutePath() + File.separator + s);
@@ -50,25 +50,24 @@ public class SourceRepository implements IObjectRepository {
 		}
 	}
 
+
 	@Override
 	public String get(String tags, String path) throws Exception {
-		path = BASEDIR + path;
+		path = projectPath + path;
 		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
 	}
 
 	@Override
-	public ArrayList<String> list(String tags, String path, String extension) {
-		String root = BASEDIR;
+	public ArrayList<String> list(String tags, String subDir, String extension) {
 		ArrayList<String> files = new ArrayList<String>();
-		File aDir = new File(root + path);
+		File aDir = new File(projectPath + subDir);
 		if (aDir.exists()) {
-			for (String s : aDir.list()) {
-				String aDirObjPath = (path + s);
-				File aDirObj = new File(root + aDirObjPath);
-				if (aDirObj.isDirectory()) {
+			for (String f : aDir.list()) {
+				String aDirObjPath = (subDir + f.replace(File.separator, "/"));
+				if ((new File(projectPath + aDirObjPath)).isDirectory()) {
 					files.addAll(list("", aDirObjPath + "/", extension));
 				} else if (aDirObjPath.toLowerCase().endsWith(extension.toLowerCase())) {
-					files.add(aDirObjPath);
+					files.add(aDirObjPath.replaceFirst(projectPath, ""));
 				}
 			}
 		}
@@ -77,7 +76,7 @@ public class SourceRepository implements IObjectRepository {
 
 	@Override
 	public void put(String tags, String path, String content) throws Exception {
-		path = BASEDIR + path;
+		path = projectPath + path;
 		new File(path).getParentFile().mkdirs();
 		PrintWriter pw = new PrintWriter(path, StandardCharsets.UTF_8);
 		pw.write(content);

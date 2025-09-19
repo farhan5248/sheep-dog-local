@@ -2,14 +2,16 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IResourceRepository;
+
 public abstract class Converter {
 
 	protected String tags = "";
 	protected ConvertibleProject project;
 	protected UMLTestProject model;
-	protected IObjectRepository fa;
+	protected IResourceRepository fa;
 
-	public Converter(String tags, IObjectRepository fa) {
+	public Converter(String tags, IResourceRepository fa) {
 		this.tags = tags;
 		this.fa = fa;
 	}

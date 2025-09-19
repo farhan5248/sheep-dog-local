@@ -1,11 +1,11 @@
 package org.farhan.common;
 
-import org.farhan.mbt.core.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends TestObject {
 
-	protected IObjectRepository sr = new SourceRepository();
+	protected IResourceRepository sr = new SourceFileRepository();
 
 	protected void assertFileExists() {
 		try {

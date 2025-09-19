@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
-import org.farhan.dsl.sheepdog.impl.SourceRepository;
+import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
@@ -61,7 +61,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				} else {
 
 					ITestProject testProject = new TestProjectImpl(
-							new SourceRepository(step.eResource().getURI().toPlatformString(true)));
+							new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 					problems = TestStepIssueDetector.validateSemantics(iTestStep, testProject);
 					if (!problems.isEmpty()) {
 

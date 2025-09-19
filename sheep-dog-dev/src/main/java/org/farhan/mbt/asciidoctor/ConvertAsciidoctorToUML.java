@@ -2,7 +2,7 @@ package org.farhan.mbt.asciidoctor;
 
 import java.util.TreeSet;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
 import org.farhan.mbt.core.UMLTestData;
@@ -32,7 +32,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private AsciiDoctorTestSuite srcObjTestSuite;
 	private AsciiDoctorStepObject srcObjStepObject;
 
-	public ConvertAsciidoctorToUML(String tags, IObjectRepository fa) {
+	public ConvertAsciidoctorToUML(String tags, IResourceRepository fa) {
 		super(tags, fa);
 	}
 

@@ -1,4 +1,4 @@
-package org.farhan.common;
+package org.farhan.mbt.maven;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -7,17 +7,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 
-public class SourceRepository implements IObjectRepository {
+public class SourceFileRepository implements IResourceRepository {
 
 	private final String BASEDIR;
 
-	public SourceRepository() {
+	public SourceFileRepository() {
 		BASEDIR = "target/src-gen/";
 	}
 
-	public SourceRepository(String baseDir) {
+	public SourceFileRepository(String baseDir) {
 		BASEDIR = baseDir;
 	}
 

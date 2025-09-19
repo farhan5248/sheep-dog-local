@@ -2,9 +2,11 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IResourceRepository;
+
 public abstract class ConvertibleProject {
 
-	protected IObjectRepository fa;
+	protected IResourceRepository fa;
 	public String tags = "";
 	// TODO replace TEST_STEPS with OBJECT_STEPS and create OBJECT_FIELDS
 	// TODO maybe move these into an enumeration constant
@@ -16,7 +18,7 @@ public abstract class ConvertibleProject {
 	protected ArrayList<IConvertibleObject> secondLayerObjects;
 	protected ArrayList<IConvertibleObject> thirdLayerObjects;
 
-	public ConvertibleProject(String tags, IObjectRepository fa) {
+	public ConvertibleProject(String tags, IResourceRepository fa) {
 		firstLayerObjects = new ArrayList<IConvertibleObject>();
 		secondLayerObjects = new ArrayList<IConvertibleObject>();
 		thirdLayerObjects = new ArrayList<IConvertibleObject>();

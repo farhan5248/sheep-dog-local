@@ -11,7 +11,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 
 public abstract class MBTMojo extends AbstractMojo {
 
@@ -49,12 +49,12 @@ public abstract class MBTMojo extends AbstractMojo {
 		} else if (!repoDir.endsWith("/")) {
 			repoDir += "/";
 		}
-		IObjectRepository or = new ServiceRepository(repoDir);
-		IObjectRepository sr = new SourceRepository(baseDir);
+		IResourceRepository or = new ServiceFileRepository(repoDir);
+		IResourceRepository sr = new SourceFileRepository(baseDir);
 		try {
 
 			Class<?> mojoClass = Class.forName(goal);
-			Converter mojo = (Converter) mojoClass.getConstructor(String.class, IObjectRepository.class)
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, IResourceRepository.class)
 					.newInstance(tags, or);
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {

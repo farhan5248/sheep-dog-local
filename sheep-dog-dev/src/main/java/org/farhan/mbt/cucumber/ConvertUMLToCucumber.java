@@ -13,7 +13,7 @@ import org.farhan.dsl.cucumber.cucumber.Step;
 import org.farhan.dsl.cucumber.cucumber.StepTable;
 import org.farhan.mbt.core.Converter;
 
-import org.farhan.mbt.core.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 import org.farhan.mbt.core.UMLStepDefinition;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
@@ -33,7 +33,7 @@ public class ConvertUMLToCucumber extends Converter {
 	protected CucumberJava tgtObjStepObject;
 	protected CucumberPathConverter pathConverter;
 
-	public ConvertUMLToCucumber(String tags, IObjectRepository fa) {
+	public ConvertUMLToCucumber(String tags, IResourceRepository fa) {
 		super(tags, fa);
 	}
 

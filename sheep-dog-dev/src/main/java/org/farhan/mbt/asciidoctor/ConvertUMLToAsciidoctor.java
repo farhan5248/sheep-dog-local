@@ -3,7 +3,7 @@ package org.farhan.mbt.asciidoctor;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.IObjectRepository;
+import org.farhan.dsl.lang.IResourceRepository;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
 import org.farhan.mbt.core.UMLTestData;
@@ -27,7 +27,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	private AsciiDoctorTestSuite tgtObjTestSuite;
 	private AsciiDoctorStepObject tgtObjStepObject;
 
-	public ConvertUMLToAsciidoctor(String tags, IObjectRepository fa) {
+	public ConvertUMLToAsciidoctor(String tags, IResourceRepository fa) {
 		super(tags, fa);
 	}
 
