@@ -46,12 +46,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public IStepParameters createStepParameters(String text) {
-		// Not needed in this project
-		return null;
-	}
-
-	@Override
 	public String getName() {
 
 		return predicate;
@@ -86,12 +80,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 				return sp;
 			}
 		}
-		return null;
-	}
-
-	@Override
-	public IStepParameters getStepParameters(String text) {
-		// Not needed in this project
 		return null;
 	}
 

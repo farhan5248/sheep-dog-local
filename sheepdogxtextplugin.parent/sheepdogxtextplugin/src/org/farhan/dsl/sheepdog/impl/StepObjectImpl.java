@@ -118,8 +118,7 @@ public class StepObjectImpl implements IStepObject {
 
 	public String serialize() throws IOException {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		eObject.eResource().save(new ByteArrayOutputStream(),
-				SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+		eObject.eResource().save(os, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		return os.toString();
 	}
 

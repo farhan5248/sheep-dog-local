@@ -13,7 +13,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.lang.*;
-import org.farhan.dsl.sheepdog.impl.SourceRepository;
+import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
@@ -73,9 +73,11 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		try {
 			ITestProject testProject = new TestProjectImpl(
-					new SourceRepository(step.eResource().getURI().toPlatformString(true)));
+					new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
+			ITestStep iTestStep = new TestStepImpl(step);
+			iTestStep.getParent().getParent().setParent(testProject);
 			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver
-					.proposeName(new TestStepImpl(step), testProject).entrySet()) {
+					.proposeName(iTestStep, testProject).entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
 				if (proposal != null) {
@@ -92,9 +94,11 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		try {
 			ITestProject testProject = new TestProjectImpl(
-					new SourceRepository(step.eResource().getURI().toPlatformString(true)));
+					new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
+			ITestStep iTestStep = new TestStepImpl(step);
+			iTestStep.getParent().getParent().setParent(testProject);
 			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver
-					.proposeStepParameters(new TestStepImpl(step), testProject).entrySet()) {
+					.proposeStepParameters(iTestStep, testProject).entrySet()) {
 				// TODO this is an ugly hack to make the proposals work. The |=== and ----
 				// shouldn't be hard-coded here.
 				String replacement;

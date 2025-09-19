@@ -44,11 +44,13 @@ public class SheepDogGenerator extends AbstractGenerator {
 
 	public void doGenerate(TestStep step) {
 		try {
-			
-			TestProjectImpl testProject = new TestProjectImpl(new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
+			TestProjectImpl testProject = new TestProjectImpl(
+					new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
+			TestStepImpl iTestStep = new TestStepImpl(step);
+			iTestStep.getParent().getParent().setParent(testProject);
 			// TODO rename to add step definition and return StepObjectImpl
 			StepObjectImpl stepObjectImpl = (StepObjectImpl) StepObjectBuilder
-					.generateStepDefinition(new TestStepImpl(step), testProject).getParent();
+					.generateStepDefinition(iTestStep, testProject).getParent();
 			testProject.putStepObject(stepObjectImpl);
 		} catch (Exception e) {
 			logError(e, step);

@@ -23,44 +23,51 @@ public class TestProjectImpl implements ITestProject {
 	private static Logger logger = Logger.getLogger(TestProjectImpl.class);
 
 	private IResourceRepository sr;
-	private final String outputPath;
+	private final String layer2dir;
 
 	public TestProjectImpl(IResourceRepository sr) {
 		this.sr = sr;
-		outputPath = "src/test/resources/asciidoc/stepdefs/";
+		layer2dir = "src/test/resources/asciidoc/stepdefs/";
 	}
 
 	@Override
 	public IStepObject createStepObject(String qualifiedName) {
 		StepObject eObject = SheepDogFactory.eINSTANCE.createStepObject();
-		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI(outputPath + qualifiedName));
+		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI(layer2dir + qualifiedName));
 		theResource.getContents().add(eObject);
 		IStepObject stepObject = new StepObjectImpl(eObject);
 		stepObject.setQualifiedName(qualifiedName);
-		stepObject.setName((new File(qualifiedName)).getName().replace(getFileExtension(), ""));
+		stepObject.setName((new File(qualifiedName)).getName().replaceFirst(getFileExtension() + "$", ""));
 		return stepObject;
 	}
 
 	@Override
 	public IStepObject getStepObject(String qualifiedName) {
-		if (sr.contains("", qualifiedName)) {
-			Resource resource = new ResourceSetImpl().createResource(URI.createFileURI(outputPath + qualifiedName));
+		if (sr.contains("", layer2dir + qualifiedName)) {
 			try {
-				String text = sr.get("", outputPath + qualifiedName);
-				resource.load(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8)), Collections.EMPTY_MAP);
+				Resource resource = new ResourceSetImpl().createResource(URI.createFileURI(layer2dir + qualifiedName));
+				String text = sr.get("", layer2dir + qualifiedName);
+				if (text.isEmpty()) {
+					logger.error("Couldn't load StepObject for, file is empty: " + qualifiedName);
+				} else {
+					resource.load(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8)),
+							Collections.EMPTY_MAP);
+					StepObject eObject = (StepObject) resource.getContents().get(0);
+					IStepObject stepObject = new StepObjectImpl(eObject);
+					stepObject.setQualifiedName(qualifiedName);
+					return stepObject;
+				}
 			} catch (Exception e) {
 				logger.error("Couldn't load StepObject for: " + qualifiedName, e);
 			}
-			return new StepObjectImpl((StepObject) resource.getContents().get(0));
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public void putStepObject(IStepObject stepObject) throws Exception {
 		// TODO serialize should be setContent, parse should be getContent, this works
 		// well for the JSON response
-		sr.put("", outputPath + stepObject.getQualifiedName(), ((StepObjectImpl) stepObject).serialize());
+		sr.put("", layer2dir + stepObject.getQualifiedName(), ((StepObjectImpl) stepObject).serialize());
 	}
 
 	@Override
@@ -75,8 +82,8 @@ public class TestProjectImpl implements ITestProject {
 		TreeSet<String> componentSet = new TreeSet<String>();
 		try {
 			// TODO instead of empty tags, append it to the prefix?
-			for (String stepObjectFileName : sr.list("", outputPath, getFileExtension())) {
-				componentSet.add(stepObjectFileName.replaceFirst(outputPath, "").split("/")[0]);
+			for (String stepObjectFileName : sr.list("", layer2dir, getFileExtension())) {
+				componentSet.add(stepObjectFileName.replaceFirst(layer2dir, "").split("/")[0]);
 			}
 		} catch (Exception e) {
 			logger.error("Couldn't get component list:", e);
@@ -97,8 +104,8 @@ public class TestProjectImpl implements ITestProject {
 		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
 		try {
 			// TODO instead of empty tags, append it to the prefix?
-			for (String stepObjectFileName : sr.list("", outputPath, getFileExtension())) {
-				objects.add(createStepObject(stepObjectFileName.replaceFirst(outputPath, "")));
+			for (String stepObjectFileName : sr.list("", layer2dir, getFileExtension())) {
+				objects.add(createStepObject(stepObjectFileName.replaceFirst(layer2dir, "")));
 			}
 		} catch (Exception e) {
 			logger.error("Couldn't get StepObject list:", e);
@@ -110,8 +117,8 @@ public class TestProjectImpl implements ITestProject {
 	public ArrayList<IStepObject> getStepObjectList(String component) {
 		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
 		try {
-			for (String stepObjectFileName : sr.list("", outputPath + component, getFileExtension())) {
-				objects.add(createStepObject(stepObjectFileName.replaceFirst(outputPath, "")));
+			for (String stepObjectFileName : sr.list("", layer2dir + component, getFileExtension())) {
+				objects.add(createStepObject(stepObjectFileName.replaceFirst(layer2dir, "")));
 			}
 		} catch (Exception e) {
 			logger.error("Couldn't get StepObject list: for" + component, e);

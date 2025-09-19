@@ -63,8 +63,13 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public String getText() {
-		// Not needed in this project
-		return null;
+		if (eObject.getText() != null) {
+			eObject.getText().getName();
+			return eObject.getText().getName().replaceFirst("^----\n", "").replaceFirst("\n----$", "").replace("\\----",
+					"----");
+		} else {
+			return null;
+		}
 	}
 
 	@Override

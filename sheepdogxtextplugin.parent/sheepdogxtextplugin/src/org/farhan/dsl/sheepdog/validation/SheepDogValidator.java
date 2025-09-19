@@ -62,6 +62,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
 					ITestProject testProject = new TestProjectImpl(
 							new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
+					iTestStep.getParent().getParent().setParent(testProject);
 					problems = TestStepIssueDetector.validateSemantics(iTestStep, testProject);
 					if (!problems.isEmpty()) {
 

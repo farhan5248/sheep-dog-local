@@ -6,8 +6,6 @@ public interface IStepDefinition {
 
 	IStepParameters createStepParameters(ArrayList<String> table);
 
-	IStepParameters createStepParameters(String text);
-
 	String getName();
 
 	String getNameLong();
@@ -19,8 +17,6 @@ public interface IStepDefinition {
 	ArrayList<IStepParameters> getStepParameterList();
 
 	IStepParameters getStepParameters(ArrayList<String> table);
-
-	IStepParameters getStepParameters(String text);
 
 	void setName(String value);
 

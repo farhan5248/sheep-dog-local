@@ -1,5 +1,7 @@
 package org.farhan.dsl.lang;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,7 +92,9 @@ public class TestStepIssueDetector {
 			}
 			if (theTestStep.getText() != null) {
 				if (!theTestStep.getText().isEmpty()) {
-					if (theStepDefinition.getStepParameters(theTestStep.getText()) == null) {
+					ArrayList<String> headers = new ArrayList<String>();
+					headers.add("Content");
+					if (theStepDefinition.getStepParameters(headers) == null) {
 						return TestStepIssueTypes.PARAMETERS_NOT_FOUND.value;
 					}
 				}

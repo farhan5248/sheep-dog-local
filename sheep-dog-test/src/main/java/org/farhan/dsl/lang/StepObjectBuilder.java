@@ -1,5 +1,7 @@
 package org.farhan.dsl.lang;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,8 +35,10 @@ public class StepObjectBuilder {
 			// TODO create IText
 			if (theTestStep.getText() != null) {
 				if (!theTestStep.getText().isEmpty()) {
-					if (theStepDefinition.getStepParameters(theTestStep.getText()) == null) {
-						theStepDefinition.createStepParameters(theTestStep.getText());
+					ArrayList<String> headers = new ArrayList<String>();
+					headers.add("Content");
+					if (theStepDefinition.getStepParameters(headers) == null) {
+						theStepDefinition.createStepParameters(headers);
 					}
 				}
 			}
