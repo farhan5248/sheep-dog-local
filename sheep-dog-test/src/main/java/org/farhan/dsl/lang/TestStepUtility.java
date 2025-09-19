@@ -133,7 +133,7 @@ public class TestStepUtility {
 					}
 				}
 				if (component.isEmpty()) {
-					String lastComponent = "Unknown component";
+					String lastComponent = "Unknown service";
 					for (ITestStep aStep : previousSteps) {
 						// keep track of the last component to assign to undeclared object components
 						if (!getComponent(aStep.getName()).isEmpty()) {
