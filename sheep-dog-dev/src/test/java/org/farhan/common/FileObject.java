@@ -1,14 +1,15 @@
 package org.farhan.common;
 
+import org.farhan.mbt.core.IObjectRepository;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends TestObject {
 
-	protected SourceRepository sr = new SourceRepository();
+	protected IObjectRepository sr = new SourceRepository();
 
 	protected void assertFileExists() {
 		try {
-			Assertions.assertTrue(sr.contains(attributes.get("path")),
+			Assertions.assertTrue(sr.contains("", attributes.get("path")),
 					"The file (" + attributes.get("path") + ") isn't present");
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
@@ -17,7 +18,7 @@ public abstract class FileObject extends TestObject {
 
 	protected void setContent(String docString) {
 		try {
-			sr.put(attributes.get("path"), docString);
+			sr.put("", attributes.get("path"), docString);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}
@@ -25,7 +26,7 @@ public abstract class FileObject extends TestObject {
 
 	protected void assertContent(String docString) {
 		try {
-			String contents = sr.get(attributes.get("path"));
+			String contents = sr.get("", attributes.get("path"));
 			Assertions.assertEquals(docString, contents.replaceAll("\r", "").trim());
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));

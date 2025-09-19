@@ -2,7 +2,7 @@ package org.farhan.mbt.asciidoctor;
 
 import java.util.TreeSet;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.IObjectRepository;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
 import org.farhan.mbt.core.UMLTestData;
@@ -15,6 +15,7 @@ import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
 import org.farhan.dsl.lang.TestStepUtility;
+import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
@@ -31,7 +32,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private AsciiDoctorTestSuite srcObjTestSuite;
 	private AsciiDoctorStepObject srcObjStepObject;
 
-	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa) {
+	public ConvertAsciidoctorToUML(String tags, IObjectRepository fa) {
 		super(tags, fa);
 	}
 
@@ -44,8 +45,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	@Override
 	public String convertFile(String path, String content) throws Exception {
-		// TODO call this outside of this method like clearObjects. When run as a
-		// service, then the client will call initObjects once and then call
+		// TODO call initProjects outside of this method like clearObjects. When run as
+		// a service, then the client will call initObjects once and then call
 		// convertObject multiple times
 		initProjects();
 		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
@@ -125,7 +126,12 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertTestStep(UMLTestStep step, TestStep srcStep) {
 		logger.debug("test step: " + srcStep.getName());
-		stepObjects.add(TestStepUtility.getStepObjectQualifiedName(new TestStepImpl(srcStep)));
+		// TODO until I implement using the sheep-dog-test interface classes, I'll need
+		// this hack. Basically when a TestSuite is created, a link to the TestProject
+		// needs to be created but that isn't being done right now
+		TestStepImpl tmpTestStep = new TestStepImpl(srcStep);
+		tmpTestStep.getParent().getParent().setParent(new TestProjectImpl(this.fa));
+		stepObjects.add(TestStepUtility.getStepObjectQualifiedName(tmpTestStep));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
 		step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));
 		stepDefinitions.add(step.getNameLong().replaceFirst(step.getKeyword(), "").trim());

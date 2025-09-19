@@ -3,24 +3,21 @@
  */
 package org.farhan.dsl.sheepdog.ui.contentassist;
 
-import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map.Entry;
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.lang.*;
+import org.farhan.dsl.sheepdog.impl.SourceRepository;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
@@ -72,20 +69,13 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		completeStepParameters(step, assignment, context, acceptor);
 	}
 
-	private void setProjectPath(TestStep step) {
-		String uriPath = step.eResource().getURI().toPlatformString(true);
-		File projectPath = new File(
-				ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uriPath)).getProject().getLocationURI());
-		TestProjectImpl testProject = new TestProjectImpl();
-		testProject.setProjectPath(projectPath.getAbsolutePath() + "/");
-	}
-
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			setProjectPath(step);
-			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver.proposeName(new TestStepImpl(step))
-					.entrySet()) {
+			ITestProject testProject = new TestProjectImpl(
+					new SourceRepository(step.eResource().getURI().toPlatformString(true)));
+			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver
+					.proposeName(new TestStepImpl(step), testProject).entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
 				if (proposal != null) {
@@ -98,20 +88,15 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		}
 	}
 
-	public void completeRow_Cells(Row row, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		// TODO if it's the first row, suggest a name based on all names used in the
-		// step definition parameters for this step definition
-	}
-
 	private void completeStepParameters(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			setProjectPath(step);
+			ITestProject testProject = new TestProjectImpl(
+					new SourceRepository(step.eResource().getURI().toPlatformString(true)));
 			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver
-					.proposeStepParameters(new TestStepImpl(step)).entrySet()) {
+					.proposeStepParameters(new TestStepImpl(step), testProject).entrySet()) {
 				// TODO this is an ugly hack to make the proposals work. The |=== and ----
-				// shouldn't be hard-coded here. 
+				// shouldn't be hard-coded here.
 				String replacement;
 				if (p.getValue().getReplacement().contentEquals("| Content")) {
 					replacement = "+\n----\n" + "todo" + "\n----";

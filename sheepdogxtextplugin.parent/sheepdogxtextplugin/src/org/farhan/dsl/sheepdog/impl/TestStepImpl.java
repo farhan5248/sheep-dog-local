@@ -14,9 +14,11 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 public class TestStepImpl implements ITestStep {
 
 	TestStep eObject;
+	ITestStepContainer parent;
 
 	public TestStepImpl(TestStep testStep) {
 		this.eObject = testStep;
+		parent = null;
 	}
 
 	@Override
@@ -32,11 +34,15 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public ITestStepContainer getParent() {
-		if (eObject.eContainer() instanceof TestCase) {
-			return new TestCaseImpl((TestCase) eObject.eContainer());
-		} else {
-			return new TestSetupImpl((TestSetup) eObject.eContainer());
+		if (parent == null) {
+			if (eObject.eContainer() instanceof TestCase) {
+				parent = new TestCaseImpl((TestCase) eObject.eContainer());
+			} else {
+				parent = new TestSetupImpl((TestSetup) eObject.eContainer());
+			}
 		}
+		return parent;
+
 	}
 
 	@Override
@@ -73,7 +79,7 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setParent(ITestStepContainer value) {
-		// Not needed in this project
+		this.parent = value;
 	}
 
 	@Override

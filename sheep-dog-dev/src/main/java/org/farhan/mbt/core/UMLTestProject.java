@@ -25,14 +25,14 @@ import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 
 public class UMLTestProject extends UMLElement {
 
-	protected ObjectRepository fa;
+	protected IObjectRepository fa;
 	public final String TEST_CASES = "specs";
 	public final String TEST_STEPS = "stepdefs";
 	private Model umlElement;
 	protected ArrayList<UMLTestSuite> firstLayerObjects;
 	protected ArrayList<UMLStepObject> secondLayerObjects;
 
-	public UMLTestProject(String tags, ObjectRepository fa) {
+	public UMLTestProject(String tags, IObjectRepository fa) {
 		firstLayerObjects = new ArrayList<UMLTestSuite>();
 		secondLayerObjects = new ArrayList<UMLStepObject>();
 		this.fa = fa;

@@ -1,6 +1,6 @@
 package org.farhan.mbt.core;
 
-public interface ConvertibleObject {
+public interface IConvertibleObject {
 
 	public String getPath();
 

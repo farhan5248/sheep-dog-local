@@ -22,9 +22,9 @@ import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
-import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.IConvertibleObject;
 
-public class AsciiDoctorStepObject implements ConvertibleObject {
+public class AsciiDoctorStepObject implements IConvertibleObject {
 
 	private StepObject theStepObject;
 	private String thePath;

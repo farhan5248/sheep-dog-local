@@ -4,22 +4,22 @@ package org.farhan.mbt.asciidoctor;
 import java.util.ArrayList;
 
 import org.farhan.dsl.sheepdog.SheepDogStandaloneSetup;
-import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.IConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.IObjectRepository;
 
 public class AsciiDoctorTestProject extends ConvertibleProject {
 
-	public AsciiDoctorTestProject(String tags, ObjectRepository fa) {
+	public AsciiDoctorTestProject(String tags, IObjectRepository fa) {
 		super(tags, fa);
 	}
 
 	@Override
-	public ConvertibleObject addFile(String path) throws Exception {
+	public IConvertibleObject addFile(String path) throws Exception {
 
 		// TODO calculate an actual checksum
 		fa.put(tags, path, "sha checksum");
-		ConvertibleObject co = getObject(path);
+		IConvertibleObject co = getObject(path);
 		if (co != null) {
 			return co;
 		} else {
@@ -54,9 +54,9 @@ public class AsciiDoctorTestProject extends ConvertibleProject {
 	}
 
 	@Override
-	public ArrayList<ConvertibleObject> getObjects(String layer) {
+	public ArrayList<IConvertibleObject> getObjects(String layer) {
 		// TODO nothing uses this so return null?
-		ArrayList<ConvertibleObject> layerFiles = null;
+		ArrayList<IConvertibleObject> layerFiles = null;
 		switch (layer) {
 		case TEST_CASES:
 			layerFiles = firstLayerObjects;
@@ -71,7 +71,7 @@ public class AsciiDoctorTestProject extends ConvertibleProject {
 	}
 
 	@Override
-	public void deleteObject(ConvertibleObject srcObj) {
+	public void deleteObject(IConvertibleObject srcObj) {
 		firstLayerObjects.remove(srcObj);
 	}
 

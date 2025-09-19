@@ -25,7 +25,7 @@ import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
-import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.IConvertibleObject;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
@@ -34,7 +34,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 
-public class AsciiDoctorTestSuite implements ConvertibleObject {
+public class AsciiDoctorTestSuite implements IConvertibleObject {
 
 	private TestSuite theTestSuite;
 	private String thePath;
@@ -421,6 +421,8 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
 		OutputStream os = new ByteArrayOutputStream();
 		try {
+			// TODO this is abuse of a toString method, it shouldn't be writing anything to
+			// the file-system
 			resource.save(os, options);
 		} catch (IOException e) {
 			return null;

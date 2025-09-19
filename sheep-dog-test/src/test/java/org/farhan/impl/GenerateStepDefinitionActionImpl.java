@@ -11,7 +11,7 @@ public class GenerateStepDefinitionActionImpl extends TestObject implements Gene
 
 	public void transition() {
 		try {
-			StepObjectBuilder.generateStepDefinition(currentStep, null);
+			StepObjectBuilder.generateStepDefinition(currentStep, this.testProject);
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

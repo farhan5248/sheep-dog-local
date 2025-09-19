@@ -3,21 +3,21 @@ package org.farhan.mbt.cucumber;
 import java.util.ArrayList;
 
 import org.farhan.dsl.cucumber.CucumberStandaloneSetup;
-import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.IConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.IObjectRepository;
 
 public class CucumberTestProject extends ConvertibleProject {
 
-	public CucumberTestProject(String tags, ObjectRepository fa) {
+	public CucumberTestProject(String tags, IObjectRepository fa) {
 		super(tags, fa);
 	}
 
 	@Override
-	public ConvertibleObject addFile(String path) throws Exception {
+	public IConvertibleObject addFile(String path) throws Exception {
 		// TODO calculate an actual checksum
 		fa.put(tags, path, "sha checksum");
-		ConvertibleObject aConvertibleObject = getObject(path);
+		IConvertibleObject aConvertibleObject = getObject(path);
 		if (aConvertibleObject != null) {
 			return aConvertibleObject;
 		} else {
@@ -38,7 +38,7 @@ public class CucumberTestProject extends ConvertibleProject {
 		}
 	}
 
-	protected ConvertibleObject createClass(String path) {
+	protected IConvertibleObject createClass(String path) {
 		return new CucumberClass(path);
 	}
 
@@ -66,9 +66,9 @@ public class CucumberTestProject extends ConvertibleProject {
 	}
 
 	@Override
-	public ArrayList<ConvertibleObject> getObjects(String layer) {
+	public ArrayList<IConvertibleObject> getObjects(String layer) {
 
-		ArrayList<ConvertibleObject> layerObjects = null;
+		ArrayList<IConvertibleObject> layerObjects = null;
 		switch (layer) {
 		case TEST_CASES:
 			layerObjects = firstLayerObjects;
@@ -89,7 +89,7 @@ public class CucumberTestProject extends ConvertibleProject {
 	}
 
 	@Override
-	public void deleteObject(ConvertibleObject srcObj) {
+	public void deleteObject(IConvertibleObject srcObj) {
 		firstLayerObjects.remove(srcObj);
 		secondLayerObjects.remove(srcObj);
 		thirdLayerObjects.remove(srcObj);

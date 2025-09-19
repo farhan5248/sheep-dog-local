@@ -11,7 +11,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.IObjectRepository;
 
 public abstract class MBTMojo extends AbstractMojo {
 
@@ -49,12 +49,12 @@ public abstract class MBTMojo extends AbstractMojo {
 		} else if (!repoDir.endsWith("/")) {
 			repoDir += "/";
 		}
-		ObjectRepository or = new FileObjectRepository(repoDir);
-		SourceRepository sr = new SourceRepository(baseDir);
+		IObjectRepository or = new ServiceRepository(repoDir);
+		IObjectRepository sr = new SourceRepository(baseDir);
 		try {
 
 			Class<?> mojoClass = Class.forName(goal);
-			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, IObjectRepository.class)
 					.newInstance(tags, or);
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
@@ -62,23 +62,23 @@ public abstract class MBTMojo extends AbstractMojo {
 				ArrayList<String> tempFiles = new ArrayList<String>();
 				// TODO this shouldn't be hardcoded, get it from the Converter class since that
 				// class knows which file types it converts
-				for (String fileName : sr.list(dir, extension)) {
+				for (String fileName : sr.list("", dir, extension)) {
 					if (fileName.startsWith(dir + "stepdefs")) {
 						tempFiles.add(fileName);
 					} else {
 						getLog().debug("fileName: " + fileName);
-						mojo.convertFile(fileName, sr.get(fileName));
+						mojo.convertFile(fileName, sr.get("", fileName));
 					}
 				}
 				for (String fileName : tempFiles) {
 					getLog().debug("fileName: " + fileName);
-					mojo.convertFile(fileName, sr.get(fileName));
+					mojo.convertFile(fileName, sr.get("", fileName));
 				}
 			} else {
 				for (String fileName : mojo.getFileNames()) {
-					String content = mojo.convertFile(fileName, sr.contains(fileName) ? sr.get(fileName) : "");
+					String content = mojo.convertFile(fileName, sr.contains("", fileName) ? sr.get("", fileName) : "");
 					if (!content.isEmpty()) {
-						sr.put(fileName, content);
+						sr.put("", fileName, content);
 					}
 				}
 			}

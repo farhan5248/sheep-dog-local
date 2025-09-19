@@ -11,8 +11,8 @@ public class TestStepIssueDetector {
 		return text.matches(TestStepUtility.REGEX);
 	}
 
-	public static String getErrorMessage(ITestStep theTestStep) throws Exception {
-		logger.debug("Entering validateError for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+	public static String validateSyntax(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering validateSyntax for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			String text = theTestStep.getName();
 			if (!isValid(text)) {
@@ -53,11 +53,11 @@ public class TestStepIssueDetector {
 			} else {
 				if (theTestStep.getParent().getTestStepList().getFirst().equals(theTestStep)) {
 					if (TestStepUtility.getComponent(theTestStep.getName()).isEmpty()) {
-						logger.debug("Exiting validateError");
+						logger.debug("Exiting validateSyntax");
 						return TestStepIssueTypes.FIRST_STEP_COMPONENT.value;
 					}
 				}
-				logger.debug("Exiting validateError");
+				logger.debug("Exiting validateSyntax");
 				return "";
 			}
 		} catch (Exception e) {
@@ -67,11 +67,10 @@ public class TestStepIssueDetector {
 		}
 	}
 
-	public static String getWarningMessage(ITestStep theTestStep) throws Exception {
-		logger.debug("Entering validateWarning for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+	public static String validateSemantics(ITestStep theTestStep, ITestProject theProject) throws Exception {
+		logger.debug("Entering validateSemantics for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 
-			ITestProject theProject = theTestStep.getParent().getParent().getParent();
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject == null) {
@@ -96,10 +95,10 @@ public class TestStepIssueDetector {
 					}
 				}
 			}
-			logger.debug("Exiting validateWarning");
+			logger.debug("Exiting validateSemantics");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateWarning for step '{}': {}",
+			logger.error("Failed in validateSemantics for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}

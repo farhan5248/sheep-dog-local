@@ -1,4 +1,4 @@
-package org.farhan.common;
+package org.farhan.mbt.maven;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -7,18 +7,55 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.IObjectRepository;
 
-public class FileObjectRepository implements ObjectRepository {
+public class ServiceRepository implements IObjectRepository {
 
 	private final String BASEDIR;
 
-	public FileObjectRepository() {
+	public ServiceRepository() {
 		BASEDIR = "target/src-gen/repo/";
 	}
 
-	public FileObjectRepository(String baseDir) {
+	public ServiceRepository(String baseDir) {
 		BASEDIR = baseDir + "target/repo/";
+	}
+
+	@Override
+	public void clear(String tags) {
+		deleteDir(new File(BASEDIR + tags + "/"));
+	}
+
+	@Override
+	public boolean contains(String tags, String path) {
+		path = path.replaceAll("\\\\+", "/");
+		path = BASEDIR + tags + "/" + path;
+		return new File(path).exists();
+	}
+
+	@Override
+	public void delete(String tags, String path) {
+		path = BASEDIR + tags + "/" + path;
+		new File(path).delete();
+	}
+
+	public void deleteDir(File aDir) {
+		if (aDir.exists()) {
+			for (String s : aDir.list()) {
+				File f = new File(aDir.getAbsolutePath() + File.separator + s);
+				if (f.isDirectory()) {
+					deleteDir(f);
+				}
+				f.delete();
+			}
+		}
+	}
+	
+	@Override
+	public String get(String tags, String path) throws Exception {
+		path = path.replaceAll("\\\\+", "/");
+		path = BASEDIR + tags + "/" + path;
+		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
 	}
 
 	@Override
@@ -42,20 +79,6 @@ public class FileObjectRepository implements ObjectRepository {
 	}
 
 	@Override
-	public boolean contains(String tags, String path) {
-		path = path.replaceAll("\\\\+", "/");
-		path = BASEDIR + tags + "/" + path;
-		return new File(path).exists();
-	}
-
-	@Override
-	public String get(String tags, String path) throws Exception {
-		path = path.replaceAll("\\\\+", "/");
-		path = BASEDIR + tags + "/" + path;
-		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
-	}
-
-	@Override
 	public void put(String tags, String path, String content) throws Exception {
 		path = path.replaceAll("\\\\+", "/");
 		path = BASEDIR + tags + "/" + path;
@@ -64,23 +87,6 @@ public class FileObjectRepository implements ObjectRepository {
 		pw.write(content);
 		pw.flush();
 		pw.close();
-	}
-
-	@Override
-	public void clear(String tags) {
-		deleteDir(new File(BASEDIR + tags + "/"));
-	}
-
-	public void deleteDir(File aDir) {
-		if (aDir.exists()) {
-			for (String s : aDir.list()) {
-				File f = new File(aDir.getAbsolutePath() + File.separator + s);
-				if (f.isDirectory()) {
-					deleteDir(f);
-				}
-				f.delete();
-			}
-		}
 	}
 
 }

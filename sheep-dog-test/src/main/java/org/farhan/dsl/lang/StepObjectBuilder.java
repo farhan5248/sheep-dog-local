@@ -1,7 +1,5 @@
 package org.farhan.dsl.lang;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,12 +7,11 @@ public class StepObjectBuilder {
 
 	private static final Logger logger = LoggerFactory.getLogger(StepObjectBuilder.class);
 
-	public static IStepDefinition generateStepDefinition(ITestStep theTestStep, Map<Object, Object> options)
+	public static IStepDefinition generateStepDefinition(ITestStep theTestStep, ITestProject theProject)
 			throws Exception {
 		logger.debug("Entering generateStepDefinition for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {
-			ITestProject theProject = theTestStep.getParent().getParent().getParent();
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject == null) {

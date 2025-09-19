@@ -7,9 +7,9 @@ public abstract class Converter {
 	protected String tags = "";
 	protected ConvertibleProject project;
 	protected UMLTestProject model;
-	protected ObjectRepository fa;
+	protected IObjectRepository fa;
 
-	public Converter(String tags, ObjectRepository fa) {
+	public Converter(String tags, IObjectRepository fa) {
 		this.tags = tags;
 		this.fa = fa;
 	}

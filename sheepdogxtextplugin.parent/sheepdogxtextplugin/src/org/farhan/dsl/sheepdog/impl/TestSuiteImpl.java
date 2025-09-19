@@ -22,7 +22,6 @@ public class TestSuiteImpl implements ITestSuite {
 
 	public TestSuiteImpl(TestSuite testSuite) {
 		this.eObject = testSuite;
-		parent = new TestProjectImpl();
 	}
 
 	@Override
@@ -105,7 +104,7 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public void setParent(ITestProject value) {
-		// Not needed in this project
+		this.parent = value;
 	}
 
 	@Override

@@ -1,13 +1,17 @@
 package org.farhan.dsl.sheepdog.impl;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.TreeSet;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.farhan.dsl.lang.IObjectRepository;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSuite;
@@ -18,24 +22,45 @@ public class TestProjectImpl implements ITestProject {
 
 	private static Logger logger = Logger.getLogger(TestProjectImpl.class);
 
-	private static String projectPath;
-	private static String outputPath;
+	private IObjectRepository sr;
+	private final String outputPath;
 
-	public void setProjectPath(String projectPath) {
-		TestProjectImpl.projectPath = projectPath;
-		outputPath = "src/test/resources/asciidoc/stepdefs/".replace("/", File.separator);
+	public TestProjectImpl(IObjectRepository sr) {
+		this.sr = sr;
+		outputPath = "src/test/resources/asciidoc/stepdefs/";
 	}
 
 	@Override
 	public IStepObject createStepObject(String qualifiedName) {
 		StepObject eObject = SheepDogFactory.eINSTANCE.createStepObject();
-		Resource theResource = new ResourceSetImpl().createResource(getObjectURI(qualifiedName));
+		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI(outputPath + qualifiedName));
 		theResource.getContents().add(eObject);
 		IStepObject stepObject = new StepObjectImpl(eObject);
 		stepObject.setQualifiedName(qualifiedName);
-		stepObject.setName(
-				(new File(projectPath + outputPath + qualifiedName)).getName().replace(getFileExtension(), ""));
+		stepObject.setName((new File(qualifiedName)).getName().replace(getFileExtension(), ""));
 		return stepObject;
+	}
+
+	@Override
+	public IStepObject getStepObject(String qualifiedName) {
+		if (sr.contains("", qualifiedName)) {
+			Resource resource = new ResourceSetImpl().createResource(URI.createFileURI(outputPath + qualifiedName));
+			try {
+				String text = sr.get("", outputPath + qualifiedName);
+				resource.load(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8)), Collections.EMPTY_MAP);
+			} catch (Exception e) {
+				logger.error("Couldn't load StepObject for: " + qualifiedName, e);
+			}
+			return new StepObjectImpl((StepObject) resource.getContents().get(0));
+		} else {
+			return null;
+		}
+	}
+
+	public void putStepObject(IStepObject stepObject) throws Exception {
+		// TODO serialize should be setContent, parse should be getContent, this works
+		// well for the JSON response
+		sr.put("", outputPath + stepObject.getQualifiedName(), ((StepObjectImpl) stepObject).serialize());
 	}
 
 	@Override
@@ -46,12 +71,20 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public ArrayList<String> getComponentList() {
-		File folder = new File(projectPath + outputPath);
-		ArrayList<String> components = new ArrayList<String>();
-		for (File ir : folder.listFiles()) {
-			components.add(ir.getName());
+
+		TreeSet<String> componentSet = new TreeSet<String>();
+		try {
+			// TODO instead of empty tags, append it to the prefix?
+			for (String stepObjectFileName : sr.list("", outputPath, getFileExtension())) {
+				componentSet.add(stepObjectFileName.replaceFirst(outputPath, "").split("/")[0]);
+			}
+		} catch (Exception e) {
+			logger.error("Couldn't get component list:", e);
 		}
-		return components;
+
+		ArrayList<String> componentList = new ArrayList<String>();
+		componentList.addAll(componentSet);
+		return componentList;
 	}
 
 	@Override
@@ -59,50 +92,13 @@ public class TestProjectImpl implements ITestProject {
 		return ".asciidoc";
 	}
 
-	private ArrayList<String> getFiles(File folder) throws Exception {
-		ArrayList<String> files = new ArrayList<String>();
-		if (folder.exists()) {
-			for (File r : folder.listFiles()) {
-				if (!r.isFile()) {
-					files.addAll(getFiles(r));
-				} else {
-					files.add(r.getAbsolutePath());
-				}
-			}
-		}
-		return files;
-	}
-
-	private URI getObjectURI(String qualifiedName) {
-
-		String objectPath = projectPath + outputPath + qualifiedName.replace("/", File.separator);
-		URI uri = URI.createFileURI(objectPath);
-		return uri;
-	}
-
-	@Override
-	public IStepObject getStepObject(String qualifiedName) {
-		Resource resource = new ResourceSetImpl().createResource(getObjectURI(qualifiedName));
-		if (new ResourceSetImpl().getURIConverter().exists(resource.getURI(), null)) {
-			try {
-				resource.load(new HashMap());
-			} catch (IOException e) {
-				logger.error("Couldn't load StepObject for: " + qualifiedName, e);
-			}
-			return new StepObjectImpl((StepObject) resource.getContents().get(0));
-		} else {
-			return null;
-		}
-	}
-
 	@Override
 	public ArrayList<IStepObject> getStepObjectList() {
 		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
 		try {
-			for (String stepObjectFileName : getFiles(new File(projectPath + outputPath))) {
-				stepObjectFileName = stepObjectFileName.replace(File.separator, "/");
-				String qualifiedName = stepObjectFileName.replaceFirst(projectPath + outputPath, "");
-				objects.add(createStepObject(qualifiedName));
+			// TODO instead of empty tags, append it to the prefix?
+			for (String stepObjectFileName : sr.list("", outputPath, getFileExtension())) {
+				objects.add(createStepObject(stepObjectFileName.replaceFirst(outputPath, "")));
 			}
 		} catch (Exception e) {
 			logger.error("Couldn't get StepObject list:", e);
@@ -112,16 +108,10 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public ArrayList<IStepObject> getStepObjectList(String component) {
-		// logger.error("Component is: " + component);
 		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
 		try {
-			// logger.error("Directory is: " + projectPath + outputPath + component);
-			for (String stepObjectFileName : getFiles(new File(projectPath + outputPath + component))) {
-				// logger.error("stepObjectFileName is: " + stepObjectFileName);
-				stepObjectFileName = stepObjectFileName.replace(File.separator, "/");
-				String qualifiedName = stepObjectFileName.replaceFirst(".*" + component + "/", component + "/");
-				// logger.error("qualifiedName is: " + qualifiedName);
-				objects.add(createStepObject(qualifiedName));
+			for (String stepObjectFileName : sr.list("", outputPath + component, getFileExtension())) {
+				objects.add(createStepObject(stepObjectFileName.replaceFirst(outputPath, "")));
 			}
 		} catch (Exception e) {
 			logger.error("Couldn't get StepObject list: for" + component, e);
@@ -139,6 +129,9 @@ public class TestProjectImpl implements ITestProject {
 	public ArrayList<ITestSuite> getTestSuiteList() {
 		// Not needed in this project
 		return null;
+	}
+
+	public void setProjectPath(String projectPath) {
 	}
 
 	@Override

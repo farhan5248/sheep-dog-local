@@ -3,21 +3,18 @@
  */
 package org.farhan.dsl.sheepdog.generator;
 
-import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
-import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.dsl.lang.*;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
-import org.farhan.dsl.sheepdog.impl.StepDefinitionImpl;
+import org.farhan.dsl.sheepdog.impl.SourceRepository;
+import org.farhan.dsl.sheepdog.impl.StepObjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
@@ -33,14 +30,6 @@ public class SheepDogGenerator extends AbstractGenerator {
 	private static final Logger logger = Logger.getLogger(SheepDogGenerator.class);
 
 	@Override
-	public void beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
-	}
-
-	@Override
-	public void afterGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
-	}
-
-	@Override
 	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
 
 		if (resource.getContents().get(0) instanceof TestSuite) {
@@ -53,20 +42,14 @@ public class SheepDogGenerator extends AbstractGenerator {
 		}
 	}
 
-	private void setProjectPath(TestStep step) {
-		String uriPath = step.eResource().getURI().toPlatformString(true);
-		File projectPath = new File(
-				ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uriPath)).getProject().getLocationURI());
-		TestProjectImpl testProject = new TestProjectImpl();
-		testProject.setProjectPath(projectPath.getAbsolutePath() + "/");
-	}
-
 	public void doGenerate(TestStep step) {
 		try {
-			setProjectPath(step);
-			StepDefinitionImpl stepDefinition = (StepDefinitionImpl) StepObjectBuilder.generateStepDefinition(
-					new TestStepImpl(step), SaveOptions.newBuilder().format().getOptions().toOptionsMap());
-			stepDefinition.getEObject().eResource().save(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+			
+			TestProjectImpl testProject = new TestProjectImpl(new SourceRepository(step.eResource().getURI().toPlatformString(true)));
+			// TODO rename to add step definition and return StepObjectImpl
+			StepObjectImpl stepObjectImpl = (StepObjectImpl) StepObjectBuilder
+					.generateStepDefinition(new TestStepImpl(step), testProject).getParent();
+			testProject.putStepObject(stepObjectImpl);
 		} catch (Exception e) {
 			logError(e, step);
 		}

@@ -7,7 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class SourceRepository {
+import org.farhan.mbt.core.IObjectRepository;
+
+public class SourceRepository implements IObjectRepository {
 
 	private final String BASEDIR;
 
@@ -19,7 +21,43 @@ public class SourceRepository {
 		BASEDIR = baseDir;
 	}
 
-	public ArrayList<String> list(String path, String extension) {
+	@Override
+	public void clear(String tags) {
+		deleteDir(new File(BASEDIR));
+	}
+
+	@Override
+	public boolean contains(String tags, String path) {
+		path = BASEDIR + path;
+		return new File(path).exists();
+	}
+
+	@Override
+	public void delete(String tags, String path) {
+		path = BASEDIR + path;
+		new File(path).delete();
+	}
+
+	public void deleteDir(File aDir) {
+		if (aDir.exists()) {
+			for (String s : aDir.list()) {
+				File f = new File(aDir.getAbsolutePath() + File.separator + s);
+				if (f.isDirectory()) {
+					deleteDir(f);
+				}
+				f.delete();
+			}
+		}
+	}
+
+	@Override
+	public String get(String tags, String path) throws Exception {
+		path = BASEDIR + path;
+		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+	}
+
+	@Override
+	public ArrayList<String> list(String tags, String path, String extension) {
 		String root = BASEDIR;
 		ArrayList<String> files = new ArrayList<String>();
 		File aDir = new File(root + path);
@@ -28,7 +66,7 @@ public class SourceRepository {
 				String aDirObjPath = (path + s);
 				File aDirObj = new File(root + aDirObjPath);
 				if (aDirObj.isDirectory()) {
-					files.addAll(list(aDirObjPath + "/", extension));
+					files.addAll(list("", aDirObjPath + "/", extension));
 				} else if (aDirObjPath.toLowerCase().endsWith(extension.toLowerCase())) {
 					files.add(aDirObjPath);
 				}
@@ -37,27 +75,13 @@ public class SourceRepository {
 		return files;
 	}
 
-	public String get(String path) throws Exception {
-		path = BASEDIR + "/" + path;
-		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
-	}
-
-	public void put(String path, String content) throws Exception {
-		path = BASEDIR + "/" + path;
+	@Override
+	public void put(String tags, String path, String content) throws Exception {
+		path = BASEDIR + path;
 		new File(path).getParentFile().mkdirs();
 		PrintWriter pw = new PrintWriter(path, StandardCharsets.UTF_8);
 		pw.write(content);
 		pw.flush();
 		pw.close();
-	}
-
-	public boolean contains(String path) {
-		path = BASEDIR + "/" + path;
-		return new File(path).exists();
-	}
-
-	public void delete(String path) {
-		path = BASEDIR + "/" + path;
-		new File(path).delete();
 	}
 }
