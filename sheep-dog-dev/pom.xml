@@ -278,6 +278,10 @@
 					<groupId>org.mortbay.jasper</groupId>
 					<artifactId>apache-jsp</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-slf4j-impl</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<!-- Xtext Cucumber -->
