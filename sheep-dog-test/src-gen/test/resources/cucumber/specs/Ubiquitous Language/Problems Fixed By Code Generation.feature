@@ -1,6 +1,6 @@
 @sheep-dog-test
 Feature: Problems Fixed By Code Generation
-  
+
   \@sheep-dog-test
   Some problems are fixed by code generation.
   They're typically things like keywords or objects that are not defined in the step objects layer.
@@ -8,49 +8,54 @@ Feature: Problems Fixed By Code Generation
   There's 4 types of warnings, the scenarios below cover them.
 
   Scenario: This object doesn't exist validation
+
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                 |
-      | The daily batchjob, Input file is present |
-    When The xtext plugin, validate warning action is performed
-    Then The xtext plugin, validate warning dialog will be set as follows
-      | Message                  |
-      | The object doesn't exist |
+          | Step Name                                 |
+          | The daily batchjob, Input file is present |
+     When The xtext plugin, validate warning action is performed
+     Then The xtext plugin, validate warning dialog will be set as follows
+          | Message                  |
+          | The object doesn't exist |
 
   Scenario: This object step definition doesn't exist validation
+
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                 |
-      | The daily batchjob, Input file is present |
-    And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-      | Object Name                       | Step Definition Name |
-      | daily batchjob/Input file.feature | is absent            |
-    When The xtext plugin, validate warning action is performed
-    Then The xtext plugin, validate warning dialog will be set as follows
-      | Message                            |
-      | The object predicate doesn't exist |
+          | Step Name                                 |
+          | The daily batchjob, Input file is present |
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name |
+          | daily batchjob/Input file.feature | is absent            |
+     When The xtext plugin, validate warning action is performed
+     Then The xtext plugin, validate warning dialog will be set as follows
+          | Message                            |
+          | The object predicate doesn't exist |
 
   Scenario: This object step definition parameter set doesn't exist validation
+
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                 | Headers    |
-      | The daily batchjob, Input file is present | New Header |
-    And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-      | Object Name                       | Step Definition Name | Parameters |
-      | daily batchjob/Input file.feature | is present           | Old Header |
-    When The xtext plugin, validate warning action is performed
-    Then The xtext plugin, validate warning dialog will be set as follows
-      | Message                                       |
-      | The object predicate parameters doesn't exist |
+          | Step Name                                 | Headers    |
+          | The daily batchjob, Input file is present | New Header |
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name | Parameters |
+          | daily batchjob/Input file.feature | is present           | Old Header |
+     When The xtext plugin, validate warning action is performed
+     Then The xtext plugin, validate warning dialog will be set as follows
+          | Message                                       |
+          | The object predicate parameters doesn't exist |
 
   Scenario: This object doesn't exist and there is an alternate
+
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                 |
-      | The daily batchjob, Input file is present |
-    And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows
-      | Object Name                           | Step Definition Name |
-      | daily batchjob/app/Input file.feature | is present           |
-    When The xtext plugin, validate warning action is performed
-    Then The xtext plugin, validate warning dialog will be set as follows
-      | Message                  |
-      | The object doesn't exist |
-    And The xtext plugin, quickfix dialog will be set as follows
-      | Message                                       |
-      | The daily batchjob, app/Input file is present |
+          | Step Name                                 |
+          | The daily batchjob, Input file is present |
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows
+          | Object Name                           | Step Definition Name |
+          | daily batchjob/app/Input file.feature | is present           |
+     When The xtext plugin, validate warning action is performed
+     Then The xtext plugin, validate warning dialog will be set as follows
+          | Message                  |
+          | The object doesn't exist |
+      And The xtext plugin, quickfix dialog will be set as follows
+          | Message                                       |
+          | The daily batchjob, app/Input file is present |
+

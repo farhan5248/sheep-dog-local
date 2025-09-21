@@ -20,8 +20,6 @@ import org.farhan.objects.maven.UmlToAsciidoctorGoal;
 import org.farhan.objects.maven.UmlToCucumberGoal;
 import org.farhan.objects.maven.UmlToCucumberGuiceGoal;
 import org.farhan.objects.maven.UmlToCucumberSpringGoal;
-import org.farhan.objects.maven.UmlToJunitGuiceGoal;
-import org.farhan.objects.maven.UmlToJunitSpringGoal;
 import org.farhan.objects.codeprj.srcgen.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
 import org.farhan.objects.codeprj.srcgen.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.app.ProcessAsciidocFile;
@@ -67,8 +65,6 @@ public final class Config extends AbstractModule implements InjectorSource {
 	protected void configure() {
 		bind(AsciidoctorToUmlGoal.class).to(AsciidoctorToUmlGoalImpl.class);
 		bind(BlahObjectPageStepsJavaFile.class).to(BlahObjectPageStepsJavaFileImpl.class);
-		bind(org.farhan.objects.codeprj.srcgen.test.java.org.farhan.suites.blah.BlahObjectPageStepsJavaFile.class)
-				.to(BlahObjectPageStepsJavaFileImpl.class);
 		bind(CucumberToUmlGoal.class).to(CucumberToUmlGoalImpl.class);
 		bind(ObjectPageJavaFile.class).to(ObjectPageJavaFileImpl.class);
 		bind(ProcessAsciidocFile.class).to(ProcessAsciidocFileImpl.class);

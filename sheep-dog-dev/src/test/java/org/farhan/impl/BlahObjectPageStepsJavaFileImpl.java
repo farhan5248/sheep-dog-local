@@ -8,8 +8,7 @@ import org.farhan.objects.codeprj.srcgen.test.java.org.farhan.stepdefs.blah.Blah
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements BlahObjectPageStepsJavaFile,
-		org.farhan.objects.codeprj.srcgen.test.java.org.farhan.suites.blah.BlahObjectPageStepsJavaFile {
+public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements BlahObjectPageStepsJavaFile {
 
 	public void assertContent(HashMap<String, String> keyMap) {
 		assertContent(keyMap.get("Content"));

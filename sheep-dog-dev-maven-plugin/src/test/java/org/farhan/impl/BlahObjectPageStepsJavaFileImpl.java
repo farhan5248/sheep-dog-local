@@ -18,9 +18,4 @@ public class BlahObjectPageStepsJavaFileImpl extends FileObject implements BlahO
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
 	}
-
-	@Override
-	public void assertPresent(HashMap<String, String> keyMap) {
-		assertObjectExists();
-	}
 }

@@ -80,7 +80,9 @@ public class TestStepUtility {
 	public static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep, boolean reverse) {
 		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
 		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
-			if (!t.equals(theTestStep)) {
+			// TODO if a test case has more than one step with the same name, this might
+			// produce the wrong result
+			if (!t.getName().contentEquals(theTestStep.getName())) {
 				if (reverse) {
 					steps.add(0, t);
 				} else {
