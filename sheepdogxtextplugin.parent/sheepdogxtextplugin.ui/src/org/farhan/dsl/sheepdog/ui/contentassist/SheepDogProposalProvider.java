@@ -119,11 +119,6 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		}
 	}
 
-	public void completeStepTable_Rows(Table stepTable, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		// TODO automatically create columns to match header
-	}
-
 	public void completeText_Name(Text model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);

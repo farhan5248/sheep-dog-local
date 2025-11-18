@@ -28,44 +28,49 @@ import org.farhan.dsl.lang.*;
 public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	private static final Logger logger = Logger.getLogger(SheepDogValidator.class);
-	public static final String INVALID_NAME = "invalidName";
-	public static final String INVALID_HEADER = "invalidHeader";
-	public static final String INVALID_STEP_TYPE = "invalidStepType";
-	public static final String MISSING_STEP_DEF = "missingStepDefinition";
-	public static final String MISSING_COMPONENT = "missingInitialComponent";
+	// TODO move these to sheep-dog-test and update quickfix provider
+	public static final String TEST_STEP_NAME = "invalidStepName";
+	public static final String TABLE_CELL_NAME = "invalidCellName";
+	public static final String TEST_STEP_REFERENCE = "referenceNotFound";
 
 	@Check(CheckType.EXPENSIVE)
-	public void checkFeature(TestSuite feature) {
+	public void checkTestSuite(TestSuite feature) {
 		// TODO validate that feature file name and feature name are the same.
 		if (!Character.isUpperCase(feature.getName().charAt(0))) {
-			warning("TestSuite name should start with a capital", SheepDogPackage.Literals.MODEL__NAME, INVALID_NAME);
+			warning("TestSuite name should start with a capital", SheepDogPackage.Literals.MODEL__NAME,
+					TEST_STEP_NAME);
 		}
 	}
 
 	@Check(CheckType.NORMAL)
-	public void checkScenario(TestStepContainer abstractScenario) {
+	public void checkTestStepContainer(TestStepContainer abstractScenario) {
 		if (!Character.isUpperCase(abstractScenario.getName().charAt(0))) {
 			warning("Scenario name should start with a capital", SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME,
-					INVALID_NAME);
+					TEST_STEP_NAME);
 		}
 	}
 
 	@Check(CheckType.FAST)
-	public void checkStepName(TestStep step) {
+	public void checkTestStepName(TestStep step) {
+		// TODO split into 2 checks, one for name syntax and one for reference
+		// and rename to checkTestStepNameInvalid and checkTestStepRefNotFound
 		try {
 			if (step.getName() != null) {
 				ITestStep iTestStep = new TestStepImpl(step);
-				String problems = TestStepIssueDetector.validateSyntax(iTestStep);
+				String problems = TestStepIssueDetector.validateName(iTestStep);
 				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, INVALID_NAME);
+					// TODO pass in the enum returned by validateSyntax instead of string
+					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME);
 				} else {
 
 					ITestProject testProject = new TestProjectImpl(
 							new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 					iTestStep.getParent().getParent().setParent(testProject);
-					problems = TestStepIssueDetector.validateSemantics(iTestStep, testProject);
+					problems = TestStepIssueDetector.validateReference(iTestStep, testProject);
 					if (!problems.isEmpty()) {
 
+						// TODO I don't need to pass in any issue data at all, the validator shouldn't
+						// suggest proposals. 
 						// TODO return String list instead of object array
 						Object[] alternateProposals = TestStepIssueResolver.proposeStepObject(iTestStep, testProject);
 						String[] alternates = new String[alternateProposals.length];
@@ -73,9 +78,8 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 							alternates[i] = alternateProposals[i].toString();
 						}
 
-						// TODO I don't need to pass in any issue data at all, get it in the proposal
-						// provider
-						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, MISSING_STEP_DEF, alternates);
+						// TODO pass in the enum returned by validateSyntax instead of string
+						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_REFERENCE, alternates);
 					}
 				}
 			}
@@ -85,7 +89,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkStepTableName(Table stepTable) {
+	public void checkTableCellName(Table stepTable) {
 		// TODO Add table column row validation, each row should have the max number of
 		// columns
 		// TODO make tests for this
@@ -94,7 +98,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				for (Cell header : stepTable.getRowList().get(0).getCellList()) {
 					if (!Character.isUpperCase(header.getName().charAt(0))) {
 						warning("Table header names should start with a capital: " + header.getName(),
-								SheepDogPackage.Literals.TABLE__ROW_LIST, INVALID_HEADER, header.getName());
+								SheepDogPackage.Literals.TABLE__ROW_LIST, TABLE_CELL_NAME, header.getName());
 					}
 				}
 			}

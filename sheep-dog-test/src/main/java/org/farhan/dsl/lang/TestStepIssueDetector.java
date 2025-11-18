@@ -13,7 +13,8 @@ public class TestStepIssueDetector {
 		return text.matches(TestStepUtility.REGEX);
 	}
 
-	public static String validateSyntax(ITestStep theTestStep) throws Exception {
+	public static String validateName(ITestStep theTestStep) throws Exception {
+		// TODO instead of returning strings, return the enum alone, including enum for no error
 		logger.debug("Entering validateSyntax for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			String text = theTestStep.getName();
@@ -53,10 +54,11 @@ public class TestStepIssueDetector {
 					}
 				}
 			} else {
+				// TODO this should be in a TestStepContainer validator
 				if (theTestStep.getParent().getTestStepList().getFirst().equals(theTestStep)) {
 					if (TestStepUtility.getComponent(theTestStep.getName()).isEmpty()) {
 						logger.debug("Exiting validateSyntax");
-						return TestStepIssueTypes.FIRST_STEP_COMPONENT.value;
+						return TestStepIssueTypes.CHILD_STEP_NAME.value;
 					}
 				}
 				logger.debug("Exiting validateSyntax");
@@ -69,24 +71,25 @@ public class TestStepIssueDetector {
 		}
 	}
 
-	public static String validateSemantics(ITestStep theTestStep, ITestProject theProject) throws Exception {
-		logger.debug("Entering validateSemantics for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+	public static String validateReference(ITestStep theTestStep, ITestProject theProject) throws Exception {
+		// TODO instead of returning strings, return the enum alone, including enum for no error
+		logger.debug("Entering validateReferences for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject == null) {
-				return TestStepIssueTypes.STEP_OBJECT_NOT_FOUND.value;
+				return TestStepIssueTypes.REFERENCE_STEP_OBJECT.value;
 			}
 			IStepDefinition theStepDefinition = theStepObject
 					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
 			if (theStepDefinition == null) {
-				return TestStepIssueTypes.PREDICATE_NOT_FOUND.value;
+				return TestStepIssueTypes.REFERENCE_STEP_DEFINITION.value;
 			}
 			if (theTestStep.getTable() != null) {
 				if (!theTestStep.getTable().isEmpty()) {
 					if (theStepDefinition.getStepParameters(theTestStep.getTable().getFirst()) == null) {
-						return TestStepIssueTypes.PARAMETERS_NOT_FOUND.value;
+						return TestStepIssueTypes.REFERENCE_STEP_PARAMETERS.value;
 					}
 				}
 			}
@@ -95,14 +98,14 @@ public class TestStepIssueDetector {
 					ArrayList<String> headers = new ArrayList<String>();
 					headers.add("Content");
 					if (theStepDefinition.getStepParameters(headers) == null) {
-						return TestStepIssueTypes.PARAMETERS_NOT_FOUND.value;
+						return TestStepIssueTypes.REFERENCE_STEP_PARAMETERS.value;
 					}
 				}
 			}
-			logger.debug("Exiting validateSemantics");
+			logger.debug("Exiting validateReferences");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateSemantics for step '{}': {}",
+			logger.error("Failed in validateReferences for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}

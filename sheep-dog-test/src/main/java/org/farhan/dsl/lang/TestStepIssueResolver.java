@@ -29,7 +29,8 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	private static ArrayList<TestStepIssueProposal> getComponentObjects(ITestStep theTestStep, String component, ITestProject theProject)
+	private static ArrayList<TestStepIssueProposal> getComponentObjects(ITestStep theTestStep, String component,
+			ITestProject theProject)
 			throws Exception {
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
 		TestStepIssueProposal proposal;
@@ -63,7 +64,7 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	private static ArrayList<TestStepIssueProposal> getObjectDefinitionCompletion(ITestStep theTestStep) {
+	private static ArrayList<TestStepIssueProposal> getStepDefinitionCompletion(ITestStep theTestStep) {
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
 		if (theTestStep.getName() != null) {
 			if (!TestStepUtility.hasState(theTestStep.getName())) {
@@ -149,7 +150,8 @@ public class TestStepIssueResolver {
 		return proposals.values();
 	}
 
-	private static ArrayList<TestStepIssueProposal> getProjectComponents(ITestStep theTestStep, ITestProject theProject) throws Exception {
+	private static ArrayList<TestStepIssueProposal> getProjectComponents(ITestStep theTestStep, ITestProject theProject)
+			throws Exception {
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
 		TestStepIssueProposal proposal;
 		for (String componentName : theProject.getComponentList()) {
@@ -162,8 +164,10 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	public static TreeMap<String, TestStepIssueProposal> proposeName(ITestStep theTestStep, ITestProject theProject) throws Exception {
+	public static TreeMap<String, TestStepIssueProposal> proposeName(ITestStep theTestStep, ITestProject theProject)
+			throws Exception {
 		logger.debug("Entering proposeName for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+		// TODO this is doing invalid step quickfixes and incomplete step name proposals
 		try {
 			TreeMap<String, TestStepIssueProposal> proposals = new TreeMap<String, TestStepIssueProposal>();
 			String component = "";
@@ -192,10 +196,10 @@ public class TestStepIssueResolver {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
 			} else {
-				for (TestStepIssueProposal proposal : getObjectDefinitions(theTestStep, theProject)) {
+				for (TestStepIssueProposal proposal : getStepDefinitions(theTestStep, theProject)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
-				for (TestStepIssueProposal proposal : getObjectDefinitionCompletion(theTestStep)) {
+				for (TestStepIssueProposal proposal : getStepDefinitionCompletion(theTestStep)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
 			}
@@ -209,9 +213,20 @@ public class TestStepIssueResolver {
 	}
 
 	public static Object[] proposeStepObject(ITestStep theTestStep, ITestProject theProject) throws Exception {
+		// this method is used to suggest alternates in case a step object is specified
+		// but doesn't exist. the proposeName methods suggests alternates in case a step object isn't
+		// specified after breaking up name into component, object, predicate etc, only this
+		// method will be used.
+
 		// TODO return TreeMap<String, TestStepIssueProposal> or
 		// ArrayList<TestStepIssueProposal> for everything
 		logger.debug("Entering proposeStepObject for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+
+		// TODO split into two
+		// 1 if object specified and syntax is valid then suggest generation or similar
+		// objects
+		// 2 if object not specified then suggest from all previous objects etc.
+		// Implement this after breaking up name into component, object, predicate
 		try {
 			String stepNameLong = TestStepUtility.getNameLong(theTestStep);
 			String component = TestStepUtility.getComponent(stepNameLong);
@@ -236,7 +251,10 @@ public class TestStepIssueResolver {
 		}
 	}
 
-	private static ArrayList<TestStepIssueProposal> getObjectDefinitions(ITestStep theTestStep, ITestProject theProject) throws Exception {
+	private static ArrayList<TestStepIssueProposal> getStepDefinitions(ITestStep theTestStep, ITestProject theProject)
+			throws Exception {
+
+		// TODO make public and rename to proposeStepDefinitions
 		ArrayList<TestStepIssueProposal> proposals = new ArrayList<TestStepIssueProposal>();
 		TestStepIssueProposal proposal;
 		String stepName = theTestStep.getName();
@@ -274,7 +292,8 @@ public class TestStepIssueResolver {
 		return cellsAsString.trim();
 	}
 
-	public static TreeMap<String, TestStepIssueProposal> proposeStepParameters(ITestStep theTestStep, ITestProject theProject) throws Exception {
+	public static TreeMap<String, TestStepIssueProposal> proposeStepParameters(ITestStep theTestStep,
+			ITestProject theProject) throws Exception {
 		logger.debug("Entering proposeStepParameters for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {

@@ -25,7 +25,7 @@ import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
  */
 public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
-	@Fix(SheepDogValidator.MISSING_STEP_DEF)
+	@Fix(SheepDogValidator.TEST_STEP_REFERENCE)
 	public void createDefinition(final Issue issue, IssueResolutionAcceptor acceptor) {
 
 		acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object", "upcase.png",
@@ -52,8 +52,10 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	@Fix(SheepDogValidator.INVALID_NAME)
+	@Fix(SheepDogValidator.TEST_STEP_NAME)
 	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
+		// TODO get rid of upcase.png
+		// TODO this applies to more than one element, so duplicate it for each element type
 		acceptor.accept(issue, "Capitalize name", "Capitalize the name", "upcase.png", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
 				IXtextDocument xtextDocument = context.getXtextDocument();
@@ -63,8 +65,8 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		});
 	}
 
-	@Fix(SheepDogValidator.INVALID_HEADER)
-	public void capitalizeTestStepTableName(final Issue issue, IssueResolutionAcceptor acceptor) {
+	@Fix(SheepDogValidator.TABLE_CELL_NAME)
+	public void fixTable(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Capitalize TestStep table name", "Capitalize the TestStep table name.", "upcase.png",
 				new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {
