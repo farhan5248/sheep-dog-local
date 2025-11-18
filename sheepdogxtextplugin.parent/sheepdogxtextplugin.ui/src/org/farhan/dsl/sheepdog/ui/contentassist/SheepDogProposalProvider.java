@@ -20,7 +20,6 @@ import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
-import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.Then;
 import org.farhan.dsl.sheepdog.sheepDog.When;
 
@@ -76,8 +75,8 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 					new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 			ITestStep iTestStep = new TestStepImpl(step);
 			iTestStep.getParent().getParent().setParent(testProject);
-			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver
-					.proposeName(iTestStep, testProject).entrySet()) {
+			for (Entry<String, SheepDogIssueProposal> p : TestStepIssueResolver.proposeName(iTestStep, testProject)
+					.entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
 				if (proposal != null) {
@@ -97,7 +96,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 					new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 			ITestStep iTestStep = new TestStepImpl(step);
 			iTestStep.getParent().getParent().setParent(testProject);
-			for (Entry<String, TestStepIssueProposal> p : TestStepIssueResolver
+			for (Entry<String, SheepDogIssueProposal> p : TestStepIssueResolver
 					.proposeStepParameters(iTestStep, testProject).entrySet()) {
 				// TODO this is an ugly hack to make the proposals work. The |=== and ----
 				// shouldn't be hard-coded here.

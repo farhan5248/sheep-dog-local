@@ -1,0 +1,41 @@
+package org.farhan.dsl.sheepdog.impl;
+
+import java.util.ArrayList;
+
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.sheepdog.sheepDog.Cell;
+import org.farhan.dsl.sheepdog.sheepDog.Row;
+
+public class RowImpl implements IRow {
+
+	private ITable parent;
+	private Row eObject;
+	private ArrayList<ICell> cellList;
+
+	public RowImpl(Row row) {
+		this.eObject = row;
+	}
+
+	@Override
+	public ITable getParent() {
+		return parent;
+	}
+
+	@Override
+	public void setParent(ITable value) {
+		this.parent = parent;
+	}
+
+	@Override
+	public ArrayList<ICell> getCellList() {
+		return cellList;
+	}
+
+	@Override
+	public void setCellList(ArrayList<ICell> value) {
+		this.cellList = value;
+	}
+
+}

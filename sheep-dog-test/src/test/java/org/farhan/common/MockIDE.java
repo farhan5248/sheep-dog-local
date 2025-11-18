@@ -1,11 +1,11 @@
 package org.farhan.common;
 
 import java.util.TreeMap;
-import org.farhan.dsl.lang.TestStepIssueProposal;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 
 public class MockIDE {
 
-	private static TreeMap<String, TestStepIssueProposal> proposalMap;
+	private static TreeMap<String, SheepDogIssueProposal> proposalMap;
 	private static String validationMessage;
 	private static Object[] alternateObjects;
 
@@ -13,7 +13,7 @@ public class MockIDE {
 		return alternateObjects;
 	}
 
-	public static TreeMap<String, TestStepIssueProposal> getProposals() {
+	public static TreeMap<String, SheepDogIssueProposal> getProposals() {
 		return proposalMap;
 	}
 
@@ -25,7 +25,7 @@ public class MockIDE {
 		alternateObjects = newAlternateObjects;
 	}
 
-	public static void setProposalList(TreeMap<String, TestStepIssueProposal> proposalList) {
+	public static void setProposalList(TreeMap<String, SheepDogIssueProposal> proposalList) {
 		proposalMap = proposalList;
 	}
 

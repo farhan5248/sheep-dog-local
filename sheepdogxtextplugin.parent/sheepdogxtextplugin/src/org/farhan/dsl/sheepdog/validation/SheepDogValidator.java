@@ -9,10 +9,16 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
+import org.farhan.dsl.sheepdog.impl.CellImpl;
+import org.farhan.dsl.sheepdog.impl.RowImpl;
 import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
+import org.farhan.dsl.sheepdog.impl.TableImpl;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
+import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
+import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
+import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
@@ -28,30 +34,41 @@ import org.farhan.dsl.lang.*;
 public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	private static final Logger logger = Logger.getLogger(SheepDogValidator.class);
-	// TODO move these to sheep-dog-test and update quickfix provider
-	public static final String TEST_STEP_NAME = "invalidStepName";
-	public static final String TABLE_CELL_NAME = "invalidCellName";
-	public static final String TEST_STEP_REFERENCE = "referenceNotFound";
+	public static final String CELL_NAME = "CELL_NAME";
+	public static final String TEST_STEP_CONTAINER_NAME = "TEST_STEP_CONTAINER_NAME";
+	public static final String TEST_SUITE_NAME = "TEST_SUITE_NAME";
+	public static final String TESTSTEP_REFERENCE_COMPONENT = "TESTSTEP_REFERENCE_COMPONENT";
+	public static final String TESTSTEP_REFERENCE_STEP_OBJECT = "TESTSTEP_REFERENCE_STEP_OBJECT";
+	public static final String TESTSTEP_REFERENCE_STEP_DEFINITION = "TESTSTEP_REFERENCE_STEP_DEFINITION";
+	public static final String TESTSTEP_REFERENCE_STEP_PARAMETERS = "TESTSTEP_REFERENCE_STEP_PARAMETERS";
+	// TODO leave this as 1 until name is split into 3 parts
+	public static final String TEST_STEP_NAME = "TEST_STEP_NAME";
 
-	@Check(CheckType.EXPENSIVE)
-	public void checkTestSuite(TestSuite feature) {
+	@Check(CheckType.FAST)
+	public void checkTestSuite(TestSuite theTestSuite) {
 		// TODO validate that feature file name and feature name are the same.
-		if (!Character.isUpperCase(feature.getName().charAt(0))) {
-			warning("TestSuite name should start with a capital", SheepDogPackage.Literals.MODEL__NAME,
-					TEST_STEP_NAME);
+		ITestSuite iTestSuite = new TestSuiteImpl(theTestSuite);
+		String problems = TestSuiteIssueDetector.validateName(iTestSuite);
+		if (!problems.isEmpty()) {
+			warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME);
 		}
 	}
 
 	@Check(CheckType.NORMAL)
-	public void checkTestStepContainer(TestStepContainer abstractScenario) {
-		if (!Character.isUpperCase(abstractScenario.getName().charAt(0))) {
-			warning("Scenario name should start with a capital", SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME,
-					TEST_STEP_NAME);
+	public void checkTestStepContainer(TestStepContainer theTestStepContainer) {
+		try {
+			ITestStepContainer iTestStepContainer = new TestStepContainerImpl(theTestStepContainer);
+			String problems = TestStepContainerIssueDetector.validateName(iTestStepContainer);
+			if (!problems.isEmpty()) {
+				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME);
+			}
+		} catch (Exception e) {
+			logError(e, theTestStepContainer.getName());
 		}
 	}
 
-	@Check(CheckType.FAST)
-	public void checkTestStepName(TestStep step) {
+	@Check(CheckType.EXPENSIVE)
+	public void checkTestStep(TestStep step) {
 		// TODO split into 2 checks, one for name syntax and one for reference
 		// and rename to checkTestStepNameInvalid and checkTestStepRefNotFound
 		try {
@@ -66,20 +83,17 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 					ITestProject testProject = new TestProjectImpl(
 							new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 					iTestStep.getParent().getParent().setParent(testProject);
-					problems = TestStepIssueDetector.validateReference(iTestStep, testProject);
+					problems = TestStepIssueDetector.validateReference(iTestStep);
 					if (!problems.isEmpty()) {
 
-						// TODO I don't need to pass in any issue data at all, the validator shouldn't
-						// suggest proposals. 
 						// TODO return String list instead of object array
-						Object[] alternateProposals = TestStepIssueResolver.proposeStepObject(iTestStep, testProject);
+						Object[] alternateProposals = TestStepIssueResolver.proposeStepObject(iTestStep);
 						String[] alternates = new String[alternateProposals.length];
 						for (int i = 0; i < alternates.length; i++) {
 							alternates[i] = alternateProposals[i].toString();
 						}
-
-						// TODO pass in the enum returned by validateSyntax instead of string
-						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_REFERENCE, alternates);
+						
+						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems, alternates);
 					}
 				}
 			}
@@ -89,20 +103,22 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkTableCellName(Table stepTable) {
-		// TODO Add table column row validation, each row should have the max number of
-		// columns
+	public void checkRow(Cell cell) {
+		// TODO validate that each row should have the max number of columns
 		// TODO make tests for this
-		if (stepTable.getRowList() != null) {
-			if (stepTable.getRowList().size() > 0) {
-				for (Cell header : stepTable.getRowList().get(0).getCellList()) {
-					if (!Character.isUpperCase(header.getName().charAt(0))) {
-						warning("Table header names should start with a capital: " + header.getName(),
-								SheepDogPackage.Literals.TABLE__ROW_LIST, TABLE_CELL_NAME, header.getName());
-					}
-				}
+		if (cell != null) {
+			ICell iCell = new CellImpl(cell);
+			IRow iRow = new RowImpl((Row) cell.eContainer());
+			iCell.setParent(iRow);
+			ITable iTable = new TableImpl((Table) cell.eContainer().eContainer());
+			iRow.setParent(iTable);
+			String problems = CellIssueDetector.validateName(iCell);
+			if (!problems.isEmpty()) {
+				// TODO pass in the enum returned by validateName instead of string
+				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME);
 			}
 		}
+
 	}
 
 	private void logError(Exception e, String name) {

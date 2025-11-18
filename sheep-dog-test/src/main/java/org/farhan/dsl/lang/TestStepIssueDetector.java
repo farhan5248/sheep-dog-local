@@ -13,83 +13,93 @@ public class TestStepIssueDetector {
 		return text.matches(TestStepUtility.REGEX);
 	}
 
+	// TODO make tests for all of these documenting the message content
+	// TODO instead of returning strings, return the enum alone, including enum for
+	// no error
 	public static String validateName(ITestStep theTestStep) throws Exception {
-		// TODO instead of returning strings, return the enum alone, including enum for no error
-		logger.debug("Entering validateSyntax for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+		logger.debug("Entering validateName for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			String text = theTestStep.getName();
 			if (!isValid(text)) {
-				logger.debug("Exiting validateError");
-				// TODO make tests for all of these documenting the message content
+				logger.debug("Exiting validateName");
 				if (text == null) {
-					return TestStepIssueTypes.NAME_COMPONENT.value;
+					return TestStepIssueTypes.TESTSTEP_NAME_COMPONENT.description;
 				}
 
 				if (!TestStepUtility.hasObject(text)) {
 					if (!TestStepUtility.hasComponent(text)) {
-						return TestStepIssueTypes.NAME_COMPONENT.value + "\n\n" + TestStepIssueTypes.NAME_OBJECT.value;
+						return TestStepIssueTypes.TESTSTEP_NAME_COMPONENT.description + "\n\n"
+								+ TestStepIssueTypes.TESTSTEP_NAME_OBJECT.description;
 					} else {
-						return TestStepIssueTypes.NAME_OBJECT.value;
+						return TestStepIssueTypes.TESTSTEP_NAME_OBJECT.description;
 					}
 				} else {
 					// There can't be a predicate since it's invalid so is there at least state
 					if (!TestStepUtility.hasState(text)) {
 						if (!TestStepUtility.hasDetails(text)) {
-							return TestStepIssueTypes.NAME_STATE.value + "\n\n" + TestStepIssueTypes.NAME_DETAILS.value;
+							return TestStepIssueTypes.TESTSTEP_NAME_STATE.description + "\n\n"
+									+ TestStepIssueTypes.TESTSTEP_NAME_DETAILS.description;
 						} else {
-							return TestStepIssueTypes.NAME_STATE.value;
+							return TestStepIssueTypes.TESTSTEP_NAME_STATE.description;
 						}
 					} else {
 						// if there's a state but it's still invalid, the only part after that is time
 						// or "is as" which passes for "is present" etc
 						if (!TestStepUtility.hasTime(text)) {
-							return TestStepIssueTypes.NAME_TIME.value;
+							return TestStepIssueTypes.TESTSTEP_NAME_TIME.description;
 						} else {
 							// put all the error messages because there's something weird
-							return TestStepIssueTypes.NAME_COMPONENT.value + "\n\n"
-									+ TestStepIssueTypes.NAME_OBJECT.value + "\n\n"
-									+ TestStepIssueTypes.NAME_DETAILS.value + "\n\n"
-									+ TestStepIssueTypes.NAME_STATE.value + "\n\n" + TestStepIssueTypes.NAME_TIME.value;
+							return TestStepIssueTypes.TESTSTEP_NAME_COMPONENT.description + "\n\n"
+									+ TestStepIssueTypes.TESTSTEP_NAME_OBJECT.description + "\n\n"
+									+ TestStepIssueTypes.TESTSTEP_NAME_DETAILS.description + "\n\n"
+									+ TestStepIssueTypes.TESTSTEP_NAME_STATE.description + "\n\n"
+									+ TestStepIssueTypes.TESTSTEP_NAME_TIME.description;
 						}
 					}
 				}
-			} else {
-				// TODO this should be in a TestStepContainer validator
-				if (theTestStep.getParent().getTestStepList().getFirst().equals(theTestStep)) {
-					if (TestStepUtility.getComponent(theTestStep.getName()).isEmpty()) {
-						logger.debug("Exiting validateSyntax");
-						return TestStepIssueTypes.CHILD_STEP_NAME.value;
-					}
-				}
-				logger.debug("Exiting validateSyntax");
-				return "";
 			}
+			logger.debug("Exiting validateName");
+			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateError for step '{}': {}",
+			logger.error("Failed in validateName for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}
 
-	public static String validateReference(ITestStep theTestStep, ITestProject theProject) throws Exception {
-		// TODO instead of returning strings, return the enum alone, including enum for no error
-		logger.debug("Entering validateReferences for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+	public static String validateReference(ITestStep theTestStep) throws Exception {
+		// TODO instead of returning strings, return the enum alone, including enum for
+		// no error
+		logger.debug("Entering validateReference for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 
+			ArrayList<ITestStep> testStepList = theTestStep.getParent().getTestStepList();
+			if (testStepList != null) {
+				if (!testStepList.isEmpty()) {
+					if (TestStepUtility.getComponent(testStepList.getFirst().getName()).isEmpty()) {
+						logger.debug("Exiting validateReference");
+						return TestStepIssueTypes.TESTSTEP_REFERENCE_COMPONENT.description;
+					}
+				}
+			}
+
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
-			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject == null) {
-				return TestStepIssueTypes.REFERENCE_STEP_OBJECT.value;
+				logger.debug("Exiting validateReference");
+				return TestStepIssueTypes.TESTSTEP_REFERENCE_STEP_OBJECT.description;
 			}
 			IStepDefinition theStepDefinition = theStepObject
 					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
 			if (theStepDefinition == null) {
-				return TestStepIssueTypes.REFERENCE_STEP_DEFINITION.value;
+				logger.debug("Exiting validateReference");
+				return TestStepIssueTypes.TESTSTEP_REFERENCE_STEP_DEFINITION.description;
 			}
 			if (theTestStep.getTable() != null) {
 				if (!theTestStep.getTable().isEmpty()) {
 					if (theStepDefinition.getStepParameters(theTestStep.getTable().getFirst()) == null) {
-						return TestStepIssueTypes.REFERENCE_STEP_PARAMETERS.value;
+						logger.debug("Exiting validateReference");
+						return TestStepIssueTypes.TESTSTEP_REFERENCE_STEP_PARAMETERS.description;
 					}
 				}
 			}
@@ -98,14 +108,15 @@ public class TestStepIssueDetector {
 					ArrayList<String> headers = new ArrayList<String>();
 					headers.add("Content");
 					if (theStepDefinition.getStepParameters(headers) == null) {
-						return TestStepIssueTypes.REFERENCE_STEP_PARAMETERS.value;
+						logger.debug("Exiting validateReference");
+						return TestStepIssueTypes.TESTSTEP_REFERENCE_STEP_PARAMETERS.description;
 					}
 				}
 			}
-			logger.debug("Exiting validateReferences");
+			logger.debug("Exiting validateReference");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateReferences for step '{}': {}",
+			logger.error("Failed in validateReference for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
