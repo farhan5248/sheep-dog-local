@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
@@ -42,15 +43,18 @@ public class StepParametersImpl implements IStepParameters {
 	}
 
 	@Override
-	public ArrayList<ArrayList<String>> getTable() {
-		ArrayList<ArrayList<String>> newTable = new ArrayList<ArrayList<String>>();
+	public ITable getTable() {
+		ITable newTable = new TableImpl();
 		Table table = eObject.getTable();
 		if (table != null) {
 			for (Row r : table.getRowList()) {
-				ArrayList<String> newRow = new ArrayList<String>();
-				newTable.add(newRow);
+				RowImpl row = new RowImpl(r);
+				row.setParent(newTable);
+				newTable.getRowList().add(row);
 				for (Cell c : r.getCellList()) {
-					newRow.add(c.getName());
+					CellImpl cell = new CellImpl(c);
+					cell.setParent(row);
+					row.getCellList().add(cell);
 				}
 			}
 		}
@@ -75,7 +79,7 @@ public class StepParametersImpl implements IStepParameters {
 	}
 
 	@Override
-	public void setTable(ArrayList<ArrayList<String>> value) {
+	public void setTable(ITable value) {
 		// Not needed in this project
 	}
 

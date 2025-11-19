@@ -1,4 +1,4 @@
-package org.farhan.dsl.lang;
+package org.farhan.dsl.issues;
 
 public enum CellIssueTypes {
 

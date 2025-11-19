@@ -3,8 +3,11 @@ package org.farhan.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.farhan.common.CellImpl;
+import org.farhan.common.RowImpl;
 import org.farhan.common.StatementImpl;
 import org.farhan.common.TestObject;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
@@ -34,7 +37,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 
 			boolean found = false;
 			for (IStepParameters sp : stepDefinition.getStepParameterList()) {
-				if (cellsToString(sp.getTable().getFirst()).contains(keyMap.get("Parameters"))) {
+				if (cellsToString(sp.getTable().getRowList().getFirst().getCellList()).contains(keyMap.get("Parameters"))) {
 					found = true;
 				}
 			}
@@ -85,8 +88,8 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 		try {
 			IStepObject stepObject = testProject.createStepObject(keyMap.get("Object Name"));
 			IStepDefinition stepDefinition = stepObject.createStepDefinition(keyMap.get("Step Definition Name"));
-			ArrayList<String> parameters = new ArrayList<String>();
-			parameters.add(keyMap.get("Parameters"));
+			IRow parameters = new RowImpl();
+			parameters.getCellList().add(new CellImpl(keyMap.get("Parameters")));
 			stepDefinition.createStepParameters(parameters);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));

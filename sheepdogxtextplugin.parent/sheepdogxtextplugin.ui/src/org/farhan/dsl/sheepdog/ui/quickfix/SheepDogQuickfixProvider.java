@@ -3,6 +3,8 @@
  */
 package org.farhan.dsl.sheepdog.ui.quickfix;
 
+import java.util.ArrayList;
+
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.text.BadLocationException;
@@ -14,7 +16,10 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
+import org.farhan.dsl.issues.SheepDogIssueProposal;
+import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.sheepdog.generator.SheepDogGenerator;
+import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
 
 /**
@@ -25,43 +30,43 @@ import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
  */
 public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
-	@Fix(SheepDogValidator.TESTSTEP_REFERENCE_COMPONENT)
 	@Fix(SheepDogValidator.TESTSTEP_REFERENCE_STEP_OBJECT)
 	@Fix(SheepDogValidator.TESTSTEP_REFERENCE_STEP_DEFINITION)
 	@Fix(SheepDogValidator.TESTSTEP_REFERENCE_STEP_PARAMETERS)
-	public void createDefinition(final Issue issue, IssueResolutionAcceptor acceptor) {
+	public void fixTestStepReference(final Issue issue, IssueResolutionAcceptor acceptor) {
 
 		acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object", "upcase.png",
 				new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {
 						Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-						TestStep TestStep = (TestStep) resource
+						TestStep step = (TestStep) resource
 								.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-						(new SheepDogGenerator()).doGenerate(TestStep);
+						(new SheepDogGenerator()).doGenerate(step);
 					}
 				});
 
-		for (String issueData : issue.getData()) {
-			acceptor.accept(issue, "Rename object to: " + issueData, "Rename the object to an existing one",
-					"upcase.png", new IModification() {
-						public void apply(IModificationContext context) throws BadLocationException {
-							Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-							TestStep TestStep = (TestStep) resource
-									.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-							IXtextDocument xtextDocument = context.getXtextDocument();
-							xtextDocument.replace(issue.getOffset(), TestStep.getName().length(), issueData);
-						}
-					});
+		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+		TestStep step = (TestStep) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+		ArrayList<SheepDogIssueProposal> proposals = TestStepIssueResolver.proposeReference(new TestStepImpl(step));
+		for (SheepDogIssueProposal p : proposals) {
+			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
+				public void apply(IModificationContext context) throws BadLocationException {
+					Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+					TestStep step = (TestStep) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+					IXtextDocument xtextDocument = context.getXtextDocument();
+					xtextDocument.replace(issue.getOffset(), step.getName().length(), p.getValue());
+				}
+			});
 		}
 	}
 
 	@Fix(SheepDogValidator.TEST_SUITE_NAME)
 	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME)
 	@Fix(SheepDogValidator.TEST_STEP_NAME)
-	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
+	public void fixTestStepName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		// TODO get rid of upcase.png
 		// TODO this applies to more than one element, so duplicate it for each element
-		// type
+		// type and use that element's issue resolver
 		acceptor.accept(issue, "Capitalize name", "Capitalize the name", "upcase.png", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
 				IXtextDocument xtextDocument = context.getXtextDocument();

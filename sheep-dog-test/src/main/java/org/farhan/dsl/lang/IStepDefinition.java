@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public interface IStepDefinition {
 
-	IStepParameters createStepParameters(ArrayList<String> table);
+	// TODO keep until IText is added
+	IStepParameters createStepParametersTmp(ArrayList<String> table);
+	IStepParameters getStepParametersTmp(ArrayList<String> table);
+
+	IStepParameters createStepParameters(IRow row);
 
 	String getName();
 
@@ -16,7 +20,7 @@ public interface IStepDefinition {
 
 	ArrayList<IStepParameters> getStepParameterList();
 
-	IStepParameters getStepParameters(ArrayList<String> table);
+	IStepParameters getStepParameters(IRow row);
 
 	void setName(String value);
 

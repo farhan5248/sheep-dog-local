@@ -5,21 +5,19 @@ package org.farhan.dsl.sheepdog.ui.contentassist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.lang.*;
+import org.farhan.dsl.issues.*;
 import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
-import org.farhan.dsl.sheepdog.sheepDog.Text;
 import org.farhan.dsl.sheepdog.sheepDog.Then;
 import org.farhan.dsl.sheepdog.sheepDog.When;
 
@@ -41,13 +39,13 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeAnd_Table(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeAnd_Table(step, assignment, context, acceptor);
-		completeStepParameters(step, assignment, context, acceptor);
+		completeTableText(step, assignment, context, acceptor);
 	}
 
 	public void completeAnd_Text(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeAnd_Text(step, assignment, context, acceptor);
-		completeStepParameters(step, assignment, context, acceptor);
+		completeTableText(step, assignment, context, acceptor);
 	}
 
 	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
@@ -59,13 +57,13 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeGiven_Table(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_Table(step, assignment, context, acceptor);
-		completeStepParameters(step, assignment, context, acceptor);
+		completeTableText(step, assignment, context, acceptor);
 	}
 
 	public void completeGiven_Text(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_Text(step, assignment, context, acceptor);
-		completeStepParameters(step, assignment, context, acceptor);
+		completeTableText(step, assignment, context, acceptor);
 	}
 
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
@@ -75,12 +73,11 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 					new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 			ITestStep iTestStep = new TestStepImpl(step);
 			iTestStep.getParent().getParent().setParent(testProject);
-			for (Entry<String, SheepDogIssueProposal> p : TestStepIssueResolver.proposeName(iTestStep, testProject)
-					.entrySet()) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeName(iTestStep, testProject)) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
+						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
-					proposal.setAdditionalProposalInfo(p.getValue().getDocumentation());
+					proposal.setAdditionalProposalInfo(p.getDescription());
 					acceptor.accept(proposal);
 				}
 			}
@@ -89,38 +86,24 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		}
 	}
 
-	private void completeStepParameters(TestStep step, Assignment assignment, ContentAssistContext context,
+	private void completeTableText(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
 			ITestProject testProject = new TestProjectImpl(
 					new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 			ITestStep iTestStep = new TestStepImpl(step);
 			iTestStep.getParent().getParent().setParent(testProject);
-			for (Entry<String, SheepDogIssueProposal> p : TestStepIssueResolver
-					.proposeStepParameters(iTestStep, testProject).entrySet()) {
-				// TODO this is an ugly hack to make the proposals work. The |=== and ----
-				// shouldn't be hard-coded here.
-				String replacement;
-				if (p.getValue().getReplacement().contentEquals("| Content")) {
-					replacement = "+\n----\n" + "todo" + "\n----";
-				} else {
-					replacement = "+\n|===\n" + p.getValue().getReplacement() + "\n|===";
-				}
+			for (SheepDogIssueProposal p : RowIssueResolver.proposeCellList(iTestStep)) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-						replacement, p.getValue().getDisplay(), null, context);
+						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
-					proposal.setAdditionalProposalInfo(p.getValue().getDocumentation());
+					proposal.setAdditionalProposalInfo(p.getDescription());
 					acceptor.accept(proposal);
 				}
 			}
 		} catch (Exception e) {
 			logError(e, step.getName());
 		}
-	}
-
-	public void completeText_Name(Text model, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
 	}
 
 	public void completeThen_Name(Then step, Assignment assignment, ContentAssistContext context,
@@ -132,13 +115,13 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeThen_Table(Then step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeThen_Table(step, assignment, context, acceptor);
-		completeStepParameters(step, assignment, context, acceptor);
+		completeTableText(step, assignment, context, acceptor);
 	}
 
 	public void completeThen_Text(Then step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeThen_Text(step, assignment, context, acceptor);
-		completeStepParameters(step, assignment, context, acceptor);
+		completeTableText(step, assignment, context, acceptor);
 	}
 
 	public void completeWhen_Name(When step, Assignment assignment, ContentAssistContext context,
@@ -150,13 +133,13 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeWhen_Table(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeWhen_Table(step, assignment, context, acceptor);
-		completeStepParameters(step, assignment, context, acceptor);
+		completeTableText(step, assignment, context, acceptor);
 	}
 
 	public void completeWhen_Text(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeWhen_Text(step, assignment, context, acceptor);
-		completeStepParameters(step, assignment, context, acceptor);
+		completeTableText(step, assignment, context, acceptor);
 	}
 
 	private void logError(Exception e, String name) {

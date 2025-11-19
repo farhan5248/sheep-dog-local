@@ -24,11 +24,10 @@ public class StepObjectBuilder {
 			if (theStepDefinition == null) {
 				theStepDefinition = theStepObject.createStepDefinition(predicate);
 			}
-			// TODO create ITable
 			if (theTestStep.getTable() != null) {
-				if (!theTestStep.getTable().isEmpty()) {
-					if (theStepDefinition.getStepParameters(theTestStep.getTable().getFirst()) == null) {
-						theStepDefinition.createStepParameters(theTestStep.getTable().getFirst());
+				if (!theTestStep.getTable().getRowList().isEmpty()) {
+					if (theStepDefinition.getStepParameters(theTestStep.getTable().getRowList().getFirst()) == null) {
+						theStepDefinition.createStepParameters(theTestStep.getTable().getRowList().getFirst());
 					}
 				}
 			}
@@ -37,8 +36,8 @@ public class StepObjectBuilder {
 				if (!theTestStep.getText().isEmpty()) {
 					ArrayList<String> headers = new ArrayList<String>();
 					headers.add("Content");
-					if (theStepDefinition.getStepParameters(headers) == null) {
-						theStepDefinition.createStepParameters(headers);
+					if (theStepDefinition.getStepParametersTmp(headers) == null) {
+						theStepDefinition.createStepParametersTmp(headers);
 					}
 				}
 			}

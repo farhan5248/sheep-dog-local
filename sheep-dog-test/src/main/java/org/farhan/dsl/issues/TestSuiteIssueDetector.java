@@ -1,5 +1,6 @@
-package org.farhan.dsl.lang;
+package org.farhan.dsl.issues;
 
+import org.farhan.dsl.lang.ITestSuite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

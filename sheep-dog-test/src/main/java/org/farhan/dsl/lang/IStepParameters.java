@@ -10,14 +10,13 @@ public interface IStepParameters {
 
 	ArrayList<IStatement> getStatementList();
 
-	ArrayList<ArrayList<String>> getTable();
+	ITable getTable();
 
 	void setName(String value);
 
 	void setParent(IStepDefinition value);
-	
-	void setStatementList(ArrayList<IStatement> value);
-	
-	void setTable(ArrayList<ArrayList<String>> value);
 
+	void setStatementList(ArrayList<IStatement> value);
+
+	void setTable(ITable value);
 }

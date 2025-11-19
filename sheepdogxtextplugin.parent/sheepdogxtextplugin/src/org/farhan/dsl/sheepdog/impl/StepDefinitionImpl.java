@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
@@ -42,11 +44,11 @@ public class StepDefinitionImpl implements IStepDefinition {
 		return cellsAsString;
 	}
 
-	private String cellsToString(List<String> cells) {
+	private String cellsToString(ArrayList<ICell> arrayList) {
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
-		for (String cell : cells) {
-			sortedCells.add(cell);
+		for (ICell cell : arrayList) {
+			sortedCells.add(cell.getName());
 		}
 		Collections.sort(sortedCells);
 		for (String cell : sortedCells) {
@@ -56,7 +58,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public IStepParameters createStepParameters(ArrayList<String> table) {
+	public IStepParameters createStepParameters(IRow header) {
 		StepParameters parameters = SheepDogFactory.eINSTANCE.createStepParameters();
 		parameters.setName(Integer.toString(eObject.getStepParameterList().size() + 1));
 		eObject.getStepParameterList().add(parameters);
@@ -64,16 +66,16 @@ public class StepDefinitionImpl implements IStepDefinition {
 		parameters.setTable(SheepDogFactory.eINSTANCE.createTable());
 		Row row = SheepDogFactory.eINSTANCE.createRow();
 		parameters.getTable().getRowList().add(row);
-		if (table == null) {
+		if (header == null) {
 			// TODO there's no automated test for this..
 			// This is a docstring and also the abuse of this method :P
 			Cell cell = SheepDogFactory.eINSTANCE.createCell();
 			cell.setName("Content");
 			row.getCellList().add(cell);
 		} else {
-			for (String srcCell : table) {
+			for (ICell srcCell : header.getCellList()) {
 				Cell cell = SheepDogFactory.eINSTANCE.createCell();
-				cell.setName(srcCell);
+				cell.setName(srcCell.getName());
 				row.getCellList().add(cell);
 			}
 		}
@@ -120,10 +122,10 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public IStepParameters getStepParameters(ArrayList<String> headers) {
+	public IStepParameters getStepParameters(IRow headers) {
 		for (StepParameters sp : eObject.getStepParameterList()) {
 			String spString = cellsToString(sp.getTable().getRowList().getFirst().getCellList(), true);
-			String headersString = cellsToString(headers);
+			String headersString = cellsToString(headers.getCellList());
 			if (spString.contentEquals(headersString)) {
 				StepParametersImpl stepParameters = new StepParametersImpl(sp);
 				stepParameters.setParent(this);
@@ -161,6 +163,18 @@ public class StepDefinitionImpl implements IStepDefinition {
 	public EObject getEObject() {
 		// TODO add this to all interfaces
 		return eObject;
+	}
+
+	@Override
+	public IStepParameters createStepParametersTmp(ArrayList<String> table) {
+		// TODO delete after IText creation
+		return null;
+	}
+
+	@Override
+	public IStepParameters getStepParametersTmp(ArrayList<String> table) {
+		// TODO delete after IText creation
+		return null;
 	}
 
 }

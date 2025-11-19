@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
+import org.farhan.dsl.issues.SheepDogIssueProposal;
 import org.farhan.objects.xtext.QuickfixDialog;
 import org.junit.jupiter.api.Assertions;
 
@@ -15,9 +16,9 @@ public class QuickfixDialogImpl extends TestObject implements QuickfixDialog {
 	public void assertMessage(HashMap<String, String> keyMap) {
 
 		String message = "";
-		for (Object alternateObject : MockIDE.getAlternateObjects()) {
-			if (alternateObject.toString().contentEquals(keyMap.get("Message"))) {
-				message = alternateObject.toString();
+		for (SheepDogIssueProposal p : MockIDE.getAlternateObjects()) {
+			if (p.getValue().contentEquals(keyMap.get("Message"))) {
+				message = p.getValue();
 				break;
 			}
 		}

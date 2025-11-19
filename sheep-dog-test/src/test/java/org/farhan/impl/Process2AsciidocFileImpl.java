@@ -1,9 +1,12 @@
 package org.farhan.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.farhan.common.CellImpl;
+import org.farhan.common.RowImpl;
+import org.farhan.common.TableImpl;
 import org.farhan.common.TestObject;
+import org.farhan.dsl.lang.ICell;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;
 import io.cucumber.guice.ScenarioScoped;
 
@@ -20,10 +23,14 @@ public class Process2AsciidocFileImpl extends TestObject implements Process2Asci
 
 		// this can be called before the step is created. I probably should enforce an
 		// order when going through the attributes to select methods in this class
-		stepParametersTable = new ArrayList<ArrayList<String>>();
-		stepParametersTable.add(new ArrayList<String>());
+		stepParametersTable = new TableImpl();
+		RowImpl row = new RowImpl();
+		row.setParent(stepParametersTable);
+		stepParametersTable.getRowList().add(row);
 		for (String h : keyMap.get("Headers").split("\\|")) {
-			stepParametersTable.getFirst().add(h);
+			ICell cell = new CellImpl(h);
+			cell.setParent(row);
+			row.getCellList().add(cell);
 		}
 	}
 

@@ -1,7 +1,6 @@
 package org.farhan.common;
 
-import java.util.ArrayList;
-
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 
@@ -9,11 +8,10 @@ public class TestStepImpl implements ITestStep {
 
 	private String name;
 	private ITestStepContainer testStepContainer;
-	private ArrayList<ArrayList<String>> theTable;
+	private ITable theTable;
 
 	public TestStepImpl(String value) {
 		name = value;
-		theTable = new ArrayList<ArrayList<String>>();
 	}
 
 	@Override
@@ -33,7 +31,7 @@ public class TestStepImpl implements ITestStep {
 	}
 
 	@Override
-	public ArrayList<ArrayList<String>> getTable() {
+	public ITable getTable() {
 		return theTable;
 	}
 
@@ -60,7 +58,7 @@ public class TestStepImpl implements ITestStep {
 	}
 
 	@Override
-	public void setTable(ArrayList<ArrayList<String>> value) {
+	public void setTable(ITable value) {
 		theTable = value;
 	}
 

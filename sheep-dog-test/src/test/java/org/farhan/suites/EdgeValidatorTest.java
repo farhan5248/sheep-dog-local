@@ -1,6 +1,6 @@
 package org.farhan.suites;
 
-import org.farhan.dsl.lang.TestStepIssueDetector;
+import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

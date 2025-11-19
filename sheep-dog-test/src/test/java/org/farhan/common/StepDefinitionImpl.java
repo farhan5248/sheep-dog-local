@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
@@ -21,11 +23,11 @@ public class StepDefinitionImpl implements IStepDefinition {
 		this.statementList = new ArrayList<IStatement>();
 	}
 
-	private String cellsToString(List<String> cells) {
+	private String cellsToString(ArrayList<ICell> cells) {
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
-		for (String cell : cells) {
-			sortedCells.add(cell);
+		for (ICell cell : cells) {
+			sortedCells.add(cell.getName());
 		}
 		Collections.sort(sortedCells);
 		for (String cell : sortedCells) {
@@ -35,10 +37,10 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public IStepParameters createStepParameters(ArrayList<String> table) {
-		IStepParameters stepParameters = getStepParameters(table);
+	public IStepParameters createStepParameters(IRow row) {
+		IStepParameters stepParameters = getStepParameters(row);
 		if (stepParameters == null) {
-			stepParameters = new StepParametersImpl(table);
+			stepParameters = new StepParametersImpl(row);
 		}
 		stepParameters.setParent(this);
 		stepParametersList.add(stepParameters);
@@ -74,9 +76,10 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public IStepParameters getStepParameters(ArrayList<String> table) {
+	public IStepParameters getStepParameters(IRow row) {
 		for (IStepParameters sp : stepParametersList) {
-			if (cellsToString(table).contentEquals(cellsToString(sp.getTable().getFirst()))) {
+			if (cellsToString(row.getCellList())
+					.contentEquals(cellsToString(sp.getTable().getRowList().getFirst().getCellList()))) {
 				return sp;
 			}
 		}
@@ -106,6 +109,16 @@ public class StepDefinitionImpl implements IStepDefinition {
 	@Override
 	public void setStepParametersList(ArrayList<IStepParameters> value) {
 		this.stepParametersList = value;
+	}
+
+	@Override
+	public IStepParameters createStepParametersTmp(ArrayList<String> table) {
+		return null;
+	}
+
+	@Override
+	public IStepParameters getStepParametersTmp(ArrayList<String> table) {
+		return null;
 	}
 
 }

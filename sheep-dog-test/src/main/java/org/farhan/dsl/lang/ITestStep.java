@@ -1,7 +1,5 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
-
 public interface ITestStep {
 
 	String getName();
@@ -10,7 +8,7 @@ public interface ITestStep {
 
 	ITestStepContainer getParent();
 
-	ArrayList<ArrayList<String>> getTable();
+	ITable getTable();
 
 	String getText();
 
@@ -19,9 +17,9 @@ public interface ITestStep {
 	void setNameLong(String value);
 
 	void setParent(ITestStepContainer value);
-	
-	void setTable(ArrayList<ArrayList<String>> value);
-	
+
+	void setTable(ITable value);
+
 	void setText(String value);
 
 }

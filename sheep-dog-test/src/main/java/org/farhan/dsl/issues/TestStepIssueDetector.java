@@ -1,7 +1,11 @@
-package org.farhan.dsl.lang;
+package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,7 +86,6 @@ public class TestStepIssueDetector {
 					}
 				}
 			}
-
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject == null) {
@@ -95,21 +98,14 @@ public class TestStepIssueDetector {
 				logger.debug("Exiting validateReference");
 				return TestStepIssueTypes.TESTSTEP_REFERENCE_STEP_DEFINITION.description;
 			}
-			if (theTestStep.getTable() != null) {
-				if (!theTestStep.getTable().isEmpty()) {
-					if (theStepDefinition.getStepParameters(theTestStep.getTable().getFirst()) == null) {
-						logger.debug("Exiting validateReference");
-						return TestStepIssueTypes.TESTSTEP_REFERENCE_STEP_PARAMETERS.description;
-					}
-				}
-			}
+			
 			if (theTestStep.getText() != null) {
 				if (!theTestStep.getText().isEmpty()) {
 					ArrayList<String> headers = new ArrayList<String>();
 					headers.add("Content");
-					if (theStepDefinition.getStepParameters(headers) == null) {
+					if (theStepDefinition.getStepParametersTmp(headers) == null) {
 						logger.debug("Exiting validateReference");
-						return TestStepIssueTypes.TESTSTEP_REFERENCE_STEP_PARAMETERS.description;
+						return RowIssueTypes.ROW_REFERENCE_CELL_LIST.description;
 					}
 				}
 			}

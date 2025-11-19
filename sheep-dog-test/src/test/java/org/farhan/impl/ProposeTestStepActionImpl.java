@@ -2,7 +2,7 @@ package org.farhan.impl;
 
 import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
-import org.farhan.dsl.lang.TestStepIssueResolver;
+import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.objects.xtext.ProposeTestStepAction;
 import org.junit.jupiter.api.Assertions;
 

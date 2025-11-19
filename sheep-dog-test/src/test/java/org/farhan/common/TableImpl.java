@@ -1,15 +1,13 @@
-package org.farhan.dsl.sheepdog.impl;
+package org.farhan.common;
 
 import java.util.ArrayList;
 
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.sheepdog.sheepDog.Table;
 
 public class TableImpl implements ITable {
 
-	private Table eObject;
 	private ArrayList<IRow> rowList;
 	private ITestStep parent;
 
@@ -25,10 +23,6 @@ public class TableImpl implements ITable {
 	@Override
 	public void setParent(ITestStep value) {
 		parent = value;
-	}
-
-	public TableImpl(Table table) {
-		this.eObject = table;
 	}
 
 	@Override

@@ -5,6 +5,7 @@ package org.farhan.dsl.sheepdog.validation;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
@@ -23,6 +24,7 @@ import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
+import org.farhan.dsl.issues.*;
 import org.farhan.dsl.lang.*;
 
 /**
@@ -76,7 +78,6 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				ITestStep iTestStep = new TestStepImpl(step);
 				String problems = TestStepIssueDetector.validateName(iTestStep);
 				if (!problems.isEmpty()) {
-					// TODO pass in the enum returned by validateSyntax instead of string
 					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME);
 				} else {
 
@@ -85,15 +86,31 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 					iTestStep.getParent().getParent().setParent(testProject);
 					problems = TestStepIssueDetector.validateReference(iTestStep);
 					if (!problems.isEmpty()) {
-
-						// TODO return String list instead of object array
-						Object[] alternateProposals = TestStepIssueResolver.proposeStepObject(iTestStep);
-						String[] alternates = new String[alternateProposals.length];
-						for (int i = 0; i < alternates.length; i++) {
-							alternates[i] = alternateProposals[i].toString();
-						}
-						
-						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems, alternates);
+						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems);
+					}
+				}
+			}
+		} catch (Exception e) {
+			logError(e, step.getName());
+		}
+	}
+	
+	@Check(CheckType.EXPENSIVE)
+	public void checkRow(Row row) {
+		TestStep step = (TestStep) row.eContainer().eContainer();
+		try {
+			if (step.getName() != null) {
+				ITestStep iTestStep = new TestStepImpl(step);
+				String problems = TestStepIssueDetector.validateName(iTestStep);
+				if (!problems.isEmpty()) {
+					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME);
+				} else {
+					ITestProject testProject = new TestProjectImpl(
+							new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
+					iTestStep.getParent().getParent().setParent(testProject);
+					problems = TestStepIssueDetector.validateReference(iTestStep);
+					if (!problems.isEmpty()) {
+						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems);
 					}
 				}
 			}
@@ -103,7 +120,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkRow(Cell cell) {
+	public void checkCell(Cell cell) {
 		// TODO validate that each row should have the max number of columns
 		// TODO make tests for this
 		if (cell != null) {
@@ -114,7 +131,6 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 			iRow.setParent(iTable);
 			String problems = CellIssueDetector.validateName(iCell);
 			if (!problems.isEmpty()) {
-				// TODO pass in the enum returned by validateName instead of string
 				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME);
 			}
 		}

@@ -1,9 +1,11 @@
-package org.farhan.dsl.lang;
+package org.farhan.dsl.issues;
 
 public enum TestStepIssueTypes {
 
-	// TODO in the future this will just be component, object, predicate
-	// (details+state+time)
+	// TODO all of these are not needed because they're basically to do with empty
+	// value proposals, not incomplete or invalid values. For now, because name has
+	// so many rules this applies because the name token has a value set and so it's
+	// examined for issues
 
 	TESTSTEP_NAME_COMPONENT("TESTSTEP_NAME_COMPONENT",
 			"Every test case must have at least one component specified."
@@ -39,22 +41,21 @@ public enum TestStepIssueTypes {
 					+ "\nExamples are: \"after the next day\" or \"on time\""
 					+ "\nThe time endings are: early, late, on time, at, before, after, in, on."),
 
+	// TODO these need to be TESTSTEP_COMPONENT, OBJECT, PREDICATE
+	// They are for issues with a token value, in this case, the component, object
+	// or predicate not existing
 	TESTSTEP_REFERENCE_COMPONENT("TESTSTEP_REFERENCE_COMPONENT", "The first step must have a component"),
 
 	TESTSTEP_REFERENCE_STEP_OBJECT("TESTSTEP_REFERENCE_STEP_OBJECT",
 			"The step object file doesn't exist for the component"),
 
 	TESTSTEP_REFERENCE_STEP_DEFINITION("TESTSTEP_REFERENCE_STEP_DEFINITION",
-			"The step definition doesn't exist for the step object"),
-
-	TESTSTEP_REFERENCE_STEP_PARAMETERS("TESTSTEP_REFERENCE_STEP_PARAMETERS",
-			"The step parameters don't exist for the step definition");
+			"The step definition doesn't exist for the step object");
 
 	public final String value;
 	public final String description;
 
 	TestStepIssueTypes(String value, String description) {
-		// TODO swap value and description
 		this.value = value;
 		this.description = description;
 	}

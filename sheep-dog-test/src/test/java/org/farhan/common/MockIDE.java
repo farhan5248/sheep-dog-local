@@ -1,19 +1,20 @@
 package org.farhan.common;
 
-import java.util.TreeMap;
-import org.farhan.dsl.lang.SheepDogIssueProposal;
+import java.util.ArrayList;
+
+import org.farhan.dsl.issues.SheepDogIssueProposal;
 
 public class MockIDE {
 
-	private static TreeMap<String, SheepDogIssueProposal> proposalMap;
+	private static ArrayList<SheepDogIssueProposal> proposalMap;
 	private static String validationMessage;
-	private static Object[] alternateObjects;
+	private static ArrayList<SheepDogIssueProposal> alternateObjects;
 
-	public static Object[] getAlternateObjects() {
+	public static ArrayList<SheepDogIssueProposal> getAlternateObjects() {
 		return alternateObjects;
 	}
 
-	public static TreeMap<String, SheepDogIssueProposal> getProposals() {
+	public static ArrayList<SheepDogIssueProposal> getProposals() {
 		return proposalMap;
 	}
 
@@ -21,11 +22,11 @@ public class MockIDE {
 		return validationMessage;
 	}
 
-	public static void setAlternateObjects(Object[] newAlternateObjects) {
+	public static void setAlternateObjects(ArrayList<SheepDogIssueProposal> newAlternateObjects) {
 		alternateObjects = newAlternateObjects;
 	}
 
-	public static void setProposalList(TreeMap<String, SheepDogIssueProposal> proposalList) {
+	public static void setProposalList(ArrayList<SheepDogIssueProposal> proposalList) {
 		proposalMap = proposalList;
 	}
 

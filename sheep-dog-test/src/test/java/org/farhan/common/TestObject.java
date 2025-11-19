@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.io.PrintWriter;
 
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
@@ -29,7 +31,7 @@ public abstract class TestObject {
 
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
 
-	protected ArrayList<ArrayList<String>> stepParametersTable;
+	protected ITable stepParametersTable;
 
 	protected void addTestCaseStep(String stepName) {
 
@@ -46,6 +48,7 @@ public abstract class TestObject {
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
 			currentStep.setTable(stepParametersTable);
+			stepParametersTable.setParent(currentStep);
 			stepParametersTable = null;
 		}
 	}
@@ -64,6 +67,7 @@ public abstract class TestObject {
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
 			currentStep.setTable(stepParametersTable);
+			stepParametersTable.setParent(currentStep);
 			stepParametersTable = null;
 		}
 	}
@@ -98,11 +102,11 @@ public abstract class TestObject {
 		processInputOutputs(row, "assert", "");
 	}
 
-	protected String cellsToString(List<String> cells) {
+	protected String cellsToString(ArrayList<ICell> cells) {
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
-		for (String cell : cells) {
-			sortedCells.add(cell);
+		for (ICell cell : cells) {
+			sortedCells.add(cell.getName());
 		}
 		Collections.sort(sortedCells);
 		for (String cell : sortedCells) {

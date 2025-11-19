@@ -2,18 +2,20 @@ package org.farhan.common;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 
 public class StepParametersImpl implements IStepParameters {
 
-	private ArrayList<ArrayList<String>> table;
+	private ITable table;
 	private ArrayList<IStatement> statementList;
 
-	public StepParametersImpl(ArrayList<String> header) {
-		this.table = new ArrayList<ArrayList<String>>();
-		this.table.add(header);
+	public StepParametersImpl(IRow header) {
+		this.table = new TableImpl();
+		this.table.getRowList().add(header);
 		this.statementList = new ArrayList<IStatement>();
 	}
 
@@ -35,7 +37,7 @@ public class StepParametersImpl implements IStepParameters {
 	}
 
 	@Override
-	public ArrayList<ArrayList<String>> getTable() {
+	public ITable getTable() {
 		return table;
 	}
 
@@ -58,7 +60,7 @@ public class StepParametersImpl implements IStepParameters {
 	}
 
 	@Override
-	public void setTable(ArrayList<ArrayList<String>> value) {
+	public void setTable(ITable value) {
 		this.table = value;
 	}
 

@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.farhan.dsl.types.TestStepAttachmentTypes;
+import org.farhan.dsl.types.TestStepComponentTypes;
+import org.farhan.dsl.types.TestStepDetailTypes;
+import org.farhan.dsl.types.TestStepObjectEdgeTypes;
+import org.farhan.dsl.types.TestStepObjectVertexTypes;
+import org.farhan.dsl.types.TestStepStateModalityTypes;
+import org.farhan.dsl.types.TestStepTimeTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
