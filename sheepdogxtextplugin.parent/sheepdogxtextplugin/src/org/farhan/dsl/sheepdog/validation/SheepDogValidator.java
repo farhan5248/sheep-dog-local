@@ -42,7 +42,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String TESTSTEP_REFERENCE_COMPONENT = "TESTSTEP_REFERENCE_COMPONENT";
 	public static final String TESTSTEP_REFERENCE_STEP_OBJECT = "TESTSTEP_REFERENCE_STEP_OBJECT";
 	public static final String TESTSTEP_REFERENCE_STEP_DEFINITION = "TESTSTEP_REFERENCE_STEP_DEFINITION";
-	public static final String TESTSTEP_REFERENCE_STEP_PARAMETERS = "TESTSTEP_REFERENCE_STEP_PARAMETERS";
+	public static final String ROW_REFERENCE_CELL_LIST = "ROW_REFERENCE_CELL_LIST";
 	// TODO leave this as 1 until name is split into 3 parts
 	public static final String TEST_STEP_NAME = "TEST_STEP_NAME";
 
@@ -95,9 +95,10 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 								// eContainer. If the getParent method is called and it hasn't been set yet, it
 								// can create a new reference and set it then, same for getting it. Two Impl
 								// classes are equal if the eObjects they point to are equal
+								// TODO this should be in its own EXPENSIVE checkRow methods
 								row.setParent(new TableImpl(step.getTable()));
 								row.getParent().getRowList().add(row);
-								problems = RowIssueDetector.validateReference(row);
+								problems = RowIssueDetector.validateCellList(row);
 							}
 						}
 					}

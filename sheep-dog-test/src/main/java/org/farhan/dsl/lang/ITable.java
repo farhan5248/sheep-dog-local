@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public interface ITable {
 	// TODO, what should getParent return? for now TestStepContainer
 
-	ITestStep getParent();
+	Object getParent();
 
-	void setParent(ITestStep value);
+	void setParent(Object value);
+
+	IRow getRow(int index);
 
 	ArrayList<IRow> getRowList();
 

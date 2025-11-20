@@ -12,22 +12,22 @@ public class RowIssueDetector {
 
 	private static final Logger logger = LoggerFactory.getLogger(RowIssueDetector.class);
 
-	public static String validateReference(IRow theRow) throws Exception {
-		logger.debug("Entering validateReference");
+	public static String validateCellList(IRow theRow) throws Exception {
+		logger.debug("Entering validateCellList");
 		try {
-			ITestStep theTestStep = theRow.getParent().getParent();
+			ITestStep theTestStep = (ITestStep) theRow.getParent().getParent();
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			IStepDefinition theStepDefinition = theStepObject
 					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
 			if (theStepDefinition.getStepParameters(theTestStep.getTable().getRowList().getFirst()) == null) {
-				logger.debug("Exiting validateReference");
+				logger.debug("Exiting validateCellList");
 				return RowIssueTypes.ROW_REFERENCE_CELL_LIST.description;
 			}
-			logger.debug("Exiting validateReference");
+			logger.debug("Exiting validateCellList");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateReference", e);
+			logger.error("Failed in validateCellList", e);
 			throw e;
 		}
 	}

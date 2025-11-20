@@ -122,4 +122,46 @@ public class StepObjectImpl implements IStepObject {
 		return os.toString();
 	}
 
+	@Override
+	public String getResourceName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setResourceName(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getNameLong() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IStatement getStatement(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IStatement getStatement(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IStepDefinition getStepDefinition(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNameLong(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

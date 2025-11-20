@@ -9,11 +9,11 @@ public interface ITestCase extends ITestStepContainer {
 	// or a String for testing in this one
 	ITestStep createTestStep(String value);
 
-	ArrayList<String> getTags();
+	ITestData getTestData(int index);
+
+	ITestData getTestData(String name);
 
 	ArrayList<ITestData> getTestDataList();
-
-	void setTags(ArrayList<String> value);
 
 	void setTestDataList(ArrayList<ITestData> value);
 

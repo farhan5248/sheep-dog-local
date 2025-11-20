@@ -2,7 +2,7 @@ package org.farhan.dsl.lang;
 
 import java.util.ArrayList;
 
-public interface ITestSuite {
+public interface ITestSuite extends IModel {
 
 	ITestCase createTestCase(String name);
 
@@ -10,15 +10,17 @@ public interface ITestSuite {
 
 	String getName();
 
+	String getNameLong();
+
 	ITestProject getParent();
 
-	String getQualifiedName();
+	IStatement getStatement(int index);
+
+	IStatement getStatement(String name);
 
 	ArrayList<IStatement> getStatementList();
 
-	ArrayList<String> getTags();
-
-	ITestSetup getTestSetup();
+	ITestStepContainer getTestStepContainer(int index);
 
 	ITestStepContainer getTestStepContainer(String name);
 
@@ -26,13 +28,11 @@ public interface ITestSuite {
 
 	void setName(String value);
 
+	void setNameLong(String value);
+
 	void setParent(ITestProject value);
 
-	void setQualifiedName(String value);
-
 	void setStatementList(ArrayList<IStatement> value);
-
-	void setTags(ArrayList<String> value);
 
 	void setTestSetup(ITestSetup value);
 

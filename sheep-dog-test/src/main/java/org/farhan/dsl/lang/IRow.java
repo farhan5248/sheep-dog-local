@@ -7,6 +7,10 @@ public interface IRow {
 
 	void setParent(ITable value);
 
+	ICell getCell(int index);
+
+	ICell getCell(String name);
+
 	ArrayList<ICell> getCellList();
 
 	void setCellList(ArrayList<ICell> value);

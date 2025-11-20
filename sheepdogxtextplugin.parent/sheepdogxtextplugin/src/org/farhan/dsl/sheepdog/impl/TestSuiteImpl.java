@@ -59,18 +59,6 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public ArrayList<String> getTags() {
-		// Not needed in this project
-		return null;
-	}
-
-	@Override
-	public ITestSetup getTestSetup() {
-		// Not needed in this project
-		return null;
-	}
-
-	@Override
 	public ITestStepContainer getTestStepContainer(String name) {
 
 		for (TestStepContainer t : eObject.getTestStepContainerList()) {
@@ -118,11 +106,6 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public void setTags(ArrayList<String> value) {
-		// Not needed in this project
-	}
-
-	@Override
 	public void setTestSetup(ITestSetup value) {
 		// Not needed in this project
 	}
@@ -130,6 +113,48 @@ public class TestSuiteImpl implements ITestSuite {
 	@Override
 	public void setTestStepContainerList(ArrayList<ITestStepContainer> value) {
 		// Not needed in this project
+	}
+
+	@Override
+	public String getResourceName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setResourceName(String value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String getNameLong() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IStatement getStatement(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IStatement getStatement(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ITestStepContainer getTestStepContainer(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNameLong(String value) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

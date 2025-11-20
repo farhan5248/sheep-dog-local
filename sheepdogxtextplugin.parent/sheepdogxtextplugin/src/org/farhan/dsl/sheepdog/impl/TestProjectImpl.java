@@ -151,4 +151,16 @@ public class TestProjectImpl implements ITestProject {
 		// Not needed in this project
 	}
 
+	@Override
+	public IStepObject getStepObject(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ITestSuite getTestSuite(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

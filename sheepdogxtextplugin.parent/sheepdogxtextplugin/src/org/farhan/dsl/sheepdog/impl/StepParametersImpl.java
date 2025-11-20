@@ -83,4 +83,28 @@ public class StepParametersImpl implements IStepParameters {
 		// Not needed in this project
 	}
 
+	@Override
+	public String getNameLong() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IStatement getStatement(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IStatement getStatement(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNameLong(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

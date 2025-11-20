@@ -100,7 +100,7 @@ public class TestStepIssueDetector {
 			}
 			
 			if (theTestStep.getText() != null) {
-				if (!theTestStep.getText().isEmpty()) {
+				if (!theTestStep.getText().getName().isEmpty()) {
 					ArrayList<String> headers = new ArrayList<String>();
 					headers.add("Content");
 					if (theStepDefinition.getStepParametersTmp(headers) == null) {

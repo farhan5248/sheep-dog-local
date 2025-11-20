@@ -6,13 +6,21 @@ public interface IStepParameters {
 
 	String getName();
 
+	String getNameLong();
+
 	IStepDefinition getParent();
+
+	IStatement getStatement(int index);
+
+	IStatement getStatement(String name);
 
 	ArrayList<IStatement> getStatementList();
 
 	ITable getTable();
 
 	void setName(String value);
+
+	void setNameLong(String value);
 
 	void setParent(IStepDefinition value);
 

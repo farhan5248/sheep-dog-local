@@ -3,6 +3,7 @@ package org.farhan.common;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
+import org.farhan.dsl.lang.IText;
 
 public class TestStepImpl implements ITestStep {
 
@@ -36,7 +37,7 @@ public class TestStepImpl implements ITestStep {
 	}
 
 	@Override
-	public String getText() {
+	public IText getText() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -63,7 +64,7 @@ public class TestStepImpl implements ITestStep {
 	}
 
 	@Override
-	public void setText(String value) {
+	public void setText(IText value) {
 		// TODO Auto-generated method stub
 
 	}

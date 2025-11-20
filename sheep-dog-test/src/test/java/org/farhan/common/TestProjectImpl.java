@@ -106,4 +106,14 @@ public class TestProjectImpl implements ITestProject {
 		this.testSuiteList = testSuiteList;
 	}
 
+	@Override
+	public IStepObject getStepObject(int index) {
+		return stepObjectList.get(index);
+	}
+
+	@Override
+	public ITestSuite getTestSuite(int index) {
+		return testSuiteList.get(index);
+	}
+
 }

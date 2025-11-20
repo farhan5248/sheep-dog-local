@@ -36,4 +36,16 @@ public class RowImpl implements IRow {
 		cellList = value;
 	}
 
+	@Override
+	public ICell getCell(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ICell getCell(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

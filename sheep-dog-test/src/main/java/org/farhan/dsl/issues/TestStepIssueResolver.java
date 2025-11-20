@@ -120,7 +120,7 @@ public class TestStepIssueResolver {
 		TreeMap<String, SheepDogIssueProposal> proposals = new TreeMap<String, SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 		ArrayList<ITestStep> allSteps = new ArrayList<ITestStep>();
-		ITestSetup testSetup = theTestStep.getParent().getParent().getTestSetup();
+		ITestSetup testSetup = (ITestSetup) theTestStep.getParent().getParent().getTestStepContainer(0);
 		if (testSetup != null) {
 			if (testSetup.getTestStepList() != null) {
 				for (ITestStep t : testSetup.getTestStepList()) {

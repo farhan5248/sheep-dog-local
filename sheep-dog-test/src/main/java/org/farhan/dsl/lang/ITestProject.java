@@ -14,12 +14,16 @@ public interface ITestProject {
 
 	String getFileExtension();
 
+	IStepObject getStepObject(int index);
+
 	IStepObject getStepObject(String qualifiedName);
 
 	ArrayList<IStepObject> getStepObjectList();
 
 	// TODO move to helper, wrap around getStepObjectList();
 	ArrayList<IStepObject> getStepObjectList(String component);
+
+	ITestSuite getTestSuite(int index);
 
 	ITestSuite getTestSuite(String name);
 

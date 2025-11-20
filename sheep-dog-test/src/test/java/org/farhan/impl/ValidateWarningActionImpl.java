@@ -20,7 +20,7 @@ public class ValidateWarningActionImpl extends TestObject implements ValidateWar
 			String message = "";
 			message = TestStepIssueDetector.validateReference(currentStep);
 			if (currentStep.getTable() != null) {
-				message += RowIssueDetector.validateReference(currentStep.getTable().getRowList().getFirst());
+				message += RowIssueDetector.validateCellList(currentStep.getTable().getRowList().getFirst());
 			}			
 			MockIDE.setValidationMessage(message);
 			MockIDE.setAlternateObjects(TestStepIssueResolver.proposeReference(currentStep));

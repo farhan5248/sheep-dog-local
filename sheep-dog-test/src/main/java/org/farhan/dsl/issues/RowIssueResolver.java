@@ -40,7 +40,7 @@ public class RowIssueResolver {
 		SheepDogIssueProposal proposal;
 
 		if (theRow.getParent().getParent() instanceof ITestStep) {
-			ITestStep theTestStep = theRow.getParent().getParent();
+			ITestStep theTestStep = (ITestStep) theRow.getParent().getParent();
 			if (TestStepIssueDetector.isValid(theTestStep.getName())) {
 				String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 				IStepObject theStepObject = theTestStep.getParent().getParent().getParent()

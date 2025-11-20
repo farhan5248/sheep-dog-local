@@ -32,7 +32,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(SheepDogValidator.TESTSTEP_REFERENCE_STEP_OBJECT)
 	@Fix(SheepDogValidator.TESTSTEP_REFERENCE_STEP_DEFINITION)
-	@Fix(SheepDogValidator.TESTSTEP_REFERENCE_STEP_PARAMETERS)
+	@Fix(SheepDogValidator.ROW_REFERENCE_CELL_LIST)
 	public void fixTestStepReference(final Issue issue, IssueResolutionAcceptor acceptor) {
 
 		acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object", "upcase.png",
@@ -77,7 +77,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	}
 
 	@Fix(SheepDogValidator.CELL_NAME)
-	public void fixTable(final Issue issue, IssueResolutionAcceptor acceptor) {
+	public void fixCellName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Capitalize TestStep table name", "Capitalize the TestStep table name.", "upcase.png",
 				new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {

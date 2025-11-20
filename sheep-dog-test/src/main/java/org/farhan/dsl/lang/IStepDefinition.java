@@ -16,9 +16,17 @@ public interface IStepDefinition {
 
 	IStepObject getParent();
 
+	IStatement getStatement(int index);
+
+	IStatement getStatement(String name);
+
 	ArrayList<IStatement> getStatementList();
 
 	ArrayList<IStepParameters> getStepParameterList();
+
+	IStepParameters getStepParameters(int index);
+
+	IStepParameters getStepParameters(String name);
 
 	IStepParameters getStepParameters(IRow row);
 

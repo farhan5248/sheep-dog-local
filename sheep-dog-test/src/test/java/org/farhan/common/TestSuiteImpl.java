@@ -61,18 +61,6 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public ArrayList<String> getTags() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ITestSetup getTestSetup() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public ITestStepContainer getTestStepContainer(String name) {
 		for (ITestStepContainer tsc : this.testStepContainerList) {
 			if (tsc.getName().contentEquals(name)) {
@@ -111,12 +99,6 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public void setTags(ArrayList<String> value) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void setTestSetup(ITestSetup value) {
 		// TODO Auto-generated method stub
 
@@ -125,6 +107,48 @@ public class TestSuiteImpl implements ITestSuite {
 	@Override
 	public void setTestStepContainerList(ArrayList<ITestStepContainer> value) {
 		this.testStepContainerList = value;
+	}
+
+	@Override
+	public String getResourceName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setResourceName(String value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String getNameLong() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IStatement getStatement(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IStatement getStatement(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ITestStepContainer getTestStepContainer(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNameLong(String value) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

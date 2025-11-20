@@ -10,7 +10,7 @@ public interface ITestStep {
 
 	ITable getTable();
 
-	String getText();
+	IText getText();
 
 	void setName(String value);
 
@@ -20,6 +20,6 @@ public interface ITestStep {
 
 	void setTable(ITable value);
 
-	void setText(String value);
+	void setText(IText value);
 
 }
