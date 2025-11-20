@@ -12,7 +12,6 @@ public class RowImpl implements IRow {
 
 	private ITable parent;
 	private Row eObject;
-	private ArrayList<ICell> cellList;
 
 	public RowImpl(Row row) {
 		this.eObject = row;
@@ -25,17 +24,21 @@ public class RowImpl implements IRow {
 
 	@Override
 	public void setParent(ITable value) {
-		this.parent = parent;
+		this.parent = value;
 	}
 
 	@Override
 	public ArrayList<ICell> getCellList() {
-		return cellList;
+		ArrayList<ICell> cells = new ArrayList<ICell>();
+		for (Cell c : eObject.getCellList()) {
+			cells.add(new CellImpl(c));
+		}
+		return cells;
 	}
 
 	@Override
 	public void setCellList(ArrayList<ICell> value) {
-		this.cellList = value;
+		// Not needed for this implementation
 	}
 
 }

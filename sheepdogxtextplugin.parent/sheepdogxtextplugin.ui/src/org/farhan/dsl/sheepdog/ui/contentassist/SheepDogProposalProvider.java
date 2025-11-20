@@ -6,17 +6,21 @@ package org.farhan.dsl.sheepdog.ui.contentassist;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.lang.*;
 import org.farhan.dsl.issues.*;
+import org.farhan.dsl.sheepdog.impl.RowImpl;
 import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
+import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Then;
 import org.farhan.dsl.sheepdog.sheepDog.When;
@@ -36,34 +40,10 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		completeName(step, assignment, context, acceptor);
 	}
 
-	public void completeAnd_Table(And step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeAnd_Table(step, assignment, context, acceptor);
-		completeTableText(step, assignment, context, acceptor);
-	}
-
-	public void completeAnd_Text(And step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeAnd_Text(step, assignment, context, acceptor);
-		completeTableText(step, assignment, context, acceptor);
-	}
-
 	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_Name(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
-	}
-
-	public void completeGiven_Table(Given step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_Table(step, assignment, context, acceptor);
-		completeTableText(step, assignment, context, acceptor);
-	}
-
-	public void completeGiven_Text(Given step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_Text(step, assignment, context, acceptor);
-		completeTableText(step, assignment, context, acceptor);
 	}
 
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
@@ -86,14 +66,11 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		}
 	}
 
-	private void completeTableText(TestStep step, Assignment assignment, ContentAssistContext context,
+	public void completeRow_CellList(Row row, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		// TODO confirm the first arg is a Row
 		try {
-			ITestProject testProject = new TestProjectImpl(
-					new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
-			ITestStep iTestStep = new TestStepImpl(step);
-			iTestStep.getParent().getParent().setParent(testProject);
-			for (SheepDogIssueProposal p : RowIssueResolver.proposeCellList(iTestStep)) {
+			for (SheepDogIssueProposal p : RowIssueResolver.proposeCellList(new RowImpl(row))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
@@ -102,7 +79,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 				}
 			}
 		} catch (Exception e) {
-			logError(e, step.getName());
+			logError(e, "");
 		}
 	}
 
@@ -112,34 +89,10 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		completeName(step, assignment, context, acceptor);
 	}
 
-	public void completeThen_Table(Then step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeThen_Table(step, assignment, context, acceptor);
-		completeTableText(step, assignment, context, acceptor);
-	}
-
-	public void completeThen_Text(Then step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeThen_Text(step, assignment, context, acceptor);
-		completeTableText(step, assignment, context, acceptor);
-	}
-
 	public void completeWhen_Name(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeWhen_Name(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
-	}
-
-	public void completeWhen_Table(When step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeWhen_Table(step, assignment, context, acceptor);
-		completeTableText(step, assignment, context, acceptor);
-	}
-
-	public void completeWhen_Text(When step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeWhen_Text(step, assignment, context, acceptor);
-		completeTableText(step, assignment, context, acceptor);
 	}
 
 	private void logError(Exception e, String name) {

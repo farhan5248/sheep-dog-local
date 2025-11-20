@@ -17,6 +17,7 @@ public class RowImpl implements IRow {
 
 	@Override
 	public ITable getParent() {
+		// TODO set a parent if parent == null
 		return parent;
 	}
 

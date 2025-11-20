@@ -30,12 +30,7 @@ public class ProposeContentDialogImpl extends TestObject implements ProposeConte
 		boolean found = false;
 		for (SheepDogIssueProposal p : MockIDE.getProposals()) {
 			if (p.getId().equals(keyMap.get("Suggestion Name"))) {
-				if (p.getValue().startsWith("+\n|===\n") && p.getValue().endsWith("\n|===")) {
-					found = p.getValue().replace("\n", "").replace("+", "").replace("|===", "")
-							.contentEquals(keyMap.get("Suggestion"));
-				} else {
-					found = p.getValue().contentEquals(keyMap.get("Suggestion"));
-				}
+				found = p.getValue().contentEquals(keyMap.get("Suggestion"));
 				if (found) {
 					return;
 				}

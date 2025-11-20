@@ -80,37 +80,26 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				if (!problems.isEmpty()) {
 					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME);
 				} else {
-
 					ITestProject testProject = new TestProjectImpl(
 							new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 					iTestStep.getParent().getParent().setParent(testProject);
 					problems = TestStepIssueDetector.validateReference(iTestStep);
 					if (!problems.isEmpty()) {
 						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems);
-					}
-				}
-			}
-		} catch (Exception e) {
-			logError(e, step.getName());
-		}
-	}
-	
-	@Check(CheckType.EXPENSIVE)
-	public void checkRow(Row row) {
-		TestStep step = (TestStep) row.eContainer().eContainer();
-		try {
-			if (step.getName() != null) {
-				ITestStep iTestStep = new TestStepImpl(step);
-				String problems = TestStepIssueDetector.validateName(iTestStep);
-				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME);
-				} else {
-					ITestProject testProject = new TestProjectImpl(
-							new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
-					iTestStep.getParent().getParent().setParent(testProject);
-					problems = TestStepIssueDetector.validateReference(iTestStep);
-					if (!problems.isEmpty()) {
-						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems);
+					} else {
+						if (step.getTable() != null) {
+							if (!step.getTable().getRowList().isEmpty()) {
+								RowImpl row = new RowImpl(step.getTable().getRowList().getFirst());
+								// TODO maybe for this project, the parent relationship doesn't need to be set
+								// for anything other than TestSuite or StepObject. Everything else can use
+								// eContainer. If the getParent method is called and it hasn't been set yet, it
+								// can create a new reference and set it then, same for getting it. Two Impl
+								// classes are equal if the eObjects they point to are equal
+								row.setParent(new TableImpl(step.getTable()));
+								row.getParent().getRowList().add(row);
+								problems = RowIssueDetector.validateReference(row);
+							}
+						}
 					}
 				}
 			}

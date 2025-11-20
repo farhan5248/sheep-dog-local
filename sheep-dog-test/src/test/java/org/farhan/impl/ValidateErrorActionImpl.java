@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
+import org.farhan.common.TestStepImpl;
 import org.farhan.dsl.issues.TestStepIssueDetector;
-import org.farhan.dsl.lang.ITestStep;
 import org.farhan.objects.xtext.ValidateErrorAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -25,7 +25,7 @@ public class ValidateErrorActionImpl extends TestObject implements ValidateError
 
 	@Override
 	public void setSelectedStep(HashMap<String, String> keyMap) {
-		currentStep = (ITestStep) currentStep.getParent().getTestStepList()
+		currentStep = (TestStepImpl) currentStep.getParent().getTestStepList()
 				.get(Integer.valueOf(keyMap.get("Selected Step")) - 1);
 	}
 }

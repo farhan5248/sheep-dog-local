@@ -6,16 +6,16 @@ import org.farhan.dsl.issues.SheepDogIssueProposal;
 
 public class MockIDE {
 
-	private static ArrayList<SheepDogIssueProposal> proposalMap;
-	private static String validationMessage;
-	private static ArrayList<SheepDogIssueProposal> alternateObjects;
+	private static ArrayList<SheepDogIssueProposal> proposalList = new ArrayList<SheepDogIssueProposal>();
+	private static String validationMessage = "";
+	private static ArrayList<SheepDogIssueProposal> alternateObjects = new ArrayList<SheepDogIssueProposal>();
 
 	public static ArrayList<SheepDogIssueProposal> getAlternateObjects() {
 		return alternateObjects;
 	}
 
 	public static ArrayList<SheepDogIssueProposal> getProposals() {
-		return proposalMap;
+		return proposalList;
 	}
 
 	public static String getValidationMessage() {
@@ -27,7 +27,7 @@ public class MockIDE {
 	}
 
 	public static void setProposalList(ArrayList<SheepDogIssueProposal> proposalList) {
-		proposalMap = proposalList;
+		MockIDE.proposalList = proposalList;
 	}
 
 	public static void setValidationMessage(String message) {

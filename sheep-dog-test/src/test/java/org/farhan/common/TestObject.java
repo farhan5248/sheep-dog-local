@@ -19,7 +19,7 @@ import io.cucumber.datatable.DataTable;
 
 public abstract class TestObject {
 
-	protected static ITestStep currentStep;
+	protected static TestStepImpl currentStep;
 
 	public static ITestProject testProject;
 
@@ -43,7 +43,7 @@ public abstract class TestObject {
 		if (testCase == null) {
 			testCase = testSuite.createTestCase("");
 		}
-		currentStep = testCase.createTestStep(stepName);
+		currentStep = (TestStepImpl) testCase.createTestStep(stepName);
 		testCase.getTestStepList().add(currentStep);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
@@ -62,7 +62,7 @@ public abstract class TestObject {
 		if (testSetup == null) {
 			testSetup = testSuite.createTestSetup("");
 		}
-		currentStep = testSetup.createTestStep(stepName);
+		currentStep = (TestStepImpl) testSetup.createTestStep(stepName);
 		testSetup.getTestStepList().add(currentStep);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
