@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.farhan.dsl.issues.SheepDogBuilder;
 import org.farhan.dsl.lang.*;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
@@ -49,7 +50,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 			TestStepImpl iTestStep = new TestStepImpl(step);
 			iTestStep.getParent().getParent().setParent(testProject);
 			// TODO rename to add step definition and return StepObjectImpl
-			StepObjectImpl stepObjectImpl = (StepObjectImpl) StepObjectBuilder
+			StepObjectImpl stepObjectImpl = (StepObjectImpl) SheepDogBuilder
 					.generateStepDefinition(iTestStep, testProject).getParent();
 			testProject.putStepObject(stepObjectImpl);
 		} catch (Exception e) {

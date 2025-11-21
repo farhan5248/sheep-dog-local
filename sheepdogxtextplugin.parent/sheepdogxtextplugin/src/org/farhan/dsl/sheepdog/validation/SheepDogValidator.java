@@ -56,7 +56,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.NORMAL)
+	@Check(CheckType.FAST)
 	public void checkTestStepContainer(TestStepContainer theTestStepContainer) {
 		try {
 			ITestStepContainer iTestStepContainer = new TestStepContainerImpl(theTestStepContainer);

@@ -1,13 +1,18 @@
-package org.farhan.dsl.lang;
+package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class StepObjectBuilder {
+public class SheepDogBuilder {
 
-	private static final Logger logger = LoggerFactory.getLogger(StepObjectBuilder.class);
+	private static final Logger logger = LoggerFactory.getLogger(SheepDogBuilder.class);
 
 	public static IStepDefinition generateStepDefinition(ITestStep theTestStep, ITestProject theProject)
 			throws Exception {

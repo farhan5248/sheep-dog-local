@@ -14,7 +14,7 @@ public class TestSuiteIssueDetector {
 		try {
 			if (!Character.isUpperCase(theTestSuite.getName().charAt(0))) {
 				logger.debug("Exiting validateName");
-				return TestSuiteIssueTypes.TEST_SUITE_NAME.description;
+				return TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description;
 			}
 			logger.debug("Exiting validateName");
 			return "";

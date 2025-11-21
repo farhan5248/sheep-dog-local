@@ -22,7 +22,7 @@ public class RowIssueDetector {
 					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
 			if (theStepDefinition.getStepParameters(theTestStep.getTable().getRowList().getFirst()) == null) {
 				logger.debug("Exiting validateCellList");
-				return RowIssueTypes.ROW_REFERENCE_CELL_LIST.description;
+				return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
 			}
 			logger.debug("Exiting validateCellList");
 			return "";

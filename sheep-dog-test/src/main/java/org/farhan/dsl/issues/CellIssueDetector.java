@@ -17,7 +17,7 @@ public class CellIssueDetector {
 			if (row.getParent().getRowList().getFirst() == row) {
 				if (!Character.isUpperCase(theCell.getName().charAt(0))) {
 					logger.debug("Exiting validateName");
-					return CellIssueTypes.CELL_NAME.description;
+					return CellIssueTypes.CELL_NAME_ONLY.description;
 				}
 			}
 

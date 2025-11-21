@@ -2,13 +2,13 @@ package org.farhan.dsl.issues;
 
 public enum TestStepContainerIssueTypes {
 
-	TEST_STEP_CONTAINER_NAME("TEST_STEP_CONTAINER_NAME", "Name should start with a capital");
+	TEST_STEP_CONTAINER_NAME_ONLY("TEST_STEP_CONTAINER_NAME_ONLY", "Name should start with a capital");
 
-	public final String value;
+	public final String id;
 	public final String description;
 
 	TestStepContainerIssueTypes(String value, String description) {
-		this.value = value;
+		this.id = value;
 		this.description = description;
 	}
 }

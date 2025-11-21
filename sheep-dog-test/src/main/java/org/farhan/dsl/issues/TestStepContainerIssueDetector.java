@@ -15,7 +15,7 @@ public class TestStepContainerIssueDetector {
 		try {
 			if (!Character.isUpperCase(theTestStepContainer.getName().charAt(0))) {
 				logger.debug("Exiting validateName");
-				return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME.description;
+				return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
 			}
 			logger.debug("Exiting validateName");
 			return "";

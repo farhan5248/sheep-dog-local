@@ -27,37 +27,37 @@ public class TestStepIssueDetector {
 			if (!isValid(text)) {
 				logger.debug("Exiting validateName");
 				if (text == null) {
-					return TestStepIssueTypes.TESTSTEP_NAME_COMPONENT.description;
+					return TestStepIssueTypes.TEST_STEP_NAME_COMPONENT_ONLY.description;
 				}
 
 				if (!TestStepUtility.hasObject(text)) {
 					if (!TestStepUtility.hasComponent(text)) {
-						return TestStepIssueTypes.TESTSTEP_NAME_COMPONENT.description + "\n\n"
-								+ TestStepIssueTypes.TESTSTEP_NAME_OBJECT.description;
+						return TestStepIssueTypes.TEST_STEP_NAME_COMPONENT_ONLY.description + "\n\n"
+								+ TestStepIssueTypes.TEST_STEP_NAME_OBJECT_ONLY.description;
 					} else {
-						return TestStepIssueTypes.TESTSTEP_NAME_OBJECT.description;
+						return TestStepIssueTypes.TEST_STEP_NAME_OBJECT_ONLY.description;
 					}
 				} else {
 					// There can't be a predicate since it's invalid so is there at least state
 					if (!TestStepUtility.hasState(text)) {
 						if (!TestStepUtility.hasDetails(text)) {
-							return TestStepIssueTypes.TESTSTEP_NAME_STATE.description + "\n\n"
-									+ TestStepIssueTypes.TESTSTEP_NAME_DETAILS.description;
+							return TestStepIssueTypes.TEST_STEP_NAME_STATE_ONLY.description + "\n\n"
+									+ TestStepIssueTypes.TEST_STEP_NAME_DETAILS_ONLY.description;
 						} else {
-							return TestStepIssueTypes.TESTSTEP_NAME_STATE.description;
+							return TestStepIssueTypes.TEST_STEP_NAME_STATE_ONLY.description;
 						}
 					} else {
 						// if there's a state but it's still invalid, the only part after that is time
 						// or "is as" which passes for "is present" etc
 						if (!TestStepUtility.hasTime(text)) {
-							return TestStepIssueTypes.TESTSTEP_NAME_TIME.description;
+							return TestStepIssueTypes.TEST_STEP_NAME_TIME_ONLY.description;
 						} else {
 							// put all the error messages because there's something weird
-							return TestStepIssueTypes.TESTSTEP_NAME_COMPONENT.description + "\n\n"
-									+ TestStepIssueTypes.TESTSTEP_NAME_OBJECT.description + "\n\n"
-									+ TestStepIssueTypes.TESTSTEP_NAME_DETAILS.description + "\n\n"
-									+ TestStepIssueTypes.TESTSTEP_NAME_STATE.description + "\n\n"
-									+ TestStepIssueTypes.TESTSTEP_NAME_TIME.description;
+							return TestStepIssueTypes.TEST_STEP_NAME_COMPONENT_ONLY.description + "\n\n"
+									+ TestStepIssueTypes.TEST_STEP_NAME_OBJECT_ONLY.description + "\n\n"
+									+ TestStepIssueTypes.TEST_STEP_NAME_DETAILS_ONLY.description + "\n\n"
+									+ TestStepIssueTypes.TEST_STEP_NAME_STATE_ONLY.description + "\n\n"
+									+ TestStepIssueTypes.TEST_STEP_NAME_TIME_ONLY.description;
 						}
 					}
 				}
@@ -82,7 +82,7 @@ public class TestStepIssueDetector {
 				if (!testStepList.isEmpty()) {
 					if (TestStepUtility.getComponent(testStepList.getFirst().getName()).isEmpty()) {
 						logger.debug("Exiting validateReference");
-						return TestStepIssueTypes.TESTSTEP_REFERENCE_COMPONENT.description;
+						return TestStepIssueTypes.TEST_STEP_NAME_COMPONENT_WORKSPACE.description;
 					}
 				}
 			}
@@ -90,13 +90,13 @@ public class TestStepIssueDetector {
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject == null) {
 				logger.debug("Exiting validateReference");
-				return TestStepIssueTypes.TESTSTEP_REFERENCE_STEP_OBJECT.description;
+				return TestStepIssueTypes.TEST_STEP_NAME_STEP_OBJECT_WORKSPACE.description;
 			}
 			IStepDefinition theStepDefinition = theStepObject
 					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
 			if (theStepDefinition == null) {
 				logger.debug("Exiting validateReference");
-				return TestStepIssueTypes.TESTSTEP_REFERENCE_STEP_DEFINITION.description;
+				return TestStepIssueTypes.TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE.description;
 			}
 			
 			if (theTestStep.getText() != null) {
@@ -105,7 +105,7 @@ public class TestStepIssueDetector {
 					headers.add("Content");
 					if (theStepDefinition.getStepParametersTmp(headers) == null) {
 						logger.debug("Exiting validateReference");
-						return RowIssueTypes.ROW_REFERENCE_CELL_LIST.description;
+						return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
 					}
 				}
 			}

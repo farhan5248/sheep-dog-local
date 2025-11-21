@@ -15,11 +15,21 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
+import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
+import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
+import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
+import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.SheepDogIssueProposal;
 import org.farhan.dsl.issues.TestStepIssueResolver;
+import org.farhan.dsl.issues.TestSuiteIssueResolver;
+import org.farhan.dsl.issues.TestStepContainerIssueResolver;
+import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.sheepdog.generator.SheepDogGenerator;
+import org.farhan.dsl.sheepdog.impl.CellImpl;
+import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
+import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
 import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
 
 /**
@@ -47,48 +57,62 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
 		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
 		TestStep step = (TestStep) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-		ArrayList<SheepDogIssueProposal> proposals = TestStepIssueResolver.proposeReference(new TestStepImpl(step));
-		for (SheepDogIssueProposal p : proposals) {
+		for (SheepDogIssueProposal p : TestStepIssueResolver.proposeReference(new TestStepImpl(step))) {
 			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 				public void apply(IModificationContext context) throws BadLocationException {
-					Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-					TestStep step = (TestStep) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-					IXtextDocument xtextDocument = context.getXtextDocument();
-					xtextDocument.replace(issue.getOffset(), step.getName().length(), p.getValue());
+					// TODO try issue.getLength
+					context.getXtextDocument().replace(issue.getOffset(), step.getName().length(), p.getValue());
+				}
+			});
+		}
+	}
+
+	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME)
+	public void fixTestStepContainerName(final Issue issue, IssueResolutionAcceptor acceptor) {
+		// TODO get rid of upcase.png
+		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+		TestStepContainer theTestStepContainer = (TestStepContainer) resource
+				.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+		for (SheepDogIssueProposal p : TestStepContainerIssueResolver
+				.proposeName(new TestStepContainerImpl(theTestStepContainer))) {
+			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
+				public void apply(IModificationContext context) throws BadLocationException {
+					// TODO try issue.getLength
+					context.getXtextDocument().replace(issue.getOffset(), theTestStepContainer.getName().length(),
+							p.getValue());
 				}
 			});
 		}
 	}
 
 	@Fix(SheepDogValidator.TEST_SUITE_NAME)
-	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME)
-	@Fix(SheepDogValidator.TEST_STEP_NAME)
-	public void fixTestStepName(final Issue issue, IssueResolutionAcceptor acceptor) {
+	public void fixTestSuiteName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		// TODO get rid of upcase.png
-		// TODO this applies to more than one element, so duplicate it for each element
-		// type and use that element's issue resolver
-		acceptor.accept(issue, "Capitalize name", "Capitalize the name", "upcase.png", new IModification() {
-			public void apply(IModificationContext context) throws BadLocationException {
-				IXtextDocument xtextDocument = context.getXtextDocument();
-				String firstLetter = xtextDocument.get(issue.getOffset(), 1);
-				xtextDocument.replace(issue.getOffset(), 1, firstLetter.toUpperCase());
-			}
-		});
+		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+		TestSuite theTestSuite = (TestSuite) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+		for (SheepDogIssueProposal p : TestSuiteIssueResolver.proposeName(new TestSuiteImpl(theTestSuite))) {
+			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
+				public void apply(IModificationContext context) throws BadLocationException {
+					context.getXtextDocument().replace(issue.getOffset(), theTestSuite.getName().length(),
+							p.getValue());
+				}
+			});
+		}
 	}
 
 	@Fix(SheepDogValidator.CELL_NAME)
 	public void fixCellName(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Capitalize TestStep table name", "Capitalize the TestStep table name.", "upcase.png",
-				new IModification() {
-					public void apply(IModificationContext context) throws BadLocationException {
-						IXtextDocument xtextDocument = context.getXtextDocument();
-						String oldHeader = issue.getData()[0];
-						String newHeader = oldHeader.substring(0, 1).toUpperCase() + oldHeader.substring(1);
-						String oldRow = xtextDocument.get(issue.getOffset(), issue.getLength());
-						String newRow = oldRow.replace(oldHeader, newHeader);
-						xtextDocument.replace(issue.getOffset(), issue.getLength(), newRow);
-					}
-				});
+
+		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+		Cell theCell = (Cell) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+		for (SheepDogIssueProposal p : CellIssueResolver.proposeName(new CellImpl(theCell))) {
+			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
+				public void apply(IModificationContext context) throws BadLocationException {
+					// TODO try issue.getLength
+					context.getXtextDocument().replace(issue.getOffset(), theCell.getName().length(), p.getValue());
+				}
+			});
+		}
 	}
 
 }
