@@ -94,7 +94,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	}
 
 	private void logError(Exception e, String name) {
-		logger.error("There was an error listing proposals for: " + name);
+		logger.error("There was a problem for step: " + name);
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
 		logger.error(sw.toString());

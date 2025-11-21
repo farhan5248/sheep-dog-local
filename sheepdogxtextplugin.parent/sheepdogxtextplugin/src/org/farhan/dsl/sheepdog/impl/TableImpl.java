@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
+import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 
 public class TableImpl implements ITable {
 
@@ -18,6 +20,13 @@ public class TableImpl implements ITable {
 
 	@Override
 	public Object getParent() {
+		if (parent == null && eObject != null) {
+			if (eObject.eContainer() instanceof TestStep) {
+				parent = new TestStepImpl((TestStep) eObject.eContainer());
+			} else if (eObject.eContainer() instanceof StepParameters) {
+				parent = new StepParametersImpl((StepParameters) eObject.eContainer());
+			}
+		}
 		return parent;
 	}
 

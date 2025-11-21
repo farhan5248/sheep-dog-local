@@ -7,6 +7,7 @@ import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
+import org.farhan.dsl.sheepdog.sheepDog.Table;
 
 public class RowImpl implements IRow {
 
@@ -19,6 +20,9 @@ public class RowImpl implements IRow {
 
 	@Override
 	public ITable getParent() {
+		if (parent == null) {
+			parent = new TableImpl((Table) eObject.eContainer());
+		}
 		return parent;
 	}
 

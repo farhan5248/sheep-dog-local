@@ -3,6 +3,10 @@
  */
 package org.farhan.dsl.sheepdog.ui.quickfix;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.text.BadLocationException;
@@ -13,6 +17,7 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
+import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
@@ -36,79 +41,117 @@ import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
  */
 public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
+	private static final Logger logger = Logger.getLogger(SheepDogQuickfixProvider.class);
+
 	@Fix(SheepDogValidator.TEST_STEP_NAME_STEP_OBJECT_WORKSPACE)
 	@Fix(SheepDogValidator.TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE)
-	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
-	public void fixTestStepReference(final Issue issue, IssueResolutionAcceptor acceptor) {
+	public void fixTestStepNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+		try {
+			acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object",
+					"upcase.png", new IModification() {
+						public void apply(IModificationContext context) throws BadLocationException {
+							Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+							TestStep step = (TestStep) resource
+									.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+							(new SheepDogGenerator()).doGenerate(step);
+						}
+					});
 
-		acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object", "upcase.png",
-				new IModification() {
+			Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+			TestStep step = (TestStep) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNameWorkspace(new TestStepImpl(step))) {
+				acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {
-						Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-						TestStep step = (TestStep) resource
-								.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-						(new SheepDogGenerator()).doGenerate(step);
+						// TODO try issue.getLength
+						context.getXtextDocument().replace(issue.getOffset(), step.getName().length(), p.getValue());
 					}
 				});
+			}
+		} catch (Exception e) {
+			logError(e, issue.getMessage());
+		}
+	}
 
-		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-		TestStep step = (TestStep) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-		for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNameWorkspace(new TestStepImpl(step))) {
-			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
-				public void apply(IModificationContext context) throws BadLocationException {
-					// TODO try issue.getLength
-					context.getXtextDocument().replace(issue.getOffset(), step.getName().length(), p.getValue());
-				}
-			});
+	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
+	public void fixRowCellListWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+		try {
+			acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object",
+					"upcase.png", new IModification() {
+						public void apply(IModificationContext context) throws BadLocationException {
+							Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+							Row theRow = (Row) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+							(new SheepDogGenerator()).doGenerate((TestStep) theRow.eContainer().eContainer());
+						}
+					});
+		} catch (Exception e) {
+			logError(e, issue.getMessage());
 		}
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
-	public void fixTestStepContainerName(final Issue issue, IssueResolutionAcceptor acceptor) {
-		// TODO get rid of upcase.png
-		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-		TestStepContainer theTestStepContainer = (TestStepContainer) resource
-				.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-		for (SheepDogIssueProposal p : TestStepContainerIssueResolver
-				.proposeNameOnly(new TestStepContainerImpl(theTestStepContainer))) {
-			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
-				public void apply(IModificationContext context) throws BadLocationException {
-					// TODO try issue.getLength
-					context.getXtextDocument().replace(issue.getOffset(), theTestStepContainer.getName().length(),
-							p.getValue());
-				}
-			});
+	public void fixTestStepContainerNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
+		try {
+			// TODO get rid of upcase.png
+			Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+			TestStepContainer theTestStepContainer = (TestStepContainer) resource
+					.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+			for (SheepDogIssueProposal p : TestStepContainerIssueResolver
+					.proposeNameOnly(new TestStepContainerImpl(theTestStepContainer))) {
+				acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
+					public void apply(IModificationContext context) throws BadLocationException {
+						// TODO try issue.getLength
+						context.getXtextDocument().replace(issue.getOffset(), theTestStepContainer.getName().length(),
+								p.getValue());
+					}
+				});
+			}
+		} catch (Exception e) {
+			logError(e, issue.getMessage());
 		}
 	}
 
 	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
-	public void fixTestSuiteName(final Issue issue, IssueResolutionAcceptor acceptor) {
-		// TODO get rid of upcase.png
-		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-		TestSuite theTestSuite = (TestSuite) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-		for (SheepDogIssueProposal p : TestSuiteIssueResolver.proposeNameOnly(new TestSuiteImpl(theTestSuite))) {
-			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
-				public void apply(IModificationContext context) throws BadLocationException {
-					context.getXtextDocument().replace(issue.getOffset(), theTestSuite.getName().length(),
-							p.getValue());
-				}
-			});
+	public void fixTestSuiteNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
+		try {
+			// TODO get rid of upcase.png
+			Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+			TestSuite theTestSuite = (TestSuite) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+			for (SheepDogIssueProposal p : TestSuiteIssueResolver.proposeNameOnly(new TestSuiteImpl(theTestSuite))) {
+				acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
+					public void apply(IModificationContext context) throws BadLocationException {
+						context.getXtextDocument().replace(issue.getOffset(), theTestSuite.getName().length(),
+								p.getValue());
+					}
+				});
+			}
+		} catch (Exception e) {
+			logError(e, issue.getMessage());
 		}
 	}
 
 	@Fix(SheepDogValidator.CELL_NAME_ONLY)
-	public void fixCellName(final Issue issue, IssueResolutionAcceptor acceptor) {
-
-		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-		Cell theCell = (Cell) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-		for (SheepDogIssueProposal p : CellIssueResolver.proposeNameOnly(new CellImpl(theCell))) {
-			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
-				public void apply(IModificationContext context) throws BadLocationException {
-					// TODO try issue.getLength
-					context.getXtextDocument().replace(issue.getOffset(), theCell.getName().length(), p.getValue());
-				}
-			});
+	public void fixCellNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
+		try {
+			Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+			Cell theCell = (Cell) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+			for (SheepDogIssueProposal p : CellIssueResolver.proposeNameOnly(new CellImpl(theCell))) {
+				acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
+					public void apply(IModificationContext context) throws BadLocationException {
+						// TODO try issue.getLength
+						context.getXtextDocument().replace(issue.getOffset(), theCell.getName().length(), p.getValue());
+					}
+				});
+			}
+		} catch (Exception e) {
+			logError(e, issue.getMessage());
 		}
+	}
+
+	private void logError(Exception e, String name) {
+		logger.error("There was a problem for step: " + name);
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		logger.error(sw.toString());
 	}
 
 }

@@ -2,6 +2,7 @@ package org.farhan.dsl.sheepdog.impl;
 
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
 
 public class TextImpl implements IText {
@@ -25,6 +26,9 @@ public class TextImpl implements IText {
 
 	@Override
 	public ITestStep getParent() {
+		if (parent == null) {
+			parent = new TestStepImpl((TestStep) eObject.eContainer());
+		}
 		return parent;
 	}
 

@@ -43,8 +43,6 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String TEST_STEP_NAME_STEP_OBJECT_WORKSPACE = "TEST_STEP_NAME_STEP_OBJECT_WORKSPACE";
 	public static final String TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE = "TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE";
 	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
-	// TODO leave this as 1 until name is split into 3 parts
-	public static final String TEST_STEP_NAME = "TEST_STEP_NAME";
 	public static final String TEST_STEP_NAME_COMPONENT_ONLY = "TEST_STEP_NAME_COMPONENT_ONLY";
 	public static final String TEST_STEP_NAME_DETAILS_ONLY = "TEST_STEP_NAME_DETAILS_ONLY";
 	public static final String TEST_STEP_NAME_OBJECT_ONLY = "TEST_STEP_NAME_OBJECT_ONLY";
@@ -57,7 +55,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		ITestSuite iTestSuite = new TestSuiteImpl(theTestSuite);
 		String problems = TestSuiteIssueDetector.validateNameOnly(iTestSuite);
 		if (!problems.isEmpty()) {
-			warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
+			warning(problems, SheepDogPackage.Literals.MODEL__NAME, problems);
 		}
 	}
 
@@ -67,7 +65,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 			ITestStepContainer iTestStepContainer = new TestStepContainerImpl(theTestStepContainer);
 			String problems = TestStepContainerIssueDetector.validateNameOnly(iTestStepContainer);
 			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME_ONLY);
+				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, problems);
 			}
 		} catch (Exception e) {
 			logError(e, theTestStepContainer.getName());
@@ -81,7 +79,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				ITestStep iTestStep = new TestStepImpl(step);
 				String problems = TestStepIssueDetector.validateNameOnly(iTestStep);
 				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME);
+					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems);
 				}
 			}
 		} catch (Exception e) {
@@ -123,7 +121,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 						rowImpl.getParent().getRowList().add(rowImpl);
 						String problems = RowIssueDetector.validateCellListWorkspace(rowImpl);
 						if (!problems.isEmpty()) {
-							warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, ROW_CELL_LIST_WORKSPACE);
+							warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, problems);
 						}
 					}
 				}
@@ -145,10 +143,9 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 			iRow.setParent(iTable);
 			String problems = CellIssueDetector.validateNameOnly(iCell);
 			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
+				warning(problems, SheepDogPackage.Literals.CELL__NAME, problems);
 			}
 		}
-
 	}
 
 	private void logError(Exception e, String name) {

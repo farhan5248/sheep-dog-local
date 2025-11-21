@@ -22,6 +22,13 @@ import org.slf4j.LoggerFactory;
 
 public class TestStepIssueResolver {
 
+	// TODO for each propose method here, there's two use cases
+	// 1. empty token which needs a list of possibilities proposed
+	// 2. non-empty token with issues that can be resolved, testStepObjectWorkspace
+	// For some issues, there's no resolution such as invalid object type. The error
+	// message can list valid types
+	// 3. non-empty token with issues that can't be resolved, testStepObjectOnly
+
 	private static final Logger logger = LoggerFactory.getLogger(TestStepIssueResolver.class);
 
 	private static ArrayList<SheepDogIssueProposal> getComponentCompletions(ITestStep theTestStep) {
@@ -176,9 +183,8 @@ public class TestStepIssueResolver {
 
 	public static ArrayList<SheepDogIssueProposal> proposeName(ITestStep theTestStep, ITestProject theProject) {
 		// TODO this is doing invalid step quickfixes and incomplete step name proposals
-		// this shouldn't even be here, when it's 3 parts, if any part is empty, a
-		// list of existing values should be proposed. If it's not empty, then, give
-		// examples.
+		// After splitting name into component/object/predicate the logic here should
+		// only be used for proposals, not for quickfixes
 		logger.debug("Entering proposeName for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		String component = "";
@@ -223,13 +229,8 @@ public class TestStepIssueResolver {
 		// but doesn't exist. the proposeName methods suggests alternates in case a step
 		// object isn't specified
 
-		// TODO split into two
-		// 1 if object specified and syntax is valid then suggest generation or similar
-		// objects
-		// 2 if object not specified then suggest from all previous objects etc.
-		// Implement this after breaking up name into component, object, predicate
-
-		logger.debug("Entering proposeStepObject for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+		logger.debug("Entering proposeNameWorkspace for step: {}",
+				theTestStep != null ? theTestStep.getName() : "null");
 
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
@@ -251,7 +252,7 @@ public class TestStepIssueResolver {
 				proposals.add(proposal);
 			}
 		}
-		logger.debug("Exiting proposeStepObject");
+		logger.debug("Exiting proposeNameWorkspace");
 		return proposals;
 	}
 

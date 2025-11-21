@@ -16,6 +16,7 @@ import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
+import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 
 public class StepDefinitionImpl implements IStepDefinition {
@@ -98,6 +99,9 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public IStepObject getParent() {
+		if (parent == null) {
+			parent = new StepObjectImpl((StepObject) eObject.eContainer());
+		}
 		return parent;
 	}
 

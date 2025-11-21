@@ -11,6 +11,7 @@ import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
+import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 
 public class StepParametersImpl implements IStepParameters {
 	private IStepDefinition parent;
@@ -27,6 +28,9 @@ public class StepParametersImpl implements IStepParameters {
 
 	@Override
 	public IStepDefinition getParent() {
+		if (parent == null) {
+			parent = new StepDefinitionImpl((StepDefinition) eObject.eContainer());
+		}
 		return parent;
 	}
 
