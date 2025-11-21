@@ -12,8 +12,8 @@ public class RowIssueDetector {
 
 	private static final Logger logger = LoggerFactory.getLogger(RowIssueDetector.class);
 
-	public static String validateCellList(IRow theRow) throws Exception {
-		logger.debug("Entering validateCellList");
+	public static String validateCellListWorkspace(IRow theRow) throws Exception {
+		logger.debug("Entering validateCellListWorkspace");
 		try {
 			ITestStep theTestStep = (ITestStep) theRow.getParent().getParent();
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
@@ -21,13 +21,13 @@ public class RowIssueDetector {
 			IStepDefinition theStepDefinition = theStepObject
 					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
 			if (theStepDefinition.getStepParameters(theTestStep.getTable().getRowList().getFirst()) == null) {
-				logger.debug("Exiting validateCellList");
+				logger.debug("Exiting validateCellListWorkspace");
 				return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
 			}
-			logger.debug("Exiting validateCellList");
+			logger.debug("Exiting validateCellListWorkspace");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateCellList", e);
+			logger.error("Failed in validateCellListWorkspace", e);
 			throw e;
 		}
 	}

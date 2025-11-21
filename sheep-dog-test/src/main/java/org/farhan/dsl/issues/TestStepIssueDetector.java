@@ -20,12 +20,12 @@ public class TestStepIssueDetector {
 	// TODO make tests for all of these documenting the message content
 	// TODO instead of returning strings, return the enum alone, including enum for
 	// no error
-	public static String validateName(ITestStep theTestStep) throws Exception {
-		logger.debug("Entering validateName for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+	public static String validateNameOnly(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering validateNameOnly for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			String text = theTestStep.getName();
 			if (!isValid(text)) {
-				logger.debug("Exiting validateName");
+				logger.debug("Exiting validateNameOnly");
 				if (text == null) {
 					return TestStepIssueTypes.TEST_STEP_NAME_COMPONENT_ONLY.description;
 				}
@@ -62,26 +62,26 @@ public class TestStepIssueDetector {
 					}
 				}
 			}
-			logger.debug("Exiting validateName");
+			logger.debug("Exiting validateNameOnly");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateName for step '{}': {}",
+			logger.error("Failed in validateNameOnly for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}
 
-	public static String validateReference(ITestStep theTestStep) throws Exception {
+	public static String validateNameWorkspace(ITestStep theTestStep) throws Exception {
 		// TODO instead of returning strings, return the enum alone, including enum for
 		// no error
-		logger.debug("Entering validateReference for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+		logger.debug("Entering validateNameWorkspace for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 
 			ArrayList<ITestStep> testStepList = theTestStep.getParent().getTestStepList();
 			if (testStepList != null) {
 				if (!testStepList.isEmpty()) {
 					if (TestStepUtility.getComponent(testStepList.getFirst().getName()).isEmpty()) {
-						logger.debug("Exiting validateReference");
+						logger.debug("Exiting validateNameWorkspace");
 						return TestStepIssueTypes.TEST_STEP_NAME_COMPONENT_WORKSPACE.description;
 					}
 				}
@@ -89,13 +89,13 @@ public class TestStepIssueDetector {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject == null) {
-				logger.debug("Exiting validateReference");
+				logger.debug("Exiting validateNameWorkspace");
 				return TestStepIssueTypes.TEST_STEP_NAME_STEP_OBJECT_WORKSPACE.description;
 			}
 			IStepDefinition theStepDefinition = theStepObject
 					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
 			if (theStepDefinition == null) {
-				logger.debug("Exiting validateReference");
+				logger.debug("Exiting validateNameWorkspace");
 				return TestStepIssueTypes.TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE.description;
 			}
 			
@@ -104,15 +104,15 @@ public class TestStepIssueDetector {
 					ArrayList<String> headers = new ArrayList<String>();
 					headers.add("Content");
 					if (theStepDefinition.getStepParametersTmp(headers) == null) {
-						logger.debug("Exiting validateReference");
+						logger.debug("Exiting validateNameWorkspace");
 						return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
 					}
 				}
 			}
-			logger.debug("Exiting validateReference");
+			logger.debug("Exiting validateNameWorkspace");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateReference for step '{}': {}",
+			logger.error("Failed in validateNameWorkspace for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}

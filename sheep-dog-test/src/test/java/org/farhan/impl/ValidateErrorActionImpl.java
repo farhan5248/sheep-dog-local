@@ -16,8 +16,8 @@ public class ValidateErrorActionImpl extends TestObject implements ValidateError
 
 	public void transition() {
 		try {
-			MockIDE.setValidationMessage(TestStepIssueDetector.validateName(currentStep)
-					+ TestStepIssueDetector.validateReference(currentStep));
+			MockIDE.setValidationMessage(TestStepIssueDetector.validateNameOnly(currentStep)
+					+ TestStepIssueDetector.validateNameWorkspace(currentStep));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

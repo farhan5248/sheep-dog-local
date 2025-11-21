@@ -36,71 +36,72 @@ import org.farhan.dsl.lang.*;
 public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	private static final Logger logger = Logger.getLogger(SheepDogValidator.class);
-	public static final String CELL_NAME = "CELL_NAME";
-	public static final String TEST_STEP_CONTAINER_NAME = "TEST_STEP_CONTAINER_NAME";
-	public static final String TEST_SUITE_NAME = "TEST_SUITE_NAME";
-	public static final String TESTSTEP_REFERENCE_COMPONENT = "TESTSTEP_REFERENCE_COMPONENT";
-	public static final String TESTSTEP_REFERENCE_STEP_OBJECT = "TESTSTEP_REFERENCE_STEP_OBJECT";
-	public static final String TESTSTEP_REFERENCE_STEP_DEFINITION = "TESTSTEP_REFERENCE_STEP_DEFINITION";
-	public static final String ROW_REFERENCE_CELL_LIST = "ROW_REFERENCE_CELL_LIST";
+	public static final String CELL_NAME_ONLY = "CELL_NAME_ONLY";
+	public static final String TEST_STEP_CONTAINER_NAME_ONLY = "TEST_STEP_CONTAINER_NAME_ONLY";
+	public static final String TEST_SUITE_NAME_ONLY = "TEST_SUITE_NAME_ONLY";
+	public static final String TEST_STEP_NAME_COMPONENT_WORKSPACE = "TEST_STEP_NAME_COMPONENT_WORKSPACE";
+	public static final String TEST_STEP_NAME_STEP_OBJECT_WORKSPACE = "TEST_STEP_NAME_STEP_OBJECT_WORKSPACE";
+	public static final String TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE = "TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE";
+	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
 	// TODO leave this as 1 until name is split into 3 parts
 	public static final String TEST_STEP_NAME = "TEST_STEP_NAME";
+	public static final String TEST_STEP_NAME_COMPONENT_ONLY = "TEST_STEP_NAME_COMPONENT_ONLY";
+	public static final String TEST_STEP_NAME_DETAILS_ONLY = "TEST_STEP_NAME_DETAILS_ONLY";
+	public static final String TEST_STEP_NAME_OBJECT_ONLY = "TEST_STEP_NAME_OBJECT_ONLY";
+	public static final String TEST_STEP_NAME_STATE_ONLY = "TEST_STEP_NAME_STATE_ONLY";
+	public static final String TEST_STEP_NAME_TIME_ONLY = "TEST_STEP_NAME_TIME_ONLY";
 
 	@Check(CheckType.FAST)
-	public void checkTestSuite(TestSuite theTestSuite) {
+	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
 		// TODO validate that feature file name and feature name are the same.
 		ITestSuite iTestSuite = new TestSuiteImpl(theTestSuite);
-		String problems = TestSuiteIssueDetector.validateName(iTestSuite);
+		String problems = TestSuiteIssueDetector.validateNameOnly(iTestSuite);
 		if (!problems.isEmpty()) {
-			warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME);
+			warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
 		}
 	}
 
 	@Check(CheckType.FAST)
-	public void checkTestStepContainer(TestStepContainer theTestStepContainer) {
+	public void checkTestStepContainerNameOnly(TestStepContainer theTestStepContainer) {
 		try {
 			ITestStepContainer iTestStepContainer = new TestStepContainerImpl(theTestStepContainer);
-			String problems = TestStepContainerIssueDetector.validateName(iTestStepContainer);
+			String problems = TestStepContainerIssueDetector.validateNameOnly(iTestStepContainer);
 			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME);
+				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME_ONLY);
 			}
 		} catch (Exception e) {
 			logError(e, theTestStepContainer.getName());
 		}
 	}
 
-	@Check(CheckType.EXPENSIVE)
-	public void checkTestStep(TestStep step) {
-		// TODO split into 2 checks, one for name syntax and one for reference
-		// and rename to checkTestStepNameInvalid and checkTestStepRefNotFound
+	@Check(CheckType.FAST)
+	public void checkTestStepNameOnly(TestStep step) {
 		try {
 			if (step.getName() != null) {
 				ITestStep iTestStep = new TestStepImpl(step);
-				String problems = TestStepIssueDetector.validateName(iTestStep);
+				String problems = TestStepIssueDetector.validateNameOnly(iTestStep);
 				if (!problems.isEmpty()) {
 					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME);
-				} else {
+				}
+			}
+		} catch (Exception e) {
+			logError(e, step.getName());
+		}
+	}
+
+	@Check(CheckType.EXPENSIVE)
+	public void checkTestStepNameWorkspace(TestStep step) {
+		try {
+			if (step.getName() != null) {
+				ITestStep iTestStep = new TestStepImpl(step);
+				String problems = TestStepIssueDetector.validateNameOnly(iTestStep);
+				if (problems.isEmpty()) {
 					ITestProject testProject = new TestProjectImpl(
 							new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 					iTestStep.getParent().getParent().setParent(testProject);
-					problems = TestStepIssueDetector.validateReference(iTestStep);
+					problems = TestStepIssueDetector.validateNameWorkspace(iTestStep);
 					if (!problems.isEmpty()) {
 						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems);
-					} else {
-						if (step.getTable() != null) {
-							if (!step.getTable().getRowList().isEmpty()) {
-								RowImpl row = new RowImpl(step.getTable().getRowList().getFirst());
-								// TODO maybe for this project, the parent relationship doesn't need to be set
-								// for anything other than TestSuite or StepObject. Everything else can use
-								// eContainer. If the getParent method is called and it hasn't been set yet, it
-								// can create a new reference and set it then, same for getting it. Two Impl
-								// classes are equal if the eObjects they point to are equal
-								// TODO this should be in its own EXPENSIVE checkRow methods
-								row.setParent(new TableImpl(step.getTable()));
-								row.getParent().getRowList().add(row);
-								problems = RowIssueDetector.validateCellList(row);
-							}
-						}
 					}
 				}
 			}
@@ -109,8 +110,31 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
+	@Check(CheckType.EXPENSIVE)
+	public void checkRowCellListWorkspace(Row row) {
+		try {
+			if (row != null && row.eContainer() != null) {
+				Table table = (Table) row.eContainer();
+				if (table.eContainer() instanceof TestStep) {
+					TestStep step = (TestStep) table.eContainer();
+					if (!table.getRowList().isEmpty() && table.getRowList().getFirst() == row) {
+						RowImpl rowImpl = new RowImpl(row);
+						rowImpl.setParent(new TableImpl(table));
+						rowImpl.getParent().getRowList().add(rowImpl);
+						String problems = RowIssueDetector.validateCellListWorkspace(rowImpl);
+						if (!problems.isEmpty()) {
+							warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, ROW_CELL_LIST_WORKSPACE);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			logError(e, "Row validation");
+		}
+	}
+
 	@Check(CheckType.FAST)
-	public void checkCell(Cell cell) {
+	public void checkCellNameOnly(Cell cell) {
 		// TODO validate that each row should have the max number of columns
 		// TODO make tests for this
 		if (cell != null) {
@@ -119,9 +143,9 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 			iCell.setParent(iRow);
 			ITable iTable = new TableImpl((Table) cell.eContainer().eContainer());
 			iRow.setParent(iTable);
-			String problems = CellIssueDetector.validateName(iCell);
+			String problems = CellIssueDetector.validateNameOnly(iCell);
 			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME);
+				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
 			}
 		}
 

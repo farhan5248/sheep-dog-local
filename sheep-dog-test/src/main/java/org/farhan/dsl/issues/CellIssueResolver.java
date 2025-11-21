@@ -9,12 +9,17 @@ public class CellIssueResolver {
 
 	private static final Logger logger = LoggerFactory.getLogger(CellIssueResolver.class);
 
-	public static ArrayList<SheepDogIssueProposal> proposeName(ICell theCell) {
+	public static ArrayList<SheepDogIssueProposal> proposeNameOnly(ICell theCell) {
 		// TODO shouldn't this take a Cell as a parameter
-		logger.debug("Entering proposeName for cell: {}", theCell != null ? theCell.getName() : "null");
+		logger.debug("Entering proposeNameOnly for cell: {}", theCell != null ? theCell.getName() : "null");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-
-		logger.debug("Exiting proposeName with {} proposals", proposals.size());
+		SheepDogIssueProposal proposal;
+		proposal = new SheepDogIssueProposal();
+		proposal.setId("Capitalize cell name");
+		proposal.setDescription("Capitalize the first letter of the name");
+		proposal.setValue(theCell.getName().substring(0, 1).toUpperCase() + theCell.getName().substring(1));
+		proposals.add(proposal);
+		logger.debug("Exiting proposeNameOnly with {} proposals", proposals.size());
 		return proposals;
 	}
 

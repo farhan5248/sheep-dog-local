@@ -3,12 +3,9 @@
  */
 package org.farhan.dsl.sheepdog.ui.quickfix;
 
-import java.util.ArrayList;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
@@ -24,7 +21,6 @@ import org.farhan.dsl.issues.SheepDogIssueProposal;
 import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
-import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.sheepdog.generator.SheepDogGenerator;
 import org.farhan.dsl.sheepdog.impl.CellImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
@@ -40,9 +36,9 @@ import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
  */
 public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
-	@Fix(SheepDogValidator.TESTSTEP_REFERENCE_STEP_OBJECT)
-	@Fix(SheepDogValidator.TESTSTEP_REFERENCE_STEP_DEFINITION)
-	@Fix(SheepDogValidator.ROW_REFERENCE_CELL_LIST)
+	@Fix(SheepDogValidator.TEST_STEP_NAME_STEP_OBJECT_WORKSPACE)
+	@Fix(SheepDogValidator.TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE)
+	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
 	public void fixTestStepReference(final Issue issue, IssueResolutionAcceptor acceptor) {
 
 		acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object", "upcase.png",
@@ -57,7 +53,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
 		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
 		TestStep step = (TestStep) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-		for (SheepDogIssueProposal p : TestStepIssueResolver.proposeReference(new TestStepImpl(step))) {
+		for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNameWorkspace(new TestStepImpl(step))) {
 			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 				public void apply(IModificationContext context) throws BadLocationException {
 					// TODO try issue.getLength
@@ -67,14 +63,14 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME)
+	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
 	public void fixTestStepContainerName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		// TODO get rid of upcase.png
 		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
 		TestStepContainer theTestStepContainer = (TestStepContainer) resource
 				.getEObject(issue.getUriToProblem().toString().split("#")[1]);
 		for (SheepDogIssueProposal p : TestStepContainerIssueResolver
-				.proposeName(new TestStepContainerImpl(theTestStepContainer))) {
+				.proposeNameOnly(new TestStepContainerImpl(theTestStepContainer))) {
 			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 				public void apply(IModificationContext context) throws BadLocationException {
 					// TODO try issue.getLength
@@ -85,12 +81,12 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	@Fix(SheepDogValidator.TEST_SUITE_NAME)
+	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
 	public void fixTestSuiteName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		// TODO get rid of upcase.png
 		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
 		TestSuite theTestSuite = (TestSuite) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-		for (SheepDogIssueProposal p : TestSuiteIssueResolver.proposeName(new TestSuiteImpl(theTestSuite))) {
+		for (SheepDogIssueProposal p : TestSuiteIssueResolver.proposeNameOnly(new TestSuiteImpl(theTestSuite))) {
 			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 				public void apply(IModificationContext context) throws BadLocationException {
 					context.getXtextDocument().replace(issue.getOffset(), theTestSuite.getName().length(),
@@ -100,12 +96,12 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	@Fix(SheepDogValidator.CELL_NAME)
+	@Fix(SheepDogValidator.CELL_NAME_ONLY)
 	public void fixCellName(final Issue issue, IssueResolutionAcceptor acceptor) {
 
 		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
 		Cell theCell = (Cell) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-		for (SheepDogIssueProposal p : CellIssueResolver.proposeName(new CellImpl(theCell))) {
+		for (SheepDogIssueProposal p : CellIssueResolver.proposeNameOnly(new CellImpl(theCell))) {
 			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 				public void apply(IModificationContext context) throws BadLocationException {
 					// TODO try issue.getLength

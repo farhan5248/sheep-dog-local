@@ -218,7 +218,7 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	public static ArrayList<SheepDogIssueProposal> proposeReference(ITestStep theTestStep) {
+	public static ArrayList<SheepDogIssueProposal> proposeNameWorkspace(ITestStep theTestStep) {
 		// this method is used to suggest alternates in case a step object is specified
 		// but doesn't exist. the proposeName methods suggests alternates in case a step
 		// object isn't specified
