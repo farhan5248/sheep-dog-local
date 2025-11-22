@@ -30,6 +30,8 @@ import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.sheepdog.generator.SheepDogGenerator;
 import org.farhan.dsl.sheepdog.impl.CellImpl;
+import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
+import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
@@ -50,9 +52,10 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		return resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
 	}
 
-//	@Fix(SheepDogValidator.TEST_STEP_NAME_WORKSPACE)
+	@Fix(SheepDogValidator.TEST_STEP_NAME_WORKSPACE)
 	public void fixTestStepNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
+			TestStep step = (TestStep) getEObject(issue);
 			acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object",
 					"upcase.png", new IModification() {
 						public void apply(IModificationContext context) throws BadLocationException {
@@ -61,11 +64,12 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 						}
 					});
 
-			TestStep step = (TestStep) getEObject(issue);
-			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNameWorkspace(new TestStepImpl(step))) {
+			TestStepImpl testStepImpl = new TestStepImpl(step);
+			testStepImpl.getParent().getParent().setParent(
+					new TestProjectImpl(new SourceFileRepository(step.eResource().getURI().toPlatformString(true))));
+			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNameWorkspace(testStepImpl)) {
 				acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {
-						// TODO try issue.getLength
 						context.getXtextDocument().replace(issue.getOffset(), step.getName().length(), p.getValue());
 					}
 				});
@@ -75,7 +79,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	// @Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
+	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
 	public void fixRowCellListWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
 			acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object",
@@ -93,13 +97,11 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
 	public void fixTestStepContainerNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
-			// TODO get rid of upcase.png
 			TestStepContainer theTestStepContainer = (TestStepContainer) getEObject(issue);
 			for (SheepDogIssueProposal p : TestStepContainerIssueResolver
 					.proposeNameOnly(new TestStepContainerImpl(theTestStepContainer))) {
 				acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {
-						// TODO try issue.getLength
 						context.getXtextDocument().replace(issue.getOffset(), theTestStepContainer.getName().length(),
 								p.getValue());
 					}
@@ -113,7 +115,6 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
 	public void fixTestSuiteNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
-			// TODO get rid of upcase.png
 			TestSuite theTestSuite = (TestSuite) getEObject(issue);
 			for (SheepDogIssueProposal p : TestSuiteIssueResolver.proposeNameOnly(new TestSuiteImpl(theTestSuite))) {
 				acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
@@ -135,7 +136,6 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 			for (SheepDogIssueProposal p : CellIssueResolver.proposeNameOnly(new CellImpl(theCell))) {
 				acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {
-						// TODO try issue.getLength
 						context.getXtextDocument().replace(issue.getOffset(), theCell.getName().length(), p.getValue());
 					}
 				});

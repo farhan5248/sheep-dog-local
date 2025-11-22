@@ -13,7 +13,6 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.impl.CellImpl;
 import org.farhan.dsl.sheepdog.impl.RowImpl;
 import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
-import org.farhan.dsl.sheepdog.impl.TableImpl;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
@@ -57,8 +56,8 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.FAST)
 	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
 		// TODO validate that feature file name and feature name are the same.
-		ITestSuite iTestSuite = new TestSuiteImpl(theTestSuite);
-		String problems = TestSuiteIssueDetector.validateNameOnly(iTestSuite);
+		TestSuiteImpl testSuiteImpl = new TestSuiteImpl(theTestSuite);
+		String problems = TestSuiteIssueDetector.validateNameOnly(testSuiteImpl);
 		if (!problems.isEmpty()) {
 			warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
 		}
@@ -67,8 +66,8 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.FAST)
 	public void checkTestStepContainerNameOnly(TestStepContainer theTestStepContainer) {
 		try {
-			ITestStepContainer iTestStepContainer = new TestStepContainerImpl(theTestStepContainer);
-			String problems = TestStepContainerIssueDetector.validateNameOnly(iTestStepContainer);
+			String problems = TestStepContainerIssueDetector
+					.validateNameOnly(new TestStepContainerImpl(theTestStepContainer));
 			if (!problems.isEmpty()) {
 				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME_ONLY);
 			}
@@ -81,11 +80,10 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public void checkTestStepNameOnly(TestStep step) {
 		try {
 			if (step.getName() != null) {
-				ITestStep iTestStep = new TestStepImpl(step);
 				// TODO this is doing ONLY and WORKSPACE checks. It's checking the workspace for
 				// suggestions. That should be the responsibility of checkTestStepNameWorkspace;
 				// ie to find alternates, this should just check the grammar
-				String problems = TestStepIssueDetector.validateNameOnly(iTestStep);
+				String problems = TestStepIssueDetector.validateNameOnly(new TestStepImpl(step));
 				if (!problems.isEmpty()) {
 					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_ONLY);
 				}
@@ -95,16 +93,16 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	// @Check(CheckType.EXPENSIVE)
+	@Check(CheckType.EXPENSIVE)
 	public void checkTestStepNameWorkspace(TestStep step) {
 		try {
 			if (step.getName() != null) {
-				ITestStep iTestStep = new TestStepImpl(step);
-				String problems = TestStepIssueDetector.validateNameOnly(iTestStep);
+				TestStepImpl testStepImpl = new TestStepImpl(step);
+				testStepImpl.getParent().getParent().setParent(new TestProjectImpl(
+						new SourceFileRepository(step.eResource().getURI().toPlatformString(true))));
+				String problems = TestStepIssueDetector.validateNameOnly(testStepImpl);
 				if (problems.isEmpty()) {
-					iTestStep.getParent().getParent().setParent(new TestProjectImpl(
-							new SourceFileRepository(step.eResource().getURI().toPlatformString(true))));
-					problems = TestStepIssueDetector.validateNameWorkspace(iTestStep);
+					problems = TestStepIssueDetector.validateNameWorkspace(testStepImpl);
 					if (!problems.isEmpty()) {
 						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_WORKSPACE);
 					}
@@ -115,7 +113,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	// @Check(CheckType.EXPENSIVE)
+	@Check(CheckType.EXPENSIVE)
 	public void checkRowCellListWorkspace(Row row) {
 		try {
 			if (row != null && row.eContainer() != null) {
@@ -123,6 +121,9 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				if (table.eContainer() instanceof TestStep) {
 					if (!table.getRowList().isEmpty() && table.getRowList().getFirst() == row) {
 						RowImpl rowImpl = new RowImpl(row);
+						((ITestStep) rowImpl.getParent().getParent()).getParent().getParent()
+								.setParent(new TestProjectImpl(
+										new SourceFileRepository(row.eResource().getURI().toPlatformString(true))));
 						String problems = RowIssueDetector.validateCellListWorkspace(rowImpl);
 						if (!problems.isEmpty()) {
 							warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, ROW_CELL_LIST_WORKSPACE);
@@ -140,12 +141,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		// TODO validate that each row should have the max number of columns
 		// TODO make tests for this
 		if (cell != null) {
-			ICell iCell = new CellImpl(cell);
-			IRow iRow = new RowImpl((Row) cell.eContainer());
-			iCell.setParent(iRow);
-			ITable iTable = new TableImpl((Table) cell.eContainer().eContainer());
-			iRow.setParent(iTable);
-			String problems = CellIssueDetector.validateNameOnly(iCell);
+			String problems = CellIssueDetector.validateNameOnly(new CellImpl(cell));
 			if (!problems.isEmpty()) {
 				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
 			}
@@ -155,10 +151,10 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.EXPENSIVE)
 	public void checkTextNameWorkspace(Text text) {
 		if (text != null) {
-			IText iText = new TextImpl(text);
-			iText.getParent().getParent().getParent().setParent(
+			TextImpl textImpl = new TextImpl(text);
+			textImpl.getParent().getParent().getParent().setParent(
 					new TestProjectImpl(new SourceFileRepository(text.eResource().getURI().toPlatformString(true))));
-			String problems = TextIssueDetector.validateNameWorkspace(iText);
+			String problems = TextIssueDetector.validateNameWorkspace(textImpl);
 			if (!problems.isEmpty()) {
 				warning(problems, SheepDogPackage.Literals.TEXT__NAME, TEXT_NAME_WORKSPACE);
 			}
