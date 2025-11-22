@@ -4,9 +4,6 @@ import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.IText;
-import org.farhan.dsl.sheepdog.sheepDog.Cell;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
-import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
@@ -47,21 +44,11 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public ITable getTable() {
-		ITable newTable = new TableImpl();
-		Table table = eObject.getTable();
-		if (table != null) {
-			for (Row r : table.getRowList()) {
-				RowImpl row = new RowImpl(r);
-				row.setParent(newTable);
-				newTable.getRowList().add(row);
-				for (Cell c : r.getCellList()) {
-					CellImpl cell = new CellImpl(c);
-					cell.setParent(row);
-					row.getCellList().add(cell);
-				}
-			}
+		if (eObject.getTable() != null) {
+			return new TableImpl(eObject.getTable());
+		} else {
+			return null;
 		}
-		return newTable;
 	}
 
 	@Override
@@ -79,12 +66,12 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setName(String value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setName(String value) is not implemented");
 	}
 
 	@Override
 	public void setNameLong(String value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 	@Override
@@ -94,7 +81,7 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setTable(ITable value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setTable(ITable value) is not implemented");
 	}
 
 	@Override

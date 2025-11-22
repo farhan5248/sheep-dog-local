@@ -55,4 +55,9 @@ public class RowImpl implements IRow {
 		throw new UnsupportedOperationException("getCell(String name) is not implemented");
 	}
 
+	@Override
+	public boolean equals(Object object) {
+		return eObject.equals(((RowImpl) object).eObject);
+	}
+
 }

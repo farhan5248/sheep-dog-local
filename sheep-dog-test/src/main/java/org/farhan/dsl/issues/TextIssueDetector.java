@@ -16,7 +16,7 @@ public class TextIssueDetector {
 	public static String validateNameWorkspace(IText theText) {
 		logger.debug("Entering validateNameWorkspace for text: {}", theText != null ? theText.getName() : "null");
 		try {
-			ITestStep theTestStep = (ITestStep) theText.getParent().getParent();
+			ITestStep theTestStep = (ITestStep) theText.getParent();
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			IStepDefinition theStepDefinition = theStepObject

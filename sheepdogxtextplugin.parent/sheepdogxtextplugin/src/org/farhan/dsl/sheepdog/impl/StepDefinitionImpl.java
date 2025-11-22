@@ -149,7 +149,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public IStepParameters getStepParameters(IText value) {
-		return StepDefinitionUtility.getStepParameters(this, value.getName());
+		return StepDefinitionUtility.getStepParameters(this, "| Content");
 	}
 
 	@Override

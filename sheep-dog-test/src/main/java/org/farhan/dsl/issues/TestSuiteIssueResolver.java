@@ -15,7 +15,7 @@ public class TestSuiteIssueResolver {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 		proposal = new SheepDogIssueProposal();
-		proposal.setId("Capitalize test step container name");
+		proposal.setId("Capitalize test suite name");
 		proposal.setDescription("Capitalize the first letter of the name");
 		proposal.setValue(theTestSuite.getName().substring(0, 1).toUpperCase() + theTestSuite.getName().substring(1));
 		proposals.add(proposal);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
@@ -13,10 +14,6 @@ public class TableImpl implements ITable {
 	private Table eObject;
 	private ArrayList<IRow> rowList;
 	private Object parent;
-
-	public TableImpl() {
-		rowList = new ArrayList<IRow>();
-	}
 
 	@Override
 	public Object getParent() {
@@ -37,10 +34,15 @@ public class TableImpl implements ITable {
 
 	public TableImpl(Table table) {
 		this.eObject = table;
+		rowList = new ArrayList<IRow>();
 	}
 
 	@Override
 	public ArrayList<IRow> getRowList() {
+		rowList.clear();
+		for (Row row : eObject.getRowList()) {
+			rowList.add(new RowImpl(row));
+		}
 		return rowList;
 	}
 

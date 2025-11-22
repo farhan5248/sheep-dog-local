@@ -41,10 +41,12 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String CELL_NAME_ONLY = "CELL_NAME_ONLY";
 	public static final String TEST_STEP_CONTAINER_NAME_ONLY = "TEST_STEP_CONTAINER_NAME_ONLY";
 	public static final String TEST_SUITE_NAME_ONLY = "TEST_SUITE_NAME_ONLY";
+	public static final String TEST_STEP_NAME_WORKSPACE = "TEST_STEP_NAME_WORKSPACE";
 	public static final String TEST_STEP_NAME_COMPONENT_WORKSPACE = "TEST_STEP_NAME_COMPONENT_WORKSPACE";
 	public static final String TEST_STEP_NAME_STEP_OBJECT_WORKSPACE = "TEST_STEP_NAME_STEP_OBJECT_WORKSPACE";
 	public static final String TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE = "TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE";
 	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
+	public static final String TEST_STEP_NAME_ONLY = "TEST_STEP_NAME_ONLY";
 	public static final String TEST_STEP_NAME_COMPONENT_ONLY = "TEST_STEP_NAME_COMPONENT_ONLY";
 	public static final String TEST_STEP_NAME_DETAILS_ONLY = "TEST_STEP_NAME_DETAILS_ONLY";
 	public static final String TEST_STEP_NAME_OBJECT_ONLY = "TEST_STEP_NAME_OBJECT_ONLY";
@@ -52,37 +54,40 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String TEST_STEP_NAME_TIME_ONLY = "TEST_STEP_NAME_TIME_ONLY";
 	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
 
-//	@Check(CheckType.FAST)
+	@Check(CheckType.FAST)
 	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
 		// TODO validate that feature file name and feature name are the same.
 		ITestSuite iTestSuite = new TestSuiteImpl(theTestSuite);
 		String problems = TestSuiteIssueDetector.validateNameOnly(iTestSuite);
 		if (!problems.isEmpty()) {
-			warning(problems, SheepDogPackage.Literals.MODEL__NAME, problems);
+			warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
 		}
 	}
 
-	//	@Check(CheckType.FAST)
+	@Check(CheckType.FAST)
 	public void checkTestStepContainerNameOnly(TestStepContainer theTestStepContainer) {
 		try {
 			ITestStepContainer iTestStepContainer = new TestStepContainerImpl(theTestStepContainer);
 			String problems = TestStepContainerIssueDetector.validateNameOnly(iTestStepContainer);
 			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, problems);
+				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME_ONLY);
 			}
 		} catch (Exception e) {
 			logError(e, theTestStepContainer.getName());
 		}
 	}
 
-	//@Check(CheckType.FAST)
+	@Check(CheckType.FAST)
 	public void checkTestStepNameOnly(TestStep step) {
 		try {
 			if (step.getName() != null) {
 				ITestStep iTestStep = new TestStepImpl(step);
+				// TODO this is doing ONLY and WORKSPACE checks. It's checking the workspace for
+				// suggestions. That should be the responsibility of checkTestStepNameWorkspace;
+				// ie to find alternates, this should just check the grammar
 				String problems = TestStepIssueDetector.validateNameOnly(iTestStep);
 				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems);
+					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_ONLY);
 				}
 			}
 		} catch (Exception e) {
@@ -90,19 +95,18 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	//@Check(CheckType.EXPENSIVE)
+	// @Check(CheckType.EXPENSIVE)
 	public void checkTestStepNameWorkspace(TestStep step) {
 		try {
 			if (step.getName() != null) {
 				ITestStep iTestStep = new TestStepImpl(step);
 				String problems = TestStepIssueDetector.validateNameOnly(iTestStep);
 				if (problems.isEmpty()) {
-					ITestProject testProject = new TestProjectImpl(
-							new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
-					iTestStep.getParent().getParent().setParent(testProject);
+					iTestStep.getParent().getParent().setParent(new TestProjectImpl(
+							new SourceFileRepository(step.eResource().getURI().toPlatformString(true))));
 					problems = TestStepIssueDetector.validateNameWorkspace(iTestStep);
 					if (!problems.isEmpty()) {
-						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, problems);
+						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_WORKSPACE);
 					}
 				}
 			}
@@ -111,7 +115,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	//@Check(CheckType.EXPENSIVE)
+	// @Check(CheckType.EXPENSIVE)
 	public void checkRowCellListWorkspace(Row row) {
 		try {
 			if (row != null && row.eContainer() != null) {
@@ -119,11 +123,9 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				if (table.eContainer() instanceof TestStep) {
 					if (!table.getRowList().isEmpty() && table.getRowList().getFirst() == row) {
 						RowImpl rowImpl = new RowImpl(row);
-						rowImpl.setParent(new TableImpl(table));
-						rowImpl.getParent().getRowList().add(rowImpl);
 						String problems = RowIssueDetector.validateCellListWorkspace(rowImpl);
 						if (!problems.isEmpty()) {
-							warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, problems);
+							warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, ROW_CELL_LIST_WORKSPACE);
 						}
 					}
 				}
@@ -133,7 +135,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	//@Check(CheckType.FAST)
+	@Check(CheckType.FAST)
 	public void checkCellNameOnly(Cell cell) {
 		// TODO validate that each row should have the max number of columns
 		// TODO make tests for this
@@ -145,18 +147,20 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 			iRow.setParent(iTable);
 			String problems = CellIssueDetector.validateNameOnly(iCell);
 			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.CELL__NAME, problems);
+				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
 			}
 		}
 	}
 
-	//@Check(CheckType.EXPENSIVE)
+	@Check(CheckType.EXPENSIVE)
 	public void checkTextNameWorkspace(Text text) {
 		if (text != null) {
 			IText iText = new TextImpl(text);
+			iText.getParent().getParent().getParent().setParent(
+					new TestProjectImpl(new SourceFileRepository(text.eResource().getURI().toPlatformString(true))));
 			String problems = TextIssueDetector.validateNameWorkspace(iText);
 			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEXT__NAME, problems);
+				warning(problems, SheepDogPackage.Literals.TEXT__NAME, TEXT_NAME_WORKSPACE);
 			}
 		}
 	}

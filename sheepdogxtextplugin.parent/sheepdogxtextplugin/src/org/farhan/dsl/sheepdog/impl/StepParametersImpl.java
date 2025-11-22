@@ -2,6 +2,7 @@ package org.farhan.dsl.sheepdog.impl;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepParameters;
@@ -48,21 +49,7 @@ public class StepParametersImpl implements IStepParameters {
 
 	@Override
 	public ITable getTable() {
-		ITable newTable = new TableImpl();
-		Table table = eObject.getTable();
-		if (table != null) {
-			for (Row r : table.getRowList()) {
-				RowImpl row = new RowImpl(r);
-				row.setParent(newTable);
-				newTable.getRowList().add(row);
-				for (Cell c : r.getCellList()) {
-					CellImpl cell = new CellImpl(c);
-					cell.setParent(row);
-					row.getCellList().add(cell);
-				}
-			}
-		}
-		return newTable;
+		return new TableImpl(eObject.getTable());
 	}
 
 	@Override

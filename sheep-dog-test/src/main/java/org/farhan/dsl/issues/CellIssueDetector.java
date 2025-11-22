@@ -14,7 +14,7 @@ public class CellIssueDetector {
 		logger.debug("Entering validateNameOnly for step: {}", theCell != null ? theCell.getName() : "null");
 		try {
 			IRow row = theCell.getParent();
-			if (row.getParent().getRowList().getFirst() == row) {
+			if (row.getParent().getRowList().getFirst().equals(row)) {
 				if (!Character.isUpperCase(theCell.getName().charAt(0))) {
 					logger.debug("Exiting validateNameOnly");
 					return CellIssueTypes.CELL_NAME_ONLY.description;
