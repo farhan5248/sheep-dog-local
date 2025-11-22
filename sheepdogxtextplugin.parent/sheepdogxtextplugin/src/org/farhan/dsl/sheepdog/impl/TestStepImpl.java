@@ -102,4 +102,7 @@ public class TestStepImpl implements ITestStep {
 		throw new UnsupportedOperationException("setText(IText value) is not implemented");
 	}
 
+	public boolean equals(TestStepImpl object) {
+		return eObject.equals(object.eObject);
+	}
 }

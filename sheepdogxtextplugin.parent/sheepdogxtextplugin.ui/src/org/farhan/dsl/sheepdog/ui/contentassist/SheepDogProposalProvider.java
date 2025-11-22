@@ -6,19 +6,18 @@ package org.farhan.dsl.sheepdog.ui.contentassist;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.lang.*;
 import org.farhan.dsl.issues.*;
-import org.farhan.dsl.sheepdog.impl.RowImpl;
 import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Then;
 import org.farhan.dsl.sheepdog.sheepDog.When;
@@ -38,6 +37,30 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		completeName(step, assignment, context, acceptor);
 	}
 
+	private void completeCellList(TestStep step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		try {
+			for (SheepDogIssueProposal p : RowIssueResolver.proposeCellListWorkspace(createITestStep(step))) {
+				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
+						p.getValue(), p.getId(), null, context);
+				if (proposal != null) {
+					proposal.setAdditionalProposalInfo(p.getDescription());
+					acceptor.accept(proposal);
+				}
+			}
+		} catch (Exception e) {
+			logError(e, "");
+		}
+	}
+
+	private ITestStep createITestStep(TestStep step) {
+		ITestProject testProject = new TestProjectImpl(
+				new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
+		ITestStep iTestStep = new TestStepImpl(step);
+		iTestStep.getParent().getParent().setParent(testProject);
+		return iTestStep;
+	}
+
 	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_Name(step, assignment, context, acceptor);
@@ -47,11 +70,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			ITestProject testProject = new TestProjectImpl(
-					new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
-			ITestStep iTestStep = new TestStepImpl(step);
-			iTestStep.getParent().getParent().setParent(testProject);
-			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeName(iTestStep, testProject)) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeName(createITestStep(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
@@ -64,21 +83,10 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		}
 	}
 
-	public void completeRow_CellList(Row row, Assignment assignment, ContentAssistContext context,
+	public void completeRow_CellList(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		// TODO confirm the first arg is a Row
-		try {
-			for (SheepDogIssueProposal p : RowIssueResolver.proposeCellListWorkspace(new RowImpl(row))) {
-				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-						p.getValue(), p.getId(), null, context);
-				if (proposal != null) {
-					proposal.setAdditionalProposalInfo(p.getDescription());
-					acceptor.accept(proposal);
-				}
-			}
-		} catch (Exception e) {
-			logError(e, "");
-		}
+		super.completeRow_CellList(model, assignment, context, acceptor);
+		completeCellList((TestStep) model, assignment, context, acceptor);
 	}
 
 	public void completeThen_Name(Then step, Assignment assignment, ContentAssistContext context,

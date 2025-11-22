@@ -52,7 +52,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String TEST_STEP_NAME_TIME_ONLY = "TEST_STEP_NAME_TIME_ONLY";
 	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
 
-	@Check(CheckType.FAST)
+//	@Check(CheckType.FAST)
 	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
 		// TODO validate that feature file name and feature name are the same.
 		ITestSuite iTestSuite = new TestSuiteImpl(theTestSuite);
@@ -62,7 +62,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.FAST)
+	//	@Check(CheckType.FAST)
 	public void checkTestStepContainerNameOnly(TestStepContainer theTestStepContainer) {
 		try {
 			ITestStepContainer iTestStepContainer = new TestStepContainerImpl(theTestStepContainer);
@@ -75,7 +75,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.FAST)
+	//@Check(CheckType.FAST)
 	public void checkTestStepNameOnly(TestStep step) {
 		try {
 			if (step.getName() != null) {
@@ -90,7 +90,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.EXPENSIVE)
+	//@Check(CheckType.EXPENSIVE)
 	public void checkTestStepNameWorkspace(TestStep step) {
 		try {
 			if (step.getName() != null) {
@@ -111,13 +111,12 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.EXPENSIVE)
+	//@Check(CheckType.EXPENSIVE)
 	public void checkRowCellListWorkspace(Row row) {
 		try {
 			if (row != null && row.eContainer() != null) {
 				Table table = (Table) row.eContainer();
 				if (table.eContainer() instanceof TestStep) {
-					TestStep step = (TestStep) table.eContainer();
 					if (!table.getRowList().isEmpty() && table.getRowList().getFirst() == row) {
 						RowImpl rowImpl = new RowImpl(row);
 						rowImpl.setParent(new TableImpl(table));
@@ -134,7 +133,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.FAST)
+	//@Check(CheckType.FAST)
 	public void checkCellNameOnly(Cell cell) {
 		// TODO validate that each row should have the max number of columns
 		// TODO make tests for this
@@ -151,7 +150,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.EXPENSIVE)
+	//@Check(CheckType.EXPENSIVE)
 	public void checkTextNameWorkspace(Text text) {
 		if (text != null) {
 			IText iText = new TextImpl(text);

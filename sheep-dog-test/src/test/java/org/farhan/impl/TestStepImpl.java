@@ -65,5 +65,9 @@ public class TestStepImpl implements ITestStep {
 	public void setText(IText value) {
 		theText = value;
 	}
+	
+	public boolean equals(TestStepImpl object) {
+		return this.equals(object);
+	}
 
 }

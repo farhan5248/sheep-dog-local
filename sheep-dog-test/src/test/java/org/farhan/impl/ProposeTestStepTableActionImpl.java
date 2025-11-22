@@ -18,7 +18,7 @@ public class ProposeTestStepTableActionImpl extends TestObject implements Propos
 			RowImpl row = new RowImpl();
 			row.setParent(currentStep.getTable());
 			currentStep.getTable().getRowList().add(row);
-			MockIDE.setProposalList(RowIssueResolver.proposeCellListWorkspace(row));
+			MockIDE.setProposalList(RowIssueResolver.proposeCellListWorkspace(currentStep));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

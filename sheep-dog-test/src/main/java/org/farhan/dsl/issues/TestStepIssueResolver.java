@@ -182,7 +182,7 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	public static ArrayList<SheepDogIssueProposal> proposeName(ITestStep theTestStep, ITestProject theProject) {
+	public static ArrayList<SheepDogIssueProposal> proposeName(ITestStep theTestStep) {
 		// TODO this is doing invalid step quickfixes and incomplete step name proposals
 		// After splitting name into component/object/predicate the logic here should
 		// only be used for proposals, not for quickfixes
@@ -190,6 +190,7 @@ public class TestStepIssueResolver {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		String component = "";
 		String object = "";
+		ITestProject theProject = theTestStep.getParent().getParent().getParent();
 		if (theTestStep.getName() != null) {
 			component = TestStepUtility.getComponent(theTestStep.getName());
 			object = TestStepUtility.getObject(theTestStep.getName());

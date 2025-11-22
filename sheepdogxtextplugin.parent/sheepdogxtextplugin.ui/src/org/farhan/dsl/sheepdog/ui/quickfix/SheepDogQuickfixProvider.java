@@ -32,7 +32,6 @@ import org.farhan.dsl.sheepdog.impl.CellImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
-import org.farhan.dsl.sheepdog.impl.TextImpl;
 import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
 
 /**
@@ -45,8 +44,8 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
 	private static final Logger logger = Logger.getLogger(SheepDogQuickfixProvider.class);
 
-	@Fix(SheepDogValidator.TEST_STEP_NAME_STEP_OBJECT_WORKSPACE)
-	@Fix(SheepDogValidator.TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE)
+//	@Fix(SheepDogValidator.TEST_STEP_NAME_STEP_OBJECT_WORKSPACE)
+//	@Fix(SheepDogValidator.TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE)
 	public void fixTestStepNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
 			acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object",
@@ -74,7 +73,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
+	//	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
 	public void fixRowCellListWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
 			acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object",
@@ -90,7 +89,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
+	//	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
 	public void fixTestStepContainerNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
 			// TODO get rid of upcase.png
@@ -112,7 +111,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
+	//	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
 	public void fixTestSuiteNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
 			// TODO get rid of upcase.png
@@ -131,7 +130,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	@Fix(SheepDogValidator.CELL_NAME_ONLY)
+	//	@Fix(SheepDogValidator.CELL_NAME_ONLY)
 	public void fixCellNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
 			Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
@@ -149,7 +148,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 
-	@Fix(SheepDogValidator.TEXT_NAME_WORKSPACE)
+	//	@Fix(SheepDogValidator.TEXT_NAME_WORKSPACE)
 	public void fixTextNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
 			acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object",

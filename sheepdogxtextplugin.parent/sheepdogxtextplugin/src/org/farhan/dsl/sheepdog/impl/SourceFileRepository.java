@@ -62,9 +62,9 @@ public class SourceFileRepository implements IResourceRepository {
 		File aDir = new File(projectPath + subDir.replace("/", File.separator));
 		if (aDir.exists()) {
 			for (String f : aDir.list()) {
-				String aDirObjPath = subDir.replace("/", File.separator) + f;
+				String aDirObjPath = subDir.replace("/", File.separator) + File.separator + f;
 				if ((new File(projectPath + aDirObjPath)).isDirectory()) {
-					files.addAll(list("", aDirObjPath + File.separator, extension));
+					files.addAll(list("", aDirObjPath, extension));
 				} else if (aDirObjPath.toLowerCase().endsWith(extension.toLowerCase())) {
 					files.add(aDirObjPath.replace(projectPath, "").replace(File.separator, "/"));
 				}

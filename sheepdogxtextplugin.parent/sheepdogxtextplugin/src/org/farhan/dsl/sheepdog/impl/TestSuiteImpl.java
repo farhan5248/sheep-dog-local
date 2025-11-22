@@ -140,7 +140,7 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public ITestStepContainer getTestStepContainer(int index) {
-		throw new UnsupportedOperationException("getTestStepContainer(int index) is not implemented");
+		return new TestStepContainerImpl(eObject.getTestStepContainerList().get(index));
 	}
 
 	@Override

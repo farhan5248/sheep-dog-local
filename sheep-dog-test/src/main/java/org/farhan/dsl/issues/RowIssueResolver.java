@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
@@ -34,39 +33,33 @@ public class RowIssueResolver {
 		return cellsAsString.trim();
 	}
 
-	public static ArrayList<SheepDogIssueProposal> proposeCellListWorkspace(IRow theRow) {
+	public static ArrayList<SheepDogIssueProposal> proposeCellListWorkspace(ITestStep theTestStep) {
 		logger.debug("Entering proposeCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 
-		if (theRow.getParent().getParent() instanceof ITestStep) {
-			ITestStep theTestStep = (ITestStep) theRow.getParent().getParent();
-			if (TestStepIssueDetector.isValid(theTestStep.getName())) {
-				String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
-				IStepObject theStepObject = theTestStep.getParent().getParent().getParent()
-						.getStepObject(qualifiedName);
-				if (theStepObject != null) {
-					IStepDefinition stepDefinition = theStepObject
-							.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
-					if (stepDefinition != null) {
-						for (IStepParameters parameters : stepDefinition.getStepParameterList()) {
-							proposal = new SheepDogIssueProposal();
-							proposal.setId(cellsToString(parameters.getTable().getRowList().getFirst().getCellList()));
-							// TODO make a test for getStepDefinitionParametersDocumentation
-							proposal.setDescription(
-									StatementUtility.getStatementListAsString(parameters.getStatementList()));
-							String replacement = cellsToString(
-									parameters.getTable().getRowList().getFirst().getCellList());
-							if (!replacement.contentEquals("| Content")) {
-								proposal.setValue(replacement);
-							}
+		if (TestStepIssueDetector.isValid(theTestStep.getName())) {
+			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
+			if (theStepObject != null) {
+				IStepDefinition stepDefinition = theStepObject
+						.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+				if (stepDefinition != null) {
+					for (IStepParameters parameters : stepDefinition.getStepParameterList()) {
+						proposal = new SheepDogIssueProposal();
+						proposal.setId(cellsToString(parameters.getTable().getRowList().getFirst().getCellList()));
+						// TODO make a test for getStepDefinitionParametersDocumentation
+						proposal.setDescription(
+								StatementUtility.getStatementListAsString(parameters.getStatementList()));
+						String replacement = cellsToString(parameters.getTable().getRowList().getFirst().getCellList());
+						if (!replacement.contentEquals("| Content")) {
+							proposal.setValue(replacement);
 							proposals.add(proposal);
-						}
+						} 
 					}
 				}
 			}
 		}
-
 		logger.debug("Exiting proposeCellListWorkspace with {} proposals", proposals.size());
 		return proposals;
 	}
