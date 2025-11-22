@@ -4,10 +4,7 @@ import java.util.ArrayList;
 
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
-import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.IText;
-import org.farhan.dsl.lang.StepDefinitionUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +21,8 @@ public class TestStepIssueDetector {
 	// TODO instead of returning strings, return the enum alone, including enum for
 	// no error
 	public static String validateNameOnly(ITestStep theTestStep) throws Exception {
+		
+		// validates name content against regex
 		logger.debug("Entering validateNameOnly for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			String text = theTestStep.getName();
@@ -75,8 +74,7 @@ public class TestStepIssueDetector {
 	}
 
 	public static String validateNameWorkspace(ITestStep theTestStep) throws Exception {
-		// TODO instead of returning strings, return the enum alone, including enum for
-		// no error
+		// validates for a good name if the reference is valid
 		logger.debug("Entering validateNameWorkspace for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {

@@ -70,7 +70,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeName(createITestStep(step))) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNameOnly(createITestStep(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {

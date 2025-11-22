@@ -182,11 +182,14 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	public static ArrayList<SheepDogIssueProposal> proposeName(ITestStep theTestStep) {
-		// TODO this is doing invalid step quickfixes and incomplete step name proposals
-		// After splitting name into component/object/predicate the logic here should
-		// only be used for proposals, not for quickfixes
-		logger.debug("Entering proposeName for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+	public static ArrayList<SheepDogIssueProposal> proposeNameOnly(ITestStep theTestStep) {
+		// TODO move out logic from here and delete metho
+		// Completions need to be moved into the issue detector. The error message
+		// should list all the completions with examples
+		// getComponents/Objects should be merged into proposeNameWorkspace. If the
+		// syntax is correct but the object doesn't exist, either generate it or suggest
+		// alternatives
+		logger.debug("Entering proposeNameOnly for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		String component = "";
 		String object = "";
@@ -222,15 +225,11 @@ public class TestStepIssueResolver {
 				proposals.add(proposal);
 			}
 		}
-		logger.debug("Exiting proposeName with {} proposals", proposals.size());
+		logger.debug("Exiting proposeNameOnly with {} proposals", proposals.size());
 		return proposals;
 	}
 
 	public static ArrayList<SheepDogIssueProposal> proposeNameWorkspace(ITestStep theTestStep) {
-		// this method is used to suggest alternates in case a step object is specified
-		// but doesn't exist. the proposeName methods suggests alternates in case a step
-		// object isn't specified
-
 		logger.debug("Entering proposeNameWorkspace for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 
