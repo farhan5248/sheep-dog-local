@@ -1,4 +1,4 @@
-package org.farhan.common;
+package org.farhan.impl;
 
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestStep;
@@ -10,6 +10,7 @@ public class TestStepImpl implements ITestStep {
 	private String name;
 	private ITestStepContainer testStepContainer;
 	private ITable theTable;
+	private IText theText;
 
 	public TestStepImpl(String value) {
 		name = value;
@@ -22,8 +23,7 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public String getNameLong() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
@@ -38,8 +38,7 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public IText getText() {
-		// TODO Auto-generated method stub
-		return null;
+		return theText;
 	}
 
 	@Override
@@ -49,8 +48,7 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setNameLong(String value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 	@Override
@@ -65,8 +63,7 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setText(IText value) {
-		// TODO Auto-generated method stub
-
+		theText = value;
 	}
 
 }

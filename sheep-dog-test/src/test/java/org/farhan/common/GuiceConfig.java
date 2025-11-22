@@ -7,6 +7,7 @@ import org.farhan.impl.ProposeContentDialogImpl;
 import org.farhan.impl.ProposeTestStepActionImpl;
 import org.farhan.impl.ProposeTestStepTableActionImpl;
 import org.farhan.impl.QuickfixDialogImpl;
+import org.farhan.impl.TestProjectImpl;
 import org.farhan.impl.ValidateErrorActionImpl;
 import org.farhan.impl.ValidateErrorDialogImpl;
 import org.farhan.impl.ValidateWarningActionImpl;

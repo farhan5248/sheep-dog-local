@@ -1,4 +1,4 @@
-package org.farhan.common;
+package org.farhan.impl;
 
 import java.util.ArrayList;
 
@@ -56,8 +56,7 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public ArrayList<IStatement> getStatementList() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStatementList() is not implemented");
 	}
 
 	@Override
@@ -72,8 +71,7 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public ArrayList<ITestStepContainer> getTestStepContainerList() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getTestStepContainerList() is not implemented");
 	}
 
 	@Override
@@ -88,20 +86,17 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public void setQualifiedName(String value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setQualifiedName(String value) is not implemented");
 	}
 
 	@Override
 	public void setStatementList(ArrayList<IStatement> value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setStatementList(ArrayList<IStatement> value) is not implemented");
 	}
 
 	@Override
 	public void setTestSetup(ITestSetup value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setTestSetup(ITestSetup value) is not implemented");
 	}
 
 	@Override
@@ -111,44 +106,37 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public String getResourceName() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getResourceName() is not implemented");
 	}
 
 	@Override
 	public void setResourceName(String value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setResourceName(String value) is not implemented");
 	}
 
 	@Override
 	public String getNameLong() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
 	public IStatement getStatement(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
 	}
 
 	@Override
 	public IStatement getStatement(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
 	}
 
 	@Override
 	public ITestStepContainer getTestStepContainer(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return testStepContainerList.get(index);
 	}
 
 	@Override
 	public void setNameLong(String value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 }

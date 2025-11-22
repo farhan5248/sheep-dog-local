@@ -1,4 +1,4 @@
-package org.farhan.common;
+package org.farhan.impl;
 
 import java.util.ArrayList;
 import java.util.TreeSet;

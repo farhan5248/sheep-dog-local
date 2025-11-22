@@ -11,6 +11,8 @@ import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.lang.StepDefinitionUtility;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
@@ -26,23 +28,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	public StepDefinitionImpl(StepDefinition value) {
 		this.eObject = value;
-	}
-
-	private String cellsToString(List<Cell> cells, boolean sorted) {
-		String cellsAsString = "";
-		List<String> sortedCells = new ArrayList<String>();
-		for (Cell cell : cells) {
-			if (cell.getName() != null) {
-				sortedCells.add(cell.getName());
-			}
-		}
-		if (sorted) {
-			Collections.sort(sortedCells);
-		}
-		for (String cell : sortedCells) {
-			cellsAsString += "| " + cell;
-		}
-		return cellsAsString;
 	}
 
 	private String cellsToString(ArrayList<ICell> arrayList) {
@@ -67,23 +52,40 @@ public class StepDefinitionImpl implements IStepDefinition {
 		parameters.setTable(SheepDogFactory.eINSTANCE.createTable());
 		Row row = SheepDogFactory.eINSTANCE.createRow();
 		parameters.getTable().getRowList().add(row);
-		if (header == null) {
-			// TODO there's no automated test for this..
-			// This is a docstring and also the abuse of this method :P
+		for (ICell srcCell : header.getCellList()) {
 			Cell cell = SheepDogFactory.eINSTANCE.createCell();
-			cell.setName("Content");
+			cell.setName(srcCell.getName());
 			row.getCellList().add(cell);
-		} else {
-			for (ICell srcCell : header.getCellList()) {
-				Cell cell = SheepDogFactory.eINSTANCE.createCell();
-				cell.setName(srcCell.getName());
-				row.getCellList().add(cell);
-			}
 		}
 
 		IStepParameters stepParameters = new StepParametersImpl(parameters);
 		stepParameters.setParent(this);
 		return stepParameters;
+	}
+
+	@Override
+	public IStepParameters createStepParameters(IText value) {
+		StepParameters parameters = SheepDogFactory.eINSTANCE.createStepParameters();
+		parameters.setName(Integer.toString(eObject.getStepParameterList().size() + 1));
+		eObject.getStepParameterList().add(parameters);
+
+		parameters.setTable(SheepDogFactory.eINSTANCE.createTable());
+		Row row = SheepDogFactory.eINSTANCE.createRow();
+		parameters.getTable().getRowList().add(row);
+		// TODO there's no automated test for this..
+		// This is a docstring and also the abuse of this method :P
+		Cell cell = SheepDogFactory.eINSTANCE.createCell();
+		cell.setName("Content");
+		row.getCellList().add(cell);
+
+		IStepParameters stepParameters = new StepParametersImpl(parameters);
+		stepParameters.setParent(this);
+		return stepParameters;
+	}
+
+	public EObject getEObject() {
+		// TODO add this to all interfaces
+		return eObject;
 	}
 
 	@Override
@@ -103,6 +105,16 @@ public class StepDefinitionImpl implements IStepDefinition {
 			parent = new StepObjectImpl((StepObject) eObject.eContainer());
 		}
 		return parent;
+	}
+
+	@Override
+	public IStatement getStatement(int index) {
+		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
+	}
+
+	@Override
+	public IStatement getStatement(String name) {
+		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
 	}
 
 	@Override
@@ -126,16 +138,23 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
+	public IStepParameters getStepParameters(int index) {
+		throw new UnsupportedOperationException("getStepParameters(int index) is not implemented");
+	}
+
+	@Override
 	public IStepParameters getStepParameters(IRow headers) {
-		for (StepParameters sp : eObject.getStepParameterList()) {
-			String spString = cellsToString(sp.getTable().getRowList().getFirst().getCellList(), true);
-			String headersString = cellsToString(headers.getCellList());
-			if (spString.contentEquals(headersString)) {
-				StepParametersImpl stepParameters = new StepParametersImpl(sp);
-				stepParameters.setParent(this);
-				return stepParameters;
-			}
-		}
+		return StepDefinitionUtility.getStepParameters(this, cellsToString(headers.getCellList()));
+	}
+
+	@Override
+	public IStepParameters getStepParameters(IText value) {
+		return StepDefinitionUtility.getStepParameters(this, value.getName());
+	}
+
+	@Override
+	public IStepParameters getStepParameters(String name) {
+		// Not needed in this project
 		return null;
 	}
 
@@ -162,47 +181,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 	@Override
 	public void setStepParametersList(ArrayList<IStepParameters> value) {
 		// Not needed in this project
-	}
-
-	public EObject getEObject() {
-		// TODO add this to all interfaces
-		return eObject;
-	}
-
-	@Override
-	public IStepParameters createStepParametersTmp(ArrayList<String> table) {
-		// TODO delete after IText creation
-		return null;
-	}
-
-	@Override
-	public IStepParameters getStepParametersTmp(ArrayList<String> table) {
-		// TODO delete after IText creation
-		return null;
-	}
-
-	@Override
-	public IStatement getStatement(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IStatement getStatement(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IStepParameters getStepParameters(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IStepParameters getStepParameters(String name) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

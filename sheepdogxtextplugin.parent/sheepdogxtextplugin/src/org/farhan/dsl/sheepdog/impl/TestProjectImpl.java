@@ -153,14 +153,12 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public IStepObject getStepObject(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStepObject(int index) is not implemented");
 	}
 
 	@Override
 	public ITestSuite getTestSuite(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getTestSuite(int index) is not implemented");
 	}
 
 }

@@ -3,12 +3,9 @@ package org.farhan.dsl.sheepdog.impl;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.TreeMap;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
@@ -124,44 +121,37 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public String getResourceName() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getResourceName() is not implemented");
 	}
 
 	@Override
 	public void setResourceName(String value) {
-		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException("setResourceName(String value) is not implemented");
 	}
 
 	@Override
 	public String getNameLong() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
 	public IStatement getStatement(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
 	}
 
 	@Override
 	public IStatement getStatement(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
 	}
 
 	@Override
 	public IStepDefinition getStepDefinition(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStepDefinition(int index) is not implemented");
 	}
 
 	@Override
 	public void setNameLong(String value) {
-		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 }

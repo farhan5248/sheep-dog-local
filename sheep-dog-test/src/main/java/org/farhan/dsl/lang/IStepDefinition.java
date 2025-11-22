@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 public interface IStepDefinition {
 
-	// TODO keep until IText is added
-	IStepParameters createStepParametersTmp(ArrayList<String> table);
-	IStepParameters getStepParametersTmp(ArrayList<String> table);
-
 	IStepParameters createStepParameters(IRow row);
+
+	IStepParameters createStepParameters(IText value);
 
 	String getName();
 
@@ -26,9 +24,11 @@ public interface IStepDefinition {
 
 	IStepParameters getStepParameters(int index);
 
-	IStepParameters getStepParameters(String name);
-
 	IStepParameters getStepParameters(IRow row);
+
+	IStepParameters getStepParameters(IText value);
+
+	IStepParameters getStepParameters(String name);
 
 	void setName(String value);
 

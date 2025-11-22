@@ -27,50 +27,42 @@ public class TestCaseImpl extends TestStepContainerImpl implements ITestCase {
 
 	@Override
 	public String getNameLong() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
 	public IStatement getStatement(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
 	}
 
 	@Override
 	public IStatement getStatement(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
 	}
 
 	@Override
 	public ITestStep getTestStep(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getTestStep(int index) is not implemented");
 	}
 
 	@Override
 	public ITestStep getTestStep(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getTestStep(String name) is not implemented");
 	}
 
 	@Override
 	public void setNameLong(String value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 	@Override
 	public ITestData getTestData(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getTestData(int index) is not implemented");
 	}
 
 	@Override
 	public ITestData getTestData(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getTestData(String name) is not implemented");
 	}
 
 }

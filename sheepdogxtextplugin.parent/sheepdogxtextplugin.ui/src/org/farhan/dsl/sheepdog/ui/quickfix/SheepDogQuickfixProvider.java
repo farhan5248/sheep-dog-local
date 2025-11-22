@@ -21,6 +21,7 @@ import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
+import org.farhan.dsl.sheepdog.sheepDog.Text;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.SheepDogIssueProposal;
 import org.farhan.dsl.issues.TestStepIssueResolver;
@@ -31,6 +32,7 @@ import org.farhan.dsl.sheepdog.impl.CellImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
+import org.farhan.dsl.sheepdog.impl.TextImpl;
 import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
 
 /**
@@ -142,6 +144,22 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 					}
 				});
 			}
+		} catch (Exception e) {
+			logError(e, issue.getMessage());
+		}
+	}
+
+	@Fix(SheepDogValidator.TEXT_NAME_WORKSPACE)
+	public void fixTextNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+		try {
+			acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object",
+					"upcase.png", new IModification() {
+						public void apply(IModificationContext context) throws BadLocationException {
+							Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+							Text theText = (Text) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+							(new SheepDogGenerator()).doGenerate((TestStep) theText.eContainer());
+						}
+					});
 		} catch (Exception e) {
 			logError(e, issue.getMessage());
 		}

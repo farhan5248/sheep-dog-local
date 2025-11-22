@@ -99,8 +99,7 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setText(IText value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setText(IText value) is not implemented");
 	}
 
 }

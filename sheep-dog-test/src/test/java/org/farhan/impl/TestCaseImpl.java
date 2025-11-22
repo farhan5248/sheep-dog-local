@@ -1,4 +1,4 @@
-package org.farhan.common;
+package org.farhan.impl;
 
 import java.util.ArrayList;
 
@@ -13,26 +13,22 @@ public class TestCaseImpl extends TestStepContainerImpl implements ITestCase {
 
 	@Override
 	public ArrayList<ITestData> getTestDataList() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getTestDataList() is not implemented");
 	}
 
 	@Override
 	public void setTestDataList(ArrayList<ITestData> value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setTestDataList(ArrayList<ITestData> value) is not implemented");
 	}
 
 	@Override
 	public ITestData getTestData(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getTestData(int index) is not implemented");
 	}
 
 	@Override
 	public ITestData getTestData(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getTestData(String name) is not implemented");
 	}
 
 }

@@ -9,6 +9,7 @@ import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.StatementUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.farhan.dsl.types.TestStepAttachmentTypes;
@@ -127,8 +128,8 @@ public class TestStepIssueResolver {
 		TreeMap<String, SheepDogIssueProposal> proposals = new TreeMap<String, SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 		ArrayList<ITestStep> allSteps = new ArrayList<ITestStep>();
-		ITestSetup testSetup = (ITestSetup) theTestStep.getParent().getParent().getTestStepContainer(0);
-		if (testSetup != null) {
+		ITestStepContainer testSetup = theTestStep.getParent().getParent().getTestStepContainer(0);
+		if (testSetup != null && testSetup instanceof ITestSetup) {
 			if (testSetup.getTestStepList() != null) {
 				for (ITestStep t : testSetup.getTestStepList()) {
 					allSteps.add(t);

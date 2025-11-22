@@ -1,8 +1,6 @@
 package org.farhan.impl;
 
 import org.farhan.common.MockIDE;
-import org.farhan.common.RowImpl;
-import org.farhan.common.TableImpl;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.objects.xtext.ProposeTestStepTableAction;
@@ -20,7 +18,7 @@ public class ProposeTestStepTableActionImpl extends TestObject implements Propos
 			RowImpl row = new RowImpl();
 			row.setParent(currentStep.getTable());
 			currentStep.getTable().getRowList().add(row);
-			MockIDE.setProposalList(RowIssueResolver.proposeCellListOnly(row));
+			MockIDE.setProposalList(RowIssueResolver.proposeCellListWorkspace(row));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

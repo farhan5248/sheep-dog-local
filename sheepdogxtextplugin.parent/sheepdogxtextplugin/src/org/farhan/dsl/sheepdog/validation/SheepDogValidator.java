@@ -18,12 +18,14 @@ import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
+import org.farhan.dsl.sheepdog.impl.TextImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
+import org.farhan.dsl.sheepdog.sheepDog.Text;
 import org.farhan.dsl.issues.*;
 import org.farhan.dsl.lang.*;
 
@@ -48,6 +50,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String TEST_STEP_NAME_OBJECT_ONLY = "TEST_STEP_NAME_OBJECT_ONLY";
 	public static final String TEST_STEP_NAME_STATE_ONLY = "TEST_STEP_NAME_STATE_ONLY";
 	public static final String TEST_STEP_NAME_TIME_ONLY = "TEST_STEP_NAME_TIME_ONLY";
+	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
 
 	@Check(CheckType.FAST)
 	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
@@ -144,6 +147,17 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 			String problems = CellIssueDetector.validateNameOnly(iCell);
 			if (!problems.isEmpty()) {
 				warning(problems, SheepDogPackage.Literals.CELL__NAME, problems);
+			}
+		}
+	}
+
+	@Check(CheckType.EXPENSIVE)
+	public void checkTextNameWorkspace(Text text) {
+		if (text != null) {
+			IText iText = new TextImpl(text);
+			String problems = TextIssueDetector.validateNameWorkspace(iText);
+			if (!problems.isEmpty()) {
+				warning(problems, SheepDogPackage.Literals.TEXT__NAME, problems);
 			}
 		}
 	}

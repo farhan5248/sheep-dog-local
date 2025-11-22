@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
-import org.farhan.common.TestStepImpl;
 import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.objects.xtext.ValidateErrorAction;
 import org.junit.jupiter.api.Assertions;

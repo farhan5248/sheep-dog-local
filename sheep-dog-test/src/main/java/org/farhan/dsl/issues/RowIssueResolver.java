@@ -34,8 +34,8 @@ public class RowIssueResolver {
 		return cellsAsString.trim();
 	}
 
-	public static ArrayList<SheepDogIssueProposal> proposeCellListOnly(IRow theRow) {
-		logger.debug("Entering proposeCellListOnly");
+	public static ArrayList<SheepDogIssueProposal> proposeCellListWorkspace(IRow theRow) {
+		logger.debug("Entering proposeCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 
@@ -67,7 +67,7 @@ public class RowIssueResolver {
 			}
 		}
 
-		logger.debug("Exiting proposeCellListOnly with {} proposals", proposals.size());
+		logger.debug("Exiting proposeCellListWorkspace with {} proposals", proposals.size());
 		return proposals;
 	}
 

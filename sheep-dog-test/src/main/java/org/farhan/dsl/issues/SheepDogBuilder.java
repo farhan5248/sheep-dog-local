@@ -1,11 +1,10 @@
 package org.farhan.dsl.issues;
 
-import java.util.ArrayList;
-
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,13 +35,12 @@ public class SheepDogBuilder {
 					}
 				}
 			}
-			// TODO create IText
 			if (theTestStep.getText() != null) {
-				if (!theTestStep.getText().getName().isEmpty()) {
-					ArrayList<String> headers = new ArrayList<String>();
-					headers.add("Content");
-					if (theStepDefinition.getStepParametersTmp(headers) == null) {
-						theStepDefinition.createStepParametersTmp(headers);
+
+				IText theText = theTestStep.getText();
+				if (!theText.getName().isEmpty()) {
+					if (theStepDefinition.getStepParameters(theText) == null) {
+						theStepDefinition.createStepParameters(theText);
 					}
 				}
 			}

@@ -51,8 +51,7 @@ public class TableImpl implements ITable {
 
 	@Override
 	public IRow getRow(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getRow(int index) is not implemented");
 	}
 
 }

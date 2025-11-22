@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.lang.StepDefinitionUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,7 +77,8 @@ public class TestStepIssueDetector {
 	public static String validateNameWorkspace(ITestStep theTestStep) throws Exception {
 		// TODO instead of returning strings, return the enum alone, including enum for
 		// no error
-		logger.debug("Entering validateNameWorkspace for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+		logger.debug("Entering validateNameWorkspace for step: {}",
+				theTestStep != null ? theTestStep.getName() : "null");
 		try {
 
 			ArrayList<ITestStep> testStepList = theTestStep.getParent().getTestStepList();
@@ -97,17 +101,6 @@ public class TestStepIssueDetector {
 			if (theStepDefinition == null) {
 				logger.debug("Exiting validateNameWorkspace");
 				return TestStepIssueTypes.TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE.description;
-			}
-			
-			if (theTestStep.getText() != null) {
-				if (!theTestStep.getText().getName().isEmpty()) {
-					ArrayList<String> headers = new ArrayList<String>();
-					headers.add("Content");
-					if (theStepDefinition.getStepParametersTmp(headers) == null) {
-						logger.debug("Exiting validateNameWorkspace");
-						return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
-					}
-				}
 			}
 			logger.debug("Exiting validateNameWorkspace");
 			return "";

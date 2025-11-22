@@ -68,7 +68,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		// TODO confirm the first arg is a Row
 		try {
-			for (SheepDogIssueProposal p : RowIssueResolver.proposeCellListOnly(new RowImpl(row))) {
+			for (SheepDogIssueProposal p : RowIssueResolver.proposeCellListWorkspace(new RowImpl(row))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {

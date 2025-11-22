@@ -2,9 +2,6 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.CellImpl;
-import org.farhan.common.RowImpl;
-import org.farhan.common.TableImpl;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.lang.ICell;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;

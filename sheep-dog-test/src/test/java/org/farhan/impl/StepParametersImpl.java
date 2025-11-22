@@ -1,4 +1,4 @@
-package org.farhan.common;
+package org.farhan.impl;
 
 import java.util.ArrayList;
 
@@ -7,9 +7,11 @@ import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.lang.IText;
 
 public class StepParametersImpl implements IStepParameters {
 
+	private IStepDefinition parent;
 	private ITable table;
 	private ArrayList<IStatement> statementList;
 
@@ -19,16 +21,24 @@ public class StepParametersImpl implements IStepParameters {
 		this.statementList = new ArrayList<IStatement>();
 	}
 
+	public StepParametersImpl(IText value) {
+		CellImpl cell = new CellImpl(value.getName());
+		RowImpl row = new RowImpl();
+		cell.setParent(row);
+		row.getCellList().add(cell);		
+		this.table = new TableImpl();
+		this.table.getRowList().add(row);
+		this.statementList = new ArrayList<IStatement>();
+	}
+
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getName() is not implemented");
 	}
 
 	@Override
 	public IStepDefinition getParent() {
-		// TODO Auto-generated method stub
-		return null;
+		return parent;
 	}
 
 	@Override
@@ -43,20 +53,17 @@ public class StepParametersImpl implements IStepParameters {
 
 	@Override
 	public void setName(String value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setName(String value) is not implemented");
 	}
 
 	@Override
 	public void setParent(IStepDefinition value) {
-		// TODO Auto-generated method stub
-
+		parent = value;
 	}
 
 	@Override
 	public void setStatementList(ArrayList<IStatement> value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("setStatementList(ArrayList<IStatement> value) is not implemented");
 	}
 
 	@Override
@@ -66,26 +73,22 @@ public class StepParametersImpl implements IStepParameters {
 
 	@Override
 	public String getNameLong() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
 	public IStatement getStatement(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
 	}
 
 	@Override
 	public IStatement getStatement(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
 	}
 
 	@Override
 	public void setNameLong(String value) {
-		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 }
