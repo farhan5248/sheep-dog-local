@@ -17,12 +17,16 @@ public class ValidateWarningActionImpl extends TestObject implements ValidateWar
 
 	public void transition() {
 		try {
-			String message = "";
-			message = TestStepIssueDetector.validateNameWorkspace(currentStep);
-			if (currentStep.getTable() != null) {
-				message += RowIssueDetector.validateCellListWorkspace(currentStep.getTable().getRowList().getFirst());
+			if (MockIDE.getValidationMessage().isEmpty()) {
+				MockIDE.setValidationMessage(TestStepIssueDetector.validateNameObjectWorkspace(currentStep));
+				if (MockIDE.getValidationMessage().isEmpty()) {
+					MockIDE.setValidationMessage(TestStepIssueDetector.validateNamePredicateWorkspace(currentStep));
+					if (MockIDE.getValidationMessage().isEmpty()) {
+						MockIDE.setValidationMessage(RowIssueDetector
+								.validateCellListWorkspace(currentStep.getTable().getRowList().getFirst()));
+					}
+				}
 			}
-			MockIDE.setValidationMessage(message);
 			MockIDE.setAlternateObjects(TestStepIssueResolver.proposeNameWorkspace(currentStep));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));

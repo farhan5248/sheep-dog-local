@@ -19,7 +19,7 @@ import io.cucumber.datatable.DataTable;
 
 public abstract class TestObject {
 
-	protected static TestStepImpl currentStep;
+	public static TestStepImpl currentStep;
 
 	public static ITestProject testProject;
 

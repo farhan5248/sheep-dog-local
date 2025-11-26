@@ -52,7 +52,8 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		return resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
 	}
 
-	@Fix(SheepDogValidator.TEST_STEP_NAME_WORKSPACE)
+	@Fix(SheepDogValidator.TEST_STEP_NAME_OBJECT_WORKSPACE)
+	@Fix(SheepDogValidator.TEST_STEP_NAME_PREDICATE_WORKSPACE)
 	public void fixTestStepNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		try {
 			TestStep step = (TestStep) getEObject(issue);

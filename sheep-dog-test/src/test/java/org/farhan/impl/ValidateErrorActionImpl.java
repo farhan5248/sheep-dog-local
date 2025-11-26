@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
+import org.farhan.dsl.issues.TestStepContainerIssueDetector;
 import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.objects.xtext.ValidateErrorAction;
 import org.junit.jupiter.api.Assertions;
@@ -15,8 +16,19 @@ public class ValidateErrorActionImpl extends TestObject implements ValidateError
 
 	public void transition() {
 		try {
-			MockIDE.setValidationMessage(TestStepIssueDetector.validateNameOnly(currentStep)
-					+ TestStepIssueDetector.validateNameWorkspace(currentStep));
+			if (MockIDE.getValidationMessage().isEmpty()) {
+				MockIDE.setValidationMessage(
+						TestStepContainerIssueDetector.validateTestStepListFile(currentStep.getParent()));
+				if (MockIDE.getValidationMessage().isEmpty()) {
+					MockIDE.setValidationMessage(TestStepIssueDetector.validateNameObjectOnly(currentStep));
+					if (MockIDE.getValidationMessage().isEmpty()) {
+						MockIDE.setValidationMessage(TestStepIssueDetector.validateNamePredicateOnly(currentStep));
+						if (MockIDE.getValidationMessage().isEmpty()) {
+							MockIDE.setValidationMessage(TestStepIssueDetector.validateNameComponentOnly(currentStep));
+						}
+					}
+				}
+			}
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

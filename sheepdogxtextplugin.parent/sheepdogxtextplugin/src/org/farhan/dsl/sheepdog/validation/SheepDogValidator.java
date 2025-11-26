@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
@@ -39,19 +40,16 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	private static final Logger logger = Logger.getLogger(SheepDogValidator.class);
 	public static final String CELL_NAME_ONLY = "CELL_NAME_ONLY";
 	public static final String TEST_STEP_CONTAINER_NAME_ONLY = "TEST_STEP_CONTAINER_NAME_ONLY";
+	public static final String TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE = "TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE";
 	public static final String TEST_SUITE_NAME_ONLY = "TEST_SUITE_NAME_ONLY";
-	public static final String TEST_STEP_NAME_WORKSPACE = "TEST_STEP_NAME_WORKSPACE";
-	public static final String TEST_STEP_NAME_COMPONENT_WORKSPACE = "TEST_STEP_NAME_COMPONENT_WORKSPACE";
-	public static final String TEST_STEP_NAME_STEP_OBJECT_WORKSPACE = "TEST_STEP_NAME_STEP_OBJECT_WORKSPACE";
-	public static final String TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE = "TEST_STEP_NAME_STEP_DEFINITION_WORKSPACE";
+	public static final String TEST_STEP_NAME_OBJECT_WORKSPACE = "TEST_STEP_NAME_OBJECT_WORKSPACE";
+	public static final String TEST_STEP_NAME_PREDICATE_WORKSPACE = "TEST_STEP_NAME_PREDICATE_WORKSPACE";
 	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
-	public static final String TEST_STEP_NAME_ONLY = "TEST_STEP_NAME_ONLY";
 	public static final String TEST_STEP_NAME_COMPONENT_ONLY = "TEST_STEP_NAME_COMPONENT_ONLY";
-	public static final String TEST_STEP_NAME_DETAILS_ONLY = "TEST_STEP_NAME_DETAILS_ONLY";
 	public static final String TEST_STEP_NAME_OBJECT_ONLY = "TEST_STEP_NAME_OBJECT_ONLY";
-	public static final String TEST_STEP_NAME_STATE_ONLY = "TEST_STEP_NAME_STATE_ONLY";
-	public static final String TEST_STEP_NAME_TIME_ONLY = "TEST_STEP_NAME_TIME_ONLY";
+	public static final String TEST_STEP_NAME_PREDICATE_ONLY = "TEST_STEP_NAME_PREDICATE_ONLY";
 	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
+	private static final EStructuralFeature TEST_STEP_NAME_STEP_PREDICATE_WORKSPACE = null;
 
 	@Check(CheckType.FAST)
 	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
@@ -80,16 +78,37 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public void checkTestStepNameOnly(TestStep step) {
 		try {
 			if (step.getName() != null) {
-				// TODO this is doing ONLY and WORKSPACE checks. It's checking the workspace for
-				// suggestions. That should be the responsibility of checkTestStepNameWorkspace;
-				// ie to find alternates, this should just check the grammar
-				String problems = TestStepIssueDetector.validateNameOnly(new TestStepImpl(step));
+				String problems = TestStepIssueDetector.validateNameComponentOnly(new TestStepImpl(step));
 				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_ONLY);
+					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_COMPONENT_ONLY);
+				} else {
+					problems = TestStepIssueDetector.validateNameObjectOnly(new TestStepImpl(step));
+					if (!problems.isEmpty()) {
+						error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_OBJECT_ONLY);
+					} else {
+						problems = TestStepIssueDetector.validateNamePredicateOnly(new TestStepImpl(step));
+						if (!problems.isEmpty()) {
+							error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_PREDICATE_ONLY);
+						}
+					}
 				}
 			}
 		} catch (Exception e) {
 			logError(e, step.getName());
+		}
+	}
+
+	@Check(CheckType.NORMAL)
+	public void checkTestStepContainerTestStepFileListFile(TestStepContainer theTestStepContainer) {
+		try {
+			String problems = TestStepContainerIssueDetector
+					.validateTestStepListFile(new TestStepContainerImpl(theTestStepContainer));
+			if (!problems.isEmpty()) {
+				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__TEST_STEP_LIST,
+						TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE);
+			}
+		} catch (Exception e) {
+			logError(e, theTestStepContainer.getName());
 		}
 	}
 
@@ -100,11 +119,14 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				TestStepImpl testStepImpl = new TestStepImpl(step);
 				testStepImpl.getParent().getParent().setParent(new TestProjectImpl(
 						new SourceFileRepository(step.eResource().getURI().toPlatformString(true))));
-				String problems = TestStepIssueDetector.validateNameOnly(testStepImpl);
-				if (problems.isEmpty()) {
-					problems = TestStepIssueDetector.validateNameWorkspace(testStepImpl);
+				String problems = TestStepIssueDetector.validateNameObjectWorkspace(testStepImpl);
+				if (!problems.isEmpty()) {
+					warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_OBJECT_WORKSPACE);
+				} else {
+					problems = TestStepIssueDetector.validateNamePredicateWorkspace(testStepImpl);
 					if (!problems.isEmpty()) {
-						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_WORKSPACE);
+						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME,
+								TEST_STEP_NAME_STEP_PREDICATE_WORKSPACE);
 					}
 				}
 			}

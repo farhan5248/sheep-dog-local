@@ -61,6 +61,8 @@ public final class GuiceConfig extends AbstractModule implements InjectorSource 
 	public void resetTestProject() throws Exception {
 		// Not sure I like this approach, feels hacky
 		TestObject.testProject = new TestProjectImpl();
+		TestObject.currentStep = null;
+		MockIDE.setValidationMessage("");
 	}
 
 }
