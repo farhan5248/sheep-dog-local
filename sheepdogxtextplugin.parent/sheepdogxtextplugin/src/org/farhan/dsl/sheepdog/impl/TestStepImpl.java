@@ -20,13 +20,12 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public String getName() {
-		return eObject.getName();
+		return eObject.getName() != null ? eObject.getName() : "";
 	}
 
 	@Override
 	public String getNameLong() {
-		// Not needed in this project
-		return null;
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
@@ -89,7 +88,7 @@ public class TestStepImpl implements ITestStep {
 		throw new UnsupportedOperationException("setText(IText value) is not implemented");
 	}
 
-	public boolean equals(TestStepImpl object) {
-		return eObject.equals(object.eObject);
+	public boolean equals(Object object) {
+		return eObject.equals(((TestStepImpl) object).eObject);
 	}
 }

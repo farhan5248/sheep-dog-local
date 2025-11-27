@@ -2,16 +2,12 @@ package org.farhan.dsl.sheepdog.impl;
 
 import java.util.ArrayList;
 
-import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
-import org.farhan.dsl.sheepdog.sheepDog.Cell;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
-import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 
 public class StepParametersImpl implements IStepParameters {

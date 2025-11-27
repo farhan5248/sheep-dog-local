@@ -1,7 +1,6 @@
 package org.farhan.dsl.sheepdog.impl;
 
 import java.util.ArrayList;
-import org.apache.log4j.Logger;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;

@@ -27,13 +27,15 @@ public class TestProjectImpl implements ITestProject {
 
 	public TestProjectImpl(IResourceRepository sr) {
 		this.sr = sr;
-		layer2dir = "src/test/resources/asciidoc/stepdefs/";
+		// TODO File.list methods don't end directory names with a / so to be
+		// consistent, this path shouldn't end with one
+		layer2dir = "src/test/resources/asciidoc/stepdefs";
 	}
 
 	@Override
 	public IStepObject createStepObject(String qualifiedName) {
 		StepObject eObject = SheepDogFactory.eINSTANCE.createStepObject();
-		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI(layer2dir + qualifiedName));
+		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI(layer2dir + "/" + qualifiedName));
 		theResource.getContents().add(eObject);
 		IStepObject stepObject = new StepObjectImpl(eObject);
 		stepObject.setQualifiedName(qualifiedName);
@@ -43,10 +45,11 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public IStepObject getStepObject(String qualifiedName) {
-		if (sr.contains("", layer2dir + qualifiedName)) {
+		if (sr.contains("", layer2dir + "/" + qualifiedName)) {
 			try {
-				Resource resource = new ResourceSetImpl().createResource(URI.createFileURI(layer2dir + qualifiedName));
-				String text = sr.get("", layer2dir + qualifiedName);
+				Resource resource = new ResourceSetImpl()
+						.createResource(URI.createFileURI(layer2dir + "/" + qualifiedName));
+				String text = sr.get("", layer2dir + "/" + qualifiedName);
 				if (text.isEmpty()) {
 					logger.error("Couldn't load StepObject for, file is empty: " + qualifiedName);
 				} else {
@@ -67,7 +70,7 @@ public class TestProjectImpl implements ITestProject {
 	public void putStepObject(IStepObject stepObject) throws Exception {
 		// TODO serialize should be setContent, parse should be getContent, this works
 		// well for the JSON response
-		sr.put("", layer2dir + stepObject.getQualifiedName(), ((StepObjectImpl) stepObject).serialize());
+		sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), ((StepObjectImpl) stepObject).serialize());
 	}
 
 	@Override
@@ -83,7 +86,7 @@ public class TestProjectImpl implements ITestProject {
 		try {
 			// TODO instead of empty tags, append it to the prefix?
 			for (String stepObjectFileName : sr.list("", layer2dir, getFileExtension())) {
-				componentSet.add(stepObjectFileName.replaceFirst(layer2dir, "").split("/")[0]);
+				componentSet.add(stepObjectFileName.replaceFirst(layer2dir + "/", "").split("/")[0]);
 			}
 		} catch (Exception e) {
 			logger.error("Couldn't get component list:", e);
@@ -117,7 +120,7 @@ public class TestProjectImpl implements ITestProject {
 	public ArrayList<IStepObject> getStepObjectList(String component) {
 		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
 		try {
-			for (String stepObjectFileName : sr.list("", layer2dir + component, getFileExtension())) {
+			for (String stepObjectFileName : sr.list("", layer2dir + "/" + component, getFileExtension())) {
 				objects.add(createStepObject(stepObjectFileName.replaceFirst(layer2dir, "")));
 			}
 		} catch (Exception e) {
@@ -128,27 +131,28 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public ITestSuite getTestSuite(String name) {
-		// Not needed in this project
-		return null;
+		throw new UnsupportedOperationException("getTestSuite(String name) is not implemented");
 	}
 
 	@Override
 	public ArrayList<ITestSuite> getTestSuiteList() {
-		// Not needed in this project
-		return null;
+		throw new UnsupportedOperationException("getTestSuiteList() is not implemented");
 	}
 
 	public void setProjectPath(String projectPath) {
+		throw new UnsupportedOperationException("setProjectPath(String projectPath) is not implemented");
 	}
 
 	@Override
 	public void setStepObjectList(ArrayList<IStepObject> stepObjectList) {
-		// Not needed in this project
+		throw new UnsupportedOperationException(
+				"setStepObjectList(ArrayList<IStepObject> stepObjectList) is not implemented");
 	}
 
 	@Override
 	public void setTestSuiteList(ArrayList<ITestSuite> testSuiteList) {
-		// Not needed in this project
+		throw new UnsupportedOperationException(
+				"setTestSuiteList(ArrayList<ITestSuite> testSuiteList) is not implemented");
 	}
 
 	@Override

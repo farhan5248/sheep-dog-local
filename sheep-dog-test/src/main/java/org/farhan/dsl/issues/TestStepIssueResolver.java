@@ -158,12 +158,15 @@ public class TestStepIssueResolver {
 
 	public static ArrayList<SheepDogIssueProposal> proposeNameObjectWorkspace(ITestStep theTestStep) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-		if (theTestStep.getName().matches(TestStepUtility.REGEX)) {
-			proposals.addAll(proposeNameObjectValid(theTestStep));
-		} else {
-			proposals.addAll(proposeNameObjectInvalid(theTestStep));
+		// TODO review whether the interface methods should return null vs empty strings
+		String name = theTestStep.getName() != null ? theTestStep.getName() : "";
+		if (name != null) {
+			if (name.matches(TestStepUtility.REGEX)) {
+				proposals.addAll(proposeNameObjectValid(theTestStep));
+			} else {
+				proposals.addAll(proposeNameObjectInvalid(theTestStep));
+			}
 		}
-
 		return proposals;
 	}
 
