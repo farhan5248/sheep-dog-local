@@ -38,7 +38,7 @@ public class RowIssueResolver {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 
-		if (TestStepIssueDetector.isValid(theTestStep.getName())) {
+		if (theTestStep.getName().matches(TestStepUtility.REGEX)) {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject != null) {
@@ -55,7 +55,7 @@ public class RowIssueResolver {
 						if (!replacement.contentEquals("| Content")) {
 							proposal.setValue(replacement);
 							proposals.add(proposal);
-						} 
+						}
 					}
 				}
 			}

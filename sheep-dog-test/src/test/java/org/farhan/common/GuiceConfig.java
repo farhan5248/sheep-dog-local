@@ -1,5 +1,8 @@
 package org.farhan.common;
 
+import java.util.ArrayList;
+
+import org.farhan.dsl.issues.SheepDogIssueProposal;
 import org.farhan.impl.GenerateStepDefinitionActionImpl;
 import org.farhan.impl.InputFileAsciidocFileImpl;
 import org.farhan.impl.Process2AsciidocFileImpl;
@@ -63,6 +66,7 @@ public final class GuiceConfig extends AbstractModule implements InjectorSource 
 		TestObject.testProject = new TestProjectImpl();
 		TestObject.currentStep = null;
 		MockIDE.setValidationMessage("");
+		MockIDE.proposalList = new ArrayList<SheepDogIssueProposal>();
 	}
 
 }

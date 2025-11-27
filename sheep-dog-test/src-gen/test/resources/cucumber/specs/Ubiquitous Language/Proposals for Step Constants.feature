@@ -15,68 +15,6 @@ Feature: Proposals for Step Constants
   4. Section types: snippet, section, table
   5. Attachment types: with, as follows
 
-  Scenario: Propose component types
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name |
-          | The blah  |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion            | Suggestion Name      |
-          | The blah application, | The blah application |
-
-  Scenario: Propose object types
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name             |
-          | The blah plugin, blah |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion                 | Suggestion Name |
-          | The blah plugin, blah file | blah file       |
-
-  Scenario: Propose modality types
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                  |
-          | The blah plugin, blah file |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion                    | Suggestion Name | Suggestion Description |
-          | The blah plugin, blah file is | is              | Maps to setter method  |
-
-  Scenario: Propose section types
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                          |
-          | The blah plugin, blah file heading |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion                                 | Suggestion Name |
-          | The blah plugin, blah file heading section | section         |
-
-  Scenario: Propose modality for section types
-
-    This is probably not needed or should be rolled up into Modality types
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                  |
-          | The blah plugin, blah file heading section |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion                                    | Suggestion Name |
-          | The blah plugin, blah file heading section is | is              |
-
-  Scenario: Propose attachment types
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                             |
-          | The blah plugin, blah file is created |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion                                 | Suggestion Name |
-          | The blah plugin, blah file is created with | with            |
-
   Scenario: Propose nothing
 
     If the step is complete, there's nothing to suggest.

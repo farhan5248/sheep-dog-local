@@ -68,7 +68,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 			TestStepImpl testStepImpl = new TestStepImpl(step);
 			testStepImpl.getParent().getParent().setParent(
 					new TestProjectImpl(new SourceFileRepository(step.eResource().getURI().toPlatformString(true))));
-			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNameWorkspace(testStepImpl)) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNameObjectWorkspace(testStepImpl)) {
 				acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {
 						context.getXtextDocument().replace(issue.getOffset(), step.getName().length(), p.getValue());

@@ -6,7 +6,7 @@ import org.farhan.dsl.issues.SheepDogIssueProposal;
 
 public class MockIDE {
 
-	private static ArrayList<SheepDogIssueProposal> proposalList = new ArrayList<SheepDogIssueProposal>();
+	static ArrayList<SheepDogIssueProposal> proposalList = new ArrayList<SheepDogIssueProposal>();
 	private static String validationMessage = "";
 	private static ArrayList<SheepDogIssueProposal> alternateObjects = new ArrayList<SheepDogIssueProposal>();
 

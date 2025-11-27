@@ -1,6 +1,5 @@
 package org.farhan.suites;
 
-import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,22 +14,22 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testIsComponent() {
-		Assertions.assertTrue(
-				TestStepUtility.hasComponent("The Something1 application, Something2 file Something3 section is empty"));
+		Assertions.assertTrue(TestStepUtility
+				.hasComponent("The Something1 application, Something2 file Something3 section is empty"));
 	}
 
 	@Test
 	public void testGetAppName() {
-		Assertions.assertTrue(
-				TestStepUtility.getComponentName("The Something1 application, Something2 file Something3 section is empty")
-						.contentEquals("Something1"));
+		Assertions.assertTrue(TestStepUtility
+				.getComponentName("The Something1 application, Something2 file Something3 section is empty")
+				.contentEquals("Something1"));
 	}
 
 	@Test
 	public void testGetAppType() {
-		Assertions.assertTrue(
-				TestStepUtility.getComponentType("The Something1 application, Something2 file Something3 section is empty")
-						.contentEquals("application"));
+		Assertions.assertTrue(TestStepUtility
+				.getComponentType("The Something1 application, Something2 file Something3 section is empty")
+				.contentEquals("application"));
 	}
 
 	@Test
@@ -49,9 +48,9 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testGetDetailsName() {
-		Assertions.assertTrue(
-				TestStepUtility.getDetailsName("The Something1 application, Something2 file Something3 section is empty")
-						.contentEquals("Something3"));
+		Assertions.assertTrue(TestStepUtility
+				.getDetailsName("The Something1 application, Something2 file Something3 section is empty")
+				.contentEquals("Something3"));
 	}
 
 	@Test
@@ -63,9 +62,9 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testGetDetailsType() {
-		Assertions.assertTrue(
-				TestStepUtility.getDetailsType("The Something1 application, Something2 file Something3 section is empty")
-						.contentEquals("section"));
+		Assertions.assertTrue(TestStepUtility
+				.getDetailsType("The Something1 application, Something2 file Something3 section is empty")
+				.contentEquals("section"));
 	}
 
 	@Test
@@ -77,9 +76,9 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testGetStateModality() {
-		Assertions.assertTrue(
-				TestStepUtility.getStateModality("The Something1 application, Something2 file Something3 section is empty")
-						.contentEquals("is"));
+		Assertions.assertTrue(TestStepUtility
+				.getStateModality("The Something1 application, Something2 file Something3 section is empty")
+				.contentEquals("is"));
 	}
 
 	@Test
@@ -91,52 +90,54 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testStateRegexIsSet() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is set"));
+		Assertions.assertTrue("The Something1 application, Something2 file is set".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsUnset() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is unset"));
+		Assertions.assertTrue("The Something1 application, Something2 file is unset".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsEmpty() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is empty"));
+		Assertions.assertTrue("The Something1 application, Something2 file is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsPresent() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is present"));
+		Assertions.assertTrue("The Something1 application, Something2 file is present".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsAbsent() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is absent"));
+		Assertions.assertTrue("The Something1 application, Something2 file is absent".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsEnabled() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is enabled"));
+		Assertions.assertTrue("The Something1 application, Something2 file is enabled".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsDisabled() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is disabled"));
+		Assertions.assertTrue("The Something1 application, Something2 file is disabled".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsDownloaded() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is downloaded"));
+		Assertions
+				.assertTrue("The Something1 application, Something2 file is downloaded".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsUploaded() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is uploaded"));
+		Assertions.assertTrue("The Something1 application, Something2 file is uploaded".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexAsFollows() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is created as follows"));
+		Assertions.assertTrue(
+				"The Something1 application, Something2 file is created as follows".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
@@ -148,91 +149,95 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testIsNegativeStep() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file isn't empty"));
+		Assertions.assertTrue("The Something1 application, Something2 file isn't empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsnt() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file isn't empty"));
+		Assertions.assertTrue("The Something1 application, Something2 file isn't empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexWillBe() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file will be empty"));
+		Assertions
+				.assertTrue("The Something1 application, Something2 file will be empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexWontBe() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file won't be empty"));
+		Assertions.assertTrue(
+				"The Something1 application, Something2 file won't be empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testDetailsRegexSection() {
-		Assertions.assertTrue(
-				TestStepIssueDetector.isValid("The Something1 application, Something2 file Something3 section is empty"));
+		Assertions.assertTrue("The Something1 application, Something2 file Something3 section is empty"
+				.matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testDetailsRegexList() {
-		Assertions
-				.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file Something3 list is empty"));
+		Assertions.assertTrue(
+				"The Something1 application, Something2 file Something3 list is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testDetailsRegexFragment() {
-		Assertions.assertTrue(
-				TestStepIssueDetector.isValid("The Something1 application, Something2 file Something3 fragment is empty"));
+		Assertions.assertTrue("The Something1 application, Something2 file Something3 fragment is empty"
+				.matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testDetailsRegexTable() {
 		Assertions.assertTrue(
-				TestStepIssueDetector.isValid("The Something1 application, Something2 file Something3 table is empty"));
+				"The Something1 application, Something2 file Something3 table is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testDetailsRegexSnippet() {
-		Assertions.assertTrue(
-				TestStepIssueDetector.isValid("The Something1 application, Something2 file Something3 snippet is empty"));
+		Assertions.assertTrue("The Something1 application, Something2 file Something3 snippet is empty"
+				.matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testObjectRegexDirectory() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 directory is empty"));
+		Assertions
+				.assertTrue("The Something1 application, Something2 directory is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testObjectRegexPage() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 page is empty"));
+		Assertions.assertTrue("The Something1 application, Something2 page is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testObjectRegexDialog() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 dialog is empty"));
+		Assertions.assertTrue("The Something1 application, Something2 dialog is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testObjectRegexResponse() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 response is empty"));
+		Assertions
+				.assertTrue("The Something1 application, Something2 response is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testAppRegexProject() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 project, Something2 file is present"));
+		Assertions.assertTrue("The Something1 project, Something2 file is present".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testAppRegexService() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 service, Something2 file is empty"));
+		Assertions.assertTrue("The Something1 service, Something2 file is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testAppRegexPlugIn() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 plugin, Something2 file is empty"));
+		Assertions.assertTrue("The Something1 plugin, Something2 file is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testAppRegexBatchJob() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 batchjob, Something2 file is empty"));
+		Assertions.assertTrue("The Something1 batchjob, Something2 file is empty".matches(TestStepUtility.REGEX));
 	}
 }

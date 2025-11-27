@@ -1,6 +1,5 @@
 package org.farhan.suites;
 
-import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -86,22 +85,22 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testStateRegexWith() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 request is executed with"));
+		Assertions.assertTrue("The Something1 application, Something2 request is executed with".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsSent() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 request is sent"));
+		Assertions.assertTrue("The Something1 application, Something2 request is sent".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsPerformed() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 file is performed"));
+		Assertions.assertTrue("The Something1 application, Something2 file is performed".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexIsTriggered() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 request is triggered"));
+		Assertions.assertTrue("The Something1 application, Something2 request is triggered".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
@@ -112,73 +111,73 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testStateRegexIsntExecuted() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 request isn't executed"));
+		Assertions.assertTrue("The Something1 application, Something2 request isn't executed".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexWillBeExecuted() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 request will be executed"));
+		Assertions.assertTrue("The Something1 application, Something2 request will be executed".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testStateRegexWontBeExecuted() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 request won't be executed"));
+		Assertions.assertTrue("The Something1 application, Something2 request won't be executed".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testObjectRegexGoal() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 goal is executed"));
+		Assertions.assertTrue("The Something1 application, Something2 goal is executed".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testObjectRegexAction() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 action is performed"));
+		Assertions.assertTrue("The Something1 application, Something2 action is performed".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testAppRegexService() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 service, Something2 request is sent"));
+		Assertions.assertTrue("The Something1 service, Something2 request is sent".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testAppRegexApplication() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 application, Something2 request is sent"));
+		Assertions.assertTrue("The Something1 application, Something2 request is sent".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testAppRegexBatchJob() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 batchjob, Something2 request is sent"));
+		Assertions.assertTrue("The Something1 batchjob, Something2 request is sent".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testAppRegexPlugIn() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 plugin, Something2 request is sent"));
+		Assertions.assertTrue("The Something1 plugin, Something2 request is sent".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testTimeRegexAt() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 plugin, Something2 request is sent at noon"));
+		Assertions.assertTrue("The Something1 plugin, Something2 request is sent at noon".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testTimeRegexBefore() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 plugin, Something2 request is sent before midday"));
+		Assertions.assertTrue("The Something1 plugin, Something2 request is sent before midday".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testTimeRegexAfter() {
 		Assertions
-				.assertTrue(TestStepIssueDetector.isValid("The Something1 plugin, Something2 request is sent after the next day"));
+				.assertTrue("The Something1 plugin, Something2 request is sent after the next day".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testTimeRegexIn() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 plugin, Something2 request is sent in 5 years"));
+		Assertions.assertTrue("The Something1 plugin, Something2 request is sent in 5 years".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
 	public void testTimeRegexOnTime() {
-		Assertions.assertTrue(TestStepIssueDetector.isValid("The Something1 plugin, Something2 request is sent on time"));
+		Assertions.assertTrue("The Something1 plugin, Something2 request is sent on time".matches(TestStepUtility.REGEX));
 	}
 
 }

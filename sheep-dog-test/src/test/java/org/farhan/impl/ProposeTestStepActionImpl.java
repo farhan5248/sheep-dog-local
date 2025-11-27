@@ -13,7 +13,10 @@ public class ProposeTestStepActionImpl extends TestObject implements ProposeTest
 
 	public void transition() {
 		try {
-			MockIDE.setProposalList(TestStepIssueResolver.proposeNameOnly(currentStep));
+			MockIDE.getProposals().addAll(TestStepIssueResolver.proposeNameObjectWorkspace(currentStep));
+			if (MockIDE.getProposals().isEmpty()) {
+				MockIDE.getProposals().addAll(TestStepIssueResolver.proposeNamePredicateWorkspace(currentStep));
+			}
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

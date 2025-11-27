@@ -27,7 +27,7 @@ public class ValidateWarningActionImpl extends TestObject implements ValidateWar
 					}
 				}
 			}
-			MockIDE.setAlternateObjects(TestStepIssueResolver.proposeNameWorkspace(currentStep));
+			MockIDE.setAlternateObjects(TestStepIssueResolver.proposeNameObjectWorkspace(currentStep));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

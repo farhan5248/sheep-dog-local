@@ -11,17 +11,13 @@ public class TestStepIssueDetector {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
 
-	public static boolean isValid(String text) {
-		return text.matches(TestStepUtility.REGEX);
-	}
-
 	// TODO make tests for all of these documenting the message content
 	public static String validateNameComponentOnly(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering validateNameComponentOnly for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		String text = theTestStep.getName();
 		if (text != null) {
-			if (!isValid(text)) {
+			if (!text.matches(TestStepUtility.REGEX)) {
 				if (!TestStepUtility.hasObject(text)) {
 					if (!TestStepUtility.hasComponent(text)) {
 						logger.debug("Exiting validateNameComponentOnly");
@@ -39,7 +35,7 @@ public class TestStepIssueDetector {
 				theTestStep != null ? theTestStep.getName() : "null");
 		String text = theTestStep.getName();
 		if (text != null) {
-			if (!isValid(text)) {
+			if (!text.matches(TestStepUtility.REGEX)) {
 				if (!TestStepUtility.hasObject(text)) {
 					logger.debug("Exiting validateNameObjectOnly");
 					return TestStepIssueTypes.TEST_STEP_NAME_OBJECT_ONLY.description;
@@ -56,7 +52,7 @@ public class TestStepIssueDetector {
 				theTestStep != null ? theTestStep.getName() : "null");
 		String text = theTestStep.getName();
 		if (text != null) {
-			if (!isValid(text)) {
+			if (!text.matches(TestStepUtility.REGEX)) {
 				if (TestStepUtility.hasObject(text)) {
 					// There can't be a predicate since it's invalid so is there at least state
 					if (!TestStepUtility.hasState(text)) {

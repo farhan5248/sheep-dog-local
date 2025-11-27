@@ -60,6 +60,7 @@ Feature: Display Documentation with Proposals
           | Suggestion     | Suggestion Name | Suggestion Description                                 |
           | The Input file | Input file      | Referred in: The daily batchjob, Input file is present |
 
+  
   Scenario: Display existing object references
 
     If the fully qualified name of an object is specified, then its documentation is displayed.

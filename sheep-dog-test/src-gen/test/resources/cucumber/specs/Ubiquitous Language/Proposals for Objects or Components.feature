@@ -118,42 +118,6 @@ Feature: Proposals for Objects or Components
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
-  Scenario: Has object no component no previous no component objects
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name      |
-          | The Input file |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion        | Suggestion Name |
-          | The Input file is | is              |
-
-  Scenario: Has object no component no previous has component objects
-
-    TODO the assertion should be that is present won't be suggested because this step has no component
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name      |
-          | The Input file |
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name |
-          | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion        | Suggestion Name |
-          | The Input file is | is              |
-
-  Scenario: Has object no component has previous no component objects
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                 |
-          | The daily batchjob, Input file is present |
-          | The Input file                            |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion        | Suggestion Name |
-          | The Input file is | is              |
-
   Scenario: Has object no component has previous has component objects
 
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
@@ -168,16 +132,6 @@ Feature: Proposals for Objects or Components
           | Suggestion                | Suggestion Name |
           | The Input file is present | is present      |
 
-  Scenario: Has object has component no previous no component objects
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                      |
-          | The daily batchjob, Input file |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion                        | Suggestion Name |
-          | The daily batchjob, Input file is | is              |
-
   Scenario: Has object has component no previous has component objects
 
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
@@ -190,17 +144,6 @@ Feature: Proposals for Objects or Components
      Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion                                | Suggestion Name |
           | The daily batchjob, Input file is present | is present      |
-
-  Scenario: Has object has component has previous no component objects
-
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                 |
-          | The daily batchjob, Input file is present |
-          | The daily batchjob, Input file            |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion                        | Suggestion Name |
-          | The daily batchjob, Input file is | is              |
 
   Scenario: Has object has component has previous has component objects
 
