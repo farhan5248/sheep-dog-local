@@ -40,17 +40,3 @@ Feature: Problems Fixed By Code Generation
       | Message                                                 |
       | The step parameters don't exist for the step definition |
 
-  Scenario: This object doesn't exist and there is an alternate
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                 |
-      | The daily batchjob, Input file is present |
-    And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows
-      | Object Name                           | Step Definition Name |
-      | daily batchjob/app/Input file.feature | is present           |
-    When The xtext plugin, validate warning action is performed
-    Then The xtext plugin, validate warning dialog will be set as follows
-      | Message                                              |
-      | The step object file doesn't exist for the component |
-    And The xtext plugin, quickfix dialog will be set as follows
-      | Message                                       |
-      | The daily batchjob, app/Input file is present |

@@ -49,7 +49,6 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String TEST_STEP_NAME_OBJECT_ONLY = "TEST_STEP_NAME_OBJECT_ONLY";
 	public static final String TEST_STEP_NAME_PREDICATE_ONLY = "TEST_STEP_NAME_PREDICATE_ONLY";
 	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
-	private static final EStructuralFeature TEST_STEP_NAME_STEP_PREDICATE_WORKSPACE = null;
 
 	@Check(CheckType.FAST)
 	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
@@ -126,7 +125,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 					problems = TestStepIssueDetector.validateNamePredicateWorkspace(testStepImpl);
 					if (!problems.isEmpty()) {
 						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME,
-								TEST_STEP_NAME_STEP_PREDICATE_WORKSPACE);
+								TEST_STEP_NAME_PREDICATE_WORKSPACE);
 					}
 				}
 			}

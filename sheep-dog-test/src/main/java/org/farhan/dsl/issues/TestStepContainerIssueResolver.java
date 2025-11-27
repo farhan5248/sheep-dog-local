@@ -10,7 +10,7 @@ public class TestStepContainerIssueResolver {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepContainerIssueResolver.class);
 
-	public static ArrayList<SheepDogIssueProposal> proposeNameOnly(ITestStepContainer theTestStepContainer) {
+	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) {
 		// TODO shouldn't this take a TestStepContainer as a parameter
 		logger.debug("Entering proposeNameOnly for test step container: {}", theTestStepContainer != null ? theTestStepContainer.getName() : "null");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();

@@ -12,8 +12,49 @@ import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.StatementUtility;
 import org.farhan.dsl.lang.TestStepUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestStepIssueResolver {
+	private static final Logger logger = LoggerFactory.getLogger(TestStepIssueResolver.class);
+
+	public static ArrayList<SheepDogIssueProposal> correctNameObjectWorkspace(ITestStep theTestStep) {
+		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
+
+		try {
+			IStepObject theStepObject = SheepDogBuilder.generateStepObject(theTestStep);
+			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+			proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getQualifiedName());
+			proposal.setDescription(StatementUtility.getStatementListAsString(theStepObject.getStatementList()));
+			proposal.setValue(theStepObject.toString());
+			proposal.setQualifiedName(theStepObject.getQualifiedName());
+			proposals.add(proposal);
+		} catch (Exception e) {
+			logger.error("Failed in correctNameObjectWorkspace for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
+		}
+		proposals.addAll(suggestNameObjectWorkspace(theTestStep));
+		return proposals;
+	}
+
+	public static ArrayList<SheepDogIssueProposal> correctNamePredicateWorkspace(ITestStep theTestStep) {
+		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
+		try {
+			IStepDefinition theStepDefinition = SheepDogBuilder.generateStepDefinition(theTestStep);
+			IStepObject theStepObject = theStepDefinition.getParent();
+			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+			proposal.setId("Generate " + theStepDefinition.getName());
+			proposal.setDescription(StatementUtility.getStatementListAsString(theStepDefinition.getStatementList()));
+			proposal.setValue(theStepObject.toString());
+			proposal.setQualifiedName(theStepObject.getQualifiedName());
+			proposals.add(proposal);
+		} catch (Exception e) {
+			logger.error("Failed in correctNameObjectWorkspace for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
+		}
+		proposals.addAll(suggestNamePredicateWorkspace(theTestStep));
+		return proposals;
+	}
 
 	private static ArrayList<SheepDogIssueProposal> getComponentObjects(ITestStep theTestStep, String component,
 			ITestProject theProject) {
@@ -115,33 +156,36 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	private static ArrayList<SheepDogIssueProposal> proposeNameObjectInvalid(ITestStep theTestStep) {
+	public static ArrayList<SheepDogIssueProposal> suggestNameObjectWorkspace(ITestStep theTestStep) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-		String component = "";
-		String object = "";
-		ITestProject theProject = theTestStep.getParent().getParent().getParent();
-		if (theTestStep.getName() != null) {
-			component = TestStepUtility.getComponent(theTestStep.getName());
-			object = TestStepUtility.getObject(theTestStep.getName());
-		}
-		if (object.isEmpty()) {
-			if (component.isEmpty()) {
-				for (SheepDogIssueProposal proposal : getProjectComponents(theTestStep, theProject)) {
-					proposals.add(proposal);
-				}
-			} else {
-				for (SheepDogIssueProposal proposal : getComponentObjects(theTestStep, component, theProject)) {
-					proposals.add(proposal);
-				}
+		String name = theTestStep.getName() != null ? theTestStep.getName() : "";
+		if (name != null) {
+			String component = "";
+			String object = "";
+			ITestProject theProject = theTestStep.getParent().getParent().getParent();
+			if (theTestStep.getName() != null) {
+				component = TestStepUtility.getComponent(theTestStep.getName());
+				object = TestStepUtility.getObject(theTestStep.getName());
 			}
-			for (SheepDogIssueProposal proposal : getPreviousObjects(theTestStep)) {
-				proposals.add(proposal);
+			if (object.isEmpty()) {
+				if (component.isEmpty()) {
+					for (SheepDogIssueProposal proposal : getProjectComponents(theTestStep, theProject)) {
+						proposals.add(proposal);
+					}
+				} else {
+					for (SheepDogIssueProposal proposal : getComponentObjects(theTestStep, component, theProject)) {
+						proposals.add(proposal);
+					}
+				}
+				for (SheepDogIssueProposal proposal : getPreviousObjects(theTestStep)) {
+					proposals.add(proposal);
+				}
 			}
 		}
 		return proposals;
 	}
 
-	public static ArrayList<SheepDogIssueProposal> proposeNamePredicateWorkspace(ITestStep theTestStep) {
+	public static ArrayList<SheepDogIssueProposal> suggestNamePredicateWorkspace(ITestStep theTestStep) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		if (theTestStep.getName() != null) {
 			if (!theTestStep.getName().matches(TestStepUtility.REGEX)) {
@@ -151,46 +195,6 @@ public class TestStepIssueResolver {
 						proposals.add(proposal);
 					}
 				}
-			}
-		}
-		return proposals;
-	}
-
-	public static ArrayList<SheepDogIssueProposal> proposeNameObjectWorkspace(ITestStep theTestStep) {
-		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-		// TODO review whether the interface methods should return null vs empty strings
-		String name = theTestStep.getName() != null ? theTestStep.getName() : "";
-		if (name != null) {
-			if (name.matches(TestStepUtility.REGEX)) {
-				proposals.addAll(proposeNameObjectValid(theTestStep));
-			} else {
-				proposals.addAll(proposeNameObjectInvalid(theTestStep));
-			}
-		}
-		return proposals;
-	}
-
-	private static ArrayList<SheepDogIssueProposal> proposeNameObjectValid(ITestStep theTestStep) {
-
-		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-		SheepDogIssueProposal proposal;
-		// TODO check if the step name is valid first
-		String stepNameLong = TestStepUtility.getNameLong(theTestStep);
-		String component = TestStepUtility.getComponent(stepNameLong);
-		String object = TestStepUtility.getObject(stepNameLong);
-		String objectName = TestStepUtility.getObjectName(stepNameLong);
-		String objectType = TestStepUtility.getObjectType(stepNameLong);
-		String extension = theTestStep.getParent().getParent().getParent().getFileExtension();
-		for (IStepObject aStepObject : theTestStep.getParent().getParent().getParent().getStepObjectList(component)) {
-			if (aStepObject.getName().contentEquals(objectName + " " + objectType)) {
-				String alternateName = aStepObject.getQualifiedName().replaceFirst(component + "/", "")
-						.replaceFirst(extension + "$", "");
-				proposal = new SheepDogIssueProposal();
-				proposal.setId(aStepObject.getQualifiedName().replaceFirst(component + "/", "")
-						.replaceFirst(extension + "$", ""));
-				proposal.setDescription("Rename the object to an existing one");
-				proposal.setValue(theTestStep.getName().replace(object, alternateName));
-				proposals.add(proposal);
 			}
 		}
 		return proposals;

@@ -9,7 +9,7 @@ public class TestSuiteIssueResolver {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestSuiteIssueResolver.class);
 
-	public static ArrayList<SheepDogIssueProposal> proposeNameOnly(ITestSuite theTestSuite) {
+	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestSuite theTestSuite) {
 		// TODO shouldn't this take a TestSuite as a parameter
 		logger.debug("Entering proposeNameOnly for test suite: {}", theTestSuite != null ? theTestSuite.getName() : "null");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();

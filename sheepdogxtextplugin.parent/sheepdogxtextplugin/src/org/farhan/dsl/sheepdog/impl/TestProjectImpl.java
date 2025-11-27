@@ -34,6 +34,7 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public IStepObject createStepObject(String qualifiedName) {
+		// TODO if contents are provided, then initialize the object.
 		StepObject eObject = SheepDogFactory.eINSTANCE.createStepObject();
 		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI(layer2dir + "/" + qualifiedName));
 		theResource.getContents().add(eObject);
@@ -67,10 +68,19 @@ public class TestProjectImpl implements ITestProject {
 		return null;
 	}
 
-	public void putStepObject(IStepObject stepObject) throws Exception {
+	public void putStepObject(IStepObject stepObject, String content) {
 		// TODO serialize should be setContent, parse should be getContent, this works
 		// well for the JSON response
-		sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), ((StepObjectImpl) stepObject).serialize());
+		try {
+			if (content != null) {
+				sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), content);
+			} else {
+				sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), ((StepObjectImpl) stepObject).serialize());
+			}
+		} catch (Exception e) {
+			logger.error("Couldn't write step object:", e);
+		}
+
 	}
 
 	@Override

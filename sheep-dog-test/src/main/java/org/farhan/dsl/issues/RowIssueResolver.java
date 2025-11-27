@@ -33,8 +33,30 @@ public class RowIssueResolver {
 		return cellsAsString.trim();
 	}
 
-	public static ArrayList<SheepDogIssueProposal> proposeCellListWorkspace(ITestStep theTestStep) {
-		logger.debug("Entering proposeCellListWorkspace");
+	public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep theTestStep) {
+		logger.debug("Entering correctCellListWorkspace");
+		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
+		try {
+			IStepParameters theStepParameters = SheepDogBuilder.generateStepParameters(theTestStep);
+			IStepObject theStepObject = theStepParameters.getParent().getParent();
+			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+			proposal.setId(
+					"Generate " + cellsToString(theStepParameters.getTable().getRowList().getFirst().getCellList()));
+			proposal.setDescription(StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
+			proposal.setValue(theStepObject.toString());
+			proposal.setQualifiedName(theStepObject.getQualifiedName());
+			proposals.add(proposal);
+		} catch (Exception e) {
+			logger.error("Failed in correctCellListWorkspace for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
+		}
+		proposals.addAll(suggestCellListWorkspace(theTestStep));
+		logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+		return proposals;
+	}
+
+	public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(ITestStep theTestStep) {
+		logger.debug("Entering suggestCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 
@@ -60,7 +82,7 @@ public class RowIssueResolver {
 				}
 			}
 		}
-		logger.debug("Exiting proposeCellListWorkspace with {} proposals", proposals.size());
+		logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
 		return proposals;
 	}
 

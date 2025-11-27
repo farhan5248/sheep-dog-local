@@ -18,11 +18,15 @@ public class RowIssueDetector {
 			ITestStep theTestStep = (ITestStep) theRow.getParent().getParent();
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
-			IStepDefinition theStepDefinition = theStepObject
-					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
-			if (theStepDefinition.getStepParameters(theTestStep.getTable().getRowList().getFirst()) == null) {
-				logger.debug("Exiting validateCellListWorkspace");
-				return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
+			if (theStepObject != null) {
+				IStepDefinition theStepDefinition = theStepObject
+						.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+				if (theStepDefinition != null) {
+					if (theStepDefinition.getStepParameters(theTestStep.getTable().getRowList().getFirst()) == null) {
+						logger.debug("Exiting validateCellListWorkspace");
+						return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
+					}
+				}
 			}
 			logger.debug("Exiting validateCellListWorkspace");
 			return "";

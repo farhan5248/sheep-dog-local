@@ -110,7 +110,19 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public void setStepDefinitionList(ArrayList<IStepDefinition> value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException(
+				"setStepDefinitionList(ArrayList<IStepDefinition> value) is not implemented");
+	}
+
+	public String toString() {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		try {
+			eObject.eResource().save(os, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+		} catch (IOException e) {
+			// TODO revisit this later, review all try catch in every package
+			e.printStackTrace();
+		}
+		return os.toString();
 	}
 
 	public String serialize() throws IOException {

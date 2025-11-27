@@ -40,7 +40,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeCellList(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (SheepDogIssueProposal p : RowIssueResolver.proposeCellListWorkspace(createITestStep(step))) {
+			for (SheepDogIssueProposal p : RowIssueResolver.suggestCellListWorkspace(createITestStep(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
@@ -70,7 +70,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNameObjectWorkspace(createITestStep(step))) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNameObjectWorkspace(createITestStep(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
@@ -78,7 +78,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 					acceptor.accept(proposal);
 				}
 			}
-			for (SheepDogIssueProposal p : TestStepIssueResolver.proposeNamePredicateWorkspace(createITestStep(step))) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNamePredicateWorkspace(createITestStep(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
