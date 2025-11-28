@@ -31,7 +31,6 @@ import org.farhan.dsl.issues.TextIssueResolver;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.sheepdog.impl.CellImpl;
 import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
-import org.farhan.dsl.sheepdog.impl.StepObjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
@@ -58,9 +57,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 					if (!p.getQualifiedName().isEmpty()) {
 						// TODO use context.getXtextDocument to write to the filesystem instead of
 						// TestProject.put
-						StepObjectImpl stepObjectImpl = (StepObjectImpl) testProject
-								.createStepObject(p.getQualifiedName());
-						testProject.putStepObject(stepObjectImpl, p.getValue());
+						testProject.putStepObject(p.getQualifiedName(), p.getValue());
 					} else {
 						context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), p.getValue());
 					}
@@ -77,11 +74,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
 	public void fixRowCellListWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		Row theRow = (Row) getEObject(issue);
-		TestProjectImpl testProject = new TestProjectImpl(
-				new SourceFileRepository(theRow.eResource().getURI().toPlatformString(true)));
-		TestStepImpl testStepImpl = new TestStepImpl((TestStep) theRow.eContainer().eContainer());
-		testStepImpl.getParent().getParent().setParent(testProject);
-		createAcceptor(issue, acceptor, RowIssueResolver.correctCellListWorkspace(testStepImpl));
+		createAcceptor(issue, acceptor, RowIssueResolver.correctCellListWorkspace(new TestStepImpl((TestStep) theRow.eContainer().eContainer())));
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
@@ -93,21 +86,13 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(SheepDogValidator.TEST_STEP_NAME_OBJECT_WORKSPACE)
 	public void fixTestStepNameObjectWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStep step = (TestStep) getEObject(issue);
-		TestProjectImpl testProject = new TestProjectImpl(
-				new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
-		TestStepImpl testStepImpl = new TestStepImpl(step);
-		testStepImpl.getParent().getParent().setParent(testProject);
-		createAcceptor(issue, acceptor, TestStepIssueResolver.correctNameObjectWorkspace(testStepImpl));
+		createAcceptor(issue, acceptor, TestStepIssueResolver.correctNameObjectWorkspace(new TestStepImpl(step)));
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_NAME_PREDICATE_WORKSPACE)
 	public void fixTestStepNamePredicateWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStep step = (TestStep) getEObject(issue);
-		TestProjectImpl testProject = new TestProjectImpl(
-				new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
-		TestStepImpl testStepImpl = new TestStepImpl(step);
-		testStepImpl.getParent().getParent().setParent(testProject);
-		createAcceptor(issue, acceptor, TestStepIssueResolver.correctNamePredicateWorkspace(testStepImpl));
+		createAcceptor(issue, acceptor, TestStepIssueResolver.correctNamePredicateWorkspace(new TestStepImpl(step)));
 	}
 
 	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
@@ -119,11 +104,8 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(SheepDogValidator.TEXT_NAME_WORKSPACE)
 	public void fixTextNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		Text theText = (Text) getEObject(issue);
-		TestProjectImpl testProject = new TestProjectImpl(
-				new SourceFileRepository(theText.eResource().getURI().toPlatformString(true)));
-		TestStepImpl testStepImpl = new TestStepImpl((TestStep) theText.eContainer());
-		testStepImpl.getParent().getParent().setParent(testProject);
-		createAcceptor(issue, acceptor, TextIssueResolver.correctNameWorkspace(testStepImpl));
+		createAcceptor(issue, acceptor,
+				TextIssueResolver.correctNameWorkspace(new TestStepImpl((TestStep) theText.eContainer())));
 	}
 
 	private EObject getEObject(Issue issue) {

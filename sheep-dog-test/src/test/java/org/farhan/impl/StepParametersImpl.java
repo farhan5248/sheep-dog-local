@@ -17,6 +17,7 @@ public class StepParametersImpl implements IStepParameters {
 
 	public StepParametersImpl(IRow header) {
 		this.table = new TableImpl();
+		this.table.setParent(this);
 		this.table.getRowList().add(header);
 		this.statementList = new ArrayList<IStatement>();
 	}
@@ -27,6 +28,7 @@ public class StepParametersImpl implements IStepParameters {
 		cell.setParent(row);
 		row.getCellList().add(cell);		
 		this.table = new TableImpl();
+		this.table.setParent(this);
 		this.table.getRowList().add(row);
 		this.statementList = new ArrayList<IStatement>();
 	}

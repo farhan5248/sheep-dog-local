@@ -2,7 +2,6 @@ package org.farhan.dsl.sheepdog.impl;
 
 import java.util.ArrayList;
 import org.farhan.dsl.lang.IStatement;
-import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStepContainer;
@@ -14,23 +13,11 @@ import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 
 public class TestSuiteImpl implements ITestSuite {
 
-	private ITestProject parent;
+	private static ITestProject parent;
 	private TestSuite eObject;
 
 	public TestSuiteImpl(TestSuite testSuite) {
 		this.eObject = testSuite;
-	}
-
-	@Override
-	public ITestCase createTestCase(String value) {
-		// Not needed in this project
-		return null;
-	}
-
-	@Override
-	public ITestStepContainer createTestSetup(String name) {
-		// Not needed in this project
-		return null;
 	}
 
 	@Override
@@ -40,6 +27,10 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public ITestProject getParent() {
+		if (parent == null) {
+			// TODO pass in the project root
+			parent = new TestProjectImpl(new SourceFileRepository(eObject.eResource().getURI().toPlatformString(true)));
+		}
 		return parent;
 	}
 
@@ -89,27 +80,28 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public void setParent(ITestProject value) {
-		this.parent = value;
+		throw new UnsupportedOperationException("setParent(ITestProject value) is not implemented");
 	}
 
 	@Override
 	public void setQualifiedName(String value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setQualifiedName(String value) is not implemented");
 	}
 
 	@Override
 	public void setStatementList(ArrayList<IStatement> value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setStatementList(ArrayList<IStatement> value) is not implemented");
 	}
 
 	@Override
 	public void setTestSetup(ITestSetup value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setTestSetup(ITestSetup value) is not implemented");
 	}
 
 	@Override
 	public void setTestStepContainerList(ArrayList<ITestStepContainer> value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException(
+				"setTestStepContainerList(ArrayList<ITestStepContainer> value) is not implemented");
 	}
 
 	@Override

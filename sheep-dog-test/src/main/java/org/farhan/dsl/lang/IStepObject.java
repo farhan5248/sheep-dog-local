@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public interface IStepObject extends IModel {
 
-	IStepDefinition createStepDefinition(String name);
-
 	String getName();
 
 	String getNameLong();

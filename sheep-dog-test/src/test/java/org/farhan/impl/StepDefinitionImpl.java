@@ -39,28 +39,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public IStepParameters createStepParameters(IRow row) {
-		IStepParameters stepParameters = getStepParameters(row);
-		if (stepParameters == null) {
-			stepParameters = new StepParametersImpl(row);
-		}
-		stepParameters.setParent(this);
-		stepParametersList.add(stepParameters);
-		return stepParameters;
-	}
-
-	@Override
-	public IStepParameters createStepParameters(IText value) {
-		IStepParameters stepParameters = getStepParameters(value);
-		if (stepParameters == null) {
-			stepParameters = new StepParametersImpl(value);
-		}
-		stepParameters.setParent(this);
-		stepParametersList.add(stepParameters);
-		return stepParameters;
-	}
-
-	@Override
 	public String getName() {
 
 		return predicate;

@@ -1,12 +1,9 @@
 package org.farhan.dsl.sheepdog.impl;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.TreeSet;
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -15,7 +12,7 @@ import org.farhan.dsl.lang.IResourceRepository;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 
 public class TestProjectImpl implements ITestProject {
@@ -23,30 +20,35 @@ public class TestProjectImpl implements ITestProject {
 	private static Logger logger = Logger.getLogger(TestProjectImpl.class);
 
 	private IResourceRepository sr;
-	private final String layer2dir;
+	public final String layer2dir;
 
 	public TestProjectImpl(IResourceRepository sr) {
+		// TODO In the future the project name should be accessible here. The
+		// constructor should get a path that includes the project name. It
+		// can then intercept the project name and save it.
 		this.sr = sr;
 		layer2dir = "src/test/resources/asciidoc/stepdefs";
 	}
 
 	@Override
-	public IStepObject createStepObject(String qualifiedName) {
-		StepObject eObject = SheepDogFactory.eINSTANCE.createStepObject();
-		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI(layer2dir + "/" + qualifiedName));
-		theResource.getContents().add(eObject);
-		IStepObject stepObject = new StepObjectImpl(eObject);
-		stepObject.setQualifiedName(qualifiedName);
-		stepObject.setName((new File(qualifiedName)).getName().replaceFirst(getFileExtension() + "$", ""));
-		return stepObject;
+	public String getFileExtension() {
+		return ".asciidoc";
+	}
+
+	@Override
+	public IStepObject getStepObject(int index) {
+		throw new UnsupportedOperationException("getStepObject(int index) is not implemented");
 	}
 
 	@Override
 	public IStepObject getStepObject(String qualifiedName) {
 		if (sr.contains("", layer2dir + "/" + qualifiedName)) {
 			try {
+				// TODO this code doesn't work, the URI is missing the project name.
+				// The sr.get hides this bug because it's reading the file system and so the URI
+				// in the resource isn't tested
 				Resource resource = new ResourceSetImpl()
-						.createResource(URI.createFileURI(layer2dir + "/" + qualifiedName));
+						.createResource(URI.createPlatformResourceURI(layer2dir + "/" + qualifiedName, true));
 				String text = sr.get("", layer2dir + "/" + qualifiedName);
 				if (text.isEmpty()) {
 					logger.error("Couldn't load StepObject for, file is empty: " + qualifiedName);
@@ -65,55 +67,13 @@ public class TestProjectImpl implements ITestProject {
 		return null;
 	}
 
-	public void putStepObject(IStepObject stepObject, String content) {
-		try {
-			if (content != null) {
-				sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), content);
-			} else {
-				sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), ((StepObjectImpl) stepObject).serialize());
-			}
-		} catch (Exception e) {
-			logger.error("Couldn't write step object:", e);
-		}
-
-	}
-
-	@Override
-	public ITestSuite createTestSuite(String qualifiedName) {
-		// Not needed in this project
-		return null;
-	}
-
-	@Override
-	public ArrayList<String> getComponentList() {
-
-		TreeSet<String> componentSet = new TreeSet<String>();
-		try {
-			// TODO instead of empty tags, append it to the prefix?
-			for (String stepObjectFileName : sr.list("", layer2dir, getFileExtension())) {
-				componentSet.add(stepObjectFileName.replaceFirst(layer2dir + "/", "").split("/")[0]);
-			}
-		} catch (Exception e) {
-			logger.error("Couldn't get component list:", e);
-		}
-
-		ArrayList<String> componentList = new ArrayList<String>();
-		componentList.addAll(componentSet);
-		return componentList;
-	}
-
-	@Override
-	public String getFileExtension() {
-		return ".asciidoc";
-	}
-
 	@Override
 	public ArrayList<IStepObject> getStepObjectList() {
 		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
 		try {
 			// TODO instead of empty tags, append it to the prefix?
 			for (String stepObjectFileName : sr.list("", layer2dir, getFileExtension())) {
-				objects.add(createStepObject(stepObjectFileName.replaceFirst(layer2dir, "")));
+				objects.add(SheepDogBuilder.createStepObject(this, stepObjectFileName.replaceFirst(layer2dir, "")));
 			}
 		} catch (Exception e) {
 			logger.error("Couldn't get StepObject list:", e);
@@ -122,16 +82,8 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public ArrayList<IStepObject> getStepObjectList(String component) {
-		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
-		try {
-			for (String stepObjectFileName : sr.list("", layer2dir + "/" + component, getFileExtension())) {
-				objects.add(createStepObject(stepObjectFileName.replaceFirst(layer2dir, "")));
-			}
-		} catch (Exception e) {
-			logger.error("Couldn't get StepObject list: for" + component, e);
-		}
-		return objects;
+	public ITestSuite getTestSuite(int index) {
+		throw new UnsupportedOperationException("getTestSuite(int index) is not implemented");
 	}
 
 	@Override
@@ -144,7 +96,17 @@ public class TestProjectImpl implements ITestProject {
 		throw new UnsupportedOperationException("getTestSuiteList() is not implemented");
 	}
 
+	public void putStepObject(String qualifiedName, String content) {
+		try {
+			sr.put("", layer2dir + "/" + qualifiedName, content);
+		} catch (Exception e) {
+			logger.error("Couldn't write step object:", e);
+		}
+
+	}
+
 	public void setProjectPath(String projectPath) {
+		// TODO the method that initialises the repo should probably handle this
 		throw new UnsupportedOperationException("setProjectPath(String projectPath) is not implemented");
 	}
 
@@ -158,16 +120,6 @@ public class TestProjectImpl implements ITestProject {
 	public void setTestSuiteList(ArrayList<ITestSuite> testSuiteList) {
 		throw new UnsupportedOperationException(
 				"setTestSuiteList(ArrayList<ITestSuite> testSuiteList) is not implemented");
-	}
-
-	@Override
-	public IStepObject getStepObject(int index) {
-		throw new UnsupportedOperationException("getStepObject(int index) is not implemented");
-	}
-
-	@Override
-	public ITestSuite getTestSuite(int index) {
-		throw new UnsupportedOperationException("getTestSuite(int index) is not implemented");
 	}
 
 }

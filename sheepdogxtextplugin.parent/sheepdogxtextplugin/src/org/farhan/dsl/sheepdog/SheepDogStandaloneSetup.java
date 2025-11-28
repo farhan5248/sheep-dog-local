@@ -3,9 +3,9 @@
  */
 package org.farhan.dsl.sheepdog;
 
-
 /**
- * Initialization support for running Xtext languages without Equinox extension registry.
+ * Initialization support for running Xtext languages without Equinox extension
+ * registry.
  */
 public class SheepDogStandaloneSetup extends SheepDogStandaloneSetupGenerated {
 

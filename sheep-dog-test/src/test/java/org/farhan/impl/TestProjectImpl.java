@@ -1,8 +1,6 @@
 package org.farhan.impl;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
-
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSuite;
@@ -15,39 +13,6 @@ public class TestProjectImpl implements ITestProject {
 	public TestProjectImpl() {
 		this.testSuiteList = new ArrayList<ITestSuite>();
 		this.stepObjectList = new ArrayList<IStepObject>();
-	}
-
-	@Override
-	public IStepObject createStepObject(String qualifiedName) {
-		IStepObject stepObject = getStepObject(qualifiedName);
-		if (stepObject == null) {
-			stepObject = new StepObjectImpl(qualifiedName);
-			stepObject.setParent(this);
-			stepObjectList.add(stepObject);
-		}
-		return stepObject;
-	}
-
-	@Override
-	public ITestSuite createTestSuite(String qualifiedName) {
-		ITestSuite testSuite = getTestSuite(qualifiedName);
-		if (testSuite == null) {
-			testSuite = new TestSuiteImpl(qualifiedName);
-			testSuite.setParent(this);
-			testSuiteList.add(testSuite);
-		}
-		return testSuite;
-	}
-
-	@Override
-	public ArrayList<String> getComponentList() {
-		TreeSet<String> componentSet = new TreeSet<String>();
-		for (IStepObject so : this.stepObjectList) {
-			componentSet.add(so.getQualifiedName().split("/")[0]);
-		}
-		ArrayList<String> componentList = new ArrayList<String>();
-		componentList.addAll(componentSet);
-		return componentList;
 	}
 
 	@Override
@@ -68,17 +33,6 @@ public class TestProjectImpl implements ITestProject {
 	@Override
 	public ArrayList<IStepObject> getStepObjectList() {
 		return stepObjectList;
-	}
-
-	@Override
-	public ArrayList<IStepObject> getStepObjectList(String component) {
-		ArrayList<IStepObject> componentStepObjectList = new ArrayList<IStepObject>();
-		for (IStepObject so : this.stepObjectList) {
-			if (so.getQualifiedName().startsWith(component)) {
-				componentStepObjectList.add(so);
-			}
-		}
-		return componentStepObjectList;
 	}
 
 	@Override

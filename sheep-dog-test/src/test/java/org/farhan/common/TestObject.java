@@ -12,6 +12,7 @@ import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.impl.TestStepImpl;
 import org.junit.jupiter.api.Assertions;
 
@@ -37,13 +38,13 @@ public abstract class TestObject {
 
 		ITestSuite testSuite = testProject.getTestSuite("");
 		if (testSuite == null) {
-			testSuite = testProject.createTestSuite("");
+			testSuite = SheepDogBuilder.createTestSuite(testProject, "");
 		}
 		ITestStepContainer testCase = testSuite.getTestStepContainer("");
 		if (testCase == null) {
-			testCase = testSuite.createTestCase("");
+			testCase = SheepDogBuilder.createTestCase(testSuite, "");
 		}
-		currentStep = (TestStepImpl) testCase.createTestStep(stepName);
+		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testCase, stepName);
 		testCase.getTestStepList().add(currentStep);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
@@ -56,13 +57,13 @@ public abstract class TestObject {
 	protected void addTestSetupStep(String stepName) {
 		ITestSuite testSuite = testProject.getTestSuite("");
 		if (testSuite == null) {
-			testSuite = testProject.createTestSuite("");
+			testSuite = SheepDogBuilder.createTestSuite(testProject, "");
 		}
 		ITestStepContainer testSetup = testSuite.getTestStepContainer("");
 		if (testSetup == null) {
-			testSetup = testSuite.createTestSetup("");
+			testSetup = SheepDogBuilder.createTestSetup(testSuite, "");
 		}
-		currentStep = (TestStepImpl) testSetup.createTestStep(stepName);
+		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testSetup, stepName);
 		testSetup.getTestStepList().add(currentStep);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved

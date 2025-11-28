@@ -40,7 +40,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeCellList(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (SheepDogIssueProposal p : RowIssueResolver.suggestCellListWorkspace(createITestStep(step))) {
+			for (SheepDogIssueProposal p : RowIssueResolver.suggestCellListWorkspace(new TestStepImpl(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
@@ -53,14 +53,6 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		}
 	}
 
-	private ITestStep createITestStep(TestStep step) {
-		ITestProject testProject = new TestProjectImpl(
-				new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
-		ITestStep iTestStep = new TestStepImpl(step);
-		iTestStep.getParent().getParent().setParent(testProject);
-		return iTestStep;
-	}
-
 	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_Name(step, assignment, context, acceptor);
@@ -70,7 +62,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNameObjectWorkspace(createITestStep(step))) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNameObjectWorkspace(new TestStepImpl(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
@@ -78,7 +70,8 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 					acceptor.accept(proposal);
 				}
 			}
-			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNamePredicateWorkspace(createITestStep(step))) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver
+					.suggestNamePredicateWorkspace(new TestStepImpl(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {

@@ -9,6 +9,7 @@ import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.StatementUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
@@ -36,7 +37,7 @@ public class RowIssueResolver {
 		logger.debug("Entering correctCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		try {
-			IStepParameters theStepParameters = SheepDogBuilder.buildStepParameters(theTestStep);
+			IStepParameters theStepParameters = SheepDogBuilder.createStepParameters(theTestStep);
 			IStepObject theStepObject = theStepParameters.getParent().getParent();
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId(

@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 public interface ITestSuite extends IModel {
 
-	ITestCase createTestCase(String name);
-
-	ITestStepContainer createTestSetup(String name);
-
 	String getName();
 
 	String getNameLong();

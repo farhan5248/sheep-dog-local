@@ -12,9 +12,6 @@ import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.StepDefinitionUtility;
-import org.farhan.dsl.sheepdog.sheepDog.Cell;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
-import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
@@ -22,8 +19,8 @@ import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 
 public class StepDefinitionImpl implements IStepDefinition {
 
-	private IStepObject parent;
-	private StepDefinition eObject;
+	private StepObjectImpl parent;
+	StepDefinition eObject;
 
 	public StepDefinitionImpl(StepDefinition value) {
 		this.eObject = value;
@@ -40,46 +37,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 			cellsAsString += "| " + cell;
 		}
 		return cellsAsString.trim();
-	}
-
-	@Override
-	public IStepParameters createStepParameters(IRow header) {
-		StepParameters parameters = SheepDogFactory.eINSTANCE.createStepParameters();
-		parameters.setName(Integer.toString(eObject.getStepParameterList().size() + 1));
-		eObject.getStepParameterList().add(parameters);
-
-		parameters.setTable(SheepDogFactory.eINSTANCE.createTable());
-		Row row = SheepDogFactory.eINSTANCE.createRow();
-		parameters.getTable().getRowList().add(row);
-		for (ICell srcCell : header.getCellList()) {
-			Cell cell = SheepDogFactory.eINSTANCE.createCell();
-			cell.setName(srcCell.getName());
-			row.getCellList().add(cell);
-		}
-
-		IStepParameters stepParameters = new StepParametersImpl(parameters);
-		stepParameters.setParent(this);
-		return stepParameters;
-	}
-
-	@Override
-	public IStepParameters createStepParameters(IText value) {
-		StepParameters parameters = SheepDogFactory.eINSTANCE.createStepParameters();
-		parameters.setName(Integer.toString(eObject.getStepParameterList().size() + 1));
-		eObject.getStepParameterList().add(parameters);
-
-		parameters.setTable(SheepDogFactory.eINSTANCE.createTable());
-		Row row = SheepDogFactory.eINSTANCE.createRow();
-		parameters.getTable().getRowList().add(row);
-		// TODO make test for this
-		// This is a docstring and also the abuse of this method :P
-		Cell cell = SheepDogFactory.eINSTANCE.createCell();
-		cell.setName("Content");
-		row.getCellList().add(cell);
-
-		IStepParameters stepParameters = new StepParametersImpl(parameters);
-		stepParameters.setParent(this);
-		return stepParameters;
 	}
 
 	@Override
@@ -163,8 +120,9 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public void setParent(IStepObject value) {
-		parent = value;
+	public void setParent(IStepObject parent) {
+		this.parent = (StepObjectImpl) parent;
+		this.parent.eObject.getStepDefinitionList().add(eObject);
 	}
 
 	@Override

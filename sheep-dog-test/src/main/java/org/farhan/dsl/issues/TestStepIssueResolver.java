@@ -10,7 +10,9 @@ import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.StatementUtility;
+import org.farhan.dsl.lang.TestProjectUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +24,7 @@ public class TestStepIssueResolver {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 
 		try {
-			IStepObject theStepObject = SheepDogBuilder.buildStepObject(theTestStep);
+			IStepObject theStepObject = SheepDogBuilder.createStepObject(theTestStep);
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getQualifiedName());
 			proposal.setDescription(StatementUtility.getStatementListAsString(theStepObject.getStatementList()));
@@ -40,7 +42,7 @@ public class TestStepIssueResolver {
 	public static ArrayList<SheepDogIssueProposal> correctNamePredicateWorkspace(ITestStep theTestStep) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		try {
-			IStepDefinition theStepDefinition = SheepDogBuilder.buildStepDefinition(theTestStep);
+			IStepDefinition theStepDefinition = SheepDogBuilder.createStepDefinition(theTestStep);
 			IStepObject theStepObject = theStepDefinition.getParent();
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate " + theStepDefinition.getName());
@@ -60,7 +62,7 @@ public class TestStepIssueResolver {
 			ITestProject theProject) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
-		for (IStepObject aStepObject : theProject.getStepObjectList(component)) {
+		for (IStepObject aStepObject : TestProjectUtility.getStepObjectList(theProject, component)) {
 			proposal = new SheepDogIssueProposal();
 			proposal.setId(aStepObject.getQualifiedName().replaceFirst(component + "/", "")
 					.replaceFirst(theProject.getFileExtension() + "$", ""));
@@ -120,7 +122,7 @@ public class TestStepIssueResolver {
 			ITestProject theProject) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
-		for (String componentName : theProject.getComponentList()) {
+		for (String componentName : TestProjectUtility.getComponentList(theProject)) {
 			proposal = new SheepDogIssueProposal();
 			proposal.setId(componentName);
 			proposal.setDescription(componentName);

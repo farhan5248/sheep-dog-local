@@ -3,47 +3,24 @@ package org.farhan.dsl.sheepdog.impl;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
-import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 
 public class StepObjectImpl implements IStepObject {
 
-	private ITestProject parent;
-	private StepObject eObject;
+	private static ITestProject parent;
+	StepObject eObject;
 	private String qualifiedName;
 
 	public StepObjectImpl(StepObject eObject) {
 		this.eObject = eObject;
-	}
-
-	@Override
-	public IStepDefinition createStepDefinition(String predicate) {
-		EList<StepDefinition> list = eObject.getStepDefinitionList();
-		list.add(SheepDogFactory.eINSTANCE.createStepDefinition());
-
-		IStepDefinition stepDefinition = new StepDefinitionImpl(list.getLast());
-		stepDefinition.setParent(this);
-		stepDefinition.setName(predicate);
-
-		TreeMap<String, StepDefinition> sorted = new TreeMap<String, StepDefinition>();
-		for (int i = list.size(); i > 0; i--) {
-			sorted.put(list.get(i - 1).getName().toLowerCase(), list.removeLast());
-		}
-		for (String name : sorted.keySet()) {
-			list.add(sorted.get(name));
-		}
-
-		return stepDefinition;
 	}
 
 	@Override
@@ -53,7 +30,7 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public ITestProject getParent() {
-		return parent;
+		throw new UnsupportedOperationException("ITestProject getParent() is not implemented");
 	}
 
 	@Override

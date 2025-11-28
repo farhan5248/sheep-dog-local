@@ -21,12 +21,6 @@ public class TestStepContainerImpl implements ITestStepContainer {
 	}
 
 	@Override
-	public ITestStep createTestStep(String value) {
-		// Not needed in this project
-		return null;
-	}
-
-	@Override
 	public String getName() {
 		return eObject.getName();
 	}

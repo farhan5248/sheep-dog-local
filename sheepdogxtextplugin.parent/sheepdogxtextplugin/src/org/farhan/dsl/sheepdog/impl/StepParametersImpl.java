@@ -11,7 +11,7 @@ import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 
 public class StepParametersImpl implements IStepParameters {
-	private IStepDefinition parent;
+	private StepDefinitionImpl parent;
 	private StepParameters eObject;
 
 	public StepParametersImpl(StepParameters stepParameters) {
@@ -53,8 +53,10 @@ public class StepParametersImpl implements IStepParameters {
 	}
 
 	@Override
-	public void setParent(IStepDefinition value) {
-		parent = value;
+	public void setParent(IStepDefinition parent) {
+		this.parent = (StepDefinitionImpl) parent;
+		this.parent.eObject.getStepParameterList().add(eObject);
+
 	}
 
 	@Override
@@ -64,7 +66,7 @@ public class StepParametersImpl implements IStepParameters {
 
 	@Override
 	public void setTable(ITable value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setTable(ITable value) is not implemented");
 	}
 
 	@Override

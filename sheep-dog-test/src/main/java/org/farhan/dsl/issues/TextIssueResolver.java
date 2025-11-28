@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.StatementUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ public class TextIssueResolver {
 		logger.debug("Entering correctNameWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		try {
-			IStepParameters theStepParameters = SheepDogBuilder.buildStepParameters(theTestStep);
+			IStepParameters theStepParameters = SheepDogBuilder.createStepParameters(theTestStep);
 			IStepObject theStepObject = theStepParameters.getParent().getParent();
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate | Content");

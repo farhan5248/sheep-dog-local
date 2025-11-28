@@ -19,14 +19,6 @@ public class TestStepContainerImpl implements ITestStepContainer {
 	}
 
 	@Override
-	public ITestStep createTestStep(String value) {
-		ITestStep testStep = new TestStepImpl(value);
-		testStep.setParent(this);
-		testStepList.add(testStep);
-		return testStep;
-	}
-
-	@Override
 	public String getName() {
 		return name;
 	}

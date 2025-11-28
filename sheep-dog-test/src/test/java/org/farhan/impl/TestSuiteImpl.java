@@ -3,7 +3,6 @@ package org.farhan.impl;
 import java.util.ArrayList;
 
 import org.farhan.dsl.lang.IStatement;
-import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStepContainer;
@@ -21,22 +20,6 @@ public class TestSuiteImpl implements ITestSuite {
 		this.qualifiedName = qualifiedName;
 		String[] nameParts = qualifiedName.split("/");
 		this.name = nameParts[nameParts.length - 1];
-	}
-
-	@Override
-	public ITestCase createTestCase(String value) {
-		ITestCase testCase = new TestCaseImpl(value);
-		testCase.setParent(this);
-		testStepContainerList.add(testCase);
-		return testCase;
-	}
-
-	@Override
-	public ITestSetup createTestSetup(String name) {
-		ITestSetup testSetup = new TestSetupImpl(name);
-		testSetup.setParent(this);
-		testStepContainerList.add(testSetup);
-		return testSetup;
 	}
 
 	@Override
@@ -71,7 +54,7 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public ArrayList<ITestStepContainer> getTestStepContainerList() {
-		throw new UnsupportedOperationException("getTestStepContainerList() is not implemented");
+		return testStepContainerList;
 	}
 
 	@Override

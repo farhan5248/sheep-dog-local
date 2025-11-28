@@ -7,14 +7,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.impl.CellImpl;
 import org.farhan.dsl.sheepdog.impl.RowImpl;
-import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
-import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
@@ -27,7 +24,6 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
 import org.farhan.dsl.issues.*;
-import org.farhan.dsl.lang.*;
 
 /**
  * This class contains custom validation rules.
@@ -51,12 +47,32 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
 
 	@Check(CheckType.FAST)
-	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
-		// TODO validate that feature file name and feature name are the same.
-		TestSuiteImpl testSuiteImpl = new TestSuiteImpl(theTestSuite);
-		String problems = TestSuiteIssueDetector.validateNameOnly(testSuiteImpl);
-		if (!problems.isEmpty()) {
-			warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
+	public void checkCellNameOnly(Cell cell) {
+		// TODO make tests for this
+		if (cell != null) {
+			String problems = CellIssueDetector.validateNameOnly(new CellImpl(cell));
+			if (!problems.isEmpty()) {
+				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
+			}
+		}
+	}
+
+	@Check(CheckType.EXPENSIVE)
+	public void checkRowCellListWorkspace(Row row) {
+		try {
+			if (row != null && row.eContainer() != null) {
+				Table table = (Table) row.eContainer();
+				if (table.eContainer() instanceof TestStep) {
+					if (!table.getRowList().isEmpty() && table.getRowList().getFirst() == row) {
+						String problems = RowIssueDetector.validateCellListWorkspace(new RowImpl(row));
+						if (!problems.isEmpty()) {
+							warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, ROW_CELL_LIST_WORKSPACE);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			logError(e, "Row validation");
 		}
 	}
 
@@ -67,6 +83,20 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 					.validateNameOnly(new TestStepContainerImpl(theTestStepContainer));
 			if (!problems.isEmpty()) {
 				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME_ONLY);
+			}
+		} catch (Exception e) {
+			logError(e, theTestStepContainer.getName());
+		}
+	}
+
+	@Check(CheckType.NORMAL)
+	public void checkTestStepContainerTestStepFileListFile(TestStepContainer theTestStepContainer) {
+		try {
+			String problems = TestStepContainerIssueDetector
+					.validateTestStepListFile(new TestStepContainerImpl(theTestStepContainer));
+			if (!problems.isEmpty()) {
+				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__TEST_STEP_LIST,
+						TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE);
 			}
 		} catch (Exception e) {
 			logError(e, theTestStepContainer.getName());
@@ -97,35 +127,18 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.NORMAL)
-	public void checkTestStepContainerTestStepFileListFile(TestStepContainer theTestStepContainer) {
-		try {
-			String problems = TestStepContainerIssueDetector
-					.validateTestStepListFile(new TestStepContainerImpl(theTestStepContainer));
-			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__TEST_STEP_LIST,
-						TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE);
-			}
-		} catch (Exception e) {
-			logError(e, theTestStepContainer.getName());
-		}
-	}
-
 	@Check(CheckType.EXPENSIVE)
 	public void checkTestStepNameWorkspace(TestStep step) {
 		try {
 			if (step.getName() != null) {
 				TestStepImpl testStepImpl = new TestStepImpl(step);
-				testStepImpl.getParent().getParent().setParent(new TestProjectImpl(
-						new SourceFileRepository(step.eResource().getURI().toPlatformString(true))));
 				String problems = TestStepIssueDetector.validateNameObjectWorkspace(testStepImpl);
 				if (!problems.isEmpty()) {
 					warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_OBJECT_WORKSPACE);
 				} else {
 					problems = TestStepIssueDetector.validateNamePredicateWorkspace(testStepImpl);
 					if (!problems.isEmpty()) {
-						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME,
-								TEST_STEP_NAME_PREDICATE_WORKSPACE);
+						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_PREDICATE_WORKSPACE);
 					}
 				}
 			}
@@ -134,47 +147,20 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.EXPENSIVE)
-	public void checkRowCellListWorkspace(Row row) {
-		try {
-			if (row != null && row.eContainer() != null) {
-				Table table = (Table) row.eContainer();
-				if (table.eContainer() instanceof TestStep) {
-					if (!table.getRowList().isEmpty() && table.getRowList().getFirst() == row) {
-						RowImpl rowImpl = new RowImpl(row);
-						((ITestStep) rowImpl.getParent().getParent()).getParent().getParent()
-								.setParent(new TestProjectImpl(
-										new SourceFileRepository(row.eResource().getURI().toPlatformString(true))));
-						String problems = RowIssueDetector.validateCellListWorkspace(rowImpl);
-						if (!problems.isEmpty()) {
-							warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, ROW_CELL_LIST_WORKSPACE);
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			logError(e, "Row validation");
-		}
-	}
-
 	@Check(CheckType.FAST)
-	public void checkCellNameOnly(Cell cell) {
-		// TODO make tests for this
-		if (cell != null) {
-			String problems = CellIssueDetector.validateNameOnly(new CellImpl(cell));
-			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
-			}
+	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
+		// TODO validate that feature file name and feature name are the same.
+		TestSuiteImpl testSuiteImpl = new TestSuiteImpl(theTestSuite);
+		String problems = TestSuiteIssueDetector.validateNameOnly(testSuiteImpl);
+		if (!problems.isEmpty()) {
+			warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
 		}
 	}
 
 	@Check(CheckType.EXPENSIVE)
 	public void checkTextNameWorkspace(Text text) {
 		if (text != null) {
-			TextImpl textImpl = new TextImpl(text);
-			textImpl.getParent().getParent().getParent().setParent(
-					new TestProjectImpl(new SourceFileRepository(text.eResource().getURI().toPlatformString(true))));
-			String problems = TextIssueDetector.validateNameWorkspace(textImpl);
+			String problems = TextIssueDetector.validateNameWorkspace(new TextImpl(text));
 			if (!problems.isEmpty()) {
 				warning(problems, SheepDogPackage.Literals.TEXT__NAME, TEXT_NAME_WORKSPACE);
 			}

@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 public interface IStepDefinition {
 
-	IStepParameters createStepParameters(IRow row);
-
-	IStepParameters createStepParameters(IText value);
-
 	String getName();
 
 	String getNameLong();

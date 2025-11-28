@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
-import org.farhan.dsl.issues.SheepDogBuilder;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
@@ -38,14 +38,12 @@ public class SheepDogGenerator extends AbstractGenerator {
 			for (TestStepContainer scenario : theTestSuite.getTestStepContainerList()) {
 				for (TestStep step : scenario.getTestStepList()) {
 					try {
-						TestProjectImpl testProject = new TestProjectImpl(
-								new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 						TestStepImpl iTestStep = new TestStepImpl(step);
-						iTestStep.getParent().getParent().setParent(testProject);
-						IStepObject stepObjectImpl = SheepDogBuilder.buildStepObject(iTestStep);
-						SheepDogBuilder.buildStepDefinition(iTestStep);
-						SheepDogBuilder.buildStepParameters(iTestStep);
-						testProject.putStepObject(stepObjectImpl, null);
+						StepObjectImpl stepObjectImpl = (StepObjectImpl) SheepDogBuilder.createStepObject(iTestStep);
+						SheepDogBuilder.createStepDefinition(iTestStep);
+						SheepDogBuilder.createStepParameters(iTestStep);
+						((TestProjectImpl) stepObjectImpl.getParent()).putStepObject(stepObjectImpl.getQualifiedName(),
+								stepObjectImpl.serialize());
 					} catch (Exception e) {
 						StringWriter sw = new StringWriter();
 						e.printStackTrace(new PrintWriter(sw));
