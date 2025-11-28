@@ -12,8 +12,10 @@ import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
 public class ValidateWarningActionImpl extends TestObject implements ValidateWarningAction {
-	// TODO instead of validate a warning, validate references (step object, step
-	// definition, step parameters)
+	// TODO instead of validate a warning, validate issue types or do
+	// fast/normal/expensive validation. There has to be enough information in the
+	// test step names for Claude to infer everything it needs when combined with
+	// the design pattern md files.
 
 	public void transition() {
 		try {

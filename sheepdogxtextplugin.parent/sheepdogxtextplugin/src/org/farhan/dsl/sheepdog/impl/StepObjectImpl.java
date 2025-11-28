@@ -119,7 +119,7 @@ public class StepObjectImpl implements IStepObject {
 		try {
 			eObject.eResource().save(os, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		} catch (IOException e) {
-			// TODO revisit this later, review all try catch in every package
+			// TODO Review all try catch in every package
 			e.printStackTrace();
 		}
 		return os.toString();

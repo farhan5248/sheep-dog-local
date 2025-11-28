@@ -27,14 +27,11 @@ public class TestProjectImpl implements ITestProject {
 
 	public TestProjectImpl(IResourceRepository sr) {
 		this.sr = sr;
-		// TODO File.list methods don't end directory names with a / so to be
-		// consistent, this path shouldn't end with one
 		layer2dir = "src/test/resources/asciidoc/stepdefs";
 	}
 
 	@Override
 	public IStepObject createStepObject(String qualifiedName) {
-		// TODO if contents are provided, then initialize the object.
 		StepObject eObject = SheepDogFactory.eINSTANCE.createStepObject();
 		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI(layer2dir + "/" + qualifiedName));
 		theResource.getContents().add(eObject);
@@ -69,8 +66,6 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	public void putStepObject(IStepObject stepObject, String content) {
-		// TODO serialize should be setContent, parse should be getContent, this works
-		// well for the JSON response
 		try {
 			if (content != null) {
 				sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), content);

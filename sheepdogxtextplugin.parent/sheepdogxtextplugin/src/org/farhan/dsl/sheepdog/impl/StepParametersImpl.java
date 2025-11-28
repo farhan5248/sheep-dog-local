@@ -34,7 +34,6 @@ public class StepParametersImpl implements IStepParameters {
 	@Override
 	public ArrayList<IStatement> getStatementList() {
 		ArrayList<IStatement> statementList = new ArrayList<IStatement>();
-		// TODO why does this need 2 nested statement list calls?
 		if (eObject.getStatementList() != null) {
 			for (Statement s : eObject.getStatementList().getStatementList()) {
 				statementList.add(new StatementImpl(s));
@@ -60,9 +59,7 @@ public class StepParametersImpl implements IStepParameters {
 
 	@Override
 	public void setStatementList(ArrayList<IStatement> value) {
-		// TODO should setters like these be used instead of directly accessing the
-		// eObject setters?
-		// Not needed in this project
+		throw new UnsupportedOperationException("setStatementList(ArrayList<IStatement> value) is not implemented");
 	}
 
 	@Override

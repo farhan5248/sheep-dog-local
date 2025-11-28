@@ -30,7 +30,6 @@ Feature:
 	statements+=Statement*
 	abstractScenarios+=AbstractScenario*;
 
-// TODO add parameters to step, cell, line tokens
 // This has the side effect of allowing more than 1 Background.
 // Also it allows it to be anywhere, like at the begining or end.
 // I'm doing it this way to make the formatting code simpler by having less duplication

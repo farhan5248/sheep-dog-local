@@ -22,7 +22,7 @@ public class TestStepIssueResolver {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 
 		try {
-			IStepObject theStepObject = SheepDogBuilder.generateStepObject(theTestStep);
+			IStepObject theStepObject = SheepDogBuilder.buildStepObject(theTestStep);
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getQualifiedName());
 			proposal.setDescription(StatementUtility.getStatementListAsString(theStepObject.getStatementList()));
@@ -40,7 +40,7 @@ public class TestStepIssueResolver {
 	public static ArrayList<SheepDogIssueProposal> correctNamePredicateWorkspace(ITestStep theTestStep) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		try {
-			IStepDefinition theStepDefinition = SheepDogBuilder.generateStepDefinition(theTestStep);
+			IStepDefinition theStepDefinition = SheepDogBuilder.buildStepDefinition(theTestStep);
 			IStepObject theStepObject = theStepDefinition.getParent();
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate " + theStepDefinition.getName());
@@ -88,7 +88,7 @@ public class TestStepIssueResolver {
 		allSteps.addAll(TestStepUtility.getPreviousSteps(theTestStep, false));
 
 		for (ITestStep step : allSteps) {
-			// TODO make tests for this if statement
+			// TODO make test for this
 			if (step.getName() == null) {
 				continue;
 			} else if (!step.getName().matches(TestStepUtility.REGEX)) {
@@ -130,10 +130,9 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	private static ArrayList<SheepDogIssueProposal> getStepDefinitions(ITestStep theTestStep, ITestProject theProject) {
+	private static ArrayList<SheepDogIssueProposal> getObjectPredicates(ITestStep theTestStep,
+			ITestProject theProject) {
 
-		// TODO make public and rename to proposeStepDefinitions after splitting name
-		// into component, object, predicate
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 		String stepName = theTestStep.getName();
@@ -191,7 +190,7 @@ public class TestStepIssueResolver {
 			if (!theTestStep.getName().matches(TestStepUtility.REGEX)) {
 				if (!TestStepUtility.getObject(theTestStep.getName()).isEmpty()) {
 					ITestProject theProject = theTestStep.getParent().getParent().getParent();
-					for (SheepDogIssueProposal proposal : getStepDefinitions(theTestStep, theProject)) {
+					for (SheepDogIssueProposal proposal : getObjectPredicates(theTestStep, theProject)) {
 						proposals.add(proposal);
 					}
 				}

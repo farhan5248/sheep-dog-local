@@ -15,6 +15,8 @@ public class RowIssueDetector {
 	public static String validateCellListWorkspace(IRow theRow) throws Exception {
 		logger.debug("Entering validateCellListWorkspace");
 		try {
+			// TODO validate that each row should have the max number of columns perhaps in
+			// a TableIssueDetector
 			ITestStep theTestStep = (ITestStep) theRow.getParent().getParent();
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);

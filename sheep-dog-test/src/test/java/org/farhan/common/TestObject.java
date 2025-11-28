@@ -171,8 +171,6 @@ public abstract class TestObject {
 	}
 
 	public void setInputOutputs(String key) {
-		// TODO in the future, the value can be true/false for is present/valid etc when
-		// is vs isn't is used
 		HashMap<String, String> row = new HashMap<String, String>();
 		row.put(key, "true");
 		processInputOutputs(row, "set", "");

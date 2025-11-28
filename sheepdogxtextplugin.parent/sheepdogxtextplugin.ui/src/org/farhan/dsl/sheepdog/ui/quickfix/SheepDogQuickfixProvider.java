@@ -56,6 +56,8 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 				public void apply(IModificationContext context) throws BadLocationException {
 					if (!p.getQualifiedName().isEmpty()) {
+						// TODO use context.getXtextDocument to write to the filesystem instead of
+						// TestProject.put
 						StepObjectImpl stepObjectImpl = (StepObjectImpl) testProject
 								.createStepObject(p.getQualifiedName());
 						testProject.putStepObject(stepObjectImpl, p.getValue());
@@ -90,8 +92,6 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(SheepDogValidator.TEST_STEP_NAME_OBJECT_WORKSPACE)
 	public void fixTestStepNameObjectWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
-		// TODO use context.getXtextDocument to write to the filesystem instead of
-		// TestProject.put
 		TestStep step = (TestStep) getEObject(issue);
 		TestProjectImpl testProject = new TestProjectImpl(
 				new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));

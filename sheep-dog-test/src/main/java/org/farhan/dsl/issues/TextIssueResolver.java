@@ -17,7 +17,7 @@ public class TextIssueResolver {
 		logger.debug("Entering correctNameWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		try {
-			IStepParameters theStepParameters = SheepDogBuilder.generateStepParameters(theTestStep);
+			IStepParameters theStepParameters = SheepDogBuilder.buildStepParameters(theTestStep);
 			IStepObject theStepObject = theStepParameters.getParent().getParent();
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate | Content");

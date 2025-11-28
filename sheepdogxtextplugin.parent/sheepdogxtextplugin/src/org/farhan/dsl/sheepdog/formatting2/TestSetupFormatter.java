@@ -21,8 +21,7 @@ public class TestSetupFormatter extends TestStepContainerFormatter {
 
 	@Override
 	protected void formatExamples(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
-		// TODO Auto-generated method stub
-
+		// TestSetup doesn't have Examples
 	}
 
 	@Override

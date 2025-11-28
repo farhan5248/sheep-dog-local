@@ -14,7 +14,7 @@ public class SheepDogBuilder {
 
 	private static final Logger logger = LoggerFactory.getLogger(SheepDogBuilder.class);
 
-	public static IStepObject generateStepObject(ITestStep theTestStep) throws Exception {
+	public static IStepObject buildStepObject(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering generateStepObject for step: {}", theTestStep != null ? theTestStep.getName() : "null");
 		try {
 			ITestProject theProject = theTestStep.getParent().getParent().getParent();
@@ -32,7 +32,7 @@ public class SheepDogBuilder {
 		}
 	}
 
-	public static IStepDefinition generateStepDefinition(ITestStep theTestStep) throws Exception {
+	public static IStepDefinition buildStepDefinition(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering generateStepDefinition for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {
@@ -56,7 +56,7 @@ public class SheepDogBuilder {
 		}
 	}
 
-	public static IStepParameters generateStepParameters(ITestStep theTestStep) throws Exception {
+	public static IStepParameters buildStepParameters(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering generateStepParameters for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {

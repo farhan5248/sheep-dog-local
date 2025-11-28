@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
@@ -72,7 +71,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 		parameters.setTable(SheepDogFactory.eINSTANCE.createTable());
 		Row row = SheepDogFactory.eINSTANCE.createRow();
 		parameters.getTable().getRowList().add(row);
-		// TODO there's no automated test for this..
+		// TODO make test for this
 		// This is a docstring and also the abuse of this method :P
 		Cell cell = SheepDogFactory.eINSTANCE.createCell();
 		cell.setName("Content");
@@ -81,11 +80,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 		IStepParameters stepParameters = new StepParametersImpl(parameters);
 		stepParameters.setParent(this);
 		return stepParameters;
-	}
-
-	public EObject getEObject() {
-		// TODO add this to all interfaces
-		return eObject;
 	}
 
 	@Override

@@ -19,8 +19,7 @@ public class RowIssueResolver {
 	private static final Logger logger = LoggerFactory.getLogger(RowIssueResolver.class);
 
 	private static String cellsToString(List<ICell> cells) {
-		// TODO this should be a csv list, think about it from the perspective of the
-		// test case, \| is ugly
+		// TODO this should be a csv list because \| is ugly 
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
 		for (ICell cell : cells) {
@@ -37,7 +36,7 @@ public class RowIssueResolver {
 		logger.debug("Entering correctCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		try {
-			IStepParameters theStepParameters = SheepDogBuilder.generateStepParameters(theTestStep);
+			IStepParameters theStepParameters = SheepDogBuilder.buildStepParameters(theTestStep);
 			IStepObject theStepObject = theStepParameters.getParent().getParent();
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId(
@@ -70,7 +69,7 @@ public class RowIssueResolver {
 					for (IStepParameters parameters : stepDefinition.getStepParameterList()) {
 						proposal = new SheepDogIssueProposal();
 						proposal.setId(cellsToString(parameters.getTable().getRowList().getFirst().getCellList()));
-						// TODO make a test for getStepDefinitionParametersDocumentation
+						// TODO make a test for this
 						proposal.setDescription(
 								StatementUtility.getStatementListAsString(parameters.getStatementList()));
 						String replacement = cellsToString(parameters.getTable().getRowList().getFirst().getCellList());

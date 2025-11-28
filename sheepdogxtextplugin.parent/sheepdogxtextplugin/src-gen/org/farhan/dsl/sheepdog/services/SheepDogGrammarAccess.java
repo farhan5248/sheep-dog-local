@@ -706,6 +706,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Assignment cStatementListAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cStatementListStatementParserRuleCall_2_0 = (RuleCall)cStatementListAssignment_2.eContents().get(0);
 		
+		//// TODO rename to indentedStatementList
 		//StatementList:
 		//    '+' EOL
 		//    statementList+=Statement+;
@@ -1112,6 +1113,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getTextAccess().getRule();
 	}
 	
+	//// TODO rename to indentedStatementList
 	//StatementList:
 	//    '+' EOL
 	//    statementList+=Statement+;

@@ -159,7 +159,6 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	@Check(CheckType.FAST)
 	public void checkCellNameOnly(Cell cell) {
-		// TODO validate that each row should have the max number of columns
 		// TODO make tests for this
 		if (cell != null) {
 			String problems = CellIssueDetector.validateNameOnly(new CellImpl(cell));

@@ -88,7 +88,7 @@ public class TestStepUtility {
 		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
 		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
 
-			// TODO make sure all impl classes implement this method
+			// TODO make isElementEqual to force implementing the equals check
 			// TODO make tests for this
 			if (t.equals(theTestStep)) {
 				break;

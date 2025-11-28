@@ -10,7 +10,6 @@ public class CellIssueResolver {
 	private static final Logger logger = LoggerFactory.getLogger(CellIssueResolver.class);
 
 	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ICell theCell) {
-		// TODO shouldn't this take a Cell as a parameter
 		logger.debug("Entering correctNameOnly for cell: {}", theCell != null ? theCell.getName() : "null");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;

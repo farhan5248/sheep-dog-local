@@ -11,7 +11,7 @@ public class TestStepIssueDetector {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
 
-	// TODO make tests for all of these documenting the message content
+	// TODO make test for this
 	public static String validateNameComponentOnly(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering validateNameComponentOnly for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
@@ -53,27 +53,8 @@ public class TestStepIssueDetector {
 		String text = theTestStep.getName();
 		if (text != null) {
 			if (!text.matches(TestStepUtility.REGEX)) {
-				if (TestStepUtility.hasObject(text)) {
-					// There can't be a predicate since it's invalid so is there at least state
-					if (!TestStepUtility.hasState(text)) {
-						// TODO this might seem silly but will go away when name is split into 3
-						if (!TestStepUtility.hasDetails(text)) {
-							return TestStepIssueTypes.TEST_STEP_NAME_PREDICATE_ONLY.description;
-						} else {
-							return TestStepIssueTypes.TEST_STEP_NAME_PREDICATE_ONLY.description;
-						}
-					} else {
-						// if there's a state but it's still invalid, the only part after that is time
-						// or "is as" which passes for "is present" etc
-						if (!TestStepUtility.hasTime(text)) {
-							return TestStepIssueTypes.TEST_STEP_NAME_PREDICATE_ONLY.description;
-						} else {
-							// put all the error messages because there's something weird
-							return TestStepIssueTypes.TEST_STEP_NAME_COMPONENT_ONLY.description + "\n\n"
-									+ TestStepIssueTypes.TEST_STEP_NAME_OBJECT_ONLY.description + "\n\n"
-									+ TestStepIssueTypes.TEST_STEP_NAME_PREDICATE_ONLY.description;
-						}
-					}
+				if (!TestStepUtility.hasPredicate(text)) {
+					return TestStepIssueTypes.TEST_STEP_NAME_PREDICATE_ONLY.description;
 				}
 			}
 		}

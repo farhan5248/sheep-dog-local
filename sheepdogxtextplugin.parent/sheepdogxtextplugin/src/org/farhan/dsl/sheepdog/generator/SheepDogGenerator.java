@@ -11,6 +11,7 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.farhan.dsl.issues.SheepDogBuilder;
+import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
@@ -41,9 +42,9 @@ public class SheepDogGenerator extends AbstractGenerator {
 								new SourceFileRepository(step.eResource().getURI().toPlatformString(true)));
 						TestStepImpl iTestStep = new TestStepImpl(step);
 						iTestStep.getParent().getParent().setParent(testProject);
-						// TODO rename to add step definition and return StepObjectImpl
-						StepObjectImpl stepObjectImpl = (StepObjectImpl) SheepDogBuilder
-								.generateStepDefinition(iTestStep).getParent();
+						IStepObject stepObjectImpl = SheepDogBuilder.buildStepObject(iTestStep);
+						SheepDogBuilder.buildStepDefinition(iTestStep);
+						SheepDogBuilder.buildStepParameters(iTestStep);
 						testProject.putStepObject(stepObjectImpl, null);
 					} catch (Exception e) {
 						StringWriter sw = new StringWriter();
