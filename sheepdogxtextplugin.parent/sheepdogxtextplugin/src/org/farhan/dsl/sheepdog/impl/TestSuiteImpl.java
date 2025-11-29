@@ -79,8 +79,8 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public void setParent(ITestProject value) {
-		throw new UnsupportedOperationException("setParent(ITestProject value) is not implemented");
+	public void setParent(ITestProject parent) {
+		TestSuiteImpl.parent = parent;
 	}
 
 	@Override
