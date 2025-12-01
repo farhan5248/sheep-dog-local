@@ -1,6 +1,8 @@
 package org.farhan.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.ITestStep;
@@ -9,9 +11,9 @@ import org.farhan.dsl.lang.ITestSuite;
 
 public class TestStepContainerImpl implements ITestStepContainer {
 
-	private ArrayList<ITestStep> testStepList;
-	private String name;
-	private ITestSuite testSuite;
+	ArrayList<ITestStep> testStepList;
+	String name;
+	private TestSuiteImpl parent;
 
 	public TestStepContainerImpl(String value) {
 		name = value;
@@ -25,7 +27,7 @@ public class TestStepContainerImpl implements ITestStepContainer {
 
 	@Override
 	public ITestSuite getParent() {
-		return testSuite;
+		return parent;
 	}
 
 	@Override
@@ -34,8 +36,8 @@ public class TestStepContainerImpl implements ITestStepContainer {
 	}
 
 	@Override
-	public ArrayList<ITestStep> getTestStepList() {
-		return testStepList;
+	public List<ITestStep> getTestStepList() {
+		return Collections.unmodifiableList(testStepList);
 	}
 
 	@Override
@@ -45,17 +47,8 @@ public class TestStepContainerImpl implements ITestStepContainer {
 
 	@Override
 	public void setParent(ITestSuite value) {
-		testSuite = value;
-	}
-
-	@Override
-	public void setStatementList(ArrayList<IStatement> value) {
-		throw new UnsupportedOperationException("setStatementList(ArrayList<IStatement> value) is not implemented");
-	}
-
-	@Override
-	public void setTestStepList(ArrayList<ITestStep> value) {
-		testStepList = value;
+		parent = (TestSuiteImpl) value;
+		parent.testStepContainerList.add(this);
 	}
 
 	@Override

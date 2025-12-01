@@ -15,17 +15,18 @@ import org.farhan.dsl.lang.StepDefinitionUtility;
 
 public class StepDefinitionImpl implements IStepDefinition {
 
-	String predicate;
+	String name;
 	ArrayList<IStepParameters> stepParametersList;
 	ArrayList<IStatement> statementList;
+	private StepObjectImpl parent;
 
-	public StepDefinitionImpl(String predicate) {
-		this.predicate = predicate;
+	public StepDefinitionImpl(String name) {
+		this.name = name;
 		this.stepParametersList = new ArrayList<IStepParameters>();
 		this.statementList = new ArrayList<IStatement>();
 	}
 
-	private String cellsToString(ArrayList<ICell> cells) {
+	private String cellsToString(List<ICell> cells) {
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
 		for (ICell cell : cells) {
@@ -40,14 +41,12 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public String getName() {
-
-		return predicate;
+		return name;
 	}
 
 	@Override
 	public String getNameLong() {
-		// Not needed in this project
-		return null;
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
@@ -66,13 +65,13 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public ArrayList<IStatement> getStatementList() {
-		return statementList;
+	public List<IStatement> getStatementList() {
+		return Collections.unmodifiableList(statementList);
 	}
 
 	@Override
-	public ArrayList<IStepParameters> getStepParameterList() {
-		return stepParametersList;
+	public List<IStepParameters> getStepParameterList() {
+		return Collections.unmodifiableList(stepParametersList);
 	}
 
 	@Override
@@ -97,27 +96,18 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public void setName(String value) {
-		this.predicate = value;
+		this.name = value;
 	}
 
 	@Override
 	public void setNameLong(String value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 	@Override
 	public void setParent(IStepObject value) {
-		// Not needed in this project
-	}
-
-	@Override
-	public void setStatementList(ArrayList<IStatement> value) {
-		statementList = value;
-	}
-
-	@Override
-	public void setStepParametersList(ArrayList<IStepParameters> value) {
-		this.stepParametersList = value;
+		parent = (StepObjectImpl) value;
+		parent.stepDefinitionList.add(this);
 	}
 
 }

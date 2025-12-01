@@ -11,7 +11,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 public class TestStepImpl implements ITestStep {
 
 	TestStep eObject;
-	ITestStepContainer parent;
+	private TestStepContainerImpl parent;
 
 	public TestStepImpl(TestStep testStep) {
 		this.eObject = testStep;
@@ -75,7 +75,8 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setParent(ITestStepContainer value) {
-		this.parent = value;
+		this.parent = (TestStepContainerImpl) value;
+		this.parent.eObject.getTestStepList().add(eObject);
 	}
 
 	@Override

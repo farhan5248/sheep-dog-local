@@ -15,7 +15,7 @@ import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 
 public class StepObjectImpl implements IStepObject {
 
-	private static ITestProject parent;
+	private static TestProjectImpl parent;
 	StepObject eObject;
 	private String qualifiedName;
 
@@ -77,7 +77,8 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public void setParent(ITestProject value) {
-		parent = value;
+		parent = (TestProjectImpl) value;
+		parent.addStepObject(qualifiedName, toString());
 	}
 
 	@Override
@@ -85,37 +86,14 @@ public class StepObjectImpl implements IStepObject {
 		this.qualifiedName = value;
 	}
 
-	@Override
-	public void setStepDefinitionList(ArrayList<IStepDefinition> value) {
-		throw new UnsupportedOperationException(
-				"setStepDefinitionList(ArrayList<IStepDefinition> value) is not implemented");
-	}
-
 	public String toString() {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		try {
 			eObject.eResource().save(os, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		} catch (IOException e) {
-			// TODO Review all try catch in every package
-			e.printStackTrace();
+			return e.getLocalizedMessage();
 		}
 		return os.toString();
-	}
-
-	public String serialize() throws IOException {
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		eObject.eResource().save(os, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
-		return os.toString();
-	}
-
-	@Override
-	public String getResourceName() {
-		throw new UnsupportedOperationException("getResourceName() is not implemented");
-	}
-
-	@Override
-	public void setResourceName(String value) {
-		throw new UnsupportedOperationException("setResourceName(String value) is not implemented");
 	}
 
 	@Override

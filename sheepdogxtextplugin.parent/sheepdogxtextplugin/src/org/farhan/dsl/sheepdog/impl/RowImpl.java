@@ -11,8 +11,8 @@ import org.farhan.dsl.sheepdog.sheepDog.Table;
 
 public class RowImpl implements IRow {
 
-	private ITable parent;
-	private Row eObject;
+	private TableImpl parent;
+	Row eObject;
 
 	public RowImpl(Row row) {
 		this.eObject = row;
@@ -28,7 +28,8 @@ public class RowImpl implements IRow {
 
 	@Override
 	public void setParent(ITable value) {
-		this.parent = value;
+		this.parent = (TableImpl) value;
+		this.parent.eObject.getRowList().add(eObject);
 	}
 
 	@Override
@@ -38,11 +39,6 @@ public class RowImpl implements IRow {
 			cells.add(new CellImpl(c));
 		}
 		return cells;
-	}
-
-	@Override
-	public void setCellList(ArrayList<ICell> value) {
-		// Not needed for this implementation
 	}
 
 	@Override

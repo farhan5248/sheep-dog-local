@@ -7,10 +7,10 @@ import org.farhan.dsl.lang.IText;
 
 public class TestStepImpl implements ITestStep {
 
-	private String name;
-	private ITestStepContainer testStepContainer;
-	private ITable theTable;
-	private IText theText;
+	String name;
+	private TestStepContainerImpl parent;
+	ITable table;
+	IText text;
 
 	public TestStepImpl(String value) {
 		name = value;
@@ -28,17 +28,17 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public ITestStepContainer getParent() {
-		return testStepContainer;
+		return parent;
 	}
 
 	@Override
 	public ITable getTable() {
-		return theTable;
+		return table;
 	}
 
 	@Override
 	public IText getText() {
-		return theText;
+		return text;
 	}
 
 	@Override
@@ -53,19 +53,20 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setParent(ITestStepContainer value) {
-		testStepContainer = value;
+		parent = (TestStepContainerImpl) value;
+		parent.testStepList.add(this);
 	}
 
 	@Override
 	public void setTable(ITable value) {
-		theTable = value;
+		table = value;
 	}
 
 	@Override
 	public void setText(IText value) {
-		theText = value;
+		text = value;
 	}
-	
+
 	public boolean equals(TestStepImpl object) {
 		return this.equals(object);
 	}

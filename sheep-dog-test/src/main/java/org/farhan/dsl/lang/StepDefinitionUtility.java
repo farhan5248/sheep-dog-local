@@ -34,7 +34,7 @@ public class StepDefinitionUtility {
 		return normalized.trim();
 	}
 
-	private static String cellsToString(ArrayList<ICell> cells) {
+	private static String cellsToString(List<ICell> cells) {
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
 		for (ICell cell : cells) {

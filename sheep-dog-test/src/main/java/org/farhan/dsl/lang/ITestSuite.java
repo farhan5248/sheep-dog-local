@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ITestSuite extends IModel {
 
@@ -14,13 +14,13 @@ public interface ITestSuite extends IModel {
 
 	IStatement getStatement(String name);
 
-	ArrayList<IStatement> getStatementList();
+	List<IStatement> getStatementList();
 
 	ITestStepContainer getTestStepContainer(int index);
 
 	ITestStepContainer getTestStepContainer(String name);
 
-	ArrayList<ITestStepContainer> getTestStepContainerList();
+	List<ITestStepContainer> getTestStepContainerList();
 
 	void setName(String value);
 
@@ -28,9 +28,6 @@ public interface ITestSuite extends IModel {
 
 	void setParent(ITestProject value);
 
-	void setStatementList(ArrayList<IStatement> value);
-
 	void setTestSetup(ITestSetup value);
 
-	void setTestStepContainerList(ArrayList<ITestStepContainer> value);
 }

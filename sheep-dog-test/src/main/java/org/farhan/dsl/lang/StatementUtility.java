@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 public class StatementUtility {
@@ -23,7 +23,7 @@ public class StatementUtility {
 		return tags;
 	}
 
-	public static String getStatementListAsString(ArrayList<IStatement> statementList) {
+	public static String getStatementListAsString(List<IStatement> statementList) {
 		String documentation = "";
 		for (IStatement s : statementList) {
 			documentation += s.getName();

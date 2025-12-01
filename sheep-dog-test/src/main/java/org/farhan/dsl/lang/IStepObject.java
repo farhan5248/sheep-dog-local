@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IStepObject extends IModel {
 
@@ -14,13 +14,13 @@ public interface IStepObject extends IModel {
 
 	IStatement getStatement(String name);
 
-	ArrayList<IStatement> getStatementList();
+	List<IStatement> getStatementList();
 
 	IStepDefinition getStepDefinition(int index);
 
 	IStepDefinition getStepDefinition(String name);
 
-	ArrayList<IStepDefinition> getStepDefinitionList();
+	List<IStepDefinition> getStepDefinitionList();
 
 	void setName(String value);
 
@@ -28,5 +28,4 @@ public interface IStepObject extends IModel {
 
 	void setParent(ITestProject value);
 
-	void setStepDefinitionList(ArrayList<IStepDefinition> value);
 }

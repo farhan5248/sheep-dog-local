@@ -7,8 +7,8 @@ import org.farhan.dsl.sheepdog.sheepDog.Text;
 
 public class TextImpl implements IText {
 
-	private ITestStep parent;
-	private Text eObject;
+	private TestStepImpl parent;
+	Text eObject;
 
 	public TextImpl(Text text) {
 		eObject = text;
@@ -34,7 +34,8 @@ public class TextImpl implements IText {
 
 	@Override
 	public void setParent(ITestStep value) {
-		parent = value;
+		parent = (TestStepImpl) value;
+		parent.eObject.setText(eObject);
 	}
 
 }

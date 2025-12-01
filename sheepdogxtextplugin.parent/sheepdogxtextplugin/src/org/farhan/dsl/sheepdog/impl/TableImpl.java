@@ -11,7 +11,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 
 public class TableImpl implements ITable {
 
-	private Table eObject;
+	Table eObject;
 	private ArrayList<IRow> rowList;
 	private Object parent;
 
@@ -44,11 +44,6 @@ public class TableImpl implements ITable {
 			rowList.add(new RowImpl(row));
 		}
 		return rowList;
-	}
-
-	@Override
-	public void setRowList(ArrayList<IRow> value) {
-		rowList = value;
 	}
 
 	@Override

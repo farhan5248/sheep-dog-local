@@ -13,8 +13,8 @@ import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 
 public class TestSuiteImpl implements ITestSuite {
 
-	private static ITestProject parent;
-	private TestSuite eObject;
+	private static TestProjectImpl parent;
+	TestSuite eObject;
 
 	public TestSuiteImpl(TestSuite testSuite) {
 		this.eObject = testSuite;
@@ -36,14 +36,12 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public String getQualifiedName() {
-		// Not needed in this project
-		return null;
+		throw new UnsupportedOperationException("getQualifiedName() is not implemented");
 	}
 
 	@Override
 	public ArrayList<IStatement> getStatementList() {
-		// Not needed in this project
-		return null;
+		throw new UnsupportedOperationException("ArrayList<IStatement> getStatementList() is not implemented");
 	}
 
 	@Override
@@ -69,8 +67,8 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public ArrayList<ITestStepContainer> getTestStepContainerList() {
-		// Not needed in this project
-		return null;
+		throw new UnsupportedOperationException(
+				"ArrayList<ITestStepContainer> getTestStepContainerList() is not implemented");
 	}
 
 	@Override
@@ -80,7 +78,7 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public void setParent(ITestProject parent) {
-		TestSuiteImpl.parent = parent;
+		throw new UnsupportedOperationException("setParent(ITestProject parent) is not implemented");
 	}
 
 	@Override
@@ -89,29 +87,8 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public void setStatementList(ArrayList<IStatement> value) {
-		throw new UnsupportedOperationException("setStatementList(ArrayList<IStatement> value) is not implemented");
-	}
-
-	@Override
 	public void setTestSetup(ITestSetup value) {
 		throw new UnsupportedOperationException("setTestSetup(ITestSetup value) is not implemented");
-	}
-
-	@Override
-	public void setTestStepContainerList(ArrayList<ITestStepContainer> value) {
-		throw new UnsupportedOperationException(
-				"setTestStepContainerList(ArrayList<ITestStepContainer> value) is not implemented");
-	}
-
-	@Override
-	public String getResourceName() {
-		throw new UnsupportedOperationException("getResourceName() is not implemented");
-	}
-
-	@Override
-	public void setResourceName(String value) {
-		throw new UnsupportedOperationException("setResourceName(String value) is not implemented");
 	}
 
 	@Override

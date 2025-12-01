@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ITable {
 	Object getParent();
@@ -9,7 +9,6 @@ public interface ITable {
 
 	IRow getRow(int index);
 
-	ArrayList<IRow> getRowList();
+	List<IRow> getRowList();
 
-	void setRowList(ArrayList<IRow> value);
 }

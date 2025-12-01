@@ -17,11 +17,6 @@ public class TestCaseImpl extends TestStepContainerImpl implements ITestCase {
 	}
 
 	@Override
-	public void setTestDataList(ArrayList<ITestData> value) {
-		throw new UnsupportedOperationException("setTestDataList(ArrayList<ITestData> value) is not implemented");
-	}
-
-	@Override
 	public ITestData getTestData(int index) {
 		throw new UnsupportedOperationException("getTestData(int index) is not implemented");
 	}

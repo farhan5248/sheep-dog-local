@@ -1,6 +1,6 @@
 package org.farhan.dsl.issues;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
@@ -25,7 +25,7 @@ public class TestStepContainerIssueDetector {
 	}
 
 	public static String validateTestStepListFile(ITestStepContainer theTestStepContainer) {
-		ArrayList<ITestStep> testStepList = theTestStepContainer.getTestStepList();
+		List<ITestStep> testStepList = theTestStepContainer.getTestStepList();
 		if (testStepList != null) {
 			if (!testStepList.isEmpty()) {
 				if (TestStepUtility.getComponent(testStepList.getFirst().getName()).isEmpty()) {

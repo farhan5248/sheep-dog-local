@@ -1,7 +1,10 @@
 package org.farhan.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
@@ -11,14 +14,19 @@ import org.farhan.dsl.lang.IText;
 
 public class StepParametersImpl implements IStepParameters {
 
-	private IStepDefinition parent;
-	private ITable table;
-	private ArrayList<IStatement> statementList;
+	private StepDefinitionImpl parent;
+	ITable table;
+	ArrayList<IStatement> statementList;
 
 	public StepParametersImpl(IRow header) {
 		this.table = new TableImpl();
 		this.table.setParent(this);
-		this.table.getRowList().add(header);
+		RowImpl row = new RowImpl();
+		row.setParent(table);
+		for (ICell c : header.getCellList()) {
+			CellImpl newCell = new CellImpl(c.getName());
+			newCell.setParent(row);
+		}
 		this.statementList = new ArrayList<IStatement>();
 	}
 
@@ -26,7 +34,7 @@ public class StepParametersImpl implements IStepParameters {
 		CellImpl cell = new CellImpl(value.getName());
 		RowImpl row = new RowImpl();
 		cell.setParent(row);
-		row.getCellList().add(cell);		
+		row.getCellList().add(cell);
 		this.table = new TableImpl();
 		this.table.setParent(this);
 		this.table.getRowList().add(row);
@@ -44,8 +52,8 @@ public class StepParametersImpl implements IStepParameters {
 	}
 
 	@Override
-	public ArrayList<IStatement> getStatementList() {
-		return statementList;
+	public List<IStatement> getStatementList() {
+		return Collections.unmodifiableList(statementList);
 	}
 
 	@Override
@@ -60,12 +68,8 @@ public class StepParametersImpl implements IStepParameters {
 
 	@Override
 	public void setParent(IStepDefinition value) {
-		parent = value;
-	}
-
-	@Override
-	public void setStatementList(ArrayList<IStatement> value) {
-		throw new UnsupportedOperationException("setStatementList(ArrayList<IStatement> value) is not implemented");
+		parent = (StepDefinitionImpl) value;
+		parent.stepParametersList.add(this);
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package org.farhan.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
@@ -8,8 +10,8 @@ import org.farhan.dsl.lang.ITable;
 
 public class RowImpl implements IRow {
 
-	private ArrayList<ICell> cellList;
-	private ITable parent;
+	List<ICell> cellList;
+	private TableImpl parent;
 
 	public RowImpl() {
 		cellList = new ArrayList<ICell>();
@@ -21,18 +23,14 @@ public class RowImpl implements IRow {
 	}
 
 	@Override
-	public void setParent(ITable value) {
-		parent = value;
+	public void setParent(ITable parent) {
+		this.parent = (TableImpl) parent;
+		this.parent.rowList.add(this);
 	}
 
 	@Override
-	public ArrayList<ICell> getCellList() {
-		return cellList;
-	}
-
-	@Override
-	public void setCellList(ArrayList<ICell> value) {
-		cellList = value;
+	public List<ICell> getCellList() {
+		return Collections.unmodifiableList(cellList);
 	}
 
 	@Override

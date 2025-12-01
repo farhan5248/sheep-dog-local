@@ -57,7 +57,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 					if (!p.getQualifiedName().isEmpty()) {
 						// TODO use context.getXtextDocument to write to the filesystem instead of
 						// TestProject.put
-						testProject.putStepObject(p.getQualifiedName(), p.getValue());
+						testProject.addStepObject(p.getQualifiedName(), p.getValue());
 					} else {
 						context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), p.getValue());
 					}

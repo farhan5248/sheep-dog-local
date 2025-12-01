@@ -96,7 +96,13 @@ public class TestProjectImpl implements ITestProject {
 		throw new UnsupportedOperationException("getTestSuiteList() is not implemented");
 	}
 
-	public void putStepObject(String qualifiedName, String content) {
+	public void addStepObject(String qualifiedName, String content) {
+		// TODO Currently StepObject calls parent.eObject.getStepObjectList.add()
+		// But this doesn't have an eObject or a list to return. Delete setParent and
+		// create addElement.
+		// TODO The next problem is that it's not just an object added but initialised.
+		// Perhaps StepObject should have a parse method like in sheep-dog-dev so that
+		// an object can be created.
 		try {
 			sr.put("", layer2dir + "/" + qualifiedName, content);
 		} catch (Exception e) {
@@ -108,18 +114,6 @@ public class TestProjectImpl implements ITestProject {
 	public void setProjectPath(String projectPath) {
 		// TODO the method that initialises the repo should probably handle this
 		throw new UnsupportedOperationException("setProjectPath(String projectPath) is not implemented");
-	}
-
-	@Override
-	public void setStepObjectList(ArrayList<IStepObject> stepObjectList) {
-		throw new UnsupportedOperationException(
-				"setStepObjectList(ArrayList<IStepObject> stepObjectList) is not implemented");
-	}
-
-	@Override
-	public void setTestSuiteList(ArrayList<ITestSuite> testSuiteList) {
-		throw new UnsupportedOperationException(
-				"setTestSuiteList(ArrayList<ITestSuite> testSuiteList) is not implemented");
 	}
 
 }

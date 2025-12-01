@@ -12,7 +12,7 @@ import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 
 public class StepParametersImpl implements IStepParameters {
 	private StepDefinitionImpl parent;
-	private StepParameters eObject;
+	StepParameters eObject;
 
 	public StepParametersImpl(StepParameters stepParameters) {
 		eObject = stepParameters;
@@ -57,11 +57,6 @@ public class StepParametersImpl implements IStepParameters {
 		this.parent = (StepDefinitionImpl) parent;
 		this.parent.eObject.getStepParameterList().add(eObject);
 
-	}
-
-	@Override
-	public void setStatementList(ArrayList<IStatement> value) {
-		throw new UnsupportedOperationException("setStatementList(ArrayList<IStatement> value) is not implemented");
 	}
 
 	@Override

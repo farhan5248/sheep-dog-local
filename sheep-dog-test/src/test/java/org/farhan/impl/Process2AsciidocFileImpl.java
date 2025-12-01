@@ -23,11 +23,9 @@ public class Process2AsciidocFileImpl extends TestObject implements Process2Asci
 		stepParametersTable = new TableImpl();
 		RowImpl row = new RowImpl();
 		row.setParent(stepParametersTable);
-		stepParametersTable.getRowList().add(row);
 		for (String h : keyMap.get("Headers").split("\\|")) {
 			ICell cell = new CellImpl(h);
 			cell.setParent(row);
-			row.getCellList().add(cell);
 		}
 	}
 

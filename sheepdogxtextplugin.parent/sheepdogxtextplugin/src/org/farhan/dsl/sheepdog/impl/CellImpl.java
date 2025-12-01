@@ -7,8 +7,8 @@ import org.farhan.dsl.sheepdog.sheepDog.Row;
 
 public class CellImpl implements ICell {
 
-	private IRow parent;
-	private Cell eObject;
+	private RowImpl parent;
+	Cell eObject;
 
 	public CellImpl(Cell cell) {
 		this.eObject = cell;
@@ -34,7 +34,8 @@ public class CellImpl implements ICell {
 
 	@Override
 	public void setParent(IRow value) {
-		this.parent = value;
+		this.parent = (RowImpl) value;
+		this.parent.eObject.getCellList().add(eObject);
 	}
 
 }

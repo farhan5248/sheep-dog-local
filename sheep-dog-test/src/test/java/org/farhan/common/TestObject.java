@@ -45,7 +45,7 @@ public abstract class TestObject {
 			testCase = SheepDogBuilder.createTestCase(testSuite, "");
 		}
 		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testCase, stepName);
-		testCase.getTestStepList().add(currentStep);
+		currentStep.setParent(testCase);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
 			currentStep.setTable(stepParametersTable);
@@ -64,7 +64,7 @@ public abstract class TestObject {
 			testSetup = SheepDogBuilder.createTestSetup(testSuite, "");
 		}
 		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testSetup, stepName);
-		testSetup.getTestStepList().add(currentStep);
+		currentStep.setParent(testSetup);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
 			currentStep.setTable(stepParametersTable);
@@ -103,7 +103,7 @@ public abstract class TestObject {
 		processInputOutputs(row, "assert", "");
 	}
 
-	protected String cellsToString(ArrayList<ICell> cells) {
+	protected String cellsToString(List<ICell> cells) {
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
 		for (ICell cell : cells) {

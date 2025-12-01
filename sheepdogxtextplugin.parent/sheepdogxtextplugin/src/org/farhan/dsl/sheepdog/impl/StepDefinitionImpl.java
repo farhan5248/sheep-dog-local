@@ -26,7 +26,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 		this.eObject = value;
 	}
 
-	private String cellsToString(ArrayList<ICell> arrayList) {
+	private String cellsToString(List<ICell> arrayList) {
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
 		for (ICell cell : arrayList) {
@@ -46,8 +46,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public String getNameLong() {
-		// Not needed in this project
-		return null;
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
@@ -116,23 +115,13 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public void setNameLong(String value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 	@Override
 	public void setParent(IStepObject parent) {
 		this.parent = (StepObjectImpl) parent;
 		this.parent.eObject.getStepDefinitionList().add(eObject);
-	}
-
-	@Override
-	public void setStatementList(ArrayList<IStatement> value) {
-		// Not needed in this project
-	}
-
-	@Override
-	public void setStepParametersList(ArrayList<IStepParameters> value) {
-		// Not needed in this project
 	}
 
 }

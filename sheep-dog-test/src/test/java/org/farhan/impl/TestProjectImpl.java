@@ -1,14 +1,17 @@
 package org.farhan.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSuite;
 
 public class TestProjectImpl implements ITestProject {
 
-	private ArrayList<ITestSuite> testSuiteList;
-	private ArrayList<IStepObject> stepObjectList;
+	ArrayList<ITestSuite> testSuiteList;
+	ArrayList<IStepObject> stepObjectList;
 
 	public TestProjectImpl() {
 		this.testSuiteList = new ArrayList<ITestSuite>();
@@ -31,8 +34,8 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public ArrayList<IStepObject> getStepObjectList() {
-		return stepObjectList;
+	public List<IStepObject> getStepObjectList() {
+		return Collections.unmodifiableList(stepObjectList);
 	}
 
 	@Override
@@ -46,18 +49,8 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public ArrayList<ITestSuite> getTestSuiteList() {
-		return testSuiteList;
-	}
-
-	@Override
-	public void setStepObjectList(ArrayList<IStepObject> stepObjectList) {
-		this.stepObjectList = stepObjectList;
-	}
-
-	@Override
-	public void setTestSuiteList(ArrayList<ITestSuite> testSuiteList) {
-		this.testSuiteList = testSuiteList;
+	public List<ITestSuite> getTestSuiteList() {
+		return Collections.unmodifiableList(testSuiteList);
 	}
 
 	@Override

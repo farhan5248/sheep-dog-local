@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ITestProject {
 
@@ -10,15 +10,12 @@ public interface ITestProject {
 
 	IStepObject getStepObject(String qualifiedName);
 
-	ArrayList<IStepObject> getStepObjectList();
+	List<IStepObject> getStepObjectList();
 
 	ITestSuite getTestSuite(int index);
 
 	ITestSuite getTestSuite(String name);
 
-	ArrayList<ITestSuite> getTestSuiteList();
+	List<ITestSuite> getTestSuiteList();
 
-	void setStepObjectList(ArrayList<IStepObject> stepObjectList);
-
-	void setTestSuiteList(ArrayList<ITestSuite> testSuiteList);
 }

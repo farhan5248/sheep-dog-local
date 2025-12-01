@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ITestCase extends ITestStepContainer {
 
@@ -8,8 +8,6 @@ public interface ITestCase extends ITestStepContainer {
 
 	ITestData getTestData(String name);
 
-	ArrayList<ITestData> getTestDataList();
-
-	void setTestDataList(ArrayList<ITestData> value);
+	List<ITestData> getTestDataList();
 
 }

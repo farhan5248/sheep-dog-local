@@ -1,6 +1,8 @@
 package org.farhan.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
@@ -9,11 +11,11 @@ import org.farhan.dsl.lang.ITestProject;
 
 public class StepObjectImpl implements IStepObject {
 
-	private String name;
+	String name;
 	private String qualifiedName;
-	private ITestProject testProject;
-	private ArrayList<IStepDefinition> stepDefinitionList;
-	private ArrayList<IStatement> statementList;
+	private TestProjectImpl parent;
+	ArrayList<IStepDefinition> stepDefinitionList;
+	ArrayList<IStatement> statementList;
 
 	public StepObjectImpl(String qualifiedName) {
 		this.qualifiedName = qualifiedName;
@@ -30,7 +32,7 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public ITestProject getParent() {
-		return testProject;
+		return parent;
 	}
 
 	@Override
@@ -39,8 +41,8 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
-	public ArrayList<IStatement> getStatementList() {
-		return statementList;
+	public List<IStatement> getStatementList() {
+		return Collections.unmodifiableList(statementList);
 	}
 
 	@Override
@@ -54,8 +56,8 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
-	public ArrayList<IStepDefinition> getStepDefinitionList() {
-		return stepDefinitionList;
+	public List<IStepDefinition> getStepDefinitionList() {
+		return Collections.unmodifiableList(stepDefinitionList);
 	}
 
 	@Override
@@ -65,27 +67,13 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public void setParent(ITestProject value) {
-		testProject = value;
+		parent = (TestProjectImpl) value;
+		parent.stepObjectList.add(this);
 	}
 
 	@Override
 	public void setQualifiedName(String value) {
 		this.qualifiedName = value;
-	}
-
-	@Override
-	public void setStepDefinitionList(ArrayList<IStepDefinition> value) {
-		throw new UnsupportedOperationException("setStepDefinitionList(ArrayList<IStepDefinition> value) is not implemented");
-	}
-
-	@Override
-	public String getResourceName() {
-		throw new UnsupportedOperationException("getResourceName() is not implemented");
-	}
-
-	@Override
-	public void setResourceName(String value) {
-		throw new UnsupportedOperationException("setResourceName(String value) is not implemented");
 	}
 
 	@Override

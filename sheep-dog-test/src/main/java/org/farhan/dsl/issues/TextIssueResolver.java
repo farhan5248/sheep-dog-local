@@ -2,11 +2,15 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.StatementUtility;
+import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,20 +22,66 @@ public class TextIssueResolver {
 		logger.debug("Entering correctNameWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		try {
-			IStepParameters theStepParameters = SheepDogBuilder.createStepParameters(theTestStep);
-			IStepObject theStepObject = theStepParameters.getParent().getParent();
-			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-			proposal.setId("Generate | Content");
-			proposal.setDescription(StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
-			proposal.setValue(theStepObject.toString());
-			proposal.setQualifiedName(theStepObject.getQualifiedName());
-			proposals.add(proposal);
+
+			ITestProject theProject = theTestStep.getParent().getParent().getParent();
+			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+			if (theStepObject != null) {
+				String predicate = TestStepUtility.getPredicate(theTestStep.getName());
+				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
+				if (theStepDefinition != null) {
+					// This assumes that the step is valid but the parameters don't exist
+					IText theText = theTestStep.getText();
+					IStepParameters theStepParameters = theStepDefinition.getStepParameters(theText);
+					if (theStepParameters == null) {
+						theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, theText);
+						SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+						proposal.setId("Generate | Content");
+						proposal.setDescription(
+								StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
+						proposal.setValue(theStepObject.toString());
+						proposal.setQualifiedName(theStepObject.getQualifiedName());
+						proposals.add(proposal);
+					}
+				}
+			}
 		} catch (Exception e) {
 			logger.error("Failed in correctCellListWorkspace for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 		}
 		logger.debug("Exiting correctNameWorkspace with {} proposals", proposals.size());
 		return proposals;
+	}
+
+	public static IStepParameters createStepParameters(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering createStepParameters for step: {}",
+				theTestStep != null ? theTestStep.getName() : "null");
+		try {
+			IStepParameters theStepParameters = null;
+			ITestProject theProject = theTestStep.getParent().getParent().getParent();
+			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+			if (theStepObject != null) {
+				String predicate = TestStepUtility.getPredicate(theTestStep.getName());
+				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
+				if (theStepDefinition != null) {
+					if (theTestStep.getText() != null) {
+						IText theText = theTestStep.getText();
+						if (!theText.getName().isEmpty()) {
+							if (theStepDefinition.getStepParameters(theText) == null) {
+								theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, theText);
+							}
+						}
+					}
+				}
+			}
+			logger.debug("Exiting createStepParameters");
+			return theStepParameters;
+		} catch (Exception e) {
+			logger.error("Failed in createStepParameters for step '{}': {}",
+					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
+			throw e;
+		}
 	}
 
 }

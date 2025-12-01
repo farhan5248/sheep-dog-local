@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IStepDefinition {
 
@@ -14,9 +14,9 @@ public interface IStepDefinition {
 
 	IStatement getStatement(String name);
 
-	ArrayList<IStatement> getStatementList();
+	List<IStatement> getStatementList();
 
-	ArrayList<IStepParameters> getStepParameterList();
+	List<IStepParameters> getStepParameterList();
 
 	IStepParameters getStepParameters(int index);
 
@@ -32,7 +32,4 @@ public interface IStepDefinition {
 
 	void setParent(IStepObject value);
 
-	void setStatementList(ArrayList<IStatement> value);
-
-	void setStepParametersList(ArrayList<IStepParameters> value);
 }

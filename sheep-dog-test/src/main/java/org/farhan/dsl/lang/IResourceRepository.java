@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IResourceRepository {
 
@@ -12,7 +12,7 @@ public interface IResourceRepository {
 
 	public String get(String tags, String path) throws Exception;
 
-	public ArrayList<String> list(String tags, String path, String extension);
+	public List<String> list(String tags, String path, String extension);
 
 	public void put(String tags, String path, String content) throws Exception;
 }

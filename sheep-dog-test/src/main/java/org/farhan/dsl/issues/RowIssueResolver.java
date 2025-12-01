@@ -5,9 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.StatementUtility;
@@ -20,7 +22,7 @@ public class RowIssueResolver {
 	private static final Logger logger = LoggerFactory.getLogger(RowIssueResolver.class);
 
 	private static String cellsToString(List<ICell> cells) {
-		// TODO this should be a csv list because \| is ugly 
+		// TODO this should be a csv list because \| is ugly
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
 		for (ICell cell : cells) {
@@ -37,15 +39,30 @@ public class RowIssueResolver {
 		logger.debug("Entering correctCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		try {
-			IStepParameters theStepParameters = SheepDogBuilder.createStepParameters(theTestStep);
-			IStepObject theStepObject = theStepParameters.getParent().getParent();
-			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-			proposal.setId(
-					"Generate " + cellsToString(theStepParameters.getTable().getRowList().getFirst().getCellList()));
-			proposal.setDescription(StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
-			proposal.setValue(theStepObject.toString());
-			proposal.setQualifiedName(theStepObject.getQualifiedName());
-			proposals.add(proposal);
+
+			ITestProject theProject = theTestStep.getParent().getParent().getParent();
+			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+			if (theStepObject != null) {
+				String predicate = TestStepUtility.getPredicate(theTestStep.getName());
+				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
+				if (theStepDefinition != null) {
+					// This assumes that the step is valid but the parameters don't exist
+					IRow headers = theTestStep.getTable().getRowList().getFirst();
+					IStepParameters theStepParameters = theStepDefinition.getStepParameters(headers);
+					if (theStepParameters == null) {
+						theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, headers);
+						SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+						proposal.setId("Generate "
+								+ cellsToString(theStepParameters.getTable().getRowList().getFirst().getCellList()));
+						proposal.setDescription(
+								StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
+						proposal.setValue(theStepObject.toString());
+						proposal.setQualifiedName(theStepObject.getQualifiedName());
+						proposals.add(proposal);
+					}
+				}
+			}
 		} catch (Exception e) {
 			logger.error("Failed in correctCellListWorkspace for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);

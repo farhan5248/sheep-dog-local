@@ -11,10 +11,7 @@ public class GenerateStepDefinitionActionImpl extends TestObject implements Gene
 
 	public void transition() {
 		try {
-			// TODO there should be actions for each issue type, not one for each menu item?
-			SheepDogBuilder.createStepObject(currentStep);
-			SheepDogBuilder.createStepDefinition(currentStep);
-			SheepDogBuilder.createStepParameters(currentStep);
+			SheepDogBuilder.createTestStepReferencedElements(currentStep);
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ITestData {
 
@@ -14,18 +14,14 @@ public interface ITestData {
 
 	IStatement getStatement(String name);
 
-	ArrayList<IStatement> getStatementList();
+	List<IStatement> getStatementList();
 
-	ArrayList<ArrayList<String>> getTable();
+	List<List<String>> getTable();
 
 	void setName(String value);
 
 	void setNameLong(String value);
 
 	void setParent(ITestCase value);
-
-	void setStatementList(ArrayList<IStatement> value);
-
-	void setTable(ArrayList<ArrayList<String>> value);
 
 }

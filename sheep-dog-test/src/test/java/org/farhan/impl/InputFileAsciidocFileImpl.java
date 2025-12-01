@@ -4,8 +4,10 @@ import java.util.HashMap;
 
 import org.farhan.common.TestObject;
 import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile;
@@ -66,7 +68,8 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	public void setObjectDescription(HashMap<String, String> keyMap) {
 		try {
 			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
-			stepObject.getStatementList().add(new StatementImpl(keyMap.get("Object Description")));
+			IStatement statement = new StatementImpl(keyMap.get("Object Description"));
+			statement.setParent(stepObject);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}
@@ -88,7 +91,8 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
 					keyMap.get("Step Definition Name"));
 			IRow parameters = new RowImpl();
-			parameters.getCellList().add(new CellImpl(keyMap.get("Parameters")));
+			ICell cell = new CellImpl(keyMap.get("Parameters"));
+			cell.setParent(parameters);
 			SheepDogBuilder.createStepParameters(stepDefinition, parameters);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
@@ -101,7 +105,8 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
 			IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
 					keyMap.get("Step Definition Name"));
-			stepDefinition.getStatementList().add(new StatementImpl(keyMap.get("Step Definition Description")));
+			IStatement statement = new StatementImpl(keyMap.get("Step Definition Description"));
+			statement.setParent(stepDefinition);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}

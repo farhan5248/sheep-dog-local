@@ -5,8 +5,8 @@ import org.farhan.dsl.lang.IRow;
 
 public class CellImpl implements ICell {
 
-	private String name;
-	private IRow parent;
+	String name;
+	private RowImpl parent;
 
 	public CellImpl(String value) {
 		name = value;
@@ -28,8 +28,9 @@ public class CellImpl implements ICell {
 	}
 
 	@Override
-	public void setParent(IRow value) {
-		parent = value;
+	public void setParent(IRow parent) {
+		this.parent = (RowImpl) parent;
+		this.parent.cellList.add(this);
 	}
 
 }

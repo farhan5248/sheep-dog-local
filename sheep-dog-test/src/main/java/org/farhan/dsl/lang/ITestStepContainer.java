@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ITestStepContainer {
 
@@ -14,13 +14,13 @@ public interface ITestStepContainer {
 
 	IStatement getStatement(String name);
 
-	ArrayList<IStatement> getStatementList();
+	List<IStatement> getStatementList();
 
 	ITestStep getTestStep(int index);
 
 	ITestStep getTestStep(String name);
 
-	ArrayList<ITestStep> getTestStepList();
+	List<ITestStep> getTestStepList();
 
 	void setName(String value);
 
@@ -28,7 +28,4 @@ public interface ITestStepContainer {
 
 	void setParent(ITestSuite value);
 
-	void setStatementList(ArrayList<IStatement> value);
-
-	void setTestStepList(ArrayList<ITestStep> value);
 }

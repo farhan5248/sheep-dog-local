@@ -13,8 +13,8 @@ import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 
 public class TestStepContainerImpl implements ITestStepContainer {
 
-	protected TestStepContainer eObject;
-	ITestSuite parent;
+	TestStepContainer eObject;
+	private TestSuiteImpl parent;
 
 	public TestStepContainerImpl(TestStepContainer testCase) {
 		this.eObject = testCase;
@@ -55,22 +55,13 @@ public class TestStepContainerImpl implements ITestStepContainer {
 
 	@Override
 	public void setName(String value) {
-		// Not needed in this project
+		throw new UnsupportedOperationException("setName(String value) is not implemented");
 	}
 
 	@Override
 	public void setParent(ITestSuite value) {
-		this.parent = value;
-	}
-
-	@Override
-	public void setStatementList(ArrayList<IStatement> value) {
-		// Not needed in this project
-	}
-
-	@Override
-	public void setTestStepList(ArrayList<ITestStep> value) {
-		// Not needed in this project
+		this.parent = (TestSuiteImpl) value;
+		this.parent.eObject.getTestStepContainerList().add(eObject);
 	}
 
 	@Override
