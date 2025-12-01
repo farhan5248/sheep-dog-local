@@ -16,14 +16,14 @@ import org.farhan.dsl.lang.StepDefinitionUtility;
 public class StepDefinitionImpl implements IStepDefinition {
 
 	String name;
-	ArrayList<IStepParameters> stepParametersList;
-	ArrayList<IStatement> statementList;
-	private StepObjectImpl parent;
+	ArrayList<StepParametersImpl> stepParametersList;
+	ArrayList<StatementImpl> statementList;
+	StepObjectImpl parent;
 
 	public StepDefinitionImpl(String name) {
 		this.name = name;
-		this.stepParametersList = new ArrayList<IStepParameters>();
-		this.statementList = new ArrayList<IStatement>();
+		this.stepParametersList = new ArrayList<StepParametersImpl>();
+		this.statementList = new ArrayList<StatementImpl>();
 	}
 
 	private String cellsToString(List<ICell> cells) {
@@ -105,9 +105,17 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public void setParent(IStepObject value) {
-		parent = (StepObjectImpl) value;
-		parent.stepDefinitionList.add(this);
+	public boolean addStatement(IStatement value) {
+		statementList.add((StatementImpl) value);
+		statementList.getLast().parent = this;
+		return true;
+	}
+
+	@Override
+	public boolean addStepParameters(IStepParameters value) {
+		stepParametersList.add((StepParametersImpl) value);
+		stepParametersList.getLast().parent = this;
+		return true;
 	}
 
 }

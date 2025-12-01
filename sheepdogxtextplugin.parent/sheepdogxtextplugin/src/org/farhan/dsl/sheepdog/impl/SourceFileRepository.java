@@ -14,7 +14,8 @@ import org.farhan.dsl.lang.IResourceRepository;
 
 public class SourceFileRepository implements IResourceRepository {
 
-	private final String projectPath;
+	// TODO this should move to TestProject, at most keep the workspace path here
+	public final String projectPath;
 
 	public SourceFileRepository(String uriPath) {
 		IFile resource = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uriPath));

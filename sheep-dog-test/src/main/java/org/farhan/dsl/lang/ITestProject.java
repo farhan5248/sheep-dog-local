@@ -18,4 +18,8 @@ public interface ITestProject {
 
 	List<ITestSuite> getTestSuiteList();
 
+	boolean addTestSuite(ITestSuite value);
+
+	boolean addStepObject(IStepObject value);
+
 }

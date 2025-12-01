@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface IStepObject extends IModel {
 
+	String getContent() throws Exception;
+
 	String getName();
 
 	String getNameLong();
@@ -22,10 +24,14 @@ public interface IStepObject extends IModel {
 
 	List<IStepDefinition> getStepDefinitionList();
 
+	void setContent(String text) throws Exception;
+
 	void setName(String value);
 
 	void setNameLong(String value);
 
-	void setParent(ITestProject value);
+	boolean addStatement(IStatement value);
+
+	boolean addStepDefinition(IStepDefinition value);
 
 }

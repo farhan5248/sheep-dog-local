@@ -116,4 +116,14 @@ public class TestSuiteImpl implements ITestSuite {
 		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
+	@Override
+	public String getContent() {
+		throw new UnsupportedOperationException("getContent() is not implemented");
+	}
+
+	@Override
+	public void setContent(String text) {
+		throw new UnsupportedOperationException("setContent(String text) is not implemented");
+	}
+
 }

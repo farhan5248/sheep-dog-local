@@ -4,7 +4,6 @@
 package org.farhan.dsl.sheepdog.ui.quickfix;
 
 import java.util.ArrayList;
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,6 +17,7 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
+import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
@@ -28,6 +28,7 @@ import org.farhan.dsl.issues.SheepDogIssueProposal;
 import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TextIssueResolver;
+import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.sheepdog.impl.CellImpl;
 import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
@@ -44,20 +45,23 @@ import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
  * https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
-
 	private static final Logger logger = Logger.getLogger(SheepDogQuickfixProvider.class);
 
 	private void createAcceptor(Issue issue, IssueResolutionAcceptor acceptor,
 			ArrayList<SheepDogIssueProposal> proposals) {
-		TestProjectImpl testProject = new TestProjectImpl(
-				new SourceFileRepository(getEObject(issue).eResource().getURI().toPlatformString(true)));
 		for (SheepDogIssueProposal p : proposals) {
 			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 				public void apply(IModificationContext context) throws BadLocationException {
 					if (!p.getQualifiedName().isEmpty()) {
-						// TODO use context.getXtextDocument to write to the filesystem instead of
-						// TestProject.put
-						testProject.addStepObject(p.getQualifiedName(), p.getValue());
+						try {
+							TestProjectImpl testProject = new TestProjectImpl(new SourceFileRepository(
+									getEObject(issue).eResource().getURI().toPlatformString(true)));
+							IStepObject stepObject = SheepDogFactory.instance.createStepObject(p.getQualifiedName());
+							stepObject.setContent(p.getValue());
+							testProject.addStepObject(stepObject);
+						} catch (Exception e) {
+							logger.error("Error writing file for " + p.getQualifiedName() + "\n" + e.getMessage());
+						}
 					} else {
 						context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), p.getValue());
 					}
@@ -74,7 +78,8 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
 	public void fixRowCellListWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		Row theRow = (Row) getEObject(issue);
-		createAcceptor(issue, acceptor, RowIssueResolver.correctCellListWorkspace(new TestStepImpl((TestStep) theRow.eContainer().eContainer())));
+		createAcceptor(issue, acceptor, RowIssueResolver
+				.correctCellListWorkspace(new TestStepImpl((TestStep) theRow.eContainer().eContainer())));
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)

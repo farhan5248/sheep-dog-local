@@ -30,6 +30,8 @@ public interface IStepDefinition {
 
 	void setNameLong(String value);
 
-	void setParent(IStepObject value);
+	boolean addStatement(IStatement value);
+
+	boolean addStepParameters(IStepParameters value);
 
 }

@@ -18,10 +18,4 @@ public interface IModel {
 	 */
 	ITestProject getParent();
 
-	/**
-	 * Sets the parent test project for this model. Meta-attribute (not in grammar).
-	 * 
-	 * @param value the parent test project
-	 */
-	void setParent(ITestProject value);
 }

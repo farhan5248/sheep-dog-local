@@ -1,8 +1,11 @@
 package org.farhan.dsl.sheepdog.impl;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.dsl.lang.IStatement;
@@ -78,22 +81,12 @@ public class StepObjectImpl implements IStepObject {
 	@Override
 	public void setParent(ITestProject value) {
 		parent = (TestProjectImpl) value;
-		parent.addStepObject(qualifiedName, toString());
+		parent.addStepObject(this);
 	}
 
 	@Override
 	public void setQualifiedName(String value) {
 		this.qualifiedName = value;
-	}
-
-	public String toString() {
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		try {
-			eObject.eResource().save(os, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
-		} catch (IOException e) {
-			return e.getLocalizedMessage();
-		}
-		return os.toString();
 	}
 
 	@Override
@@ -119,6 +112,22 @@ public class StepObjectImpl implements IStepObject {
 	@Override
 	public void setNameLong(String value) {
 		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
+	}
+
+	@Override
+	public String getContent() throws Exception {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		eObject.eResource().save(os, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+		return os.toString();
+	}
+
+	@Override
+	public void setContent(String text) throws Exception {
+		if (!text.isEmpty()) {
+			InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
+			eObject.eResource().load(content, Collections.EMPTY_MAP);
+			eObject = (StepObject) eObject.eResource().getContents().get(0);
+		}
 	}
 
 }

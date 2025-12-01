@@ -22,6 +22,6 @@ public interface ITestData {
 
 	void setNameLong(String value);
 
-	void setParent(ITestCase value);
+	boolean addStatement(IStatement value);
 
 }

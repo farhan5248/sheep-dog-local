@@ -30,7 +30,7 @@ public class TestStepIssueResolver {
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getQualifiedName());
 			proposal.setDescription(StatementUtility.getStatementListAsString(theStepObject.getStatementList()));
-			proposal.setValue(theStepObject.toString());
+			proposal.setValue(theStepObject.getContent());
 			proposal.setQualifiedName(theStepObject.getQualifiedName());
 			proposals.add(proposal);
 		} catch (Exception e) {
@@ -56,7 +56,7 @@ public class TestStepIssueResolver {
 					proposal.setId("Generate " + theStepDefinition.getName());
 					proposal.setDescription(
 							StatementUtility.getStatementListAsString(theStepDefinition.getStatementList()));
-					proposal.setValue(theStepObject.toString());
+					proposal.setValue(theStepObject.getContent());
 					proposal.setQualifiedName(theStepObject.getQualifiedName());
 					proposals.add(proposal);
 				}

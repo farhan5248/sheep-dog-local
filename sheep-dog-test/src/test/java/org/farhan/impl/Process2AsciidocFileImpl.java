@@ -22,10 +22,10 @@ public class Process2AsciidocFileImpl extends TestObject implements Process2Asci
 		// order when going through the attributes to select methods in this class
 		stepParametersTable = new TableImpl();
 		RowImpl row = new RowImpl();
-		row.setParent(stepParametersTable);
+		stepParametersTable.addRow(row);
 		for (String h : keyMap.get("Headers").split("\\|")) {
 			ICell cell = new CellImpl(h);
-			cell.setParent(row);
+			row.addCell(cell);
 		}
 	}
 

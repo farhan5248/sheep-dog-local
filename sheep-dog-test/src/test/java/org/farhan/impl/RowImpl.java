@@ -10,22 +10,16 @@ import org.farhan.dsl.lang.ITable;
 
 public class RowImpl implements IRow {
 
-	List<ICell> cellList;
-	private TableImpl parent;
+	List<CellImpl> cellList;
+	TableImpl parent;
 
 	public RowImpl() {
-		cellList = new ArrayList<ICell>();
+		cellList = new ArrayList<CellImpl>();
 	}
 
 	@Override
 	public ITable getParent() {
 		return parent;
-	}
-
-	@Override
-	public void setParent(ITable parent) {
-		this.parent = (TableImpl) parent;
-		this.parent.rowList.add(this);
 	}
 
 	@Override
@@ -41,6 +35,13 @@ public class RowImpl implements IRow {
 	@Override
 	public ICell getCell(String name) {
 		throw new UnsupportedOperationException("getCell(String name) is not implemented");
+	}
+
+	@Override
+	public boolean addCell(ICell value) {
+		cellList.add((CellImpl) value);
+		cellList.getLast().parent = this;
+		return true;
 	}
 
 }

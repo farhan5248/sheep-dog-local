@@ -16,8 +16,6 @@ public interface ITestStep {
 
 	void setNameLong(String value);
 
-	void setParent(ITestStepContainer value);
-
 	void setTable(ITable value);
 
 	void setText(IText value);

@@ -10,12 +10,12 @@ import org.farhan.dsl.lang.ITestSuite;
 
 public class TestProjectImpl implements ITestProject {
 
-	ArrayList<ITestSuite> testSuiteList;
-	ArrayList<IStepObject> stepObjectList;
+	ArrayList<TestSuiteImpl> testSuiteList;
+	ArrayList<StepObjectImpl> stepObjectList;
 
 	public TestProjectImpl() {
-		this.testSuiteList = new ArrayList<ITestSuite>();
-		this.stepObjectList = new ArrayList<IStepObject>();
+		this.testSuiteList = new ArrayList<TestSuiteImpl>();
+		this.stepObjectList = new ArrayList<StepObjectImpl>();
 	}
 
 	@Override
@@ -61,6 +61,20 @@ public class TestProjectImpl implements ITestProject {
 	@Override
 	public ITestSuite getTestSuite(int index) {
 		return testSuiteList.get(index);
+	}
+
+	@Override
+	public boolean addTestSuite(ITestSuite value) {
+		testSuiteList.add((TestSuiteImpl) value);
+		testSuiteList.getLast().parent = this;
+		return true;
+	}
+
+	@Override
+	public boolean addStepObject(IStepObject value) {
+		stepObjectList.add((StepObjectImpl) value);
+		stepObjectList.getLast().parent = this;
+		return true;
 	}
 
 }

@@ -8,9 +8,9 @@ import org.farhan.dsl.lang.IText;
 public class TestStepImpl implements ITestStep {
 
 	String name;
-	private TestStepContainerImpl parent;
-	ITable table;
-	IText text;
+	TestStepContainerImpl parent;
+	TableImpl table;
+	TextImpl text;
 
 	public TestStepImpl(String value) {
 		name = value;
@@ -52,19 +52,14 @@ public class TestStepImpl implements ITestStep {
 	}
 
 	@Override
-	public void setParent(ITestStepContainer value) {
-		parent = (TestStepContainerImpl) value;
-		parent.testStepList.add(this);
-	}
-
-	@Override
 	public void setTable(ITable value) {
-		table = value;
+		table = (TableImpl) value;
+		table.parent = this;
 	}
 
 	@Override
 	public void setText(IText value) {
-		text = value;
+		throw new UnsupportedOperationException("setText(IText value) is not implemented");
 	}
 
 	public boolean equals(TestStepImpl object) {

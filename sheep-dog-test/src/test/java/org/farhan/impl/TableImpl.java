@@ -9,21 +9,16 @@ import org.farhan.dsl.lang.ITable;
 
 public class TableImpl implements ITable {
 
-	ArrayList<IRow> rowList;
-	private Object parent;
+	ArrayList<RowImpl> rowList;
+	Object parent;
 
 	public TableImpl() {
-		rowList = new ArrayList<IRow>();
+		rowList = new ArrayList<RowImpl>();
 	}
 
 	@Override
 	public Object getParent() {
 		return parent;
-	}
-
-	@Override
-	public void setParent(Object value) {
-		parent = value;
 	}
 
 	@Override
@@ -34,6 +29,13 @@ public class TableImpl implements ITable {
 	@Override
 	public IRow getRow(int index) {
 		throw new UnsupportedOperationException("getRow(int index) is not implemented");
+	}
+
+	@Override
+	public boolean addRow(IRow value) {
+		rowList.add((RowImpl) value);
+		rowList.getLast().parent = this;
+		return true;
 	}
 
 }

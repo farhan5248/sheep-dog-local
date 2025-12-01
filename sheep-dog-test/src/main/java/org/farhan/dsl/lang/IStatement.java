@@ -7,6 +7,4 @@ public interface IStatement {
 	void setName(String value);
 
 	Object getParent();
-
-	void setParent(Object parent);
 }

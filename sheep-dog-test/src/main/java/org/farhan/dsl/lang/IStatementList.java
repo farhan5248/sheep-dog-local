@@ -28,5 +28,5 @@ public interface IStatementList {
 	 * 
 	 * @param value the parent element (IStepParameters or ITestData)
 	 */
-	void setParent(Object value);
+	boolean addStatement(IStatement value);
 }

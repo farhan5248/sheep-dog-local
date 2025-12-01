@@ -69,7 +69,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 		try {
 			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
 			IStatement statement = new StatementImpl(keyMap.get("Object Description"));
-			statement.setParent(stepObject);
+			stepObject.addStatement(statement);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}
@@ -90,10 +90,10 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
 			IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
 					keyMap.get("Step Definition Name"));
-			IRow parameters = new RowImpl();
+			IRow row = new RowImpl();
 			ICell cell = new CellImpl(keyMap.get("Parameters"));
-			cell.setParent(parameters);
-			SheepDogBuilder.createStepParameters(stepDefinition, parameters);
+			row.addCell(cell);
+			SheepDogBuilder.createStepParameters(stepDefinition, row);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}
@@ -106,7 +106,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
 					keyMap.get("Step Definition Name"));
 			IStatement statement = new StatementImpl(keyMap.get("Step Definition Description"));
-			statement.setParent(stepDefinition);
+			stepDefinition.addStatement(statement);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}

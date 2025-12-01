@@ -45,11 +45,10 @@ public abstract class TestObject {
 			testCase = SheepDogBuilder.createTestCase(testSuite, "");
 		}
 		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testCase, stepName);
-		currentStep.setParent(testCase);
+		testCase.addTestStep(currentStep);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
 			currentStep.setTable(stepParametersTable);
-			stepParametersTable.setParent(currentStep);
 			stepParametersTable = null;
 		}
 	}
@@ -64,11 +63,10 @@ public abstract class TestObject {
 			testSetup = SheepDogBuilder.createTestSetup(testSuite, "");
 		}
 		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testSetup, stepName);
-		currentStep.setParent(testSetup);
+		testSetup.addTestStep(currentStep);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
 			currentStep.setTable(stepParametersTable);
-			stepParametersTable.setParent(currentStep);
 			stepParametersTable = null;
 		}
 	}

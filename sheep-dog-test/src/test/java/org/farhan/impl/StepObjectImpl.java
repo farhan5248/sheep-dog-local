@@ -13,21 +13,31 @@ public class StepObjectImpl implements IStepObject {
 
 	String name;
 	private String qualifiedName;
-	private TestProjectImpl parent;
-	ArrayList<IStepDefinition> stepDefinitionList;
-	ArrayList<IStatement> statementList;
+	TestProjectImpl parent;
+	ArrayList<StepDefinitionImpl> stepDefinitionList;
+	ArrayList<StatementImpl> statementList;
 
 	public StepObjectImpl(String qualifiedName) {
 		this.qualifiedName = qualifiedName;
 		String[] nameParts = qualifiedName.split("/");
 		name = nameParts[nameParts.length - 1].replace(".feature", "");
-		this.stepDefinitionList = new ArrayList<IStepDefinition>();
-		this.statementList = new ArrayList<IStatement>();
+		this.stepDefinitionList = new ArrayList<StepDefinitionImpl>();
+		this.statementList = new ArrayList<StatementImpl>();
+	}
+
+	@Override
+	public String getContent() throws Exception {
+		throw new UnsupportedOperationException("getContent() is not implemented");
 	}
 
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public String getNameLong() {
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
@@ -41,8 +51,23 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
+	public IStatement getStatement(int index) {
+		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
+	}
+
+	@Override
+	public IStatement getStatement(String name) {
+		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
+	}
+
+	@Override
 	public List<IStatement> getStatementList() {
 		return Collections.unmodifiableList(statementList);
+	}
+
+	@Override
+	public IStepDefinition getStepDefinition(int index) {
+		throw new UnsupportedOperationException("getStepDefinition(int index) is not implemented");
 	}
 
 	@Override
@@ -61,14 +86,18 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
+	public void setContent(String text) throws Exception {
+		throw new UnsupportedOperationException("setContent(String text)  is not implemented");
+	}
+
+	@Override
 	public void setName(String value) {
 		this.name = value;
 	}
 
 	@Override
-	public void setParent(ITestProject value) {
-		parent = (TestProjectImpl) value;
-		parent.stepObjectList.add(this);
+	public void setNameLong(String value) {
+		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 	@Override
@@ -77,28 +106,17 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
-	public String getNameLong() {
-		throw new UnsupportedOperationException("getNameLong() is not implemented");
+	public boolean addStatement(IStatement value) {
+		statementList.add((StatementImpl) value);
+		statementList.getLast().parent = this;
+		return true;
 	}
 
 	@Override
-	public IStatement getStatement(int index) {
-		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
-	}
-
-	@Override
-	public IStatement getStatement(String name) {
-		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
-	}
-
-	@Override
-	public IStepDefinition getStepDefinition(int index) {
-		throw new UnsupportedOperationException("getStepDefinition(int index) is not implemented");
-	}
-
-	@Override
-	public void setNameLong(String value) {
-		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
+	public boolean addStepDefinition(IStepDefinition value) {
+		stepDefinitionList.add((StepDefinitionImpl) value);
+		stepDefinitionList.getLast().parent = this;
+		return true;
 	}
 
 }

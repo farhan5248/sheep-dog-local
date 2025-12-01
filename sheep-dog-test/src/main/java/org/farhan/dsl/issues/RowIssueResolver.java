@@ -57,7 +57,7 @@ public class RowIssueResolver {
 								+ cellsToString(theStepParameters.getTable().getRowList().getFirst().getCellList()));
 						proposal.setDescription(
 								StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
-						proposal.setValue(theStepObject.toString());
+						proposal.setValue(theStepObject.getContent());
 						proposal.setQualifiedName(theStepObject.getQualifiedName());
 						proposals.add(proposal);
 					}

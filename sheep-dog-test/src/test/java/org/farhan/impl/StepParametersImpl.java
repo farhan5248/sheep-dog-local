@@ -14,31 +14,30 @@ import org.farhan.dsl.lang.IText;
 
 public class StepParametersImpl implements IStepParameters {
 
-	private StepDefinitionImpl parent;
-	ITable table;
-	ArrayList<IStatement> statementList;
+	StepDefinitionImpl parent;
+	TableImpl table;
+	ArrayList<StatementImpl> statementList;
 
 	public StepParametersImpl(IRow header) {
 		this.table = new TableImpl();
-		this.table.setParent(this);
+		this.table.parent = this;
 		RowImpl row = new RowImpl();
-		row.setParent(table);
+		this.table.addRow(row);
 		for (ICell c : header.getCellList()) {
 			CellImpl newCell = new CellImpl(c.getName());
-			newCell.setParent(row);
+			row.addCell(newCell);
 		}
-		this.statementList = new ArrayList<IStatement>();
+		this.statementList = new ArrayList<StatementImpl>();
 	}
 
 	public StepParametersImpl(IText value) {
-		CellImpl cell = new CellImpl(value.getName());
-		RowImpl row = new RowImpl();
-		cell.setParent(row);
-		row.getCellList().add(cell);
 		this.table = new TableImpl();
-		this.table.setParent(this);
-		this.table.getRowList().add(row);
-		this.statementList = new ArrayList<IStatement>();
+		this.table.parent = this;
+		RowImpl row = new RowImpl();
+		this.table.addRow(row);
+		CellImpl newCell = new CellImpl(value.getName());
+		row.addCell(newCell);
+		this.statementList = new ArrayList<StatementImpl>();
 	}
 
 	@Override
@@ -67,14 +66,9 @@ public class StepParametersImpl implements IStepParameters {
 	}
 
 	@Override
-	public void setParent(IStepDefinition value) {
-		parent = (StepDefinitionImpl) value;
-		parent.stepParametersList.add(this);
-	}
-
-	@Override
 	public void setTable(ITable value) {
-		this.table = value;
+		this.table = (TableImpl) value;
+		this.table.parent = this;
 	}
 
 	@Override
@@ -95,6 +89,13 @@ public class StepParametersImpl implements IStepParameters {
 	@Override
 	public void setNameLong(String value) {
 		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
+	}
+
+	@Override
+	public boolean addStatement(IStatement value) {
+		statementList.add((StatementImpl) value);
+		statementList.getLast().parent = this;
+		return true;
 	}
 
 }

@@ -1,16 +1,12 @@
 package org.farhan.impl;
 
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.IText;
 
-public class CellImpl implements ICell {
+public class TextImpl implements IText {
 
+	TestStepImpl parent;
 	String name;
-	RowImpl parent;
-
-	public CellImpl(String value) {
-		name = value;
-	}
 
 	@Override
 	public String getName() {
@@ -23,7 +19,7 @@ public class CellImpl implements ICell {
 	}
 
 	@Override
-	public IRow getParent() {
+	public ITestStep getParent() {
 		return parent;
 	}
 

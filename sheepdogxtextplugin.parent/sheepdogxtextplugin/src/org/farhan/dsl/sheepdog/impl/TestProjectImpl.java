@@ -96,7 +96,7 @@ public class TestProjectImpl implements ITestProject {
 		throw new UnsupportedOperationException("getTestSuiteList() is not implemented");
 	}
 
-	public void addStepObject(String qualifiedName, String content) {
+	public boolean addStepObject(IStepObject stepObject) {
 		// TODO Currently StepObject calls parent.eObject.getStepObjectList.add()
 		// But this doesn't have an eObject or a list to return. Delete setParent and
 		// create addElement.
@@ -104,9 +104,11 @@ public class TestProjectImpl implements ITestProject {
 		// Perhaps StepObject should have a parse method like in sheep-dog-dev so that
 		// an object can be created.
 		try {
-			sr.put("", layer2dir + "/" + qualifiedName, content);
+			sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), stepObject.getContent());
+			return true;
 		} catch (Exception e) {
 			logger.error("Couldn't write step object:", e);
+			return false;
 		}
 
 	}

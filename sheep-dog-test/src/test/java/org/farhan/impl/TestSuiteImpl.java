@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.farhan.dsl.lang.IStatement;
+import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStepContainer;
@@ -12,16 +13,21 @@ import org.farhan.dsl.lang.ITestSuite;
 
 public class TestSuiteImpl implements ITestSuite {
 
-	ArrayList<ITestStepContainer> testStepContainerList;
+	ArrayList<TestStepContainerImpl> testStepContainerList;
 	private String qualifiedName;
 	String name;
-	private TestProjectImpl parent;
+	TestProjectImpl parent;
 
 	public TestSuiteImpl(String qualifiedName) {
-		this.testStepContainerList = new ArrayList<ITestStepContainer>();
+		this.testStepContainerList = new ArrayList<TestStepContainerImpl>();
 		this.qualifiedName = qualifiedName;
 		String[] nameParts = qualifiedName.split("/");
 		this.name = nameParts[nameParts.length - 1];
+	}
+
+	@Override
+	public String getContent() throws Exception {
+		throw new UnsupportedOperationException("getContent() is not implemented");
 	}
 
 	@Override
@@ -80,6 +86,11 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
+	public void setContent(String text) throws Exception {
+		throw new UnsupportedOperationException("setContent(String text)  is not implemented");
+	}
+
+	@Override
 	public void setName(String value) {
 		this.name = value;
 	}
@@ -90,18 +101,27 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public void setParent(ITestProject value) {
-		parent = (TestProjectImpl) value;
-		parent.testSuiteList.add(this);
-	}
-
-	@Override
 	public void setQualifiedName(String value) {
 		throw new UnsupportedOperationException("setQualifiedName(String value) is not implemented");
 	}
 
 	@Override
-	public void setTestSetup(ITestSetup value) {
-		throw new UnsupportedOperationException("setTestSetup(ITestSetup value) is not implemented");
+	public boolean addStatement(IStatement value) {
+		throw new UnsupportedOperationException("addStatement(IStatement value) is not implemented");
 	}
+
+	@Override
+	public boolean addTestCase(ITestCase value) {
+		testStepContainerList.add((TestCaseImpl) value);
+		testStepContainerList.getLast().parent = this;
+		return true;
+	}
+
+	@Override
+	public boolean addTestSetup(ITestSetup value) {
+		testStepContainerList.add(0, (TestSetupImpl) value);
+		testStepContainerList.getFirst().parent = this;
+		return true;
+	}
+
 }

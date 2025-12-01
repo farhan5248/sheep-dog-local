@@ -22,7 +22,7 @@ public interface IStepParameters {
 
 	void setNameLong(String value);
 
-	void setParent(IStepDefinition value);
+	boolean addStatement(IStatement value);
 
 	void setTable(ITable value);
 }

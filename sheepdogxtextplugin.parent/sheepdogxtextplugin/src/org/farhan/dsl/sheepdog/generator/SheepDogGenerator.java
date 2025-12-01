@@ -5,7 +5,6 @@ package org.farhan.dsl.sheepdog.generator;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -24,8 +23,6 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
  */
 public class SheepDogGenerator extends AbstractGenerator {
 
-	private static final Logger logger = Logger.getLogger(SheepDogGenerator.class);
-
 	@Override
 	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
 
@@ -34,8 +31,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 			for (TestStepContainer scenario : theTestSuite.getTestStepContainerList()) {
 				for (TestStep step : scenario.getTestStepList()) {
 					try {
-						TestStepImpl iTestStep = new TestStepImpl(step);
-						SheepDogBuilder.createTestStepReferencedElements(iTestStep);
+						SheepDogBuilder.createTestStepReferencedElements(new TestStepImpl(step));
 					} catch (Exception e) {
 						StringWriter sw = new StringWriter();
 						e.printStackTrace(new PrintWriter(sw));

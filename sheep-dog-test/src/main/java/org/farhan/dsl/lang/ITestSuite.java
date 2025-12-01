@@ -4,6 +4,14 @@ import java.util.List;
 
 public interface ITestSuite extends IModel {
 
+	boolean addStatement(IStatement value);
+
+	boolean addTestCase(ITestCase value);
+
+	boolean addTestSetup(ITestSetup value);
+
+	String getContent() throws Exception;
+
 	String getName();
 
 	String getNameLong();
@@ -22,12 +30,10 @@ public interface ITestSuite extends IModel {
 
 	List<ITestStepContainer> getTestStepContainerList();
 
+	void setContent(String text) throws Exception;
+
 	void setName(String value);
 
 	void setNameLong(String value);
-
-	void setParent(ITestProject value);
-
-	void setTestSetup(ITestSetup value);
 
 }

@@ -11,13 +11,13 @@ import org.farhan.dsl.lang.ITestSuite;
 
 public class TestStepContainerImpl implements ITestStepContainer {
 
-	ArrayList<ITestStep> testStepList;
+	ArrayList<TestStepImpl> testStepList;
 	String name;
-	private TestSuiteImpl parent;
+	TestSuiteImpl parent;
 
 	public TestStepContainerImpl(String value) {
 		name = value;
-		testStepList = new ArrayList<ITestStep>();
+		testStepList = new ArrayList<TestStepImpl>();
 	}
 
 	@Override
@@ -43,12 +43,6 @@ public class TestStepContainerImpl implements ITestStepContainer {
 	@Override
 	public void setName(String value) {
 		this.name = value;
-	}
-
-	@Override
-	public void setParent(ITestSuite value) {
-		parent = (TestSuiteImpl) value;
-		parent.testStepContainerList.add(this);
 	}
 
 	@Override
@@ -79,6 +73,18 @@ public class TestStepContainerImpl implements ITestStepContainer {
 	@Override
 	public void setNameLong(String value) {
 		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
+	}
+
+	@Override
+	public boolean addStatement(IStatement value) {
+		throw new UnsupportedOperationException("addStatement(IStatement value) is not implemented");
+	}
+
+	@Override
+	public boolean addTestStep(ITestStep value) {
+		testStepList.add((TestStepImpl) value);
+		testStepList.getLast().parent = this;
+		return true;
 	}
 
 }

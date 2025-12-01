@@ -26,6 +26,8 @@ public interface ITestStepContainer {
 
 	void setNameLong(String value);
 
-	void setParent(ITestSuite value);
+	boolean addStatement(IStatement value);
+
+	boolean addTestStep(ITestStep value);
 
 }

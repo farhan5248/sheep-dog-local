@@ -53,7 +53,7 @@ public class SheepDogBuilder {
 		IStepDefinition stepDefinition = parent.getStepDefinition(name);
 		if (stepDefinition == null) {
 			stepDefinition = SheepDogFactory.instance.createStepDefinition(name);
-			stepDefinition.setParent(parent);
+			parent.addStepDefinition(stepDefinition);
 		}
 		return stepDefinition;
 	}
@@ -62,7 +62,7 @@ public class SheepDogBuilder {
 		IStepObject stepObject = parent.getStepObject(qualifiedName);
 		if (stepObject == null) {
 			stepObject = SheepDogFactory.instance.createStepObject(qualifiedName);
-			stepObject.setParent(parent);
+			parent.addStepObject(stepObject);
 		}
 		return stepObject;
 	}
@@ -71,7 +71,7 @@ public class SheepDogBuilder {
 		IStepParameters stepParameters = parent.getStepParameters(header);
 		if (stepParameters == null) {
 			stepParameters = SheepDogFactory.instance.createStepParameters(header);
-			stepParameters.setParent(parent);
+			parent.addStepParameters(stepParameters);
 		}
 		return stepParameters;
 	}
@@ -80,8 +80,7 @@ public class SheepDogBuilder {
 		IStepParameters stepParameters = parent.getStepParameters(header);
 		if (stepParameters == null) {
 			stepParameters = SheepDogFactory.instance.createStepParameters(header);
-			stepParameters.setParent(parent);
-			parent.getStepParameterList().add(stepParameters);
+			parent.addStepParameters(stepParameters);
 		}
 		return stepParameters;
 	}
@@ -90,7 +89,7 @@ public class SheepDogBuilder {
 		ITestCase testCase = (ITestCase) parent.getTestStepContainer(name);
 		if (testCase == null) {
 			testCase = SheepDogFactory.instance.createTestCase(name);
-			testCase.setParent(parent);
+			parent.addTestCase(testCase);
 		}
 		return testCase;
 	}
@@ -99,7 +98,7 @@ public class SheepDogBuilder {
 		ITestSetup testSetup = (ITestSetup) parent.getTestStepContainer(name);
 		if (testSetup == null) {
 			testSetup = SheepDogFactory.instance.createTestSetup(name);
-			testSetup.setParent(parent);
+			parent.addTestSetup(testSetup);
 		}
 		return testSetup;
 	}
@@ -107,7 +106,7 @@ public class SheepDogBuilder {
 	public static ITestStep createTestStep(ITestStepContainer parent, String name) {
 		// No need to check if step exists, because a test case can have multiple steps
 		ITestStep testStep = SheepDogFactory.instance.createTestStep(name);
-		testStep.setParent(parent);
+		parent.addTestStep(testStep);
 		return testStep;
 	}
 
@@ -115,7 +114,7 @@ public class SheepDogBuilder {
 		ITestSuite testSuite = parent.getTestSuite(qualifiedName);
 		if (testSuite == null) {
 			testSuite = SheepDogFactory.instance.createTestSuite(qualifiedName);
-			testSuite.setParent(parent);
+			parent.addTestSuite(testSuite);
 		}
 		return testSuite;
 	}
