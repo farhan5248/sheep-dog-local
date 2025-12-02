@@ -27,11 +27,6 @@ public class TableImpl implements ITable {
 		return parent;
 	}
 
-	@Override
-	public void setParent(Object value) {
-		parent = value;
-	}
-
 	public TableImpl(Table table) {
 		this.eObject = table;
 		rowList = new ArrayList<IRow>();
@@ -49,6 +44,12 @@ public class TableImpl implements ITable {
 	@Override
 	public IRow getRow(int index) {
 		throw new UnsupportedOperationException("getRow(int index) is not implemented");
+	}
+
+	@Override
+	public boolean addRow(IRow value) {
+		eObject.getRowList().add(((RowImpl) value).eObject);
+		return true;
 	}
 
 }

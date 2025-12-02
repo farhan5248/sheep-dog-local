@@ -30,8 +30,24 @@ public class TestProjectImpl implements ITestProject {
 		layer2dir = "src/test/resources/asciidoc/stepdefs";
 	}
 
+	public boolean addStepObject(IStepObject stepObject) {
+		try {
+			sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), stepObject.getContent());
+			return true;
+		} catch (Exception e) {
+			logger.error("Couldn't write step object:", e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean addTestSuite(ITestSuite value) {
+		throw new UnsupportedOperationException("addTestSuite(ITestSuite value) is not implemented");
+	}
+
 	@Override
 	public String getFileExtension() {
+		// TODO make a static config object for this and they layer 2 directory
 		return ".asciidoc";
 	}
 
@@ -46,7 +62,7 @@ public class TestProjectImpl implements ITestProject {
 			try {
 				// TODO this code doesn't work, the URI is missing the project name.
 				// The sr.get hides this bug because it's reading the file system and so the URI
-				// in the resource isn't tested
+				// in the resource isn't used
 				Resource resource = new ResourceSetImpl()
 						.createResource(URI.createPlatformResourceURI(layer2dir + "/" + qualifiedName, true));
 				String text = sr.get("", layer2dir + "/" + qualifiedName);
@@ -94,23 +110,6 @@ public class TestProjectImpl implements ITestProject {
 	@Override
 	public ArrayList<ITestSuite> getTestSuiteList() {
 		throw new UnsupportedOperationException("getTestSuiteList() is not implemented");
-	}
-
-	public boolean addStepObject(IStepObject stepObject) {
-		// TODO Currently StepObject calls parent.eObject.getStepObjectList.add()
-		// But this doesn't have an eObject or a list to return. Delete setParent and
-		// create addElement.
-		// TODO The next problem is that it's not just an object added but initialised.
-		// Perhaps StepObject should have a parse method like in sheep-dog-dev so that
-		// an object can be created.
-		try {
-			sr.put("", layer2dir + "/" + stepObject.getQualifiedName(), stepObject.getContent());
-			return true;
-		} catch (Exception e) {
-			logger.error("Couldn't write step object:", e);
-			return false;
-		}
-
 	}
 
 	public void setProjectPath(String projectPath) {

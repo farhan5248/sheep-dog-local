@@ -53,13 +53,6 @@ public class StepParametersImpl implements IStepParameters {
 	}
 
 	@Override
-	public void setParent(IStepDefinition parent) {
-		this.parent = (StepDefinitionImpl) parent;
-		this.parent.eObject.getStepParameterList().add(eObject);
-
-	}
-
-	@Override
 	public void setTable(ITable value) {
 		throw new UnsupportedOperationException("setTable(ITable value) is not implemented");
 	}
@@ -82,6 +75,12 @@ public class StepParametersImpl implements IStepParameters {
 	@Override
 	public void setNameLong(String value) {
 		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
+	}
+
+	@Override
+	public boolean addStatement(IStatement value) {
+		eObject.getStatementList().getStatementList().add(((StatementImpl) value).eObject);
+		return true;
 	}
 
 }

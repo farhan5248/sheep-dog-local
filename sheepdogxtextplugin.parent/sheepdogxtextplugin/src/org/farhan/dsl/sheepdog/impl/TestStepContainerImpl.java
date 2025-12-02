@@ -47,7 +47,6 @@ public class TestStepContainerImpl implements ITestStepContainer {
 		ArrayList<ITestStep> testStepList = new ArrayList<ITestStep>();
 		for (TestStep s : eObject.getTestStepList()) {
 			TestStepImpl testStep = new TestStepImpl(s);
-			testStep.setParent(this);
 			testStepList.add(testStep);
 		}
 		return testStepList;
@@ -56,12 +55,6 @@ public class TestStepContainerImpl implements ITestStepContainer {
 	@Override
 	public void setName(String value) {
 		throw new UnsupportedOperationException("setName(String value) is not implemented");
-	}
-
-	@Override
-	public void setParent(ITestSuite value) {
-		this.parent = (TestSuiteImpl) value;
-		this.parent.eObject.getTestStepContainerList().add(eObject);
 	}
 
 	@Override
@@ -92,6 +85,18 @@ public class TestStepContainerImpl implements ITestStepContainer {
 	@Override
 	public void setNameLong(String value) {
 		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
+	}
+
+	@Override
+	public boolean addStatement(IStatement value) {
+		eObject.getStatementList().add(((StatementImpl) value).eObject);
+		return true;
+	}
+
+	@Override
+	public boolean addTestStep(ITestStep value) {
+		eObject.getTestStepList().add(((TestStepImpl) value).eObject);
+		return true;
 	}
 
 }

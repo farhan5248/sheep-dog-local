@@ -1,9 +1,6 @@
 package org.farhan.dsl.sheepdog.impl;
 
 import java.io.File;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.ISheepDogFactory;
@@ -34,13 +31,10 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 	@Override
 	public IStepObject createStepObject(String qualifiedName) {
 		StepObject eObject = SheepDogFactory.eINSTANCE.createStepObject();
-		// TODO this is a temp hack. After #81 is completed, Resource operations will be
-		// in the addStepObject method which will set the resource, read/write from the
-		// file system etc
+		// TODO put the file extension in a config object, creating a project ref just
+		// to get the extension is convoluted
 		TestProjectImpl tmpProject = new TestProjectImpl(null);
 		eObject.setName((new File(qualifiedName)).getName().replaceFirst(tmpProject.getFileExtension() + "$", ""));
-		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI(tmpProject.layer2dir + "/" + qualifiedName));
-		theResource.getContents().add(eObject);
 		IStepObject stepObject = new StepObjectImpl(eObject);
 		stepObject.setQualifiedName(qualifiedName);
 		return stepObject;
@@ -49,9 +43,6 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 	@Override
 	public IStepParameters createStepParameters(IRow header) {
 		StepParameters parameters = SheepDogFactory.eINSTANCE.createStepParameters();
-		// TODO after #81, the name will be set when this is added to the
-		// parent.addElement method
-		parameters.setName("1");
 		parameters.setTable(SheepDogFactory.eINSTANCE.createTable());
 		Row row = SheepDogFactory.eINSTANCE.createRow();
 		parameters.getTable().getRowList().add(row);

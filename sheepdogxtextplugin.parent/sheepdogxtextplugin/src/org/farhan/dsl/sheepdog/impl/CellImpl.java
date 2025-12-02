@@ -32,10 +32,4 @@ public class CellImpl implements ICell {
 		return parent;
 	}
 
-	@Override
-	public void setParent(IRow value) {
-		this.parent = (RowImpl) value;
-		this.parent.eObject.getCellList().add(eObject);
-	}
-
 }

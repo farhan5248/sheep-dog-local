@@ -27,12 +27,6 @@ public class RowImpl implements IRow {
 	}
 
 	@Override
-	public void setParent(ITable value) {
-		this.parent = (TableImpl) value;
-		this.parent.eObject.getRowList().add(eObject);
-	}
-
-	@Override
 	public ArrayList<ICell> getCellList() {
 		ArrayList<ICell> cells = new ArrayList<ICell>();
 		for (Cell c : eObject.getCellList()) {
@@ -54,6 +48,12 @@ public class RowImpl implements IRow {
 	@Override
 	public boolean equals(Object object) {
 		return eObject.equals(((RowImpl) object).eObject);
+	}
+
+	@Override
+	public boolean addCell(ICell value) {
+		eObject.getCellList().add(((CellImpl) value).eObject);
+		return true;
 	}
 
 }

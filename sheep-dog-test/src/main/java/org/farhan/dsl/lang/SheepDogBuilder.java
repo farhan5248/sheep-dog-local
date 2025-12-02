@@ -17,7 +17,7 @@ public class SheepDogBuilder {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject == null) {
-				theStepObject = createStepObject(theProject, qualifiedName);
+				theStepObject = SheepDogFactory.instance.createStepObject(qualifiedName);
 			}
 			String predicate = TestStepUtility.getPredicate(theTestStep.getName());
 			IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
@@ -40,6 +40,7 @@ public class SheepDogBuilder {
 					}
 				}
 			}
+			theProject.addStepObject(theStepObject);
 			logger.debug("Exiting createTestStepReferencedElements");
 			return theStepObject;
 		} catch (Exception e) {

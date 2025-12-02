@@ -27,24 +27,13 @@ public class StatementImpl implements IStatement {
 	@Override
 	public Object getParent() {
 		if (parent == null) {
-
 			if (eObject.eContainer() instanceof org.farhan.dsl.sheepdog.sheepDog.impl.StepDefinitionImpl) {
 				parent = new StepDefinitionImpl((StepDefinition) eObject.eContainer());
 			} else if (eObject.eContainer() instanceof org.farhan.dsl.sheepdog.sheepDog.impl.StepObjectImpl) {
 				parent = new StepObjectImpl((StepObject) eObject.eContainer());
 			}
-
 		}
 		return parent;
-	}
-
-	@Override
-	public void setParent(Object parent) {
-		if (this.parent instanceof StepDefinitionImpl) {
-			((StepDefinitionImpl) this.parent).eObject.getStatementList().add(eObject);
-		} else if (this.parent instanceof StepObjectImpl) {
-			((StepObjectImpl) this.parent).eObject.getStatementList().add(eObject);
-		}
 	}
 
 }

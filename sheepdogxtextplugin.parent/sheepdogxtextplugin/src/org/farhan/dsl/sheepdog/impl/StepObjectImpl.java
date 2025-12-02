@@ -2,11 +2,13 @@ package org.farhan.dsl.sheepdog.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
@@ -55,7 +57,6 @@ public class StepObjectImpl implements IStepObject {
 		for (StepDefinition sd : eObject.getStepDefinitionList()) {
 			if (sd.getName().contentEquals(predicate)) {
 				StepDefinitionImpl stepDefinition = new StepDefinitionImpl((StepDefinition) sd);
-				stepDefinition.setParent(this);
 				return stepDefinition;
 			}
 		}
@@ -67,7 +68,6 @@ public class StepObjectImpl implements IStepObject {
 		ArrayList<IStepDefinition> list = new ArrayList<IStepDefinition>();
 		for (StepDefinition t : eObject.getStepDefinitionList()) {
 			StepDefinitionImpl stepDefinition = new StepDefinitionImpl((StepDefinition) t);
-			stepDefinition.setParent(this);
 			list.add(stepDefinition);
 		}
 		return list;
@@ -76,12 +76,6 @@ public class StepObjectImpl implements IStepObject {
 	@Override
 	public void setName(String value) {
 		eObject.setName(value);
-	}
-
-	@Override
-	public void setParent(ITestProject value) {
-		parent = (TestProjectImpl) value;
-		parent.addStepObject(this);
 	}
 
 	@Override
@@ -116,18 +110,32 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public String getContent() throws Exception {
+		Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI("tmpFile.asciidoc"));
+		theResource.getContents().add(eObject);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		eObject.eResource().save(os, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+		theResource.save(os, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		return os.toString();
 	}
 
 	@Override
 	public void setContent(String text) throws Exception {
 		if (!text.isEmpty()) {
-			InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
-			eObject.eResource().load(content, Collections.EMPTY_MAP);
-			eObject = (StepObject) eObject.eResource().getContents().get(0);
+			Resource theResource = new ResourceSetImpl().createResource(URI.createFileURI("tmpFile.asciidoc"));
+			theResource.load(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8)), Collections.EMPTY_MAP);
+			eObject = (StepObject) theResource.getContents().get(0);
 		}
+	}
+
+	@Override
+	public boolean addStatement(IStatement value) {
+		eObject.getStatementList().add(((StatementImpl) value).eObject);
+		return true;
+	}
+
+	@Override
+	public boolean addStepDefinition(IStepDefinition value) {
+		eObject.getStepDefinitionList().add(((StepDefinitionImpl) value).eObject);
+		return true;
 	}
 
 }

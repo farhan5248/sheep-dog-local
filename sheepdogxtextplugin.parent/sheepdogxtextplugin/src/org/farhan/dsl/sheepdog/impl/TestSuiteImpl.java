@@ -2,6 +2,7 @@ package org.farhan.dsl.sheepdog.impl;
 
 import java.util.ArrayList;
 import org.farhan.dsl.lang.IStatement;
+import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStepContainer;
@@ -51,13 +52,11 @@ public class TestSuiteImpl implements ITestSuite {
 			if (t instanceof TestCase) {
 				if (t.getName().contentEquals(name)) {
 					TestCaseImpl testCase = new TestCaseImpl((TestCase) t);
-					testCase.setParent(this);
 					return testCase;
 				}
 			} else {
 				if (t.getName().contentEquals(name)) {
 					TestSetupImpl testCase = new TestSetupImpl((TestSetup) t);
-					testCase.setParent(this);
 					return testCase;
 				}
 			}
@@ -77,18 +76,8 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public void setParent(ITestProject parent) {
-		throw new UnsupportedOperationException("setParent(ITestProject parent) is not implemented");
-	}
-
-	@Override
 	public void setQualifiedName(String value) {
 		throw new UnsupportedOperationException("setQualifiedName(String value) is not implemented");
-	}
-
-	@Override
-	public void setTestSetup(ITestSetup value) {
-		throw new UnsupportedOperationException("setTestSetup(ITestSetup value) is not implemented");
 	}
 
 	@Override
@@ -124,6 +113,24 @@ public class TestSuiteImpl implements ITestSuite {
 	@Override
 	public void setContent(String text) {
 		throw new UnsupportedOperationException("setContent(String text) is not implemented");
+	}
+
+	@Override
+	public boolean addStatement(IStatement value) {
+		eObject.getStatementList().add(((StatementImpl) value).eObject);
+		return true;
+	}
+
+	@Override
+	public boolean addTestCase(ITestCase value) {
+		eObject.getTestStepContainerList().add(((TestCaseImpl) value).eObject);
+		return true;
+	}
+
+	@Override
+	public boolean addTestSetup(ITestSetup value) {
+		eObject.getTestStepContainerList().add(0, ((TestSetupImpl) value).eObject);
+		return true;
 	}
 
 }

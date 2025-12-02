@@ -81,7 +81,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 		ArrayList<IStepParameters> list = new ArrayList<IStepParameters>();
 		for (StepParameters t : eObject.getStepParameterList()) {
 			StepParametersImpl stepParameters = new StepParametersImpl((StepParameters) t);
-			stepParameters.setParent(this);
 			list.add(stepParameters);
 		}
 		return list;
@@ -119,9 +118,16 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public void setParent(IStepObject parent) {
-		this.parent = (StepObjectImpl) parent;
-		this.parent.eObject.getStepDefinitionList().add(eObject);
+	public boolean addStatement(IStatement value) {
+		eObject.getStatementList().add(((StatementImpl) value).eObject);
+		return true;
+	}
+
+	@Override
+	public boolean addStepParameters(IStepParameters value) {
+		eObject.getStepParameterList().add(((StepParametersImpl) value).eObject);
+		eObject.getStepParameterList().getLast().setName(String.valueOf(eObject.getStepParameterList().size()));
+		return true;
 	}
 
 }

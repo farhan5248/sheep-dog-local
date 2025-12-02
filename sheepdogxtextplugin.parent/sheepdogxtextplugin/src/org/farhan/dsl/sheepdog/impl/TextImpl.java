@@ -32,10 +32,4 @@ public class TextImpl implements IText {
 		return parent;
 	}
 
-	@Override
-	public void setParent(ITestStep value) {
-		parent = (TestStepImpl) value;
-		parent.eObject.setText(eObject);
-	}
-
 }

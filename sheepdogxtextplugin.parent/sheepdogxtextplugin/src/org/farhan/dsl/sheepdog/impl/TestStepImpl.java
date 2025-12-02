@@ -74,12 +74,6 @@ public class TestStepImpl implements ITestStep {
 	}
 
 	@Override
-	public void setParent(ITestStepContainer value) {
-		this.parent = (TestStepContainerImpl) value;
-		this.parent.eObject.getTestStepList().add(eObject);
-	}
-
-	@Override
 	public void setTable(ITable value) {
 		throw new UnsupportedOperationException("setTable(ITable value) is not implemented");
 	}
