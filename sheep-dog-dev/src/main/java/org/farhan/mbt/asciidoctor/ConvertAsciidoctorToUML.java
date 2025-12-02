@@ -15,7 +15,9 @@ import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
 import org.farhan.dsl.lang.TestStepUtility;
+import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
+import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
@@ -125,7 +127,13 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertTestStep(UMLTestStep step, TestStep srcStep) {
 		logger.debug("test step: " + srcStep.getName());
-		stepObjects.add(TestStepUtility.getStepObjectQualifiedName(new TestStepImpl(srcStep)));
+		// TODO until I implement using the sheep-dog-test interface classes, I'll need
+		// this hack. Basically when a TestSuite is created, a link to the TestProject
+		// needs to be created but that isn't being done right now
+		TestStepImpl tmpTestStep = new TestStepImpl(srcStep);
+		TestSuiteImpl tmpTestSuite = (TestSuiteImpl) tmpTestStep.getParent().getParent();
+		tmpTestSuite.setParent(new TestProjectImpl(this.fa));
+		stepObjects.add(TestStepUtility.getStepObjectQualifiedName(tmpTestStep));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
 		step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));
 		stepDefinitions.add(step.getNameLong().replaceFirst(step.getKeyword(), "").trim());

@@ -14,7 +14,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 
 public class TestSuiteImpl implements ITestSuite {
 
-	private static TestProjectImpl parent;
+	private static ITestProject parent;
 	TestSuite eObject;
 
 	public TestSuiteImpl(TestSuite testSuite) {
@@ -24,6 +24,12 @@ public class TestSuiteImpl implements ITestSuite {
 	@Override
 	public String getName() {
 		return eObject.getName();
+	}
+
+	public void setParent(ITestProject parent) {
+		// TODO temp hack to make sheep-dog dev work. These language Impl classes can't
+		// have hardcoded reference to workspace specific files like IRepository
+		TestSuiteImpl.parent = parent;
 	}
 
 	@Override
