@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.generator.SheepDogOutputConfigurationProvider;
 import org.farhan.dsl.sheepdog.impl.SheepDogFactoryImpl;
+import org.farhan.dsl.sheepdog.impl.EclipseFileRepository;
 import org.farhan.dsl.sheepdog.parser.antlr.MySheepDogParser;
 import org.farhan.dsl.sheepdog.parser.antlr.internal.InternalSheepDogLexer;
 import org.farhan.dsl.sheepdog.parser.antlr.internal.MySheepDogLexer;
@@ -36,7 +37,7 @@ public class SheepDogRuntimeModule extends AbstractSheepDogRuntimeModule {
 		super.configure(binder);
 		binder.bind(IOutputConfigurationProvider.class).to(SheepDogOutputConfigurationProvider.class)
 				.in(Singleton.class);
-		SheepDogFactory.instance = new SheepDogFactoryImpl();
+		SheepDogFactory.instance = new SheepDogFactoryImpl(new EclipseFileRepository());
 	}
 
 	@Override

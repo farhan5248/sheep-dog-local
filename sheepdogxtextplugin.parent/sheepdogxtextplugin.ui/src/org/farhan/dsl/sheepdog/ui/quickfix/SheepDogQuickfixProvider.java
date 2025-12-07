@@ -31,8 +31,6 @@ import org.farhan.dsl.issues.TextIssueResolver;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.sheepdog.impl.CellImpl;
-import org.farhan.dsl.sheepdog.impl.SourceFileRepository;
-import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
@@ -54,11 +52,9 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 				public void apply(IModificationContext context) throws BadLocationException {
 					if (!p.getQualifiedName().isEmpty()) {
 						try {
-							TestProjectImpl testProject = new TestProjectImpl(new SourceFileRepository(
-									getEObject(issue).eResource().getURI().toPlatformString(true)));
 							IStepObject stepObject = SheepDogFactory.instance.createStepObject(p.getQualifiedName());
 							stepObject.setContent(p.getValue());
-							testProject.addStepObject(stepObject);
+							SheepDogFactory.instance.createTestProject().addStepObject(stepObject);
 						} catch (Exception e) {
 							logger.error("Error writing file for " + p.getQualifiedName() + "\n" + e.getMessage());
 						}

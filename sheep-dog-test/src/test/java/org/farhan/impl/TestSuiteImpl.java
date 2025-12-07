@@ -14,7 +14,7 @@ import org.farhan.dsl.lang.ITestSuite;
 public class TestSuiteImpl implements ITestSuite {
 
 	ArrayList<TestStepContainerImpl> testStepContainerList;
-	private String qualifiedName;
+	String qualifiedName;
 	String name;
 	TestProjectImpl parent;
 

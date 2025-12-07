@@ -7,67 +7,44 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.farhan.dsl.lang.IResourceRepository;
 
-public class SourceFileRepository implements IResourceRepository {
-
-	// TODO this should move to TestProject, at most keep the workspace path here
-	public final String projectPath;
-
-	public SourceFileRepository(String uriPath) {
-		IFile resource = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uriPath));
-		this.projectPath = (new File(resource.getProject().getLocationURI())).getAbsolutePath() + File.separator;
-	}
+public class EclipseFileRepository implements IResourceRepository {
 
 	@Override
 	public void clear(String tags) {
-		deleteDir(new File(projectPath));
+		throw new UnsupportedOperationException("clear(String tags) is not implemented");
 	}
 
 	@Override
 	public boolean contains(String tags, String path) {
-		path = projectPath + path.replace("/", File.separator);
+		path = path.replace("/", File.separator);
 		return new File(path).exists();
 	}
 
 	@Override
 	public void delete(String tags, String path) {
-		path = projectPath + path.replace("/", File.separator);
+		path = path.replace("/", File.separator);
 		new File(path).delete();
-	}
-
-	private void deleteDir(File aDir) {
-		if (aDir.exists()) {
-			for (String s : aDir.list()) {
-				File f = new File(aDir.getAbsolutePath() + File.separator + s);
-				if (f.isDirectory()) {
-					deleteDir(f);
-				}
-				f.delete();
-			}
-		}
 	}
 
 	@Override
 	public String get(String tags, String path) throws Exception {
-		path = projectPath + path.replace("/", File.separator);
+		path = path.replace("/", File.separator);
 		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
 	}
 
 	@Override
 	public ArrayList<String> list(String tags, String subDir, String extension) {
 		ArrayList<String> files = new ArrayList<String>();
-		File aDir = new File(projectPath + subDir.replace("/", File.separator));
+		File aDir = new File(subDir.replace("/", File.separator));
 		if (aDir.exists()) {
 			for (String f : aDir.list()) {
 				String aDirObjPath = subDir.replace("/", File.separator) + File.separator + f;
-				if ((new File(projectPath + aDirObjPath)).isDirectory()) {
+				if ((new File(aDirObjPath)).isDirectory()) {
 					files.addAll(list("", aDirObjPath, extension));
 				} else if (aDirObjPath.toLowerCase().endsWith(extension.toLowerCase())) {
-					files.add(aDirObjPath.replace(projectPath, "").replace(File.separator, "/"));
+					files.add(aDirObjPath.replace(File.separator, "/"));
 				}
 			}
 		}
@@ -76,7 +53,7 @@ public class SourceFileRepository implements IResourceRepository {
 
 	@Override
 	public void put(String tags, String path, String content) throws Exception {
-		path = projectPath + path.replace("/", File.separator);
+		path = path.replace("/", File.separator);
 		new File(path).getParentFile().mkdirs();
 		PrintWriter pw = new PrintWriter(path, StandardCharsets.UTF_8);
 		pw.write(content);

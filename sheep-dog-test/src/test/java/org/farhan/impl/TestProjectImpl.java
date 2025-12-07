@@ -77,4 +77,14 @@ public class TestProjectImpl implements ITestProject {
 		return true;
 	}
 
+	@Override
+	public String getName() {
+		throw new UnsupportedOperationException("getName() is not implemented");
+	}
+
+	@Override
+	public void setName(String name) {
+		throw new UnsupportedOperationException("setName(String name) is not implemented");
+	}
+
 }

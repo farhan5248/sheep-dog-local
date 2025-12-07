@@ -6,6 +6,7 @@ import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITestCase;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestSuite;
@@ -36,6 +37,11 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 	@Override
 	public ITestCase createTestCase(String value) {
 		return new TestCaseImpl(value);
+	}
+
+	@Override
+	public ITestProject createTestProject() {
+		return new TestProjectImpl();
 	}
 
 	@Override

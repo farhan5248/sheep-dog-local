@@ -4,7 +4,13 @@ import java.util.List;
 
 public interface ITestProject {
 
+	boolean addStepObject(IStepObject value);
+
+	boolean addTestSuite(ITestSuite value);
+
 	String getFileExtension();
+
+	String getName();
 
 	IStepObject getStepObject(int index);
 
@@ -18,8 +24,6 @@ public interface ITestProject {
 
 	List<ITestSuite> getTestSuiteList();
 
-	boolean addTestSuite(ITestSuite value);
-
-	boolean addStepObject(IStepObject value);
+	void setName(String name);
 
 }

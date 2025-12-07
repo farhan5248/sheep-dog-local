@@ -12,6 +12,8 @@ public interface ISheepDogFactory {
 
 	ITestCase createTestCase(String name);
 
+	ITestProject createTestProject();
+
 	ITestSetup createTestSetup(String name);
 
 	ITestStep createTestStep(String name);

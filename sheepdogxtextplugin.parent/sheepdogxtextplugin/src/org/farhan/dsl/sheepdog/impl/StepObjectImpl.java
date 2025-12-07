@@ -20,7 +20,7 @@ import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 
 public class StepObjectImpl implements IStepObject {
 
-	private static TestProjectImpl parent;
+	private TestProjectImpl parent;
 	StepObject eObject;
 	private String qualifiedName;
 

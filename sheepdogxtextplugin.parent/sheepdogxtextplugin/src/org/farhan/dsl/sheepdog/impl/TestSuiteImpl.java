@@ -1,12 +1,18 @@
 package org.farhan.dsl.sheepdog.impl;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
@@ -14,7 +20,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 
 public class TestSuiteImpl implements ITestSuite {
 
-	private static ITestProject parent;
+	private ITestProject parent;
 	TestSuite eObject;
 
 	public TestSuiteImpl(TestSuite testSuite) {
@@ -27,16 +33,24 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	public void setParent(ITestProject parent) {
-		// TODO temp hack to make sheep-dog dev work. These language Impl classes can't
-		// have hardcoded reference to workspace specific files like IRepository
-		TestSuiteImpl.parent = parent;
+		this.parent = parent;
 	}
 
 	@Override
 	public ITestProject getParent() {
 		if (parent == null) {
-			// TODO pass in the project root
-			parent = new TestProjectImpl(new SourceFileRepository(eObject.eResource().getURI().toPlatformString(true)));
+			parent = SheepDogFactory.instance.createTestProject();
+			// TODO this if statement can't initialise TestProject because it won't work
+			// within the Maven goals. The generator, quickfix provider or content assist
+			// should set the name. make private helper methods to do the lines below.
+			// Each of those classes should call the factory to get the project and then set
+			// the name if the name is null. 
+			if (parent.getName() == null) {
+				IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
+						.getFile(new Path(eObject.eResource().getURI().toPlatformString(true)));
+				File resourceFile = new File(resourceIFile.getProject().getLocationURI());
+				parent.setName(resourceFile.getAbsolutePath());
+			}
 		}
 		return parent;
 	}

@@ -1,8 +1,5 @@
 package org.farhan.common;
 
-import java.util.ArrayList;
-
-import org.farhan.dsl.issues.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.impl.GenerateStepDefinitionActionImpl;
 import org.farhan.impl.InputFileAsciidocFileImpl;
@@ -12,7 +9,6 @@ import org.farhan.impl.ProposeTestStepActionImpl;
 import org.farhan.impl.ProposeTestStepTableActionImpl;
 import org.farhan.impl.QuickfixDialogImpl;
 import org.farhan.impl.SheepDogFactoryImpl;
-import org.farhan.impl.TestProjectImpl;
 import org.farhan.impl.ValidateErrorActionImpl;
 import org.farhan.impl.ValidateErrorDialogImpl;
 import org.farhan.impl.ValidateWarningActionImpl;
@@ -64,12 +60,9 @@ public final class GuiceConfig extends AbstractModule implements InjectorSource 
 
 	@Before
 	public void resetTestProject() throws Exception {
-		// TODO change the initialiation, this feels hacky
 		SheepDogFactory.instance = new SheepDogFactoryImpl();
-		TestObject.testProject = new TestProjectImpl();
-		TestObject.currentStep = null;
-		MockIDE.setValidationMessage("");
-		MockIDE.proposalList = new ArrayList<SheepDogIssueProposal>();
+		TestObject.reset();
+		MockIDE.reset();
 	}
 
 }

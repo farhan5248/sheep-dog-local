@@ -13,6 +13,7 @@ import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.SheepDogBuilder;
+import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.impl.TestStepImpl;
 import org.junit.jupiter.api.Assertions;
 
@@ -21,13 +22,17 @@ import io.cucumber.datatable.DataTable;
 public abstract class TestObject {
 
 	public static TestStepImpl currentStep;
-
 	public static ITestProject testProject;
 
 	protected static String getStackTraceAsString(Exception e) {
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
 		return sw.toString();
+	}
+
+	public static void reset() {
+		currentStep = null;
+		testProject = SheepDogFactory.instance.createTestProject();
 	}
 
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
