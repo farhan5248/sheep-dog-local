@@ -1,12 +1,12 @@
 package org.farhan.dsl.sheepdog.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.farhan.dsl.lang.IResourceRepository;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
 
 public class TestProjectImpl implements ITestProject {
@@ -14,7 +14,7 @@ public class TestProjectImpl implements ITestProject {
 	private static Logger logger = Logger.getLogger(TestProjectImpl.class);
 
 	private IResourceRepository sr;
-	private String name;
+	private String projectPath;
 	public final String layer2dir;
 
 	TestProjectImpl(IResourceRepository sr) {
@@ -23,12 +23,12 @@ public class TestProjectImpl implements ITestProject {
 		// can then intercept the project name and save it.
 		this.sr = sr;
 		layer2dir = "src/test/resources/asciidoc/stepdefs";
-		name = null;
+		projectPath = null;
 	}
 
 	public boolean addStepObject(IStepObject stepObject) {
 		try {
-			sr.put("", name + "/" + layer2dir + "/" + stepObject.getQualifiedName(), stepObject.getContent());
+			sr.put("", projectPath + "/" + layer2dir + "/" + stepObject.getQualifiedName(), stepObject.getContent());
 			return true;
 		} catch (Exception e) {
 			logger.error("Couldn't write step object:", e);
@@ -48,7 +48,7 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	public String getName() {
-		return name;
+		return projectPath;
 	}
 
 	@Override
@@ -58,9 +58,9 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public IStepObject getStepObject(String qualifiedName) {
-		if (sr.contains("", name + "/" + layer2dir + "/" + qualifiedName)) {
+		if (sr.contains("", projectPath + "/" + layer2dir + "/" + qualifiedName)) {
 			try {
-				String text = sr.get("", name + "/" + layer2dir + "/" + qualifiedName);
+				String text = sr.get("", projectPath + "/" + layer2dir + "/" + qualifiedName);
 				if (text.isEmpty()) {
 					logger.error("Couldn't load StepObject for, file is empty: " + qualifiedName);
 				} else {
@@ -80,8 +80,8 @@ public class TestProjectImpl implements ITestProject {
 		ArrayList<IStepObject> objects = new ArrayList<IStepObject>();
 		try {
 			// TODO instead of empty tags, append it to the prefix?
-			for (String stepObjectFileName : sr.list("", name + "/" + layer2dir, getFileExtension())) {
-				objects.add(SheepDogBuilder.createStepObject(this, stepObjectFileName.replaceFirst(layer2dir, "")));
+			for (String stepObjectFileName : sr.list("", projectPath + "/" + layer2dir, getFileExtension())) {
+				objects.add(getStepObject(stepObjectFileName.replace(projectPath + "/" + layer2dir + "/", "")));
 			}
 		} catch (Exception e) {
 			logger.error("Couldn't get StepObject list:", e);
@@ -104,7 +104,7 @@ public class TestProjectImpl implements ITestProject {
 		throw new UnsupportedOperationException("getTestSuiteList() is not implemented");
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String projectPath) {
+		this.projectPath = projectPath.replace(File.separator, "/");
 	}
 }

@@ -3,10 +3,15 @@
  */
 package org.farhan.dsl.sheepdog.validation;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
@@ -24,6 +29,8 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
 import org.farhan.dsl.issues.*;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.SheepDogFactory;
 
 /**
  * This class contains custom validation rules.
@@ -48,6 +55,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	@Check(CheckType.FAST)
 	public void checkCellNameOnly(Cell cell) {
+		initProject(cell.eResource());
 		// TODO make tests for this
 		if (cell != null) {
 			String problems = CellIssueDetector.validateNameOnly(new CellImpl(cell));
@@ -60,6 +68,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.EXPENSIVE)
 	public void checkRowCellListWorkspace(Row row) {
 		try {
+			initProject(row.eResource());
 			if (row != null && row.eContainer() != null) {
 				Table table = (Table) row.eContainer();
 				if (table.eContainer() instanceof TestStep) {
@@ -79,6 +88,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.FAST)
 	public void checkTestStepContainerNameOnly(TestStepContainer theTestStepContainer) {
 		try {
+			initProject(theTestStepContainer.eResource());
 			String problems = TestStepContainerIssueDetector
 					.validateNameOnly(new TestStepContainerImpl(theTestStepContainer));
 			if (!problems.isEmpty()) {
@@ -92,6 +102,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.NORMAL)
 	public void checkTestStepContainerTestStepFileListFile(TestStepContainer theTestStepContainer) {
 		try {
+			initProject(theTestStepContainer.eResource());
 			String problems = TestStepContainerIssueDetector
 					.validateTestStepListFile(new TestStepContainerImpl(theTestStepContainer));
 			if (!problems.isEmpty()) {
@@ -106,6 +117,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.FAST)
 	public void checkTestStepNameOnly(TestStep step) {
 		try {
+			initProject(step.eResource());
 			if (step.getName() != null) {
 				String problems = TestStepIssueDetector.validateNameComponentOnly(new TestStepImpl(step));
 				if (!problems.isEmpty()) {
@@ -130,6 +142,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.EXPENSIVE)
 	public void checkTestStepNameWorkspace(TestStep step) {
 		try {
+			initProject(step.eResource());
 			if (step.getName() != null) {
 				TestStepImpl testStepImpl = new TestStepImpl(step);
 				String problems = TestStepIssueDetector.validateNameObjectWorkspace(testStepImpl);
@@ -149,6 +162,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	@Check(CheckType.FAST)
 	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
+		initProject(theTestSuite.eResource());
 		// TODO validate that feature file name and feature name are the same.
 		TestSuiteImpl testSuiteImpl = new TestSuiteImpl(theTestSuite);
 		String problems = TestSuiteIssueDetector.validateNameOnly(testSuiteImpl);
@@ -159,6 +173,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	@Check(CheckType.EXPENSIVE)
 	public void checkTextNameWorkspace(Text text) {
+		initProject(text.eResource());
 		if (text != null) {
 			String problems = TextIssueDetector.validateNameWorkspace(new TextImpl(text));
 			if (!problems.isEmpty()) {
@@ -172,5 +187,15 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
 		logger.error(sw.toString());
+	}
+
+	private void initProject(Resource resource) {
+		ITestProject parent = SheepDogFactory.instance.createTestProject();
+		if (parent.getName() == null) {
+			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(new Path(resource.getURI().toPlatformString(true)));
+			File resourceFile = new File(resourceIFile.getProject().getLocationURI());
+			parent.setName(resourceFile.getAbsolutePath());
+		}
 	}
 }

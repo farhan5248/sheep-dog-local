@@ -3,8 +3,12 @@
  */
 package org.farhan.dsl.sheepdog.ui.quickfix;
 
+import java.io.File;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -29,6 +33,7 @@ import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TextIssueResolver;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.sheepdog.impl.CellImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
@@ -47,6 +52,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
 	private void createAcceptor(Issue issue, IssueResolutionAcceptor acceptor,
 			ArrayList<SheepDogIssueProposal> proposals) {
+		initProject(getEObject(issue).eResource());
 		for (SheepDogIssueProposal p : proposals) {
 			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
 				public void apply(IModificationContext context) throws BadLocationException {
@@ -114,4 +120,13 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 		return resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
 	}
 
+	private void initProject(Resource resource) {
+		ITestProject parent = SheepDogFactory.instance.createTestProject();
+		if (parent.getName() == null) {
+			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(new Path(resource.getURI().toPlatformString(true)));
+			File resourceFile = new File(resourceIFile.getProject().getLocationURI());
+			parent.setName(resourceFile.getAbsolutePath());
+		}
+	}
 }

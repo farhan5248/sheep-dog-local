@@ -28,29 +28,42 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
+	public boolean addStatement(IStatement value) {
+		eObject.getStatementList().add(((StatementImpl) value).eObject);
+		return true;
+	}
+
+	@Override
+	public boolean addTestCase(ITestCase value) {
+		eObject.getTestStepContainerList().add(((TestCaseImpl) value).eObject);
+		return true;
+	}
+
+	@Override
+	public boolean addTestSetup(ITestSetup value) {
+		eObject.getTestStepContainerList().add(0, ((TestSetupImpl) value).eObject);
+		return true;
+	}
+
+	@Override
+	public String getContent() {
+		throw new UnsupportedOperationException("getContent() is not implemented");
+	}
+
+	@Override
 	public String getName() {
 		return eObject.getName();
 	}
 
-	public void setParent(ITestProject parent) {
-		this.parent = parent;
+	@Override
+	public String getNameLong() {
+		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
 	public ITestProject getParent() {
 		if (parent == null) {
 			parent = SheepDogFactory.instance.createTestProject();
-			// TODO this if statement can't initialise TestProject because it won't work
-			// within the Maven goals. The generator, quickfix provider or content assist
-			// should set the name. make private helper methods to do the lines below.
-			// Each of those classes should call the factory to get the project and then set
-			// the name if the name is null. 
-			if (parent.getName() == null) {
-				IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
-						.getFile(new Path(eObject.eResource().getURI().toPlatformString(true)));
-				File resourceFile = new File(resourceIFile.getProject().getLocationURI());
-				parent.setName(resourceFile.getAbsolutePath());
-			}
 		}
 		return parent;
 	}
@@ -61,8 +74,23 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
+	public IStatement getStatement(int index) {
+		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
+	}
+
+	@Override
+	public IStatement getStatement(String name) {
+		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
+	}
+
+	@Override
 	public ArrayList<IStatement> getStatementList() {
 		throw new UnsupportedOperationException("ArrayList<IStatement> getStatementList() is not implemented");
+	}
+
+	@Override
+	public ITestStepContainer getTestStepContainer(int index) {
+		return new TestStepContainerImpl(eObject.getTestStepContainerList().get(index));
 	}
 
 	@Override
@@ -91,33 +119,13 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
+	public void setContent(String text) {
+		throw new UnsupportedOperationException("setContent(String text) is not implemented");
+	}
+
+	@Override
 	public void setName(String value) {
 		eObject.setName(value);
-	}
-
-	@Override
-	public void setQualifiedName(String value) {
-		throw new UnsupportedOperationException("setQualifiedName(String value) is not implemented");
-	}
-
-	@Override
-	public String getNameLong() {
-		throw new UnsupportedOperationException("getNameLong() is not implemented");
-	}
-
-	@Override
-	public IStatement getStatement(int index) {
-		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
-	}
-
-	@Override
-	public IStatement getStatement(String name) {
-		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
-	}
-
-	@Override
-	public ITestStepContainer getTestStepContainer(int index) {
-		return new TestStepContainerImpl(eObject.getTestStepContainerList().get(index));
 	}
 
 	@Override
@@ -125,32 +133,13 @@ public class TestSuiteImpl implements ITestSuite {
 		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
-	@Override
-	public String getContent() {
-		throw new UnsupportedOperationException("getContent() is not implemented");
+	public void setParent(ITestProject parent) {
+		this.parent = parent;
 	}
 
 	@Override
-	public void setContent(String text) {
-		throw new UnsupportedOperationException("setContent(String text) is not implemented");
-	}
-
-	@Override
-	public boolean addStatement(IStatement value) {
-		eObject.getStatementList().add(((StatementImpl) value).eObject);
-		return true;
-	}
-
-	@Override
-	public boolean addTestCase(ITestCase value) {
-		eObject.getTestStepContainerList().add(((TestCaseImpl) value).eObject);
-		return true;
-	}
-
-	@Override
-	public boolean addTestSetup(ITestSetup value) {
-		eObject.getTestStepContainerList().add(0, ((TestSetupImpl) value).eObject);
-		return true;
+	public void setQualifiedName(String value) {
+		throw new UnsupportedOperationException("setQualifiedName(String value) is not implemented");
 	}
 
 }

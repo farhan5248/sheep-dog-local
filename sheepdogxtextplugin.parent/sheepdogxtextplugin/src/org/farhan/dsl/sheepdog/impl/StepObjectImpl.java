@@ -14,13 +14,14 @@ import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 
 public class StepObjectImpl implements IStepObject {
 
-	private TestProjectImpl parent;
+	private ITestProject parent;
 	StepObject eObject;
 	private String qualifiedName;
 
@@ -35,7 +36,10 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public ITestProject getParent() {
-		throw new UnsupportedOperationException("ITestProject getParent() is not implemented");
+		if (parent == null) {
+			parent = SheepDogFactory.instance.createTestProject();
+		}
+		return parent;
 	}
 
 	@Override

@@ -3,15 +3,22 @@
  */
 package org.farhan.dsl.sheepdog.ui.contentassist;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.issues.*;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
@@ -37,6 +44,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeCellList(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
+			initProject(step.eResource());
 			for (SheepDogIssueProposal p : RowIssueResolver.suggestCellListWorkspace(new TestStepImpl(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
@@ -59,6 +67,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
+			initProject(step.eResource());
 			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNameObjectWorkspace(new TestStepImpl(step))) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
@@ -104,5 +113,15 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
 		logger.error(sw.toString());
+	}
+
+	private void initProject(Resource resource) {
+		ITestProject parent = SheepDogFactory.instance.createTestProject();
+		if (parent.getName() == null) {
+			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(new Path(resource.getURI().toPlatformString(true)));
+			File resourceFile = new File(resourceIFile.getProject().getLocationURI());
+			parent.setName(resourceFile.getAbsolutePath());
+		}
 	}
 }

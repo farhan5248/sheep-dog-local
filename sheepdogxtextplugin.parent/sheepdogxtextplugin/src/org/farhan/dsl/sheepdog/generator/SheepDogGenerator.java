@@ -3,13 +3,20 @@
  */
 package org.farhan.dsl.sheepdog.generator;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.SheepDogBuilder;
+import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
@@ -25,7 +32,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 
 	@Override
 	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-
+		initProject(resource);
 		if (resource.getContents().get(0) instanceof TestSuite) {
 			TestSuite theTestSuite = (TestSuite) resource.getContents().get(0);
 			for (TestStepContainer scenario : theTestSuite.getTestStepContainerList()) {
@@ -41,4 +48,13 @@ public class SheepDogGenerator extends AbstractGenerator {
 		}
 	}
 
+	private void initProject(Resource resource) {
+		ITestProject parent = SheepDogFactory.instance.createTestProject();
+		if (parent.getName() == null) {
+			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(new Path(resource.getURI().toPlatformString(true)));
+			File resourceFile = new File(resourceIFile.getProject().getLocationURI());
+			parent.setName(resourceFile.getAbsolutePath());
+		}
+	}
 }
