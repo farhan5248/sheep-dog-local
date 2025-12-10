@@ -35,7 +35,7 @@ public class ThenFormatter extends TestStepFormatter {
 
 	@Override
 	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((ThenElements) a).getNameTitleParserRuleCall_2_0();
+		return ((ThenElements) a).getNameStepReferenceParserRuleCall_2_0();
 	}
 
 }

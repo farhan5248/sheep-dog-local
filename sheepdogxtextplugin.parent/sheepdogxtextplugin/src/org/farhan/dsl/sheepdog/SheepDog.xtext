@@ -19,7 +19,7 @@ StepDefinition:
 
 StepParameters:
 	'*' 'Step-Parameters:' name=Title EOL
-	statementList=StatementList?
+	statementList=NestedStatementList?
 	table=Table;
 
 TestSuite:
@@ -43,34 +43,37 @@ TestCase:
 
 TestData:
 	'*' 'Test-Data:' name=Title EOL
-	statementList=StatementList?
+	statementList=NestedStatementList?
 	table=Table;
 
 TestStep:
 	Given | When | Then | And;
 
 Given:
-	'*' 'Given:' name=Title EOL
+	'*' 'Given:' name=StepReference EOL
 	(table=Table | text=Text)?;
 
+// TODO in the future, these point to StepObject and StepDefinition just as class and method would
+StepReference:
+	object=Name ',' predicate=Name;
+
 When:
-	'*' 'When:' name=Title EOL
+	'*' 'When:' name=StepReference EOL
 	(table=Table | text=Text)?;
 
 Then:
-	'*' 'Then:' name=Title EOL
+	'*' 'Then:' name=StepReference EOL
 	(table=Table | text=Text)?;
 
 And:
-	'*' 'And:' name=Title EOL
+	'*' 'And:' name=StepReference EOL
 	(table=Table | text=Text)?;
 
 Text:
 	'+' EOL
 	name=RAWTEXT EOL;
 
-// TODO rename to indentedStatementList
-StatementList:
+NestedStatementList:
 	'+' EOL
 	statementList+=Statement+;
 
@@ -86,17 +89,24 @@ Row:
 Cell:
 	'|' name=Title;
 
+// TODO There need to be better names than Text, Statement, Title ...
 Statement:
 	name=Title EOL;
 
-// TODO maybe I don't need Title and can ignore the warnings about it being used in a loop
 Title:
 	WORD+;
 
+Name:
+	ID+;
+
 // TODO look at fragments to handle escape characters etc instead of this and to handle re-using ' ' | '\t' | '\r' | '\n'
 terminal WORD:
-	!(' ' | '\t' | '\r' | '\n' | '[' | ']' | '|' | '#')
-	!(' ' | '\t' | '\r' | '\n' | '[' | ']')*;
+	!(' ' | '\t' | '\r' | '\n' | '|' | '#')
+	!(' ' | '\t' | '\r' | '\n')*;
+
+terminal ID:
+	!(' ' | '\t' | '\r' | '\n' | '|' | '#')
+	!(' ' | '\t' | '\r' | '\n' | ',')*;
 
 terminal WS:
 	(' ' | '\t' | '\r')+;

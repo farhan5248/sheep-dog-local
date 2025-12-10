@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class MySheepDogLexer extends InternalSheepDogLexer {
 
 	// TODO maybe these should all be one flag called escapeKeyword?
-	private boolean nextTokenIsWORD = false;
+	private boolean nextTokenIsWORD = true;
+	private boolean isStepReference = false;
 
 	public MySheepDogLexer() {
 	}
@@ -32,8 +33,23 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			}
 			i++;
 		}
-		// System.out.println(">>>" + s + "<<<");
+		//System.out.println("Keyword >>>" + s + "<<<");
 		return true;
+	}
+
+	public void printNextToken() throws MismatchedTokenException {
+		int i = 0;
+		try {
+			String s = "";
+			while (!Character.isWhitespace(input.LA(i))) {
+				s += Character.toString(input.LA(i));
+				i++;
+			}
+			System.out.println("Token >>>" + s + "<<<");
+		} catch (Exception e) {
+			System.out.println("Error >>>" + input.LA(i) + "<<<");
+		}
+
 	}
 
 	@Override
@@ -43,53 +59,59 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		// This is a hack, ideally the xtext grammar file needs to be defined better,
 		// when I have more time I'll review the need to do this but for now I figured
 		// it'd be a good example on how to hack the lexer for newbies
-
+		//printNextToken();
 		if (isKeyword("----")) {
 			mRULE_RAWTEXT();// ( '----' RULE_EOL ( . )+ '----' RULE_EOL )
 		} else if (isKeyword("#")) {
 			mRULE_SL_COMMENT();
-		} else if (isKeyword("\n")) {
-			mRULE_EOL();
-			nextTokenIsWORD = false;
 		} else if (isKeyword(" ") || isKeyword("\t") || isKeyword("\r")) {
 			mRULE_WS();
 		} else if (isKeyword("+")) {
-			mT__23();
-		} else if (isKeyword("|===")) {
-			mT__24();
-		} else if (isKeyword("*")) {
-			mT__13();
-		} else if (isKeyword("==")) {
-			mT__11();
-		} else if (isKeyword("=")) {
-			mT__9();
-		} else if (isKeyword("|")) {
 			mT__25();
-			nextTokenIsWORD = true;
-		} else if (nextTokenIsWORD) {
-			mRULE_WORD();
+		} else if (isKeyword("|===")) {
+			mT__26();
+		} else if (isKeyword("*")) {
+			mT__14();
+		} else if (isKeyword("==")) {
+			mT__12();
+		} else if (isKeyword("=")) {
+			mT__10();
 		} else if (isKeyword("Step-Object:")) {
-			mT__10();// 'Object:'
+			mT__11();// 'Object:'
 		} else if (isKeyword("Step-Definition:")) {
-			mT__12();// 'Definition:'
+			mT__13();// 'Definition:'
 		} else if (isKeyword("Step-Parameters:")) {
-			mT__14();// 'Parameters:'
+			mT__15();// 'Parameters:'
 		} else if (isKeyword("Test-Suite:")) {
-			mT__15();// 'Feature:'
+			mT__16();// 'Feature:'
 		} else if (isKeyword("Test-Setup:")) {
-			mT__16();// 'Background:'
+			mT__17();// 'Background:'
 		} else if (isKeyword("Test-Case:")) {
-			mT__17();// 'Scenario:'
+			mT__18();// 'Scenario:'
 		} else if (isKeyword("Test-Data:")) {
-			mT__18();// 'Examples:'
+			mT__19();// 'Examples:'
+		} else if (isKeyword(",")) {
+			mT__21();// ','
+		} else if (isKeyword("\n")) {
+			mRULE_EOL();
+			nextTokenIsWORD = true;
 		} else if (isKeyword("Given:")) {
-			mT__19();// 'Given'
+			mT__20();// 'Given'
+			nextTokenIsWORD = false;
 		} else if (isKeyword("When:")) {
-			mT__20();// 'When'
+			mT__22();// 'When'
+			nextTokenIsWORD = false;
 		} else if (isKeyword("Then:")) {
-			mT__21();// 'Then'
+			mT__23();// 'Then'
+			nextTokenIsWORD = false;
 		} else if (isKeyword("And:")) {
-			mT__22();// 'And'
+			mT__24();// 'And'
+			nextTokenIsWORD = false;
+		} else if (isKeyword("|")) {
+			mT__27();
+			// nextTokenIsWORD = true;
+		} else if (!nextTokenIsWORD) {
+			mRULE_ID();
 		} else {
 			mRULE_WORD();
 		}

@@ -129,7 +129,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Cell returns Cell
 	 *
 	 * Constraint:
-	 *     name=Phrase
+	 *     name=Title
 	 * </pre>
 	 */
 	protected void sequence_Cell(ISerializationContext context, Cell semanticObject) {
@@ -138,7 +138,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.CELL__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCellAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getCellAccess().getNameTitleParserRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -192,7 +192,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Statement returns Statement
 	 *
 	 * Constraint:
-	 *     name=Phrase
+	 *     name=Title
 	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, Statement semanticObject) {
@@ -201,7 +201,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.STATEMENT__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getStatementAccess().getNamePhraseParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getStatementAccess().getNameTitleParserRuleCall_0_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -212,7 +212,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     StepDefinition returns StepDefinition
 	 *
 	 * Constraint:
-	 *     (name=Phrase statementList+=Statement* stepParameterList+=StepParameters*)
+	 *     (name=Title statementList+=Statement* stepParameterList+=StepParameters*)
 	 * </pre>
 	 */
 	protected void sequence_StepDefinition(ISerializationContext context, StepDefinition semanticObject) {
@@ -227,7 +227,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     StepObject returns StepObject
 	 *
 	 * Constraint:
-	 *     (name=Phrase statementList+=Statement* stepDefinitionList+=StepDefinition*)
+	 *     (name=Title statementList+=Statement* stepDefinitionList+=StepDefinition*)
 	 * </pre>
 	 */
 	protected void sequence_StepObject(ISerializationContext context, StepObject semanticObject) {
@@ -241,7 +241,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     StepParameters returns StepParameters
 	 *
 	 * Constraint:
-	 *     (name=Phrase statementList=NestedStatementList? table=Table)
+	 *     (name=Title statementList=NestedStatementList? table=Table)
 	 * </pre>
 	 */
 	protected void sequence_StepParameters(ISerializationContext context, StepParameters semanticObject) {
@@ -293,7 +293,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     TestCase returns TestCase
 	 *
 	 * Constraint:
-	 *     (name=Phrase statementList+=Statement* testStepList+=TestStep* testDataList+=TestData*)
+	 *     (name=Title statementList+=Statement* testStepList+=TestStep* testDataList+=TestData*)
 	 * </pre>
 	 */
 	protected void sequence_TestCase(ISerializationContext context, TestCase semanticObject) {
@@ -307,7 +307,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     TestData returns TestData
 	 *
 	 * Constraint:
-	 *     (name=Phrase statementList=NestedStatementList? table=Table)
+	 *     (name=Title statementList=NestedStatementList? table=Table)
 	 * </pre>
 	 */
 	protected void sequence_TestData(ISerializationContext context, TestData semanticObject) {
@@ -322,7 +322,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     TestSetup returns TestSetup
 	 *
 	 * Constraint:
-	 *     (name=Phrase statementList+=Statement* testStepList+=TestStep*)
+	 *     (name=Title statementList+=Statement* testStepList+=TestStep*)
 	 * </pre>
 	 */
 	protected void sequence_TestSetup(ISerializationContext context, TestSetup semanticObject) {
@@ -337,7 +337,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     TestSuite returns TestSuite
 	 *
 	 * Constraint:
-	 *     (name=Phrase statementList+=Statement* testStepContainerList+=TestStepContainer*)
+	 *     (name=Title statementList+=Statement* testStepContainerList+=TestStepContainer*)
 	 * </pre>
 	 */
 	protected void sequence_TestSuite(ISerializationContext context, TestSuite semanticObject) {

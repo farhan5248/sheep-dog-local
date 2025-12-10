@@ -99,8 +99,8 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step one\n");
-		sb.append("* When: do step three\n");
+		sb.append("* Given: do step, one\n");
+		sb.append("* When: do step, three\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("|===\n");
@@ -117,8 +117,8 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("@tag1\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
-		sb.append("* Given: do step one\n");
-		sb.append("* When: do step three\n");
+		sb.append("* Given: do step, one\n");
+		sb.append("* When: do step, three\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("|===\n");

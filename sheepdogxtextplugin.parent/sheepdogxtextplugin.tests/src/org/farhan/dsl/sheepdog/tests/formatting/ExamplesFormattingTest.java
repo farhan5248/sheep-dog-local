@@ -18,7 +18,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("\n");
-		sb.append("* Given: do step one\n");
+		sb.append("* Given: do step, one\n");
 		sb.append("\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
@@ -54,7 +54,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
-			sb.append("* Given: do step one\n");
+			sb.append("* Given: do step, one\n");
 			sb.append("\n");
 			sb.append(" *  Test-Data:  Describe what this data is about \n");
 			sb.append("+\n");
@@ -82,7 +82,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
-			sb.append("* Given: do step one\n");
+			sb.append("* Given: do step, one\n");
 			sb.append("\n");
 			sb.append("*Test-Data:Describe what this data is about\n");
 			sb.append("+\n");
@@ -111,7 +111,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
-			sb.append("* Given: do step one\n");
+			sb.append("* Given: do step, one\n");
 			sb.append("\n");
 			sb.append("* Test-Data: Describe what this data is about\n");
 			sb.append("\n");

@@ -29,6 +29,7 @@ public abstract class TestStepFormatter extends Formatter {
 		AbstractParserRuleElementFinder a = getAccess(ga);
 		formatKeywordTrailingSpace(df.getRegion(theStep, getEqualsKeyword(a)), doc);
 		formatKeywordTrailingSpace(df.getRegion(theStep, getKeyword(a)), doc);
+		// TODO change to StepReferenceFormatter.format
 		formatTitle(df.getRegion(theStep, getPhraseRuleCall(a)), doc);
 		if (theStep.getTable() != null || theStep.getText() != null) {
 			formatEOL1RuleCall(df.getRegion(theStep, getEOLRuleCall(a)), doc);

@@ -263,7 +263,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStepObject"
-    // InternalSheepDog.g:107:1: ruleStepObject returns [EObject current=null] : (otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )* ) ;
+    // InternalSheepDog.g:107:1: ruleStepObject returns [EObject current=null] : (otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )* ) ;
     public final EObject ruleStepObject() throws RecognitionException {
         EObject current = null;
 
@@ -281,11 +281,11 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:113:2: ( (otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )* ) )
-            // InternalSheepDog.g:114:2: (otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )* )
+            // InternalSheepDog.g:113:2: ( (otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )* ) )
+            // InternalSheepDog.g:114:2: (otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )* )
             {
-            // InternalSheepDog.g:114:2: (otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )* )
-            // InternalSheepDog.g:115:3: otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )*
+            // InternalSheepDog.g:114:2: (otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )* )
+            // InternalSheepDog.g:115:3: otherlv_0= '=' otherlv_1= 'Step-Object:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepDefinitionList_5_0= ruleStepDefinition ) )*
             {
             otherlv_0=(Token)match(input,10,FOLLOW_3); 
 
@@ -295,17 +295,17 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getStepObjectAccess().getStepObjectKeyword_1());
             		
-            // InternalSheepDog.g:123:3: ( (lv_name_2_0= rulePhrase ) )
-            // InternalSheepDog.g:124:4: (lv_name_2_0= rulePhrase )
+            // InternalSheepDog.g:123:3: ( (lv_name_2_0= ruleTitle ) )
+            // InternalSheepDog.g:124:4: (lv_name_2_0= ruleTitle )
             {
-            // InternalSheepDog.g:124:4: (lv_name_2_0= rulePhrase )
-            // InternalSheepDog.g:125:5: lv_name_2_0= rulePhrase
+            // InternalSheepDog.g:124:4: (lv_name_2_0= ruleTitle )
+            // InternalSheepDog.g:125:5: lv_name_2_0= ruleTitle
             {
 
-            					newCompositeNode(grammarAccess.getStepObjectAccess().getNamePhraseParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getStepObjectAccess().getNameTitleParserRuleCall_2_0());
             				
             pushFollow(FOLLOW_5);
-            lv_name_2_0=rulePhrase();
+            lv_name_2_0=ruleTitle();
 
             state._fsp--;
 
@@ -317,7 +317,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_2_0,
-            						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
+            						"org.farhan.dsl.sheepdog.SheepDog.Title");
             					afterParserOrEnumRuleCall();
             				
 
@@ -487,7 +487,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStepDefinition"
-    // InternalSheepDog.g:195:1: ruleStepDefinition returns [EObject current=null] : (otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )* ) ;
+    // InternalSheepDog.g:195:1: ruleStepDefinition returns [EObject current=null] : (otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )* ) ;
     public final EObject ruleStepDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -505,11 +505,11 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:201:2: ( (otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )* ) )
-            // InternalSheepDog.g:202:2: (otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )* )
+            // InternalSheepDog.g:201:2: ( (otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )* ) )
+            // InternalSheepDog.g:202:2: (otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )* )
             {
-            // InternalSheepDog.g:202:2: (otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )* )
-            // InternalSheepDog.g:203:3: otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )*
+            // InternalSheepDog.g:202:2: (otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )* )
+            // InternalSheepDog.g:203:3: otherlv_0= '==' otherlv_1= 'Step-Definition:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_stepParameterList_5_0= ruleStepParameters ) )*
             {
             otherlv_0=(Token)match(input,12,FOLLOW_8); 
 
@@ -519,17 +519,17 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getStepDefinitionAccess().getStepDefinitionKeyword_1());
             		
-            // InternalSheepDog.g:211:3: ( (lv_name_2_0= rulePhrase ) )
-            // InternalSheepDog.g:212:4: (lv_name_2_0= rulePhrase )
+            // InternalSheepDog.g:211:3: ( (lv_name_2_0= ruleTitle ) )
+            // InternalSheepDog.g:212:4: (lv_name_2_0= ruleTitle )
             {
-            // InternalSheepDog.g:212:4: (lv_name_2_0= rulePhrase )
-            // InternalSheepDog.g:213:5: lv_name_2_0= rulePhrase
+            // InternalSheepDog.g:212:4: (lv_name_2_0= ruleTitle )
+            // InternalSheepDog.g:213:5: lv_name_2_0= ruleTitle
             {
 
-            					newCompositeNode(grammarAccess.getStepDefinitionAccess().getNamePhraseParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getStepDefinitionAccess().getNameTitleParserRuleCall_2_0());
             				
             pushFollow(FOLLOW_5);
-            lv_name_2_0=rulePhrase();
+            lv_name_2_0=ruleTitle();
 
             state._fsp--;
 
@@ -541,7 +541,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_2_0,
-            						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
+            						"org.farhan.dsl.sheepdog.SheepDog.Title");
             					afterParserOrEnumRuleCall();
             				
 
@@ -711,7 +711,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStepParameters"
-    // InternalSheepDog.g:283:1: ruleStepParameters returns [EObject current=null] : (otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) ) ;
+    // InternalSheepDog.g:283:1: ruleStepParameters returns [EObject current=null] : (otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) ) ;
     public final EObject ruleStepParameters() throws RecognitionException {
         EObject current = null;
 
@@ -729,11 +729,11 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:289:2: ( (otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) ) )
-            // InternalSheepDog.g:290:2: (otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) )
+            // InternalSheepDog.g:289:2: ( (otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) ) )
+            // InternalSheepDog.g:290:2: (otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) )
             {
-            // InternalSheepDog.g:290:2: (otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) )
-            // InternalSheepDog.g:291:3: otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) )
+            // InternalSheepDog.g:290:2: (otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) )
+            // InternalSheepDog.g:291:3: otherlv_0= '*' otherlv_1= 'Step-Parameters:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) )
             {
             otherlv_0=(Token)match(input,14,FOLLOW_11); 
 
@@ -743,17 +743,17 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getStepParametersAccess().getStepParametersKeyword_1());
             		
-            // InternalSheepDog.g:299:3: ( (lv_name_2_0= rulePhrase ) )
-            // InternalSheepDog.g:300:4: (lv_name_2_0= rulePhrase )
+            // InternalSheepDog.g:299:3: ( (lv_name_2_0= ruleTitle ) )
+            // InternalSheepDog.g:300:4: (lv_name_2_0= ruleTitle )
             {
-            // InternalSheepDog.g:300:4: (lv_name_2_0= rulePhrase )
-            // InternalSheepDog.g:301:5: lv_name_2_0= rulePhrase
+            // InternalSheepDog.g:300:4: (lv_name_2_0= ruleTitle )
+            // InternalSheepDog.g:301:5: lv_name_2_0= ruleTitle
             {
 
-            					newCompositeNode(grammarAccess.getStepParametersAccess().getNamePhraseParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getStepParametersAccess().getNameTitleParserRuleCall_2_0());
             				
             pushFollow(FOLLOW_5);
-            lv_name_2_0=rulePhrase();
+            lv_name_2_0=ruleTitle();
 
             state._fsp--;
 
@@ -765,7 +765,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_2_0,
-            						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
+            						"org.farhan.dsl.sheepdog.SheepDog.Title");
             					afterParserOrEnumRuleCall();
             				
 
@@ -918,7 +918,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTestSuite"
-    // InternalSheepDog.g:371:1: ruleTestSuite returns [EObject current=null] : (otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )* ) ;
+    // InternalSheepDog.g:371:1: ruleTestSuite returns [EObject current=null] : (otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )* ) ;
     public final EObject ruleTestSuite() throws RecognitionException {
         EObject current = null;
 
@@ -936,11 +936,11 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:377:2: ( (otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )* ) )
-            // InternalSheepDog.g:378:2: (otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )* )
+            // InternalSheepDog.g:377:2: ( (otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )* ) )
+            // InternalSheepDog.g:378:2: (otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )* )
             {
-            // InternalSheepDog.g:378:2: (otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )* )
-            // InternalSheepDog.g:379:3: otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )*
+            // InternalSheepDog.g:378:2: (otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )* )
+            // InternalSheepDog.g:379:3: otherlv_0= '=' otherlv_1= 'Test-Suite:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepContainerList_5_0= ruleTestStepContainer ) )*
             {
             otherlv_0=(Token)match(input,10,FOLLOW_13); 
 
@@ -950,17 +950,17 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getTestSuiteAccess().getTestSuiteKeyword_1());
             		
-            // InternalSheepDog.g:387:3: ( (lv_name_2_0= rulePhrase ) )
-            // InternalSheepDog.g:388:4: (lv_name_2_0= rulePhrase )
+            // InternalSheepDog.g:387:3: ( (lv_name_2_0= ruleTitle ) )
+            // InternalSheepDog.g:388:4: (lv_name_2_0= ruleTitle )
             {
-            // InternalSheepDog.g:388:4: (lv_name_2_0= rulePhrase )
-            // InternalSheepDog.g:389:5: lv_name_2_0= rulePhrase
+            // InternalSheepDog.g:388:4: (lv_name_2_0= ruleTitle )
+            // InternalSheepDog.g:389:5: lv_name_2_0= ruleTitle
             {
 
-            					newCompositeNode(grammarAccess.getTestSuiteAccess().getNamePhraseParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getTestSuiteAccess().getNameTitleParserRuleCall_2_0());
             				
             pushFollow(FOLLOW_5);
-            lv_name_2_0=rulePhrase();
+            lv_name_2_0=ruleTitle();
 
             state._fsp--;
 
@@ -972,7 +972,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_2_0,
-            						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
+            						"org.farhan.dsl.sheepdog.SheepDog.Title");
             					afterParserOrEnumRuleCall();
             				
 
@@ -1280,7 +1280,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTestSetup"
-    // InternalSheepDog.g:495:1: ruleTestSetup returns [EObject current=null] : (otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ) ;
+    // InternalSheepDog.g:495:1: ruleTestSetup returns [EObject current=null] : (otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ) ;
     public final EObject ruleTestSetup() throws RecognitionException {
         EObject current = null;
 
@@ -1298,11 +1298,11 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:501:2: ( (otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ) )
-            // InternalSheepDog.g:502:2: (otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* )
+            // InternalSheepDog.g:501:2: ( (otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ) )
+            // InternalSheepDog.g:502:2: (otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* )
             {
-            // InternalSheepDog.g:502:2: (otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* )
-            // InternalSheepDog.g:503:3: otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )*
+            // InternalSheepDog.g:502:2: (otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* )
+            // InternalSheepDog.g:503:3: otherlv_0= '==' otherlv_1= 'Test-Setup:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )*
             {
             otherlv_0=(Token)match(input,12,FOLLOW_14); 
 
@@ -1312,17 +1312,17 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getTestSetupAccess().getTestSetupKeyword_1());
             		
-            // InternalSheepDog.g:511:3: ( (lv_name_2_0= rulePhrase ) )
-            // InternalSheepDog.g:512:4: (lv_name_2_0= rulePhrase )
+            // InternalSheepDog.g:511:3: ( (lv_name_2_0= ruleTitle ) )
+            // InternalSheepDog.g:512:4: (lv_name_2_0= ruleTitle )
             {
-            // InternalSheepDog.g:512:4: (lv_name_2_0= rulePhrase )
-            // InternalSheepDog.g:513:5: lv_name_2_0= rulePhrase
+            // InternalSheepDog.g:512:4: (lv_name_2_0= ruleTitle )
+            // InternalSheepDog.g:513:5: lv_name_2_0= ruleTitle
             {
 
-            					newCompositeNode(grammarAccess.getTestSetupAccess().getNamePhraseParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getTestSetupAccess().getNameTitleParserRuleCall_2_0());
             				
             pushFollow(FOLLOW_5);
-            lv_name_2_0=rulePhrase();
+            lv_name_2_0=ruleTitle();
 
             state._fsp--;
 
@@ -1334,7 +1334,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_2_0,
-            						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
+            						"org.farhan.dsl.sheepdog.SheepDog.Title");
             					afterParserOrEnumRuleCall();
             				
 
@@ -1504,7 +1504,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTestCase"
-    // InternalSheepDog.g:583:1: ruleTestCase returns [EObject current=null] : (otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )* ) ;
+    // InternalSheepDog.g:583:1: ruleTestCase returns [EObject current=null] : (otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )* ) ;
     public final EObject ruleTestCase() throws RecognitionException {
         EObject current = null;
 
@@ -1524,11 +1524,11 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:589:2: ( (otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )* ) )
-            // InternalSheepDog.g:590:2: (otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )* )
+            // InternalSheepDog.g:589:2: ( (otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )* ) )
+            // InternalSheepDog.g:590:2: (otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )* )
             {
-            // InternalSheepDog.g:590:2: (otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )* )
-            // InternalSheepDog.g:591:3: otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )*
+            // InternalSheepDog.g:590:2: (otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )* )
+            // InternalSheepDog.g:591:3: otherlv_0= '==' otherlv_1= 'Test-Case:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleStatement ) )* ( (lv_testStepList_5_0= ruleTestStep ) )* ( (lv_testDataList_6_0= ruleTestData ) )*
             {
             otherlv_0=(Token)match(input,12,FOLLOW_15); 
 
@@ -1538,17 +1538,17 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getTestCaseAccess().getTestCaseKeyword_1());
             		
-            // InternalSheepDog.g:599:3: ( (lv_name_2_0= rulePhrase ) )
-            // InternalSheepDog.g:600:4: (lv_name_2_0= rulePhrase )
+            // InternalSheepDog.g:599:3: ( (lv_name_2_0= ruleTitle ) )
+            // InternalSheepDog.g:600:4: (lv_name_2_0= ruleTitle )
             {
-            // InternalSheepDog.g:600:4: (lv_name_2_0= rulePhrase )
-            // InternalSheepDog.g:601:5: lv_name_2_0= rulePhrase
+            // InternalSheepDog.g:600:4: (lv_name_2_0= ruleTitle )
+            // InternalSheepDog.g:601:5: lv_name_2_0= ruleTitle
             {
 
-            					newCompositeNode(grammarAccess.getTestCaseAccess().getNamePhraseParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getTestCaseAccess().getNameTitleParserRuleCall_2_0());
             				
             pushFollow(FOLLOW_5);
-            lv_name_2_0=rulePhrase();
+            lv_name_2_0=ruleTitle();
 
             state._fsp--;
 
@@ -1560,7 +1560,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_2_0,
-            						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
+            						"org.farhan.dsl.sheepdog.SheepDog.Title");
             					afterParserOrEnumRuleCall();
             				
 
@@ -1785,7 +1785,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTestData"
-    // InternalSheepDog.g:690:1: ruleTestData returns [EObject current=null] : (otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) ) ;
+    // InternalSheepDog.g:690:1: ruleTestData returns [EObject current=null] : (otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) ) ;
     public final EObject ruleTestData() throws RecognitionException {
         EObject current = null;
 
@@ -1803,11 +1803,11 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:696:2: ( (otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) ) )
-            // InternalSheepDog.g:697:2: (otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) )
+            // InternalSheepDog.g:696:2: ( (otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) ) )
+            // InternalSheepDog.g:697:2: (otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) )
             {
-            // InternalSheepDog.g:697:2: (otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) )
-            // InternalSheepDog.g:698:3: otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= rulePhrase ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) )
+            // InternalSheepDog.g:697:2: (otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) ) )
+            // InternalSheepDog.g:698:3: otherlv_0= '*' otherlv_1= 'Test-Data:' ( (lv_name_2_0= ruleTitle ) ) this_EOL_3= RULE_EOL ( (lv_statementList_4_0= ruleNestedStatementList ) )? ( (lv_table_5_0= ruleTable ) )
             {
             otherlv_0=(Token)match(input,14,FOLLOW_16); 
 
@@ -1817,17 +1817,17 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getTestDataAccess().getTestDataKeyword_1());
             		
-            // InternalSheepDog.g:706:3: ( (lv_name_2_0= rulePhrase ) )
-            // InternalSheepDog.g:707:4: (lv_name_2_0= rulePhrase )
+            // InternalSheepDog.g:706:3: ( (lv_name_2_0= ruleTitle ) )
+            // InternalSheepDog.g:707:4: (lv_name_2_0= ruleTitle )
             {
-            // InternalSheepDog.g:707:4: (lv_name_2_0= rulePhrase )
-            // InternalSheepDog.g:708:5: lv_name_2_0= rulePhrase
+            // InternalSheepDog.g:707:4: (lv_name_2_0= ruleTitle )
+            // InternalSheepDog.g:708:5: lv_name_2_0= ruleTitle
             {
 
-            					newCompositeNode(grammarAccess.getTestDataAccess().getNamePhraseParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getTestDataAccess().getNameTitleParserRuleCall_2_0());
             				
             pushFollow(FOLLOW_5);
-            lv_name_2_0=rulePhrase();
+            lv_name_2_0=ruleTitle();
 
             state._fsp--;
 
@@ -1839,7 +1839,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_2_0,
-            						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
+            						"org.farhan.dsl.sheepdog.SheepDog.Title");
             					afterParserOrEnumRuleCall();
             				
 
@@ -3768,7 +3768,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCell"
-    // InternalSheepDog.g:1456:1: ruleCell returns [EObject current=null] : (otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) ) ) ;
+    // InternalSheepDog.g:1456:1: ruleCell returns [EObject current=null] : (otherlv_0= '|' ( (lv_name_1_0= ruleTitle ) ) ) ;
     public final EObject ruleCell() throws RecognitionException {
         EObject current = null;
 
@@ -3780,27 +3780,27 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:1462:2: ( (otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) ) ) )
-            // InternalSheepDog.g:1463:2: (otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) ) )
+            // InternalSheepDog.g:1462:2: ( (otherlv_0= '|' ( (lv_name_1_0= ruleTitle ) ) ) )
+            // InternalSheepDog.g:1463:2: (otherlv_0= '|' ( (lv_name_1_0= ruleTitle ) ) )
             {
-            // InternalSheepDog.g:1463:2: (otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) ) )
-            // InternalSheepDog.g:1464:3: otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) )
+            // InternalSheepDog.g:1463:2: (otherlv_0= '|' ( (lv_name_1_0= ruleTitle ) ) )
+            // InternalSheepDog.g:1464:3: otherlv_0= '|' ( (lv_name_1_0= ruleTitle ) )
             {
             otherlv_0=(Token)match(input,27,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getCellAccess().getVerticalLineKeyword_0());
             		
-            // InternalSheepDog.g:1468:3: ( (lv_name_1_0= rulePhrase ) )
-            // InternalSheepDog.g:1469:4: (lv_name_1_0= rulePhrase )
+            // InternalSheepDog.g:1468:3: ( (lv_name_1_0= ruleTitle ) )
+            // InternalSheepDog.g:1469:4: (lv_name_1_0= ruleTitle )
             {
-            // InternalSheepDog.g:1469:4: (lv_name_1_0= rulePhrase )
-            // InternalSheepDog.g:1470:5: lv_name_1_0= rulePhrase
+            // InternalSheepDog.g:1469:4: (lv_name_1_0= ruleTitle )
+            // InternalSheepDog.g:1470:5: lv_name_1_0= ruleTitle
             {
 
-            					newCompositeNode(grammarAccess.getCellAccess().getNamePhraseParserRuleCall_1_0());
+            					newCompositeNode(grammarAccess.getCellAccess().getNameTitleParserRuleCall_1_0());
             				
             pushFollow(FOLLOW_2);
-            lv_name_1_0=rulePhrase();
+            lv_name_1_0=ruleTitle();
 
             state._fsp--;
 
@@ -3812,7 +3812,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_1_0,
-            						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
+            						"org.farhan.dsl.sheepdog.SheepDog.Title");
             					afterParserOrEnumRuleCall();
             				
 
@@ -3880,7 +3880,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStatement"
-    // InternalSheepDog.g:1498:1: ruleStatement returns [EObject current=null] : ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL ) ;
+    // InternalSheepDog.g:1498:1: ruleStatement returns [EObject current=null] : ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL ) ;
     public final EObject ruleStatement() throws RecognitionException {
         EObject current = null;
 
@@ -3892,23 +3892,23 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:1504:2: ( ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL ) )
-            // InternalSheepDog.g:1505:2: ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL )
+            // InternalSheepDog.g:1504:2: ( ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL ) )
+            // InternalSheepDog.g:1505:2: ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL )
             {
-            // InternalSheepDog.g:1505:2: ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL )
-            // InternalSheepDog.g:1506:3: ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL
+            // InternalSheepDog.g:1505:2: ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL )
+            // InternalSheepDog.g:1506:3: ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL
             {
-            // InternalSheepDog.g:1506:3: ( (lv_name_0_0= rulePhrase ) )
-            // InternalSheepDog.g:1507:4: (lv_name_0_0= rulePhrase )
+            // InternalSheepDog.g:1506:3: ( (lv_name_0_0= ruleTitle ) )
+            // InternalSheepDog.g:1507:4: (lv_name_0_0= ruleTitle )
             {
-            // InternalSheepDog.g:1507:4: (lv_name_0_0= rulePhrase )
-            // InternalSheepDog.g:1508:5: lv_name_0_0= rulePhrase
+            // InternalSheepDog.g:1507:4: (lv_name_0_0= ruleTitle )
+            // InternalSheepDog.g:1508:5: lv_name_0_0= ruleTitle
             {
 
-            					newCompositeNode(grammarAccess.getStatementAccess().getNamePhraseParserRuleCall_0_0());
+            					newCompositeNode(grammarAccess.getStatementAccess().getNameTitleParserRuleCall_0_0());
             				
             pushFollow(FOLLOW_5);
-            lv_name_0_0=rulePhrase();
+            lv_name_0_0=ruleTitle();
 
             state._fsp--;
 
@@ -3920,7 +3920,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_0_0,
-            						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
+            						"org.farhan.dsl.sheepdog.SheepDog.Title");
             					afterParserOrEnumRuleCall();
             				
 
@@ -3955,25 +3955,25 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleStatement"
 
 
-    // $ANTLR start "entryRulePhrase"
-    // InternalSheepDog.g:1533:1: entryRulePhrase returns [String current=null] : iv_rulePhrase= rulePhrase EOF ;
-    public final String entryRulePhrase() throws RecognitionException {
+    // $ANTLR start "entryRuleTitle"
+    // InternalSheepDog.g:1533:1: entryRuleTitle returns [String current=null] : iv_ruleTitle= ruleTitle EOF ;
+    public final String entryRuleTitle() throws RecognitionException {
         String current = null;
 
-        AntlrDatatypeRuleToken iv_rulePhrase = null;
+        AntlrDatatypeRuleToken iv_ruleTitle = null;
 
 
         try {
-            // InternalSheepDog.g:1533:46: (iv_rulePhrase= rulePhrase EOF )
-            // InternalSheepDog.g:1534:2: iv_rulePhrase= rulePhrase EOF
+            // InternalSheepDog.g:1533:45: (iv_ruleTitle= ruleTitle EOF )
+            // InternalSheepDog.g:1534:2: iv_ruleTitle= ruleTitle EOF
             {
-             newCompositeNode(grammarAccess.getPhraseRule()); 
+             newCompositeNode(grammarAccess.getTitleRule()); 
             pushFollow(FOLLOW_1);
-            iv_rulePhrase=rulePhrase();
+            iv_ruleTitle=ruleTitle();
 
             state._fsp--;
 
-             current =iv_rulePhrase.getText(); 
+             current =iv_ruleTitle.getText(); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -3988,12 +3988,12 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRulePhrase"
+    // $ANTLR end "entryRuleTitle"
 
 
-    // $ANTLR start "rulePhrase"
-    // InternalSheepDog.g:1540:1: rulePhrase returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD )+ ;
-    public final AntlrDatatypeRuleToken rulePhrase() throws RecognitionException {
+    // $ANTLR start "ruleTitle"
+    // InternalSheepDog.g:1540:1: ruleTitle returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD )+ ;
+    public final AntlrDatatypeRuleToken ruleTitle() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token this_WORD_0=null;
@@ -4026,7 +4026,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             	    			current.merge(this_WORD_0);
             	    		
 
-            	    			newLeafNode(this_WORD_0, grammarAccess.getPhraseAccess().getWORDTerminalRuleCall());
+            	    			newLeafNode(this_WORD_0, grammarAccess.getTitleAccess().getWORDTerminalRuleCall());
             	    		
 
             	    }
@@ -4057,7 +4057,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "rulePhrase"
+    // $ANTLR end "ruleTitle"
 
 
     // $ANTLR start "entryRuleName"

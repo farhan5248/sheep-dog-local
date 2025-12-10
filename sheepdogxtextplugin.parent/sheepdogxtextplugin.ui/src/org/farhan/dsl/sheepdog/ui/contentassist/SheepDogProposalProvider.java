@@ -86,7 +86,8 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 				}
 			}
 		} catch (Exception e) {
-			logError(e, step.getName());
+			// TODO replace with utility to combine both
+			logError(e, step.getName().getObject() + step.getName().getPredicate());
 		}
 	}
 
