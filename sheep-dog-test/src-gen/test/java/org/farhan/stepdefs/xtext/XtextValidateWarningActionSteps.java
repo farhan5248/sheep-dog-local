@@ -14,7 +14,7 @@ public class XtextValidateWarningActionSteps extends TestSteps {
         super(object, "xtext", "validate warning");
     }
 
-    @Given("^The xtext plugin, validate warning action is performed$")
+    @Given("^The xtext plugin validate warning action, is performed$")
     public void isPerformed() {
         object.transition();
     }

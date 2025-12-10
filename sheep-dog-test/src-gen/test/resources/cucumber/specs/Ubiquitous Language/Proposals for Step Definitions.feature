@@ -3,8 +3,8 @@ Feature: Proposals for Step Definitions
 
   \@sheep-dog-test
   Because a step can have a component or not and the full path specified or not, you can have 4 keywords like:
-  1. The daily batchjob, path/to/file/Input file is empty
-  2. The daily batchjob, Input file is empty
+  1. The daily batchjob path/to/file/Input file, is empty
+  2. The daily batchjob Input file, is empty
   3. The path/to/file/Input file is empty
   4. The Input file is empty
   So instead of saving all combinations, only the details section and predicate are saved.
@@ -12,14 +12,14 @@ Feature: Proposals for Step Definitions
 
   Scenario: Something is proposed if there's a step-definition
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
           | Step Name                      |
-          | The daily batchjob, Input file |
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | The daily batchjob Input file, |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
           | Object Name                       | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be set as follows
+     When The xtext plugin propose test step action, is performed
+     Then The xtext plugin propose content dialog, will be set as follows
           | Suggestion                                | Suggestion Name | Suggestion Description |
-          | The daily batchjob, Input file is present | is present      | Creates empty file     |
+          | The daily batchjob Input file, is present | is present      | Creates empty file     |
 

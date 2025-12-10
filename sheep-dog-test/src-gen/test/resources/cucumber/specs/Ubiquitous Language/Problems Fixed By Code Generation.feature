@@ -9,37 +9,37 @@ Feature: Problems Fixed By Code Generation
 
   Scenario: This object doesn't exist validation
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob, Input file is present |
-     When The xtext plugin, validate warning action is performed
-     Then The xtext plugin, validate warning dialog will be set as follows
+          | The daily batchjob Input file, is present |
+     When The xtext plugin validate warning action, is performed
+     Then The xtext plugin validate warning dialog, will be set as follows
           | Message                                              |
           | The step object file doesn't exist for the component |
 
   Scenario: This object step definition doesn't exist validation
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob, Input file is present |
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | The daily batchjob Input file, is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is absent            |
-     When The xtext plugin, validate warning action is performed
-     Then The xtext plugin, validate warning dialog will be set as follows
+     When The xtext plugin validate warning action, is performed
+     Then The xtext plugin validate warning dialog, will be set as follows
           | Message                                               |
           | The step definition doesn't exist for the step object |
 
   Scenario: This object step definition parameter set doesn't exist validation
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
           | Step Name                                 | Headers    |
-          | The daily batchjob, Input file is present | New Header |
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | The daily batchjob Input file, is present | New Header |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
           | Object Name                       | Step Definition Name | Parameters |
           | daily batchjob/Input file.feature | is present           | Old Header |
-     When The xtext plugin, validate warning action is performed
-     Then The xtext plugin, validate warning dialog will be set as follows
+     When The xtext plugin validate warning action, is performed
+     Then The xtext plugin validate warning dialog, will be set as follows
           | Message                                                 |
           | The step parameters don't exist for the step definition |
 

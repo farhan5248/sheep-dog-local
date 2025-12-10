@@ -9,13 +9,13 @@ public class ValidatorTest {
 	@Test
 	public void testGetComponentObjectState() {
 		Assertions.assertTrue(
-				TestStepUtility.getComponent("The Something1 application, Something2 request is executed with")
+				TestStepUtility.getComponent("The Something1 application Something2 request, is executed with")
 						.contentEquals("Something1 application"));
 	}
 
 	@Test
 	public void testGetComponentObject() {
-		Assertions.assertTrue(TestStepUtility.getComponent("The Something1 application, Something2 request")
+		Assertions.assertTrue(TestStepUtility.getComponent("The Something1 application Something2 request,")
 				.contentEquals("Something1 application"));
 	}
 
@@ -28,53 +28,53 @@ public class ValidatorTest {
 	@Test
 	public void testGetObjectComponentState() {
 		Assertions.assertTrue(
-				TestStepUtility.getObject("The Something1 application, Something2 request is executed with")
+				TestStepUtility.getObject("The Something1 application Something2 request, is executed with")
 						.contentEquals("Something2 request"));
 	}
 
 	@Test
 	public void testGetObjectComponent() {
-		Assertions.assertTrue(TestStepUtility.getObject("The Something1 application, Something2 request")
+		Assertions.assertTrue(TestStepUtility.getObject("The Something1 application Something2 request,")
 				.contentEquals("Something2 request"));
 	}
 
 	@Test
 	public void testGetObject() {
 		Assertions
-				.assertTrue(TestStepUtility.getObject("The Something2 request").contentEquals("Something2 request"));
+				.assertTrue(TestStepUtility.getObject("The Something2 request,").contentEquals("Something2 request"));
 	}
 
 	@Test
 	public void testGetPredicate() {
 		Assertions.assertTrue(TestStepUtility
-				.getPredicate("The Something1 application, Something2 request Something3 section is executed with")
+				.getPredicate("The Something1 application Something2 request, Something3 section is executed with")
 				.contentEquals("Something3 section is executed with"));
 	}
 
 	@Test
 	public void testHasModalityWithDetails() {
 		Assertions.assertTrue(TestStepUtility
-				.hasStateModality("The Something1 application, Something2 request Something3 section is"));
+				.hasStateModality("The Something1 application Something2 request, Something3 section is"));
 	}
 
 	@Test
 	public void testHasModalityWithoutDetails() {
-		Assertions.assertTrue(TestStepUtility.hasStateModality("The Something1 application, Something2 request is"));
+		Assertions.assertTrue(TestStepUtility.hasStateModality("The Something1 application Something2 request, is"));
 	}
 
 	@Test
 	public void testHasModalityEmpty() {
-		Assertions.assertFalse(TestStepUtility.hasStateModality("The Something1 application, Something2 request"));
+		Assertions.assertFalse(TestStepUtility.hasStateModality("The Something1 application Something2 request,"));
 	}
 
 	@Test
 	public void testHasDetailsEmpty() {
-		Assertions.assertFalse(TestStepUtility.hasDetails("The Something1 application, Something2 request"));
+		Assertions.assertFalse(TestStepUtility.hasDetails("The Something1 application Something2 request,"));
 	}
 
 	@Test
 	public void testHasDetails() {
 		Assertions.assertTrue(
-				TestStepUtility.hasDetails("The Something1 application, Something2 request something section"));
+				TestStepUtility.hasDetails("The Something1 application Something2 request, something section"));
 	}
 }

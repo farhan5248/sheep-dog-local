@@ -15,7 +15,7 @@ public class SpecPrjInputFileAsciidocFileSteps extends TestSteps {
         super(object, "spec-prj", "src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc");
     }
 
-    @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows$")
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file, is created as follows$")
     public void isCreatedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable);
     }
