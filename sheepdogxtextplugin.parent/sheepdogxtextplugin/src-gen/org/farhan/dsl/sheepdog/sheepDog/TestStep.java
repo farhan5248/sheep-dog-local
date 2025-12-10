@@ -26,26 +26,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface TestStep extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Name</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
+   * @return the value of the '<em>Name</em>' containment reference.
+   * @see #setName(StepReference)
    * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestStep_Name()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getName();
+  StepReference getName();
 
   /**
-   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getName <em>Name</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
+   * @param value the new value of the '<em>Name</em>' containment reference.
    * @see #getName()
    * @generated
    */
-  void setName(String value);
+  void setName(StepReference value);
 
   /**
    * Returns the value of the '<em><b>Table</b></em>' containment reference.

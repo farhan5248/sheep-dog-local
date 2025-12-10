@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
+import org.farhan.dsl.sheepdog.sheepDog.StepReference;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
@@ -35,24 +36,14 @@ import org.farhan.dsl.sheepdog.sheepDog.Text;
 public class TestStepImpl extends MinimalEObjectImpl.Container implements TestStep
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected StepReference name;
 
   /**
    * The cached value of the '{@link #getTable() <em>Table</em>}' containment reference.
@@ -101,7 +92,7 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
    * @generated
    */
   @Override
-  public String getName()
+  public StepReference getName()
   {
     return name;
   }
@@ -111,13 +102,38 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setName(String newName)
+  public NotificationChain basicSetName(StepReference newName, NotificationChain msgs)
   {
-    String oldName = name;
+    StepReference oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__NAME, oldName, name));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__NAME, oldName, newName);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(StepReference newName)
+  {
+    if (newName != name)
+    {
+      NotificationChain msgs = null;
+      if (name != null)
+        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP__NAME, null, msgs);
+      if (newName != null)
+        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP__NAME, null, msgs);
+      msgs = basicSetName(newName, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__NAME, newName, newName));
   }
 
   /**
@@ -230,6 +246,8 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
   {
     switch (featureID)
     {
+      case SheepDogPackage.TEST_STEP__NAME:
+        return basicSetName(null, msgs);
       case SheepDogPackage.TEST_STEP__TABLE:
         return basicSetTable(null, msgs);
       case SheepDogPackage.TEST_STEP__TEXT:
@@ -269,7 +287,7 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
     switch (featureID)
     {
       case SheepDogPackage.TEST_STEP__NAME:
-        setName((String)newValue);
+        setName((StepReference)newValue);
         return;
       case SheepDogPackage.TEST_STEP__TABLE:
         setTable((Table)newValue);
@@ -292,7 +310,7 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
     switch (featureID)
     {
       case SheepDogPackage.TEST_STEP__NAME:
-        setName(NAME_EDEFAULT);
+        setName((StepReference)null);
         return;
       case SheepDogPackage.TEST_STEP__TABLE:
         setTable((Table)null);
@@ -315,30 +333,13 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
     switch (featureID)
     {
       case SheepDogPackage.TEST_STEP__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+        return name != null;
       case SheepDogPackage.TEST_STEP__TABLE:
         return table != null;
       case SheepDogPackage.TEST_STEP__TEXT:
         return text != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //TestStepImpl

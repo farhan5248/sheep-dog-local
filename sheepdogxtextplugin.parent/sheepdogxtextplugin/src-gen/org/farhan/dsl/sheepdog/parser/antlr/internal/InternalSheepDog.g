@@ -123,9 +123,9 @@ ruleStepObject returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepObjectAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getStepObjectAccess().getNamePhraseParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepObjectRule());
@@ -134,7 +134,7 @@ ruleStepObject returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -211,9 +211,9 @@ ruleStepDefinition returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepDefinitionAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getStepDefinitionAccess().getNamePhraseParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepDefinitionRule());
@@ -222,7 +222,7 @@ ruleStepDefinition returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -299,9 +299,9 @@ ruleStepParameters returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepParametersAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getStepParametersAccess().getNamePhraseParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepParametersRule());
@@ -310,7 +310,7 @@ ruleStepParameters returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -322,9 +322,9 @@ ruleStepParameters returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepParametersAccess().getStatementListStatementListParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getStepParametersAccess().getStatementListNestedStatementListParserRuleCall_4_0());
 				}
-				lv_statementList_4_0=ruleStatementList
+				lv_statementList_4_0=ruleNestedStatementList
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepParametersRule());
@@ -333,7 +333,7 @@ ruleStepParameters returns [EObject current=null]
 						$current,
 						"statementList",
 						lv_statementList_4_0,
-						"org.farhan.dsl.sheepdog.SheepDog.StatementList");
+						"org.farhan.dsl.sheepdog.SheepDog.NestedStatementList");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -387,9 +387,9 @@ ruleTestSuite returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTestSuiteAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getTestSuiteAccess().getNamePhraseParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTestSuiteRule());
@@ -398,7 +398,7 @@ ruleTestSuite returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -511,9 +511,9 @@ ruleTestSetup returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTestSetupAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getTestSetupAccess().getNamePhraseParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTestSetupRule());
@@ -522,7 +522,7 @@ ruleTestSetup returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -599,9 +599,9 @@ ruleTestCase returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTestCaseAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getTestCaseAccess().getNamePhraseParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTestCaseRule());
@@ -610,7 +610,7 @@ ruleTestCase returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -706,9 +706,9 @@ ruleTestData returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTestDataAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getTestDataAccess().getNamePhraseParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTestDataRule());
@@ -717,7 +717,7 @@ ruleTestData returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -729,9 +729,9 @@ ruleTestData returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTestDataAccess().getStatementListStatementListParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getTestDataAccess().getStatementListNestedStatementListParserRuleCall_4_0());
 				}
-				lv_statementList_4_0=ruleStatementList
+				lv_statementList_4_0=ruleNestedStatementList
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTestDataRule());
@@ -740,7 +740,7 @@ ruleTestData returns [EObject current=null]
 						$current,
 						"statementList",
 						lv_statementList_4_0,
-						"org.farhan.dsl.sheepdog.SheepDog.StatementList");
+						"org.farhan.dsl.sheepdog.SheepDog.NestedStatementList");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -848,9 +848,9 @@ ruleGiven returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getGivenAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getGivenAccess().getNameStepReferenceParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=ruleStepReference
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getGivenRule());
@@ -859,7 +859,7 @@ ruleGiven returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.StepReference");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -912,6 +912,67 @@ ruleGiven returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleStepReference
+entryRuleStepReference returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getStepReferenceRule()); }
+	iv_ruleStepReference=ruleStepReference
+	{ $current=$iv_ruleStepReference.current; }
+	EOF;
+
+// Rule StepReference
+ruleStepReference returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getStepReferenceAccess().getObjectNameParserRuleCall_0_0());
+				}
+				lv_object_0_0=ruleName
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getStepReferenceRule());
+					}
+					set(
+						$current,
+						"object",
+						lv_object_0_0,
+						"org.farhan.dsl.sheepdog.SheepDog.Name");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_1=','
+		{
+			newLeafNode(otherlv_1, grammarAccess.getStepReferenceAccess().getCommaKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getStepReferenceAccess().getPredicateNameParserRuleCall_2_0());
+				}
+				lv_predicate_2_0=ruleName
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getStepReferenceRule());
+					}
+					set(
+						$current,
+						"predicate",
+						lv_predicate_2_0,
+						"org.farhan.dsl.sheepdog.SheepDog.Name");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
 // Entry rule entryRuleWhen
 entryRuleWhen returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getWhenRule()); }
@@ -939,9 +1000,9 @@ ruleWhen returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getWhenAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getWhenAccess().getNameStepReferenceParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=ruleStepReference
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getWhenRule());
@@ -950,7 +1011,7 @@ ruleWhen returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.StepReference");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -1030,9 +1091,9 @@ ruleThen returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getThenAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getThenAccess().getNameStepReferenceParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=ruleStepReference
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getThenRule());
@@ -1041,7 +1102,7 @@ ruleThen returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.StepReference");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -1121,9 +1182,9 @@ ruleAnd returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getAndAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getAndAccess().getNameStepReferenceParserRuleCall_2_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_2_0=ruleStepReference
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getAndRule());
@@ -1132,7 +1193,7 @@ ruleAnd returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.StepReference");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -1234,15 +1295,15 @@ ruleText returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleStatementList
-entryRuleStatementList returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getStatementListRule()); }
-	iv_ruleStatementList=ruleStatementList
-	{ $current=$iv_ruleStatementList.current; }
+// Entry rule entryRuleNestedStatementList
+entryRuleNestedStatementList returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getNestedStatementListRule()); }
+	iv_ruleNestedStatementList=ruleNestedStatementList
+	{ $current=$iv_ruleNestedStatementList.current; }
 	EOF;
 
-// Rule StatementList
-ruleStatementList returns [EObject current=null]
+// Rule NestedStatementList
+ruleNestedStatementList returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -1252,21 +1313,21 @@ ruleStatementList returns [EObject current=null]
 	(
 		otherlv_0='+'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getStatementListAccess().getPlusSignKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getNestedStatementListAccess().getPlusSignKeyword_0());
 		}
 		this_EOL_1=RULE_EOL
 		{
-			newLeafNode(this_EOL_1, grammarAccess.getStatementListAccess().getEOLTerminalRuleCall_1());
+			newLeafNode(this_EOL_1, grammarAccess.getNestedStatementListAccess().getEOLTerminalRuleCall_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStatementListAccess().getStatementListStatementParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getNestedStatementListAccess().getStatementListStatementParserRuleCall_2_0());
 				}
 				lv_statementList_2_0=ruleStatement
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getStatementListRule());
+						$current = createModelElementForParent(grammarAccess.getNestedStatementListRule());
 					}
 					add(
 						$current,
@@ -1407,9 +1468,9 @@ ruleCell returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getCellAccess().getNameTitleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getCellAccess().getNamePhraseParserRuleCall_1_0());
 				}
-				lv_name_1_0=ruleTitle
+				lv_name_1_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getCellRule());
@@ -1418,7 +1479,7 @@ ruleCell returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -1445,9 +1506,9 @@ ruleStatement returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStatementAccess().getNameTitleParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getStatementAccess().getNamePhraseParserRuleCall_0_0());
 				}
-				lv_name_0_0=ruleTitle
+				lv_name_0_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStatementRule());
@@ -1456,7 +1517,7 @@ ruleStatement returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_0_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Title");
+						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -1468,15 +1529,15 @@ ruleStatement returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleTitle
-entryRuleTitle returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getTitleRule()); }
-	iv_ruleTitle=ruleTitle
-	{ $current=$iv_ruleTitle.current.getText(); }
+// Entry rule entryRulePhrase
+entryRulePhrase returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getPhraseRule()); }
+	iv_rulePhrase=rulePhrase
+	{ $current=$iv_rulePhrase.current.getText(); }
 	EOF;
 
-// Rule Title
-ruleTitle returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+// Rule Phrase
+rulePhrase returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 @init {
 	enterRule();
 }
@@ -1489,12 +1550,40 @@ ruleTitle returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 			$current.merge(this_WORD_0);
 		}
 		{
-			newLeafNode(this_WORD_0, grammarAccess.getTitleAccess().getWORDTerminalRuleCall());
+			newLeafNode(this_WORD_0, grammarAccess.getPhraseAccess().getWORDTerminalRuleCall());
 		}
 	)+
 ;
 
-RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'['|']'|'|'|'#')) ~((' '|'\t'|'\r'|'\n'|'['|']'))*;
+// Entry rule entryRuleName
+entryRuleName returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getNameRule()); }
+	iv_ruleName=ruleName
+	{ $current=$iv_ruleName.current.getText(); }
+	EOF;
+
+// Rule Name
+ruleName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		this_ID_0=RULE_ID
+		{
+			$current.merge(this_ID_0);
+		}
+		{
+			newLeafNode(this_ID_0, grammarAccess.getNameAccess().getIDTerminalRuleCall());
+		}
+	)+
+;
+
+RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'|'|'#')) ~((' '|'\t'|'\r'|'\n'))*;
+
+RULE_ID : ~((' '|'\t'|'\r'|'\n'|'|'|'#'|',')) ~((' '|'\t'|'\r'|'\n'))*;
 
 RULE_WS : (' '|'\t'|'\r')+;
 

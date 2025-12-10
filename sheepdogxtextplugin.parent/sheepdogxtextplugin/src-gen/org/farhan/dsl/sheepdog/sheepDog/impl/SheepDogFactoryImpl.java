@@ -76,11 +76,12 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
       case SheepDogPackage.TEST_DATA: return createTestData();
       case SheepDogPackage.TEST_STEP: return createTestStep();
       case SheepDogPackage.GIVEN: return createGiven();
+      case SheepDogPackage.STEP_REFERENCE: return createStepReference();
       case SheepDogPackage.WHEN: return createWhen();
       case SheepDogPackage.THEN: return createThen();
       case SheepDogPackage.AND: return createAnd();
       case SheepDogPackage.TEXT: return createText();
-      case SheepDogPackage.STATEMENT_LIST: return createStatementList();
+      case SheepDogPackage.NESTED_STATEMENT_LIST: return createNestedStatementList();
       case SheepDogPackage.TABLE: return createTable();
       case SheepDogPackage.ROW: return createRow();
       case SheepDogPackage.CELL: return createCell();
@@ -228,6 +229,18 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
+  public StepReference createStepReference()
+  {
+    StepReferenceImpl stepReference = new StepReferenceImpl();
+    return stepReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public When createWhen()
   {
     WhenImpl when = new WhenImpl();
@@ -276,10 +289,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public StatementList createStatementList()
+  public NestedStatementList createNestedStatementList()
   {
-    StatementListImpl statementList = new StatementListImpl();
-    return statementList;
+    NestedStatementListImpl nestedStatementList = new NestedStatementListImpl();
+    return nestedStatementList;
   }
 
   /**

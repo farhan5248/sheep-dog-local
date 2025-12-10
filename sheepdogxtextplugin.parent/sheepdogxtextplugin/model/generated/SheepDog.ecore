@@ -19,7 +19,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StepParameters">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" eType="#//StatementList"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" eType="#//NestedStatementList"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//Table"
         containment="true"/>
@@ -42,25 +42,30 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TestData">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" eType="#//StatementList"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" eType="#//NestedStatementList"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//Table"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TestStep">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//StepReference"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//Table"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//Text" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Given" eSuperTypes="#//TestStep"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StepReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="object" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="predicate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="When" eSuperTypes="#//TestStep"/>
   <eClassifiers xsi:type="ecore:EClass" name="Then" eSuperTypes="#//TestStep"/>
   <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//TestStep"/>
   <eClassifiers xsi:type="ecore:EClass" name="Text">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StatementList">
+  <eClassifiers xsi:type="ecore:EClass" name="NestedStatementList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" upperBound="-1"
         eType="#//Statement" containment="true"/>
   </eClassifiers>

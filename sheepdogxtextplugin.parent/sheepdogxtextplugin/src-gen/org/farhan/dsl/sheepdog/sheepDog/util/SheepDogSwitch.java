@@ -155,6 +155,13 @@ public class SheepDogSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SheepDogPackage.STEP_REFERENCE:
+      {
+        StepReference stepReference = (StepReference)theEObject;
+        T result = caseStepReference(stepReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SheepDogPackage.WHEN:
       {
         When when = (When)theEObject;
@@ -186,10 +193,10 @@ public class SheepDogSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case SheepDogPackage.STATEMENT_LIST:
+      case SheepDogPackage.NESTED_STATEMENT_LIST:
       {
-        StatementList statementList = (StatementList)theEObject;
-        T result = caseStatementList(statementList);
+        NestedStatementList nestedStatementList = (NestedStatementList)theEObject;
+        T result = caseNestedStatementList(nestedStatementList);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -402,6 +409,22 @@ public class SheepDogSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Step Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Step Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStepReference(StepReference object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>When</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -466,17 +489,17 @@ public class SheepDogSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Statement List</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Nested Statement List</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Statement List</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Nested Statement List</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseStatementList(StatementList object)
+  public T caseNestedStatementList(NestedStatementList object)
   {
     return null;
   }
