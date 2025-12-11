@@ -50,23 +50,19 @@ TestStep:
 	Given | When | Then | And;
 
 Given:
-	'*' 'Given:' name=StepReference EOL
+	'*' 'Given:' object=STEP_OBJECT predicate=STEP_DEFINITION EOL
 	(table=Table | text=Text)?;
 
-// TODO in the future, these point to StepObject and StepDefinition just as class and method would
-StepReference:
-	object=Name ',' predicate=Name;
-
 When:
-	'*' 'When:' name=StepReference EOL
+	'*' 'When:' object=STEP_OBJECT predicate=STEP_DEFINITION EOL
 	(table=Table | text=Text)?;
 
 Then:
-	'*' 'Then:' name=StepReference EOL
+	'*' 'Then:' object=STEP_OBJECT predicate=STEP_DEFINITION EOL
 	(table=Table | text=Text)?;
 
 And:
-	'*' 'And:' name=StepReference EOL
+	'*' 'And:' object=STEP_OBJECT predicate=STEP_DEFINITION EOL
 	(table=Table | text=Text)?;
 
 Text:
@@ -89,24 +85,45 @@ Row:
 Cell:
 	'|' name=Title;
 
-// TODO There need to be better names than Text, Statement, Title ...
+// TODO There need to be better names than Text, Statement, Title, WORD etc ...
 Statement:
 	name=Title EOL;
 
 Title:
 	WORD+;
 
-Name:
-	ID+;
+// TODO the regular expression here is a partial duplication of what's in sheep-dog-test
+// It should only be defined here but that is more work than I want to do right now
+// When testing sheep-dog-test, it doesn't need a regex.
+// It's enough that the Impl classes return what parts it needs.
+// If all the parts accessible from the utility are defined here, 
+// then the TestStepImpl class + its utility can extract that information
+// Also any tests in sheep-dog-test must be implemented in the xtext project
+// to make sure the Impl classes have implemented this correctly
+// For now I'm putting the whole regex to make it possible to distinguish between STEP_OBJECT and STEP_DEFINITION
+// without breaking it up into its parts
+terminal STEP_OBJECT:
+	'The'
+	((' ' ID+ (' application' | ' service' | ' plugin' | ' batchjob' | ' project') ',')?
+      )
+	(' ' ID+ ((' file' | ' page' | ' response' | ' dialog' | ' directory') |
+	(' request' | ' goal' | ' job' | ' action')));
+
+terminal STEP_DEFINITION:
+	(((ID+) (' ' ('section' | 'fragment' | 'table' | 'snippet' | 'list')))?
+	((' ' ('is' | 'isn\'t' | 'will be' | 'won\'t be'))
+	(' ' ID+)
+	(' ' ('with' | 'as follows'))?)
+	((' ' ('at' | 'before' | 'after' | 'in' | 'on'))
+	(' ' ID+))?);
+
+terminal ID:
+	!(' ' | '\t' | '\r' | '\n' | '|' | '#' | ',');
 
 // TODO look at fragments to handle escape characters etc instead of this and to handle re-using ' ' | '\t' | '\r' | '\n'
 terminal WORD:
 	!(' ' | '\t' | '\r' | '\n' | '|' | '#')
 	!(' ' | '\t' | '\r' | '\n')*;
-
-terminal ID:
-	!(' ' | '\t' | '\r' | '\n' | '|' | '#')
-	!(' ' | '\t' | '\r' | '\n' | ',')*;
 
 terminal WS:
 	(' ' | '\t' | '\r')+;

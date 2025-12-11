@@ -18,7 +18,7 @@ public class DocStringFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1 \n");
@@ -51,7 +51,7 @@ public class DocStringFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Test-Case: Submit a drug claim\n");
 			sb.append("\n");
-			sb.append("* Given: do step, one\n");
+			sb.append("* Given: do step one\n");
 			sb.append("\n");
 			sb.append("+\n");
 			sb.append("----\n");

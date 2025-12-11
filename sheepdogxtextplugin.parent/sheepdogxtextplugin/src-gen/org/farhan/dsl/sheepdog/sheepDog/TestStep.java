@@ -14,7 +14,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getObject <em>Object</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getPredicate <em>Predicate</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getTable <em>Table</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getText <em>Text</em>}</li>
  * </ul>
@@ -26,26 +27,48 @@ import org.eclipse.emf.ecore.EObject;
 public interface TestStep extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' containment reference.
+   * Returns the value of the '<em><b>Object</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' containment reference.
-   * @see #setName(StepReference)
-   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestStep_Name()
-   * @model containment="true"
+   * @return the value of the '<em>Object</em>' attribute.
+   * @see #setObject(String)
+   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestStep_Object()
+   * @model
    * @generated
    */
-  StepReference getName();
+  String getObject();
 
   /**
-   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getName <em>Name</em>}' containment reference.
+   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getObject <em>Object</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' containment reference.
-   * @see #getName()
+   * @param value the new value of the '<em>Object</em>' attribute.
+   * @see #getObject()
    * @generated
    */
-  void setName(StepReference value);
+  void setObject(String value);
+
+  /**
+   * Returns the value of the '<em><b>Predicate</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Predicate</em>' attribute.
+   * @see #setPredicate(String)
+   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestStep_Predicate()
+   * @model
+   * @generated
+   */
+  String getPredicate();
+
+  /**
+   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getPredicate <em>Predicate</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Predicate</em>' attribute.
+   * @see #getPredicate()
+   * @generated
+   */
+  void setPredicate(String value);
 
   /**
    * Returns the value of the '<em><b>Table</b></em>' containment reference.

@@ -155,13 +155,6 @@ public class SheepDogSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case SheepDogPackage.STEP_REFERENCE:
-      {
-        StepReference stepReference = (StepReference)theEObject;
-        T result = caseStepReference(stepReference);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case SheepDogPackage.WHEN:
       {
         When when = (When)theEObject;
@@ -404,22 +397,6 @@ public class SheepDogSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseGiven(Given object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Step Reference</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Step Reference</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseStepReference(StepReference object)
   {
     return null;
   }

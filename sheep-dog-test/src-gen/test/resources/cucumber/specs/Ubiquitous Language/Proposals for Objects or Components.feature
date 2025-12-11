@@ -12,14 +12,14 @@ Feature: Proposals for Objects or Components
 
   Scenario: No object no component has previous in background
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, background steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file background steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob Input file, is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+          | The daily batchjob, Input file is present |
+      And The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name |
           | empty     |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
@@ -27,135 +27,135 @@ Feature: Proposals for Objects or Components
 
     TODO make this an outline with various steps like "The" or "The batchjob" etc
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name |
           | empty     |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be empty
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be empty
 
   Scenario: No object no component no previous has component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name |
           | empty     |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion          | Suggestion Name |
-          | The daily batchjob | daily batchjob  |
+          | The daily batchjob, | daily batchjob  |
 
   Scenario: No object no component has previous no component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob Input file, is present |
+          | The daily batchjob, Input file is present |
           | empty                                     |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
   Scenario: No object no component has previous has component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob Input file, is present |
+          | The daily batchjob, Input file is present |
           | empty                                     |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion          | Suggestion Name |
           | The Input file      | Input file      |
-          | The daily batchjob | daily batchjob  |
+          | The daily batchjob, | daily batchjob  |
 
   Scenario: No object has component no previous no component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name           |
-          | The daily batchjob |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be empty
+          | The daily batchjob, |
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be empty
 
   Scenario: No object has component no previous has component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name           |
-          | The daily batchjob |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
+          | The daily batchjob, |
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion                     | Suggestion Name |
-          | The daily batchjob Input file, | Input file      |
+          | The daily batchjob, Input file | Input file      |
 
   Scenario: No object has component has previous no component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob Input file, is present |
-          | The daily batchjob                       |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+          | The daily batchjob, Input file is present |
+          | The daily batchjob,                       |
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
   Scenario: No object has component has previous has component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob Input file, is present |
-          | The daily batchjob                       |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
+          | The daily batchjob, Input file is present |
+          | The daily batchjob,                       |
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
   Scenario: Has object no component has previous has component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob Input file, is present |
-          | The Input file,                            |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
+          | The daily batchjob, Input file is present |
+          | The Input file                            |
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion                | Suggestion Name |
-          | The Input file, is present | is present      |
+          | The Input file is present | is present      |
 
   Scenario: Has object has component no previous has component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                      |
-          | The daily batchjob Input file, |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
+          | The daily batchjob, Input file |
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion                                | Suggestion Name |
-          | The daily batchjob Input file, is present | is present      |
+          | The daily batchjob, Input file is present | is present      |
 
   Scenario: Has object has component has previous has component objects
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file, steps snippet is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob Input file, is present |
-          | The daily batchjob Input file,            |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file, is created as follows
+          | The daily batchjob, Input file is present |
+          | The daily batchjob, Input file            |
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action, is performed
-     Then The xtext plugin propose content dialog, will be set as follows
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion                                | Suggestion Name |
-          | The daily batchjob Input file, is present | is present      |
+          | The daily batchjob, Input file is present | is present      |
 

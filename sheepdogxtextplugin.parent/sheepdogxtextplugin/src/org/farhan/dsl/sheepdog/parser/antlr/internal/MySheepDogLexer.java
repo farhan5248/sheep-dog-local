@@ -11,7 +11,6 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 
 	// TODO maybe these should all be one flag called escapeKeyword?
 	private boolean nextTokenIsWORD = true;
-	private boolean isStepReference = false;
 
 	public MySheepDogLexer() {
 	}
@@ -109,7 +108,8 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			nextTokenIsWORD = false;
 		} else if (isKeyword("|")) {
 			mT__27();
-			// nextTokenIsWORD = true;
+			// TODO not sure I need this assignment
+			nextTokenIsWORD = true;
 		} else if (!nextTokenIsWORD) {
 			mRULE_ID();
 		} else {

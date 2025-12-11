@@ -78,7 +78,7 @@ public class TestStepIssueResolver {
 			proposal.setId(aStepObject.getQualifiedName().replaceFirst(component + "/", "")
 					.replaceFirst(theProject.getFileExtension() + "$", ""));
 			proposal.setDescription(StatementUtility.getStatementListAsString(aStepObject.getStatementList()));
-			proposal.setValue("The " + component + " " + proposal.getId() + ",");
+			proposal.setValue("The " + component + ", " + proposal.getId());
 			proposals.add(proposal);
 		}
 		return proposals;
@@ -99,9 +99,9 @@ public class TestStepIssueResolver {
 				proposal.setId(stepDefinition.getName());
 				proposal.setDescription(StatementUtility.getStatementListAsString(stepDefinition.getStatementList()));
 				if (component.isEmpty()) {
-					proposal.setValue("The " + object + ", " + proposal.getId());
+					proposal.setValue("The " + object + " " + proposal.getId());
 				} else {
-					proposal.setValue("The " + component + " " + object + ", " + proposal.getId());
+					proposal.setValue("The " + component + ", " + object + " " + proposal.getId());
 				}
 				proposals.add(proposal);
 			}
@@ -162,7 +162,7 @@ public class TestStepIssueResolver {
 			proposal = new SheepDogIssueProposal();
 			proposal.setId(componentName);
 			proposal.setDescription(componentName);
-			proposal.setValue("The " + componentName);
+			proposal.setValue("The " + componentName + ",");
 			proposals.add(proposal);
 		}
 		return proposals;

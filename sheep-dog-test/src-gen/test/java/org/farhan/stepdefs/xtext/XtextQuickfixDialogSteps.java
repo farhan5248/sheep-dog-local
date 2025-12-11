@@ -15,7 +15,7 @@ public class XtextQuickfixDialogSteps extends TestSteps {
         super(object, "xtext", "quickfix");
     }
 
-    @Given("^The xtext plugin quickfix dialog, will be set as follows$")
+    @Given("^The xtext plugin, quickfix dialog will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }

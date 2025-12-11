@@ -76,7 +76,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
       case SheepDogPackage.TEST_DATA: return createTestData();
       case SheepDogPackage.TEST_STEP: return createTestStep();
       case SheepDogPackage.GIVEN: return createGiven();
-      case SheepDogPackage.STEP_REFERENCE: return createStepReference();
       case SheepDogPackage.WHEN: return createWhen();
       case SheepDogPackage.THEN: return createThen();
       case SheepDogPackage.AND: return createAnd();
@@ -221,18 +220,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
   {
     GivenImpl given = new GivenImpl();
     return given;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public StepReference createStepReference()
-  {
-    StepReferenceImpl stepReference = new StepReferenceImpl();
-    return stepReference;
   }
 
   /**

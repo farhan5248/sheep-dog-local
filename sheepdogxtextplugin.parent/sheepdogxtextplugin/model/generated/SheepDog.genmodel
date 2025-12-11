@@ -41,15 +41,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/table"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestStep">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStep/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStep/object"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStep/predicate"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStep/table"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStep/text"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Given"/>
-    <genClasses ecoreClass="SheepDog.ecore#//StepReference">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//StepReference/object"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//StepReference/predicate"/>
-    </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//When"/>
     <genClasses ecoreClass="SheepDog.ecore#//Then"/>
     <genClasses ecoreClass="SheepDog.ecore#//And"/>

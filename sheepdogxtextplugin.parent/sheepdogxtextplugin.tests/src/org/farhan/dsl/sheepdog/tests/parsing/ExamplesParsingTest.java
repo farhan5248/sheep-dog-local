@@ -18,7 +18,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 
 		sb.append("+\n");
@@ -33,7 +33,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("* Test-Data:\n");
 
 		sb.append("+\n");
@@ -48,7 +48,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("* Test-Data: Describe what this data is about");
 		assertFeatureErrors(sb);
 	}
@@ -58,7 +58,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("@tag1\n");
@@ -74,7 +74,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("Basic EDI claim\n");
@@ -90,7 +90,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("Basic EDI claim\n");
@@ -107,7 +107,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("Basic EDI claim");
@@ -119,7 +119,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("Basic EDI claim\n");
@@ -137,7 +137,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
-		sb.append("* Given: do step, one\n");
+		sb.append("* Given: do step one\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("@tag1\n");

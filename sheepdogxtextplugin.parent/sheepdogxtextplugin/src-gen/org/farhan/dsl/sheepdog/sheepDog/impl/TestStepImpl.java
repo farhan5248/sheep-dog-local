@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
-import org.farhan.dsl.sheepdog.sheepDog.StepReference;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
@@ -26,7 +25,8 @@ import org.farhan.dsl.sheepdog.sheepDog.Text;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepImpl#getObject <em>Object</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepImpl#getPredicate <em>Predicate</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepImpl#getTable <em>Table</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepImpl#getText <em>Text</em>}</li>
  * </ul>
@@ -36,14 +36,44 @@ import org.farhan.dsl.sheepdog.sheepDog.Text;
 public class TestStepImpl extends MinimalEObjectImpl.Container implements TestStep
 {
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
+   * The default value of the '{@link #getObject() <em>Object</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getObject()
    * @generated
    * @ordered
    */
-  protected StepReference name;
+  protected static final String OBJECT_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getObject() <em>Object</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getObject()
+   * @generated
+   * @ordered
+   */
+  protected String object = OBJECT_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getPredicate() <em>Predicate</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPredicate()
+   * @generated
+   * @ordered
+   */
+  protected static final String PREDICATE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getPredicate() <em>Predicate</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPredicate()
+   * @generated
+   * @ordered
+   */
+  protected String predicate = PREDICATE_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getTable() <em>Table</em>}' containment reference.
@@ -92,26 +122,9 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
    * @generated
    */
   @Override
-  public StepReference getName()
+  public String getObject()
   {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetName(StepReference newName, NotificationChain msgs)
-  {
-    StepReference oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__NAME, oldName, newName);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+    return object;
   }
 
   /**
@@ -120,20 +133,37 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
    * @generated
    */
   @Override
-  public void setName(StepReference newName)
+  public void setObject(String newObject)
   {
-    if (newName != name)
-    {
-      NotificationChain msgs = null;
-      if (name != null)
-        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP__NAME, null, msgs);
-      if (newName != null)
-        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP__NAME, null, msgs);
-      msgs = basicSetName(newName, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__NAME, newName, newName));
+    String oldObject = object;
+    object = newObject;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__OBJECT, oldObject, object));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getPredicate()
+  {
+    return predicate;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setPredicate(String newPredicate)
+  {
+    String oldPredicate = predicate;
+    predicate = newPredicate;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__PREDICATE, oldPredicate, predicate));
   }
 
   /**
@@ -246,8 +276,6 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP__NAME:
-        return basicSetName(null, msgs);
       case SheepDogPackage.TEST_STEP__TABLE:
         return basicSetTable(null, msgs);
       case SheepDogPackage.TEST_STEP__TEXT:
@@ -266,8 +294,10 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP__NAME:
-        return getName();
+      case SheepDogPackage.TEST_STEP__OBJECT:
+        return getObject();
+      case SheepDogPackage.TEST_STEP__PREDICATE:
+        return getPredicate();
       case SheepDogPackage.TEST_STEP__TABLE:
         return getTable();
       case SheepDogPackage.TEST_STEP__TEXT:
@@ -286,8 +316,11 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP__NAME:
-        setName((StepReference)newValue);
+      case SheepDogPackage.TEST_STEP__OBJECT:
+        setObject((String)newValue);
+        return;
+      case SheepDogPackage.TEST_STEP__PREDICATE:
+        setPredicate((String)newValue);
         return;
       case SheepDogPackage.TEST_STEP__TABLE:
         setTable((Table)newValue);
@@ -309,8 +342,11 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP__NAME:
-        setName((StepReference)null);
+      case SheepDogPackage.TEST_STEP__OBJECT:
+        setObject(OBJECT_EDEFAULT);
+        return;
+      case SheepDogPackage.TEST_STEP__PREDICATE:
+        setPredicate(PREDICATE_EDEFAULT);
         return;
       case SheepDogPackage.TEST_STEP__TABLE:
         setTable((Table)null);
@@ -332,14 +368,35 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements TestSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP__NAME:
-        return name != null;
+      case SheepDogPackage.TEST_STEP__OBJECT:
+        return OBJECT_EDEFAULT == null ? object != null : !OBJECT_EDEFAULT.equals(object);
+      case SheepDogPackage.TEST_STEP__PREDICATE:
+        return PREDICATE_EDEFAULT == null ? predicate != null : !PREDICATE_EDEFAULT.equals(predicate);
       case SheepDogPackage.TEST_STEP__TABLE:
         return table != null;
       case SheepDogPackage.TEST_STEP__TEXT:
         return text != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (object: ");
+    result.append(object);
+    result.append(", predicate: ");
+    result.append(predicate);
+    result.append(')');
+    return result.toString();
   }
 
 } //TestStepImpl

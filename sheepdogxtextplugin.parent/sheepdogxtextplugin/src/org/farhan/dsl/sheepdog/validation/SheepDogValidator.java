@@ -135,8 +135,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				}
 			}
 		} catch (Exception e) {
-			// TODO replace with utility to combine both
-			logError(e, step.getName().getObject() + step.getName().getPredicate());
+			logError(e, step.getName());
 		}
 	}
 
@@ -157,8 +156,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				}
 			}
 		} catch (Exception e) {
-			// TODO replace with utility to combine both
-			logError(e, step.getName().getObject() + step.getName().getPredicate());
+			logError(e, step.getName());
 		}
 	}
 

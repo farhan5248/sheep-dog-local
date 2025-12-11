@@ -131,11 +131,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createGivenAdapter();
       }
       @Override
-      public Adapter caseStepReference(StepReference object)
-      {
-        return createStepReferenceAdapter();
-      }
-      @Override
       public Adapter caseWhen(When object)
       {
         return createWhenAdapter();
@@ -363,21 +358,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createGivenAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.StepReference <em>Step Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.dsl.sheepdog.sheepDog.StepReference
-   * @generated
-   */
-  public Adapter createStepReferenceAdapter()
   {
     return null;
   }

@@ -15,12 +15,12 @@ public class XtextProposeContentDialogSteps extends TestSteps {
         super(object, "xtext", "propose content");
     }
 
-    @Given("^The xtext plugin propose content dialog, will be empty$")
+    @Given("^The xtext plugin, propose content dialog will be empty$")
     public void willBeEmpty() {
         object.assertInputOutputs("Empty");
     }
 
-    @Given("^The xtext plugin propose content dialog, will be set as follows$")
+    @Given("^The xtext plugin, propose content dialog will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }

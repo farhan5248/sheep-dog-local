@@ -25,7 +25,6 @@ import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
-import org.farhan.dsl.sheepdog.sheepDog.StepReference;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
@@ -76,9 +75,6 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 			case SheepDogPackage.STEP_PARAMETERS:
 				sequence_StepParameters(context, (StepParameters) semanticObject); 
 				return; 
-			case SheepDogPackage.STEP_REFERENCE:
-				sequence_StepReference(context, (StepReference) semanticObject); 
-				return; 
 			case SheepDogPackage.TABLE:
 				sequence_Table(context, (Table) semanticObject); 
 				return; 
@@ -115,7 +111,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     And returns And
 	 *
 	 * Constraint:
-	 *     (name=StepReference (table=Table | text=Text)?)
+	 *     (object=STEP_OBJECT predicate=STEP_DEFINITION (table=Table | text=Text)?)
 	 * </pre>
 	 */
 	protected void sequence_And(ISerializationContext context, And semanticObject) {
@@ -150,7 +146,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Given returns Given
 	 *
 	 * Constraint:
-	 *     (name=StepReference (table=Table | text=Text)?)
+	 *     (object=STEP_OBJECT predicate=STEP_DEFINITION (table=Table | text=Text)?)
 	 * </pre>
 	 */
 	protected void sequence_Given(ISerializationContext context, Given semanticObject) {
@@ -246,29 +242,6 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 */
 	protected void sequence_StepParameters(ISerializationContext context, StepParameters semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     StepReference returns StepReference
-	 *
-	 * Constraint:
-	 *     (object=Name predicate=Name)
-	 * </pre>
-	 */
-	protected void sequence_StepReference(ISerializationContext context, StepReference semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.STEP_REFERENCE__OBJECT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.STEP_REFERENCE__OBJECT));
-			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.STEP_REFERENCE__PREDICATE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.STEP_REFERENCE__PREDICATE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getStepReferenceAccess().getObjectNameParserRuleCall_0_0(), semanticObject.getObject());
-		feeder.accept(grammarAccess.getStepReferenceAccess().getPredicateNameParserRuleCall_2_0(), semanticObject.getPredicate());
-		feeder.finish();
 	}
 	
 	
@@ -372,7 +345,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Then returns Then
 	 *
 	 * Constraint:
-	 *     (name=StepReference (table=Table | text=Text)?)
+	 *     (object=STEP_OBJECT predicate=STEP_DEFINITION (table=Table | text=Text)?)
 	 * </pre>
 	 */
 	protected void sequence_Then(ISerializationContext context, Then semanticObject) {
@@ -387,7 +360,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     When returns When
 	 *
 	 * Constraint:
-	 *     (name=StepReference (table=Table | text=Text)?)
+	 *     (object=STEP_OBJECT predicate=STEP_DEFINITION (table=Table | text=Text)?)
 	 * </pre>
 	 */
 	protected void sequence_When(ISerializationContext context, When semanticObject) {

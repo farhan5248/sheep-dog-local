@@ -482,13 +482,22 @@ public interface SheepDogPackage extends EPackage
   int TEST_STEP = 9;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' containment reference.
+   * The feature id for the '<em><b>Object</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TEST_STEP__NAME = 0;
+  int TEST_STEP__OBJECT = 0;
+
+  /**
+   * The feature id for the '<em><b>Predicate</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEST_STEP__PREDICATE = 1;
 
   /**
    * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -497,7 +506,7 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_STEP__TABLE = 1;
+  int TEST_STEP__TABLE = 2;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' containment reference.
@@ -506,7 +515,7 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_STEP__TEXT = 2;
+  int TEST_STEP__TEXT = 3;
 
   /**
    * The number of structural features of the '<em>Test Step</em>' class.
@@ -515,7 +524,7 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEST_STEP_FEATURE_COUNT = 3;
+  int TEST_STEP_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.GivenImpl <em>Given</em>}' class.
@@ -528,13 +537,22 @@ public interface SheepDogPackage extends EPackage
   int GIVEN = 10;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' containment reference.
+   * The feature id for the '<em><b>Object</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GIVEN__NAME = TEST_STEP__NAME;
+  int GIVEN__OBJECT = TEST_STEP__OBJECT;
+
+  /**
+   * The feature id for the '<em><b>Predicate</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GIVEN__PREDICATE = TEST_STEP__PREDICATE;
 
   /**
    * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -564,14 +582,14 @@ public interface SheepDogPackage extends EPackage
   int GIVEN_FEATURE_COUNT = TEST_STEP_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.StepReferenceImpl <em>Step Reference</em>}' class.
+   * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.WhenImpl <em>When</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.farhan.dsl.sheepdog.sheepDog.impl.StepReferenceImpl
-   * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getStepReference()
+   * @see org.farhan.dsl.sheepdog.sheepDog.impl.WhenImpl
+   * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getWhen()
    * @generated
    */
-  int STEP_REFERENCE = 11;
+  int WHEN = 11;
 
   /**
    * The feature id for the '<em><b>Object</b></em>' attribute.
@@ -580,7 +598,7 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STEP_REFERENCE__OBJECT = 0;
+  int WHEN__OBJECT = TEST_STEP__OBJECT;
 
   /**
    * The feature id for the '<em><b>Predicate</b></em>' attribute.
@@ -589,35 +607,7 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STEP_REFERENCE__PREDICATE = 1;
-
-  /**
-   * The number of structural features of the '<em>Step Reference</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STEP_REFERENCE_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.WhenImpl <em>When</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.farhan.dsl.sheepdog.sheepDog.impl.WhenImpl
-   * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getWhen()
-   * @generated
-   */
-  int WHEN = 12;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int WHEN__NAME = TEST_STEP__NAME;
+  int WHEN__PREDICATE = TEST_STEP__PREDICATE;
 
   /**
    * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -654,16 +644,25 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getThen()
    * @generated
    */
-  int THEN = 13;
+  int THEN = 12;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' containment reference.
+   * The feature id for the '<em><b>Object</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int THEN__NAME = TEST_STEP__NAME;
+  int THEN__OBJECT = TEST_STEP__OBJECT;
+
+  /**
+   * The feature id for the '<em><b>Predicate</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int THEN__PREDICATE = TEST_STEP__PREDICATE;
 
   /**
    * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -700,16 +699,25 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getAnd()
    * @generated
    */
-  int AND = 14;
+  int AND = 13;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' containment reference.
+   * The feature id for the '<em><b>Object</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int AND__NAME = TEST_STEP__NAME;
+  int AND__OBJECT = TEST_STEP__OBJECT;
+
+  /**
+   * The feature id for the '<em><b>Predicate</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND__PREDICATE = TEST_STEP__PREDICATE;
 
   /**
    * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -746,7 +754,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getText()
    * @generated
    */
-  int TEXT = 15;
+  int TEXT = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -774,7 +782,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getNestedStatementList()
    * @generated
    */
-  int NESTED_STATEMENT_LIST = 16;
+  int NESTED_STATEMENT_LIST = 15;
 
   /**
    * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
@@ -802,7 +810,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getTable()
    * @generated
    */
-  int TABLE = 17;
+  int TABLE = 16;
 
   /**
    * The feature id for the '<em><b>Row List</b></em>' containment reference list.
@@ -830,7 +838,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getRow()
    * @generated
    */
-  int ROW = 18;
+  int ROW = 17;
 
   /**
    * The feature id for the '<em><b>Cell List</b></em>' containment reference list.
@@ -858,7 +866,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getCell()
    * @generated
    */
-  int CELL = 19;
+  int CELL = 18;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -886,7 +894,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getStatement()
    * @generated
    */
-  int STATEMENT = 20;
+  int STATEMENT = 19;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1195,15 +1203,26 @@ public interface SheepDogPackage extends EPackage
   EClass getTestStep();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getObject <em>Object</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Name</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.TestStep#getName()
+   * @return the meta object for the attribute '<em>Object</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.TestStep#getObject()
    * @see #getTestStep()
    * @generated
    */
-  EReference getTestStep_Name();
+  EAttribute getTestStep_Object();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getPredicate <em>Predicate</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Predicate</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.TestStep#getPredicate()
+   * @see #getTestStep()
+   * @generated
+   */
+  EAttribute getTestStep_Predicate();
 
   /**
    * Returns the meta object for the containment reference '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getTable <em>Table</em>}'.
@@ -1236,38 +1255,6 @@ public interface SheepDogPackage extends EPackage
    * @generated
    */
   EClass getGiven();
-
-  /**
-   * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.StepReference <em>Step Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Step Reference</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.StepReference
-   * @generated
-   */
-  EClass getStepReference();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.farhan.dsl.sheepdog.sheepDog.StepReference#getObject <em>Object</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.StepReference#getObject()
-   * @see #getStepReference()
-   * @generated
-   */
-  EAttribute getStepReference_Object();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.farhan.dsl.sheepdog.sheepDog.StepReference#getPredicate <em>Predicate</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Predicate</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.StepReference#getPredicate()
-   * @see #getStepReference()
-   * @generated
-   */
-  EAttribute getStepReference_Predicate();
 
   /**
    * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.When <em>When</em>}'.
@@ -1685,12 +1672,20 @@ public interface SheepDogPackage extends EPackage
     EClass TEST_STEP = eINSTANCE.getTestStep();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TEST_STEP__NAME = eINSTANCE.getTestStep_Name();
+    EAttribute TEST_STEP__OBJECT = eINSTANCE.getTestStep_Object();
+
+    /**
+     * The meta object literal for the '<em><b>Predicate</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TEST_STEP__PREDICATE = eINSTANCE.getTestStep_Predicate();
 
     /**
      * The meta object literal for the '<em><b>Table</b></em>' containment reference feature.
@@ -1717,32 +1712,6 @@ public interface SheepDogPackage extends EPackage
      * @generated
      */
     EClass GIVEN = eINSTANCE.getGiven();
-
-    /**
-     * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.StepReferenceImpl <em>Step Reference</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.farhan.dsl.sheepdog.sheepDog.impl.StepReferenceImpl
-     * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getStepReference()
-     * @generated
-     */
-    EClass STEP_REFERENCE = eINSTANCE.getStepReference();
-
-    /**
-     * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STEP_REFERENCE__OBJECT = eINSTANCE.getStepReference_Object();
-
-    /**
-     * The meta object literal for the '<em><b>Predicate</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STEP_REFERENCE__PREDICATE = eINSTANCE.getStepReference_Predicate();
 
     /**
      * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.WhenImpl <em>When</em>}' class.

@@ -18,23 +18,25 @@ public class TestStepUtility {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepUtility.class);
 
+	// TODO NAME_REGEX should match terminal ID and be used the same way
 	private static final String NAME_REGEX = "[^,]";
 	private static final String COMPONENT_REGEX = "( " + NAME_REGEX + "+)"
-			+ getRegexFromTypes(TestStepComponentTypes.values());
+			+ getRegexFromTypes(TestStepComponentTypes.values()) + ",";
 	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)("
 			+ getRegexFromTypes(TestStepObjectVertexTypes.values()) + "|"
-			+ getRegexFromTypes(TestStepObjectEdgeTypes.values()) + "))" + ",";
+			+ getRegexFromTypes(TestStepObjectEdgeTypes.values()) + "))";
 	private static final String DETAILS_REGEX = "( " + NAME_REGEX + "+)"
 			+ getRegexFromTypes(TestStepDetailTypes.values());
 	private static final String STATE_ATTR_REGEX = "( \\S+)";
 	private static final String STATE_REGEX = "(" + getRegexFromTypes(TestStepStateModalityTypes.values())
 			+ STATE_ATTR_REGEX + getRegexFromTypes(TestStepAttachmentTypes.values()) + "?)";
-	private static final String TIME_REGEX = getRegexFromTypes(TestStepTimeTypes.values()) + " (.*)";
+	private static final String TIME_REGEX = getRegexFromTypes(TestStepTimeTypes.values()) + " (" + NAME_REGEX + "+)";
 	private static final String PREDICATE_REGEX = "(" + "(" + DETAILS_REGEX + ")?" + STATE_REGEX + "(" + TIME_REGEX
 			+ ")?" + ")";
-	// TODO this whole regex needs to be refactored to reflect OBJECT_REGEX
-	// PREDICATE_REGEX
-	public static final String REGEX = "The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + PREDICATE_REGEX;
+
+	private static final String STEP_OBJECT = "The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX;
+	private static final String STEP_DEFINITION = PREDICATE_REGEX;
+	public static final String REGEX = STEP_OBJECT + STEP_DEFINITION;
 
 	// TODO combine has and get into one
 	public static String getAttachment(String text) {
@@ -42,7 +44,7 @@ public class TestStepUtility {
 	}
 
 	public static String getComponent(String text) {
-		return getGroup("The" + "(" + COMPONENT_REGEX + ")", text, 1);
+		return getGroup("The" + "(" + COMPONENT_REGEX + ")", text, 1).replace(",", "");
 	}
 
 	public static String getComponentName(String text) {
@@ -79,7 +81,7 @@ public class TestStepUtility {
 	}
 
 	public static String getObject(String text) {
-		return getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX, text, 4).replace(",", "");
+		return getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX, text, 4);
 	}
 
 	public static String getObjectName(String text) {
@@ -156,7 +158,7 @@ public class TestStepUtility {
 					}
 					component = lastComponent;
 				}
-				stepNameLong = "The " + component + " " + object + ", " + predicate;
+				stepNameLong = "The " + component + ", " + object + " " + predicate;
 			}
 			logger.debug("Exiting getNameLong with result: {}", stepNameLong);
 			return stepNameLong;

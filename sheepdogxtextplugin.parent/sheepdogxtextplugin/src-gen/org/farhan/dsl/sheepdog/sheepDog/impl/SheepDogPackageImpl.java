@@ -22,7 +22,6 @@ import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
-import org.farhan.dsl.sheepdog.sheepDog.StepReference;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
@@ -118,13 +117,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   private EClass givenEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass stepReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -554,9 +546,20 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getTestStep_Name()
+  public EAttribute getTestStep_Object()
   {
-    return (EReference)testStepEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)testStepEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getTestStep_Predicate()
+  {
+    return (EAttribute)testStepEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -567,7 +570,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
   @Override
   public EReference getTestStep_Table()
   {
-    return (EReference)testStepEClass.getEStructuralFeatures().get(1);
+    return (EReference)testStepEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -578,7 +581,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
   @Override
   public EReference getTestStep_Text()
   {
-    return (EReference)testStepEClass.getEStructuralFeatures().get(2);
+    return (EReference)testStepEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -590,39 +593,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
   public EClass getGiven()
   {
     return givenEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getStepReference()
-  {
-    return stepReferenceEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getStepReference_Object()
-  {
-    return (EAttribute)stepReferenceEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getStepReference_Predicate()
-  {
-    return (EAttribute)stepReferenceEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -857,15 +827,12 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     createEReference(testDataEClass, TEST_DATA__TABLE);
 
     testStepEClass = createEClass(TEST_STEP);
-    createEReference(testStepEClass, TEST_STEP__NAME);
+    createEAttribute(testStepEClass, TEST_STEP__OBJECT);
+    createEAttribute(testStepEClass, TEST_STEP__PREDICATE);
     createEReference(testStepEClass, TEST_STEP__TABLE);
     createEReference(testStepEClass, TEST_STEP__TEXT);
 
     givenEClass = createEClass(GIVEN);
-
-    stepReferenceEClass = createEClass(STEP_REFERENCE);
-    createEAttribute(stepReferenceEClass, STEP_REFERENCE__OBJECT);
-    createEAttribute(stepReferenceEClass, STEP_REFERENCE__PREDICATE);
 
     whenEClass = createEClass(WHEN);
 
@@ -967,15 +934,12 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     initEReference(getTestData_Table(), this.getTable(), null, "table", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testStepEClass, TestStep.class, "TestStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTestStep_Name(), this.getStepReference(), null, "name", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestStep_Object(), ecorePackage.getEString(), "object", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestStep_Predicate(), ecorePackage.getEString(), "predicate", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTestStep_Table(), this.getTable(), null, "table", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTestStep_Text(), this.getText(), null, "text", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(givenEClass, Given.class, "Given", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(stepReferenceEClass, StepReference.class, "StepReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStepReference_Object(), ecorePackage.getEString(), "object", null, 0, 1, StepReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getStepReference_Predicate(), ecorePackage.getEString(), "predicate", null, 0, 1, StepReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(whenEClass, When.class, "When", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
