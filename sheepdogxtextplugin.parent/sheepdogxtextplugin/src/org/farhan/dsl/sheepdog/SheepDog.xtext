@@ -50,19 +50,19 @@ TestStep:
 	Given | When | Then | And;
 
 Given:
-	'*' 'Given:' object=STEP_OBJECT predicate=STEP_DEFINITION EOL
+	'*' 'Given:' object=StepObjectRef predicate=StepDefinitionRef EOL
 	(table=Table | text=Text)?;
 
 When:
-	'*' 'When:' object=STEP_OBJECT predicate=STEP_DEFINITION EOL
+	'*' 'When:' object=StepObjectRef predicate=StepDefinitionRef EOL
 	(table=Table | text=Text)?;
 
 Then:
-	'*' 'Then:' object=STEP_OBJECT predicate=STEP_DEFINITION EOL
+	'*' 'Then:' object=StepObjectRef predicate=StepDefinitionRef EOL
 	(table=Table | text=Text)?;
 
 And:
-	'*' 'And:' object=STEP_OBJECT predicate=STEP_DEFINITION EOL
+	'*' 'And:' object=StepObjectRef predicate=StepDefinitionRef EOL
 	(table=Table | text=Text)?;
 
 Text:
@@ -102,23 +102,12 @@ Title:
 // to make sure the Impl classes have implemented this correctly
 // For now I'm putting the whole regex to make it possible to distinguish between STEP_OBJECT and STEP_DEFINITION
 // without breaking it up into its parts
-terminal STEP_OBJECT:
-	'The'
-	((' ' ID+ (' application' | ' service' | ' plugin' | ' batchjob' | ' project') ',')?
-      )
-	(' ' ID+ ((' file' | ' page' | ' response' | ' dialog' | ' directory') |
-	(' request' | ' goal' | ' job' | ' action')));
+// TODO do I need to define single spaces?
+StepObjectRef:
+	WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action');
 
-terminal STEP_DEFINITION:
-	(((ID+) (' ' ('section' | 'fragment' | 'table' | 'snippet' | 'list')))?
-	((' ' ('is' | 'isn\'t' | 'will be' | 'won\'t be'))
-	(' ' ID+)
-	(' ' ('with' | 'as follows'))?)
-	((' ' ('at' | 'before' | 'after' | 'in' | 'on'))
-	(' ' ID+))?);
-
-terminal ID:
-	!(' ' | '\t' | '\r' | '\n' | '|' | '#' | ',');
+StepDefinitionRef:
+	WORD+;
 
 // TODO look at fragments to handle escape characters etc instead of this and to handle re-using ' ' | '\t' | '\r' | '\n'
 terminal WORD:

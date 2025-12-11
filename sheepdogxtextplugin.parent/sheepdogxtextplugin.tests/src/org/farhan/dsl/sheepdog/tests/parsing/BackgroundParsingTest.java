@@ -71,8 +71,8 @@ public class BackgroundParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Setup: Setup a cardholder\n");
-		sb.append("* Given: do step one\n");
-		sb.append("* When: do step three\n");
+		sb.append("* Given: The one service, one file is valid\n");
+		sb.append("* When: The three service, three file is valid\n");
 		assertNoFeatureErrors(sb);
 	}
 
@@ -84,8 +84,8 @@ public class BackgroundParsingTest extends ParsingTest {
 		sb.append("First setup a group\n");
 		sb.append("Next setup the cardholder\n");
 		sb.append("Next setup their family\n");
-		sb.append("* Given: do step one\n");
-		sb.append("* When: do step three\n");
+		sb.append("* Given: The one service, one file is valid\n");
+		sb.append("* When: The three service, three file is valid\n");
 		assertNoFeatureErrors(sb);
 	}
 }

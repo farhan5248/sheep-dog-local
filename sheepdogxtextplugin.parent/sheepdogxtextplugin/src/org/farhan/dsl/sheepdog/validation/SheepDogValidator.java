@@ -116,47 +116,45 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	@Check(CheckType.FAST)
 	public void checkTestStepNameOnly(TestStep step) {
+		TestStepImpl testStep = new TestStepImpl(step);
 		try {
 			initProject(step.eResource());
-			if (step.getName() != null) {
-				String problems = TestStepIssueDetector.validateNameComponentOnly(new TestStepImpl(step));
+			String problems = TestStepIssueDetector.validateNameComponentOnly(testStep);
+			if (!problems.isEmpty()) {
+				error(problems, SheepDogPackage.Literals.TEST_STEP__OBJECT, TEST_STEP_NAME_COMPONENT_ONLY);
+			} else {
+				problems = TestStepIssueDetector.validateNameObjectOnly(testStep);
 				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_COMPONENT_ONLY);
+					error(problems, SheepDogPackage.Literals.TEST_STEP__OBJECT, TEST_STEP_NAME_OBJECT_ONLY);
 				} else {
-					problems = TestStepIssueDetector.validateNameObjectOnly(new TestStepImpl(step));
+					problems = TestStepIssueDetector.validateNamePredicateOnly(testStep);
 					if (!problems.isEmpty()) {
-						error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_OBJECT_ONLY);
-					} else {
-						problems = TestStepIssueDetector.validateNamePredicateOnly(new TestStepImpl(step));
-						if (!problems.isEmpty()) {
-							error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_PREDICATE_ONLY);
-						}
+						error(problems, SheepDogPackage.Literals.TEST_STEP__PREDICATE, TEST_STEP_NAME_PREDICATE_ONLY);
 					}
 				}
 			}
 		} catch (Exception e) {
-			logError(e, step.getName());
+			logError(e, testStep.getName());
 		}
 	}
 
 	@Check(CheckType.EXPENSIVE)
 	public void checkTestStepNameWorkspace(TestStep step) {
+		TestStepImpl testStep = new TestStepImpl(step);
 		try {
 			initProject(step.eResource());
-			if (step.getName() != null) {
-				TestStepImpl testStepImpl = new TestStepImpl(step);
-				String problems = TestStepIssueDetector.validateNameObjectWorkspace(testStepImpl);
+			String problems = TestStepIssueDetector.validateNameObjectWorkspace(testStep);
+			if (!problems.isEmpty()) {
+				warning(problems, SheepDogPackage.Literals.TEST_STEP__OBJECT, TEST_STEP_NAME_OBJECT_WORKSPACE);
+			} else {
+				problems = TestStepIssueDetector.validateNamePredicateWorkspace(testStep);
 				if (!problems.isEmpty()) {
-					warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_OBJECT_WORKSPACE);
-				} else {
-					problems = TestStepIssueDetector.validateNamePredicateWorkspace(testStepImpl);
-					if (!problems.isEmpty()) {
-						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, TEST_STEP_NAME_PREDICATE_WORKSPACE);
-					}
+					warning(problems, SheepDogPackage.Literals.TEST_STEP__PREDICATE,
+							TEST_STEP_NAME_PREDICATE_WORKSPACE);
 				}
 			}
 		} catch (Exception e) {
-			logError(e, step.getName());
+			logError(e, testStep.getName());
 		}
 	}
 

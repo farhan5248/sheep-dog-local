@@ -38,6 +38,7 @@ public class SheepDogParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getWhenAccess().getAlternatives_5(), "rule__When__Alternatives_5");
 			builder.put(grammarAccess.getThenAccess().getAlternatives_5(), "rule__Then__Alternatives_5");
 			builder.put(grammarAccess.getAndAccess().getAlternatives_5(), "rule__And__Alternatives_5");
+			builder.put(grammarAccess.getStepObjectRefAccess().getAlternatives_1(), "rule__StepObjectRef__Alternatives_1");
 			builder.put(grammarAccess.getStepObjectAccess().getGroup(), "rule__StepObject__Group__0");
 			builder.put(grammarAccess.getStepDefinitionAccess().getGroup(), "rule__StepDefinition__Group__0");
 			builder.put(grammarAccess.getStepParametersAccess().getGroup(), "rule__StepParameters__Group__0");
@@ -55,6 +56,7 @@ public class SheepDogParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getRowAccess().getGroup(), "rule__Row__Group__0");
 			builder.put(grammarAccess.getCellAccess().getGroup(), "rule__Cell__Group__0");
 			builder.put(grammarAccess.getStatementAccess().getGroup(), "rule__Statement__Group__0");
+			builder.put(grammarAccess.getStepObjectRefAccess().getGroup(), "rule__StepObjectRef__Group__0");
 			builder.put(grammarAccess.getStepObjectAccess().getNameAssignment_2(), "rule__StepObject__NameAssignment_2");
 			builder.put(grammarAccess.getStepObjectAccess().getStatementListAssignment_4(), "rule__StepObject__StatementListAssignment_4");
 			builder.put(grammarAccess.getStepObjectAccess().getStepDefinitionListAssignment_5(), "rule__StepObject__StepDefinitionListAssignment_5");

@@ -847,37 +847,39 @@ ruleGiven returns [EObject current=null]
 		}
 		(
 			(
-				lv_object_2_0=RULE_STEP_OBJECT
 				{
-					newLeafNode(lv_object_2_0, grammarAccess.getGivenAccess().getObjectSTEP_OBJECTTerminalRuleCall_2_0());
+					newCompositeNode(grammarAccess.getGivenAccess().getObjectStepObjectRefParserRuleCall_2_0());
 				}
+				lv_object_2_0=ruleStepObjectRef
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getGivenRule());
+						$current = createModelElementForParent(grammarAccess.getGivenRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"object",
 						lv_object_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.STEP_OBJECT");
+						"org.farhan.dsl.sheepdog.SheepDog.StepObjectRef");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
 			(
-				lv_predicate_3_0=RULE_STEP_DEFINITION
 				{
-					newLeafNode(lv_predicate_3_0, grammarAccess.getGivenAccess().getPredicateSTEP_DEFINITIONTerminalRuleCall_3_0());
+					newCompositeNode(grammarAccess.getGivenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0());
 				}
+				lv_predicate_3_0=ruleStepDefinitionRef
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getGivenRule());
+						$current = createModelElementForParent(grammarAccess.getGivenRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"predicate",
 						lv_predicate_3_0,
-						"org.farhan.dsl.sheepdog.SheepDog.STEP_DEFINITION");
+						"org.farhan.dsl.sheepdog.SheepDog.StepDefinitionRef");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -955,37 +957,39 @@ ruleWhen returns [EObject current=null]
 		}
 		(
 			(
-				lv_object_2_0=RULE_STEP_OBJECT
 				{
-					newLeafNode(lv_object_2_0, grammarAccess.getWhenAccess().getObjectSTEP_OBJECTTerminalRuleCall_2_0());
+					newCompositeNode(grammarAccess.getWhenAccess().getObjectStepObjectRefParserRuleCall_2_0());
 				}
+				lv_object_2_0=ruleStepObjectRef
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getWhenRule());
+						$current = createModelElementForParent(grammarAccess.getWhenRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"object",
 						lv_object_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.STEP_OBJECT");
+						"org.farhan.dsl.sheepdog.SheepDog.StepObjectRef");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
 			(
-				lv_predicate_3_0=RULE_STEP_DEFINITION
 				{
-					newLeafNode(lv_predicate_3_0, grammarAccess.getWhenAccess().getPredicateSTEP_DEFINITIONTerminalRuleCall_3_0());
+					newCompositeNode(grammarAccess.getWhenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0());
 				}
+				lv_predicate_3_0=ruleStepDefinitionRef
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getWhenRule());
+						$current = createModelElementForParent(grammarAccess.getWhenRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"predicate",
 						lv_predicate_3_0,
-						"org.farhan.dsl.sheepdog.SheepDog.STEP_DEFINITION");
+						"org.farhan.dsl.sheepdog.SheepDog.StepDefinitionRef");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -1063,37 +1067,39 @@ ruleThen returns [EObject current=null]
 		}
 		(
 			(
-				lv_object_2_0=RULE_STEP_OBJECT
 				{
-					newLeafNode(lv_object_2_0, grammarAccess.getThenAccess().getObjectSTEP_OBJECTTerminalRuleCall_2_0());
+					newCompositeNode(grammarAccess.getThenAccess().getObjectStepObjectRefParserRuleCall_2_0());
 				}
+				lv_object_2_0=ruleStepObjectRef
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getThenRule());
+						$current = createModelElementForParent(grammarAccess.getThenRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"object",
 						lv_object_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.STEP_OBJECT");
+						"org.farhan.dsl.sheepdog.SheepDog.StepObjectRef");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
 			(
-				lv_predicate_3_0=RULE_STEP_DEFINITION
 				{
-					newLeafNode(lv_predicate_3_0, grammarAccess.getThenAccess().getPredicateSTEP_DEFINITIONTerminalRuleCall_3_0());
+					newCompositeNode(grammarAccess.getThenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0());
 				}
+				lv_predicate_3_0=ruleStepDefinitionRef
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getThenRule());
+						$current = createModelElementForParent(grammarAccess.getThenRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"predicate",
 						lv_predicate_3_0,
-						"org.farhan.dsl.sheepdog.SheepDog.STEP_DEFINITION");
+						"org.farhan.dsl.sheepdog.SheepDog.StepDefinitionRef");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -1171,37 +1177,39 @@ ruleAnd returns [EObject current=null]
 		}
 		(
 			(
-				lv_object_2_0=RULE_STEP_OBJECT
 				{
-					newLeafNode(lv_object_2_0, grammarAccess.getAndAccess().getObjectSTEP_OBJECTTerminalRuleCall_2_0());
+					newCompositeNode(grammarAccess.getAndAccess().getObjectStepObjectRefParserRuleCall_2_0());
 				}
+				lv_object_2_0=ruleStepObjectRef
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getAndRule());
+						$current = createModelElementForParent(grammarAccess.getAndRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"object",
 						lv_object_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.STEP_OBJECT");
+						"org.farhan.dsl.sheepdog.SheepDog.StepObjectRef");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
 			(
-				lv_predicate_3_0=RULE_STEP_DEFINITION
 				{
-					newLeafNode(lv_predicate_3_0, grammarAccess.getAndAccess().getPredicateSTEP_DEFINITIONTerminalRuleCall_3_0());
+					newCompositeNode(grammarAccess.getAndAccess().getPredicateStepDefinitionRefParserRuleCall_3_0());
 				}
+				lv_predicate_3_0=ruleStepDefinitionRef
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getAndRule());
+						$current = createModelElementForParent(grammarAccess.getAndRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"predicate",
 						lv_predicate_3_0,
-						"org.farhan.dsl.sheepdog.SheepDog.STEP_DEFINITION");
+						"org.farhan.dsl.sheepdog.SheepDog.StepDefinitionRef");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -1562,11 +1570,114 @@ ruleTitle returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	)+
 ;
 
-RULE_STEP_OBJECT : 'The' (' ' RULE_ID+ (' application'|' service'|' plugin'|' batchjob'|' project') ',')? ' ' RULE_ID+ ((' file'|' page'|' response'|' dialog'|' directory')|(' request'|' goal'|' job'|' action'));
+// Entry rule entryRuleStepObjectRef
+entryRuleStepObjectRef returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getStepObjectRefRule()); }
+	iv_ruleStepObjectRef=ruleStepObjectRef
+	{ $current=$iv_ruleStepObjectRef.current.getText(); }
+	EOF;
 
-RULE_STEP_DEFINITION : (RULE_ID+ ' ' ('section'|'fragment'|'table'|'snippet'|'list'))? ' ' ('is'|'isn\'t'|'will be'|'won\'t be') ' ' RULE_ID+ (' ' ('with'|'as follows'))? (' ' ('at'|'before'|'after'|'in'|'on') ' ' RULE_ID+)?;
+// Rule StepObjectRef
+ruleStepObjectRef returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			this_WORD_0=RULE_WORD
+			{
+				$current.merge(this_WORD_0);
+			}
+			{
+				newLeafNode(this_WORD_0, grammarAccess.getStepObjectRefAccess().getWORDTerminalRuleCall_0());
+			}
+		)+
+		(
+			kw='file'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getFileKeyword_1_0());
+			}
+			    |
+			kw='page'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getPageKeyword_1_1());
+			}
+			    |
+			kw='response'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getResponseKeyword_1_2());
+			}
+			    |
+			kw='dialog'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getDialogKeyword_1_3());
+			}
+			    |
+			kw='directory'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getDirectoryKeyword_1_4());
+			}
+			    |
+			kw='request'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getRequestKeyword_1_5());
+			}
+			    |
+			kw='goal'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getGoalKeyword_1_6());
+			}
+			    |
+			kw='job'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getJobKeyword_1_7());
+			}
+			    |
+			kw='action'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getActionKeyword_1_8());
+			}
+		)
+	)
+;
 
-fragment RULE_ID : ~((' '|'\t'|'\r'|'\n'|'|'|'#'|','));
+// Entry rule entryRuleStepDefinitionRef
+entryRuleStepDefinitionRef returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getStepDefinitionRefRule()); }
+	iv_ruleStepDefinitionRef=ruleStepDefinitionRef
+	{ $current=$iv_ruleStepDefinitionRef.current.getText(); }
+	EOF;
+
+// Rule StepDefinitionRef
+ruleStepDefinitionRef returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		this_WORD_0=RULE_WORD
+		{
+			$current.merge(this_WORD_0);
+		}
+		{
+			newLeafNode(this_WORD_0, grammarAccess.getStepDefinitionRefAccess().getWORDTerminalRuleCall());
+		}
+	)+
+;
 
 RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'|'|'#')) ~((' '|'\t'|'\r'|'\n'))*;
 

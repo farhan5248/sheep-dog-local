@@ -22,7 +22,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 		sb.append("\n");
-		sb.append("* Given: do step one\n");
+		sb.append("* Given: The one service, one file is valid\n");
 		sb.append("\n");
 		assertNoFeatureErrors(sb);
 		return sb;
@@ -50,7 +50,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append(" Basic EDI claim \n");
 			sb.append(" No deductible \n");
 			sb.append("\n");
-			sb.append("*  Given: do step one \n");
+			sb.append("*  Given: The one service, one file is valid \n");
 			sb.append("\n");
 			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
@@ -71,7 +71,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
 			sb.append("\n");
-			sb.append("*Given: do step one\n");
+			sb.append("*Given: The one service, one file is valid\n");
 			sb.append("\n");
 			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
@@ -95,7 +95,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("No deductible\n");
 			sb.append("\n");
 			sb.append("\n");
-			sb.append("* Given: do step one\n");
+			sb.append("* Given: The one service, one file is valid\n");
 			sb.append("\n");
 			sb.append("\n");
 			assertNoFeatureErrors(sb);

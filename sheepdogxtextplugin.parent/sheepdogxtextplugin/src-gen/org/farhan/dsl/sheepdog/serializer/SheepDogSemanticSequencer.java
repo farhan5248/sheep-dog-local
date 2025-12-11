@@ -111,7 +111,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     And returns And
 	 *
 	 * Constraint:
-	 *     (object=STEP_OBJECT predicate=STEP_DEFINITION (table=Table | text=Text)?)
+	 *     (object=StepObjectRef predicate=StepDefinitionRef (table=Table | text=Text)?)
 	 * </pre>
 	 */
 	protected void sequence_And(ISerializationContext context, And semanticObject) {
@@ -146,7 +146,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Given returns Given
 	 *
 	 * Constraint:
-	 *     (object=STEP_OBJECT predicate=STEP_DEFINITION (table=Table | text=Text)?)
+	 *     (object=StepObjectRef predicate=StepDefinitionRef (table=Table | text=Text)?)
 	 * </pre>
 	 */
 	protected void sequence_Given(ISerializationContext context, Given semanticObject) {
@@ -345,7 +345,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Then returns Then
 	 *
 	 * Constraint:
-	 *     (object=STEP_OBJECT predicate=STEP_DEFINITION (table=Table | text=Text)?)
+	 *     (object=StepObjectRef predicate=StepDefinitionRef (table=Table | text=Text)?)
 	 * </pre>
 	 */
 	protected void sequence_Then(ISerializationContext context, Then semanticObject) {
@@ -360,7 +360,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     When returns When
 	 *
 	 * Constraint:
-	 *     (object=STEP_OBJECT predicate=STEP_DEFINITION (table=Table | text=Text)?)
+	 *     (object=StepObjectRef predicate=StepDefinitionRef (table=Table | text=Text)?)
 	 * </pre>
 	 */
 	protected void sequence_When(ISerializationContext context, When semanticObject) {

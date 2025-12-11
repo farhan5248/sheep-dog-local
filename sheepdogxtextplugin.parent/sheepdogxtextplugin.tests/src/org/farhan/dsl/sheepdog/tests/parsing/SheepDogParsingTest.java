@@ -29,7 +29,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("Next setup their family\n");
 		sb.append("\n");
 
-		sb.append("* Given: do step one\n");
+		sb.append("* Given: The one service, one file is valid\n");
 		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
@@ -37,7 +37,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("Line3\n");
 		sb.append("----\n");
 
-		sb.append("* And: do step two\n");
+		sb.append("* And: The two service, two file is valid\n");
 
 		sb.append("+\n");
 		sb.append("|===\n");
@@ -45,7 +45,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
 
-		sb.append("* When: do step three\n");
+		sb.append("* When: The three service, three file is valid\n");
 
 		sb.append("+\n");
 		sb.append("|===\n");
@@ -53,7 +53,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
 
-		sb.append("* Then: do step four\n");
+		sb.append("* Then: The four service, four file is valid\n");
 
 		sb.append("+\n");
 		sb.append("|===\n");
@@ -65,16 +65,16 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("@tag1,@tag2,@tag3\n");
 		sb.append("\n");
-		sb.append("* And: do step two\n");
+		sb.append("* And: The two service, two file is valid\n");
 		sb.append("\n");
 
 		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("@tag1,@tag2,@tag3\n");
 		sb.append("\n");
-		sb.append("* And: do step two\n");
-		sb.append("* When: do step three\n");
-		sb.append("* Then: do step four\n");
-		sb.append("* Given: do step six\n");
+		sb.append("* And: The two service, two file is valid\n");
+		sb.append("* When: The three service, three file is valid\n");
+		sb.append("* Then: The four service, four file is valid\n");
+		sb.append("* Given: The six service, six file is valid\n");
 		sb.append("+\n");
 		sb.append("----\n");
 		sb.append(" Line1\n");
@@ -85,15 +85,15 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("== Test-Case: Submit a dental claim\n");
 		sb.append("@tag1,@tag2,@tag3\n");
 		sb.append("\n");
-		sb.append("* Given: do step one\n");
-		sb.append("* And: do step two\n");
+		sb.append("* Given: The one service, one file is valid\n");
+		sb.append("* And: The two service, two file is valid\n");
 		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
-		sb.append("* When: do step three\n");
-		sb.append("* Then: do step four\n");
+		sb.append("* When: The three service, three file is valid\n");
+		sb.append("* Then: The four service, four file is valid\n");
 		sb.append("\n");
 		sb.append("* Test-Data: Describe what this data is about\n");
 		sb.append("\n");
@@ -111,10 +111,10 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("==  Test-Case: Submit a dental claim\n");
 		sb.append("@tag1,@tag2,@tag3\n");
 		sb.append("\n");
-		sb.append("* Given: do step one\n");
-		sb.append("* And: do step two\n");
-		sb.append("* When: do step three\n");
-		sb.append("* Then: do step four\n");
+		sb.append("* Given: The one service, one file is valid\n");
+		sb.append("* And: The two service, two file is valid\n");
+		sb.append("* When: The three service, three file is valid\n");
+		sb.append("* Then: The four service, four file is valid\n");
 		sb.append("\n");
 		sb.append("* Test-Data: Describe what this data is about as well\n");
 		sb.append("\n");

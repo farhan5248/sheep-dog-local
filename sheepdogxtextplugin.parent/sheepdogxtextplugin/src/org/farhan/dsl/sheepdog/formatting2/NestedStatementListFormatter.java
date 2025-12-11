@@ -2,20 +2,20 @@ package org.farhan.dsl.sheepdog.formatting2;
 
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.farhan.dsl.sheepdog.services.SheepDogGrammarAccess;
-import org.farhan.dsl.sheepdog.services.SheepDogGrammarAccess.StatementListElements;
+import org.farhan.dsl.sheepdog.services.SheepDogGrammarAccess.NestedStatementListElements;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
-import org.farhan.dsl.sheepdog.sheepDog.StatementList;
+import org.farhan.dsl.sheepdog.sheepDog.NestedStatementList;
 
-public class StatementListFormatter extends Formatter {
+public class NestedStatementListFormatter extends Formatter {
 
-	private StatementList theStatementList;
+	private NestedStatementList theStatementList;
 
-	public StatementListFormatter(StatementList theStatementList) {
+	public NestedStatementListFormatter(NestedStatementList theStatementList) {
 		this.theStatementList = theStatementList;
 	}
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
-		StatementListElements a = ga.getStatementListAccess();
+		NestedStatementListElements a = ga.getNestedStatementListAccess();
 		formatKeywordNoSpace(df.getRegion(theStatementList, a.getPlusSignKeyword_0()), doc);
 		formatEOL1RuleCall(df.getRegion(theStatementList, a.getEOLTerminalRuleCall_1()), doc);
 

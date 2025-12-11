@@ -35,9 +35,9 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 
 	private static final Logger logger = Logger.getLogger(SheepDogProposalProvider.class);
 
-	public void completeAnd_Name(And step, Assignment assignment, ContentAssistContext context,
+	public void completeAnd_Object(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeAnd_Name(step, assignment, context, acceptor);
+		super.completeAnd_Object(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
 	}
 
@@ -58,17 +58,18 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		}
 	}
 
-	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
+	public void completeGiven_Object(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_Name(step, assignment, context, acceptor);
+		super.completeGiven_Object(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
 	}
 
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		TestStepImpl testStep = new TestStepImpl(step);
 		try {
 			initProject(step.eResource());
-			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNameObjectWorkspace(new TestStepImpl(step))) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNameObjectWorkspace(testStep)) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
@@ -76,8 +77,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 					acceptor.accept(proposal);
 				}
 			}
-			for (SheepDogIssueProposal p : TestStepIssueResolver
-					.suggestNamePredicateWorkspace(new TestStepImpl(step))) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNamePredicateWorkspace(testStep)) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {
@@ -86,7 +86,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 				}
 			}
 		} catch (Exception e) {
-			logError(e, step.getName());
+			logError(e, testStep.getName());
 		}
 	}
 
@@ -96,15 +96,15 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		completeCellList((TestStep) model, assignment, context, acceptor);
 	}
 
-	public void completeThen_Name(Then step, Assignment assignment, ContentAssistContext context,
+	public void completeThen_Object(Then step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeThen_Name(step, assignment, context, acceptor);
+		super.completeThen_Object(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
 	}
 
-	public void completeWhen_Name(When step, Assignment assignment, ContentAssistContext context,
+	public void completeWhen_Object(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeWhen_Name(step, assignment, context, acceptor);
+		super.completeWhen_Object(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
 	}
 

@@ -20,7 +20,10 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public String getName() {
-		return eObject.getName() != null ? eObject.getName() : "";
+		String name = "";
+		name += eObject.getObject() != null ? eObject.getObject() : "";
+		name += eObject.getPredicate() != null ? eObject.getPredicate() : "";
+		return name;
 	}
 
 	@Override
