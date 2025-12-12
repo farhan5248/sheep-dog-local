@@ -50,7 +50,7 @@ public class TestStepIssueResolver {
 			if (theStepObject != null) {
 				String predicate = TestStepUtility.getPredicate(theTestStep.getName());
 				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
-				if (theStepObject.getStepDefinition(predicate) == null) {
+				if (theStepDefinition == null) {
 					theStepDefinition = SheepDogBuilder.createStepDefinition(theStepObject, predicate);
 					SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 					proposal.setId("Generate " + theStepDefinition.getName());
@@ -89,20 +89,13 @@ public class TestStepIssueResolver {
 
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
-		String stepName = theTestStep.getName();
-		String component = TestStepUtility.getComponent(stepName);
-		String object = TestStepUtility.getObject(stepName);
 		IStepObject stepObject = theProject.getStepObject(TestStepUtility.getStepObjectQualifiedName(theTestStep));
 		if (stepObject != null) {
 			for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
 				proposal = new SheepDogIssueProposal();
 				proposal.setId(stepDefinition.getName());
 				proposal.setDescription(StatementUtility.getStatementListAsString(stepDefinition.getStatementList()));
-				if (component.isEmpty()) {
-					proposal.setValue("The " + object + " " + proposal.getId());
-				} else {
-					proposal.setValue("The " + component + ", " + object + " " + proposal.getId());
-				}
+				proposal.setValue(proposal.getId());
 				proposals.add(proposal);
 			}
 		}

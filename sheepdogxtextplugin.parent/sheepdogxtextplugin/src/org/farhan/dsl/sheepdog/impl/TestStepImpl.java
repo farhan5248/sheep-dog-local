@@ -22,7 +22,7 @@ public class TestStepImpl implements ITestStep {
 	public String getName() {
 		String name = "";
 		name += eObject.getObject() != null ? eObject.getObject() : "";
-		name += eObject.getPredicate() != null ? eObject.getPredicate() : "";
+		name += eObject.getPredicate() != null ? " " + eObject.getPredicate() : "";
 		return name;
 	}
 

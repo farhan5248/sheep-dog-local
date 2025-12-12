@@ -38,7 +38,13 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeAnd_Object(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeAnd_Object(step, assignment, context, acceptor);
-		completeName(step, assignment, context, acceptor);
+		completeObject(step, assignment, context, acceptor);
+	}
+
+	public void completeAnd_Predicate(And step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeAnd_Predicate(step, assignment, context, acceptor);
+		completePredicate(step, assignment, context, acceptor);
 	}
 
 	private void completeCellList(TestStep step, Assignment assignment, ContentAssistContext context,
@@ -61,10 +67,16 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeGiven_Object(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_Object(step, assignment, context, acceptor);
-		completeName(step, assignment, context, acceptor);
+		completeObject(step, assignment, context, acceptor);
 	}
 
-	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
+	public void completeGiven_Predicate(Given step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeGiven_Predicate(step, assignment, context, acceptor);
+		completePredicate(step, assignment, context, acceptor);
+	}
+
+	private void completeObject(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		TestStepImpl testStep = new TestStepImpl(step);
 		try {
@@ -77,6 +89,16 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 					acceptor.accept(proposal);
 				}
 			}
+		} catch (Exception e) {
+			logError(e, testStep.getName());
+		}
+	}
+
+	private void completePredicate(TestStep step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		TestStepImpl testStep = new TestStepImpl(step);
+		try {
+			initProject(step.eResource());
 			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestNamePredicateWorkspace(testStep)) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
@@ -99,20 +121,25 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeThen_Object(Then step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeThen_Object(step, assignment, context, acceptor);
-		completeName(step, assignment, context, acceptor);
+		completeObject(step, assignment, context, acceptor);
+	}
+
+	public void completeThen_Predicate(Then step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeThen_Predicate(step, assignment, context, acceptor);
+		completePredicate(step, assignment, context, acceptor);
 	}
 
 	public void completeWhen_Object(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeWhen_Object(step, assignment, context, acceptor);
-		completeName(step, assignment, context, acceptor);
+		completeObject(step, assignment, context, acceptor);
 	}
 
-	private void logError(Exception e, String name) {
-		logger.error("There was a problem for step: " + name);
-		StringWriter sw = new StringWriter();
-		e.printStackTrace(new PrintWriter(sw));
-		logger.error(sw.toString());
+	public void completeWhen_Predicate(When step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeWhen_Predicate(step, assignment, context, acceptor);
+		completePredicate(step, assignment, context, acceptor);
 	}
 
 	private void initProject(Resource resource) {
@@ -123,5 +150,12 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 			File resourceFile = new File(resourceIFile.getProject().getLocationURI());
 			parent.setName(resourceFile.getAbsolutePath());
 		}
+	}
+
+	private void logError(Exception e, String name) {
+		logger.error("There was a problem for step: " + name);
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		logger.error(sw.toString());
 	}
 }

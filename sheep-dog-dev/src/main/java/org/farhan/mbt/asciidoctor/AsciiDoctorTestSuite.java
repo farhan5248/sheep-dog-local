@@ -98,7 +98,10 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 			step = SheepDogFactory.eINSTANCE.createAnd();
 			break;
 		}
-		step.setName(name.substring(keyword.length() + 1));
+		String stepName = name.substring(keyword.length() + 1);
+		String predicate = TestStepUtility.getPredicate(stepName);
+		step.setPredicate(predicate);
+		step.setObject(stepName.replace(predicate, "").trim());
 		abstractScenario.getTestStepList().add(step);
 		return step;
 	}
@@ -274,7 +277,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 	}
 
 	public String getStepName(TestStep step) {
-		return getStepKeyword(step) + " " + step.getName();
+		return getStepKeyword(step) + " " + step.getObject() + " " + step.getPredicate();
 	}
 
 	public String getStepNameLong(TestStep step) {
@@ -415,14 +418,15 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 	}
 
 	public String toString() {
+		// TODO this is abuse of a toString method, it shouldn't be writing anything to
+		// the file-system. The xtext TestSuiteImpl class already implements this so
+		// this can be deleted
 		URI uri = URI.createFileURI(thePath);
 		Resource resource = new ResourceSetImpl().createResource(uri);
 		resource.getContents().add(theTestSuite);
 		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
 		OutputStream os = new ByteArrayOutputStream();
 		try {
-			// TODO this is abuse of a toString method, it shouldn't be writing anything to
-			// the file-system
 			resource.save(os, options);
 		} catch (IOException e) {
 			return null;
@@ -445,7 +449,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
 	public void setExamplesDescription(TestData examples, String description) {
 		if (!description.isEmpty()) {
-			examples.setStatementList(SheepDogFactory.eINSTANCE.createStatementList());
+			examples.setStatementList(SheepDogFactory.eINSTANCE.createNestedStatementList());
 			for (String line : description.split("\n")) {
 				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
 				statement.setName(line);

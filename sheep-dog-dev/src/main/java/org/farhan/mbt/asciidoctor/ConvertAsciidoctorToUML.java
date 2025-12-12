@@ -126,7 +126,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private void convertTestStep(UMLTestStep step, TestStep srcStep) {
-		logger.debug("test step: " + srcStep.getName());
+		logger.debug("test step: " + srcStep.getObject() + " " + srcStep.getPredicate());
 		stepObjects.add(TestStepUtility.getStepObjectQualifiedName(new TestStepImpl(srcStep)));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
 		step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));

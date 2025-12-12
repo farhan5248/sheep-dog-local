@@ -130,7 +130,7 @@ Feature: Proposals for Objects or Components
      When The xtext plugin, propose test step action is performed
      Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion                | Suggestion Name |
-          | The Input file is present | is present      |
+          | is present | is present      |
 
   Scenario: Has object has component no previous has component objects
 
@@ -143,7 +143,7 @@ Feature: Proposals for Objects or Components
      When The xtext plugin, propose test step action is performed
      Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion                                | Suggestion Name |
-          | The daily batchjob, Input file is present | is present      |
+          | is present | is present      |
 
   Scenario: Has object has component has previous has component objects
 
@@ -157,5 +157,5 @@ Feature: Proposals for Objects or Components
      When The xtext plugin, propose test step action is performed
      Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion                                | Suggestion Name |
-          | The daily batchjob, Input file is present | is present      |
+          | is present | is present      |
 
