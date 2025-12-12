@@ -1,6 +1,6 @@
 @sheep-dog-test
 Feature: Proposals for Step Constants
-  
+
   \@sheep-dog-test
   Some parts of the step are constants defined in the regular expression use for validation.
   Basically each step has these parts
@@ -16,13 +16,14 @@ Feature: Proposals for Step Constants
   5. Attachment types: with, as follows
 
   Scenario: Propose nothing
-    
+
     If the step is complete, there's nothing to suggest.
     However if it's an attachment, that means a text or table section should follow.
     Those proposals are triggered from the next line.
 
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                 |
-      | The daily batchjob, Input file is present |
-    When The xtext plugin, propose test step action is performed
-    Then The xtext plugin, propose content dialog will be empty
+          | Step Name                                 |
+          | The daily batchjob, Input file is present |
+     When The xtext plugin, propose test step action is performed
+     Then The xtext plugin, propose content dialog will be empty
+
