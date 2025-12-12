@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class MySheepDogLexer extends InternalSheepDogLexer {
 
 	// TODO maybe these should all be one flag called escapeKeyword?
-	private boolean nextTokenIsWORD = true;
-	private boolean nextTokenIsTestStep = false;
+	private boolean nextTokenIsWORD = false;
+	private boolean useDefaultLexer = false;
 
 	public MySheepDogLexer() {
 	}
@@ -24,7 +24,7 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		super(input, state);
 	}
 
-	public boolean isMatch(String s) throws MismatchedTokenException {
+	public boolean isKeyword(String s) throws MismatchedTokenException {
 		int i = 0;
 		while (i < s.length()) {
 			input.LA(i + 1);
@@ -33,7 +33,7 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			}
 			i++;
 		}
-		//System.out.println("isMatch >>>" + s + "<<<");
+		//System.out.println("isKeyword >>>" + s + "<<<");
 		return true;
 	}
 
@@ -60,57 +60,61 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		// when I have more time I'll review the need to do this but for now I figured
 		// it'd be a good example on how to hack the lexer for newbies
 		//printNextToken();
-		if (isMatch("----")) {
+		if (isKeyword("----")) {
 			mRULE_RAWTEXT();// ( '----' RULE_EOL ( . )+ '----' RULE_EOL )
-		} else if (isMatch("#")) {
+		} else if (isKeyword("#")) {
 			mRULE_SL_COMMENT();
-		} else if (isMatch(" ") || isMatch("\t") || isMatch("\r")) {
+		} else if (isKeyword(" ") || isKeyword("\t") || isKeyword("\r")) {
 			mRULE_WS();
-		} else if (isMatch("+")) {
-			mT__23();
-		} else if (isMatch("|===")) {
-			mT__24();
-		} else if (isMatch("*")) {
-			mT__13();
-		} else if (isMatch("==")) {
-			mT__11();
-		} else if (isMatch("=")) {
-			mT__9();
-		} else if (isMatch("|")) {
-			mT__25();
-		} else if (isMatch("Step-Object:")) {
-			mT__10();// 'Object:'
-		} else if (isMatch("Step-Definition:")) {
-			mT__12();// 'Definition:'
-		} else if (isMatch("Step-Parameters:")) {
-			mT__14();// 'Parameters:'
-		} else if (isMatch("Test-Suite:")) {
-			mT__15();// 'Feature:'
-		} else if (isMatch("Test-Setup:")) {
-			mT__16();// 'Background:'
-		} else if (isMatch("Test-Case:")) {
-			mT__17();// 'Scenario:'
-		} else if (isMatch("Test-Data:")) {
-			mT__18();// 'Examples:'
-		} else if (isMatch(",")) {
-			mT__21();// ','
-		} else if (isMatch("\n")) {
+		} else if (isKeyword("\n")) {
 			mRULE_EOL();
-			nextTokenIsTestStep = false;
-		} else if (isMatch("Given:")) {
+			nextTokenIsWORD = false;
+			useDefaultLexer = false;
+		} else if (isKeyword("+")) {
+			mT__23();
+		} else if (isKeyword("|===")) {
+			mT__24();
+		} else if (isKeyword("*")) {
+			mT__13();
+		} else if (isKeyword("==")) {
+			mT__11();
+		} else if (isKeyword("=")) {
+			mT__9();
+		} else if (isKeyword("|")) {
+			mT__25();
+			nextTokenIsWORD = true;
+		} else if (nextTokenIsWORD) {
+			// treat any token as a WORD even if it looks like a keyword
+			mRULE_WORD();
+		} else if (isKeyword("Step-Object:")) {
+			mT__10();// 'Object:'
+		} else if (isKeyword("Step-Definition:")) {
+			mT__12();// 'Definition:'
+		} else if (isKeyword("Step-Parameters:")) {
+			mT__14();// 'Parameters:'
+		} else if (isKeyword("Test-Suite:")) {
+			mT__15();// 'Feature:'
+		} else if (isKeyword("Test-Setup:")) {
+			mT__16();// 'Background:'
+		} else if (isKeyword("Test-Case:")) {
+			mT__17();// 'Scenario:'
+		} else if (isKeyword("Test-Data:")) {
+			mT__18();// 'Examples:'
+		} else if (isKeyword("Given:")) {
 			mT__19();// 'Given'
-			nextTokenIsTestStep = true;
-		} else if (isMatch("When:")) {
+			useDefaultLexer = true;
+		} else if (isKeyword("When:")) {
 			mT__20();// 'When'
-			nextTokenIsTestStep = true;
-		} else if (isMatch("Then:")) {
+			useDefaultLexer = true;
+		} else if (isKeyword("Then:")) {
 			mT__21();// 'Then'
-			nextTokenIsTestStep = true;
-		} else if (isMatch("And:")) {
+			useDefaultLexer = true;
+		} else if (isKeyword("And:")) {
 			mT__22();// 'And'
-			nextTokenIsTestStep = true;
-		} else if (nextTokenIsTestStep) {
-			// TODO perhaps I don't need to override the whole lexer, just stuff like raw text?
+			useDefaultLexer = true;
+		} else if (useDefaultLexer) {
+			// TODO perhaps I don't need to override the whole lexer, just stuff like raw
+			// text? Perhaps it should be the final else?
 			super.mTokens();
 		} else {
 			mRULE_WORD();

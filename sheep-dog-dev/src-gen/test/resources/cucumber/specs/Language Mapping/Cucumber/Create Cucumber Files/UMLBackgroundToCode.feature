@@ -52,10 +52,10 @@ Feature: UMLBackgroundToCode
       And The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be present
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Background Steps section will be created as follows
-          | Name  | Step                                             |
+          | Name  | Step                                            |
           | Setup | Given The Unknown service Object0 page is valid |
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenarios Steps section will be created as follows
-          | Name     | Step                                             |
+          | Name     | Step                                            |
           | Submit 1 | Given The Unknown service Object1 page is valid |
           | Submit 2 | Given The Unknown service Object2 page is valid |
           | Submit 3 | Given The Unknown service Object3 page is valid |
@@ -80,7 +80,7 @@ Feature: UMLBackgroundToCode
       And The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be present
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Background Steps section will be created as follows
-          | Name  | Step                                                   |
+          | Name  | Step                                                  |
           | Setup | Given The Unknown service Object<Index> page is valid |
 
     Examples: Indices

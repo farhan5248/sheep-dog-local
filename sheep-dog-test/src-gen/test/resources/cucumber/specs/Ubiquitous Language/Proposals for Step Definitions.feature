@@ -13,7 +13,7 @@ Feature: Proposals for Step Definitions
   Scenario: Something is proposed if there's a step-definition
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                      |
+          | Step Name                     |
           | The daily batchjob Input file |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name | Step Definition Description |

@@ -21,7 +21,7 @@ Feature: UMLStepToDocument
       And The maven plugin uml-to-asciidoctor goal is executed
      Then The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file will be present
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps section will be created as follows
-          | Name   | Step                                             |
+          | Name   | Step                                            |
           | Submit | Given: The blah application Given page is empty |
           | Submit | When: The blah application When page is empty   |
           | Submit | Then: The blah application Then page is empty   |
@@ -42,6 +42,6 @@ Feature: UMLStepToDocument
       And The maven plugin uml-to-asciidoctor goal is executed
      Then The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file will be present
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps section will be created as follows
-          | Name      | Step                                                |
+          | Name      | Step                                               |
           | Submit's' | Given: The blah application Given page isn't empty |
 

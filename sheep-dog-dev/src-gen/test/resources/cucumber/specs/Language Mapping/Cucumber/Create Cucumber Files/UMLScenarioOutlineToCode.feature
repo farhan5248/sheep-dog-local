@@ -29,7 +29,7 @@ Feature: UMLScenarioOutlineToCode
       And The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be present
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Steps Data Table section will be created as follows
-          | Name   | Step                                                          |
+          | Name   | Step                                                         |
           | Submit | Given The blah application Object page is created as follows |
           | Submit | Given The blah application Object page is created as follows |
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
@@ -99,7 +99,7 @@ Feature: UMLScenarioOutlineToCode
           | Name   | Tags           | Description                                                 |
           | Submit | tag1,tag2,tag3 | \@tag1 \@tag2 \@tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Steps Data Table section will be created as follows
-          | Name   | Step                                                                 |
+          | Name   | Step                                                                |
           | Submit | Given The blah application Object<Index> page is created as follows |
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples         | Row             |

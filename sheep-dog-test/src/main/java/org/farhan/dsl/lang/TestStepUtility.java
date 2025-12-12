@@ -21,7 +21,7 @@ public class TestStepUtility {
 	private static final String WORD = ".";
 	private static final String TITLE = "( " + WORD + "+)";
 
-	private static final String COMPONENT_NAME = TITLE;
+	private static final String COMPONENT_NAME = "( " + "[^/]" + "+)";
 	private static final String COMPONENT_TYPE = getRegexFromTypes(TestStepComponentTypes.values());
 	private static final String COMPONENT = "(" + COMPONENT_NAME + COMPONENT_TYPE + ")";
 
@@ -54,7 +54,7 @@ public class TestStepUtility {
 	}
 
 	public static String getComponent(String text) {
-		return getGroup("The" + "(" + COMPONENT + ")", text, 1);
+		return getGroup("(The" + COMPONENT + ")", text, 2);
 	}
 
 	public static String getComponentName(String text) {

@@ -11,9 +11,9 @@ Feature: Problems Which Prevent Code Generation
           | Object Name                       | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
       And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                 |
+          | Step Name                                |
           | The daily batchjob Input file is present |
-          | The Input file is downloaded              |
+          | The Input file is downloaded             |
      When The xtext plugin validate error action is performed as follows
           | Selected Step |
           | 1             |
@@ -25,8 +25,8 @@ Feature: Problems Which Prevent Code Generation
     The other steps default to that one.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                    |
-          | The Input file is present                    |
+          | Step Name                                   |
+          | The Input file is present                   |
           | The daily batchjob Input file is downloaded |
      When The xtext plugin validate error action is performed as follows
           | Selected Step |

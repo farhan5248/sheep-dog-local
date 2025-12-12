@@ -30,7 +30,7 @@ Feature: UMLScenarioOutlineToDocument
       And The maven plugin uml-to-asciidoctor goal is executed
      Then The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file will be present
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps section will be created as follows
-          | Name   | Step                                                           |
+          | Name   | Step                                                          |
           | Submit | Given: The blah application Object page is created as follows |
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
@@ -100,7 +100,7 @@ Feature: UMLScenarioOutlineToDocument
           | Name   | Tags           | Description                                              |
           | Submit | tag1,tag2,tag3 | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps section will be created as follows
-          | Name   | Step                                                            |
+          | Name   | Step                                                           |
           | Submit | Given: The blah application Object page is created as follows  |
           | Submit | Given: The blah application Object2 page is created as follows |
           | Submit | Given: The blah application Object3 page is created as follows |

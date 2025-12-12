@@ -112,7 +112,7 @@ Feature: DocumentBackgroundToUML
           | Interaction Name      | Comment                                                  |
           | specs::Process::Setup | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name      | Message                                     |
+          | Interaction Name      | Message                                    |
           | specs::Process::Setup | The blah application Object page is empty  |
           | specs::Process::Setup | The blah application Object2 page is empty |
           | specs::Process::Setup | The blah application Object3 page is empty |

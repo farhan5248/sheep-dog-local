@@ -28,7 +28,7 @@ Feature: DocumentScenarioOutlineToUML
      When The maven plugin asciidoctor-to-uml goal is executed
      Then The spec-prj project uml/pst.uml file will be present
       And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                                 | Argument Name | Annotation Detail |
+          | Interaction Name       | Message                                                | Argument Name | Annotation Detail |
           | specs::Process::Submit | The blah application Object page is created as follows | dataTable     | 0 -> h1 \|        |
           | specs::Process::Submit | The blah application Object page is created as follows | dataTable     | 1 -> <h3> \|      |
       And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
@@ -99,7 +99,7 @@ Feature: DocumentScenarioOutlineToUML
           | Interaction Name       | Comment                                                  |
           | specs::Process::Submit | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                                        |
+          | Interaction Name       | Message                                                       |
           | specs::Process::Submit | The blah application Object<Index> page is created as follows |
       And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name  | Annotation Detail         |

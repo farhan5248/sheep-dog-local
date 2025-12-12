@@ -7,14 +7,14 @@ Feature: Display Documentation with Proposals
   Scenario: Display Step Object documentation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name           |
+          | Step Name          |
           | The daily batchjob |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Object Description |
           | daily batchjob/Input file.feature | Description\n      |
      When The xtext plugin propose test step action is performed
      Then The xtext plugin propose content dialog will be set as follows
-          | Suggestion                     | Suggestion Name | Suggestion Description |
+          | Suggestion                    | Suggestion Name | Suggestion Description |
           | The daily batchjob Input file | Input file      | Description\n          |
 
   Scenario: Components have no documentation
@@ -29,21 +29,21 @@ Feature: Display Documentation with Proposals
           | daily batchjob/Input file.feature | Description        |
      When The xtext plugin propose test step action is performed
      Then The xtext plugin propose content dialog will be set as follows
-          | Suggestion          | Suggestion Name | Suggestion Description |
+          | Suggestion         | Suggestion Name | Suggestion Description |
           | The daily batchjob | daily batchjob  | daily batchjob         |
 
   Scenario: Display empty tooltip if there's no documentation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                 |
+          | Step Name                                |
           | The daily batchjob Input file is present |
-          | empty                                     |
+          | empty                                    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Object Description |
           | daily batchjob/Input file.feature | empty              |
      When The xtext plugin propose test step action is performed
      Then The xtext plugin propose content dialog will be set as follows
-          | Suggestion     | Suggestion Name | Suggestion Description                                 |
+          | Suggestion     | Suggestion Name | Suggestion Description                                |
           | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
 
   Scenario: Display non-existing object references
@@ -52,12 +52,12 @@ Feature: Display Documentation with Proposals
     In that case, the tooltip displays the line that the object is on.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                 |
+          | Step Name                                |
           | The daily batchjob Input file is present |
-          | empty                                     |
+          | empty                                    |
      When The xtext plugin propose test step action is performed
      Then The xtext plugin propose content dialog will be set as follows
-          | Suggestion     | Suggestion Name | Suggestion Description                                 |
+          | Suggestion     | Suggestion Name | Suggestion Description                                |
           | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
 
   Scenario: Display existing object references
@@ -68,14 +68,14 @@ Feature: Display Documentation with Proposals
     TODO I guess I could put the full name and the documentation if it exists.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                 |
+          | Step Name                                |
           | The daily batchjob Input file is present |
-          | empty                                     |
+          | empty                                    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Object Description |
           | daily batchjob/Input file.feature | Description        |
      When The xtext plugin propose test step action is performed
      Then The xtext plugin propose content dialog will be set as follows
-          | Suggestion     | Suggestion Name | Suggestion Description                                 |
+          | Suggestion     | Suggestion Name | Suggestion Description                                |
           | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
 

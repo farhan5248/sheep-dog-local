@@ -24,7 +24,7 @@ Feature: UMLStepTableToCode
       And The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be present
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Steps Data Table section will be created as follows
-          | Name   | Step                                                         | Row                  |
+          | Name   | Step                                                        | Row                  |
           | Submit | Given The Unknown service Object page is created as follows | \| h1 \| h2 \| h3 \| |
           | Submit | Given The Unknown service Object page is created as follows | \| v1 \| v2 \| v3 \| |
           | Submit | Given The Unknown service Object page is created as follows | \| v4 \| v5 \| v6 \| |
@@ -49,7 +49,7 @@ Feature: UMLStepTableToCode
       And The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be present
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Steps Data Table section will be created as follows
-          | Name   | Step                                                         | Row                |
+          | Name   | Step                                                        | Row                |
           | Submit | Given The Unknown service Object page is created as follows | \| h1 \|           |
           | Submit | Given The Unknown service Object page is created as follows | \| \\\| v1 \\\| \| |
 

@@ -21,6 +21,6 @@ Feature: UMLDocStringToCode
       And The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be present
       And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Steps Doc String section will be created as follows
-          | Name   | Step                                                         | Content |
+          | Name   | Step                                                        | Content |
           | Submit | Given The Unknown service Object page is created as follows | text1   |
 

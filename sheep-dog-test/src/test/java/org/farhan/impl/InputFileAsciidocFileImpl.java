@@ -10,14 +10,13 @@ import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.SheepDogBuilder;
-import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class InputFileAsciidocFileImpl extends TestObject implements InputFileAsciidocFile,
-		org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile {
+public class InputFileAsciidocFileImpl extends TestObject implements InputFileAsciidocFile {
 
 	@Override
 	public void assertObjectName(HashMap<String, String> keyMap) {

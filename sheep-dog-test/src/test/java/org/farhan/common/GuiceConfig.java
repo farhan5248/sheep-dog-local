@@ -7,19 +7,17 @@ import org.farhan.impl.Process2AsciidocFileImpl;
 import org.farhan.impl.ProposeContentDialogImpl;
 import org.farhan.impl.ProposeTestStepActionImpl;
 import org.farhan.impl.ProposeTestStepTableActionImpl;
-import org.farhan.impl.QuickfixDialogImpl;
 import org.farhan.impl.SheepDogFactoryImpl;
 import org.farhan.impl.ValidateErrorActionImpl;
 import org.farhan.impl.ValidateErrorDialogImpl;
 import org.farhan.impl.ValidateWarningActionImpl;
 import org.farhan.impl.ValidateWarningDialogImpl;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;
-import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.GenerateStepDefinitionAction;
 import org.farhan.objects.xtext.ProposeContentDialog;
 import org.farhan.objects.xtext.ProposeTestStepAction;
 import org.farhan.objects.xtext.ProposeTestStepTableAction;
-import org.farhan.objects.xtext.QuickfixDialog;
 import org.farhan.objects.xtext.ValidateErrorAction;
 import org.farhan.objects.xtext.ValidateErrorDialog;
 import org.farhan.objects.xtext.ValidateWarningAction;
@@ -40,10 +38,7 @@ public final class GuiceConfig extends AbstractModule implements InjectorSource 
 	protected void configure() {
 		bind(GenerateStepDefinitionAction.class).to(GenerateStepDefinitionActionImpl.class);
 		bind(InputFileAsciidocFile.class).to(InputFileAsciidocFileImpl.class);
-		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile.class)
-				.to(InputFileAsciidocFileImpl.class);
 		bind(Process2AsciidocFile.class).to(Process2AsciidocFileImpl.class);
-		bind(QuickfixDialog.class).to(QuickfixDialogImpl.class);
 		bind(ValidateErrorAction.class).to(ValidateErrorActionImpl.class);
 		bind(ValidateErrorDialog.class).to(ValidateErrorDialogImpl.class);
 		bind(ProposeTestStepTableAction.class).to(ProposeTestStepTableActionImpl.class);

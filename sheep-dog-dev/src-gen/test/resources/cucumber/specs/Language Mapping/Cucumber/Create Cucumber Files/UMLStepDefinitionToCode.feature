@@ -70,7 +70,7 @@ Feature: UMLStepDefinitionToCode
      When The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name | Annotation                                             | Visibility | Return Type |
+          | Method Name | Annotation                                            | Visibility | Return Type |
           | isEmpty     | @Given("^The blah application Object page is empty$") | public     | void        |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
           | Method Name | Statement                        |

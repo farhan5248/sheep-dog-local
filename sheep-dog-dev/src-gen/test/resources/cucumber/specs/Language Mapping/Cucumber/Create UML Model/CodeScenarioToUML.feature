@@ -15,7 +15,7 @@ Feature: CodeScenarioToUML
      When The maven plugin cucumber-to-uml goal is executed
      Then The spec-prj project uml/pst.uml file will be present
       And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                               |
+          | Interaction Name       | Message                                              |
           | specs::Process::Submit | The blah application something/Object1 page is empty |
 
   Scenario Outline: Three tags, three statements, three steps
@@ -43,7 +43,7 @@ Feature: CodeScenarioToUML
           | Interaction Name       | Comment                               |
           | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
       And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                                     |
+          | Interaction Name       | Message                                                    |
           | specs::Process::Submit | The blah application something/Object<Index> page is empty |
 
     Examples: Indices

@@ -15,7 +15,7 @@ Feature: Code Generation
   Scenario: Create a new object for a component
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                 |
+          | Step Name                                |
           | The daily batchjob Input file is present |
      When The xtext plugin generate step definition action is performed
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
@@ -25,7 +25,7 @@ Feature: Code Generation
   Scenario: Create a step definition for an object
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                 |
+          | Step Name                                |
           | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
@@ -38,7 +38,7 @@ Feature: Code Generation
   Scenario: Create a new parameter set for the step-definition
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                 | Headers    |
+          | Step Name                                | Headers    |
           | The daily batchjob Input file is present | New Header |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name | Parameters |

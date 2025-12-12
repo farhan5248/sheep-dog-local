@@ -16,7 +16,7 @@ Feature: DocumentScenarioToUML
      When The maven plugin asciidoctor-to-uml goal is executed
      Then The spec-prj project uml/pst.uml file will be present
       And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                    |
+          | Interaction Name       | Message                                   |
           | specs::Process::Submit | The blah application Object page is empty |
 
   Scenario: Three tags, three statements, three steps
@@ -49,7 +49,7 @@ Feature: DocumentScenarioToUML
           | Interaction Name       | Comment                                                  |
           | specs::Process::Submit | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                     |
+          | Interaction Name       | Message                                    |
           | specs::Process::Submit | The blah application Object page is empty  |
           | specs::Process::Submit | The blah application Object2 page is empty |
           | specs::Process::Submit | The blah application Object3 page is empty |
