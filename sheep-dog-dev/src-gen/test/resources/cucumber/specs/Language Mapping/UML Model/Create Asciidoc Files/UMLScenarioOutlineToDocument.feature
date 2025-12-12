@@ -5,13 +5,13 @@ Feature: UMLScenarioOutlineToDocument
 
   Scenario: No tags, no statement, one step, one example
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
           == Test-Case: Submit
           
-          * Given: The blah application, Object page is created as follows
+          * Given: The blah application Object page is created as follows
           +
           |===
           | h1
@@ -25,21 +25,21 @@ Feature: UMLScenarioOutlineToDocument
           | v31
           |===
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
-      And The maven plugin, uml-to-asciidoctor goal is executed
-     Then The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+      And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
+      And The maven plugin uml-to-asciidoctor goal is executed
+     Then The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file will be present
+      And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                                           |
-          | Submit | Given: The blah application, Object page is created as follows |
-      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+          | Submit | Given: The blah application Object page is created as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h3  |
           | Submit | Examples 1 | v31 |
 
   Scenario: Three tags, three statements, three steps, three examples
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -50,21 +50,21 @@ Feature: UMLScenarioOutlineToDocument
           Desc line 2
           Desc line 3
           
-          * Given: The blah application, Object page is created as follows
+          * Given: The blah application Object page is created as follows
           +
           |===
           | h1
           | {h3}
           |===
           
-          * Given: The blah application, Object2 page is created as follows
+          * Given: The blah application Object2 page is created as follows
           +
           |===
           | h1
           | {h3}
           |===
           
-          * Given: The blah application, Object3 page is created as follows
+          * Given: The blah application Object3 page is created as follows
           +
           |===
           | h1
@@ -92,19 +92,19 @@ Feature: UMLScenarioOutlineToDocument
           | v33
           |===
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
-      And The maven plugin, uml-to-asciidoctor goal is executed
-     Then The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+      And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
+      And The maven plugin uml-to-asciidoctor goal is executed
+     Then The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file will be present
+      And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios section will be created as follows
           | Name   | Tags           | Description                                              |
           | Submit | tag1,tag2,tag3 | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
-      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps section will be created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                                            |
-          | Submit | Given: The blah application, Object page is created as follows  |
-          | Submit | Given: The blah application, Object2 page is created as follows |
-          | Submit | Given: The blah application, Object3 page is created as follows |
-      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+          | Submit | Given: The blah application Object page is created as follows  |
+          | Submit | Given: The blah application Object2 page is created as follows |
+          | Submit | Given: The blah application Object3 page is created as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h3  |
           | Submit | Examples 1 | v31 |

@@ -5,19 +5,19 @@ Feature: DocumentFeatureToUML
 
   Scenario: No statements
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Class section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
 
   Scenario: Three tags, three statements
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -27,9 +27,9 @@ Feature: DocumentFeatureToUML
           
           == Test-Case: Story One
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Class Comments section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
 

@@ -5,7 +5,7 @@ Feature: CodeBackgroundToUML
 
   Scenario: One statement, one step, one scenario
 
-    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -16,15 +16,15 @@ Feature: CodeBackgroundToUML
             Scenario: Submit
                Given The Object1 page is valid
           """
-     When The maven plugin, cucumber-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
+     When The maven plugin cucumber-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name      | Comment     |
           | specs::Process::Setup | Desc line 1 |
 
   Scenario: No statement, one step, three scenarios
 
-    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -40,9 +40,9 @@ Feature: CodeBackgroundToUML
             Scenario: Submit 3
                Given The Object3 page is valid
           """
-     When The maven plugin, cucumber-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin cucumber-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name         | Message                   |
           | specs::Process::Setup    | The Object0 page is valid |
           | specs::Process::Submit 1 | The Object1 page is valid |
@@ -51,7 +51,7 @@ Feature: CodeBackgroundToUML
 
   Scenario Outline: No statement, three steps, one scenario
 
-    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -63,9 +63,9 @@ Feature: CodeBackgroundToUML
             Scenario: Submit
                Given The Object page is valid
           """
-     When The maven plugin, cucumber-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin cucumber-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                         |
           | specs::Process::Setup  | The Object<Index> page is valid |
           | specs::Process::Submit | The Object page is valid        |

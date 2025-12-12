@@ -15,12 +15,12 @@ public class XtextValidateErrorDialogSteps extends TestSteps {
         super(object, "xtext", "validate error");
     }
 
-    @Given("^The xtext plugin, validate error dialog will be empty$")
+    @Given("^The xtext plugin validate error dialog will be empty$")
     public void willBeEmpty() {
         object.assertInputOutputs("Empty");
     }
 
-    @Given("^The xtext plugin, validate error dialog will be set as follows$")
+    @Given("^The xtext plugin validate error dialog will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }

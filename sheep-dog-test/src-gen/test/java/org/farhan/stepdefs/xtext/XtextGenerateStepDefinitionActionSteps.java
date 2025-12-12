@@ -14,7 +14,7 @@ public class XtextGenerateStepDefinitionActionSteps extends TestSteps {
         super(object, "xtext", "generate step definition");
     }
 
-    @Given("^The xtext plugin, generate step definition action is performed$")
+    @Given("^The xtext plugin generate step definition action is performed$")
     public void isPerformed() {
         object.transition();
     }

@@ -15,27 +15,27 @@ public class CodePrjObjectPageJavaFileSteps extends TestSteps {
         super(object, "code-prj", "src-gen/test/java/org/farhan/objects/blah/ObjectPage.java");
     }
 
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Header section will be created as follows$")
+    @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Header section will be created as follows$")
     public void headerSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable, "HeaderSection");
     }
 
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Methods section will be created as follows$")
+    @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Methods section will be created as follows$")
     public void methodsSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable, "MethodsSection");
     }
 
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows$")
+    @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows$")
     public void isCreatedAsFollows(String docString) {
         object.setInputOutputs("Content", docString);
     }
 
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows$")
+    @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows$")
     public void willBeCreatedAsFollows(String docString) {
         object.assertInputOutputs("Content", docString);
     }
 
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present$")
+    @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present$")
     public void willBePresent() {
         object.assertInputOutputs("Present");
     }

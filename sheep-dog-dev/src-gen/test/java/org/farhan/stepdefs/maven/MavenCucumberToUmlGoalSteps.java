@@ -15,12 +15,12 @@ public class MavenCucumberToUmlGoalSteps extends TestSteps {
         super(object, "maven", "cucumber-to-uml");
     }
 
-    @Given("^The maven plugin, cucumber-to-uml goal is executed$")
+    @Given("^The maven plugin cucumber-to-uml goal is executed$")
     public void isExecuted() {
         object.transition();
     }
 
-    @Given("^The maven plugin, cucumber-to-uml goal is executed with$")
+    @Given("^The maven plugin cucumber-to-uml goal is executed with$")
     public void isExecutedWith(DataTable dataTable) {
         object.setInputOutputs(dataTable);
         object.transition();

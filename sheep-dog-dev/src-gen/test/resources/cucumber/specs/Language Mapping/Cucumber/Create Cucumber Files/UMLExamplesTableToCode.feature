@@ -5,7 +5,7 @@ Feature: UMLExamplesTableToCode
 
   Scenario: Three rows, three cells
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -32,16 +32,16 @@ Feature: UMLExamplesTableToCode
           | v7 | v8 | v9
           |===
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-      And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
-      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+      And The maven plugin uml-to-cucumber goal is executed
+     Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row                  |
           | Submit | Examples 1 | \| h1 \| h2 \| h3 \| |
           | Submit | Examples 1 | \| v1 \| v2 \| v3 \| |
           | Submit | Examples 1 | \| v4 \| v5 \| v6 \| |
           | Submit | Examples 1 | \| v7 \| v8 \| v9 \| |
-      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
+      And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Tags           | Description                               |
           | Submit | Examples 1 | tag1,tag2,tag3 | \@tag1 \@tag2 \@tag3\nDesc1\nDesc2\nDesc3 |
 

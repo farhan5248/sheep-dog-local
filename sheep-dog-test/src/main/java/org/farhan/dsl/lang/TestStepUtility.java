@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import org.farhan.dsl.types.TestStepAttachmentTypes;
 import org.farhan.dsl.types.TestStepComponentTypes;
-import org.farhan.dsl.types.TestStepDetailTypes;
+import org.farhan.dsl.types.TestStepPartTypes;
 import org.farhan.dsl.types.TestStepObjectEdgeTypes;
 import org.farhan.dsl.types.TestStepObjectVertexTypes;
 import org.farhan.dsl.types.TestStepStateModalityTypes;
@@ -18,53 +18,63 @@ public class TestStepUtility {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepUtility.class);
 
-	// TODO NAME_REGEX should match terminal ID and be used the same way
-	private static final String NAME_REGEX = "[^,]";
-	private static final String COMPONENT_REGEX = "( " + NAME_REGEX + "+)"
-			+ getRegexFromTypes(TestStepComponentTypes.values()) + ",";
-	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)("
-			+ getRegexFromTypes(TestStepObjectVertexTypes.values()) + "|"
-			+ getRegexFromTypes(TestStepObjectEdgeTypes.values()) + "))";
-	private static final String DETAILS_REGEX = "( " + NAME_REGEX + "+)"
-			+ getRegexFromTypes(TestStepDetailTypes.values());
-	private static final String STATE_ATTR_REGEX = "( \\S+)";
-	private static final String STATE_REGEX = "(" + getRegexFromTypes(TestStepStateModalityTypes.values())
-			+ STATE_ATTR_REGEX + getRegexFromTypes(TestStepAttachmentTypes.values()) + "?)";
-	private static final String TIME_REGEX = getRegexFromTypes(TestStepTimeTypes.values()) + " (" + NAME_REGEX + "+)";
-	private static final String PREDICATE_REGEX = "(" + "(" + DETAILS_REGEX + ")?" + STATE_REGEX + "(" + TIME_REGEX
-			+ ")?" + ")";
+	private static final String WORD = ".";
+	private static final String TITLE = "( " + WORD + "+)";
 
-	private static final String STEP_OBJECT = "The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX;
-	private static final String STEP_DEFINITION = PREDICATE_REGEX;
-	public static final String REGEX = STEP_OBJECT + STEP_DEFINITION;
+	private static final String COMPONENT_NAME = TITLE;
+	private static final String COMPONENT_TYPE = getRegexFromTypes(TestStepComponentTypes.values());
+	private static final String COMPONENT = "(" + COMPONENT_NAME + COMPONENT_TYPE + ")";
+
+	private static final String OBJECT_NAME = TITLE;
+	private static final String OBJECT_TYPE = "(" + getRegexFromTypes(TestStepObjectVertexTypes.values()) + "|"
+			+ getRegexFromTypes(TestStepObjectEdgeTypes.values()) + ")";
+	private static final String OBJECT = "(" + OBJECT_NAME + OBJECT_TYPE + ")";
+
+	private static final String PART_DESC = TITLE;
+	private static final String PART_TYPE = getRegexFromTypes(TestStepPartTypes.values());
+	private static final String PART = "(" + PART_DESC + PART_TYPE + ")";
+
+	private static final String STATE_DESC = "( \\S+)";
+	private static final String STATE_TYPE = getRegexFromTypes(TestStepStateModalityTypes.values());
+	private static final String STATE = "(" + STATE_TYPE + STATE_DESC + ")";
+
+	private static final String TIME_DESC = TITLE;
+	private static final String TIME_TYPE = getRegexFromTypes(TestStepTimeTypes.values());
+	private static final String TIME = "(" + TIME_TYPE + TIME_DESC + ")";
+
+	private static final String ATTACHMENT = getRegexFromTypes(TestStepAttachmentTypes.values());
+
+	private static final String STEP_OBJECT_NAME = "(The" + COMPONENT + "?" + OBJECT + ")";
+	private static final String STEP_DEFINITION_NAME = "(" + PART + "?" + STATE + TIME + "?" + ATTACHMENT + "?" + ")";
+	public static final String REGEX = STEP_OBJECT_NAME + STEP_DEFINITION_NAME;
 
 	// TODO combine has and get into one
 	public static String getAttachment(String text) {
-		return getGroup(REGEX, text, 16);
+		return getGroup(REGEX, text, 20);
 	}
 
 	public static String getComponent(String text) {
-		return getGroup("The" + "(" + COMPONENT_REGEX + ")", text, 1).replace(",", "");
+		return getGroup("The" + "(" + COMPONENT + ")", text, 1);
 	}
 
 	public static String getComponentName(String text) {
-		return getGroup(REGEX, text, 2);
-	}
-
-	public static String getComponentType(String text) {
 		return getGroup(REGEX, text, 3);
 	}
 
-	public static String getDetails(String text) {
-		return getGroup(REGEX, text, 10);
+	public static String getComponentType(String text) {
+		return getGroup(REGEX, text, 4);
 	}
 
-	public static String getDetailsName(String text) {
+	public static String getDetails(String text) {
 		return getGroup(REGEX, text, 11);
 	}
 
-	public static String getDetailsType(String text) {
+	public static String getDetailsName(String text) {
 		return getGroup(REGEX, text, 12);
+	}
+
+	public static String getDetailsType(String text) {
+		return getGroup(REGEX, text, 13);
 	}
 
 	public static String getGroup(String regex, String text, int group) {
@@ -78,42 +88,6 @@ public class TestStepUtility {
 			}
 		}
 		return "";
-	}
-
-	public static String getObject(String text) {
-		return getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX, text, 4);
-	}
-
-	public static String getObjectName(String text) {
-		return getGroup(REGEX, text, 5);
-	}
-
-	public static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep, boolean reverse) {
-		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
-		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
-
-			// TODO make isElementEqual to force implementing the equals check
-			// TODO make tests for this
-			if (t.equals(theTestStep)) {
-				break;
-			} else {
-				if (reverse) {
-					steps.add(0, t);
-				} else {
-					steps.add(t);
-				}
-			}
-		}
-		return steps;
-
-	}
-
-	public static String getStepObjectQualifiedName(ITestStep theStep) {
-		String stepNameLong = getNameLong(theStep);
-		String component = getComponent(stepNameLong);
-		String object = getObject(stepNameLong);
-		String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
-		return component + "/" + object + fileExt;
 	}
 
 	public static String getNameLong(ITestStep theStep) {
@@ -158,7 +132,7 @@ public class TestStepUtility {
 					}
 					component = lastComponent;
 				}
-				stepNameLong = "The " + component + ", " + object + " " + predicate;
+				stepNameLong = "The " + component + " " + object + " " + predicate;
 			}
 			logger.debug("Exiting getNameLong with result: {}", stepNameLong);
 			return stepNameLong;
@@ -169,12 +143,40 @@ public class TestStepUtility {
 		}
 	}
 
-	public static String getObjectType(String text) {
+	public static String getObject(String text) {
+		return getGroup(STEP_OBJECT_NAME, text, 5);
+	}
+
+	public static String getObjectName(String text) {
 		return getGroup(REGEX, text, 6);
 	}
 
+	public static String getObjectType(String text) {
+		return getGroup(REGEX, text, 7);
+	}
+
 	public static String getPredicate(String text) {
-		return getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(.*)", text, 9);
+		return getGroup(REGEX, text, 10);
+	}
+
+	public static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep, boolean reverse) {
+		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
+		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
+
+			// TODO make isElementEqual to force implementing the equals check
+			// TODO make tests for this
+			if (t.equals(theTestStep)) {
+				break;
+			} else {
+				if (reverse) {
+					steps.add(0, t);
+				} else {
+					steps.add(t);
+				}
+			}
+		}
+		return steps;
+
 	}
 
 	private static String getRegexFromTypes(Enum<?>[] enumValues) {
@@ -184,8 +186,8 @@ public class TestStepUtility {
 				regex += " " + ((TestStepAttachmentTypes) enumValue).value + "|";
 			} else if (enumValue instanceof TestStepComponentTypes) {
 				regex += " " + ((TestStepComponentTypes) enumValue).value + "|";
-			} else if (enumValue instanceof TestStepDetailTypes) {
-				regex += " " + ((TestStepDetailTypes) enumValue).value + "|";
+			} else if (enumValue instanceof TestStepPartTypes) {
+				regex += " " + ((TestStepPartTypes) enumValue).value + "|";
 			} else if (enumValue instanceof TestStepObjectEdgeTypes) {
 				regex += " " + ((TestStepObjectEdgeTypes) enumValue).value + "|";
 			} else if (enumValue instanceof TestStepObjectVertexTypes) {
@@ -200,15 +202,23 @@ public class TestStepUtility {
 	}
 
 	public static String getState(String text) {
-		return getGroup(REGEX, text, 13);
-	}
-
-	public static String getStateModality(String text) {
 		return getGroup(REGEX, text, 14);
 	}
 
-	public static String getStateType(String text) {
+	public static String getStateModality(String text) {
 		return getGroup(REGEX, text, 15);
+	}
+
+	public static String getStateType(String text) {
+		return getGroup(REGEX, text, 16);
+	}
+
+	public static String getStepObjectQualifiedName(ITestStep theStep) {
+		String stepNameLong = getNameLong(theStep);
+		String component = getComponent(stepNameLong);
+		String object = getObject(stepNameLong);
+		String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
+		return component + "/" + object + fileExt;
 	}
 
 	public static String getTime(String text) {
@@ -216,53 +226,49 @@ public class TestStepUtility {
 	}
 
 	public static boolean hasComponent(String text) {
-		return !getGroup("The" + "(" + COMPONENT_REGEX + ")", text, 0).isBlank();
+		return !getGroup("The" + "(" + COMPONENT + ")", text, 0).isBlank();
 	}
 
 	public static boolean hasDetails(String text) {
-		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")" + ")",
-				text, 0).isBlank();
+		return !getGroup("The" + "(" + COMPONENT + ")?" + OBJECT + "(" + "(" + PART + ")" + ")", text, 0).isBlank();
 	}
 
 	public static boolean hasObject(String text) {
-		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX, text, 0).isBlank();
+		return !getGroup(STEP_OBJECT_NAME, text, 0).isBlank();
 	}
 
 	public static boolean hasPredicate(String text) {
-		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + PREDICATE_REGEX, text, 0).isBlank();
+		return !getGroup(REGEX, text, 0).isBlank();
 	}
 
 	public static boolean hasState(String text) {
-		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")?"
-				+ STATE_REGEX + ")", text, 0).isBlank();
+		return !getGroup("The" + "(" + COMPONENT + ")?" + OBJECT + "(" + "(" + PART + ")?" + STATE + ")", text, 0)
+				.isBlank();
 	}
 
 	public static boolean hasStateAttachment(String text) {
-		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")?" + "("
-				+ getRegexFromTypes(TestStepStateModalityTypes.values()) + STATE_ATTR_REGEX
+		return !getGroup("The" + "(" + COMPONENT + ")?" + OBJECT + "(" + "(" + PART + ")?" + "("
+				+ getRegexFromTypes(TestStepStateModalityTypes.values()) + STATE_DESC
 				+ getRegexFromTypes(TestStepAttachmentTypes.values()) + ")" + ")", text, 0).isBlank();
 	}
 
 	public static boolean hasStateAttribute(String text) {
-		return !getGroup(
-				"The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")?" + "("
-						+ getRegexFromTypes(TestStepStateModalityTypes.values()) + STATE_ATTR_REGEX + ")" + ")",
-				text, 0).isBlank();
+		return !getGroup("The" + "(" + COMPONENT + ")?" + OBJECT + "(" + "(" + PART + ")?" + "("
+				+ getRegexFromTypes(TestStepStateModalityTypes.values()) + STATE_DESC + ")" + ")", text, 0).isBlank();
 	}
 
 	public static boolean hasStateModality(String text) {
-		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")?" + "("
+		return !getGroup("The" + "(" + COMPONENT + ")?" + OBJECT + "(" + "(" + PART + ")?" + "("
 				+ getRegexFromTypes(TestStepStateModalityTypes.values()) + ")" + ")", text, 0).isBlank();
 	}
 
 	public static boolean hasTime(String text) {
-		return !getGroup(
-				"The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + STATE_REGEX + "(" + TIME_REGEX + ")" + ")",
-				text, 0).isBlank();
+		return !getGroup("The" + "(" + COMPONENT + ")?" + OBJECT + "(" + STATE + "(" + TIME + ")" + ")", text, 0)
+				.isBlank();
 	}
 
 	public static boolean isEdge(String text) {
-		return !getGroup(REGEX, text, 8).isEmpty();
+		return !getGroup(REGEX, text, 9).isEmpty();
 	}
 
 	public static boolean isNegativeStep(String text) {

@@ -5,7 +5,7 @@ Feature: UMLDocStringToCode
 
   Scenario: One line
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -17,10 +17,10 @@ Feature: UMLDocStringToCode
           text1
           ----
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-      And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
-      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Steps Doc String section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+      And The maven plugin uml-to-cucumber goal is executed
+     Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Steps Doc String section will be created as follows
           | Name   | Step                                                         | Content |
-          | Submit | Given The Unknown service, Object page is created as follows | text1   |
+          | Submit | Given The Unknown service Object page is created as follows | text1   |
 

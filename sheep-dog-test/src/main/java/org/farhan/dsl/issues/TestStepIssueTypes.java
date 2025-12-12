@@ -5,7 +5,7 @@ public enum TestStepIssueTypes {
 	TEST_STEP_NAME_COMPONENT_ONLY("TEST_STEP_NAME_COMPONENT_ONLY",
 			"Every test case must have at least one component specified."
 					+ "\nThis should be the first part of the test step name."
-					+ "\nThe component is optional, but if it is present, it must be followed by a comma."
+					+ "\nThe component is optional."
 					+ "\nComponent ending words are: application, service, plugin, batchjob, project."
 					+ "\nExamples are: \"The something application,\" or \"The something service,\""),
 

@@ -5,7 +5,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: One statement, one step, one scenario
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -19,16 +19,16 @@ Feature: DocumentBackgroundToUML
           
           * Given: The Object page is valid
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                   |
           | specs::Process::Setup  | The Object0 page is valid |
           | specs::Process::Submit | The Object page is valid  |
 
   Scenario: No statement, one step, three scenarios
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -48,9 +48,9 @@ Feature: DocumentBackgroundToUML
           
           * Given: The Object3 page is valid
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name         | Message                   |
           | specs::Process::Setup    | The Object0 page is valid |
           | specs::Process::Submit 1 | The Object page is valid  |
@@ -59,7 +59,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: No statement, three steps, one scenario
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -73,9 +73,9 @@ Feature: DocumentBackgroundToUML
           
           * Given: The Object page is valid
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                   |
           | specs::Process::Setup  | The Object page is valid  |
           | specs::Process::Setup  | The Object2 page is valid |
@@ -84,7 +84,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: Three tags, three statements, three steps
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -95,31 +95,31 @@ Feature: DocumentBackgroundToUML
           Desc line 2
           Desc line 3
           
-          * Given: The blah application, Object page is empty
+          * Given: The blah application Object page is empty
           
-          * Given: The blah application, Object2 page is empty
+          * Given: The blah application Object2 page is empty
           
-          * Given: The blah application, Object3 page is empty
+          * Given: The blah application Object3 page is empty
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name      | Annotation Name | Annotation Detail |
           | specs::Process::Setup | tags            | tag1              |
           | specs::Process::Setup | tags            | tag2              |
           | specs::Process::Setup | tags            | tag3              |
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name      | Comment                                                  |
           | specs::Process::Setup | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name      | Message                                     |
-          | specs::Process::Setup | The blah application, Object page is empty  |
-          | specs::Process::Setup | The blah application, Object2 page is empty |
-          | specs::Process::Setup | The blah application, Object3 page is empty |
+          | specs::Process::Setup | The blah application Object page is empty  |
+          | specs::Process::Setup | The blah application Object2 page is empty |
+          | specs::Process::Setup | The blah application Object3 page is empty |
 
   Scenario: Selected tags
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -127,20 +127,20 @@ Feature: DocumentBackgroundToUML
           
           @tag1
           """
-      And The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/app/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           [tags="tag2"]
           == Test-Setup: Data Setup
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed with
+     When The maven plugin asciidoctor-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Class section will be created as follows
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
-      And The spec-prj project, uml/pst.uml file Class section won't be created as follows
+      And The spec-prj project uml/pst.uml file Class section won't be created as follows
           | Class Name          |
           | specs::app::Process |
 

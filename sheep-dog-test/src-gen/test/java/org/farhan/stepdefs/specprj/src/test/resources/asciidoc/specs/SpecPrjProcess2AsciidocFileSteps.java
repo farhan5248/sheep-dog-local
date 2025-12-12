@@ -15,12 +15,12 @@ public class SpecPrjProcess2AsciidocFileSteps extends TestSteps {
         super(object, "spec-prj", "src/test/resources/asciidoc/specs/Process2.asciidoc");
     }
 
-    @Given("^The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file background steps snippet is created as follows$")
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file background steps snippet is created as follows$")
     public void backgroundStepsSnippetIsCreatedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable, "BackgroundStepsSnippet");
     }
 
-    @Given("^The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows$")
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows$")
     public void stepsSnippetIsCreatedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable, "StepsSnippet");
     }

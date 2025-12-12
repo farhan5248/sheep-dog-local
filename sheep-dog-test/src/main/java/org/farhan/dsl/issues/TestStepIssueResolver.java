@@ -78,7 +78,7 @@ public class TestStepIssueResolver {
 			proposal.setId(aStepObject.getQualifiedName().replaceFirst(component + "/", "")
 					.replaceFirst(theProject.getFileExtension() + "$", ""));
 			proposal.setDescription(StatementUtility.getStatementListAsString(aStepObject.getStatementList()));
-			proposal.setValue("The " + component + ", " + proposal.getId());
+			proposal.setValue("The " + component + " " + proposal.getId());
 			proposals.add(proposal);
 		}
 		return proposals;
@@ -155,7 +155,7 @@ public class TestStepIssueResolver {
 			proposal = new SheepDogIssueProposal();
 			proposal.setId(componentName);
 			proposal.setDescription(componentName);
-			proposal.setValue("The " + componentName + ",");
+			proposal.setValue("The " + componentName);
 			proposals.add(proposal);
 		}
 		return proposals;

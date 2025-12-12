@@ -1,6 +1,6 @@
 package org.farhan.dsl.types;
 
-public enum TestStepDetailTypes {
+public enum TestStepPartTypes {
 
 	SECTION("section", "Used to specify a part in a document"),
 	FRAGMENT("fragment", "Used to specify a part in some code"),
@@ -11,7 +11,7 @@ public enum TestStepDetailTypes {
 	public final String value;
 	public final String description;
 
-	TestStepDetailTypes(String value, String description) {
+	TestStepPartTypes(String value, String description) {
 		this.value = value;
 		this.description = description;
 	}

@@ -5,7 +5,7 @@ Feature: CodeStepTableToUML
 
   Scenario: Three rows, three cells
 
-    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -17,9 +17,9 @@ Feature: CodeStepTableToUML
                     | v4 | v5 | v6 |
                     | v7 | v8 | v9 |
           """
-     When The maven plugin, cucumber-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin cucumber-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail    |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|h2 \|h3 \| |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|v2 \|v3 \| |

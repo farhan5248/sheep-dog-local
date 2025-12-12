@@ -5,22 +5,22 @@ Feature: CodeScenarioToUML
 
   Scenario: No tags, no statements, one step
 
-    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
             Scenario: Submit
-              Given The blah application, something/Object1 page is empty
+              Given The blah application something/Object1 page is empty
           """
-     When The maven plugin, cucumber-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin cucumber-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                               |
-          | specs::Process::Submit | The blah application, something/Object1 page is empty |
+          | specs::Process::Submit | The blah application something/Object1 page is empty |
 
   Scenario Outline: Three tags, three statements, three steps
 
-    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -30,21 +30,21 @@ Feature: CodeScenarioToUML
               Desc line 2
               Desc line 3
           
-              Given The blah application, something/Object1 page is empty
-              Given The blah application, something/Object2 page is empty
-              Given The blah application, something/Object3 page is empty
+              Given The blah application something/Object1 page is empty
+              Given The blah application something/Object2 page is empty
+              Given The blah application something/Object3 page is empty
           """
-     When The maven plugin, cucumber-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin cucumber-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                               |
           | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                     |
-          | specs::Process::Submit | The blah application, something/Object<Index> page is empty |
+          | specs::Process::Submit | The blah application something/Object<Index> page is empty |
 
     Examples: Indices
 
@@ -55,7 +55,7 @@ Feature: CodeScenarioToUML
 
   Scenario: Selected tags
 
-    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -69,14 +69,14 @@ Feature: CodeScenarioToUML
           
               Given The Object1 page is empty
           """
-     When The maven plugin, cucumber-to-uml goal is executed with
+     When The maven plugin cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction section will be created as follows
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction section will be created as follows
           | Interaction Name       |
           | specs::Process::Submit |
-      And The spec-prj project, uml/pst.uml file Interaction section won't be created as follows
+      And The spec-prj project uml/pst.uml file Interaction section won't be created as follows
           | Interaction Name        |
           | specs::Process::Submit2 |
 

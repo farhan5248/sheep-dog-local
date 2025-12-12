@@ -6,13 +6,13 @@ Feature: DocumentStepDefinitionToUML
 
   Background: Create a test case
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
           == Test-Case: Submit
           
-          * Given: The blah application, Object page is created as follows
+          * Given: The blah application Object page is created as follows
           +
           |===
           | h1
@@ -21,7 +21,7 @@ Feature: DocumentStepDefinitionToUML
 
   Scenario: No statement, one step parameter
 
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -33,15 +33,15 @@ Feature: DocumentStepDefinitionToUML
           | h1
           |===
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | 1               | 0 -> h1\|         |
 
   Scenario Outline: Three statements, three step parameters
 
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -69,12 +69,12 @@ Feature: DocumentStepDefinitionToUML
           | h3
           |===
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name                                               | Comment                               |
           | stepdefs::blah application::Object page::is created as follows | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
+      And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | <Index>         | 0 -> h<Index>\|   |
 

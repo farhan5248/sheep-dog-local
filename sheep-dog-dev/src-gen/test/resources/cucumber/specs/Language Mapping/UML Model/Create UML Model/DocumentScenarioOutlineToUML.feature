@@ -5,13 +5,13 @@ Feature: DocumentScenarioOutlineToUML
 
   Scenario: No tags, no statement, one step, one example
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
           == Test-Case: Submit
           
-          * Given: The blah application, Object page is created as follows
+          * Given: The blah application Object page is created as follows
           +
           |===
           | h1
@@ -25,19 +25,19 @@ Feature: DocumentScenarioOutlineToUML
           | v31
           |===
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                 | Argument Name | Annotation Detail |
-          | specs::Process::Submit | The blah application, Object page is created as follows | dataTable     | 0 -> h1 \|        |
-          | specs::Process::Submit | The blah application, Object page is created as follows | dataTable     | 1 -> <h3> \|      |
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
+          | specs::Process::Submit | The blah application Object page is created as follows | dataTable     | 0 -> h1 \|        |
+          | specs::Process::Submit | The blah application Object page is created as follows | dataTable     | 1 -> <h3> \|      |
+      And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail   |
           | specs::Process::Submit | Examples 1      | Data -> h3\|\nv31\| |
 
   Scenario Outline: Three tags, three statements, three steps, three examples
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -48,21 +48,21 @@ Feature: DocumentScenarioOutlineToUML
           Desc line 2
           Desc line 3
           
-          * Given: The blah application, Object1 page is created as follows
+          * Given: The blah application Object1 page is created as follows
           +
           |===
           | h1
           | {h3}
           |===
           
-          * Given: The blah application, Object2 page is created as follows
+          * Given: The blah application Object2 page is created as follows
           +
           |===
           | h1
           | {h3}
           |===
           
-          * Given: The blah application, Object3 page is created as follows
+          * Given: The blah application Object3 page is created as follows
           +
           |===
           | h1
@@ -90,18 +90,18 @@ Feature: DocumentScenarioOutlineToUML
           | v33
           |===
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                                                  |
           | specs::Process::Submit | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                        |
-          | specs::Process::Submit | The blah application, Object<Index> page is created as follows |
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
+          | specs::Process::Submit | The blah application Object<Index> page is created as follows |
+      And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name  | Annotation Detail         |
           | specs::Process::Submit | Examples <Index> | Data -> h3\|\nv3<Index>\| |
 
@@ -114,7 +114,7 @@ Feature: DocumentScenarioOutlineToUML
 
   Scenario: Selected tags
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -122,7 +122,7 @@ Feature: DocumentScenarioOutlineToUML
           
           @tag1
           
-          * Given: The blah application, Object page is empty
+          * Given: The blah application Object page is empty
           
           * Test-Data: Examples 1
           +
@@ -135,7 +135,7 @@ Feature: DocumentScenarioOutlineToUML
           
           @tag2
           
-          * Given: The blah application, Object page is empty
+          * Given: The blah application Object page is empty
           
           * Test-Data: Examples 1
           +
@@ -144,14 +144,14 @@ Feature: DocumentScenarioOutlineToUML
           | v31
           |===
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed with
+     When The maven plugin asciidoctor-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction section will be created as follows
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction section will be created as follows
           | Interaction Name       |
           | specs::Process::Submit |
-      And The spec-prj project, uml/pst.uml file Interaction section won't be created as follows
+      And The spec-prj project uml/pst.uml file Interaction section won't be created as follows
           | Interaction Name        |
           | specs::Process::Submit2 |
 

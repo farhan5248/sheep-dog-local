@@ -21,9 +21,9 @@ Feature: Proposals for Step Constants
     However if it's an attachment, that means a text or table section should follow.
     Those proposals are triggered from the next line.
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                 |
-          | The daily batchjob, Input file is present |
-     When The xtext plugin, propose test step action is performed
-     Then The xtext plugin, propose content dialog will be empty
+          | The daily batchjob Input file is present |
+     When The xtext plugin propose test step action is performed
+     Then The xtext plugin propose content dialog will be empty
 

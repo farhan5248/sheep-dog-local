@@ -14,7 +14,7 @@ public class XtextProposeTestStepTableActionSteps extends TestSteps {
         super(object, "xtext", "propose test step table");
     }
 
-    @Given("^The xtext plugin, propose test step table action is performed$")
+    @Given("^The xtext plugin propose test step table action is performed$")
     public void isPerformed() {
         object.transition();
     }

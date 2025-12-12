@@ -5,23 +5,23 @@ Feature: DocumentScenarioToUML
 
   Scenario: No tags, no statements, one step
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
           == Test-Case: Submit
           
-          * Given: The blah application, Object page is empty
+          * Given: The blah application Object page is empty
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                    |
-          | specs::Process::Submit | The blah application, Object page is empty |
+          | specs::Process::Submit | The blah application Object page is empty |
 
   Scenario: Three tags, three statements, three steps
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -32,31 +32,31 @@ Feature: DocumentScenarioToUML
           Desc line 2
           Desc line 3
           
-          * Given: The blah application, Object page is empty
+          * Given: The blah application Object page is empty
           
-          * Given: The blah application, Object2 page is empty
+          * Given: The blah application Object2 page is empty
           
-          * Given: The blah application, Object3 page is empty
+          * Given: The blah application Object3 page is empty
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin asciidoctor-to-uml goal is executed
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag1              |
           | specs::Process::Submit | tags            | tag2              |
           | specs::Process::Submit | tags            | tag3              |
-      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                                                  |
           | specs::Process::Submit | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
-      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
+      And The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                     |
-          | specs::Process::Submit | The blah application, Object page is empty  |
-          | specs::Process::Submit | The blah application, Object2 page is empty |
-          | specs::Process::Submit | The blah application, Object3 page is empty |
+          | specs::Process::Submit | The blah application Object page is empty  |
+          | specs::Process::Submit | The blah application Object2 page is empty |
+          | specs::Process::Submit | The blah application Object3 page is empty |
 
   Scenario: Selected tags
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -64,22 +64,22 @@ Feature: DocumentScenarioToUML
           
           @tag1
           
-          * Given: The blah application, Object page is empty
+          * Given: The blah application Object page is empty
           
           == Test-Case: Submit2
           
           @tag2
           
-          * Given: The blah application, Object page is empty
+          * Given: The blah application Object page is empty
           """
-     When The maven plugin, asciidoctor-to-uml goal is executed with
+     When The maven plugin asciidoctor-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The spec-prj project, uml/pst.uml file will be present
-      And The spec-prj project, uml/pst.uml file Interaction section will be created as follows
+     Then The spec-prj project uml/pst.uml file will be present
+      And The spec-prj project uml/pst.uml file Interaction section will be created as follows
           | Interaction Name       |
           | specs::Process::Submit |
-      And The spec-prj project, uml/pst.uml file Interaction section won't be created as follows
+      And The spec-prj project uml/pst.uml file Interaction section won't be created as follows
           | Interaction Name        |
           | specs::Process::Submit2 |
 

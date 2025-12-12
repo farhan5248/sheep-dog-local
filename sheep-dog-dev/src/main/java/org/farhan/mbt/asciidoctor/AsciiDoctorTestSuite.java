@@ -263,7 +263,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 		String noRoot = getPath().replaceFirst("^src/test/resources/asciidoc/stepdefs/", "");
 		String component = noRoot.split("/")[0];
 		String object = noRoot.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
-		return "The " + component + ", " + object + " " + stepDefinitionSrc.getName();
+		return "The " + component + " " + object + " " + stepDefinitionSrc.getName();
 	}
 
 	public String getStepKeyword(TestStep step) {
