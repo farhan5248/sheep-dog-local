@@ -49,21 +49,21 @@ public class VertexValidatorTest {
 	@Test
 	public void testGetDetailsName() {
 		Assertions.assertTrue(TestStepUtility
-				.getDetailsName("The Something1 application Something2 file Something3 section is empty")
+				.getPartDesc("The Something1 application Something2 file Something3 section is empty")
 				.contentEquals("Something3"));
 	}
 
 	@Test
 	public void testGetDetails() {
 		Assertions.assertTrue(
-				TestStepUtility.getDetails("The Something1 application Something2 file Something3 section is empty")
+				TestStepUtility.getPart("The Something1 application Something2 file Something3 section is empty")
 						.contentEquals("Something3 section"));
 	}
 
 	@Test
 	public void testGetDetailsType() {
 		Assertions.assertTrue(TestStepUtility
-				.getDetailsType("The Something1 application Something2 file Something3 section is empty")
+				.getPartType("The Something1 application Something2 file Something3 section is empty")
 				.contentEquals("section"));
 	}
 
@@ -77,7 +77,7 @@ public class VertexValidatorTest {
 	@Test
 	public void testGetStateModality() {
 		Assertions.assertTrue(TestStepUtility
-				.getStateModality("The Something1 application Something2 file Something3 section is empty")
+				.getStateDesc("The Something1 application Something2 file Something3 section is empty")
 				.contentEquals("is"));
 	}
 

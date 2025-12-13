@@ -62,7 +62,7 @@ public class EdgeValidatorTest {
 	@Test
 	public void testGetStateModality() {
 		Assertions.assertTrue(
-				TestStepUtility.getStateModality("The Something1 application Something2 request is executed with")
+				TestStepUtility.getStateDesc("The Something1 application Something2 request is executed with")
 						.contentEquals("is"));
 	}
 

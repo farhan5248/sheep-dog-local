@@ -18,7 +18,7 @@ public class TestStepIssueDetector {
 		String text = theTestStep.getName();
 		if (text != null) {
 			if (!text.matches(TestStepUtility.REGEX)) {
-				if (!TestStepUtility.hasObject(text)) {
+				if (!TestStepUtility.hasStepObjectName(text)) {
 					if (!TestStepUtility.hasComponent(text)) {
 						logger.debug("Exiting validateNameComponentOnly");
 						return TestStepIssueTypes.TEST_STEP_NAME_COMPONENT_ONLY.description;
@@ -36,7 +36,7 @@ public class TestStepIssueDetector {
 		String text = theTestStep.getName();
 		if (text != null) {
 			if (!text.matches(TestStepUtility.REGEX)) {
-				if (!TestStepUtility.hasObject(text)) {
+				if (!TestStepUtility.hasStepObjectName(text)) {
 					logger.debug("Exiting validateNameObjectOnly");
 					return TestStepIssueTypes.TEST_STEP_NAME_OBJECT_ONLY.description;
 				}
@@ -53,7 +53,7 @@ public class TestStepIssueDetector {
 		String text = theTestStep.getName();
 		if (text != null) {
 			if (!text.matches(TestStepUtility.REGEX)) {
-				if (!TestStepUtility.hasPredicate(text)) {
+				if (!TestStepUtility.hasStepDefinitionName(text)) {
 					return TestStepIssueTypes.TEST_STEP_NAME_PREDICATE_ONLY.description;
 				}
 			}
@@ -92,7 +92,7 @@ public class TestStepIssueDetector {
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject != null) {
 				IStepDefinition theStepDefinition = theStepObject
-						.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+						.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
 				if (theStepDefinition == null) {
 					logger.debug("Exiting validateNamePredicateWorkspace");
 					return TestStepIssueTypes.TEST_STEP_NAME_PREDICATE_WORKSPACE.description;

@@ -20,7 +20,7 @@ public class TextIssueDetector {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			IStepDefinition theStepDefinition = theStepObject
-					.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+					.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
 			if (!theText.getName().isEmpty()) {
 				if (theStepDefinition.getStepParameters(theText) == null) {
 					logger.debug("Exiting validateNameWorkspace");

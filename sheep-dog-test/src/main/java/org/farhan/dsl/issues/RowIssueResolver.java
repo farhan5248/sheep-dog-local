@@ -44,7 +44,7 @@ public class RowIssueResolver {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject != null) {
-				String predicate = TestStepUtility.getPredicate(theTestStep.getName());
+				String predicate = TestStepUtility.getStepDefinitionName(theTestStep.getName());
 				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
 				if (theStepDefinition != null) {
 					// This assumes that the step is valid but the parameters don't exist
@@ -82,7 +82,7 @@ public class RowIssueResolver {
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject != null) {
 				IStepDefinition stepDefinition = theStepObject
-						.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+						.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
 				if (stepDefinition != null) {
 					for (IStepParameters parameters : stepDefinition.getStepParameterList()) {
 						proposal = new SheepDogIssueProposal();

@@ -99,7 +99,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 			break;
 		}
 		String stepName = name.substring(keyword.length() + 1);
-		String predicate = TestStepUtility.getPredicate(stepName);
+		String predicate = TestStepUtility.getStepDefinitionName(stepName);
 		step.setPredicate(predicate);
 		step.setObject(stepName.replace(predicate, "").trim());
 		abstractScenario.getTestStepList().add(step);

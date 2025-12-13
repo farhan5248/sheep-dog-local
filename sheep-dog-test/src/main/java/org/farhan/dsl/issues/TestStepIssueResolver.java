@@ -48,7 +48,7 @@ public class TestStepIssueResolver {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject != null) {
-				String predicate = TestStepUtility.getPredicate(theTestStep.getName());
+				String predicate = TestStepUtility.getStepDefinitionName(theTestStep.getName());
 				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
 				if (theStepDefinition == null) {
 					theStepDefinition = SheepDogBuilder.createStepDefinition(theStepObject, predicate);

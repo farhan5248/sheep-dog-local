@@ -29,20 +29,20 @@ public class CucumberInterface extends CucumberJava {
 		if (TestStepUtility.isEdge(name)) {
 			addMethod("transition", false);
 			for (String param : paramList) {
-				addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepUtility.getDetails(name))
+				addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepUtility.getPart(name))
 						+ StringUtils.capitalize(convertToCamelCase(param)), true);
 			}
 		} else {
 			if (TestStepUtility.isNegativeStep(name)) {
-				addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepUtility.getDetails(name)) + "Negative",
+				addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepUtility.getPart(name)) + "Negative",
 						true);
 			} else {
 				if (paramList.size() == 0) {
-					addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepUtility.getDetails(name))
+					addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepUtility.getPart(name))
 							+ convertToPascalCase(TestStepUtility.getStateType(name)), true);
 				} else {
 					for (String param : paramList) {
-						addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepUtility.getDetails(name))
+						addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepUtility.getPart(name))
 								+ StringUtils.capitalize(convertToCamelCase(param)), true);
 					}
 				}

@@ -19,7 +19,7 @@ public class SheepDogBuilder {
 			if (theStepObject == null) {
 				theStepObject = SheepDogFactory.instance.createStepObject(qualifiedName);
 			}
-			String predicate = TestStepUtility.getPredicate(theTestStep.getName());
+			String predicate = TestStepUtility.getStepDefinitionName(theTestStep.getName());
 			IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
 			if (theStepDefinition == null) {
 				theStepDefinition = createStepDefinition(theStepObject, predicate);

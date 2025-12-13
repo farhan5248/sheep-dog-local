@@ -22,7 +22,7 @@ public class RowIssueDetector {
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject != null) {
 				IStepDefinition theStepDefinition = theStepObject
-						.getStepDefinition(TestStepUtility.getPredicate(theTestStep.getName()));
+						.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
 				if (theStepDefinition != null) {
 					if (theStepDefinition.getStepParameters(theTestStep.getTable().getRowList().getFirst()) == null) {
 						logger.debug("Exiting validateCellListWorkspace");
