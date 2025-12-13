@@ -20,8 +20,6 @@ public interface ITestData {
 
 	void setName(String value);
 
-	void setNameLong(String value);
-
 	boolean addStatement(IStatement value);
 
 }

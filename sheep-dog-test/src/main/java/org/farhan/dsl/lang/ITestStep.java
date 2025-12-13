@@ -6,15 +6,19 @@ public interface ITestStep {
 
 	String getNameLong();
 
+	String getStepObjectName();
+
+	String getStepDefinitionName();
+
 	ITestStepContainer getParent();
 
 	ITable getTable();
 
 	IText getText();
 
-	void setName(String value);
+	void setStepObjectName(String value);
 
-	void setNameLong(String value);
+	void setStepDefinitionName(String value);
 
 	void setTable(ITable value);
 

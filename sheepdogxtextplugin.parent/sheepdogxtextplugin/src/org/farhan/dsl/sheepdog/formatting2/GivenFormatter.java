@@ -35,12 +35,12 @@ public class GivenFormatter extends TestStepFormatter {
 
 	@Override
 	protected RuleCall getObjectStepObjectRefParserRuleCall(AbstractParserRuleElementFinder a) {
-		return ((GivenElements) a).getObjectStepObjectRefParserRuleCall_2_0();
+		return ((GivenElements) a).getStepObjectNameStepObjectRefParserRuleCall_2_0();
 	}
 
 	@Override
 	protected RuleCall getPredicateStepDefinitionRefParserRuleCall(AbstractParserRuleElementFinder a) {
-		return ((GivenElements) a).getPredicateStepDefinitionRefParserRuleCall_3_0();
+		return ((GivenElements) a).getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0();
 	}
 
 }

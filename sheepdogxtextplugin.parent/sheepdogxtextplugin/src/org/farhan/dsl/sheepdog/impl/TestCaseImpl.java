@@ -45,11 +45,6 @@ public class TestCaseImpl extends TestStepContainerImpl implements ITestCase {
 	}
 
 	@Override
-	public void setNameLong(String value) {
-		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
-	}
-
-	@Override
 	public ITestData getTestData(int index) {
 		throw new UnsupportedOperationException("getTestData(int index) is not implemented");
 	}

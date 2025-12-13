@@ -40,7 +40,7 @@ public class TextIssueResolver {
 						proposal.setDescription(
 								StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
 						proposal.setValue(theStepObject.getContent());
-						proposal.setQualifiedName(theStepObject.getQualifiedName());
+						proposal.setQualifiedName(theStepObject.getNameLong());
 						proposals.add(proposal);
 					}
 				}

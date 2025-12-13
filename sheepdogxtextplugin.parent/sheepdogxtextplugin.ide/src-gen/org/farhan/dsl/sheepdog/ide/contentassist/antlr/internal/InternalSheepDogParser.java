@@ -6752,31 +6752,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__2__Impl"
-    // InternalSheepDog.g:2090:1: rule__Given__Group__2__Impl : ( ( rule__Given__ObjectAssignment_2 ) ) ;
+    // InternalSheepDog.g:2090:1: rule__Given__Group__2__Impl : ( ( rule__Given__StepObjectNameAssignment_2 ) ) ;
     public final void rule__Given__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2094:1: ( ( ( rule__Given__ObjectAssignment_2 ) ) )
-            // InternalSheepDog.g:2095:1: ( ( rule__Given__ObjectAssignment_2 ) )
+            // InternalSheepDog.g:2094:1: ( ( ( rule__Given__StepObjectNameAssignment_2 ) ) )
+            // InternalSheepDog.g:2095:1: ( ( rule__Given__StepObjectNameAssignment_2 ) )
             {
-            // InternalSheepDog.g:2095:1: ( ( rule__Given__ObjectAssignment_2 ) )
-            // InternalSheepDog.g:2096:2: ( rule__Given__ObjectAssignment_2 )
+            // InternalSheepDog.g:2095:1: ( ( rule__Given__StepObjectNameAssignment_2 ) )
+            // InternalSheepDog.g:2096:2: ( rule__Given__StepObjectNameAssignment_2 )
             {
-             before(grammarAccess.getGivenAccess().getObjectAssignment_2()); 
-            // InternalSheepDog.g:2097:2: ( rule__Given__ObjectAssignment_2 )
-            // InternalSheepDog.g:2097:3: rule__Given__ObjectAssignment_2
+             before(grammarAccess.getGivenAccess().getStepObjectNameAssignment_2()); 
+            // InternalSheepDog.g:2097:2: ( rule__Given__StepObjectNameAssignment_2 )
+            // InternalSheepDog.g:2097:3: rule__Given__StepObjectNameAssignment_2
             {
             pushFollow(FOLLOW_2);
-            rule__Given__ObjectAssignment_2();
+            rule__Given__StepObjectNameAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getGivenAccess().getObjectAssignment_2()); 
+             after(grammarAccess.getGivenAccess().getStepObjectNameAssignment_2()); 
 
             }
 
@@ -6837,31 +6837,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__3__Impl"
-    // InternalSheepDog.g:2117:1: rule__Given__Group__3__Impl : ( ( rule__Given__PredicateAssignment_3 ) ) ;
+    // InternalSheepDog.g:2117:1: rule__Given__Group__3__Impl : ( ( rule__Given__StepDefinitionNameAssignment_3 ) ) ;
     public final void rule__Given__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2121:1: ( ( ( rule__Given__PredicateAssignment_3 ) ) )
-            // InternalSheepDog.g:2122:1: ( ( rule__Given__PredicateAssignment_3 ) )
+            // InternalSheepDog.g:2121:1: ( ( ( rule__Given__StepDefinitionNameAssignment_3 ) ) )
+            // InternalSheepDog.g:2122:1: ( ( rule__Given__StepDefinitionNameAssignment_3 ) )
             {
-            // InternalSheepDog.g:2122:1: ( ( rule__Given__PredicateAssignment_3 ) )
-            // InternalSheepDog.g:2123:2: ( rule__Given__PredicateAssignment_3 )
+            // InternalSheepDog.g:2122:1: ( ( rule__Given__StepDefinitionNameAssignment_3 ) )
+            // InternalSheepDog.g:2123:2: ( rule__Given__StepDefinitionNameAssignment_3 )
             {
-             before(grammarAccess.getGivenAccess().getPredicateAssignment_3()); 
-            // InternalSheepDog.g:2124:2: ( rule__Given__PredicateAssignment_3 )
-            // InternalSheepDog.g:2124:3: rule__Given__PredicateAssignment_3
+             before(grammarAccess.getGivenAccess().getStepDefinitionNameAssignment_3()); 
+            // InternalSheepDog.g:2124:2: ( rule__Given__StepDefinitionNameAssignment_3 )
+            // InternalSheepDog.g:2124:3: rule__Given__StepDefinitionNameAssignment_3
             {
             pushFollow(FOLLOW_2);
-            rule__Given__PredicateAssignment_3();
+            rule__Given__StepDefinitionNameAssignment_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getGivenAccess().getPredicateAssignment_3()); 
+             after(grammarAccess.getGivenAccess().getStepDefinitionNameAssignment_3()); 
 
             }
 
@@ -7238,31 +7238,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__2__Impl"
-    // InternalSheepDog.g:2252:1: rule__When__Group__2__Impl : ( ( rule__When__ObjectAssignment_2 ) ) ;
+    // InternalSheepDog.g:2252:1: rule__When__Group__2__Impl : ( ( rule__When__StepObjectNameAssignment_2 ) ) ;
     public final void rule__When__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2256:1: ( ( ( rule__When__ObjectAssignment_2 ) ) )
-            // InternalSheepDog.g:2257:1: ( ( rule__When__ObjectAssignment_2 ) )
+            // InternalSheepDog.g:2256:1: ( ( ( rule__When__StepObjectNameAssignment_2 ) ) )
+            // InternalSheepDog.g:2257:1: ( ( rule__When__StepObjectNameAssignment_2 ) )
             {
-            // InternalSheepDog.g:2257:1: ( ( rule__When__ObjectAssignment_2 ) )
-            // InternalSheepDog.g:2258:2: ( rule__When__ObjectAssignment_2 )
+            // InternalSheepDog.g:2257:1: ( ( rule__When__StepObjectNameAssignment_2 ) )
+            // InternalSheepDog.g:2258:2: ( rule__When__StepObjectNameAssignment_2 )
             {
-             before(grammarAccess.getWhenAccess().getObjectAssignment_2()); 
-            // InternalSheepDog.g:2259:2: ( rule__When__ObjectAssignment_2 )
-            // InternalSheepDog.g:2259:3: rule__When__ObjectAssignment_2
+             before(grammarAccess.getWhenAccess().getStepObjectNameAssignment_2()); 
+            // InternalSheepDog.g:2259:2: ( rule__When__StepObjectNameAssignment_2 )
+            // InternalSheepDog.g:2259:3: rule__When__StepObjectNameAssignment_2
             {
             pushFollow(FOLLOW_2);
-            rule__When__ObjectAssignment_2();
+            rule__When__StepObjectNameAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getWhenAccess().getObjectAssignment_2()); 
+             after(grammarAccess.getWhenAccess().getStepObjectNameAssignment_2()); 
 
             }
 
@@ -7323,31 +7323,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__3__Impl"
-    // InternalSheepDog.g:2279:1: rule__When__Group__3__Impl : ( ( rule__When__PredicateAssignment_3 ) ) ;
+    // InternalSheepDog.g:2279:1: rule__When__Group__3__Impl : ( ( rule__When__StepDefinitionNameAssignment_3 ) ) ;
     public final void rule__When__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2283:1: ( ( ( rule__When__PredicateAssignment_3 ) ) )
-            // InternalSheepDog.g:2284:1: ( ( rule__When__PredicateAssignment_3 ) )
+            // InternalSheepDog.g:2283:1: ( ( ( rule__When__StepDefinitionNameAssignment_3 ) ) )
+            // InternalSheepDog.g:2284:1: ( ( rule__When__StepDefinitionNameAssignment_3 ) )
             {
-            // InternalSheepDog.g:2284:1: ( ( rule__When__PredicateAssignment_3 ) )
-            // InternalSheepDog.g:2285:2: ( rule__When__PredicateAssignment_3 )
+            // InternalSheepDog.g:2284:1: ( ( rule__When__StepDefinitionNameAssignment_3 ) )
+            // InternalSheepDog.g:2285:2: ( rule__When__StepDefinitionNameAssignment_3 )
             {
-             before(grammarAccess.getWhenAccess().getPredicateAssignment_3()); 
-            // InternalSheepDog.g:2286:2: ( rule__When__PredicateAssignment_3 )
-            // InternalSheepDog.g:2286:3: rule__When__PredicateAssignment_3
+             before(grammarAccess.getWhenAccess().getStepDefinitionNameAssignment_3()); 
+            // InternalSheepDog.g:2286:2: ( rule__When__StepDefinitionNameAssignment_3 )
+            // InternalSheepDog.g:2286:3: rule__When__StepDefinitionNameAssignment_3
             {
             pushFollow(FOLLOW_2);
-            rule__When__PredicateAssignment_3();
+            rule__When__StepDefinitionNameAssignment_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getWhenAccess().getPredicateAssignment_3()); 
+             after(grammarAccess.getWhenAccess().getStepDefinitionNameAssignment_3()); 
 
             }
 
@@ -7724,31 +7724,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__2__Impl"
-    // InternalSheepDog.g:2414:1: rule__Then__Group__2__Impl : ( ( rule__Then__ObjectAssignment_2 ) ) ;
+    // InternalSheepDog.g:2414:1: rule__Then__Group__2__Impl : ( ( rule__Then__StepObjectNameAssignment_2 ) ) ;
     public final void rule__Then__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2418:1: ( ( ( rule__Then__ObjectAssignment_2 ) ) )
-            // InternalSheepDog.g:2419:1: ( ( rule__Then__ObjectAssignment_2 ) )
+            // InternalSheepDog.g:2418:1: ( ( ( rule__Then__StepObjectNameAssignment_2 ) ) )
+            // InternalSheepDog.g:2419:1: ( ( rule__Then__StepObjectNameAssignment_2 ) )
             {
-            // InternalSheepDog.g:2419:1: ( ( rule__Then__ObjectAssignment_2 ) )
-            // InternalSheepDog.g:2420:2: ( rule__Then__ObjectAssignment_2 )
+            // InternalSheepDog.g:2419:1: ( ( rule__Then__StepObjectNameAssignment_2 ) )
+            // InternalSheepDog.g:2420:2: ( rule__Then__StepObjectNameAssignment_2 )
             {
-             before(grammarAccess.getThenAccess().getObjectAssignment_2()); 
-            // InternalSheepDog.g:2421:2: ( rule__Then__ObjectAssignment_2 )
-            // InternalSheepDog.g:2421:3: rule__Then__ObjectAssignment_2
+             before(grammarAccess.getThenAccess().getStepObjectNameAssignment_2()); 
+            // InternalSheepDog.g:2421:2: ( rule__Then__StepObjectNameAssignment_2 )
+            // InternalSheepDog.g:2421:3: rule__Then__StepObjectNameAssignment_2
             {
             pushFollow(FOLLOW_2);
-            rule__Then__ObjectAssignment_2();
+            rule__Then__StepObjectNameAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getThenAccess().getObjectAssignment_2()); 
+             after(grammarAccess.getThenAccess().getStepObjectNameAssignment_2()); 
 
             }
 
@@ -7809,31 +7809,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__3__Impl"
-    // InternalSheepDog.g:2441:1: rule__Then__Group__3__Impl : ( ( rule__Then__PredicateAssignment_3 ) ) ;
+    // InternalSheepDog.g:2441:1: rule__Then__Group__3__Impl : ( ( rule__Then__StepDefinitionNameAssignment_3 ) ) ;
     public final void rule__Then__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2445:1: ( ( ( rule__Then__PredicateAssignment_3 ) ) )
-            // InternalSheepDog.g:2446:1: ( ( rule__Then__PredicateAssignment_3 ) )
+            // InternalSheepDog.g:2445:1: ( ( ( rule__Then__StepDefinitionNameAssignment_3 ) ) )
+            // InternalSheepDog.g:2446:1: ( ( rule__Then__StepDefinitionNameAssignment_3 ) )
             {
-            // InternalSheepDog.g:2446:1: ( ( rule__Then__PredicateAssignment_3 ) )
-            // InternalSheepDog.g:2447:2: ( rule__Then__PredicateAssignment_3 )
+            // InternalSheepDog.g:2446:1: ( ( rule__Then__StepDefinitionNameAssignment_3 ) )
+            // InternalSheepDog.g:2447:2: ( rule__Then__StepDefinitionNameAssignment_3 )
             {
-             before(grammarAccess.getThenAccess().getPredicateAssignment_3()); 
-            // InternalSheepDog.g:2448:2: ( rule__Then__PredicateAssignment_3 )
-            // InternalSheepDog.g:2448:3: rule__Then__PredicateAssignment_3
+             before(grammarAccess.getThenAccess().getStepDefinitionNameAssignment_3()); 
+            // InternalSheepDog.g:2448:2: ( rule__Then__StepDefinitionNameAssignment_3 )
+            // InternalSheepDog.g:2448:3: rule__Then__StepDefinitionNameAssignment_3
             {
             pushFollow(FOLLOW_2);
-            rule__Then__PredicateAssignment_3();
+            rule__Then__StepDefinitionNameAssignment_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getThenAccess().getPredicateAssignment_3()); 
+             after(grammarAccess.getThenAccess().getStepDefinitionNameAssignment_3()); 
 
             }
 
@@ -8210,31 +8210,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__2__Impl"
-    // InternalSheepDog.g:2576:1: rule__And__Group__2__Impl : ( ( rule__And__ObjectAssignment_2 ) ) ;
+    // InternalSheepDog.g:2576:1: rule__And__Group__2__Impl : ( ( rule__And__StepObjectNameAssignment_2 ) ) ;
     public final void rule__And__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2580:1: ( ( ( rule__And__ObjectAssignment_2 ) ) )
-            // InternalSheepDog.g:2581:1: ( ( rule__And__ObjectAssignment_2 ) )
+            // InternalSheepDog.g:2580:1: ( ( ( rule__And__StepObjectNameAssignment_2 ) ) )
+            // InternalSheepDog.g:2581:1: ( ( rule__And__StepObjectNameAssignment_2 ) )
             {
-            // InternalSheepDog.g:2581:1: ( ( rule__And__ObjectAssignment_2 ) )
-            // InternalSheepDog.g:2582:2: ( rule__And__ObjectAssignment_2 )
+            // InternalSheepDog.g:2581:1: ( ( rule__And__StepObjectNameAssignment_2 ) )
+            // InternalSheepDog.g:2582:2: ( rule__And__StepObjectNameAssignment_2 )
             {
-             before(grammarAccess.getAndAccess().getObjectAssignment_2()); 
-            // InternalSheepDog.g:2583:2: ( rule__And__ObjectAssignment_2 )
-            // InternalSheepDog.g:2583:3: rule__And__ObjectAssignment_2
+             before(grammarAccess.getAndAccess().getStepObjectNameAssignment_2()); 
+            // InternalSheepDog.g:2583:2: ( rule__And__StepObjectNameAssignment_2 )
+            // InternalSheepDog.g:2583:3: rule__And__StepObjectNameAssignment_2
             {
             pushFollow(FOLLOW_2);
-            rule__And__ObjectAssignment_2();
+            rule__And__StepObjectNameAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getAndAccess().getObjectAssignment_2()); 
+             after(grammarAccess.getAndAccess().getStepObjectNameAssignment_2()); 
 
             }
 
@@ -8295,31 +8295,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__3__Impl"
-    // InternalSheepDog.g:2603:1: rule__And__Group__3__Impl : ( ( rule__And__PredicateAssignment_3 ) ) ;
+    // InternalSheepDog.g:2603:1: rule__And__Group__3__Impl : ( ( rule__And__StepDefinitionNameAssignment_3 ) ) ;
     public final void rule__And__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2607:1: ( ( ( rule__And__PredicateAssignment_3 ) ) )
-            // InternalSheepDog.g:2608:1: ( ( rule__And__PredicateAssignment_3 ) )
+            // InternalSheepDog.g:2607:1: ( ( ( rule__And__StepDefinitionNameAssignment_3 ) ) )
+            // InternalSheepDog.g:2608:1: ( ( rule__And__StepDefinitionNameAssignment_3 ) )
             {
-            // InternalSheepDog.g:2608:1: ( ( rule__And__PredicateAssignment_3 ) )
-            // InternalSheepDog.g:2609:2: ( rule__And__PredicateAssignment_3 )
+            // InternalSheepDog.g:2608:1: ( ( rule__And__StepDefinitionNameAssignment_3 ) )
+            // InternalSheepDog.g:2609:2: ( rule__And__StepDefinitionNameAssignment_3 )
             {
-             before(grammarAccess.getAndAccess().getPredicateAssignment_3()); 
-            // InternalSheepDog.g:2610:2: ( rule__And__PredicateAssignment_3 )
-            // InternalSheepDog.g:2610:3: rule__And__PredicateAssignment_3
+             before(grammarAccess.getAndAccess().getStepDefinitionNameAssignment_3()); 
+            // InternalSheepDog.g:2610:2: ( rule__And__StepDefinitionNameAssignment_3 )
+            // InternalSheepDog.g:2610:3: rule__And__StepDefinitionNameAssignment_3
             {
             pushFollow(FOLLOW_2);
-            rule__And__PredicateAssignment_3();
+            rule__And__StepDefinitionNameAssignment_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getAndAccess().getPredicateAssignment_3()); 
+             after(grammarAccess.getAndAccess().getStepDefinitionNameAssignment_3()); 
 
             }
 
@@ -11268,9 +11268,9 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "rule__TestData__TableAssignment_5"
 
 
-    // $ANTLR start "rule__Given__ObjectAssignment_2"
-    // InternalSheepDog.g:3624:1: rule__Given__ObjectAssignment_2 : ( ruleStepObjectRef ) ;
-    public final void rule__Given__ObjectAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__Given__StepObjectNameAssignment_2"
+    // InternalSheepDog.g:3624:1: rule__Given__StepObjectNameAssignment_2 : ( ruleStepObjectRef ) ;
+    public final void rule__Given__StepObjectNameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -11281,13 +11281,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3629:2: ( ruleStepObjectRef )
             // InternalSheepDog.g:3630:3: ruleStepObjectRef
             {
-             before(grammarAccess.getGivenAccess().getObjectStepObjectRefParserRuleCall_2_0()); 
+             before(grammarAccess.getGivenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
             ruleStepObjectRef();
 
             state._fsp--;
 
-             after(grammarAccess.getGivenAccess().getObjectStepObjectRefParserRuleCall_2_0()); 
+             after(grammarAccess.getGivenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); 
 
             }
 
@@ -11306,12 +11306,12 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__Given__ObjectAssignment_2"
+    // $ANTLR end "rule__Given__StepObjectNameAssignment_2"
 
 
-    // $ANTLR start "rule__Given__PredicateAssignment_3"
-    // InternalSheepDog.g:3639:1: rule__Given__PredicateAssignment_3 : ( ruleStepDefinitionRef ) ;
-    public final void rule__Given__PredicateAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__Given__StepDefinitionNameAssignment_3"
+    // InternalSheepDog.g:3639:1: rule__Given__StepDefinitionNameAssignment_3 : ( ruleStepDefinitionRef ) ;
+    public final void rule__Given__StepDefinitionNameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -11322,13 +11322,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3644:2: ( ruleStepDefinitionRef )
             // InternalSheepDog.g:3645:3: ruleStepDefinitionRef
             {
-             before(grammarAccess.getGivenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); 
+             before(grammarAccess.getGivenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
             ruleStepDefinitionRef();
 
             state._fsp--;
 
-             after(grammarAccess.getGivenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); 
+             after(grammarAccess.getGivenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); 
 
             }
 
@@ -11347,7 +11347,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__Given__PredicateAssignment_3"
+    // $ANTLR end "rule__Given__StepDefinitionNameAssignment_3"
 
 
     // $ANTLR start "rule__Given__TableAssignment_5_0"
@@ -11432,9 +11432,9 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "rule__Given__TextAssignment_5_1"
 
 
-    // $ANTLR start "rule__When__ObjectAssignment_2"
-    // InternalSheepDog.g:3684:1: rule__When__ObjectAssignment_2 : ( ruleStepObjectRef ) ;
-    public final void rule__When__ObjectAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__When__StepObjectNameAssignment_2"
+    // InternalSheepDog.g:3684:1: rule__When__StepObjectNameAssignment_2 : ( ruleStepObjectRef ) ;
+    public final void rule__When__StepObjectNameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -11445,13 +11445,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3689:2: ( ruleStepObjectRef )
             // InternalSheepDog.g:3690:3: ruleStepObjectRef
             {
-             before(grammarAccess.getWhenAccess().getObjectStepObjectRefParserRuleCall_2_0()); 
+             before(grammarAccess.getWhenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
             ruleStepObjectRef();
 
             state._fsp--;
 
-             after(grammarAccess.getWhenAccess().getObjectStepObjectRefParserRuleCall_2_0()); 
+             after(grammarAccess.getWhenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); 
 
             }
 
@@ -11470,12 +11470,12 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__When__ObjectAssignment_2"
+    // $ANTLR end "rule__When__StepObjectNameAssignment_2"
 
 
-    // $ANTLR start "rule__When__PredicateAssignment_3"
-    // InternalSheepDog.g:3699:1: rule__When__PredicateAssignment_3 : ( ruleStepDefinitionRef ) ;
-    public final void rule__When__PredicateAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__When__StepDefinitionNameAssignment_3"
+    // InternalSheepDog.g:3699:1: rule__When__StepDefinitionNameAssignment_3 : ( ruleStepDefinitionRef ) ;
+    public final void rule__When__StepDefinitionNameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -11486,13 +11486,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3704:2: ( ruleStepDefinitionRef )
             // InternalSheepDog.g:3705:3: ruleStepDefinitionRef
             {
-             before(grammarAccess.getWhenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); 
+             before(grammarAccess.getWhenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
             ruleStepDefinitionRef();
 
             state._fsp--;
 
-             after(grammarAccess.getWhenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); 
+             after(grammarAccess.getWhenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); 
 
             }
 
@@ -11511,7 +11511,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__When__PredicateAssignment_3"
+    // $ANTLR end "rule__When__StepDefinitionNameAssignment_3"
 
 
     // $ANTLR start "rule__When__TableAssignment_5_0"
@@ -11596,9 +11596,9 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "rule__When__TextAssignment_5_1"
 
 
-    // $ANTLR start "rule__Then__ObjectAssignment_2"
-    // InternalSheepDog.g:3744:1: rule__Then__ObjectAssignment_2 : ( ruleStepObjectRef ) ;
-    public final void rule__Then__ObjectAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__Then__StepObjectNameAssignment_2"
+    // InternalSheepDog.g:3744:1: rule__Then__StepObjectNameAssignment_2 : ( ruleStepObjectRef ) ;
+    public final void rule__Then__StepObjectNameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -11609,13 +11609,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3749:2: ( ruleStepObjectRef )
             // InternalSheepDog.g:3750:3: ruleStepObjectRef
             {
-             before(grammarAccess.getThenAccess().getObjectStepObjectRefParserRuleCall_2_0()); 
+             before(grammarAccess.getThenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
             ruleStepObjectRef();
 
             state._fsp--;
 
-             after(grammarAccess.getThenAccess().getObjectStepObjectRefParserRuleCall_2_0()); 
+             after(grammarAccess.getThenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); 
 
             }
 
@@ -11634,12 +11634,12 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__Then__ObjectAssignment_2"
+    // $ANTLR end "rule__Then__StepObjectNameAssignment_2"
 
 
-    // $ANTLR start "rule__Then__PredicateAssignment_3"
-    // InternalSheepDog.g:3759:1: rule__Then__PredicateAssignment_3 : ( ruleStepDefinitionRef ) ;
-    public final void rule__Then__PredicateAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__Then__StepDefinitionNameAssignment_3"
+    // InternalSheepDog.g:3759:1: rule__Then__StepDefinitionNameAssignment_3 : ( ruleStepDefinitionRef ) ;
+    public final void rule__Then__StepDefinitionNameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -11650,13 +11650,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3764:2: ( ruleStepDefinitionRef )
             // InternalSheepDog.g:3765:3: ruleStepDefinitionRef
             {
-             before(grammarAccess.getThenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); 
+             before(grammarAccess.getThenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
             ruleStepDefinitionRef();
 
             state._fsp--;
 
-             after(grammarAccess.getThenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); 
+             after(grammarAccess.getThenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); 
 
             }
 
@@ -11675,7 +11675,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__Then__PredicateAssignment_3"
+    // $ANTLR end "rule__Then__StepDefinitionNameAssignment_3"
 
 
     // $ANTLR start "rule__Then__TableAssignment_5_0"
@@ -11760,9 +11760,9 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "rule__Then__TextAssignment_5_1"
 
 
-    // $ANTLR start "rule__And__ObjectAssignment_2"
-    // InternalSheepDog.g:3804:1: rule__And__ObjectAssignment_2 : ( ruleStepObjectRef ) ;
-    public final void rule__And__ObjectAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__And__StepObjectNameAssignment_2"
+    // InternalSheepDog.g:3804:1: rule__And__StepObjectNameAssignment_2 : ( ruleStepObjectRef ) ;
+    public final void rule__And__StepObjectNameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -11773,13 +11773,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3809:2: ( ruleStepObjectRef )
             // InternalSheepDog.g:3810:3: ruleStepObjectRef
             {
-             before(grammarAccess.getAndAccess().getObjectStepObjectRefParserRuleCall_2_0()); 
+             before(grammarAccess.getAndAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
             ruleStepObjectRef();
 
             state._fsp--;
 
-             after(grammarAccess.getAndAccess().getObjectStepObjectRefParserRuleCall_2_0()); 
+             after(grammarAccess.getAndAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); 
 
             }
 
@@ -11798,12 +11798,12 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__And__ObjectAssignment_2"
+    // $ANTLR end "rule__And__StepObjectNameAssignment_2"
 
 
-    // $ANTLR start "rule__And__PredicateAssignment_3"
-    // InternalSheepDog.g:3819:1: rule__And__PredicateAssignment_3 : ( ruleStepDefinitionRef ) ;
-    public final void rule__And__PredicateAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__And__StepDefinitionNameAssignment_3"
+    // InternalSheepDog.g:3819:1: rule__And__StepDefinitionNameAssignment_3 : ( ruleStepDefinitionRef ) ;
+    public final void rule__And__StepDefinitionNameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -11814,13 +11814,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3824:2: ( ruleStepDefinitionRef )
             // InternalSheepDog.g:3825:3: ruleStepDefinitionRef
             {
-             before(grammarAccess.getAndAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); 
+             before(grammarAccess.getAndAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
             ruleStepDefinitionRef();
 
             state._fsp--;
 
-             after(grammarAccess.getAndAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); 
+             after(grammarAccess.getAndAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); 
 
             }
 
@@ -11839,7 +11839,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__And__PredicateAssignment_3"
+    // $ANTLR end "rule__And__StepDefinitionNameAssignment_3"
 
 
     // $ANTLR start "rule__And__TableAssignment_5_0"

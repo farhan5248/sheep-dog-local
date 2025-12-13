@@ -43,7 +43,7 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
-	public String getQualifiedName() {
+	public String getNameLong() {
 		return qualifiedName;
 	}
 
@@ -83,13 +83,8 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
-	public void setQualifiedName(String value) {
+	public void setNameLong(String value) {
 		this.qualifiedName = value;
-	}
-
-	@Override
-	public String getNameLong() {
-		throw new UnsupportedOperationException("getNameLong() is not implemented");
 	}
 
 	@Override
@@ -105,11 +100,6 @@ public class StepObjectImpl implements IStepObject {
 	@Override
 	public IStepDefinition getStepDefinition(int index) {
 		throw new UnsupportedOperationException("getStepDefinition(int index) is not implemented");
-	}
-
-	@Override
-	public void setNameLong(String value) {
-		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
 	}
 
 	@Override

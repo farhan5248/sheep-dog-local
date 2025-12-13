@@ -28,7 +28,7 @@ public class TestProjectImpl implements ITestProject {
 
 	public boolean addStepObject(IStepObject stepObject) {
 		try {
-			sr.put("", projectPath + "/" + layer2dir + "/" + stepObject.getQualifiedName(), stepObject.getContent());
+			sr.put("", projectPath + "/" + layer2dir + "/" + stepObject.getNameLong(), stepObject.getContent());
 			return true;
 		} catch (Exception e) {
 			logger.error("Couldn't write step object:", e);

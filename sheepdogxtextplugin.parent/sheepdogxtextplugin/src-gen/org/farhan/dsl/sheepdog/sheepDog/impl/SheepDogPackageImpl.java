@@ -546,7 +546,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getTestStep_Object()
+  public EAttribute getTestStep_StepObjectName()
   {
     return (EAttribute)testStepEClass.getEStructuralFeatures().get(0);
   }
@@ -557,7 +557,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getTestStep_Predicate()
+  public EAttribute getTestStep_StepDefinitionName()
   {
     return (EAttribute)testStepEClass.getEStructuralFeatures().get(1);
   }
@@ -827,8 +827,8 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     createEReference(testDataEClass, TEST_DATA__TABLE);
 
     testStepEClass = createEClass(TEST_STEP);
-    createEAttribute(testStepEClass, TEST_STEP__OBJECT);
-    createEAttribute(testStepEClass, TEST_STEP__PREDICATE);
+    createEAttribute(testStepEClass, TEST_STEP__STEP_OBJECT_NAME);
+    createEAttribute(testStepEClass, TEST_STEP__STEP_DEFINITION_NAME);
     createEReference(testStepEClass, TEST_STEP__TABLE);
     createEReference(testStepEClass, TEST_STEP__TEXT);
 
@@ -934,8 +934,8 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     initEReference(getTestData_Table(), this.getTable(), null, "table", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testStepEClass, TestStep.class, "TestStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTestStep_Object(), ecorePackage.getEString(), "object", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTestStep_Predicate(), ecorePackage.getEString(), "predicate", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestStep_StepObjectName(), ecorePackage.getEString(), "stepObjectName", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestStep_StepDefinitionName(), ecorePackage.getEString(), "stepDefinitionName", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTestStep_Table(), this.getTable(), null, "table", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTestStep_Text(), this.getText(), null, "text", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

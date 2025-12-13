@@ -28,8 +28,6 @@ public interface IStepObject extends IModel {
 
 	void setName(String value);
 
-	void setNameLong(String value);
-
 	boolean addStatement(IStatement value);
 
 	boolean addStepDefinition(IStepDefinition value);

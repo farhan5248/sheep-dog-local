@@ -848,17 +848,17 @@ ruleGiven returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getGivenAccess().getObjectStepObjectRefParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getGivenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0());
 				}
-				lv_object_2_0=ruleStepObjectRef
+				lv_stepObjectName_2_0=ruleStepObjectRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getGivenRule());
 					}
 					set(
 						$current,
-						"object",
-						lv_object_2_0,
+						"stepObjectName",
+						lv_stepObjectName_2_0,
 						"org.farhan.dsl.sheepdog.SheepDog.StepObjectRef");
 					afterParserOrEnumRuleCall();
 				}
@@ -867,17 +867,17 @@ ruleGiven returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getGivenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getGivenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0());
 				}
-				lv_predicate_3_0=ruleStepDefinitionRef
+				lv_stepDefinitionName_3_0=ruleStepDefinitionRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getGivenRule());
 					}
 					set(
 						$current,
-						"predicate",
-						lv_predicate_3_0,
+						"stepDefinitionName",
+						lv_stepDefinitionName_3_0,
 						"org.farhan.dsl.sheepdog.SheepDog.StepDefinitionRef");
 					afterParserOrEnumRuleCall();
 				}
@@ -958,17 +958,17 @@ ruleWhen returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getWhenAccess().getObjectStepObjectRefParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getWhenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0());
 				}
-				lv_object_2_0=ruleStepObjectRef
+				lv_stepObjectName_2_0=ruleStepObjectRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getWhenRule());
 					}
 					set(
 						$current,
-						"object",
-						lv_object_2_0,
+						"stepObjectName",
+						lv_stepObjectName_2_0,
 						"org.farhan.dsl.sheepdog.SheepDog.StepObjectRef");
 					afterParserOrEnumRuleCall();
 				}
@@ -977,17 +977,17 @@ ruleWhen returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getWhenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getWhenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0());
 				}
-				lv_predicate_3_0=ruleStepDefinitionRef
+				lv_stepDefinitionName_3_0=ruleStepDefinitionRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getWhenRule());
 					}
 					set(
 						$current,
-						"predicate",
-						lv_predicate_3_0,
+						"stepDefinitionName",
+						lv_stepDefinitionName_3_0,
 						"org.farhan.dsl.sheepdog.SheepDog.StepDefinitionRef");
 					afterParserOrEnumRuleCall();
 				}
@@ -1068,17 +1068,17 @@ ruleThen returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getThenAccess().getObjectStepObjectRefParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getThenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0());
 				}
-				lv_object_2_0=ruleStepObjectRef
+				lv_stepObjectName_2_0=ruleStepObjectRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getThenRule());
 					}
 					set(
 						$current,
-						"object",
-						lv_object_2_0,
+						"stepObjectName",
+						lv_stepObjectName_2_0,
 						"org.farhan.dsl.sheepdog.SheepDog.StepObjectRef");
 					afterParserOrEnumRuleCall();
 				}
@@ -1087,17 +1087,17 @@ ruleThen returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getThenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getThenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0());
 				}
-				lv_predicate_3_0=ruleStepDefinitionRef
+				lv_stepDefinitionName_3_0=ruleStepDefinitionRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getThenRule());
 					}
 					set(
 						$current,
-						"predicate",
-						lv_predicate_3_0,
+						"stepDefinitionName",
+						lv_stepDefinitionName_3_0,
 						"org.farhan.dsl.sheepdog.SheepDog.StepDefinitionRef");
 					afterParserOrEnumRuleCall();
 				}
@@ -1178,17 +1178,17 @@ ruleAnd returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getAndAccess().getObjectStepObjectRefParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getAndAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0());
 				}
-				lv_object_2_0=ruleStepObjectRef
+				lv_stepObjectName_2_0=ruleStepObjectRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getAndRule());
 					}
 					set(
 						$current,
-						"object",
-						lv_object_2_0,
+						"stepObjectName",
+						lv_stepObjectName_2_0,
 						"org.farhan.dsl.sheepdog.SheepDog.StepObjectRef");
 					afterParserOrEnumRuleCall();
 				}
@@ -1197,17 +1197,17 @@ ruleAnd returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getAndAccess().getPredicateStepDefinitionRefParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getAndAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0());
 				}
-				lv_predicate_3_0=ruleStepDefinitionRef
+				lv_stepDefinitionName_3_0=ruleStepDefinitionRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getAndRule());
 					}
 					set(
 						$current,
-						"predicate",
-						lv_predicate_3_0,
+						"stepDefinitionName",
+						lv_stepDefinitionName_3_0,
 						"org.farhan.dsl.sheepdog.SheepDog.StepDefinitionRef");
 					afterParserOrEnumRuleCall();
 				}

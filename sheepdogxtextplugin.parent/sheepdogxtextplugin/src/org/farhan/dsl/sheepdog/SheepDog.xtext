@@ -50,19 +50,19 @@ TestStep:
 	Given | When | Then | And;
 
 Given:
-	'*' 'Given:' object=StepObjectRef predicate=StepDefinitionRef EOL
+	'*' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 	(table=Table | text=Text)?;
 
 When:
-	'*' 'When:' object=StepObjectRef predicate=StepDefinitionRef EOL
+	'*' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 	(table=Table | text=Text)?;
 
 Then:
-	'*' 'Then:' object=StepObjectRef predicate=StepDefinitionRef EOL
+	'*' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 	(table=Table | text=Text)?;
 
 And:
-	'*' 'And:' object=StepObjectRef predicate=StepDefinitionRef EOL
+	'*' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 	(table=Table | text=Text)?;
 
 Text:

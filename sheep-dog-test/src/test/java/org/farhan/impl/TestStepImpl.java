@@ -42,16 +42,6 @@ public class TestStepImpl implements ITestStep {
 	}
 
 	@Override
-	public void setName(String value) {
-		name = value;
-	}
-
-	@Override
-	public void setNameLong(String value) {
-		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
-	}
-
-	@Override
 	public void setTable(ITable value) {
 		table = (TableImpl) value;
 		table.parent = this;
@@ -64,6 +54,26 @@ public class TestStepImpl implements ITestStep {
 
 	public boolean equals(TestStepImpl object) {
 		return this.equals(object);
+	}
+
+	@Override
+	public String getStepObjectName() {
+		throw new UnsupportedOperationException("getStepObjectName() is not implemented");
+	}
+
+	@Override
+	public String getStepDefinitionName() {
+		throw new UnsupportedOperationException("getStepDefinitionName() is not implemented");
+	}
+
+	@Override
+	public void setStepObjectName(String value) {
+		throw new UnsupportedOperationException("setStepObjectName(String value) is not implemented");
+	}
+
+	@Override
+	public void setStepDefinitionName(String value) {
+		throw new UnsupportedOperationException("setStepDefinitionName(String value) is not implemented");
 	}
 
 }

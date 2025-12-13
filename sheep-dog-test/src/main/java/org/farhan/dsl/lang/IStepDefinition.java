@@ -28,8 +28,6 @@ public interface IStepDefinition {
 
 	void setName(String value);
 
-	void setNameLong(String value);
-
 	boolean addStatement(IStatement value);
 
 	boolean addStepParameters(IStepParameters value);

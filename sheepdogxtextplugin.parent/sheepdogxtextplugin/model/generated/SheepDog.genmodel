@@ -41,8 +41,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/table"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestStep">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStep/object"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStep/predicate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStep/stepObjectName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStep/stepDefinitionName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStep/table"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStep/text"/>
     </genClasses>

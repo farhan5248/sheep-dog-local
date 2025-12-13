@@ -20,8 +20,6 @@ public interface IStepParameters {
 
 	void setName(String value);
 
-	void setNameLong(String value);
-
 	boolean addStatement(IStatement value);
 
 	void setTable(ITable value);

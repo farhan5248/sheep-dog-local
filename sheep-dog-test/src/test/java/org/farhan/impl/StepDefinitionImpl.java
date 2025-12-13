@@ -100,11 +100,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public void setNameLong(String value) {
-		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
-	}
-
-	@Override
 	public boolean addStatement(IStatement value) {
 		statementList.add((StatementImpl) value);
 		statementList.getLast().parent = this;

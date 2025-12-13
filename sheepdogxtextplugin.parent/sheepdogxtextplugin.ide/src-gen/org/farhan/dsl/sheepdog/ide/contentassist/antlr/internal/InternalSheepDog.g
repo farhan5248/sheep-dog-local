@@ -2093,9 +2093,9 @@ rule__Given__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getGivenAccess().getObjectAssignment_2()); }
-	(rule__Given__ObjectAssignment_2)
-	{ after(grammarAccess.getGivenAccess().getObjectAssignment_2()); }
+	{ before(grammarAccess.getGivenAccess().getStepObjectNameAssignment_2()); }
+	(rule__Given__StepObjectNameAssignment_2)
+	{ after(grammarAccess.getGivenAccess().getStepObjectNameAssignment_2()); }
 )
 ;
 finally {
@@ -2120,9 +2120,9 @@ rule__Given__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getGivenAccess().getPredicateAssignment_3()); }
-	(rule__Given__PredicateAssignment_3)
-	{ after(grammarAccess.getGivenAccess().getPredicateAssignment_3()); }
+	{ before(grammarAccess.getGivenAccess().getStepDefinitionNameAssignment_3()); }
+	(rule__Given__StepDefinitionNameAssignment_3)
+	{ after(grammarAccess.getGivenAccess().getStepDefinitionNameAssignment_3()); }
 )
 ;
 finally {
@@ -2255,9 +2255,9 @@ rule__When__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getWhenAccess().getObjectAssignment_2()); }
-	(rule__When__ObjectAssignment_2)
-	{ after(grammarAccess.getWhenAccess().getObjectAssignment_2()); }
+	{ before(grammarAccess.getWhenAccess().getStepObjectNameAssignment_2()); }
+	(rule__When__StepObjectNameAssignment_2)
+	{ after(grammarAccess.getWhenAccess().getStepObjectNameAssignment_2()); }
 )
 ;
 finally {
@@ -2282,9 +2282,9 @@ rule__When__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getWhenAccess().getPredicateAssignment_3()); }
-	(rule__When__PredicateAssignment_3)
-	{ after(grammarAccess.getWhenAccess().getPredicateAssignment_3()); }
+	{ before(grammarAccess.getWhenAccess().getStepDefinitionNameAssignment_3()); }
+	(rule__When__StepDefinitionNameAssignment_3)
+	{ after(grammarAccess.getWhenAccess().getStepDefinitionNameAssignment_3()); }
 )
 ;
 finally {
@@ -2417,9 +2417,9 @@ rule__Then__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getThenAccess().getObjectAssignment_2()); }
-	(rule__Then__ObjectAssignment_2)
-	{ after(grammarAccess.getThenAccess().getObjectAssignment_2()); }
+	{ before(grammarAccess.getThenAccess().getStepObjectNameAssignment_2()); }
+	(rule__Then__StepObjectNameAssignment_2)
+	{ after(grammarAccess.getThenAccess().getStepObjectNameAssignment_2()); }
 )
 ;
 finally {
@@ -2444,9 +2444,9 @@ rule__Then__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getThenAccess().getPredicateAssignment_3()); }
-	(rule__Then__PredicateAssignment_3)
-	{ after(grammarAccess.getThenAccess().getPredicateAssignment_3()); }
+	{ before(grammarAccess.getThenAccess().getStepDefinitionNameAssignment_3()); }
+	(rule__Then__StepDefinitionNameAssignment_3)
+	{ after(grammarAccess.getThenAccess().getStepDefinitionNameAssignment_3()); }
 )
 ;
 finally {
@@ -2579,9 +2579,9 @@ rule__And__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getAndAccess().getObjectAssignment_2()); }
-	(rule__And__ObjectAssignment_2)
-	{ after(grammarAccess.getAndAccess().getObjectAssignment_2()); }
+	{ before(grammarAccess.getAndAccess().getStepObjectNameAssignment_2()); }
+	(rule__And__StepObjectNameAssignment_2)
+	{ after(grammarAccess.getAndAccess().getStepObjectNameAssignment_2()); }
 )
 ;
 finally {
@@ -2606,9 +2606,9 @@ rule__And__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getAndAccess().getPredicateAssignment_3()); }
-	(rule__And__PredicateAssignment_3)
-	{ after(grammarAccess.getAndAccess().getPredicateAssignment_3()); }
+	{ before(grammarAccess.getAndAccess().getStepDefinitionNameAssignment_3()); }
+	(rule__And__StepDefinitionNameAssignment_3)
+	{ after(grammarAccess.getAndAccess().getStepDefinitionNameAssignment_3()); }
 )
 ;
 finally {
@@ -3621,30 +3621,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Given__ObjectAssignment_2
+rule__Given__StepObjectNameAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getGivenAccess().getObjectStepObjectRefParserRuleCall_2_0()); }
+		{ before(grammarAccess.getGivenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); }
 		ruleStepObjectRef
-		{ after(grammarAccess.getGivenAccess().getObjectStepObjectRefParserRuleCall_2_0()); }
+		{ after(grammarAccess.getGivenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Given__PredicateAssignment_3
+rule__Given__StepDefinitionNameAssignment_3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getGivenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); }
+		{ before(grammarAccess.getGivenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); }
 		ruleStepDefinitionRef
-		{ after(grammarAccess.getGivenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); }
+		{ after(grammarAccess.getGivenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); }
 	)
 ;
 finally {
@@ -3681,30 +3681,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__When__ObjectAssignment_2
+rule__When__StepObjectNameAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getWhenAccess().getObjectStepObjectRefParserRuleCall_2_0()); }
+		{ before(grammarAccess.getWhenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); }
 		ruleStepObjectRef
-		{ after(grammarAccess.getWhenAccess().getObjectStepObjectRefParserRuleCall_2_0()); }
+		{ after(grammarAccess.getWhenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__When__PredicateAssignment_3
+rule__When__StepDefinitionNameAssignment_3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getWhenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); }
+		{ before(grammarAccess.getWhenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); }
 		ruleStepDefinitionRef
-		{ after(grammarAccess.getWhenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); }
+		{ after(grammarAccess.getWhenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); }
 	)
 ;
 finally {
@@ -3741,30 +3741,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Then__ObjectAssignment_2
+rule__Then__StepObjectNameAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getThenAccess().getObjectStepObjectRefParserRuleCall_2_0()); }
+		{ before(grammarAccess.getThenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); }
 		ruleStepObjectRef
-		{ after(grammarAccess.getThenAccess().getObjectStepObjectRefParserRuleCall_2_0()); }
+		{ after(grammarAccess.getThenAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Then__PredicateAssignment_3
+rule__Then__StepDefinitionNameAssignment_3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getThenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); }
+		{ before(grammarAccess.getThenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); }
 		ruleStepDefinitionRef
-		{ after(grammarAccess.getThenAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); }
+		{ after(grammarAccess.getThenAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); }
 	)
 ;
 finally {
@@ -3801,30 +3801,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__And__ObjectAssignment_2
+rule__And__StepObjectNameAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getAndAccess().getObjectStepObjectRefParserRuleCall_2_0()); }
+		{ before(grammarAccess.getAndAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); }
 		ruleStepObjectRef
-		{ after(grammarAccess.getAndAccess().getObjectStepObjectRefParserRuleCall_2_0()); }
+		{ after(grammarAccess.getAndAccess().getStepObjectNameStepObjectRefParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__And__PredicateAssignment_3
+rule__And__StepDefinitionNameAssignment_3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getAndAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); }
+		{ before(grammarAccess.getAndAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); }
 		ruleStepDefinitionRef
-		{ after(grammarAccess.getAndAccess().getPredicateStepDefinitionRefParserRuleCall_3_0()); }
+		{ after(grammarAccess.getAndAccess().getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0()); }
 	)
 ;
 finally {

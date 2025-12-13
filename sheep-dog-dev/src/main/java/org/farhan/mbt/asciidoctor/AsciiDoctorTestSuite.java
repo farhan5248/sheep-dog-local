@@ -100,8 +100,8 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 		}
 		String stepName = name.substring(keyword.length() + 1);
 		String predicate = TestStepUtility.getStepDefinitionName(stepName);
-		step.setPredicate(predicate);
-		step.setObject(stepName.replace(predicate, "").trim());
+		step.setStepDefinitionName(predicate);
+		step.setStepObjectName(stepName.replace(predicate, "").trim());
 		abstractScenario.getTestStepList().add(step);
 		return step;
 	}
@@ -277,7 +277,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 	}
 
 	public String getStepName(TestStep step) {
-		return getStepKeyword(step) + " " + step.getObject() + " " + step.getPredicate();
+		return getStepKeyword(step) + " " + step.getStepObjectName() + " " + step.getStepDefinitionName();
 	}
 
 	public String getStepNameLong(TestStep step) {

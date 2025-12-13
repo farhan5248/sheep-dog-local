@@ -35,12 +35,12 @@ public class AndFormatter extends TestStepFormatter {
 
 	@Override
 	protected RuleCall getObjectStepObjectRefParserRuleCall(AbstractParserRuleElementFinder a) {
-		return ((AndElements) a).getObjectStepObjectRefParserRuleCall_2_0();
+		return ((AndElements) a).getStepObjectNameStepObjectRefParserRuleCall_2_0();
 	}
 
 	@Override
 	protected RuleCall getPredicateStepDefinitionRefParserRuleCall(AbstractParserRuleElementFinder a) {
-		return ((AndElements) a).getPredicateStepDefinitionRefParserRuleCall_3_0();
+		return ((AndElements) a).getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0();
 	}
 
 }

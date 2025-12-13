@@ -121,15 +121,15 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 			initProject(step.eResource());
 			String problems = TestStepIssueDetector.validateNameComponentOnly(testStep);
 			if (!problems.isEmpty()) {
-				error(problems, SheepDogPackage.Literals.TEST_STEP__OBJECT, TEST_STEP_NAME_COMPONENT_ONLY);
+				error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME, TEST_STEP_NAME_COMPONENT_ONLY);
 			} else {
 				problems = TestStepIssueDetector.validateNameObjectOnly(testStep);
 				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__OBJECT, TEST_STEP_NAME_OBJECT_ONLY);
+					error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME, TEST_STEP_NAME_OBJECT_ONLY);
 				} else {
 					problems = TestStepIssueDetector.validateNamePredicateOnly(testStep);
 					if (!problems.isEmpty()) {
-						error(problems, SheepDogPackage.Literals.TEST_STEP__PREDICATE, TEST_STEP_NAME_PREDICATE_ONLY);
+						error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME, TEST_STEP_NAME_PREDICATE_ONLY);
 					}
 				}
 			}
@@ -145,11 +145,11 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 			initProject(step.eResource());
 			String problems = TestStepIssueDetector.validateNameObjectWorkspace(testStep);
 			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEST_STEP__OBJECT, TEST_STEP_NAME_OBJECT_WORKSPACE);
+				warning(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME, TEST_STEP_NAME_OBJECT_WORKSPACE);
 			} else {
 				problems = TestStepIssueDetector.validateNamePredicateWorkspace(testStep);
 				if (!problems.isEmpty()) {
-					warning(problems, SheepDogPackage.Literals.TEST_STEP__PREDICATE,
+					warning(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME,
 							TEST_STEP_NAME_PREDICATE_WORKSPACE);
 				}
 			}

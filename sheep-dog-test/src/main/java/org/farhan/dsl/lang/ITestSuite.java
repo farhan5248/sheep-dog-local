@@ -34,6 +34,4 @@ public interface ITestSuite extends IModel {
 
 	void setName(String value);
 
-	void setNameLong(String value);
-
 }

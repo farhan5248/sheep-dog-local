@@ -21,8 +21,8 @@ public class TestStepImpl implements ITestStep {
 	@Override
 	public String getName() {
 		String name = "";
-		name += eObject.getObject() != null ? eObject.getObject() : "";
-		name += eObject.getPredicate() != null ? " " + eObject.getPredicate() : "";
+		name += eObject.getStepObjectName() != null ? eObject.getStepObjectName() : "";
+		name += eObject.getStepDefinitionName() != null ? " " + eObject.getStepDefinitionName() : "";
 		return name;
 	}
 
@@ -67,16 +67,6 @@ public class TestStepImpl implements ITestStep {
 	}
 
 	@Override
-	public void setName(String value) {
-		throw new UnsupportedOperationException("setName(String value) is not implemented");
-	}
-
-	@Override
-	public void setNameLong(String value) {
-		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
-	}
-
-	@Override
 	public void setTable(ITable value) {
 		throw new UnsupportedOperationException("setTable(ITable value) is not implemented");
 	}
@@ -88,5 +78,25 @@ public class TestStepImpl implements ITestStep {
 
 	public boolean equals(Object object) {
 		return eObject.equals(((TestStepImpl) object).eObject);
+	}
+
+	@Override
+	public String getStepObjectName() {
+		return eObject.getStepObjectName();
+	}
+
+	@Override
+	public String getStepDefinitionName() {
+		return eObject.getStepDefinitionName();
+	}
+
+	@Override
+	public void setStepObjectName(String value) {
+		eObject.setStepObjectName(value);
+	}
+
+	@Override
+	public void setStepDefinitionName(String value) {
+		eObject.setStepDefinitionName(value);
 	}
 }

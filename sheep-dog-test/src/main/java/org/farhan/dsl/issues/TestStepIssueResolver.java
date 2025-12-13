@@ -28,10 +28,10 @@ public class TestStepIssueResolver {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = SheepDogFactory.instance.createStepObject(qualifiedName);
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-			proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getQualifiedName());
+			proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getNameLong());
 			proposal.setDescription(StatementUtility.getStatementListAsString(theStepObject.getStatementList()));
 			proposal.setValue(theStepObject.getContent());
-			proposal.setQualifiedName(theStepObject.getQualifiedName());
+			proposal.setQualifiedName(theStepObject.getNameLong());
 			proposals.add(proposal);
 		} catch (Exception e) {
 			logger.error("Failed in correctNameObjectWorkspace for step '{}': {}",
@@ -57,7 +57,7 @@ public class TestStepIssueResolver {
 					proposal.setDescription(
 							StatementUtility.getStatementListAsString(theStepDefinition.getStatementList()));
 					proposal.setValue(theStepObject.getContent());
-					proposal.setQualifiedName(theStepObject.getQualifiedName());
+					proposal.setQualifiedName(theStepObject.getNameLong());
 					proposals.add(proposal);
 				}
 			}
@@ -75,7 +75,7 @@ public class TestStepIssueResolver {
 		SheepDogIssueProposal proposal;
 		for (IStepObject aStepObject : TestProjectUtility.getStepObjectList(theProject, component)) {
 			proposal = new SheepDogIssueProposal();
-			proposal.setId(aStepObject.getQualifiedName().replaceFirst(component + "/", "")
+			proposal.setId(aStepObject.getNameLong().replaceFirst(component + "/", "")
 					.replaceFirst(theProject.getFileExtension() + "$", ""));
 			proposal.setDescription(StatementUtility.getStatementListAsString(aStepObject.getStatementList()));
 			proposal.setValue("The " + component + " " + proposal.getId());

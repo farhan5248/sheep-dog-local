@@ -71,11 +71,6 @@ public class TestStepContainerImpl implements ITestStepContainer {
 	}
 
 	@Override
-	public void setNameLong(String value) {
-		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
-	}
-
-	@Override
 	public boolean addStatement(IStatement value) {
 		throw new UnsupportedOperationException("addStatement(IStatement value) is not implemented");
 	}

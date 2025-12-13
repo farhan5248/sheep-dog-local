@@ -45,7 +45,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 		String extension = org.farhan.dsl.lang.SheepDogFactory.instance.createTestProject().getFileExtension();
 		eObject.setName((new File(qualifiedName)).getName().replaceFirst(extension + "$", ""));
 		IStepObject stepObject = new StepObjectImpl(eObject);
-		stepObject.setQualifiedName(qualifiedName);
+		stepObject.setNameLong(qualifiedName);
 		return stepObject;
 	}
 

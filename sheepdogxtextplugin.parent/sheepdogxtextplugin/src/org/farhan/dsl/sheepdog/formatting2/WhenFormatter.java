@@ -35,12 +35,12 @@ public class WhenFormatter extends TestStepFormatter {
 
 	@Override
 	protected RuleCall getObjectStepObjectRefParserRuleCall(AbstractParserRuleElementFinder a) {
-		return ((WhenElements) a).getObjectStepObjectRefParserRuleCall_2_0();
+		return ((WhenElements) a).getStepObjectNameStepObjectRefParserRuleCall_2_0();
 	}
 
 	@Override
 	protected RuleCall getPredicateStepDefinitionRefParserRuleCall(AbstractParserRuleElementFinder a) {
-		return ((WhenElements) a).getPredicateStepDefinitionRefParserRuleCall_3_0();
+		return ((WhenElements) a).getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0();
 	}
 
 }

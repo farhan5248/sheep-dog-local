@@ -37,13 +37,13 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 
 	public void completeAnd_Object(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeAnd_Object(step, assignment, context, acceptor);
+		super.completeAnd_StepObjectName(step, assignment, context, acceptor);
 		completeObject(step, assignment, context, acceptor);
 	}
 
 	public void completeAnd_Predicate(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeAnd_Predicate(step, assignment, context, acceptor);
+		super.completeAnd_StepDefinitionName(step, assignment, context, acceptor);
 		completePredicate(step, assignment, context, acceptor);
 	}
 
@@ -66,13 +66,13 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 
 	public void completeGiven_Object(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_Object(step, assignment, context, acceptor);
+		super.completeGiven_StepObjectName(step, assignment, context, acceptor);
 		completeObject(step, assignment, context, acceptor);
 	}
 
 	public void completeGiven_Predicate(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_Predicate(step, assignment, context, acceptor);
+		super.completeGiven_StepDefinitionName(step, assignment, context, acceptor);
 		completePredicate(step, assignment, context, acceptor);
 	}
 
@@ -120,25 +120,25 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 
 	public void completeThen_Object(Then step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeThen_Object(step, assignment, context, acceptor);
+		super.completeThen_StepObjectName(step, assignment, context, acceptor);
 		completeObject(step, assignment, context, acceptor);
 	}
 
 	public void completeThen_Predicate(Then step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeThen_Predicate(step, assignment, context, acceptor);
+		super.completeThen_StepDefinitionName(step, assignment, context, acceptor);
 		completePredicate(step, assignment, context, acceptor);
 	}
 
 	public void completeWhen_Object(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeWhen_Object(step, assignment, context, acceptor);
+		super.completeWhen_StepObjectName(step, assignment, context, acceptor);
 		completeObject(step, assignment, context, acceptor);
 	}
 
 	public void completeWhen_Predicate(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeWhen_Predicate(step, assignment, context, acceptor);
+		super.completeWhen_StepDefinitionName(step, assignment, context, acceptor);
 		completePredicate(step, assignment, context, acceptor);
 	}
 

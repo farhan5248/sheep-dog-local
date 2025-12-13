@@ -26,7 +26,7 @@ public class TestProjectImpl implements ITestProject {
 	@Override
 	public IStepObject getStepObject(String qualifiedName) {
 		for (IStepObject so : this.stepObjectList) {
-			if (so.getQualifiedName().contentEquals(qualifiedName)) {
+			if (so.getNameLong().contentEquals(qualifiedName)) {
 				return so;
 			}
 		}

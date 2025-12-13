@@ -15,6 +15,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestStepUtility {
+	// TODO think about the following
+	// 1. Delete this class and move all the grammar to the xtext file
+	// 2. getQualifiedName or getNameLong should be move to the implementing
+	// classes? But if so, then each jar would have to implement the same logic. In
+	// this case then, even after moving out the grammar, the only class using the
+	// utility is the Impl classes. In which case, instead of an interface, would
+	// abstract classes be better? Make a decision only after updating the spring
+	// boot service code. For now meta attributes should use methods here to get
+	// their value. They have no setters in the interfaces, just getters
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepUtility.class);
 
@@ -117,7 +126,6 @@ public class TestStepUtility {
 	public static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep, boolean reverse) {
 		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
 		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
-
 			// TODO make isElementEqual to force implementing the equals check
 			// TODO make tests for this
 			if (t.equals(theTestStep)) {

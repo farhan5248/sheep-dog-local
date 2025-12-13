@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getObject <em>Object</em>}</li>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getPredicate <em>Predicate</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getStepObjectName <em>Step Object Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getStepDefinitionName <em>Step Definition Name</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getTable <em>Table</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getText <em>Text</em>}</li>
  * </ul>
@@ -27,48 +27,48 @@ import org.eclipse.emf.ecore.EObject;
 public interface TestStep extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Object</b></em>' attribute.
+   * Returns the value of the '<em><b>Step Object Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Object</em>' attribute.
-   * @see #setObject(String)
-   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestStep_Object()
+   * @return the value of the '<em>Step Object Name</em>' attribute.
+   * @see #setStepObjectName(String)
+   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestStep_StepObjectName()
    * @model
    * @generated
    */
-  String getObject();
+  String getStepObjectName();
 
   /**
-   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getObject <em>Object</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getStepObjectName <em>Step Object Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Object</em>' attribute.
-   * @see #getObject()
+   * @param value the new value of the '<em>Step Object Name</em>' attribute.
+   * @see #getStepObjectName()
    * @generated
    */
-  void setObject(String value);
+  void setStepObjectName(String value);
 
   /**
-   * Returns the value of the '<em><b>Predicate</b></em>' attribute.
+   * Returns the value of the '<em><b>Step Definition Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Predicate</em>' attribute.
-   * @see #setPredicate(String)
-   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestStep_Predicate()
+   * @return the value of the '<em>Step Definition Name</em>' attribute.
+   * @see #setStepDefinitionName(String)
+   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestStep_StepDefinitionName()
    * @model
    * @generated
    */
-  String getPredicate();
+  String getStepDefinitionName();
 
   /**
-   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getPredicate <em>Predicate</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep#getStepDefinitionName <em>Step Definition Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Predicate</em>' attribute.
-   * @see #getPredicate()
+   * @param value the new value of the '<em>Step Definition Name</em>' attribute.
+   * @see #getStepDefinitionName()
    * @generated
    */
-  void setPredicate(String value);
+  void setStepDefinitionName(String value);
 
   /**
    * Returns the value of the '<em><b>Table</b></em>' containment reference.

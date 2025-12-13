@@ -69,11 +69,6 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public String getQualifiedName() {
-		throw new UnsupportedOperationException("getQualifiedName() is not implemented");
-	}
-
-	@Override
 	public IStatement getStatement(int index) {
 		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
 	}
@@ -135,11 +130,6 @@ public class TestSuiteImpl implements ITestSuite {
 
 	public void setParent(ITestProject parent) {
 		this.parent = parent;
-	}
-
-	@Override
-	public void setQualifiedName(String value) {
-		throw new UnsupportedOperationException("setQualifiedName(String value) is not implemented");
 	}
 
 }

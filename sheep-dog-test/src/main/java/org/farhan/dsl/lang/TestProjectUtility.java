@@ -7,7 +7,7 @@ public class TestProjectUtility {
 	public static ArrayList<String> getComponentList(ITestProject testProject) {
 		TreeSet<String> componentSet = new TreeSet<String>();
 		for (IStepObject so : testProject.getStepObjectList()) {
-			componentSet.add(so.getQualifiedName().split("/")[0]);
+			componentSet.add(so.getNameLong().split("/")[0]);
 		}
 		ArrayList<String> componentList = new ArrayList<String>();
 		componentList.addAll(componentSet);
@@ -17,7 +17,7 @@ public class TestProjectUtility {
 	public static ArrayList<IStepObject> getStepObjectList(ITestProject testProject, String component) {
 		ArrayList<IStepObject> componentStepObjectList = new ArrayList<IStepObject>();
 		for (IStepObject so : testProject.getStepObjectList()) {
-			if (so.getQualifiedName().startsWith(component)) {
+			if (so.getNameLong().startsWith(component)) {
 				componentStepObjectList.add(so);
 			}
 		}
