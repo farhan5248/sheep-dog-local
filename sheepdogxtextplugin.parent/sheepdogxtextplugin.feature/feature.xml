@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature id="sheepdogxtextplugin.feature"
 	label="SheepDog Feature "
-	version="1.29.0">
+	version="1.30.0.qualifier">
 	<plugin
 			id="sheepdogxtextplugin"
 			download-size="0"
