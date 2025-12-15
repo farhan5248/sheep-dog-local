@@ -148,7 +148,7 @@
 			<plugin>
 				<groupId>org.farhan</groupId>
 				<artifactId>sheep-dog-dev-maven-plugin</artifactId>
-				<version>1.30</version>
+				<version>1.32</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
