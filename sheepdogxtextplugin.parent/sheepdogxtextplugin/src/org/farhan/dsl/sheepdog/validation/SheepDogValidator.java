@@ -48,8 +48,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String TEST_STEP_STEP_OBJECT_NAME_WORKSPACE = "TEST_STEP_STEP_OBJECT_NAME_WORKSPACE";
 	public static final String TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE = "TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE";
 	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
-	public static final String TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY = "TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY";
-	public static final String TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY = "TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY";
+	public static final String TEST_STEP_STEP_OBJECT_NAME_ONLY = "TEST_STEP_STEP_OBJECT_NAME_ONLY";
 	public static final String TEST_STEP_STEP_DEFINITION_NAME_ONLY = "TEST_STEP_STEP_DEFINITION_NAME_ONLY";
 	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
 
@@ -119,21 +118,15 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		TestStepImpl testStep = new TestStepImpl(step);
 		try {
 			initProject(step.eResource());
-			String problems = TestStepIssueDetector.validateStepObjectNameComponentOnly(testStep);
+			String problems = TestStepIssueDetector.validateStepObjectNameOnly(testStep);
 			if (!problems.isEmpty()) {
 				error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME,
-						TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY);
+						TEST_STEP_STEP_OBJECT_NAME_ONLY);
 			} else {
-				problems = TestStepIssueDetector.validateStepObjectNameObjectOnly(testStep);
+				problems = TestStepIssueDetector.validateStepDefinitionNameOnly(testStep);
 				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME,
-							TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY);
-				} else {
-					problems = TestStepIssueDetector.validateStepDefinitionNameOnly(testStep);
-					if (!problems.isEmpty()) {
-						error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME,
-								TEST_STEP_STEP_DEFINITION_NAME_ONLY);
-					}
+					error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME,
+							TEST_STEP_STEP_DEFINITION_NAME_ONLY);
 				}
 			}
 		} catch (Exception e) {

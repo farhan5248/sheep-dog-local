@@ -11,38 +11,19 @@ public class TestStepIssueDetector {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
 
-	// TODO make test for this
-	public static String validateStepObjectNameComponentOnly(ITestStep theTestStep) throws Exception {
-		logger.debug("Entering validateStepObjectNameComponentOnly for step: {}",
+	public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering validateStepObjectNameOnly for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		String text = theTestStep.getName();
 		if (text != null) {
-			if (!text.matches(TestStepUtility.REGEX)) {
-				if (!TestStepUtility.hasStepObjectName(text)) {
-					if (!TestStepUtility.hasComponent(text)) {
-						logger.debug("Exiting validateStepObjectNameComponentOnly");
-						return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY.description;
-					}
+			if (!TestStepUtility.isValid(text)) {
+				if (!TestStepUtility.getStepObjectName(text).isEmpty()) {
+					logger.debug("Exiting validateStepObjectNameOnly");
+					return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
 				}
 			}
 		}
-		logger.debug("Exiting validateStepObjectNameComponentOnly");
-		return "";
-	}
-
-	public static String validateStepObjectNameObjectOnly(ITestStep theTestStep) throws Exception {
-		logger.debug("Entering validateStepObjectNameObjectOnly for step: {}",
-				theTestStep != null ? theTestStep.getName() : "null");
-		String text = theTestStep.getName();
-		if (text != null) {
-			if (!text.matches(TestStepUtility.REGEX)) {
-				if (!TestStepUtility.hasStepObjectName(text)) {
-					logger.debug("Exiting validateStepObjectNameObjectOnly");
-					return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY.description;
-				}
-			}
-		}
-		logger.debug("Exiting validateStepObjectNameObjectOnly");
+		logger.debug("Exiting validateStepObjectNameOnly");
 		return "";
 	}
 
@@ -52,8 +33,8 @@ public class TestStepIssueDetector {
 				theTestStep != null ? theTestStep.getName() : "null");
 		String text = theTestStep.getName();
 		if (text != null) {
-			if (!text.matches(TestStepUtility.REGEX)) {
-				if (!TestStepUtility.hasStepDefinitionName(text)) {
+			if (!TestStepUtility.isValid(text)) {
+				if (!TestStepUtility.getStepDefinitionName(text).isEmpty()) {
 					return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
 				}
 			}

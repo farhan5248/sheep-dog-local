@@ -22,21 +22,6 @@ Feature: Create Documentation
           | Message                              |
           | The first step must have a component |
 
-  Scenario: Select from list of existing objects in the component
-
-    Now that there's a component, select from a list of its existing objects.
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name          |
-          | The daily batchjob |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name |
-          | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose content dialog will be set as follows
-          | Suggestion                    | Suggestion Name |
-          | The daily batchjob Input file | Input file      |
-
   Scenario: Confirm that this is a new step definition
 
     Create a new step instead of picking from what exists and ignore the warning.

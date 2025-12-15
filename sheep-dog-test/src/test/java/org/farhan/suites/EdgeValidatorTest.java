@@ -8,14 +8,7 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testIsEdge() {
-		Assertions
-				.assertTrue(TestStepUtility.isEdge("The Something1 application Something2 request is executed with"));
-	}
-
-	@Test
-	public void testIsComponent() {
-		Assertions.assertTrue(
-				TestStepUtility.hasComponent("The Something1 application Something2 request is executed with"));
+		Assertions.assertTrue(TestStepUtility.isEdge("The Something1 application Something2 request is executed with"));
 	}
 
 	@Test
@@ -54,16 +47,14 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testGetState() {
-		Assertions
-				.assertTrue(TestStepUtility.getState("The Something1 application Something2 request is executed with")
-						.contentEquals("is executed"));
+		Assertions.assertTrue(TestStepUtility.getState("The Something1 application Something2 request is executed with")
+				.contentEquals("is executed"));
 	}
 
 	@Test
 	public void testGetStateModality() {
-		Assertions.assertTrue(
-				TestStepUtility.getStateDesc("The Something1 application Something2 request is executed with")
-						.contentEquals("is"));
+		Assertions.assertTrue(TestStepUtility
+				.getStateDesc("The Something1 application Something2 request is executed with").contentEquals("is"));
 	}
 
 	@Test
@@ -75,16 +66,14 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testGetAttachment() {
-		Assertions.assertTrue(
-				TestStepUtility.getAttachment("The Something1 application Something2 request is executed with")
-						.contentEquals("with"));
+		Assertions.assertTrue(TestStepUtility
+				.getAttachment("The Something1 application Something2 request is executed with").contentEquals("with"));
 	}
 
 	@Test
 	public void testGetTime() {
-		Assertions.assertTrue(
-				TestStepUtility.getTime("The Something1 application Something2 request is executed on time")
-						.contentEquals("on time"));
+		Assertions.assertTrue(TestStepUtility
+				.getTime("The Something1 application Something2 request is executed on time").contentEquals("on time"));
 	}
 
 	@Test
@@ -100,8 +89,7 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testStateRegexIsPerformed() {
-		Assertions
-				.assertTrue("The Something1 application Something2 file is performed".matches(TestStepUtility.REGEX));
+		Assertions.assertTrue("The Something1 application Something2 file is performed".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
@@ -141,8 +129,8 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testObjectRegexAction() {
-		Assertions.assertTrue(
-				"The Something1 application Something2 action is performed".matches(TestStepUtility.REGEX));
+		Assertions
+				.assertTrue("The Something1 application Something2 action is performed".matches(TestStepUtility.REGEX));
 	}
 
 	@Test

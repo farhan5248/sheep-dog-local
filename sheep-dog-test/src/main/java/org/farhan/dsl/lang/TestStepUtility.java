@@ -81,7 +81,7 @@ public class TestStepUtility {
 			String stepDefinitonName = getStepDefinitionName(stepNameLong);
 
 			if (component.isEmpty() || !object.contains("/")) {
-				ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep, true);
+				ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep);
 				for (ITestStep previousStep : previousSteps) {
 					// if the step has a matching object
 					String previousObject = getObject(previousStep.getName());
@@ -123,7 +123,7 @@ public class TestStepUtility {
 		}
 	}
 
-	public static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep, boolean reverse) {
+	private static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep) {
 		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
 		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
 			// TODO make isElementEqual to force implementing the equals check
@@ -131,11 +131,7 @@ public class TestStepUtility {
 			if (t.equals(theTestStep)) {
 				break;
 			} else {
-				if (reverse) {
-					steps.add(0, t);
-				} else {
-					steps.add(t);
-				}
+				steps.add(0, t);
 			}
 		}
 		return steps;
@@ -168,6 +164,7 @@ public class TestStepUtility {
 		String stepNameLong = getNameLong(theStep);
 		String component = getComponent(stepNameLong);
 		String object = getObject(stepNameLong);
+		// TODO maybe in the future, the file extension shouldn't be referenced in this utility class.
 		String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
 		return component + "/" + object + fileExt;
 	}
@@ -176,26 +173,16 @@ public class TestStepUtility {
 		return getGroup(STEP_OBJECT_NAME, text, 0);
 	}
 
-	public static boolean hasStepObjectName(String text) {
-		// TODO replace with get
-		return !getGroup(STEP_OBJECT_NAME, text, 0).isBlank();
-	}
-
 	public static String getComponent(String text) {
-		return getGroup("(The" + COMPONENT + ")", text, 2);
-	}
-
-	public static boolean hasComponent(String text) {
-		// TODO replace with getComponent
-		return !getGroup("(The" + COMPONENT + ")", text, 2).isBlank();
+		return getGroup(STEP_OBJECT_NAME, text, 2);
 	}
 
 	public static String getComponentName(String text) {
-		return getGroup(REGEX, text, 3);
+		return getGroup(STEP_OBJECT_NAME, text, 3);
 	}
 
 	public static String getComponentType(String text) {
-		return getGroup(REGEX, text, 4);
+		return getGroup(STEP_OBJECT_NAME, text, 4);
 	}
 
 	public static String getObject(String text) {
@@ -203,20 +190,23 @@ public class TestStepUtility {
 	}
 
 	public static String getObjectName(String text) {
-		return getGroup(REGEX, text, 6);
+		return getGroup(STEP_OBJECT_NAME, text, 6);
 	}
 
 	public static String getObjectType(String text) {
-		return getGroup(REGEX, text, 7);
+		return getGroup(STEP_OBJECT_NAME, text, 7);
+	}
+
+	public static String getObjectVertexType(String text) {
+		return getGroup(STEP_OBJECT_NAME, text, 8);
+	}
+
+	public static String getObjectEdgeType(String text) {
+		return getGroup(STEP_OBJECT_NAME, text, 9);
 	}
 
 	public static String getStepDefinitionName(String text) {
 		return getGroup(REGEX, text, 10);
-	}
-
-	public static boolean hasStepDefinitionName(String text) {
-		// TODO replace with getStepDefinitionName
-		return !getGroup(REGEX, text, 0).isBlank();
 	}
 
 	public static String getPart(String text) {
@@ -243,12 +233,6 @@ public class TestStepUtility {
 		return getGroup(REGEX, text, 16);
 	}
 
-	public static boolean hasStateType(String text) {
-		// TODO replace with getStateType
-		return !getGroup("The" + "(" + COMPONENT + ")?" + OBJECT + "(" + "(" + PART + ")?" + "("
-				+ getRegexFromTypes(TestStepStateModalityTypes.values()) + ")" + ")", text, 0).isBlank();
-	}
-
 	public static String getTime(String text) {
 		return getGroup(REGEX, text, 17);
 	}
@@ -266,15 +250,18 @@ public class TestStepUtility {
 	}
 
 	public static boolean isEdge(String text) {
-		return !getGroup(REGEX, text, 9).isEmpty();
+		return !getObjectEdgeType(text).isEmpty();
 	}
 
 	public static boolean isNegativeStep(String text) {
-		return getGroup(REGEX, text, 14).contains("isn't") || getGroup(REGEX, text, 14).contains("won't be");
+		return getState(text).contains("isn't") || getState(text).contains("won't be");
 	}
 
 	public static boolean isVertex(String text) {
-		return !getGroup(REGEX, text, 7).isEmpty();
+		return !getObjectVertexType(text).isEmpty();
 	}
 
+	public static boolean isValid(String text) {
+		return !getGroup(REGEX, text, 0).isEmpty();
+	}
 }

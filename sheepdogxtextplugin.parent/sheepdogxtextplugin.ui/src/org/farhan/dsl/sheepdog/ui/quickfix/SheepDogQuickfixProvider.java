@@ -91,7 +91,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE)
-	public void fixTestStepNameObjectWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+	public void fixTestStepStepObjectNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStep step = (TestStep) getEObject(issue);
 		createAcceptor(issue, acceptor, TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
 	}

@@ -2,14 +2,13 @@ package org.farhan.dsl.issues;
 
 public enum TestStepIssueTypes {
 
-	TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY("TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY",
+	TEST_STEP_STEP_OBJECT_NAME_ONLY("TEST_STEP_STEP_OBJECT_NAME_ONLY",
 			"Every test case must have at least one component specified."
 					+ "\nThis should be the first part of the test step name." + "\nThe component is optional."
 					+ "\nComponent ending words are: application, service, plugin, batchjob, project."
-					+ "\nExamples are: \"The something application,\" or \"The something service,\""),
-
-	TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY("TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY",
-			"Every test step must have the object specified." + "\nThe object can have the complete path or not."
+					+ "\nExamples are: \"The something application,\" or \"The something service,\""
+					+ "Every test step must have the object specified."
+					+ "\nThe object can have the complete path or not."
 					+ "\nObject ending words are: file, page, response, dialog, directory, request, goal, job, action."
 					+ "\nExamples are: \"src/test/resources/file.txt file\" or \"Home page\""),
 

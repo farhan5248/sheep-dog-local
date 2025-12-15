@@ -77,7 +77,7 @@ public class RowIssueResolver {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 
-		if (theTestStep.getName().matches(TestStepUtility.REGEX)) {
+		if (TestStepUtility.isValid(theTestStep.getName())) {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject != null) {

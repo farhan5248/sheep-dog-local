@@ -43,8 +43,8 @@ Feature: Proposals for Objects or Components
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin propose test step action is performed
      Then The xtext plugin propose content dialog will be set as follows
-          | Suggestion         | Suggestion Name |
-          | The daily batchjob | daily batchjob  |
+          | Suggestion                    | Suggestion Name |
+          | The daily batchjob Input file | Input file      |
 
   Scenario: No object no component has previous no component objects
 
@@ -68,9 +68,8 @@ Feature: Proposals for Objects or Components
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin propose test step action is performed
      Then The xtext plugin propose content dialog will be set as follows
-          | Suggestion         | Suggestion Name |
-          | The Input file     | Input file      |
-          | The daily batchjob | daily batchjob  |
+          | Suggestion                    | Suggestion Name |
+          | The daily batchjob Input file | Input file      |
 
   Scenario: No object has component no previous no component objects
 

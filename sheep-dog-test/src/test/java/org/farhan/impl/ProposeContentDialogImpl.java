@@ -49,7 +49,7 @@ public class ProposeContentDialogImpl extends TestObject implements ProposeConte
 	public void assertSuggestionDescription(HashMap<String, String> keyMap) {
 		boolean found = false;
 		for (SheepDogIssueProposal p : MockIDE.getProposals()) {
-			if (p.getId().equals(keyMap.get("Suggestion Name"))) {
+			if (p.getId().equals(keyMap.get("Suggestion Name")) && p.getValue().equals(keyMap.get("Suggestion"))) {
 				found = p.getDescription().contentEquals(keyMap.get("Suggestion Description"));
 				Assertions.assertTrue(found, "Suggestion Description doesn't match: " + p.getValue());
 				return;

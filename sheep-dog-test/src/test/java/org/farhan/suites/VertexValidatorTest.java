@@ -13,12 +13,6 @@ public class VertexValidatorTest {
 	}
 
 	@Test
-	public void testIsComponent() {
-		Assertions.assertTrue(TestStepUtility
-				.hasComponent("The Something1 application Something2 file Something3 section is empty"));
-	}
-
-	@Test
 	public void testGetAppName() {
 		Assertions.assertTrue(TestStepUtility
 				.getComponentName("The Something1 application Something2 file Something3 section is empty")
@@ -48,9 +42,9 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testGetDetailsName() {
-		Assertions.assertTrue(TestStepUtility
-				.getPartDesc("The Something1 application Something2 file Something3 section is empty")
-				.contentEquals("Something3"));
+		Assertions.assertTrue(
+				TestStepUtility.getPartDesc("The Something1 application Something2 file Something3 section is empty")
+						.contentEquals("Something3"));
 	}
 
 	@Test
@@ -62,9 +56,9 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testGetDetailsType() {
-		Assertions.assertTrue(TestStepUtility
-				.getPartType("The Something1 application Something2 file Something3 section is empty")
-				.contentEquals("section"));
+		Assertions.assertTrue(
+				TestStepUtility.getPartType("The Something1 application Something2 file Something3 section is empty")
+						.contentEquals("section"));
 	}
 
 	@Test
@@ -76,9 +70,9 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testGetStateModality() {
-		Assertions.assertTrue(TestStepUtility
-				.getStateDesc("The Something1 application Something2 file Something3 section is empty")
-				.contentEquals("is"));
+		Assertions.assertTrue(
+				TestStepUtility.getStateDesc("The Something1 application Something2 file Something3 section is empty")
+						.contentEquals("is"));
 	}
 
 	@Test
@@ -165,8 +159,8 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testStateRegexWontBe() {
-		Assertions.assertTrue(
-				"The Something1 application Something2 file won't be empty".matches(TestStepUtility.REGEX));
+		Assertions
+				.assertTrue("The Something1 application Something2 file won't be empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test
@@ -217,8 +211,7 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testObjectRegexResponse() {
-		Assertions
-				.assertTrue("The Something1 application Something2 response is empty".matches(TestStepUtility.REGEX));
+		Assertions.assertTrue("The Something1 application Something2 response is empty".matches(TestStepUtility.REGEX));
 	}
 
 	@Test

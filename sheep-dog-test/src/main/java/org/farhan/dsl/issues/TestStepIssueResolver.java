@@ -69,8 +69,8 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	private static ArrayList<SheepDogIssueProposal> getComponentObjects(ITestStep theTestStep, String component,
-			ITestProject theProject) {
+	private static ArrayList<SheepDogIssueProposal> getComponentObjects(ITestStep theTestStep, ITestProject theProject,
+			String component) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
 		for (IStepObject aStepObject : TestProjectUtility.getStepObjectList(theProject, component)) {
@@ -84,8 +84,7 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	private static ArrayList<SheepDogIssueProposal> getStepDefinitions(ITestStep theTestStep,
-			ITestProject theProject) {
+	private static ArrayList<SheepDogIssueProposal> getStepDefinitions(ITestStep theTestStep, ITestProject theProject) {
 
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;
@@ -102,27 +101,37 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
-	private static Collection<SheepDogIssueProposal> getPreviousObjects(ITestStep theTestStep) {
-
-		TreeMap<String, SheepDogIssueProposal> proposals = new TreeMap<String, SheepDogIssueProposal>();
-		SheepDogIssueProposal proposal;
-		ArrayList<ITestStep> allSteps = new ArrayList<ITestStep>();
+	private static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep) {
+		ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
 		ITestStepContainer testSetup = theTestStep.getParent().getParent().getTestStepContainer(0);
 		if (testSetup != null && testSetup instanceof ITestSetup) {
 			if (testSetup.getTestStepList() != null) {
 				for (ITestStep t : testSetup.getTestStepList()) {
-					allSteps.add(t);
+					steps.add(t);
 				}
 			}
 		}
 
-		allSteps.addAll(TestStepUtility.getPreviousSteps(theTestStep, false));
+		for (ITestStep t : theTestStep.getParent().getTestStepList()) {
+			if (t.equals(theTestStep)) {
+				break;
+			} else {
+				steps.add(t);
+			}
+		}
+		return steps;
+	}
 
-		for (ITestStep step : allSteps) {
+	private static Collection<SheepDogIssueProposal> getPreviousObjects(ITestStep theTestStep) {
+
+		TreeMap<String, SheepDogIssueProposal> proposals = new TreeMap<String, SheepDogIssueProposal>();
+		SheepDogIssueProposal proposal;
+
+		for (ITestStep step : getPreviousSteps(theTestStep)) {
 			// TODO make test for this
 			if (step.getName() == null) {
 				continue;
-			} else if (!step.getName().matches(TestStepUtility.REGEX)) {
+			} else if (!TestStepUtility.isValid(step.getName())) {
 				continue;
 			}
 			String[] objectParts = TestStepUtility.getObject(step.getName()).split("/");
@@ -147,20 +156,6 @@ public class TestStepIssueResolver {
 		return proposals.values();
 	}
 
-	private static ArrayList<SheepDogIssueProposal> getProjectComponents(ITestStep theTestStep,
-			ITestProject theProject) {
-		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-		SheepDogIssueProposal proposal;
-		for (String componentName : TestProjectUtility.getComponentList(theProject)) {
-			proposal = new SheepDogIssueProposal();
-			proposal.setId(componentName);
-			proposal.setDescription(componentName);
-			proposal.setValue("The " + componentName);
-			proposals.add(proposal);
-		}
-		return proposals;
-	}
-
 	public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		String name = theTestStep.getName() != null ? theTestStep.getName() : "";
@@ -174,11 +169,11 @@ public class TestStepIssueResolver {
 			}
 			if (object.isEmpty()) {
 				if (component.isEmpty()) {
-					for (SheepDogIssueProposal proposal : getProjectComponents(theTestStep, theProject)) {
-						proposals.add(proposal);
+					for (String componentName : TestProjectUtility.getComponentList(theProject)) {
+						proposals.addAll(getComponentObjects(theTestStep, theProject, componentName));
 					}
 				} else {
-					for (SheepDogIssueProposal proposal : getComponentObjects(theTestStep, component, theProject)) {
+					for (SheepDogIssueProposal proposal : getComponentObjects(theTestStep, theProject, component)) {
 						proposals.add(proposal);
 					}
 				}
@@ -193,7 +188,7 @@ public class TestStepIssueResolver {
 	public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		if (theTestStep.getName() != null) {
-			if (!theTestStep.getName().matches(TestStepUtility.REGEX)) {
+			if (!TestStepUtility.isValid(theTestStep.getName())) {
 				if (!TestStepUtility.getObject(theTestStep.getName()).isEmpty()) {
 					ITestProject theProject = theTestStep.getParent().getParent().getParent();
 					for (SheepDogIssueProposal proposal : getStepDefinitions(theTestStep, theProject)) {
