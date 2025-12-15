@@ -239,29 +239,29 @@
 		<!-- Eclipse Xtext - These incldue Eclipse plugin dependencies not in the 
 			jar but provided by Eclipse -->
 		<dependency>
-			<groupId>org.eclipse.equinox</groupId>
-			<artifactId>common</artifactId>
-			<version>3.18.100.v20230730-1117</version>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.equinox.common</artifactId>
+			<version>3.19.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.antlr</groupId>
-			<artifactId>runtime</artifactId>
-			<version>3.2.0.v20220404-1927</version>
+			<artifactId>antlr-runtime</artifactId>
+			<version>3.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>xtext</artifactId>
-			<version>2.32.0.v20230827-1315</version>
+			<artifactId>org.eclipse.xtext</artifactId>
+			<version>2.41.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>util</artifactId>
-			<version>2.32.0.v20230827-1315</version>
+			<artifactId>org.eclipse.xtext.util</artifactId>
+			<version>2.41.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>xbase.lib</artifactId>
-			<version>2.33.0.v20231121-0955</version>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<version>2.41.0</version>
 		</dependency>
 		<!-- Xtext AsciiDoctor -->
 		<dependency>
