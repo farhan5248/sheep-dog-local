@@ -78,7 +78,7 @@ public class TestStepUtility {
 			String object = getObject(stepNameLong);
 			String objectName = getObjectName(stepNameLong);
 			String objectType = getObjectType(stepNameLong);
-			String predicate = getStepDefinitionName(stepNameLong);
+			String stepDefinitonName = getStepDefinitionName(stepNameLong);
 
 			if (component.isEmpty() || !object.contains("/")) {
 				ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep, true);
@@ -112,7 +112,7 @@ public class TestStepUtility {
 					}
 					component = lastComponent;
 				}
-				stepNameLong = "The " + component + " " + object + " " + predicate;
+				stepNameLong = "The " + component + " " + object + " " + stepDefinitonName;
 			}
 			logger.debug("Exiting getNameLong with result: {}", stepNameLong);
 			return stepNameLong;

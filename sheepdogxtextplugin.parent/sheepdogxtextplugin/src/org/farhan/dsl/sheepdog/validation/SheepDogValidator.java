@@ -45,12 +45,12 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public static final String TEST_STEP_CONTAINER_NAME_ONLY = "TEST_STEP_CONTAINER_NAME_ONLY";
 	public static final String TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE = "TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE";
 	public static final String TEST_SUITE_NAME_ONLY = "TEST_SUITE_NAME_ONLY";
-	public static final String TEST_STEP_NAME_OBJECT_WORKSPACE = "TEST_STEP_NAME_OBJECT_WORKSPACE";
-	public static final String TEST_STEP_NAME_PREDICATE_WORKSPACE = "TEST_STEP_NAME_PREDICATE_WORKSPACE";
+	public static final String TEST_STEP_STEP_OBJECT_NAME_WORKSPACE = "TEST_STEP_STEP_OBJECT_NAME_WORKSPACE";
+	public static final String TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE = "TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE";
 	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
-	public static final String TEST_STEP_NAME_COMPONENT_ONLY = "TEST_STEP_NAME_COMPONENT_ONLY";
-	public static final String TEST_STEP_NAME_OBJECT_ONLY = "TEST_STEP_NAME_OBJECT_ONLY";
-	public static final String TEST_STEP_NAME_PREDICATE_ONLY = "TEST_STEP_NAME_PREDICATE_ONLY";
+	public static final String TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY = "TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY";
+	public static final String TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY = "TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY";
+	public static final String TEST_STEP_STEP_DEFINITION_NAME_ONLY = "TEST_STEP_STEP_DEFINITION_NAME_ONLY";
 	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
 
 	@Check(CheckType.FAST)
@@ -119,17 +119,20 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		TestStepImpl testStep = new TestStepImpl(step);
 		try {
 			initProject(step.eResource());
-			String problems = TestStepIssueDetector.validateNameComponentOnly(testStep);
+			String problems = TestStepIssueDetector.validateStepObjectNameComponentOnly(testStep);
 			if (!problems.isEmpty()) {
-				error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME, TEST_STEP_NAME_COMPONENT_ONLY);
+				error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME,
+						TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY);
 			} else {
-				problems = TestStepIssueDetector.validateNameObjectOnly(testStep);
+				problems = TestStepIssueDetector.validateStepObjectNameObjectOnly(testStep);
 				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME, TEST_STEP_NAME_OBJECT_ONLY);
+					error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME,
+							TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY);
 				} else {
-					problems = TestStepIssueDetector.validateNamePredicateOnly(testStep);
+					problems = TestStepIssueDetector.validateStepDefinitionNameOnly(testStep);
 					if (!problems.isEmpty()) {
-						error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME, TEST_STEP_NAME_PREDICATE_ONLY);
+						error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME,
+								TEST_STEP_STEP_DEFINITION_NAME_ONLY);
 					}
 				}
 			}
@@ -143,14 +146,15 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		TestStepImpl testStep = new TestStepImpl(step);
 		try {
 			initProject(step.eResource());
-			String problems = TestStepIssueDetector.validateNameObjectWorkspace(testStep);
+			String problems = TestStepIssueDetector.validateStepObjectNameWorkspace(testStep);
 			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME, TEST_STEP_NAME_OBJECT_WORKSPACE);
+				warning(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME,
+						TEST_STEP_STEP_OBJECT_NAME_WORKSPACE);
 			} else {
-				problems = TestStepIssueDetector.validateNamePredicateWorkspace(testStep);
+				problems = TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep);
 				if (!problems.isEmpty()) {
 					warning(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME,
-							TEST_STEP_NAME_PREDICATE_WORKSPACE);
+							TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE);
 				}
 			}
 		} catch (Exception e) {

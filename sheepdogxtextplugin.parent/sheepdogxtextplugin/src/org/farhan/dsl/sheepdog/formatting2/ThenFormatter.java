@@ -39,7 +39,7 @@ public class ThenFormatter extends TestStepFormatter {
 	}
 
 	@Override
-	protected RuleCall getPredicateStepDefinitionRefParserRuleCall(AbstractParserRuleElementFinder a) {
+	protected RuleCall getStepDefinitionNameStepDefinitionRefParserRuleCall(AbstractParserRuleElementFinder a) {
 		return ((ThenElements) a).getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0();
 	}
 

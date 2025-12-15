@@ -33,9 +33,9 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 	}
 
 	@Override
-	public IStepDefinition createStepDefinition(String predicate) {
+	public IStepDefinition createStepDefinition(String stepDefinitionName) {
 		StepDefinition stepDefinition = SheepDogFactory.eINSTANCE.createStepDefinition();
-		stepDefinition.setName(predicate);
+		stepDefinition.setName(stepDefinitionName);
 		return new StepDefinitionImpl(stepDefinition);
 	}
 

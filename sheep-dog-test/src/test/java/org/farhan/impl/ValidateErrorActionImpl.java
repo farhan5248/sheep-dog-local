@@ -20,11 +20,11 @@ public class ValidateErrorActionImpl extends TestObject implements ValidateError
 				MockIDE.setValidationMessage(
 						TestStepContainerIssueDetector.validateTestStepListFile(currentStep.getParent()));
 				if (MockIDE.getValidationMessage().isEmpty()) {
-					MockIDE.setValidationMessage(TestStepIssueDetector.validateNameObjectOnly(currentStep));
+					MockIDE.setValidationMessage(TestStepIssueDetector.validateStepObjectNameObjectOnly(currentStep));
 					if (MockIDE.getValidationMessage().isEmpty()) {
-						MockIDE.setValidationMessage(TestStepIssueDetector.validateNamePredicateOnly(currentStep));
+						MockIDE.setValidationMessage(TestStepIssueDetector.validateStepDefinitionNameOnly(currentStep));
 						if (MockIDE.getValidationMessage().isEmpty()) {
-							MockIDE.setValidationMessage(TestStepIssueDetector.validateNameComponentOnly(currentStep));
+							MockIDE.setValidationMessage(TestStepIssueDetector.validateStepObjectNameComponentOnly(currentStep));
 						}
 					}
 				}

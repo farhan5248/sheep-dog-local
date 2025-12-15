@@ -27,8 +27,8 @@ public class TextIssueResolver {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject != null) {
-				String predicate = TestStepUtility.getStepDefinitionName(theTestStep.getName());
-				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
+				String stepDefinitonName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
+				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
 				if (theStepDefinition != null) {
 					// This assumes that the step is valid but the parameters don't exist
 					IText theText = theTestStep.getText();
@@ -62,8 +62,8 @@ public class TextIssueResolver {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject != null) {
-				String predicate = TestStepUtility.getStepDefinitionName(theTestStep.getName());
-				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
+				String stepDefinitonName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
+				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
 				if (theStepDefinition != null) {
 					if (theTestStep.getText() != null) {
 						IText theText = theTestStep.getText();

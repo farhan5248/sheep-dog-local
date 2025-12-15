@@ -39,7 +39,7 @@ public class GivenFormatter extends TestStepFormatter {
 	}
 
 	@Override
-	protected RuleCall getPredicateStepDefinitionRefParserRuleCall(AbstractParserRuleElementFinder a) {
+	protected RuleCall getStepDefinitionNameStepDefinitionRefParserRuleCall(AbstractParserRuleElementFinder a) {
 		return ((GivenElements) a).getStepDefinitionNameStepDefinitionRefParserRuleCall_3_0();
 	}
 

@@ -39,12 +39,12 @@ public class ValidatorTest {
 	}
 
 	@Test
-	public void testGetObject() {
+	public void testGetStepObjectName() {
 		Assertions.assertTrue(TestStepUtility.getObject("The Something2 request").contentEquals("Something2 request"));
 	}
 
 	@Test
-	public void testGetPredicate() {
+	public void testGetStepDefinitionName() {
 		Assertions.assertTrue(TestStepUtility
 				.getStepDefinitionName(
 						"The Something1 application Something2 request Something3 section is executed with")

@@ -19,10 +19,10 @@ public class SheepDogBuilder {
 			if (theStepObject == null) {
 				theStepObject = SheepDogFactory.instance.createStepObject(qualifiedName);
 			}
-			String predicate = TestStepUtility.getStepDefinitionName(theTestStep.getName());
-			IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
+			String stepDefinitonName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
+			IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
 			if (theStepDefinition == null) {
-				theStepDefinition = createStepDefinition(theStepObject, predicate);
+				theStepDefinition = createStepDefinition(theStepObject, stepDefinitonName);
 			}
 			if (theTestStep.getTable() != null) {
 				if (!theTestStep.getTable().getRowList().isEmpty()) {

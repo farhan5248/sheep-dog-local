@@ -90,16 +90,17 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 				.correctNameOnly(new TestStepContainerImpl((TestStepContainer) getEObject(issue))));
 	}
 
-	@Fix(SheepDogValidator.TEST_STEP_NAME_OBJECT_WORKSPACE)
+	@Fix(SheepDogValidator.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE)
 	public void fixTestStepNameObjectWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStep step = (TestStep) getEObject(issue);
-		createAcceptor(issue, acceptor, TestStepIssueResolver.correctNameObjectWorkspace(new TestStepImpl(step)));
+		createAcceptor(issue, acceptor, TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
 	}
 
-	@Fix(SheepDogValidator.TEST_STEP_NAME_PREDICATE_WORKSPACE)
-	public void fixTestStepNamePredicateWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+	@Fix(SheepDogValidator.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE)
+	public void fixTestStepStepDefinitionNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStep step = (TestStep) getEObject(issue);
-		createAcceptor(issue, acceptor, TestStepIssueResolver.correctNamePredicateWorkspace(new TestStepImpl(step)));
+		createAcceptor(issue, acceptor,
+				TestStepIssueResolver.correctStepDefinitionNameWorkspace(new TestStepImpl(step)));
 	}
 
 	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)

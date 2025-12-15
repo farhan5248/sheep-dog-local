@@ -15,8 +15,8 @@ import org.farhan.dsl.lang.IText;
 public class SheepDogFactoryImpl implements ISheepDogFactory {
 
 	@Override
-	public IStepDefinition createStepDefinition(String predicate) {
-		return new StepDefinitionImpl(predicate);
+	public IStepDefinition createStepDefinition(String name) {
+		return new StepDefinitionImpl(name);
 	}
 
 	@Override

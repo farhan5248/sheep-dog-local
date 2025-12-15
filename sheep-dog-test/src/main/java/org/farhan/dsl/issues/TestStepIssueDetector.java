@@ -12,79 +12,79 @@ public class TestStepIssueDetector {
 	private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
 
 	// TODO make test for this
-	public static String validateNameComponentOnly(ITestStep theTestStep) throws Exception {
-		logger.debug("Entering validateNameComponentOnly for step: {}",
+	public static String validateStepObjectNameComponentOnly(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering validateStepObjectNameComponentOnly for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		String text = theTestStep.getName();
 		if (text != null) {
 			if (!text.matches(TestStepUtility.REGEX)) {
 				if (!TestStepUtility.hasStepObjectName(text)) {
 					if (!TestStepUtility.hasComponent(text)) {
-						logger.debug("Exiting validateNameComponentOnly");
-						return TestStepIssueTypes.TEST_STEP_NAME_COMPONENT_ONLY.description;
+						logger.debug("Exiting validateStepObjectNameComponentOnly");
+						return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_COMPONENT_ONLY.description;
 					}
 				}
 			}
 		}
-		logger.debug("Exiting validateNameComponentOnly");
+		logger.debug("Exiting validateStepObjectNameComponentOnly");
 		return "";
 	}
 
-	public static String validateNameObjectOnly(ITestStep theTestStep) throws Exception {
-		logger.debug("Entering validateNameObjectOnly for step: {}",
+	public static String validateStepObjectNameObjectOnly(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering validateStepObjectNameObjectOnly for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		String text = theTestStep.getName();
 		if (text != null) {
 			if (!text.matches(TestStepUtility.REGEX)) {
 				if (!TestStepUtility.hasStepObjectName(text)) {
-					logger.debug("Exiting validateNameObjectOnly");
-					return TestStepIssueTypes.TEST_STEP_NAME_OBJECT_ONLY.description;
+					logger.debug("Exiting validateStepObjectNameObjectOnly");
+					return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_OBJECT_ONLY.description;
 				}
 			}
 		}
-		logger.debug("Exiting validateNameObjectOnly");
+		logger.debug("Exiting validateStepObjectNameObjectOnly");
 		return "";
 	}
 
-	public static String validateNamePredicateOnly(ITestStep theTestStep) throws Exception {
+	public static String validateStepDefinitionNameOnly(ITestStep theTestStep) throws Exception {
 
-		logger.debug("Entering validateNamePredicateOnly for step: {}",
+		logger.debug("Entering validateStepDefinitionNameOnly for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		String text = theTestStep.getName();
 		if (text != null) {
 			if (!text.matches(TestStepUtility.REGEX)) {
 				if (!TestStepUtility.hasStepDefinitionName(text)) {
-					return TestStepIssueTypes.TEST_STEP_NAME_PREDICATE_ONLY.description;
+					return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
 				}
 			}
 		}
-		logger.debug("Exiting validateNamePredicateOnly");
+		logger.debug("Exiting validateStepDefinitionNameOnly");
 		return "";
 	}
 
-	public static String validateNameObjectWorkspace(ITestStep theTestStep) throws Exception {
-		logger.debug("Entering validateNameObjectWorkspace for step: {}",
+	public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
+		logger.debug("Entering validateStepObjectNameWorkspace for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {
 
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject == null) {
-				logger.debug("Exiting validateNameObjectWorkspace");
-				return TestStepIssueTypes.TEST_STEP_NAME_OBJECT_WORKSPACE.description;
+				logger.debug("Exiting validateStepObjectNameWorkspace");
+				return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
 			}
-			logger.debug("Exiting validateNameObjectWorkspace");
+			logger.debug("Exiting validateStepObjectNameWorkspace");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateNameObjectWorkspace for step '{}': {}",
+			logger.error("Failed in validateStepObjectNameWorkspace for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}
 	}
 
-	public static String validateNamePredicateWorkspace(ITestStep theTestStep) throws Exception {
+	public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
 		// validates for a good name if the reference is valid
-		logger.debug("Entering validateNamePredicateWorkspace for step: {}",
+		logger.debug("Entering validateStepDefinitionNameWorkspace for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {
 
@@ -94,14 +94,14 @@ public class TestStepIssueDetector {
 				IStepDefinition theStepDefinition = theStepObject
 						.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
 				if (theStepDefinition == null) {
-					logger.debug("Exiting validateNamePredicateWorkspace");
-					return TestStepIssueTypes.TEST_STEP_NAME_PREDICATE_WORKSPACE.description;
+					logger.debug("Exiting validateStepDefinitionNameWorkspace");
+					return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
 				}
 			}
-			logger.debug("Exiting validateNamePredicateWorkspace");
+			logger.debug("Exiting validateStepDefinitionNameWorkspace");
 			return "";
 		} catch (Exception e) {
-			logger.error("Failed in validateNamePredicateWorkspace for step '{}': {}",
+			logger.error("Failed in validateStepDefinitionNameWorkspace for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 			throw e;
 		}

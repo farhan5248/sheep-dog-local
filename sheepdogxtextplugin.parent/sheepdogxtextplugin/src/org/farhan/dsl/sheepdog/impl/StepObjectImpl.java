@@ -57,9 +57,9 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
-	public IStepDefinition getStepDefinition(String predicate) {
+	public IStepDefinition getStepDefinition(String stepDefinitionName) {
 		for (StepDefinition sd : eObject.getStepDefinitionList()) {
-			if (sd.getName().contentEquals(predicate)) {
+			if (sd.getName().contentEquals(stepDefinitionName)) {
 				StepDefinitionImpl stepDefinition = new StepDefinitionImpl((StepDefinition) sd);
 				return stepDefinition;
 			}

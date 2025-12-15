@@ -44,8 +44,8 @@ public class RowIssueResolver {
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject != null) {
-				String predicate = TestStepUtility.getStepDefinitionName(theTestStep.getName());
-				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(predicate);
+				String stepDefinitionName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
+				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
 				if (theStepDefinition != null) {
 					// This assumes that the step is valid but the parameters don't exist
 					IRow headers = theTestStep.getTable().getRowList().getFirst();
