@@ -147,6 +147,7 @@ public class TestStepIssueResolver {
 			// This proposal is to list the fully qualified name of an object in case two
 			// objects with the same simple name have different paths like a batch job file
 			// being moved between directories
+			// TODO if the value doesn't differ between the two, then don't add this
 			proposal = new SheepDogIssueProposal();
 			proposal.setId(TestStepUtility.getObject(step.getName()));
 			proposal.setDescription("Referred in: " + step.getName());
@@ -158,15 +159,10 @@ public class TestStepIssueResolver {
 
 	public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep) {
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-		String name = theTestStep.getName() != null ? theTestStep.getName() : "";
-		if (name != null) {
-			String component = "";
-			String object = "";
+		if (theTestStep.getName() != null) {
 			ITestProject theProject = theTestStep.getParent().getParent().getParent();
-			if (theTestStep.getName() != null) {
-				component = TestStepUtility.getComponent(theTestStep.getName());
-				object = TestStepUtility.getObject(theTestStep.getName());
-			}
+			String component = TestStepUtility.getComponent(theTestStep.getName());
+			String object = TestStepUtility.getObject(theTestStep.getName());
 			if (object.isEmpty()) {
 				if (component.isEmpty()) {
 					for (String componentName : TestProjectUtility.getComponentList(theProject)) {
