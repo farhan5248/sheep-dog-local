@@ -21,8 +21,8 @@ public class TestStepImpl implements ITestStep {
 	@Override
 	public String getName() {
 		String name = "";
-		name += eObject.getStepObjectName() != null ? eObject.getStepObjectName() : "";
-		name += eObject.getStepDefinitionName() != null ? " " + eObject.getStepDefinitionName() : "";
+		name += eObject.getStepObjectName() != null ? eObject.getStepObjectName().trim() : "";
+		name += eObject.getStepDefinitionName() != null ? " " + eObject.getStepDefinitionName().trim() : "";
 		return name;
 	}
 
@@ -82,12 +82,12 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public String getStepObjectName() {
-		return eObject.getStepObjectName();
+		return eObject.getStepObjectName() != null ? eObject.getStepObjectName().trim() : "";
 	}
 
 	@Override
 	public String getStepDefinitionName() {
-		return eObject.getStepDefinitionName();
+		return eObject.getStepDefinitionName() != null ? eObject.getStepDefinitionName().trim() : "";
 	}
 
 	@Override

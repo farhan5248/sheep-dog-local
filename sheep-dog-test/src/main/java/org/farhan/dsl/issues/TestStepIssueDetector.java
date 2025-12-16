@@ -2,6 +2,7 @@ package org.farhan.dsl.issues;
 
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
@@ -17,7 +18,7 @@ public class TestStepIssueDetector {
 		String text = theTestStep.getName();
 		if (text != null) {
 			if (!TestStepUtility.isValid(text)) {
-				if (!TestStepUtility.getStepObjectName(text).isEmpty()) {
+				if (TestStepUtility.getStepObjectName(text).isEmpty()) {
 					logger.debug("Exiting validateStepObjectNameOnly");
 					return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
 				}
@@ -47,15 +48,14 @@ public class TestStepIssueDetector {
 		logger.debug("Entering validateStepObjectNameWorkspace for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {
-
+			String message = "";
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
 			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
 			if (theStepObject == null) {
-				logger.debug("Exiting validateStepObjectNameWorkspace");
-				return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
+				message = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
 			}
 			logger.debug("Exiting validateStepObjectNameWorkspace");
-			return "";
+			return message;
 		} catch (Exception e) {
 			logger.error("Failed in validateStepObjectNameWorkspace for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
@@ -68,19 +68,21 @@ public class TestStepIssueDetector {
 		logger.debug("Entering validateStepDefinitionNameWorkspace for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
 		try {
-
+			String message = "";
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
-			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
+			ITestProject theProject = theTestStep.getParent().getParent().getParent();
+			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
 			if (theStepObject != null) {
-				IStepDefinition theStepDefinition = theStepObject
-						.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
-				if (theStepDefinition == null) {
-					logger.debug("Exiting validateStepDefinitionNameWorkspace");
-					return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
-				}
+				String stepDefinitionName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
+				if (!stepDefinitionName.isEmpty()) {
+					IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+					if (theStepDefinition == null) {
+						message = TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
+					}
+				} 
 			}
 			logger.debug("Exiting validateStepDefinitionNameWorkspace");
-			return "";
+			return message;
 		} catch (Exception e) {
 			logger.error("Failed in validateStepDefinitionNameWorkspace for step '{}': {}",
 					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
