@@ -64,7 +64,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.EXPENSIVE)
+	@Check(CheckType.FAST)
 	public void checkRowCellListWorkspace(Row row) {
 		try {
 			initProject(row.eResource());
@@ -98,7 +98,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.NORMAL)
+	@Check(CheckType.FAST)
 	public void checkTestStepContainerTestStepFileListFile(TestStepContainer theTestStepContainer) {
 		try {
 			initProject(theTestStepContainer.eResource());
@@ -134,7 +134,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.EXPENSIVE)
+	@Check(CheckType.FAST)
 	public void checkTestStepNameWorkspace(TestStep step) {
 		TestStepImpl testStep = new TestStepImpl(step);
 		try {
@@ -166,7 +166,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 		}
 	}
 
-	@Check(CheckType.EXPENSIVE)
+	@Check(CheckType.FAST)
 	public void checkTextNameWorkspace(Text text) {
 		initProject(text.eResource());
 		if (text != null) {

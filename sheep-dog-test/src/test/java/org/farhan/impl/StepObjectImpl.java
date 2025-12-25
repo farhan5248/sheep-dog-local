@@ -27,7 +27,7 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public String getContent() throws Exception {
-		throw new UnsupportedOperationException("getContent() is not implemented");
+		return this.toString();
 	}
 
 	@Override

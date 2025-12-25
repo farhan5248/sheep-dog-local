@@ -22,7 +22,7 @@ public class ValidatorTest {
 	@Test
 	public void testGetComponent() {
 		Assertions.assertTrue(
-				TestStepUtility.getComponent("The Something1 application ").contentEquals(""));
+				TestStepUtility.getComponent("The Something1 application ").contentEquals("Something1 application"));
 	}
 
 	@Test

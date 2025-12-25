@@ -93,14 +93,22 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(SheepDogValidator.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE)
 	public void fixTestStepStepObjectNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStep step = (TestStep) getEObject(issue);
-		createAcceptor(issue, acceptor, TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
+		try {
+			createAcceptor(issue, acceptor, TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
+		} catch (Exception e) {
+			logger.error("Error fixing step for " + step.getStepObjectName() + "\n" + e.getMessage());
+		}
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE)
 	public void fixTestStepStepDefinitionNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStep step = (TestStep) getEObject(issue);
-		createAcceptor(issue, acceptor,
-				TestStepIssueResolver.correctStepDefinitionNameWorkspace(new TestStepImpl(step)));
+		try {
+			createAcceptor(issue, acceptor,
+					TestStepIssueResolver.correctStepDefinitionNameWorkspace(new TestStepImpl(step)));
+		} catch (Exception e) {
+			logger.error("Error fixing step for " + step.getStepObjectName() + "\n" + e.getMessage());
+		}
 	}
 
 	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)

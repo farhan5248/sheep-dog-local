@@ -4,6 +4,7 @@ import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.lang.TestStepUtility;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
@@ -28,7 +29,7 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public String getNameLong() {
-		throw new UnsupportedOperationException("getNameLong() is not implemented");
+		return TestStepUtility.getNameLong(this);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.lang.TestStepUtility;
 
 public class TestStepImpl implements ITestStep {
 
@@ -23,7 +24,7 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public String getNameLong() {
-		throw new UnsupportedOperationException("getNameLong() is not implemented");
+		return TestStepUtility.getNameLong(this);
 	}
 
 	@Override
@@ -58,12 +59,12 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public String getStepObjectName() {
-		throw new UnsupportedOperationException("getStepObjectName() is not implemented");
+		return TestStepUtility.getStepObjectName(name);
 	}
 
 	@Override
 	public String getStepDefinitionName() {
-		throw new UnsupportedOperationException("getStepDefinitionName() is not implemented");
+		return TestStepUtility.getStepDefinitionName(name);
 	}
 
 	@Override

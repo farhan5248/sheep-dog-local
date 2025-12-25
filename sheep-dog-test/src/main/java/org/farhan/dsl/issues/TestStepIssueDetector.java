@@ -35,7 +35,7 @@ public class TestStepIssueDetector {
 		String text = theTestStep.getName();
 		if (text != null) {
 			if (!TestStepUtility.isValid(text)) {
-				if (!TestStepUtility.getStepDefinitionName(text).isEmpty()) {
+				if (TestStepUtility.getStepDefinitionName(text).isEmpty()) {
 					return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
 				}
 			}

@@ -164,7 +164,8 @@ public class TestStepUtility {
 		String stepNameLong = getNameLong(theStep);
 		String component = getComponent(stepNameLong);
 		String object = getObject(stepNameLong);
-		// TODO maybe in the future, the file extension shouldn't be referenced in this utility class.
+		// TODO maybe in the future, the file extension shouldn't be referenced in this
+		// utility class.
 		String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
 		return component + "/" + object + fileExt;
 	}
@@ -174,15 +175,15 @@ public class TestStepUtility {
 	}
 
 	public static String getComponent(String text) {
-		return getGroup(STEP_OBJECT_NAME, text, 2);
+		return getGroup("(The" + COMPONENT + "?" + ")", text, 2);
 	}
 
 	public static String getComponentName(String text) {
-		return getGroup(STEP_OBJECT_NAME, text, 3);
+		return getGroup("(The" + COMPONENT + "?" + ")", text, 3);
 	}
 
 	public static String getComponentType(String text) {
-		return getGroup(STEP_OBJECT_NAME, text, 4);
+		return getGroup("(The" + COMPONENT + "?" + ")", text, 4);
 	}
 
 	public static String getObject(String text) {
