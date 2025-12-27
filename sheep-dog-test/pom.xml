@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
 	<artifactId>sheep-dog-test</artifactId>
-	<version>1.28-SNAPSHOT</version>
+	<version>1.28</version>
 	<name>Lean Sheep Dog Tools for Testers</name>
 	<description>There's 4 reasons for this project
 		1. To demonstrate how to include a jar in an xtext jar.
@@ -22,7 +22,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/sheep-dog-local</connection>
-		<tag>HEAD</tag>
+		<tag>sheep-dog-test-1.28</tag>
 	</scm>
 
 	<pluginRepositories>
