@@ -3,7 +3,9 @@ package org.farhan.dsl.sheepdog.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
 
+import org.eclipse.emf.common.util.EList;
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
@@ -12,6 +14,7 @@ import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.StepDefinitionUtility;
+import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
@@ -103,8 +106,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public IStepParameters getStepParameters(String name) {
-		// Not needed in this project
-		return null;
+		throw new UnsupportedOperationException("getStepParameters(String name) is not implemented");
 	}
 
 	@Override
@@ -120,9 +122,34 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public boolean addStepParameters(IStepParameters value) {
-		eObject.getStepParameterList().add(((StepParametersImpl) value).eObject);
-		eObject.getStepParameterList().getLast().setName(String.valueOf(eObject.getStepParameterList().size()));
+
+		EList<StepParameters> unsortedList = eObject.getStepParameterList();
+		TreeMap<String, StepParameters> sortedMap = new TreeMap<String, StepParameters>();
+		StepParameters aStepParameter = ((StepParametersImpl) value).eObject;
+		sortedMap.put(getKey(aStepParameter), aStepParameter);
+		for (StepParameters sp : unsortedList) {
+			sortedMap.put(getKey(sp), sp);
+		}
+		unsortedList.clear();
+		for (String key : sortedMap.keySet()) {
+			unsortedList.add(sortedMap.get(key));
+			unsortedList.getLast().setName(String.valueOf(unsortedList.size()));
+		}
 		return true;
+	}
+
+	private String getKey(StepParameters aStepParameter) {
+		List<Cell> arrayList = aStepParameter.getTable().getRowList().getFirst().getCellList();
+		String cellsAsString = "";
+		List<String> sortedCells = new ArrayList<String>();
+		for (Cell cell : arrayList) {
+			sortedCells.add(cell.getName());
+		}
+		Collections.sort(sortedCells);
+		for (String cell : sortedCells) {
+			cellsAsString += "| " + cell;
+		}
+		return cellsAsString.trim();
 	}
 
 }

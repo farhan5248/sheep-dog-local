@@ -5,7 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.TreeMap;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -128,7 +130,17 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public boolean addStepDefinition(IStepDefinition value) {
-		eObject.getStepDefinitionList().add(((StepDefinitionImpl) value).eObject);
+		EList<StepDefinition> unsortedList = eObject.getStepDefinitionList();
+		TreeMap<String, StepDefinition> sortedMap = new TreeMap<String, StepDefinition>();
+		StepDefinition aStepDefinition = ((StepDefinitionImpl) value).eObject;
+		sortedMap.put(aStepDefinition.getName(), aStepDefinition);
+		for (StepDefinition sd : unsortedList) {
+			sortedMap.put(sd.getName(), sd);
+		}
+		unsortedList.clear();
+		for (String key : sortedMap.keySet()) {
+			unsortedList.add(sortedMap.get(key));
+		}
 		return true;
 	}
 
