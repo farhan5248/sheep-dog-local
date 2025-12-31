@@ -1,4 +1,4 @@
-package org.farhan.dsl.types;
+package org.farhan.dsl.lang;
 
 public enum TestStepStateModalityTypes {
 
