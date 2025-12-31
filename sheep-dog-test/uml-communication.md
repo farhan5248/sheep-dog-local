@@ -1,21 +1,51 @@
 # UML Communication Patterns
 
-Each class is part of a collection of classes that follow a pattern.
 These are the patterns that all classes follow:
 
-1. Wrapper
-2. Content proposal
-3. Content validation
-4. Content correction
+## Interface Definition
 
-These are the classes per project in **sheep-dog-local** for a pattern above:
+**Rules**
+- There is no proposal, validation or correction for the grammar element.
 
-1. **sheep-dog-test**
-   1. **Content proposal**: *IssueResolver, LanguageIssueProposal
-   2. **Content validation**: *IssueTypes, *IssueDetector
-   3. **Content correction**: *IssueTypes, *IssueDetector, *IssueResolver
-2. **sheepdogxtextplugin.parent\sheepdogxtextplugin**
-   1. **Content validation**: Validator
-3. **sheepdogxtextplugin.parent\sheepdogxtextplugin.ui**
-   1. **Content proposal**: ProposalProvider
-   2. **Content correction**: QuickfixProvider
+**Class Name**
+- Always has one interface per **Feature** named I**Feature**
+- Might have one class per **Feature** named **Feature**Utility
+- Might have multiple classes per **Feature** named **FeatureAspect**Types
+
+## Content Proposal
+
+**Rules**
+- Applies when proposing alternatives to empty grammar elements.
+
+**Class Name**
+- Always has one interface per **Feature** named I**Feature**
+- Might have one class per **Feature** named **Feature**Utility
+- Might have multiple classes per **Feature** named **FeatureAspect**Types
+- Always has a class named **Language**IssueProposal
+- Always has one class per **Feature** named **Feature**IssueResolver
+
+## Content Validation
+
+**Rules**
+- Applies when validating non-empty grammar elements.
+
+**Class Name**
+- Always has one interface per **Feature** named I**Feature**
+- Might have one class per **Feature** named **Feature**Utility
+- Might have multiple classes per **Feature** named **FeatureAspect**Types
+- Always has one class per **Feature** named **Feature**IssueTypes
+- Always has one class per **Feature** named **Feature**IssueDetector
+
+## Content Correction
+
+**Rules**
+- Applies when proposing alternatives to non-empty invalid grammar elements.
+
+**Class Name**
+- Always has one interface per **Feature** named I**Feature**
+- Might have one class per **Feature** named **Feature**Utility
+- Might have multiple classes per **Feature** named **FeatureAspect**Types
+- Always has a class named **Language**IssueProposal
+- Always has one class per **Feature** named **Feature**IssueResolver
+- Always has one class per **Feature** named **Feature**IssueTypes
+- Always has one class per **Feature** named **Feature**IssueDetector
