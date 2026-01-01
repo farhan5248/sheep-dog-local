@@ -1,9 +1,11 @@
-# FeatureIssueDetector
+# {Feature}IssueDetector
 
-All detector classes follow the `validateISSUENAME` pattern.
-Method names match the grammar attributes they validate like `validateNameOnly` or `validateCellListWorkspace`
+## Detector methods follow validate{Issue} naming pattern
 
-## TestStepIssueDetector
+All detector classes follow the `validate{Issue}` pattern.
+Method names match the grammar attributes they validate.
+
+### TestStepIssueDetector
 
 ```java
 public static String validateStepObjectNameOnly(ITestStep step)
@@ -12,7 +14,7 @@ public static String validateStepDefinitionNameOnly(ITestStep step)
 public static String validateStepDefinitionNameWorkspace(ITestStep step)
 ```
 
-## RowIssueDetector
+### RowIssueDetector
 
 ```java
 public static String validateCellListWorkspace(IRow row)

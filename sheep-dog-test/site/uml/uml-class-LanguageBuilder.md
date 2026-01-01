@@ -1,10 +1,10 @@
-# LanguageBuilder
+# {Language}Builder
 
-There is a LanguageBuilder class for each language. The SheepDogBuilder provides static factory methods that follow a consistent pattern for creating language elements and managing their parent-child relationships.
+There is a {Language}Builder class for each language. The SheepDogBuilder provides static factory methods that follow a consistent pattern for creating language elements and managing their parent-child relationships.
 
 ## All Builder methods are static factory methods
 
-All methods follow the pattern `create{Feature}(I{Parent} parent, {params})` and return the created feature instance.
+All methods follow the pattern `create{Feature}(I{Parent} parent, {params})` and return the created {Feature} instance.
 
 ### SheepDogBuilder
 

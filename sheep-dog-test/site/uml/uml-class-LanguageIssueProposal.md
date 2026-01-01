@@ -1,4 +1,4 @@
-# LanguageIssueProposal
+# {Language}IssueProposal
 
 Represents a proposal for resolving validation issues in the language model.
 

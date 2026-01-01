@@ -1,7 +1,7 @@
-# FeatureUtility
+# {Feature}Utility
 
 Some language features have derived attributes.
-These derived attributes have getters in *Utility classes.
+These derived attributes have getters in {Feature}Utility classes.
 
 ## All Utility classes are static
 

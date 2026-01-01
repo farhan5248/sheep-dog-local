@@ -1,6 +1,6 @@
-# IFeature
+# I{Feature}
 
-## All grammar features have IFeature interfaces
+## All grammar features have I{Feature} interfaces
 
 All union types in the grammar follow the pattern:
 - Base interface contains common attributes child interfaces extend the base.
