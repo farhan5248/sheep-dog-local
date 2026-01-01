@@ -20,9 +20,10 @@
 ## org\farhan\dsl\lang
 
 **Rules**
+- Always has an interface named IResourceRepository
+- Always has an interface named ITestProject
 - Always has a class named **Language**Builder
 - Always has a class named **Language**Factory
-- Always has an interface named ITestProject
 - Always has one interface per **Feature** named I**Feature**
 - Might have one class per **Feature** named **Feature**Utility
 - Might have multiple classes per **Feature** named **FeatureAspect**Types

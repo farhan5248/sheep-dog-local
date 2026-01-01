@@ -3,14 +3,23 @@
 ## UML Patterns Referenced
 
 1. `uml-package.md`
-2. `uml-class.md`
+2. `uml-class-*.md` - Class/interface patterns (one file per class)
+   - `uml-class-IFeature.md`
+   - `uml-class-FeatureUtility.md`
+   - `uml-class-LanguageBuilder.md`
+   - `uml-class-FeatureIssueDetector.md`
+   - `uml-class-FeatureIssueTypes.md`
+   - `uml-class-FeatureIssueResolver.md`
+   - `uml-class-LanguageIssueProposal.md`
+   - `uml-class-FeatureIssueTypes Naming Convention.md`
+   - `uml-class-FeatureIssueDetector Validation Methods.md`
+   - `uml-class-FeatureIssueResolver Proposal Methods.md`
 3. `uml-communication.md`
 4. `uml-interaction.md`
 
 ## Technology Preferences Referenced
 
-1. `tech-logging.md` - General logging rules
-2. `tech-log4j.md` - **Log4j** specific rules
+1. `sheep-dog-main/tech-log4j.md` - **Log4j** specific rules
 
 ## Pattern Variables
 
