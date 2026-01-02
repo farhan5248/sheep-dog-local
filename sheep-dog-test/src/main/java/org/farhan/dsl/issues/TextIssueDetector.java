@@ -13,27 +13,20 @@ public class TextIssueDetector {
 	private static final Logger logger = LoggerFactory.getLogger(TextIssueDetector.class);
 
 	// TODO make test for this
-	public static String validateNameWorkspace(IText theText) {
+	public static String validateNameWorkspace(IText theText) throws Exception {
 		logger.debug("Entering validateNameWorkspace for text: {}", theText != null ? theText.getName() : "null");
-		try {
-			ITestStep theTestStep = (ITestStep) theText.getParent();
-			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
-			IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
-			IStepDefinition theStepDefinition = theStepObject
-					.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
-			if (!theText.getName().isEmpty()) {
-				if (theStepDefinition.getStepParameters(theText) == null) {
-					logger.debug("Exiting validateNameWorkspace");
-					return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
-				}
+		ITestStep theTestStep = (ITestStep) theText.getParent();
+		String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+		IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
+		IStepDefinition theStepDefinition = theStepObject
+				.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
+		if (!theText.getName().isEmpty()) {
+			if (theStepDefinition.getStepParameters(theText) == null) {
+				logger.debug("Exiting validateNameWorkspace");
+				return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
 			}
-
-			logger.debug("Exiting validateNameWorkspace");
-			return "";
-		} catch (Exception e) {
-			logger.error("Failed in validateNameWorkspace for text '{}': {}",
-					theText != null ? theText.getName() : "null", e.getMessage(), e);
-			throw e;
 		}
+		logger.debug("Exiting validateNameWorkspace");
+		return "";
 	}
 }

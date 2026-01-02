@@ -24,7 +24,11 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public String getNameLong() {
-		return TestStepUtility.getNameLong(this);
+		try {
+			return TestStepUtility.getNameLong(this);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override

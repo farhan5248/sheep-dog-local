@@ -11,15 +11,12 @@
    - `uml-class-FeatureIssueTypes.md`
    - `uml-class-FeatureIssueResolver.md`
    - `uml-class-LanguageIssueProposal.md`
-   - `uml-class-FeatureIssueTypes Naming Convention.md`
-   - `uml-class-FeatureIssueDetector Validation Methods.md`
-   - `uml-class-FeatureIssueResolver Proposal Methods.md`
 3. `uml-communication.md`
 4. `uml-interaction.md`
 
 ## Technology Preferences Referenced
 
-1. `sheep-dog-main/tech-log4j.md` - **Log4j** specific rules
+1. `sheep-dog-main/tech-slf4j.md` - **SLF4j** specific rules
 
 ## Pattern Variables
 

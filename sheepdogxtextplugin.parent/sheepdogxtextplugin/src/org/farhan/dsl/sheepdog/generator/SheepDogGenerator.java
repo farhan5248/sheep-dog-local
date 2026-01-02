@@ -40,8 +40,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 					try {
 						SheepDogBuilder.createTestStepReferencedElements(new TestStepImpl(step));
 					} catch (Exception e) {
-						StringWriter sw = new StringWriter();
-						e.printStackTrace(new PrintWriter(sw));
+						e.printStackTrace(new PrintWriter(new StringWriter()));
 					}
 				}
 			}

@@ -35,44 +35,39 @@ public class RowIssueResolver {
 		return cellsAsString.trim();
 	}
 
-	public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep theTestStep) {
+	public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering correctCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-		try {
 
-			ITestProject theProject = theTestStep.getParent().getParent().getParent();
-			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
-			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
-			if (theStepObject != null) {
-				String stepDefinitionName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
-				IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
-				if (theStepDefinition != null) {
-					// This assumes that the step is valid but the parameters don't exist
-					IRow headers = theTestStep.getTable().getRowList().getFirst();
-					IStepParameters theStepParameters = theStepDefinition.getStepParameters(headers);
-					if (theStepParameters == null) {
-						theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, headers);
-						SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-						proposal.setId("Generate "
-								+ cellsToString(theStepParameters.getTable().getRowList().getFirst().getCellList()));
-						proposal.setDescription(
-								StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
-						proposal.setValue(theStepObject.getContent());
-						proposal.setQualifiedName(theStepObject.getNameLong());
-						proposals.add(proposal);
-					}
+		ITestProject theProject = theTestStep.getParent().getParent().getParent();
+		String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+		IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+		if (theStepObject != null) {
+			String stepDefinitionName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
+			IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+			if (theStepDefinition != null) {
+				// This assumes that the step is valid but the parameters don't exist
+				IRow headers = theTestStep.getTable().getRowList().getFirst();
+				IStepParameters theStepParameters = theStepDefinition.getStepParameters(headers);
+				if (theStepParameters == null) {
+					theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, headers);
+					SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+					proposal.setId("Generate "
+							+ cellsToString(theStepParameters.getTable().getRowList().getFirst().getCellList()));
+					proposal.setDescription(
+							StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
+					proposal.setValue(theStepObject.getContent());
+					proposal.setQualifiedName(theStepObject.getNameLong());
+					proposals.add(proposal);
 				}
 			}
-		} catch (Exception e) {
-			logger.error("Failed in correctCellListWorkspace for step '{}': {}",
-					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
 		}
 		proposals.addAll(suggestCellListWorkspace(theTestStep));
 		logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
 		return proposals;
 	}
 
-	public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(ITestStep theTestStep) {
+	public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering suggestCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 		SheepDogIssueProposal proposal;

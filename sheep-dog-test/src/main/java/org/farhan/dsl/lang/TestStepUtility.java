@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class TestStepUtility {
 	// TODO think about the following
 	// 1. Delete this class and move all the grammar to the xtext file
@@ -17,8 +14,6 @@ public class TestStepUtility {
 	// abstract classes be better? Make a decision only after updating the spring
 	// boot service code. For now meta attributes should use methods here to get
 	// their value. They have no setters in the interfaces, just getters
-
-	private static final Logger logger = LoggerFactory.getLogger(TestStepUtility.class);
 
 	private static final String WORD = ".";
 	private static final String TITLE = "( " + WORD + "+)";
@@ -63,57 +58,49 @@ public class TestStepUtility {
 		return "";
 	}
 
-	public static String getNameLong(ITestStep theStep) {
-		logger.debug("Entering getNameLong for step: {}", theStep != null ? theStep.getName() : "null");
-		try {
-			String stepNameLong = theStep.getName();
-			String component = getComponent(stepNameLong);
-			String object = getObject(stepNameLong);
-			String objectName = getObjectName(stepNameLong);
-			String objectType = getObjectType(stepNameLong);
-			String stepDefinitonName = getStepDefinitionName(stepNameLong);
+	public static String getNameLong(ITestStep theStep) throws Exception {
+		String stepNameLong = theStep.getName();
+		String component = getComponent(stepNameLong);
+		String object = getObject(stepNameLong);
+		String objectName = getObjectName(stepNameLong);
+		String objectType = getObjectType(stepNameLong);
+		String stepDefinitonName = getStepDefinitionName(stepNameLong);
 
-			if (component.isEmpty() || !object.contains("/")) {
-				ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep);
-				for (ITestStep previousStep : previousSteps) {
-					// if the step has a matching object
-					String previousObject = getObject(previousStep.getName());
-					String previousComponent = getComponent(previousStep.getName());
-					if (previousObject.endsWith("/" + objectName + " " + objectType)) {
-						// if the object doesn't have / and the matching object does. Set it
-						if (!object.contains("/") && previousObject.contains("/")) {
-							object = previousObject;
-						}
-						// if the component is empty and the matching component isn't. Set it
-						if (component.isEmpty() && !previousComponent.isEmpty()) {
-							component = previousComponent;
-						}
-						// if we have both, we're done
-						if (!component.isEmpty() && object.contains("/")) {
-							break;
-						}
+		if (component.isEmpty() || !object.contains("/")) {
+			ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep);
+			for (ITestStep previousStep : previousSteps) {
+				// if the step has a matching object
+				String previousObject = getObject(previousStep.getName());
+				String previousComponent = getComponent(previousStep.getName());
+				if (previousObject.endsWith("/" + objectName + " " + objectType)) {
+					// if the object doesn't have / and the matching object does. Set it
+					if (!object.contains("/") && previousObject.contains("/")) {
+						object = previousObject;
+					}
+					// if the component is empty and the matching component isn't. Set it
+					if (component.isEmpty() && !previousComponent.isEmpty()) {
+						component = previousComponent;
+					}
+					// if we have both, we're done
+					if (!component.isEmpty() && object.contains("/")) {
+						break;
 					}
 				}
-				if (component.isEmpty()) {
-					String lastComponent = "Unknown service";
-					for (ITestStep aStep : previousSteps) {
-						// keep track of the last component to assign to undeclared object components
-						if (!getComponent(aStep.getName()).isEmpty()) {
-							lastComponent = getComponent(aStep.getName());
-							break;
-						}
-					}
-					component = lastComponent;
-				}
-				stepNameLong = "The " + component + " " + object + " " + stepDefinitonName;
 			}
-			logger.debug("Exiting getNameLong with result: {}", stepNameLong);
-			return stepNameLong;
-		} catch (Exception e) {
-			logger.error("Failed in getNameLong for step '{}': {}", theStep != null ? theStep.getName() : "null",
-					e.getMessage(), e);
-			throw e;
+			if (component.isEmpty()) {
+				String lastComponent = "Unknown service";
+				for (ITestStep aStep : previousSteps) {
+					// keep track of the last component to assign to undeclared object components
+					if (!getComponent(aStep.getName()).isEmpty()) {
+						lastComponent = getComponent(aStep.getName());
+						break;
+					}
+				}
+				component = lastComponent;
+			}
+			stepNameLong = "The " + component + " " + object + " " + stepDefinitonName;
 		}
+		return stepNameLong;
 	}
 
 	private static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep) {
@@ -153,7 +140,7 @@ public class TestStepUtility {
 		return regex.replaceAll("\\|$", ")");
 	}
 
-	public static String getStepObjectQualifiedName(ITestStep theStep) {
+	public static String getStepObjectQualifiedName(ITestStep theStep) throws Exception {
 		String stepNameLong = getNameLong(theStep);
 		String component = getComponent(stepNameLong);
 		String object = getObject(stepNameLong);

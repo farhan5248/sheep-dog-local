@@ -7,47 +7,41 @@ public class SheepDogBuilder {
 
 	private static final Logger logger = LoggerFactory.getLogger(SheepDogBuilder.class);
 
-	public static IStepObject createTestStepReferencedElements(ITestStep theTestStep) {
+	public static IStepObject createTestStepReferencedElements(ITestStep theTestStep) throws Exception {
 		// I need to figure out a better name for this or a pattern for claude to
 		// recognise
 		logger.debug("Entering createTestStepReferencedElements for step: {}",
 				theTestStep != null ? theTestStep.getName() : "null");
-		try {
-			ITestProject theProject = theTestStep.getParent().getParent().getParent();
-			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
-			IStepObject theStepObject = theProject.getStepObject(qualifiedName);
-			if (theStepObject == null) {
-				theStepObject = SheepDogFactory.instance.createStepObject(qualifiedName);
-			}
-			String stepDefinitonName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
-			IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
-			if (theStepDefinition == null) {
-				theStepDefinition = createStepDefinition(theStepObject, stepDefinitonName);
-			}
-			if (theTestStep.getTable() != null) {
-				if (!theTestStep.getTable().getRowList().isEmpty()) {
-					IRow header = theTestStep.getTable().getRowList().getFirst();
-					if (theStepDefinition.getStepParameters(header) == null) {
-						createStepParameters(theStepDefinition, header);
-					}
-				}
-			}
-			if (theTestStep.getText() != null) {
-				IText theText = theTestStep.getText();
-				if (!theText.getName().isEmpty()) {
-					if (theStepDefinition.getStepParameters(theText) == null) {
-						createStepParameters(theStepDefinition, theText);
-					}
-				}
-			}
-			theProject.addStepObject(theStepObject);
-			logger.debug("Exiting createTestStepReferencedElements");
-			return theStepObject;
-		} catch (Exception e) {
-			logger.error("Failed in createTestStepReferencedElements for step '{}': {}",
-					theTestStep != null ? theTestStep.getName() : "null", e.getMessage(), e);
+		ITestProject theProject = theTestStep.getParent().getParent().getParent();
+		String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+		IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+		if (theStepObject == null) {
+			theStepObject = SheepDogFactory.instance.createStepObject(qualifiedName);
 		}
-		return null;
+		String stepDefinitonName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
+		IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
+		if (theStepDefinition == null) {
+			theStepDefinition = createStepDefinition(theStepObject, stepDefinitonName);
+		}
+		if (theTestStep.getTable() != null) {
+			if (!theTestStep.getTable().getRowList().isEmpty()) {
+				IRow header = theTestStep.getTable().getRowList().getFirst();
+				if (theStepDefinition.getStepParameters(header) == null) {
+					createStepParameters(theStepDefinition, header);
+				}
+			}
+		}
+		if (theTestStep.getText() != null) {
+			IText theText = theTestStep.getText();
+			if (!theText.getName().isEmpty()) {
+				if (theStepDefinition.getStepParameters(theText) == null) {
+					createStepParameters(theStepDefinition, theText);
+				}
+			}
+		}
+		theProject.addStepObject(theStepObject);
+		logger.debug("Exiting createTestStepReferencedElements");
+		return theStepObject;
 	}
 
 	public static IStepDefinition createStepDefinition(IStepObject parent, String name) {
