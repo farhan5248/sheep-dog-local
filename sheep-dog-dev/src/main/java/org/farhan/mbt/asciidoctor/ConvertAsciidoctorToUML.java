@@ -94,7 +94,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		stepParameters.setTable(srcObjStepObject.getStepParametersTable(srcStepParameters));
 	}
 
-	private void convertTestCase(TestStepContainer srcTestCase, UMLTestCase testCase) {
+	private void convertTestCase(TestStepContainer srcTestCase, UMLTestCase testCase) throws Exception {
 		logger.debug("test case: " + srcTestCase.getName());
 		testCase.setTags(srcObjTestSuite.getAbstractScenarioTags(srcTestCase));
 		testCase.setDescription(srcObjTestSuite.getScenarioDescription(srcTestCase));
@@ -116,7 +116,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertTestSetup(TestStepContainer srcBackground, UMLTestSetup background) {
+	private void convertTestSetup(TestStepContainer srcBackground, UMLTestSetup background) throws Exception {
 		logger.debug("test setup: " + srcBackground.getName());
 		background.setTags(srcObjTestSuite.getAbstractScenarioTags(srcBackground));
 		background.setDescription(srcObjTestSuite.getBackgroundDescription(srcBackground));
@@ -125,7 +125,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertTestStep(UMLTestStep step, TestStep srcStep) {
+	private void convertTestStep(UMLTestStep step, TestStep srcStep) throws Exception {
 		logger.debug("test step: " + srcStep.getStepObjectName() + " " + srcStep.getStepDefinitionName());
 		stepObjects.add(TestStepUtility.getStepObjectQualifiedName(new TestStepImpl(srcStep)));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));

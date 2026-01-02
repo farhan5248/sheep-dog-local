@@ -280,7 +280,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 		return getStepKeyword(step) + " " + step.getStepObjectName() + " " + step.getStepDefinitionName();
 	}
 
-	public String getStepNameLong(TestStep step) {
+	public String getStepNameLong(TestStep step) throws Exception {
 		return getStepKeyword(step) + " " + TestStepUtility.getNameLong(new TestStepImpl(step));
 	}
 
