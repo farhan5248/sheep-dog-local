@@ -4,6 +4,8 @@
 package org.farhan.dsl.sheepdog.ui.quickfix;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -80,8 +82,12 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
 	public void fixRowCellListWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		Row theRow = (Row) getEObject(issue);
-		createAcceptor(issue, acceptor, RowIssueResolver
-				.correctCellListWorkspace(new TestStepImpl((TestStep) theRow.eContainer().eContainer())));
+		try {
+			createAcceptor(issue, acceptor, RowIssueResolver
+					.correctCellListWorkspace(new TestStepImpl((TestStep) theRow.eContainer().eContainer())));
+		} catch (Exception e) {
+			logError( e, "fixRowCellListWorkspace");
+		}
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
@@ -120,8 +126,19 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(SheepDogValidator.TEXT_NAME_WORKSPACE)
 	public void fixTextNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		Text theText = (Text) getEObject(issue);
-		createAcceptor(issue, acceptor,
-				TextIssueResolver.correctNameWorkspace(new TestStepImpl((TestStep) theText.eContainer())));
+		try {
+			createAcceptor(issue, acceptor,
+					TextIssueResolver.correctNameWorkspace(new TestStepImpl((TestStep) theText.eContainer())));
+		} catch (Exception e) {
+			logError( e, "fixTextNameWorkspace");
+		}
+	}
+	
+	private void logError(Exception e, String name) {
+		logger.error("There was a problem for method: " + name);
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		logger.error(sw.toString());
 	}
 
 	private EObject getEObject(Issue issue) {

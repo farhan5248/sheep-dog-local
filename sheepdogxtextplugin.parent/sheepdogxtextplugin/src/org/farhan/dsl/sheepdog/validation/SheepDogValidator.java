@@ -55,12 +55,16 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.FAST)
 	public void checkCellNameOnly(Cell cell) {
 		initProject(cell.eResource());
-		// TODO make tests for this
-		if (cell != null) {
-			String problems = CellIssueDetector.validateNameOnly(new CellImpl(cell));
-			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
+		try {
+			// TODO make tests for this
+			if (cell != null) {
+				String problems = CellIssueDetector.validateNameOnly(new CellImpl(cell));
+				if (!problems.isEmpty()) {
+					warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
+				}
 			}
+		} catch (Exception e) {
+			logError( e, "checkCellNameOnly");
 		}
 	}
 
@@ -158,11 +162,15 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	@Check(CheckType.FAST)
 	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
 		initProject(theTestSuite.eResource());
-		// TODO validate that feature file name and feature name are the same.
-		TestSuiteImpl testSuiteImpl = new TestSuiteImpl(theTestSuite);
-		String problems = TestSuiteIssueDetector.validateNameOnly(testSuiteImpl);
-		if (!problems.isEmpty()) {
-			warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
+		try {
+			// TODO validate that feature file name and feature name are the same.
+			TestSuiteImpl testSuiteImpl = new TestSuiteImpl(theTestSuite);
+			String problems = TestSuiteIssueDetector.validateNameOnly(testSuiteImpl);
+			if (!problems.isEmpty()) {
+				warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
+			}
+		} catch (Exception e) {
+			logError( e, "checkTestSuiteNameOnly");
 		}
 	}
 
@@ -170,15 +178,19 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public void checkTextNameWorkspace(Text text) {
 		initProject(text.eResource());
 		if (text != null) {
-			String problems = TextIssueDetector.validateNameWorkspace(new TextImpl(text));
-			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEXT__NAME, TEXT_NAME_WORKSPACE);
+			try {
+				String problems = TextIssueDetector.validateNameWorkspace(new TextImpl(text));
+				if (!problems.isEmpty()) {
+					warning(problems, SheepDogPackage.Literals.TEXT__NAME, TEXT_NAME_WORKSPACE);
+				}
+			} catch (Exception e) {
+				logError( e, "checkTextNameWorkspace");
 			}
 		}
 	}
 
 	private void logError(Exception e, String name) {
-		logger.error("There was a problem for step: " + name);
+		logger.error("There was a problem for method: " + name);
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
 		logger.error(sw.toString());
