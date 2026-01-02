@@ -4,7 +4,7 @@
 
 All union types in the grammar follow the pattern:
 - Base interface contains common attributes child interfaces extend the base.
-- Type differentiation through inheritance hierarchy, not discriminator methods (`is*()`, `getAs*()`). Parent type matches containment hierarchy or Object if there is no common parent like Table or StatementList. 
+- Type differentiation through inheritance hierarchy, not discriminator methods (`is*()`, `getAs*()`). Parent type matches containment hierarchy or Object if there is no common parent like Table or StatementList.
 
 ### Base Interface Example
 
@@ -184,6 +184,8 @@ StepDefinition: ... stepParameterList+=StepParameters* ...
 
 Every non-root interface has `getParent()` methods, even though "parent" never appears in the grammar.
 Apply lazy parent initialization.
+
+**Parent Return Type Rule**: getParent() methods MUST return interface types (I*), never EMF types. This maintains framework independence. 
 
 ### Root Interface Example
 

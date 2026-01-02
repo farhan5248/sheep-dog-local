@@ -2,7 +2,7 @@
 
 ## Logging
 
-Logging patterns specific to sheep-dog-test that supplement the practices defined in [logging.md](../../../../logging.md) and tech-slf4j.md.
+Logging patterns specific to sheep-dog-test that supplement the practices defined in [logging.md](../../../../arch-logging.md) and tech-slf4j.md.
 
 **Rules:**
 - All {Feature}IssueDetector classes have loggers
