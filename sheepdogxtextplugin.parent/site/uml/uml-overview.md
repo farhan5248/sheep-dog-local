@@ -3,15 +3,25 @@
 ## UML Patterns Referenced
 
 1. `uml-package.md` - Package and class naming patterns
-2. `uml-class.md` - IDE integration patterns (Validator, QuickfixProvider, ProposalProvider)
-3. `uml-communication.md` - Collaboration patterns
-4. `uml-interaction.md` - Logging and exception handling
+2. `uml-class-FeatureImpl.md` - Wrapper implementation patterns
+3. `uml-class-LanguageValidator.md` - Validator check methods and constants
+4. `uml-class-LanguageQuickfixProvider.md` - Quick fix methods and @Fix annotations
+5. `uml-class-LanguageProposalProvider.md` - Content assist complete methods
+6. `uml-communication.md` - Collaboration patterns
+7. `uml-interaction.md` - Logging and exception handling
 
 ## Technology Preferences Referenced
 
 1. `../../../../arch-logging.md` - Logging patterns (SLF4J)
 2. `../../../../arch-xtext.md` - General Xtext framework architecture
-3. `../../../../tech-log4j.md` - Log4J configuration
+3. `../../../../impl-log4j.md` - Log4J configuration
+
+## Sub-Projects
+
+List of sub-project directories where these patterns apply:
+
+1. **sheepdogxtextplugin** - Contains core packages: grammar, impl, validation, formatting, generator, parser
+2. **sheepdogxtextplugin.ui** - Contains UI packages: contentassist, quickfix, syntaxcoloring
 
 ## Pattern Variables
 
@@ -50,10 +60,3 @@ IDE integration patterns refer to these variables:
      - Use for: Workspace validation (WORKSPACE issues)
      - Example: TestStep references existing StepObject
 
-## Mapping: {Issue} → {CheckType}
-
-| Issue Level | CheckType | When It Runs | Example |
-|-------------|-----------|--------------|---------|
-| ONLY | FAST | Every keystroke | Cell name starts with uppercase |
-| FILE | NORMAL | File save | First step has component |
-| WORKSPACE | EXPENSIVE | On-demand/build | Step references existing definition |

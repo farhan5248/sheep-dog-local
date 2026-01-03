@@ -16,7 +16,7 @@
 
 ## Technology Preferences Referenced
 
-1. `sheep-dog-main/tech-slf4j.md` - **SLF4j** specific rules
+1. `sheep-dog-main/impl-slf4j.md` - **SLF4j** specific rules
 
 ## Pattern Variables
 
