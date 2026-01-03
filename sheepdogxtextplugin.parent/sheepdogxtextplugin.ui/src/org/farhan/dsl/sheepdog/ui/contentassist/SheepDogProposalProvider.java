@@ -99,7 +99,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		TestStepImpl testStep = new TestStepImpl(step);
 		try {
 			initProject(step.eResource());
-			for (SheepDogIssueProposal p : TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep)) {
+			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep)) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue(), p.getId(), null, context);
 				if (proposal != null) {

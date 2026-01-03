@@ -18,7 +18,7 @@ public class {Language}Validator extends Abstract{Language}Validator
 
 Only elements with validation infrastructure (Detector/Types) have check methods.
 
-There should be one check method for each validate method: ONLY issues will be FAST checks, FILE will be NORMAL, WORKSPACE will be EXPENSIVE.
+There should be one check method for each validate method. All check methods use CheckType.FAST regardless of issue type (ONLY, FILE, or WORKSPACE).
 
 ### {Language}Validator
 

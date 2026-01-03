@@ -10,7 +10,9 @@ Method names match the grammar attributes they validate.
 - **Parameter Type**: MUST accept interface type I{Feature}, never EMF type {Feature}
 - **Return Type**: MUST return `ArrayList<{Language}IssueProposal>`
 
-### TestStepIssueResolver
+**Examples**
+
+- TestStepIssueResolver
 
 ```java
 public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep testStep)
@@ -19,7 +21,7 @@ public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(IT
 public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep testStep)
 ```
 
-### RowIssueResolver
+- RowIssueResolver
 
 ```java
 public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep testStep)

@@ -1,10 +1,10 @@
 # {Language}IssueProposal
 
-Represents a proposal for resolving validation issues in the language model.
-
 ## IssueProposal has four private attributes
 
-### SheepDogIssueProposal
+**Examples**
+
+- SheepDogIssueProposal
 
 ```java
 private String id;
@@ -15,7 +15,9 @@ private String qualifiedName;
 
 ## IssueProposal provides two constructors
 
-### SheepDogIssueProposal
+**Examples**
+
+- SheepDogIssueProposal
 
 ```java
 public SheepDogIssueProposal()
@@ -24,7 +26,9 @@ public SheepDogIssueProposal(String id, String description, String value)
 
 ## IssueProposal provides getters and setters for all attributes
 
-### SheepDogIssueProposal
+**Examples**
+
+- SheepDogIssueProposal
 
 ```java
 public String getId()
@@ -33,7 +37,9 @@ public void setId(String id)
 
 ## Default constructor initializes all attributes to empty strings
 
-### SheepDogIssueProposal
+**Examples**
+
+- SheepDogIssueProposal
 
 ```java
 public SheepDogIssueProposal()

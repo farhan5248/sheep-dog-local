@@ -1,19 +1,18 @@
 # {Feature}Utility
 
-Some language features have derived attributes.
-These derived attributes have getters in {Feature}Utility classes.
-
 ## All Utility classes are static
 
 All methods are public static. No instance variables or constructors.
 
-### StepDefinitionUtility
+**Examples**
+
+- StepDefinitionUtility
 
 ```java
 public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String pipeDelimitedString)
 ```
 
-### TestStepUtility
+- TestStepUtility
 
 ```java
 public static String getNameLong(ITestStep theStep)
@@ -24,14 +23,14 @@ public static boolean isVertex(String text)
 public static boolean isNegativeStep(String text)
 ```
 
-### TestProjectUtility
+- TestProjectUtility
 
 ```java
 public static ArrayList<String> getComponentList(ITestProject testProject)
 public static ArrayList<IStepObject> getStepObjectList(ITestProject testProject, String component)
 ```
 
-### StatementUtility
+- StatementUtility
 
 ```java
 public static boolean isTag(String word)
@@ -44,13 +43,15 @@ public static String getStatementListAsString(List<IStatement> statementList)
 
 Methods compute values not stored in grammar.
 
-### TestStepUtility
+**Examples**
+
+- TestStepUtility
 
 ```java
 public static String getNameLong(ITestStep theStep)
 ```
 
-### TestProjectUtility
+- TestProjectUtility
 
 ```java
 public static ArrayList<String> getComponentList(ITestProject testProject)
@@ -60,7 +61,9 @@ public static ArrayList<String> getComponentList(ITestProject testProject)
 
 Extract parts from composite grammar attributes.
 
-### TestStepUtility
+**Examples**
+
+- TestStepUtility
 
 ```java
 public static String getStepObjectName(String text)
@@ -77,7 +80,9 @@ public static String getStepDefinitionName(String text)
 
 Boolean methods for classification.
 
-### TestStepUtility
+**Examples**
+
+- TestStepUtility
 
 ```java
 public static boolean isValid(String text)
@@ -86,7 +91,7 @@ public static boolean isVertex(String text)
 public static boolean isNegativeStep(String text)
 ```
 
-### StatementUtility
+- StatementUtility
 
 ```java
 public static boolean isTag(String word)

@@ -6,7 +6,9 @@ All union types in the grammar follow the pattern:
 - Base interface contains common attributes child interfaces extend the base.
 - Type differentiation through inheritance hierarchy, not discriminator methods (`is*()`, `getAs*()`). Parent type matches containment hierarchy or Object if there is no common parent like Table or StatementList.
 
-### Base Interface Example
+**Examples**
+
+- Base Interface Example
 
 ```java
 // IModel.java - Base interface for union type (StepObject | TestSuite)
@@ -33,7 +35,7 @@ public interface ITestStep {
 }
 ```
 
-### Child Interface Example
+- Child Interface Example
 
 ```java
 // IGiven.java - Child interface extends ITestStep
@@ -55,7 +57,9 @@ public interface IStepObject extends IModel {
 
 ## Each non grammar list attribute has a getter/setter
 
-### Single Value Attribute Example
+**Examples**
+
+- Single Value Attribute Example
 
 ```java
 // ICell.java - 'name' attribute from grammar
@@ -68,7 +72,7 @@ public interface ICell {
 }
 ```
 
-### Object Reference Attribute Example
+- Object Reference Attribute Example
 
 ```java
 // IStepParameters.java - 'table' attribute from grammar
@@ -93,7 +97,9 @@ Every grammar list must have up to 3 helper methods with these signatures:
 2. `getX(String name)` - For lists of elements with `name=Title` grammar attribute
 3. `getX(String qualifiedName)` - For top-level lists (TestSuite, StepObject in ITestProject)
 
-### Index-Only Getter Example
+**Examples**
+
+- Index-Only Getter Example
 
 Lists where elements have no name attribute only require the index-based getter.
 
@@ -114,7 +120,7 @@ Grammar reference:
 Table: ... rowList+=Row+ ...
 ```
 
-### Index and Name Getter Example
+- Index and Name Getter Example
 
 Lists where elements have `name=Title` in grammar require both index and name getters.
 
@@ -136,7 +142,7 @@ Grammar reference:
 Cell: ... name=Title ...
 ```
 
-### Top-Level Qualified Name Getter Example
+- Top-Level Qualified Name Getter Example
 
 Top-level lists in ITestProject require index and qualifiedName getters.
 
@@ -158,7 +164,7 @@ Grammar reference:
 StepObject: ... stepDefinitionList+=StepDefinition* ...
 ```
 
-### Nested List Getter Example
+- Nested List Getter Example
 
 Lists within non-top-level features require index and name getters when elements have name attribute.
 
@@ -185,9 +191,11 @@ StepDefinition: ... stepParameterList+=StepParameters* ...
 Every non-root interface has `getParent()` methods, even though "parent" never appears in the grammar.
 Apply lazy parent initialization.
 
-**Parent Return Type Rule**: getParent() methods MUST return interface types (I*), never EMF types. This maintains framework independence. 
+**Parent Return Type Rule**: getParent() methods MUST return interface types (I*), never EMF types. This maintains framework independence.
 
-### Root Interface Example
+**Examples**
+
+- Root Interface Example
 
 The root interface (ITestProject) has NO getParent() method.
 
@@ -204,7 +212,7 @@ public interface ITestProject {
 }
 ```
 
-### Direct Parent Reference Example
+- Direct Parent Reference Example
 
 Non-root interfaces have explicit getParent() methods returning the appropriate parent type.
 
@@ -220,7 +228,7 @@ public interface IStepDefinition {
 }
 ```
 
-### Inherited Parent Reference Example
+- Inherited Parent Reference Example
 
 Child interfaces inherit getParent() from their base interface.
 
@@ -233,7 +241,7 @@ public interface IGiven extends ITestStep {
 }
 ```
 
-### Object Parent Type Example
+- Object Parent Type Example
 
 When there is no common parent type, getParent() returns Object.
 
@@ -255,7 +263,9 @@ public interface ITable {
 This applies to feature names beginning with **Test** or **Step**.
 For top level objects, this is the qualified name. For steps it's the full step with component and object path.
 
-### Top-Level NameLong Example
+**Examples**
+
+- Top-Level NameLong Example
 
 Top-level Model features (IStepObject, ITestSuite) have both getter and setter through IModel.
 
@@ -285,7 +295,7 @@ Grammar reference:
 StepObject: ... name=Title ... // No nameLong in grammar
 ```
 
-### Step-Related NameLong Example
+- Step-Related NameLong Example
 
 Step-related features have only getter (no setter) - it's a computed attribute.
 
@@ -309,7 +319,7 @@ public interface IStepDefinition {
 }
 ```
 
-### Test-Related NameLong Example
+- Test-Related NameLong Example
 
 Test-related features have only getter (no setter) - it's a computed attribute.
 

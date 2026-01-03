@@ -1,41 +1,89 @@
 # UML Package Patterns
 
-## org\farhan\dsl\issues
+## org.farhan.dsl.issues
 
-**Rules**
-- Always has a class named {Language}IssueProposal
-- Might have one class per {Feature} named {Feature}IssueTypes
-- Might have one class per {Feature} named {Feature}IssueDetector
-- Might have one class per {Feature} named {Feature}IssueResolver
-- **Component-Based Organization**: Validation classes MUST be organized by grammar element, not by validation type (all TestStep concerns together, not all detectors together). 
+### {Language}IssueProposal
+
+Always has a class named {Language}IssueProposal
+
+**Examples**
+- SheepDogIssueProposal
+
+### {Feature}IssueTypes
+
+Might have one class per {Feature} named {Feature}IssueTypes
 
 **Examples**
 - TestStepIssueTypes
 - TextIssueTypes
+
+### {Feature}IssueDetector
+
+Might have one class per {Feature} named {Feature}IssueDetector
+
+**Examples**
 - TestStepIssueDetector
 - TextIssueDetector
+
+### {Feature}IssueResolver
+
+Might have one class per {Feature} named {Feature}IssueResolver
+
+**Examples**
 - TestStepIssueResolver
 - TextIssueResolver
-- SheepDogIssueProposal
 
-## org\farhan\dsl\lang
+## org.farhan.dsl.lang
 
-**Rules**
-- Always has an interface named IResourceRepository
-- Always has an interface named ITestProject
-- Always has a class named {Language}Builder
-- Always has a class named {Language}Factory
-- Always has one interface per {Feature} named I{Feature}
-- Might have one class per {Feature} named {Feature}Utility
-- Might have multiple classes per {Feature} named {FeatureAspect}Types
+### IResourceRepository
+
+Always has an interface named IResourceRepository
+
+**Examples**
+- IResourceRepository
+
+### ITestProject
+
+Always has an interface named ITestProject
+
+**Examples**
+- ITestProject
+
+### {Language}Builder
+
+Always has a class named {Language}Builder
+
+**Examples**
+- SheepDogBuilder
+
+### {Language}Factory
+
+Always has a class named {Language}Factory
+
+**Examples**
+- SheepDogFactory
+
+### I{Feature}
+
+Always has one interface per {Feature} named I{Feature}
 
 **Examples**
 - ITestStep
 - IText
+
+### {Feature}Utility
+
+Might have one class per {Feature} named {Feature}Utility
+
+**Examples**
 - TestStepUtility
 - StepDefinitionUtility
+
+### {FeatureAspect}Types
+
+Might have multiple classes per {Feature} named {FeatureAspect}Types
+
+**Examples**
 - TestStepComponentTypes
 - TestStepObjectEdgeTypes
 - TestStepObjectVertexTypes
-- SheepDogBuilder
-- SheepDogFactory
