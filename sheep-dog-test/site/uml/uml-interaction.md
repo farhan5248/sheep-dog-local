@@ -2,25 +2,116 @@
 
 ## Logging
 
-Logging patterns specific to sheep-dog-test that supplement the practices defined in [logging.md](../../../../arch-logging.md) and [impl-slf4j.md](../../../../impl-slf4j.md).
+SLF4J logging patterns specific to sheep-dog-test that supplement the practices defined in `arch-logging.md` and `impl-slf4j.md`. These patterns define which classes have loggers and which operations should be logged.
 
-**Rules:**
-- All {Feature}IssueDetector classes have loggers
-- All {Feature}IssueResolver classes have loggers
-- {Language}Builder class has logger
-- {Feature}Utility classes do NOT have loggers
-- I{Feature} interfaces do NOT have loggers
-- {Language}Factory does NOT have logger
-- Classes that read or write files through IResourceRepository should log these operations:
+### Logger Declaration Pattern
 
-## Exceptions
+Detector, resolver, and builder classes declare SLF4J loggers for tracking operations and debugging.
 
-**Rules:**
-- Declare `throws Exception` in method signature for methods that can fail
-- No specific exception types (IOException, NullPointerException, etc.)
-- No custom exception classes defined
-- No RuntimeException usage
-- No try-catch blocks (exceptions propagate naturally)
-- No graceful degradation (no catching and continuing)
-- No null returns to signal failure
-- Interfaces declare `throws Exception` in method signatures for content operations `getContent()`, `setContent()`, repository `get()`, `put()`
+**Examples**
+
+- {Feature}IssueDetector classes:
+```java
+private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
+```
+
+- {Feature}IssueResolver classes:
+```java
+private static final Logger logger = LoggerFactory.getLogger(TestStepIssueResolver.class);
+```
+
+- {Language}Builder class:
+```java
+private static final Logger logger = LoggerFactory.getLogger(SheepDogBuilder.class);
+```
+
+### No Logger Pattern
+
+Utility classes, interfaces, and factory classes do not declare loggers to keep them lightweight and focused on their single responsibility.
+
+**Examples**
+
+- {Feature}Utility classes have no logger
+- I{Feature} interfaces have no logger
+- {Language}Factory has no logger
+
+### File Operation Logging Pattern
+
+Classes that read or write files through IResourceRepository log these I/O operations for debugging and troubleshooting.
+
+**Examples**
+
+```java
+logger.debug("Reading file: {}", path);
+repository.get(path);
+```
+
+```java
+logger.debug("Writing file: {}", path);
+repository.put(path, content);
+```
+
+## Exception Handling
+
+Java Exception class is used for all error propagation without catching or handling. This simple approach ensures all errors propagate to test execution layer where they can be properly reported.
+
+### Exception Propagation Pattern
+
+Methods declare throws Exception in signatures and allow all exceptions to propagate naturally without try-catch blocks.
+
+**Examples**
+
+- Method signatures:
+```java
+public void getContent() throws Exception {
+    // Implementation that may throw
+}
+```
+
+```java
+public void setContent(String content) throws Exception {
+    // Implementation that may throw
+}
+```
+
+- Interface methods:
+```java
+public interface IResourceRepository {
+    Object get(String path) throws Exception;
+    void put(String path, Object content) throws Exception;
+}
+```
+
+### No Exception Handling Pattern
+
+No try-catch blocks, custom exceptions, RuntimeException usage, null returns for errors, or graceful degradation. All errors propagate immediately.
+
+**Examples**
+
+- No try-catch:
+```java
+// Not allowed
+try {
+    riskyOperation();
+} catch (Exception e) {
+    // handle
+}
+```
+
+- No custom exceptions:
+```java
+// Not allowed
+class CustomException extends Exception { }
+```
+
+- No null returns for errors:
+```java
+// Not allowed
+public Object loadFile() {
+    try {
+        return readFile();
+    } catch (Exception e) {
+        return null; // Bad - use throws Exception instead
+    }
+}
+```

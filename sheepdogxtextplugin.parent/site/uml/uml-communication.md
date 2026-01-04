@@ -4,116 +4,74 @@ Collaboration patterns for sheepdogxtextplugin IDE integration. Business logic p
 
 ## IDE Integration
 
-**Rules**
-- Applies when Xtext IDE needs to validate, propose, or correct grammar elements
-- IDE integration classes wrap EMF objects and delegate to business logic
-- Business logic classes (Detector/Resolver) are in sheep-dog-test, not sheepdogxtextplugin
+This collaboration applies when Xtext IDE needs to validate, propose, or correct grammar elements. IDE integration classes wrap EMF objects and delegate to business logic. Business logic classes (Detector/Resolver) are in sheep-dog-test, not sheepdogxtextplugin.
+
+**Methods**
+- Grammar element validation workflows
+- Content assist proposal generation
+- Quick fix correction workflows
+- EMF object wrapping and delegation
 
 ### {Language}Validator
 
-- `check{Feature}{Aspect}({Feature} eObject)` - Validates grammar element
-  - **Creates:** {Feature}Impl wrapper
-  - **Calls:** {Feature}IssueDetector.validate{Aspect}(), initProject(), warning() or error()
-  - **Returns:** void
+Validates grammar elements in the IDE by wrapping EMF objects and delegating to business logic detectors.
 
-- `initProject(Resource resource)` - Initializes project context
-  - **Creates:** ITestProject via {Language}Factory
-  - **Calls:** {Language}Factory.instance.createTestProject()
-  - **Returns:** void
-
-- `logError(Exception e, String name)` - Logs exceptions
-  - **Calls:** logger.error()
-  - **Returns:** void
+**Methods**
+- `check{Feature}{Aspect}({Feature} eObject)`
+- `initProject(Resource resource)`
+- `logError(Exception e, String name)`
 
 ### {Language}ProposalProvider
 
-- `complete{Feature}_{Attribute}({FeatureType} model, Assignment, ContentAssistContext, ICompletionProposalAcceptor acceptor)` - Content assist entry point
-  - **Calls:** super.complete{Feature}_{Attribute}(), complete{Attribute}()
-  - **Returns:** void
+Provides content assist proposals by delegating to business logic resolvers.
 
-- `complete{Attribute}({Feature} model, Assignment, ContentAssistContext, ICompletionProposalAcceptor acceptor)` - Helper generates proposals
-  - **Creates:** {Feature}Impl wrapper, ConfigurableCompletionProposal
-  - **Calls:** {Feature}IssueResolver.suggest{Attribute}(), acceptor.accept()
-  - **Returns:** void
-
-- `initProject(Resource resource)` - Initializes project context
-  - **Creates:** ITestProject via {Language}Factory
-  - **Calls:** {Language}Factory.instance.createTestProject()
-  - **Returns:** void
+**Methods**
+- `complete{Feature}_{Attribute}({FeatureType} model, Assignment, ContentAssistContext, ICompletionProposalAcceptor acceptor)`
+- `complete{Attribute}({Feature} model, Assignment, ContentAssistContext, ICompletionProposalAcceptor acceptor)`
+- `initProject(Resource resource)`
 
 ### {Language}QuickfixProvider
 
-- `fix{Feature}{Aspect}(Issue issue, IssueResolutionAcceptor acceptor)` - Quick fix entry point
-  - **Creates:** {Feature}Impl wrapper
-  - **Calls:** getEObject(), {Feature}IssueResolver.correct{Aspect}(), createAcceptor()
-  - **Returns:** void
+Provides quick fix corrections by delegating to business logic resolvers and applying modifications to EMF objects.
 
-- `createAcceptor(Issue issue, IssueResolutionAcceptor acceptor, ArrayList<{Language}IssueProposal> proposals)` - Creates fix acceptors
-  - **Creates:** IModification instances
-  - **Calls:** acceptor.accept()
-  - **Returns:** void
-
-- `getEObject(Issue issue)` - Retrieves EMF object
-  - **Creates:** ResourceSetImpl, Resource
-  - **Calls:** ResourceSetImpl.getResource(), Resource.getEObject()
-  - **Returns:** EObject
+**Methods**
+- `fix{Feature}{Aspect}(Issue issue, IssueResolutionAcceptor acceptor)`
+- `createAcceptor(Issue issue, IssueResolutionAcceptor acceptor, ArrayList<{Language}IssueProposal> proposals)`
+- `getEObject(Issue issue)`
 
 ### {Feature}Impl
 
-- `{Feature}Impl({Feature} eObject)` - Wraps EMF object
-  - **Creates:** Wrapper instance
-  - **Returns:** N/A (constructor)
+Wrapper class that adapts EMF objects to business logic interfaces by delegating attribute access.
 
-- `get{Attribute}()` - Delegates to EMF object
-  - **Calls:** eObject.get{Attribute}()
-  - **Returns:** Attribute value
-
-- `getParent()` - Lazy parent initialization
-  - **Creates:** Parent wrapper (lazy)
-  - **Calls:** eObject.eContainer()
-  - **Returns:** I{Parent}
+**Methods**
+- `{Feature}Impl({Feature} eObject)`
+- `get{Attribute}()`
+- `getParent()`
 
 ### {Feature}IssueDetector
 
-Business logic class from sheep-dog-test (not in sheepdogxtextplugin).
+Business logic class from sheep-dog-test (not in sheepdogxtextplugin) that provides pure validation logic for grammar elements.
 
-- `validate{Aspect}(I{Feature} feature)` - Pure validation logic
-  - **Calls:** {Feature}Utility methods
-  - **Returns:** String (empty if valid)
-
-**Called by:** {Language}Validator
+**Methods**
+- `validate{Aspect}(I{Feature} feature)`
 
 ### {Feature}IssueResolver
 
-Business logic class from sheep-dog-test (not in sheepdogxtextplugin).
+Business logic class from sheep-dog-test (not in sheepdogxtextplugin) that generates proposals and corrections for grammar elements.
 
-- `suggest{Attribute}(I{Feature} feature)` - Generates proposals
-  - **Creates:** {Language}IssueProposal instances
-  - **Returns:** ArrayList<{Language}IssueProposal>
-
-- `correct{Aspect}(I{Feature} feature)` - Generates corrections
-  - **Creates:** {Language}IssueProposal instances
-  - **Returns:** ArrayList<{Language}IssueProposal>
-
-**Called by:** {Language}ProposalProvider, {Language}QuickfixProvider
+**Methods**
+- `suggest{Attribute}(I{Feature} feature)`
+- `correct{Aspect}(I{Feature} feature)`
 
 ### {Language}Factory
 
-Singleton from sheep-dog-test (not in sheepdogxtextplugin).
+Singleton from sheep-dog-test (not in sheepdogxtextplugin) that creates and manages project instances.
 
-- `instance` - Singleton instance
-  - **Accessed by:** All IDE integration classes
-
-- `createTestProject()` - Returns project singleton
-  - **Creates:** TestProjectImpl
-  - **Returns:** ITestProject
-
-**Called by:** initProject() methods
+**Methods**
+- `createTestProject()`
 
 ### {Language}IssueProposal
 
-Data container from sheep-dog-test (not in sheepdogxtextplugin).
+Data container from sheep-dog-test (not in sheepdogxtextplugin) that holds proposal information for content assist and quick fixes.
 
 **Properties:** id, description, value, qualifiedName
-
-**Created by:** {Feature}IssueResolver classes

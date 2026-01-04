@@ -2,11 +2,13 @@
 
 ## {Feature}Impl implements I{Feature} interface
 
+**Content**
+
 Wrapper classes implement framework-independent interfaces from org.farhan.dsl.lang.
 
 Provides bridge pattern between Xtext EMF objects and business logic.
 
-### {Feature}Impl
+**Examples**
 
 ```java
 public {Feature}Impl({Feature} eObject)
@@ -18,9 +20,11 @@ public {Type} get{Attribute}()
 
 ## {Feature}Impl wraps EMF eObject
 
+**Content**
+
 Wrapper delegates to underlying Xtext-generated EMF object for data access.
 
-### {Feature}Impl
+**Examples**
 
 ```java
 public String getName()

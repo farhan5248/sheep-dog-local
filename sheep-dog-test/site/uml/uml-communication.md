@@ -4,128 +4,109 @@ These patterns apply to grammar elements (see **Feature** definition in Pattern 
 
 ## Interface Definition
 
-**Rules**
-- There is no proposal, validation or correction for the grammar element.
+This collaboration applies when defining basic grammar element interfaces with simple getters and setters. There is no proposal, validation or correction for the grammar element.
+
+**Methods**
+- Basic interface usage for grammar element access
+- Simple property retrieval and modification
+- Parent-child relationship navigation
 
 ### I{Feature}
 
-Interface defining the grammar element.
+Interface defining the grammar element with basic accessors and mutators for element properties and relationships.
 
-- `getName()` - Returns element name
-  - **Returns:** String
-
-- `setName(String value)` - Sets element name
-  - **Returns:** void
-
-- `getParent()` - Returns parent element
-  - **Returns:** Parent interface type
-
-- `get{Attribute}List()` - Returns child element list
-  - **Returns:** ArrayList
-
-- `add{Attribute}({Type} element)` - Adds child element to list
-  - **Returns:** void
+**Methods**
+- `getName()`
+- `setName(String value)`
+- `getParent()`
+- `get{Attribute}List()`
+- `add{Attribute}({Type} element)`
 
 ### {Feature}Utility
 
-Static utility class with helper methods.
+Static utility class with helper methods that derive properties from grammar elements or validate text formats.
 
-- `get{Property}(I{Feature} element)` - Derives property from element
-  - **Calls:** I{Feature}.getName(), I{Feature}.getParent(), I{Feature}.get{Attribute}List()
-  - **Returns:** Computed values or boolean validation results
-
-- `isValid(String text)` - Validates text format
-  - **Returns:** boolean
+**Methods**
+- `get{Property}(I{Feature} element)`
+- `isValid(String text)`
 
 ### {FeatureAspect}Types
 
-Enum with type constants for grammar element aspects. Each constant represents a valid keyword or type value.
+Enum with type constants for grammar element aspects. Each constant represents a valid keyword or type value used by utility methods and test implementations.
 
-**Accessed by:** {Feature}Utility methods, test implementations
+**Methods**
+- Enum constants accessed by {Feature}Utility methods
+- Type validation in test implementations
 
 ## Content Correction
 
-**Rules**
-- Applies when proposing alternatives to non-empty invalid grammar elements.
+This collaboration applies when proposing alternatives to non-empty invalid grammar elements. It involves validation, issue detection, and resolution with correction proposals.
+
+**Methods**
+- Grammar element validation workflows
+- Issue detection and reporting
+- Correction proposal generation
+- Alternative suggestion workflows
 
 ### {Feature}IssueDetector
 
-Static validation class.
+Static validation class that validates grammar element aspects and returns issue descriptions.
 
-- `validate{Aspect}(I{Feature} element)` - Validates grammar element
-  - **Calls:** I{Feature}.getName(), I{Feature}.getParent(), other I{Feature} methods
-  - **Returns:** {Feature}IssueTypes.{ISSUE_TYPE}.description (String, empty if valid)
+**Methods**
+- `validate{Aspect}(I{Feature} element)`
 
 ### {Feature}IssueResolver
 
-Static resolution class.
+Static resolution class that generates correction proposals or suggests existing alternatives for invalid grammar elements.
 
-- `correct{Aspect}(I{Feature} element)` - Generates correction proposal
-  - **Creates:** SheepDogIssueProposal instances
-  - **Calls:** I{Feature}.getName(), I{Feature}.getParent(), {Feature}Utility methods, {Language}Builder.create{Feature}(), {Language}Factory.create{Feature}(), SheepDogIssueProposal.setId(), .setDescription(), .setValue()
-  - **Returns:** ArrayList<SheepDogIssueProposal>
-
-- `suggest{Aspect}(I{Feature} element)` - Suggests existing alternatives
-  - **Creates:** SheepDogIssueProposal instances
-  - **Calls:** I{Feature} methods, {Feature}Utility methods, SheepDogIssueProposal.setId(), .setDescription(), .setValue()
-  - **Returns:** ArrayList<SheepDogIssueProposal>
+**Methods**
+- `correct{Aspect}(I{Feature} element)`
+- `suggest{Aspect}(I{Feature} element)`
 
 ### {Feature}IssueTypes
 
-Enum with issue type constants. Each constant has a `description` field (String).
+Enum with issue type constants. Each constant has a description field (String) used by validation methods.
 
-**Accessed by:** {Feature}IssueDetector.validate{Aspect}() methods
+**Methods**
+- Enum constants with description fields
+- Accessed by {Feature}IssueDetector.validate{Aspect}() methods
 
 ### SheepDogIssueProposal
 
-Data container for correction/suggestion proposals.
+Data container for correction and suggestion proposals with properties for id, description, value, and optional qualifiedName.
 
-**Properties:** id (String), description (String), value (String), qualifiedName (String, optional)
-
-**Methods:** setId(), setDescription(), setValue(), setQualifiedName()
-
-**Created by:** All {Feature}IssueResolver classes
+**Methods**
+- `setId(String id)`
+- `setDescription(String description)`
+- `setValue(String value)`
+- `setQualifiedName(String qualifiedName)`
 
 ### I{Feature}
 
-Interface defining the grammar element.
+Interface defining the grammar element used by issue detection and resolution to access element properties.
 
-- `getName()` - Returns element name
-  - **Returns:** String
-
-- `getParent()` - Returns parent element
-  - **Returns:** Parent interface type
-
-**Called by:** {Feature}IssueDetector, {Feature}IssueResolver
+**Methods**
+- `getName()`
+- `getParent()`
 
 ### {Feature}Utility
 
-Static utility class with helper methods.
+Static utility class with helper methods that derive properties for validation and proposal generation.
 
-- `get{Property}(I{Feature} element)` - Derives properties for validation/proposal generation
-  - **Calls:** I{Feature}.getName(), I{Feature}.getParent(), I{Feature}.get{Attribute}List()
-  - **Returns:** Computed values or boolean validation results
-
-- `isValid(String text)` - Validates text format
-  - **Returns:** boolean
-
-**Called by:** {Feature}IssueResolver
+**Methods**
+- `get{Property}(I{Feature} element)`
+- `isValid(String text)`
 
 ### {Language}Builder
 
-Static factory class for creating and managing elements.
+Static factory class for creating and managing elements, adding them to parent elements during correction workflows.
 
-- `create{Feature}(I{Parent} parent, {params})` - Creates element and adds to parent
-  - **Calls:** {Language}Factory.create{Feature}(), I{Parent}.add{Feature}()
-  - **Returns:** Created I{Feature} instance
-
-**Called by:** {Feature}IssueResolver.correct{Aspect}()
+**Methods**
+- `create{Feature}(I{Parent} parent, {params})`
 
 ### {Language}Factory
 
-Singleton factory for creating element instances.
+Singleton factory for creating element instances without adding them to parent elements.
 
-- `create{Feature}({params})` - Creates element instance without parent
-  - **Returns:** Created I{Feature} instance (not yet added to parent)
-
-**Called by:** {Feature}IssueResolver.correct{Aspect}(), {Language}Builder.create{Feature}()
+**Methods**
+- `create{Feature}({params})`
