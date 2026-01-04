@@ -4,8 +4,6 @@
 package org.farhan.dsl.sheepdog.ui.quickfix;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -64,7 +62,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 							stepObject.setContent(p.getValue());
 							SheepDogFactory.instance.createTestProject().addStepObject(stepObject);
 						} catch (Exception e) {
-							logger.error("Error writing file for " + p.getQualifiedName() + "\n" + e.getMessage());
+							logger.error("Failed writing file for " + p.getQualifiedName() + ": " + e.getMessage(), e);
 						}
 					} else {
 						context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), p.getValue());
@@ -76,69 +74,80 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(SheepDogValidator.CELL_NAME_ONLY)
 	public void fixCellNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
-		createAcceptor(issue, acceptor, CellIssueResolver.correctNameOnly(new CellImpl((Cell) getEObject(issue))));
+		Cell cell = (Cell) getEObject(issue);
+		logger.debug("Entering fixCellNameOnly for element: " + (cell != null ? cell.getName() : "null"));
+		createAcceptor(issue, acceptor, CellIssueResolver.correctNameOnly(new CellImpl(cell)));
+		logger.debug("Exiting fixCellNameOnly");
 	}
 
 	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
 	public void fixRowCellListWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		Row theRow = (Row) getEObject(issue);
+		logger.debug("Entering fixRowCellListWorkspace for element: " + theRow.toString());
 		try {
 			createAcceptor(issue, acceptor, RowIssueResolver
 					.correctCellListWorkspace(new TestStepImpl((TestStep) theRow.eContainer().eContainer())));
 		} catch (Exception e) {
-			logError( e, "fixRowCellListWorkspace");
+			logger.error("Failed in fixRowCellListWorkspace for: " + e.getMessage(), e);
 		}
+		logger.debug("Exiting fixRowCellListWorkspace");
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
 	public void fixTestStepContainerNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
+		TestStepContainer theTestStepContainer = (TestStepContainer) getEObject(issue);
+		logger.debug("Entering fixTestStepContainerNameOnly for element: " + theTestStepContainer.getName());
 		createAcceptor(issue, acceptor, TestStepContainerIssueResolver
-				.correctNameOnly(new TestStepContainerImpl((TestStepContainer) getEObject(issue))));
+				.correctNameOnly(new TestStepContainerImpl(theTestStepContainer)));
+		logger.debug("Exiting fixTestStepContainerNameOnly");
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE)
 	public void fixTestStepStepObjectNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStep step = (TestStep) getEObject(issue);
+		logger.debug("Entering fixTestStepStepObjectNameWorkspace for element: " + step.getStepObjectName());
 		try {
-			createAcceptor(issue, acceptor, TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
+			createAcceptor(issue, acceptor,
+					TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
 		} catch (Exception e) {
-			logger.error("Error fixing step for " + step.getStepObjectName() + "\n" + e.getMessage());
+			logger.error("Failed fixing step for " + step.getStepObjectName() + ": " + e.getMessage(), e);
 		}
+		logger.debug("Exiting fixTestStepStepObjectNameWorkspace");
 	}
 
 	@Fix(SheepDogValidator.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE)
 	public void fixTestStepStepDefinitionNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStep step = (TestStep) getEObject(issue);
+		logger.debug("Entering fixTestStepStepDefinitionNameWorkspace for element: " + step.getStepObjectName());
 		try {
 			createAcceptor(issue, acceptor,
 					TestStepIssueResolver.correctStepDefinitionNameWorkspace(new TestStepImpl(step)));
 		} catch (Exception e) {
-			logger.error("Error fixing step for " + step.getStepObjectName() + "\n" + e.getMessage());
+			logger.error("Failed fixing step for " + step.getStepObjectName() + ": " + e.getMessage(), e);
 		}
+		logger.debug("Exiting fixTestStepStepDefinitionNameWorkspace");
 	}
 
 	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
 	public void fixTestSuiteNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
+		TestSuite theTestSuite = (TestSuite) getEObject(issue);
+		logger.debug("Entering fixTestSuiteNameOnly for element: " + theTestSuite.getName());
 		createAcceptor(issue, acceptor,
-				TestSuiteIssueResolver.correctNameOnly(new TestSuiteImpl((TestSuite) getEObject(issue))));
+				TestSuiteIssueResolver.correctNameOnly(new TestSuiteImpl(theTestSuite)));
+		logger.debug("Exiting fixTestSuiteNameOnly");
 	}
 
 	@Fix(SheepDogValidator.TEXT_NAME_WORKSPACE)
 	public void fixTextNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
 		Text theText = (Text) getEObject(issue);
+		logger.debug("Entering fixTextNameWorkspace for element: " + theText.getName());
 		try {
 			createAcceptor(issue, acceptor,
 					TextIssueResolver.correctNameWorkspace(new TestStepImpl((TestStep) theText.eContainer())));
 		} catch (Exception e) {
-			logError( e, "fixTextNameWorkspace");
+			logger.error("Failed in fixTextNameWorkspace for: " + e.getMessage(), e);
 		}
-	}
-	
-	private void logError(Exception e, String name) {
-		logger.error("There was a problem for method: " + name);
-		StringWriter sw = new StringWriter();
-		e.printStackTrace(new PrintWriter(sw));
-		logger.error(sw.toString());
+		logger.debug("Exiting fixTextNameWorkspace");
 	}
 
 	private EObject getEObject(Issue issue) {

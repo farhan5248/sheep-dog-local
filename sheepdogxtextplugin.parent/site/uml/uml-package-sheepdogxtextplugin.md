@@ -53,7 +53,7 @@
 
 - Formatter is the base class for **{Feature}Formatter**
 
-## org.farhan.generator
+## org.farhan.dsl.sheepdog.generator
 
 ### {Language}Generator
 

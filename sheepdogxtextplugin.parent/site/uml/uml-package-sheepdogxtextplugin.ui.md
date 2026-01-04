@@ -1,6 +1,6 @@
 # UML Package Patterns
 
-## org.farhan.ui
+## org.farhan.dsl.sheepdog.ui
 
 ### {Language}UiModule
 
@@ -28,7 +28,7 @@
 **Examples:**
 - SheepDogQuickfixProvider
 
-## org.farhan.ui.syntaxcoloring
+## org.farhan.dsl.sheepdog.ui.syntaxcoloring
 
 ### {Language}AntlrTokenToAttributeIdMapper
 
