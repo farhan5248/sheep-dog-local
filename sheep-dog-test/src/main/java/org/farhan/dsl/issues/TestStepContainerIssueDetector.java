@@ -6,7 +6,7 @@ import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 public class TestStepContainerIssueDetector {
 
@@ -25,14 +25,18 @@ public class TestStepContainerIssueDetector {
 	}
 
 	public static String validateTestStepListFile(ITestStepContainer theTestStepContainer) {
+		logger.debug("Entering validateTestStepListFile for container: {}",
+				theTestStepContainer != null ? theTestStepContainer.getName() : "null");
 		List<ITestStep> testStepList = theTestStepContainer.getTestStepList();
 		if (testStepList != null) {
 			if (!testStepList.isEmpty()) {
 				if (TestStepUtility.getComponent(testStepList.getFirst().getName()).isEmpty()) {
+					logger.debug("Exiting validateTestStepListFile");
 					return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE.description;
 				}
 			}
 		}
+		logger.debug("Exiting validateTestStepListFile");
 		return "";
 	}
 

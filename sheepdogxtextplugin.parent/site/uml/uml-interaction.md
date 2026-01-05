@@ -16,6 +16,15 @@ ALL methods that call sheep-dog-test business logic must include entry/exit debu
 - Methods that directly call `*IssueDetector` or `*IssueResolver` classes
 - Methods that call `createAcceptor()` which delegates to `*Resolver` classes
 
+### Logger Initialization
+
+LoggerBridge is set as the LoggerProvider in SheepDogRuntimeModule.configure():
+
+**Example**
+```java
+LoggerFactory.setLoggerImplementation(new LoggerBridge());
+```
+
 ### Entry/Exit Logging Pattern
 
 Methods that delegate to sheep-dog-test business logic use entry/exit debug logging.

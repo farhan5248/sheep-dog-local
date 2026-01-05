@@ -3,7 +3,7 @@ package org.farhan.dsl.issues;
 import java.util.ArrayList;
 import org.farhan.dsl.lang.ICell;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 public class CellIssueResolver {
 

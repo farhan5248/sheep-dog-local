@@ -12,7 +12,6 @@ import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.StatementUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TextIssueResolver {
 

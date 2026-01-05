@@ -33,15 +33,15 @@
 ### {Language}AntlrTokenToAttributeIdMapper
 
 **Examples:**
-- SheepAntlrTokenToAttributeIdMapper
+- SheepDogAntlrTokenToAttributeIdMapper
 
 ### {Language}HighlightingConfiguration
 
 **Examples:**
-- SheepHighlightingConfiguration
+- SheepDogHighlightingConfiguration
 
 ### {Language}SemanticHighlightingCalculator
 
 **Examples:**
-- SheepSemanticHighlightingCalculator
+- SheepDogSemanticHighlightingCalculator
 

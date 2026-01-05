@@ -6,7 +6,7 @@ import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 public class TestStepIssueDetector {
 
@@ -36,6 +36,7 @@ public class TestStepIssueDetector {
 		if (text != null) {
 			if (!TestStepUtility.isValid(text)) {
 				if (TestStepUtility.getStepDefinitionName(text).isEmpty()) {
+					logger.debug("Exiting validateStepDefinitionNameOnly");
 					return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
 				}
 			}

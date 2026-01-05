@@ -6,7 +6,6 @@ import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TextIssueDetector {
 

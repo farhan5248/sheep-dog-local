@@ -33,6 +33,20 @@ Might have one class per {Feature} named {Feature}IssueResolver
 - TestStepIssueResolver
 - TextIssueResolver
 
+### LoggerFactory
+
+Always has a class named LoggerFactory that provides loggers to all classes in this package.
+
+**Examples**
+- LoggerFactory
+
+### LoggerProvider
+
+Always has an interface named LoggerProvider that allows external systems to inject custom logger implementations.
+
+**Examples**
+- LoggerProvider
+
 ## org.farhan.dsl.lang
 
 ### IResourceRepository

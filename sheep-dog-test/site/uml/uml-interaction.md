@@ -6,7 +6,9 @@ SLF4J logging patterns specific to sheep-dog-test that supplement the practices 
 
 ### Logger Declaration Pattern
 
-Detector, resolver, and builder classes declare SLF4J loggers for tracking operations and debugging.
+Detector, resolver, and builder classes declare SLF4J loggers using the custom LoggerFactory for tracking operations and debugging.
+
+**Note**: Import is `org.farhan.dsl.issues.LoggerFactory` (custom), not `org.slf4j.LoggerFactory`.
 
 **Examples**
 
@@ -23,6 +25,32 @@ private static final Logger logger = LoggerFactory.getLogger(TestStepIssueResolv
 - {Language}Builder class:
 ```java
 private static final Logger logger = LoggerFactory.getLogger(SheepDogBuilder.class);
+```
+
+### Entry/Exit Logging Pattern
+
+All public methods in Detector, Resolver, and Builder classes MUST have entry and exit logging as defined in `arch-logging.md`.
+
+**Rules**
+- Entry log is the first statement in each public method
+- Exit log is placed before each return statement
+- Follow the logging patterns defined in `arch-logging.md`
+
+**Examples**
+
+- Entry logging with context:
+```java
+logger.debug("Entering validateNameOnly for step: {}", theTestStep != null ? theTestStep.getName() : "null");
+```
+
+- Exit logging:
+```java
+logger.debug("Exiting validateNameOnly");
+```
+
+- Exit logging with result:
+```java
+logger.debug("Exiting proposeNameOnly with {} proposals", proposals.size());
 ```
 
 ### No Logger Pattern

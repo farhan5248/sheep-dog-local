@@ -7,6 +7,13 @@
 **Examples:**
 - SheepDogRuntimeModule
 
+### LoggerBridge
+
+Always has a class named LoggerBridge that bridges SLF4J logging calls to Log4j.
+
+**Examples:**
+- LoggerBridge
+
 ## org.farhan.dsl.sheepdog.impl
 
 ### {Feature}Impl

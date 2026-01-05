@@ -17,6 +17,7 @@
 ## Technology Preferences Referenced
 
 1. `sheep-dog-main/impl-slf4j.md` - **SLF4j** specific rules
+2. `sheep-dog-main/arch-logging.md` - General logging patterns
 
 ## Pattern Variables
 
