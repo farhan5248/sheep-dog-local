@@ -31,7 +31,7 @@ public class WhenFormatter extends StepFormatter {
 
 	@Override
 	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((WhenElements) a).getNamePhraseParserRuleCall_1_0();
+		return ((WhenElements) a).getNameTitleParserRuleCall_1_0();
 	}
 
 	@Override

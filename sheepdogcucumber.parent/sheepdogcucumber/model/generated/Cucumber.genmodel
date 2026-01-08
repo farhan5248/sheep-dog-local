@@ -67,7 +67,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Step/theDocString"/>
     </genClasses>
     <genClasses ecoreClass="Cucumber.ecore#//DocString">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//DocString/lines"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//DocString/name"/>
     </genClasses>
     <genClasses ecoreClass="Cucumber.ecore#//Given"/>
     <genClasses ecoreClass="Cucumber.ecore#//When"/>
@@ -80,9 +80,6 @@
     </genClasses>
     <genClasses ecoreClass="Cucumber.ecore#//Tag">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Tag/name"/>
-    </genClasses>
-    <genClasses ecoreClass="Cucumber.ecore#//Line">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Line/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

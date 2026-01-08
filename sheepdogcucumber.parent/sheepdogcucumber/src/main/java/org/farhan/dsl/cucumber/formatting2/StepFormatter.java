@@ -30,7 +30,7 @@ public abstract class StepFormatter extends Formatter {
 
 		AbstractParserRuleElementFinder a = getAccess(ga);
 		formatKeyword(df.getRegion(theStep, getKeyword(a)), doc);
-		formatPhraseRuleCall(df.getRegion(theStep, getPhraseRuleCall(a)), doc);
+		formatTitleRuleCall(df.getRegion(theStep, getPhraseRuleCall(a)), doc);
 		formatEOL12RuleCall(df.getRegion(theStep, getEOLRuleCall(a)), doc);
 		if (theStep.getTheStepTable() != null) {
 			StepTableFormatter formatter = new StepTableFormatter(theStep.getTheStepTable());

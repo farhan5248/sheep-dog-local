@@ -991,11 +991,11 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final TitleElements pTitle;
 	private final StepObjectRefElements pStepObjectRef;
 	private final StepDefinitionRefElements pStepDefinitionRef;
-	private final TerminalRule tWORD;
 	private final TerminalRule tWS;
 	private final TerminalRule tSL_COMMENT;
 	private final TerminalRule tEOL;
 	private final TerminalRule tRAWTEXT;
+	private final TerminalRule tWORD;
 	
 	private final Grammar grammar;
 
@@ -1025,11 +1025,11 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pTitle = new TitleElements();
 		this.pStepObjectRef = new StepObjectRefElements();
 		this.pStepDefinitionRef = new StepDefinitionRefElements();
-		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.WORD");
 		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.WS");
 		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.SL_COMMENT");
 		this.tEOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.EOL");
 		this.tRAWTEXT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.RAWTEXT");
+		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.WORD");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1321,14 +1321,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getStepDefinitionRefAccess().getRule();
 	}
 	
-	//// TODO look at fragments to handle escape characters etc instead of this and to handle re-using ' ' | '\t' | '\r' | '\n'
-	//terminal WORD:
-	//    !(' ' | '\t' | '\r' | '\n' | '|' | '#')
-	//    !(' ' | '\t' | '\r' | '\n')*;
-	public TerminalRule getWORDRule() {
-		return tWORD;
-	}
-	
 	//terminal WS:
 	//    (' ' | '\t' | '\r')+;
 	public TerminalRule getWSRule() {
@@ -1351,5 +1343,11 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//    '----' '\n' (.)+ '\n' '----';
 	public TerminalRule getRAWTEXTRule() {
 		return tRAWTEXT;
+	}
+	
+	//terminal WORD:
+	//    !(' ' | '\t' | '\r' | '\n')+;
+	public TerminalRule getWORDRule() {
+		return tWORD;
 	}
 }

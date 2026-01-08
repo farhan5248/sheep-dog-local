@@ -51,7 +51,7 @@ public class FeatureFormatter extends Formatter {
 		// Together they make up an assignment.
 		// A ruleCall is anything that's in the xtext file with a :
 		// So a ruleCall can be a structure like thing with attributes or a terminal
-		formatPhraseRuleCall(df.getRegion(theFeature, a.getNamePhraseParserRuleCall_2_0()), doc);
+		formatTitleRuleCall(df.getRegion(theFeature, a.getNameTitleParserRuleCall_2_0()), doc);
 		formatEOL2RuleCall(df.getRegion(theFeature, a.getEOLTerminalRuleCall_3()), doc);
 		for (Statement s : theFeature.getStatements()) {
 

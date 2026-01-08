@@ -32,7 +32,7 @@ public class AsteriskFormatter extends StepFormatter {
 
 	@Override
 	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((AsteriskElements) a).getNamePhraseParserRuleCall_1_0();
+		return ((AsteriskElements) a).getNameTitleParserRuleCall_1_0();
 	}
 
 	@Override

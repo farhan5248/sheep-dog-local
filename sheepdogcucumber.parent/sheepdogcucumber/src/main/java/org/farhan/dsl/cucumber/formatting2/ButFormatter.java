@@ -32,7 +32,7 @@ public class ButFormatter extends StepFormatter {
 
 	@Override
 	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((ButElements) a).getNamePhraseParserRuleCall_1_0();
+		return ((ButElements) a).getNameTitleParserRuleCall_1_0();
 	}
 
 	@Override

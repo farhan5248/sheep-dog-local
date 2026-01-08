@@ -29,7 +29,7 @@ public class ExampleFormatter extends Formatter {
 			formatEOL1RuleCall(df.getRegion(e, a.getEOLTerminalRuleCall_0_1()), doc);
 		}
 		formatKeyword(df.getRegion(e, a.getExamplesKeyword_1()), doc);
-		formatPhraseRuleCall(df.getRegion(e, a.getNamePhraseParserRuleCall_2_0()), doc);
+		formatTitleRuleCall(df.getRegion(e, a.getNameTitleParserRuleCall_2_0()), doc);
 		formatEOL2RuleCall(df.getRegion(e, a.getEOLTerminalRuleCall_3()), doc);
 		for (Statement s : e.getStatements()) {
 

@@ -49,7 +49,7 @@ public class ScenarioOutlineFormatter extends AbstractScenarioFormatter {
 
 	@Override
 	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((ScenarioOutlineElements) a).getNamePhraseParserRuleCall_2_0();
+		return ((ScenarioOutlineElements) a).getNameTitleParserRuleCall_2_0();
 	}
 
 	@Override

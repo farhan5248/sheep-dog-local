@@ -1679,8 +1679,6 @@ ruleStepDefinitionRef returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	)+
 ;
 
-RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'|'|'#')) ~((' '|'\t'|'\r'|'\n'))*;
-
 RULE_WS : (' '|'\t'|'\r')+;
 
 RULE_SL_COMMENT : '#' ~('\n')* RULE_EOL;
@@ -1688,3 +1686,5 @@ RULE_SL_COMMENT : '#' ~('\n')* RULE_EOL;
 RULE_EOL : '\n'+;
 
 RULE_RAWTEXT : '----' '\n' .+ '\n' '----';
+
+RULE_WORD : ~((' '|'\t'|'\r'|'\n'))+;

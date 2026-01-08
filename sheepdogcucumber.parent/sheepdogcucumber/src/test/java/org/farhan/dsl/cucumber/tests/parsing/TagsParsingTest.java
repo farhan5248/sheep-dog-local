@@ -34,7 +34,7 @@ public class TagsParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("@tag1@tag2@tag3\n");
 		sb.append("Feature: This is a test feature\n");
-		assertFeatureErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test

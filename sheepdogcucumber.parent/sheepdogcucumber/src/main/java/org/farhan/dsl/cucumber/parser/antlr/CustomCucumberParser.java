@@ -2,12 +2,12 @@ package org.farhan.dsl.cucumber.parser.antlr;
 
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
-import org.farhan.dsl.cucumber.parser.antlr.internal.MyCucumberLexer;
+import org.farhan.dsl.cucumber.parser.antlr.internal.CucumberLexer;
 
-public class MyCucumberParser extends CucumberParser {
+public class CustomCucumberParser extends CucumberParser {
 
 	@Override
 	protected TokenSource createLexer(CharStream stream) {
-		return new MyCucumberLexer(stream);
+		return new CucumberLexer(stream);
 	}
 }

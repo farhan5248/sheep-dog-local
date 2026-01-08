@@ -13,9 +13,9 @@ import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.generator.SheepDogOutputConfigurationProvider;
 import org.farhan.dsl.sheepdog.impl.SheepDogFactoryImpl;
 import org.farhan.dsl.sheepdog.impl.EclipseFileRepository;
-import org.farhan.dsl.sheepdog.parser.antlr.MySheepDogParser;
+import org.farhan.dsl.sheepdog.parser.antlr.SheepDogParser;
 import org.farhan.dsl.sheepdog.parser.antlr.internal.InternalSheepDogLexer;
-import org.farhan.dsl.sheepdog.parser.antlr.internal.MySheepDogLexer;
+import org.farhan.dsl.sheepdog.parser.antlr.internal.SheepDogLexer;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
@@ -30,7 +30,7 @@ public class SheepDogRuntimeModule extends AbstractSheepDogRuntimeModule {
 
 	@Override
 	public Class<? extends IParser> bindIParser() {
-		return MySheepDogParser.class;
+		return SheepDogParser.class;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class SheepDogRuntimeModule extends AbstractSheepDogRuntimeModule {
 		binder.bind(IOutputConfigurationProvider.class).to(SheepDogOutputConfigurationProvider.class)
 				.in(Singleton.class);
 		SheepDogFactory.instance = new SheepDogFactoryImpl(new EclipseFileRepository());
-		LoggerFactory.setLoggerImplementation(new LoggerBridge());
+		LoggerFactory.setLoggerImplementation(new SheepDogLogger());
 		
 		//org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.DEBUG);
 		//org.apache.log4j.BasicConfigurator.configure();
@@ -47,16 +47,16 @@ public class SheepDogRuntimeModule extends AbstractSheepDogRuntimeModule {
 
 	@Override
 	public Class<? extends Lexer> bindLexer() {
-		return MySheepDogLexer.class;
+		return SheepDogLexer.class;
 	}
 
 	@Override
 	public Provider<? extends InternalSheepDogLexer> provideInternalSheepDogLexer() {
-		return LexerProvider.create(MySheepDogLexer.class);
+		return LexerProvider.create(SheepDogLexer.class);
 	}
 
 	@Override
 	public void configureRuntimeLexer(Binder binder) {
-		binder.bind(Lexer.class).annotatedWith(Names.named(LexerBindings.RUNTIME)).to(MySheepDogLexer.class);
+		binder.bind(Lexer.class).annotatedWith(Names.named(LexerBindings.RUNTIME)).to(SheepDogLexer.class);
 	}
 }

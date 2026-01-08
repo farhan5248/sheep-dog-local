@@ -32,7 +32,7 @@ public class GivenFormatter extends StepFormatter {
 
 	@Override
 	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((GivenElements) a).getNamePhraseParserRuleCall_1_0();
+		return ((GivenElements) a).getNameTitleParserRuleCall_1_0();
 	}
 
 	@Override

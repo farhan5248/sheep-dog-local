@@ -18,7 +18,7 @@ public class StepParametersFormatter extends Formatter {
 		StepParametersElements a = ga.getStepParametersAccess();
 
 		formatKeyword(df.getRegion(stepParameters, a.getParametersKeyword_0()), doc);
-		formatPhraseRuleCall(df.getRegion(stepParameters, a.getNamePhraseParserRuleCall_1_0()), doc);
+		formatTitleRuleCall(df.getRegion(stepParameters, a.getNameTitleParserRuleCall_1_0()), doc);
 		formatEOL2RuleCall(df.getRegion(stepParameters, a.getEOLTerminalRuleCall_2()), doc);
 		for (Statement s : stepParameters.getStatements()) {
 

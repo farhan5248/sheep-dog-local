@@ -32,7 +32,7 @@ public class ThenFormatter extends StepFormatter {
 
 	@Override
 	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((ThenElements) a).getNamePhraseParserRuleCall_1_0();
+		return ((ThenElements) a).getNameTitleParserRuleCall_1_0();
 	}
 
 	@Override

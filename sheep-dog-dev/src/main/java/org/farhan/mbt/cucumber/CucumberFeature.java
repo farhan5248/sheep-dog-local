@@ -25,7 +25,6 @@ import org.farhan.dsl.cucumber.cucumber.DocString;
 import org.farhan.dsl.cucumber.cucumber.Examples;
 import org.farhan.dsl.cucumber.cucumber.ExamplesTable;
 import org.farhan.dsl.cucumber.cucumber.Feature;
-import org.farhan.dsl.cucumber.cucumber.Line;
 import org.farhan.dsl.cucumber.cucumber.Row;
 import org.farhan.dsl.cucumber.cucumber.Scenario;
 import org.farhan.dsl.cucumber.cucumber.ScenarioOutline;
@@ -68,12 +67,6 @@ public class CucumberFeature implements IConvertibleObject {
 		return cell;
 	}
 
-	public DocString addDocString(Step step) {
-		DocString docString = CucumberFactory.eINSTANCE.createDocString();
-		step.setTheDocString(docString);
-		return docString;
-	}
-
 	public Examples addExamples(ScenarioOutline scenarioOutline, String examplesName) {
 		Examples examples = CucumberFactory.eINSTANCE.createExamples();
 		examples.setName(examplesName);
@@ -104,24 +97,12 @@ public class CucumberFeature implements IConvertibleObject {
 		theFeature.setName(featureName);
 	}
 
-	public void clearFeatureStatement() {
-		theFeature.getStatements().clear();
-	}
-
 	public Statement addFeatureStatement(String statement) {
 		return addStatement(theFeature.getStatements(), statement);
 	}
 
 	public Tag addFeatureTag(String tagName) {
 		return addTag(theFeature.getTags(), tagName);
-	}
-
-	public Line addLine(DocString docString, String name) {
-		Line line = CucumberFactory.eINSTANCE.createLine();
-		// Add hidden text
-		line.setName("          " + name);
-		docString.getLines().add(line);
-		return line;
 	}
 
 	public Row addRow(EList<Row> rowList) {
@@ -175,18 +156,18 @@ public class CucumberFeature implements IConvertibleObject {
 		String keyword = name.split(" ")[0];
 		Step step = null;
 		switch (keyword) {
-			case "Given:":
-				step = CucumberFactory.eINSTANCE.createGiven();
-				break;
-			case "When:":
-				step = CucumberFactory.eINSTANCE.createWhen();
-				break;
-			case "Then:":
-				step = CucumberFactory.eINSTANCE.createThen();
-				break;
-			case "And:":
-				step = CucumberFactory.eINSTANCE.createAnd();
-				break;
+		case "Given:":
+			step = CucumberFactory.eINSTANCE.createGiven();
+			break;
+		case "When:":
+			step = CucumberFactory.eINSTANCE.createWhen();
+			break;
+		case "Then:":
+			step = CucumberFactory.eINSTANCE.createThen();
+			break;
+		case "And:":
+			step = CucumberFactory.eINSTANCE.createAnd();
+			break;
 		}
 		step.setName(name.substring(keyword.length() + 1));
 		abstractScenario.getSteps().add(step);
@@ -215,6 +196,10 @@ public class CucumberFeature implements IConvertibleObject {
 		tag.setName(tagName);
 		tagList.add(tag);
 		return tag;
+	}
+
+	public void clearFeatureStatement() {
+		theFeature.getStatements().clear();
 	}
 
 	private String convertStatementsToString(EList<Statement> eList) {
@@ -252,19 +237,6 @@ public class CucumberFeature implements IConvertibleObject {
 
 	public String getBackgroundName(AbstractScenario abstractScenario) {
 		return abstractScenario.getName();
-	}
-
-	public String getDocString(Step stepSrc) {
-		String text = "";
-		String indent = "          ";
-		for (Line l : stepSrc.getTheDocString().getLines()) {
-			if (l.getName() != null) {
-				text += "\n" + l.getName().replaceFirst(indent, "");
-			} else {
-				text += "\n";
-			}
-		}
-		return text.replaceFirst("\n", "");
 	}
 
 	public String getExamplesDescription(Examples examples) {
@@ -425,6 +397,24 @@ public class CucumberFeature implements IConvertibleObject {
 		} catch (Exception e) {
 			throw new Exception("There was a problem parsing file: " + thePath);
 		}
+	}
+
+	public String getDocString(Step stepSrc) {
+		String indent = "          ";
+		return stepSrc.getTheDocString().getName().replaceFirst("^\"\"\"\n" + indent, "")
+				.replaceFirst("\n" + indent + "\"\"\"$", "").replace("\\\"\\\"\\\"", "\"\"\"")
+				.replaceAll("\n" + indent, "\n");
+	}
+
+	public void setDocString(Step step, String docString) {
+		String indent = "          ";
+		String indentedDocString = "\"\"\"\n" + indent;
+		step.setTheDocString(CucumberFactory.eINSTANCE.createDocString());
+		for (String line : docString.split("\n")) {
+			indentedDocString += line.replace("\"\"\"", "\\\"\\\"\\\"") + "\n" + indent;
+		}
+		indentedDocString += "\"\"\"";
+		step.getTheDocString().setName(indentedDocString);
 	}
 
 	public String toString() {

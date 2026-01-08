@@ -26,7 +26,7 @@ public class StepDefinitionFormatter extends Formatter {
 	public void format(IFormattableDocument doc, CucumberGrammarAccess ga, CucumberFormatter df) {
 		StepDefinitionElements a = ga.getStepDefinitionAccess();
 		formatKeyword(df.getRegion(stepDefinition, a.getDefinitionKeyword_0()), doc);
-		formatPhraseRuleCall(df.getRegion(stepDefinition, a.getNamePhraseParserRuleCall_1_0()), doc);
+		formatTitleRuleCall(df.getRegion(stepDefinition, a.getNameTitleParserRuleCall_1_0()), doc);
 		formatEOL2RuleCall(df.getRegion(stepDefinition, a.getEOLTerminalRuleCall_2()), doc);
 		for (Statement s : stepDefinition.getStatements()) {
 			StatementFormatter formatter = new StatementFormatter(s);

@@ -109,11 +109,6 @@ StepObjectRef:
 StepDefinitionRef:
 	WORD+;
 
-// TODO look at fragments to handle escape characters etc instead of this and to handle re-using ' ' | '\t' | '\r' | '\n'
-terminal WORD:
-	!(' ' | '\t' | '\r' | '\n' | '|' | '#')
-	!(' ' | '\t' | '\r' | '\n')*;
-
 terminal WS:
 	(' ' | '\t' | '\r')+;
 
@@ -125,3 +120,8 @@ terminal EOL:
 
 terminal RAWTEXT:
 	'----' '\n' (.)+ '\n' '----';
+
+terminal WORD:
+	!(' ' | '\t' | '\r' | '\n')+;
+
+	

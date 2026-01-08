@@ -31,7 +31,7 @@ public class BackgroundFormatter extends AbstractScenarioFormatter {
 
 	@Override
 	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((BackgroundElements) a).getNamePhraseParserRuleCall_1_0();
+		return ((BackgroundElements) a).getNameTitleParserRuleCall_1_0();
 	}
 
 	@Override

@@ -57,7 +57,7 @@ public abstract class AbstractScenarioFormatter extends Formatter {
 		AbstractParserRuleElementFinder a = getAccess(ga);
 		formatTags(doc, ga, df);
 		formatKeyword(df.getRegion(theAbstractScenario, getKeyword(a)), doc);
-		formatPhraseRuleCall(df.getRegion(theAbstractScenario, getPhraseRuleCall(a)), doc);
+		formatTitleRuleCall(df.getRegion(theAbstractScenario, getPhraseRuleCall(a)), doc);
 		formatEOL2RuleCall(df.getRegion(theAbstractScenario, getEOLRuleCall(a)), doc);
 		for (Statement s : theAbstractScenario.getStatements()) {
 			StatementFormatter formatter = new StatementFormatter(s);

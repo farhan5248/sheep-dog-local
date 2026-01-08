@@ -23,7 +23,6 @@ import org.farhan.dsl.cucumber.cucumber.Examples;
 import org.farhan.dsl.cucumber.cucumber.ExamplesTable;
 import org.farhan.dsl.cucumber.cucumber.Feature;
 import org.farhan.dsl.cucumber.cucumber.Given;
-import org.farhan.dsl.cucumber.cucumber.Line;
 import org.farhan.dsl.cucumber.cucumber.Model;
 import org.farhan.dsl.cucumber.cucumber.ParametersTable;
 import org.farhan.dsl.cucumber.cucumber.Row;
@@ -221,13 +220,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   private EClass tagEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass lineEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -803,9 +795,9 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getDocString_Lines()
+  public EAttribute getDocString_Name()
   {
-    return (EReference)docStringEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)docStringEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -924,28 +916,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EClass getLine()
-  {
-    return lineEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getLine_Name()
-  {
-    return (EAttribute)lineEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public CucumberFactory getCucumberFactory()
   {
     return (CucumberFactory)getEFactoryInstance();
@@ -1033,7 +1003,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     createEReference(stepEClass, STEP__THE_DOC_STRING);
 
     docStringEClass = createEClass(DOC_STRING);
-    createEReference(docStringEClass, DOC_STRING__LINES);
+    createEAttribute(docStringEClass, DOC_STRING__NAME);
 
     givenEClass = createEClass(GIVEN);
 
@@ -1052,9 +1022,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     tagEClass = createEClass(TAG);
     createEAttribute(tagEClass, TAG__NAME);
-
-    lineEClass = createEClass(LINE);
-    createEAttribute(lineEClass, LINE__NAME);
   }
 
   /**
@@ -1161,7 +1128,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     initEReference(getStep_TheDocString(), this.getDocString(), null, "theDocString", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(docStringEClass, DocString.class, "DocString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDocString_Lines(), this.getLine(), null, "lines", null, 0, -1, DocString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDocString_Name(), ecorePackage.getEString(), "name", null, 0, 1, DocString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(givenEClass, Given.class, "Given", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1180,9 +1147,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTag_Name(), ecorePackage.getEString(), "name", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(lineEClass, Line.class, "Line", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLine_Name(), ecorePackage.getEString(), "name", null, 0, 1, Line.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

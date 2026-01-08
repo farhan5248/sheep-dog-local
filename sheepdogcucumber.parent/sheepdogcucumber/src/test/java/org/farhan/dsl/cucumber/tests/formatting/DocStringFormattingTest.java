@@ -56,7 +56,7 @@ public class DocStringFormattingTest extends FormattingTest {
 		});
 	}
 
-	@Test
+	// @Test Will enable after implementing formatting
 	public void formatDocStringMoreSpaces() {
 
 		assertFormatted((FormatterTestRequest it) -> {

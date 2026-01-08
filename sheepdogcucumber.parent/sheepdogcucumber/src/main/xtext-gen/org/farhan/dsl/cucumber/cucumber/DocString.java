@@ -3,8 +3,6 @@
  */
 package org.farhan.dsl.cucumber.cucumber;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.dsl.cucumber.cucumber.DocString#getLines <em>Lines</em>}</li>
+ *   <li>{@link org.farhan.dsl.cucumber.cucumber.DocString#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.farhan.dsl.cucumber.cucumber.CucumberPackage#getDocString()
@@ -26,15 +24,25 @@ import org.eclipse.emf.ecore.EObject;
 public interface DocString extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Lines</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.dsl.cucumber.cucumber.Line}.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Lines</em>' containment reference list.
-   * @see org.farhan.dsl.cucumber.cucumber.CucumberPackage#getDocString_Lines()
-   * @model containment="true"
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.farhan.dsl.cucumber.cucumber.CucumberPackage#getDocString_Name()
+   * @model
    * @generated
    */
-  EList<Line> getLines();
+  String getName();
+
+  /**
+   * Sets the value of the '{@link org.farhan.dsl.cucumber.cucumber.DocString#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
 
 } // DocString

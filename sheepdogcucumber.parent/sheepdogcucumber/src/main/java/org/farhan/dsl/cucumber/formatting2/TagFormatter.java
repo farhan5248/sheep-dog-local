@@ -22,7 +22,7 @@ public class TagFormatter extends Formatter {
 		}
 	}
 
-	public void formatPhraseRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
+	public void formatTitleRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 
 		doc.prepend(iSR, it -> it.noSpace());
 		doc.append(iSR, it -> it.noSpace());
@@ -37,7 +37,7 @@ public class TagFormatter extends Formatter {
 	public void format(IFormattableDocument doc, CucumberGrammarAccess ga, CucumberFormatter df) {
 		TagElements a = ga.getTagAccess();
 		formatKeyword(df.getRegion(theTag, a.getCommercialAtKeyword_0()), doc);
-		formatPhraseRuleCall(df.getRegion(theTag, a.getNameIDTerminalRuleCall_1_0()), doc);
+		formatTitleRuleCall(df.getRegion(theTag, a.getNameWORDTerminalRuleCall_1_0()), doc);
 	}
 
 }

@@ -750,13 +750,13 @@ public interface CucumberPackage extends EPackage
   int DOC_STRING = 16;
 
   /**
-   * The feature id for the '<em><b>Lines</b></em>' containment reference list.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DOC_STRING__LINES = 0;
+  int DOC_STRING__NAME = 0;
 
   /**
    * The number of structural features of the '<em>Doc String</em>' class.
@@ -1098,34 +1098,6 @@ public interface CucumberPackage extends EPackage
    * @ordered
    */
   int TAG_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.farhan.dsl.cucumber.cucumber.impl.LineImpl <em>Line</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.farhan.dsl.cucumber.cucumber.impl.LineImpl
-   * @see org.farhan.dsl.cucumber.cucumber.impl.CucumberPackageImpl#getLine()
-   * @generated
-   */
-  int LINE = 25;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LINE__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>Line</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LINE_FEATURE_COUNT = 1;
 
 
   /**
@@ -1618,15 +1590,15 @@ public interface CucumberPackage extends EPackage
   EClass getDocString();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.dsl.cucumber.cucumber.DocString#getLines <em>Lines</em>}'.
+   * Returns the meta object for the attribute '{@link org.farhan.dsl.cucumber.cucumber.DocString#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Lines</em>'.
-   * @see org.farhan.dsl.cucumber.cucumber.DocString#getLines()
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.farhan.dsl.cucumber.cucumber.DocString#getName()
    * @see #getDocString()
    * @generated
    */
-  EReference getDocString_Lines();
+  EAttribute getDocString_Name();
 
   /**
    * Returns the meta object for class '{@link org.farhan.dsl.cucumber.cucumber.Given <em>Given</em>}'.
@@ -1729,27 +1701,6 @@ public interface CucumberPackage extends EPackage
    * @generated
    */
   EAttribute getTag_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.farhan.dsl.cucumber.cucumber.Line <em>Line</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Line</em>'.
-   * @see org.farhan.dsl.cucumber.cucumber.Line
-   * @generated
-   */
-  EClass getLine();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.farhan.dsl.cucumber.cucumber.Line#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.farhan.dsl.cucumber.cucumber.Line#getName()
-   * @see #getLine()
-   * @generated
-   */
-  EAttribute getLine_Name();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -2177,12 +2128,12 @@ public interface CucumberPackage extends EPackage
     EClass DOC_STRING = eINSTANCE.getDocString();
 
     /**
-     * The meta object literal for the '<em><b>Lines</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference DOC_STRING__LINES = eINSTANCE.getDocString_Lines();
+    EAttribute DOC_STRING__NAME = eINSTANCE.getDocString_Name();
 
     /**
      * The meta object literal for the '{@link org.farhan.dsl.cucumber.cucumber.impl.GivenImpl <em>Given</em>}' class.
@@ -2279,24 +2230,6 @@ public interface CucumberPackage extends EPackage
      * @generated
      */
     EAttribute TAG__NAME = eINSTANCE.getTag_Name();
-
-    /**
-     * The meta object literal for the '{@link org.farhan.dsl.cucumber.cucumber.impl.LineImpl <em>Line</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.farhan.dsl.cucumber.cucumber.impl.LineImpl
-     * @see org.farhan.dsl.cucumber.cucumber.impl.CucumberPackageImpl#getLine()
-     * @generated
-     */
-    EClass LINE = eINSTANCE.getLine();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute LINE__NAME = eINSTANCE.getLine_Name();
 
   }
 

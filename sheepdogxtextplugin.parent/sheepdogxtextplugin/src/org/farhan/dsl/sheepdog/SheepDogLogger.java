@@ -5,21 +5,21 @@ import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.farhan.dsl.issues.LoggerProvider;
 
-public class LoggerBridge implements Logger, LoggerProvider {
+public class SheepDogLogger implements Logger, LoggerProvider {
 
 	private org.apache.log4j.Logger log4jLogger = null;
 
-	public LoggerBridge(Class<?> clazz) {
+	public SheepDogLogger(Class<?> clazz) {
 		log4jLogger = org.apache.log4j.Logger.getLogger(clazz);
 	}
 
-	public LoggerBridge() {
+	public SheepDogLogger() {
 		log4jLogger = null;
 	}
 
 	@Override
 	public Logger getLogger(Class<?> clazz) {
-		return new LoggerBridge(clazz);
+		return new SheepDogLogger(clazz);
 	}
 
 	private String format(String pattern, Object... args) {

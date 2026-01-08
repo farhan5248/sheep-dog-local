@@ -4,7 +4,7 @@
 package org.farhan.dsl.cucumber;
 
 import org.eclipse.xtext.parser.IParser;
-import org.farhan.dsl.cucumber.parser.antlr.MyCucumberParser;
+import org.farhan.dsl.cucumber.parser.antlr.CustomCucumberParser;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -13,6 +13,6 @@ public class CucumberRuntimeModule extends AbstractCucumberRuntimeModule {
 	
 	@Override
 	public Class<? extends IParser> bindIParser() {
-		return MyCucumberParser.class;
+		return CustomCucumberParser.class;
 	}
 }

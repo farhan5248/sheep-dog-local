@@ -23,11 +23,11 @@ public class StatementFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, CucumberGrammarAccess ga, CucumberFormatter df) {
 		StatementElements a = ga.getStatementAccess();
-		formatPhraseRuleCall(df.getRegion(theStatement, a.getNamePhraseParserRuleCall_0_0()), doc);
+		formatTitleRuleCall(df.getRegion(theStatement, a.getNameTitleParserRuleCall_0_0()), doc);
 		formatEOL12RuleCall(df.getRegion(theStatement, a.getEOLTerminalRuleCall_1()), doc);
 	}
 
-	public void formatPhraseRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
+	public void formatTitleRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 
 		int hiddenLength = iSR.getPreviousHiddenRegion().getText().length();
 		doc.prepend(iSR, it -> it.noSpace());

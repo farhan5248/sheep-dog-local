@@ -3,7 +3,6 @@ package org.farhan.mbt.cucumber;
 import java.util.ArrayList;
 
 import org.farhan.dsl.cucumber.cucumber.Background;
-import org.farhan.dsl.cucumber.cucumber.DocString;
 import org.farhan.dsl.cucumber.cucumber.Examples;
 import org.farhan.dsl.cucumber.cucumber.ExamplesTable;
 import org.farhan.dsl.cucumber.cucumber.Row;
@@ -136,10 +135,7 @@ public class ConvertUMLToCucumber extends Converter {
 		logger.debug("test step: " + srcStep.getName());
 		// TODO make it consistent, has StepText or getDocString
 		if (srcStep.hasDocString()) {
-			DocString docString = tgtObjTestSuite.addDocString(step);
-			for (String l : srcStep.getStepText().split("\n")) {
-				tgtObjTestSuite.addLine(docString, l);
-			}
+			tgtObjTestSuite.setDocString(step, srcStep.getStepText());
 		} else if (srcStep.hasStepTable()) {
 			StepTable stepTable = tgtObjTestSuite.addStepTable(step);
 			for (ArrayList<String> srcRow : srcStep.getStepData()) {
