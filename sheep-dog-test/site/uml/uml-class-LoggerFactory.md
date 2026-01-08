@@ -1,34 +1,36 @@
 # LoggerFactory
 
-## Purpose
-
 Factory class that provides loggers to sheep-dog-test classes. Uses SLF4J when a real provider is available, otherwise delegates to a custom LoggerProvider implementation.
 
-## Static Attributes
+## All LoggerFactory methods are static
 
-- `provider`: LoggerProvider - Custom logger implementation injected by external systems
+The LoggerFactory provides static factory methods for logger creation and configuration.
 
-## Static Methods
-
-### setLoggerImplementation(LoggerProvider)
-
-Sets the custom logger provider for environments where SLF4J has no provider.
-
-**Signature**
+**Examples**
 ```java
 public static void setLoggerImplementation(LoggerProvider provider)
-```
-
-### getLogger(Class<?>)
-
-Returns an SLF4J Logger for the specified class. Uses custom provider if SLF4J falls back to NOPLoggerFactory.
-
-**Signature**
-```java
 public static Logger getLogger(Class<?> clazz)
 ```
 
-**Detection Logic**
-- Checks if `org.slf4j.LoggerFactory.getILoggerFactory()` returns `NOPLoggerFactory`
-- If yes and provider is set, delegates to `provider.getLogger(clazz)`
-- Otherwise returns standard SLF4J logger
+## LoggerFactory stores a custom LoggerProvider
+
+Custom logger implementation injected by external systems when SLF4J has no provider.
+
+**Examples**
+```java
+private static LoggerProvider provider;
+```
+
+## getLogger delegates to LoggerProvider when SLF4J unavailable
+
+Returns an SLF4J Logger for the specified class. Uses custom provider if SLF4J falls back to NOPLoggerFactory.
+
+**Examples**
+```java
+public static Logger getLogger(Class<?> clazz) {
+    if (LoggerFactory.getILoggerFactory() instanceof NOPLoggerFactory && provider != null) {
+        return provider.getLogger(clazz);
+    }
+    return LoggerFactory.getLogger(clazz);
+}
+```

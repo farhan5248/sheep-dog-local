@@ -1,54 +1,123 @@
 # LoggerBridge
 
-## Purpose
+## LoggerBridge implements both org.slf4j.Logger and LoggerProvider interfaces
 
-Implements both `org.slf4j.Logger` and `LoggerProvider` interfaces to bridge SLF4J logging calls to Log4j in the Eclipse/OSGi environment.
+Bridges SLF4J logging calls to Log4j in the Eclipse/OSGi environment.
 
-## Implements
+**Examples**
 
-- org.slf4j.Logger
-- org.farhan.dsl.issues.LoggerProvider
+- ```java
+  public class LoggerBridge implements Logger, LoggerProvider {
+  ```
 
-## Attributes
+## LoggerBridge has a Log4j logger attribute
 
-- `log4jLogger`: org.apache.log4j.Logger - The underlying Log4j logger
+Holds the underlying Log4j logger for delegation.
 
-## Constructors
+**Examples**
 
-### LoggerBridge()
+- ```java
+  // LoggerBridge.java
+  private org.apache.log4j.Logger log4jLogger;
+  ```
 
-Default constructor used when registered as LoggerProvider. Sets log4jLogger to null.
+## LoggerBridge has two constructors for different use cases
 
-### LoggerBridge(Class<?>)
+Default constructor for LoggerProvider registration, and parameterized constructor for class-specific loggers.
 
-Creates a LoggerBridge with a Log4j logger for the specified class.
+**Examples**
 
-## Key Methods
+- ```java
+  // LoggerBridge.java
+  public LoggerBridge() {
+      this.log4jLogger = null;
+  }
 
-### getLogger(Class<?>) : Logger
+  public LoggerBridge(Class<?> clazz) {
+      this.log4jLogger = org.apache.log4j.Logger.getLogger(clazz);
+  }
+  ```
 
-LoggerProvider implementation. Creates a new LoggerBridge for the specified class.
+## LoggerProvider.getLogger creates a new LoggerBridge for the specified class
 
-### format(String, Object...) : String
+Factory method implementation for the LoggerProvider interface.
 
-Private helper that converts SLF4J `{}` placeholders to formatted strings for Log4j.
+**Examples**
 
-**Conversion Logic**
-- Iterates through args
-- Replaces each `{}` with `String.valueOf(arg)`
+- ```java
+  // LoggerBridge.java
+  @Override
+  public Logger getLogger(Class<?> clazz) {
+      return new LoggerBridge(clazz);
+  }
+  ```
 
-### Logging Methods (debug, info, warn, error, trace)
+## format method converts SLF4J placeholders to formatted strings
 
-Each logging level has multiple overloaded methods matching org.slf4j.Logger interface:
-- `level(String msg)`
-- `level(String format, Object arg)`
-- `level(String format, Object arg1, Object arg2)`
-- `level(String format, Object... arguments)`
-- `level(String msg, Throwable t)`
-- `level(Marker marker, ...)` variants
+Private helper that replaces `{}` placeholders with argument values for Log4j.
 
-All format variants call `format()` helper before delegating to Log4j.
+**Examples**
 
-### isLevelEnabled Methods
+- ```java
+  // LoggerBridge.java
+  private String format(String format, Object... args) {
+      String result = format;
+      for (Object arg : args) {
+          result = result.replaceFirst("\\{\\}", String.valueOf(arg));
+      }
+      return result;
+  }
+  ```
 
-Returns `log4jLogger.isEnabledFor(Level.LEVEL)` for the corresponding level.
+## Each logging level has overloaded methods matching org.slf4j.Logger interface
+
+Methods for debug, info, warn, error, and trace levels with various signatures.
+
+**Examples**
+
+- ```java
+  // LoggerBridge.java
+  @Override
+  public void info(String msg) {
+      log4jLogger.info(msg);
+  }
+
+  @Override
+  public void info(String format, Object arg) {
+      log4jLogger.info(format(format, arg));
+  }
+
+  @Override
+  public void info(String format, Object arg1, Object arg2) {
+      log4jLogger.info(format(format, arg1, arg2));
+  }
+
+  @Override
+  public void info(String format, Object... arguments) {
+      log4jLogger.info(format(format, arguments));
+  }
+
+  @Override
+  public void info(String msg, Throwable t) {
+      log4jLogger.info(msg, t);
+  }
+  ```
+
+## isLevelEnabled methods delegate to Log4j level checks
+
+Returns whether logging is enabled for the corresponding level.
+
+**Examples**
+
+- ```java
+  // LoggerBridge.java
+  @Override
+  public boolean isInfoEnabled() {
+      return log4jLogger.isEnabledFor(Level.INFO);
+  }
+
+  @Override
+  public boolean isDebugEnabled() {
+      return log4jLogger.isEnabledFor(Level.DEBUG);
+  }
+  ```
