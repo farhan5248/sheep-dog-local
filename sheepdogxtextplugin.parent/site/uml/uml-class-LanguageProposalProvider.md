@@ -1,37 +1,22 @@
 # {Language}ProposalProvider
 
-## {Language}ProposalProvider extends Abstract{Language}ProposalProvider
+
+## complete{Type}_{Assignment} methods invoke helper complete{Assignment} methods
 
 **Content**
 
-Extends Xtext-generated Abstract{Language}ProposalProvider base class.
+All `complete{Type}_{Assignment}` methods either invoke a helper method or directly invoke the IssueResolver.
 
-Overrides complete{Feature}_{Attribute} methods.
-
-Manually created proposal methods delegate to {Feature}IssueResolver classes.
+The goal is to avoid duplicating business logic across multiple complete methods.
 
 **Examples**
 
 ```java
-public class {Language}ProposalProvider extends Abstract{Language}ProposalProvider
+public void complete{Type}_{Assignment}({TypeClass} model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor)
+// Calls: complete{Assignment}(model, assignment, context, acceptor)
 ```
 
-## complete{Feature}_{Attribute} methods invoke helper complete{Attribute} methods
-
-**Content**
-
-All `complete{Feature}_{Attribute}` methods either invoke a helper method or directly invoke the IssueResolver.
-
-The pattern is consistently followed - the goal is to avoid duplicating business logic across multiple complete methods.
-
-**Examples**
-
-```java
-public void complete{Feature}_{Attribute}({FeatureType} model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor)
-// Calls: complete{Attribute}(model, assignment, context, acceptor)
-```
-
-## complete{Attribute} helper methods invoke {Feature}IssueResolver.suggest{Attribute} methods
+## complete{Assignment} helper methods invoke {Type}IssueResolver.suggest{Assignment} methods
 
 **Content**
 
@@ -42,6 +27,6 @@ The pattern ensures that proposal logic is centralized in Resolver classes and r
 **Examples**
 
 ```java
-private void complete{Attribute}({Feature} model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor)
-// Calls: {Feature}IssueResolver.suggest{Attribute}Workspace(new {Feature}Impl(model))
+private void complete{Assignment}({Type} model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor)
+// Calls: {Type}IssueResolver.suggest{Assignment}Workspace(new {Type}Impl(model))
 ```

@@ -9,25 +9,25 @@ Always has a class named {Language}IssueProposal
 **Examples**
 - SheepDogIssueProposal
 
-### {Feature}IssueTypes
+### {Type}IssueTypes
 
-Might have one class per {Feature} named {Feature}IssueTypes
+Might have one class per {Type} named {Type}IssueTypes
 
 **Examples**
 - TestStepIssueTypes
 - TextIssueTypes
 
-### {Feature}IssueDetector
+### {Type}IssueDetector
 
-Might have one class per {Feature} named {Feature}IssueDetector
+Might have one class per {Type} named {Type}IssueDetector
 
 **Examples**
 - TestStepIssueDetector
 - TextIssueDetector
 
-### {Feature}IssueResolver
+### {Type}IssueResolver
 
-Might have one class per {Feature} named {Feature}IssueResolver
+Might have one class per {Type} named {Type}IssueResolver
 
 **Examples**
 - TestStepIssueResolver
@@ -77,25 +77,25 @@ Always has a class named {Language}Factory
 **Examples**
 - SheepDogFactory
 
-### I{Feature}
+### I{Type}
 
-Always has one interface per {Feature} named I{Feature}
+Always has one interface per {Type} named I{Type}
 
 **Examples**
 - ITestStep
 - IText
 
-### {Feature}Utility
+### {Type}Utility
 
-Might have one class per {Feature} named {Feature}Utility
+Might have one class per {Type} named {Type}Utility
 
 **Examples**
 - TestStepUtility
 - StepDefinitionUtility
 
-### {FeatureAspect}Types
+### {TypeAspect}Types
 
-Might have multiple classes per {Feature} named {FeatureAspect}Types
+Might have multiple classes per {Type} named {TypeAspect}Types
 
 **Examples**
 - TestStepComponentTypes

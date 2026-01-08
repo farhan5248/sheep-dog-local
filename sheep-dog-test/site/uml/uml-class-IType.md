@@ -1,6 +1,6 @@
-# I{Feature}
+# I{Type}
 
-## All grammar features have I{Feature} interfaces
+## All grammar types have I{Type} interfaces
 
 All union types in the grammar follow the pattern:
 - Base interface contains common attributes child interfaces extend the base.
@@ -166,7 +166,7 @@ StepObject: ... stepDefinitionList+=StepDefinition* ...
 
 - Nested List Getter Example
 
-Lists within non-top-level features require index and name getters when elements have name attribute.
+Lists within non-top-level types require index and name getters when elements have name attribute.
 
 ```java
 // IStepObject.java - stepDefinitionList (StepDefinition has name=Title)
@@ -186,7 +186,7 @@ Grammar reference:
 StepDefinition: ... stepParameterList+=StepParameters* ...
 ```
 
-## All grammar features have Parent References
+## All grammar types have Parent References
 
 Every non-root interface has `getParent()` methods, even though "parent" never appears in the grammar.
 Apply lazy parent initialization.
@@ -258,9 +258,9 @@ public interface ITable {
 }
 ```
 
-## Some grammar features have NameLong attribute
+## Some grammar types have NameLong attribute
 
-This applies to feature names beginning with **Test** or **Step**.
+This applies to type names beginning with **Test** or **Step**.
 For top level objects, this is the qualified name. For steps it's the full step with component and object path.
 
 **Examples**

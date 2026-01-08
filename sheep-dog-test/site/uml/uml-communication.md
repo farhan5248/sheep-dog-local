@@ -1,6 +1,6 @@
 # UML Communication Patterns
 
-These patterns apply to grammar elements (see **Feature** definition in Pattern Variables in uml-overview.md). Each non-terminal grammar rule should follow one of these collaboration patterns.
+These patterns apply to grammar elements (see **Type** definition in Pattern Variables in uml-overview.md). Each non-terminal grammar rule should follow one of these collaboration patterns.
 
 ## Interface Definition
 
@@ -11,7 +11,7 @@ This collaboration applies when defining basic grammar element interfaces with s
 - Simple property retrieval and modification
 - Parent-child relationship navigation
 
-### I{Feature}
+### I{Type}
 
 Interface defining the grammar element with basic accessors and mutators for element properties and relationships.
 
@@ -19,23 +19,23 @@ Interface defining the grammar element with basic accessors and mutators for ele
 - `getName()`
 - `setName(String value)`
 - `getParent()`
-- `get{Attribute}List()`
-- `add{Attribute}({Type} element)`
+- `get{Assignment}List()`
+- `add{Assignment}({ElementType} element)`
 
-### {Feature}Utility
+### {Type}Utility
 
 Static utility class with helper methods that derive properties from grammar elements or validate text formats.
 
 **Methods**
-- `get{Property}(I{Feature} element)`
+- `get{Property}(I{Type} element)`
 - `isValid(String text)`
 
-### {FeatureAspect}Types
+### {TypeAspect}Types
 
 Enum with type constants for grammar element aspects. Each constant represents a valid keyword or type value used by utility methods and test implementations.
 
 **Methods**
-- Enum constants accessed by {Feature}Utility methods
+- Enum constants accessed by {Type}Utility methods
 - Type validation in test implementations
 
 ## Content Correction
@@ -48,28 +48,28 @@ This collaboration applies when proposing alternatives to non-empty invalid gram
 - Correction proposal generation
 - Alternative suggestion workflows
 
-### {Feature}IssueDetector
+### {Type}IssueDetector
 
 Static validation class that validates grammar element aspects and returns issue descriptions.
 
 **Methods**
-- `validate{Aspect}(I{Feature} element)`
+- `validate{Aspect}(I{Type} element)`
 
-### {Feature}IssueResolver
+### {Type}IssueResolver
 
 Static resolution class that generates correction proposals or suggests existing alternatives for invalid grammar elements.
 
 **Methods**
-- `correct{Aspect}(I{Feature} element)`
-- `suggest{Aspect}(I{Feature} element)`
+- `correct{Aspect}(I{Type} element)`
+- `suggest{Aspect}(I{Type} element)`
 
-### {Feature}IssueTypes
+### {Type}IssueTypes
 
 Enum with issue type constants. Each constant has a description field (String) used by validation methods.
 
 **Methods**
 - Enum constants with description fields
-- Accessed by {Feature}IssueDetector.validate{Aspect}() methods
+- Accessed by {Type}IssueDetector.validate{Aspect}() methods
 
 ### SheepDogIssueProposal
 
@@ -81,7 +81,7 @@ Data container for correction and suggestion proposals with properties for id, d
 - `setValue(String value)`
 - `setQualifiedName(String qualifiedName)`
 
-### I{Feature}
+### I{Type}
 
 Interface defining the grammar element used by issue detection and resolution to access element properties.
 
@@ -89,12 +89,12 @@ Interface defining the grammar element used by issue detection and resolution to
 - `getName()`
 - `getParent()`
 
-### {Feature}Utility
+### {Type}Utility
 
 Static utility class with helper methods that derive properties for validation and proposal generation.
 
 **Methods**
-- `get{Property}(I{Feature} element)`
+- `get{Property}(I{Type} element)`
 - `isValid(String text)`
 
 ### {Language}Builder
@@ -102,11 +102,11 @@ Static utility class with helper methods that derive properties for validation a
 Static factory class for creating and managing elements, adding them to parent elements during correction workflows.
 
 **Methods**
-- `create{Feature}(I{Parent} parent, {params})`
+- `create{Type}(I{Parent} parent, {params})`
 
 ### {Language}Factory
 
 Singleton factory for creating element instances without adding them to parent elements.
 
 **Methods**
-- `create{Feature}({params})`
+- `create{Type}({params})`

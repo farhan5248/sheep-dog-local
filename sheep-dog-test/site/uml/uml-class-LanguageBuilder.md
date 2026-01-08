@@ -2,7 +2,7 @@
 
 ## All Builder methods are static factory methods
 
-All methods follow the pattern `create{Feature}(I{Parent} parent, {params})` and return the created {Feature} instance.
+All methods follow the pattern `create{Type}(I{Parent} parent, {params})` and return the created {Type} instance.
 
 **Examples**
 

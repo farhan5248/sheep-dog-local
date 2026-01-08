@@ -33,9 +33,9 @@ Methods that delegate to sheep-dog-test business logic use entry/exit debug logg
 
 Multi-line method with try/catch:
 - ```java
-  logger.debug("Entering check{Feature} for element: " + (element != null ? element.getName() : "null"));
+  logger.debug("Entering check{Type} for element: " + (element != null ? element.getName() : "null"));
   // delegate to business logic
-  logger.debug("Exiting check{Feature}");
+  logger.debug("Exiting check{Type}");
   ```
 
 Simple one-line delegation (extract element variable first for logging):
@@ -54,7 +54,7 @@ Exceptions from sheep-dog-test calls are logged with string concatenation for th
 
 **Examples**
 - ```java
-  logger.error("Failed in check{Feature} for : "+ e.getMessage(), e);
+  logger.error("Failed in check{Type} for : "+ e.getMessage(), e);
   ```
 
 ## Exceptions

@@ -1,8 +1,8 @@
-# {Feature}IssueTypes
+# {Type}IssueTypes
 
 ## Enum constants follow naming convention pattern
 
-All {Feature}IssueTypes enums follow the naming convention exactly: constant value matches constant name.
+All {Type}IssueTypes enums follow the naming convention exactly: constant value matches constant name.
 The names match the value of id attribute in the constructor.
 
 **Examples**
@@ -20,9 +20,9 @@ TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE("TEST_STEP_CONTAINER_TEST_STEP_FILE
 ROW_CELL_LIST_WORKSPACE("ROW_CELL_LIST_WORKSPACE", "The step parameters don't exist for the step definition")
 ```
 
-## Issue constants follow {Feature}_{Aspect}_{Issue} pattern
+## Issue constants follow {Type}_{Aspect}_{Issue} pattern
 
-All issue constants follow the pattern of the {Feature} followed by child {Feature} followed by an optional {Aspect} and then {Issue} (ONLY, FILE, WORKSPACE).
+All issue constants follow the pattern of the {Type} followed by child {Type} followed by an optional {Aspect} and then {Issue} (ONLY, FILE, WORKSPACE).
 
 **Examples**
 

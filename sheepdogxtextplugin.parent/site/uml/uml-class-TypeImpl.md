@@ -1,6 +1,6 @@
-# {Feature}Impl
+# {Type}Impl
 
-## {Feature}Impl implements I{Feature} interface
+## {Type}Impl implements I{Type} interface
 
 **Content**
 
@@ -11,14 +11,14 @@ Provides bridge pattern between Xtext EMF objects and business logic.
 **Examples**
 
 ```java
-public {Feature}Impl({Feature} eObject)
+public {Type}Impl({Type} eObject)
 public String getName()
 public void setName(String value)
 public I{Parent} getParent()
-public {Type} get{Attribute}()
+public {ReturnType} get{Assignment}()
 ```
 
-## {Feature}Impl wraps EMF eObject
+## {Type}Impl wraps EMF eObject
 
 **Content**
 

@@ -17,7 +17,7 @@ This collaboration applies when Xtext IDE needs to validate, propose, or correct
 Validates grammar elements in the IDE by wrapping EMF objects and delegating to business logic detectors.
 
 **Methods**
-- `check{Feature}{Aspect}({Feature} eObject)`
+- `check{Type}{Aspect}({Type} eObject)`
 - `initProject(Resource resource)`
 - `logError(Exception e, String name)`
 
@@ -26,8 +26,8 @@ Validates grammar elements in the IDE by wrapping EMF objects and delegating to 
 Provides content assist proposals by delegating to business logic resolvers.
 
 **Methods**
-- `complete{Feature}_{Attribute}({FeatureType} model, Assignment, ContentAssistContext, ICompletionProposalAcceptor acceptor)`
-- `complete{Attribute}({Feature} model, Assignment, ContentAssistContext, ICompletionProposalAcceptor acceptor)`
+- `complete{Type}_{Assignment}({TypeClass} model, Assignment, ContentAssistContext, ICompletionProposalAcceptor acceptor)`
+- `complete{Assignment}({Type} model, Assignment, ContentAssistContext, ICompletionProposalAcceptor acceptor)`
 - `initProject(Resource resource)`
 
 ### {Language}QuickfixProvider
@@ -35,33 +35,33 @@ Provides content assist proposals by delegating to business logic resolvers.
 Provides quick fix corrections by delegating to business logic resolvers and applying modifications to EMF objects.
 
 **Methods**
-- `fix{Feature}{Aspect}(Issue issue, IssueResolutionAcceptor acceptor)`
+- `fix{Type}{Aspect}(Issue issue, IssueResolutionAcceptor acceptor)`
 - `createAcceptor(Issue issue, IssueResolutionAcceptor acceptor, ArrayList<{Language}IssueProposal> proposals)`
 - `getEObject(Issue issue)`
 
-### {Feature}Impl
+### {Type}Impl
 
 Wrapper class that adapts EMF objects to business logic interfaces by delegating attribute access.
 
 **Methods**
-- `{Feature}Impl({Feature} eObject)`
-- `get{Attribute}()`
+- `{Type}Impl({Type} eObject)`
+- `get{Assignment}()`
 - `getParent()`
 
-### {Feature}IssueDetector
+### {Type}IssueDetector
 
 Business logic class from sheep-dog-test (not in sheepdogxtextplugin) that provides pure validation logic for grammar elements.
 
 **Methods**
-- `validate{Aspect}(I{Feature} feature)`
+- `validate{Aspect}(I{Type} type)`
 
-### {Feature}IssueResolver
+### {Type}IssueResolver
 
 Business logic class from sheep-dog-test (not in sheepdogxtextplugin) that generates proposals and corrections for grammar elements.
 
 **Methods**
-- `suggest{Attribute}(I{Feature} feature)`
-- `correct{Aspect}(I{Feature} feature)`
+- `suggest{Assignment}(I{Type} type)`
+- `correct{Aspect}(I{Type} type)`
 
 ### {Language}Factory
 

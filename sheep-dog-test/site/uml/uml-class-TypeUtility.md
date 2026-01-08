@@ -1,4 +1,4 @@
-# {Feature}Utility
+# {Type}Utility
 
 ## All Utility classes are static
 

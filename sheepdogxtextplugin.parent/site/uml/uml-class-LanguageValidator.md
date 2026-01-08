@@ -8,7 +8,7 @@ Extends Xtext-generated Abstract{Language}Validator base class.
 
 Uses @Check annotations with CheckType (FAST, NORMAL, EXPENSIVE).
 
-Manually created validation methods delegate to {Feature}IssueDetector classes.
+Manually created validation methods delegate to {Type}IssueDetector classes.
 
 **Examples**
 
@@ -16,7 +16,7 @@ Manually created validation methods delegate to {Feature}IssueDetector classes.
 public class {Language}Validator extends Abstract{Language}Validator
 ```
 
-## {Language}Validator has check{Feature} for every validate{Issue}
+## {Language}Validator has check{Type} for every validate{Issue}
 
 **Content**
 
@@ -28,10 +28,10 @@ There should be one check method for each validate method. All check methods use
 
 ```java
 @Check(CheckType.FAST)
-public void check{Feature}{Aspect}({Feature} element)
+public void check{Type}{Aspect}({Type} element)
 ```
 
-## {Language}Validator constants match {Feature}IssueTypes enums
+## {Language}Validator constants match {Type}IssueTypes enums
 
 **Content**
 
@@ -44,5 +44,5 @@ The pattern is: only create constants for issues that will have @Fix annotations
 **Examples**
 
 ```java
-public static final String {FEATURE}_{ASPECT}_{ISSUE} = "{FEATURE}_{ASPECT}_{ISSUE}"
+public static final String {TYPE}_{ASPECT}_{ISSUE} = "{TYPE}_{ASPECT}_{ISSUE}"
 ```

@@ -1,13 +1,13 @@
-# {Feature}IssueResolver
+# {Type}IssueResolver
 
 ## Resolver methods follow correct{Issue} or suggest{Issue} naming pattern
 
 All resolver classes follow the `correct{Issue}` or `suggest{Issue}` pattern.
 Not all issues have a resolution, some have no corresponding correct* or suggest* method.
-Method names match the grammar attributes they validate.
+Method names match the grammar assignments they validate.
 
 **Method Signature Rules**:
-- **Parameter Type**: MUST accept interface type I{Feature}, never EMF type {Feature}
+- **Parameter Type**: MUST accept interface type I{Type}, never EMF type {Type}
 - **Return Type**: MUST return `ArrayList<{Language}IssueProposal>`
 
 **Examples**

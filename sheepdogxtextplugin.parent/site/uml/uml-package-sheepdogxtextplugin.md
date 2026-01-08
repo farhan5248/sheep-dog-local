@@ -16,9 +16,9 @@ Always has a class named LoggerBridge that bridges SLF4J logging calls to Log4j.
 
 ## org.farhan.dsl.sheepdog.impl
 
-### {Feature}Impl
+### {Type}Impl
 
-- Always has one class per **{Feature}** named **{Feature}Impl**
+- Always has one class per **{Type}** named **{Type}Impl**
 
 **Examples:**
 - TestStepImpl
@@ -45,9 +45,9 @@ Always has a class named LoggerBridge that bridges SLF4J logging calls to Log4j.
 **Examples:**
 - SheepDogFormatter
 
-### {Feature}Formatter
+### {Type}Formatter
 
-- Contains one {Feature}Formatter per grammar feature
+- Contains one {Type}Formatter per grammar type
 - Contains TextReplacer for formatting hidden regions
 - Uses polymorphic pattern with factory methods for union types
 - Manually created to define formatting rules
@@ -58,7 +58,7 @@ Always has a class named LoggerBridge that bridges SLF4J logging calls to Log4j.
 
 ### Formatter
 
-- Formatter is the base class for **{Feature}Formatter**
+- Formatter is the base class for **{Type}Formatter**
 
 ## org.farhan.dsl.sheepdog.generator
 

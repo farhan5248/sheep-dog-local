@@ -12,12 +12,12 @@ Detector, resolver, and builder classes declare SLF4J loggers using the custom L
 
 **Examples**
 
-- {Feature}IssueDetector classes:
+- {Type}IssueDetector classes:
 ```java
 private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
 ```
 
-- {Feature}IssueResolver classes:
+- {Type}IssueResolver classes:
 ```java
 private static final Logger logger = LoggerFactory.getLogger(TestStepIssueResolver.class);
 ```
@@ -59,8 +59,8 @@ Utility classes, interfaces, and factory classes do not declare loggers to keep 
 
 **Examples**
 
-- {Feature}Utility classes have no logger
-- I{Feature} interfaces have no logger
+- {Type}Utility classes have no logger
+- I{Type} interfaces have no logger
 - {Language}Factory has no logger
 
 ### File Operation Logging Pattern
