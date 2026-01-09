@@ -7,12 +7,12 @@
 **Examples:**
 - SheepDogRuntimeModule
 
-### LoggerBridge
+### {Language}Logger
 
-Always has a class named LoggerBridge that bridges SLF4J logging calls to Log4j.
+Always has a class named {Language}Logger that bridges SLF4J logging calls to Log4j.
 
 **Examples:**
-- LoggerBridge
+- SheepDogLogger
 
 ## org.farhan.dsl.sheepdog.impl
 
@@ -74,14 +74,14 @@ Always has a class named LoggerBridge that bridges SLF4J logging calls to Log4j.
 
 ## org.farhan.dsl.sheepdog.parser.antlr
 
-### My{Language}Parser
+### Custom{Language}Parser
 
 **Examples:**
-- MySheepDogParser
+- CustomSheepDogParser
 
 ## org.farhan.dsl.sheepdog.parser.antlr.internal
 
-### My{Language}Lexer
+### {Language}Lexer
 
 **Examples:**
-- MySheepDogLexer
+- SheepDogLexer

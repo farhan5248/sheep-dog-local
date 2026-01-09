@@ -18,11 +18,11 @@ ALL methods that call sheep-dog-test business logic must include entry/exit debu
 
 ### Logger Initialization
 
-LoggerBridge is set as the LoggerProvider in SheepDogRuntimeModule.configure():
+{Language}Logger is set as the LoggerProvider in {Language}RuntimeModule.configure():
 
 **Example**
 ```java
-LoggerFactory.setLoggerImplementation(new LoggerBridge());
+LoggerFactory.setLoggerImplementation(new SheepDogLogger());
 ```
 
 ### Entry/Exit Logging Pattern
