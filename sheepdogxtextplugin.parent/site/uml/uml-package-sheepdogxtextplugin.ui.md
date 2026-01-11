@@ -14,13 +14,6 @@
 **Examples:**
 - SheepDogProposalProvider
 
-## org.farhan.dsl.sheepdog.ui.labeling
-
-### {Language}LabelProvider
-
-**Examples:**
-- SheepDogLabelProvider
-
 ## org.farhan.dsl.sheepdog.ui.quickfix
 
 ### {Language}QuickfixProvider

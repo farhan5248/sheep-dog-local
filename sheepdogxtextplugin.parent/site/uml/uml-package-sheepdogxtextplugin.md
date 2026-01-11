@@ -26,6 +26,10 @@ Always has a class named {Language}Logger that bridges SLF4J logging calls to Lo
 - TestSuiteImpl
 - StepObjectImpl
 - SheepDogFactoryImpl
+
+### {IDE}FileRepository
+
+**Examples:**
 - EclipseFileRepository
 
 ## org.farhan.dsl.sheepdog.validation
