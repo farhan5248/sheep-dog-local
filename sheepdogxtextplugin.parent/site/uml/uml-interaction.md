@@ -6,15 +6,7 @@ Logging patterns specific to sheepdogxtextplugin that supplement [arch-logging.m
 
 **Framework**: Eclipse Xtext uses Log4j 1.2 (via reload4j/orbit bundle), which does **not** support SLF4J-style parameterized logging with `{}` placeholders.
 
-**When to add logging:**
-- All manually edited classes that call sheep-dog-test methods must have loggers
-- Generated classes (in src-gen/) do NOT have loggers
-- Methods calling sheep-dog-test business logic use entry/exit debug logging
-
-**When entry/exit logging is required:**
-ALL methods that call sheep-dog-test business logic must include entry/exit debug logging for tracing execution flow. This includes:
-- Methods that directly call `*IssueDetector` or `*IssueResolver` classes
-- Methods that call `createAcceptor()` which delegates to `*Resolver` classes
+See [arch-xtext-logging.md](../../../../arch-xtext-logging.md) "When to Add Logging" section for when to add logging and entry/exit logging requirements.
 
 ### Logger Initialization
 
@@ -29,11 +21,11 @@ LoggerFactory.setLoggerImplementation(new SheepDogLogger());
 
 Methods that delegate to sheep-dog-test business logic use entry/exit debug logging.
 
-See [arch-logging.md](../../../../arch-logging.md) "Log4j 1.2 Projects (String Concatenation)" section for patterns.
+See [impl-log4j.md](../../../../impl-log4j.md) for entry, exit, and error logging patterns.
 
 ### Error Logging Pattern
 
-See [arch-logging.md](../../../../arch-logging.md) "Error Logging Pattern (Log4j 1.2)" section.
+See [impl-log4j.md](../../../../impl-log4j.md) "Error Logging Pattern" section.
 
 ## Exceptions
 
