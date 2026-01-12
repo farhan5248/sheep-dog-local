@@ -1,29 +1,29 @@
-# SheepDogLexer
+# {Language}Lexer
 
-## SheepDogLexer extends InternalSheepDogLexer
+## {Language}Lexer extends Internal{Language}Lexer
 
 Custom lexer that overrides the generated lexer to handle context-sensitive tokenization.
 
 **Examples**
 
 - ```java
-  // SheepDogLexer.java
-  public class SheepDogLexer extends InternalSheepDogLexer {
+  // {Language}Lexer.java
+  public class {Language}Lexer extends Internal{Language}Lexer {
   ```
 
-## SheepDogLexer has hasNoDelimiter flag for no-delimiter keywords
+## {Language}Lexer has hasNoDelimiter flag for no-delimiter keywords
 
 After keywords like `Test-Suite:`, `Step-Object:`, treat following tokens as WORD. See [impl-xtext-grammar.md](../../../impl-xtext-grammar.md#state-flags) for pattern.
 
-## SheepDogLexer has hasConstantDelimiter flag for table cell context
+## {Language}Lexer has hasConstantDelimiter flag for table cell context
 
 After encountering `|`, check for same delimiter or treat as WORD. See [impl-xtext-grammar.md](../../../impl-xtext-grammar.md#state-flags) for pattern.
 
-## SheepDogLexer has hasVariableDelimiter flag for step keyword context
+## {Language}Lexer has hasVariableDelimiter flag for step keyword context
 
 After step keywords (Given:/When:/Then:/And:), delegate to `super.mTokens()` for expression parsing. See [impl-xtext-grammar.md](../../../impl-xtext-grammar.md#state-flags) for pattern.
 
-## SheepDogLexer has three constructors
+## {Language}Lexer has three constructors
 
 Default constructor, CharStream constructor, and CharStream with RecognizerSharedState constructor. See [impl-xtext-grammar.md](../../../impl-xtext-grammar.md#class-structure) for pattern.
 
