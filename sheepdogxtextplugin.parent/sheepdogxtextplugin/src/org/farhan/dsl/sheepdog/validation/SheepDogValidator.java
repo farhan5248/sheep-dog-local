@@ -4,9 +4,6 @@
 package org.farhan.dsl.sheepdog.validation;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -15,12 +12,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
-import org.farhan.dsl.sheepdog.impl.CellImpl;
-import org.farhan.dsl.sheepdog.impl.RowImpl;
-import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
-import org.farhan.dsl.sheepdog.impl.TestStepImpl;
-import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
-import org.farhan.dsl.sheepdog.impl.TextImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
@@ -28,6 +19,12 @@ import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
+import org.farhan.dsl.sheepdog.impl.CellImpl;
+import org.farhan.dsl.sheepdog.impl.RowImpl;
+import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
+import org.farhan.dsl.sheepdog.impl.TestStepImpl;
+import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
+import org.farhan.dsl.sheepdog.impl.TextImpl;
 import org.farhan.dsl.issues.*;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.SheepDogFactory;

@@ -36,7 +36,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeAnd_StepObjectName(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeAnd_StepObjectName(step, assignment, context, acceptor);
-		completeObject(step, assignment, context, acceptor);
+		completeStepObject(step, assignment, context, acceptor);
 	}
 
 	public void completeAnd_StepDefinitionName(And step, Assignment assignment, ContentAssistContext context,
@@ -67,7 +67,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeGiven_StepObjectName(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_StepObjectName(step, assignment, context, acceptor);
-		completeObject(step, assignment, context, acceptor);
+		completeStepObject(step, assignment, context, acceptor);
 	}
 
 	public void completeGiven_StepDefinitionName(Given step, Assignment assignment, ContentAssistContext context,
@@ -76,7 +76,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		completeStepDefinitionName(step, assignment, context, acceptor);
 	}
 
-	private void completeObject(TestStep step, Assignment assignment, ContentAssistContext context,
+	private void completeStepObject(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		TestStepImpl testStep = new TestStepImpl(step);
 		logger.debug("Entering completeObject for element: " + testStep.getName());
@@ -125,7 +125,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeThen_StepObjectName(Then step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeThen_StepObjectName(step, assignment, context, acceptor);
-		completeObject(step, assignment, context, acceptor);
+		completeStepObject(step, assignment, context, acceptor);
 	}
 
 	public void completeThen_StepDefinitionName(Then step, Assignment assignment, ContentAssistContext context,
@@ -137,7 +137,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	public void completeWhen_StepObjectName(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeWhen_StepObjectName(step, assignment, context, acceptor);
-		completeObject(step, assignment, context, acceptor);
+		completeStepObject(step, assignment, context, acceptor);
 	}
 
 	public void completeWhen_StepDefinitionName(When step, Assignment assignment, ContentAssistContext context,

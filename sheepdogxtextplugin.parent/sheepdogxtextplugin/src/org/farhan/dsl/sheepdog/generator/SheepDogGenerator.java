@@ -4,9 +4,8 @@
 package org.farhan.dsl.sheepdog.generator;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -29,9 +28,11 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
  * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 public class SheepDogGenerator extends AbstractGenerator {
+	private static final Logger logger = Logger.getLogger(SheepDogGenerator.class);
 
 	@Override
 	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+		logger.debug("Entering doGenerate for resource: " + (resource != null ? resource.getURI() : "null"));
 		initProject(resource);
 		if (resource.getContents().get(0) instanceof TestSuite) {
 			TestSuite theTestSuite = (TestSuite) resource.getContents().get(0);
@@ -40,11 +41,12 @@ public class SheepDogGenerator extends AbstractGenerator {
 					try {
 						SheepDogBuilder.createTestStepReferencedElements(new TestStepImpl(step));
 					} catch (Exception e) {
-						e.printStackTrace(new PrintWriter(new StringWriter()));
+						logger.error("Failed in doGenerate for step: " + e.getMessage(), e);
 					}
 				}
 			}
 		}
+		logger.debug("Exiting doGenerate");
 	}
 
 	private void initProject(Resource resource) {
