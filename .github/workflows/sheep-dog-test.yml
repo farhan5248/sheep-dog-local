@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   sheep-dog-test:
-    uses: farhan5248/sheep-dog-ops/.github/workflows/release.yml@main
+    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-release.yml@main
     with:
       project: 'sheep-dog-test'
       plugin: 'Maven'
@@ -16,7 +16,7 @@ jobs:
 
   sheep-dog-xtext-plugin:
     needs: [sheep-dog-test]
-    uses: farhan5248/sheep-dog-ops/.github/workflows/release.yml@main
+    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-release.yml@main
     with:
       project: 'sheepdogxtextplugin.parent'
       plugin: 'Sheep'
@@ -24,7 +24,7 @@ jobs:
   
   sheep-dog-dev:
     needs: [sheep-dog-xtext-plugin]
-    uses: farhan5248/sheep-dog-ops/.github/workflows/release.yml@main
+    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-release.yml@main
     with:
       project: 'sheep-dog-dev'
       plugin: 'Maven'
@@ -32,7 +32,7 @@ jobs:
 
   sheep-dog-dev-maven-plugin:
     needs: [sheep-dog-dev]
-    uses: farhan5248/sheep-dog-ops/.github/workflows/release.yml@main
+    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-release.yml@main
     with:
       project: 'sheep-dog-dev-maven-plugin'
       plugin: 'Maven'
