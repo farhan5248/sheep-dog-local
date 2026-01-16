@@ -15,34 +15,34 @@ permissions:
 
 jobs:
   sheep-dog-test:
-    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
       project: 'sheep-dog-test'
     secrets: inherit
 
   sheep-dog-xtext-plugin:
     needs: [sheep-dog-test]
-    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
       project: 'sheepdogxtextplugin.parent'
     secrets: inherit
 
   sheep-dog-cucumber:
-    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
       project: 'sheepdogcucumber.parent'
     secrets: inherit
 
   sheep-dog-dev:
     needs: [sheep-dog-xtext-plugin, sheep-dog-cucumber]
-    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
       project: 'sheep-dog-dev'
     secrets: inherit
 
   sheep-dog-dev-maven-plugin:
     needs: [sheep-dog-dev]
-    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot.yml@main
+    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
       project: 'sheep-dog-dev-maven-plugin'
     secrets: inherit
