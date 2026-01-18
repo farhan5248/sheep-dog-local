@@ -12,7 +12,8 @@
    - `uml-class-{Type}IssueResolver.md`
    - `uml-class-{Language}IssueProposal.md`
 3. `uml-communication.md`
-4. `uml-interaction.md`
+4. `uml-activity.md`
+5. `uml-interaction.md`
 
 ## Technology Preferences Referenced
 

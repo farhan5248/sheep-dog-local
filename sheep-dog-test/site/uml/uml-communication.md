@@ -38,15 +38,80 @@ Enum with type constants for grammar element aspects. Each constant represents a
 - Enum constants accessed by {Type}Utility methods
 - Type validation in test implementations
 
-## Content Correction
+## Suggest
 
-This collaboration applies when proposing alternatives to non-empty invalid grammar elements. It involves validation, issue detection, and resolution with correction proposals.
+This pattern applies when proposing content assist suggestions for absent grammar elements. The element doesn't exist yet, so we suggest alternatives.
+
+### {Type}IssueResolver
+
+Static resolution class that suggests existing alternatives for absent grammar elements.
 
 **Methods**
-- Grammar element validation workflows
-- Issue detection and reporting
-- Correction proposal generation
-- Alternative suggestion workflows
+- `suggest{Aspect}(I{Type} element)`
+
+### SheepDogIssueProposal
+
+Data container for suggestion proposals with properties for id, description, value, and optional qualifiedName.
+
+**Methods**
+- `setId(String id)`
+- `setDescription(String description)`
+- `setValue(String value)`
+- `setQualifiedName(String qualifiedName)`
+
+### I{Type}
+
+Interface defining the grammar element used by suggestion methods to access element properties.
+
+**Methods**
+- `getName()`
+- `getParent()`
+
+### {Type}Utility
+
+Static utility class with helper methods that derive properties for proposal generation.
+
+**Methods**
+- `get{Property}(I{Type} element)`
+
+## Validate
+
+This pattern applies when validating existing grammar elements. The element exists, so we validate its content.
+
+### {Type}IssueDetector
+
+Static validation class that validates grammar element aspects and returns issue descriptions.
+
+**Methods**
+- `validate{Aspect}(I{Type} element)`
+
+### {Type}IssueTypes
+
+Enum with issue type constants. Each constant has a description field (String) used by validation methods.
+
+**Methods**
+- Enum constants with description fields
+- Accessed by {Type}IssueDetector.validate{Aspect}() methods
+
+### I{Type}
+
+Interface defining the grammar element used by issue detection to access element properties.
+
+**Methods**
+- `getName()`
+- `getParent()`
+
+### {Type}Utility
+
+Static utility class with helper methods that derive properties for validation.
+
+**Methods**
+- `get{Property}(I{Type} element)`
+- `isValid(String text)`
+
+## Correct
+
+This pattern applies when proposing corrections for invalid grammar elements. The element exists but is invalid, so we propose corrections.
 
 ### {Type}IssueDetector
 
@@ -57,11 +122,10 @@ Static validation class that validates grammar element aspects and returns issue
 
 ### {Type}IssueResolver
 
-Static resolution class that generates correction proposals or suggests existing alternatives for invalid grammar elements.
+Static resolution class that generates correction proposals for invalid grammar elements.
 
 **Methods**
 - `correct{Aspect}(I{Type} element)`
-- `suggest{Aspect}(I{Type} element)`
 
 ### {Type}IssueTypes
 
@@ -73,7 +137,7 @@ Enum with issue type constants. Each constant has a description field (String) u
 
 ### SheepDogIssueProposal
 
-Data container for correction and suggestion proposals with properties for id, description, value, and optional qualifiedName.
+Data container for correction proposals with properties for id, description, value, and optional qualifiedName.
 
 **Methods**
 - `setId(String id)`
