@@ -47,29 +47,4 @@ public class TextIssueResolver {
 		return proposals;
 	}
 
-	public static IStepParameters createStepParameters(ITestStep theTestStep) throws Exception {
-		logger.debug("Entering createStepParameters for step: {}",
-				theTestStep != null ? theTestStep.getName() : "null");
-		IStepParameters theStepParameters = null;
-		ITestProject theProject = theTestStep.getParent().getParent().getParent();
-		String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
-		IStepObject theStepObject = theProject.getStepObject(qualifiedName);
-		if (theStepObject != null) {
-			String stepDefinitonName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
-			IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
-			if (theStepDefinition != null) {
-				if (theTestStep.getText() != null) {
-					IText theText = theTestStep.getText();
-					if (!theText.getName().isEmpty()) {
-						if (theStepDefinition.getStepParameters(theText) == null) {
-							theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, theText);
-						}
-					}
-				}
-			}
-		}
-		logger.debug("Exiting createStepParameters");
-		return theStepParameters;
-	}
-
 }

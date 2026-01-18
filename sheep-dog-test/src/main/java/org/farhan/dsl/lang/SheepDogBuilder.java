@@ -1,7 +1,7 @@
 package org.farhan.dsl.lang;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.farhan.dsl.issues.LoggerFactory;
 
 public class SheepDogBuilder {
 
