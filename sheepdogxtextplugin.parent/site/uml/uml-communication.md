@@ -111,13 +111,6 @@ Wrapper class that adapts EMF objects to business logic interfaces by delegating
 - `get{Assignment}()`
 - `getParent()`
 
-### {Type}IssueDetector
-
-Business logic class from sheep-dog-test (not in sheepdogxtextplugin) that provides pure validation logic for grammar elements.
-
-**Methods**
-- `validate{Aspect}(I{Type} type)`
-
 ### {Type}IssueResolver
 
 Business logic class from sheep-dog-test (not in sheepdogxtextplugin) that generates corrections for invalid grammar elements.

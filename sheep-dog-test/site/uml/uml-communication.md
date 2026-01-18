@@ -113,13 +113,6 @@ Static utility class with helper methods that derive properties for validation.
 
 This pattern applies when proposing corrections for invalid grammar elements. The element exists but is invalid, so we propose corrections.
 
-### {Type}IssueDetector
-
-Static validation class that validates grammar element aspects and returns issue descriptions.
-
-**Methods**
-- `validate{Aspect}(I{Type} element)`
-
 ### {Type}IssueResolver
 
 Static resolution class that generates correction proposals for invalid grammar elements.
