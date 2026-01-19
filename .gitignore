@@ -1,12 +1,14 @@
 **/target
 **/.gradle
 **/build
+**/out
 **/node_modules
 **/bin
 release.properties
 **/*._trace
 **/*.xtextbin
 **/*.xtendbin
+**/*-report.md
 **/*.pdf
 **/*.doc
 **/*.docx

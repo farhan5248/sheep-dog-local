@@ -11,10 +11,10 @@ The goal is to avoid duplicating business logic across multiple complete methods
 
 **Examples**
 
-```java
-public void complete{Type}_{Assignment}({TypeClass} model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor)
-// Calls: complete{Assignment}(model, assignment, context, acceptor)
-```
+- ```java
+  public void complete{Type}_{Assignment}({TypeClass} model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor)
+  // Calls: complete{Assignment}(model, assignment, context, acceptor)
+  ```
 
 ## complete{Assignment} helper methods invoke {Type}IssueResolver.suggest{Assignment} methods
 
@@ -26,7 +26,7 @@ The pattern ensures that proposal logic is centralized in Resolver classes and r
 
 **Examples**
 
-```java
-private void complete{Assignment}({Type} model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor)
-// Calls: {Type}IssueResolver.suggest{Assignment}Workspace(new {Type}Impl(model))
-```
+- ```java
+  private void complete{Assignment}({Type} model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor)
+  // Calls: {Type}IssueResolver.suggest{Assignment}Workspace(new {Type}Impl(model))
+  ```

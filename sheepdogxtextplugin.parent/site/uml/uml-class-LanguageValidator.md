@@ -12,9 +12,9 @@ Manually created validation methods delegate to {Type}IssueDetector classes.
 
 **Examples**
 
-```java
-public class {Language}Validator extends Abstract{Language}Validator
-```
+- ```java
+  public class {Language}Validator extends Abstract{Language}Validator
+  ```
 
 ## {Language}Validator has check{Type} for every validate{Issue}
 
@@ -26,10 +26,10 @@ There should be one check method for each validate method. All check methods use
 
 **Examples**
 
-```java
-@Check(CheckType.FAST)
-public void check{Type}{Aspect}({Type} element)
-```
+- ```java
+  @Check(CheckType.FAST)
+  public void check{Type}{Aspect}({Type} element)
+  ```
 
 ## {Language}Validator constants match {Type}IssueTypes enums
 
@@ -43,6 +43,6 @@ The pattern is: only create constants for issues that will have @Fix annotations
 
 **Examples**
 
-```java
-public static final String {TYPE}_{ASPECT}_{ISSUE} = "{TYPE}_{ASPECT}_{ISSUE}"
-```
+- ```java
+  public static final String {TYPE}_{ASPECT}_{ISSUE} = "{TYPE}_{ASPECT}_{ISSUE}"
+  ```

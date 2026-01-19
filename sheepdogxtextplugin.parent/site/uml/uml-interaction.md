@@ -12,10 +12,11 @@ See [arch-xtext-logging.md](sheep-dog-main/site/arch/arch-xtext-logging.md) "Whe
 
 {Language}Logger is set as the LoggerProvider in {Language}RuntimeModule.configure():
 
-**Example**
-```java
-LoggerFactory.setLoggerImplementation(new SheepDogLogger());
-```
+**Examples**
+
+- ```java
+  LoggerFactory.setLoggerImplementation(new SheepDogLogger());
+  ```
 
 ### Entry/Exit Logging Pattern
 

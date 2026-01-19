@@ -5,11 +5,11 @@
 1. `uml-package.md` - Package and class naming patterns
 2. `uml-class-{Type}Impl.md` - Wrapper implementation patterns
 3. `uml-class-{Language}Logger.md` - Logger wrapper
-3. `uml-class-{Language}Validator.md` - Validator check methods and constants
-4. `uml-class-{Language}QuickfixProvider.md` - Quick fix methods and @Fix annotations
-5. `uml-class-{Language}ProposalProvider.md` - Content assist complete methods
-6. `uml-communication.md` - Collaboration patterns
-7. `uml-interaction.md` - Logging and exception handling
+4. `uml-class-{Language}Validator.md` - Validator check methods and constants
+5. `uml-class-{Language}QuickfixProvider.md` - Quick fix methods and @Fix annotations
+6. `uml-class-{Language}ProposalProvider.md` - Content assist complete methods
+7. `uml-communication.md` - Collaboration patterns
+8. `uml-interaction.md` - Logging and exception handling
 
 ## Technology Preferences Referenced
 

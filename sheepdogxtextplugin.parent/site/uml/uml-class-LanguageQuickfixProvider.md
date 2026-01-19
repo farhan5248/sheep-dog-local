@@ -11,10 +11,10 @@ If a fix{Issue} method exists, there must be a corresponding check{Issue} method
 
 **Examples**
 
-```java
-@Fix({Language}Validator.{TYPE}_{ASPECT}_{ISSUE})
-public void fix{Type}{Aspect}{Issue}(final Issue issue, IssueResolutionAcceptor acceptor)
-```
+- ```java
+  @Fix({Language}Validator.{TYPE}_{ASPECT}_{ISSUE})
+  public void fix{Type}{Aspect}{Issue}(final Issue issue, IssueResolutionAcceptor acceptor)
+  ```
 
 ## All @Fix annotations in QuickfixProvider exist in {Language}Validator
 
@@ -28,10 +28,10 @@ Method names follow the convention fix{CamelCase} corresponding to @Fix annotati
 
 **Examples**
 
-```java
-@Fix({Language}Validator.{TYPE}_{ASPECT}_{ISSUE})
-public void fix{Type}{Aspect}{Issue}(final Issue issue, IssueResolutionAcceptor acceptor)
-```
+- ```java
+  @Fix({Language}Validator.{TYPE}_{ASPECT}_{ISSUE})
+  public void fix{Type}{Aspect}{Issue}(final Issue issue, IssueResolutionAcceptor acceptor)
+  ```
 
 ## fix{Issue} methods invoke {Type}IssueResolver.correct{Issue} methods
 
@@ -41,7 +41,7 @@ Each fix method delegates to the appropriate IssueResolver.correct* method to ge
 
 **Examples**
 
-```java
-public void fix{Type}{Aspect}{Issue}(final Issue issue, IssueResolutionAcceptor acceptor)
-// Calls: {Type}IssueResolver.correct{Aspect}{Issue}(new {Type}Impl(({Type}) getEObject(issue)))
-```
+- ```java
+  public void fix{Type}{Aspect}{Issue}(final Issue issue, IssueResolutionAcceptor acceptor)
+  // Calls: {Type}IssueResolver.correct{Aspect}{Issue}(new {Type}Impl(({Type}) getEObject(issue)))
+  ```

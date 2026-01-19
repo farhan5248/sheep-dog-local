@@ -136,13 +136,33 @@
 				<configuration>
 					<properties>
 						<!-- Work around. Surefire does not include enough information to
-						disambiguate 
+						disambiguate
 							between different examples and scenarios. -->
 						<configurationParameters>
 							cucumber.junit-platform.naming-strategy=long
 						</configurationParameters>
 					</properties>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.14</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
