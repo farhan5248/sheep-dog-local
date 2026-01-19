@@ -2,7 +2,7 @@
 
 ## Logging
 
-SLF4J logging patterns specific to sheep-dog-test that supplement [arch-logging.md](../../../../arch-logging.md). These patterns define which classes have loggers and which operations should be logged.
+SLF4J logging patterns specific to sheep-dog-test that supplement [arch-logging.md](sheep-dog-main/site/arch/arch-logging.md). These patterns define which classes have loggers and which operations should be logged.
 
 ### Logger Declaration Pattern
 
@@ -35,7 +35,7 @@ All public methods in Detector, Resolver, and Builder classes MUST have entry an
 - Entry log is the first statement in each public method
 - Exit log is placed before each return statement
 
-See [arch-logging.md](../../../../arch-logging.md) "Specific Rules" section for pattern details.
+See [arch-logging.md](sheep-dog-main/site/arch/arch-logging.md) "Specific Rules" section for pattern details.
 
 ### No Logger Pattern
 

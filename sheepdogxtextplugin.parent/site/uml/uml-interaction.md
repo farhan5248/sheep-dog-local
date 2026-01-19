@@ -2,11 +2,11 @@
 
 ## Logging
 
-Logging patterns specific to sheepdogxtextplugin that supplement [arch-logging.md](../../../../arch-logging.md).
+Logging patterns specific to sheepdogxtextplugin that supplement [arch-logging.md](sheep-dog-main/site/arch/arch-logging.md).
 
 **Framework**: Eclipse Xtext uses Log4j 1.2 (via reload4j/orbit bundle), which does **not** support SLF4J-style parameterized logging with `{}` placeholders.
 
-See [arch-xtext-logging.md](../../../../arch-xtext-logging.md) "When to Add Logging" section for when to add logging and entry/exit logging requirements.
+See [arch-xtext-logging.md](sheep-dog-main/site/arch/arch-xtext-logging.md) "When to Add Logging" section for when to add logging and entry/exit logging requirements.
 
 ### Logger Initialization
 
@@ -21,12 +21,12 @@ LoggerFactory.setLoggerImplementation(new SheepDogLogger());
 
 Methods that delegate to sheep-dog-test business logic use entry/exit debug logging.
 
-See [impl-log4j.md](../../../../impl-log4j.md) for entry, exit, and error logging patterns.
+See [impl-log4j.md](sheep-dog-main/site/impl/impl-log4j.md) for entry, exit, and error logging patterns.
 
 ### Error Logging Pattern
 
-See [impl-log4j.md](../../../../impl-log4j.md) "Error Logging Pattern" section.
+See [impl-log4j.md](sheep-dog-main/site/impl/impl-log4j.md) "Error Logging Pattern" section.
 
 ## Exceptions
 
-Exception handling for Xtext IDE integration. See [arch-xtext-logging.md](../../../../arch-xtext-logging.md) "Xtext IDE Exception Handling" section for rationale and patterns.
+Exception handling for Xtext IDE integration. See [arch-xtext-logging.md](sheep-dog-main/site/arch/arch-xtext-logging.md) "Xtext IDE Exception Handling" section for rationale and patterns.
