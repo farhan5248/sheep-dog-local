@@ -43,3 +43,15 @@ Feature: Problems Fixed By Code Generation
           | Message                                                 |
           | The step parameters don't exist for the step definition |
 
+  Scenario: Object path and component is inherited from previous steps
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                    |
+          | The daily batchjob app/Input file is present |
+          | The Input file is absent                     |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows
+          | Object Name                           | Step Definition Name |
+          | daily batchjob/app/Input file.feature | is present           |
+          | daily batchjob/app/Input file.feature | is absent            |
+     When The xtext plugin validate warning action is performed
+     Then The xtext plugin validate warning dialog will be empty
