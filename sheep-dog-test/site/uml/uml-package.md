@@ -77,6 +77,13 @@ Always has a class named {Language}Factory
 **Examples**
 - SheepDogFactory
 
+### I{Language}Factory
+
+Always has an interface named I{Language}Factory
+
+**Examples**
+- ISheepDogFactory
+
 ### I{Type}
 
 Always has one interface per {Type} named I{Type}
