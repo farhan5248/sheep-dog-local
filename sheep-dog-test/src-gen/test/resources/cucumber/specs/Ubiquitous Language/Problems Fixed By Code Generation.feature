@@ -55,3 +55,4 @@ Feature: Problems Fixed By Code Generation
           | daily batchjob/app/Input file.feature | is absent            |
      When The xtext plugin validate warning action is performed
      Then The xtext plugin validate warning dialog will be empty
+
