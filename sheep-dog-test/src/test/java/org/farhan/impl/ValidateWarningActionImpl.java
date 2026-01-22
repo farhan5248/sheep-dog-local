@@ -24,8 +24,10 @@ public class ValidateWarningActionImpl extends TestObject implements ValidateWar
 				if (MockIDE.getValidationMessage().isEmpty()) {
 					MockIDE.setValidationMessage(TestStepIssueDetector.validateStepDefinitionNameWorkspace(currentStep));
 					if (MockIDE.getValidationMessage().isEmpty()) {
-						MockIDE.setValidationMessage(RowIssueDetector
-								.validateCellListWorkspace(currentStep.getTable().getRowList().getFirst()));
+						if (currentStep.getTable() != null) {
+							MockIDE.setValidationMessage(RowIssueDetector
+									.validateCellListWorkspace(currentStep.getTable().getRowList().getFirst()));
+						}
 					}
 				}
 			}

@@ -5,4 +5,6 @@ import java.util.HashMap;
 public interface ValidateWarningDialog {
 
     public void assertMessage(HashMap<String, String> keyMap);
+
+    public void assertEmpty(HashMap<String, String> keyMap);
 }

@@ -9,6 +9,8 @@ Feature: Problems Fixed By Code Generation
 
   Scenario: This object doesn't exist validation
 
+    Coverage Target: SheepDogIssueProposal.getQualifiedName lines 32-32
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
           | The daily batchjob Input file is present |
@@ -55,3 +57,4 @@ Feature: Problems Fixed By Code Generation
           | daily batchjob/app/Input file.feature | is absent            |
      When The xtext plugin validate warning action is performed
      Then The xtext plugin validate warning dialog will be empty
+

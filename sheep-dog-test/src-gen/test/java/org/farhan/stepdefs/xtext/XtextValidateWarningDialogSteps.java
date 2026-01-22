@@ -19,4 +19,9 @@ public class XtextValidateWarningDialogSteps extends TestSteps {
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }
+
+    @Given("^The xtext plugin validate warning dialog will be empty$")
+    public void willBeEmpty() {
+        object.assertInputOutputs("Empty");
+    }
 }

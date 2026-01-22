@@ -16,4 +16,9 @@ public class ValidateWarningDialogImpl extends TestObject implements ValidateWar
 		Assertions.assertEquals(keyMap.get("Message"), MockIDE.getValidationMessage());
 	}
 
+	@Override
+	public void assertEmpty(HashMap<String, String> keyMap) {
+		Assertions.assertTrue(MockIDE.getValidationMessage().isEmpty());
+	}
+
 }
