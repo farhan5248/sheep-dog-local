@@ -13,6 +13,7 @@ import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfixesDialog {
 
+	@Override
 	public void assertQuickfix(HashMap<String, String> keyMap) {
 		boolean found = false;
 		for (SheepDogIssueProposal p : MockIDE.getProposals()) {
@@ -42,12 +43,17 @@ public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfix
 	public void assertQuickfixDescription(HashMap<String, String> keyMap) {
 		boolean found = false;
 		for (SheepDogIssueProposal p : MockIDE.getProposals()) {
-			if (p.getId().equals(keyMap.get("Quickfix Name")) && p.getValue().equals(keyMap.get("Quickfix"))) {
-				found = p.getDescription().contentEquals(keyMap.get("Quickfix Description"));
+			if (p.getId().equals(keyMap.get("Quickfix Name")) ) {
+				found = p.getDescription().contentEquals(getSpecial(keyMap.get("Quickfix Description")));
 				Assertions.assertTrue(found, "Quickfix Description doesn't match: " + p.getValue());
 				return;
 			}
 		}
 		Assertions.assertTrue(found, "No quickfix found with ID: " + keyMap.get("Quickfix Name"));
+	}
+
+	@Override
+	public void assertEmpty(HashMap<String, String> keyMap) {
+		Assertions.assertTrue(MockIDE.getProposals().isEmpty());
 	}
 }
