@@ -5,25 +5,21 @@ import java.util.HashMap;
 import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.issues.TestStepContainerIssueDetector;
-import org.farhan.dsl.issues.TestStepIssueDetector;
-import org.farhan.objects.xtext.ValidateErrorAction;
+import org.farhan.objects.xtext.ValidateTestStepContainerAction;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ValidateErrorActionImpl extends TestObject implements ValidateErrorAction {
+public class ValidateTestStepContainerActionImpl extends TestObject implements ValidateTestStepContainerAction {
 
 	public void transition() {
 		try {
 			if (MockIDE.getValidationMessage().isEmpty()) {
 				MockIDE.setValidationMessage(
-						TestStepContainerIssueDetector.validateTestStepListFile(currentStep.getParent()));
+						TestStepContainerIssueDetector.validateTestStepListFile(testStepContainer));
 				if (MockIDE.getValidationMessage().isEmpty()) {
-					MockIDE.setValidationMessage(TestStepIssueDetector.validateStepObjectNameOnly(currentStep));
-					if (MockIDE.getValidationMessage().isEmpty()) {
-						MockIDE.setValidationMessage(TestStepIssueDetector.validateStepDefinitionNameOnly(currentStep));
-					}
+					MockIDE.setValidationMessage(TestStepContainerIssueDetector.validateNameOnly(testStepContainer));
 				}
 			}
 		} catch (Exception e) {

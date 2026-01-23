@@ -11,7 +11,6 @@ public class TextIssueDetector {
 
 	private static final Logger logger = LoggerFactory.getLogger(TextIssueDetector.class);
 
-	// TODO make test for this
 	public static String validateNameWorkspace(IText theText) throws Exception {
 		logger.debug("Entering validateNameWorkspace for text: {}", theText != null ? theText.getName() : "null");
 		ITestStep theTestStep = (ITestStep) theText.getParent();

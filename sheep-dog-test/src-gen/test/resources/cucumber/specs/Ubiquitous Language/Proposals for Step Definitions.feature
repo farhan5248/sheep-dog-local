@@ -19,7 +19,7 @@ Feature: Proposals for Step Definitions
           | Object Name                       | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
      When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose content dialog will be set as follows
+     Then The xtext plugin propose dialog will be set as follows
           | Suggestion | Suggestion Name | Suggestion Description |
           | is present | is present      | Creates empty file     |
 

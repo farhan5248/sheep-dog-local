@@ -11,7 +11,7 @@ Feature: Proposals for Step Parameters
           | Step Name                                           |
           | The daily batchjob Input file is created as follows |
      When The xtext plugin propose test step table action is performed
-     Then The xtext plugin propose content dialog will be empty
+     Then The xtext plugin propose dialog will be empty
 
   Scenario: No proposal for absent step definition
 
@@ -22,7 +22,7 @@ Feature: Proposals for Step Parameters
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin propose test step table action is performed
-     Then The xtext plugin propose content dialog will be empty
+     Then The xtext plugin propose dialog will be empty
 
   Scenario: List parameters for a step definition if it exists
 
@@ -35,7 +35,7 @@ Feature: Proposals for Step Parameters
           | Object Name                       | Step Definition Name  | Parameters |
           | daily batchjob/Input file.feature | is created as follows | H1         |
      When The xtext plugin propose test step table action is performed
-     Then The xtext plugin propose content dialog will be set as follows
+     Then The xtext plugin propose dialog will be set as follows
           | Suggestion | Suggestion Name |
           | \| H1      | \| H1           |
 

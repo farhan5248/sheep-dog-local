@@ -25,5 +25,5 @@ Feature: Proposals for Step Constants
           | Step Name                                |
           | The daily batchjob Input file is present |
      When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose content dialog will be empty
+     Then The xtext plugin propose dialog will be empty
 

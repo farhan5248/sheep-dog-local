@@ -54,7 +54,8 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setText(IText value) {
-		throw new UnsupportedOperationException("setText(IText value) is not implemented");
+		text = (TextImpl) value;
+		text.parent = this;
 	}
 
 	public boolean equals(TestStepImpl object) {

@@ -8,7 +8,6 @@ public class CellIssueDetector {
 
 	private static final Logger logger = LoggerFactory.getLogger(CellIssueDetector.class);
 
-	// TODO make test for this
 	public static String validateNameOnly(ICell theCell) throws Exception {
 		logger.debug("Entering validateNameOnly for cell: {}", theCell != null ? theCell.getName() : "null");
 		IRow row = theCell.getParent();

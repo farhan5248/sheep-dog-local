@@ -33,4 +33,25 @@ public class Process2AsciidocFileImpl extends TestObject implements Process2Asci
 		addTestCaseStep(getSpecial(keyMap.get("Step Name")));
 	}
 
+	@Override
+	public void setTestSuiteName(HashMap<String, String> keyMap) {
+		addTestSuite(getSpecial(keyMap.get("Test Suite Name")));
+	}
+
+	@Override
+	public void setTestCaseName(HashMap<String, String> keyMap) {
+		addTestStepContainer(getSpecial(keyMap.get("Test Case Name")));
+	}
+
+	@Override
+	public void setStepsSnippetTextContent(HashMap<String, String> keyMap) {
+		// this is called after the step is created. I probably should enforce an
+		// order when going through the attributes to select methods in this class
+		stepText = new TextImpl();
+		stepText.setName(keyMap.get("Text Content"));
+		if (currentStep != null) {
+			currentStep.setText(stepText);
+		}
+	}
+
 }

@@ -5,22 +5,22 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
-import org.farhan.objects.xtext.ValidateErrorDialog;
+import org.farhan.objects.xtext.ProposeDialog;
 
 @ScenarioScoped
-public class XtextValidateErrorDialogSteps extends TestSteps {
+public class XtextProposeDialogSteps extends TestSteps {
 
     @Inject
-    public XtextValidateErrorDialogSteps(ValidateErrorDialog object) {
-        super(object, "xtext", "validate error");
+    public XtextProposeDialogSteps(ProposeDialog object) {
+        super(object, "xtext", "propose");
     }
 
-    @Given("^The xtext plugin validate error dialog will be empty$")
+    @Given("^The xtext plugin propose dialog will be empty$")
     public void willBeEmpty() {
         object.assertInputOutputs("Empty");
     }
 
-    @Given("^The xtext plugin validate error dialog will be set as follows$")
+    @Given("^The xtext plugin propose dialog will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }

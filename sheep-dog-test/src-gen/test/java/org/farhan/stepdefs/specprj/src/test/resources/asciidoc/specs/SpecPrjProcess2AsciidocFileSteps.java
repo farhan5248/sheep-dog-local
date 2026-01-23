@@ -20,6 +20,11 @@ public class SpecPrjProcess2AsciidocFileSteps extends TestSteps {
         object.setInputOutputs(dataTable, "BackgroundStepsSnippet");
     }
 
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows$")
+    public void isCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable);
+    }
+
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows$")
     public void stepsSnippetIsCreatedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable, "StepsSnippet");

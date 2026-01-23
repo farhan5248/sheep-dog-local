@@ -39,14 +39,14 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	private static final Logger logger = Logger.getLogger(SheepDogValidator.class);
 	public static final String CELL_NAME_ONLY = "CELL_NAME_ONLY";
-	public static final String TEST_STEP_CONTAINER_NAME_ONLY = "TEST_STEP_CONTAINER_NAME_ONLY";
-	public static final String TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE = "TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE";
+	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE"; 
 	public static final String TEST_SUITE_NAME_ONLY = "TEST_SUITE_NAME_ONLY";
-	public static final String TEST_STEP_STEP_OBJECT_NAME_WORKSPACE = "TEST_STEP_STEP_OBJECT_NAME_WORKSPACE";
-	public static final String TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE = "TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE";
-	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
-	public static final String TEST_STEP_STEP_OBJECT_NAME_ONLY = "TEST_STEP_STEP_OBJECT_NAME_ONLY";
+	public static final String TEST_STEP_CONTAINER_NAME_ONLY = "TEST_STEP_CONTAINER_NAME_ONLY";
+	public static final String TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE = "TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE";
 	public static final String TEST_STEP_STEP_DEFINITION_NAME_ONLY = "TEST_STEP_STEP_DEFINITION_NAME_ONLY";
+	public static final String TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE = "TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE";
+	public static final String TEST_STEP_STEP_OBJECT_NAME_ONLY = "TEST_STEP_STEP_OBJECT_NAME_ONLY";
+	public static final String TEST_STEP_STEP_OBJECT_NAME_WORKSPACE = "TEST_STEP_STEP_OBJECT_NAME_WORKSPACE";
 	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
 
 	@Check(CheckType.FAST)
@@ -109,22 +109,22 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkTestStepContainerTestStepFileListFile(TestStepContainer theTestStepContainer) {
+	public void checkTestStepContainerTestStepListFile(TestStepContainer theTestStepContainer) {
 		logger.debug(
-				"Entering checkTestStepContainerTestStepFileListFile for element: " + theTestStepContainer.getName());
+				"Entering checkTestStepContainerTestStepListFile for element: " + theTestStepContainer.getName());
 		try {
 			initProject(theTestStepContainer.eResource());
 			String problems = TestStepContainerIssueDetector
 					.validateTestStepListFile(new TestStepContainerImpl(theTestStepContainer));
 			if (!problems.isEmpty()) {
 				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__TEST_STEP_LIST,
-						TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE);
+						TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE);
 			}
 		} catch (Exception e) {
-			logger.error("Failed in checkTestStepContainerTestStepFileListFile for : "+ e.getMessage(), e);
+			logger.error("Failed in checkTestStepContainerTestStepListFile for : "+ e.getMessage(), e);
 
 		}
-		logger.debug("Exiting checkTestStepContainerTestStepFileListFile");
+		logger.debug("Exiting checkTestStepContainerTestStepListFile");
 	}
 
 	@Check(CheckType.FAST)

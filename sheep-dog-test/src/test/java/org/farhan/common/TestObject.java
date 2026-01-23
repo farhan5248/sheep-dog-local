@@ -12,17 +12,22 @@ import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
+import org.farhan.impl.TestStepContainerImpl;
 import org.farhan.impl.TestStepImpl;
+import org.farhan.impl.TestSuiteImpl;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
 
 public abstract class TestObject {
 
-	public static TestStepImpl currentStep;
 	public static ITestProject testProject;
+	public static TestSuiteImpl testSuite;
+	public static TestStepContainerImpl testStepContainer;
+	public static TestStepImpl currentStep;
 
 	protected static String getStackTraceAsString(Exception e) {
 		StringWriter sw = new StringWriter();
@@ -31,6 +36,8 @@ public abstract class TestObject {
 	}
 
 	public static void reset() {
+		testSuite = null;
+		testStepContainer = null;
 		currentStep = null;
 		testProject = SheepDogFactory.instance.createTestProject();
 	}
@@ -38,41 +45,64 @@ public abstract class TestObject {
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
 
 	protected ITable stepParametersTable;
+	protected IText stepText;
+
+	protected void addTestSuite(String testSuiteName) {
+		ITestSuite testSuite = testProject.getTestSuite(testSuiteName);
+		if (testSuite == null) {
+			testSuite = SheepDogBuilder.createTestSuite(testProject, testSuiteName);
+		}
+		TestObject.testSuite = (TestSuiteImpl) testSuite;
+	}
+
+	protected void addTestStepContainer(String testStepContainerName) {
+		if (testSuite == null) {
+			addTestSuite("Test Suite");
+		}
+		ITestStepContainer testCase = testSuite.getTestStepContainer(testStepContainerName);
+		if (testCase == null) {
+			testCase = SheepDogBuilder.createTestCase(testSuite, testStepContainerName);
+		}
+		TestObject.testStepContainer = (TestStepContainerImpl) testCase;
+	}
 
 	protected void addTestCaseStep(String stepName) {
-
-		ITestSuite testSuite = testProject.getTestSuite("");
 		if (testSuite == null) {
-			testSuite = SheepDogBuilder.createTestSuite(testProject, "");
+			addTestSuite("Test Suite");
 		}
-		ITestStepContainer testCase = testSuite.getTestStepContainer("");
-		if (testCase == null) {
-			testCase = SheepDogBuilder.createTestCase(testSuite, "");
+		if (testStepContainer == null) {
+			addTestStepContainer("Test Step Container");
 		}
-		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testCase, stepName);
-		testCase.addTestStep(currentStep);
+		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testStepContainer, stepName);
+		testStepContainer.addTestStep(currentStep);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
 			currentStep.setTable(stepParametersTable);
 			stepParametersTable = null;
+		}
+		if (stepText != null) {
+			currentStep.setText(stepText);
+			stepText = null;
 		}
 	}
 
 	protected void addTestSetupStep(String stepName) {
-		ITestSuite testSuite = testProject.getTestSuite("");
 		if (testSuite == null) {
-			testSuite = SheepDogBuilder.createTestSuite(testProject, "");
+			addTestSuite("");
 		}
-		ITestStepContainer testSetup = testSuite.getTestStepContainer("");
-		if (testSetup == null) {
-			testSetup = SheepDogBuilder.createTestSetup(testSuite, "");
+		if (testStepContainer == null) {
+			addTestStepContainer("");
 		}
-		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testSetup, stepName);
-		testSetup.addTestStep(currentStep);
+		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testStepContainer, stepName);
+		testStepContainer.addTestStep(currentStep);
 		if (stepParametersTable != null) {
 			// this is for situations where the keymap order isn't preserved
 			currentStep.setTable(stepParametersTable);
 			stepParametersTable = null;
+		}
+		if (stepText != null) {
+			currentStep.setText(stepText);
+			stepText = null;
 		}
 	}
 

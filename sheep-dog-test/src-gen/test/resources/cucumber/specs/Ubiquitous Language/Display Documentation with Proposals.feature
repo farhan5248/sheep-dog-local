@@ -13,7 +13,7 @@ Feature: Display Documentation with Proposals
           | Object Name                       | Object Description |
           | daily batchjob/Input file.feature | Description\n      |
      When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose content dialog will be set as follows
+     Then The xtext plugin propose dialog will be set as follows
           | Suggestion                    | Suggestion Name | Suggestion Description |
           | The daily batchjob Input file | Input file      | Description\n          |
 
@@ -27,7 +27,7 @@ Feature: Display Documentation with Proposals
           | Object Name                       | Object Description |
           | daily batchjob/Input file.feature | empty              |
      When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose content dialog will be set as follows
+     Then The xtext plugin propose dialog will be set as follows
           | Suggestion     | Suggestion Name | Suggestion Description                                |
           | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
 
@@ -41,7 +41,7 @@ Feature: Display Documentation with Proposals
           | The daily batchjob Input file is present |
           | empty                                    |
      When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose content dialog will be set as follows
+     Then The xtext plugin propose dialog will be set as follows
           | Suggestion     | Suggestion Name | Suggestion Description                                |
           | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
 
@@ -60,7 +60,7 @@ Feature: Display Documentation with Proposals
           | Object Name                       | Object Description |
           | daily batchjob/Input file.feature | Description        |
      When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose content dialog will be set as follows
+     Then The xtext plugin propose dialog will be set as follows
           | Suggestion     | Suggestion Name | Suggestion Description                                |
           | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
 

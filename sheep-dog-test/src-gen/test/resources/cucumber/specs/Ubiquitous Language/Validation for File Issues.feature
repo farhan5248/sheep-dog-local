@@ -1,5 +1,5 @@
 @sheep-dog-test
-Feature: Problems Which Prevent Code Generation
+Feature: Validation for File Issues
 
   \@sheep-dog-test
   Some problems prevent code generation.
@@ -14,10 +14,10 @@ Feature: Problems Which Prevent Code Generation
           | Step Name                                |
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
-     When The xtext plugin validate error action is performed as follows
+     When The xtext plugin validate test step container action is performed as follows
           | Selected Step |
           | 1             |
-     Then The xtext plugin validate error dialog will be empty
+     Then The xtext plugin validate dialog will be empty
 
   Scenario: No component in the first step triggers an error
 
@@ -28,10 +28,11 @@ Feature: Problems Which Prevent Code Generation
           | Step Name                                   |
           | The Input file is present                   |
           | The daily batchjob Input file is downloaded |
-     When The xtext plugin validate error action is performed as follows
+     When The xtext plugin validate test step container action is performed as follows
           | Selected Step |
           | 1             |
-     Then The xtext plugin validate error dialog will be set as follows
-          | Message                              |
-          | The first step must have a component |
+     Then The xtext plugin validate dialog will be set as follows
+          """
+          The first step must have a component
+          """
 

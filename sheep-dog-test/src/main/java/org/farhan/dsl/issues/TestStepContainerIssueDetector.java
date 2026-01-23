@@ -12,7 +12,6 @@ public class TestStepContainerIssueDetector {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepContainerIssueDetector.class);
 
-	// TODO make test for this
 	public static String validateNameOnly(ITestStepContainer theTestStepContainer) {
 		logger.debug("Entering validateNameOnly for step: {}",
 				theTestStepContainer != null ? theTestStepContainer.getName() : "null");
@@ -32,7 +31,7 @@ public class TestStepContainerIssueDetector {
 			if (!testStepList.isEmpty()) {
 				if (TestStepUtility.getComponent(testStepList.getFirst().getName()).isEmpty()) {
 					logger.debug("Exiting validateTestStepListFile");
-					return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE.description;
+					return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE.description;
 				}
 			}
 		}
