@@ -5,22 +5,22 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
-import org.farhan.objects.xtext.ProposeDialog;
+import org.farhan.objects.xtext.ListProposalsDialog;
 
 @ScenarioScoped
-public class XtextProposeDialogSteps extends TestSteps {
+public class XtextListProposalsDialogSteps extends TestSteps {
 
     @Inject
-    public XtextProposeDialogSteps(ProposeDialog object) {
-        super(object, "xtext", "propose");
+    public XtextListProposalsDialogSteps(ListProposalsDialog object) {
+        super(object, "xtext", "list proposals");
     }
 
-    @Given("^The xtext plugin propose dialog will be empty$")
+    @Given("^The xtext plugin list proposals dialog will be empty$")
     public void willBeEmpty() {
         object.assertInputOutputs("Empty");
     }
 
-    @Given("^The xtext plugin propose dialog will be set as follows$")
+    @Given("^The xtext plugin list proposals dialog will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }

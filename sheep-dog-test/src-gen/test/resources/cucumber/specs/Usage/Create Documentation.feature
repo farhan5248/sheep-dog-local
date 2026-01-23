@@ -15,9 +15,9 @@ Feature: Create Documentation
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                 |
           | The Input file is present |
-     When The xtext plugin validate test step container action is performed as follows
-          | Selected Step |
-          | 1             |
+     When The xtext plugin validate action is performed as follows
+          | Element Type        | Selected Step |
+          | Test Step Container | 1             |
      Then The xtext plugin validate dialog will be set as follows
           """
           The first step must have a component
@@ -33,7 +33,9 @@ Feature: Create Documentation
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is absent            |
-     When The xtext plugin validate test step action is performed
+     When The xtext plugin validate action is performed as follows
+          | Element Type | Selected Step |
+          | Test Step    | 1             |
      Then The xtext plugin validate dialog will be set as follows
           """
           The step definition doesn't exist for the step object

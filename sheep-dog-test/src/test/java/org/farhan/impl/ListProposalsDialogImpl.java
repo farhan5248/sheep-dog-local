@@ -5,13 +5,13 @@ import java.util.HashMap;
 import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.issues.SheepDogIssueProposal;
-import org.farhan.objects.xtext.ProposeDialog;
+import org.farhan.objects.xtext.ListProposalsDialog;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProposeDialogImpl extends TestObject implements ProposeDialog {
+public class ListProposalsDialogImpl extends TestObject implements ListProposalsDialog {
 
 	@Override
 	public void assertSuggestionName(HashMap<String, String> keyMap) {

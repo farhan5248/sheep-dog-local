@@ -18,8 +18,10 @@ Feature: Proposals for Objects or Components
       And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name |
           | empty     |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
@@ -30,8 +32,10 @@ Feature: Proposals for Objects or Components
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name |
           | empty     |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be empty
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be empty
 
   Scenario: No object no component no previous has component objects
 
@@ -41,8 +45,10 @@ Feature: Proposals for Objects or Components
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                    | Suggestion Name |
           | The daily batchjob Input file | Input file      |
 
@@ -52,8 +58,10 @@ Feature: Proposals for Objects or Components
           | Step Name                                |
           | The daily batchjob Input file is present |
           | empty                                    |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
@@ -66,8 +74,10 @@ Feature: Proposals for Objects or Components
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                    | Suggestion Name |
           | The daily batchjob Input file | Input file      |
 
@@ -76,8 +86,10 @@ Feature: Proposals for Objects or Components
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name          |
           | The daily batchjob |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be empty
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be empty
 
   Scenario: No object has component no previous has component objects
 
@@ -87,8 +99,10 @@ Feature: Proposals for Objects or Components
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                    | Suggestion Name |
           | The daily batchjob Input file | Input file      |
 
@@ -98,8 +112,10 @@ Feature: Proposals for Objects or Components
           | Step Name                                |
           | The daily batchjob Input file is present |
           | The daily batchjob                       |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
@@ -112,8 +128,10 @@ Feature: Proposals for Objects or Components
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
@@ -126,8 +144,10 @@ Feature: Proposals for Objects or Components
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion | Suggestion Name |
           | is present | is present      |
 
@@ -139,8 +159,10 @@ Feature: Proposals for Objects or Components
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion | Suggestion Name |
           | is present | is present      |
 
@@ -153,8 +175,10 @@ Feature: Proposals for Objects or Components
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion | Suggestion Name |
           | is present | is present      |
 

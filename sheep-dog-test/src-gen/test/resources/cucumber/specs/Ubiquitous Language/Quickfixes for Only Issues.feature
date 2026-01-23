@@ -1,5 +1,5 @@
 @sheep-dog-test
-Feature: Validation for Only Issues
+Feature: Quickfixes for Only Issues
 
   \@sheep-dog-test
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
@@ -12,49 +12,67 @@ Feature: Validation for Only Issues
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name | Parameters       |
           | daily batchjob/Input file.feature | is present           | lowercase header |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type |
           | Cell         |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           Name should start with a capital
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Cell         |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 
   Scenario: Test suite name should start with a capital letter
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name   |
           | lowercase process |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type |
           | Test Suite   |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           Name should start with a capital
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Test Suite   |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 
   Scenario: Test case name should start with a capital letter
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name | Test Case Name      |
           | Process2        | lowercase test case |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type        |
           | Test Step Container |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           Name should start with a capital
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type        |
+          | Test Step Container |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 
   Scenario: Test step must have a valid object name
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name      |
           | The is present |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type |
           | Test Step    |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           Every test case must have at least one component specified.
           This should be the first part of the test step name.
@@ -65,16 +83,22 @@ Feature: Validation for Only Issues
           Object ending words are: file, page, response, dialog, directory, request, goal, job, action.
           Examples are: "src/test/resources/file.txt file" or "Home page"
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 
   Scenario: Test step must have a valid step definition name
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                     |
           | The daily batchjob Input file |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type |
           | Test Step    |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           After specifying the step object name, a step definition name is specified.
           It has 3 parts, details (optional), state and time (optional).
@@ -90,4 +114,10 @@ Feature: Validation for Only Issues
           The time endings are: early, late, on time, at, before, after, in, on.
           Examples are: "after the next day" or "on time"
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 

@@ -28,6 +28,7 @@ public abstract class TestObject {
 	public static TestSuiteImpl testSuite;
 	public static TestStepContainerImpl testStepContainer;
 	public static TestStepImpl currentStep;
+	public static String elementType;
 
 	protected static String getStackTraceAsString(Exception e) {
 		StringWriter sw = new StringWriter();
@@ -39,6 +40,7 @@ public abstract class TestObject {
 		testSuite = null;
 		testStepContainer = null;
 		currentStep = null;
+		elementType = null;
 		testProject = SheepDogFactory.instance.createTestProject();
 	}
 

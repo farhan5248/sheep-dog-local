@@ -1,26 +1,30 @@
 @sheep-dog-test
-Feature: Validation for Workspace Issues
+Feature: Quickfixes for Workspace Issues
 
   \@sheep-dog-test
   Some problems are fixed by code generation.
   They're typically things like keywords or objects that are not defined in the step objects layer.
-  I could just ignore all those warnings and then use the Build Project menu item and it’ll create everything at once.
+  I could just ignore all those warnings and then use the Build Project menu item and it'll create everything at once.
   There's 4 types of warnings, the scenarios below cover them.
 
   Scenario: This object doesn't exist validation
 
-    Coverage Target: SheepDogIssueProposal.getQualifiedName lines 32-32
-
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
           | The daily batchjob Input file is present |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type |
           | Test Step    |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           The step object file doesn't exist for the component
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 
   Scenario: This object step definition doesn't exist validation
 
@@ -30,13 +34,19 @@ Feature: Validation for Workspace Issues
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is absent            |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type |
           | Test Step    |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           The step definition doesn't exist for the step object
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 
   Scenario: This object step definition parameter set doesn't exist validation
 
@@ -46,13 +56,19 @@ Feature: Validation for Workspace Issues
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name | Parameters      |
           | daily batchjob/Input file.feature | is set as follows    | Existing Header |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type |
           | Row          |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           The step parameters don't exist for the step definition
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Row          |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 
   Scenario: This object step definition text parameter doesn't exist validation
 
@@ -62,13 +78,19 @@ Feature: Validation for Workspace Issues
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name | Parameters      |
           | daily batchjob/Input file.feature | is set as follows    | Existing Header |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type |
           | Text         |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           The step parameters don't exist for the step definition
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Text         |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 
   Scenario: Object path and component is inherited from previous steps
 
@@ -80,8 +102,14 @@ Feature: Validation for Workspace Issues
           | Object Name                           | Step Definition Name |
           | daily batchjob/app/Input file.feature | is present           |
           | daily batchjob/app/Input file.feature | is absent            |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type |
           | Test Step    |
-     Then The xtext plugin validate dialog will be empty
+      And The xtext plugin validate dialog will be empty
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 

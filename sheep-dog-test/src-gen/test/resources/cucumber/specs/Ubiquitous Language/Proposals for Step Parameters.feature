@@ -10,8 +10,10 @@ Feature: Proposals for Step Parameters
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                           |
           | The daily batchjob Input file is created as follows |
-     When The xtext plugin propose test step table action is performed
-     Then The xtext plugin propose dialog will be empty
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Row          |
+     Then The xtext plugin list proposals dialog will be empty
 
   Scenario: No proposal for absent step definition
 
@@ -21,8 +23,10 @@ Feature: Proposals for Step Parameters
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
-     When The xtext plugin propose test step table action is performed
-     Then The xtext plugin propose dialog will be empty
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Row          |
+     Then The xtext plugin list proposals dialog will be empty
 
   Scenario: List parameters for a step definition if it exists
 
@@ -34,8 +38,10 @@ Feature: Proposals for Step Parameters
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name  | Parameters |
           | daily batchjob/Input file.feature | is created as follows | H1         |
-     When The xtext plugin propose test step table action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Row          |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion | Suggestion Name |
           | \| H1      | \| H1           |
 

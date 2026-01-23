@@ -1,5 +1,5 @@
 @sheep-dog-test
-Feature: Validation for File Issues
+Feature: Quickfixes for File Issues
 
   \@sheep-dog-test
   Some problems prevent code generation.
@@ -14,10 +14,16 @@ Feature: Validation for File Issues
           | Step Name                                |
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type        | Selected Step |
           | Test Step Container | 1             |
-     Then The xtext plugin validate dialog will be empty
+      And The xtext plugin validate dialog will be empty
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type        |
+          | Test Step Container |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 
   Scenario: No component in the first step triggers an error
 
@@ -28,11 +34,17 @@ Feature: Validation for File Issues
           | Step Name                                   |
           | The Input file is present                   |
           | The daily batchjob Input file is downloaded |
-     When The xtext plugin validate action is performed as follows
+      And The xtext plugin validate action is performed as follows
           | Element Type        | Selected Step |
           | Test Step Container | 1             |
-     Then The xtext plugin validate dialog will be set as follows
+      And The xtext plugin validate dialog will be set as follows
           """
           The first step must have a component
           """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type        |
+          | Test Step Container |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description |
+          | tbd           | tbd                  |
 

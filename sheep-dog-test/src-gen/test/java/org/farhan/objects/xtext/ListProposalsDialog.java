@@ -2,7 +2,7 @@ package org.farhan.objects.xtext;
 
 import java.util.HashMap;
 
-public interface ProposeDialog {
+public interface ListProposalsDialog {
 
     public void assertEmpty(HashMap<String, String> keyMap);
 

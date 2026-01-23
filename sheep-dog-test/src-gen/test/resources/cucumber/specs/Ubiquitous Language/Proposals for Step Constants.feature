@@ -24,6 +24,8 @@ Feature: Proposals for Step Constants
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
           | The daily batchjob Input file is present |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be empty
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be empty
 

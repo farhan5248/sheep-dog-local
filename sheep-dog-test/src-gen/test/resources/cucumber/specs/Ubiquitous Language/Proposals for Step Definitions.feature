@@ -18,8 +18,10 @@ Feature: Proposals for Step Definitions
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
-     When The xtext plugin propose test step action is performed
-     Then The xtext plugin propose dialog will be set as follows
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion | Suggestion Name | Suggestion Description |
           | is present | is present      | Creates empty file     |
 
