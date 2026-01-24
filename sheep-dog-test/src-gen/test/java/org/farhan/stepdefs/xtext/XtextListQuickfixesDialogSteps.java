@@ -19,7 +19,7 @@ public class XtextListQuickfixesDialogSteps extends TestSteps {
     public void willBeEmpty() {
         object.assertInputOutputs("Empty");
     }
-    
+
     @Given("^The xtext plugin list quickfixes dialog will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);

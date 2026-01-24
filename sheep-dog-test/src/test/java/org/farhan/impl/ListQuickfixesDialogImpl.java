@@ -15,16 +15,13 @@ public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfix
 
 	@Override
 	public void assertQuickfix(HashMap<String, String> keyMap) {
-		boolean found = false;
 		for (SheepDogIssueProposal p : MockIDE.getProposals()) {
 			if (p.getId().equals(keyMap.get("Quickfix Name"))) {
-				found = p.getValue().contentEquals(keyMap.get("Quickfix"));
-				if (found) {
-					return;
-				}
+				Assertions.assertTrue(p.getValue().contentEquals(keyMap.get("Quickfix")));
+				return;
 			}
 		}
-		Assertions.assertTrue(found, "No quickfix found with ID that matches the name: " + keyMap.get("Quickfix Name"));
+		Assertions.fail("No quickfix found with ID that matches the name: " + keyMap.get("Quickfix Name"));
 	}
 
 	@Override
@@ -41,19 +38,18 @@ public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfix
 
 	@Override
 	public void assertQuickfixDescription(HashMap<String, String> keyMap) {
-		boolean found = false;
 		for (SheepDogIssueProposal p : MockIDE.getProposals()) {
-			if (p.getId().equals(keyMap.get("Quickfix Name")) ) {
-				found = p.getDescription().contentEquals(getSpecial(keyMap.get("Quickfix Description")));
-				Assertions.assertTrue(found, "Quickfix Description doesn't match: " + p.getValue());
+			if (p.getId().equals(keyMap.get("Quickfix Name"))) {
+				Assertions.assertTrue(p.getDescription().contentEquals(getSpecial(keyMap.get("Quickfix Description"))));
 				return;
 			}
 		}
-		Assertions.assertTrue(found, "No quickfix found with ID: " + keyMap.get("Quickfix Name"));
+		Assertions.fail("No quickfix found with ID: " + keyMap.get("Quickfix Name"));
 	}
 
 	@Override
 	public void assertEmpty(HashMap<String, String> keyMap) {
 		Assertions.assertTrue(MockIDE.getProposals().isEmpty());
 	}
+
 }

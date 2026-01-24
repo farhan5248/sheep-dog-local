@@ -14,6 +14,16 @@ public class XtextValidateDialogSteps extends TestSteps {
         super(object, "xtext", "validate");
     }
 
+    @Given("^The xtext plugin validate dialog is empty$")
+    public void isEmpty() {
+        object.setInputOutputs("Empty");
+    }
+
+    @Given("^The xtext plugin validate dialog is set as follows$")
+    public void isSetAsFollows(String docString) {
+        object.setInputOutputs("Content", docString);
+    }
+
     @Given("^The xtext plugin validate dialog will be empty$")
     public void willBeEmpty() {
         object.assertInputOutputs("Empty");

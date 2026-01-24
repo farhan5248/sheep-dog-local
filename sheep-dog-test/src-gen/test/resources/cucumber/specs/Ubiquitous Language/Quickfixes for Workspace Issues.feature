@@ -1,6 +1,6 @@
 @sheep-dog-test
 Feature: Quickfixes for Workspace Issues
-  
+
   \@sheep-dog-test
   Some problems are fixed by code generation.
   They're typically things like keywords or objects that are not defined in the step objects layer.
@@ -8,107 +8,98 @@ Feature: Quickfixes for Workspace Issues
   There's 4 types of warnings, the scenarios below cover them.
 
   Scenario: This object doesn't exist validation
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                |
-      | The daily batchjob Input file is present |
-    And The xtext plugin validate action is performed as follows
-      | Element Type |
-      | Test Step    |
-    And The xtext plugin validate dialog will be set as follows
-      """
-      The step object file doesn't exist for the component
-      """
-    When The xtext plugin list quickfixes action is performed as follows
-      | Element Type |
-      | Test Step    |
-    Then The xtext plugin list quickfixes dialog will be set as follows
-      | Quickfix Name                                           | Quickfix Description |
-      | Generate Input file - daily batchjob/Input file.feature | empty                |
+          | Step Name                                |
+          | The daily batchjob Input file is present |
+      And The xtext plugin validate dialog is set as follows
+          """
+          The step object file doesn't exist for the component
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name                                           | Quickfix Description |
+          | Generate Input file - daily batchjob/Input file.feature | empty                |
 
   Scenario: This object step definition doesn't exist validation
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                |
-      | The daily batchjob Input file is present |
-    And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-      | Object Name                       | Step Definition Name |
-      | daily batchjob/Input file.feature | is absent            |
-    And The xtext plugin validate action is performed as follows
-      | Element Type |
-      | Test Step    |
-    And The xtext plugin validate dialog will be set as follows
-      """
-      The step definition doesn't exist for the step object
-      """
-    When The xtext plugin list quickfixes action is performed as follows
-      | Element Type |
-      | Test Step    |
-    Then The xtext plugin list quickfixes dialog will be set as follows
-      | Quickfix Name | Quickfix Description | Quickfix  |
-      | is absent     | empty                | is absent |
-    And The xtext plugin list quickfixes dialog will be set as follows
-      | Quickfix Name       | Quickfix Description |
-      | Generate is present | empty                |
+          | Step Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name |
+          | daily batchjob/Input file.feature | is absent            |
+      And The xtext plugin validate dialog is set as follows
+          """
+          The step definition doesn't exist for the step object
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name | Quickfix Description | Quickfix  |
+          | is absent     | empty                | is absent |
+      And The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name       | Quickfix Description |
+          | Generate is present | empty                |
 
   Scenario: This object step definition parameter set doesn't exist validation
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                       | Headers    |
-      | The daily batchjob Input file is set as follows | New Header |
-    And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-      | Object Name                       | Step Definition Name | Parameters      |
-      | daily batchjob/Input file.feature | is set as follows    | Existing Header |
-    And The xtext plugin validate action is performed as follows
-      | Element Type |
-      | Row          |
-    And The xtext plugin validate dialog will be set as follows
-      """
-      The step parameters don't exist for the step definition
-      """
-    When The xtext plugin list quickfixes action is performed as follows
-      | Element Type |
-      | Row          |
-    Then The xtext plugin list quickfixes dialog will be set as follows
-      | Quickfix Name      | Quickfix Description | Quickfix           |
-      | \| Existing Header | empty                | \| Existing Header |
-      | \| New Header      | empty                | \| New Header      |
-    And The xtext plugin list quickfixes dialog will be set as follows
-      | Quickfix Name          | Quickfix Description |
-      | Generate \| New Header | empty                |
+          | Step Name                                       | Headers    |
+          | The daily batchjob Input file is set as follows | New Header |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name | Parameters      |
+          | daily batchjob/Input file.feature | is set as follows    | Existing Header |
+      And The xtext plugin validate dialog is set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Row          |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name      | Quickfix Description | Quickfix           |
+          | \| Existing Header | empty                | \| Existing Header |
+          | \| New Header      | empty                | \| New Header      |
+      And The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name          | Quickfix Description |
+          | Generate \| New Header | empty                |
 
   Scenario: This object step definition text parameter doesn't exist validation
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                       | Text Content |
-      | The daily batchjob Input file is set as follows | New Content  |
-    And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-      | Object Name                       | Step Definition Name | Parameters      |
-      | daily batchjob/Input file.feature | is set as follows    | Existing Header |
-    And The xtext plugin validate action is performed as follows
-      | Element Type |
-      | Text         |
-    And The xtext plugin validate dialog will be set as follows
-      """
-      The step parameters don't exist for the step definition
-      """
-    When The xtext plugin list quickfixes action is performed as follows
-      | Element Type |
-      | Text         |
-    Then The xtext plugin list quickfixes dialog will be set as follows
-      | Quickfix Name       | Quickfix Description |
-      | Generate \| Content | empty                |
+          | Step Name                                       | Text Content |
+          | The daily batchjob Input file is set as follows | New Content  |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name | Parameters      |
+          | daily batchjob/Input file.feature | is set as follows    | Existing Header |
+      And The xtext plugin validate dialog is set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Text         |
+     Then The xtext plugin list quickfixes dialog will be set as follows
+          | Quickfix Name       | Quickfix Description |
+          | Generate \| Content | empty                |
 
   Scenario: Object path and component is inherited from previous steps
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-      | Step Name                                    |
-      | The daily batchjob app/Input file is present |
-      | The Input file is absent                     |
-    And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows
-      | Object Name                           | Step Definition Name |
-      | daily batchjob/app/Input file.feature | is present           |
-      | daily batchjob/app/Input file.feature | is absent            |
-    And The xtext plugin validate action is performed as follows
-      | Element Type |
-      | Test Step    |
-    And The xtext plugin validate dialog will be empty
-    When The xtext plugin list quickfixes action is performed as follows
-      | Element Type |
-      | Test Step    |
-    Then The xtext plugin list quickfixes dialog will be empty
+          | Step Name                                    |
+          | The daily batchjob app/Input file is present |
+          | The Input file is absent                     |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows
+          | Object Name                           | Step Definition Name |
+          | daily batchjob/app/Input file.feature | is present           |
+          | daily batchjob/app/Input file.feature | is absent            |
+      And The xtext plugin validate dialog is empty
+     When The xtext plugin list quickfixes action is performed as follows
+          | Element Type |
+          | Test Step    |
+     Then The xtext plugin list quickfixes dialog will be empty
+

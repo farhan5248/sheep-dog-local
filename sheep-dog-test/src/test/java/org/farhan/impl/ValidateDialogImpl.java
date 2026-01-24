@@ -12,10 +12,6 @@ import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class ValidateDialogImpl extends TestObject implements ValidateDialog {
 
-	public void assertMessage(HashMap<String, String> keyMap) {
-		Assertions.assertEquals(keyMap.get("Message"), MockIDE.getValidationMessage());
-	}
-
 	@Override
 	public void assertEmpty(HashMap<String, String> keyMap) {
 		Assertions.assertTrue(MockIDE.getValidationMessage().isEmpty());
@@ -23,7 +19,16 @@ public class ValidateDialogImpl extends TestObject implements ValidateDialog {
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {
-		// TODO Auto-generated method stub
-		
+		Assertions.assertEquals(keyMap.get("Content"), MockIDE.getValidationMessage());
+	}
+
+	@Override
+	public void setEmpty(HashMap<String, String> keyMap) {
+		MockIDE.setValidationMessage("");
+	}
+
+	@Override
+	public void setContent(HashMap<String, String> keyMap) {
+		MockIDE.setValidationMessage(keyMap.get("Content"));
 	}
 }
