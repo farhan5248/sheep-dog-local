@@ -12,7 +12,10 @@ Feature: Code Generation
   2. A keyword or statement aka step definition about that object such as whether is exists, or has certain attributes or fields.
   3. A combination of parameters for that statement. This could be different combinations of search fields used in a search page.
 
+  @mcp-test
   Scenario: Create a new object for a component
+
+    \@mcp-test
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
