@@ -1,4 +1,4 @@
-package org.farhan.impl;
+package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
@@ -10,6 +10,9 @@ import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.SheepDogBuilder;
+import org.farhan.impl.ide.CellImpl;
+import org.farhan.impl.ide.RowImpl;
+import org.farhan.impl.ide.StatementImpl;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.junit.jupiter.api.Assertions;
 
@@ -23,7 +26,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 		try {
 			Assertions.assertNotNull(testProject.getStepObject(keyMap.get("Object Name")));
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
@@ -42,7 +45,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			}
 			Assertions.assertTrue(found);
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 
 	}
@@ -59,7 +62,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			}
 			Assertions.fail("No step defintion found");
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
@@ -70,7 +73,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			IStatement statement = new StatementImpl(keyMap.get("Object Description"));
 			stepObject.addStatement(statement);
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
@@ -79,7 +82,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 		try {
 			SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
@@ -94,7 +97,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			row.addCell(cell);
 			SheepDogBuilder.createStepParameters(stepDefinition, row);
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
@@ -107,7 +110,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			IStatement statement = new StatementImpl(keyMap.get("Step Definition Description"));
 			stepDefinition.addStatement(statement);
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
@@ -117,7 +120,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
 			SheepDogBuilder.createStepDefinition(stepObject, keyMap.get("Step Definition Name"));
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 }

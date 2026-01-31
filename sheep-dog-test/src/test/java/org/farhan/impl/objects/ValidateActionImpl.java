@@ -1,4 +1,4 @@
-package org.farhan.impl;
+package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
@@ -11,6 +11,7 @@ import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.issues.TestSuiteIssueDetector;
 import org.farhan.dsl.issues.TextIssueDetector;
 import org.farhan.dsl.lang.ICell;
+import org.farhan.impl.ide.TestStepImpl;
 import org.farhan.objects.xtext.ValidateAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -82,7 +83,7 @@ public class ValidateActionImpl extends TestObject implements ValidateAction {
 			// TODO remove this
 			// MockIDE.setAlternateObjects(TestStepIssueResolver.correctStepObjectNameWorkspace(currentStep));
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 

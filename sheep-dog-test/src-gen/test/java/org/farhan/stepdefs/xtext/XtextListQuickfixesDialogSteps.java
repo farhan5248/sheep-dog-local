@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
-import org.farhan.common.TestSteps;
+import org.farhan.common.TestStepdef;
 import org.farhan.objects.xtext.ListQuickfixesDialog;
 
 @ScenarioScoped
-public class XtextListQuickfixesDialogSteps extends TestSteps {
+public class XtextListQuickfixesDialogSteps extends TestStepdef {
 
     @Inject
     public XtextListQuickfixesDialogSteps(ListQuickfixesDialog object) {

@@ -1,4 +1,4 @@
-package org.farhan.impl;
+package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
@@ -6,6 +6,8 @@ import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueResolver;
+import org.farhan.impl.ide.RowImpl;
+import org.farhan.impl.ide.TableImpl;
 import org.farhan.objects.xtext.ListProposalsAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -28,7 +30,7 @@ public class ListProposalsActionImpl extends TestObject implements ListProposals
 				Assertions.fail("Unknown Element Type");
 			}
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 

@@ -1,9 +1,13 @@
-package org.farhan.impl;
+package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
 import org.farhan.common.TestObject;
 import org.farhan.dsl.lang.ICell;
+import org.farhan.impl.ide.CellImpl;
+import org.farhan.impl.ide.RowImpl;
+import org.farhan.impl.ide.TableImpl;
+import org.farhan.impl.ide.TextImpl;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;
 import io.cucumber.guice.ScenarioScoped;
 

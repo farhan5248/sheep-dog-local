@@ -1,4 +1,4 @@
-package org.farhan.impl;
+package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
@@ -18,7 +18,7 @@ public class AppInputFileAsciidocFileImpl extends TestObject implements InputFil
 		try {
 			SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
@@ -28,7 +28,7 @@ public class AppInputFileAsciidocFileImpl extends TestObject implements InputFil
 			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
 			SheepDogBuilder.createStepDefinition(stepObject, keyMap.get("Step Definition Name"));
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 }

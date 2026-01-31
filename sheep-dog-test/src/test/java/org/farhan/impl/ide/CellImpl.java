@@ -1,4 +1,4 @@
-package org.farhan.impl;
+package org.farhan.impl.ide;
 
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;

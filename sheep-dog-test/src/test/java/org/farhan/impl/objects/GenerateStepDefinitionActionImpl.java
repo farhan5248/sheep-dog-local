@@ -1,4 +1,4 @@
-package org.farhan.impl;
+package org.farhan.impl.objects;
 
 import org.farhan.common.TestObject;
 import org.farhan.dsl.lang.SheepDogBuilder;
@@ -13,7 +13,7 @@ public class GenerateStepDefinitionActionImpl extends TestObject implements Gene
 		try {
 			SheepDogBuilder.createTestStepReferencedElements(currentStep);
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 }

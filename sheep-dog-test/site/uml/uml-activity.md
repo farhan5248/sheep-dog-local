@@ -63,7 +63,7 @@ A test case matches a pattern if it covers any of that pattern's discriminating 
 
 **Partitions**: 1, 10, 11, 14, 16, 21
 
-### Correct
+### Generate
 
 **Partitions**: 7, 9
 

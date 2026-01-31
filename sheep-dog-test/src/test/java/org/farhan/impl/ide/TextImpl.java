@@ -1,4 +1,4 @@
-package org.farhan.impl;
+package org.farhan.impl.ide;
 
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.IText;

@@ -1,13 +1,11 @@
-package org.farhan.impl;
+package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
 import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
-import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
-import org.farhan.dsl.issues.RowIssueDetector;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.RowIssueTypes;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
@@ -16,7 +14,6 @@ import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueTypes;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueTypes;
-import org.farhan.dsl.issues.TextIssueDetector;
 import org.farhan.dsl.issues.TextIssueResolver;
 import org.farhan.dsl.issues.TextIssueTypes;
 import org.farhan.dsl.lang.ICell;
@@ -79,7 +76,7 @@ public class ListQuickfixesActionImpl extends TestObject implements ListQuickfix
 				Assertions.fail("Unknown Element Type");
 			}
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 

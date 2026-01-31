@@ -1,12 +1,9 @@
 package org.farhan.common;
 
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.io.PrintWriter;
-
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
@@ -15,9 +12,9 @@ import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
-import org.farhan.impl.TestStepContainerImpl;
-import org.farhan.impl.TestStepImpl;
-import org.farhan.impl.TestSuiteImpl;
+import org.farhan.impl.ide.TestStepContainerImpl;
+import org.farhan.impl.ide.TestStepImpl;
+import org.farhan.impl.ide.TestSuiteImpl;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
@@ -36,12 +33,6 @@ public abstract class TestObject {
 		currentStep = null;
 		elementType = null;
 		testProject = SheepDogFactory.instance.createTestProject();
-	}
-
-	protected static String getStackTraceAsString(Exception e) {
-		StringWriter sw = new StringWriter();
-		e.printStackTrace(new PrintWriter(sw));
-		return sw.toString();
 	}
 
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
@@ -147,7 +138,7 @@ public abstract class TestObject {
 						.invoke(this, row);
 			}
 		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
