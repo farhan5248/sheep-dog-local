@@ -7,13 +7,13 @@ Feature: Quickfixes for File Issues
 
   Scenario: The first step needs to have a component specified
 
-    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name | Step Definition Description |
-          | daily batchjob/Input file.feature | is present           | Creates empty file          |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name | Step Definition Description |
+          | daily batchjob/Input file.feature | is present           | Creates empty file          |
       And The xtext plugin validate dialog is empty
      When The xtext plugin list quickfixes action is performed as follows
           | Element Type        |
