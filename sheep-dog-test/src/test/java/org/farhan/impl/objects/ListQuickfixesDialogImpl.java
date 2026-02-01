@@ -14,10 +14,14 @@ import io.cucumber.guice.ScenarioScoped;
 public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfixesDialog {
 
 	@Override
+	public void assertEmpty(HashMap<String, String> keyMap) {
+		Assertions.assertTrue(MockIDE.listQuickfixesDialog.isEmpty());
+	}
+
+	@Override
 	public void assertQuickfix(HashMap<String, String> keyMap) {
-		for (SheepDogIssueProposal p : MockIDE.getProposals()) {
-			if (p.getId().equals(keyMap.get("Quickfix Name"))) {
-				Assertions.assertTrue(p.getValue().contentEquals(keyMap.get("Quickfix")));
+		for (SheepDogIssueProposal p : MockIDE.listQuickfixesDialog) {
+			if (p.getId().equals(keyMap.get("Quickfix Name")) && p.getValue().contentEquals(keyMap.get("Quickfix"))) {
 				return;
 			}
 		}
@@ -25,22 +29,10 @@ public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfix
 	}
 
 	@Override
-	public void assertQuickfixName(HashMap<String, String> keyMap) {
-		boolean found = false;
-		for (SheepDogIssueProposal p : MockIDE.getProposals()) {
-			if (p.getId().equals(keyMap.get("Quickfix Name"))) {
-				found = true;
-				break;
-			}
-		}
-		Assertions.assertTrue(found, "No quickfix found with ID: " + keyMap.get("Quickfix Name"));
-	}
-
-	@Override
 	public void assertQuickfixDescription(HashMap<String, String> keyMap) {
-		for (SheepDogIssueProposal p : MockIDE.getProposals()) {
-			if (p.getId().equals(keyMap.get("Quickfix Name"))) {
-				Assertions.assertTrue(p.getDescription().contentEquals(getSpecial(keyMap.get("Quickfix Description"))));
+		for (SheepDogIssueProposal p : MockIDE.listQuickfixesDialog) {
+			if (p.getId().equals(keyMap.get("Quickfix Name"))
+					&& p.getDescription().contentEquals(getSpecial(keyMap.get("Quickfix Description")))) {
 				return;
 			}
 		}
@@ -48,8 +40,13 @@ public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfix
 	}
 
 	@Override
-	public void assertEmpty(HashMap<String, String> keyMap) {
-		Assertions.assertTrue(MockIDE.getProposals().isEmpty());
+	public void assertQuickfixName(HashMap<String, String> keyMap) {
+		for (SheepDogIssueProposal p : MockIDE.listQuickfixesDialog) {
+			if (p.getId().equals(keyMap.get("Quickfix Name"))) {
+				return;
+			}
+		}
+		Assertions.fail("No quickfix found with ID: " + keyMap.get("Quickfix Name"));
 	}
 
 }

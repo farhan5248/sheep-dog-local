@@ -1,44 +1,15 @@
 package org.farhan.common;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.ITable;
-import org.farhan.dsl.lang.ITestProject;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.IText;
-import org.farhan.dsl.lang.SheepDogBuilder;
-import org.farhan.dsl.lang.SheepDogFactory;
-import org.farhan.impl.ide.TestStepContainerImpl;
-import org.farhan.impl.ide.TestStepImpl;
-import org.farhan.impl.ide.TestSuiteImpl;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
 
 public abstract class TestObject {
 
-	public static ITestProject testProject;
-	public static TestSuiteImpl testSuite;
-	public static TestStepContainerImpl testStepContainer;
-	public static TestStepImpl currentStep;
-	public static String elementType;
-
-	public static void reset() {
-		testSuite = null;
-		testStepContainer = null;
-		currentStep = null;
-		elementType = null;
-		testProject = SheepDogFactory.instance.createTestProject();
-	}
-
-	protected HashMap<String, String> keyValue = new HashMap<String, String>();
-
-	protected ITable stepParametersTable;
-	protected IText stepText;
+	public HashMap<String, String> keyValue = new HashMap<String, String>();
 
 	public void assertInputOutputs(DataTable dataTable) {
 		processInputOutputs(dataTable, "assert", "");
@@ -142,79 +113,7 @@ public abstract class TestObject {
 		}
 	}
 
-	protected void addTestCaseStep(String stepName) {
-		if (testSuite == null) {
-			addTestSuite("Test Suite");
-		}
-		if (testStepContainer == null) {
-			addTestStepContainer("Test Step Container");
-		}
-		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testStepContainer, stepName);
-		testStepContainer.addTestStep(currentStep);
-		if (stepParametersTable != null) {
-			// this is for situations where the keymap order isn't preserved
-			currentStep.setTable(stepParametersTable);
-			stepParametersTable = null;
-		}
-		if (stepText != null) {
-			currentStep.setText(stepText);
-			stepText = null;
-		}
-	}
-
-	protected void addTestSetupStep(String stepName) {
-		if (testSuite == null) {
-			addTestSuite("");
-		}
-		if (testStepContainer == null) {
-			addTestStepContainer("");
-		}
-		currentStep = (TestStepImpl) SheepDogBuilder.createTestStep(testStepContainer, stepName);
-		testStepContainer.addTestStep(currentStep);
-		if (stepParametersTable != null) {
-			// this is for situations where the keymap order isn't preserved
-			currentStep.setTable(stepParametersTable);
-			stepParametersTable = null;
-		}
-		if (stepText != null) {
-			currentStep.setText(stepText);
-			stepText = null;
-		}
-	}
-
-	protected void addTestStepContainer(String testStepContainerName) {
-		if (testSuite == null) {
-			addTestSuite("Test Suite");
-		}
-		ITestStepContainer testCase = testSuite.getTestStepContainer(testStepContainerName);
-		if (testCase == null) {
-			testCase = SheepDogBuilder.createTestCase(testSuite, testStepContainerName);
-		}
-		TestObject.testStepContainer = (TestStepContainerImpl) testCase;
-	}
-
-	protected void addTestSuite(String testSuiteName) {
-		ITestSuite testSuite = testProject.getTestSuite(testSuiteName);
-		if (testSuite == null) {
-			testSuite = SheepDogBuilder.createTestSuite(testProject, testSuiteName);
-		}
-		TestObject.testSuite = (TestSuiteImpl) testSuite;
-	}
-
-	protected String cellsToString(List<ICell> cells) {
-		String cellsAsString = "";
-		List<String> sortedCells = new ArrayList<String>();
-		for (ICell cell : cells) {
-			sortedCells.add(cell.getName());
-		}
-		Collections.sort(sortedCells);
-		for (String cell : sortedCells) {
-			cellsAsString += "| " + cell;
-		}
-		return cellsAsString.trim();
-	}
-
-	protected String getSpecial(String value) {
+	public String getSpecial(String value) {
 		if (value.contentEquals("empty")) {
 			return "";
 		} else {

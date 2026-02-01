@@ -1,7 +1,11 @@
 package org.farhan.impl.objects;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
+import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.ICell;
@@ -24,7 +28,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void assertObjectName(HashMap<String, String> keyMap) {
 		try {
-			Assertions.assertNotNull(testProject.getStepObject(keyMap.get("Object Name")));
+			Assertions.assertNotNull(MockIDE.testProject.getStepObject(keyMap.get("Object Name")));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
@@ -33,7 +37,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void assertParameters(HashMap<String, String> keyMap) {
 		try {
-			IStepObject stepObject = testProject.getStepObject(keyMap.get("Object Name"));
+			IStepObject stepObject = MockIDE.testProject.getStepObject(keyMap.get("Object Name"));
 			IStepDefinition stepDefinition = stepObject.getStepDefinition(keyMap.get("Step Definition Name"));
 
 			boolean found = false;
@@ -47,13 +51,25 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
+	}
 
+	private String cellsToString(List<ICell> cells) {
+		String cellsAsString = "";
+		List<String> sortedCells = new ArrayList<String>();
+		for (ICell cell : cells) {
+			sortedCells.add(cell.getName());
+		}
+		Collections.sort(sortedCells);
+		for (String cell : sortedCells) {
+			cellsAsString += "| " + cell;
+		}
+		return cellsAsString.trim();
 	}
 
 	@Override
 	public void assertStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
-			IStepObject stepObject = testProject.getStepObject(keyMap.get("Object Name"));
+			IStepObject stepObject = MockIDE.testProject.getStepObject(keyMap.get("Object Name"));
 			Assertions.assertNotNull(stepObject);
 			for (IStepDefinition stepDef : stepObject.getStepDefinitionList()) {
 				if (stepDef.getName().contentEquals(keyMap.get("Step Definition Name"))) {
@@ -69,7 +85,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setObjectDescription(HashMap<String, String> keyMap) {
 		try {
-			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
+			IStepObject stepObject = SheepDogBuilder.createStepObject(MockIDE.testProject, keyMap.get("Object Name"));
 			IStatement statement = new StatementImpl(keyMap.get("Object Description"));
 			stepObject.addStatement(statement);
 		} catch (Exception e) {
@@ -80,7 +96,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setObjectName(HashMap<String, String> keyMap) {
 		try {
-			SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
+			SheepDogBuilder.createStepObject(MockIDE.testProject, keyMap.get("Object Name"));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
@@ -89,7 +105,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setParameters(HashMap<String, String> keyMap) {
 		try {
-			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
+			IStepObject stepObject = SheepDogBuilder.createStepObject(MockIDE.testProject, keyMap.get("Object Name"));
 			IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
 					keyMap.get("Step Definition Name"));
 			IRow row = new RowImpl();
@@ -104,7 +120,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setStepDefinitionDescription(HashMap<String, String> keyMap) {
 		try {
-			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
+			IStepObject stepObject = SheepDogBuilder.createStepObject(MockIDE.testProject, keyMap.get("Object Name"));
 			IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
 					keyMap.get("Step Definition Name"));
 			IStatement statement = new StatementImpl(keyMap.get("Step Definition Description"));
@@ -117,7 +133,7 @@ public class InputFileAsciidocFileImpl extends TestObject implements InputFileAs
 	@Override
 	public void setStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
-			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
+			IStepObject stepObject = SheepDogBuilder.createStepObject(MockIDE.testProject, keyMap.get("Object Name"));
 			SheepDogBuilder.createStepDefinition(stepObject, keyMap.get("Step Definition Name"));
 		} catch (Exception e) {
 			Assertions.fail(e);

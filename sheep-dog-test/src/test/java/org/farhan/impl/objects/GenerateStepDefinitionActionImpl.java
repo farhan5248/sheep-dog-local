@@ -1,5 +1,6 @@
 package org.farhan.impl.objects;
 
+import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.objects.xtext.GenerateStepDefinitionAction;
@@ -11,7 +12,7 @@ public class GenerateStepDefinitionActionImpl extends TestObject implements Gene
 
 	public void transition() {
 		try {
-			SheepDogBuilder.createTestStepReferencedElements(currentStep);
+			SheepDogBuilder.createTestStepReferencedElements(MockIDE.testStep);
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}

@@ -41,7 +41,6 @@ public final class GuiceConfig extends AbstractModule implements InjectorSource 
 	@Before
 	public void resetTestProject() throws Exception {
 		SheepDogFactory.instance = new SheepDogFactoryImpl();
-		TestObject.reset();
 		MockIDE.reset();
 	}
 

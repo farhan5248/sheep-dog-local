@@ -6,8 +6,6 @@ import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueResolver;
-import org.farhan.impl.ide.RowImpl;
-import org.farhan.impl.ide.TableImpl;
 import org.farhan.objects.xtext.ListProposalsAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -18,14 +16,13 @@ public class ListProposalsActionImpl extends TestObject implements ListProposals
 
 	public void transition() {
 		try {
-			if (elementType.contentEquals("Row")) {
-				currentStep.setTable(new TableImpl());
-				RowImpl row = new RowImpl();
-				currentStep.getTable().addRow(row);
-				MockIDE.setProposalList(RowIssueResolver.suggestCellListWorkspace(currentStep));
-			} else if (elementType.contentEquals("Test Step")) {
-				MockIDE.getProposals().addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(currentStep));
-				MockIDE.getProposals().addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace(currentStep));
+			if (MockIDE.elementType.contentEquals("Row")) {
+				MockIDE.listProposalsDialog.addAll(RowIssueResolver.suggestCellListWorkspace(MockIDE.testStep));
+			} else if (MockIDE.elementType.contentEquals("Test Step")) {
+				MockIDE.listProposalsDialog
+						.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(MockIDE.testStep));
+				MockIDE.listProposalsDialog
+						.addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace(MockIDE.testStep));
 			} else {
 				Assertions.fail("Unknown Element Type");
 			}
@@ -36,6 +33,6 @@ public class ListProposalsActionImpl extends TestObject implements ListProposals
 
 	@Override
 	public void setElementType(HashMap<String, String> keyMap) {
-		elementType = keyMap.get("Element Type");
+		MockIDE.elementType = keyMap.get("Element Type");
 	}
 }

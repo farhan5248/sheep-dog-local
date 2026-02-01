@@ -2,6 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
+import org.farhan.common.MockIDE;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.SheepDogBuilder;
@@ -16,7 +17,7 @@ public class AppInputFileAsciidocFileImpl extends TestObject implements InputFil
 	@Override
 	public void setObjectName(HashMap<String, String> keyMap) {
 		try {
-			SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
+			SheepDogBuilder.createStepObject(MockIDE.testProject, keyMap.get("Object Name"));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
@@ -25,7 +26,7 @@ public class AppInputFileAsciidocFileImpl extends TestObject implements InputFil
 	@Override
 	public void setStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
-			IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, keyMap.get("Object Name"));
+			IStepObject stepObject = SheepDogBuilder.createStepObject(MockIDE.testProject, keyMap.get("Object Name"));
 			SheepDogBuilder.createStepDefinition(stepObject, keyMap.get("Step Definition Name"));
 		} catch (Exception e) {
 			Assertions.fail(e);

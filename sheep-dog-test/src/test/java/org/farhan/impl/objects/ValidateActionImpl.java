@@ -19,16 +19,17 @@ import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
 public class ValidateActionImpl extends TestObject implements ValidateAction {
+	
 	public void transition() {
 		try {
-			if (elementType.contentEquals("Cell")) {
-				if (MockIDE.getValidationMessage().isEmpty()) {
-					if (currentStep.getTable() != null) {
-						if (currentStep.getTable().getRowList() != null) {
-							if (currentStep.getTable().getRowList().getFirst() != null) {
-								for (ICell c : currentStep.getTable().getRowList().getFirst().getCellList()) {
-									MockIDE.setValidationMessage(CellIssueDetector.validateNameOnly(c));
-									if (!MockIDE.getValidationMessage().isEmpty()) {
+			if (MockIDE.elementType.contentEquals("Cell")) {
+				if (MockIDE.validateDialog.isEmpty()) {
+					if (MockIDE.testStep.getTable() != null) {
+						if (MockIDE.testStep.getTable().getRowList() != null) {
+							if (MockIDE.testStep.getTable().getRowList().getFirst() != null) {
+								for (ICell c : MockIDE.testStep.getTable().getRowList().getFirst().getCellList()) {
+									MockIDE.validateDialog = CellIssueDetector.validateNameOnly(c);
+									if (!MockIDE.validateDialog.isEmpty()) {
 										break;
 									}
 								}
@@ -36,52 +37,54 @@ public class ValidateActionImpl extends TestObject implements ValidateAction {
 						}
 					}
 				}
-			} else if (elementType.contentEquals("Row")) {
-				if (MockIDE.getValidationMessage().isEmpty()) {
-					if (currentStep.getTable() != null) {
-						MockIDE.setValidationMessage(RowIssueDetector
-								.validateCellListWorkspace(currentStep.getTable().getRowList().getFirst()));
-					}
-				}
-			} else if (elementType.contentEquals("Text")) {
-				if (MockIDE.getValidationMessage().isEmpty()) {
-					if (currentStep.getText() != null) {
-						MockIDE.setValidationMessage(TextIssueDetector.validateNameWorkspace(currentStep.getText()));
-					}
-				}
-			} else if (elementType.contentEquals("Test Step")) {
-				if (MockIDE.getValidationMessage().isEmpty()) {
-					MockIDE.setValidationMessage(TestStepIssueDetector.validateStepObjectNameOnly(currentStep));
-					if (MockIDE.getValidationMessage().isEmpty()) {
-						MockIDE.setValidationMessage(TestStepIssueDetector.validateStepDefinitionNameOnly(currentStep));
-						if (MockIDE.getValidationMessage().isEmpty()) {
-							MockIDE.setValidationMessage(
-									TestStepIssueDetector.validateStepObjectNameWorkspace(currentStep));
-							if (MockIDE.getValidationMessage().isEmpty()) {
-								MockIDE.setValidationMessage(
-										TestStepIssueDetector.validateStepDefinitionNameWorkspace(currentStep));
+			} else if (MockIDE.elementType.contentEquals("Row")) {
+				if (MockIDE.validateDialog.isEmpty()) {
+					if (MockIDE.testStep.getTable() != null) {
+						if (MockIDE.testStep.getTable().getRowList() != null) {
+							if (MockIDE.testStep.getTable().getRowList().getFirst() != null) {
+								MockIDE.validateDialog = RowIssueDetector
+										.validateCellListWorkspace(MockIDE.testStep.getTable().getRowList().getFirst());
 							}
 						}
 					}
 				}
-			} else if (elementType.contentEquals("Test Step Container")) {
-				if (MockIDE.getValidationMessage().isEmpty()) {
-					MockIDE.setValidationMessage(
-							TestStepContainerIssueDetector.validateTestStepListFile(testStepContainer));
-					if (MockIDE.getValidationMessage().isEmpty()) {
-						MockIDE.setValidationMessage(
-								TestStepContainerIssueDetector.validateNameOnly(testStepContainer));
+			} else if (MockIDE.elementType.contentEquals("Text")) {
+				if (MockIDE.validateDialog.isEmpty()) {
+					if (MockIDE.testStep.getText() != null) {
+						MockIDE.validateDialog = TextIssueDetector.validateNameWorkspace(MockIDE.testStep.getText());
 					}
 				}
-			} else if (elementType.contentEquals("Test Suite")) {
-				if (MockIDE.getValidationMessage().isEmpty()) {
-					MockIDE.setValidationMessage(TestSuiteIssueDetector.validateNameOnly(testSuite));
+			} else if (MockIDE.elementType.contentEquals("Test Step")) {
+				if (MockIDE.validateDialog.isEmpty()) {
+					MockIDE.validateDialog = TestStepIssueDetector.validateStepObjectNameOnly(MockIDE.testStep);
+					if (MockIDE.validateDialog.isEmpty()) {
+						MockIDE.validateDialog = TestStepIssueDetector.validateStepDefinitionNameOnly(MockIDE.testStep);
+						if (MockIDE.validateDialog.isEmpty()) {
+							MockIDE.validateDialog = TestStepIssueDetector
+									.validateStepObjectNameWorkspace(MockIDE.testStep);
+							if (MockIDE.validateDialog.isEmpty()) {
+								MockIDE.validateDialog = TestStepIssueDetector
+										.validateStepDefinitionNameWorkspace(MockIDE.testStep);
+							}
+						}
+					}
+				}
+			} else if (MockIDE.elementType.contentEquals("Test Step Container")) {
+				if (MockIDE.validateDialog.isEmpty()) {
+					MockIDE.validateDialog = TestStepContainerIssueDetector
+							.validateTestStepListFile(MockIDE.testStepContainer);
+					if (MockIDE.validateDialog.isEmpty()) {
+						MockIDE.validateDialog = TestStepContainerIssueDetector
+								.validateNameOnly(MockIDE.testStepContainer);
+					}
+				}
+			} else if (MockIDE.elementType.contentEquals("Test Suite")) {
+				if (MockIDE.validateDialog.isEmpty()) {
+					MockIDE.validateDialog = TestSuiteIssueDetector.validateNameOnly(MockIDE.testSuite);
 				}
 			} else {
 				Assertions.fail("Unknown Element Type");
 			}
-			// TODO remove this
-			// MockIDE.setAlternateObjects(TestStepIssueResolver.correctStepObjectNameWorkspace(currentStep));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
@@ -89,12 +92,12 @@ public class ValidateActionImpl extends TestObject implements ValidateAction {
 
 	@Override
 	public void setElementType(HashMap<String, String> keyMap) {
-		elementType = keyMap.get("Element Type");
+		MockIDE.elementType = keyMap.get("Element Type");
 	}
 
 	@Override
 	public void setSelectedStep(HashMap<String, String> keyMap) {
-		currentStep = (TestStepImpl) currentStep.getParent().getTestStepList()
+		MockIDE.testStep = (TestStepImpl) MockIDE.testStep.getParent().getTestStepList()
 				.get(Integer.valueOf(keyMap.get("Selected Step")) - 1);
 	}
 }

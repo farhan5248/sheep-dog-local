@@ -14,21 +14,21 @@ public class ValidateDialogImpl extends TestObject implements ValidateDialog {
 
 	@Override
 	public void assertEmpty(HashMap<String, String> keyMap) {
-		Assertions.assertTrue(MockIDE.getValidationMessage().isEmpty());
+		Assertions.assertTrue(MockIDE.validateDialog.isEmpty());
 	}
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {
-		Assertions.assertEquals(keyMap.get("Content"), MockIDE.getValidationMessage());
+		Assertions.assertEquals(keyMap.get("Content"), MockIDE.validateDialog);
 	}
 
 	@Override
 	public void setEmpty(HashMap<String, String> keyMap) {
-		MockIDE.setValidationMessage("");
+		MockIDE.validateDialog = getSpecial("empty");
 	}
 
 	@Override
 	public void setContent(HashMap<String, String> keyMap) {
-		MockIDE.setValidationMessage(keyMap.get("Content"));
+		MockIDE.validateDialog = keyMap.get("Content");
 	}
 }
