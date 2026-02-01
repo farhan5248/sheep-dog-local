@@ -23,7 +23,7 @@ public class Process2AsciidocFileImpl extends TestObject implements Process2Asci
 	@Override
 	public void setStepsSnippetHeaders(HashMap<String, String> keyMap) {
 
-		// this can be called before the step is created. I probably should enforce an
+		// TODO this can be called before the step is created. I probably should enforce an
 		// order when going through the attributes to select methods in this class
 		MockIDE.stepParametersTable = new TableImpl();
 		RowImpl row = new RowImpl();
@@ -39,8 +39,12 @@ public class Process2AsciidocFileImpl extends TestObject implements Process2Asci
 	}
 
 	@Override
-	public void setTestSuiteName(HashMap<String, String> keyMap) {
-		MockIDE.addTestSuite(getSpecial(keyMap.get("Test Suite Name")));
+	public void setStepsSnippetTextContent(HashMap<String, String> keyMap) {
+		MockIDE.stepText = new TextImpl();
+		MockIDE.stepText.setName(keyMap.get("Text Content"));
+		if (MockIDE.testStep != null) {
+			MockIDE.testStep.setText(MockIDE.stepText);
+		}
 	}
 
 	@Override
@@ -49,14 +53,8 @@ public class Process2AsciidocFileImpl extends TestObject implements Process2Asci
 	}
 
 	@Override
-	public void setStepsSnippetTextContent(HashMap<String, String> keyMap) {
-		// this is called after the step is created. I probably should enforce an
-		// order when going through the attributes to select methods in this class
-		MockIDE.stepText = new TextImpl();
-		MockIDE.stepText.setName(keyMap.get("Text Content"));
-		if (MockIDE.testStep != null) {
-			MockIDE.testStep.setText(MockIDE.stepText);
-		}
+	public void setTestSuiteName(HashMap<String, String> keyMap) {
+		MockIDE.addTestSuite(getSpecial(keyMap.get("Test Suite Name")));
 	}
 
 }
