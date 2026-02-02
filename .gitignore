@@ -31,3 +31,6 @@ release.properties
 **/*.theia-workspace
 **/.classpath
 .vscode/settings.json
+nul
+temp/*.*
+.claude/commands/__pycache__/*.*

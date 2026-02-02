@@ -4,7 +4,10 @@ Feature: Validation for Only Issues
   \@sheep-dog-test
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
+  @mcp-test
   Scenario: Cell name should start with a capital letter
+
+    \@mcp-test
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                | Headers          |

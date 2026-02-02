@@ -10,7 +10,6 @@ import org.farhan.dsl.issues.TestStepContainerIssueDetector;
 import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.issues.TestSuiteIssueDetector;
 import org.farhan.dsl.issues.TextIssueDetector;
-import org.farhan.dsl.lang.ICell;
 import org.farhan.impl.ide.TestStepImpl;
 import org.farhan.objects.xtext.ValidateAction;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +18,7 @@ import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
 public class ValidateActionImpl extends TestObject implements ValidateAction {
-	
+
 	public void transition() {
 		try {
 			if (MockIDE.elementType.contentEquals("Cell")) {
@@ -27,10 +26,11 @@ public class ValidateActionImpl extends TestObject implements ValidateAction {
 					if (MockIDE.testStep.getTable() != null) {
 						if (MockIDE.testStep.getTable().getRowList() != null) {
 							if (MockIDE.testStep.getTable().getRowList().getFirst() != null) {
-								for (ICell c : MockIDE.testStep.getTable().getRowList().getFirst().getCellList()) {
-									MockIDE.validateDialog = CellIssueDetector.validateNameOnly(c);
-									if (!MockIDE.validateDialog.isEmpty()) {
-										break;
+								if (MockIDE.testStep.getTable().getRowList().getFirst().getCellList() != null) {
+									if (MockIDE.testStep.getTable().getRowList().getFirst().getCellList()
+											.getFirst() != null) {
+										MockIDE.validateDialog = CellIssueDetector.validateNameOnly(MockIDE.testStep
+												.getTable().getRowList().getFirst().getCellList().getFirst());
 									}
 								}
 							}
