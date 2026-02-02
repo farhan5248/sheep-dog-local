@@ -12,6 +12,7 @@ import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
@@ -63,7 +64,7 @@ public class TestSuiteImpl implements ITestSuite {
 	@Override
 	public ITestProject getParent() {
 		if (parent == null) {
-			parent = SheepDogFactory.instance.createTestProject();
+			parent = SheepDogBuilder.createTestProject();
 		}
 		return parent;
 	}

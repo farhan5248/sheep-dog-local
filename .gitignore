@@ -32,5 +32,6 @@ release.properties
 **/.classpath
 .vscode/settings.json
 nul
+NUL
 temp/*.*
 .claude/commands/__pycache__/*.*

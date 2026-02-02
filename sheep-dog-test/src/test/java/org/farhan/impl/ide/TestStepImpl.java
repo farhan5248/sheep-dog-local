@@ -13,8 +13,7 @@ public class TestStepImpl implements ITestStep {
 	TableImpl table;
 	TextImpl text;
 
-	public TestStepImpl(String value) {
-		name = value;
+	TestStepImpl() {
 	}
 
 	@Override
@@ -74,12 +73,12 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setStepObjectName(String value) {
-		throw new UnsupportedOperationException("setStepObjectName(String value) is not implemented");
+		name = value;
 	}
 
 	@Override
 	public void setStepDefinitionName(String value) {
-		throw new UnsupportedOperationException("setStepDefinitionName(String value) is not implemented");
+		name += " " + value;
 	}
 
 }

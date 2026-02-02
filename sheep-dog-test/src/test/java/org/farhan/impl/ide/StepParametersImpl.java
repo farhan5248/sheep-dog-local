@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
-import org.farhan.dsl.lang.IText;
 
 public class StepParametersImpl implements IStepParameters {
 
@@ -18,25 +15,7 @@ public class StepParametersImpl implements IStepParameters {
 	TableImpl table;
 	ArrayList<StatementImpl> statementList;
 
-	public StepParametersImpl(IRow header) {
-		this.table = new TableImpl();
-		this.table.parent = this;
-		RowImpl row = new RowImpl();
-		this.table.addRow(row);
-		for (ICell c : header.getCellList()) {
-			CellImpl newCell = new CellImpl(c.getName());
-			row.addCell(newCell);
-		}
-		this.statementList = new ArrayList<StatementImpl>();
-	}
-
-	public StepParametersImpl(IText value) {
-		this.table = new TableImpl();
-		this.table.parent = this;
-		RowImpl row = new RowImpl();
-		this.table.addRow(row);
-		CellImpl newCell = new CellImpl(value.getName());
-		row.addCell(newCell);
+	StepParametersImpl() {
 		this.statementList = new ArrayList<StatementImpl>();
 	}
 

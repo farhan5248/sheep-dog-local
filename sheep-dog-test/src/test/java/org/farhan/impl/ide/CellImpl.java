@@ -8,8 +8,7 @@ public class CellImpl implements ICell {
 	String name;
 	RowImpl parent;
 
-	public CellImpl(String value) {
-		name = value;
+	CellImpl() {
 	}
 
 	@Override

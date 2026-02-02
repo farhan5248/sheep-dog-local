@@ -7,8 +7,7 @@ public class StatementImpl implements IStatement {
 	String name;
 	Object parent;
 
-	public StatementImpl(String name) {
-		this.name = name;
+	StatementImpl() {
 	}
 
 	@Override

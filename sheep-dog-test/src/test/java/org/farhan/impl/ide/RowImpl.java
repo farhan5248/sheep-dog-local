@@ -13,7 +13,7 @@ public class RowImpl implements IRow {
 	List<CellImpl> cellList;
 	TableImpl parent;
 
-	public RowImpl() {
+	RowImpl() {
 		cellList = new ArrayList<CellImpl>();
 	}
 

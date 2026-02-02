@@ -16,6 +16,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.issues.*;
 import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
@@ -147,7 +148,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	}
 
 	private void initProject(Resource resource) {
-		ITestProject parent = SheepDogFactory.instance.createTestProject();
+		ITestProject parent = SheepDogBuilder.createTestProject();
 		if (parent.getName() == null) {
 			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
 					.getFile(new Path(resource.getURI().toPlatformString(true)));

@@ -15,8 +15,7 @@ public class TestStepContainerImpl implements ITestStepContainer {
 	String name;
 	TestSuiteImpl parent;
 
-	public TestStepContainerImpl(String value) {
-		name = value;
+	TestStepContainerImpl() {
 		testStepList = new ArrayList<TestStepImpl>();
 	}
 
@@ -67,7 +66,12 @@ public class TestStepContainerImpl implements ITestStepContainer {
 
 	@Override
 	public ITestStep getTestStep(String name) {
-		throw new UnsupportedOperationException("getTestStep(String name) is not implemented");
+		for (ITestStep ts : testStepList) {
+			if (ts.getName().contentEquals(name)) {
+				return ts;
+			}
+		}
+		return null;
 	}
 
 	@Override

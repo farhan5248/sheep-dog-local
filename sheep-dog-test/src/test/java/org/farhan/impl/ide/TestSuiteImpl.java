@@ -18,11 +18,8 @@ public class TestSuiteImpl implements ITestSuite {
 	String name;
 	TestProjectImpl parent;
 
-	public TestSuiteImpl(String qualifiedName) {
+	TestSuiteImpl() {
 		this.testStepContainerList = new ArrayList<TestStepContainerImpl>();
-		this.qualifiedName = qualifiedName;
-		String[] nameParts = qualifiedName.split("/");
-		this.name = nameParts[nameParts.length - 1];
 	}
 
 	@Override
@@ -92,7 +89,9 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public void setNameLong(String value) {
-		throw new UnsupportedOperationException("setNameLong(String value) is not implemented");
+		this.qualifiedName = value;
+		String[] nameParts = qualifiedName.split("/");
+		this.name = nameParts[nameParts.length - 1];
 	}
 
 	@Override

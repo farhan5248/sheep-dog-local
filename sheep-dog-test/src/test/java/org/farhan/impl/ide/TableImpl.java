@@ -12,7 +12,7 @@ public class TableImpl implements ITable {
 	ArrayList<RowImpl> rowList;
 	Object parent;
 
-	public TableImpl() {
+	TableImpl() {
 		rowList = new ArrayList<RowImpl>();
 	}
 

@@ -13,7 +13,7 @@ public class TestProjectImpl implements ITestProject {
 	ArrayList<TestSuiteImpl> testSuiteList;
 	ArrayList<StepObjectImpl> stepObjectList;
 
-	public TestProjectImpl() {
+	TestProjectImpl() {
 		this.testSuiteList = new ArrayList<TestSuiteImpl>();
 		this.stepObjectList = new ArrayList<StepObjectImpl>();
 	}

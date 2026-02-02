@@ -4,6 +4,7 @@
 package org.farhan.dsl.sheepdog.generator;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -13,12 +14,21 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.farhan.dsl.issues.RowIssueDetector;
+import org.farhan.dsl.issues.RowIssueResolver;
+import org.farhan.dsl.issues.SheepDogIssueProposal;
+import org.farhan.dsl.issues.TestStepIssueDetector;
+import org.farhan.dsl.issues.TestStepIssueResolver;
+import org.farhan.dsl.issues.TextIssueDetector;
+import org.farhan.dsl.issues.TextIssueResolver;
+import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.SheepDogBuilder;
-import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
+import org.farhan.dsl.sheepdog.impl.RowImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
+import org.farhan.dsl.sheepdog.impl.TextImpl;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 
 /**
@@ -29,6 +39,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
  */
 public class SheepDogGenerator extends AbstractGenerator {
 	private static final Logger logger = Logger.getLogger(SheepDogGenerator.class);
+	private ITestProject testProject;
 
 	@Override
 	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
@@ -39,7 +50,29 @@ public class SheepDogGenerator extends AbstractGenerator {
 			for (TestStepContainer scenario : theTestSuite.getTestStepContainerList()) {
 				for (TestStep step : scenario.getTestStepList()) {
 					try {
-						SheepDogBuilder.createTestStepReferencedElements(new TestStepImpl(step));
+						TestStepImpl testStep = new TestStepImpl(step);
+						if (!TestStepIssueDetector.validateStepObjectNameWorkspace(testStep).isEmpty()) {
+							applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
+						}
+						if (!TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep).isEmpty()) {
+							applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
+						}
+						if (step.getTable() != null) {
+							if (!step.getTable().getRowList().isEmpty()
+									&& step.getTable().getRowList().getFirst() != null) {
+								if (!RowIssueDetector
+										.validateCellListWorkspace(new RowImpl(step.getTable().getRowList().getFirst()))
+										.isEmpty()) {
+									applyProposal(RowIssueResolver.correctCellListWorkspace(new TestStepImpl(step)));
+								}
+							}
+						}
+						if (step.getText() != null) {
+							if (!TextIssueDetector.validateNameWorkspace(new TextImpl(step.getText())).isEmpty()) {
+								applyProposal(TextIssueResolver.correctNameWorkspace(new TestStepImpl(step)));
+							}
+						}
+
 					} catch (Exception e) {
 						logger.error("Failed in doGenerate for step: " + e.getMessage(), e);
 					}
@@ -49,13 +82,23 @@ public class SheepDogGenerator extends AbstractGenerator {
 		logger.debug("Exiting doGenerate");
 	}
 
+	private void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
+		for (SheepDogIssueProposal p : proposals) {
+			if (!p.getQualifiedName().isEmpty()) {
+				IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, p.getQualifiedName());
+				stepObject.setContent(p.getValue());
+				testProject.addStepObject(stepObject);
+			}
+		}
+	}
+
 	private void initProject(Resource resource) {
-		ITestProject parent = SheepDogFactory.instance.createTestProject();
-		if (parent.getName() == null) {
+		testProject = SheepDogBuilder.createTestProject();
+		if (testProject.getName() == null) {
 			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
 					.getFile(new Path(resource.getURI().toPlatformString(true)));
 			File resourceFile = new File(resourceIFile.getProject().getLocationURI());
-			parent.setName(resourceFile.getAbsolutePath());
+			testProject.setName(resourceFile.getAbsolutePath());
 		}
 	}
 }

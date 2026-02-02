@@ -11,12 +11,10 @@ import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.SheepDogBuilder;
-import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.lang.StatementUtility;
 import org.farhan.dsl.lang.TestProjectUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
-
 
 public class TestStepIssueResolver {
 
@@ -34,7 +32,7 @@ public class TestStepIssueResolver {
 
 			// or create a new one
 			String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
-			IStepObject theStepObject = SheepDogFactory.instance.createStepObject(qualifiedName);
+			IStepObject theStepObject = SheepDogBuilder.createStepObject(null, qualifiedName);
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getNameLong());
 			proposal.setDescription(StatementUtility.getStatementListAsString(theStepObject.getStatementList()));

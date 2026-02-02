@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
@@ -15,7 +14,6 @@ import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.StatementUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
-
 
 public class RowIssueResolver {
 
@@ -47,7 +45,7 @@ public class RowIssueResolver {
 			IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
 			if (theStepDefinition != null) {
 				// This assumes that the step is valid but the parameters don't exist
-				IRow headers = theTestStep.getTable().getRowList().getFirst();
+				String headers = cellsToString(theTestStep.getTable().getRowList().getFirst().getCellList());
 				IStepParameters theStepParameters = theStepDefinition.getStepParameters(headers);
 				if (theStepParameters == null) {
 					theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, headers);

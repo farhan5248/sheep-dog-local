@@ -8,6 +8,9 @@ public class TextImpl implements IText {
 	TestStepImpl parent;
 	String name;
 
+	public TextImpl() {
+	}
+
 	@Override
 	public String getName() {
 		return name;

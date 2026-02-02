@@ -7,8 +7,8 @@ import org.farhan.dsl.lang.ITestData;
 
 public class TestCaseImpl extends TestStepContainerImpl implements ITestCase {
 
-	public TestCaseImpl(String value) {
-		super(value);
+	TestCaseImpl() {
+		super();
 	}
 
 	@Override

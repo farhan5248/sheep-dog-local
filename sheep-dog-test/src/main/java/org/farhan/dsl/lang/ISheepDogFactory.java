@@ -2,21 +2,32 @@ package org.farhan.dsl.lang;
 
 public interface ISheepDogFactory {
 
-	IStepDefinition createStepDefinition(String name);
+	// TODO none of these should take an argument. The Factory impl class would
+	// create an empty TypeImpl class and return it just as the EMF stuff does
+	// typically. The builder will set the attributes and children etc. Add this
+	// desc to the pattern
 
-	IStepObject createStepObject(String qualifiedName);
+	IStepDefinition createStepDefinition();
 
-	IStepParameters createStepParameters(IRow row);
+	IStepObject createStepObject();
 
-	IStepParameters createStepParameters(IText value);
+	IStepParameters createStepParameters();
 
-	ITestCase createTestCase(String name);
+	ITestCase createTestCase();
 
 	ITestProject createTestProject();
 
-	ITestSetup createTestSetup(String name);
+	ITestSetup createTestSetup();
 
-	ITestStep createTestStep(String name);
+	ITestStep createTestStep();
 
-	ITestSuite createTestSuite(String qualifiedName);
+	ITestSuite createTestSuite();
+
+	IStatement createStatement();
+
+	ITable createTable();
+
+	IRow createRow();
+
+	ICell createCell();
 }

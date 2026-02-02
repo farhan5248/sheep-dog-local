@@ -3,6 +3,7 @@ package org.farhan.common;
 import java.util.ArrayList;
 
 import org.farhan.dsl.issues.SheepDogIssueProposal;
+import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStepContainer;
@@ -23,7 +24,7 @@ public class MockIDE {
 	public static TestSuiteImpl testSuite;
 	public static TestStepContainerImpl testStepContainer;
 	public static TestStepImpl testStep;
-	public static ITable stepParametersTable;
+	public static ITable stepTable;
 	public static IText stepText;
 	public static String elementType;
 
@@ -31,11 +32,13 @@ public class MockIDE {
 		validateDialog = "";
 		listProposalsDialog = new ArrayList<SheepDogIssueProposal>();
 		listQuickfixesDialog = new ArrayList<SheepDogIssueProposal>();
+		testProject = SheepDogBuilder.createTestProject();
 		testSuite = null;
 		testStepContainer = null;
 		testStep = null;
+		stepTable = null;
+		stepText = null;
 		elementType = null;
-		testProject = SheepDogFactory.instance.createTestProject();
 	}
 
 	public static void addTestSuite(String testSuiteName) {
@@ -53,16 +56,9 @@ public class MockIDE {
 		if (testStepContainer == null) {
 			addTestStepContainer("Test Step Container");
 		}
-		testStep = (TestStepImpl) SheepDogBuilder.createTestStep(testStepContainer, stepName);
-		testStepContainer.addTestStep(testStep);
-		if (stepParametersTable != null) {
-			// this is for situations where the keymap order isn't preserved
-			testStep.setTable(stepParametersTable);
-			stepParametersTable = null;
-		}
-		if (stepText != null) {
-			testStep.setText(stepText);
-			stepText = null;
+		if (MockIDE.testStepContainer.getTestStep(stepName) == null) {
+			testStep = (TestStepImpl) SheepDogBuilder.createTestStep(testStepContainer, stepName);
+			testStepContainer.addTestStep(testStep);
 		}
 	}
 
@@ -71,19 +67,10 @@ public class MockIDE {
 			addTestSuite("");
 		}
 		if (testStepContainer == null) {
-			addTestStepContainer("");
+			addTestStepContainer("Background");
 		}
 		testStep = (TestStepImpl) SheepDogBuilder.createTestStep(testStepContainer, stepName);
 		testStepContainer.addTestStep(testStep);
-		if (stepParametersTable != null) {
-			// this is for situations where the keymap order isn't preserved
-			testStep.setTable(stepParametersTable);
-			stepParametersTable = null;
-		}
-		if (stepText != null) {
-			testStep.setText(stepText);
-			stepText = null;
-		}
 	}
 
 	public static void addTestStepContainer(String testStepContainerName) {
@@ -92,8 +79,22 @@ public class MockIDE {
 		}
 		ITestStepContainer testCase = testSuite.getTestStepContainer(testStepContainerName);
 		if (testCase == null) {
-			testCase = SheepDogBuilder.createTestCase(testSuite, testStepContainerName);
+			if (testStepContainerName.contentEquals("Background")) {
+				testCase = SheepDogBuilder.createTestSetup(testSuite, testStepContainerName);
+			} else {
+				testCase = SheepDogBuilder.createTestCase(testSuite, testStepContainerName);
+			}
 		}
 		testStepContainer = (TestStepContainerImpl) testCase;
+	}
+
+	public static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
+		for (SheepDogIssueProposal p : proposals) {
+			if (!p.getQualifiedName().isEmpty()) {
+				IStepObject stepObject = SheepDogBuilder.createStepObject(null, p.getQualifiedName());
+				stepObject.setContent(p.getValue());
+				testProject.addStepObject(stepObject);
+			}
+		}
 	}
 }

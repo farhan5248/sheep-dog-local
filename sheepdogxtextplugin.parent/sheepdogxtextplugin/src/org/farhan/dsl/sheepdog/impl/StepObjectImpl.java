@@ -16,6 +16,7 @@ import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
@@ -39,7 +40,7 @@ public class StepObjectImpl implements IStepObject {
 	@Override
 	public ITestProject getParent() {
 		if (parent == null) {
-			parent = SheepDogFactory.instance.createTestProject();
+			parent = SheepDogBuilder.createTestProject();
 		}
 		return parent;
 	}

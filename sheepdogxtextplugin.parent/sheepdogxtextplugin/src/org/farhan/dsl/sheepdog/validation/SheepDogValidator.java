@@ -27,6 +27,7 @@ import org.farhan.dsl.sheepdog.impl.TestSuiteImpl;
 import org.farhan.dsl.sheepdog.impl.TextImpl;
 import org.farhan.dsl.issues.*;
 import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
 
 /**
@@ -39,7 +40,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	private static final Logger logger = Logger.getLogger(SheepDogValidator.class);
 	public static final String CELL_NAME_ONLY = "CELL_NAME_ONLY";
-	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE"; 
+	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
 	public static final String TEST_SUITE_NAME_ONLY = "TEST_SUITE_NAME_ONLY";
 	public static final String TEST_STEP_CONTAINER_NAME_ONLY = "TEST_STEP_CONTAINER_NAME_ONLY";
 	public static final String TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE = "TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE";
@@ -62,7 +63,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("Failed in checkCellNameOnly for : "+ e.getMessage(), e);
+			logger.error("Failed in checkCellNameOnly for : " + e.getMessage(), e);
 
 		}
 		logger.debug("Exiting checkCellNameOnly");
@@ -85,7 +86,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("Failed in checkRowCellListWorkspace for : "+ e.getMessage(), e);
+			logger.error("Failed in checkRowCellListWorkspace for : " + e.getMessage(), e);
 
 		}
 		logger.debug("Exiting checkRowCellListWorkspace");
@@ -102,7 +103,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME_ONLY);
 			}
 		} catch (Exception e) {
-			logger.error("Failed in checkTestStepContainerNameOnly for : "+ e.getMessage(), e);
+			logger.error("Failed in checkTestStepContainerNameOnly for : " + e.getMessage(), e);
 
 		}
 		logger.debug("Exiting checkTestStepContainerNameOnly");
@@ -110,8 +111,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	@Check(CheckType.FAST)
 	public void checkTestStepContainerTestStepListFile(TestStepContainer theTestStepContainer) {
-		logger.debug(
-				"Entering checkTestStepContainerTestStepListFile for element: " + theTestStepContainer.getName());
+		logger.debug("Entering checkTestStepContainerTestStepListFile for element: " + theTestStepContainer.getName());
 		try {
 			initProject(theTestStepContainer.eResource());
 			String problems = TestStepContainerIssueDetector
@@ -121,7 +121,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 						TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE);
 			}
 		} catch (Exception e) {
-			logger.error("Failed in checkTestStepContainerTestStepListFile for : "+ e.getMessage(), e);
+			logger.error("Failed in checkTestStepContainerTestStepListFile for : " + e.getMessage(), e);
 
 		}
 		logger.debug("Exiting checkTestStepContainerTestStepListFile");
@@ -144,7 +144,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("Failed in checkTestStepNameOnly for : "+ e.getMessage(), e);
+			logger.error("Failed in checkTestStepNameOnly for : " + e.getMessage(), e);
 
 		}
 		logger.debug("Exiting checkTestStepNameOnly");
@@ -168,7 +168,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("Failed in checkTestStepNameWorkspace for : "+ e.getMessage(), e);
+			logger.error("Failed in checkTestStepNameWorkspace for : " + e.getMessage(), e);
 
 		}
 		logger.debug("Exiting checkTestStepNameWorkspace");
@@ -186,7 +186,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 				warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
 			}
 		} catch (Exception e) {
-			logger.error("Failed in checkTestSuiteNameOnly for : "+ e.getMessage(), e);
+			logger.error("Failed in checkTestSuiteNameOnly for : " + e.getMessage(), e);
 
 		}
 		logger.debug("Exiting checkTestSuiteNameOnly");
@@ -203,14 +203,14 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 					warning(problems, SheepDogPackage.Literals.TEXT__NAME, TEXT_NAME_WORKSPACE);
 				}
 			} catch (Exception e) {
-				logger.error("Failed in checkTextNameWorkspace for : "+ e.getMessage(), e);
+				logger.error("Failed in checkTextNameWorkspace for : " + e.getMessage(), e);
 			}
 		}
 		logger.debug("Exiting checkTextNameWorkspace");
 	}
 
 	private void initProject(Resource resource) {
-		ITestProject parent = SheepDogFactory.instance.createTestProject();
+		ITestProject parent = SheepDogBuilder.createTestProject();
 		if (parent.getName() == null) {
 			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
 					.getFile(new Path(resource.getURI().toPlatformString(true)));

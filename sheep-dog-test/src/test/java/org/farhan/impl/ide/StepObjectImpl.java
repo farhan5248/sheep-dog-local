@@ -12,22 +12,22 @@ import org.farhan.dsl.lang.ITestProject;
 public class StepObjectImpl implements IStepObject {
 
 	String name;
-	private String qualifiedName;
+	String qualifiedName;
+	String content;
 	TestProjectImpl parent;
 	ArrayList<StepDefinitionImpl> stepDefinitionList;
 	ArrayList<StatementImpl> statementList;
 
-	public StepObjectImpl(String qualifiedName) {
-		this.qualifiedName = qualifiedName;
-		String[] nameParts = qualifiedName.split("/");
-		name = nameParts[nameParts.length - 1].replace(".feature", "");
+	StepObjectImpl() {
 		this.stepDefinitionList = new ArrayList<StepDefinitionImpl>();
 		this.statementList = new ArrayList<StatementImpl>();
 	}
 
 	@Override
 	public String getContent() throws Exception {
-		return this.toString();
+		// TODO create a proper toString method
+		content = this.toString();
+		return content;
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public void setContent(String text) throws Exception {
-		throw new UnsupportedOperationException("setContent(String text)  is not implemented");
+		content = text;
 	}
 
 	@Override
@@ -93,6 +93,8 @@ public class StepObjectImpl implements IStepObject {
 	@Override
 	public void setNameLong(String value) {
 		this.qualifiedName = value;
+		String[] nameParts = qualifiedName.split("/");
+		name = nameParts[nameParts.length - 1].replace(".feature", "");
 	}
 
 	@Override

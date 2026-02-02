@@ -32,7 +32,7 @@ public class TextIssueResolver {
 				IText theText = theTestStep.getText();
 				IStepParameters theStepParameters = theStepDefinition.getStepParameters(theText);
 				if (theStepParameters == null) {
-					theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, theText);
+					theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, "| Content");
 					SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 					proposal.setId("Generate | Content");
 					proposal.setDescription(

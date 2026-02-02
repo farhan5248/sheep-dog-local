@@ -20,8 +20,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 	ArrayList<StatementImpl> statementList;
 	StepObjectImpl parent;
 
-	public StepDefinitionImpl(String name) {
-		this.name = name;
+	StepDefinitionImpl() {
 		this.stepParametersList = new ArrayList<StepParametersImpl>();
 		this.statementList = new ArrayList<StatementImpl>();
 	}
@@ -91,7 +90,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 
 	@Override
 	public IStepParameters getStepParameters(String name) {
-		throw new UnsupportedOperationException("getStepParameters(String name) is not implemented");
+		return StepDefinitionUtility.getStepParameters(this, name);
 	}
 
 	@Override

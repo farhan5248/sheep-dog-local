@@ -34,6 +34,7 @@ import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TextIssueResolver;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.sheepdog.impl.CellImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepContainerImpl;
@@ -58,9 +59,9 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 				public void apply(IModificationContext context) throws BadLocationException {
 					if (!p.getQualifiedName().isEmpty()) {
 						try {
-							IStepObject stepObject = SheepDogFactory.instance.createStepObject(p.getQualifiedName());
+							IStepObject stepObject = SheepDogBuilder.createStepObject(null, p.getQualifiedName());
 							stepObject.setContent(p.getValue());
-							SheepDogFactory.instance.createTestProject().addStepObject(stepObject);
+							SheepDogBuilder.createTestProject().addStepObject(stepObject);
 						} catch (Exception e) {
 							logger.error("Failed writing file for " + p.getQualifiedName() + ": " + e.getMessage(), e);
 						}
@@ -97,8 +98,8 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixTestStepContainerNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestStepContainer theTestStepContainer = (TestStepContainer) getEObject(issue);
 		logger.debug("Entering fixTestStepContainerNameOnly for element: " + theTestStepContainer.getName());
-		createAcceptor(issue, acceptor, TestStepContainerIssueResolver
-				.correctNameOnly(new TestStepContainerImpl(theTestStepContainer)));
+		createAcceptor(issue, acceptor,
+				TestStepContainerIssueResolver.correctNameOnly(new TestStepContainerImpl(theTestStepContainer)));
 		logger.debug("Exiting fixTestStepContainerNameOnly");
 	}
 
@@ -132,8 +133,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixTestSuiteNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
 		TestSuite theTestSuite = (TestSuite) getEObject(issue);
 		logger.debug("Entering fixTestSuiteNameOnly for element: " + theTestSuite.getName());
-		createAcceptor(issue, acceptor,
-				TestSuiteIssueResolver.correctNameOnly(new TestSuiteImpl(theTestSuite)));
+		createAcceptor(issue, acceptor, TestSuiteIssueResolver.correctNameOnly(new TestSuiteImpl(theTestSuite)));
 		logger.debug("Exiting fixTestSuiteNameOnly");
 	}
 
@@ -156,7 +156,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	}
 
 	private void initProject(Resource resource) {
-		ITestProject parent = SheepDogFactory.instance.createTestProject();
+		ITestProject parent = SheepDogBuilder.createTestProject();
 		if (parent.getName() == null) {
 			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
 					.getFile(new Path(resource.getURI().toPlatformString(true)));
