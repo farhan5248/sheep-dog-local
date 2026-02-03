@@ -4,9 +4,9 @@ import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.StepDefinitionUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
-
 
 public class RowIssueDetector {
 
@@ -23,7 +23,8 @@ public class RowIssueDetector {
 			IStepDefinition theStepDefinition = theStepObject
 					.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
 			if (theStepDefinition != null) {
-				if (theStepDefinition.getStepParameters(theTestStep.getTable().getRowList().getFirst()) == null) {
+				if (StepDefinitionUtility.getStepParameters(theStepDefinition,
+						theTestStep.getTable().getRowList().getFirst()) == null) {
 					logger.debug("Exiting validateCellListWorkspace");
 					return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
 				}

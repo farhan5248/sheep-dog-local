@@ -10,6 +10,7 @@ import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.StatementUtility;
+import org.farhan.dsl.lang.StepDefinitionUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
 
@@ -30,7 +31,7 @@ public class TextIssueResolver {
 			if (theStepDefinition != null) {
 				// This assumes that the step is valid but the parameters don't exist
 				IText theText = theTestStep.getText();
-				IStepParameters theStepParameters = theStepDefinition.getStepParameters(theText);
+				IStepParameters theStepParameters = StepDefinitionUtility.getStepParameters(theStepDefinition, theText);
 				if (theStepParameters == null) {
 					theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, "| Content");
 					SheepDogIssueProposal proposal = new SheepDogIssueProposal();

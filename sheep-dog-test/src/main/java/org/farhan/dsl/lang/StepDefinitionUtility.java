@@ -6,6 +6,10 @@ import java.util.List;
 
 public class StepDefinitionUtility {
 
+	public static Object getStepParameters(IStepDefinition theStepDefinition, IRow row) {
+		return getStepParameters(theStepDefinition, cellsToString(row.getCellList()));
+	}
+
 	public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String pipeDelimitedString) {
 		String normalizedInput = normalizePipeDelimitedString(pipeDelimitedString);
 		for (IStepParameters sp : stepDefinition.getStepParameterList()) {
@@ -16,6 +20,19 @@ public class StepDefinitionUtility {
 			}
 		}
 		return null;
+	}
+
+	private static String cellsToString(List<ICell> cells) {
+		String cellsAsString = "";
+		List<String> sortedCells = new ArrayList<String>();
+		for (ICell cell : cells) {
+			sortedCells.add(cell.getName());
+		}
+		Collections.sort(sortedCells);
+		for (String cell : sortedCells) {
+			cellsAsString += "| " + cell;
+		}
+		return cellsAsString.trim();
 	}
 
 	private static String normalizePipeDelimitedString(String pipeDelimitedString) {
@@ -34,16 +51,7 @@ public class StepDefinitionUtility {
 		return normalized.trim();
 	}
 
-	private static String cellsToString(List<ICell> cells) {
-		String cellsAsString = "";
-		List<String> sortedCells = new ArrayList<String>();
-		for (ICell cell : cells) {
-			sortedCells.add(cell.getName());
-		}
-		Collections.sort(sortedCells);
-		for (String cell : sortedCells) {
-			cellsAsString += "| " + cell;
-		}
-		return cellsAsString.trim();
+	public static IStepParameters getStepParameters(IStepDefinition theStepDefinition, IText theText) {
+		return StepDefinitionUtility.getStepParameters(theStepDefinition, "| Content");
 	}
 }

@@ -2,7 +2,7 @@
 
 ## All Utility classes are static
 
-All methods are public static. No instance variables or constructors.
+All methods are static. No instance variables or constructors.
 
 **Examples**
 

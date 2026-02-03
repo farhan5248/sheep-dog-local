@@ -20,10 +20,6 @@ public interface IStepDefinition {
 
 	IStepParameters getStepParameters(int index);
 
-	IStepParameters getStepParameters(IRow row);
-
-	IStepParameters getStepParameters(IText value);
-
 	IStepParameters getStepParameters(String name);
 
 	void setName(String value);

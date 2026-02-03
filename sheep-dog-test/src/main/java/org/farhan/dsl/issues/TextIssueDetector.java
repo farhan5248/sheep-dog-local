@@ -4,6 +4,7 @@ import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.lang.StepDefinitionUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
 
@@ -19,7 +20,7 @@ public class TextIssueDetector {
 		IStepDefinition theStepDefinition = theStepObject
 				.getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
 		if (!theText.getName().isEmpty()) {
-			if (theStepDefinition.getStepParameters(theText) == null) {
+			if (StepDefinitionUtility.getStepParameters(theStepDefinition, "| Content") == null) {
 				logger.debug("Exiting validateNameWorkspace");
 				return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
 			}

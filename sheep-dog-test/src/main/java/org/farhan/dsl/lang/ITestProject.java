@@ -20,7 +20,7 @@ public interface ITestProject {
 
 	ITestSuite getTestSuite(int index);
 
-	ITestSuite getTestSuite(String name);
+	ITestSuite getTestSuite(String qualifiedName);
 
 	List<ITestSuite> getTestSuiteList();
 

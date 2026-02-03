@@ -38,15 +38,3 @@ After creating an instance via SheepDogFactory, the builder automatically adds i
 ```java
 public static IStepDefinition createStepDefinition(IStepObject parent, String name)
 ```
-
-## Builder provides convenience methods for complex creation
-
-Some methods create multiple related elements in a single call.
-
-**Examples**
-
-- SheepDogBuilder
-
-```java
-public static IStepObject createTestStepReferencedElements(ITestStep theTestStep)
-```

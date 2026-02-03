@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
-import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.StepDefinitionUtility;
 
 public class StepDefinitionImpl implements IStepDefinition {
@@ -23,19 +20,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 	StepDefinitionImpl() {
 		this.stepParametersList = new ArrayList<StepParametersImpl>();
 		this.statementList = new ArrayList<StatementImpl>();
-	}
-
-	private String cellsToString(List<ICell> cells) {
-		String cellsAsString = "";
-		List<String> sortedCells = new ArrayList<String>();
-		for (ICell cell : cells) {
-			sortedCells.add(cell.getName());
-		}
-		Collections.sort(sortedCells);
-		for (String cell : sortedCells) {
-			cellsAsString += "| " + cell;
-		}
-		return cellsAsString.trim();
 	}
 
 	@Override
@@ -76,16 +60,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 	@Override
 	public IStepParameters getStepParameters(int index) {
 		throw new UnsupportedOperationException("getStepParameters(int index) is not implemented");
-	}
-
-	@Override
-	public IStepParameters getStepParameters(IRow row) {
-		return StepDefinitionUtility.getStepParameters(this, cellsToString(row.getCellList()));
-	}
-
-	@Override
-	public IStepParameters getStepParameters(IText value) {
-		return StepDefinitionUtility.getStepParameters(this, "| Content");
 	}
 
 	@Override

@@ -9,8 +9,24 @@ import java.util.List;
 public interface IStatementList {
 
 	/**
+	 * Gets a statement by index.
+	 *
+	 * @param index the zero-based index
+	 * @return the statement at the specified index
+	 */
+	IStatement getStatement(int index);
+
+	/**
+	 * Gets a statement by name.
+	 *
+	 * @param name the statement name
+	 * @return the statement with the specified name, or null if not found
+	 */
+	IStatement getStatement(String name);
+
+	/**
 	 * Gets the list of statements.
-	 * 
+	 *
 	 * @return the statement list
 	 */
 	List<IStatement> getStatementList();
