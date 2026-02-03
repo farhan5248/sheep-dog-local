@@ -1,18 +1,12 @@
 package org.farhan.dsl.sheepdog.impl;
 
-import java.io.File;
 import java.util.ArrayList;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
@@ -64,7 +58,7 @@ public class TestSuiteImpl implements ITestSuite {
 	@Override
 	public ITestProject getParent() {
 		if (parent == null) {
-			parent = SheepDogBuilder.createTestProject();
+			parent = SheepDogFactory.instance.createTestProject();
 		}
 		return parent;
 	}

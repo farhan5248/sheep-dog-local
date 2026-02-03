@@ -85,7 +85,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 	private void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
 		for (SheepDogIssueProposal p : proposals) {
 			if (!p.getQualifiedName().isEmpty()) {
-				IStepObject stepObject = SheepDogBuilder.createStepObject(testProject, p.getQualifiedName());
+				IStepObject stepObject = SheepDogBuilder.createStepObject(null, p.getQualifiedName());
 				stepObject.setContent(p.getValue());
 				testProject.addStepObject(stepObject);
 			}

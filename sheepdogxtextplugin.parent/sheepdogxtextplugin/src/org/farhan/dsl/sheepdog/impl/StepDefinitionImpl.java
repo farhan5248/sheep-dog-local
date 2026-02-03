@@ -29,17 +29,28 @@ public class StepDefinitionImpl implements IStepDefinition {
 		this.eObject = value;
 	}
 
-	private String cellsToString(List<ICell> arrayList) {
-		String cellsAsString = "";
-		List<String> sortedCells = new ArrayList<String>();
-		for (ICell cell : arrayList) {
-			sortedCells.add(cell.getName());
+	@Override
+	public boolean addStatement(IStatement value) {
+		eObject.getStatementList().add(((StatementImpl) value).eObject);
+		return true;
+	}
+
+	@Override
+	public boolean addStepParameters(IStepParameters value) {
+
+		EList<StepParameters> unsortedList = eObject.getStepParameterList();
+		TreeMap<String, StepParameters> sortedMap = new TreeMap<String, StepParameters>();
+		StepParameters aStepParameter = ((StepParametersImpl) value).eObject;
+		sortedMap.put(getKey(aStepParameter), aStepParameter);
+		for (StepParameters sp : unsortedList) {
+			sortedMap.put(getKey(sp), sp);
 		}
-		Collections.sort(sortedCells);
-		for (String cell : sortedCells) {
-			cellsAsString += "| " + cell;
+		unsortedList.clear();
+		for (String key : sortedMap.keySet()) {
+			unsortedList.add(sortedMap.get(key));
+			unsortedList.getLast().setName(String.valueOf(unsortedList.size()));
 		}
-		return cellsAsString.trim();
+		return true;
 	}
 
 	@Override
@@ -105,8 +116,8 @@ public class StepDefinitionImpl implements IStepDefinition {
 	}
 
 	@Override
-	public IStepParameters getStepParameters(String name) {
-		throw new UnsupportedOperationException("getStepParameters(String name) is not implemented");
+	public IStepParameters getStepParameters(String headers) {
+		return StepDefinitionUtility.getStepParameters(this, headers);
 	}
 
 	@Override
@@ -114,28 +125,17 @@ public class StepDefinitionImpl implements IStepDefinition {
 		eObject.setName(value);
 	}
 
-	@Override
-	public boolean addStatement(IStatement value) {
-		eObject.getStatementList().add(((StatementImpl) value).eObject);
-		return true;
-	}
-
-	@Override
-	public boolean addStepParameters(IStepParameters value) {
-
-		EList<StepParameters> unsortedList = eObject.getStepParameterList();
-		TreeMap<String, StepParameters> sortedMap = new TreeMap<String, StepParameters>();
-		StepParameters aStepParameter = ((StepParametersImpl) value).eObject;
-		sortedMap.put(getKey(aStepParameter), aStepParameter);
-		for (StepParameters sp : unsortedList) {
-			sortedMap.put(getKey(sp), sp);
+	private String cellsToString(List<ICell> arrayList) {
+		String cellsAsString = "";
+		List<String> sortedCells = new ArrayList<String>();
+		for (ICell cell : arrayList) {
+			sortedCells.add(cell.getName());
 		}
-		unsortedList.clear();
-		for (String key : sortedMap.keySet()) {
-			unsortedList.add(sortedMap.get(key));
-			unsortedList.getLast().setName(String.valueOf(unsortedList.size()));
+		Collections.sort(sortedCells);
+		for (String cell : sortedCells) {
+			cellsAsString += "| " + cell;
 		}
-		return true;
+		return cellsAsString.trim();
 	}
 
 	private String getKey(StepParameters aStepParameter) {

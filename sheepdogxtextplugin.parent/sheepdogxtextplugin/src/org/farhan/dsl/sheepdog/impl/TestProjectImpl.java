@@ -7,7 +7,6 @@ import org.farhan.dsl.lang.IResourceRepository;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
 
 public class TestProjectImpl implements ITestProject {
@@ -65,7 +64,8 @@ public class TestProjectImpl implements ITestProject {
 				if (text.isEmpty()) {
 					logger.error("Couldn't load StepObject for, file is empty: " + qualifiedName);
 				} else {
-					IStepObject stepObject = SheepDogBuilder.createStepObject(this, qualifiedName);
+					IStepObject stepObject = SheepDogFactory.instance.createStepObject();
+					stepObject.setNameLong(qualifiedName);
 					stepObject.setContent(text);
 					return stepObject;
 				}

@@ -2,6 +2,7 @@ package org.farhan.dsl.sheepdog.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +17,6 @@ import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
-import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
@@ -40,7 +40,7 @@ public class StepObjectImpl implements IStepObject {
 	@Override
 	public ITestProject getParent() {
 		if (parent == null) {
-			parent = SheepDogBuilder.createTestProject();
+			parent = SheepDogFactory.instance.createTestProject();
 		}
 		return parent;
 	}
@@ -88,6 +88,8 @@ public class StepObjectImpl implements IStepObject {
 	@Override
 	public void setNameLong(String value) {
 		this.qualifiedName = value;
+		String extension = org.farhan.dsl.lang.SheepDogFactory.instance.createTestProject().getFileExtension();
+		eObject.setName((new File(qualifiedName)).getName().replaceFirst(extension + "$", ""));
 	}
 
 	@Override

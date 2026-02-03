@@ -28,7 +28,6 @@ import org.farhan.dsl.sheepdog.impl.TextImpl;
 import org.farhan.dsl.issues.*;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.SheepDogBuilder;
-import org.farhan.dsl.lang.SheepDogFactory;
 
 /**
  * This class contains custom validation rules.
