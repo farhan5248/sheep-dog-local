@@ -68,8 +68,8 @@
 		<plugins>
 			<plugin>
 				<groupId>org.farhan</groupId>
-				<artifactId>sheep-dog-dev-maven-plugin</artifactId>
-				<version>1.35</version>
+				<artifactId>sheep-dog-dev-svc-maven-plugin</artifactId>
+				<version>1.38</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -153,13 +153,6 @@
 						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>

@@ -10,6 +10,7 @@ Feature: Proposals for Objects or Components
   3. Previous Object in Test Case: If there's a previous object with the fully qualified name, then only the name is suggested
   4. Test Setup: The test setup section is checked if it has a component or object specified.
 
+  @single-test
   Scenario: No object no component has previous in background
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file background steps snippet is created as follows
@@ -25,6 +26,7 @@ Feature: Proposals for Objects or Components
           | Suggestion     | Suggestion Name |
           | The Input file | Input file      |
 
+  @single-test
   Scenario: No object no component no previous no component objects
 
     TODO make this an outline with various steps like "The" or "The batchjob" etc

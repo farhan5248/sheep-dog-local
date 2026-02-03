@@ -15,6 +15,7 @@ Feature: Proposals for Step Parameters
           | Row          |
      Then The xtext plugin list proposals dialog will be empty
 
+  @single-test
   Scenario: No proposal for absent step definition
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows

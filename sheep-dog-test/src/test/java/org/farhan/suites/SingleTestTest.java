@@ -13,7 +13,6 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("cucumber/")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan.common,org.farhan.objects,org.farhan.stepdefs,org.farhan.suites")
-@IncludeTags("mcp-test")
-public class McpTest {
-
+@IncludeTags("single-test")
+public class SingleTestTest {
 }

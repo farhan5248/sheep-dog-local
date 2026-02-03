@@ -4,6 +4,7 @@ Feature: Display Documentation with Proposals
   \@sheep-dog-test
   Just as you can see the associated Javadoc for classes and attributes, you can attach documentation about the objects and step-definitions.
 
+  @single-test
   Scenario: Display Step Object documentation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
@@ -35,6 +36,7 @@ Feature: Display Documentation with Proposals
           | Suggestion     | Suggestion Name | Suggestion Description                                |
           | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
 
+  @single-test
   Scenario: Display non-existing object references
 
     If an object is mentioned in a test step but isn't created in the stepdefs folder yet, it can still be used.

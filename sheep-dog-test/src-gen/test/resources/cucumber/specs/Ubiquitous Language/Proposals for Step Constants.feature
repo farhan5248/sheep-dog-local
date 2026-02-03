@@ -15,8 +15,10 @@ Feature: Proposals for Step Constants
   4. Section types: snippet, section, table
   5. Attachment types: with, as follows
 
+  @single-test
   Scenario: Propose nothing
 
+    \@single-test
     If the step is complete, there's nothing to suggest.
     However if it's an attachment, that means a text or table section should follow.
     Those proposals are triggered from the next line.

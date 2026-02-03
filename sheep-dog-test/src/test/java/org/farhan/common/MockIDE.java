@@ -53,7 +53,7 @@ public class MockIDE {
 		if (testSuite == null) {
 			addTestSuite("Test Suite");
 		}
-		if (testStepContainer == null) {
+		if (testStepContainer == null || testStepContainer.getName().contentEquals("Background")) {
 			addTestStepContainer("Test Step Container");
 		}
 		if (MockIDE.testStepContainer.getTestStep(stepName) == null) {
