@@ -3,7 +3,7 @@ Automatic-Module-Name: sheepdogxtextplugin.tests
 Bundle-ManifestVersion: 2
 Bundle-Name: sheepdogxtextplugin.tests
 Bundle-Vendor: My Company
-Bundle-Version: 1.34.0.qualifier
+Bundle-Version: 1.34.0
 Bundle-SymbolicName: sheepdogxtextplugin.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: sheepdogxtextplugin,
