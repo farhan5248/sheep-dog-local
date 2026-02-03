@@ -3,7 +3,7 @@
 
 	<groupId>org.farhan</groupId>
 	<artifactId>sheep-dog-dev-maven-plugin</artifactId>
-	<version>1.36-SNAPSHOT</version>
+	<version>1.36</version>
 	<packaging>maven-plugin</packaging>
 	<name>Lean Sheep Dog Tools for Developers Maven Plugin</name>
 
@@ -11,12 +11,12 @@
 		<project.build.sourceEncoding>
 			UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
-		<sheep-dog-dev.version>1.57-SNAPSHOT</sheep-dog-dev.version>
+		<sheep-dog-dev.version>1.57</sheep-dog-dev.version>
 	</properties>
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/sheep-dog-local</connection>
-		<tag>sheep-dog-dev-maven-plugin-1.0</tag>
+		<tag>sheep-dog-dev-maven-plugin-1.36</tag>
 	</scm>
 
 	<pluginRepositories>
@@ -217,25 +217,25 @@
 						<configuration>
 							<skip>${skipTests}</skip>
 							<target>
-								<taskdef name="report" classname="org.jacoco.ant.ReportTask" classpathref="maven.plugin.classpath"/>
+								<taskdef name="report" classname="org.jacoco.ant.ReportTask" classpathref="maven.plugin.classpath" />
 								<report>
 									<executiondata>
-										<file file="${project.build.directory}/jacoco.exec"/>
+										<file file="${project.build.directory}/jacoco.exec" />
 									</executiondata>
 									<structure name="${project.name}">
 										<classfiles>
-											<fileset dir="${project.build.directory}/classes"/>
-											<fileset dir="${project.build.directory}/test-classes"/>
+											<fileset dir="${project.build.directory}/classes" />
+											<fileset dir="${project.build.directory}/test-classes" />
 										</classfiles>
 										<sourcefiles encoding="UTF-8">
-											<fileset dir="${project.build.sourceDirectory}"/>
-											<fileset dir="${project.build.testSourceDirectory}"/>
-											<fileset dir="${project.basedir}/src-gen/test/java"/>
+											<fileset dir="${project.build.sourceDirectory}" />
+											<fileset dir="${project.build.testSourceDirectory}" />
+											<fileset dir="${project.basedir}/src-gen/test/java" />
 										</sourcefiles>
 									</structure>
-									<html destdir="${project.build.directory}/site/jacoco-with-tests"/>
-									<xml destfile="${project.build.directory}/site/jacoco-with-tests/jacoco.xml"/>
-									<csv destfile="${project.build.directory}/site/jacoco-with-tests/jacoco.csv"/>
+									<html destdir="${project.build.directory}/site/jacoco-with-tests" />
+									<xml destfile="${project.build.directory}/site/jacoco-with-tests/jacoco.xml" />
+									<csv destfile="${project.build.directory}/site/jacoco-with-tests/jacoco.csv" />
 								</report>
 							</target>
 						</configuration>
