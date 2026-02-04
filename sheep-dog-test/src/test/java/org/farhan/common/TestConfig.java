@@ -31,17 +31,17 @@ import io.cucumber.guice.CucumberModules;
 import io.cucumber.guice.InjectorSource;
 import io.cucumber.java.Before;
 
-public final class GuiceConfig extends AbstractModule implements InjectorSource {
+public final class TestConfig extends AbstractModule implements InjectorSource {
 
 	@Override
 	public Injector getInjector() {
-		return Guice.createInjector(Stage.DEVELOPMENT, CucumberModules.createScenarioModule(), new GuiceConfig());
+		return Guice.createInjector(Stage.DEVELOPMENT, CucumberModules.createScenarioModule(), new TestConfig());
 	}
 
 	@Before
 	public void resetTestProject() throws Exception {
 		SheepDogFactory.instance = new SheepDogFactoryImpl();
-		MockIDE.reset();
+		TestIDEElement.reset();
 	}
 
 	@Override

@@ -52,4 +52,15 @@ public class SheepDogIssueProposal {
 		this.value = value;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SheepDogIssueProposal [id=").append(id);
+		sb.append(", description=").append(description);
+		sb.append(", value=").append(value);
+		sb.append(", qualifiedName=").append(qualifiedName);
+		sb.append("]");
+		return sb.toString();
+	}
+
 }

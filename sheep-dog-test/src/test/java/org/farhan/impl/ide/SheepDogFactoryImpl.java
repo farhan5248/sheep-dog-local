@@ -13,67 +13,73 @@ import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.IText;
 
 public class SheepDogFactoryImpl implements ISheepDogFactory {
 
-	@Override
-	public IStepDefinition createStepDefinition() {
-		return new StepDefinitionImpl();
-	}
+    @Override
+    public ICell createCell() {
+        return new CellImpl();
+    }
 
-	@Override
-	public IStepObject createStepObject() {
-		return new StepObjectImpl();
-	}
+    @Override
+    public IRow createRow() {
+        return new RowImpl();
+    }
 
-	@Override
-	public IStepParameters createStepParameters() {
-		return new StepParametersImpl();
-	}
+    @Override
+    public IStatement createStatement() {
+        return new StatementImpl();
+    }
 
-	@Override
-	public ITestCase createTestCase() {
-		return new TestCaseImpl();
-	}
+    @Override
+    public IStepDefinition createStepDefinition() {
+        return new StepDefinitionImpl();
+    }
 
-	@Override
-	public ITestProject createTestProject() {
-		return new TestProjectImpl();
-	}
+    @Override
+    public IStepObject createStepObject() {
+        return new StepObjectImpl();
+    }
 
-	@Override
-	public ITestSetup createTestSetup() {
-		return new TestSetupImpl();
-	}
+    @Override
+    public IStepParameters createStepParameters() {
+        return new StepParametersImpl();
+    }
 
-	@Override
-	public ITestStep createTestStep() {
-		return new TestStepImpl();
-	}
+    @Override
+    public ITable createTable() {
+        return new TableImpl();
+    }
 
-	@Override
-	public ITestSuite createTestSuite() {
-		return new TestSuiteImpl();
-	}
+    @Override
+    public ITestCase createTestCase() {
+        return new TestCaseImpl();
+    }
 
-	@Override
-	public IStatement createStatement() {
-		return new StatementImpl();
-	}
+    @Override
+    public ITestProject createTestProject() {
+        return new TestProjectImpl();
+    }
 
-	@Override
-	public ITable createTable() {
-		return new TableImpl();
-	}
+    @Override
+    public ITestSetup createTestSetup() {
+        return new TestSetupImpl();
+    }
 
-	@Override
-	public IRow createRow() {
-		return new RowImpl();
-	}
+    @Override
+    public ITestStep createTestStep() {
+        return new TestStepImpl();
+    }
 
-	@Override
-	public ICell createCell() {
-		return new CellImpl();
-	}
+    @Override
+    public ITestSuite createTestSuite() {
+        return new TestSuiteImpl();
+    }
+
+    @Override
+    public IText createText() {
+        return new TextImpl();
+    }
 
 }

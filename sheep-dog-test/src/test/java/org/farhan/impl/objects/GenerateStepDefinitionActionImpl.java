@@ -1,7 +1,6 @@
 package org.farhan.impl.objects;
 
-import org.farhan.common.MockIDE;
-import org.farhan.common.TestObject;
+import org.farhan.common.TestIDEElement;
 import org.farhan.dsl.issues.RowIssueDetector;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueDetector;
@@ -13,27 +12,27 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class GenerateStepDefinitionActionImpl extends TestObject implements GenerateStepDefinitionAction {
+public class GenerateStepDefinitionActionImpl extends TestIDEElement implements GenerateStepDefinitionAction {
 
 	public void transition() {
 		try {
-			if (!TestStepIssueDetector.validateStepObjectNameWorkspace(MockIDE.testStep).isEmpty()) {
-				MockIDE.applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(MockIDE.testStep));
+			if (!TestStepIssueDetector.validateStepObjectNameWorkspace(TestIDEElement.testStep).isEmpty()) {
+				TestIDEElement.applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(TestIDEElement.testStep));
 			}
-			if (!TestStepIssueDetector.validateStepDefinitionNameWorkspace(MockIDE.testStep).isEmpty()) {
-				MockIDE.applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(MockIDE.testStep));
+			if (!TestStepIssueDetector.validateStepDefinitionNameWorkspace(TestIDEElement.testStep).isEmpty()) {
+				TestIDEElement.applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(TestIDEElement.testStep));
 			}
-			if (MockIDE.stepTable != null) {
-				if (!MockIDE.stepTable.getRowList().isEmpty() && MockIDE.stepTable.getRowList().getFirst() != null) {
-					if (!RowIssueDetector.validateCellListWorkspace(MockIDE.testStep.getTable().getRowList().getFirst())
+			if (TestIDEElement.stepTable != null) {
+				if (!TestIDEElement.stepTable.getRowList().isEmpty() && TestIDEElement.stepTable.getRowList().getFirst() != null) {
+					if (!RowIssueDetector.validateCellListWorkspace(TestIDEElement.testStep.getTable().getRowList().getFirst())
 							.isEmpty()) {
-						MockIDE.applyProposal(RowIssueResolver.correctCellListWorkspace(MockIDE.testStep));
+						TestIDEElement.applyProposal(RowIssueResolver.correctCellListWorkspace(TestIDEElement.testStep));
 					}
 				}
 			}
-			if (MockIDE.testStep.getText() != null) {
-				if (!TextIssueDetector.validateNameWorkspace(MockIDE.testStep.getText()).isEmpty()) {
-					MockIDE.applyProposal(TextIssueResolver.correctNameWorkspace(MockIDE.testStep));
+			if (TestIDEElement.testStep.getText() != null) {
+				if (!TextIssueDetector.validateNameWorkspace(TestIDEElement.testStep.getText()).isEmpty()) {
+					TestIDEElement.applyProposal(TextIssueResolver.correctNameWorkspace(TestIDEElement.testStep));
 				}
 			}
 		} catch (Exception e) {

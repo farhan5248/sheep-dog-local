@@ -2,8 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.MockIDE;
-import org.farhan.common.TestObject;
+import org.farhan.common.TestIDEElement;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.objects.xtext.ListProposalsAction;
@@ -12,17 +11,17 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListProposalsActionImpl extends TestObject implements ListProposalsAction {
+public class ListProposalsActionImpl extends TestIDEElement implements ListProposalsAction {
 
 	public void transition() {
 		try {
-			if (MockIDE.elementType.contentEquals("Row")) {
-				MockIDE.listProposalsDialog.addAll(RowIssueResolver.suggestCellListWorkspace(MockIDE.testStep));
-			} else if (MockIDE.elementType.contentEquals("Test Step")) {
-				MockIDE.listProposalsDialog
-						.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(MockIDE.testStep));
-				MockIDE.listProposalsDialog
-						.addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace(MockIDE.testStep));
+			if (TestIDEElement.isElementType("Row")) {
+				TestIDEElement.listProposalsDialog.addAll(RowIssueResolver.suggestCellListWorkspace(TestIDEElement.testStep));
+			} else if (TestIDEElement.isElementType("Test Step")) {
+				TestIDEElement.listProposalsDialog
+						.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(TestIDEElement.testStep));
+				TestIDEElement.listProposalsDialog
+						.addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace(TestIDEElement.testStep));
 			} else {
 				Assertions.fail("Unknown Element Type");
 			}
@@ -33,6 +32,6 @@ public class ListProposalsActionImpl extends TestObject implements ListProposals
 
 	@Override
 	public void setElementType(HashMap<String, String> keyMap) {
-		MockIDE.elementType = keyMap.get("Element Type");
+		TestIDEElement.setElementType(keyMap.get("Element Type"));
 	}
 }

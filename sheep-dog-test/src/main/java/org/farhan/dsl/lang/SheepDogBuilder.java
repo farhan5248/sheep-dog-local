@@ -11,7 +11,7 @@ public class SheepDogBuilder {
     private static final Logger logger = LoggerFactory.getLogger(SheepDogBuilder.class);
 
     public static ICell createCell(IRow parent, String name) {
-        logger.debug("Entering createCell");
+        logger.debug("Entering createCell for name: {}", name);
         ICell cell = SheepDogFactory.instance.createCell();
         cell.setName(name);
         if (parent != null)
@@ -114,6 +114,16 @@ public class SheepDogBuilder {
             parent.setTable(table);
         logger.debug("Exiting createTable");
         return table;
+    }
+
+    public static IText createText(ITestStep parent, String name) {
+        logger.debug("Entering createText");
+        IText text = SheepDogFactory.instance.createText();
+        text.setName(name);
+        if (parent != null)
+            parent.setText(text);
+        logger.debug("Exiting createText");
+        return text;
     }
 
     public static ITestCase createTestCase(ITestSuite parent, String name) {
