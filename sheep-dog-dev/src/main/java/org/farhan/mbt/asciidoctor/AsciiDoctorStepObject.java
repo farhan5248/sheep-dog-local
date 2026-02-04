@@ -165,7 +165,7 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 			resource.load(content, Collections.EMPTY_MAP);
 			theStepObject = (StepObject) resource.getContents().get(0);
 		} catch (Exception e) {
-			throw new Exception("There was a problem parsing file: " + thePath);
+			throw new Exception("There was a problem parsing file: " + thePath, e);
 		}
 	}
 

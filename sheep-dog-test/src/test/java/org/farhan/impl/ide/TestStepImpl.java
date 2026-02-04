@@ -78,7 +78,9 @@ public class TestStepImpl implements ITestStep {
 
 	@Override
 	public void setStepDefinitionName(String value) {
-		name += " " + value;
+		if (value != null && !value.isEmpty()) {
+			name += " " + value;
+		}
 	}
 
 }

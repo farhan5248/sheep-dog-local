@@ -25,7 +25,11 @@ public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfix
 				return;
 			}
 		}
-		Assertions.fail("No quickfix found with ID that matches the name: " + keyMap.get("Quickfix Name"));
+        StringBuilder sb = new StringBuilder();
+        sb.append("No quickfix found with ID that matches the name: ").append(keyMap.get("Quickfix Name"));
+        sb.append(" and value: ").append(keyMap.get("Quickfix"));
+        sb.append(getListProposalsString(MockIDE.listQuickfixesDialog));
+        Assertions.fail(sb.toString());
 	}
 
 	@Override
@@ -36,7 +40,11 @@ public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfix
 				return;
 			}
 		}
-		Assertions.fail("No quickfix found with ID: " + keyMap.get("Quickfix Name"));
+        StringBuilder sb = new StringBuilder();
+        sb.append("No quickfix found with ID that matches the name: ").append(keyMap.get("Quickfix Name"));
+        sb.append(" and description: ").append(keyMap.get("Quickfix Description"));
+        sb.append(getListProposalsString(MockIDE.listQuickfixesDialog));
+        Assertions.fail(sb.toString());
 	}
 
 	@Override
@@ -46,7 +54,10 @@ public class ListQuickfixesDialogImpl extends TestObject implements ListQuickfix
 				return;
 			}
 		}
-		Assertions.fail("No quickfix found with ID: " + keyMap.get("Quickfix Name"));
+        StringBuilder sb = new StringBuilder();
+        sb.append("No quickfix found with ID that matches the name: ").append(keyMap.get("Quickfix Name"));
+        sb.append(getListProposalsString(MockIDE.listQuickfixesDialog));
+        Assertions.fail(sb.toString());
 	}
 
 }

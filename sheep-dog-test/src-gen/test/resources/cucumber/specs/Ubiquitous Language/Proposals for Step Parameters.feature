@@ -5,7 +5,7 @@ Feature: Proposals for Step Parameters
   TODO Add text string tests.
   If the step definition has step parameters, they'll be proposed.
 
-  Scenario: No proposal for absent object
+  Scenario: No existing step object
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                           |
@@ -15,8 +15,7 @@ Feature: Proposals for Step Parameters
           | Row          |
      Then The xtext plugin list proposals dialog will be empty
 
-  @single-test
-  Scenario: No proposal for absent step definition
+  Scenario: No existing step definition
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                           |
@@ -29,7 +28,20 @@ Feature: Proposals for Step Parameters
           | Row          |
      Then The xtext plugin list proposals dialog will be empty
 
-  Scenario: List parameters for a step definition if it exists
+  Scenario: Has existing step definition without parameters
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name  | Parameters |
+          | daily batchjob/Input file.feature | is created as follows | H1         |
+     When The xtext plugin list proposals action is performed as follows
+          | Element Type |
+          | Row          |
+     Then The xtext plugin list proposals dialog will be empty
+
+  Scenario: Has existing step definition with parameters
 
     TODO I should add more parameter combinations to describe this better.
 
