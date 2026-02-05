@@ -41,7 +41,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
 	@Before
 	public void resetTestProject() throws Exception {
 		SheepDogFactory.instance = new SheepDogFactoryImpl();
-		TestIDEElement.reset();
+		TestIDEObject.reset();
 	}
 
 	@Override

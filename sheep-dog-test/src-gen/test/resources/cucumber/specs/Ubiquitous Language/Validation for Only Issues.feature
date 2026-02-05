@@ -13,8 +13,8 @@ Feature: Validation for Only Issues
           | Object Name                       | Step Definition Name | Parameters       |
           | daily batchjob/Input file.feature | is present           | lowercase header |
      When The xtext plugin validate action is performed as follows
-          | Element Type |
-          | Cell         |
+          | Selected Element                                              |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           Name should start with a capital
@@ -26,8 +26,8 @@ Feature: Validation for Only Issues
           | Test Suite Name   |
           | lowercase process |
      When The xtext plugin validate action is performed as follows
-          | Element Type |
-          | Test Suite   |
+          | Selected Element |
+          | TestSuite/1      |
      Then The xtext plugin validate dialog will be set as follows
           """
           Name should start with a capital
@@ -39,8 +39,8 @@ Feature: Validation for Only Issues
           | Test Suite Name | Test Case Name      |
           | Process2        | lowercase test case |
      When The xtext plugin validate action is performed as follows
-          | Element Type        |
-          | Test Step Container |
+          | Selected Element                |
+          | TestSuite/1/TestStepContainer/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           Name should start with a capital
@@ -52,8 +52,8 @@ Feature: Validation for Only Issues
           | Step Name      |
           | The is present |
      When The xtext plugin validate action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           Every test case must have at least one component specified.
@@ -72,8 +72,8 @@ Feature: Validation for Only Issues
           | Step Name                     |
           | The daily batchjob Input file |
      When The xtext plugin validate action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           After specifying the step object name, a step definition name is specified.

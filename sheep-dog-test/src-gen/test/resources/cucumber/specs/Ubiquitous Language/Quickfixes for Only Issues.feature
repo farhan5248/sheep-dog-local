@@ -17,8 +17,8 @@ Feature: Quickfixes for Only Issues
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type |
-          | Cell         |
+          | Selected Element                                              |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell/1 |
      Then The xtext plugin list quickfixes dialog will be set as follows
           | Quickfix Name        | Quickfix Description                    | Quickfix         |
           | Capitalize cell name | Capitalize the first letter of the name | Lowercase header |
@@ -33,8 +33,8 @@ Feature: Quickfixes for Only Issues
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type |
-          | Test Suite   |
+          | Selected Element |
+          | TestSuite/1      |
      Then The xtext plugin list quickfixes dialog will be set as follows
           | Quickfix Name              | Quickfix Description                    | Quickfix          |
           | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
@@ -49,8 +49,8 @@ Feature: Quickfixes for Only Issues
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type        |
-          | Test Step Container |
+          | Selected Element                |
+          | TestSuite/1/TestStepContainer/1 |
      Then The xtext plugin list quickfixes dialog will be set as follows
           | Quickfix Name                       | Quickfix Description                    | Quickfix            |
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
@@ -72,8 +72,8 @@ Feature: Quickfixes for Only Issues
           Examples are: "src/test/resources/file.txt file" or "Home page"
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list quickfixes dialog will be empty
 
   Scenario: Test step must have a valid step definition name
@@ -98,7 +98,7 @@ Feature: Quickfixes for Only Issues
           Examples are: "after the next day" or "on time"
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list quickfixes dialog will be empty
 

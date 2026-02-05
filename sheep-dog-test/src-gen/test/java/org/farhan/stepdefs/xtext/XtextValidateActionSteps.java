@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
-import org.farhan.common.TestStepdef;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.xtext.ValidateAction;
 
 @ScenarioScoped
-public class XtextValidateActionSteps extends TestStepdef {
+public class XtextValidateActionSteps extends TestSteps {
 
     @Inject
     public XtextValidateActionSteps(ValidateAction object) {

@@ -19,8 +19,8 @@ Feature: Proposals for Step Objects from Previous Steps
           | Step Name |
           | empty     |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                     | Suggestion Name            |
           | The Output file                | Output file                |
@@ -33,8 +33,8 @@ Feature: Proposals for Step Objects from Previous Steps
           | The daily batchjob Output file is present |
           | empty                                     |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/2 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                     | Suggestion Name            |
           | The Output file                | Output file                |
@@ -50,8 +50,8 @@ Feature: Proposals for Step Objects from Previous Steps
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/2 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                     | Suggestion Name            |
           | The Output file                | Output file                |
@@ -65,8 +65,8 @@ Feature: Proposals for Step Objects from Previous Steps
           | The daily batchjob Output file is present |
           | The daily batchjob                        |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/2 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                     | Suggestion Name            |
           | The Output file                | Output file                |
@@ -82,8 +82,8 @@ Feature: Proposals for Step Objects from Previous Steps
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/2 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                     | Suggestion Name            |
           | The Output file                | Output file                |

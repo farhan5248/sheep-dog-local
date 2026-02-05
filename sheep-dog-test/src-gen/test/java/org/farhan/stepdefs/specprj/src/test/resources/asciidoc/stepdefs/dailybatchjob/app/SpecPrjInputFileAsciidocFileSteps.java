@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
-import org.farhan.common.TestStepdef;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile;
 
 @ScenarioScoped
-public class SpecPrjInputFileAsciidocFileSteps extends TestStepdef {
+public class SpecPrjInputFileAsciidocFileSteps extends TestSteps {
 
     @Inject
     public SpecPrjInputFileAsciidocFileSteps(InputFileAsciidocFile object) {

@@ -15,8 +15,8 @@ Feature: Validation for File Issues
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
      When The xtext plugin validate action is performed as follows
-          | Element Type        | Selected Step |
-          | Test Step Container | 1             |
+          | Selected Element                |
+          | TestSuite/1/TestStepContainer/1 |
      Then The xtext plugin validate dialog will be empty
 
   Scenario: No component in the first step triggers an error
@@ -29,8 +29,8 @@ Feature: Validation for File Issues
           | The Input file is present                   |
           | The daily batchjob Input file is downloaded |
      When The xtext plugin validate action is performed as follows
-          | Element Type        | Selected Step |
-          | Test Step Container | 1             |
+          | Selected Element                |
+          | TestSuite/1/TestStepContainer/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           The first step must have a component

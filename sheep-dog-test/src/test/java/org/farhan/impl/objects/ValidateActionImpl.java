@@ -2,88 +2,74 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestIDEElement;
+import org.farhan.common.TestIDEObject;
 import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.issues.RowIssueDetector;
 import org.farhan.dsl.issues.TestStepContainerIssueDetector;
 import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.issues.TestSuiteIssueDetector;
 import org.farhan.dsl.issues.TextIssueDetector;
-import org.farhan.impl.ide.TestStepImpl;
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.ITestStepContainer;
+import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.IText;
 import org.farhan.objects.xtext.ValidateAction;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ValidateActionImpl extends TestIDEElement implements ValidateAction {
+public class ValidateActionImpl extends TestIDEObject implements ValidateAction {
 
     public void transition() {
         try {
-            if (TestIDEElement.isElementType("Cell")) {
-                if (TestIDEElement.validateDialog.isEmpty()) {
-                    if (TestIDEElement.testStep.getTable() != null) {
-                        if (TestIDEElement.testStep.getTable().getRowList() != null) {
-                            if (TestIDEElement.testStep.getTable().getRowList().getFirst() != null) {
-                                if (TestIDEElement.testStep.getTable().getRowList().getFirst().getCellList() != null) {
-                                    if (TestIDEElement.testStep.getTable().getRowList().getFirst().getCellList()
-                                            .getFirst() != null) {
-                                        TestIDEElement.validateDialog = CellIssueDetector
-                                                .validateNameOnly(TestIDEElement.testStep.getTable().getRowList()
-                                                        .getFirst().getCellList().getFirst());
-                                    }
-                                }
+            if (TestIDEObject.selectedElement.contains("Cell/")) {
+                ICell cell = (ICell) TestIDEObject.focus;
+                if (TestIDEObject.validateDialog.isEmpty()) {
+                    TestIDEObject.validateDialog = CellIssueDetector.validateNameOnly(cell);
+                }
+            } else if (TestIDEObject.selectedElement.contains("Row/")) {
+                IRow row = (IRow) TestIDEObject.focus;
+                if (TestIDEObject.validateDialog.isEmpty()) {
+                    TestIDEObject.validateDialog = RowIssueDetector.validateCellListWorkspace(row);
+                }
+            } else if (TestIDEObject.selectedElement.contains("Text/")) {
+                IText text = (IText) TestIDEObject.focus;
+                if (TestIDEObject.validateDialog.isEmpty()) {
+                    TestIDEObject.validateDialog = TextIssueDetector.validateNameWorkspace(text);
+                }
+            } else if (TestIDEObject.selectedElement.contains("TestStep/")) {
+                ITestStep testStep = (ITestStep) TestIDEObject.focus;
+                if (TestIDEObject.validateDialog.isEmpty()) {
+                    TestIDEObject.validateDialog = TestStepIssueDetector.validateStepObjectNameOnly(testStep);
+                    if (TestIDEObject.validateDialog.isEmpty()) {
+                        TestIDEObject.validateDialog = TestStepIssueDetector.validateStepDefinitionNameOnly(testStep);
+                        if (TestIDEObject.validateDialog.isEmpty()) {
+                            TestIDEObject.validateDialog = TestStepIssueDetector
+                                    .validateStepObjectNameWorkspace(testStep);
+                            if (TestIDEObject.validateDialog.isEmpty()) {
+                                TestIDEObject.validateDialog = TestStepIssueDetector
+                                        .validateStepDefinitionNameWorkspace(testStep);
                             }
                         }
                     }
                 }
-            } else if (TestIDEElement.isElementType("Row")) {
-                if (TestIDEElement.validateDialog.isEmpty()) {
-                    if (TestIDEElement.testStep.getTable() != null) {
-                        if (TestIDEElement.testStep.getTable().getRowList() != null) {
-                            if (TestIDEElement.testStep.getTable().getRowList().getFirst() != null) {
-                                TestIDEElement.validateDialog = RowIssueDetector.validateCellListWorkspace(
-                                        TestIDEElement.testStep.getTable().getRowList().getFirst());
-                            }
-                        }
+            } else if (TestIDEObject.selectedElement.contains("TestStepContainer/")) {
+                ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
+                if (TestIDEObject.validateDialog.isEmpty()) {
+                    TestIDEObject.validateDialog = TestStepContainerIssueDetector
+                            .validateTestStepListFile(testStepContainer);
+                    if (TestIDEObject.validateDialog.isEmpty()) {
+                        TestIDEObject.validateDialog = TestStepContainerIssueDetector
+                                .validateNameOnly(testStepContainer);
                     }
                 }
-            } else if (TestIDEElement.isElementType("Text")) {
-                if (TestIDEElement.validateDialog.isEmpty()) {
-                    if (TestIDEElement.testStep.getText() != null) {
-                        TestIDEElement.validateDialog = TextIssueDetector
-                                .validateNameWorkspace(TestIDEElement.testStep.getText());
-                    }
-                }
-            } else if (TestIDEElement.isElementType("Test Step")) {
-                if (TestIDEElement.validateDialog.isEmpty()) {
-                    TestIDEElement.validateDialog = TestStepIssueDetector
-                            .validateStepObjectNameOnly(TestIDEElement.testStep);
-                    if (TestIDEElement.validateDialog.isEmpty()) {
-                        TestIDEElement.validateDialog = TestStepIssueDetector
-                                .validateStepDefinitionNameOnly(TestIDEElement.testStep);
-                        if (TestIDEElement.validateDialog.isEmpty()) {
-                            TestIDEElement.validateDialog = TestStepIssueDetector
-                                    .validateStepObjectNameWorkspace(TestIDEElement.testStep);
-                            if (TestIDEElement.validateDialog.isEmpty()) {
-                                TestIDEElement.validateDialog = TestStepIssueDetector
-                                        .validateStepDefinitionNameWorkspace(TestIDEElement.testStep);
-                            }
-                        }
-                    }
-                }
-            } else if (TestIDEElement.isElementType("Test Step Container")) {
-                if (TestIDEElement.validateDialog.isEmpty()) {
-                    TestIDEElement.validateDialog = TestStepContainerIssueDetector
-                            .validateTestStepListFile(TestIDEElement.testStepContainer);
-                    if (TestIDEElement.validateDialog.isEmpty()) {
-                        TestIDEElement.validateDialog = TestStepContainerIssueDetector
-                                .validateNameOnly(TestIDEElement.testStepContainer);
-                    }
-                }
-            } else if (TestIDEElement.isElementType("Test Suite")) {
-                if (TestIDEElement.validateDialog.isEmpty()) {
-                    TestIDEElement.validateDialog = TestSuiteIssueDetector.validateNameOnly(TestIDEElement.testSuite);
+            } else if (TestIDEObject.selectedElement.contains("TestSuite/")) {
+                ITestSuite testSuite = (ITestSuite) TestIDEObject.focus;
+                if (TestIDEObject.validateDialog.isEmpty()) {
+                    TestIDEObject.validateDialog = TestSuiteIssueDetector.validateNameOnly(testSuite);
                 }
             } else {
                 Assertions.fail("Unknown Element Type");
@@ -94,13 +80,7 @@ public class ValidateActionImpl extends TestIDEElement implements ValidateAction
     }
 
     @Override
-    public void setElementType(HashMap<String, String> keyMap) {
-        TestIDEElement.setElementType(keyMap.get("Element Type"));
-    }
-
-    @Override
-    public void setSelectedStep(HashMap<String, String> keyMap) {
-        TestIDEElement.testStep = (TestStepImpl) TestIDEElement.testStep.getParent().getTestStepList()
-                .get(Integer.valueOf(keyMap.get("Selected Step")) - 1);
+    public void setSelectedElement(HashMap<String, String> keyMap) {
+        setSelectedElement(keyMap.get("Selected Element"));
     }
 }

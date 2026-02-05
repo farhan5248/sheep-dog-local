@@ -11,8 +11,8 @@ Feature: Proposals for Step Parameters
           | Step Name                                           |
           | The daily batchjob Input file is created as follows |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Row          |
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
   Scenario: No existing step definition
@@ -24,8 +24,8 @@ Feature: Proposals for Step Parameters
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Row          |
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
   Scenario: Has existing step definition without parameters
@@ -37,8 +37,8 @@ Feature: Proposals for Step Parameters
           | Object Name                       | Step Definition Name  | Parameters |
           | daily batchjob/Input file.feature | is created as follows | H1         |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Row          |
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
   Scenario: Has existing step definition with parameters
@@ -52,8 +52,8 @@ Feature: Proposals for Step Parameters
           | Object Name                       | Step Definition Name  | Parameters |
           | daily batchjob/Input file.feature | is created as follows | H1         |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Row          |
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion | Suggestion Name |
           | \| H1      | \| H1           |

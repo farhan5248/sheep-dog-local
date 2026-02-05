@@ -16,8 +16,8 @@ Feature: Create Documentation
           | Step Name                 |
           | The Input file is present |
      When The xtext plugin validate action is performed as follows
-          | Element Type        | Selected Step |
-          | Test Step Container | 1             |
+          | Selected Element                |
+          | TestSuite/1/TestStepContainer/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           The first step must have a component
@@ -34,8 +34,8 @@ Feature: Create Documentation
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is absent            |
      When The xtext plugin validate action is performed as follows
-          | Element Type | Selected Step |
-          | Test Step    | 1             |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           The step definition doesn't exist for the step object

@@ -6,7 +6,8 @@ Feature: Proposals for Step Objects from Existing Ones
   The general idea behind these tests is that when no object is specified in the test step, you get a list of proposals.
   The variables are:
   1. Component: There's no suggestions if there's no component.
-  2. Component Object: If there's a component, propose objects that it has.
+  2. Component
+  If there's a component, propose objects that it has.
   3. Previous Object in Test Case: If there's a previous object with the fully qualified name, then only the name is suggested
   4. Test Setup: The test setup section is checked if it has a component or object specified.
 
@@ -18,8 +19,8 @@ Feature: Proposals for Step Objects from Existing Ones
           | Step Name |
           | empty     |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be empty
 
   Scenario: No component has existing
@@ -31,8 +32,8 @@ Feature: Proposals for Step Objects from Existing Ones
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                    | Suggestion Name |
           | The daily batchjob Input file | Input file      |
@@ -43,8 +44,8 @@ Feature: Proposals for Step Objects from Existing Ones
           | Step Name          |
           | The daily batchjob |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be empty
 
   Scenario: Has component has existing
@@ -56,8 +57,8 @@ Feature: Proposals for Step Objects from Existing Ones
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                    | Suggestion Name |
           | The daily batchjob Input file | Input file      |

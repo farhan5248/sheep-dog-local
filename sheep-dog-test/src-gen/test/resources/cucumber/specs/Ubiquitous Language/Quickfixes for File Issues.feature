@@ -16,8 +16,8 @@ Feature: Quickfixes for File Issues
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
       And The xtext plugin validate dialog is empty
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type        |
-          | Test Step Container |
+          | Selected Element                |
+          | TestSuite/1/TestStepContainer/1 |
      Then The xtext plugin list quickfixes dialog will be empty
 
   Scenario: No component in the first step triggers an error
@@ -34,7 +34,7 @@ Feature: Quickfixes for File Issues
           The first step must have a component
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type        |
-          | Test Step Container |
+          | Selected Element                |
+          | TestSuite/1/TestStepContainer/1 |
      Then The xtext plugin list quickfixes dialog will be empty
 

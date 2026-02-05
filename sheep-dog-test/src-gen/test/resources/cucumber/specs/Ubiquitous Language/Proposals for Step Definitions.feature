@@ -16,8 +16,8 @@ Feature: Proposals for Step Definitions
           | Step Name                     |
           | The daily batchjob Input file |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Row          |
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
   Scenario: Has component no existing step definition
@@ -26,8 +26,8 @@ Feature: Proposals for Step Definitions
           | Step Name                     |
           | The daily batchjob Input file |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Row          |
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
   Scenario: Has component has existing step definition
@@ -39,8 +39,8 @@ Feature: Proposals for Step Definitions
           | Object Name                       | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion | Suggestion Name | Suggestion Description |
           | is present | is present      | Creates empty file     |
@@ -55,8 +55,8 @@ Feature: Proposals for Step Definitions
           | Object Name                       | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion | Suggestion Name | Suggestion Description |
           | is present | is present      | Creates empty file     |

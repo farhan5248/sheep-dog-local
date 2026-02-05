@@ -10,38 +10,38 @@ import org.farhan.dsl.lang.ITable;
 
 public class RowImpl implements IRow {
 
-	List<CellImpl> cellList;
-	TableImpl parent;
+    List<CellImpl> cellList;
+    TableImpl parent;
 
-	RowImpl() {
-		cellList = new ArrayList<CellImpl>();
-	}
+    RowImpl() {
+        cellList = new ArrayList<CellImpl>();
+    }
 
-	@Override
-	public ITable getParent() {
-		return parent;
-	}
+    @Override
+    public ITable getParent() {
+        return parent;
+    }
 
-	@Override
-	public List<ICell> getCellList() {
-		return Collections.unmodifiableList(cellList);
-	}
+    @Override
+    public List<ICell> getCellList() {
+        return Collections.unmodifiableList(cellList);
+    }
 
-	@Override
-	public ICell getCell(int index) {
-		throw new UnsupportedOperationException("getCell(int index) is not implemented");
-	}
+    @Override
+    public ICell getCell(int index) {
+        return cellList.get(index);
+    }
 
-	@Override
-	public ICell getCell(String name) {
-		throw new UnsupportedOperationException("getCell(String name) is not implemented");
-	}
+    @Override
+    public ICell getCell(String name) {
+        throw new UnsupportedOperationException("getCell(String name) is not implemented");
+    }
 
-	@Override
-	public boolean addCell(ICell value) {
-		cellList.add((CellImpl) value);
-		cellList.getLast().parent = this;
-		return true;
-	}
+    @Override
+    public boolean addCell(ICell value) {
+        cellList.add((CellImpl) value);
+        cellList.getLast().parent = this;
+        return true;
+    }
 
 }

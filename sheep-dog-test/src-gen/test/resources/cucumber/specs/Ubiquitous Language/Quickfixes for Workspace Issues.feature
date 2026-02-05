@@ -17,8 +17,8 @@ Feature: Quickfixes for Workspace Issues
           The step object file doesn't exist for the component
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list quickfixes dialog will be set as follows
           | Quickfix Name                                           | Quickfix Description |
           | Generate Input file - daily batchjob/Input file.feature | empty                |
@@ -36,8 +36,8 @@ Feature: Quickfixes for Workspace Issues
           The step definition doesn't exist for the step object
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list quickfixes dialog will be set as follows
           | Quickfix Name | Quickfix Description | Quickfix  |
           | is absent     | empty                | is absent |
@@ -58,8 +58,8 @@ Feature: Quickfixes for Workspace Issues
           The step parameters don't exist for the step definition
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type |
-          | Row          |
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list quickfixes dialog will be set as follows
           | Quickfix Name      | Quickfix Description | Quickfix           |
           | \| Existing Header | empty                | \| Existing Header |
@@ -81,8 +81,8 @@ Feature: Quickfixes for Workspace Issues
           The step parameters don't exist for the step definition
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type |
-          | Text         |
+          | Selected Element                                 |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
      Then The xtext plugin list quickfixes dialog will be set as follows
           | Quickfix Name       | Quickfix Description |
           | Generate \| Content | empty                |
@@ -99,7 +99,7 @@ Feature: Quickfixes for Workspace Issues
           | daily batchjob/app/Input file.feature | is absent            |
       And The xtext plugin validate dialog is empty
      When The xtext plugin list quickfixes action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list quickfixes dialog will be empty
 

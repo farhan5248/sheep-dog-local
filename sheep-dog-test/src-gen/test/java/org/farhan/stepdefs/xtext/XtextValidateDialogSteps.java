@@ -3,11 +3,11 @@ package org.farhan.stepdefs.xtext;
 import com.google.inject.Inject;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
-import org.farhan.common.TestStepdef;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.xtext.ValidateDialog;
 
 @ScenarioScoped
-public class XtextValidateDialogSteps extends TestStepdef {
+public class XtextValidateDialogSteps extends TestSteps {
 
     @Inject
     public XtextValidateDialogSteps(ValidateDialog object) {

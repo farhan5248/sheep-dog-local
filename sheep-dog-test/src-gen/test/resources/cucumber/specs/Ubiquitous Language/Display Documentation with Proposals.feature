@@ -4,7 +4,6 @@ Feature: Display Documentation with Proposals
   \@sheep-dog-test
   Just as you can see the associated Javadoc for classes and attributes, you can attach documentation about the objects and step-definitions.
 
-  @single-test
   Scenario: Display Step Object documentation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
@@ -14,8 +13,8 @@ Feature: Display Documentation with Proposals
           | Object Name                       | Object Description |
           | daily batchjob/Input file.feature | Description\n      |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                    | Suggestion Name | Suggestion Description |
           | The daily batchjob Input file | Input file      | Description\n          |
@@ -23,20 +22,18 @@ Feature: Display Documentation with Proposals
   Scenario: Display empty tooltip if there's no documentation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                |
-          | The daily batchjob Input file is present |
-          | empty                                    |
+          | Step Name          |
+          | The daily batchjob |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Object Description |
           | daily batchjob/Input file.feature | empty              |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
-          | Suggestion     | Suggestion Name | Suggestion Description                                |
-          | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
+          | Suggestion                    | Suggestion Name | Suggestion Description |
+          | The daily batchjob Input file | Input file      | empty                  |
 
-  @single-test
   Scenario: Display non-existing object references
 
     If an object is mentioned in a test step but isn't created in the stepdefs folder yet, it can still be used.
@@ -47,8 +44,8 @@ Feature: Display Documentation with Proposals
           | The daily batchjob Input file is present |
           | empty                                    |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/2 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion     | Suggestion Name | Suggestion Description                                |
           | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
@@ -61,16 +58,15 @@ Feature: Display Documentation with Proposals
     TODO I guess I could put the full name and the documentation if it exists.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                |
-          | The daily batchjob Input file is present |
-          | empty                                    |
+          | Step Name          |
+          | The daily batchjob |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Object Description |
           | daily batchjob/Input file.feature | Description        |
      When The xtext plugin list proposals action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
-          | Suggestion     | Suggestion Name | Suggestion Description                                |
-          | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
+          | Suggestion                    | Suggestion Name | Suggestion Description |
+          | The daily batchjob Input file | Input file      | Description            |
 

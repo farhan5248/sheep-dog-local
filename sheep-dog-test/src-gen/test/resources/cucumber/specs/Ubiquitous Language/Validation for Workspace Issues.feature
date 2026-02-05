@@ -15,8 +15,8 @@ Feature: Validation for Workspace Issues
           | Step Name                                |
           | The daily batchjob Input file is present |
      When The xtext plugin validate action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           The step object file doesn't exist for the component
@@ -31,8 +31,8 @@ Feature: Validation for Workspace Issues
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is absent            |
      When The xtext plugin validate action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           The step definition doesn't exist for the step object
@@ -47,8 +47,8 @@ Feature: Validation for Workspace Issues
           | Object Name                       | Step Definition Name | Parameters      |
           | daily batchjob/Input file.feature | is set as follows    | Existing Header |
      When The xtext plugin validate action is performed as follows
-          | Element Type |
-          | Row          |
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin validate dialog will be set as follows
           """
           The step parameters don't exist for the step definition
@@ -63,8 +63,8 @@ Feature: Validation for Workspace Issues
           | Object Name                       | Step Definition Name | Parameters      |
           | daily batchjob/Input file.feature | is set as follows    | Existing Header |
      When The xtext plugin validate action is performed as follows
-          | Element Type |
-          | Text         |
+          | Selected Element                                 |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
      Then The xtext plugin validate dialog will be set as follows
           """
           The step parameters don't exist for the step definition
@@ -81,7 +81,7 @@ Feature: Validation for Workspace Issues
           | daily batchjob/app/Input file.feature | is present           |
           | daily batchjob/app/Input file.feature | is absent            |
      When The xtext plugin validate action is performed as follows
-          | Element Type |
-          | Test Step    |
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin validate dialog will be empty
 
