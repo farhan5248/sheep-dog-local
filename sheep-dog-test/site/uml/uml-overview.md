@@ -23,4 +23,22 @@
 
 ## Pattern Variables
 
-See `sheep-dog-main/site/impl/impl-xtext.md` Domain Terminology section for pattern variable definitions.
+Pattern variables used in UML files to represent families of classes following similar patterns.
+
+1. **{Language}** - The name of the Xtext grammar/language implementation
+   - Values: `(SheepDog)`
+   - Used in: {Language}Builder, {Language}Factory, I{Language}Factory, {Language}IssueProposal
+
+2. **{Type}** - Grammar types (non-terminal rules) defined in the .xtext file
+   - Values: `(And|Cell|Given|Model|Row|Statement|StatementList|StepDefinition|StepObject|StepParameters|Table|TestCase|TestData|TestProject|TestSetup|TestStep|TestStepContainer|TestSuite|Text|Then|When)`
+   - Used in: I{Type}, create{Type}(), get{Type}(), {Type}Utility, {Type}IssueTypes, {Type}IssueDetector, {Type}IssueResolver
+
+3. **{Assignment}** - Named assignments within grammar rules
+   - Values: `(name|[a-z][a-zA-Z0-9]*List)`
+   - Used in: validate{Assignment}Only(), validate{Assignment}File(), validate{Assignment}Workspace(), get{Assignment}(), set{Assignment}()
+
+4. **{Issue}** - Issue scope levels from {Type}IssueTypes enum
+   - Values: `(Only|File|Workspace)`
+   - Used in: validate{Assignment}{Issue}()
+
+See `sheep-dog-main/site/impl/impl-xtext.md` Domain Terminology section for additional context.

@@ -1,5 +1,41 @@
 # UML Package Patterns
 
+## ALL interfaces follow I{Type} naming pattern
+
+All grammar type interfaces across all packages must start with 'I' followed by PascalCase type name.
+
+**Regex**: `^I[A-Z][a-zA-Z0-9]*$`
+
+**Examples**
+- ICell, IRow, ITable (in org.farhan.dsl.lang)
+- ITestStep, ITestProject, IStepDefinition (in org.farhan.dsl.lang)
+
+## ALL classes with IssueDetector suffix follow {Type}IssueDetector pattern
+
+**Regex**: `^[A-Z][a-zA-Z0-9]*IssueDetector$`
+
+**Examples**
+- TestStepIssueDetector
+- TextIssueDetector
+- CellIssueDetector
+
+## ALL classes with IssueResolver suffix follow {Type}IssueResolver pattern
+
+**Regex**: `^[A-Z][a-zA-Z0-9]*IssueResolver$`
+
+**Examples**
+- TestStepIssueResolver
+- TextIssueResolver
+
+## ALL classes with Utility suffix follow {Type}Utility pattern
+
+**Regex**: `^[A-Z][a-zA-Z0-9]*Utility$`
+
+**Examples**
+- TestStepUtility
+- StepDefinitionUtility
+- StatementUtility
+
 ## org.farhan.dsl.issues
 
 ### {Language}IssueProposal
