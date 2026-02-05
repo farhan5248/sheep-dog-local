@@ -1,146 +1,113 @@
 # UML Package Patterns
 
-## ALL interfaces follow I{Type} naming pattern
-
-All grammar type interfaces across all packages must start with 'I' followed by PascalCase type name.
-
-**Regex**: `^I[A-Z][a-zA-Z0-9]*$`
-
-**Examples**
-- ICell, IRow, ITable (in org.farhan.dsl.lang)
-- ITestStep, ITestProject, IStepDefinition (in org.farhan.dsl.lang)
-
-## ALL classes with IssueDetector suffix follow {Type}IssueDetector pattern
-
-**Regex**: `^[A-Z][a-zA-Z0-9]*IssueDetector$`
-
-**Examples**
-- TestStepIssueDetector
-- TextIssueDetector
-- CellIssueDetector
-
-## ALL classes with IssueResolver suffix follow {Type}IssueResolver pattern
-
-**Regex**: `^[A-Z][a-zA-Z0-9]*IssueResolver$`
-
-**Examples**
-- TestStepIssueResolver
-- TextIssueResolver
-
-## ALL classes with Utility suffix follow {Type}Utility pattern
-
-**Regex**: `^[A-Z][a-zA-Z0-9]*Utility$`
-
-**Examples**
-- TestStepUtility
-- StepDefinitionUtility
-- StatementUtility
-
 ## org.farhan.dsl.issues
 
-### {Language}IssueProposal
+### ONE {Language}IssueProposal
 
-Always has a class named {Language}IssueProposal
+Always has a class named {Language}IssueProposal that represents quick fix proposals for validation issues.
 
-**Examples**
-- SheepDogIssueProposal
+**Regex**: `^{Language}IssueProposal$`
+ - `SheepDogIssueProposal`
 
-### {Type}IssueTypes
+### SOME {Type}IssueTypes
 
-Might have one class per {Type} named {Type}IssueTypes
+Might have one class per {Type} named {Type}IssueTypes that defines enum constants for issue types.
 
-**Examples**
-- TestStepIssueTypes
-- TextIssueTypes
+**Regex**: `^{Type}IssueTypes$`
+ - `TestStepIssueTypes`
+ - `TextIssueTypes`
 
-### {Type}IssueDetector
+### SOME {Type}IssueDetector
 
-Might have one class per {Type} named {Type}IssueDetector
+Might have one class per {Type} named {Type}IssueDetector that validates grammar assignments.
 
-**Examples**
-- TestStepIssueDetector
-- TextIssueDetector
+**Regex**: `^{Type}IssueDetector$`
+ - `TestStepIssueDetector`
+ - `TextIssueDetector`
 
-### {Type}IssueResolver
+### SOME {Type}IssueResolver
 
-Might have one class per {Type} named {Type}IssueResolver
+Might have one class per {Type} named {Type}IssueResolver that generates quick fix proposals.
 
-**Examples**
-- TestStepIssueResolver
-- TextIssueResolver
+**Regex**: `^{Type}IssueResolver$`
+ - `TestStepIssueResolver`
+ - `TextIssueResolver`
 
-### LoggerFactory
+### ONE LoggerFactory
 
 Always has a class named LoggerFactory that provides loggers to all classes in this package.
 
-**Examples**
-- LoggerFactory
+**Regex**: `^LoggerFactory$`
+ - `LoggerFactory`
 
-### LoggerProvider
+### ONE LoggerProvider
 
 Always has an interface named LoggerProvider that allows external systems to inject custom logger implementations.
 
-**Examples**
-- LoggerProvider
+**Regex**: `^LoggerProvider$`
+ - `LoggerProvider`
 
 ## org.farhan.dsl.lang
 
-### IResourceRepository
+### ONE IResourceRepository
 
-Always has an interface named IResourceRepository
+Always has an interface named IResourceRepository for resource management.
 
-**Examples**
-- IResourceRepository
+**Regex**: `^IResourceRepository$`
+ - `IResourceRepository`
 
-### ITestProject
+### ONE ITestProject
 
-Always has an interface named ITestProject
+Always has an interface named ITestProject representing the root of the test project hierarchy.
 
-**Examples**
-- ITestProject
+**Regex**: `^ITestProject$`
+ - `ITestProject`
 
-### {Language}Builder
+### ONE {Language}Builder
 
-Always has a class named {Language}Builder
+Always has a class named {Language}Builder that creates and initializes grammar elements.
 
-**Examples**
-- SheepDogBuilder
+**Regex**: `^{Language}Builder$`
+ - `SheepDogBuilder`
 
-### {Language}Factory
+### ONE {Language}Factory
 
-Always has a class named {Language}Factory
+Always has a class named {Language}Factory that creates grammar elements without initialization.
 
-**Examples**
-- SheepDogFactory
+**Regex**: `^{Language}Factory$`
+ - `SheepDogFactory`
 
-### I{Language}Factory
+### ONE I{Language}Factory
 
-Always has an interface named I{Language}Factory
+Always has an interface named I{Language}Factory defining factory methods for grammar elements.
 
-**Examples**
-- ISheepDogFactory
+**Regex**: `^I{Language}Factory$`
+ - `ISheepDogFactory`
 
-### I{Type}
+### SOME I{Type}
 
-Always has one interface per {Type} named I{Type}
+Always has one interface per {Type} named I{Type} representing grammar elements.
 
-**Examples**
-- ITestStep
-- IText
+**Regex**: `^I{Type}$`
+ - `ITestStep`
+ - `IText`
+ - `ICell`
+ - `IRow`
 
-### {Type}Utility
+### SOME {Type}Utility
 
-Might have one class per {Type} named {Type}Utility
+Might have one class per {Type} named {Type}Utility providing helper methods.
 
-**Examples**
-- TestStepUtility
-- StepDefinitionUtility
+**Regex**: `^{Type}Utility$`
+ - `TestStepUtility`
+ - `StepDefinitionUtility`
+ - `StatementUtility`
 
-### {TypeAspect}Types
+### SOME {TypeAspect}Types
 
-Might have multiple classes per {Type} named {TypeAspect}Types
+Might have multiple classes per {Type} named {TypeAspect}Types defining enum constants for type aspects.
 
-**Examples**
-- TestStepComponentTypes
-- TestStepObjectEdgeTypes
-- TestStepObjectVertexTypes
+**Regex**: `^[A-Z][a-zA-Z0-9]*Types$`
+ - `TestStepComponentTypes`
+ - `TestStepObjectEdgeTypes`
+ - `TestStepObjectVertexTypes`

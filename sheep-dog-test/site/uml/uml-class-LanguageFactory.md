@@ -1,36 +1,10 @@
 # {Language}Factory
 
-## Factory is a singleton accessed via static instance field
+Singleton holder class that provides access to the concrete factory implementation. Contains only the static instance field.
 
-The factory class holds a static instance field that references the concrete implementation. This allows language-independent code to create elements without knowing the specific implementation.
+## ONE attribute names match instance pattern
 
-**Examples**
+The factory class holds a static instance field that references the concrete I{Language}Factory implementation.
 
-- SheepDogFactory
-
-```java
-public static ISheepDogFactory instance;
-```
-
-## Factory creates elements without adding to parent
-
-Unlike {Language}Builder which creates and adds elements to parents, the factory creates standalone element instances. The caller is responsible for adding them to the appropriate parent.
-
-**Methods**
-- `create{Type}({params})`
-
-**Examples**
-
-- SheepDogFactory (via ISheepDogFactory interface)
-
-```java
-IStepDefinition createStepDefinition(String name)
-IStepObject createStepObject(String qualifiedName)
-IStepParameters createStepParameters(IRow row)
-IStepParameters createStepParameters(IText value)
-ITestCase createTestCase(String name)
-ITestProject createTestProject()
-ITestSetup createTestSetup(String name)
-ITestStep createTestStep(String name)
-ITestSuite createTestSuite(String qualifiedName)
-```
+**Regex**: `^public\s+static\s+I{Language}Factory\s+instance$`
+ - `public static ISheepDogFactory instance`

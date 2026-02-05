@@ -1,55 +1,21 @@
 # I{Language}Factory
 
-## Factory interface defines create{Type}() methods
+Interface for creating language-specific grammar elements. Defines parameterless create{Type}() methods that return empty instances.
 
-All factory interfaces follow the `create{Type}()` pattern where each grammar type has a corresponding create method.
+## ALL method names follow create{Type} pattern
 
-**Method Naming Pattern**: `create{Type}()`
-- **{Type}**: The grammar type to create (e.g., StepDefinition, TestCase, Cell)
-- Methods have NO parameters - they create empty instances
-- Caller is responsible for setting attributes and adding to parent
+Factory interface methods create empty instances of grammar types. Return type I{Type} must match method name create{Type}(). Methods are parameterless and return interface types. The {Language}Builder is responsible for setting attributes and adding instances to parent containers.
 
-**Method Signature Rules**:
-- **Return Type**: MUST return interface type I{Type}, never EMF type {Type}
-- **Parameters**: MUST have no parameters (parameterless)
-- **Modifier**: Interface methods have no modifiers (implicitly public abstract)
-
-**Examples**
-
-- ISheepDogFactory
-
-```java
-// Creates empty instances of grammar types
-IStepDefinition createStepDefinition()
-IStepObject createStepObject()
-IStepParameters createStepParameters()
-ITestCase createTestCase()
-ITestProject createTestProject()
-ITestSetup createTestSetup()
-ITestStep createTestStep()
-ITestSuite createTestSuite()
-IStatement createStatement()
-ITable createTable()
-IRow createRow()
-ICell createCell()
-```
-
-## Factory creates empty instances without setting attributes
-
-Factory methods create standalone element instances with no attributes set. This follows the EMF factory pattern where factories create empty instances and builders set attributes.
-
-The {Language}Builder is responsible for:
-- Setting attributes on created instances
-- Adding instances to their parent containers
-
-**Examples**
-
-- Typical usage pattern
-
-```java
-// Factory creates empty instance
-ITestCase testCase = SheepDogFactory.instance.createTestCase();
-
-// Builder sets attributes and adds to parent
-SheepDogBuilder.createTestCase(testSuite, "My Test Case");
-```
+**Regex**: `^I{Type}\s+create{Type}\(\)$`
+ - `IStepDefinition createStepDefinition()`
+ - `IStepObject createStepObject()`
+ - `IStepParameters createStepParameters()`
+ - `ITestCase createTestCase()`
+ - `ITestProject createTestProject()`
+ - `ITestSetup createTestSetup()`
+ - `ITestStep createTestStep()`
+ - `ITestSuite createTestSuite()`
+ - `IStatement createStatement()`
+ - `ITable createTable()`
+ - `IRow createRow()`
+ - `ICell createCell()`

@@ -1,40 +1,28 @@
 # {Language}Builder
 
-## All Builder methods are static factory methods
+Static factory class for creating and initializing grammar elements. Builder methods create instances via {Language}Factory, set attributes, and add to parent collections.
 
-All methods follow the pattern `create{Type}(I{Parent} parent, {params})` and return the created {Type} instance.
+## ALL method names follow create{Type} pattern
 
-**Examples**
+Builder methods are static factory methods that create instances of grammar types. Return type I{Type} must match method name create{Type}(). Most methods accept a parent interface as first parameter and additional initialization parameters.
 
-- SheepDogBuilder
+**Regex**: `^public\s+static\s+I{Type}\s+create{Type}\((I{Type}\s+parent(,\s*String\s+[a-z]\w*)?)?\)$`
+ - `public static ICell createCell(IRow parent, String name)`
+ - `public static IRow createRow(ITable parent)`
+ - `public static IStatement createStatement(IStepDefinition parent, String name)`
+ - `public static IStepDefinition createStepDefinition(IStepObject parent, String name)`
+ - `public static IStepObject createStepObject(ITestProject parent, String qualifiedName)`
+ - `public static IStepParameters createStepParameters(IStepDefinition parent, String headers)`
+ - `public static ITable createTable(IStepParameters parent)`
+ - `public static IText createText(ITestStep parent, String name)`
+ - `public static ITestCase createTestCase(ITestSuite parent, String name)`
+ - `public static ITestSetup createTestSetup(ITestSuite parent, String name)`
+ - `public static ITestStep createTestStep(ITestStepContainer parent, String name)`
+ - `public static ITestSuite createTestSuite(ITestProject parent, String qualifiedName)`
+ - `public static ITestProject createTestProject()`
 
-```java
-public static IStepObject createStepObject(ITestProject parent, String qualifiedName)
-public static IStepDefinition createStepDefinition(IStepObject parent, String name)
-public static ITestStep createTestStep(ITestStepContainer parent, String name)
-```
-
-## Builder methods check for existence before creating
-
-Most methods check if the element already exists in the parent before creating a new instance, except for TestStep which allows duplicates.
-
-**Examples**
-
-- SheepDogBuilder
-
-```java
-public static IStepDefinition createStepDefinition(IStepObject parent, String name)
-public static ITestStep createTestStep(ITestStepContainer parent, String name)
-```
-
-## Builder methods automatically add to parent
-
-After creating an instance via SheepDogFactory, the builder automatically adds it to the parent collection.
-
-**Examples**
-
-- SheepDogBuilder
-
-```java
-public static IStepDefinition createStepDefinition(IStepObject parent, String name)
-```
+**Behavioral Notes**:
+- Most builder methods check if element already exists in parent before creating (deduplication)
+- TestStep creation allows duplicates (no existence check)
+- After creation, builder automatically adds element to parent collection
+- createTestProject() has no parent parameter (root element)

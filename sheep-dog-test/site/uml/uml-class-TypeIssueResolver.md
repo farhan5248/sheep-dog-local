@@ -1,29 +1,20 @@
 # {Type}IssueResolver
 
-## Resolver methods follow correct{Issue} or suggest{Issue} naming pattern
+Quick fix proposal generator for validation issues. Provides corrections (when value exists but is wrong) and suggestions (when value is missing).
 
-All resolver classes follow the `correct{Issue}` or `suggest{Issue}` pattern.
-Not all issues have a resolution, some have no corresponding correct* or suggest* method.
-Method names match the grammar assignments they validate.
+## SOME method names follow (correct|suggest){Assignment}{Issue} pattern
 
-**Method Signature Rules**:
-- **Parameter Type**: MUST accept interface type I{Type}, never EMF type {Type}
-- **Return Type**: MUST return `ArrayList<{Language}IssueProposal>`
+Resolver public API methods generate quick fix proposals for validation issues. Method name pattern is (correct|suggest) + {Assignment} + {Issue}. Not all issues have resolutions - some validation errors have no corresponding resolver methods. Classes may contain private helper methods that don't follow this pattern. Parameter type must be I{Type} interface. Return type must be ArrayList<{Language}IssueProposal>.
 
-**Examples**
+**Regex**: `^public\s+static\s+ArrayList<{Language}IssueProposal>\s+(correct|suggest){Assignment}{Issue}\(I{Type}\s+[a-z]\w+\)$`
+ - `public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep theTestStep)`
+ - `public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep)`
+ - `public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep)`
+ - `public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep)`
+ - `public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep theTestStep)`
+ - `public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(ITestStep theTestStep)`
 
-- TestStepIssueResolver
-
-```java
-public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep testStep)
-public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep testStep)
-public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep testStep)
-public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep testStep)
-```
-
-- RowIssueResolver
-
-```java
-public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep testStep)
-public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(ITestStep testStep)
-```
+**Behavioral Notes**:
+- correct methods provide fixes when assignment value exists but is wrong
+- suggest methods provide options when assignment value is missing or empty
+- Methods can throw Exception for workspace-level validation errors

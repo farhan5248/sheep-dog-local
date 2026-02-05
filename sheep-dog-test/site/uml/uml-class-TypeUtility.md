@@ -1,99 +1,60 @@
 # {Type}Utility
 
-## All Utility classes are static
+Utility classes provide helper methods for grammar elements. All methods are static with no instance state.
 
-All methods are static. No instance variables or constructors.
+## ALL methods are static
 
-**Examples**
+Utility classes have no instance methods, constructors, or variables. All methods (public and private) must be static.
 
-- StepDefinitionUtility
+**Regex**: `^(public|private)\s+static\s+\S+\s+[a-z]\w+\(`
+ - `public static boolean isTag(String word)`
+ - `public static String getStepObjectName(String text)`
+ - `private static String cellsToString(List<ICell> cells)`
+ - `private static String normalizePipeDelimitedString(String pipeDelimitedString)`
+ - `private static String getGroup(String regex, String text, int group)`
+ - `private static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep)`
 
-```java
-public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String pipeDelimitedString)
-```
+## SOME methods are validation methods
 
-- TestStepUtility
+Boolean methods for classification and validation checks. Method names follow is{Condition} pattern.
 
-```java
-public static String getNameLong(ITestStep theStep)
-public static String getStepObjectQualifiedName(ITestStep theStep)
-public static boolean isValid(String text)
-public static boolean isEdge(String text)
-public static boolean isVertex(String text)
-public static boolean isNegativeStep(String text)
-```
+**Regex**: `^public\s+static\s+boolean\s+is[A-Z]\w+\(`
+ - `public static boolean isValid(String text)`
+ - `public static boolean isTag(String word)`
+ - `public static boolean isTodo(String word)`
+ - `public static boolean isEdge(String text)`
+ - `public static boolean isVertex(String text)`
+ - `public static boolean isNegativeStep(String text)`
 
-- TestProjectUtility
+## SOME methods are parsing methods
 
-```java
-public static ArrayList<String> getComponentList(ITestProject testProject)
-public static ArrayList<IStepObject> getStepObjectList(ITestProject testProject, String component)
-```
+Extract components from composite String values. Method names follow get{Component} pattern, accept String parameter, return String or collection.
 
-- StatementUtility
+**Regex**: `^public\s+static\s+\S+\s+get[A-Z]\w+\(String\s+[a-z]\w+\)$`
+ - `public static String getStepObjectName(String text)`
+ - `public static String getComponent(String text)`
+ - `public static String getComponentName(String text)`
+ - `public static String getComponentType(String text)`
+ - `public static String getObject(String text)`
+ - `public static String getObjectName(String text)`
+ - `public static String getObjectType(String text)`
+ - `public static String getStepDefinitionName(String text)`
+ - `public static TreeSet<String> getTags(String name)`
 
-```java
-public static boolean isTag(String word)
-public static boolean isTodo(String word)
-public static TreeSet<String> getTags(String name)
-public static String getStatementListAsString(List<IStatement> statementList)
-```
+## SOME methods are derived attributes
 
-## Utility classes provide derived attributes
+Compute values from grammar object graphs. Method names follow get{Attribute} pattern, accept I{Type} or collection parameters, return computed values. A derived attribute is an attribute that's in the I{Type} interfaces but not in the grammar itself.
 
-Methods compute values not stored in grammar.
+**Regex**: `^public\s+static\s+\S+\s+get[A-Z]\w+\((I{Type}|List|ArrayList)[^)]*\)$`
+ - `public static String getNameLong(ITestStep theStep)`
+ - `public static String getStepObjectQualifiedName(ITestStep theStep)`
+ - `public static ArrayList<String> getComponentList(ITestProject testProject)`
+ - `public static ArrayList<IStepObject> getStepObjectList(ITestProject testProject, String component)`
+ - `public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String pipeDelimitedString)`
+ - `public static String getStatementListAsString(List<IStatement> statementList)`
 
-**Examples**
-
-- TestStepUtility
-
-```java
-public static String getNameLong(ITestStep theStep)
-```
-
-- TestProjectUtility
-
-```java
-public static ArrayList<String> getComponentList(ITestProject testProject)
-```
-
-## Utility classes provide parsing methods
-
-Extract parts from composite grammar attributes.
-
-**Examples**
-
-- TestStepUtility
-
-```java
-public static String getStepObjectName(String text)
-public static String getComponent(String text)
-public static String getComponentName(String text)
-public static String getComponentType(String text)
-public static String getObject(String text)
-public static String getObjectName(String text)
-public static String getObjectType(String text)
-public static String getStepDefinitionName(String text)
-```
-
-## Utility classes provide validation methods
-
-Boolean methods for classification.
-
-**Examples**
-
-- TestStepUtility
-
-```java
-public static boolean isValid(String text)
-public static boolean isEdge(String text)
-public static boolean isVertex(String text)
-public static boolean isNegativeStep(String text)
-```
-
-- StatementUtility
-
-```java
-public static boolean isTag(String word)
-public static boolean isTodo(String word)
-```
+**Behavioral Notes**:
+- TestStepUtility contains complex regex patterns (20+ capture groups) for parsing test step names
+- Some utilities have private helper methods that don't follow public API patterns
+- Parsing methods use regex or string manipulation to extract components
+- Derived attributes may navigate object graphs or aggregate data from collections
