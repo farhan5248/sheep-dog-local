@@ -1,6 +1,6 @@
 # UML Package Patterns
 
-## org.farhan.dsl.issues
+## src/main/java/org/farhan/dsl/issues
 
 ### ONE {Language}IssueProposal
 
@@ -47,7 +47,7 @@ Always has an interface named LoggerProvider that allows external systems to inj
 **Regex**: `^LoggerProvider$`
  - `LoggerProvider`
 
-## org.farhan.dsl.lang
+## src/main/java/org/farhan/dsl/lang
 
 ### ONE IResourceRepository
 
