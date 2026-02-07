@@ -2,9 +2,11 @@
 
 Utility classes provide helper methods for grammar elements. All methods are static with no instance state.
 
-## ALL methods are static
+## (public|private) static .* [a-z]\w+\(
 
 Utility classes have no instance methods, constructors, or variables. All methods (public and private) must be static.
+
+**Rule**: ALL methods are static
 
 **Regex**: `^(public|private)\s+static\s+\S+\s+[a-z]\w+\(`
  - `public static boolean isTag(String word)`
@@ -14,9 +16,11 @@ Utility classes have no instance methods, constructors, or variables. All method
  - `private static String getGroup(String regex, String text, int group)`
  - `private static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep)`
 
-## SOME methods are validation methods
+## is[A-Z]\w+\(
 
 Boolean methods for classification and validation checks. Method names follow is{Condition} pattern.
+
+**Rule**: SOME methods are validation methods
 
 **Regex**: `^public\s+static\s+boolean\s+is[A-Z]\w+\(`
  - `public static boolean isValid(String text)`
@@ -26,9 +30,11 @@ Boolean methods for classification and validation checks. Method names follow is
  - `public static boolean isVertex(String text)`
  - `public static boolean isNegativeStep(String text)`
 
-## SOME methods are parsing methods
+## get[A-Z]\w+\(String\)
 
 Extract components from composite String values. Method names follow get{Component} pattern, accept String parameter, return String or collection.
+
+**Rule**: SOME methods are parsing methods
 
 **Regex**: `^public\s+static\s+\S+\s+get[A-Z]\w+\(String\s+[a-z]\w+\)$`
  - `public static String getStepObjectName(String text)`
@@ -41,9 +47,11 @@ Extract components from composite String values. Method names follow get{Compone
  - `public static String getStepDefinitionName(String text)`
  - `public static TreeSet<String> getTags(String name)`
 
-## SOME methods are derived attributes
+## get[A-Z]\w+\((I{Type}|List|ArrayList)\)
 
 Compute values from grammar object graphs. Method names follow get{Attribute} pattern, accept I{Type} or collection parameters, return computed values. A derived attribute is an attribute that's in the I{Type} interfaces but not in the grammar itself.
+
+**Rule**: SOME methods are derived attributes
 
 **Regex**: `^public\s+static\s+\S+\s+get[A-Z]\w+\((I{Type}|List|ArrayList)[^)]*\)$`
  - `public static String getNameLong(ITestStep theStep)`
@@ -52,9 +60,3 @@ Compute values from grammar object graphs. Method names follow get{Attribute} pa
  - `public static ArrayList<IStepObject> getStepObjectList(ITestProject testProject, String component)`
  - `public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String pipeDelimitedString)`
  - `public static String getStatementListAsString(List<IStatement> statementList)`
-
-**Behavioral Notes**:
-- TestStepUtility contains complex regex patterns (20+ capture groups) for parsing test step names
-- Some utilities have private helper methods that don't follow public API patterns
-- Parsing methods use regex or string manipulation to extract components
-- Derived attributes may navigate object graphs or aggregate data from collections

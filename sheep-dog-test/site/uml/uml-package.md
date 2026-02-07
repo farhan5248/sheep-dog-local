@@ -2,91 +2,115 @@
 
 ## src/main/java/org/farhan/dsl/issues
 
-### ONE {Language}IssueProposal
+### {Language}IssueProposal
 
 Always has a class named {Language}IssueProposal that represents quick fix proposals for validation issues.
+
+**Rule**: ONE class matches {Language}IssueProposal pattern
 
 **Regex**: `^{Language}IssueProposal$`
  - `SheepDogIssueProposal`
 
-### SOME {Type}IssueTypes
+### {Type}IssueTypes
 
 Might have one class per {Type} named {Type}IssueTypes that defines enum constants for issue types.
+
+**Rule**: SOME class matches {Type}IssueTypes pattern
 
 **Regex**: `^{Type}IssueTypes$`
  - `TestStepIssueTypes`
  - `TextIssueTypes`
 
-### SOME {Type}IssueDetector
+### {Type}IssueDetector
 
 Might have one class per {Type} named {Type}IssueDetector that validates grammar assignments.
+
+**Rule**: SOME class matches {Type}IssueDetector pattern
 
 **Regex**: `^{Type}IssueDetector$`
  - `TestStepIssueDetector`
  - `TextIssueDetector`
 
-### SOME {Type}IssueResolver
+### {Type}IssueResolver
 
 Might have one class per {Type} named {Type}IssueResolver that generates quick fix proposals.
+
+**Rule**: SOME class matches {Type}IssueResolver pattern
 
 **Regex**: `^{Type}IssueResolver$`
  - `TestStepIssueResolver`
  - `TextIssueResolver`
 
-### ONE LoggerFactory
+### LoggerFactory
 
 Always has a class named LoggerFactory that provides loggers to all classes in this package.
+
+**Rule**: ONE class matches LoggerFactory pattern
 
 **Regex**: `^LoggerFactory$`
  - `LoggerFactory`
 
-### ONE LoggerProvider
+### LoggerProvider
 
 Always has an interface named LoggerProvider that allows external systems to inject custom logger implementations.
+
+**Rule**: ONE class matches LoggerProvider pattern
 
 **Regex**: `^LoggerProvider$`
  - `LoggerProvider`
 
 ## src/main/java/org/farhan/dsl/lang
 
-### ONE IResourceRepository
+### IResourceRepository
 
 Always has an interface named IResourceRepository for resource management.
+
+**Rule**: ONE class matches IResourceRepository pattern
 
 **Regex**: `^IResourceRepository$`
  - `IResourceRepository`
 
-### ONE ITestProject
+### ITestProject
 
 Always has an interface named ITestProject representing the root of the test project hierarchy.
+
+**Rule**: ONE class matches ITestProject pattern
 
 **Regex**: `^ITestProject$`
  - `ITestProject`
 
-### ONE {Language}Builder
+### {Language}Builder
 
 Always has a class named {Language}Builder that creates and initializes grammar elements.
+
+**Rule**: ONE class matches {Language}Builder pattern
 
 **Regex**: `^{Language}Builder$`
  - `SheepDogBuilder`
 
-### ONE {Language}Factory
+### {Language}Factory
 
 Always has a class named {Language}Factory that creates grammar elements without initialization.
+
+**Rule**: ONE class matches {Language}Factory pattern
 
 **Regex**: `^{Language}Factory$`
  - `SheepDogFactory`
 
-### ONE I{Language}Factory
+### I{Language}Factory
 
 Always has an interface named I{Language}Factory defining factory methods for grammar elements.
+
+**Rule**: ONE class matches I{Language}Factory pattern
 
 **Regex**: `^I{Language}Factory$`
  - `ISheepDogFactory`
 
-### SOME I{Type}
+### I{Type}
 
 Always has one interface per {Type} named I{Type} representing grammar elements.
+
+**Rule**: SOME class matches I{Type} pattern
 
 **Regex**: `^I{Type}$`
  - `ITestStep`
@@ -94,20 +118,28 @@ Always has one interface per {Type} named I{Type} representing grammar elements.
  - `ICell`
  - `IRow`
 
-### SOME {Type}Utility
+### {Type}Utility
 
 Might have one class per {Type} named {Type}Utility providing helper methods.
+
+**Rule**: SOME class matches {Type}Utility pattern
 
 **Regex**: `^{Type}Utility$`
  - `TestStepUtility`
  - `StepDefinitionUtility`
  - `StatementUtility`
 
-### SOME {TypeAspect}Types
+### {Type}{Fragment}Types
 
-Might have multiple classes per {Type} named {TypeAspect}Types defining enum constants for type aspects.
+Might have multiple classes per {Type} named {Type}{Fragment}Types defining enum constants for test step regex fragments.
 
-**Regex**: `^[A-Z][a-zA-Z0-9]*Types$`
+**Rule**: SOME class matches {Type}{Fragment}Types pattern
+
+**Regex**: `^{Type}{Fragment}Types$`
  - `TestStepComponentTypes`
- - `TestStepObjectEdgeTypes`
  - `TestStepObjectVertexTypes`
+ - `TestStepObjectEdgeTypes`
+ - `TestStepPartTypes`
+ - `TestStepStateTypes`
+ - `TestStepTimeTypes`
+ - `TestStepAttachmentTypes`

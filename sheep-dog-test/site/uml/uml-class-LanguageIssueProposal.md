@@ -2,33 +2,29 @@
 
 Data transfer object for Eclipse Quick Fix proposals. Contains four private String attributes with standard JavaBeans getters and setters.
 
-## SOME attribute names match required fields pattern
-
-The proposal class has four private String attributes for issue data.
-
-**Regex**: `^private\s+String\s+(id|description|value|qualifiedName)$`
- - `private String id`
- - `private String description`
- - `private String value`
- - `private String qualifiedName`
-
-## ONE constructor names match default constructor pattern
+## {Language}IssueProposal()
 
 Default constructor initializes all attributes to empty strings.
+
+**Rule**: ONE constructor names match default constructor pattern
 
 **Regex**: `^public\s+{Language}IssueProposal\(\)$`
  - `public SheepDogIssueProposal()`
 
-## ONE constructor names match parameterized constructor pattern
+## {Language}IssueProposal(String, String, String)
 
 Parameterized constructor accepts id, description, and value (qualifiedName is set separately).
+
+**Rule**: ONE constructor names match parameterized constructor pattern
 
 **Regex**: `^public\s+{Language}IssueProposal\(String\s+\w+,\s*String\s+\w+,\s*String\s+\w+\)$`
  - `public SheepDogIssueProposal(String id, String description, String value)`
 
-## SOME method names follow getter pattern
+## get(Id|Description|Value|QualifiedName)()
 
 Getters provide read access to private attributes following JavaBeans convention.
+
+**Rule**: SOME method names follow getter pattern
 
 **Regex**: `^public\s+String\s+get(Id|Description|Value|QualifiedName)\(\)$`
  - `public String getId()`
@@ -36,9 +32,11 @@ Getters provide read access to private attributes following JavaBeans convention
  - `public String getValue()`
  - `public String getQualifiedName()`
 
-## SOME method names follow setter pattern
+## set(Id|Description|Value|QualifiedName)(String)
 
 Setters provide write access to private attributes following JavaBeans convention.
+
+**Rule**: SOME method names follow setter pattern
 
 **Regex**: `^public\s+void\s+set(Id|Description|Value|QualifiedName)\(String\s+\w+\)$`
  - `public void setId(String id)`

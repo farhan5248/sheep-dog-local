@@ -23,8 +23,9 @@ public class TestStepUtility {
     private static final String COMPONENT = "(" + COMPONENT_NAME + COMPONENT_TYPE + ")";
 
     private static final String OBJECT_NAME = TITLE;
-    private static final String OBJECT_TYPE = "(" + getRegexFromTypes(TestStepObjectVertexTypes.values()) + "|"
-            + getRegexFromTypes(TestStepObjectEdgeTypes.values()) + ")";
+    private static final String OBJECT_TYPE_VERTEX = getRegexFromTypes(TestStepObjectVertexTypes.values());
+    private static final String OBJECT_TYPE_EDGE = getRegexFromTypes(TestStepObjectEdgeTypes.values());
+    private static final String OBJECT_TYPE = "(" + OBJECT_TYPE_VERTEX + "|" + OBJECT_TYPE_EDGE + ")";
     private static final String OBJECT = "(" + OBJECT_NAME + OBJECT_TYPE + ")";
 
     private static final String PART_DESC = TITLE;
@@ -32,7 +33,7 @@ public class TestStepUtility {
     private static final String PART = "(" + PART_DESC + PART_TYPE + ")";
 
     private static final String STATE_DESC = "( \\S+)";
-    private static final String STATE_TYPE = getRegexFromTypes(TestStepStateModalityTypes.values());
+    private static final String STATE_TYPE = getRegexFromTypes(TestStepStateTypes.values());
     private static final String STATE = "(" + STATE_TYPE + STATE_DESC + ")";
 
     private static final String TIME_DESC = TITLE;
@@ -131,8 +132,8 @@ public class TestStepUtility {
                 regex += " " + ((TestStepObjectEdgeTypes) enumValue).value + "|";
             } else if (enumValue instanceof TestStepObjectVertexTypes) {
                 regex += " " + ((TestStepObjectVertexTypes) enumValue).value + "|";
-            } else if (enumValue instanceof TestStepStateModalityTypes) {
-                regex += " " + ((TestStepStateModalityTypes) enumValue).value + "|";
+            } else if (enumValue instanceof TestStepStateTypes) {
+                regex += " " + ((TestStepStateTypes) enumValue).value + "|";
             } else if (enumValue instanceof TestStepTimeTypes) {
                 regex += ((TestStepTimeTypes) enumValue).value + "|";
             }

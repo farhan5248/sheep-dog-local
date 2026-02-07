@@ -2,9 +2,11 @@
 
 Static factory class for creating and initializing grammar elements. Builder methods create instances via {Language}Factory, set attributes, and add to parent collections.
 
-## ALL method names follow create{Type} pattern
+## create{Type}(I{Type}, ...)
 
 Builder methods are static factory methods that create instances of grammar types. Return type I{Type} must match method name create{Type}(). Most methods accept a parent interface as first parameter and additional initialization parameters.
+
+**Rule**: ALL method names follow create{Type} pattern
 
 **Regex**: `^public\s+static\s+I{Type}\s+create{Type}\((I{Type}\s+parent(,\s*String\s+[a-z]\w*)?)?\)$`
  - `public static ICell createCell(IRow parent, String name)`
@@ -20,9 +22,3 @@ Builder methods are static factory methods that create instances of grammar type
  - `public static ITestStep createTestStep(ITestStepContainer parent, String name)`
  - `public static ITestSuite createTestSuite(ITestProject parent, String qualifiedName)`
  - `public static ITestProject createTestProject()`
-
-**Behavioral Notes**:
-- Most builder methods check if element already exists in parent before creating (deduplication)
-- TestStep creation allows duplicates (no existence check)
-- After creation, builder automatically adds element to parent collection
-- createTestProject() has no parent parameter (root element)

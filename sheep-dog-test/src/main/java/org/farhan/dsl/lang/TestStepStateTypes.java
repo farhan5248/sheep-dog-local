@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-public enum TestStepStateModalityTypes {
+public enum TestStepStateTypes {
 
 	IS("is", "Maps to setter method"),
 	ISNT("isn't", "Maps to setter method but used to remove something"),
@@ -10,7 +10,7 @@ public enum TestStepStateModalityTypes {
 	public final String value;
 	public final String description;
 
-	TestStepStateModalityTypes(String value, String description) {
+	TestStepStateTypes(String value, String description) {
 		this.value = value;
 		this.description = description;
 	}
