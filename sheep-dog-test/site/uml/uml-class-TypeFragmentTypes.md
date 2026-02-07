@@ -22,8 +22,8 @@ Each enum constant has a public final String field named 'value' containing the 
 
 **Rule**: ONE field matches this pattern
 
-**Regex**: `^public\s+final\s+String\s+value;$`
- - `public final String value;`
+**Regex**: `^public\s+final\s+String\s+value$`
+ - `public final String value`
 
 ## public final String description
 
@@ -31,8 +31,8 @@ Each enum constant has a public final String field named 'description' providing
 
 **Rule**: ONE field matches this pattern
 
-**Regex**: `^public\s+final\s+String\s+description;$`
- - `public final String description;`
+**Regex**: `^public\s+final\s+String\s+description$`
+ - `public final String description`
 
 ## {Type}{Fragment}Types\(String value, String description\)
 

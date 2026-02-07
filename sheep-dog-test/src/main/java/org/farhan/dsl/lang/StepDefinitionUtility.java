@@ -6,8 +6,12 @@ import java.util.List;
 
 public class StepDefinitionUtility {
 
-	public static Object getStepParameters(IStepDefinition theStepDefinition, IRow row) {
+	public static IStepParameters getStepParameters(IStepDefinition theStepDefinition, IRow row) {
 		return getStepParameters(theStepDefinition, cellsToString(row.getCellList()));
+	}
+
+	public static IStepParameters getStepParameters(IStepDefinition theStepDefinition, IText theText) {
+		return StepDefinitionUtility.getStepParameters(theStepDefinition, "| Content");
 	}
 
 	public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String pipeDelimitedString) {
@@ -49,9 +53,5 @@ public class StepDefinitionUtility {
 			normalized += "| " + cell;
 		}
 		return normalized.trim();
-	}
-
-	public static IStepParameters getStepParameters(IStepDefinition theStepDefinition, IText theText) {
-		return StepDefinitionUtility.getStepParameters(theStepDefinition, "| Content");
 	}
 }

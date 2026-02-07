@@ -70,15 +70,6 @@ Always has an interface named IResourceRepository for resource management.
 **Regex**: `^IResourceRepository$`
  - `IResourceRepository`
 
-### ITestProject
-
-Always has an interface named ITestProject representing the root of the test project hierarchy.
-
-**Rule**: ONE class matches ITestProject pattern
-
-**Regex**: `^ITestProject$`
- - `ITestProject`
-
 ### {Language}Builder
 
 Always has a class named {Language}Builder that creates and initializes grammar elements.

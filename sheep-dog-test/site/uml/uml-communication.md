@@ -18,6 +18,10 @@ Static utility class with helper methods that derive properties from grammar ele
 
 Enum with type constants for grammar element aspects. Each constant represents a valid keyword or type value used by utility methods and test implementations.
 
+### {Type}{Fragment}Types
+
+Enum with type constants for test step regex fragments. Each constant represents a fragment type (Component, ObjectVertex, ObjectEdge, Part, State, Time, Attachment) used in test step parsing.
+
 ## Suggest
 
 This pattern applies when proposing content assist suggestions for absent grammar elements. The element doesn't exist yet, so we suggest alternatives.
@@ -70,7 +74,7 @@ Static resolution class that generates correction proposals for invalid grammar 
 
 Enum with issue type constants. Each constant has a description field (String) used by validation methods.
 
-### SheepDogIssueProposal
+### {Language}IssueProposal
 
 Data container for correction proposals with properties for id, description, value, and optional qualifiedName.
 
@@ -86,6 +90,26 @@ Static utility class with helper methods that derive properties for validation a
 
 Static factory class for creating and managing elements, adding them to parent elements during correction workflows.
 
+### I{Language}Factory
+
+Interface for creating language-specific grammar elements. Defines parameterless create{Type}() methods that return empty instances.
+
 ### {Language}Factory
 
-Singleton factory for creating element instances without adding them to parent elements.
+Singleton holder class that provides access to the concrete I{Language}Factory implementation.
+
+## Common
+
+This pattern applies to infrastructure and service classes used across all collaboration patterns. These classes provide cross-cutting concerns like logging, resource management, and project structure access.
+
+### LoggerFactory
+
+Factory class that provides loggers to sheep-dog-test classes. Uses SLF4J when available, otherwise delegates to a custom LoggerProvider implementation.
+
+### LoggerProvider
+
+Interface that allows external systems (like Eclipse/OSGi plugins) to inject custom logger implementations when SLF4J providers are not available.
+
+### IResourceRepository
+
+Service interface for resource management operations using standard CRUD patterns (get, put, delete, list, clear, contains).
