@@ -4,11 +4,12 @@ Enum classes defining regex constants for test step fragments. Each enum constan
 
 ## {FRAGMENT}(_{WORD})*
 
-All enum constants follow UPPER_SNAKE_CASE naming pattern.
+**Desc**: All enum constants follow UPPER_SNAKE_CASE naming pattern.
 
-**Rule**: SOME constant names follow {FRAGMENT} or {FRAGMENT}_{WORD} pattern
+**Rule**: SOME constant names follow {FRAGMENT} or {FRAGMENT}_{WORD} pattern.
+ - **Name**: `^[A-Z][A-Z0-9_]*$`
 
-**Regex**: `^[A-Z][A-Z0-9_]*$`
+**Examples**:
  - `APPLICATION`
  - `SERVICE`
  - `PLUGIN`
@@ -18,28 +19,36 @@ All enum constants follow UPPER_SNAKE_CASE naming pattern.
 
 ## value
 
-Each enum constant has a public final String field named 'value' containing the lowercase keyword used in test steps.
+**Desc**: Each enum constant has a public final String field named 'value' containing the lowercase keyword used in test steps.
 
-**Rule**: ONE field matches this pattern
+**Rule**: ONE field matches this pattern.
+ - **Name**: `^value$`
+ - **Return**: `^String$`
+ - **Modifier**: `^public\s+final$`
 
-**Regex**: `^public\s+final\s+String\s+value$`
+**Examples**:
  - `public final String value`
 
 ## description
 
-Each enum constant has a public final String field named 'description' providing human-readable explanation.
+**Desc**: Each enum constant has a public final String field named 'description' providing human-readable explanation.
 
-**Rule**: ONE field matches this pattern
+**Rule**: ONE field matches this pattern.
+ - **Name**: `^description$`
+ - **Return**: `^String$`
+ - **Modifier**: `^public\s+final$`
 
-**Regex**: `^public\s+final\s+String\s+description$`
+**Examples**:
  - `public final String description`
 
 ## {Type}{Fragment}Types
 
-Private constructor that initializes the value and description fields for each enum constant.
+**Desc**: Private constructor that initializes the value and description fields for each enum constant.
 
-**Rule**: ONE constructor matches this pattern
+**Rule**: ONE constructor matches this pattern.
+ - **Name**: `^{Type}{Fragment}Types$`
+ - **Parameters**: `^\(String\s+value,\s*String\s+description\)$`
 
-**Regex**: `^{Type}{Fragment}Types\(String\s+value,\s*String\s+description\)$`
+**Examples**:
  - `TestStepComponentTypes(String value, String description)`
  - `TestStepObjectVertexTypes(String value, String description)`

@@ -6,18 +6,26 @@ The getLogger method delegates to LoggerProvider when SLF4J falls back to NOPLog
 
 ## getLogger
 
-Get logger for class using SLF4J or custom provider.
+**Desc**: Get logger for class using SLF4J or custom provider.
 
-**Rule**: ONE method names match getLogger pattern
+**Rule**: ONE method names match getLogger pattern.
+ - **Name**: `^getLogger$`
+ - **Return**: `^Logger$`
+ - **Parameters**: `^\(Class<\?>\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
 
-**Regex**: `^public\s+static\s+Logger\s+getLogger\(Class<\?>\s+\w+\)$`
+**Examples**:
  - `public static Logger getLogger(Class<?> clazz)`
 
 ## setLoggerImplementation
 
-Set custom logger provider when SLF4J is unavailable.
+**Desc**: Set custom logger provider when SLF4J is unavailable.
 
-**Rule**: ONE method names match setLoggerImplementation pattern
+**Rule**: ONE method names match setLoggerImplementation pattern.
+ - **Name**: `^setLoggerImplementation$`
+ - **Return**: `^void$`
+ - **Parameters**: `^\(LoggerProvider\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
 
-**Regex**: `^public\s+static\s+void\s+setLoggerImplementation\(LoggerProvider\s+\w+\)$`
+**Examples**:
  - `public static void setLoggerImplementation(LoggerProvider provider)`

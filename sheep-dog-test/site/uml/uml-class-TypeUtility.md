@@ -4,10 +4,12 @@ Utility classes provide helper methods for grammar elements. All methods are sta
 
 ## static
 
-Utility classes have no instance methods, constructors, or variables. All methods (public and private) must be static.
+**Desc**: Utility classes have no instance methods, constructors, or variables. All methods (public and private) must be static.
 
-**Rule**: ALL methods are static
+**Rule**: SOME methods are static.
+ - **Name**: `^(get|set|add|is)`
+ - **Modifier**: `^public\s+static$`
 
-**Regex**: `^public\s+static\s+(get|set|add|is)(`
+**Examples**:
  - `public static boolean isTag(String text)`
  - `public static String getStepObjectName(String text)`

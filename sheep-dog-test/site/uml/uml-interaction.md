@@ -473,7 +473,7 @@ ITable table = SheepDogFactory.instance.createTable();
 step.setTable(table);
 ```
 
-### getNameLong
+### NameLong
 
 Methods that return qualified or full path names use 'NameLong' suffix. Some are computed properties without setters.
 

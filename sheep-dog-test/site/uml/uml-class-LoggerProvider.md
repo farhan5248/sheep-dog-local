@@ -4,9 +4,13 @@ Interface that allows external systems (like Eclipse/OSGi plugins) to inject cus
 
 ## getLogger
 
-The provider interface defines a single method for creating loggers by class.
+**Desc**: The provider interface defines a single method for creating loggers by class.
 
-**Rule**: ALL method names follow getLogger pattern
+**Rule**: ALL method names follow getLogger pattern.
+ - **Name**: `^getLogger$`
+ - **Return**: `^Logger$`
+ - **Parameters**: `^\(Class<\?>\s+\w+\)$`
+ - **Modifier**: `^public$`
 
-**Regex**: `^public\s+Logger\s+getLogger\(Class<\?>\s+\w+\)$`
+**Examples**:
  - `public Logger getLogger(Class<?> clazz)`

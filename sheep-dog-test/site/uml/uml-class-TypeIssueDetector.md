@@ -4,11 +4,15 @@ Validation detector for grammar element assignments. Methods validate assignment
 
 ## validate{Assignment}{Issue}
 
-Detector methods validate specific grammar assignments at different validation scopes. Method name pattern is validate + {Assignment} + {Issue} where {Assignment} is the grammar assignment in PascalCase and {Issue} is the validation scope (Only=element, File=file, Workspace=cross-file). Parameter type must be I{Type} interface. Return type must be String (empty string = valid, error description = invalid).
+**Desc**: Detector methods validate specific grammar assignments at different validation scopes. Method name pattern is validate + {Assignment} + {Issue} where {Assignment} is the grammar assignment in PascalCase and {Issue} is the validation scope (Only=element, File=file, Workspace=cross-file). Parameter type must be I{Type} interface. Return type must be String (empty string = valid, error description = invalid).
 
-**Rule**: ALL method names follow validate{Assignment}{Issue} pattern
+**Rule**: ALL method names follow validate{Assignment}{Issue} pattern.
+ - **Name**: `^validate{Assignment}{Issue}$`
+ - **Return**: `^String$`
+ - **Parameters**: `^\(I{Type}\s+[a-z]\w+\)$`
+ - **Modifier**: `^public\s+static$`
 
-**Regex**: `^public\s+static\s+String\s+validate{Assignment}{Issue}\(I{Type}\s+[a-z]\w+\)$`
+**Examples**:
  - `public static String validateNameOnly(ICell theCell)`
  - `public static String validateNameOnly(ITestStepContainer theTestStepContainer)`
  - `public static String validateTestStepListFile(ITestStepContainer theTestStepContainer)`

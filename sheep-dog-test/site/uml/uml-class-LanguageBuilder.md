@@ -4,11 +4,15 @@ Static factory class for creating and initializing grammar elements. Builder met
 
 ## create{Type}
 
-Builder methods are static factory methods that create instances of grammar types. Return type I{Type} must match method name create{Type}(). Most methods accept a parent interface as first parameter and additional initialization parameters.
+**Desc**: Builder methods are static factory methods that create instances of grammar types. Return type I{Type} must match method name create{Type}(). Most methods accept a parent interface as first parameter and additional initialization parameters.
 
-**Rule**: ALL method names follow create{Type} pattern
+**Rule**: ALL method names follow create{Type} pattern.
+ - **Name**: `^create{Type}$`
+ - **Return**: `^I{Type}$`
+ - **Parameters**: `^\((I{Type}\s+parent(,\s*String\s+[a-z]\w*)?)?\)$`
+ - **Modifier**: `^public\s+static$`
 
-**Regex**: `^public\s+static\s+I{Type}\s+create{Type}\((I{Type}\s+parent(,\s*String\s+[a-z]\w*)?)?\)$`
+**Examples**:
  - `public static ICell createCell(IRow parent, String name)`
  - `public static IRow createRow(ITable parent)`
  - `public static IStatement createStatement(IStepDefinition parent, String name)`

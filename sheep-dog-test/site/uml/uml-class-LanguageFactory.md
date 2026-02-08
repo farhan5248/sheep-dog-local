@@ -4,9 +4,12 @@ Singleton holder class that provides access to the concrete factory implementati
 
 ## instance
 
-The factory class holds a static instance field that references the concrete I{Language}Factory implementation.
+**Desc**: The factory class holds a static instance field that references the concrete I{Language}Factory implementation.
 
-**Rule**: ONE attribute names match instance pattern
+**Rule**: ONE attribute names match instance pattern.
+ - **Name**: `^instance$`
+ - **Return**: `^I{Language}Factory$`
+ - **Modifier**: `^public\s+static$`
 
-**Regex**: `^public\s+static\s+I{Language}Factory\s+instance$`
+**Examples**:
  - `public static ISheepDogFactory instance`
