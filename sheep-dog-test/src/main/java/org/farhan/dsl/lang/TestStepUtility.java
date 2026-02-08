@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Static helper methods for grammar element operations.
+ * <p>
+ * Separates utility operations from grammar model classes, keeping interfaces
+ * focused on data access.
+ * </p>
+ */
 public class TestStepUtility {
     // TODO think about the following
     // 1. Delete this class and move all the grammar to the xtext file
@@ -46,6 +53,15 @@ public class TestStepUtility {
     private static final String STEP_DEFINITION_NAME = "(" + PART + "?" + STATE + TIME + "?" + ATTACHMENT + "?" + ")";
     public static final String REGEX = STEP_OBJECT_NAME + STEP_DEFINITION_NAME;
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param regex the regular expression pattern
+     * @param text the text to match against
+     * @param group the group number to extract
+     * @return the matched group text, trimmed, or empty string if no match
+     */
     private static String getGroup(String regex, String text, int group) {
         Matcher m = Pattern.compile(regex).matcher(text);
         if (m.find()) {
@@ -59,6 +75,13 @@ public class TestStepUtility {
         return "";
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param theStep the test step to process
+     * @return the fully qualified name with inferred component and object information
+     */
     public static String getNameLong(ITestStep theStep) {
         String stepNameLong = theStep.getName();
         String component = getComponent(stepNameLong);
@@ -104,6 +127,13 @@ public class TestStepUtility {
         return stepNameLong;
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param theTestStep the test step to get previous steps for
+     * @return ArrayList of test steps that appear before the given step in reverse order
+     */
     private static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep) {
         ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
         for (ITestStep t : theTestStep.getParent().getTestStepList()) {
@@ -119,6 +149,13 @@ public class TestStepUtility {
 
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param enumValues array of enum values to convert to regex
+     * @return regex pattern string with alternation of all enum values
+     */
     private static String getRegexFromTypes(Enum<?>[] enumValues) {
         String regex = "(";
         for (Enum<?> enumValue : enumValues) {
@@ -141,6 +178,13 @@ public class TestStepUtility {
         return regex.replaceAll("\\|$", ")");
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param theStep the test step to process
+     * @return qualified name string with component, object, and file extension
+     */
     public static String getStepObjectQualifiedName(ITestStep theStep) {
         String stepNameLong = getNameLong(theStep);
         String component = getComponent(stepNameLong);
@@ -151,90 +195,244 @@ public class TestStepUtility {
         return component + "/" + object + fileExt;
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the step object name portion
+     */
     public static String getStepObjectName(String text) {
         return getGroup(STEP_OBJECT_NAME, text, 0);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the component portion
+     */
     public static String getComponent(String text) {
         return getGroup("(The" + COMPONENT + "?" + ")", text, 2);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the component name portion
+     */
     public static String getComponentName(String text) {
         return getGroup("(The" + COMPONENT + "?" + ")", text, 3);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the component type portion
+     */
     public static String getComponentType(String text) {
         return getGroup("(The" + COMPONENT + "?" + ")", text, 4);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the object portion
+     */
     public static String getObject(String text) {
         return getGroup(STEP_OBJECT_NAME, text, 5);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the object name portion
+     */
     public static String getObjectName(String text) {
         return getGroup(STEP_OBJECT_NAME, text, 6);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the object type portion
+     */
     public static String getObjectType(String text) {
         return getGroup(STEP_OBJECT_NAME, text, 7);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the object vertex type portion
+     */
     public static String getObjectVertexType(String text) {
         return getGroup(STEP_OBJECT_NAME, text, 8);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the object edge type portion
+     */
     public static String getObjectEdgeType(String text) {
         return getGroup(STEP_OBJECT_NAME, text, 9);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the step definition name portion
+     */
     public static String getStepDefinitionName(String text) {
         return getGroup(REGEX, text, 10);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the part portion
+     */
     public static String getPart(String text) {
         return getGroup(REGEX, text, 11);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the part description portion
+     */
     public static String getPartDesc(String text) {
         return getGroup(REGEX, text, 12);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the part type portion
+     */
     public static String getPartType(String text) {
         return getGroup(REGEX, text, 13);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the state portion
+     */
     public static String getState(String text) {
         return getGroup(REGEX, text, 14);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the state description portion
+     */
     public static String getStateDesc(String text) {
         return getGroup(REGEX, text, 15);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the state type portion
+     */
     public static String getStateType(String text) {
         return getGroup(REGEX, text, 16);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the time portion
+     */
     public static String getTime(String text) {
         return getGroup(REGEX, text, 17);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the time type portion
+     */
     public static String getTimeType(String text) {
         return getGroup(REGEX, text, 18);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the time description portion
+     */
     public static String getTimeDesc(String text) {
         return getGroup(REGEX, text, 19);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to parse
+     * @return the attachment portion
+     */
     public static String getAttachment(String text) {
         return getGroup(REGEX, text, 20);
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to check
+     * @return true if the text contains an edge object type, false otherwise
+     */
     public static boolean isEdge(String text) {
         return !getObjectEdgeType(text).isEmpty();
     }
 
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param text the text to check
+     * @return true if the text contains negative state keywords, false otherwise
+     */
     public static boolean isNegativeStep(String text) {
         return getState(text).contains("isn't") || getState(text).contains("won't be");
     }

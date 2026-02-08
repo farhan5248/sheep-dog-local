@@ -1,10 +1,10 @@
 # LoggerProvider
 
-Interface that allows external systems (like Eclipse/OSGi plugins) to inject custom logger implementations when SLF4J providers are not available.
+Interface for custom logger implementations. Separates logger provider contract from logger usage, enabling dependency injection in environments without SLF4J.
 
 ## getLogger
 
-**Desc**: The provider interface defines a single method for creating loggers by class.
+**Desc**: Creates a logger instance for the specified class when custom logging is needed.
 
 **Rule**: ALL method names follow getLogger pattern.
  - **Name**: `^getLogger$`

@@ -1,10 +1,10 @@
 # {Language}IssueProposal
 
-Data transfer object for Eclipse Quick Fix proposals. Contains four private String attributes with standard JavaBeans getters and setters.
+Data transfer object holding quick fix proposal data. Separates proposal data (id, description, value, qualifiedName) from proposal generation and application logic.
 
 ## {Language}IssueProposal
 
-**Desc**: Default constructor initializes all attributes to empty strings.
+**Desc**: Initializes all proposal fields to empty strings for subsequent population.
 
 **Rule**: ONE constructor names match default constructor pattern.
  - **Name**: `^{Language}IssueProposal$`
@@ -16,7 +16,7 @@ Data transfer object for Eclipse Quick Fix proposals. Contains four private Stri
 
 ## get{Proposal}
 
-**Desc**: Getters provide read access to private attributes following JavaBeans convention.
+**Desc**: Provides read access to proposal attributes, allowing resolvers and UI to query proposal details.
 
 **Rule**: SOME method names follow getter pattern.
  - **Name**: `^get{Proposal}$`
@@ -32,7 +32,7 @@ Data transfer object for Eclipse Quick Fix proposals. Contains four private Stri
 
 ## set{Proposal}
 
-**Desc**: Setters provide write access to private attributes following JavaBeans convention.
+**Desc**: Provides write access for resolvers to populate proposal attributes during generation.
 
 **Rule**: SOME method names follow setter pattern. 
  - **Name**: `^set{Proposal}$`
@@ -47,7 +47,7 @@ Data transfer object for Eclipse Quick Fix proposals. Contains four private Stri
 
 ## toString
 
-**Desc**: Output a description of the proposal
+**Desc**: Generates formatted string representation for debugging and logging purposes.
 
 **Rule**: SOME method names follow toString pattern.
  - **Name**: `^toString$`

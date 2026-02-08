@@ -1,10 +1,10 @@
 # {Type}IssueResolver
 
-Quick fix proposal generator for validation issues. Provides corrections (when value exists but is wrong) and suggestions (when value is missing).
+Quick fix proposal generation for validation errors. Separates fix proposal logic from detection and application, enabling IDE-independent validation tooling.
 
 ## suggest{Assignment}{Issue}(I{Type})
 
-**Desc**: Resolver public API methods generate quick fix proposals for validation issues.
+**Desc**: Generates proposals suggesting values when an assignment is missing or empty.
 
 **Rule**: SOME method names follow suggest{Assignment}{Issue} pattern.
  - **Name**: `^suggest{Assignment}{Issue}$`
@@ -19,7 +19,7 @@ Quick fix proposal generator for validation issues. Provides corrections (when v
 
 ## correct{Assignment}{Issue}(I{Type})
 
-**Desc**: Resolver public API methods generate quick fix proposals for validation issues.
+**Desc**: Generates proposals correcting values when an assignment exists but is invalid.
 
 **Rule**: SOME method names follow correct{Assignment}{Issue} pattern.
  - **Name**: `^correct{Assignment}{Issue}$`

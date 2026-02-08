@@ -1,10 +1,10 @@
 # {Language}Builder
 
-Static factory class for creating and initializing grammar elements. Builder methods create instances via {Language}Factory, set attributes, and add to parent collections.
+Static factory for creating and initializing grammar elements. Separates object construction and initialization logic from factory operations and grammar model definitions.
 
 ## create{Type}
 
-**Desc**: Builder methods are static factory methods that create instances of grammar types. Return type I{Type} must match method name create{Type}(). Most methods accept a parent interface as first parameter and additional initialization parameters.
+**Desc**: Creates grammar element using factory, initializes attributes, establishes parent-child relationships, and handles singleton lookups where needed.
 
 **Rule**: ALL method names follow create{Type} pattern.
  - **Name**: `^create{Type}$`

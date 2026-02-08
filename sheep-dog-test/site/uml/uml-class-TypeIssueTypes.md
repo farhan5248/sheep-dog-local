@@ -1,10 +1,10 @@
 # {Type}IssueTypes
 
-Enum class defining validation issue types for grammar elements. Each constant represents a specific validation error with an ID and description.
+Enum constants for validation error types. Separates error type definitions from validation logic, providing stable identifiers for detector-resolver coordination.
 
 ## {TYPE}(_{ASSIGNMENT})*_{ISSUE}
 
-**Desc**: All enum constants follow the pattern {TYPE} prefix, one or more middle parts (assignment/child type names), and {ISSUE} suffix.
+**Desc**: Defines a validation error type with unique identifier and user-facing description.
 
 **Rule**: ALL constant names follow {TYPE}_{ASSIGNMENT}_{ISSUE} pattern.
  - **Name**: `^{TYPE}(_{ASSIGNMENT})*_{ISSUE}$`
@@ -18,7 +18,7 @@ Enum class defining validation issue types for grammar elements. Each constant r
 
 ## id
 
-**Desc**: Uniquely identifies an issue and matches the name of the enum.
+**Desc**: Unique identifier matching the enum name, used to link detectors with resolvers.
 
 **Rule**: ONE attribute is the identifier.
  - **Name**: `^id$`
@@ -28,7 +28,7 @@ Enum class defining validation issue types for grammar elements. Each constant r
 
 ## description
 
-**Desc**: The description displayed to the user.
+**Desc**: Human-readable error message displayed to users when validation fails.
 
 **Rule**: ONE attribute is the description explaining the problem.
  - **Name**: `^description$`

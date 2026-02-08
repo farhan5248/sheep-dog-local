@@ -1,5 +1,12 @@
 package org.farhan.dsl.issues;
 
+/**
+ * Data transfer object holding quick fix proposal data.
+ * <p>
+ * Separates proposal data (id, description, value, qualifiedName) from proposal
+ * generation and application logic.
+ * </p>
+ */
 public class SheepDogIssueProposal {
 
     private String id;
@@ -7,6 +14,9 @@ public class SheepDogIssueProposal {
     private String value;
     private String qualifiedName;
 
+    /**
+     * Initializes all proposal fields to empty strings for subsequent population.
+     */
     public SheepDogIssueProposal() {
         this.id = "";
         this.description = "";
@@ -14,38 +24,91 @@ public class SheepDogIssueProposal {
         this.qualifiedName = "";
     }
 
+    /**
+     * Provides read access to proposal attributes, allowing resolvers and UI to
+     * query proposal details.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Provides read access to proposal attributes, allowing resolvers and UI to
+     * query proposal details.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Provides read access to proposal attributes, allowing resolvers and UI to
+     * query proposal details.
+     *
+     * @return the qualified name
+     */
     public String getQualifiedName() {
         return qualifiedName;
     }
 
+    /**
+     * Provides read access to proposal attributes, allowing resolvers and UI to
+     * query proposal details.
+     *
+     * @return the value
+     */
     public String getValue() {
         return value;
     }
 
+    /**
+     * Provides write access for resolvers to populate proposal attributes during
+     * generation.
+     *
+     * @param description the description to set
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Provides write access for resolvers to populate proposal attributes during
+     * generation.
+     *
+     * @param id the id to set
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Provides write access for resolvers to populate proposal attributes during
+     * generation.
+     *
+     * @param qualifiedName the qualified name to set
+     */
     public void setQualifiedName(String qualifiedName) {
         this.qualifiedName = qualifiedName;
     }
 
+    /**
+     * Provides write access for resolvers to populate proposal attributes during
+     * generation.
+     *
+     * @param value the value to set
+     */
     public void setValue(String value) {
         this.value = value;
     }
 
+    /**
+     * Generates formatted string representation for debugging and logging purposes.
+     *
+     * @return string representation of the proposal
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

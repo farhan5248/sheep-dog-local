@@ -1,13 +1,10 @@
 # I{Language}Factory
 
-
-Interface for creating language-specific grammar elements. Defines parameterless create{Type}() methods that return empty instances.
-Factory interface methods create empty instances of grammar types. 
-The {Language}Builder is responsible for setting attributes and adding instances to parent containers.
+Factory interface for creating empty grammar instances. Separates factory contract from initialization logic and concrete implementations (EMF vs POJO).
 
 ## create{Type}
 
-**Desc**: Return type I{Type} must match method name create{Type}(). 
+**Desc**: Creates uninitialized grammar element instance for subsequent attribute setting by builder. 
 
 **Rule**: ALL method names follow create{Type} pattern.
  - **Name**: `^create{Type}$`

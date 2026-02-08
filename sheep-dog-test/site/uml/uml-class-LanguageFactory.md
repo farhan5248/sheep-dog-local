@@ -1,10 +1,10 @@
 # {Language}Factory
 
-Singleton holder class that provides access to the concrete factory implementation. Contains only the static instance field.
+Singleton holder that provides global access to the concrete factory instance. Separates factory instance management from factory operations and builder logic.
 
 ## instance
 
-**Desc**: The factory class holds a static instance field that references the concrete I{Language}Factory implementation.
+**Desc**: Stores the concrete factory implementation, allowing builders and other consumers to create grammar instances.
 
 **Rule**: ONE attribute names match instance pattern.
  - **Name**: `^instance$`

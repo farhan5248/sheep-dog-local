@@ -4,12 +4,26 @@ import java.util.ArrayList;
 
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-
+/**
+ * Quick fix proposal generation for validation errors.
+ * <p>
+ * Separates fix proposal logic from detection and application, enabling
+ * IDE-independent validation tooling.
+ * </p>
+ */
 public class TestStepContainerIssueResolver {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestStepContainerIssueResolver.class);
 
+	/**
+	 * Generates proposals correcting values when an assignment exists but is
+	 * invalid.
+	 *
+	 * @param theTestStepContainer the element needing corrections
+	 * @return list of quick fix proposals
+	 */
 	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) {
 		logger.debug("Entering proposeNameOnly for test step container: {}", theTestStepContainer != null ? theTestStepContainer.getName() : "null");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();

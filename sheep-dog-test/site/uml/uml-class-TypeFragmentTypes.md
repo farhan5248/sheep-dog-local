@@ -1,10 +1,10 @@
 # {Type}{Fragment}Types
 
-Enum classes defining regex constants for test step fragments. Each enum constant represents a keyword or pattern used in test step matching.
+Enum constants for test step keyword patterns. Separates keyword definitions from parsing logic, enabling centralized maintenance of domain vocabulary.
 
 ## {FRAGMENT}(_{WORD})*
 
-**Desc**: All enum constants follow UPPER_SNAKE_CASE naming pattern.
+**Desc**: Defines a keyword constant with associated value and description for test step matching.
 
 **Rule**: SOME constant names follow {FRAGMENT} or {FRAGMENT}_{WORD} pattern.
  - **Name**: `^[A-Z][A-Z0-9_]*$`
@@ -19,7 +19,7 @@ Enum classes defining regex constants for test step fragments. Each enum constan
 
 ## value
 
-**Desc**: Each enum constant has a public final String field named 'value' containing the lowercase keyword used in test steps.
+**Desc**: Stores the lowercase keyword string that appears in actual test step definitions.
 
 **Rule**: ONE field matches this pattern.
  - **Name**: `^value$`
@@ -31,7 +31,7 @@ Enum classes defining regex constants for test step fragments. Each enum constan
 
 ## description
 
-**Desc**: Each enum constant has a public final String field named 'description' providing human-readable explanation.
+**Desc**: Provides human-readable explanation of the keyword for documentation and UI display.
 
 **Rule**: ONE field matches this pattern.
  - **Name**: `^description$`
@@ -43,7 +43,7 @@ Enum classes defining regex constants for test step fragments. Each enum constan
 
 ## {Type}{Fragment}Types
 
-**Desc**: Private constructor that initializes the value and description fields for each enum constant.
+**Desc**: Initializes enum constant with keyword value and description for test step parsing.
 
 **Rule**: ONE constructor matches this pattern.
  - **Name**: `^{Type}{Fragment}Types$`

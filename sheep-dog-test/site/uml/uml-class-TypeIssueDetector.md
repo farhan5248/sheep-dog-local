@@ -1,10 +1,10 @@
 # {Type}IssueDetector
 
-Validation detector for grammar element assignments. Methods validate assignment values at different scopes (element-level, file-level, cross-file).
+Validation logic for grammar elements at different scopes. Separates validation rules from grammar model and UI, enabling reuse across editors and build tools.
 
 ## validate{Assignment}{Issue}
 
-**Desc**: Detector methods validate specific grammar assignments at different validation scopes. Method name pattern is validate + {Assignment} + {Issue} where {Assignment} is the grammar assignment in PascalCase and {Issue} is the validation scope (Only=element, File=file, Workspace=cross-file). Parameter type must be I{Type} interface. Return type must be String (empty string = valid, error description = invalid).
+**Desc**: Validates a specific grammar assignment at element-only, file, or workspace scope, returning empty string if valid or error description if invalid.
 
 **Rule**: ALL method names follow validate{Assignment}{Issue} pattern.
  - **Name**: `^validate{Assignment}{Issue}$`

@@ -1,10 +1,10 @@
 # {Type}Utility
 
-Utility classes provide helper methods for grammar elements. All methods are static with no instance state.
+Static helper methods for grammar element operations. Separates utility operations from grammar model classes, keeping interfaces focused on data access.
 
 ## static
 
-**Desc**: Utility classes have no instance methods, constructors, or variables. All methods (public and private) must be static.
+**Desc**: Performs parsing, formatting, or computation operations on grammar elements without maintaining state.
 
 **Rule**: SOME methods are static.
  - **Name**: `^(get|set|add|is)`

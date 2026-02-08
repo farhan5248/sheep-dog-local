@@ -1,10 +1,10 @@
 # IResourceRepository
 
-Service interface for resource management operations.
+Repository interface for file I/O operations. Separates persistence contracts from business logic, allowing different implementations (filesystem, in-memory, Eclipse workspace).
 
 ## {IO}
 
-**Desc**: Repository methods follow standard CRUD (Create, Read, Update, Delete) naming conventions using verbs: get, put, delete, list, clear, contains.
+**Desc**: Performs CRUD operations on tagged file resources using standard repository method naming.
 
 **Rule**: ALL method names follow CRUD operation patterns.
  - **Name**: `^(get|put|delete|list|clear|contains)$`

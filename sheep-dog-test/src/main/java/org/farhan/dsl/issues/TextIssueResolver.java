@@ -13,11 +13,26 @@ import org.farhan.dsl.lang.StatementUtility;
 import org.farhan.dsl.lang.StepDefinitionUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Quick fix proposal generation for validation errors.
+ * <p>
+ * Separates fix proposal logic from detection and application, enabling
+ * IDE-independent validation tooling.
+ * </p>
+ */
 public class TextIssueResolver {
 
 	private static final Logger logger = LoggerFactory.getLogger(TextIssueResolver.class);
 
+	/**
+	 * Generates proposals correcting values when an assignment exists but is
+	 * invalid.
+	 *
+	 * @param theTestStep the element needing corrections
+	 * @return list of quick fix proposals
+	 */
 	public static ArrayList<SheepDogIssueProposal> correctNameWorkspace(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering correctNameWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();

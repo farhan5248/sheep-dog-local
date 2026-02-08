@@ -15,11 +15,26 @@ import org.farhan.dsl.lang.StatementUtility;
 import org.farhan.dsl.lang.TestProjectUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Quick fix proposal generation for validation errors.
+ * <p>
+ * Separates fix proposal logic from detection and application, enabling
+ * IDE-independent validation tooling.
+ * </p>
+ */
 public class TestStepIssueResolver {
 
     private static final Logger logger = LoggerFactory.getLogger(TestStepIssueResolver.class);
 
+    /**
+     * Generates proposals correcting values when an assignment exists but is
+     * invalid.
+     *
+     * @param theTestStep the element needing corrections
+     * @return list of quick fix proposals
+     */
     public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {
         logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
@@ -44,6 +59,13 @@ public class TestStepIssueResolver {
         return proposals;
     }
 
+    /**
+     * Generates proposals correcting values when an assignment exists but is
+     * invalid.
+     *
+     * @param theTestStep the element needing corrections
+     * @return list of quick fix proposals
+     */
     public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep)
             throws Exception {
         logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
@@ -166,6 +188,12 @@ public class TestStepIssueResolver {
         return proposals.values();
     }
 
+    /**
+     * Generates proposals suggesting values when an assignment is missing or empty.
+     *
+     * @param theTestStep the element needing suggestions
+     * @return list of quick fix proposals
+     */
     public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {
         logger.debug("Entering suggestStepObjectNameWorkspace for step: {}",
@@ -182,6 +210,12 @@ public class TestStepIssueResolver {
         return proposals;
     }
 
+    /**
+     * Generates proposals suggesting values when an assignment is missing or empty.
+     *
+     * @param theTestStep the element needing suggestions
+     * @return list of quick fix proposals
+     */
     public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep)
             throws Exception {
         logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",

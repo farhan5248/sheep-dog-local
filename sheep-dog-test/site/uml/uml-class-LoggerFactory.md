@@ -1,12 +1,10 @@
 # LoggerFactory
 
-Factory class that provides loggers to sheep-dog-test classes. Uses SLF4J when a real provider is available, otherwise delegates to a custom LoggerProvider implementation.
-
-The getLogger method delegates to LoggerProvider when SLF4J falls back to NOPLoggerFactory.
+Facade for logger creation that abstracts SLF4J vs custom logger providers. Separates logging infrastructure concerns from business logic by hiding provider selection and fallback.
 
 ## getLogger
 
-**Desc**: Get logger for class using SLF4J or custom provider.
+**Desc**: Creates logger for a class by selecting SLF4J or custom provider based on availability.
 
 **Rule**: ONE method names match getLogger pattern.
  - **Name**: `^getLogger$`
@@ -19,7 +17,7 @@ The getLogger method delegates to LoggerProvider when SLF4J falls back to NOPLog
 
 ## setLoggerImplementation
 
-**Desc**: Set custom logger provider when SLF4J is unavailable.
+**Desc**: Configures custom logger provider for environments without SLF4J implementations (like Eclipse OSGi).
 
 **Rule**: ONE method names match setLoggerImplementation pattern.
  - **Name**: `^setLoggerImplementation$`

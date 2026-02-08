@@ -3,8 +3,11 @@ package org.farhan.dsl.issues;
 import org.slf4j.Logger;
 
 /**
- * Factory for creating loggers. Uses SLF4J by default when available, otherwise
- * falls back to a custom logger implementation.
+ * Facade for logger creation that abstracts SLF4J vs custom logger providers.
+ * <p>
+ * Separates logging infrastructure concerns from business logic by hiding
+ * provider selection and fallback.
+ * </p>
  */
 public class LoggerFactory {
 
@@ -13,6 +16,13 @@ public class LoggerFactory {
 	 */
 	private static LoggerProvider provider = null;
 
+	/**
+	 * Configures custom logger provider for environments without SLF4J
+	 * implementations (like Eclipse OSGi).
+	 *
+	 * @param provider the custom logger provider
+	 * @throws IllegalArgumentException if provider is null
+	 */
 	public static void setLoggerImplementation(LoggerProvider provider) {
 		if (provider == null) {
 			throw new IllegalArgumentException("Logger implementation cannot be null");
@@ -21,6 +31,13 @@ public class LoggerFactory {
 		}
 	}
 
+	/**
+	 * Creates logger for a class by selecting SLF4J or custom provider based on
+	 * availability.
+	 *
+	 * @param clazz the class to create a logger for
+	 * @return the logger instance
+	 */
 	public static Logger getLogger(Class<?> clazz) {
 		// Use custom impl if SLF4J has no real provider
 		if (org.slf4j.LoggerFactory.getILoggerFactory() instanceof org.slf4j.helpers.NOPLoggerFactory) {

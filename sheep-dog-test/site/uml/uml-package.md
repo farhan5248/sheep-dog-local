@@ -2,9 +2,11 @@
 
 ## src/main/java/org/farhan/dsl/issues
 
+**Desc**: Validation and quick fix infrastructure. Separates detection, resolution, and proposal data structures from grammar model and UI frameworks, enabling IDE-independent validation tooling.
+
 ### {Language}IssueProposal
 
-Always has a class named {Language}IssueProposal that represents quick fix proposals for validation issues.
+**Desc**: Data transfer object holding quick fix proposal data. Separates proposal data (id, description, value, qualifiedName) from proposal generation and application logic.
 
 **Rule**: ONE class matches {Language}IssueProposal pattern
 
@@ -13,7 +15,7 @@ Always has a class named {Language}IssueProposal that represents quick fix propo
 
 ### {Type}IssueTypes
 
-Might have one class per {Type} named {Type}IssueTypes that defines enum constants for issue types.
+**Desc**: Enum constants for validation error types. Separates error type definitions from validation logic, providing stable identifiers for detector-resolver coordination.
 
 **Rule**: SOME class matches {Type}IssueTypes pattern
 
@@ -23,7 +25,7 @@ Might have one class per {Type} named {Type}IssueTypes that defines enum constan
 
 ### {Type}IssueDetector
 
-Might have one class per {Type} named {Type}IssueDetector that validates grammar assignments.
+**Desc**: Validation logic for grammar elements at different scopes. Separates validation rules from grammar model and UI, enabling reuse across editors and build tools.
 
 **Rule**: SOME class matches {Type}IssueDetector pattern
 
@@ -33,7 +35,7 @@ Might have one class per {Type} named {Type}IssueDetector that validates grammar
 
 ### {Type}IssueResolver
 
-Might have one class per {Type} named {Type}IssueResolver that generates quick fix proposals.
+**Desc**: Quick fix proposal generation for validation errors. Separates fix proposal logic from detection and application, enabling IDE-independent validation tooling.
 
 **Rule**: SOME class matches {Type}IssueResolver pattern
 
@@ -43,7 +45,7 @@ Might have one class per {Type} named {Type}IssueResolver that generates quick f
 
 ### LoggerFactory
 
-Always has a class named LoggerFactory that provides loggers to all classes in this package.
+**Desc**: Facade for logger creation that abstracts SLF4J vs custom logger providers. Separates logging infrastructure concerns from business logic by hiding provider selection and fallback.
 
 **Rule**: ONE class matches LoggerFactory pattern
 
@@ -52,7 +54,7 @@ Always has a class named LoggerFactory that provides loggers to all classes in t
 
 ### LoggerProvider
 
-Always has an interface named LoggerProvider that allows external systems to inject custom logger implementations.
+**Desc**: Interface for custom logger implementations. Separates logger provider contract from logger usage, enabling dependency injection in environments without SLF4J.
 
 **Rule**: ONE class matches LoggerProvider pattern
 
@@ -61,9 +63,11 @@ Always has an interface named LoggerProvider that allows external systems to inj
 
 ## src/main/java/org/farhan/dsl/lang
 
+**Desc**: Grammar model interfaces and creation infrastructure. Separates interface contracts from implementations, initialization logic from factory operations, and persistence contracts from business logic.
+
 ### IResourceRepository
 
-Always has an interface named IResourceRepository for resource management.
+**Desc**: Repository interface for file I/O operations. Separates persistence contracts from business logic, allowing different implementations (filesystem, in-memory, Eclipse workspace).
 
 **Rule**: ONE class matches IResourceRepository pattern
 
@@ -72,7 +76,7 @@ Always has an interface named IResourceRepository for resource management.
 
 ### {Language}Builder
 
-Always has a class named {Language}Builder that creates and initializes grammar elements.
+**Desc**: Static factory for creating and initializing grammar elements. Separates object construction and initialization logic from factory operations and grammar model definitions.
 
 **Rule**: ONE class matches {Language}Builder pattern
 
@@ -81,7 +85,7 @@ Always has a class named {Language}Builder that creates and initializes grammar 
 
 ### {Language}Factory
 
-Always has a class named {Language}Factory that creates grammar elements without initialization.
+**Desc**: Singleton holder that provides global access to the concrete factory instance. Separates factory instance management from factory operations and builder logic.
 
 **Rule**: ONE class matches {Language}Factory pattern
 
@@ -90,7 +94,7 @@ Always has a class named {Language}Factory that creates grammar elements without
 
 ### I{Language}Factory
 
-Always has an interface named I{Language}Factory defining factory methods for grammar elements.
+**Desc**: Factory interface for creating empty grammar instances. Separates factory contract from initialization logic and concrete implementations (EMF vs POJO).
 
 **Rule**: ONE class matches I{Language}Factory pattern
 
@@ -99,7 +103,7 @@ Always has an interface named I{Language}Factory defining factory methods for gr
 
 ### I{Type}
 
-Always has one interface per {Type} named I{Type} representing grammar elements.
+**Desc**: Grammar element interface contracts. Separates interface definitions from implementations, allowing multiple backends (EMF, POJO) for the same grammar model.
 
 **Rule**: SOME class matches I{Type} pattern
 
@@ -111,7 +115,7 @@ Always has one interface per {Type} named I{Type} representing grammar elements.
 
 ### {Type}Utility
 
-Might have one class per {Type} named {Type}Utility providing helper methods.
+**Desc**: Static helper methods for grammar element operations. Separates utility operations from grammar model classes, keeping interfaces focused on data access.
 
 **Rule**: SOME class matches {Type}Utility pattern
 
@@ -122,7 +126,7 @@ Might have one class per {Type} named {Type}Utility providing helper methods.
 
 ### {Type}{Fragment}Types
 
-Might have multiple classes per {Type} named {Type}{Fragment}Types defining enum constants for test step regex fragments.
+**Desc**: Enum constants for test step keyword patterns. Separates keyword definitions from parsing logic, enabling centralized maintenance of domain vocabulary.
 
 **Rule**: SOME class matches {Type}{Fragment}Types pattern
 

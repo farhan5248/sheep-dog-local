@@ -14,7 +14,15 @@ import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.StatementUtility;
 import org.farhan.dsl.lang.TestStepUtility;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Quick fix proposal generation for validation errors.
+ * <p>
+ * Separates fix proposal logic from detection and application, enabling
+ * IDE-independent validation tooling.
+ * </p>
+ */
 public class RowIssueResolver {
 
 	private static final Logger logger = LoggerFactory.getLogger(RowIssueResolver.class);
@@ -33,6 +41,13 @@ public class RowIssueResolver {
 		return cellsAsString.trim();
 	}
 
+	/**
+	 * Generates proposals correcting values when an assignment exists but is
+	 * invalid.
+	 *
+	 * @param theTestStep the element needing corrections
+	 * @return list of quick fix proposals
+	 */
 	public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering correctCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
@@ -65,6 +80,12 @@ public class RowIssueResolver {
 		return proposals;
 	}
 
+	/**
+	 * Generates proposals suggesting values when an assignment is missing or empty.
+	 *
+	 * @param theTestStep the element needing suggestions
+	 * @return list of quick fix proposals
+	 */
 	public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(ITestStep theTestStep) throws Exception {
 		logger.debug("Entering suggestCellListWorkspace");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
