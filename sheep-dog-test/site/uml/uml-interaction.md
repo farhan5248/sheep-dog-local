@@ -433,7 +433,7 @@ public class EclipseLoggerProvider implements LoggerProvider {
 
 ## I{Type}
 
-### {Accessor}{Assignment}
+### {Assignment}
 
 All interface methods follow standard accessor naming: getters start with 'get', setters start with 'set', and adders start with 'add'.
 

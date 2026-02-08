@@ -58,10 +58,7 @@ Pattern variables used in UML files to represent families of classes following s
 6. **{Proposal}** - Proposal attributes.
    - Values: `(Id|Description|Value|QualifiedName)`
 
-7. **{IO}** - File operations. This has nothing to do with the domain, remove it
+7. **{IO}** - File operations. 
    - Values: `(get|put|delete|list|clear|contains)`
-
-8. **{Accessor}** - Standard accessor naming convention. This has nothing to do with the domain, remove it
-   - Values: `(get|set|add|is)`
 
 See `sheep-dog-main/site/impl/impl-xtext.md` Domain Terminology section for additional context.
