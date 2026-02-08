@@ -2,7 +2,7 @@
 
 Validation detector for grammar element assignments. Methods validate assignment values at different scopes (element-level, file-level, cross-file).
 
-## validate{Assignment}{Issue}(I{Type})
+## validate{Assignment}{Issue}
 
 Detector methods validate specific grammar assignments at different validation scopes. Method name pattern is validate + {Assignment} + {Issue} where {Assignment} is the grammar assignment in PascalCase and {Issue} is the validation scope (Only=element, File=file, Workspace=cross-file). Parameter type must be I{Type} interface. Return type must be String (empty string = valid, error description = invalid).
 

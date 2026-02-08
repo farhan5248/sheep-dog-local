@@ -1,6 +1,6 @@
 # UML Interaction Patterns
 
-## Logging
+## All
 
 SLF4J logging patterns specific to sheep-dog-test that supplement [arch-logging.md](sheep-dog-main/site/arch/arch-logging.md). These patterns define which classes have loggers and which operations should be logged.
 
@@ -62,10 +62,6 @@ repository.get(path);
 logger.debug("Writing file: {}", path);
 repository.put(path, content);
 ```
-
-## Exception Handling
-
-Java Exception class is used for all error propagation without catching or handling. This simple approach ensures all errors propagate to test execution layer where they can be properly reported.
 
 ### Exception Propagation Pattern
 

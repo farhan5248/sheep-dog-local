@@ -55,4 +55,13 @@ Pattern variables used in UML files to represent families of classes following s
    - Used in: validate{Assignment}{Issue}(), correct{Assignment}{Issue}(), suggest{Assignment}{Issue}()
    - Case variants: `{issue}` (camelCase), `{ISSUE}` (UPPER_SNAKE_CASE)
 
+6. **{Proposal}** - Proposal attributes.
+   - Values: `(Id|Description|Value|QualifiedName)`
+
+7. **{IO}** - File operations.
+   - Values: `(get|put|delete|list|clear|contains)`
+
+8. **{Accessor}** - Standard accessor naming convention
+   - Values: `(get|set|add|is)`
+
 See `sheep-dog-main/site/impl/impl-xtext.md` Domain Terminology section for additional context.

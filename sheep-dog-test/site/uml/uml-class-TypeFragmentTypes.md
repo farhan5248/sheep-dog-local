@@ -16,7 +16,7 @@ All enum constants follow UPPER_SNAKE_CASE naming pattern.
  - `PAGE`
  - `RESPONSE`
 
-## public final String value
+## value
 
 Each enum constant has a public final String field named 'value' containing the lowercase keyword used in test steps.
 
@@ -25,7 +25,7 @@ Each enum constant has a public final String field named 'value' containing the 
 **Regex**: `^public\s+final\s+String\s+value$`
  - `public final String value`
 
-## public final String description
+## description
 
 Each enum constant has a public final String field named 'description' providing human-readable explanation.
 
@@ -34,7 +34,7 @@ Each enum constant has a public final String field named 'description' providing
 **Regex**: `^public\s+final\s+String\s+description$`
  - `public final String description`
 
-## {Type}{Fragment}Types\(String value, String description\)
+## {Type}{Fragment}Types
 
 Private constructor that initializes the value and description fields for each enum constant.
 

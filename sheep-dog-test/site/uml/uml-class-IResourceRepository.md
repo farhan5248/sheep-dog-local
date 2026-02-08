@@ -2,7 +2,7 @@
 
 Service interface for resource management operations.
 
-## (get|put|delete|list|clear|contains)
+## {IO}
 
 Repository methods follow standard CRUD (Create, Read, Update, Delete) naming conventions using verbs: get, put, delete, list, clear, contains.
 

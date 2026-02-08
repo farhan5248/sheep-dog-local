@@ -2,7 +2,7 @@
 
 Interface for creating language-specific grammar elements. Defines parameterless create{Type}() methods that return empty instances.
 
-## create{Type}()
+## create{Type}
 
 Factory interface methods create empty instances of grammar types. Return type I{Type} must match method name create{Type}(). Methods are parameterless and return interface types. The {Language}Builder is responsible for setting attributes and adding instances to parent containers.
 
