@@ -4,6 +4,10 @@ import java.util.List;
 
 public interface IStepDefinition {
 
+	boolean addStatement(IStatement value);
+
+	boolean addStepParameters(IStepParameters value);
+
 	String getName();
 
 	String getNameLong();
@@ -22,10 +26,6 @@ public interface IStepDefinition {
 
 	IStepParameters getStepParameters(String name);
 
-	void setName(String value);
-
-	boolean addStatement(IStatement value);
-
-	boolean addStepParameters(IStepParameters value);
+    void setName(String value);
 
 }

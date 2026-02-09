@@ -8,82 +8,89 @@ import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
-import org.farhan.dsl.lang.StepDefinitionUtility;
+import org.farhan.dsl.lang.RowUtility;
 
 public class StepDefinitionImpl implements IStepDefinition {
 
-	String name;
-	ArrayList<StepParametersImpl> stepParametersList;
-	ArrayList<StatementImpl> statementList;
-	StepObjectImpl parent;
+    String name;
+    ArrayList<StepParametersImpl> stepParametersList;
+    ArrayList<StatementImpl> statementList;
+    StepObjectImpl parent;
 
-	StepDefinitionImpl() {
-		this.stepParametersList = new ArrayList<StepParametersImpl>();
-		this.statementList = new ArrayList<StatementImpl>();
-	}
+    StepDefinitionImpl() {
+        this.stepParametersList = new ArrayList<StepParametersImpl>();
+        this.statementList = new ArrayList<StatementImpl>();
+    }
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public String getNameLong() {
-		throw new UnsupportedOperationException("getNameLong() is not implemented");
-	}
+    @Override
+    public String getNameLong() {
+        throw new UnsupportedOperationException("getNameLong() is not implemented");
+    }
 
-	@Override
-	public IStepObject getParent() {
-		throw new UnsupportedOperationException("getParent() is not implemented");
-	}
+    @Override
+    public IStepObject getParent() {
+        throw new UnsupportedOperationException("getParent() is not implemented");
+    }
 
-	@Override
-	public IStatement getStatement(int index) {
-		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
-	}
+    @Override
+    public IStatement getStatement(int index) {
+        throw new UnsupportedOperationException("getStatement(int index) is not implemented");
+    }
 
-	@Override
-	public IStatement getStatement(String name) {
-		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
-	}
+    @Override
+    public IStatement getStatement(String name) {
+        throw new UnsupportedOperationException("getStatement(String name) is not implemented");
+    }
 
-	@Override
-	public List<IStatement> getStatementList() {
-		return Collections.unmodifiableList(statementList);
-	}
+    @Override
+    public List<IStatement> getStatementList() {
+        return Collections.unmodifiableList(statementList);
+    }
 
-	@Override
-	public List<IStepParameters> getStepParameterList() {
-		return Collections.unmodifiableList(stepParametersList);
-	}
+    @Override
+    public List<IStepParameters> getStepParameterList() {
+        return Collections.unmodifiableList(stepParametersList);
+    }
 
-	@Override
-	public IStepParameters getStepParameters(int index) {
-		throw new UnsupportedOperationException("getStepParameters(int index) is not implemented");
-	}
+    @Override
+    public IStepParameters getStepParameters(int index) {
+        throw new UnsupportedOperationException("getStepParameters(int index) is not implemented");
+    }
 
-	@Override
-	public IStepParameters getStepParameters(String name) {
-		return StepDefinitionUtility.getStepParameters(this, name);
-	}
+    @Override
+    public IStepParameters getStepParameters(String name) {
 
-	@Override
-	public void setName(String value) {
-		this.name = value;
-	}
+        for (IStepParameters sp : stepParametersList) {
+            String rowAsString = RowUtility.getCellListAsString(sp.getTable().getRowList().getFirst());
+            if (name.contentEquals(rowAsString)) {
+                return sp;
+            }
+        }
+        return null;
+    }
 
-	@Override
-	public boolean addStatement(IStatement value) {
-		statementList.add((StatementImpl) value);
-		statementList.getLast().parent = this;
-		return true;
-	}
+    @Override
+    public void setName(String value) {
+        this.name = value;
+    }
 
-	@Override
-	public boolean addStepParameters(IStepParameters value) {
-		stepParametersList.add((StepParametersImpl) value);
-		stepParametersList.getLast().parent = this;
-		return true;
-	}
+    @Override
+    public boolean addStatement(IStatement value) {
+        statementList.add((StatementImpl) value);
+        statementList.getLast().parent = this;
+        return true;
+    }
+
+    @Override
+    public boolean addStepParameters(IStepParameters value) {
+        stepParametersList.add((StepParametersImpl) value);
+        stepParametersList.getLast().parent = this;
+        return true;
+    }
 
 }

@@ -11,65 +11,66 @@ import org.farhan.dsl.lang.ITable;
 
 public class StepParametersImpl implements IStepParameters {
 
-	StepDefinitionImpl parent;
-	TableImpl table;
-	ArrayList<StatementImpl> statementList;
+    StepDefinitionImpl parent;
+    TableImpl table;
+    String name;
+    ArrayList<StatementImpl> statementList;
 
-	StepParametersImpl() {
-		this.statementList = new ArrayList<StatementImpl>();
-	}
+    StepParametersImpl() {
+        this.statementList = new ArrayList<StatementImpl>();
+    }
 
-	@Override
-	public String getName() {
-		throw new UnsupportedOperationException("getName() is not implemented");
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public IStepDefinition getParent() {
-		return parent;
-	}
+    @Override
+    public IStepDefinition getParent() {
+        return parent;
+    }
 
-	@Override
-	public List<IStatement> getStatementList() {
-		return Collections.unmodifiableList(statementList);
-	}
+    @Override
+    public List<IStatement> getStatementList() {
+        return Collections.unmodifiableList(statementList);
+    }
 
-	@Override
-	public ITable getTable() {
-		return table;
-	}
+    @Override
+    public ITable getTable() {
+        return table;
+    }
 
-	@Override
-	public void setName(String value) {
-		throw new UnsupportedOperationException("setName(String value) is not implemented");
-	}
+    @Override
+    public void setName(String value) {
+        name = value;
+    }
 
-	@Override
-	public void setTable(ITable value) {
-		this.table = (TableImpl) value;
-		this.table.parent = this;
-	}
+    @Override
+    public void setTable(ITable value) {
+        this.table = (TableImpl) value;
+        this.table.parent = this;
+    }
 
-	@Override
-	public String getNameLong() {
-		throw new UnsupportedOperationException("getNameLong() is not implemented");
-	}
+    @Override
+    public String getNameLong() {
+        throw new UnsupportedOperationException("getNameLong() is not implemented");
+    }
 
-	@Override
-	public IStatement getStatement(int index) {
-		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
-	}
+    @Override
+    public IStatement getStatement(int index) {
+        throw new UnsupportedOperationException("getStatement(int index) is not implemented");
+    }
 
-	@Override
-	public IStatement getStatement(String name) {
-		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
-	}
+    @Override
+    public IStatement getStatement(String name) {
+        throw new UnsupportedOperationException("getStatement(String name) is not implemented");
+    }
 
-	@Override
-	public boolean addStatement(IStatement value) {
-		statementList.add((StatementImpl) value);
-		statementList.getLast().parent = this;
-		return true;
-	}
+    @Override
+    public boolean addStatement(IStatement value) {
+        statementList.add((StatementImpl) value);
+        statementList.getLast().parent = this;
+        return true;
+    }
 
 }

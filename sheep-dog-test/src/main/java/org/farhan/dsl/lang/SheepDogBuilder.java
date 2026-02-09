@@ -1,13 +1,14 @@
 package org.farhan.dsl.lang;
 
 import org.slf4j.Logger;
+
 import org.farhan.dsl.issues.LoggerFactory;
 
 /**
  * Static factory for creating and initializing grammar elements.
  * <p>
- * Separates object construction and initialization logic from factory operations
- * and grammar model definitions.
+ * Separates object construction and initialization logic from factory
+ * operations and grammar model definitions.
  * </p>
  */
 public class SheepDogBuilder {
@@ -22,7 +23,7 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name the name of the cell
+     * @param name   the name of the cell
      * @return the created and initialized instance
      */
     public static ICell createCell(IRow parent, String name) {
@@ -56,7 +57,7 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name the name of the statement
+     * @param name   the name of the statement
      * @return the created and initialized instance
      */
     public static IStatement createStatement(IStepDefinition parent, String name) {
@@ -74,7 +75,7 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name the name of the statement
+     * @param name   the name of the statement
      * @return the created and initialized instance
      */
     public static IStatement createStatement(IStepObject parent, String name) {
@@ -92,7 +93,7 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name the name of the step definition
+     * @param name   the name of the step definition
      * @return the created and initialized instance
      */
     public static IStepDefinition createStepDefinition(IStepObject parent, String name) {
@@ -114,7 +115,7 @@ public class SheepDogBuilder {
      * Creates grammar element using factory, initializes attributes, establishes
      * parent-child relationships, and handles singleton lookups where needed.
      *
-     * @param parent the parent element (or null if root)
+     * @param parent        the parent element (or null if root)
      * @param qualifiedName the qualified name of the step object
      * @return the created and initialized instance
      */
@@ -137,22 +138,18 @@ public class SheepDogBuilder {
      * Creates grammar element using factory, initializes attributes, establishes
      * parent-child relationships, and handles singleton lookups where needed.
      *
-     * @param parent the parent element (or null if root)
+     * @param parent  the parent element (or null if root)
      * @param headers the headers for the step parameters
      * @return the created and initialized instance
      */
-    public static IStepParameters createStepParameters(IStepDefinition parent, String headers) {
+    public static IStepParameters createStepParameters(IStepDefinition parent, String name) {
         logger.debug("Entering createStepParameters for IRow");
         IStepParameters stepParameters = null;
         if (parent != null)
-            stepParameters = parent.getStepParameters(headers);
+            stepParameters = parent.getStepParameters(name);
         if (stepParameters == null) {
             stepParameters = SheepDogFactory.instance.createStepParameters();
-            ITable table = createTable(stepParameters);
-            IRow row = createRow(table);
-            for (String h : headers.replaceFirst("^\\|\\s+", "").split("\\|")) {
-                SheepDogBuilder.createCell(row, h);
-            }
+            stepParameters.setName(name);
             if (parent != null)
                 parent.addStepParameters(stepParameters);
         }
@@ -197,7 +194,7 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name the name of the text
+     * @param name   the name of the text
      * @return the created and initialized instance
      */
     public static IText createText(ITestStep parent, String name) {
@@ -215,7 +212,7 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name the name of the test case
+     * @param name   the name of the test case
      * @return the created and initialized instance
      */
     public static ITestCase createTestCase(ITestSuite parent, String name) {
@@ -236,7 +233,7 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name the name of the test setup
+     * @param name   the name of the test setup
      * @return the created and initialized instance
      */
     public static ITestSetup createTestSetup(ITestSuite parent, String name) {
@@ -257,7 +254,7 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name the name of the test step
+     * @param name   the name of the test step
      * @return the created and initialized instance
      */
     public static ITestStep createTestStep(ITestStepContainer parent, String name) {
@@ -275,7 +272,7 @@ public class SheepDogBuilder {
      * Creates grammar element using factory, initializes attributes, establishes
      * parent-child relationships, and handles singleton lookups where needed.
      *
-     * @param parent the parent element (or null if root)
+     * @param parent        the parent element (or null if root)
      * @param qualifiedName the qualified name of the test suite
      * @return the created and initialized instance
      */

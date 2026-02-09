@@ -2,8 +2,11 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 import org.farhan.common.TestIDEObject;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.junit.jupiter.api.Assertions;
@@ -79,7 +82,13 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
                     keyMap.get("Object Name"));
             IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
                     keyMap.get("Step Definition Name"));
-            SheepDogBuilder.createStepParameters(stepDefinition, keyMap.get("Parameters"));
+            String name = keyMap.get("Parameters");
+            IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDefinition, name);
+            ITable table = SheepDogBuilder.createTable(stepParameters);
+            IRow row = SheepDogBuilder.createRow(table);
+            for (String h : name.replaceFirst("^\\|\\s+", "").split("\\|")) {
+                SheepDogBuilder.createCell(row, h);
+            }
         } catch (Exception e) {
             Assertions.fail(e);
         }
