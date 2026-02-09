@@ -46,7 +46,7 @@ public class TextIssueResolver {
             IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
             if (theStepDefinition != null) {
                 // This assumes that the step is valid but the parameters don't exist
-                IStepParameters theStepParameters = theStepDefinition.getStepParameters("| Content");
+                IStepParameters theStepParameters = theStepDefinition.getStepParameters("Content");
                 if (theStepParameters == null) {
                     theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, "Content");
                     ITable table = SheepDogBuilder.createTable(theStepParameters);

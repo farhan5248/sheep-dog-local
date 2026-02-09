@@ -18,7 +18,7 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
     public void setStepsSnippetHeaders(HashMap<String, String> keyMap) {
         addTable();
         addRow();
-        for (String h : keyMap.get("Headers").split("\\|")) {
+        for (String h : keyMap.get("Headers").split(",")) {
             addCell(h);
         }
     }

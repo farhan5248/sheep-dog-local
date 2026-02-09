@@ -64,7 +64,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     @Override
     public IStepParameters getStepParameters(String name) {
-
         for (IStepParameters sp : stepParametersList) {
             String rowAsString = RowUtility.getCellListAsString(sp.getTable().getRowList().getFirst());
             if (name.contentEquals(rowAsString)) {

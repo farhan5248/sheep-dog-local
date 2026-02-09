@@ -35,7 +35,7 @@ public class TextIssueDetector {
         IStepDefinition theStepDefinition = theStepObject
                 .getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
         if (!theText.getName().isEmpty()) {
-            if (theStepDefinition.getStepParameters("| Content") == null) {
+            if (theStepDefinition.getStepParameters("Content") == null) {
                 logger.debug("Exiting validateNameWorkspace");
                 return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
             }

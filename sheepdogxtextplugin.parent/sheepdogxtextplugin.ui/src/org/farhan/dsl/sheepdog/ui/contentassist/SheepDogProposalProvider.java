@@ -17,7 +17,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.issues.*;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.SheepDogBuilder;
-import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
@@ -32,129 +31,134 @@ import org.farhan.dsl.sheepdog.sheepDog.When;
  */
 public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 
-	private static final Logger logger = Logger.getLogger(SheepDogProposalProvider.class);
+    private static final Logger logger = Logger.getLogger(SheepDogProposalProvider.class);
 
-	public void completeAnd_StepObjectName(And step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeAnd_StepObjectName(step, assignment, context, acceptor);
-		completeStepObject(step, assignment, context, acceptor);
-	}
+    public void completeAnd_StepObjectName(And step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        super.completeAnd_StepObjectName(step, assignment, context, acceptor);
+        completeStepObject(step, assignment, context, acceptor);
+    }
 
-	public void completeAnd_StepDefinitionName(And step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeAnd_StepDefinitionName(step, assignment, context, acceptor);
-		completeStepDefinitionName(step, assignment, context, acceptor);
-	}
+    public void completeAnd_StepDefinitionName(And step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        super.completeAnd_StepDefinitionName(step, assignment, context, acceptor);
+        completeStepDefinitionName(step, assignment, context, acceptor);
+    }
 
-	private void completeCellList(TestStep step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		logger.debug("Entering completeCellList for element: " + step.toString());
-		try {
-			initProject(step.eResource());
-			for (SheepDogIssueProposal p : RowIssueResolver.suggestCellListWorkspace(new TestStepImpl(step))) {
-				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-						p.getValue(), p.getId(), null, context);
-				if (proposal != null) {
-					proposal.setAdditionalProposalInfo(p.getDescription());
-					acceptor.accept(proposal);
-				}
-			}
-		} catch (Exception e) {
-			logger.error("Failed in content assist for " + step.toString() + ": " + e.getMessage(), e);
-		}
-		logger.debug("Exiting completeCellList");
-	}
+    private void completeCellList(EObject step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        logger.debug("Entering completeCellList for element: " + step.toString());
+        try {
+            if (step instanceof TestStep) {
+                initProject(step.eResource());
+                for (SheepDogIssueProposal p : RowIssueResolver.suggestCellListWorkspace(new TestStepImpl((TestStep) step))) {
+                    String pipeList = "| " + p.getValue().replaceAll(",", " \\|");
+                    ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
+                            pipeList, p.getId(), null, context);
+                    if (proposal != null) {
+                        proposal.setAdditionalProposalInfo(p.getDescription());
+                        acceptor.accept(proposal);
+                    }
+                }
+            } else {
+                return;
+            }
+        } catch (Exception e) {
+            logger.error("Failed in content assist for " + step.toString() + ": " + e.getMessage(), e);
+        }
+        logger.debug("Exiting completeCellList");
+    }
 
-	public void completeGiven_StepObjectName(Given step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_StepObjectName(step, assignment, context, acceptor);
-		completeStepObject(step, assignment, context, acceptor);
-	}
+    public void completeGiven_StepObjectName(Given step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        super.completeGiven_StepObjectName(step, assignment, context, acceptor);
+        completeStepObject(step, assignment, context, acceptor);
+    }
 
-	public void completeGiven_StepDefinitionName(Given step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_StepDefinitionName(step, assignment, context, acceptor);
-		completeStepDefinitionName(step, assignment, context, acceptor);
-	}
+    public void completeGiven_StepDefinitionName(Given step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        super.completeGiven_StepDefinitionName(step, assignment, context, acceptor);
+        completeStepDefinitionName(step, assignment, context, acceptor);
+    }
 
-	private void completeStepObject(TestStep step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		TestStepImpl testStep = new TestStepImpl(step);
-		logger.debug("Entering completeObject for element: " + testStep.getName());
-		try {
-			initProject(step.eResource());
-			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep)) {
-				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-						p.getValue(), p.getId(), null, context);
-				if (proposal != null) {
-					proposal.setAdditionalProposalInfo(p.getDescription());
-					acceptor.accept(proposal);
-				}
-			}
-		} catch (Exception e) {
-			logger.error("Failed in content assist for " + testStep.getName() + ": " + e.getMessage(), e);
-		}
-		logger.debug("Exiting completeObject");
-	}
+    private void completeStepObject(TestStep step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        TestStepImpl testStep = new TestStepImpl(step);
+        logger.debug("Entering completeObject for element: " + testStep.getName());
+        try {
+            initProject(step.eResource());
+            for (SheepDogIssueProposal p : TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep)) {
+                ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
+                        p.getValue(), p.getId(), null, context);
+                if (proposal != null) {
+                    proposal.setAdditionalProposalInfo(p.getDescription());
+                    acceptor.accept(proposal);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Failed in content assist for " + testStep.getName() + ": " + e.getMessage(), e);
+        }
+        logger.debug("Exiting completeObject");
+    }
 
-	private void completeStepDefinitionName(TestStep step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		TestStepImpl testStep = new TestStepImpl(step);
-		logger.debug("Entering completeStepDefinitionName for element: " + testStep.getName());
-		try {
-			initProject(step.eResource());
-			for (SheepDogIssueProposal p : TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep)) {
-				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-						p.getValue(), p.getId(), null, context);
-				if (proposal != null) {
-					proposal.setAdditionalProposalInfo(p.getDescription());
-					acceptor.accept(proposal);
-				}
-			}
-		} catch (Exception e) {
-			logger.error("Failed in content assist for " + testStep.getName() + ": " + e.getMessage(), e);
-		}
-		logger.debug("Exiting completeStepDefinitionName");
-	}
+    private void completeStepDefinitionName(TestStep step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        TestStepImpl testStep = new TestStepImpl(step);
+        logger.debug("Entering completeStepDefinitionName for element: " + testStep.getName());
+        try {
+            initProject(step.eResource());
+            for (SheepDogIssueProposal p : TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep)) {
+                ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
+                        p.getValue(), p.getId(), null, context);
+                if (proposal != null) {
+                    proposal.setAdditionalProposalInfo(p.getDescription());
+                    acceptor.accept(proposal);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Failed in content assist for " + testStep.getName() + ": " + e.getMessage(), e);
+        }
+        logger.debug("Exiting completeStepDefinitionName");
+    }
 
-	public void completeRow_CellList(EObject model, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeRow_CellList(model, assignment, context, acceptor);
-		completeCellList((TestStep) model, assignment, context, acceptor);
-	}
+    public void completeRow_CellList(EObject model, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        super.completeRow_CellList(model, assignment, context, acceptor);
+        completeCellList(model, assignment, context, acceptor);
+    }
 
-	public void completeThen_StepObjectName(Then step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeThen_StepObjectName(step, assignment, context, acceptor);
-		completeStepObject(step, assignment, context, acceptor);
-	}
+    public void completeThen_StepObjectName(Then step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        super.completeThen_StepObjectName(step, assignment, context, acceptor);
+        completeStepObject(step, assignment, context, acceptor);
+    }
 
-	public void completeThen_StepDefinitionName(Then step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeThen_StepDefinitionName(step, assignment, context, acceptor);
-		completeStepDefinitionName(step, assignment, context, acceptor);
-	}
+    public void completeThen_StepDefinitionName(Then step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        super.completeThen_StepDefinitionName(step, assignment, context, acceptor);
+        completeStepDefinitionName(step, assignment, context, acceptor);
+    }
 
-	public void completeWhen_StepObjectName(When step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeWhen_StepObjectName(step, assignment, context, acceptor);
-		completeStepObject(step, assignment, context, acceptor);
-	}
+    public void completeWhen_StepObjectName(When step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        super.completeWhen_StepObjectName(step, assignment, context, acceptor);
+        completeStepObject(step, assignment, context, acceptor);
+    }
 
-	public void completeWhen_StepDefinitionName(When step, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeWhen_StepDefinitionName(step, assignment, context, acceptor);
-		completeStepDefinitionName(step, assignment, context, acceptor);
-	}
+    public void completeWhen_StepDefinitionName(When step, Assignment assignment, ContentAssistContext context,
+            ICompletionProposalAcceptor acceptor) {
+        super.completeWhen_StepDefinitionName(step, assignment, context, acceptor);
+        completeStepDefinitionName(step, assignment, context, acceptor);
+    }
 
-	private void initProject(Resource resource) {
-		ITestProject parent = SheepDogBuilder.createTestProject();
-		if (parent.getName() == null) {
-			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
-					.getFile(new Path(resource.getURI().toPlatformString(true)));
-			File resourceFile = new File(resourceIFile.getProject().getLocationURI());
-			parent.setName(resourceFile.getAbsolutePath());
-		}
-	}
+    private void initProject(Resource resource) {
+        ITestProject parent = SheepDogBuilder.createTestProject();
+        if (parent.getName() == null) {
+            IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
+                    .getFile(new Path(resource.getURI().toPlatformString(true)));
+            File resourceFile = new File(resourceIFile.getProject().getLocationURI());
+            parent.setName(resourceFile.getAbsolutePath());
+        }
+    }
 
 }

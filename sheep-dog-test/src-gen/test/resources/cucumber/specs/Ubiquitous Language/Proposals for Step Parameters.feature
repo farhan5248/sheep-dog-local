@@ -56,5 +56,5 @@ Feature: Proposals for Step Parameters
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion | Suggestion Name |
-          | \| H1      | \| H1           |
+          | H1         | H1              |
 

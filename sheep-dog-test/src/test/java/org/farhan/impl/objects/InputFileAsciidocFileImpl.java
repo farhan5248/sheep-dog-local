@@ -86,7 +86,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
             IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDefinition, name);
             ITable table = SheepDogBuilder.createTable(stepParameters);
             IRow row = SheepDogBuilder.createRow(table);
-            for (String h : name.replaceFirst("^\\|\\s+", "").split("\\|")) {
+            for (String h : name.split(",")) {
                 SheepDogBuilder.createCell(row, h);
             }
         } catch (Exception e) {

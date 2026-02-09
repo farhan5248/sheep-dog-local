@@ -21,7 +21,6 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
-import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
@@ -49,119 +48,120 @@ import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
  * https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
-	private static final Logger logger = Logger.getLogger(SheepDogQuickfixProvider.class);
+    private static final Logger logger = Logger.getLogger(SheepDogQuickfixProvider.class);
 
-	private void createAcceptor(Issue issue, IssueResolutionAcceptor acceptor,
-			ArrayList<SheepDogIssueProposal> proposals) {
-		initProject(getEObject(issue).eResource());
-		for (SheepDogIssueProposal p : proposals) {
-			acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
-				public void apply(IModificationContext context) throws BadLocationException {
-					if (!p.getQualifiedName().isEmpty()) {
-						try {
-							IStepObject stepObject = SheepDogBuilder.createStepObject(null, p.getQualifiedName());
-							stepObject.setContent(p.getValue());
-							SheepDogBuilder.createTestProject().addStepObject(stepObject);
-						} catch (Exception e) {
-							logger.error("Failed writing file for " + p.getQualifiedName() + ": " + e.getMessage(), e);
-						}
-					} else {
-						context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), p.getValue());
-					}
-				}
-			});
-		}
-	}
+    private void createAcceptor(Issue issue, IssueResolutionAcceptor acceptor,
+            ArrayList<SheepDogIssueProposal> proposals) {
+        initProject(getEObject(issue).eResource());
+        for (SheepDogIssueProposal p : proposals) {
+            acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
+                public void apply(IModificationContext context) throws BadLocationException {
+                    if (!p.getQualifiedName().isEmpty()) {
+                        try {
+                            IStepObject stepObject = SheepDogBuilder.createStepObject(null, p.getQualifiedName());
+                            stepObject.setContent(p.getValue());
+                            SheepDogBuilder.createTestProject().addStepObject(stepObject);
+                        } catch (Exception e) {
+                            logger.error("Failed writing file for " + p.getQualifiedName() + ": " + e.getMessage(), e);
+                        }
+                    } else {
+                        String pipeList = "| " + p.getValue().replaceAll(",", " \\|");
+                        context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), pipeList);
+                    }
+                }
+            });
+        }
+    }
 
-	@Fix(SheepDogValidator.CELL_NAME_ONLY)
-	public void fixCellNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
-		Cell cell = (Cell) getEObject(issue);
-		logger.debug("Entering fixCellNameOnly for element: " + (cell != null ? cell.getName() : "null"));
-		createAcceptor(issue, acceptor, CellIssueResolver.correctNameOnly(new CellImpl(cell)));
-		logger.debug("Exiting fixCellNameOnly");
-	}
+    @Fix(SheepDogValidator.CELL_NAME_ONLY)
+    public void fixCellNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
+        Cell cell = (Cell) getEObject(issue);
+        logger.debug("Entering fixCellNameOnly for element: " + (cell != null ? cell.getName() : "null"));
+        createAcceptor(issue, acceptor, CellIssueResolver.correctNameOnly(new CellImpl(cell)));
+        logger.debug("Exiting fixCellNameOnly");
+    }
 
-	@Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
-	public void fixRowCellListWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
-		Row theRow = (Row) getEObject(issue);
-		logger.debug("Entering fixRowCellListWorkspace for element: " + theRow.toString());
-		try {
-			createAcceptor(issue, acceptor, RowIssueResolver
-					.correctCellListWorkspace(new TestStepImpl((TestStep) theRow.eContainer().eContainer())));
-		} catch (Exception e) {
-			logger.error("Failed in fixRowCellListWorkspace for: " + e.getMessage(), e);
-		}
-		logger.debug("Exiting fixRowCellListWorkspace");
-	}
+    @Fix(SheepDogValidator.ROW_CELL_LIST_WORKSPACE)
+    public void fixRowCellListWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+        Row theRow = (Row) getEObject(issue);
+        logger.debug("Entering fixRowCellListWorkspace for element: " + theRow.toString());
+        try {
+            createAcceptor(issue, acceptor, RowIssueResolver
+                    .correctCellListWorkspace(new TestStepImpl((TestStep) theRow.eContainer().eContainer())));
+        } catch (Exception e) {
+            logger.error("Failed in fixRowCellListWorkspace for: " + e.getMessage(), e);
+        }
+        logger.debug("Exiting fixRowCellListWorkspace");
+    }
 
-	@Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
-	public void fixTestStepContainerNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
-		TestStepContainer theTestStepContainer = (TestStepContainer) getEObject(issue);
-		logger.debug("Entering fixTestStepContainerNameOnly for element: " + theTestStepContainer.getName());
-		createAcceptor(issue, acceptor,
-				TestStepContainerIssueResolver.correctNameOnly(new TestStepContainerImpl(theTestStepContainer)));
-		logger.debug("Exiting fixTestStepContainerNameOnly");
-	}
+    @Fix(SheepDogValidator.TEST_STEP_CONTAINER_NAME_ONLY)
+    public void fixTestStepContainerNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
+        TestStepContainer theTestStepContainer = (TestStepContainer) getEObject(issue);
+        logger.debug("Entering fixTestStepContainerNameOnly for element: " + theTestStepContainer.getName());
+        createAcceptor(issue, acceptor,
+                TestStepContainerIssueResolver.correctNameOnly(new TestStepContainerImpl(theTestStepContainer)));
+        logger.debug("Exiting fixTestStepContainerNameOnly");
+    }
 
-	@Fix(SheepDogValidator.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE)
-	public void fixTestStepStepObjectNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
-		TestStep step = (TestStep) getEObject(issue);
-		logger.debug("Entering fixTestStepStepObjectNameWorkspace for element: " + step.getStepObjectName());
-		try {
-			createAcceptor(issue, acceptor,
-					TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
-		} catch (Exception e) {
-			logger.error("Failed fixing step for " + step.getStepObjectName() + ": " + e.getMessage(), e);
-		}
-		logger.debug("Exiting fixTestStepStepObjectNameWorkspace");
-	}
+    @Fix(SheepDogValidator.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE)
+    public void fixTestStepStepObjectNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+        TestStep step = (TestStep) getEObject(issue);
+        logger.debug("Entering fixTestStepStepObjectNameWorkspace for element: " + step.getStepObjectName());
+        try {
+            createAcceptor(issue, acceptor,
+                    TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
+        } catch (Exception e) {
+            logger.error("Failed fixing step for " + step.getStepObjectName() + ": " + e.getMessage(), e);
+        }
+        logger.debug("Exiting fixTestStepStepObjectNameWorkspace");
+    }
 
-	@Fix(SheepDogValidator.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE)
-	public void fixTestStepStepDefinitionNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
-		TestStep step = (TestStep) getEObject(issue);
-		logger.debug("Entering fixTestStepStepDefinitionNameWorkspace for element: " + step.getStepObjectName());
-		try {
-			createAcceptor(issue, acceptor,
-					TestStepIssueResolver.correctStepDefinitionNameWorkspace(new TestStepImpl(step)));
-		} catch (Exception e) {
-			logger.error("Failed fixing step for " + step.getStepObjectName() + ": " + e.getMessage(), e);
-		}
-		logger.debug("Exiting fixTestStepStepDefinitionNameWorkspace");
-	}
+    @Fix(SheepDogValidator.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE)
+    public void fixTestStepStepDefinitionNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+        TestStep step = (TestStep) getEObject(issue);
+        logger.debug("Entering fixTestStepStepDefinitionNameWorkspace for element: " + step.getStepObjectName());
+        try {
+            createAcceptor(issue, acceptor,
+                    TestStepIssueResolver.correctStepDefinitionNameWorkspace(new TestStepImpl(step)));
+        } catch (Exception e) {
+            logger.error("Failed fixing step for " + step.getStepObjectName() + ": " + e.getMessage(), e);
+        }
+        logger.debug("Exiting fixTestStepStepDefinitionNameWorkspace");
+    }
 
-	@Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
-	public void fixTestSuiteNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
-		TestSuite theTestSuite = (TestSuite) getEObject(issue);
-		logger.debug("Entering fixTestSuiteNameOnly for element: " + theTestSuite.getName());
-		createAcceptor(issue, acceptor, TestSuiteIssueResolver.correctNameOnly(new TestSuiteImpl(theTestSuite)));
-		logger.debug("Exiting fixTestSuiteNameOnly");
-	}
+    @Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
+    public void fixTestSuiteNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
+        TestSuite theTestSuite = (TestSuite) getEObject(issue);
+        logger.debug("Entering fixTestSuiteNameOnly for element: " + theTestSuite.getName());
+        createAcceptor(issue, acceptor, TestSuiteIssueResolver.correctNameOnly(new TestSuiteImpl(theTestSuite)));
+        logger.debug("Exiting fixTestSuiteNameOnly");
+    }
 
-	@Fix(SheepDogValidator.TEXT_NAME_WORKSPACE)
-	public void fixTextNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
-		Text theText = (Text) getEObject(issue);
-		logger.debug("Entering fixTextNameWorkspace for element: " + theText.getName());
-		try {
-			createAcceptor(issue, acceptor,
-					TextIssueResolver.correctNameWorkspace(new TestStepImpl((TestStep) theText.eContainer())));
-		} catch (Exception e) {
-			logger.error("Failed in fixTextNameWorkspace for: " + e.getMessage(), e);
-		}
-		logger.debug("Exiting fixTextNameWorkspace");
-	}
+    @Fix(SheepDogValidator.TEXT_NAME_WORKSPACE)
+    public void fixTextNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+        Text theText = (Text) getEObject(issue);
+        logger.debug("Entering fixTextNameWorkspace for element: " + theText.getName());
+        try {
+            createAcceptor(issue, acceptor,
+                    TextIssueResolver.correctNameWorkspace(new TestStepImpl((TestStep) theText.eContainer())));
+        } catch (Exception e) {
+            logger.error("Failed in fixTextNameWorkspace for: " + e.getMessage(), e);
+        }
+        logger.debug("Exiting fixTextNameWorkspace");
+    }
 
-	private EObject getEObject(Issue issue) {
-		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-		return resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-	}
+    private EObject getEObject(Issue issue) {
+        Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+        return resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+    }
 
-	private void initProject(Resource resource) {
-		ITestProject parent = SheepDogBuilder.createTestProject();
-		if (parent.getName() == null) {
-			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
-					.getFile(new Path(resource.getURI().toPlatformString(true)));
-			File resourceFile = new File(resourceIFile.getProject().getLocationURI());
-			parent.setName(resourceFile.getAbsolutePath());
-		}
-	}
+    private void initProject(Resource resource) {
+        ITestProject parent = SheepDogBuilder.createTestProject();
+        if (parent.getName() == null) {
+            IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
+                    .getFile(new Path(resource.getURI().toPlatformString(true)));
+            File resourceFile = new File(resourceIFile.getProject().getLocationURI());
+            parent.setName(resourceFile.getAbsolutePath());
+        }
+    }
 }

@@ -94,7 +94,7 @@ public class RowIssueResolver {
                         proposal.setId(RowUtility.getCellListAsString(parameters.getTable().getRowList().getFirst()));
                         proposal.setDescription(
                                 StatementUtility.getStatementListAsString(parameters.getStatementList()));
-                        if (!proposal.getId().contentEquals("| Content")) {
+                        if (!proposal.getId().contentEquals("Content")) {
                             proposal.setValue(proposal.getId());
                             proposals.add(proposal);
                         }

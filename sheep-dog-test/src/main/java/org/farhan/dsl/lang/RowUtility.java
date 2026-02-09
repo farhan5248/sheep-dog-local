@@ -14,8 +14,8 @@ public class RowUtility {
         }
         Collections.sort(theList);
         for (String cell : theList) {
-            cellsAsString += "| " + cell;
+            cellsAsString += ", " + cell;
         }
-        return cellsAsString.trim();
+        return cellsAsString.replaceFirst(", ", "").trim();
     }
 }

@@ -61,12 +61,12 @@ Feature: Quickfixes for Workspace Issues
           | Selected Element                                       |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name      | Quickfix Description | Quickfix           |
-          | \| Existing Header | empty                | \| Existing Header |
-          | \| New Header      | empty                | \| New Header      |
+          | Quickfix Name   | Quickfix Description | Quickfix        |
+          | Existing Header | empty                | Existing Header |
+          | New Header      | empty                | New Header      |
       And The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name          | Quickfix Description |
-          | Generate \| New Header | empty                |
+          | Quickfix Name       | Quickfix Description |
+          | Generate New Header | empty                |
 
   Scenario: This object step definition text parameter doesn't exist validation
 
@@ -84,8 +84,8 @@ Feature: Quickfixes for Workspace Issues
           | Selected Element                                 |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
      Then The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name       | Quickfix Description |
-          | Generate \| Content | empty                |
+          | Quickfix Name    | Quickfix Description |
+          | Generate Content | empty                |
 
   Scenario: Object path and component is inherited from previous steps
 
