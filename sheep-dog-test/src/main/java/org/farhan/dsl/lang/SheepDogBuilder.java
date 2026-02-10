@@ -260,9 +260,9 @@ public class SheepDogBuilder {
     public static ITestStep createTestStep(ITestStepContainer parent, String name) {
         logger.debug("Entering createTestStep for name: {}", name);
         ITestStep testStep = SheepDogFactory.instance.createTestStep();
-        testStep.setStepObjectName(StepObjectRefFragments.getStepObjectName(name));
+        testStep.setStepObjectName(StepObjectRefFragments.getAll(name));
         testStep.setStepDefinitionName(
-                StepDefinitionRefFragments.getStepDefinitionName(name.replace(testStep.getStepObjectName(), "")));
+                StepDefinitionRefFragments.getAll(name.replace(testStep.getStepObjectName(), "")));
         if (parent != null)
             parent.addTestStep(testStep);
         logger.debug("Exiting createTestStep");

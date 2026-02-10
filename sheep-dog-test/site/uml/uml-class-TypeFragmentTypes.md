@@ -2,7 +2,7 @@
 
 Enum constants for test step keyword patterns. Separates keyword definitions from parsing logic, enabling centralized maintenance of domain vocabulary.
 
-## {FRAGMENT}(_{WORD})*
+## {FRAGMENT}
 
 **Desc**: Defines a keyword constant with associated value and description for test step matching.
 
@@ -46,7 +46,7 @@ Enum constants for test step keyword patterns. Separates keyword definitions fro
 **Desc**: Initializes enum constant with keyword value and description for test step parsing.
 
 **Rule**: ONE constructor matches this pattern.
- - **Name**: `^{Type}{Fragment}Types$`
+ - **Name**: `^{Type}{Fragment}(Desc|Type|Name|Edge|Vertex)*Types$`
  - **Parameters**: `^\(String\s+value,\s*String\s+description\)$`
 
 **Examples**:

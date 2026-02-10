@@ -32,7 +32,7 @@ public class TestStepIssueDetector {
         logger.debug("Entering validateStepObjectNameOnly for step");
         String text = theTestStep.getStepObjectName();
         if (text != null) {
-            if (StepObjectRefFragments.getStepObjectName(text).isEmpty()) {
+            if (StepObjectRefFragments.getAll(text).isEmpty()) {
                 logger.debug("Exiting validateStepObjectNameOnly");
                 return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
             }

@@ -12,6 +12,11 @@ public class TitleFragments {
     private static final String TAG_TYPE = "(@)";
     private static final String TAG_DESC = "(\\S+)";
     private static final String TAG = "(" + TAG_TYPE + TAG_DESC + ")";
+    private static final String TITLE = "((" + TAG + ")+|" + TODO + "|.+)";
+
+    public static String getAll(String text) {
+        return getGroup(TitleFragments.TITLE, text, 0);
+    }
 
     /**
      * Performs parsing, formatting, or computation operations on grammar elements

@@ -185,7 +185,7 @@ public class TestStepIssueResolver {
             proposal = new SheepDogIssueProposal();
             proposal.setId(stepObjectNameLong.replaceFirst(theProject.getFileExtension() + "$", ""));
             proposal.setDescription("Referred in: " + theStepStepObjectName + " " + theStepStepDefinitionName);
-            proposal.setValue(StepObjectRefFragments.getStepObjectName(nameLong));
+            proposal.setValue(StepObjectRefFragments.getAll(nameLong));
             proposals.put(proposal.getId(), proposal);
         }
         return proposals.values();

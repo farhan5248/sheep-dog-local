@@ -113,16 +113,25 @@
  - `ICell`
  - `IRow`
 
-### {Type}Utility
+### {Language}Utility
 
 **Desc**: Static helper methods for grammar element operations. Separates utility operations from grammar model classes, keeping interfaces focused on data access.
 
-**Rule**: SOME class matches {Type}Utility pattern
+**Rule**: ONE class matches {Language}Utility pattern
 
-**Regex**: `^{Type}Utility$`
- - `TestStepUtility`
- - `StepDefinitionUtility`
- - `StatementUtility`
+**Regex**: `^{Language}Utility$`
+ - `SheepDogUtility`
+
+### {Type}Fragments
+
+**Desc**: Parser utilities for extracting typed fragments from formatted text strings. Separates parsing logic from grammar model classes, using regex patterns to extract components based on domain-specific syntax rules.
+
+**Rule**: SOME class matches {Type}Fragments pattern
+
+**Regex**: `^{Type}Fragments$`
+ - `StepObjectRefFragments`
+ - `StepDefinitionRefFragments`
+ - `TitleFragments`
 
 ### {Type}{Fragment}Types
 

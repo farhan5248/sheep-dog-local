@@ -321,7 +321,7 @@ public static void setLoggerImplementation(LoggerProvider provider) {
 
 ## {Type}{Fragment}Types
 
-### {FRAGMENT}(_{WORD})*
+### {FRAGMENT}
 
 Enum constants follow UPPER_SNAKE_CASE naming and represent keywords or patterns used in test step matching.
 

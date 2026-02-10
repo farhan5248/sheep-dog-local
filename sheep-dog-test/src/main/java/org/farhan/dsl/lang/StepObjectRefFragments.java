@@ -19,43 +19,11 @@ public class StepObjectRefFragments {
      * Performs parsing, formatting, or computation operations on grammar elements
      * without maintaining state.
      *
-     * @param enumValues array of enum values to convert to regex
-     * @return regex pattern string with alternation of all enum values
+     * @param text the text to parse
+     * @return the step object name portion
      */
-    private static String getRegexFromTypes(Enum<?>[] enumValues) {
-        String regex = "(";
-        for (Enum<?> enumValue : enumValues) {
-            if (enumValue instanceof TestStepComponentTypes) {
-                regex += " " + ((TestStepComponentTypes) enumValue).value + "|";
-            } else if (enumValue instanceof TestStepObjectEdgeTypes) {
-                regex += " " + ((TestStepObjectEdgeTypes) enumValue).value + "|";
-            } else if (enumValue instanceof TestStepObjectVertexTypes) {
-                regex += " " + ((TestStepObjectVertexTypes) enumValue).value + "|";
-            }
-        }
-        return regex.replaceAll("\\|$", ")");
-    }
-
-    /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
-     *
-     * @param regex the regular expression pattern
-     * @param text  the text to match against
-     * @param group the group number to extract
-     * @return the matched group text, trimmed, or empty string if no match
-     */
-    private static String getGroup(String regex, String text, int group) {
-        Matcher m = Pattern.compile(regex).matcher(text);
-        if (m.find()) {
-            String temp = m.group(group);
-            if (temp != null) {
-                return temp.trim();
-            } else {
-                return "";
-            }
-        }
-        return "";
+    public static String getAll(String text) {
+        return getGroup(STEP_OBJECT_REF, text, 0);
     }
 
     /**
@@ -109,7 +77,7 @@ public class StepObjectRefFragments {
      * @param text the text to parse
      * @return the object edge type portion
      */
-    public static String getObjecEdgeType(String text) {
+    public static String getObjectEdgeType(String text) {
         return getGroup(STEP_OBJECT_REF, text, 9);
     }
 
@@ -154,7 +122,7 @@ public class StepObjectRefFragments {
      * @return true if the text contains an edge object type, false otherwise
      */
     public static boolean isObjectEdgeType(String text) {
-        return !getObjecEdgeType(text).isEmpty();
+        return !getObjectEdgeType(text).isEmpty();
     }
 
     public static boolean isObjectVertexType(String text) {
@@ -165,10 +133,42 @@ public class StepObjectRefFragments {
      * Performs parsing, formatting, or computation operations on grammar elements
      * without maintaining state.
      *
-     * @param text the text to parse
-     * @return the step object name portion
+     * @param regex the regular expression pattern
+     * @param text  the text to match against
+     * @param group the group number to extract
+     * @return the matched group text, trimmed, or empty string if no match
      */
-    public static String getStepObjectName(String text) {
-        return getGroup(STEP_OBJECT_REF, text, 0);
+    private static String getGroup(String regex, String text, int group) {
+        Matcher m = Pattern.compile(regex).matcher(text);
+        if (m.find()) {
+            String temp = m.group(group);
+            if (temp != null) {
+                return temp.trim();
+            } else {
+                return "";
+            }
+        }
+        return "";
+    }
+
+    /**
+     * Performs parsing, formatting, or computation operations on grammar elements
+     * without maintaining state.
+     *
+     * @param enumValues array of enum values to convert to regex
+     * @return regex pattern string with alternation of all enum values
+     */
+    private static String getRegexFromTypes(Enum<?>[] enumValues) {
+        String regex = "(";
+        for (Enum<?> enumValue : enumValues) {
+            if (enumValue instanceof TestStepComponentTypes) {
+                regex += " " + ((TestStepComponentTypes) enumValue).value + "|";
+            } else if (enumValue instanceof TestStepObjectEdgeTypes) {
+                regex += " " + ((TestStepObjectEdgeTypes) enumValue).value + "|";
+            } else if (enumValue instanceof TestStepObjectVertexTypes) {
+                regex += " " + ((TestStepObjectVertexTypes) enumValue).value + "|";
+            }
+        }
+        return regex.replaceAll("\\|$", ")");
     }
 }

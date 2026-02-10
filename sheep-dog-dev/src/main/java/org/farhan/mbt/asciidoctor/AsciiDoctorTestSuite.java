@@ -100,7 +100,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
             break;
         }
         String stepName = name.substring(keyword.length() + 1);
-        String stepObjectName = StepObjectRefFragments.getStepObjectName(stepName);
+        String stepObjectName = StepObjectRefFragments.getAll(stepName);
         String stepDefinitionName = stepName.replace(stepObjectName, "").trim();
         step.setStepObjectName(stepObjectName);
         step.setStepDefinitionName(stepDefinitionName);

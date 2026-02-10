@@ -10,10 +10,6 @@ This collaboration applies when defining basic grammar element interfaces with s
 
 Interface defining the grammar element with basic accessors and mutators for element properties and relationships.
 
-### {Type}Utility
-
-Static utility class with helper methods that derive properties from grammar elements or validate text formats.
-
 ### {Type}IssueTypes
 
 Enum with type constants for grammar element aspects. Each constant represents a valid keyword or type value used by utility methods and test implementations.
@@ -38,10 +34,6 @@ Data container for suggestion proposals with properties for id, description, val
 
 Interface defining the grammar element used by suggestion methods to access element properties.
 
-### {Type}Utility
-
-Static utility class with helper methods that derive properties for proposal generation.
-
 ## Validate
 
 This pattern applies when validating existing grammar elements. The element exists, so we validate its content.
@@ -57,10 +49,6 @@ Enum with issue type constants. Each constant has a description field (String) u
 ### I{Type}
 
 Interface defining the grammar element used by issue detection to access element properties.
-
-### {Type}Utility
-
-Static utility class with helper methods that derive properties for validation.
 
 ## Correct
 
@@ -81,10 +69,6 @@ Data container for correction proposals with properties for id, description, val
 ### I{Type}
 
 Interface defining the grammar element used by issue detection and resolution to access element properties.
-
-### {Type}Utility
-
-Static utility class with helper methods that derive properties for validation and proposal generation.
 
 ### {Language}Builder
 
