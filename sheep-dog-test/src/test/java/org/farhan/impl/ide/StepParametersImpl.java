@@ -52,11 +52,6 @@ public class StepParametersImpl implements IStepParameters {
     }
 
     @Override
-    public String getNameLong() {
-        throw new UnsupportedOperationException("getNameLong() is not implemented");
-    }
-
-    @Override
     public IStatement getStatement(int index) {
         throw new UnsupportedOperationException("getStatement(int index) is not implemented");
     }

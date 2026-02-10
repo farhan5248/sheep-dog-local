@@ -13,7 +13,7 @@ import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogUtility;
-import org.farhan.dsl.lang.StepObjectRef;
+import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,12 +37,11 @@ public class TestStepIssueResolver {
      */
     public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {
-        logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.getName() : "null");
+        logger.debug("Entering correctStepObjectNameWorkspace");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
         if (!theTestStep.getStepObjectName().isEmpty()) {
             // suggest other component objects
-            String component = StepObjectRef.getComponent(theTestStep.getNameLong());
+            String component = StepObjectRefFragments.getComponent(SheepDogUtility.getTestStepNameLong(theTestStep));
             proposals.addAll(getComponentObjects(theTestStep, component));
 
             // or create a new one
@@ -68,8 +67,7 @@ public class TestStepIssueResolver {
      */
     public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep)
             throws Exception {
-        logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.getName() : "null");
+        logger.debug("Entering correctStepDefinitionNameWorkspace for step");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
         String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (stepDefinitionName.isEmpty()) {
@@ -167,27 +165,27 @@ public class TestStepIssueResolver {
         for (ITestStep step : getPreviousSteps(theTestStep)) {
             // TODO make test for this
 
-            if (step.getName() == null) {
-                continue;
-            } else if (!TestStepIssueDetector.validateStepObjectNameOnly(step).isEmpty()
+            if (!TestStepIssueDetector.validateStepObjectNameOnly(step).isEmpty()
                     || !TestStepIssueDetector.validateStepDefinitionNameOnly(step).isEmpty()) {
                 continue;
             }
-            String nameLong = step.getNameLong();
+            String theStepStepObjectName = step.getStepObjectName();
+            String theStepStepDefinitionName = step.getStepDefinitionName();
+            String nameLong = SheepDogUtility.getTestStepNameLong(step);
             String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(step);
             ITestProject theProject = theTestStep.getParent().getParent().getParent();
             // Give both options, just the object or with the component
 
             proposal = new SheepDogIssueProposal();
-            proposal.setId(StepObjectRef.getObject(nameLong));
-            proposal.setDescription("Referred in: " + step.getName());
+            proposal.setId(StepObjectRefFragments.getObject(nameLong));
+            proposal.setDescription("Referred in: " + theStepStepObjectName + " " + theStepStepDefinitionName);
             proposal.setValue("The " + proposal.getId());
             proposals.put(proposal.getId(), proposal);
 
             proposal = new SheepDogIssueProposal();
             proposal.setId(stepObjectNameLong.replaceFirst(theProject.getFileExtension() + "$", ""));
-            proposal.setDescription("Referred in: " + step.getName());
-            proposal.setValue(StepObjectRef.getStepObjectName(nameLong));
+            proposal.setDescription("Referred in: " + theStepStepObjectName + " " + theStepStepDefinitionName);
+            proposal.setValue(StepObjectRefFragments.getStepObjectName(nameLong));
             proposals.put(proposal.getId(), proposal);
         }
         return proposals.values();
@@ -201,8 +199,7 @@ public class TestStepIssueResolver {
      */
     public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {
-        logger.debug("Entering suggestStepObjectNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.getName() : "null");
+        logger.debug("Entering suggestStepObjectNameWorkspace for step");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
         ITestProject theProject = theTestStep.getParent().getParent().getParent();
         for (String componentName : getComponentList(theProject)) {
@@ -233,8 +230,7 @@ public class TestStepIssueResolver {
      */
     public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep)
             throws Exception {
-        logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.getName() : "null");
+        logger.debug("Entering suggestStepDefinitionNameWorkspace for step");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
         for (SheepDogIssueProposal proposal : getStepDefinitions(theTestStep)) {
             proposals.add(proposal);

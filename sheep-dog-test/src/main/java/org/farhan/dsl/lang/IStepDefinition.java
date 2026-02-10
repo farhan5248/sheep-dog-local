@@ -4,27 +4,25 @@ import java.util.List;
 
 public interface IStepDefinition {
 
-	boolean addStatement(IStatement value);
+    boolean addStatement(IStatement value);
 
-	boolean addStepParameters(IStepParameters value);
+    boolean addStepParameters(IStepParameters value);
 
-	String getName();
+    String getName();
 
-	String getNameLong();
+    IStepObject getParent();
 
-	IStepObject getParent();
+    IStatement getStatement(int index);
 
-	IStatement getStatement(int index);
+    IStatement getStatement(String name);
 
-	IStatement getStatement(String name);
+    List<IStatement> getStatementList();
 
-	List<IStatement> getStatementList();
+    List<IStepParameters> getStepParameterList();
 
-	List<IStepParameters> getStepParameterList();
+    IStepParameters getStepParameters(int index);
 
-	IStepParameters getStepParameters(int index);
-
-	IStepParameters getStepParameters(String name);
+    IStepParameters getStepParameters(String name);
 
     void setName(String value);
 

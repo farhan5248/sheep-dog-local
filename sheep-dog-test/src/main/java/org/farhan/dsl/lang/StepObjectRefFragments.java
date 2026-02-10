@@ -3,7 +3,7 @@ package org.farhan.dsl.lang;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StepObjectRef {
+public class StepObjectRefFragments {
 
     private static final String COMPONENT_NAME = "( " + "[^/]" + "+)";
     private static final String COMPONENT_TYPE = getRegexFromTypes(TestStepComponentTypes.values());
@@ -13,7 +13,7 @@ public class StepObjectRef {
     private static final String OBJECT_VERTEX_TYPE = getRegexFromTypes(TestStepObjectVertexTypes.values());
     private static final String OBJECT_TYPE = "(" + OBJECT_VERTEX_TYPE + "|" + OBJECT_EDGE_TYPE + ")";
     private static final String OBJECT = "(" + OBJECT_NAME + OBJECT_TYPE + ")";
-    private static final String STEP_OBJECT_NAME = "(The" + COMPONENT + "?" + OBJECT + ")";
+    private static final String STEP_OBJECT_REF = "(The" + COMPONENT + "?" + OBJECT + ")";
 
     /**
      * Performs parsing, formatting, or computation operations on grammar elements
@@ -66,7 +66,7 @@ public class StepObjectRef {
      * @return the component portion
      */
     public static String getComponent(String text) {
-        return getGroup("(The" + StepObjectRef.COMPONENT + "?" + ")", text, 2);
+        return getGroup("(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 2);
     }
 
     /**
@@ -77,7 +77,7 @@ public class StepObjectRef {
      * @return the component name portion
      */
     public static String getComponentName(String text) {
-        return getGroup("(The" + StepObjectRef.COMPONENT + "?" + ")", text, 3);
+        return getGroup("(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 3);
     }
 
     /**
@@ -88,7 +88,7 @@ public class StepObjectRef {
      * @return the component type portion
      */
     public static String getComponentType(String text) {
-        return getGroup("(The" + StepObjectRef.COMPONENT + "?" + ")", text, 4);
+        return getGroup("(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 4);
     }
 
     /**
@@ -99,7 +99,7 @@ public class StepObjectRef {
      * @return the object portion
      */
     public static String getObject(String text) {
-        return getGroup(STEP_OBJECT_NAME, text, 5);
+        return getGroup(STEP_OBJECT_REF, text, 5);
     }
 
     /**
@@ -110,7 +110,7 @@ public class StepObjectRef {
      * @return the object edge type portion
      */
     public static String getObjecEdgeType(String text) {
-        return getGroup(STEP_OBJECT_NAME, text, 9);
+        return getGroup(STEP_OBJECT_REF, text, 9);
     }
 
     /**
@@ -121,7 +121,7 @@ public class StepObjectRef {
      * @return the object name portion
      */
     public static String getObjectName(String text) {
-        return getGroup(STEP_OBJECT_NAME, text, 6);
+        return getGroup(STEP_OBJECT_REF, text, 6);
     }
 
     /**
@@ -132,7 +132,7 @@ public class StepObjectRef {
      * @return the object type portion
      */
     public static String getObjectType(String text) {
-        return getGroup(STEP_OBJECT_NAME, text, 7);
+        return getGroup(STEP_OBJECT_REF, text, 7);
     }
 
     /**
@@ -143,7 +143,7 @@ public class StepObjectRef {
      * @return the object vertex type portion
      */
     public static String getObjectVertexType(String text) {
-        return getGroup(STEP_OBJECT_NAME, text, 8);
+        return getGroup(STEP_OBJECT_REF, text, 8);
     }
 
     /**
@@ -169,6 +169,6 @@ public class StepObjectRef {
      * @return the step object name portion
      */
     public static String getStepObjectName(String text) {
-        return getGroup(STEP_OBJECT_NAME, text, 0);
+        return getGroup(STEP_OBJECT_REF, text, 0);
     }
 }

@@ -3,18 +3,18 @@ package org.farhan.dsl.lang;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StepDefinitionRef {
+public class StepDefinitionRefFragments {
     private static final String PART_DESC = "(.+)";
     private static final String PART_TYPE = getRegexFromTypes(TestStepPartTypes.values());
-    private static final String PART = "(" + PART_DESC + PART_TYPE + ")";
-    private static final String STATE_DESC = "( \\S+)";
+    private static final String PART = "(" + PART_DESC + " " + PART_TYPE + " )";
+    private static final String STATE_DESC = "(\\S+)";
     private static final String STATE_TYPE = getRegexFromTypes(TestStepStateTypes.values());
-    private static final String STATE = "(" + STATE_TYPE + STATE_DESC + ")";
-    private static final String TIME_DESC = "( .+)";
+    private static final String STATE = "(" + STATE_TYPE + " " + STATE_DESC + ")";
+    private static final String TIME_DESC = "(.+)";
     private static final String TIME_TYPE = getRegexFromTypes(TestStepTimeTypes.values());
-    private static final String TIME = "(" + TIME_TYPE + TIME_DESC + ")";
-    private static final String ATTACHMENT = getRegexFromTypes(TestStepAttachmentTypes.values());
-    private static final String STEP_DEFINITION_NAME = "(" + PART + "?" + STATE + TIME + "?" + ATTACHMENT + "?" + ")";
+    private static final String TIME = "( " + TIME_TYPE + " " + TIME_DESC + ")";
+    private static final String ATTACHMENT = "( " + getRegexFromTypes(TestStepAttachmentTypes.values()) + ")";
+    private static final String STEP_DEFINITION_REF = "(" + PART + "?" + STATE + TIME + "?" + ATTACHMENT + "?" + ")";
 
     /**
      * Performs parsing, formatting, or computation operations on grammar elements
@@ -27,11 +27,11 @@ public class StepDefinitionRef {
         String regex = "(";
         for (Enum<?> enumValue : enumValues) {
             if (enumValue instanceof TestStepAttachmentTypes) {
-                regex += " " + ((TestStepAttachmentTypes) enumValue).value + "|";
+                regex += ((TestStepAttachmentTypes) enumValue).value + "|";
             } else if (enumValue instanceof TestStepPartTypes) {
-                regex += " " + ((TestStepPartTypes) enumValue).value + "|";
+                regex += ((TestStepPartTypes) enumValue).value + "|";
             } else if (enumValue instanceof TestStepStateTypes) {
-                regex += " " + ((TestStepStateTypes) enumValue).value + "|";
+                regex += ((TestStepStateTypes) enumValue).value + "|";
             } else if (enumValue instanceof TestStepTimeTypes) {
                 regex += ((TestStepTimeTypes) enumValue).value + "|";
             }
@@ -69,7 +69,7 @@ public class StepDefinitionRef {
      * @return the attachment portion
      */
     public static String getAttachment(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 11);
+        return getGroup(STEP_DEFINITION_REF, text, 11);
     }
 
     /**
@@ -80,7 +80,7 @@ public class StepDefinitionRef {
      * @return the part portion
      */
     public static String getPart(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 2);
+        return getGroup(STEP_DEFINITION_REF, text, 2);
     }
 
     /**
@@ -91,7 +91,7 @@ public class StepDefinitionRef {
      * @return the part description portion
      */
     public static String getPartDesc(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 3);
+        return getGroup(STEP_DEFINITION_REF, text, 3);
     }
 
     /**
@@ -102,7 +102,7 @@ public class StepDefinitionRef {
      * @return the part type portion
      */
     public static String getPartType(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 4);
+        return getGroup(STEP_DEFINITION_REF, text, 4);
     }
 
     /**
@@ -113,7 +113,7 @@ public class StepDefinitionRef {
      * @return the state portion
      */
     public static String getState(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 5);
+        return getGroup(STEP_DEFINITION_REF, text, 5);
     }
 
     /**
@@ -124,7 +124,7 @@ public class StepDefinitionRef {
      * @return the state description portion
      */
     public static String getStateDesc(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 6);
+        return getGroup(STEP_DEFINITION_REF, text, 6);
     }
 
     /**
@@ -135,7 +135,7 @@ public class StepDefinitionRef {
      * @return the state type portion
      */
     public static String getStateType(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 7);
+        return getGroup(STEP_DEFINITION_REF, text, 7);
     }
 
     /**
@@ -146,7 +146,7 @@ public class StepDefinitionRef {
      * @return the time portion
      */
     public static String getTime(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 8);
+        return getGroup(STEP_DEFINITION_REF, text, 8);
     }
 
     /**
@@ -157,7 +157,7 @@ public class StepDefinitionRef {
      * @return the time type portion
      */
     public static String getTimeType(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 9);
+        return getGroup(STEP_DEFINITION_REF, text, 9);
     }
 
     /**
@@ -168,7 +168,7 @@ public class StepDefinitionRef {
      * @return the time description portion
      */
     public static String getTimeDesc(String text) {
-        return getGroup(STEP_DEFINITION_NAME, text, 10);
+        return getGroup(STEP_DEFINITION_REF, text, 10);
     }
 
     /**
@@ -179,7 +179,7 @@ public class StepDefinitionRef {
      * @return the step definition name portion
      */
     public static String getStepDefinitionName(String text) {
-        return getGroup(StepDefinitionRef.STEP_DEFINITION_NAME, text, 0);
+        return getGroup(StepDefinitionRefFragments.STEP_DEFINITION_REF, text, 0);
     }
 
 }

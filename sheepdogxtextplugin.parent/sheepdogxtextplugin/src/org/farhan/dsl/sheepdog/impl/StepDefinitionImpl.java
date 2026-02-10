@@ -8,7 +8,7 @@ import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
-import org.farhan.dsl.lang.RowUtility;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
@@ -49,11 +49,6 @@ public class StepDefinitionImpl implements IStepDefinition {
     @Override
     public String getName() {
         return eObject.getName();
-    }
-
-    @Override
-    public String getNameLong() {
-        throw new UnsupportedOperationException("getNameLong() is not implemented");
     }
 
     @Override
@@ -101,7 +96,8 @@ public class StepDefinitionImpl implements IStepDefinition {
     @Override
     public IStepParameters getStepParameters(String name) {
         for (IStepParameters sp : getStepParameterList()) {
-            String rowAsString = RowUtility.getCellListAsString(sp.getTable().getRowList().getFirst());
+            String rowAsString = SheepDogUtility
+                    .getCellListAsString(sp.getTable().getRowList().getFirst().getCellList());
             if (name.contentEquals(rowAsString)) {
                 return sp;
             }

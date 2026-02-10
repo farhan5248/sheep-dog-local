@@ -37,184 +37,184 @@ import org.farhan.dsl.lang.SheepDogBuilder;
  */
 public class SheepDogValidator extends AbstractSheepDogValidator {
 
-	private static final Logger logger = Logger.getLogger(SheepDogValidator.class);
-	public static final String CELL_NAME_ONLY = "CELL_NAME_ONLY";
-	public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
-	public static final String TEST_SUITE_NAME_ONLY = "TEST_SUITE_NAME_ONLY";
-	public static final String TEST_STEP_CONTAINER_NAME_ONLY = "TEST_STEP_CONTAINER_NAME_ONLY";
-	public static final String TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE = "TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE";
-	public static final String TEST_STEP_STEP_DEFINITION_NAME_ONLY = "TEST_STEP_STEP_DEFINITION_NAME_ONLY";
-	public static final String TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE = "TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE";
-	public static final String TEST_STEP_STEP_OBJECT_NAME_ONLY = "TEST_STEP_STEP_OBJECT_NAME_ONLY";
-	public static final String TEST_STEP_STEP_OBJECT_NAME_WORKSPACE = "TEST_STEP_STEP_OBJECT_NAME_WORKSPACE";
-	public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
+    private static final Logger logger = Logger.getLogger(SheepDogValidator.class);
+    public static final String CELL_NAME_ONLY = "CELL_NAME_ONLY";
+    public static final String ROW_CELL_LIST_WORKSPACE = "ROW_CELL_LIST_WORKSPACE";
+    public static final String TEST_SUITE_NAME_ONLY = "TEST_SUITE_NAME_ONLY";
+    public static final String TEST_STEP_CONTAINER_NAME_ONLY = "TEST_STEP_CONTAINER_NAME_ONLY";
+    public static final String TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE = "TEST_STEP_CONTAINER_TEST_STEP_FILE_LIST_FILE";
+    public static final String TEST_STEP_STEP_DEFINITION_NAME_ONLY = "TEST_STEP_STEP_DEFINITION_NAME_ONLY";
+    public static final String TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE = "TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE";
+    public static final String TEST_STEP_STEP_OBJECT_NAME_ONLY = "TEST_STEP_STEP_OBJECT_NAME_ONLY";
+    public static final String TEST_STEP_STEP_OBJECT_NAME_WORKSPACE = "TEST_STEP_STEP_OBJECT_NAME_WORKSPACE";
+    public static final String TEXT_NAME_WORKSPACE = "TEXT_NAME_WORKSPACE";
 
-	@Check(CheckType.FAST)
-	public void checkCellNameOnly(Cell cell) {
-		logger.debug("Entering checkCellNameOnly for element: " + (cell != null ? cell.getName() : "null"));
-		initProject(cell.eResource());
-		try {
-			// TODO make tests for this
-			if (cell != null) {
-				String problems = CellIssueDetector.validateNameOnly(new CellImpl(cell));
-				if (!problems.isEmpty()) {
-					warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
-				}
-			}
-		} catch (Exception e) {
-			logger.error("Failed in checkCellNameOnly for : " + e.getMessage(), e);
+    @Check(CheckType.FAST)
+    public void checkCellNameOnly(Cell cell) {
+        logger.debug("Entering checkCellNameOnly for element: " + (cell != null ? cell.getName() : "null"));
+        initProject(cell.eResource());
+        try {
+            // TODO make tests for this
+            if (cell != null) {
+                String problems = CellIssueDetector.validateNameOnly(new CellImpl(cell));
+                if (!problems.isEmpty()) {
+                    warning(problems, SheepDogPackage.Literals.CELL__NAME, CELL_NAME_ONLY);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Failed in checkCellNameOnly for : " + e.getMessage(), e);
 
-		}
-		logger.debug("Exiting checkCellNameOnly");
-	}
+        }
+        logger.debug("Exiting checkCellNameOnly");
+    }
 
-	@Check(CheckType.FAST)
-	public void checkRowCellListWorkspace(Row row) {
-		logger.debug("Entering checkRowCellListWorkspace for element: " + (row != null ? row.toString() : "null"));
-		try {
-			initProject(row.eResource());
-			if (row != null && row.eContainer() != null) {
-				Table table = (Table) row.eContainer();
-				if (table.eContainer() instanceof TestStep) {
-					if (!table.getRowList().isEmpty() && table.getRowList().getFirst() == row) {
-						String problems = RowIssueDetector.validateCellListWorkspace(new RowImpl(row));
-						if (!problems.isEmpty()) {
-							warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, ROW_CELL_LIST_WORKSPACE);
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			logger.error("Failed in checkRowCellListWorkspace for : " + e.getMessage(), e);
+    @Check(CheckType.FAST)
+    public void checkRowCellListWorkspace(Row row) {
+        logger.debug("Entering checkRowCellListWorkspace for element: " + (row != null ? row.toString() : "null"));
+        try {
+            initProject(row.eResource());
+            if (row != null && row.eContainer() != null) {
+                Table table = (Table) row.eContainer();
+                if (table.eContainer() instanceof TestStep) {
+                    if (!table.getRowList().isEmpty() && table.getRowList().getFirst() == row) {
+                        String problems = RowIssueDetector.validateCellListWorkspace(new RowImpl(row));
+                        if (!problems.isEmpty()) {
+                            warning(problems, SheepDogPackage.Literals.ROW__CELL_LIST, ROW_CELL_LIST_WORKSPACE);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Failed in checkRowCellListWorkspace for : " + e.getMessage(), e);
 
-		}
-		logger.debug("Exiting checkRowCellListWorkspace");
-	}
+        }
+        logger.debug("Exiting checkRowCellListWorkspace");
+    }
 
-	@Check(CheckType.FAST)
-	public void checkTestStepContainerNameOnly(TestStepContainer theTestStepContainer) {
-		logger.debug("Entering checkTestStepContainerNameOnly for element: " + theTestStepContainer.getName());
-		try {
-			initProject(theTestStepContainer.eResource());
-			String problems = TestStepContainerIssueDetector
-					.validateNameOnly(new TestStepContainerImpl(theTestStepContainer));
-			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME_ONLY);
-			}
-		} catch (Exception e) {
-			logger.error("Failed in checkTestStepContainerNameOnly for : " + e.getMessage(), e);
+    @Check(CheckType.FAST)
+    public void checkTestStepContainerNameOnly(TestStepContainer theTestStepContainer) {
+        logger.debug("Entering checkTestStepContainerNameOnly for element: " + theTestStepContainer.getName());
+        try {
+            initProject(theTestStepContainer.eResource());
+            String problems = TestStepContainerIssueDetector
+                    .validateNameOnly(new TestStepContainerImpl(theTestStepContainer));
+            if (!problems.isEmpty()) {
+                warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__NAME, TEST_STEP_CONTAINER_NAME_ONLY);
+            }
+        } catch (Exception e) {
+            logger.error("Failed in checkTestStepContainerNameOnly for : " + e.getMessage(), e);
 
-		}
-		logger.debug("Exiting checkTestStepContainerNameOnly");
-	}
+        }
+        logger.debug("Exiting checkTestStepContainerNameOnly");
+    }
 
-	@Check(CheckType.FAST)
-	public void checkTestStepContainerTestStepListFile(TestStepContainer theTestStepContainer) {
-		logger.debug("Entering checkTestStepContainerTestStepListFile for element: " + theTestStepContainer.getName());
-		try {
-			initProject(theTestStepContainer.eResource());
-			String problems = TestStepContainerIssueDetector
-					.validateTestStepListFile(new TestStepContainerImpl(theTestStepContainer));
-			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__TEST_STEP_LIST,
-						TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE);
-			}
-		} catch (Exception e) {
-			logger.error("Failed in checkTestStepContainerTestStepListFile for : " + e.getMessage(), e);
+    @Check(CheckType.FAST)
+    public void checkTestStepContainerTestStepListFile(TestStepContainer theTestStepContainer) {
+        logger.debug("Entering checkTestStepContainerTestStepListFile for element: " + theTestStepContainer.getName());
+        try {
+            initProject(theTestStepContainer.eResource());
+            String problems = TestStepContainerIssueDetector
+                    .validateTestStepListFile(new TestStepContainerImpl(theTestStepContainer));
+            if (!problems.isEmpty()) {
+                warning(problems, SheepDogPackage.Literals.TEST_STEP_CONTAINER__TEST_STEP_LIST,
+                        TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE);
+            }
+        } catch (Exception e) {
+            logger.error("Failed in checkTestStepContainerTestStepListFile for : " + e.getMessage(), e);
 
-		}
-		logger.debug("Exiting checkTestStepContainerTestStepListFile");
-	}
+        }
+        logger.debug("Exiting checkTestStepContainerTestStepListFile");
+    }
 
-	@Check(CheckType.FAST)
-	public void checkTestStepNameOnly(TestStep step) {
-		TestStepImpl testStep = new TestStepImpl(step);
-		logger.debug("Entering checkTestStepNameOnly for element: " + testStep.getName());
-		try {
-			initProject(step.eResource());
-			String problems = TestStepIssueDetector.validateStepObjectNameOnly(testStep);
-			if (!problems.isEmpty()) {
-				error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME, TEST_STEP_STEP_OBJECT_NAME_ONLY);
-			} else {
-				problems = TestStepIssueDetector.validateStepDefinitionNameOnly(testStep);
-				if (!problems.isEmpty()) {
-					error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME,
-							TEST_STEP_STEP_DEFINITION_NAME_ONLY);
-				}
-			}
-		} catch (Exception e) {
-			logger.error("Failed in checkTestStepNameOnly for : " + e.getMessage(), e);
+    @Check(CheckType.FAST)
+    public void checkTestStepNameOnly(TestStep step) {
+        TestStepImpl testStep = new TestStepImpl(step);
+        logger.debug("Entering checkTestStepNameOnly");
+        try {
+            initProject(step.eResource());
+            String problems = TestStepIssueDetector.validateStepObjectNameOnly(testStep);
+            if (!problems.isEmpty()) {
+                error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME, TEST_STEP_STEP_OBJECT_NAME_ONLY);
+            } else {
+                problems = TestStepIssueDetector.validateStepDefinitionNameOnly(testStep);
+                if (!problems.isEmpty()) {
+                    error(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME,
+                            TEST_STEP_STEP_DEFINITION_NAME_ONLY);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Failed in checkTestStepNameOnly for : " + e.getMessage(), e);
 
-		}
-		logger.debug("Exiting checkTestStepNameOnly");
-	}
+        }
+        logger.debug("Exiting checkTestStepNameOnly");
+    }
 
-	@Check(CheckType.FAST)
-	public void checkTestStepNameWorkspace(TestStep step) {
-		TestStepImpl testStep = new TestStepImpl(step);
-		logger.debug("Entering checkTestStepNameWorkspace for element: " + testStep.getName());
-		try {
-			initProject(step.eResource());
-			String problems = TestStepIssueDetector.validateStepObjectNameWorkspace(testStep);
-			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME,
-						TEST_STEP_STEP_OBJECT_NAME_WORKSPACE);
-			} else {
-				problems = TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep);
-				if (!problems.isEmpty()) {
-					warning(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME,
-							TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE);
-				}
-			}
-		} catch (Exception e) {
-			logger.error("Failed in checkTestStepNameWorkspace for : " + e.getMessage(), e);
+    @Check(CheckType.FAST)
+    public void checkTestStepNameWorkspace(TestStep step) {
+        TestStepImpl testStep = new TestStepImpl(step);
+        logger.debug("Entering checkTestStepNameWorkspace");
+        try {
+            initProject(step.eResource());
+            String problems = TestStepIssueDetector.validateStepObjectNameWorkspace(testStep);
+            if (!problems.isEmpty()) {
+                warning(problems, SheepDogPackage.Literals.TEST_STEP__STEP_OBJECT_NAME,
+                        TEST_STEP_STEP_OBJECT_NAME_WORKSPACE);
+            } else {
+                problems = TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep);
+                if (!problems.isEmpty()) {
+                    warning(problems, SheepDogPackage.Literals.TEST_STEP__STEP_DEFINITION_NAME,
+                            TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Failed in checkTestStepNameWorkspace for : " + e.getMessage(), e);
 
-		}
-		logger.debug("Exiting checkTestStepNameWorkspace");
-	}
+        }
+        logger.debug("Exiting checkTestStepNameWorkspace");
+    }
 
-	@Check(CheckType.FAST)
-	public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
-		logger.debug("Entering checkTestSuiteNameOnly for element: " + theTestSuite.getName());
-		initProject(theTestSuite.eResource());
-		try {
-			// TODO validate that feature file name and feature name are the same.
-			TestSuiteImpl testSuiteImpl = new TestSuiteImpl(theTestSuite);
-			String problems = TestSuiteIssueDetector.validateNameOnly(testSuiteImpl);
-			if (!problems.isEmpty()) {
-				warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
-			}
-		} catch (Exception e) {
-			logger.error("Failed in checkTestSuiteNameOnly for : " + e.getMessage(), e);
+    @Check(CheckType.FAST)
+    public void checkTestSuiteNameOnly(TestSuite theTestSuite) {
+        logger.debug("Entering checkTestSuiteNameOnly for element: " + theTestSuite.getName());
+        initProject(theTestSuite.eResource());
+        try {
+            // TODO validate that feature file name and feature name are the same.
+            TestSuiteImpl testSuiteImpl = new TestSuiteImpl(theTestSuite);
+            String problems = TestSuiteIssueDetector.validateNameOnly(testSuiteImpl);
+            if (!problems.isEmpty()) {
+                warning(problems, SheepDogPackage.Literals.MODEL__NAME, TEST_SUITE_NAME_ONLY);
+            }
+        } catch (Exception e) {
+            logger.error("Failed in checkTestSuiteNameOnly for : " + e.getMessage(), e);
 
-		}
-		logger.debug("Exiting checkTestSuiteNameOnly");
-	}
+        }
+        logger.debug("Exiting checkTestSuiteNameOnly");
+    }
 
-	@Check(CheckType.FAST)
-	public void checkTextNameWorkspace(Text text) {
-		logger.debug("Entering checkTextNameWorkspace for element: " + (text != null ? text.getName() : "null"));
-		initProject(text.eResource());
-		if (text != null) {
-			try {
-				String problems = TextIssueDetector.validateNameWorkspace(new TextImpl(text));
-				if (!problems.isEmpty()) {
-					warning(problems, SheepDogPackage.Literals.TEXT__NAME, TEXT_NAME_WORKSPACE);
-				}
-			} catch (Exception e) {
-				logger.error("Failed in checkTextNameWorkspace for : " + e.getMessage(), e);
-			}
-		}
-		logger.debug("Exiting checkTextNameWorkspace");
-	}
+    @Check(CheckType.FAST)
+    public void checkTextNameWorkspace(Text text) {
+        logger.debug("Entering checkTextNameWorkspace for element: " + (text != null ? text.getName() : "null"));
+        initProject(text.eResource());
+        if (text != null) {
+            try {
+                String problems = TextIssueDetector.validateNameWorkspace(new TextImpl(text));
+                if (!problems.isEmpty()) {
+                    warning(problems, SheepDogPackage.Literals.TEXT__NAME, TEXT_NAME_WORKSPACE);
+                }
+            } catch (Exception e) {
+                logger.error("Failed in checkTextNameWorkspace for : " + e.getMessage(), e);
+            }
+        }
+        logger.debug("Exiting checkTextNameWorkspace");
+    }
 
-	private void initProject(Resource resource) {
-		ITestProject parent = SheepDogBuilder.createTestProject();
-		if (parent.getName() == null) {
-			IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
-					.getFile(new Path(resource.getURI().toPlatformString(true)));
-			File resourceFile = new File(resourceIFile.getProject().getLocationURI());
-			parent.setName(resourceFile.getAbsolutePath());
-		}
-	}
+    private void initProject(Resource resource) {
+        ITestProject parent = SheepDogBuilder.createTestProject();
+        if (parent.getName() == null) {
+            IFile resourceIFile = ResourcesPlugin.getWorkspace().getRoot()
+                    .getFile(new Path(resource.getURI().toPlatformString(true)));
+            File resourceFile = new File(resourceIFile.getProject().getLocationURI());
+            parent.setName(resourceFile.getAbsolutePath());
+        }
+    }
 }

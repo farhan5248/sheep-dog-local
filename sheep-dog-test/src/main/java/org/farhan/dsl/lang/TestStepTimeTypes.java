@@ -13,27 +13,27 @@ public enum TestStepTimeTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	AT(" at", "Specifies exact time"),
+	AT("at", "Specifies exact time"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	BEFORE(" before", "Specifies time constraint - earlier than"),
+	BEFORE("before", "Specifies time constraint - earlier than"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	AFTER(" after", "Specifies time constraint - later than"),
+	AFTER("after", "Specifies time constraint - later than"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	IN(" in", "Specifies duration or time period"),
+	IN("in", "Specifies duration or time period"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	ON(" on", "Specifies specific date or time");
+	ON("on", "Specifies specific date or time");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step

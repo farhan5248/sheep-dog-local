@@ -4,7 +4,6 @@ import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.IText;
-import org.farhan.dsl.lang.SheepDogUtility;
 
 public class TestStepImpl implements ITestStep {
 
@@ -14,20 +13,6 @@ public class TestStepImpl implements ITestStep {
     TestStepContainerImpl parent;
     TableImpl table;
     TextImpl text;
-
-    @Override
-    public String getName() {
-        return stepObjectName + " " + stepDefinitionName;
-    }
-
-    @Override
-    public String getNameLong() {
-        try {
-            return SheepDogUtility.getTestStepNameLong(this);
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
     @Override
     public ITestStepContainer getParent() {

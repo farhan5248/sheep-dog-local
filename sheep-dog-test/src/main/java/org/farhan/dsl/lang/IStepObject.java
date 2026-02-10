@@ -8,8 +8,6 @@ public interface IStepObject extends IModel {
 
 	String getName();
 
-	String getNameLong();
-
 	ITestProject getParent();
 
 	IStatement getStatement(int index);

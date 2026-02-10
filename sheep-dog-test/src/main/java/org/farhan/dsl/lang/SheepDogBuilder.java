@@ -116,17 +116,17 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent        the parent element (or null if root)
-     * @param qualifiedName the qualified name of the step object
+     * @param nameLong the qualified name of the step object
      * @return the created and initialized instance
      */
-    public static IStepObject createStepObject(ITestProject parent, String qualifiedName) {
-        logger.debug("Entering createStepObject for qualifiedName: {}", qualifiedName);
+    public static IStepObject createStepObject(ITestProject parent, String nameLong) {
+        logger.debug("Entering createStepObject for nameLong: {}", nameLong);
         IStepObject stepObject = null;
         if (parent != null)
-            stepObject = parent.getStepObject(qualifiedName);
+            stepObject = parent.getStepObject(nameLong);
         if (stepObject == null) {
             stepObject = SheepDogFactory.instance.createStepObject();
-            stepObject.setNameLong(qualifiedName);
+            stepObject.setNameLong(nameLong);
             if (parent != null)
                 parent.addStepObject(stepObject);
         }
@@ -260,9 +260,9 @@ public class SheepDogBuilder {
     public static ITestStep createTestStep(ITestStepContainer parent, String name) {
         logger.debug("Entering createTestStep for name: {}", name);
         ITestStep testStep = SheepDogFactory.instance.createTestStep();
-        testStep.setStepObjectName(StepObjectRef.getStepObjectName(name));
+        testStep.setStepObjectName(StepObjectRefFragments.getStepObjectName(name));
         testStep.setStepDefinitionName(
-                StepDefinitionRef.getStepDefinitionName(name.replace(testStep.getStepObjectName(), "")));
+                StepDefinitionRefFragments.getStepDefinitionName(name.replace(testStep.getStepObjectName(), "")));
         if (parent != null)
             parent.addTestStep(testStep);
         logger.debug("Exiting createTestStep");
@@ -274,15 +274,15 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent        the parent element (or null if root)
-     * @param qualifiedName the qualified name of the test suite
+     * @param nameLong the qualified name of the test suite
      * @return the created and initialized instance
      */
-    public static ITestSuite createTestSuite(ITestProject parent, String qualifiedName) {
-        logger.debug("Entering createTestSuite for qualifiedName: {}", qualifiedName);
-        ITestSuite testSuite = parent.getTestSuite(qualifiedName);
+    public static ITestSuite createTestSuite(ITestProject parent, String nameLong) {
+        logger.debug("Entering createTestSuite for nameLong: {}", nameLong);
+        ITestSuite testSuite = parent.getTestSuite(nameLong);
         if (testSuite == null) {
             testSuite = SheepDogFactory.instance.createTestSuite();
-            testSuite.setNameLong(qualifiedName);
+            testSuite.setNameLong(nameLong);
             if (parent != null)
                 parent.addTestSuite(testSuite);
         }

@@ -51,7 +51,8 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
         try {
             if (step instanceof TestStep) {
                 initProject(step.eResource());
-                for (SheepDogIssueProposal p : RowIssueResolver.suggestCellListWorkspace(new TestStepImpl((TestStep) step))) {
+                for (SheepDogIssueProposal p : RowIssueResolver
+                        .suggestCellListWorkspace(new TestStepImpl((TestStep) step))) {
                     String pipeList = "| " + p.getValue().replaceAll(",", " \\|");
                     ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
                             pipeList, p.getId(), null, context);
@@ -64,7 +65,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
                 return;
             }
         } catch (Exception e) {
-            logger.error("Failed in content assist for " + step.toString() + ": " + e.getMessage(), e);
+            logger.error("Failed in content assist for " + step.toString(), e);
         }
         logger.debug("Exiting completeCellList");
     }
@@ -84,7 +85,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
     private void completeStepObject(TestStep step, Assignment assignment, ContentAssistContext context,
             ICompletionProposalAcceptor acceptor) {
         TestStepImpl testStep = new TestStepImpl(step);
-        logger.debug("Entering completeObject for element: " + testStep.getName());
+        logger.debug("Entering completeObject for " + step.toString());
         try {
             initProject(step.eResource());
             for (SheepDogIssueProposal p : TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep)) {
@@ -96,7 +97,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
                 }
             }
         } catch (Exception e) {
-            logger.error("Failed in content assist for " + testStep.getName() + ": " + e.getMessage(), e);
+            logger.error("Failed in content assist for " + step.toString(), e);
         }
         logger.debug("Exiting completeObject");
     }
@@ -104,7 +105,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
     private void completeStepDefinitionName(TestStep step, Assignment assignment, ContentAssistContext context,
             ICompletionProposalAcceptor acceptor) {
         TestStepImpl testStep = new TestStepImpl(step);
-        logger.debug("Entering completeStepDefinitionName for element: " + testStep.getName());
+        logger.debug("Entering completeStepDefinitionName for " + step.toString());
         try {
             initProject(step.eResource());
             for (SheepDogIssueProposal p : TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep)) {
@@ -116,7 +117,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
                 }
             }
         } catch (Exception e) {
-            logger.error("Failed in content assist for " + testStep.getName() + ": " + e.getMessage(), e);
+            logger.error("Failed in content assist for " + step.toString(), e);
         }
         logger.debug("Exiting completeStepDefinitionName");
     }

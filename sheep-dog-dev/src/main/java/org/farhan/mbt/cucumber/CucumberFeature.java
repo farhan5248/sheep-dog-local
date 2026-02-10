@@ -21,7 +21,6 @@ import org.farhan.dsl.cucumber.cucumber.AbstractScenario;
 import org.farhan.dsl.cucumber.cucumber.Background;
 import org.farhan.dsl.cucumber.cucumber.Cell;
 import org.farhan.dsl.cucumber.cucumber.CucumberFactory;
-import org.farhan.dsl.cucumber.cucumber.DocString;
 import org.farhan.dsl.cucumber.cucumber.Examples;
 import org.farhan.dsl.cucumber.cucumber.ExamplesTable;
 import org.farhan.dsl.cucumber.cucumber.Feature;

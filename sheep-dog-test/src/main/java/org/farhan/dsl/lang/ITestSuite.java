@@ -4,34 +4,32 @@ import java.util.List;
 
 public interface ITestSuite extends IModel {
 
-	boolean addStatement(IStatement value);
+    boolean addStatement(IStatement value);
 
-	boolean addTestCase(ITestCase value);
+    boolean addTestCase(ITestCase value);
 
-	boolean addTestSetup(ITestSetup value);
+    boolean addTestSetup(ITestSetup value);
 
-	String getContent() throws Exception;
+    String getContent() throws Exception;
 
-	String getName();
+    String getName();
 
-	String getNameLong();
+    ITestProject getParent();
 
-	ITestProject getParent();
+    IStatement getStatement(int index);
 
-	IStatement getStatement(int index);
+    IStatement getStatement(String name);
 
-	IStatement getStatement(String name);
+    List<IStatement> getStatementList();
 
-	List<IStatement> getStatementList();
+    ITestStepContainer getTestStepContainer(int index);
 
-	ITestStepContainer getTestStepContainer(int index);
+    ITestStepContainer getTestStepContainer(String name);
 
-	ITestStepContainer getTestStepContainer(String name);
+    List<ITestStepContainer> getTestStepContainerList();
 
-	List<ITestStepContainer> getTestStepContainerList();
+    void setContent(String text) throws Exception;
 
-	void setContent(String text) throws Exception;
-
-	void setName(String value);
+    void setName(String value);
 
 }

@@ -2,26 +2,22 @@ package org.farhan.dsl.lang;
 
 public interface ITestStep {
 
-	String getName();
+    String getStepObjectName();
 
-	String getNameLong();
+    String getStepDefinitionName();
 
-	String getStepObjectName();
+    ITestStepContainer getParent();
 
-	String getStepDefinitionName();
+    ITable getTable();
 
-	ITestStepContainer getParent();
+    IText getText();
 
-	ITable getTable();
+    void setStepObjectName(String value);
 
-	IText getText();
+    void setStepDefinitionName(String value);
 
-	void setStepObjectName(String value);
+    void setTable(ITable value);
 
-	void setStepDefinitionName(String value);
-
-	void setTable(ITable value);
-
-	void setText(IText value);
+    void setText(IText value);
 
 }

@@ -5,7 +5,7 @@ import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogUtility;
-import org.farhan.dsl.lang.StepObjectRef;
+import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,12 +28,11 @@ public class TestStepIssueDetector {
      * @return empty string if valid, error description otherwise
      * @throws Exception if validation fails
      */
-    public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Exception {
-        logger.debug("Entering validateStepObjectNameOnly for step: {}",
-                theTestStep != null ? theTestStep.getName() : "null");
-        String text = theTestStep.getName();
+    public static String validateStepObjectNameOnly(ITestStep theTestStep) {
+        logger.debug("Entering validateStepObjectNameOnly for step");
+        String text = theTestStep.getStepObjectName();
         if (text != null) {
-            if (StepObjectRef.getStepObjectName(text).isEmpty()) {
+            if (StepObjectRefFragments.getStepObjectName(text).isEmpty()) {
                 logger.debug("Exiting validateStepObjectNameOnly");
                 return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
             }
@@ -50,10 +49,9 @@ public class TestStepIssueDetector {
      * @return empty string if valid, error description otherwise
      * @throws Exception if validation fails
      */
-    public static String validateStepDefinitionNameOnly(ITestStep theTestStep) throws Exception {
+    public static String validateStepDefinitionNameOnly(ITestStep theTestStep) {
 
-        logger.debug("Entering validateStepDefinitionNameOnly for step: {}",
-                theTestStep != null ? theTestStep.getName() : "null");
+        logger.debug("Entering validateStepDefinitionNameOnly for step");
         if (theTestStep.getStepDefinitionName() != null) {
             if (theTestStep.getStepDefinitionName().isEmpty()) {
                 logger.debug("Exiting validateStepDefinitionNameOnly");
@@ -73,8 +71,7 @@ public class TestStepIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
-        logger.debug("Entering validateStepObjectNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.getName() : "null");
+        logger.debug("Entering validateStepObjectNameWorkspace for step");
         String message = "";
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
@@ -95,8 +92,7 @@ public class TestStepIssueDetector {
      */
     public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
         // validates for a good name if the reference is valid
-        logger.debug("Entering validateStepDefinitionNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.getName() : "null");
+        logger.debug("Entering validateStepDefinitionNameWorkspace for step");
         String message = "";
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         ITestProject theProject = theTestStep.getParent().getParent().getParent();

@@ -45,11 +45,6 @@ public class TestStepContainerImpl implements ITestStepContainer {
     }
 
     @Override
-    public String getNameLong() {
-        throw new UnsupportedOperationException("getNameLong() is not implemented");
-    }
-
-    @Override
     public IStatement getStatement(int index) {
         throw new UnsupportedOperationException("getStatement(int index) is not implemented");
     }
@@ -67,7 +62,7 @@ public class TestStepContainerImpl implements ITestStepContainer {
     @Override
     public ITestStep getTestStep(String name) {
         for (ITestStep ts : testStepList) {
-            if (ts.getName().contentEquals(name)) {
+            if (name.contentEquals(ts.getStepObjectName() + " " + ts.getStepDefinitionName())) {
                 return ts;
             }
         }

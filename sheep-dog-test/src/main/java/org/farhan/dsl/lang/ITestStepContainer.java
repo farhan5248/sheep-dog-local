@@ -4,28 +4,26 @@ import java.util.List;
 
 public interface ITestStepContainer {
 
-	String getName();
+    String getName();
 
-	String getNameLong();
+    ITestSuite getParent();
 
-	ITestSuite getParent();
+    IStatement getStatement(int index);
 
-	IStatement getStatement(int index);
+    IStatement getStatement(String name);
 
-	IStatement getStatement(String name);
+    List<IStatement> getStatementList();
 
-	List<IStatement> getStatementList();
+    ITestStep getTestStep(int index);
 
-	ITestStep getTestStep(int index);
+    ITestStep getTestStep(String name);
 
-	ITestStep getTestStep(String name);
+    List<ITestStep> getTestStepList();
 
-	List<ITestStep> getTestStepList();
+    void setName(String value);
 
-	void setName(String value);
+    boolean addStatement(IStatement value);
 
-	boolean addStatement(IStatement value);
-
-	boolean addTestStep(ITestStep value);
+    boolean addTestStep(ITestStep value);
 
 }

@@ -4,22 +4,20 @@ import java.util.List;
 
 public interface ITestData {
 
-	String getName();
+    String getName();
 
-	String getNameLong();
+    ITestCase getParent();
 
-	ITestCase getParent();
+    IStatement getStatement(int index);
 
-	IStatement getStatement(int index);
+    IStatement getStatement(String name);
 
-	IStatement getStatement(String name);
+    List<IStatement> getStatementList();
 
-	List<IStatement> getStatementList();
+    List<List<String>> getTable();
 
-	List<List<String>> getTable();
+    void setName(String value);
 
-	void setName(String value);
-
-	boolean addStatement(IStatement value);
+    boolean addStatement(IStatement value);
 
 }
