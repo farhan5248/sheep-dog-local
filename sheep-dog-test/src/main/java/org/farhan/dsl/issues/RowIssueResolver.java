@@ -10,10 +10,8 @@ import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.RowUtility;
 import org.farhan.dsl.lang.SheepDogBuilder;
-import org.farhan.dsl.lang.StatementUtility;
-import org.farhan.dsl.lang.TestStepUtility;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,14 +38,14 @@ public class RowIssueResolver {
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 
         ITestProject theProject = theTestStep.getParent().getParent().getParent();
-        String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         IStepObject theStepObject = theProject.getStepObject(qualifiedName);
         if (theStepObject != null) {
-            String stepDefinitionName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
+            String stepDefinitionName = theTestStep.getStepDefinitionName();
             IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
             if (theStepDefinition != null) {
                 // This assumes that the step is valid but the parameters don't exist
-                String name = RowUtility.getCellListAsString(theTestStep.getTable().getRowList().getFirst());
+                String name = SheepDogUtility.getCellListAsString(theTestStep.getTable().getRowList().getFirst().getCellList());
                 IStepParameters theStepParameters = theStepDefinition.getStepParameters(name);
                 if (theStepParameters == null) {
                     theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, name);
@@ -59,7 +57,7 @@ public class RowIssueResolver {
                     SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                     proposal.setId("Generate " + name);
                     proposal.setDescription(
-                            StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
+                            SheepDogUtility.getStatementListAsString(theStepParameters.getStatementList()));
                     proposal.setValue(theStepObject.getContent());
                     proposal.setQualifiedName(theStepObject.getNameLong());
                     proposals.add(proposal);
@@ -82,18 +80,19 @@ public class RowIssueResolver {
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
         SheepDogIssueProposal proposal;
 
-        if (TestStepUtility.isValid(theTestStep.getName())) {
-            String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+        if (TestStepIssueDetector.validateStepObjectNameOnly(theTestStep).isEmpty()
+                && TestStepIssueDetector.validateStepDefinitionNameOnly(theTestStep).isEmpty()) {
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
             IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
             if (theStepObject != null) {
                 IStepDefinition stepDefinition = theStepObject
-                        .getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
+                        .getStepDefinition(theTestStep.getStepDefinitionName());
                 if (stepDefinition != null) {
                     for (IStepParameters parameters : stepDefinition.getStepParameterList()) {
                         proposal = new SheepDogIssueProposal();
-                        proposal.setId(RowUtility.getCellListAsString(parameters.getTable().getRowList().getFirst()));
+                        proposal.setId(SheepDogUtility.getCellListAsString(parameters.getTable().getRowList().getFirst().getCellList()));
                         proposal.setDescription(
-                                StatementUtility.getStatementListAsString(parameters.getStatementList()));
+                                SheepDogUtility.getStatementListAsString(parameters.getStatementList()));
                         if (!proposal.getId().contentEquals("Content")) {
                             proposal.setValue(proposal.getId());
                             proposals.add(proposal);

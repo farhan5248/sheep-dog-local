@@ -9,10 +9,8 @@ import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.RowUtility;
 import org.farhan.dsl.lang.SheepDogBuilder;
-import org.farhan.dsl.lang.StatementUtility;
-import org.farhan.dsl.lang.TestStepUtility;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,10 +37,10 @@ public class TextIssueResolver {
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
 
         ITestProject theProject = theTestStep.getParent().getParent().getParent();
-        String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         IStepObject theStepObject = theProject.getStepObject(qualifiedName);
         if (theStepObject != null) {
-            String stepDefinitonName = TestStepUtility.getStepDefinitionName(theTestStep.getName());
+            String stepDefinitonName = theTestStep.getStepDefinitionName();
             IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
             if (theStepDefinition != null) {
                 // This assumes that the step is valid but the parameters don't exist
@@ -54,9 +52,9 @@ public class TextIssueResolver {
                     SheepDogBuilder.createCell(row, "Content");
                     SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                     proposal.setId("Generate "
-                            + RowUtility.getCellListAsString(theStepParameters.getTable().getRowList().getFirst()));
+                            + SheepDogUtility.getCellListAsString(theStepParameters.getTable().getRowList().getFirst().getCellList()));
                     proposal.setDescription(
-                            StatementUtility.getStatementListAsString(theStepParameters.getStatementList()));
+                            SheepDogUtility.getStatementListAsString(theStepParameters.getStatementList()));
                     proposal.setValue(theStepObject.getContent());
                     proposal.setQualifiedName(theStepObject.getNameLong());
                     proposals.add(proposal);

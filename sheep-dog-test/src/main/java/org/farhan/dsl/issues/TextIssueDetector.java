@@ -4,7 +4,7 @@ import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.IText;
-import org.farhan.dsl.lang.TestStepUtility;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,10 +30,9 @@ public class TextIssueDetector {
     public static String validateNameWorkspace(IText theText) throws Exception {
         logger.debug("Entering validateNameWorkspace for text: {}", theText != null ? theText.getName() : "null");
         ITestStep theTestStep = (ITestStep) theText.getParent();
-        String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
-        IStepDefinition theStepDefinition = theStepObject
-                .getStepDefinition(TestStepUtility.getStepDefinitionName(theTestStep.getName()));
+        IStepDefinition theStepDefinition = theStepObject.getStepDefinition(theTestStep.getStepDefinitionName());
         if (!theText.getName().isEmpty()) {
             if (theStepDefinition.getStepParameters("Content") == null) {
                 logger.debug("Exiting validateNameWorkspace");

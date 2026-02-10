@@ -8,7 +8,7 @@ import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
-import org.farhan.dsl.lang.RowUtility;
+import org.farhan.dsl.lang.SheepDogUtility;
 
 public class StepDefinitionImpl implements IStepDefinition {
 
@@ -65,7 +65,7 @@ public class StepDefinitionImpl implements IStepDefinition {
     @Override
     public IStepParameters getStepParameters(String name) {
         for (IStepParameters sp : stepParametersList) {
-            String rowAsString = RowUtility.getCellListAsString(sp.getTable().getRowList().getFirst());
+            String rowAsString = SheepDogUtility.getCellListAsString(sp.getTable().getRowList().getFirst().getCellList());
             if (name.contentEquals(rowAsString)) {
                 return sp;
             }
