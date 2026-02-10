@@ -11,7 +11,7 @@
 	<packaging>eclipse-plugin</packaging>
 
 	<properties>
-		<sheep-dog-test.version>1.32</sheep-dog-test.version>
+		<sheep-dog-test.version>1.33-SNAPSHOT</sheep-dog-test.version>
 	</properties>
 
 	<dependencies>
