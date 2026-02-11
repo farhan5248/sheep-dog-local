@@ -2,20 +2,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
 	<artifactId>sheep-dog-dev</artifactId>
-	<version>1.61-SNAPSHOT</version>
+	<version>1.61</version>
 	<name>Lean Sheep Dog Tools for Developers</name>
 	<description>Transforms test cases to models and vice-versa</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
-		<sheepdogcucumber.version>1.4.0-SNAPSHOT</sheepdogcucumber.version>
-		<sheepdogxtextplugin.version>1.36.0-SNAPSHOT</sheepdogxtextplugin.version>
+		<sheepdogcucumber.version>1.3.0</sheepdogcucumber.version>
+		<sheepdogxtextplugin.version>1.37.0</sheepdogxtextplugin.version>
 	</properties>
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/sheep-dog-local</connection>
-		<tag>HEAD</tag>
+		<tag>sheep-dog-dev-1.61</tag>
 	</scm>
 
 	<pluginRepositories>
