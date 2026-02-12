@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.farhan</groupId>
 		<artifactId>sheepdogxtextplugin.parent</artifactId>
-		<version>1.38.0-SNAPSHOT</version>
+		<version>1.38.0</version>
 	</parent>
 	<artifactId>sheepdogxtextplugin.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
