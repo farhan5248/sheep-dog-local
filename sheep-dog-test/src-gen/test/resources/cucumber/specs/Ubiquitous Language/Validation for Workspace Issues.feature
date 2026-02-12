@@ -1,15 +1,14 @@
-@sheep-dog-test
+@sheep-dog-test @Validate
 Feature: Validation for Workspace Issues
 
   \@sheep-dog-test
+  \@Validate
   Some problems are fixed by code generation.
   They're typically things like keywords or objects that are not defined in the step objects layer.
   I could just ignore all those warnings and then use the Build Project menu item and it'll create everything at once.
   There's 4 types of warnings, the scenarios below cover them.
 
   Scenario: This object doesn't exist validation
-
-    Coverage Target: SheepDogIssueProposal.getQualifiedName lines 32-32
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
@@ -56,6 +55,10 @@ Feature: Validation for Workspace Issues
 
   Scenario: This object step definition text parameter doesn't exist validation
 
+    Validation should define first what a text parameter table looks like, that is with "Content"
+    The test should say that if there's a Content column, you get no error.
+    A second test will state if you don't have a content column, your log an error.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                       | Text Content |
           | The daily batchjob Input file is set as follows | New Content  |
@@ -69,19 +72,4 @@ Feature: Validation for Workspace Issues
           """
           The step parameters don't exist for the step definition
           """
-
-  Scenario: Object path and component is inherited from previous steps
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                    |
-          | The daily batchjob app/Input file is present |
-          | The Input file is absent                     |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows
-          | Object Name                           | Step Definition Name |
-          | daily batchjob/app/Input file.feature | is present           |
-          | daily batchjob/app/Input file.feature | is absent            |
-     When The xtext plugin validate action is performed as follows
-          | Selected Element                           |
-          | TestSuite/1/TestStepContainer/1/TestStep/1 |
-     Then The xtext plugin validate dialog will be empty
 

@@ -13,6 +13,13 @@ import java.util.List;
  */
 public class SheepDogUtility {
 
+    /**
+     * Converts a list of grammar elements into a formatted string representation
+     * for display or comparison purposes.
+     *
+     * @param list the list of cells to convert
+     * @return formatted string representation of the cell list
+     */
     public static String getCellListAsString(List<ICell> list) {
         String cellsAsString = "";
         List<String> theList = new ArrayList<String>();
@@ -27,8 +34,8 @@ public class SheepDogUtility {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Converts a list of grammar elements into a formatted string representation
+     * for display or comparison purposes.
      *
      * @param statementList the list of statements to convert
      * @return String concatenation of all statement names
@@ -42,8 +49,9 @@ public class SheepDogUtility {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Constructs fully qualified or long-form names for grammar elements by
+     * combining components, objects, and contextual information from parent
+     * elements.
      *
      * @param theStep the test step to process
      * @return qualified name string with component, object, and file extension
@@ -56,6 +64,14 @@ public class SheepDogUtility {
         return component + "/" + object + fileExt;
     }
 
+    /**
+     * Constructs fully qualified or long-form names for grammar elements by
+     * combining components, objects, and contextual information from parent
+     * elements.
+     *
+     * @param theStep the test step to process
+     * @return the long-form name of the test step
+     */
     public static String getTestStepNameLong(ITestStep theStep) {
 
         String component = StepObjectRefFragments.getComponent(theStep.getStepObjectName());

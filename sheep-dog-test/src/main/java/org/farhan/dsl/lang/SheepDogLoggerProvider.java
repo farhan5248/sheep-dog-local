@@ -1,4 +1,4 @@
-package org.farhan.dsl.issues;
+package org.farhan.dsl.lang;
 
 import org.slf4j.Logger;
 
@@ -9,7 +9,7 @@ import org.slf4j.Logger;
  * injection in environments without SLF4J.
  * </p>
  */
-public interface LoggerProvider {
+public interface SheepDogLoggerProvider {
 
 	/**
 	 * Creates a logger instance for the specified class when custom logging is

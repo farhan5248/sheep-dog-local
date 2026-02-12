@@ -1,7 +1,8 @@
-@sheep-dog-test
+@sheep-dog-test @Validate
 Feature: Validation for Only Issues
 
   \@sheep-dog-test
+  \@Validate
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
   Scenario: Cell name should start with a capital letter

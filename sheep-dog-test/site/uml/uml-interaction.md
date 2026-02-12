@@ -260,15 +260,15 @@ public static IStepParameters createStepParameters(IStepDefinition parent, Strin
 }
 ```
 
-## LoggerFactory
+## {Language}LoggerFactory
 
 ### getLogger
 
-Gets a logger for the specified class. Uses SLF4J when available, otherwise delegates to custom LoggerProvider.
+Gets a logger for the specified class. Uses SLF4J when available, otherwise delegates to custom {Language}LoggerProvider.
 
 **Example: Standard usage**
 ```java
-private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
+private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueDetector.class);
 
 public static String validate(ITestStep step) {
     logger.debug("Starting validation");
@@ -300,7 +300,7 @@ Configures a custom logger provider when SLF4J is unavailable (e.g., in Eclipse/
 **Example: Setting custom logger**
 ```java
 // In Eclipse plugin activator
-LoggerFactory.setLoggerImplementation(new LoggerProvider() {
+SheepDogLoggerFactory.setLoggerImplementation(new LoggerProvider() {
     @Override
     public Logger getLogger(Class<?> clazz) {
         return new EclipseLogger(clazz);
@@ -310,12 +310,250 @@ LoggerFactory.setLoggerImplementation(new LoggerProvider() {
 
 **Example: Implementation with validation**
 ```java
-public static void setLoggerImplementation(LoggerProvider provider) {
+public static void setLoggerImplementation(SheepDogLoggerProvider provider) {
     if (provider == null) {
         throw new IllegalArgumentException("Logger implementation cannot be null");
     } else {
-        LoggerFactory.provider = provider;
+        SheepDogLoggerFactory.provider = provider;
     }
+}
+```
+
+## {Language}Utility
+
+### get{Type}ListAsString
+
+Utility methods convert lists of grammar elements into formatted string representations for display or comparison purposes. These methods follow a consistent pattern of iterating, collecting, sorting, and formatting.
+
+**Example: Converting cell list to string**
+```java
+public static String getCellListAsString(List<ICell> list) {
+    String cellsAsString = "";
+    List<String> theList = new ArrayList<String>();
+    for (ICell cell : list) {
+        theList.add(cell.getName());
+    }
+    Collections.sort(theList);
+    for (String cell : theList) {
+        cellsAsString += ", " + cell;
+    }
+    return cellsAsString.replaceFirst(", ", "").trim();
+}
+```
+### get{Type}NameLong
+
+Utility methods construct fully qualified or long-form names for grammar elements by combining components, objects, and contextual information from parent elements. These methods navigate the parent hierarchy and apply domain-specific formatting rules.
+
+**Example: Getting step object qualified name**
+```java
+public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
+    String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
+    String component = StepObjectRefFragments.getComponent(stepNameLong);
+    String object = StepObjectRefFragments.getObject(stepNameLong);
+    String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
+    return component + "/" + object + fileExt;
+}
+```
+
+**Example: Getting test step qualified name with context inference**
+```java
+public static String getTestStepNameLong(ITestStep theStep) {
+    String component = StepObjectRefFragments.getComponent(theStep.getStepObjectName());
+    String object = StepObjectRefFragments.getObject(theStep.getStepObjectName());
+
+    if (component.isEmpty() || !object.contains("/")) {
+        ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep);
+        for (ITestStep previousStep : previousSteps) {
+            String previousObject = StepObjectRefFragments.getObject(previousStep.getStepObjectName());
+            String previousComponent = StepObjectRefFragments.getComponent(previousStep.getStepObjectName());
+            if (previousObject.endsWith("/" + object)) {
+                if (!object.contains("/") && previousObject.contains("/")) {
+                    object = previousObject;
+                }
+                if (component.isEmpty() && !previousComponent.isEmpty()) {
+                    component = previousComponent;
+                }
+                if (!component.isEmpty() && object.contains("/")) {
+                    break;
+                }
+            }
+        }
+        if (component.isEmpty()) {
+            String lastComponent = "Unknown service";
+            for (ITestStep aStep : previousSteps) {
+                if (!StepObjectRefFragments.getComponent(aStep.getStepObjectName()).isEmpty()) {
+                    lastComponent = StepObjectRefFragments.getComponent(aStep.getStepObjectName());
+                    break;
+                }
+            }
+            component = lastComponent;
+        }
+    }
+    return "The " + component + " " + object + " " + theStep.getStepDefinitionName();
+}
+```
+
+## {Type}Fragments
+
+### Regex Pattern Constants
+
+Fragment classes define regex patterns as private static final constants. These patterns are composed hierarchically, building from simple fragments to complex structures.
+
+**Example: Simple pattern composition (TitleFragments)**
+```java
+private static final String TODO_TYPE = "(TODO)";
+private static final String TODO_DESC = "( \\S.*)";
+private static final String TODO = "(" + TODO_TYPE + TODO_DESC + ")";
+private static final String TAG_TYPE = "(@)";
+private static final String TAG_DESC = "(\\S+)";
+private static final String TAG = "(" + TAG_TYPE + TAG_DESC + ")";
+private static final String TITLE = "((" + TAG + ")+|" + TODO + "|.+)";
+```
+
+**Example: Complex pattern composition with enum types (StepObjectRefFragments)**
+```java
+private static final String COMPONENT_NAME = "( " + "[^/]" + "+)";
+private static final String COMPONENT_TYPE = getRegexFromTypes(TestStepComponentTypes.values());
+private static final String COMPONENT = "(" + COMPONENT_NAME + COMPONENT_TYPE + ")";
+private static final String OBJECT_NAME = "( .+)";
+private static final String OBJECT_EDGE_TYPE = getRegexFromTypes(TestStepObjectEdgeTypes.values());
+private static final String OBJECT_VERTEX_TYPE = getRegexFromTypes(TestStepObjectVertexTypes.values());
+private static final String OBJECT_TYPE = "(" + OBJECT_VERTEX_TYPE + "|" + OBJECT_EDGE_TYPE + ")";
+private static final String OBJECT = "(" + OBJECT_NAME + OBJECT_TYPE + ")";
+private static final String STEP_OBJECT_REF = "(The" + COMPONENT + "?" + OBJECT + ")";
+```
+
+**Example: Pattern composition with optional fragments (StepDefinitionRefFragments)**
+```java
+private static final String PART_DESC = "(.+)";
+private static final String PART_TYPE = getRegexFromTypes(TestStepPartTypes.values());
+private static final String PART = "(" + PART_DESC + " " + PART_TYPE + " )";
+private static final String STATE_DESC = "(\\S+)";
+private static final String STATE_TYPE = getRegexFromTypes(TestStepStateTypes.values());
+private static final String STATE = "(" + STATE_TYPE + " " + STATE_DESC + ")";
+private static final String TIME_DESC = "(.+)";
+private static final String TIME_TYPE = getRegexFromTypes(TestStepTimeTypes.values());
+private static final String TIME = "( " + TIME_TYPE + " " + TIME_DESC + ")";
+private static final String ATTACHMENT = "( " + getRegexFromTypes(TestStepAttachmentTypes.values()) + ")";
+private static final String STEP_DEFINITION_REF = "(" + PART + "?" + STATE + TIME + "?" + ATTACHMENT + "?" + ")";
+```
+
+### getAll
+
+Extracts the complete matched text from formatted input, returning the entire reference as a single string for full pattern validation or processing.
+
+**Example: Getting full title match**
+```java
+public static String getAll(String text) {
+    return getGroup(TitleFragments.TITLE, text, 0);
+}
+```
+
+### get{Fragment}
+
+Extracts a specific named fragment from formatted text using predefined regex patterns and group positions. Each getter targets a specific capture group in the composed pattern.
+
+**Example: Extracting component fragments**
+```java
+public static String getComponent(String text) {
+    return getGroup("(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 2);
+}
+```
+
+**Example: Extracting object fragments**
+```java
+public static String getObject(String text) {
+    return getGroup(STEP_OBJECT_REF, text, 5);
+}
+```
+
+**Example: Extracting state fragments**
+```java
+public static String getState(String text) {
+    return getGroup(STEP_DEFINITION_REF, text, 5);
+}
+```
+
+**Example: Extracting title fragments**
+```java
+public static String getTagDesc(String text) {
+    return getGroup(TAG, text, 3);
+}
+```
+
+### is{Fragment}
+
+Boolean methods check for the presence of specific fragments by testing if extraction returns a non-empty result.
+
+**Example: Checking for tags and todos**
+```java
+public static boolean isTag(String text) {
+    return !getGroup(TAG, text, 0).isEmpty();
+}
+```
+
+**Example: Checking for object types**
+```java
+public static boolean isObjectEdgeType(String text) {
+    return !getObjectEdgeType(text).isEmpty();
+}
+```
+
+### getGroup
+
+Private helper method performs the actual regex matching and group extraction. This method is shared across all fragment extraction methods.
+
+**Example: Standard implementation**
+```java
+private static String getGroup(String regex, String text, int group) {
+    Matcher m = Pattern.compile(regex).matcher(text);
+    if (m.find()) {
+        String temp = m.group(group);
+        if (temp != null) {
+            return temp.trim();
+        } else {
+            return "";
+        }
+    }
+    return "";
+}
+```
+
+### getRegexFromTypes
+
+Private helper method converts enum values to regex alternation patterns. It handles multiple enum types and constructs a pattern that matches any of the enum values.
+
+**Example: Building regex from multiple enum types**
+```java
+private static String getRegexFromTypes(Enum<?>[] enumValues) {
+    String regex = "(";
+    for (Enum<?> enumValue : enumValues) {
+        if (enumValue instanceof TestStepComponentTypes) {
+            regex += " " + ((TestStepComponentTypes) enumValue).value + "|";
+        } else if (enumValue instanceof TestStepObjectEdgeTypes) {
+            regex += " " + ((TestStepObjectEdgeTypes) enumValue).value + "|";
+        } else if (enumValue instanceof TestStepObjectVertexTypes) {
+            regex += " " + ((TestStepObjectVertexTypes) enumValue).value + "|";
+        }
+    }
+    return regex.replaceAll("\\|$", ")");
+}
+```
+
+### get{Type}AsList
+
+Specialized methods parse text into collections of structured data, applying domain-specific logic during iteration.
+
+**Example: Extracting tags as list**
+```java
+public static ArrayList<String> getTagAsList(String name) {
+    ArrayList<String> tags = new ArrayList<String>();
+    for (String word : name.split(" ")) {
+        if (isTag(word)) {
+            tags.add(getTagDesc(word));
+        }
+    }
+    return tags;
 }
 ```
 
@@ -401,7 +639,7 @@ if (repo.contains("test", "config.properties")) {
 List<String> features = repo.list("test", "src/test/resources", ".feature");
 ```
 
-## LoggerProvider
+## {Language}LoggerProvider
 
 ### getLogger
 
@@ -409,14 +647,14 @@ Interface method allows external systems to inject custom logger implementations
 
 **Example: Interface definition**
 ```java
-public interface LoggerProvider {
+public interface SheepDogLoggerProvider {
     public Logger getLogger(Class<?> clazz);
 }
 ```
 
 **Example: Eclipse plugin implementation**
 ```java
-public class EclipseLoggerProvider implements LoggerProvider {
+public class EclipseLoggerProvider implements SheepDogLoggerProvider {
     @Override
     public Logger getLogger(Class<?> clazz) {
         return new Logger() {

@@ -86,11 +86,11 @@ Singleton holder class that provides access to the concrete I{Language}Factory i
 
 This pattern applies to infrastructure and service classes used across all collaboration patterns. These classes provide cross-cutting concerns like logging, resource management, and project structure access.
 
-### LoggerFactory
+### {Language}LoggerFactory
 
 Factory class that provides loggers to sheep-dog-test classes. Uses SLF4J when available, otherwise delegates to a custom LoggerProvider implementation.
 
-### LoggerProvider
+### {Language}LoggerProvider
 
 Interface that allows external systems (like Eclipse/OSGi plugins) to inject custom logger implementations when SLF4J providers are not available.
 

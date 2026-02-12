@@ -16,8 +16,9 @@ public class StepObjectRefFragments {
     private static final String STEP_OBJECT_REF = "(The" + COMPONENT + "?" + OBJECT + ")";
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts the complete matched text from formatted input, returning the
+     * entire reference as a single string for full pattern validation or
+     * processing.
      *
      * @param text the text to parse
      * @return the step object name portion
@@ -27,8 +28,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the component portion
@@ -38,8 +39,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the component name portion
@@ -49,8 +50,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the component type portion
@@ -60,8 +61,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the object portion
@@ -71,8 +72,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the object edge type portion
@@ -82,8 +83,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the object name portion
@@ -93,8 +94,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the object type portion
@@ -104,8 +105,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the object vertex type portion

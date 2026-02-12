@@ -2,8 +2,6 @@ package org.farhan.dsl.lang;
 
 import org.slf4j.Logger;
 
-import org.farhan.dsl.issues.LoggerFactory;
-
 /**
  * Static factory for creating and initializing grammar elements.
  * <p>
@@ -16,7 +14,7 @@ public class SheepDogBuilder {
     // TODO Builder creates the child and adds it to the parent. It also adds
     // statement list etc. The child source type is String. Add this desc to the
     // pattern
-    private static final Logger logger = LoggerFactory.getLogger(SheepDogBuilder.class);
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(SheepDogBuilder.class);
 
     /**
      * Creates grammar element using factory, initializes attributes, establishes

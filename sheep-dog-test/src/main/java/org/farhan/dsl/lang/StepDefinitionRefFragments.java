@@ -17,8 +17,9 @@ public class StepDefinitionRefFragments {
     private static final String STEP_DEFINITION_REF = "(" + PART + "?" + STATE + TIME + "?" + ATTACHMENT + "?" + ")";
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts the complete matched text from formatted input, returning the
+     * entire reference as a single string for full pattern validation or
+     * processing.
      *
      * @param text the text to parse
      * @return the step definition name portion
@@ -28,8 +29,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the attachment portion
@@ -39,8 +40,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the part portion
@@ -50,8 +51,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the part description portion
@@ -61,8 +62,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the part type portion
@@ -72,8 +73,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the state portion
@@ -83,8 +84,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the state description portion
@@ -94,8 +95,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the state type portion
@@ -105,8 +106,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the time portion
@@ -116,8 +117,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the time description portion
@@ -127,8 +128,8 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
+     * Extracts a specific named fragment from formatted text using predefined
+     * regex patterns and group positions.
      *
      * @param text the text to parse
      * @return the time type portion

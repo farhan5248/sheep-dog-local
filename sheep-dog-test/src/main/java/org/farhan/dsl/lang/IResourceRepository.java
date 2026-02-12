@@ -12,7 +12,8 @@ import java.util.List;
 public interface IResourceRepository {
 
 	/**
-	 * Clears all resources with the specified tags.
+	 * Performs CRUD operations on tagged file resources using standard repository
+	 * method naming.
 	 *
 	 * @param tags the tags identifying resources to clear
 	 */
@@ -28,7 +29,8 @@ public interface IResourceRepository {
 	public boolean contains(String tags, String path);
 
 	/**
-	 * Deletes the resource at the specified path with given tags.
+	 * Performs CRUD operations on tagged file resources using standard repository
+	 * method naming.
 	 *
 	 * @param tags the tags identifying the resource
 	 * @param path the path to the resource
@@ -36,7 +38,8 @@ public interface IResourceRepository {
 	public void delete(String tags, String path);
 
 	/**
-	 * Retrieves the content of the resource at the specified path with given tags.
+	 * Performs CRUD operations on tagged file resources using standard repository
+	 * method naming.
 	 *
 	 * @param tags the tags identifying the resource
 	 * @param path the path to the resource
@@ -46,7 +49,8 @@ public interface IResourceRepository {
 	public String get(String tags, String path) throws Exception;
 
 	/**
-	 * Lists all resources matching the path pattern, extension, and tags.
+	 * Performs CRUD operations on tagged file resources using standard repository
+	 * method naming.
 	 *
 	 * @param tags the tags identifying the resources
 	 * @param path the path pattern to match
@@ -56,7 +60,8 @@ public interface IResourceRepository {
 	public List<String> list(String tags, String path, String extension);
 
 	/**
-	 * Stores content at the specified path with given tags.
+	 * Performs CRUD operations on tagged file resources using standard repository
+	 * method naming.
 	 *
 	 * @param tags the tags identifying the resource
 	 * @param path the path to store the resource

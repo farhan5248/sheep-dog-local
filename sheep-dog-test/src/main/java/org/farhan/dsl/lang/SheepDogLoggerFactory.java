@@ -1,4 +1,4 @@
-package org.farhan.dsl.issues;
+package org.farhan.dsl.lang;
 
 import org.slf4j.Logger;
 
@@ -9,12 +9,12 @@ import org.slf4j.Logger;
  * provider selection and fallback.
  * </p>
  */
-public class LoggerFactory {
+public class SheepDogLoggerFactory {
 
 	/**
 	 * Custom logger implementation. When set, this is used instead of SLF4J.
 	 */
-	private static LoggerProvider provider = null;
+	private static SheepDogLoggerProvider provider = null;
 
 	/**
 	 * Configures custom logger provider for environments without SLF4J
@@ -23,11 +23,11 @@ public class LoggerFactory {
 	 * @param provider the custom logger provider
 	 * @throws IllegalArgumentException if provider is null
 	 */
-	public static void setLoggerImplementation(LoggerProvider provider) {
+	public static void setLoggerImplementation(SheepDogLoggerProvider provider) {
 		if (provider == null) {
 			throw new IllegalArgumentException("Logger implementation cannot be null");
 		} else {
-			LoggerFactory.provider = provider;
+			SheepDogLoggerFactory.provider = provider;
 		}
 	}
 

@@ -1,4 +1,4 @@
-# LoggerFactory
+# {Language}LoggerFactory
 
 Facade for logger creation that abstracts SLF4J vs custom logger providers. Separates logging infrastructure concerns from business logic by hiding provider selection and fallback.
 
@@ -22,8 +22,8 @@ Facade for logger creation that abstracts SLF4J vs custom logger providers. Sepa
 **Rule**: ONE method names match setLoggerImplementation pattern.
  - **Name**: `^setLoggerImplementation$`
  - **Return**: `^void$`
- - **Parameters**: `^\(LoggerProvider\s+\w+\)$`
+ - **Parameters**: `^\({Language}LoggerProvider\s+\w+\)$`
  - **Modifier**: `^public\s+static$`
 
 **Examples**:
- - `public static void setLoggerImplementation(LoggerProvider provider)`
+ - `public static void setLoggerImplementation(SheepDogLoggerProvider provider)`
