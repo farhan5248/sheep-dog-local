@@ -3,7 +3,7 @@ Automatic-Module-Name: sheepdogxtextplugin
 Bundle-ManifestVersion: 2
 Bundle-Name: sheepdogxtextplugin
 Bundle-Vendor: My Company
-Bundle-Version: 1.38.0
+Bundle-Version: 1.39.0.qualifier
 Bundle-SymbolicName: sheepdogxtextplugin; singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/sheep-dog-test.jar,
