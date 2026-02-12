@@ -5,14 +5,11 @@ Feature: Validation for Only Issues
   \@Validate
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
-  Scenario: Cell name should start with a capital letter
+  Scenario: Header row Cell names should start with a capital letter
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                | Headers          |
-          | The daily batchjob Input file is present | lowercase header |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name | Parameters       |
-          | daily batchjob/Input file.feature | is present           | lowercase header |
+          | Step Name                                | Row Contents |
+          | The daily batchjob Input file is present | header       |
      When The xtext plugin validate action is performed as follows
           | Selected Element                                              |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell/1 |
@@ -20,6 +17,17 @@ Feature: Validation for Only Issues
           """
           Name should start with a capital
           """
+
+  Scenario: Body row Cell names can be any case
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                | Row Contents |
+          | The daily batchjob Input file is present | Header       |
+          | The daily batchjob Input file is present | value        |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                                              |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/2/Cell/1 |
+     Then The xtext plugin validate dialog will be empty
 
   Scenario: Test suite name should start with a capital letter
 

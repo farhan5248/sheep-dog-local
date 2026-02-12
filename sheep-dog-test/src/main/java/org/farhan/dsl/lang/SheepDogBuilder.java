@@ -113,7 +113,7 @@ public class SheepDogBuilder {
      * Creates grammar element using factory, initializes attributes, establishes
      * parent-child relationships, and handles singleton lookups where needed.
      *
-     * @param parent        the parent element (or null if root)
+     * @param parent   the parent element (or null if root)
      * @param nameLong the qualified name of the step object
      * @return the created and initialized instance
      */
@@ -180,9 +180,16 @@ public class SheepDogBuilder {
      */
     public static ITable createTable(ITestStep parent) {
         logger.debug("Entering createTable");
-        ITable table = SheepDogFactory.instance.createTable();
-        if (parent != null)
-            parent.setTable(table);
+        ITable table;
+        if (parent != null) {
+            table = parent.getTable();
+            if (table == null) {
+                table = SheepDogFactory.instance.createTable();
+                parent.setTable(table);
+            }
+        } else {
+            table = SheepDogFactory.instance.createTable();
+        }
         logger.debug("Exiting createTable");
         return table;
     }
@@ -271,7 +278,7 @@ public class SheepDogBuilder {
      * Creates grammar element using factory, initializes attributes, establishes
      * parent-child relationships, and handles singleton lookups where needed.
      *
-     * @param parent        the parent element (or null if root)
+     * @param parent   the parent element (or null if root)
      * @param nameLong the qualified name of the test suite
      * @return the created and initialized instance
      */

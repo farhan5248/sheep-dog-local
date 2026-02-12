@@ -43,8 +43,8 @@ Feature: Code Generation
   Scenario: Create a new parameter set for the step-definition
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                | Headers    |
-          | The daily batchjob Input file is present | New Header |
+          | Step Name                                | Row Contents |
+          | The daily batchjob Input file is present | New Header   |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name | Parameters |
           | daily batchjob/Input file.feature | is present           | Old Header |

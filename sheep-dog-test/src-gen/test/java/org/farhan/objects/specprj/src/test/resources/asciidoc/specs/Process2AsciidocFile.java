@@ -6,7 +6,7 @@ public interface Process2AsciidocFile {
 
     public void setBackgroundStepsSnippetStepName(HashMap<String, String> keyMap);
 
-    public void setStepsSnippetHeaders(HashMap<String, String> keyMap);
+    public void setStepsSnippetRowContents(HashMap<String, String> keyMap);
 
     public void setStepsSnippetStepName(HashMap<String, String> keyMap);
 

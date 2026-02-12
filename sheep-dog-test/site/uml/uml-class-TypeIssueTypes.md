@@ -2,7 +2,7 @@
 
 Enum constants for validation error types. Separates error type definitions from validation logic, providing stable identifiers for detector-resolver coordination.
 
-## {TYPE}(_{ASSIGNMENT})*_{ISSUE}
+## {TYPE}{ASSIGNMENT}{ISSUE}
 
 **Desc**: Defines a validation error type with unique identifier and user-facing description.
 

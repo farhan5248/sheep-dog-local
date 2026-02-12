@@ -15,7 +15,7 @@ Static helper methods for grammar element operations. Separates utility operatio
 **Examples**:
  - `public static String getCellListAsString(List<ICell> list)`
 
-## get{Type}NameLong(For{Type})?
+## get{Type}NameLongFor{Type}
 
 **Desc**: Constructs fully qualified or long-form names for grammar elements by combining components, objects, and contextual information from parent elements.
 
@@ -28,3 +28,18 @@ Static helper methods for grammar element operations. Separates utility operatio
 **Examples**:
  - `public static String getStepObjectNameLongForTestStep(ITestStep theStep)`
  - `public static String getTestStepNameLong(ITestStep theStep)`
+
+## get{Type}ParentFor{Type}
+
+**Desc**: Gets the grand parent or great grand parent etc for a type. The most common usage is getting TestProject from TestStep
+
+**Rule**: SOME method names follow get{Type}NameLong or get{Type}NameLongFor{Type} pattern.
+ - **Name**: `^get{Type}Parent(For{Type})?$`
+ - **Return**: `^{Type}$`
+ - **Parameters**: `^\(I{Type}\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static ITestProject getTestProjectParentForTestStep(ITestStep theStep)`
+ - `public static ITestProject getTestProjectParentForRow(IRow theRow)`
+ - `public static ITestProject getTestProjectParentForText(IText theText)`

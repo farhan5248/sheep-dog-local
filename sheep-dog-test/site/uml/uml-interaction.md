@@ -1,8 +1,12 @@
 # UML Interaction Patterns
 
+**References**
+
+1. `sheep-dog-main/site/impl/impl-xtext-logging.md` - SLF4J logging patterns specific to sheep-dog-test that supplement
+
 ## All
 
-SLF4J logging patterns specific to sheep-dog-test that supplement [arch-logging.md](sheep-dog-main/site/arch/arch-logging.md). These patterns define which classes have loggers and which operations should be logged.
+These patterns define which classes have loggers and which operations should be logged.
 
 ### Entry/Exit Logging Pattern
 
@@ -12,15 +16,13 @@ All public methods in Detector, Resolver, and Builder classes MUST have entry an
 - Entry log is the first statement in each public method
 - Exit log is placed before each return statement
 
-See [arch-logging.md](sheep-dog-main/site/arch/arch-logging.md) "Specific Rules" section for pattern details.
-
 ### No Logger Pattern
 
 Utility classes, interfaces, and factory classes do not declare loggers to keep them lightweight and focused on their single responsibility.
 
 **Examples**
 
-- {Type}Utility classes have no logger
+- {Language}Utility classes have no logger
 - I{Type} interfaces have no logger
 - {Language}Factory has no logger
 
@@ -120,7 +122,7 @@ IRow row = SheepDogFactory.instance.createRow();
 
 ## {Type}IssueTypes
 
-### {TYPE}(_{ASSIGNMENT})*_{ISSUE}
+### {TYPE}{ASSIGNMENT}{ISSUE}
 
 Enum constants define validation issue types using a structured naming pattern. Each constant represents a specific validation error with an ID and description message.
 
@@ -321,26 +323,7 @@ public static void setLoggerImplementation(SheepDogLoggerProvider provider) {
 
 ## {Language}Utility
 
-### get{Type}ListAsString
-
-Utility methods convert lists of grammar elements into formatted string representations for display or comparison purposes. These methods follow a consistent pattern of iterating, collecting, sorting, and formatting.
-
-**Example: Converting cell list to string**
-```java
-public static String getCellListAsString(List<ICell> list) {
-    String cellsAsString = "";
-    List<String> theList = new ArrayList<String>();
-    for (ICell cell : list) {
-        theList.add(cell.getName());
-    }
-    Collections.sort(theList);
-    for (String cell : theList) {
-        cellsAsString += ", " + cell;
-    }
-    return cellsAsString.replaceFirst(", ", "").trim();
-}
-```
-### get{Type}NameLong
+### get{Type}NameLongFor{Type}
 
 Utility methods construct fully qualified or long-form names for grammar elements by combining components, objects, and contextual information from parent elements. These methods navigate the parent hierarchy and apply domain-specific formatting rules.
 
@@ -393,50 +376,16 @@ public static String getTestStepNameLong(ITestStep theStep) {
 }
 ```
 
+**Example: Using getStepObjectNameLongForTestStep in validation**
+```java
+public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
+    ...
+    String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+    ...
+}
+```
+
 ## {Type}Fragments
-
-### Regex Pattern Constants
-
-Fragment classes define regex patterns as private static final constants. These patterns are composed hierarchically, building from simple fragments to complex structures.
-
-**Example: Simple pattern composition (TitleFragments)**
-```java
-private static final String TODO_TYPE = "(TODO)";
-private static final String TODO_DESC = "( \\S.*)";
-private static final String TODO = "(" + TODO_TYPE + TODO_DESC + ")";
-private static final String TAG_TYPE = "(@)";
-private static final String TAG_DESC = "(\\S+)";
-private static final String TAG = "(" + TAG_TYPE + TAG_DESC + ")";
-private static final String TITLE = "((" + TAG + ")+|" + TODO + "|.+)";
-```
-
-**Example: Complex pattern composition with enum types (StepObjectRefFragments)**
-```java
-private static final String COMPONENT_NAME = "( " + "[^/]" + "+)";
-private static final String COMPONENT_TYPE = getRegexFromTypes(TestStepComponentTypes.values());
-private static final String COMPONENT = "(" + COMPONENT_NAME + COMPONENT_TYPE + ")";
-private static final String OBJECT_NAME = "( .+)";
-private static final String OBJECT_EDGE_TYPE = getRegexFromTypes(TestStepObjectEdgeTypes.values());
-private static final String OBJECT_VERTEX_TYPE = getRegexFromTypes(TestStepObjectVertexTypes.values());
-private static final String OBJECT_TYPE = "(" + OBJECT_VERTEX_TYPE + "|" + OBJECT_EDGE_TYPE + ")";
-private static final String OBJECT = "(" + OBJECT_NAME + OBJECT_TYPE + ")";
-private static final String STEP_OBJECT_REF = "(The" + COMPONENT + "?" + OBJECT + ")";
-```
-
-**Example: Pattern composition with optional fragments (StepDefinitionRefFragments)**
-```java
-private static final String PART_DESC = "(.+)";
-private static final String PART_TYPE = getRegexFromTypes(TestStepPartTypes.values());
-private static final String PART = "(" + PART_DESC + " " + PART_TYPE + " )";
-private static final String STATE_DESC = "(\\S+)";
-private static final String STATE_TYPE = getRegexFromTypes(TestStepStateTypes.values());
-private static final String STATE = "(" + STATE_TYPE + " " + STATE_DESC + ")";
-private static final String TIME_DESC = "(.+)";
-private static final String TIME_TYPE = getRegexFromTypes(TestStepTimeTypes.values());
-private static final String TIME = "( " + TIME_TYPE + " " + TIME_DESC + ")";
-private static final String ATTACHMENT = "( " + getRegexFromTypes(TestStepAttachmentTypes.values()) + ")";
-private static final String STEP_DEFINITION_REF = "(" + PART + "?" + STATE + TIME + "?" + ATTACHMENT + "?" + ")";
-```
 
 ### getAll
 
@@ -499,48 +448,7 @@ public static boolean isObjectEdgeType(String text) {
 }
 ```
 
-### getGroup
-
-Private helper method performs the actual regex matching and group extraction. This method is shared across all fragment extraction methods.
-
-**Example: Standard implementation**
-```java
-private static String getGroup(String regex, String text, int group) {
-    Matcher m = Pattern.compile(regex).matcher(text);
-    if (m.find()) {
-        String temp = m.group(group);
-        if (temp != null) {
-            return temp.trim();
-        } else {
-            return "";
-        }
-    }
-    return "";
-}
-```
-
-### getRegexFromTypes
-
-Private helper method converts enum values to regex alternation patterns. It handles multiple enum types and constructs a pattern that matches any of the enum values.
-
-**Example: Building regex from multiple enum types**
-```java
-private static String getRegexFromTypes(Enum<?>[] enumValues) {
-    String regex = "(";
-    for (Enum<?> enumValue : enumValues) {
-        if (enumValue instanceof TestStepComponentTypes) {
-            regex += " " + ((TestStepComponentTypes) enumValue).value + "|";
-        } else if (enumValue instanceof TestStepObjectEdgeTypes) {
-            regex += " " + ((TestStepObjectEdgeTypes) enumValue).value + "|";
-        } else if (enumValue instanceof TestStepObjectVertexTypes) {
-            regex += " " + ((TestStepObjectVertexTypes) enumValue).value + "|";
-        }
-    }
-    return regex.replaceAll("\\|$", ")");
-}
-```
-
-### get{Type}AsList
+### get{Fragment}AsList
 
 Specialized methods parse text into collections of structured data, applying domain-specific logic during iteration.
 

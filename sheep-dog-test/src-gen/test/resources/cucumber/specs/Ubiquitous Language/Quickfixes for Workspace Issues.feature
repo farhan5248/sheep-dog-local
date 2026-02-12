@@ -48,8 +48,8 @@ Feature: Quickfixes for Workspace Issues
   Scenario: This object step definition parameter set doesn't exist validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                       | Headers    |
-          | The daily batchjob Input file is set as follows | New Header |
+          | Step Name                                       | Row Contents |
+          | The daily batchjob Input file is set as follows | New Header   |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name | Parameters      |
           | daily batchjob/Input file.feature | is set as follows    | Existing Header |
@@ -68,14 +68,28 @@ Feature: Quickfixes for Workspace Issues
           | Quickfix Name       | Quickfix Description |
           | Generate New Header | empty                |
 
+  Scenario: This object step definition text parameter exists validation
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                       | Text Content |
+          | The daily batchjob Input file is set as follows | Some text    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name | Parameters |
+          | daily batchjob/Input file.feature | is set as follows    | Content    |
+      And The xtext plugin validate dialog is empty
+     When The xtext plugin list quickfixes action is performed as follows
+          | Selected Element                                 |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
+     Then The xtext plugin list quickfixes dialog will be empty
+
   Scenario: This object step definition text parameter doesn't exist validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                       | Text Content |
-          | The daily batchjob Input file is set as follows | New Content  |
+          | The daily batchjob Input file is set as follows | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name | Parameters      |
-          | daily batchjob/Input file.feature | is set as follows    | Existing Header |
+          | Object Name                       | Step Definition Name |
+          | daily batchjob/Input file.feature | is set as follows    |
       And The xtext plugin validate dialog is set as follows
           """
           The step parameters don't exist for the step definition
@@ -86,20 +100,4 @@ Feature: Quickfixes for Workspace Issues
      Then The xtext plugin list quickfixes dialog will be set as follows
           | Quickfix Name    | Quickfix Description |
           | Generate Content | empty                |
-
-  Scenario: Object path and component is inherited from previous steps
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                    |
-          | The daily batchjob app/Input file is present |
-          | The Input file is absent                     |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows
-          | Object Name                           | Step Definition Name |
-          | daily batchjob/app/Input file.feature | is present           |
-          | daily batchjob/app/Input file.feature | is absent            |
-      And The xtext plugin validate dialog is empty
-     When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                           |
-          | TestSuite/1/TestStepContainer/1/TestStep/1 |
-     Then The xtext plugin list quickfixes dialog will be empty
 
