@@ -40,8 +40,8 @@ Feature: Validation for Workspace Issues
   Scenario: This object step definition parameter set doesn't exist validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                       | Headers    |
-          | The daily batchjob Input file is set as follows | New Header |
+          | Step Name                                       | Row Contents |
+          | The daily batchjob Input file is set as follows | New Header   |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Object Name                       | Step Definition Name | Parameters      |
           | daily batchjob/Input file.feature | is set as follows    | Existing Header |
@@ -53,18 +53,31 @@ Feature: Validation for Workspace Issues
           The step parameters don't exist for the step definition
           """
 
-  Scenario: This object step definition text parameter doesn't exist validation
+  Scenario: This object step definition text parameter exists validation
 
-    Validation should define first what a text parameter table looks like, that is with "Content"
-    The test should say that if there's a Content column, you get no error.
-    A second test will state if you don't have a content column, your log an error.
+    Step definitions for Text Content only have one parameter called "Content"
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                       | Text Content |
-          | The daily batchjob Input file is set as follows | New Content  |
+          | The daily batchjob Input file is set as follows | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name | Parameters      |
-          | daily batchjob/Input file.feature | is set as follows    | Existing Header |
+          | Object Name                       | Step Definition Name | Parameters |
+          | daily batchjob/Input file.feature | is set as follows    | Content    |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                                 |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
+     Then The xtext plugin validate dialog will be empty
+
+  Scenario: This object step definition text parameter doesn't exist validation
+
+    If there isn't a step definition in the step object file with a Content header, then a warning is displayed.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                       | Text Content |
+          | The daily batchjob Input file is set as follows | Some text    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name |
+          | daily batchjob/Input file.feature | is set as follows    |
      When The xtext plugin validate action is performed as follows
           | Selected Element                                 |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |

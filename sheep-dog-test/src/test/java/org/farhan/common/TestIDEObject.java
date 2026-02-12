@@ -1,6 +1,7 @@
 package org.farhan.common;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.farhan.dsl.issues.SheepDogIssueProposal;
 import org.farhan.dsl.lang.IRow;
@@ -63,6 +64,15 @@ public class TestIDEObject extends TestObject {
 
     public void addTestCaseStep(String stepName) {
         addTestStepContainer("Test Case");
+
+        List<ITestStep> testStepList = ((ITestStepContainer) focus).getTestStepList();
+        if (!testStepList.isEmpty()) {
+            ITestStep testStep = testStepList.getLast();
+            if (stepName.contentEquals(testStep.getStepObjectName() + " " + testStep.getStepDefinitionName())) {
+                focus = testStep;
+                return;
+            }
+        }
         focus = SheepDogBuilder.createTestStep((ITestStepContainer) focus, stepName);
     }
 

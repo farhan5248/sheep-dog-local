@@ -15,10 +15,10 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
     }
 
     @Override
-    public void setStepsSnippetHeaders(HashMap<String, String> keyMap) {
+    public void setStepsSnippetRowContents(HashMap<String, String> keyMap) {
         addTable();
         addRow();
-        for (String h : keyMap.get("Headers").split(",")) {
+        for (String h : keyMap.get("Row Contents").split(",")) {
             addCell(h);
         }
     }
