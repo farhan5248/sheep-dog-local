@@ -1,16 +1,21 @@
 package org.farhan.dsl.issues;
 
+import org.slf4j.Logger;
+
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.lang.StepObjectRefFragments;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -21,7 +26,7 @@ import org.slf4j.LoggerFactory;
  */
 public class TextIssueDetector {
 
-    private static final Logger logger = LoggerFactory.getLogger(TextIssueDetector.class);
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(TextIssueDetector.class);
 
     /**
      * Validates a specific grammar assignment at element-only, file, or workspace
@@ -57,35 +62,36 @@ public class TextIssueDetector {
                     }
 
                     // Navigate up to get the test project
-                    ITestStepContainer container = theTestStep.getParent();
-                    if (container != null) {
-                        ITestSuite suite = container.getParent();
-                        if (suite != null) {
-                            ITestProject project = suite.getParent();
-                            if (project != null && !qualifiedName.isEmpty()) {
-                                // Check if step object exists in workspace
-                                IStepObject stepObject = project.getStepObject(qualifiedName);
-                                if (stepObject != null) {
-                                    // Get step definition
-                                    IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
-                                    if (stepDefinition != null) {
-                                        // Check if step definition has text (statement-based) parameters
-                                        boolean hasTextParameters = false;
-                                        if (!stepDefinition.getStepParameterList().isEmpty()) {
-                                            IStepParameters stepParameters = stepDefinition.getStepParameterList().get(0);
-                                            // Text parameters are represented as statements
-                                            if (!stepParameters.getStatementList().isEmpty()) {
+                    ITestProject project = SheepDogUtility.getTestProjectParentForText(theText);
+                    if (project != null && !qualifiedName.isEmpty()) {
+                        // Check if step object exists in workspace
+                        IStepObject stepObject = project.getStepObject(qualifiedName);
+                        if (stepObject != null) {
+                            // Get step definition
+                            IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
+                            if (stepDefinition != null) {
+                                // Check if step definition has text (Content) parameters
+                                boolean hasTextParameters = false;
+                                if (!stepDefinition.getStepParameterList().isEmpty()) {
+                                    IStepParameters stepParameters = stepDefinition.getStepParameterList().get(0);
+                                    // Text parameters are represented as a table with a "Content" cell
+                                    ITable parameterTable = stepParameters.getTable();
+                                    if (parameterTable != null && !parameterTable.getRowList().isEmpty()) {
+                                        IRow headerRow = parameterTable.getRowList().get(0);
+                                        for (ICell cell : headerRow.getCellList()) {
+                                            if ("Content".equals(cell.getName())) {
                                                 hasTextParameters = true;
+                                                break;
                                             }
                                         }
-
-                                        // If the test step has text but the step definition doesn't support text parameters,
-                                        // return error message
-                                        if (!hasTextParameters) {
-                                            logger.debug("Exiting validateNameWorkspace");
-                                            return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
-                                        }
                                     }
+                                }
+
+                                // If the test step has text but the step definition doesn't support text parameters,
+                                // return error message
+                                if (!hasTextParameters) {
+                                    logger.debug("Exiting validateNameWorkspace");
+                                    return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
                                 }
                             }
                         }

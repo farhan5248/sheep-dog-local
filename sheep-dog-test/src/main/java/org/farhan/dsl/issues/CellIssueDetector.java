@@ -1,9 +1,11 @@
 package org.farhan.dsl.issues;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -14,7 +16,7 @@ import org.farhan.dsl.lang.ICell;
  */
 public class CellIssueDetector {
 
-	private static final Logger logger = LoggerFactory.getLogger(CellIssueDetector.class);
+	private static final Logger logger = SheepDogLoggerFactory.getLogger(CellIssueDetector.class);
 
 	/**
 	 * Validates a specific grammar assignment at element-only, file, or workspace
@@ -27,10 +29,23 @@ public class CellIssueDetector {
 	public static String validateNameOnly(ICell theCell) throws Exception {
 		logger.debug("Entering validateNameOnly");
 		if (theCell != null && theCell.getName() != null && !theCell.getName().isEmpty()) {
-			String name = theCell.getName();
-			if (!Character.isUpperCase(name.charAt(0))) {
-				logger.debug("Exiting validateNameOnly");
-				return CellIssueTypes.CELL_NAME_ONLY.description;
+			// Only validate capitalization for header row (first row)
+			IRow parentRow = theCell.getParent();
+			if (parentRow != null) {
+				ITable parentTable = parentRow.getParent();
+				if (parentTable != null) {
+					// Check if this is the first row (header row)
+					boolean isHeaderRow = (parentTable.getRowList().size() > 0
+							&& parentTable.getRow(0) == parentRow);
+
+					if (isHeaderRow) {
+						String name = theCell.getName();
+						if (!Character.isUpperCase(name.charAt(0))) {
+							logger.debug("Exiting validateNameOnly");
+							return CellIssueTypes.CELL_NAME_ONLY.description;
+						}
+					}
+				}
 			}
 		}
 		logger.debug("Exiting validateNameOnly");

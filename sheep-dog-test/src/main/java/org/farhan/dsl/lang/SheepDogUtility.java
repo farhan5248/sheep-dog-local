@@ -113,6 +113,29 @@ public class SheepDogUtility {
         return "The " + component + " " + object + " " + theStep.getStepDefinitionName();
     }
 
+    /**
+     * Gets the grand parent or great grand parent etc for a type. Navigates the
+     * parent hierarchy to reach the TestProject from a Text element.
+     *
+     * @param theText the text element to navigate from
+     * @return the TestProject parent, or null if not found
+     */
+    public static ITestProject getTestProjectParentForText(IText theText) {
+        if (theText != null) {
+            ITestStep testStep = theText.getParent();
+            if (testStep != null) {
+                ITestStepContainer container = testStep.getParent();
+                if (container != null) {
+                    ITestSuite suite = container.getParent();
+                    if (suite != null) {
+                        return suite.getParent();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     private static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep) {
         ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
         for (ITestStep t : theTestStep.getParent().getTestStepList()) {

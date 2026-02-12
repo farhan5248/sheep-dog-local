@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
@@ -16,6 +15,7 @@ import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
@@ -27,7 +27,7 @@ import org.farhan.dsl.lang.StepObjectRefFragments;
  */
 public class RowIssueDetector {
 
-    private static final Logger logger = LoggerFactory.getLogger(RowIssueDetector.class);
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(RowIssueDetector.class);
 
     /**
      * Validates a specific grammar assignment at element-only, file, or workspace

@@ -1,13 +1,13 @@
 package org.farhan.dsl.issues;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
@@ -19,7 +19,7 @@ import org.farhan.dsl.lang.StepObjectRefFragments;
  */
 public class TestStepIssueDetector {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueDetector.class);
 
     /**
      * Validates a specific grammar assignment at element-only, file, or workspace

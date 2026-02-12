@@ -1,6 +1,9 @@
 package org.farhan.dsl.issues;
 
+import org.slf4j.Logger;
+
 import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -11,6 +14,8 @@ import org.farhan.dsl.lang.ITestSuite;
  */
 public class TestSuiteIssueDetector {
 
+	private static final Logger logger = SheepDogLoggerFactory.getLogger(TestSuiteIssueDetector.class);
+
 	/**
 	 * Validates a specific grammar assignment at element-only, file, or workspace
 	 * scope, returning empty string if valid or error description if invalid.
@@ -20,12 +25,15 @@ public class TestSuiteIssueDetector {
 	 * @throws Exception if validation fails
 	 */
 	public static String validateNameOnly(ITestSuite theTestSuite) throws Exception {
+		logger.debug("Entering validateNameOnly");
 		if (theTestSuite != null && theTestSuite.getName() != null && !theTestSuite.getName().isEmpty()) {
 			String name = theTestSuite.getName();
 			if (!Character.isUpperCase(name.charAt(0))) {
+				logger.debug("Exiting validateNameOnly");
 				return TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description;
 			}
 		}
+		logger.debug("Exiting validateNameOnly");
 		return "";
 	}
 }
