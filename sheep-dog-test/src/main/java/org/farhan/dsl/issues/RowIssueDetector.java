@@ -1,12 +1,8 @@
 package org.farhan.dsl.issues;
 
-import org.farhan.dsl.lang.IRow;
-import org.farhan.dsl.lang.IStepDefinition;
-import org.farhan.dsl.lang.IStepObject;
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.farhan.dsl.lang.IRow;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -29,21 +25,8 @@ public class RowIssueDetector {
      */
     public static String validateCellListWorkspace(IRow theRow) throws Exception {
         logger.debug("Entering validateCellListWorkspace");
-        ITestStep theTestStep = (ITestStep) theRow.getParent().getParent();
-        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-        IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
-        if (theStepObject != null) {
-            IStepDefinition theStepDefinition = theStepObject.getStepDefinition(theTestStep.getStepDefinitionName());
-            if (theStepDefinition != null) {
-                if (theStepDefinition.getStepParameters(
-                        SheepDogUtility.getCellListAsString(theTestStep.getTable().getRowList().getFirst().getCellList())) == null) {
-                    logger.debug("Exiting validateCellListWorkspace");
-                    return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
-                }
-            }
-        }
         logger.debug("Exiting validateCellListWorkspace");
-        return "";
+        return null;
     }
 
 }

@@ -6,6 +6,8 @@ Feature: Validation for Only Issues
 
   Scenario: Cell name should start with a capital letter
 
+    \@Validate
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                | Headers          |
           | The daily batchjob Input file is present | lowercase header |
@@ -22,6 +24,8 @@ Feature: Validation for Only Issues
 
   Scenario: Test suite name should start with a capital letter
 
+    \@Validate
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name   |
           | lowercase process |
@@ -35,6 +39,8 @@ Feature: Validation for Only Issues
 
   Scenario: Test case name should start with a capital letter
 
+    \@Validate
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name | Test Case Name      |
           | Process2        | lowercase test case |
@@ -47,6 +53,8 @@ Feature: Validation for Only Issues
           """
 
   Scenario: Test step must have a valid object name
+
+    \@Validate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name      |
@@ -67,6 +75,8 @@ Feature: Validation for Only Issues
           """
 
   Scenario: Test step must have a valid step definition name
+
+    \@Validate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                     |
