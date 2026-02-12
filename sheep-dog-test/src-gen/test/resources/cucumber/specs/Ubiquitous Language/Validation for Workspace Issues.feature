@@ -1,0 +1,75 @@
+@sheep-dog-test @Validate
+Feature: Validation for Workspace Issues
+
+  \@sheep-dog-test
+  \@Validate
+  Some problems are fixed by code generation.
+  They're typically things like keywords or objects that are not defined in the step objects layer.
+  I could just ignore all those warnings and then use the Build Project menu item and it'll create everything at once.
+  There's 4 types of warnings, the scenarios below cover them.
+
+  Scenario: This object doesn't exist validation
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                |
+          | The daily batchjob Input file is present |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+     Then The xtext plugin validate dialog will be set as follows
+          """
+          The step object file doesn't exist for the component
+          """
+
+  Scenario: This object step definition doesn't exist validation
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name |
+          | daily batchjob/Input file.feature | is absent            |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+     Then The xtext plugin validate dialog will be set as follows
+          """
+          The step definition doesn't exist for the step object
+          """
+
+  Scenario: This object step definition parameter set doesn't exist validation
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                       | Headers    |
+          | The daily batchjob Input file is set as follows | New Header |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name | Parameters      |
+          | daily batchjob/Input file.feature | is set as follows    | Existing Header |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
+     Then The xtext plugin validate dialog will be set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
+
+  Scenario: This object step definition text parameter doesn't exist validation
+
+    Validation should define first what a text parameter table looks like, that is with "Content"
+    The test should say that if there's a Content column, you get no error.
+    A second test will state if you don't have a content column, your log an error.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                       | Text Content |
+          | The daily batchjob Input file is set as follows | New Content  |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name | Parameters      |
+          | daily batchjob/Input file.feature | is set as follows    | Existing Header |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                                 |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
+     Then The xtext plugin validate dialog will be set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
+

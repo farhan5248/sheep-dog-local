@@ -1,8 +1,13 @@
 package org.farhan.dsl.issues;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.ITestStepContainer;
+import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
@@ -77,6 +82,44 @@ public class TestStepIssueDetector {
      */
     public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepObjectNameWorkspace");
+
+        if (theTestStep != null && theTestStep.getStepObjectName() != null) {
+            String stepObjectName = theTestStep.getStepObjectName();
+
+            // Extract component and object from step object name
+            String componentName = StepObjectRefFragments.getComponentName(stepObjectName);
+            String componentType = StepObjectRefFragments.getComponentType(stepObjectName);
+            String objectName = StepObjectRefFragments.getObjectName(stepObjectName);
+            String objectType = StepObjectRefFragments.getObjectType(stepObjectName);
+
+            // Build qualified name: "{component}/{object}.feature"
+            String qualifiedName = "";
+            if (!componentName.isEmpty() && !componentType.isEmpty()) {
+                qualifiedName = componentName.trim() + " " + componentType.trim() + "/";
+            }
+            if (!objectName.isEmpty() && !objectType.trim().isEmpty()) {
+                qualifiedName += objectName.trim() + " " + objectType.trim() + ".feature";
+            }
+
+            // Navigate up to get the test project
+            ITestStepContainer container = theTestStep.getParent();
+            if (container != null) {
+                ITestSuite suite = container.getParent();
+                if (suite != null) {
+                    ITestProject project = suite.getParent();
+                    if (project != null && !qualifiedName.isEmpty()) {
+                        // Check if step object exists in workspace
+                        IStepObject stepObject = project.getStepObject(qualifiedName);
+                        if (stepObject == null) {
+                            logger.debug("Step object not found: " + qualifiedName);
+                            logger.debug("Exiting validateStepObjectNameWorkspace");
+                            return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
+                        }
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting validateStepObjectNameWorkspace");
         return "";
     }
@@ -91,6 +134,48 @@ public class TestStepIssueDetector {
      */
     public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepDefinitionNameWorkspace");
+
+        if (theTestStep != null && theTestStep.getStepObjectName() != null && theTestStep.getStepDefinitionName() != null) {
+            String stepObjectName = theTestStep.getStepObjectName();
+            String stepDefinitionName = theTestStep.getStepDefinitionName();
+
+            // Extract component and object from step object name
+            String componentName = StepObjectRefFragments.getComponentName(stepObjectName);
+            String componentType = StepObjectRefFragments.getComponentType(stepObjectName);
+            String objectName = StepObjectRefFragments.getObjectName(stepObjectName);
+            String objectType = StepObjectRefFragments.getObjectType(stepObjectName);
+
+            // Build qualified name: "{component}/{object}.feature"
+            String qualifiedName = "";
+            if (!componentName.isEmpty() && !componentType.isEmpty()) {
+                qualifiedName = componentName.trim() + " " + componentType.trim() + "/";
+            }
+            if (!objectName.isEmpty() && !objectType.trim().isEmpty()) {
+                qualifiedName += objectName.trim() + " " + objectType.trim() + ".feature";
+            }
+
+            // Navigate up to get the test project
+            ITestStepContainer container = theTestStep.getParent();
+            if (container != null) {
+                ITestSuite suite = container.getParent();
+                if (suite != null) {
+                    ITestProject project = suite.getParent();
+                    if (project != null && !qualifiedName.isEmpty()) {
+                        // Check if step object exists in workspace
+                        IStepObject stepObject = project.getStepObject(qualifiedName);
+                        if (stepObject != null) {
+                            // Step object exists, now check if step definition exists within it
+                            if (stepObject.getStepDefinition(stepDefinitionName) == null) {
+                                logger.debug("Step definition not found: " + stepDefinitionName + " in " + qualifiedName);
+                                logger.debug("Exiting validateStepDefinitionNameWorkspace");
+                                return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting validateStepDefinitionNameWorkspace");
         return "";
     }

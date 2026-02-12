@@ -23,7 +23,7 @@ public class TestSuiteIssueDetector {
 		if (theTestSuite != null && theTestSuite.getName() != null && !theTestSuite.getName().isEmpty()) {
 			String name = theTestSuite.getName();
 			if (!Character.isUpperCase(name.charAt(0))) {
-				return "Name should start with a capital";
+				return TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description;
 			}
 		}
 		return "";

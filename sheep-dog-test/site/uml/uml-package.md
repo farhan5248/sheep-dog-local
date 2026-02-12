@@ -43,27 +43,27 @@
  - `TestStepIssueResolver`
  - `TextIssueResolver`
 
-### LoggerFactory
+## src/main/java/org/farhan/dsl/lang
+
+**Desc**: Grammar model interfaces and creation infrastructure. Separates interface contracts from implementations, initialization logic from factory operations, and persistence contracts from business logic.
+
+### {Language}LoggerFactory
 
 **Desc**: Facade for logger creation that abstracts SLF4J vs custom logger providers. Separates logging infrastructure concerns from business logic by hiding provider selection and fallback.
 
 **Rule**: ONE class matches LoggerFactory pattern
 
-**Regex**: `^LoggerFactory$`
- - `LoggerFactory`
+**Regex**: `^{Language}LoggerFactory$`
+ - `SheepDogLoggerFactory`
 
-### LoggerProvider
+### {Language}LoggerProvider
 
 **Desc**: Interface for custom logger implementations. Separates logger provider contract from logger usage, enabling dependency injection in environments without SLF4J.
 
 **Rule**: ONE class matches LoggerProvider pattern
 
-**Regex**: `^LoggerProvider$`
- - `LoggerProvider`
-
-## src/main/java/org/farhan/dsl/lang
-
-**Desc**: Grammar model interfaces and creation infrastructure. Separates interface contracts from implementations, initialization logic from factory operations, and persistence contracts from business logic.
+**Regex**: `^{Language}LoggerProvider$`
+ - `SheepDogLoggerProvider`
 
 ### IResourceRepository
 

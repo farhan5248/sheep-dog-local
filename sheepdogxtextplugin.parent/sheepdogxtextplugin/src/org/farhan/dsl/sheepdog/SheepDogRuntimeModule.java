@@ -8,7 +8,7 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
-import org.farhan.dsl.issues.LoggerFactory;
+import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.dsl.sheepdog.generator.SheepDogOutputConfigurationProvider;
 import org.farhan.dsl.sheepdog.impl.SheepDogFactoryImpl;
@@ -39,7 +39,7 @@ public class SheepDogRuntimeModule extends AbstractSheepDogRuntimeModule {
 		binder.bind(IOutputConfigurationProvider.class).to(SheepDogOutputConfigurationProvider.class)
 				.in(Singleton.class);
 		SheepDogFactory.instance = new SheepDogFactoryImpl(new EclipseFileRepository());
-		LoggerFactory.setLoggerImplementation(new SheepDogLogger());
+		SheepDogLoggerFactory.setLoggerImplementation(new SheepDogLogger());
 		
 		//org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.DEBUG);
 		//org.apache.log4j.BasicConfigurator.configure();

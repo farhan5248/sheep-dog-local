@@ -1,6 +1,7 @@
 package org.farhan.dsl.issues;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.farhan.dsl.lang.ICell;
 

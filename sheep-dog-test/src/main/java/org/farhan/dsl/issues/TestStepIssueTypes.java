@@ -32,7 +32,13 @@ public enum TestStepIssueTypes {
 					+ "A test step can end with the time specified.\n"
 					+ "Time was useful running describing a sequence of steps like submitting an order before 5pm.\n"
 					+ "The time endings are: early, late, on time, at, before, after, in, on.\n"
-					+ "Examples are: \"after the next day\" or \"on time\"");
+					+ "Examples are: \"after the next day\" or \"on time\""),
+
+	TEST_STEP_STEP_OBJECT_NAME_WORKSPACE("TEST_STEP_STEP_OBJECT_NAME_WORKSPACE",
+			"The step object file doesn't exist for the component"),
+
+	TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE("TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE",
+			"The step definition doesn't exist for the step object");
 
 	/**
 	 * Issue identifier following structured naming pattern.

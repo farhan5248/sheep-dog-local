@@ -3,9 +3,9 @@ package org.farhan.dsl.sheepdog;
 import org.apache.log4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.farhan.dsl.issues.LoggerProvider;
+import org.farhan.dsl.lang.SheepDogLoggerProvider;
 
-public class SheepDogLogger implements Logger, LoggerProvider {
+public class SheepDogLogger implements Logger, SheepDogLoggerProvider {
 
 	private org.apache.log4j.Logger log4jLogger = null;
 
