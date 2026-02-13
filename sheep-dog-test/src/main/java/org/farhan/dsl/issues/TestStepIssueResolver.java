@@ -3,6 +3,7 @@ package org.farhan.dsl.issues;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
@@ -110,8 +111,9 @@ public class TestStepIssueResolver {
                     }
 
                     if (!object.isEmpty() && !component.isEmpty()) {
-                        // Only suggest if component was used in previous steps
-                        if (previousComponents.contains(component)) {
+                        // If no previous components exist, suggest all workspace objects
+                        // Otherwise, only suggest if component was used in previous steps
+                        if (previousComponents.isEmpty() || previousComponents.contains(component)) {
                             // Create proposal with short ID and long value
                             String shortId = object;
                             String longValue = "The " + component + " " + object;
@@ -181,7 +183,45 @@ public class TestStepIssueResolver {
         logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-        // For now, return empty list as we don't have step definitions to suggest
+
+        if (theTestStep != null && theTestStep.getStepObjectName() != null
+                && !theTestStep.getStepObjectName().isEmpty()) {
+            // Get the qualified name of the step object
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+
+            if (qualifiedName != null && !qualifiedName.isEmpty()) {
+                // Get the test project
+                ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+
+                if (theProject != null) {
+                    // Get the step object from the project
+                    IStepObject stepObject = theProject.getStepObject(qualifiedName);
+
+                    if (stepObject != null) {
+                        // Get all step definitions from the step object
+                        for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                            String stepDefName = stepDefinition.getName();
+                            if (stepDefName != null && !stepDefName.isEmpty()) {
+                                // Create proposal for this step definition
+                                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                                proposal.setId(stepDefName);
+                                proposal.setValue(stepDefName);
+
+                                // Get description from statements
+                                String description = SheepDogUtility.getStatementListAsString(
+                                        stepDefinition.getStatementList());
+                                if (description != null && !description.isEmpty()) {
+                                    proposal.setDescription(description);
+                                }
+
+                                proposals.add(proposal);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
