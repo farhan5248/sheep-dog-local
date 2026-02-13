@@ -330,11 +330,25 @@ Utility methods construct fully qualified or long-form names for grammar element
 **Example: Getting step object qualified name**
 ```java
 public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
-    String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
-    String component = StepObjectRefFragments.getComponent(stepNameLong);
-    String object = StepObjectRefFragments.getObject(stepNameLong);
-    String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
-    return component + "/" + object + fileExt;
+    if (theStep != null) {
+        String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
+        if (stepNameLong != null && !stepNameLong.isEmpty()) {
+            String component = StepObjectRefFragments.getComponent(stepNameLong);
+            String object = StepObjectRefFragments.getObject(stepNameLong);
+
+            if (!component.isEmpty() && !object.isEmpty()) {
+                // Use utility method to navigate to project
+                ITestProject project = getTestProjectParentForTestStep(theStep);
+                if (project != null) {
+                    String fileExt = project.getFileExtension();
+                    if (fileExt != null && !fileExt.isEmpty()) {
+                        return component + "/" + object + fileExt;
+                    }
+                }
+            }
+        }
+    }
+    return "";
 }
 ```
 

@@ -13,9 +13,8 @@ import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
@@ -51,27 +50,24 @@ public class RowIssueDetector {
 
                     if (stepObjectName != null && stepDefinitionName != null) {
                         // Extract component and object from step object name
-                        String componentName = StepObjectRefFragments.getComponentName(stepObjectName);
-                        String componentType = StepObjectRefFragments.getComponentType(stepObjectName);
-                        String objectName = StepObjectRefFragments.getObjectName(stepObjectName);
-                        String objectType = StepObjectRefFragments.getObjectType(stepObjectName);
-
-                        // Build qualified name: "{component}/{object}.feature"
-                        String qualifiedName = "";
-                        if (!componentName.isEmpty() && !componentType.isEmpty()) {
-                            qualifiedName = componentName.trim() + " " + componentType.trim() + "/";
-                        }
-                        if (!objectName.isEmpty() && !objectType.trim().isEmpty()) {
-                            qualifiedName += objectName.trim() + " " + objectType.trim() + ".feature";
-                        }
+                        String component = StepObjectRefFragments.getComponent(stepObjectName);
+                        String object = StepObjectRefFragments.getObject(stepObjectName);
 
                         // Navigate up to get the test project
-                        ITestStepContainer container = theTestStep.getParent();
-                        if (container != null) {
-                            ITestSuite suite = container.getParent();
-                            if (suite != null) {
-                                ITestProject project = suite.getParent();
-                                if (project != null && !qualifiedName.isEmpty()) {
+                        ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+                        if (project != null) {
+                            String fileExt = project.getFileExtension();
+                            if (fileExt != null && !fileExt.isEmpty()) {
+                                // Build qualified name: "{component}/{object}{fileExt}"
+                                String qualifiedName = "";
+                                if (!component.isEmpty()) {
+                                    qualifiedName = component + "/";
+                                }
+                                if (!object.isEmpty()) {
+                                    qualifiedName += object + fileExt;
+                                }
+
+                                if (!qualifiedName.isEmpty()) {
                                     // Check if step object exists in workspace
                                     IStepObject stepObject = project.getStepObject(qualifiedName);
                                     if (stepObject != null) {
@@ -100,6 +96,9 @@ public class RowIssueDetector {
 
                                                     // Compare the sets
                                                     if (!expectedParams.equals(actualParams)) {
+                                                        String expectedParamsStr = SheepDogUtility.getCellListAsString(headerRow.getCellList());
+                                                        String actualParamsStr = SheepDogUtility.getCellListAsString(theRow.getCellList());
+                                                        logger.error("Cell mismatch - Expected: [{}], Actual: [{}]", expectedParamsStr, actualParamsStr);
                                                         logger.debug("Exiting validateCellListWorkspace");
                                                         return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
                                                     }

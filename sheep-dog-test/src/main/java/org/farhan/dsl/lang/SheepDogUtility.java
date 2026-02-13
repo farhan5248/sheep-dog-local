@@ -57,11 +57,25 @@ public class SheepDogUtility {
      * @return qualified name string with component, object, and file extension
      */
     public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
-        String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
-        String component = StepObjectRefFragments.getComponent(stepNameLong);
-        String object = StepObjectRefFragments.getObject(stepNameLong);
-        String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
-        return component + "/" + object + fileExt;
+        if (theStep != null) {
+            String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
+            if (stepNameLong != null && !stepNameLong.isEmpty()) {
+                String component = StepObjectRefFragments.getComponent(stepNameLong);
+                String object = StepObjectRefFragments.getObject(stepNameLong);
+
+                if (!component.isEmpty() && !object.isEmpty()) {
+                    // Use the new utility method to navigate to project
+                    ITestProject project = getTestProjectParentForTestStep(theStep);
+                    if (project != null) {
+                        String fileExt = project.getFileExtension();
+                        if (fileExt != null && !fileExt.isEmpty()) {
+                            return component + "/" + object + fileExt;
+                        }
+                    }
+                }
+            }
+        }
+        return "";
     }
 
     /**
@@ -130,6 +144,26 @@ public class SheepDogUtility {
                     if (suite != null) {
                         return suite.getParent();
                     }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the grand parent or great grand parent etc for a type. Navigates the
+     * parent hierarchy to reach the TestProject from a TestStep element.
+     *
+     * @param theTestStep the test step element to navigate from
+     * @return the TestProject parent, or null if not found
+     */
+    public static ITestProject getTestProjectParentForTestStep(ITestStep theTestStep) {
+        if (theTestStep != null) {
+            ITestStepContainer container = theTestStep.getParent();
+            if (container != null) {
+                ITestSuite suite = container.getParent();
+                if (suite != null) {
+                    return suite.getParent();
                 }
             }
         }
