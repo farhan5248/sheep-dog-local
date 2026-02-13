@@ -5,9 +5,8 @@ import org.slf4j.Logger;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
@@ -102,20 +101,14 @@ public class TestStepIssueDetector {
             }
 
             // Navigate up to get the test project
-            ITestStepContainer container = theTestStep.getParent();
-            if (container != null) {
-                ITestSuite suite = container.getParent();
-                if (suite != null) {
-                    ITestProject project = suite.getParent();
-                    if (project != null && !qualifiedName.isEmpty()) {
-                        // Check if step object exists in workspace
-                        IStepObject stepObject = project.getStepObject(qualifiedName);
-                        if (stepObject == null) {
-                            logger.debug("Step object not found: " + qualifiedName);
-                            logger.debug("Exiting validateStepObjectNameWorkspace");
-                            return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
-                        }
-                    }
+            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (project != null && !qualifiedName.isEmpty()) {
+                // Check if step object exists in workspace
+                IStepObject stepObject = project.getStepObject(qualifiedName);
+                if (stepObject == null) {
+                    logger.debug("Step object not found: " + qualifiedName);
+                    logger.debug("Exiting validateStepObjectNameWorkspace");
+                    return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
                 }
             }
         }
@@ -155,22 +148,16 @@ public class TestStepIssueDetector {
             }
 
             // Navigate up to get the test project
-            ITestStepContainer container = theTestStep.getParent();
-            if (container != null) {
-                ITestSuite suite = container.getParent();
-                if (suite != null) {
-                    ITestProject project = suite.getParent();
-                    if (project != null && !qualifiedName.isEmpty()) {
-                        // Check if step object exists in workspace
-                        IStepObject stepObject = project.getStepObject(qualifiedName);
-                        if (stepObject != null) {
-                            // Step object exists, now check if step definition exists within it
-                            if (stepObject.getStepDefinition(stepDefinitionName) == null) {
-                                logger.debug("Step definition not found: " + stepDefinitionName + " in " + qualifiedName);
-                                logger.debug("Exiting validateStepDefinitionNameWorkspace");
-                                return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
-                            }
-                        }
+            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (project != null && !qualifiedName.isEmpty()) {
+                // Check if step object exists in workspace
+                IStepObject stepObject = project.getStepObject(qualifiedName);
+                if (stepObject != null) {
+                    // Step object exists, now check if step definition exists within it
+                    if (stepObject.getStepDefinition(stepDefinitionName) == null) {
+                        logger.debug("Step definition not found: " + stepDefinitionName + " in " + qualifiedName);
+                        logger.debug("Exiting validateStepDefinitionNameWorkspace");
+                        return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
                     }
                 }
             }

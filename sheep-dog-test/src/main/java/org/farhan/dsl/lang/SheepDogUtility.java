@@ -173,6 +173,7 @@ public class SheepDogUtility {
     /**
      * Gets a list of elements up to (but not including) the specified element.
      * Returns elements in reverse chronological order (most recent first) for context inference.
+     * Includes background/setup steps when processing scenario/test case steps.
      *
      * @param theTestStep the current test step
      * @return list of test steps up to the specified step in reverse chronological order
@@ -180,11 +181,30 @@ public class SheepDogUtility {
     public static ArrayList<ITestStep> getTestStepListUpToTestStep(ITestStep theTestStep) {
         ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
         if (theTestStep != null && theTestStep.getParent() != null) {
-            for (ITestStep t : theTestStep.getParent().getTestStepList()) {
+            ITestStepContainer currentContainer = theTestStep.getParent();
+
+            // First, add steps from current container up to theTestStep
+            for (ITestStep t : currentContainer.getTestStepList()) {
                 if (t.equals(theTestStep)) {
                     break;
                 } else {
                     steps.add(0, t);
+                }
+            }
+
+            // If current container is a TestCase, also include all steps from TestSetup (Background)
+            if (currentContainer instanceof ITestCase) {
+                ITestSuite suite = currentContainer.getParent();
+                if (suite != null) {
+                    for (ITestStepContainer container : suite.getTestStepContainerList()) {
+                        if (container instanceof ITestSetup) {
+                            // Add all background steps (in reverse order)
+                            List<ITestStep> backgroundSteps = container.getTestStepList();
+                            for (int i = backgroundSteps.size() - 1; i >= 0; i--) {
+                                steps.add(0, backgroundSteps.get(i));
+                            }
+                        }
+                    }
                 }
             }
         }

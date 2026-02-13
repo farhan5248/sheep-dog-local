@@ -3,6 +3,8 @@ package org.farhan.dsl.issues;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -62,12 +64,72 @@ public class TestStepIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
-        // Get previous steps
-        ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
-
         // Use HashSet to avoid duplicates
         HashSet<String> addedProposals = new HashSet<>();
 
+        // First, collect components from previous steps
+        ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
+        HashSet<String> previousComponents = new HashSet<>();
+
+        for (ITestStep previousStep : previousSteps) {
+            String stepObjectName = previousStep.getStepObjectName();
+            if (stepObjectName != null && !stepObjectName.isEmpty()) {
+                String component = StepObjectRefFragments.getComponent(stepObjectName);
+                if (!component.isEmpty()) {
+                    previousComponents.add(component);
+                }
+            }
+        }
+
+        // Get the test project to access all step objects in workspace
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+
+        // Suggest objects from workspace that match components from previous steps
+        if (theProject != null) {
+            for (IStepObject stepObject : theProject.getStepObjectList()) {
+                String qualifiedName = stepObject.getNameLong();
+                if (qualifiedName != null && !qualifiedName.isEmpty()) {
+                    // Parse qualified name (e.g., "daily batchjob/Input file.feature")
+                    // Remove file extension first
+                    String nameWithoutExt = qualifiedName;
+                    int lastDot = qualifiedName.lastIndexOf('.');
+                    if (lastDot > 0) {
+                        nameWithoutExt = qualifiedName.substring(0, lastDot);
+                    }
+
+                    // Split by "/" to get component and object
+                    String component = "";
+                    String object = "";
+                    int slashIndex = nameWithoutExt.indexOf('/');
+                    if (slashIndex > 0) {
+                        component = nameWithoutExt.substring(0, slashIndex);
+                        object = nameWithoutExt.substring(slashIndex + 1);
+                    } else {
+                        // No component, just object
+                        object = nameWithoutExt;
+                    }
+
+                    if (!object.isEmpty() && !component.isEmpty()) {
+                        // Only suggest if component was used in previous steps
+                        if (previousComponents.contains(component)) {
+                            // Create proposal with short ID and long value
+                            String shortId = object;
+                            String longValue = "The " + component + " " + object;
+
+                            if (!addedProposals.contains(shortId + "|" + longValue)) {
+                                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                                proposal.setId(shortId);
+                                proposal.setValue(longValue);
+                                proposals.add(proposal);
+                                addedProposals.add(shortId + "|" + longValue);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Suggest objects from previous steps
         for (ITestStep previousStep : previousSteps) {
             String stepObjectName = previousStep.getStepObjectName();
             if (stepObjectName != null && !stepObjectName.isEmpty()) {
@@ -79,12 +141,12 @@ public class TestStepIssueResolver {
                     String shortId = object;
                     String shortValue = "The " + object;
 
-                    if (!addedProposals.contains(shortId)) {
+                    if (!addedProposals.contains(shortId + "|" + shortValue)) {
                         SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
                         shortProposal.setId(shortId);
                         shortProposal.setValue(shortValue);
                         proposals.add(shortProposal);
-                        addedProposals.add(shortId);
+                        addedProposals.add(shortId + "|" + shortValue);
                     }
 
                     // Create long form proposal (component/object) if component exists
@@ -92,12 +154,12 @@ public class TestStepIssueResolver {
                         String longId = component + "/" + object;
                         String longValue = "The " + component + " " + object;
 
-                        if (!addedProposals.contains(longId)) {
+                        if (!addedProposals.contains(longId + "|" + longValue)) {
                             SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
                             longProposal.setId(longId);
                             longProposal.setValue(longValue);
                             proposals.add(longProposal);
-                            addedProposals.add(longId);
+                            addedProposals.add(longId + "|" + longValue);
                         }
                     }
                 }

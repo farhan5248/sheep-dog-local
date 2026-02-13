@@ -10,7 +10,7 @@ These patterns define which classes have loggers and which operations should be 
 
 ### Entry/Exit Logging Pattern
 
-All public methods in Detector, Resolver, and Builder classes MUST have entry and exit logging.
+All public methods in Utility, Detector, Resolver, and Builder classes MUST have entry and exit logging.
 
 **Rules**
 - Entry log is the first statement in each public method
@@ -18,7 +18,7 @@ All public methods in Detector, Resolver, and Builder classes MUST have entry an
 
 ### No Logger Pattern
 
-Utility classes, interfaces, and factory classes do not declare loggers to keep them lightweight and focused on their single responsibility.
+Interfaces, and factory classes do not declare loggers to keep them lightweight and focused on their single responsibility.
 
 **Examples**
 
