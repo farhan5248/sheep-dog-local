@@ -2,8 +2,16 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
 
 /**
@@ -43,7 +51,56 @@ public class RowIssueResolver {
         logger.debug("Entering suggestCellListWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-        // For now, return empty list as we don't have cell list suggestions
+
+        if (theTestStep != null && theTestStep.getStepObjectName() != null
+                && !theTestStep.getStepObjectName().isEmpty()) {
+            // Get the qualified name of the step object
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+
+            if (qualifiedName != null && !qualifiedName.isEmpty()) {
+                // Get the test project
+                ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+
+                if (theProject != null) {
+                    // Get the step object from the project
+                    IStepObject stepObject = theProject.getStepObject(qualifiedName);
+
+                    if (stepObject != null) {
+                        // Get the step definition name from the test step
+                        String stepDefName = theTestStep.getStepDefinitionName();
+
+                        if (stepDefName != null && !stepDefName.isEmpty()) {
+                            // Find the step definition
+                            IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefName);
+
+                            if (stepDefinition != null) {
+                                // Get all step parameters from the step definition
+                                for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
+                                    ITable table = stepParameters.getTable();
+                                    if (table != null) {
+                                        // Get all rows from the table
+                                        for (IRow row : table.getRowList()) {
+                                            // Get all cells from the row
+                                            for (ICell cell : row.getCellList()) {
+                                                String cellName = cell.getName();
+                                                if (cellName != null && !cellName.isEmpty()) {
+                                                    // Create proposal for this cell (parameter)
+                                                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                                                    proposal.setId(cellName);
+                                                    proposal.setValue(cellName);
+                                                    proposals.add(proposal);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
         return proposals;
     }

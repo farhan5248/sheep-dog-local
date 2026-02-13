@@ -122,6 +122,14 @@ public class TestStepIssueResolver {
                                 SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                                 proposal.setId(shortId);
                                 proposal.setValue(longValue);
+
+                                // Get description from step object statements
+                                String description = SheepDogUtility.getStatementListAsString(
+                                        stepObject.getStatementList());
+                                if (description != null && !description.isEmpty()) {
+                                    proposal.setDescription(description);
+                                }
+
                                 proposals.add(proposal);
                                 addedProposals.add(shortId + "|" + longValue);
                             }
@@ -138,6 +146,20 @@ public class TestStepIssueResolver {
                 String component = StepObjectRefFragments.getComponent(stepObjectName);
                 String object = StepObjectRefFragments.getObject(stepObjectName);
 
+                // Get the step object description from the workspace, or generate "Referred in:" description
+                String description = "";
+                String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(previousStep);
+                if (qualifiedName != null && !qualifiedName.isEmpty() && theProject != null) {
+                    IStepObject stepObject = theProject.getStepObject(qualifiedName);
+                    if (stepObject != null) {
+                        // Step object exists in workspace - use its description
+                        description = SheepDogUtility.getStatementListAsString(stepObject.getStatementList());
+                    } else {
+                        // Step object doesn't exist in workspace - show where it's referred
+                        description = "Referred in: " + previousStep.toString();
+                    }
+                }
+
                 if (!object.isEmpty()) {
                     // Create short form proposal (just object)
                     String shortId = object;
@@ -147,6 +169,9 @@ public class TestStepIssueResolver {
                         SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
                         shortProposal.setId(shortId);
                         shortProposal.setValue(shortValue);
+                        if (description != null && !description.isEmpty()) {
+                            shortProposal.setDescription(description);
+                        }
                         proposals.add(shortProposal);
                         addedProposals.add(shortId + "|" + shortValue);
                     }
@@ -160,6 +185,9 @@ public class TestStepIssueResolver {
                             SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
                             longProposal.setId(longId);
                             longProposal.setValue(longValue);
+                            if (description != null && !description.isEmpty()) {
+                                longProposal.setDescription(description);
+                            }
                             proposals.add(longProposal);
                             addedProposals.add(longId + "|" + longValue);
                         }

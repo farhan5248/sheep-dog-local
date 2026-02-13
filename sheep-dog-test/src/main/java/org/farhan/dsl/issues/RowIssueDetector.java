@@ -49,25 +49,13 @@ public class RowIssueDetector {
                     String stepDefinitionName = theTestStep.getStepDefinitionName();
 
                     if (stepObjectName != null && stepDefinitionName != null) {
-                        // Extract component and object from step object name
-                        String component = StepObjectRefFragments.getComponent(stepObjectName);
-                        String object = StepObjectRefFragments.getObject(stepObjectName);
+                        // Get the qualified name using utility method
+                        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
 
-                        // Navigate up to get the test project
-                        ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-                        if (project != null) {
-                            String fileExt = project.getFileExtension();
-                            if (fileExt != null && !fileExt.isEmpty()) {
-                                // Build qualified name: "{component}/{object}{fileExt}"
-                                String qualifiedName = "";
-                                if (!component.isEmpty()) {
-                                    qualifiedName = component + "/";
-                                }
-                                if (!object.isEmpty()) {
-                                    qualifiedName += object + fileExt;
-                                }
-
-                                if (!qualifiedName.isEmpty()) {
+                        if (qualifiedName != null && !qualifiedName.isEmpty()) {
+                            // Get the test project
+                            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+                            if (project != null) {
                                     // Check if step object exists in workspace
                                     IStepObject stepObject = project.getStepObject(qualifiedName);
                                     if (stepObject != null) {
@@ -109,7 +97,6 @@ public class RowIssueDetector {
                                 }
                             }
                         }
-                    }
                 }
             }
         }

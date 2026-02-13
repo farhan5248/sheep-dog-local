@@ -10,12 +10,9 @@ import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
-import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -46,24 +43,13 @@ public class TextIssueDetector {
                 String stepDefinitionName = theTestStep.getStepDefinitionName();
 
                 if (stepObjectName != null && stepDefinitionName != null) {
-                    // Extract component and object from step object name
-                    String componentName = StepObjectRefFragments.getComponentName(stepObjectName);
-                    String componentType = StepObjectRefFragments.getComponentType(stepObjectName);
-                    String objectName = StepObjectRefFragments.getObjectName(stepObjectName);
-                    String objectType = StepObjectRefFragments.getObjectType(stepObjectName);
+                    // Get the qualified name using utility method
+                    String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
 
-                    // Build qualified name: "{component}/{object}.feature"
-                    String qualifiedName = "";
-                    if (!componentName.isEmpty() && !componentType.isEmpty()) {
-                        qualifiedName = componentName.trim() + " " + componentType.trim() + "/";
-                    }
-                    if (!objectName.isEmpty() && !objectType.trim().isEmpty()) {
-                        qualifiedName += objectName.trim() + " " + objectType.trim() + ".feature";
-                    }
-
-                    // Navigate up to get the test project
-                    ITestProject project = SheepDogUtility.getTestProjectParentForText(theText);
-                    if (project != null && !qualifiedName.isEmpty()) {
+                    if (qualifiedName != null && !qualifiedName.isEmpty()) {
+                        // Get the test project
+                        ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+                        if (project != null) {
                         // Check if step object exists in workspace
                         IStepObject stepObject = project.getStepObject(qualifiedName);
                         if (stepObject != null) {
@@ -94,6 +80,7 @@ public class TextIssueDetector {
                                     return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
                                 }
                             }
+                        }
                         }
                     }
                 }
