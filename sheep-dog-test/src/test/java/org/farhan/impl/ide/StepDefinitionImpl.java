@@ -88,4 +88,9 @@ public class StepDefinitionImpl implements IStepDefinition {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return name != null ? name : "";
+    }
+
 }

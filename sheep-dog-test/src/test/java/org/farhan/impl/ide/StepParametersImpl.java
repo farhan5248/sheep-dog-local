@@ -68,4 +68,9 @@ public class StepParametersImpl implements IStepParameters {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return name != null ? name : "";
+    }
+
 }

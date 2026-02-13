@@ -26,4 +26,9 @@ public class TextImpl implements IText {
 		return parent;
 	}
 
+	@Override
+	public String toString() {
+		return name != null ? name : "";
+	}
+
 }

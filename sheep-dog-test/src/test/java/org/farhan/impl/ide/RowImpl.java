@@ -44,4 +44,17 @@ public class RowImpl implements IRow {
         return true;
     }
 
+    @Override
+    public String toString() {
+        if (cellList == null || cellList.isEmpty()) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < cellList.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(cellList.get(i).getName());
+        }
+        return sb.toString();
+    }
+
 }

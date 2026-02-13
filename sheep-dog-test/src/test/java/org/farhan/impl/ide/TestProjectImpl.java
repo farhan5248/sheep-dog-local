@@ -87,4 +87,10 @@ public class TestProjectImpl implements ITestProject {
 		throw new UnsupportedOperationException("setName(String name) is not implemented");
 	}
 
+	@Override
+	public String toString() {
+		int count = testSuiteList != null ? testSuiteList.size() : 0;
+		return "TestProject[" + count + " suites]";
+	}
+
 }

@@ -92,7 +92,7 @@ public class SheepDogUtility {
         String object = StepObjectRefFragments.getObject(theStep.getStepObjectName());
 
         if (component.isEmpty() || !object.contains("/")) {
-            ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep);
+            ArrayList<ITestStep> previousSteps = getTestStepListUpToTestStep(theStep);
             for (ITestStep previousStep : previousSteps) {
                 // if the step has a matching object
                 String previousObject = StepObjectRefFragments.getObject(previousStep.getStepObjectName());
@@ -170,17 +170,26 @@ public class SheepDogUtility {
         return null;
     }
 
-    private static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep) {
+    /**
+     * Gets a list of elements up to (but not including) the specified element.
+     * Returns elements in reverse chronological order (most recent first) for context inference.
+     *
+     * @param theTestStep the current test step
+     * @return list of test steps up to the specified step in reverse chronological order
+     */
+    public static ArrayList<ITestStep> getTestStepListUpToTestStep(ITestStep theTestStep) {
         ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
-        for (ITestStep t : theTestStep.getParent().getTestStepList()) {
-            // TODO make tests for this
-            if (t.equals(theTestStep)) {
-                break;
-            } else {
-                steps.add(0, t);
+        if (theTestStep != null && theTestStep.getParent() != null) {
+            for (ITestStep t : theTestStep.getParent().getTestStepList()) {
+                if (t.equals(theTestStep)) {
+                    break;
+                } else {
+                    steps.add(0, t);
+                }
             }
         }
         return steps;
-
     }
+
+    // Future: getTestStepContainerListUpToTestCase(ITestCase theTestCase)
 }

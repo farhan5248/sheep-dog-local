@@ -111,4 +111,9 @@ public class StepObjectImpl implements IStepObject {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return qualifiedName != null ? qualifiedName : (name != null ? name : "");
+	}
+
 }

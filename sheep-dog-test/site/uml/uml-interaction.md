@@ -170,9 +170,8 @@ Detector methods validate grammar assignments at different scopes: Only (element
 **Example: Element-level validation (Only)**
 ```java
 public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Exception {
-    logger.debug("Entering validateStepObjectNameOnly for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
-    String text = theTestStep.getName();
+    logger.debug("Entering validateStepObjectNameOnly");
+    String text = theTestStep.getStepObjectName();
     if (text != null) {
         if (!TestStepUtility.isValid(text)) {
             if (TestStepUtility.getStepObjectName(text).isEmpty()) {
@@ -189,8 +188,7 @@ public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Ex
 **Example: Cross-file validation (Workspace)**
 ```java
 public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
-    logger.debug("Entering validateStepObjectNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering validateStepObjectNameWorkspace");
     String message = "";
     String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
     IStepObject theStepObject = theTestStep.getParent().getParent().getParent()
@@ -673,8 +671,7 @@ Resolver methods generate quick fix proposals when values are missing. They sugg
 ```java
 public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering suggestStepObjectNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering suggestStepObjectNameWorkspace");
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
     ITestProject theProject = theTestStep.getParent().getParent().getParent();
 
@@ -698,8 +695,7 @@ public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(
 ```java
 public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering suggestStepDefinitionNameWorkspace");
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
     // Get all step definitions from the step object
@@ -721,8 +717,7 @@ Resolver methods generate quick fix proposals when values exist but are wrong. T
 ```java
 public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering correctStepObjectNameWorkspace");
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
     if (!theTestStep.getStepObjectName().isEmpty()) {
@@ -753,11 +748,10 @@ public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(
 ```java
 public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering correctStepDefinitionNameWorkspace");
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
     String stepDefinitionName = TestStepUtility.getStepDefinitionName(
-            theTestStep.getName());
+            theTestStep.getStepDefinitionName());
 
     if (!stepDefinitionName.isEmpty()) {
         ITestProject theProject = theTestStep.getParent().getParent().getParent();

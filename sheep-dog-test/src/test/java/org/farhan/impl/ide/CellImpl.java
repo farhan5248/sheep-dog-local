@@ -26,4 +26,9 @@ public class CellImpl implements ICell {
 		return parent;
 	}
 
+	@Override
+	public String toString() {
+		return name != null ? name : "";
+	}
+
 }
