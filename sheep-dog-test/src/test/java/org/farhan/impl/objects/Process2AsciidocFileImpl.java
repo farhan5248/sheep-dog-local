@@ -19,7 +19,7 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
         addTable();
         addRow();
         for (String h : keyMap.get("Row Contents").split(",")) {
-            addCell(h);
+            addCell(h.trim());
         }
     }
 

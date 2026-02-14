@@ -19,4 +19,6 @@ public interface InputFileAsciidocFile {
     public void setStepDefinitionDescription(HashMap<String, String> keyMap);
 
     public void setStepDefinitionName(HashMap<String, String> keyMap);
+
+    public void setParametersDescription(HashMap<String, String> keyMap);
 }
