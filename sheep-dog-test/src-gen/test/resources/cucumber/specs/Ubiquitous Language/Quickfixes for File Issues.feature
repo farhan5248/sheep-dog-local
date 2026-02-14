@@ -5,7 +5,10 @@ Feature: Quickfixes for File Issues
   Some problems prevent code generation.
   For example not knowing which component an object belongs to gets in the way of knowing where to create the file.
 
-  Scenario: The first step needs to have a component specified
+  @Correct
+  Scenario: The first step needs to have a component specified quickfix
+
+    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
@@ -20,8 +23,10 @@ Feature: Quickfixes for File Issues
           | TestSuite/1/TestStepContainer/1 |
      Then The xtext plugin list quickfixes dialog will be empty
 
-  Scenario: No component in the first step triggers an error
+  @Correct
+  Scenario: No component in the first step triggers an error quickfix
 
+    \@Correct
     The first step needs to have a component specified.
     The other steps default to that one.
 

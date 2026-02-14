@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.dsl.issues.*;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.SheepDogBuilder;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
@@ -53,7 +54,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
                 initProject(step.eResource());
                 for (SheepDogIssueProposal p : RowIssueResolver
                         .suggestCellListWorkspace(new TestStepImpl((TestStep) step))) {
-                    String pipeList = "| " + p.getValue().replaceAll(",", " \\|");
+                    String pipeList = "| " + p.getValue().toString().replaceAll(",", " \\|");
                     ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
                             pipeList, p.getId(), null, context);
                     if (proposal != null) {
@@ -90,7 +91,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
             initProject(step.eResource());
             for (SheepDogIssueProposal p : TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep)) {
                 ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-                        p.getValue(), p.getId(), null, context);
+                        p.getValue().toString(), p.getId(), null, context);
                 if (proposal != null) {
                     proposal.setAdditionalProposalInfo(p.getDescription());
                     acceptor.accept(proposal);
@@ -110,7 +111,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
             initProject(step.eResource());
             for (SheepDogIssueProposal p : TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep)) {
                 ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-                        p.getValue(), p.getId(), null, context);
+                        p.getValue().toString(), p.getId(), null, context);
                 if (proposal != null) {
                     proposal.setAdditionalProposalInfo(p.getDescription());
                     acceptor.accept(proposal);

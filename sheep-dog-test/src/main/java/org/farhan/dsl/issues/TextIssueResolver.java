@@ -10,6 +10,7 @@ import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogBuilder;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,7 @@ public class TextIssueResolver {
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         IStepObject theStepObject = theProject.getStepObject(qualifiedName);
         if (theStepObject != null) {
+            theStepObject = SheepDogUtility.cloneStepObject(theStepObject);
             String stepDefinitonName = theTestStep.getStepDefinitionName();
             IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
             if (theStepDefinition != null) {
@@ -56,7 +58,6 @@ public class TextIssueResolver {
                     proposal.setDescription(
                             SheepDogUtility.getStatementListAsString(theStepParameters.getStatementList()));
                     proposal.setValue(theStepObject.getContent());
-                    proposal.setQualifiedName(theStepObject.getNameLong());
                     proposals.add(proposal);
                 }
             }

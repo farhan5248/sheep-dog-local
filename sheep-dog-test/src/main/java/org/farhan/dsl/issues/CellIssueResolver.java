@@ -2,6 +2,7 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

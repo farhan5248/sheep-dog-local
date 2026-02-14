@@ -4,15 +4,6 @@
 
 **Desc**: Validation and quick fix infrastructure. Separates detection, resolution, and proposal data structures from grammar model and UI frameworks, enabling IDE-independent validation tooling.
 
-### {Language}IssueProposal
-
-**Desc**: Data transfer object holding quick fix proposal data. Separates proposal data (id, description, value, qualifiedName) from proposal generation and application logic.
-
-**Rule**: ONE class matches {Language}IssueProposal pattern
-
-**Regex**: `^{Language}IssueProposal$`
- - `SheepDogIssueProposal`
-
 ### {Type}IssueTypes
 
 **Desc**: Enum constants for validation error types. Separates error type definitions from validation logic, providing stable identifiers for detector-resolver coordination.
@@ -121,6 +112,15 @@
 
 **Regex**: `^{Language}Utility$`
  - `SheepDogUtility`
+
+### {Language}IssueProposal
+
+**Desc**: Data transfer object holding quick fix proposal data. Separates proposal data (id, description, value) from proposal generation and application logic.
+
+**Rule**: ONE class matches {Language}IssueProposal pattern
+
+**Regex**: `^{Language}IssueProposal$`
+ - `SheepDogIssueProposal`
 
 ### {Type}Fragments
 

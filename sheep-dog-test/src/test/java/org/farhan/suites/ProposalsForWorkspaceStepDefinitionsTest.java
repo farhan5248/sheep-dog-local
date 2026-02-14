@@ -10,10 +10,10 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/specs/Ubiquitous Language/Proposals for Step Parameters.feature")
+@SelectClasspathResource("cucumber/specs/Ubiquitous Language/Proposals for Workspace Step Definitions.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("sheep-dog-test")
-public class ProposalsForStepParametersTest {
+public class ProposalsForWorkspaceStepDefinitionsTest {
 
 }

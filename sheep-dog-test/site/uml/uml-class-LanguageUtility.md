@@ -33,9 +33,9 @@ Static helper methods for grammar element operations. Separates utility operatio
 
 **Desc**: Gets the grand parent or great grand parent etc for a type. The most common usage is getting TestProject from TestStep
 
-**Rule**: SOME method names follow get{Type}NameLong or get{Type}NameLongFor{Type} pattern.
+**Rule**: SOME method names follow get{Type}Parent or get{Type}ParentFor{Type} pattern.
  - **Name**: `^get{Type}Parent(For{Type})?$`
- - **Return**: `^{Type}$`
+ - **Return**: `^I{Type}$`
  - **Parameters**: `^\(I{Type}\s+\w+\)$`
  - **Modifier**: `^public\s+static$`
 
@@ -43,3 +43,30 @@ Static helper methods for grammar element operations. Separates utility operatio
  - `public static ITestProject getTestProjectParentForTestStep(ITestStep theStep)`
  - `public static ITestProject getTestProjectParentForRow(IRow theRow)`
  - `public static ITestProject getTestProjectParentForText(IText theText)`
+
+## get{Assignment}UpTo{Type}
+
+**Desc**: Gets a list of elements up to (but not including) the specified element. Returns elements in reverse chronological order (most recent first) for context inference.
+
+**Rule**: SOME method names follow get{Assignment}UpTo{Type} pattern.
+ - **Name**: `^get{Assignment}UpTo{Type}$`
+ - **Return**: `^ArrayList<I{Type}>$`
+ - **Parameters**: `^\(I{Type}\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static ArrayList<ITestStep> getTestStepListUpToTestStep(ITestStep theTestStep)`
+ - Future: `public static ArrayList<ITestStepContainer> getTestStepContainerListUpToTestCase(ITestCase theTestCase)`
+
+## clone{Type}
+
+**Desc**: Creates deep clones of grammar elements to avoid side effects during operations like proposal generation. Clones are created without parent associations to prevent modification of the original element tree.
+
+**Rule**: SOME method names follow clone{Type} pattern.
+ - **Name**: `^clone{Type}$`
+ - **Return**: `^I{Type}$`
+ - **Parameters**: `^\(I{Type}\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static IStepObject cloneStepObject(IStepObject original)`

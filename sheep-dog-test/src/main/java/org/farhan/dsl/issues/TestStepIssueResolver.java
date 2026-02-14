@@ -12,6 +12,7 @@ import org.farhan.dsl.lang.ITestSetup;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.SheepDogBuilder;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
@@ -50,8 +51,7 @@ public class TestStepIssueResolver {
             SheepDogIssueProposal proposal = new SheepDogIssueProposal();
             proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getNameLong());
             proposal.setDescription(SheepDogUtility.getStatementListAsString(theStepObject.getStatementList()));
-            proposal.setValue(theStepObject.getContent());
-            proposal.setQualifiedName(theStepObject.getNameLong());
+            proposal.setValue(theStepObject);
             proposals.add(proposal);
         }
         logger.debug("Exiting correctStepObjectNameWorkspace with {} proposals", proposals.size());
@@ -80,6 +80,7 @@ public class TestStepIssueResolver {
             IStepObject theStepObject = theProject
                     .getStepObject(SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep));
             if (theStepObject != null) {
+                theStepObject = SheepDogUtility.cloneStepObject(theStepObject);
                 IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
                 if (theStepDefinition == null) {
                     // the step definition name is valid but doesn't exist
@@ -91,8 +92,7 @@ public class TestStepIssueResolver {
                     proposal.setId("Generate " + theStepDefinition.getName());
                     proposal.setDescription(
                             SheepDogUtility.getStatementListAsString(theStepDefinition.getStatementList()));
-                    proposal.setValue(theStepObject.getContent());
-                    proposal.setQualifiedName(theStepObject.getNameLong());
+                    proposal.setValue(theStepObject);
                     proposals.add(proposal);
                 }
             }
