@@ -1,0 +1,60 @@
+@sheep-dog-test
+Feature: Create Documentation
+
+  \@sheep-dog-test
+  These four tests describe the Eclipse IDE features that can be customised.
+  1. Error validation
+  2. Content proposal
+  3. Quick fixes
+  4. Code generation
+
+  @Validate
+  Scenario: Start a step without the component specified
+
+    Start with single step and trigger an error by not specifying a component.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                 |
+          | The Input file is present |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                |
+          | TestSuite/1/TestStepContainer/1 |
+     Then The xtext plugin validate dialog will be set as follows
+          """
+          The first step must have a component
+          """
+
+  @Validate
+  Scenario: Confirm that this is a new step definition
+
+    Create a new step instead of picking from what exists and ignore the warning.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name |
+          | daily batchjob/Input file.feature | is absent            |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+     Then The xtext plugin validate dialog will be set as follows
+          """
+          The step definition doesn't exist for the step object
+          """
+
+  Scenario: Create the new step definition
+
+    Use the suggested quick fix to add this new step to the step object file.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name |
+          | daily batchjob/Input file.feature | is absent            |
+     When The xtext plugin generate step definition action is performed
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
+          | Object Name                       | Step Definition Name |
+          | daily batchjob/Input file.feature | is present           |
+

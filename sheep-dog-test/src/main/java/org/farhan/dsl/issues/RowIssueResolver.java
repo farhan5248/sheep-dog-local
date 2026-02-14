@@ -26,6 +26,33 @@ public class RowIssueResolver {
     private static final Logger logger = SheepDogLoggerFactory.getLogger(RowIssueResolver.class);
 
     /**
+     * Helper method to create and add a proposal if it doesn't already exist.
+     *
+     * @param proposals the list to add the proposal to
+     * @param addedProposals set tracking already-added proposals
+     * @param id the proposal ID
+     * @param value the proposal value
+     * @param description the proposal description (can be null or empty)
+     */
+    private static void addProposal(
+            ArrayList<SheepDogIssueProposal> proposals,
+            java.util.HashSet<String> addedProposals,
+            String id,
+            String value,
+            String description) {
+        if (!addedProposals.contains(id)) {
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId(id);
+            proposal.setValue(value);
+            if (description != null && !description.isEmpty()) {
+                proposal.setDescription(description);
+            }
+            proposals.add(proposal);
+            addedProposals.add(id);
+        }
+    }
+
+    /**
      * Generates proposals correcting values when an assignment exists but is
      * invalid.
      *
@@ -36,9 +63,118 @@ public class RowIssueResolver {
         logger.debug("Entering correctCellListWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-        // For now, return empty list as we don't have cell list corrections to suggest
+        java.util.HashSet<String> addedProposals = new java.util.HashSet<>();
+
+        // Guard clauses - early returns to reduce nesting
+        if (theTestStep == null || theTestStep.getStepObjectName() == null
+                || theTestStep.getStepObjectName().isEmpty()) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (qualifiedName == null || qualifiedName.isEmpty()) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (theProject == null) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        IStepObject stepObject = theProject.getStepObject(qualifiedName);
+        if (stepObject == null) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        String stepDefName = theTestStep.getStepDefinitionName();
+        if (stepDefName == null || stepDefName.isEmpty()) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefName);
+        if (stepDefinition == null) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        // Collect existing cell names from step definition parameters
+        java.util.HashSet<String> existingCells = collectExistingCells(stepDefinition);
+
+        // Collect new cell names from test step's table
+        java.util.HashSet<String> newCells = collectNewCells(theTestStep, existingCells);
+
+        // Add proposals for existing cells
+        for (String cellName : existingCells) {
+            addProposal(proposals, addedProposals, cellName, cellName, "");
+        }
+
+        // Add proposals for new cells
+        for (String cellName : newCells) {
+            addProposal(proposals, addedProposals, cellName, cellName, "");
+        }
+
+        // Add "Generate" proposals for new cells
+        for (String cellName : newCells) {
+            String generateId = "Generate " + cellName;
+            addProposal(proposals, addedProposals, generateId, generateId, "");
+        }
+
         logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
         return proposals;
+    }
+
+    /**
+     * Collects existing cell names from step definition parameters.
+     *
+     * @param stepDefinition the step definition to extract cells from
+     * @return set of existing cell names
+     */
+    private static java.util.HashSet<String> collectExistingCells(IStepDefinition stepDefinition) {
+        java.util.HashSet<String> existingCells = new java.util.HashSet<>();
+        for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
+            ITable table = stepParameters.getTable();
+            if (table != null) {
+                for (IRow row : table.getRowList()) {
+                    for (ICell cell : row.getCellList()) {
+                        String cellName = cell.getName();
+                        if (cellName != null && !cellName.isEmpty()
+                                && !"Content".equals(cellName)) {
+                            existingCells.add(cellName.trim());
+                        }
+                    }
+                }
+            }
+        }
+        return existingCells;
+    }
+
+    /**
+     * Collects new cell names from test step's table that don't exist in step definition.
+     *
+     * @param theTestStep the test step to extract cells from
+     * @param existingCells set of existing cell names to filter against
+     * @return set of new cell names
+     */
+    private static java.util.HashSet<String> collectNewCells(ITestStep theTestStep,
+            java.util.HashSet<String> existingCells) {
+        java.util.HashSet<String> newCells = new java.util.HashSet<>();
+        if (theTestStep.getTable() != null) {
+            for (IRow row : theTestStep.getTable().getRowList()) {
+                for (ICell cell : row.getCellList()) {
+                    String cellName = cell.getName();
+                    if (cellName != null && !cellName.isEmpty()
+                            && !existingCells.contains(cellName.trim())) {
+                        newCells.add(cellName.trim());
+                    }
+                }
+            }
+        }
+        return newCells;
     }
 
     /**

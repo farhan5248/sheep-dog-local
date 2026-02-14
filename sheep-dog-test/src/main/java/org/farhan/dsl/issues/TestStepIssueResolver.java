@@ -66,8 +66,29 @@ public class TestStepIssueResolver {
             throws Exception {
         logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
-        logger.debug("Exiting correctStepObjectNameWorkspace with 0 proposals (not yet implemented)");
-        return new ArrayList<>();
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        HashSet<String> addedProposals = new HashSet<>();
+
+        if (theTestStep != null && theTestStep.getStepObjectName() != null
+                && !theTestStep.getStepObjectName().isEmpty()) {
+            // Get component and object from step object name
+            String stepObjectName = theTestStep.getStepObjectName();
+            String component = StepObjectRefFragments.getComponent(stepObjectName);
+            String object = StepObjectRefFragments.getObject(stepObjectName);
+
+            if (!component.isEmpty() && !object.isEmpty()) {
+                // Create proposal to generate the missing step object file
+                // Format: "Generate {Object} - {component}/{object}.feature"
+                String proposalId = "Generate " + object + " - " + component + "/" + object + ".feature";
+                String proposalValue = proposalId;
+                String description = "";
+
+                addProposal(proposals, addedProposals, proposalId, proposalValue, description);
+            }
+        }
+
+        logger.debug("Exiting correctStepObjectNameWorkspace with {} proposals", proposals.size());
+        return proposals;
     }
 
     /**
@@ -81,8 +102,54 @@ public class TestStepIssueResolver {
             throws Exception {
         logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
-        logger.debug("Exiting correctStepDefinitionNameWorkspace with 0 proposals (not yet implemented)");
-        return new ArrayList<>();
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        HashSet<String> addedProposals = new HashSet<>();
+
+        if (theTestStep != null && theTestStep.getStepObjectName() != null
+                && !theTestStep.getStepObjectName().isEmpty()) {
+            // Get the qualified name of the step object
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+
+            if (qualifiedName != null && !qualifiedName.isEmpty()) {
+                // Get the test project
+                ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+
+                if (theProject != null) {
+                    // Get the step object from the project
+                    IStepObject stepObject = theProject.getStepObject(qualifiedName);
+
+                    if (stepObject != null) {
+                        // Add proposals for existing step definitions from the step object
+                        for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                            String stepDefName = stepDefinition.getName();
+                            if (stepDefName != null && !stepDefName.isEmpty()) {
+                                // Skip step definitions that have "Content" parameters
+                                if (!hasContentParameter(stepDefinition)) {
+                                    // Get description from statements
+                                    String description = SheepDogUtility.getStatementListAsString(
+                                            stepDefinition.getStatementList());
+
+                                    addProposal(proposals, addedProposals, stepDefName, stepDefName, description);
+                                }
+                            }
+                        }
+                    }
+
+                    // Add proposal to generate the missing step definition
+                    String stepDefinitionName = theTestStep.getStepDefinitionName();
+                    if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                        String proposalId = "Generate " + stepDefinitionName;
+                        String proposalValue = proposalId;
+                        String description = "";
+
+                        addProposal(proposals, addedProposals, proposalId, proposalValue, description);
+                    }
+                }
+            }
+        }
+
+        logger.debug("Exiting correctStepDefinitionNameWorkspace with {} proposals", proposals.size());
+        return proposals;
     }
 
     /**
