@@ -87,7 +87,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
             ITable table = SheepDogBuilder.createTable(stepParameters);
             IRow row = SheepDogBuilder.createRow(table);
             for (String h : name.split(",")) {
-                SheepDogBuilder.createCell(row, h);
+                SheepDogBuilder.createCell(row, h.trim());
             }
         } catch (Exception e) {
             Assertions.fail(e);
@@ -113,6 +113,26 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
             IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
                     keyMap.get("Object Name"));
             SheepDogBuilder.createStepDefinition(stepObject, keyMap.get("Step Definition Name"));
+        } catch (Exception e) {
+            Assertions.fail(e);
+        }
+    }
+
+    @Override
+    public void setParametersDescription(HashMap<String, String> keyMap) {
+        try {
+            IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
+                    keyMap.get("Object Name"));
+            IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
+                    keyMap.get("Step Definition Name"));
+            String name = keyMap.get("Parameters");
+            IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDefinition, name);
+            ITable table = SheepDogBuilder.createTable(stepParameters);
+            IRow row = SheepDogBuilder.createRow(table);
+            for (String h : name.split(",")) {
+                SheepDogBuilder.createCell(row, h.trim());
+            }
+            SheepDogBuilder.createStatement(stepParameters, replaceKeyword(keyMap.get("Parameters Description")));
         } catch (Exception e) {
             Assertions.fail(e);
         }

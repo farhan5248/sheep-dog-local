@@ -10,8 +10,11 @@ Feature: Proposals for Step Definitions
   So instead of saving all combinations, only the details section and predicate are saved.
   When the reference look-up is done, the step-object is located using the full path and component.
 
+  @Suggest
   Scenario: Has component no existing step object
 
+    \@Suggest
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                     |
           | The daily batchjob Input file |
@@ -20,8 +23,11 @@ Feature: Proposals for Step Definitions
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
+  @Suggest
   Scenario: Has component no existing step definition
 
+    \@Suggest
+
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                     |
           | The daily batchjob Input file |
@@ -30,7 +36,10 @@ Feature: Proposals for Step Definitions
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
+  @Suggest
   Scenario: Has component has existing step definition
+
+    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                     |
@@ -45,7 +54,10 @@ Feature: Proposals for Step Definitions
           | Suggestion | Suggestion Name | Suggestion Description |
           | is present | is present      | Creates empty file     |
 
+  @Suggest
   Scenario: No component has existing step definition
+
+    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |

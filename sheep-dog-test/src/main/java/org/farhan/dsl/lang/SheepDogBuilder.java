@@ -86,6 +86,16 @@ public class SheepDogBuilder {
         return statement;
     }
 
+    public static IStatement createStatement(IStepParameters parent, String name) {
+        logger.debug("Entering createStatement for name: {}", name);
+        IStatement statement = SheepDogFactory.instance.createStatement();
+        statement.setName(name);
+        if (parent != null)
+            parent.addStatement(statement);
+        logger.debug("Exiting createStatement");
+        return statement;
+    }
+
     /**
      * Creates grammar element using factory, initializes attributes, establishes
      * parent-child relationships, and handles singleton lookups where needed.
@@ -199,24 +209,6 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name   the name of the text
-     * @return the created and initialized instance
-     */
-    public static IText createText(ITestStep parent, String name) {
-        logger.debug("Entering createText");
-        IText text = SheepDogFactory.instance.createText();
-        text.setName(name);
-        if (parent != null)
-            parent.setText(text);
-        logger.debug("Exiting createText");
-        return text;
-    }
-
-    /**
-     * Creates grammar element using factory, initializes attributes, establishes
-     * parent-child relationships, and handles singleton lookups where needed.
-     *
-     * @param parent the parent element (or null if root)
      * @param name   the name of the test case
      * @return the created and initialized instance
      */
@@ -231,6 +223,20 @@ public class SheepDogBuilder {
         }
         logger.debug("Exiting createTestCase");
         return testCase;
+    }
+
+    /**
+     * Creates grammar element using factory, initializes attributes, establishes
+     * parent-child relationships, and handles singleton lookups where needed.
+     *
+     * @param parent the parent element (or null if root)
+     * @return the created and initialized instance
+     */
+    public static ITestProject createTestProject() {
+        logger.debug("Entering createTestProject");
+        ITestProject testProject = SheepDogFactory.instance.createTestProject();
+        logger.debug("Exiting createTestProject");
+        return testProject;
     }
 
     /**
@@ -300,13 +306,17 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
+     * @param name   the name of the text
      * @return the created and initialized instance
      */
-    public static ITestProject createTestProject() {
-        logger.debug("Entering createTestProject");
-        ITestProject testProject = SheepDogFactory.instance.createTestProject();
-        logger.debug("Exiting createTestProject");
-        return testProject;
+    public static IText createText(ITestStep parent, String name) {
+        logger.debug("Entering createText");
+        IText text = SheepDogFactory.instance.createText();
+        text.setName(name);
+        if (parent != null)
+            parent.setText(text);
+        logger.debug("Exiting createText");
+        return text;
     }
 
 }

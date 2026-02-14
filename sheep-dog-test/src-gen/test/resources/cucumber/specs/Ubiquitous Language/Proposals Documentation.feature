@@ -1,10 +1,13 @@
 @sheep-dog-test
-Feature: Display Documentation with Proposals
+Feature: Proposals Documentation
 
   \@sheep-dog-test
   Just as you can see the associated Javadoc for classes and attributes, you can attach documentation about the objects and step-definitions.
 
+  @Suggest
   Scenario: Display Step Object documentation
+
+    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name          |
@@ -19,7 +22,10 @@ Feature: Display Documentation with Proposals
           | Suggestion                    | Suggestion Name | Suggestion Description |
           | The daily batchjob Input file | Input file      | Description\n          |
 
+  @Suggest
   Scenario: Display empty tooltip if there's no documentation
+
+    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name          |
@@ -34,8 +40,10 @@ Feature: Display Documentation with Proposals
           | Suggestion                    | Suggestion Name | Suggestion Description |
           | The daily batchjob Input file | Input file      | empty                  |
 
+  @Suggest
   Scenario: Display non-existing object references
 
+    \@Suggest
     If an object is mentioned in a test step but isn't created in the stepdefs folder yet, it can still be used.
     In that case, the tooltip displays the line that the object is on.
 
@@ -50,8 +58,10 @@ Feature: Display Documentation with Proposals
           | Suggestion     | Suggestion Name | Suggestion Description                                |
           | The Input file | Input file      | Referred in: The daily batchjob Input file is present |
 
+  @Suggest
   Scenario: Display existing object references
 
+    \@Suggest
     If the fully qualified name of an object is specified, then its documentation is displayed.
     If it's a reference to an object in a previous step, the referred object name is displayed.
     This is done because it was useful to know to which step the object is implicitly pointing to.
@@ -69,4 +79,22 @@ Feature: Display Documentation with Proposals
      Then The xtext plugin list proposals dialog will be set as follows
           | Suggestion                    | Suggestion Name | Suggestion Description |
           | The daily batchjob Input file | Input file      | Description            |
+
+  @Suggest
+  Scenario: Display Step Parameter documentation
+
+    \@Suggest
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                           |
+          | The daily batchjob Input file is created as follows |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name  | Parameters | Parameters Description       |
+          | daily batchjob/Input file.feature | is created as follows | H1, H2, H3 | Header parameters for tables |
+     When The xtext plugin list proposals action is performed as follows
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
+     Then The xtext plugin list proposals dialog will be set as follows
+          | Suggestion | Suggestion Name | Suggestion Description       |
+          | H1, H2, H3 | H1, H2, H3      | Header parameters for tables |
 
