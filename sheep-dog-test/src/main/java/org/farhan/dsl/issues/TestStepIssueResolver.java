@@ -3,8 +3,12 @@ package org.farhan.dsl.issues;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
@@ -24,6 +28,34 @@ public class TestStepIssueResolver {
     private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
 
     /**
+     * Helper method to create and add a proposal if it doesn't already exist.
+     *
+     * @param proposals the list to add the proposal to
+     * @param addedProposals set tracking already-added proposals
+     * @param id the proposal ID
+     * @param value the proposal value
+     * @param description the proposal description (can be null or empty)
+     */
+    private static void addProposal(
+            ArrayList<SheepDogIssueProposal> proposals,
+            HashSet<String> addedProposals,
+            String id,
+            String value,
+            String description) {
+        String key = id + "|" + value;
+        if (!addedProposals.contains(key)) {
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId(id);
+            proposal.setValue(value);
+            if (description != null && !description.isEmpty()) {
+                proposal.setDescription(description);
+            }
+            proposals.add(proposal);
+            addedProposals.add(key);
+        }
+    }
+
+    /**
      * Generates proposals correcting values when an assignment exists but is
      * invalid.
      *
@@ -34,8 +66,8 @@ public class TestStepIssueResolver {
             throws Exception {
         logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
-        logger.debug("Exiting correctStepObjectNameWorkspace");
-        return null;
+        logger.debug("Exiting correctStepObjectNameWorkspace with 0 proposals (not yet implemented)");
+        return new ArrayList<>();
     }
 
     /**
@@ -49,8 +81,8 @@ public class TestStepIssueResolver {
             throws Exception {
         logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
-        logger.debug("Exiting correctStepDefinitionNameWorkspace");
-        return null;
+        logger.debug("Exiting correctStepDefinitionNameWorkspace with 0 proposals (not yet implemented)");
+        return new ArrayList<>();
     }
 
     /**
@@ -64,14 +96,73 @@ public class TestStepIssueResolver {
         logger.debug("Entering suggestStepObjectNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
-        // Use HashSet to avoid duplicates
         HashSet<String> addedProposals = new HashSet<>();
 
-        // First, collect components from previous steps
+        // Get context
         ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
-        HashSet<String> previousComponents = new HashSet<>();
+        HashSet<String> previousComponents = getPreviousComponents(previousSteps);
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
 
+        // Add proposals from workspace and previous steps
+        addWorkspaceProposals(proposals, addedProposals, theProject, previousComponents);
+        addPreviousStepProposals(proposals, addedProposals, previousSteps, theProject);
+
+        logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
+        return proposals;
+    }
+
+    /**
+     * Checks if a step definition has a "Content" parameter.
+     * Content parameters are for text blocks, not for table rows.
+     *
+     * @param stepDefinition the step definition to check
+     * @return true if the step definition has a "Content" parameter
+     */
+    private static boolean hasContentParameter(IStepDefinition stepDefinition) {
+        for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
+            ITable table = stepParameters.getTable();
+            if (table != null) {
+                for (IRow row : table.getRowList()) {
+                    for (ICell cell : row.getCellList()) {
+                        if ("Content".equals(cell.getName())) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if a step object only has step definitions with "Content" parameters.
+     * If all step definitions have Content parameters, the step object shouldn't be suggested.
+     *
+     * @param stepObject the step object to check
+     * @return true if the object has step definitions AND ALL of them have "Content" parameters
+     */
+    private static boolean hasOnlyContentParameters(IStepObject stepObject) {
+        java.util.List<IStepDefinition> stepDefinitions = stepObject.getStepDefinitionList();
+        if (stepDefinitions.isEmpty()) {
+            return false; // No step definitions, still suggest (might be work in progress or just documentation)
+        }
+
+        for (IStepDefinition stepDefinition : stepDefinitions) {
+            if (!hasContentParameter(stepDefinition)) {
+                return false; // Found at least one step definition without Content parameter
+            }
+        }
+        return true; // All step definitions have Content parameters
+    }
+
+    /**
+     * Collects components referenced in previous steps.
+     *
+     * @param previousSteps list of test steps before the current step
+     * @return set of component names
+     */
+    private static HashSet<String> getPreviousComponents(ArrayList<ITestStep> previousSteps) {
+        HashSet<String> previousComponents = new HashSet<>();
         for (ITestStep previousStep : previousSteps) {
             String stepObjectName = previousStep.getStepObjectName();
             if (stepObjectName != null && !stepObjectName.isEmpty()) {
@@ -81,17 +172,32 @@ public class TestStepIssueResolver {
                 }
             }
         }
+        return previousComponents;
+    }
 
-        // Get the test project to access all step objects in workspace
-        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-
-        // Suggest objects from workspace that match components from previous steps
+    /**
+     * Adds proposals from workspace objects that match previously-used components.
+     *
+     * @param proposals the list to add proposals to
+     * @param addedProposals set tracking already-added proposals
+     * @param theProject the test project containing step objects
+     * @param previousComponents set of components from previous steps
+     */
+    private static void addWorkspaceProposals(
+            ArrayList<SheepDogIssueProposal> proposals,
+            HashSet<String> addedProposals,
+            ITestProject theProject,
+            HashSet<String> previousComponents) {
         if (theProject != null) {
             for (IStepObject stepObject : theProject.getStepObjectList()) {
+                // Skip step objects that only have Content parameters
+                if (hasOnlyContentParameters(stepObject)) {
+                    continue;
+                }
+
                 String qualifiedName = stepObject.getNameLong();
                 if (qualifiedName != null && !qualifiedName.isEmpty()) {
                     // Parse qualified name (e.g., "daily batchjob/Input file.feature")
-                    // Remove file extension first
                     String nameWithoutExt = qualifiedName;
                     int lastDot = qualifiedName.lastIndexOf('.');
                     if (lastDot > 0) {
@@ -106,98 +212,76 @@ public class TestStepIssueResolver {
                         component = nameWithoutExt.substring(0, slashIndex);
                         object = nameWithoutExt.substring(slashIndex + 1);
                     } else {
-                        // No component, just object
                         object = nameWithoutExt;
                     }
 
                     if (!object.isEmpty() && !component.isEmpty()) {
-                        // If no previous components exist, suggest all workspace objects
-                        // Otherwise, only suggest if component was used in previous steps
+                        // Only suggest if component was used in previous steps (or no components exist yet)
                         if (previousComponents.isEmpty() || previousComponents.contains(component)) {
-                            // Create proposal with short ID and long value
                             String shortId = object;
                             String longValue = "The " + component + " " + object;
-
-                            if (!addedProposals.contains(shortId + "|" + longValue)) {
-                                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                                proposal.setId(shortId);
-                                proposal.setValue(longValue);
-
-                                // Get description from step object statements
-                                String description = SheepDogUtility.getStatementListAsString(
-                                        stepObject.getStatementList());
-                                if (description != null && !description.isEmpty()) {
-                                    proposal.setDescription(description);
-                                }
-
-                                proposals.add(proposal);
-                                addedProposals.add(shortId + "|" + longValue);
-                            }
+                            String description = SheepDogUtility.getStatementListAsString(
+                                    stepObject.getStatementList());
+                            addProposal(proposals, addedProposals, shortId, longValue, description);
                         }
                     }
                 }
             }
         }
+    }
 
-        // Suggest objects from previous steps
+    /**
+     * Adds proposals from objects referenced in previous steps.
+     *
+     * @param proposals the list to add proposals to
+     * @param addedProposals set tracking already-added proposals
+     * @param previousSteps list of test steps before the current step
+     * @param theProject the test project (used to get descriptions)
+     */
+    private static void addPreviousStepProposals(
+            ArrayList<SheepDogIssueProposal> proposals,
+            HashSet<String> addedProposals,
+            ArrayList<ITestStep> previousSteps,
+            ITestProject theProject) {
         for (ITestStep previousStep : previousSteps) {
             String stepObjectName = previousStep.getStepObjectName();
             if (stepObjectName != null && !stepObjectName.isEmpty()) {
                 String component = StepObjectRefFragments.getComponent(stepObjectName);
                 String object = StepObjectRefFragments.getObject(stepObjectName);
 
-                // Get the step object description from the workspace, or generate "Referred in:" description
-                String description = "";
+                // Check if step object only has Content parameters
                 String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(previousStep);
                 if (qualifiedName != null && !qualifiedName.isEmpty() && theProject != null) {
                     IStepObject stepObject = theProject.getStepObject(qualifiedName);
+                    if (stepObject != null && hasOnlyContentParameters(stepObject)) {
+                        continue; // Skip step objects with only Content parameters
+                    }
+                }
+
+                // Get description from workspace or fallback to "Referred in:" message
+                String description = "";
+                if (qualifiedName != null && !qualifiedName.isEmpty() && theProject != null) {
+                    IStepObject stepObject = theProject.getStepObject(qualifiedName);
                     if (stepObject != null) {
-                        // Step object exists in workspace - use its description
                         description = SheepDogUtility.getStatementListAsString(stepObject.getStatementList());
                     } else {
-                        // Step object doesn't exist in workspace - show where it's referred
                         description = "Referred in: " + previousStep.toString();
                     }
                 }
 
                 if (!object.isEmpty()) {
-                    // Create short form proposal (just object)
-                    String shortId = object;
-                    String shortValue = "The " + object;
+                    // Add short form proposal
+                    addProposal(proposals, addedProposals, object, "The " + object, description);
 
-                    if (!addedProposals.contains(shortId + "|" + shortValue)) {
-                        SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
-                        shortProposal.setId(shortId);
-                        shortProposal.setValue(shortValue);
-                        if (description != null && !description.isEmpty()) {
-                            shortProposal.setDescription(description);
-                        }
-                        proposals.add(shortProposal);
-                        addedProposals.add(shortId + "|" + shortValue);
-                    }
-
-                    // Create long form proposal (component/object) if component exists
+                    // Add long form proposal if component exists
                     if (!component.isEmpty()) {
                         String longId = component + "/" + object;
                         String longValue = "The " + component + " " + object;
-
-                        if (!addedProposals.contains(longId + "|" + longValue)) {
-                            SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
-                            longProposal.setId(longId);
-                            longProposal.setValue(longValue);
-                            if (description != null && !description.isEmpty()) {
-                                longProposal.setDescription(description);
-                            }
-                            proposals.add(longProposal);
-                            addedProposals.add(longId + "|" + longValue);
-                        }
+                        addProposal(proposals, addedProposals, longId, longValue, description);
                     }
                 }
             }
         }
-
-        logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
-        return proposals;
     }
 
     /**
@@ -211,6 +295,7 @@ public class TestStepIssueResolver {
         logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        HashSet<String> addedProposals = new HashSet<>();
 
         if (theTestStep != null && theTestStep.getStepObjectName() != null
                 && !theTestStep.getStepObjectName().isEmpty()) {
@@ -230,19 +315,15 @@ public class TestStepIssueResolver {
                         for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
                             String stepDefName = stepDefinition.getName();
                             if (stepDefName != null && !stepDefName.isEmpty()) {
-                                // Create proposal for this step definition
-                                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                                proposal.setId(stepDefName);
-                                proposal.setValue(stepDefName);
+                                // Skip step definitions that have "Content" parameters
+                                // Content parameters are for text blocks, not for table rows
+                                if (!hasContentParameter(stepDefinition)) {
+                                    // Get description from statements
+                                    String description = SheepDogUtility.getStatementListAsString(
+                                            stepDefinition.getStatementList());
 
-                                // Get description from statements
-                                String description = SheepDogUtility.getStatementListAsString(
-                                        stepDefinition.getStatementList());
-                                if (description != null && !description.isEmpty()) {
-                                    proposal.setDescription(description);
+                                    addProposal(proposals, addedProposals, stepDefName, stepDefName, description);
                                 }
-
-                                proposals.add(proposal);
                             }
                         }
                     }

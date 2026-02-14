@@ -80,16 +80,35 @@ public class RowIssueResolver {
                                     if (table != null) {
                                         // Get all rows from the table
                                         for (IRow row : table.getRowList()) {
-                                            // Get all cells from the row
+                                            // Collect all cell names from the row, excluding "Content"
+                                            ArrayList<String> cellNames = new ArrayList<>();
                                             for (ICell cell : row.getCellList()) {
                                                 String cellName = cell.getName();
                                                 if (cellName != null && !cellName.isEmpty()) {
-                                                    // Create proposal for this cell (parameter)
-                                                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                                                    proposal.setId(cellName);
-                                                    proposal.setValue(cellName);
-                                                    proposals.add(proposal);
+                                                    // Skip "Content" parameters as they are for text blocks, not table rows
+                                                    if (!"Content".equals(cellName)) {
+                                                        cellNames.add(cellName.trim());
+                                                    }
                                                 }
+                                            }
+
+                                            // If we have cell names, create a single proposal with combined value
+                                            if (!cellNames.isEmpty()) {
+                                                String combinedValue = String.join(", ", cellNames);
+                                                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                                                proposal.setId(combinedValue);
+                                                proposal.setValue(combinedValue);
+
+                                                // Set the description from step parameters' statement list
+                                                if (stepParameters.getStatementList() != null
+                                                        && !stepParameters.getStatementList().isEmpty()) {
+                                                    String description = stepParameters.getStatementList().get(0).getName();
+                                                    if (description != null && !description.isEmpty()) {
+                                                        proposal.setDescription(description);
+                                                    }
+                                                }
+
+                                                proposals.add(proposal);
                                             }
                                         }
                                     }
