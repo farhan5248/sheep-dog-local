@@ -41,7 +41,7 @@ public class TestStepIssueResolver {
             ArrayList<SheepDogIssueProposal> proposals,
             HashSet<String> addedProposals,
             String id,
-            String value,
+            Object value,
             String description) {
         String key = id + "|" + value;
         if (!addedProposals.contains(key)) {
@@ -72,19 +72,32 @@ public class TestStepIssueResolver {
 
         if (theTestStep != null && theTestStep.getStepObjectName() != null
                 && !theTestStep.getStepObjectName().isEmpty()) {
-            // Get component and object from step object name
-            String stepObjectName = theTestStep.getStepObjectName();
-            String component = StepObjectRefFragments.getComponent(stepObjectName);
-            String object = StepObjectRefFragments.getObject(stepObjectName);
+            // Get the qualified name of the step object
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
 
-            if (!component.isEmpty() && !object.isEmpty()) {
-                // Create proposal to generate the missing step object file
-                // Format: "Generate {Object} - {component}/{object}.feature"
-                String proposalId = "Generate " + object + " - " + component + "/" + object + ".feature";
-                String proposalValue = proposalId;
-                String description = "";
+            if (qualifiedName != null && !qualifiedName.isEmpty()) {
+                // Get component and object from step object name
+                String stepObjectName = theTestStep.getStepObjectName();
+                String component = StepObjectRefFragments.getComponent(stepObjectName);
+                String object = StepObjectRefFragments.getObject(stepObjectName);
 
-                addProposal(proposals, addedProposals, proposalId, proposalValue, description);
+                if (!component.isEmpty() && !object.isEmpty()) {
+                    // Create the step object with its step definition
+                    IStepObject stepObject = org.farhan.dsl.lang.SheepDogBuilder.createStepObject(null, qualifiedName);
+
+                    // Create the step definition for this step
+                    String stepDefinitionName = theTestStep.getStepDefinitionName();
+                    if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                        org.farhan.dsl.lang.SheepDogBuilder.createStepDefinition(stepObject, stepDefinitionName);
+                    }
+
+                    // Create proposal to generate the missing step object file
+                    // Format: "Generate {Object} - {qualified name}"
+                    String proposalId = "Generate " + object + " - " + qualifiedName;
+                    String description = "";
+
+                    addProposal(proposals, addedProposals, proposalId, stepObject, description);
+                }
             }
         }
 
@@ -139,11 +152,23 @@ public class TestStepIssueResolver {
                     // Add proposal to generate the missing step definition
                     String stepDefinitionName = theTestStep.getStepDefinitionName();
                     if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                        // Clone the existing step object or create a new one if it doesn't exist
+                        IStepObject proposalStepObject;
+                        if (stepObject != null) {
+                            // Clone the existing step object to avoid modifying the original
+                            proposalStepObject = SheepDogUtility.cloneStepObject(stepObject);
+                        } else {
+                            // Create a new step object if it doesn't exist
+                            proposalStepObject = org.farhan.dsl.lang.SheepDogBuilder.createStepObject(null, qualifiedName);
+                        }
+
+                        // Add the new step definition to the cloned/new step object
+                        org.farhan.dsl.lang.SheepDogBuilder.createStepDefinition(proposalStepObject, stepDefinitionName);
+
                         String proposalId = "Generate " + stepDefinitionName;
-                        String proposalValue = proposalId;
                         String description = "";
 
-                        addProposal(proposals, addedProposals, proposalId, proposalValue, description);
+                        addProposal(proposals, addedProposals, proposalId, proposalStepObject, description);
                     }
                 }
             }

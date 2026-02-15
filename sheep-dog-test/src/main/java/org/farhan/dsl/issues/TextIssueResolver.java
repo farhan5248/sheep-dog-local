@@ -10,6 +10,7 @@ import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -103,9 +104,22 @@ public class TextIssueResolver {
         // If test step has text and step definition doesn't have Content parameter,
         // suggest "Generate Content"
         if (!contentParameterExists && theTestStep.getText() != null) {
+            // Clone the existing step object and add the new parameter set
+            IStepObject proposalStepObject = SheepDogUtility.cloneStepObject(stepObject);
+
+            // Get the step definition from the cloned object
+            IStepDefinition proposalStepDefinition = proposalStepObject.getStepDefinition(stepDefName);
+
+            // Create the new step parameters with "Content"
+            IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(proposalStepDefinition,
+                    "Content");
+            ITable newTable = SheepDogBuilder.createTable(newStepParameters);
+            IRow newRow = SheepDogBuilder.createRow(newTable);
+            SheepDogBuilder.createCell(newRow, "Content");
+
             SheepDogIssueProposal proposal = new SheepDogIssueProposal();
             proposal.setId("Generate Content");
-            proposal.setValue("Generate Content");
+            proposal.setValue(proposalStepObject);
             proposal.setDescription("");
             proposals.add(proposal);
         }

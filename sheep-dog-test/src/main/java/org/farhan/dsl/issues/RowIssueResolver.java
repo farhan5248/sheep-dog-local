@@ -12,6 +12,7 @@ import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -36,7 +37,7 @@ public class RowIssueResolver {
      * @param description the proposal description (can be null or empty)
      * @return the created proposal
      */
-    private static SheepDogIssueProposal createProposal(String id, String value, String description) {
+    private static SheepDogIssueProposal createProposal(String id, Object value, String description) {
         SheepDogIssueProposal proposal = new SheepDogIssueProposal();
         proposal.setId(id);
         proposal.setValue(value);
@@ -111,7 +112,7 @@ public class RowIssueResolver {
             ArrayList<SheepDogIssueProposal> proposals,
             HashSet<String> addedProposals,
             String id,
-            String value,
+            Object value,
             String description) {
         if (!addedProposals.contains(id)) {
             SheepDogIssueProposal proposal = createProposal(id, value, description);
@@ -197,7 +198,22 @@ public class RowIssueResolver {
             Collections.sort(sortedNewCells);
             String combinedNewCells = String.join(", ", sortedNewCells);
             String generateId = "Generate " + combinedNewCells;
-            addProposal(proposals, addedProposals, generateId, generateId, "");
+
+            // Clone the existing step object and add the new parameter set
+            IStepObject proposalStepObject = SheepDogUtility.cloneStepObject(stepObject);
+
+            // Get the step definition from the cloned object
+            IStepDefinition proposalStepDefinition = proposalStepObject.getStepDefinition(stepDefName);
+
+            // Create the new step parameters with the new cells
+            IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(proposalStepDefinition, combinedNewCells);
+            ITable newTable = SheepDogBuilder.createTable(newStepParameters);
+            IRow newRow = SheepDogBuilder.createRow(newTable);
+            for (String cellName : sortedNewCells) {
+                SheepDogBuilder.createCell(newRow, cellName);
+            }
+
+            addProposal(proposals, addedProposals, generateId, proposalStepObject, "");
         }
 
         logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
