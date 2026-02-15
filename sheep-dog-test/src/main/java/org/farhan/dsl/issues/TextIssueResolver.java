@@ -57,7 +57,7 @@ public class TextIssueResolver {
                             + SheepDogUtility.getCellListAsString(theStepParameters.getTable().getRowList().getFirst().getCellList()));
                     proposal.setDescription(
                             SheepDogUtility.getStatementListAsString(theStepParameters.getStatementList()));
-                    proposal.setValue(theStepObject.getContent());
+                    proposal.setValue(theStepObject);
                     proposals.add(proposal);
                 }
             }

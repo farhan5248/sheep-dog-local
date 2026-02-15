@@ -24,4 +24,9 @@ public class XtextListQuickfixesDialogSteps extends TestSteps {
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }
+
+    @Given("^The xtext plugin list quickfixes dialog is set as follows$")
+    public void isSetAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable);
+    }
 }

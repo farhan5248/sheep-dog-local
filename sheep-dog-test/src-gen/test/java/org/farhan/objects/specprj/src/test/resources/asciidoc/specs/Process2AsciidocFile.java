@@ -15,4 +15,12 @@ public interface Process2AsciidocFile {
     public void setTestCaseName(HashMap<String, String> keyMap);
 
     public void setTestSuiteName(HashMap<String, String> keyMap);
+
+    public void assertStepName(HashMap<String, String> keyMap);
+
+    public void assertRowContents(HashMap<String, String> keyMap);
+
+    public void assertTestSuiteName(HashMap<String, String> keyMap);
+
+    public void assertTestCaseName(HashMap<String, String> keyMap);
 }
