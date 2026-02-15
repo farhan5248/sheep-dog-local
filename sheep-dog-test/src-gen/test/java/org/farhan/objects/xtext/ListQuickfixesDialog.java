@@ -11,4 +11,10 @@ public interface ListQuickfixesDialog {
     public void assertQuickfixDescription(HashMap<String, String> keyMap);
 
     public void assertQuickfixName(HashMap<String, String> keyMap);
+
+    public void setQuickfixName(HashMap<String, String> keyMap);
+
+    public void setQuickfixDescription(HashMap<String, String> keyMap);
+
+    public void setQuickfix(HashMap<String, String> keyMap);
 }

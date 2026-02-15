@@ -60,4 +60,20 @@ public class ListQuickfixesDialogImpl extends TestIDEObject implements ListQuick
         Assertions.fail(sb.toString());
     }
 
+    @Override
+    public void setQuickfixName(HashMap<String, String> keyMap) {
+        TestIDEObject.listQuickfixesDialog.add(new SheepDogIssueProposal());
+        TestIDEObject.listQuickfixesDialog.getLast().setId(keyMap.get("Quickfix Name"));
+    }
+
+    @Override
+    public void setQuickfixDescription(HashMap<String, String> keyMap) {
+        TestIDEObject.listQuickfixesDialog.getLast().setDescription(keyMap.get("Quickfix Description"));
+    }
+
+    @Override
+    public void setQuickfix(HashMap<String, String> keyMap) {
+        TestIDEObject.listQuickfixesDialog.getLast().setValue(keyMap.get("Quickfix"));
+    }
+
 }

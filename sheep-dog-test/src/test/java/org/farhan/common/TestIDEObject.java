@@ -3,6 +3,7 @@ package org.farhan.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITable;
@@ -29,6 +30,14 @@ public class TestIDEObject extends TestObject {
         for (SheepDogIssueProposal p : proposals) {
             if (p.getValue() instanceof IStepObject) {
                 testProject.addStepObject((IStepObject) p.getValue());
+            } else {
+                if (focus instanceof ICell) {
+                    ((ICell) focus).setName(p.getValue().toString());
+                } else if (focus instanceof ITestSuite) {
+                    ((ITestSuite) focus).setName(p.getValue().toString());
+                } else if (focus instanceof ITestStepContainer) {
+                    ((ITestStepContainer) focus).setName(p.getValue().toString());
+                }
             }
         }
     }
@@ -143,4 +152,76 @@ public class TestIDEObject extends TestObject {
 
     }
 
+    /**
+     * Gets an object of the specified type from the current selectedElement path.
+     *
+     * @param elementType The type to retrieve (e.g., "TestStep", "Row", "Cell",
+     *                    "Table", "Text", "TestSuite", "TestStepContainer")
+     * @return The object of the specified type, or null if not found in the path
+     * @throws IllegalArgumentException if the element type is not found in
+     *                                  selectedElement or is invalid
+     */
+    public static Object getElementByType(String elementType) {
+        if (selectedElement == null || selectedElement.isEmpty()) {
+            throw new IllegalArgumentException("selectedElement is null or empty");
+        }
+
+        // Check if the element type exists in the path
+        if (!selectedElement.contains(elementType + "/") && !selectedElement.endsWith(elementType)) {
+            throw new IllegalArgumentException(
+                    "Element type '" + elementType + "' not found in selectedElement: " + selectedElement);
+        }
+
+        String[] parts = selectedElement.split("/");
+        Object current = testProject;
+
+        int i = 0;
+        while (i < parts.length && current != null) {
+            String currentType = parts[i];
+
+            // Table and Text don't have indices in the path
+            if (currentType.equals("Table")) {
+                current = ((ITestStep) current).getTable();
+                if (currentType.equals(elementType)) {
+                    return current;
+                }
+                i++;
+            } else if (currentType.equals("Text")) {
+                current = ((ITestStep) current).getText();
+                if (currentType.equals(elementType)) {
+                    return current;
+                }
+                i++;
+            } else {
+                // All other elements have indices
+                if (i + 1 >= parts.length) {
+                    throw new IllegalArgumentException("Missing index for element type: " + currentType);
+                }
+                int index = Integer.parseInt(parts[i + 1]) - 1; // Convert from 1-based to 0-based
+
+                if (currentType.equals("TestSuite")) {
+                    current = ((ITestProject) current).getTestSuite(index);
+                } else if (currentType.equals("TestStepContainer")) {
+                    current = ((ITestSuite) current).getTestStepContainer(index);
+                } else if (currentType.equals("TestStep")) {
+                    current = ((ITestStepContainer) current).getTestStep(index);
+                } else if (currentType.equals("Row")) {
+                    current = ((ITable) current).getRow(index);
+                } else if (currentType.equals("Cell")) {
+                    current = ((IRow) current).getCell(index);
+                } else {
+                    throw new IllegalArgumentException("Unknown element type: " + currentType);
+                }
+
+                // Return if we've reached the desired type
+                if (currentType.equals(elementType)) {
+                    return current;
+                }
+
+                i += 2; // Skip elementType and index
+            }
+        }
+
+        return null;
+    }
 }
