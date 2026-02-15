@@ -3,7 +3,7 @@ package org.farhan.dsl.issues;
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CellIssueDetector {
 
-	private static final Logger logger = LoggerFactory.getLogger(CellIssueDetector.class);
+	private static final Logger logger = SheepDogLoggerFactory.getLogger(CellIssueDetector.class);
 
 	/**
 	 * Validates a specific grammar assignment at element-only, file, or workspace

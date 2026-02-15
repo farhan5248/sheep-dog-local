@@ -11,9 +11,9 @@ import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
+import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Quick fix proposal generation for validation errors.
@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  */
 public class TextIssueResolver {
 
-    private static final Logger logger = LoggerFactory.getLogger(TextIssueResolver.class);
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(TextIssueResolver.class);
 
     /**
      * Generates proposals correcting values when an assignment exists but is

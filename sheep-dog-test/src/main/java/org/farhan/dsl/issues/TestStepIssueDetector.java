@@ -7,7 +7,7 @@ import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class TestStepIssueDetector {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestStepIssueDetector.class);
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueDetector.class);
 
     /**
      * Validates a specific grammar assignment at element-only, file, or workspace
