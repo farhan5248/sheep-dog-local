@@ -8,8 +8,10 @@ Feature: Create Documentation
   3. Quick fixes
   4. Code generation
 
+  @Validate
   Scenario: Start a step without the component specified
 
+    \@Validate
     Start with single step and trigger an error by not specifying a component.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
@@ -23,8 +25,10 @@ Feature: Create Documentation
           The first step must have a component
           """
 
+  @Validate
   Scenario: Confirm that this is a new step definition
 
+    \@Validate
     Create a new step instead of picking from what exists and ignore the warning.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
@@ -41,8 +45,10 @@ Feature: Create Documentation
           The step definition doesn't exist for the step object
           """
 
+  @Generate
   Scenario: Create the new step definition
 
+    \@Generate
     Use the suggested quick fix to add this new step to the step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
