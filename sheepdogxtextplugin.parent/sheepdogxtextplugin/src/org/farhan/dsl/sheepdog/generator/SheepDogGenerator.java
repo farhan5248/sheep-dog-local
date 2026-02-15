@@ -16,7 +16,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.farhan.dsl.issues.RowIssueDetector;
 import org.farhan.dsl.issues.RowIssueResolver;
-import org.farhan.dsl.issues.SheepDogIssueProposal;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.issues.TextIssueDetector;
@@ -84,10 +84,8 @@ public class SheepDogGenerator extends AbstractGenerator {
 
 	private void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
 		for (SheepDogIssueProposal p : proposals) {
-			if (!p.getQualifiedName().isEmpty()) {
-				IStepObject stepObject = SheepDogBuilder.createStepObject(null, p.getQualifiedName());
-				stepObject.setContent(p.getValue());
-				testProject.addStepObject(stepObject);
+			if (p.getValue() instanceof IStepObject) {
+				testProject.addStepObject((IStepObject) p.getValue());
 			}
 		}
 	}

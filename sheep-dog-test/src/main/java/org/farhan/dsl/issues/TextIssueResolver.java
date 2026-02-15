@@ -10,6 +10,7 @@ import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;

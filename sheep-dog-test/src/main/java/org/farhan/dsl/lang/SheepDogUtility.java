@@ -14,6 +14,63 @@ import java.util.List;
 public class SheepDogUtility {
 
     /**
+     * Creates a deep clone of a step object without parent association.
+     * <p>
+     * Clones the step object and all its children (statements, step definitions,
+     * step parameters, tables, rows, cells) to avoid side effects when modifying
+     * the structure for proposal generation.
+     * </p>
+     *
+     * @param original the step object to clone
+     * @return a deep clone of the step object with null parent
+     */
+    public static IStepObject cloneStepObject(IStepObject original) {
+        IStepObject clone = SheepDogBuilder.createStepObject(null, original.getNameLong());
+
+        // Clone statements
+        for (IStatement statement : original.getStatementList()) {
+            SheepDogBuilder.createStatement(clone, statement.getName());
+        }
+
+        // Clone step definitions
+        for (IStepDefinition stepDefinition : original.getStepDefinitionList()) {
+            IStepDefinition clonedStepDef = SheepDogBuilder.createStepDefinition(clone, stepDefinition.getName());
+
+            // Clone statements for step definition
+            for (IStatement statement : stepDefinition.getStatementList()) {
+                SheepDogBuilder.createStatement(clonedStepDef, statement.getName());
+            }
+
+            // Clone step parameters
+            for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
+                IStepParameters clonedStepParams = SheepDogBuilder.createStepParameters(clonedStepDef, stepParameters.getName());
+
+                // Clone statements for step parameters
+                for (IStatement statement : stepParameters.getStatementList()) {
+                    SheepDogBuilder.createStatement(clonedStepParams, statement.getName());
+                }
+
+                // Clone table
+                if (stepParameters.getTable() != null) {
+                    ITable clonedTable = SheepDogBuilder.createTable(clonedStepParams);
+
+                    // Clone rows
+                    for (IRow row : stepParameters.getTable().getRowList()) {
+                        IRow clonedRow = SheepDogBuilder.createRow(clonedTable);
+
+                        // Clone cells
+                        for (ICell cell : row.getCellList()) {
+                            SheepDogBuilder.createCell(clonedRow, cell.getName());
+                        }
+                    }
+                }
+            }
+        }
+
+        return clone;
+    }
+
+    /**
      * Converts a list of grammar elements into a formatted string representation
      * for display or comparison purposes.
      *

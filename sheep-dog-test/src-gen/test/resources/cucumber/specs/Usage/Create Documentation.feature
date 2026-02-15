@@ -8,7 +8,6 @@ Feature: Create Documentation
   3. Quick fixes
   4. Code generation
 
-  @Validate
   Scenario: Start a step without the component specified
 
     Start with single step and trigger an error by not specifying a component.
@@ -24,7 +23,6 @@ Feature: Create Documentation
           The first step must have a component
           """
 
-  @Validate
   Scenario: Confirm that this is a new step definition
 
     Create a new step instead of picking from what exists and ignore the warning.

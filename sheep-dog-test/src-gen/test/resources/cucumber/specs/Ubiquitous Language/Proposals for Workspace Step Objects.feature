@@ -1,5 +1,5 @@
 @sheep-dog-test
-Feature: Proposals for Step Objects from Existing Ones
+Feature: Proposals for Workspace Step Objects
 
   \@sheep-dog-test
   TODO Collapse all these tests into fewer ones using Test Data
@@ -33,14 +33,14 @@ Feature: Proposals for Step Objects from Existing Ones
           | Step Name |
           | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name |
-          | daily batchjob/Input file.feature | is present           |
+          | Object Name                       | Step Definition Name | Object Description |
+          | daily batchjob/Input file.feature | is present           | Description\n      |
      When The xtext plugin list proposals action is performed as follows
           | Selected Element                           |
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
-          | Suggestion                    | Suggestion Name |
-          | The daily batchjob Input file | Input file      |
+          | Suggestion                    | Suggestion Name | Suggestion Description |
+          | The daily batchjob Input file | Input file      | Description\n          |
 
   @Suggest
   Scenario: Has component no existing
@@ -64,12 +64,12 @@ Feature: Proposals for Step Objects from Existing Ones
           | Step Name          |
           | The daily batchjob |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name |
-          | daily batchjob/Input file.feature | is present           |
+          | Object Name                       | Step Definition Name | Object Description |
+          | daily batchjob/Input file.feature | is present           | Description        |
      When The xtext plugin list proposals action is performed as follows
           | Selected Element                           |
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be set as follows
-          | Suggestion                    | Suggestion Name |
-          | The daily batchjob Input file | Input file      |
+          | Suggestion                    | Suggestion Name | Suggestion Description |
+          | The daily batchjob Input file | Input file      | Description            |
 

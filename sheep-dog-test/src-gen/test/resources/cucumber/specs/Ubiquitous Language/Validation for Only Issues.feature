@@ -5,7 +5,7 @@ Feature: Validation for Only Issues
   \@Validate
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
-  Scenario: Header row Cell names should start with a capital letter
+  Scenario: Header row Cell names should start with a capital letter validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                | Row Contents |
@@ -18,7 +18,7 @@ Feature: Validation for Only Issues
           Name should start with a capital
           """
 
-  Scenario: Body row Cell names can be any case
+  Scenario: Body row Cell names can be any case validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                | Row Contents |
@@ -29,7 +29,7 @@ Feature: Validation for Only Issues
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/2/Cell/1 |
      Then The xtext plugin validate dialog will be empty
 
-  Scenario: Test suite name should start with a capital letter
+  Scenario: Test suite name should start with a capital letter validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name   |
@@ -42,7 +42,7 @@ Feature: Validation for Only Issues
           Name should start with a capital
           """
 
-  Scenario: Test case name should start with a capital letter
+  Scenario: Test case name should start with a capital letter validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name | Test Case Name      |
@@ -55,7 +55,7 @@ Feature: Validation for Only Issues
           Name should start with a capital
           """
 
-  Scenario: Test step must have a valid object name
+  Scenario: Test step must have a valid object name validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name      |
@@ -75,7 +75,7 @@ Feature: Validation for Only Issues
           Examples are: "src/test/resources/file.txt file" or "Home page"
           """
 
-  Scenario: Test step must have a valid step definition name
+  Scenario: Test step must have a valid step definition name validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                     |

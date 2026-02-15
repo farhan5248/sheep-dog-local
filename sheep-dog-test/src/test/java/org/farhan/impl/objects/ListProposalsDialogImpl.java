@@ -3,7 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.common.TestIDEObject;
-import org.farhan.dsl.issues.SheepDogIssueProposal;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.objects.xtext.ListProposalsDialog;
 import org.junit.jupiter.api.Assertions;
 
@@ -21,7 +21,7 @@ public class ListProposalsDialogImpl extends TestIDEObject implements ListPropos
     public void assertSuggestion(HashMap<String, String> keyMap) {
         for (SheepDogIssueProposal p : TestIDEObject.listProposalsDialog) {
             if (p.getId().equals(keyMap.get("Suggestion Name"))
-                    && p.getValue().contentEquals(keyMap.get("Suggestion"))) {
+                    && p.getValue().toString().contentEquals(keyMap.get("Suggestion"))) {
                 return;
             }
         }

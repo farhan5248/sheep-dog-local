@@ -27,7 +27,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.RowIssueResolver;
-import org.farhan.dsl.issues.SheepDogIssueProposal;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TextIssueResolver;
@@ -49,29 +49,6 @@ import org.farhan.dsl.sheepdog.validation.SheepDogValidator;
  */
 public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
     private static final Logger logger = Logger.getLogger(SheepDogQuickfixProvider.class);
-
-    private void createAcceptor(Issue issue, IssueResolutionAcceptor acceptor,
-            ArrayList<SheepDogIssueProposal> proposals) {
-        initProject(getEObject(issue).eResource());
-        for (SheepDogIssueProposal p : proposals) {
-            acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
-                public void apply(IModificationContext context) throws BadLocationException {
-                    if (!p.getQualifiedName().isEmpty()) {
-                        try {
-                            IStepObject stepObject = SheepDogBuilder.createStepObject(null, p.getQualifiedName());
-                            stepObject.setContent(p.getValue());
-                            SheepDogBuilder.createTestProject().addStepObject(stepObject);
-                        } catch (Exception e) {
-                            logger.error("Failed writing file for " + p.getQualifiedName() + ": " + e.getMessage(), e);
-                        }
-                    } else {
-                        String pipeList = "| " + p.getValue().replaceAll(",", " \\|");
-                        context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), pipeList);
-                    }
-                }
-            });
-        }
-    }
 
     @Fix(SheepDogValidator.CELL_NAME_ONLY)
     public void fixCellNameOnly(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -103,19 +80,6 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
         logger.debug("Exiting fixTestStepContainerNameOnly");
     }
 
-    @Fix(SheepDogValidator.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE)
-    public void fixTestStepStepObjectNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
-        TestStep step = (TestStep) getEObject(issue);
-        logger.debug("Entering fixTestStepStepObjectNameWorkspace for element: " + step.getStepObjectName());
-        try {
-            createAcceptor(issue, acceptor,
-                    TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
-        } catch (Exception e) {
-            logger.error("Failed fixing step for " + step.getStepObjectName() + ": " + e.getMessage(), e);
-        }
-        logger.debug("Exiting fixTestStepStepObjectNameWorkspace");
-    }
-
     @Fix(SheepDogValidator.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE)
     public void fixTestStepStepDefinitionNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
         TestStep step = (TestStep) getEObject(issue);
@@ -127,6 +91,19 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
             logger.error("Failed fixing step for " + step.getStepObjectName() + ": " + e.getMessage(), e);
         }
         logger.debug("Exiting fixTestStepStepDefinitionNameWorkspace");
+    }
+
+    @Fix(SheepDogValidator.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE)
+    public void fixTestStepStepObjectNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
+        TestStep step = (TestStep) getEObject(issue);
+        logger.debug("Entering fixTestStepStepObjectNameWorkspace for element: " + step.getStepObjectName());
+        try {
+            createAcceptor(issue, acceptor,
+                    TestStepIssueResolver.correctStepObjectNameWorkspace(new TestStepImpl(step)));
+        } catch (Exception e) {
+            logger.error("Failed fixing step for " + step.getStepObjectName() + ": " + e.getMessage(), e);
+        }
+        logger.debug("Exiting fixTestStepStepObjectNameWorkspace");
     }
 
     @Fix(SheepDogValidator.TEST_SUITE_NAME_ONLY)
@@ -148,6 +125,27 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
             logger.error("Failed in fixTextNameWorkspace for: " + e.getMessage(), e);
         }
         logger.debug("Exiting fixTextNameWorkspace");
+    }
+
+    private void createAcceptor(Issue issue, IssueResolutionAcceptor acceptor,
+            ArrayList<SheepDogIssueProposal> proposals) {
+        initProject(getEObject(issue).eResource());
+        for (SheepDogIssueProposal p : proposals) {
+            acceptor.accept(issue, p.getId(), p.getDescription(), "upcase.png", new IModification() {
+                public void apply(IModificationContext context) throws BadLocationException {
+                    if (p.getValue() instanceof IStepObject) {
+                        try {
+                            SheepDogBuilder.createTestProject().addStepObject((IStepObject) p.getValue());
+                        } catch (Exception e) {
+                            logger.error("Failed writing file for " + p.getValue().toString(), e);
+                        }
+                    } else {
+                        String pipeList = "| " + p.getValue().toString().replaceAll(",", " \\|");
+                        context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), pipeList);
+                    }
+                }
+            });
+        }
     }
 
     private EObject getEObject(Issue issue) {

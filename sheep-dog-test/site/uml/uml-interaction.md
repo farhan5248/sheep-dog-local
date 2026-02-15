@@ -397,6 +397,87 @@ public static String validateStepObjectNameWorkspace(ITestStep theTestStep) thro
 }
 ```
 
+### clone{Type}
+
+Utility methods create deep clones of grammar elements to avoid side effects during operations like proposal generation. Clones are created without parent associations to prevent modification of the original element tree.
+
+**Example: Cloning a step object**
+```java
+public static IStepObject cloneStepObject(IStepObject original) {
+    IStepObject clone = SheepDogBuilder.createStepObject(null, original.getNameLong());
+
+    // Clone statements
+    for (IStatement statement : original.getStatementList()) {
+        SheepDogBuilder.createStatement(clone, statement.getName());
+    }
+
+    // Clone step definitions
+    for (IStepDefinition stepDefinition : original.getStepDefinitionList()) {
+        IStepDefinition clonedStepDef = SheepDogBuilder.createStepDefinition(clone, stepDefinition.getName());
+
+        // Clone statements for step definition
+        for (IStatement statement : stepDefinition.getStatementList()) {
+            SheepDogBuilder.createStatement(clonedStepDef, statement.getName());
+        }
+
+        // Clone step parameters
+        for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
+            IStepParameters clonedStepParams = SheepDogBuilder.createStepParameters(clonedStepDef, stepParameters.getName());
+
+            // Clone statements for step parameters
+            for (IStatement statement : stepParameters.getStatementList()) {
+                SheepDogBuilder.createStatement(clonedStepParams, statement.getName());
+            }
+
+            // Clone table
+            if (stepParameters.getTable() != null) {
+                ITable clonedTable = SheepDogBuilder.createTable(clonedStepParams);
+
+                // Clone rows
+                for (IRow row : stepParameters.getTable().getRowList()) {
+                    IRow clonedRow = SheepDogBuilder.createRow(clonedTable);
+
+                    // Clone cells
+                    for (ICell cell : row.getCellList()) {
+                        SheepDogBuilder.createCell(clonedRow, cell.getName());
+                    }
+                }
+            }
+        }
+    }
+
+    return clone;
+}
+```
+
+**Example: Using cloneStepObject in proposal generation**
+```java
+public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep theTestStep) throws Exception {
+    ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+    ITestProject theProject = theTestStep.getParent().getParent().getParent();
+    String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+    IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+
+    if (theStepObject != null) {
+        // Clone before modification to avoid side effects
+        theStepObject = SheepDogUtility.cloneStepObject(theStepObject);
+
+        // Now safe to modify without affecting original
+        // ...
+    }
+
+    return proposals;
+}
+```
+
+**Key Principles:**
+- Always clone before modification to avoid unintended side effects
+- Create clone with null parent to prevent adding to original tree
+- Recursively clone all child elements for deep copy
+- Use SheepDogBuilder for all element creation to maintain consistency
+- Preserve element names and structure from original
+
 ## {Type}Fragments
 
 ### getAll

@@ -1,4 +1,4 @@
-package org.farhan.dsl.issues;
+package org.farhan.dsl.lang;
 
 /**
  * Data transfer object holding quick fix proposal data.
@@ -11,8 +11,7 @@ public class SheepDogIssueProposal {
 
     private String id;
     private String description;
-    private String value;
-    private String qualifiedName;
+    private Object value;
 
     /**
      * Initializes all proposal fields to empty strings for subsequent population.
@@ -21,7 +20,6 @@ public class SheepDogIssueProposal {
         this.id = "";
         this.description = "";
         this.value = "";
-        this.qualifiedName = "";
     }
 
     /**
@@ -48,19 +46,9 @@ public class SheepDogIssueProposal {
      * Provides read access to proposal attributes, allowing resolvers and UI to
      * query proposal details.
      *
-     * @return the qualified name
-     */
-    public String getQualifiedName() {
-        return qualifiedName;
-    }
-
-    /**
-     * Provides read access to proposal attributes, allowing resolvers and UI to
-     * query proposal details.
-     *
      * @return the value
      */
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
@@ -88,19 +76,9 @@ public class SheepDogIssueProposal {
      * Provides write access for resolvers to populate proposal attributes during
      * generation.
      *
-     * @param qualifiedName the qualified name to set
-     */
-    public void setQualifiedName(String qualifiedName) {
-        this.qualifiedName = qualifiedName;
-    }
-
-    /**
-     * Provides write access for resolvers to populate proposal attributes during
-     * generation.
-     *
      * @param value the value to set
      */
-    public void setValue(String value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 
@@ -115,7 +93,6 @@ public class SheepDogIssueProposal {
         sb.append("SheepDogIssueProposal [id=").append(id);
         sb.append(", description=").append(description);
         sb.append(", value=").append(value);
-        sb.append(", qualifiedName=").append(qualifiedName);
         sb.append("]");
         return sb.toString();
     }

@@ -6,7 +6,7 @@ Feature: Quickfixes for File Issues
   For example not knowing which component an object belongs to gets in the way of knowing where to create the file.
 
   @Correct
-  Scenario: The first step needs to have a component specified
+  Scenario: The first step needs to have a component specified quickfix
 
     \@Correct
 
@@ -24,7 +24,7 @@ Feature: Quickfixes for File Issues
      Then The xtext plugin list quickfixes dialog will be empty
 
   @Correct
-  Scenario: No component in the first step triggers an error
+  Scenario: No component in the first step triggers an error quickfix
 
     \@Correct
     The first step needs to have a component specified.

@@ -1,5 +1,5 @@
 @sheep-dog-test
-Feature: Proposals for Step Definitions
+Feature: Proposals for Workspace Step Definitions
 
   \@sheep-dog-test
   Because a step can have a component or not and the full path specified or not, you can have 4 keywords like:

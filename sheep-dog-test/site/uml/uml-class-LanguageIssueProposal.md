@@ -16,34 +16,32 @@ Data transfer object holding quick fix proposal data. Separates proposal data (i
 
 ## get{Proposal}
 
-**Desc**: Provides read access to proposal attributes, allowing resolvers and UI to query proposal details.
+**Desc**: Provides read access to proposal attributes, allowing resolvers and UI to query proposal details. getValue returns Object to support both String and IStepObject types.
 
 **Rule**: SOME method names follow getter pattern.
  - **Name**: `^get{Proposal}$`
- - **Return**: `^String$`
+ - **Return**: `^(String|Object)$`
  - **Parameters**: `^\(\)$`
  - **Modifier**: `^public$`
 
 **Examples**:
  - `public String getId()`
  - `public String getDescription()`
- - `public String getValue()`
- - `public String getQualifiedName()`
+ - `public Object getValue()`
 
 ## set{Proposal}
 
-**Desc**: Provides write access for resolvers to populate proposal attributes during generation.
+**Desc**: Provides write access for resolvers to populate proposal attributes during generation. setValue accepts Object to support both String and IStepObject types.
 
-**Rule**: SOME method names follow setter pattern. 
+**Rule**: SOME method names follow setter pattern.
  - **Name**: `^set{Proposal}$`
  - **Return**: `^void$`
- - **Parameters**: `^\(String\s+\w+\)$`
+ - **Parameters**: `^\((String|Object)\s+\w+\)$`
 
 **Examples**:
  - `public void setId(String id)`
  - `public void setDescription(String description)`
- - `public void setValue(String value)`
- - `public void setQualifiedName(String qualifiedName)`
+ - `public void setValue(Object value)`
 
 ## toString
 

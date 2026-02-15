@@ -3,6 +3,7 @@ Feature: Code Generation for Workspace Issues
 
   \@sheep-dog-test
   TODO Add tests for each quickfix one
+  TODO Add test step ensuring step object isn't changed until after the quickfix is applied
   The Xtext framework lets you map the DSL to Java so that you can generate the Java code with minimal coding.
   I think that's useful for a tester if every component is written in Java or the same language.
   If it's not, and there's PL/SQL, COBOL, webMethods, Layer 7 and other such languages, you might not need Java code but insert statements for example.

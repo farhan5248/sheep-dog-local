@@ -3,7 +3,6 @@ package org.farhan.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.farhan.dsl.issues.SheepDogIssueProposal;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITable;
@@ -12,6 +11,7 @@ import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogBuilder;
+import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.impl.ide.CellImpl;
 import org.farhan.impl.ide.RowImpl;
 
@@ -27,10 +27,8 @@ public class TestIDEObject extends TestObject {
 
     public static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
         for (SheepDogIssueProposal p : proposals) {
-            if (!p.getQualifiedName().isEmpty()) {
-                IStepObject stepObject = SheepDogBuilder.createStepObject(null, p.getQualifiedName());
-                stepObject.setContent(p.getValue());
-                testProject.addStepObject(stepObject);
+            if (p.getValue() instanceof IStepObject) {
+                testProject.addStepObject((IStepObject) p.getValue());
             }
         }
     }
