@@ -2,9 +2,15 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
 
 /**
@@ -29,7 +35,7 @@ public class TextIssueResolver {
         }
 
         // Get the qualified name of the step object for this test step
-        String stepObjectQualifiedName = org.farhan.dsl.lang.SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        String stepObjectQualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         logger.debug("Step object qualified name: {}", stepObjectQualifiedName);
 
         if (stepObjectQualifiedName == null || stepObjectQualifiedName.isEmpty()) {
@@ -38,14 +44,14 @@ public class TextIssueResolver {
         }
 
         // Get the test project to access workspace step objects
-        org.farhan.dsl.lang.ITestProject theProject = org.farhan.dsl.lang.SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
         if (theProject == null) {
             logger.debug("Exiting correctNameWorkspace with {} proposals", proposals.size());
             return proposals;
         }
 
         // Find the step object with this qualified name
-        org.farhan.dsl.lang.IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
+        IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
         if (stepObject == null) {
             logger.debug("Step object not found: {}", stepObjectQualifiedName);
             logger.debug("Exiting correctNameWorkspace with {} proposals", proposals.size());
@@ -63,7 +69,7 @@ public class TextIssueResolver {
         }
 
         // Find the step definition in the step object
-        org.farhan.dsl.lang.IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
+        IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
         if (stepDefinition == null) {
             logger.debug("Step definition not found: {}", stepDefinitionName);
             logger.debug("Exiting correctNameWorkspace with {} proposals", proposals.size());
@@ -72,18 +78,18 @@ public class TextIssueResolver {
         logger.debug("Found step definition: {}", stepDefinition.getName());
 
         // Check if this step definition already has a "Content" parameter
-        org.farhan.dsl.lang.IStepParameters existingContentParameter = stepDefinition.getStepParameters("Content");
+        IStepParameters existingContentParameter = stepDefinition.getStepParameters("Content");
         if (existingContentParameter == null) {
             // Create a proposal to generate the missing Content parameter
-            org.farhan.dsl.lang.IStepObject clonedStepObject = org.farhan.dsl.lang.SheepDogUtility.cloneStepObject(stepObject);
-            org.farhan.dsl.lang.IStepDefinition clonedStepDefinition = clonedStepObject.getStepDefinition(stepDefinitionName);
+            IStepObject clonedStepObject = SheepDogUtility.cloneStepObject(stepObject);
+            IStepDefinition clonedStepDefinition = clonedStepObject.getStepDefinition(stepDefinitionName);
 
             if (clonedStepDefinition != null) {
-                org.farhan.dsl.lang.SheepDogBuilder.createStepParameters(clonedStepDefinition, "Content");
+                SheepDogBuilder.createStepParameters(clonedStepDefinition, "Content");
 
                 SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
                 generateProposal.setId("Generate Content");
-                generateProposal.setDescription(org.farhan.dsl.lang.SheepDogUtility.getStatementListAsString(clonedStepDefinition.getStatementList()));
+                generateProposal.setDescription(SheepDogUtility.getStatementListAsString(clonedStepDefinition.getStatementList()));
                 generateProposal.setValue(clonedStepObject.getContent());
                 proposals.add(generateProposal);
 
