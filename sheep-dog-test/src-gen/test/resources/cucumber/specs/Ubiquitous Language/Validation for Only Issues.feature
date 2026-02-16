@@ -1,0 +1,22 @@
+@sheep-dog-test
+Feature: Validation for Only Issues
+
+  \@sheep-dog-test
+  These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
+
+  @Validate
+  Scenario: Header row Cell names should start with a capital letter validation
+
+    \@Validate
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                | Row Contents |
+          | The daily batchjob Input file is present | header       |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                                              |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell/1 |
+     Then The xtext plugin validate dialog will be set as follows
+          """
+          Name should start with a capital
+          """
+
