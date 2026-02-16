@@ -2,8 +2,14 @@ package org.farhan.dsl.issues;
 
 import org.slf4j.Logger;
 
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -30,22 +36,22 @@ public class TextIssueDetector {
 
         // Navigate from Text to TestStep: Text -> TestStep
         if (theText.getParent() != null) {
-            org.farhan.dsl.lang.ITestStep theTestStep = theText.getParent();
+            ITestStep theTestStep = theText.getParent();
 
             // Get the step object and step definition from the workspace
-            String qualifiedName = org.farhan.dsl.lang.SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
             if (!qualifiedName.isEmpty()) {
-                org.farhan.dsl.lang.ITestProject theProject = org.farhan.dsl.lang.SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+                ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
                 if (theProject != null) {
-                    org.farhan.dsl.lang.IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+                    IStepObject theStepObject = theProject.getStepObject(qualifiedName);
                     if (theStepObject != null) {
                         // Get the step definition - use the full step definition name directly
                         String stepDefinitionName = theTestStep.getStepDefinitionName();
                         if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
-                            org.farhan.dsl.lang.IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                            IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
                             if (theStepDefinition != null) {
                                 // Check if step parameters with "Content" header exist
-                                org.farhan.dsl.lang.IStepParameters stepParams = theStepDefinition.getStepParameters("Content");
+                                IStepParameters stepParams = theStepDefinition.getStepParameters("Content");
                                 if (stepParams == null) {
                                     message = TextIssueTypes.TEXT_NAME_WORKSPACE.description;
                                 }
