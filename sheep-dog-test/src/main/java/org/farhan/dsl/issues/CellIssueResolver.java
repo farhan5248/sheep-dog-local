@@ -28,6 +28,26 @@ public class CellIssueResolver {
     public static ArrayList<SheepDogIssueProposal> correctNameOnly(ICell theCell) throws Exception {
         logger.debug("Entering correctNameOnly");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        if (theCell != null) {
+            String name = theCell.getName();
+            if (name != null && !name.isEmpty()) {
+                char firstChar = name.charAt(0);
+                if (!Character.isUpperCase(firstChar)) {
+                    // Create capitalized version
+                    String capitalizedName = Character.toUpperCase(firstChar) + name.substring(1);
+
+                    // Create proposal
+                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                    proposal.setId("Capitalize cell name");
+                    proposal.setDescription("Capitalize the first letter of the name");
+                    proposal.setValue(capitalizedName);
+                    proposals.add(proposal);
+                    logger.debug("Created proposal to capitalize '{}' to '{}'", name, capitalizedName);
+                }
+            }
+        }
+
         logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
         return proposals;
     }
