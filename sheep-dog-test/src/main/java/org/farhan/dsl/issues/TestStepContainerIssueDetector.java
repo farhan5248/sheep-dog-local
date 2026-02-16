@@ -28,7 +28,15 @@ public class TestStepContainerIssueDetector {
      */
     public static String validateNameOnly(ITestStepContainer theTestStepContainer) throws Exception {
         logger.debug("Entering validateNameOnly");
-
+        String name = theTestStepContainer.getName();
+        if (name != null && !name.isEmpty()) {
+            // Test case names should start with a capital letter
+            char firstChar = name.charAt(0);
+            if (Character.isLetter(firstChar) && !Character.isUpperCase(firstChar)) {
+                logger.debug("Exiting validateNameOnly");
+                return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
+            }
+        }
         logger.debug("Exiting validateNameOnly");
         return "";
     }
