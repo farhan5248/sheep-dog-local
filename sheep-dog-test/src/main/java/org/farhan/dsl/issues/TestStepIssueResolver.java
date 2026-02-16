@@ -5,6 +5,7 @@ import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
+import org.farhan.dsl.lang.StepDefinitionRefFragments;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
 
@@ -68,6 +69,64 @@ public class TestStepIssueResolver {
         logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        if (theTestStep != null) {
+            // Get the qualified name of the step object for this test step
+            String stepObjectQualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            logger.debug("Step object qualified name: {}", stepObjectQualifiedName);
+
+            if (stepObjectQualifiedName != null && !stepObjectQualifiedName.isEmpty()) {
+                // Get the test project to access workspace step objects
+                org.farhan.dsl.lang.ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+
+                if (theProject != null) {
+                    // Find the step object with this qualified name
+                    org.farhan.dsl.lang.IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
+
+                    if (stepObject != null) {
+                        logger.debug("Found step object: {}", stepObject.getNameLong());
+
+                        // Add all existing step definitions as quickfix options
+                        for (org.farhan.dsl.lang.IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                            String stepDefName = stepDefinition.getName();
+                            String stepDefDescription = SheepDogUtility.getStatementListAsString(stepDefinition.getStatementList());
+
+                            logger.debug("Adding existing step definition proposal: name={}, description={}", stepDefName, stepDefDescription);
+
+                            // Create proposal with id=name, value=name, description=description
+                            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                            proposal.setId(stepDefName);
+                            proposal.setValue(stepDefName);
+                            proposal.setDescription(stepDefDescription);
+                            proposals.add(proposal);
+                        }
+
+                        // Also create a proposal to generate the missing step definition
+                        String stepDefinitionName = StepDefinitionRefFragments.getState(theTestStep.getStepDefinitionName());
+                        if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                            // Check if this step definition already exists
+                            org.farhan.dsl.lang.IStepDefinition existingStepDef = stepObject.getStepDefinition(stepDefinitionName);
+
+                            if (existingStepDef == null) {
+                                // Create a new step definition for the quickfix proposal
+                                org.farhan.dsl.lang.IStepObject clonedStepObject = SheepDogUtility.cloneStepObject(stepObject);
+                                org.farhan.dsl.lang.IStepDefinition newStepDefinition = org.farhan.dsl.lang.SheepDogBuilder.createStepDefinition(clonedStepObject, stepDefinitionName);
+
+                                SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
+                                generateProposal.setId("Generate " + stepDefinitionName);
+                                generateProposal.setDescription(SheepDogUtility.getStatementListAsString(newStepDefinition.getStatementList()));
+                                generateProposal.setValue(clonedStepObject.getContent());
+                                proposals.add(generateProposal);
+
+                                logger.debug("Created proposal to generate step definition: {}", stepDefinitionName);
+                            }
+                        }
+                    } else {
+                        logger.debug("Step object not found: {}", stepObjectQualifiedName);
+                    }
+                }
+            }
+        }
 
         logger.debug("Exiting correctStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
