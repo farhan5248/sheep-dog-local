@@ -21,6 +21,8 @@ Feature: Validation for Only Issues
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
   \@sheep-dog-test
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
+  \@sheep-dog-test
+  These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
   @Validate
   Scenario: Header row Cell names should start with a capital letter validation
