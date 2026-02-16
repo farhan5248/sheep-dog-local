@@ -25,6 +25,18 @@ Feature: Code Generation for Workspace Issues
   1. An object such as an input file or report, a web-page or web-service response etc.
   2. A keyword or statement aka step definition about that object such as whether is exists, or has certain attributes or fields.
   3. A combination of parameters for that statement. This could be different combinations of search fields used in a search page.
+  \@sheep-dog-test
+  TODO Add tests for each quickfix one
+  TODO Add test step ensuring step object isn't changed until after the quickfix is applied
+  The Xtext framework lets you map the DSL to Java so that you can generate the Java code with minimal coding.
+  I think that's useful for a tester if every component is written in Java or the same language.
+  If it's not, and there's PL/SQL, COBOL, webMethods, Layer 7 and other such languages, you might not need Java code but insert statements for example.
+  In that case, generating Java code isn't that useful so I generate the lower layer describing each object.
+  One way to see these two layers is that the test cases in the first layer are paths in a graph model and the steps in the second are the vertices.
+  There's 3 things to generate
+  1. An object such as an input file or report, a web-page or web-service response etc.
+  2. A keyword or statement aka step definition about that object such as whether is exists, or has certain attributes or fields.
+  3. A combination of parameters for that statement. This could be different combinations of search fields used in a search page.
 
   @Generate
   Scenario: This object doesn't exist generation
@@ -65,4 +77,26 @@ Feature: Code Generation for Workspace Issues
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is absent            |
           | daily batchjob/Input file.feature | is present           |
+
+  @Generate
+  Scenario: This object step definition parameter set doesn't exist generation
+
+    \@Generate
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                       | Row Contents |
+          | The daily batchjob Input file is set as follows | N1, N2       |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Object Name                       | Step Definition Name | Parameters |
+          | daily batchjob/Input file.feature | is set as follows    | E1, E2, E3 |
+      And The xtext plugin list quickfixes dialog is set as follows
+          | Quickfix Name   | Quickfix Description |
+          | Generate N1, N2 | empty                |
+     When The xtext plugin apply quickfix action is performed as follows
+          | Selected Element                                       |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
+          | Object Name                       | Step Definition Name | Parameters |
+          | daily batchjob/Input file.feature | is set as follows    | E1, E2, E3 |
+          | daily batchjob/Input file.feature | is set as follows    | N1, N2     |
 
