@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -26,7 +27,23 @@ public class TestStepIssueDetector {
      */
     public static String validateStepObjectNameOnly(ITestStep theTestStep) {
         logger.debug("Entering validateStepObjectNameOnly");
-
+        String stepObjectName = theTestStep.getStepObjectName();
+        // Check if the step object name is missing or doesn't contain a valid object
+        if (stepObjectName == null || stepObjectName.isEmpty()) {
+            // Step has no object name - this is an error if step definition exists
+            String stepDefinitionName = theTestStep.getStepDefinitionName();
+            if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                logger.debug("Exiting validateStepObjectNameOnly");
+                return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
+            }
+        } else {
+            // Step object name exists but check if it's valid (has object type)
+            String object = StepObjectRefFragments.getObject(stepObjectName);
+            if (object.isEmpty()) {
+                logger.debug("Exiting validateStepObjectNameOnly");
+                return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
+            }
+        }
         logger.debug("Exiting validateStepObjectNameOnly");
         return "";
     }
