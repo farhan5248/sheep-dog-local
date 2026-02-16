@@ -24,10 +24,23 @@ public class TestStepContainerIssueResolver {
 	 *
 	 * @param theTestStepContainer the element needing corrections
 	 * @return list of quick fix proposals
+	 * @throws Exception if an error occurs during proposal generation
 	 */
-	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) {
+	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) throws Exception {
 		logger.debug("Entering correctNameOnly");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+		String name = theTestStepContainer.getName();
+		if (name != null && !name.isEmpty()) {
+			char firstChar = name.charAt(0);
+			if (Character.isLowerCase(firstChar)) {
+				String capitalizedName = Character.toUpperCase(firstChar) + name.substring(1);
+				SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+				proposal.setId("Capitalize test step container name");
+				proposal.setDescription("Capitalize the first letter of the name");
+				proposal.setValue(capitalizedName);
+				proposals.add(proposal);
+			}
+		}
 		logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
 		return proposals;
 	}
