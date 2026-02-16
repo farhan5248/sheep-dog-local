@@ -114,6 +114,24 @@ Feature: Proposals for File Step Objects
   The general idea behind these tests is that when no object is specified in the test step, you get a list of proposals.
   The variables are:
   1. Component: There's no suggestions if there's no component.
+  2. Component
+  If there's a component, propose objects that it has.
+  3. Previous Object in Test Case: If there's a previous object, propose both just the name and the long form name
+  4. Test Setup: The test setup section is checked if it has a component or object specified.
+  \@sheep-dog-test
+  TODO Add more background tests
+  The general idea behind these tests is that when no object is specified in the test step, you get a list of proposals.
+  The variables are:
+  1. Component: There's no suggestions if there's no component.
+  2. Component
+  If there's a component, propose objects that it has.
+  3. Previous Object in Test Case: If there's a previous object, propose both just the name and the long form name
+  4. Test Setup: The test setup section is checked if it has a component or object specified.
+  \@sheep-dog-test
+  TODO Add more background tests
+  The general idea behind these tests is that when no object is specified in the test step, you get a list of proposals.
+  The variables are:
+  1. Component: There's no suggestions if there's no component.
   2. Component Object: If there's a component, propose objects that it has.
   3. Previous Object in Test Case: If there's a previous object, propose both just the name and the long form name
   4. Test Setup: The test setup section is checked if it has a component or object specified.
