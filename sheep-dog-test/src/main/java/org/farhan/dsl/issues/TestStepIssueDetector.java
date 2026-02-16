@@ -2,6 +2,7 @@ package org.farhan.dsl.issues;
 
 import org.slf4j.Logger;
 
+import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
@@ -122,9 +123,26 @@ public class TestStepIssueDetector {
      */
     public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepDefinitionNameWorkspace");
-
+        String message = "";
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (!qualifiedName.isEmpty()) {
+            ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (theProject != null) {
+                IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+                if (theStepObject != null) {
+                    // Step object exists, now check if the step definition exists
+                    String stepDefinitionName = StepDefinitionRefFragments.getState(theTestStep.getStepDefinitionName());
+                    if (!stepDefinitionName.isEmpty()) {
+                        IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                        if (theStepDefinition == null) {
+                            message = TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
+                        }
+                    }
+                }
+            }
+        }
         logger.debug("Exiting validateStepDefinitionNameWorkspace");
-        return "";
+        return message;
     }
 
 }
