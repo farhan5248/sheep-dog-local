@@ -4,6 +4,9 @@ Feature: Quickfixes for File Issues
   \@sheep-dog-test
   Some problems prevent code generation.
   For example not knowing which component an object belongs to gets in the way of knowing where to create the file.
+  \@sheep-dog-test
+  Some problems prevent code generation.
+  For example not knowing which component an object belongs to gets in the way of knowing where to create the file.
 
   @Correct
   Scenario: The first step needs to have a component specified quickfix
@@ -18,6 +21,26 @@ Feature: Quickfixes for File Issues
           | Object Name                       | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
       And The xtext plugin validate dialog is empty
+     When The xtext plugin list quickfixes action is performed as follows
+          | Selected Element                |
+          | TestSuite/1/TestStepContainer/1 |
+     Then The xtext plugin list quickfixes dialog will be empty
+
+  @Correct
+  Scenario: No component in the first step triggers an error quickfix
+
+    \@Correct
+    The first step needs to have a component specified.
+    The other steps default to that one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                   |
+          | The Input file is present                   |
+          | The daily batchjob Input file is downloaded |
+      And The xtext plugin validate dialog is set as follows
+          """
+          The first step must have a component
+          """
      When The xtext plugin list quickfixes action is performed as follows
           | Selected Element                |
           | TestSuite/1/TestStepContainer/1 |
