@@ -3,8 +3,6 @@ package org.farhan.dsl.issues;
 import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
-import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
@@ -16,39 +14,20 @@ import org.farhan.dsl.lang.SheepDogLoggerFactory;
  */
 public class CellIssueDetector {
 
-	private static final Logger logger = SheepDogLoggerFactory.getLogger(CellIssueDetector.class);
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(CellIssueDetector.class);
 
-	/**
-	 * Validates a specific grammar assignment at element-only, file, or workspace
-	 * scope, returning empty string if valid or error description if invalid.
-	 *
-	 * @param theCell the element to validate
-	 * @return empty string if valid, error description otherwise
-	 * @throws Exception if validation fails
-	 */
-	public static String validateNameOnly(ICell theCell) throws Exception {
-		logger.debug("Entering validateNameOnly");
-		if (theCell != null && theCell.getName() != null && !theCell.getName().isEmpty()) {
-			// Only validate capitalization for header row (first row)
-			IRow parentRow = theCell.getParent();
-			if (parentRow != null) {
-				ITable parentTable = parentRow.getParent();
-				if (parentTable != null) {
-					// Check if this is the first row (header row)
-					boolean isHeaderRow = (parentTable.getRowList().size() > 0
-							&& parentTable.getRow(0) == parentRow);
+    /**
+     * Validates a specific grammar assignment at element-only, file, or workspace
+     * scope, returning empty string if valid or error description if invalid.
+     *
+     * @param theCell the element to validate
+     * @return empty string if valid, error description otherwise
+     * @throws Exception if validation fails
+     */
+    public static String validateNameOnly(ICell theCell) throws Exception {
+        logger.debug("Entering validateNameOnly");
 
-					if (isHeaderRow) {
-						String name = theCell.getName();
-						if (!Character.isUpperCase(name.charAt(0))) {
-							logger.debug("Exiting validateNameOnly");
-							return CellIssueTypes.CELL_NAME_ONLY.description;
-						}
-					}
-				}
-			}
-		}
-		logger.debug("Exiting validateNameOnly");
-		return "";
-	}
+        logger.debug("Exiting validateNameOnly");
+        return "";
+    }
 }
