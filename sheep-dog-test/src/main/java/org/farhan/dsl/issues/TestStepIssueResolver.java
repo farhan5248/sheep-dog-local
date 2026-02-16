@@ -1,7 +1,11 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -40,12 +44,12 @@ public class TestStepIssueResolver {
 
             if (qualifiedName != null && !qualifiedName.isEmpty()) {
                 // Create a new step object for the quickfix proposal
-                org.farhan.dsl.lang.IStepObject theStepObject = org.farhan.dsl.lang.SheepDogBuilder.createStepObject(null, qualifiedName);
+                IStepObject theStepObject = SheepDogBuilder.createStepObject(null, qualifiedName);
 
                 // Also create the step definition from the test step
                 String stepDefinitionName = StepDefinitionRefFragments.getState(theTestStep.getStepDefinitionName());
                 if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
-                    org.farhan.dsl.lang.SheepDogBuilder.createStepDefinition(theStepObject, stepDefinitionName);
+                    SheepDogBuilder.createStepDefinition(theStepObject, stepDefinitionName);
                     logger.debug("Created step definition: {}", stepDefinitionName);
                 }
 
@@ -84,17 +88,17 @@ public class TestStepIssueResolver {
 
             if (stepObjectQualifiedName != null && !stepObjectQualifiedName.isEmpty()) {
                 // Get the test project to access workspace step objects
-                org.farhan.dsl.lang.ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+                ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
 
                 if (theProject != null) {
                     // Find the step object with this qualified name
-                    org.farhan.dsl.lang.IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
+                    IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
 
                     if (stepObject != null) {
                         logger.debug("Found step object: {}", stepObject.getNameLong());
 
                         // Add all existing step definitions as quickfix options
-                        for (org.farhan.dsl.lang.IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                        for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
                             String stepDefName = stepDefinition.getName();
                             String stepDefDescription = SheepDogUtility.getStatementListAsString(stepDefinition.getStatementList());
 
@@ -112,12 +116,12 @@ public class TestStepIssueResolver {
                         String stepDefinitionName = StepDefinitionRefFragments.getState(theTestStep.getStepDefinitionName());
                         if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
                             // Check if this step definition already exists
-                            org.farhan.dsl.lang.IStepDefinition existingStepDef = stepObject.getStepDefinition(stepDefinitionName);
+                            IStepDefinition existingStepDef = stepObject.getStepDefinition(stepDefinitionName);
 
                             if (existingStepDef == null) {
                                 // Create a new step definition for the quickfix proposal
-                                org.farhan.dsl.lang.IStepObject clonedStepObject = SheepDogUtility.cloneStepObject(stepObject);
-                                org.farhan.dsl.lang.IStepDefinition newStepDefinition = org.farhan.dsl.lang.SheepDogBuilder.createStepDefinition(clonedStepObject, stepDefinitionName);
+                                IStepObject clonedStepObject = SheepDogUtility.cloneStepObject(stepObject);
+                                IStepDefinition newStepDefinition = SheepDogBuilder.createStepDefinition(clonedStepObject, stepDefinitionName);
 
                                 SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
                                 generateProposal.setId("Generate " + stepDefinitionName);
@@ -153,10 +157,10 @@ public class TestStepIssueResolver {
 
         if (theTestStep != null) {
             // Get the test project to access workspace step objects
-            org.farhan.dsl.lang.ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
             if (theProject != null) {
                 // Get all step objects from the workspace
-                for (org.farhan.dsl.lang.IStepObject stepObject : theProject.getStepObjectList()) {
+                for (IStepObject stepObject : theProject.getStepObjectList()) {
                     // Get the step object qualified name (e.g., "daily batchjob/Input file.feature")
                     String qualifiedName = stepObject.getNameLong();
                     if (qualifiedName != null && !qualifiedName.isEmpty()) {
@@ -246,17 +250,17 @@ public class TestStepIssueResolver {
 
             if (stepObjectQualifiedName != null && !stepObjectQualifiedName.isEmpty()) {
                 // Get the test project to access workspace step objects
-                org.farhan.dsl.lang.ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+                ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
 
                 if (theProject != null) {
                     // Find the step object with this qualified name
-                    org.farhan.dsl.lang.IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
+                    IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
 
                     if (stepObject != null) {
                         logger.debug("Found step object: {}", stepObject.getNameLong());
 
                         // Get all step definitions from the step object
-                        for (org.farhan.dsl.lang.IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                        for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
                             String stepDefName = stepDefinition.getName();
                             String stepDefDescription = SheepDogUtility.getStatementListAsString(stepDefinition.getStatementList());
 
