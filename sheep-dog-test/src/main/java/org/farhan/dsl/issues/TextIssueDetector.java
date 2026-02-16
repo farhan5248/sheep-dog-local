@@ -2,8 +2,15 @@ package org.farhan.dsl.issues;
 
 import org.slf4j.Logger;
 
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
+import org.farhan.dsl.lang.StepDefinitionRefFragments;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -26,7 +33,27 @@ public class TextIssueDetector {
      */
     public static String validateNameWorkspace(IText theText) throws Exception {
         logger.debug("Entering validateNameWorkspace");
-
+        ITestStep theTestStep = theText.getParent();
+        if (theTestStep != null) {
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            if (!qualifiedName.isEmpty()) {
+                ITestProject theProject = SheepDogUtility.getTestProjectParentForText(theText);
+                if (theProject != null) {
+                    IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+                    if (theStepObject != null) {
+                        String stepDefinitionName = StepDefinitionRefFragments.getAll(theTestStep.getStepDefinitionName());
+                        IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                        if (theStepDefinition != null) {
+                            IStepParameters theStepParameters = theStepDefinition.getStepParameters("Content");
+                            if (theStepParameters == null) {
+                                logger.debug("Exiting validateNameWorkspace with error");
+                                return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         logger.debug("Exiting validateNameWorkspace");
         return "";
     }

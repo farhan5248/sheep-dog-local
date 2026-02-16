@@ -2,8 +2,13 @@ package org.farhan.dsl.issues;
 
 import org.slf4j.Logger;
 
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
+import org.farhan.dsl.lang.StepDefinitionRefFragments;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -56,7 +61,17 @@ public class TestStepIssueDetector {
      */
     public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepObjectNameWorkspace");
-
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (!qualifiedName.isEmpty()) {
+            ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (theProject != null) {
+                IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+                if (theStepObject == null) {
+                    logger.debug("Exiting validateStepObjectNameWorkspace with error");
+                    return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
+                }
+            }
+        }
         logger.debug("Exiting validateStepObjectNameWorkspace");
         return "";
     }
@@ -71,7 +86,21 @@ public class TestStepIssueDetector {
      */
     public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepDefinitionNameWorkspace");
-
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (!qualifiedName.isEmpty()) {
+            ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (theProject != null) {
+                IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+                if (theStepObject != null) {
+                    String stepDefinitionName = StepDefinitionRefFragments.getAll(theTestStep.getStepDefinitionName());
+                    IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                    if (theStepDefinition == null) {
+                        logger.debug("Exiting validateStepDefinitionNameWorkspace with error");
+                        return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
+                    }
+                }
+            }
+        }
         logger.debug("Exiting validateStepDefinitionNameWorkspace");
         return "";
     }
