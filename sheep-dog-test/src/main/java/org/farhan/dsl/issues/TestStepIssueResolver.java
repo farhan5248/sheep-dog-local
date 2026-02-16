@@ -42,11 +42,18 @@ public class TestStepIssueResolver {
                 // Create a new step object for the quickfix proposal
                 org.farhan.dsl.lang.IStepObject theStepObject = org.farhan.dsl.lang.SheepDogBuilder.createStepObject(null, qualifiedName);
 
+                // Also create the step definition from the test step
+                String stepDefinitionName = StepDefinitionRefFragments.getState(theTestStep.getStepDefinitionName());
+                if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                    org.farhan.dsl.lang.SheepDogBuilder.createStepDefinition(theStepObject, stepDefinitionName);
+                    logger.debug("Created step definition: {}", stepDefinitionName);
+                }
+
                 // Create the proposal to generate the missing step object file
                 SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                 proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getNameLong());
                 proposal.setDescription(SheepDogUtility.getStatementListAsString(theStepObject.getStatementList()));
-                proposal.setValue(theStepObject.getContent());
+                proposal.setValue(theStepObject);
                 proposals.add(proposal);
 
                 logger.debug("Created proposal to generate step object: {}", theStepObject.getNameLong());
