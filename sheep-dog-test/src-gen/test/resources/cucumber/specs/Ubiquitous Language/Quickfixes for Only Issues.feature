@@ -17,6 +17,8 @@ Feature: Quickfixes for Only Issues
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
   \@sheep-dog-test
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
+  \@sheep-dog-test
+  These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
   @Correct
   Scenario: Cell name should start with a capital letter quickfix
