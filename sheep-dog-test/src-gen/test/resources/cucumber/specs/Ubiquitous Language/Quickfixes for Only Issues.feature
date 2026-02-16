@@ -11,6 +11,8 @@ Feature: Quickfixes for Only Issues
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
   \@sheep-dog-test
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
+  \@sheep-dog-test
+  These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
   @Correct
   Scenario: Cell name should start with a capital letter quickfix
@@ -105,6 +107,35 @@ Feature: Quickfixes for Only Issues
           The object can have the complete path or not.
           Object ending words are: file, page, response, dialog, directory, request, goal, job, action.
           Examples are: "src/test/resources/file.txt file" or "Home page"
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Selected Element                           |
+          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+     Then The xtext plugin list quickfixes dialog will be empty
+
+  @Correct
+  Scenario: Test step must have a valid step definition name quickfix
+
+    \@Correct
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                     |
+          | The daily batchjob Input file |
+      And The xtext plugin validate dialog is set as follows
+          """
+          After specifying the step object name, a step definition name is specified.
+          It has 3 parts, details (optional), state and time (optional).
+          Details is used to specify a part in a document, like the header or body.
+          The details ending words are: section, fragment, table, snippet, list.
+          Examples are: "Customer details section" or "Order History table"
+          State part begins with words like is or isn't which get converted to setters or assertions in the test automation.
+          Next it's followed by the state attribute which is optional and can be any word.
+          The state starting words are: is, isn't, will be, won't be.
+          Examples are: "is present" or "will be created as follows"
+          A test step can end with the time specified.
+          Time was useful running describing a sequence of steps like submitting an order before 5pm.
+          The time endings are: early, late, on time, at, before, after, in, on.
+          Examples are: "after the next day" or "on time"
           """
      When The xtext plugin list quickfixes action is performed as follows
           | Selected Element                           |
