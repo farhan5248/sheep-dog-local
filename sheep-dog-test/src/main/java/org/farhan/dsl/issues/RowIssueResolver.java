@@ -1,11 +1,15 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -124,7 +128,7 @@ public class RowIssueResolver {
             IStepDefinition clonedStepDefinition = clonedStepObject.getStepDefinition(stepDefinitionName);
 
             if (clonedStepDefinition != null) {
-                org.farhan.dsl.lang.SheepDogBuilder.createStepParameters(clonedStepDefinition, testStepCellList);
+                SheepDogBuilder.createStepParameters(clonedStepDefinition, testStepCellList);
 
                 SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
                 generateProposal.setId("Generate " + testStepCellList);
@@ -148,16 +152,16 @@ public class RowIssueResolver {
             return "";
         }
 
-        org.farhan.dsl.lang.ITable table = theTestStep.getTable();
+        ITable table = theTestStep.getTable();
         if (table.getRowList().isEmpty()) {
             return "";
         }
 
         // Get the first row (header row)
-        org.farhan.dsl.lang.IRow row = table.getRow(0);
+        IRow row = table.getRow(0);
         StringBuilder cellList = new StringBuilder();
 
-        for (org.farhan.dsl.lang.ICell cell : row.getCellList()) {
+        for (ICell cell : row.getCellList()) {
             if (cellList.length() > 0) {
                 cellList.append(", ");
             }
