@@ -63,6 +63,51 @@ public class TestStepIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        if (theTestStep != null) {
+            // Get previous steps to extract object references
+            java.util.ArrayList<org.farhan.dsl.lang.ITestStep> previousSteps =
+                org.farhan.dsl.lang.SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
+
+            for (org.farhan.dsl.lang.ITestStep previousStep : previousSteps) {
+                String stepObjectName = previousStep.getStepObjectName();
+                if (stepObjectName != null && !stepObjectName.isEmpty()) {
+                    // Parse the step object name to extract component and object
+                    String component = org.farhan.dsl.lang.StepObjectRefFragments.getComponent(stepObjectName);
+                    String object = org.farhan.dsl.lang.StepObjectRefFragments.getObject(stepObjectName);
+
+                    if (!object.isEmpty()) {
+                        // Extract the base object name and type from the full stepObjectName
+                        String objectName = org.farhan.dsl.lang.StepObjectRefFragments.getObjectName(stepObjectName);
+                        String objectType = org.farhan.dsl.lang.StepObjectRefFragments.getObjectType(stepObjectName);
+
+                        if (!objectName.isEmpty() && !objectType.isEmpty()) {
+                            String baseObjectName = (objectName + " " + objectType).trim();
+                            String previousStepNameLong = org.farhan.dsl.lang.SheepDogUtility.getTestStepNameLong(previousStep);
+                            String referenceText = "Referred in: " + previousStepNameLong;
+
+                            // Proposal 1: Just the object name (without component)
+                            org.farhan.dsl.lang.SheepDogIssueProposal proposal1 =
+                                new org.farhan.dsl.lang.SheepDogIssueProposal();
+                            proposal1.setId(baseObjectName);
+                            proposal1.setValue("The " + baseObjectName);
+                            proposal1.setDescription(referenceText);
+                            proposals.add(proposal1);
+
+                            // Proposal 2: Full component/object (if component exists)
+                            if (!component.isEmpty()) {
+                                org.farhan.dsl.lang.SheepDogIssueProposal proposal2 =
+                                    new org.farhan.dsl.lang.SheepDogIssueProposal();
+                                proposal2.setId((component + "/" + baseObjectName).trim());
+                                proposal2.setValue("The " + component + " " + baseObjectName);
+                                proposal2.setDescription(referenceText);
+                                proposals.add(proposal2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
