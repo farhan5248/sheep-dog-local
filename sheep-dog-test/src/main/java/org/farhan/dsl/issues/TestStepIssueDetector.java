@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.StepDefinitionRefFragments;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
@@ -58,7 +59,27 @@ public class TestStepIssueDetector {
      */
     public static String validateStepDefinitionNameOnly(ITestStep theTestStep) {
         logger.debug("Entering validateStepDefinitionNameOnly");
-
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        // Check if the step definition name is missing or doesn't contain a valid state
+        if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
+            // Step has no definition name - this is an error if step object name exists
+            String stepObjectName = theTestStep.getStepObjectName();
+            if (stepObjectName != null && !stepObjectName.isEmpty()) {
+                // Check if step object name has a valid object
+                String object = StepObjectRefFragments.getObject(stepObjectName);
+                if (!object.isEmpty()) {
+                    logger.debug("Exiting validateStepDefinitionNameOnly");
+                    return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
+                }
+            }
+        } else {
+            // Step definition name exists but check if it's valid (has state)
+            String state = StepDefinitionRefFragments.getState(stepDefinitionName);
+            if (state.isEmpty()) {
+                logger.debug("Exiting validateStepDefinitionNameOnly");
+                return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
+            }
+        }
         logger.debug("Exiting validateStepDefinitionNameOnly");
         return "";
     }
