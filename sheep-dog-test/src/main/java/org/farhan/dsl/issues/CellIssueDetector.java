@@ -3,6 +3,7 @@ package org.farhan.dsl.issues;
 import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
@@ -28,13 +29,29 @@ public class CellIssueDetector {
         logger.debug("Entering validateNameOnly");
         String name = theCell.getName();
         if (name != null && !name.isEmpty()) {
-            char firstChar = name.charAt(0);
-            if (!Character.isUpperCase(firstChar)) {
-                logger.debug("Exiting validateNameOnly");
-                return CellIssueTypes.CELL_NAME_ONLY.description;
+            // Only validate cells in header row (first row)
+            if (isHeaderRowCell(theCell)) {
+                char firstChar = name.charAt(0);
+                if (!Character.isUpperCase(firstChar)) {
+                    logger.debug("Exiting validateNameOnly");
+                    return CellIssueTypes.CELL_NAME_ONLY.description;
+                }
             }
         }
         logger.debug("Exiting validateNameOnly");
         return "";
+    }
+
+    private static boolean isHeaderRowCell(ICell theCell) {
+        logger.debug("Entering isHeaderRowCell");
+        IRow parentRow = theCell.getParent();
+        if (parentRow != null && parentRow.getParent() != null) {
+            IRow firstRow = parentRow.getParent().getRow(0);
+            boolean isHeader = parentRow == firstRow;
+            logger.debug("Exiting isHeaderRowCell");
+            return isHeader;
+        }
+        logger.debug("Exiting isHeaderRowCell");
+        return false;
     }
 }
