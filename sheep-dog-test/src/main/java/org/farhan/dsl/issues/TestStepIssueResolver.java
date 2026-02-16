@@ -153,6 +153,39 @@ public class TestStepIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        if (theTestStep != null) {
+            // Get the qualified name of the step object for this test step
+            String stepObjectQualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            logger.debug("Step object qualified name: {}", stepObjectQualifiedName);
+
+            if (stepObjectQualifiedName != null && !stepObjectQualifiedName.isEmpty()) {
+                // Get the test project to access workspace step objects
+                org.farhan.dsl.lang.ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+
+                if (theProject != null) {
+                    // Find the step object with this qualified name
+                    org.farhan.dsl.lang.IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
+
+                    if (stepObject != null) {
+                        logger.debug("Found step object: {}", stepObject.getNameLong());
+
+                        // Get all step definitions from the step object
+                        for (org.farhan.dsl.lang.IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                            String stepDefName = stepDefinition.getName();
+                            String stepDefDescription = SheepDogUtility.getStatementListAsString(stepDefinition.getStatementList());
+
+                            logger.debug("Adding step definition proposal: name={}, description={}", stepDefName, stepDefDescription);
+
+                            // Create proposal with id=name, value=name, description=description
+                            addProposal(proposals, stepDefName, stepDefName, stepDefDescription);
+                        }
+                    } else {
+                        logger.debug("Step object not found: {}", stepObjectQualifiedName);
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
