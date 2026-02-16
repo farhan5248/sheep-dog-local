@@ -66,6 +66,43 @@ public class TestStepIssueResolver {
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
         if (theTestStep != null) {
+            // Get the test project to access workspace step objects
+            org.farhan.dsl.lang.ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (theProject != null) {
+                // Get all step objects from the workspace
+                for (org.farhan.dsl.lang.IStepObject stepObject : theProject.getStepObjectList()) {
+                    // Get the step object qualified name (e.g., "daily batchjob/Input file.feature")
+                    String qualifiedName = stepObject.getNameLong();
+                    if (qualifiedName != null && !qualifiedName.isEmpty()) {
+                        // Parse the qualified name to extract component and object
+                        // Remove the file extension (.feature, .asciidoc, etc.)
+                        String nameWithoutExt = qualifiedName.replaceAll("\\.[^.]+$", "");
+
+                        // Split by "/" to get component and object
+                        String component = "";
+                        String object = "";
+                        if (nameWithoutExt.contains("/")) {
+                            String[] parts = nameWithoutExt.split("/", 2);
+                            component = parts[0];
+                            object = parts[1];
+                        } else {
+                            object = nameWithoutExt;
+                        }
+
+                        if (!object.isEmpty()) {
+                            // Get the step object description from statements
+                            String description = SheepDogUtility.getStatementListAsString(stepObject.getStatementList());
+
+                            // Proposal: Full component/object (if component exists)
+                            if (!component.isEmpty()) {
+                                addProposal(proposals, object,
+                                    "The " + component + " " + object, description);
+                            }
+                        }
+                    }
+                }
+            }
+
             // Get previous steps to extract object references
             ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
 
