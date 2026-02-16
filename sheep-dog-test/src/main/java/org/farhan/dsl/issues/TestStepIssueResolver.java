@@ -32,6 +32,26 @@ public class TestStepIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        if (theTestStep != null && !theTestStep.getStepObjectName().isEmpty()) {
+            // Get the qualified name for the step object (e.g., "daily batchjob/Input file.feature")
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            logger.debug("Step object qualified name: {}", qualifiedName);
+
+            if (qualifiedName != null && !qualifiedName.isEmpty()) {
+                // Create a new step object for the quickfix proposal
+                org.farhan.dsl.lang.IStepObject theStepObject = org.farhan.dsl.lang.SheepDogBuilder.createStepObject(null, qualifiedName);
+
+                // Create the proposal to generate the missing step object file
+                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getNameLong());
+                proposal.setDescription(SheepDogUtility.getStatementListAsString(theStepObject.getStatementList()));
+                proposal.setValue(theStepObject.getContent());
+                proposals.add(proposal);
+
+                logger.debug("Created proposal to generate step object: {}", theStepObject.getNameLong());
+            }
+        }
+
         logger.debug("Exiting correctStepObjectNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
