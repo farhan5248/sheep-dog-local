@@ -128,12 +128,17 @@ public class RowIssueResolver {
             IStepDefinition clonedStepDefinition = clonedStepObject.getStepDefinition(stepDefinitionName);
 
             if (clonedStepDefinition != null) {
-                SheepDogBuilder.createStepParameters(clonedStepDefinition, testStepCellList);
+                IStepParameters stepParameters = SheepDogBuilder.createStepParameters(clonedStepDefinition, testStepCellList);
+                ITable table = SheepDogBuilder.createTable(stepParameters);
+                IRow row = SheepDogBuilder.createRow(table);
+                for (String cellName : testStepCellList.split(", ")) {
+                    SheepDogBuilder.createCell(row, cellName.trim());
+                }
 
                 SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
                 generateProposal.setId("Generate " + testStepCellList);
                 generateProposal.setDescription(SheepDogUtility.getStatementListAsString(clonedStepDefinition.getStatementList()));
-                generateProposal.setValue(clonedStepObject.getContent());
+                generateProposal.setValue(clonedStepObject);
                 proposals.add(generateProposal);
 
                 logger.debug("Created proposal to generate step parameters: {}", testStepCellList);
