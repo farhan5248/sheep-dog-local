@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
+import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
 
 /**
@@ -65,42 +67,32 @@ public class TestStepIssueResolver {
 
         if (theTestStep != null) {
             // Get previous steps to extract object references
-            java.util.ArrayList<org.farhan.dsl.lang.ITestStep> previousSteps =
-                org.farhan.dsl.lang.SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
+            ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
 
-            for (org.farhan.dsl.lang.ITestStep previousStep : previousSteps) {
+            for (ITestStep previousStep : previousSteps) {
                 String stepObjectName = previousStep.getStepObjectName();
                 if (stepObjectName != null && !stepObjectName.isEmpty()) {
                     // Parse the step object name to extract component and object
-                    String component = org.farhan.dsl.lang.StepObjectRefFragments.getComponent(stepObjectName);
-                    String object = org.farhan.dsl.lang.StepObjectRefFragments.getObject(stepObjectName);
+                    String component = StepObjectRefFragments.getComponent(stepObjectName);
+                    String object = StepObjectRefFragments.getObject(stepObjectName);
 
                     if (!object.isEmpty()) {
                         // Extract the base object name and type from the full stepObjectName
-                        String objectName = org.farhan.dsl.lang.StepObjectRefFragments.getObjectName(stepObjectName);
-                        String objectType = org.farhan.dsl.lang.StepObjectRefFragments.getObjectType(stepObjectName);
+                        String objectName = StepObjectRefFragments.getObjectName(stepObjectName);
+                        String objectType = StepObjectRefFragments.getObjectType(stepObjectName);
 
                         if (!objectName.isEmpty() && !objectType.isEmpty()) {
                             String baseObjectName = (objectName + " " + objectType).trim();
-                            String previousStepNameLong = org.farhan.dsl.lang.SheepDogUtility.getTestStepNameLong(previousStep);
+                            String previousStepNameLong = SheepDogUtility.getTestStepNameLong(previousStep);
                             String referenceText = "Referred in: " + previousStepNameLong;
 
                             // Proposal 1: Just the object name (without component)
-                            org.farhan.dsl.lang.SheepDogIssueProposal proposal1 =
-                                new org.farhan.dsl.lang.SheepDogIssueProposal();
-                            proposal1.setId(baseObjectName);
-                            proposal1.setValue("The " + baseObjectName);
-                            proposal1.setDescription(referenceText);
-                            proposals.add(proposal1);
+                            addProposal(proposals, baseObjectName, "The " + baseObjectName, referenceText);
 
                             // Proposal 2: Full component/object (if component exists)
                             if (!component.isEmpty()) {
-                                org.farhan.dsl.lang.SheepDogIssueProposal proposal2 =
-                                    new org.farhan.dsl.lang.SheepDogIssueProposal();
-                                proposal2.setId((component + "/" + baseObjectName).trim());
-                                proposal2.setValue("The " + component + " " + baseObjectName);
-                                proposal2.setDescription(referenceText);
-                                proposals.add(proposal2);
+                                addProposal(proposals, (component + "/" + baseObjectName).trim(),
+                                    "The " + component + " " + baseObjectName, referenceText);
                             }
                         }
                     }
@@ -126,6 +118,15 @@ public class TestStepIssueResolver {
 
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
+    }
+
+    private static void addProposal(ArrayList<SheepDogIssueProposal> proposals, String id, String value,
+            String description) {
+        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+        proposal.setId(id);
+        proposal.setValue(value);
+        proposal.setDescription(description);
+        proposals.add(proposal);
     }
 
 }
