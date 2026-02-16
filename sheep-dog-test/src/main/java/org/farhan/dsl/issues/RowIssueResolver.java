@@ -1,9 +1,14 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
 
 /**
@@ -44,63 +49,74 @@ public class RowIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
-        if (theTestStep != null) {
-            // Get the qualified name of the step object for this test step
-            String stepObjectQualifiedName = org.farhan.dsl.lang.SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-            logger.debug("Step object qualified name: {}", stepObjectQualifiedName);
+        if (theTestStep == null) {
+            logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
 
-            if (stepObjectQualifiedName != null && !stepObjectQualifiedName.isEmpty()) {
-                // Get the test project to access workspace step objects
-                org.farhan.dsl.lang.ITestProject theProject = org.farhan.dsl.lang.SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        // Get the qualified name of the step object for this test step
+        String stepObjectQualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        logger.debug("Step object qualified name: {}", stepObjectQualifiedName);
 
-                if (theProject != null) {
-                    // Find the step object with this qualified name
-                    org.farhan.dsl.lang.IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
+        if (stepObjectQualifiedName == null || stepObjectQualifiedName.isEmpty()) {
+            logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
 
-                    if (stepObject != null) {
-                        logger.debug("Found step object: {}", stepObject.getNameLong());
+        // Get the test project to access workspace step objects
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (theProject == null) {
+            logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
 
-                        // Get the step definition name from the test step
-                        String stepDefinitionName = theTestStep.getStepDefinitionName();
-                        logger.debug("Looking for step definition: {}", stepDefinitionName);
+        // Find the step object with this qualified name
+        IStepObject stepObject = theProject.getStepObject(stepObjectQualifiedName);
+        if (stepObject == null) {
+            logger.debug("Step object not found: {}", stepObjectQualifiedName);
+            logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+        logger.debug("Found step object: {}", stepObject.getNameLong());
 
-                        if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
-                            // Find the step definition in the step object
-                            org.farhan.dsl.lang.IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
+        // Get the step definition name from the test step
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        logger.debug("Looking for step definition: {}", stepDefinitionName);
 
-                            if (stepDefinition != null) {
-                                logger.debug("Found step definition: {}", stepDefinition.getName());
+        if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
+            logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
 
-                                // Get all step parameters from the step definition
-                                for (org.farhan.dsl.lang.IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
-                                    String parametersName = stepParameters.getName();
+        // Find the step definition in the step object
+        IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
+        if (stepDefinition == null) {
+            logger.debug("Step definition not found: {}", stepDefinitionName);
+            logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+        logger.debug("Found step definition: {}", stepDefinition.getName());
 
-                                    // Skip Content parameters - they are for text blocks, not table rows
-                                    if ("Content".equals(parametersName)) {
-                                        logger.debug("Skipping Content parameter as it's for text blocks, not table rows");
-                                        continue;
-                                    }
+        // Get all step parameters from the step definition
+        for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
+            String parametersName = stepParameters.getName();
 
-                                    String parametersDescription = org.farhan.dsl.lang.SheepDogUtility.getStatementListAsString(stepParameters.getStatementList());
-
-                                    logger.debug("Adding step parameters proposal: name={}, description={}", parametersName, parametersDescription);
-
-                                    // Create proposal with id=name, value=name, description=description
-                                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                                    proposal.setId(parametersName);
-                                    proposal.setValue(parametersName);
-                                    proposal.setDescription(parametersDescription);
-                                    proposals.add(proposal);
-                                }
-                            } else {
-                                logger.debug("Step definition not found: {}", stepDefinitionName);
-                            }
-                        }
-                    } else {
-                        logger.debug("Step object not found: {}", stepObjectQualifiedName);
-                    }
-                }
+            // Skip Content parameters - they are for text blocks, not table rows
+            if ("Content".equals(parametersName)) {
+                logger.debug("Skipping Content parameter as it's for text blocks, not table rows");
+                continue;
             }
+
+            String parametersDescription = SheepDogUtility.getStatementListAsString(stepParameters.getStatementList());
+
+            logger.debug("Adding step parameters proposal: name={}, description={}", parametersName, parametersDescription);
+
+            // Create proposal with id=name, value=name, description=description
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId(parametersName);
+            proposal.setValue(parametersName);
+            proposal.setDescription(parametersDescription);
+            proposals.add(proposal);
         }
 
         logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
