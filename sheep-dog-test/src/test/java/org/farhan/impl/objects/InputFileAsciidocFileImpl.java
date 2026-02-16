@@ -49,7 +49,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
                     return;
                 }
             }
-            Assertions.fail("No step defintion found" + keyMap.get("Step Definition Name"));
+            Assertions.fail("No step defintion found: " + keyMap.get("Step Definition Name"));
         } catch (Exception e) {
             Assertions.fail(e);
         }

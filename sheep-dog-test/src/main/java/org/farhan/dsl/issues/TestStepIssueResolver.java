@@ -122,7 +122,7 @@ public class TestStepIssueResolver {
                                 SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
                                 generateProposal.setId("Generate " + stepDefinitionName);
                                 generateProposal.setDescription(SheepDogUtility.getStatementListAsString(newStepDefinition.getStatementList()));
-                                generateProposal.setValue(clonedStepObject.getContent());
+                                generateProposal.setValue(clonedStepObject);
                                 proposals.add(generateProposal);
 
                                 logger.debug("Created proposal to generate step definition: {}", stepDefinitionName);
