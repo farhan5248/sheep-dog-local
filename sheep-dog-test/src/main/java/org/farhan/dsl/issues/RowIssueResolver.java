@@ -74,6 +74,13 @@ public class RowIssueResolver {
                                 // Get all step parameters from the step definition
                                 for (org.farhan.dsl.lang.IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
                                     String parametersName = stepParameters.getName();
+
+                                    // Skip Content parameters - they are for text blocks, not table rows
+                                    if ("Content".equals(parametersName)) {
+                                        logger.debug("Skipping Content parameter as it's for text blocks, not table rows");
+                                        continue;
+                                    }
+
                                     String parametersDescription = org.farhan.dsl.lang.SheepDogUtility.getStatementListAsString(stepParameters.getStatementList());
 
                                     logger.debug("Adding step parameters proposal: name={}, description={}", parametersName, parametersDescription);
