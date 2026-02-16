@@ -61,6 +61,18 @@ Feature: Code Generation for Workspace Issues
   1. An object such as an input file or report, a web-page or web-service response etc.
   2. A keyword or statement aka step definition about that object such as whether is exists, or has certain attributes or fields.
   3. A combination of parameters for that statement. This could be different combinations of search fields used in a search page.
+  \@sheep-dog-test
+  TODO Add tests for each quickfix one
+  TODO Add test step ensuring step object isn't changed until after the quickfix is applied
+  The Xtext framework lets you map the DSL to Java so that you can generate the Java code with minimal coding.
+  I think that's useful for a tester if every component is written in Java or the same language.
+  If it's not, and there's PL/SQL, COBOL, webMethods, Layer 7 and other such languages, you might not need Java code but insert statements for example.
+  In that case, generating Java code isn't that useful so I generate the lower layer describing each object.
+  One way to see these two layers is that the test cases in the first layer are paths in a graph model and the steps in the second are the vertices.
+  There's 3 things to generate
+  1. An object such as an input file or report, a web-page or web-service response etc.
+  2. A keyword or statement aka step definition about that object such as whether is exists, or has certain attributes or fields.
+  3. A combination of parameters for that statement. This could be different combinations of search fields used in a search page.
 
   @Generate
   Scenario: This object doesn't exist generation
@@ -129,6 +141,7 @@ Feature: Code Generation for Workspace Issues
   @Generate
   Scenario: This object step definition text parameter doesn't exist generation
 
+    \@Generate
     \@Generate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
