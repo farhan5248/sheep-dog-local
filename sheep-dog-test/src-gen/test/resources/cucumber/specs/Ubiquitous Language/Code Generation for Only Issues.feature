@@ -3,6 +3,8 @@ Feature: Code Generation for Only Issues
 
   \@sheep-dog-test
   These tests verify that code generation works correctly when names follow proper capitalization rules.
+  \@sheep-dog-test
+  These tests verify that code generation works correctly when names follow proper capitalization rules.
 
   @Generate
   Scenario: Cell name should start with a capital letter generation
@@ -24,4 +26,22 @@ Feature: Code Generation for Only Issues
      Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file will be created as follows
           | Step Name                                | Row Contents     |
           | The daily batchjob Input file is present | Lowercase header |
+
+  @Generate
+  Scenario: Test suite name should start with a capital letter generation
+
+    \@Generate
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
+          | Test Suite Name   |
+          | lowercase process |
+      And The xtext plugin list quickfixes dialog is set as follows
+          | Quickfix Name              | Quickfix Description                    | Quickfix          |
+          | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
+     When The xtext plugin apply quickfix action is performed as follows
+          | Selected Element |
+          | TestSuite/1      |
+     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file will be created as follows
+          | Test Suite Name   |
+          | Lowercase process |
 
