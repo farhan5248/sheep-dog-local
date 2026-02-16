@@ -7,6 +7,8 @@ Feature: Code Generation for Only Issues
   These tests verify that code generation works correctly when names follow proper capitalization rules.
   \@sheep-dog-test
   These tests verify that code generation works correctly when names follow proper capitalization rules.
+  \@sheep-dog-test
+  These tests verify that code generation works correctly when names follow proper capitalization rules.
 
   @Generate
   Scenario: Cell name should start with a capital letter generation
