@@ -2,9 +2,11 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogBuilder;
@@ -85,12 +87,15 @@ public class TextIssueResolver {
             IStepDefinition clonedStepDefinition = clonedStepObject.getStepDefinition(stepDefinitionName);
 
             if (clonedStepDefinition != null) {
-                SheepDogBuilder.createStepParameters(clonedStepDefinition, "Content");
+                IStepParameters stepParameters = SheepDogBuilder.createStepParameters(clonedStepDefinition, "Content");
+                ITable table = SheepDogBuilder.createTable(stepParameters);
+                IRow row = SheepDogBuilder.createRow(table);
+                SheepDogBuilder.createCell(row, "Content");
 
                 SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
                 generateProposal.setId("Generate Content");
                 generateProposal.setDescription(SheepDogUtility.getStatementListAsString(clonedStepDefinition.getStatementList()));
-                generateProposal.setValue(clonedStepObject.getContent());
+                generateProposal.setValue(clonedStepObject);
                 proposals.add(generateProposal);
 
                 logger.debug("Created proposal to generate Content parameter");
