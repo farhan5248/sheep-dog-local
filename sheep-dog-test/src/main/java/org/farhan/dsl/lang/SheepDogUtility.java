@@ -114,11 +114,25 @@ public class SheepDogUtility {
      * @return qualified name string with component, object, and file extension
      */
     public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
-        String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
-        String component = StepObjectRefFragments.getComponent(stepNameLong);
-        String object = StepObjectRefFragments.getObject(stepNameLong);
-        String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
-        return component + "/" + object + fileExt;
+        if (theStep != null) {
+            String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
+            if (stepNameLong != null && !stepNameLong.isEmpty()) {
+                String component = StepObjectRefFragments.getComponent(stepNameLong);
+                String object = StepObjectRefFragments.getObject(stepNameLong);
+
+                if (!component.isEmpty() && !object.isEmpty()) {
+                    // Use the new utility method to navigate to project
+                    ITestProject project = getTestProjectParentForTestStep(theStep);
+                    if (project != null) {
+                        String fileExt = project.getFileExtension();
+                        if (fileExt != null && !fileExt.isEmpty()) {
+                            return component + "/" + object + fileExt;
+                        }
+                    }
+                }
+            }
+        }
+        return "";
     }
 
     /**
@@ -135,7 +149,7 @@ public class SheepDogUtility {
         String object = StepObjectRefFragments.getObject(theStep.getStepObjectName());
 
         if (component.isEmpty() || !object.contains("/")) {
-            ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep);
+            ArrayList<ITestStep> previousSteps = getTestStepListUpToTestStep(theStep);
             for (ITestStep previousStep : previousSteps) {
                 // if the step has a matching object
                 String previousObject = StepObjectRefFragments.getObject(previousStep.getStepObjectName());
@@ -170,17 +184,107 @@ public class SheepDogUtility {
         return "The " + component + " " + object + " " + theStep.getStepDefinitionName();
     }
 
-    private static ArrayList<ITestStep> getPreviousSteps(ITestStep theTestStep) {
+    /**
+     * Gets the grand parent or great grand parent etc for a type. Navigates the
+     * parent hierarchy to reach the TestProject from a Text element.
+     *
+     * @param theText the text element to navigate from
+     * @return the TestProject parent, or null if not found
+     */
+    public static ITestProject getTestProjectParentForText(IText theText) {
+        if (theText != null) {
+            ITestStep testStep = theText.getParent();
+            if (testStep != null) {
+                ITestStepContainer container = testStep.getParent();
+                if (container != null) {
+                    ITestSuite suite = container.getParent();
+                    if (suite != null) {
+                        return suite.getParent();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the grand parent or great grand parent etc for a type. Navigates the
+     * parent hierarchy to reach the TestProject from a TestStep element.
+     *
+     * @param theTestStep the test step element to navigate from
+     * @return the TestProject parent, or null if not found
+     */
+    public static ITestProject getTestProjectParentForTestStep(ITestStep theTestStep) {
+        if (theTestStep != null) {
+            ITestStepContainer container = theTestStep.getParent();
+            if (container != null) {
+                ITestSuite suite = container.getParent();
+                if (suite != null) {
+                    return suite.getParent();
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the grand parent or great grand parent etc for a type. Navigates the
+     * parent hierarchy to reach the TestProject from a Row element.
+     *
+     * @param theRow the row element to navigate from
+     * @return the TestProject parent, or null if not found
+     */
+    public static ITestProject getTestProjectParentForRow(IRow theRow) {
+        if (theRow != null) {
+            ITable table = theRow.getParent();
+            if (table != null) {
+                Object tableParent = table.getParent();
+                if (tableParent instanceof ITestStep) {
+                    return getTestProjectParentForTestStep((ITestStep) tableParent);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets a list of elements up to (but not including) the specified element.
+     * Returns elements in reverse chronological order (most recent first) for context inference.
+     * Includes background/setup steps when processing scenario/test case steps.
+     *
+     * @param theTestStep the current test step
+     * @return list of test steps up to the specified step in reverse chronological order
+     */
+    public static ArrayList<ITestStep> getTestStepListUpToTestStep(ITestStep theTestStep) {
         ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
-        for (ITestStep t : theTestStep.getParent().getTestStepList()) {
-            // TODO make tests for this
-            if (t.equals(theTestStep)) {
-                break;
-            } else {
-                steps.add(0, t);
+        if (theTestStep != null && theTestStep.getParent() != null) {
+            ITestStepContainer currentContainer = theTestStep.getParent();
+
+            // First, add steps from current container up to theTestStep
+            for (ITestStep t : currentContainer.getTestStepList()) {
+                if (t.equals(theTestStep)) {
+                    break;
+                } else {
+                    steps.add(0, t);
+                }
+            }
+
+            // If current container is a TestCase, also include all steps from TestSetup (Background)
+            if (currentContainer instanceof ITestCase) {
+                ITestSuite suite = currentContainer.getParent();
+                if (suite != null) {
+                    for (ITestStepContainer container : suite.getTestStepContainerList()) {
+                        if (container instanceof ITestSetup) {
+                            // Add all background steps (in reverse order)
+                            List<ITestStep> backgroundSteps = container.getTestStepList();
+                            for (int i = backgroundSteps.size() - 1; i >= 0; i--) {
+                                steps.add(0, backgroundSteps.get(i));
+                            }
+                        }
+                    }
+                }
             }
         }
         return steps;
-
     }
 }
