@@ -1,6 +1,7 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
@@ -10,70 +11,45 @@ import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
 
-/**
- * Quick fix proposal generation for validation errors.
- * <p>
- * Separates fix proposal logic from detection and application, enabling
- * IDE-independent validation tooling.
- * </p>
- */
 public class TestStepIssueResolver {
 
     private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
 
-    /**
-     * Generates proposals correcting values when an assignment exists but is
-     * invalid.
-     *
-     * @param theTestStep the element needing corrections
-     * @return list of quick fix proposals
-     */
     public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {
         logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
         logger.debug("Exiting correctStepObjectNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
 
-    /**
-     * Generates proposals correcting values when an assignment exists but is
-     * invalid.
-     *
-     * @param theTestStep the element needing corrections
-     * @return list of quick fix proposals
-     */
     public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep)
             throws Exception {
         logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
         logger.debug("Exiting correctStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
 
-    /**
-     * Generates proposals suggesting values when an assignment is missing or empty.
-     *
-     * @param theTestStep the element needing suggestions
-     * @return list of quick fix proposals
-     */
     public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {
         logger.debug("Entering suggestStepObjectNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
-        // Suggest objects from all components in the workspace
+        String stepObjectName = theTestStep != null ? theTestStep.getStepObjectName() : null;
+        if (stepObjectName != null && !stepObjectName.isEmpty()) {
+            logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
         for (SheepDogIssueProposal proposal : getWorkspaceObjects(theProject)) {
             proposals.add(proposal);
         }
 
-        // Suggest objects from previous steps
         for (SheepDogIssueProposal proposal : getPreviousObjects(theTestStep)) {
             proposals.add(proposal);
         }
@@ -96,14 +72,12 @@ public class TestStepIssueResolver {
             }
             String referredIn = "Referred in: " + previousStep.toString();
 
-            // Short form: just the object
             SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
             shortProposal.setId(object);
             shortProposal.setValue("The " + object);
             shortProposal.setDescription(referredIn);
             proposals.add(shortProposal);
 
-            // Long form: component/object (only when component is present)
             if (!component.isEmpty()) {
                 SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
                 longProposal.setId(component + "/" + object);
@@ -139,17 +113,45 @@ public class TestStepIssueResolver {
         return proposals;
     }
 
-    /**
-     * Generates proposals suggesting values when an assignment is missing or empty.
-     *
-     * @param theTestStep the element needing suggestions
-     * @return list of quick fix proposals
-     */
     public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep)
             throws Exception {
         logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        String stepObjectName = theTestStep != null ? theTestStep.getStepObjectName() : null;
+        if (stepObjectName == null || stepObjectName.isEmpty()) {
+            logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (qualifiedName.isEmpty()) {
+            logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (theProject == null) {
+            logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+        if (theStepObject == null) {
+            logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        for (IStepDefinition stepDefinition : theStepObject.getStepDefinitionList()) {
+            String defName = stepDefinition.getName();
+            String defDescription = SheepDogUtility.getStatementListAsString(stepDefinition.getStatementList());
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId(defName);
+            proposal.setValue(defName);
+            proposal.setDescription(defDescription);
+            proposals.add(proposal);
+        }
 
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
