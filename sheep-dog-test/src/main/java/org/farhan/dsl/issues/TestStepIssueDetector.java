@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -73,8 +74,40 @@ public class TestStepIssueDetector {
     public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepObjectNameWorkspace");
 
+        String message = "";
+        String stepObjectName = theTestStep.getStepObjectName();
+
+        if (stepObjectName != null && !stepObjectName.isEmpty()) {
+            String component = StepObjectRefFragments.getComponent(stepObjectName);
+            String object = StepObjectRefFragments.getObject(stepObjectName);
+
+            if (!component.isEmpty() && !object.isEmpty()) {
+                // Get the test project from the step's parent hierarchy
+                // TestStep -> TestStepContainer -> TestSuite -> TestProject
+                if (theTestStep.getParent() != null
+                    && theTestStep.getParent().getParent() != null) {
+
+                    org.farhan.dsl.lang.ITestProject theProject = theTestStep.getParent().getParent().getParent();
+
+                    // Construct the qualified name of the step object file
+                    // component/object.asciidoc format
+                    String fileExt = theProject.getFileExtension();
+                    if (fileExt == null) {
+                        fileExt = "";
+                    }
+                    String qualifiedName = component + "/" + object + fileExt;
+
+                    // Check if the step object exists in the project
+                    org.farhan.dsl.lang.IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+                    if (theStepObject == null) {
+                        message = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting validateStepObjectNameWorkspace");
-        return "";
+        return message;
     }
 
     /**
@@ -88,8 +121,46 @@ public class TestStepIssueDetector {
     public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepDefinitionNameWorkspace");
 
+        String message = "";
+        String stepObjectName = theTestStep.getStepObjectName();
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+
+        if (stepObjectName != null && !stepObjectName.isEmpty() &&
+            stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+            String component = StepObjectRefFragments.getComponent(stepObjectName);
+            String object = StepObjectRefFragments.getObject(stepObjectName);
+
+            if (!component.isEmpty() && !object.isEmpty()) {
+                // Get the test project from the step's parent hierarchy
+                // TestStep -> TestStepContainer -> TestSuite -> TestProject
+                if (theTestStep.getParent() != null
+                    && theTestStep.getParent().getParent() != null) {
+
+                    org.farhan.dsl.lang.ITestProject theProject = theTestStep.getParent().getParent().getParent();
+
+                    // Construct the qualified name of the step object file
+                    // component/object.asciidoc format
+                    String fileExt = theProject.getFileExtension();
+                    if (fileExt == null) {
+                        fileExt = "";
+                    }
+                    String qualifiedName = component + "/" + object + fileExt;
+
+                    // Check if the step object exists in the project
+                    org.farhan.dsl.lang.IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+                    if (theStepObject != null) {
+                        // Step object exists, now check if the step definition exists
+                        org.farhan.dsl.lang.IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                        if (theStepDefinition == null) {
+                            message = TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
+                        }
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting validateStepDefinitionNameWorkspace");
-        return "";
+        return message;
     }
 
 }
