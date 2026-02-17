@@ -1,6 +1,7 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
@@ -154,6 +155,39 @@ public class TestStepIssueResolver {
         logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        if (theTestStep != null) {
+            // Get the step object name from the test step
+            String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+
+            if (stepObjectNameLong != null && !stepObjectNameLong.isEmpty()) {
+                // Find the matching step object in the workspace
+                ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+
+                if (project != null) {
+                    for (IStepObject stepObject : project.getStepObjectList()) {
+                        if (stepObjectNameLong.equals(stepObject.getNameLong())) {
+                            // Found the matching step object - add proposals for each step definition
+                            for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                                String stepDefName = stepDefinition.getName();
+                                if (stepDefName != null && !stepDefName.isEmpty()) {
+                                    String description = SheepDogUtility.getStatementListAsString(
+                                            stepDefinition.getStatementList());
+
+                                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                                    proposal.setId(stepDefName);
+                                    proposal.setValue(stepDefName);
+                                    proposal.setDescription(description);
+                                    proposals.add(proposal);
+                                    logger.debug("Added step definition proposal: {} = {}", stepDefName, stepDefName);
+                                }
+                            }
+                            break; // Found the matching step object, no need to continue
+                        }
+                    }
+                }
+            }
+        }
 
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
