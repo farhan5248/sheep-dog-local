@@ -228,6 +228,26 @@ public class SheepDogUtility {
     }
 
     /**
+     * Gets the grand parent or great grand parent etc for a type. Navigates the
+     * parent hierarchy to reach the TestProject from a Row element.
+     *
+     * @param theRow the row element to navigate from
+     * @return the TestProject parent, or null if not found
+     */
+    public static ITestProject getTestProjectParentForRow(IRow theRow) {
+        if (theRow != null) {
+            ITable table = theRow.getParent();
+            if (table != null) {
+                Object tableParent = table.getParent();
+                if (tableParent instanceof ITestStep) {
+                    return getTestProjectParentForTestStep((ITestStep) tableParent);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * Gets a list of elements up to (but not including) the specified element.
      * Returns elements in reverse chronological order (most recent first) for context inference.
      * Includes background/setup steps when processing scenario/test case steps.

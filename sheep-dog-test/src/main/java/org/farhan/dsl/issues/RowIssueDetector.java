@@ -8,11 +8,10 @@ import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
@@ -63,10 +62,12 @@ public class RowIssueDetector {
         }
         String rowParametersKey = rowHeaders.toString();
 
-        // Navigate to the test project to get the step object
-        ITestStepContainer testStepContainer = testStep.getParent();
-        ITestSuite testSuite = testStepContainer.getParent();
-        ITestProject testProject = testSuite.getParent();
+        // Get the test project using utility method
+        ITestProject testProject = SheepDogUtility.getTestProjectParentForRow(theRow);
+        if (testProject == null) {
+            logger.debug("Exiting validateCellListWorkspace");
+            return "";
+        }
 
         // Try to get the step object and step definition
         String stepObjectName = testStep.getStepObjectName();
