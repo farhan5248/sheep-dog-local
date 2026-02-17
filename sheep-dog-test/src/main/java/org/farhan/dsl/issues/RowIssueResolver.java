@@ -62,6 +62,20 @@ public class RowIssueResolver {
                     }
                 }
             }
+
+            if (theTestStep.getTable() != null && theTestStep.getTable().getRowList() != null
+                    && !theTestStep.getTable().getRowList().isEmpty()) {
+                String currentCellList = SheepDogUtility
+                        .getCellListAsString(theTestStep.getTable().getRowList().getFirst().getCellList());
+                if (currentCellList != null && !currentCellList.isEmpty()) {
+                    SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
+                    generateProposal.setId("Generate " + currentCellList);
+                    generateProposal.setDescription("");
+                    generateProposal.setValue("");
+                    proposals.add(generateProposal);
+                    logger.debug("Added generate cell list proposal: Generate {}", currentCellList);
+                }
+            }
         }
 
         logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
