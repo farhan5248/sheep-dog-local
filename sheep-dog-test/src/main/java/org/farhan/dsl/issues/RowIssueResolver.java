@@ -34,6 +34,36 @@ public class RowIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        if (theTestStep != null) {
+            String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            String stepDefinitionName = theTestStep.getStepDefinitionName();
+
+            if (stepObjectNameLong != null && !stepObjectNameLong.isEmpty()
+                    && stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+                if (project != null) {
+                    IStepObject stepObject = project.getStepObject(stepObjectNameLong);
+                    if (stepObject != null) {
+                        stepObject = SheepDogUtility.cloneStepObject(stepObject);
+                        IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
+                        if (stepDefinition != null) {
+                            for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
+                                String cellListAsString = SheepDogUtility
+                                        .getCellListAsString(stepParameters.getTable().getRowList().getFirst().getCellList());
+                                if (cellListAsString != null && !cellListAsString.isEmpty()) {
+                                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                                    proposal.setId(cellListAsString);
+                                    proposal.setValue(cellListAsString);
+                                    proposals.add(proposal);
+                                    logger.debug("Added cell list proposal: {}", cellListAsString);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
         return proposals;
     }
