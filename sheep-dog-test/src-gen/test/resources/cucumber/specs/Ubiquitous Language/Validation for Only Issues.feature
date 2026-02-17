@@ -11,6 +11,8 @@ Feature: Validation for Only Issues
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
   \@sheep-dog-test
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
+  \@sheep-dog-test
+  These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
   @Validate
   Scenario: Test suite name should start with a capital letter validation
@@ -110,4 +112,18 @@ Feature: Validation for Only Issues
           """
           Name should start with a capital
           """
+
+  @Validate
+  Scenario: Body row Cell names can be any case validation
+
+    \@Validate
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
+          | Step Name                                | Row Contents |
+          | The daily batchjob Input file is present | Header       |
+          | The daily batchjob Input file is present | value        |
+     When The xtext plugin validate action is performed as follows
+          | Selected Element                                              |
+          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/2/Cell/1 |
+     Then The xtext plugin validate dialog will be empty
 
