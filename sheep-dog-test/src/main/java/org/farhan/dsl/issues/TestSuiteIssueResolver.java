@@ -27,6 +27,18 @@ public class TestSuiteIssueResolver {
 	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestSuite theTestSuite) {
 		logger.debug("Entering correctNameOnly");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+		if (theTestSuite != null) {
+			String name = theTestSuite.getName();
+			if (name != null && !name.isEmpty() && Character.isLowerCase(name.charAt(0))) {
+				String capitalizedName = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+				SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+				proposal.setId("Capitalize test suite name");
+				proposal.setDescription("Capitalize the first letter of the name");
+				proposal.setValue(capitalizedName);
+				proposals.add(proposal);
+				logger.debug("Added capitalize proposal for name: {}", name);
+			}
+		}
 		logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
 		return proposals;
 	}
