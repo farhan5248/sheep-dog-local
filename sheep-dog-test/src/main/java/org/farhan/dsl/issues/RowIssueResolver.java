@@ -1,9 +1,11 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogBuilder;
@@ -71,13 +73,30 @@ public class RowIssueResolver {
                 String cellListAsString = SheepDogUtility
                         .getCellListAsString(theTestStep.getTable().getRowList().getFirst().getCellList());
                 if (cellListAsString != null && !cellListAsString.isEmpty()) {
-                    IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(null, cellListAsString);
-                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                    proposal.setId("Generate " + cellListAsString);
-                    proposal.setValue(newStepParameters);
-                    proposal.setDescription("");
-                    proposals.add(proposal);
-                    logger.debug("Added generate cell list proposal: Generate {}", cellListAsString);
+                    String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+                    String stepDefinitionName = theTestStep.getStepDefinitionName();
+                    ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+                    if (project != null && stepObjectNameLong != null && !stepObjectNameLong.isEmpty()) {
+                        IStepObject existingStepObject = project.getStepObject(stepObjectNameLong);
+                        if (existingStepObject != null) {
+                            IStepObject clonedStepObject = SheepDogUtility.cloneStepObject(existingStepObject);
+                            IStepDefinition clonedStepDefinition = clonedStepObject.getStepDefinition(stepDefinitionName);
+                            if (clonedStepDefinition != null) {
+                                IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(clonedStepDefinition, cellListAsString);
+                                ITable table = SheepDogBuilder.createTable(newStepParameters);
+                                IRow row = SheepDogBuilder.createRow(table);
+                                for (String h : cellListAsString.split(",")) {
+                                    SheepDogBuilder.createCell(row, h.trim());
+                                }
+                                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                                proposal.setId("Generate " + cellListAsString);
+                                proposal.setValue(clonedStepObject);
+                                proposal.setDescription("");
+                                proposals.add(proposal);
+                                logger.debug("Added generate cell list proposal: Generate {}", cellListAsString);
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -51,6 +51,10 @@ public class TestStepIssueResolver {
                 }
 
                 IStepObject newStepObject = SheepDogBuilder.createStepObject(null, stepObjectNameLong);
+                String stepDefinitionName = theTestStep.getStepDefinitionName();
+                if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                    SheepDogBuilder.createStepDefinition(newStepObject, stepDefinitionName);
+                }
 
                 SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                 proposal.setId("Generate " + objectName + " - " + stepObjectNameLong);
@@ -105,11 +109,11 @@ public class TestStepIssueResolver {
 
                             // Add a proposal to generate the missing step definition
                             if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
-                                IStepDefinition newStepDefinition = SheepDogBuilder.createStepDefinition(
-                                        null, stepDefinitionName);
+                                IStepObject clonedStepObject = SheepDogUtility.cloneStepObject(stepObject);
+                                SheepDogBuilder.createStepDefinition(clonedStepObject, stepDefinitionName);
                                 SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                                proposal.setId("Generate " + newStepDefinition.getName());
-                                proposal.setValue(stepObject.getContent());
+                                proposal.setId("Generate " + stepDefinitionName);
+                                proposal.setValue(clonedStepObject);
                                 proposal.setDescription("");
                                 proposals.add(proposal);
                                 logger.debug("Added generate step definition proposal: Generate {}", stepDefinitionName);
