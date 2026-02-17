@@ -113,6 +113,23 @@ public class TestStepIssueDetector {
     public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepDefinitionNameWorkspace");
 
+        String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (stepObjectNameLong != null && !stepObjectNameLong.isEmpty()) {
+            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (project != null) {
+                IStepObject stepObject = project.getStepObject(stepObjectNameLong);
+                if (stepObject != null) {
+                    String stepDefinitionName = theTestStep.getStepDefinitionName();
+                    if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                        if (stepObject.getStepDefinition(stepDefinitionName) == null) {
+                            logger.debug("Exiting validateStepDefinitionNameWorkspace with error");
+                            return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
+                        }
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting validateStepDefinitionNameWorkspace");
         return "";
     }
