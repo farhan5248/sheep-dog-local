@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
+import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
 
 /**
@@ -63,7 +65,45 @@ public class TestStepIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        // Suggest objects from previous steps
+        for (SheepDogIssueProposal proposal : getPreviousObjects(theTestStep)) {
+            proposals.add(proposal);
+        }
+
         logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
+        return proposals;
+    }
+
+    private static ArrayList<SheepDogIssueProposal> getPreviousObjects(ITestStep theTestStep) {
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        for (ITestStep previousStep : SheepDogUtility.getTestStepListUpToTestStep(theTestStep)) {
+            String stepObjectName = previousStep.getStepObjectName();
+            if (stepObjectName == null || stepObjectName.isEmpty()) {
+                continue;
+            }
+            String component = StepObjectRefFragments.getComponent(stepObjectName);
+            String object = StepObjectRefFragments.getObject(stepObjectName);
+            if (object.isEmpty()) {
+                continue;
+            }
+            String referredIn = "Referred in: " + previousStep.toString();
+
+            // Short form: just the object
+            SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
+            shortProposal.setId(object);
+            shortProposal.setValue("The " + object);
+            shortProposal.setDescription(referredIn);
+            proposals.add(shortProposal);
+
+            // Long form: component/object (only when component is present)
+            if (!component.isEmpty()) {
+                SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
+                longProposal.setId(component + "/" + object);
+                longProposal.setValue("The " + component + " " + object);
+                longProposal.setDescription(referredIn);
+                proposals.add(longProposal);
+            }
+        }
         return proposals;
     }
 
