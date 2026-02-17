@@ -2,8 +2,11 @@ package org.farhan.dsl.issues;
 
 import org.slf4j.Logger;
 
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.lang.StepDefinitionRefFragments;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 
@@ -82,6 +85,18 @@ public class TestStepIssueDetector {
      */
     public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepObjectNameWorkspace");
+
+        String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (stepObjectNameLong != null && !stepObjectNameLong.isEmpty()) {
+            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (project != null) {
+                IStepObject stepObject = project.getStepObject(stepObjectNameLong);
+                if (stepObject == null) {
+                    logger.debug("Exiting validateStepObjectNameWorkspace with error");
+                    return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
+                }
+            }
+        }
 
         logger.debug("Exiting validateStepObjectNameWorkspace");
         return "";
