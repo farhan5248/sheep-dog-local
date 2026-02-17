@@ -15,6 +15,14 @@ public class TestStepIssueResolver {
 
     private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
 
+    private static SheepDogIssueProposal createProposal(String id, String value, String description) {
+        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+        proposal.setId(id);
+        proposal.setValue(value);
+        proposal.setDescription(description);
+        return proposal;
+    }
+
     public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {
         logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
@@ -72,18 +80,10 @@ public class TestStepIssueResolver {
             }
             String referredIn = "Referred in: " + previousStep.toString();
 
-            SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
-            shortProposal.setId(object);
-            shortProposal.setValue("The " + object);
-            shortProposal.setDescription(referredIn);
-            proposals.add(shortProposal);
+            proposals.add(createProposal(object, "The " + object, referredIn));
 
             if (!component.isEmpty()) {
-                SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
-                longProposal.setId(component + "/" + object);
-                longProposal.setValue("The " + component + " " + object);
-                longProposal.setDescription(referredIn);
-                proposals.add(longProposal);
+                proposals.add(createProposal(component + "/" + object, "The " + component + " " + object, referredIn));
             }
         }
         return proposals;
@@ -104,11 +104,7 @@ public class TestStepIssueResolver {
             String component = lastSlash > 0 ? nameLong.substring(0, lastSlash) : "";
             String description = SheepDogUtility.getStatementListAsString(stepObject.getStatementList());
 
-            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-            proposal.setId(objectName);
-            proposal.setValue("The " + (component.isEmpty() ? "" : component + " ") + objectName);
-            proposal.setDescription(description);
-            proposals.add(proposal);
+            proposals.add(createProposal(objectName, "The " + (component.isEmpty() ? "" : component + " ") + objectName, description));
         }
         return proposals;
     }
@@ -146,11 +142,7 @@ public class TestStepIssueResolver {
         for (IStepDefinition stepDefinition : theStepObject.getStepDefinitionList()) {
             String defName = stepDefinition.getName();
             String defDescription = SheepDogUtility.getStatementListAsString(stepDefinition.getStatementList());
-            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-            proposal.setId(defName);
-            proposal.setValue(defName);
-            proposal.setDescription(defDescription);
-            proposals.add(proposal);
+            proposals.add(createProposal(defName, defName, defDescription));
         }
 
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
