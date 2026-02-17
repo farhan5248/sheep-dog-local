@@ -27,6 +27,12 @@ public class TestSuiteIssueDetector {
     public static String validateNameOnly(ITestSuite theTestSuite) throws Exception {
         logger.debug("Entering validateNameOnly");
 
+        String name = theTestSuite.getName();
+        if (name != null && !name.isEmpty() && Character.isLowerCase(name.charAt(0))) {
+            logger.debug("Exiting validateNameOnly with error");
+            return "Name should start with a capital";
+        }
+
         logger.debug("Exiting validateNameOnly");
         return "";
     }
