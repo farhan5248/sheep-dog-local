@@ -27,6 +27,12 @@ public class CellIssueDetector {
     public static String validateNameOnly(ICell theCell) throws Exception {
         logger.debug("Entering validateNameOnly");
 
+        String name = theCell.getName();
+        if (name != null && !name.isEmpty() && Character.isLowerCase(name.charAt(0))) {
+            logger.debug("Exiting validateNameOnly with error");
+            return CellIssueTypes.CELL_NAME_ONLY.description;
+        }
+
         logger.debug("Exiting validateNameOnly");
         return "";
     }
