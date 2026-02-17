@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
+import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
 
 /**
@@ -62,6 +64,52 @@ public class TestStepIssueResolver {
         logger.debug("Entering suggestStepObjectNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        if (theTestStep != null) {
+            // Get previous steps in the test case
+            ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
+
+            // Track unique objects we've already added to avoid duplicates
+            ArrayList<String> addedObjects = new ArrayList<>();
+
+            for (ITestStep previousStep : previousSteps) {
+                String stepObjectName = previousStep.getStepObjectName();
+                if (stepObjectName != null && !stepObjectName.isEmpty()) {
+                    String component = StepObjectRefFragments.getComponent(stepObjectName);
+                    String object = StepObjectRefFragments.getObject(stepObjectName);
+
+                    if (!object.isEmpty()) {
+                        // Proposal 1: Just the object (e.g., "The Output file")
+                        String shortValue = "The " + object.trim();
+                        String shortId = object.trim();
+                        if (!addedObjects.contains(shortId)) {
+                            SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
+                            shortProposal.setId(shortId);
+                            shortProposal.setValue(shortValue);
+                            shortProposal.setDescription("Referred in: " + SheepDogUtility.getTestStepNameLong(previousStep));
+                            proposals.add(shortProposal);
+                            addedObjects.add(shortId);
+                            logger.debug("Added short proposal: {} = {}", shortId, shortValue);
+                        }
+
+                        // Proposal 2: Component + object (e.g., "The daily batchjob Output file")
+                        if (!component.isEmpty()) {
+                            String longValue = "The " + component.trim() + " " + object.trim();
+                            String longId = component.trim() + "/" + object.trim();
+                            if (!addedObjects.contains(longId)) {
+                                SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
+                                longProposal.setId(longId);
+                                longProposal.setValue(longValue);
+                                longProposal.setDescription("Referred in: " + SheepDogUtility.getTestStepNameLong(previousStep));
+                                proposals.add(longProposal);
+                                addedObjects.add(longId);
+                                logger.debug("Added long proposal: {} = {}", longId, longValue);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
         return proposals;
