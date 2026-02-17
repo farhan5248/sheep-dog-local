@@ -3,7 +3,7 @@ Automatic-Module-Name: sheepdogxtextplugin.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: sheepdogxtextplugin.ui
 Bundle-Vendor: My Company
-Bundle-Version: 1.39.0.qualifier
+Bundle-Version: 1.39.0
 Bundle-SymbolicName: sheepdogxtextplugin.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: sheepdogxtextplugin,
