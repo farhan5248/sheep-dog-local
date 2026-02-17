@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
-import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
  * Validation logic for grammar elements at different scopes.

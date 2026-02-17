@@ -3,6 +3,8 @@ package org.farhan.dsl.issues;
 import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
@@ -30,10 +32,10 @@ public class CellIssueDetector {
         String name = theCell.getName();
         if (name != null && !name.isEmpty()) {
             // Check if the cell is in the header row (first row)
-            org.farhan.dsl.lang.IRow parentRow = theCell.getParent();
+            IRow parentRow = theCell.getParent();
             if (parentRow != null && parentRow.getParent() != null) {
-                org.farhan.dsl.lang.ITable table = parentRow.getParent();
-                org.farhan.dsl.lang.IRow headerRow = table.getRow(0);
+                ITable table = parentRow.getParent();
+                IRow headerRow = table.getRow(0);
 
                 // Only validate that header row cells start with capital letter
                 if (parentRow == headerRow && !Character.isUpperCase(name.charAt(0))) {
