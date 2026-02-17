@@ -3,7 +3,12 @@ package org.farhan.dsl.issues;
 import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -26,6 +31,37 @@ public class TextIssueDetector {
      */
     public static String validateNameWorkspace(IText theText) throws Exception {
         logger.debug("Entering validateNameWorkspace");
+
+        // Get the parent test step
+        ITestStep testStep = theText.getParent();
+        if (testStep != null) {
+            // Get the step object qualified name
+            String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(testStep);
+            if (stepObjectNameLong != null && !stepObjectNameLong.isEmpty()) {
+                // Get the project
+                ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(testStep);
+                if (project != null) {
+                    // Get the step object
+                    IStepObject stepObject = project.getStepObject(stepObjectNameLong);
+                    if (stepObject != null) {
+                        // Get the step definition
+                        String stepDefinitionName = testStep.getStepDefinitionName();
+                        if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                            IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
+                            if (stepDefinition != null) {
+                                // Check if step parameters exist with "Content" parameter
+                                // Text parameters are represented by step parameters with a "Content" cell
+                                boolean hasContentParameter = stepDefinition.getStepParameters("Content") != null;
+                                if (!hasContentParameter) {
+                                    logger.debug("Exiting validateNameWorkspace with error");
+                                    return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         logger.debug("Exiting validateNameWorkspace");
         return "";
