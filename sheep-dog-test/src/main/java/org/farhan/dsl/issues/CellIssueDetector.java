@@ -27,6 +27,22 @@ public class CellIssueDetector {
     public static String validateNameOnly(ICell theCell) throws Exception {
         logger.debug("Entering validateNameOnly");
 
+        String name = theCell.getName();
+        if (name != null && !name.isEmpty()) {
+            // Check if the cell is in the header row (first row)
+            org.farhan.dsl.lang.IRow parentRow = theCell.getParent();
+            if (parentRow != null && parentRow.getParent() != null) {
+                org.farhan.dsl.lang.ITable table = parentRow.getParent();
+                org.farhan.dsl.lang.IRow headerRow = table.getRow(0);
+
+                // Only validate that header row cells start with capital letter
+                if (parentRow == headerRow && !Character.isUpperCase(name.charAt(0))) {
+                    logger.debug("Exiting validateNameOnly with error");
+                    return "Name should start with a capital";
+                }
+            }
+        }
+
         logger.debug("Exiting validateNameOnly");
         return "";
     }
