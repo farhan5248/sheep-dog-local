@@ -3,6 +3,8 @@ package org.farhan.dsl.issues;
 import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
@@ -28,7 +30,14 @@ public class CellIssueDetector {
         logger.debug("Entering validateNameOnly");
 
         String name = theCell.getName();
-        if (name != null && !name.isEmpty() && Character.isLowerCase(name.charAt(0))) {
+        // Only validate header row cells (first row)
+        IRow parentRow = theCell.getParent();
+        ITable parentTable = parentRow.getParent();
+
+        // Check if this cell is in the first row (header row)
+        boolean isHeaderRow = parentTable.getRowList().indexOf(parentRow) == 0;
+
+        if (isHeaderRow && name != null && !name.isEmpty() && Character.isLowerCase(name.charAt(0))) {
             logger.debug("Exiting validateNameOnly with error");
             return CellIssueTypes.CELL_NAME_ONLY.description;
         }
