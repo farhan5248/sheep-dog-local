@@ -25,6 +25,14 @@ public class RowIssueResolver {
 
     private static final Logger logger = SheepDogLoggerFactory.getLogger(RowIssueResolver.class);
 
+    private static SheepDogIssueProposal createProposal(String id, String value, String description) {
+        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+        proposal.setId(id);
+        proposal.setValue(value);
+        proposal.setDescription(description);
+        return proposal;
+    }
+
     /**
      * Generates proposals correcting values when an assignment exists but is
      * invalid.
@@ -73,11 +81,7 @@ public class RowIssueResolver {
                 continue;
             }
             String description = SheepDogUtility.getStatementListAsString(stepParameters.getStatementList());
-            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-            proposal.setId(name);
-            proposal.setValue(name);
-            proposal.setDescription(description);
-            proposals.add(proposal);
+            proposals.add(createProposal(name, name, description));
         }
 
         if (theTestStep.getTable() != null && theTestStep.getTable().getRowList() != null
@@ -87,11 +91,7 @@ public class RowIssueResolver {
                     .map(ICell::getName)
                     .collect(Collectors.joining(", "));
             if (!currentCellNames.isEmpty()) {
-                SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
-                generateProposal.setId("Generate " + currentCellNames);
-                generateProposal.setValue(currentCellNames);
-                generateProposal.setDescription("");
-                proposals.add(generateProposal);
+                proposals.add(createProposal("Generate " + currentCellNames, currentCellNames, ""));
             }
         }
 
@@ -146,11 +146,7 @@ public class RowIssueResolver {
                 continue;
             }
             String description = SheepDogUtility.getStatementListAsString(stepParameters.getStatementList());
-            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-            proposal.setId(name);
-            proposal.setValue(name);
-            proposal.setDescription(description);
-            proposals.add(proposal);
+            proposals.add(createProposal(name, name, description));
         }
 
         logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
