@@ -57,6 +57,13 @@ Feature: Proposals for Workspace Step Definitions
   3. The path/to/file/Input file is empty
   4. The Input file is empty
   So instead of saving all combinations, only the details section and predicate are saved.
+  \@sheep-dog-test
+  Because a step can have a component or not and the full path specified or not, you can have 4 keywords like:
+  1. The daily batchjob path/to/file/Input file is empty
+  2. The daily batchjob Input file is empty
+  3. The path/to/file/Input file is empty
+  4. The Input file is empty
+  So instead of saving all combinations, only the details section and predicate are saved.
   When the reference look-up is done, the step-object is located using the full path and component.
 
   @Suggest
