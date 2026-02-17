@@ -1,6 +1,9 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
@@ -33,6 +36,64 @@ public class RowIssueResolver {
         logger.debug("Entering correctCellListWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        if (theTestStep == null) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (theProject == null) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (qualifiedName.isEmpty()) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+        if (theStepObject == null) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+        if (theStepDefinition == null) {
+            logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+            return proposals;
+        }
+
+        for (IStepParameters stepParameters : theStepDefinition.getStepParameterList()) {
+            String name = stepParameters.getName();
+            if (name.equals("Content")) {
+                continue;
+            }
+            String description = SheepDogUtility.getStatementListAsString(stepParameters.getStatementList());
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId(name);
+            proposal.setValue(name);
+            proposal.setDescription(description);
+            proposals.add(proposal);
+        }
+
+        if (theTestStep.getTable() != null && theTestStep.getTable().getRowList() != null
+                && !theTestStep.getTable().getRowList().isEmpty()) {
+            IRow headerRow = theTestStep.getTable().getRowList().getFirst();
+            String currentCellNames = headerRow.getCellList().stream()
+                    .map(ICell::getName)
+                    .collect(Collectors.joining(", "));
+            if (!currentCellNames.isEmpty()) {
+                SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
+                generateProposal.setId("Generate " + currentCellNames);
+                generateProposal.setValue(currentCellNames);
+                generateProposal.setDescription("");
+                proposals.add(generateProposal);
+            }
+        }
 
         logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
         return proposals;
