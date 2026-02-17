@@ -1,6 +1,8 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
@@ -65,6 +67,12 @@ public class TestStepIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        // Suggest objects from all components in the workspace
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        for (SheepDogIssueProposal proposal : getWorkspaceObjects(theProject)) {
+            proposals.add(proposal);
+        }
+
         // Suggest objects from previous steps
         for (SheepDogIssueProposal proposal : getPreviousObjects(theTestStep)) {
             proposals.add(proposal);
@@ -103,6 +111,30 @@ public class TestStepIssueResolver {
                 longProposal.setDescription(referredIn);
                 proposals.add(longProposal);
             }
+        }
+        return proposals;
+    }
+
+    private static ArrayList<SheepDogIssueProposal> getWorkspaceObjects(ITestProject theProject) {
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        if (theProject == null) {
+            return proposals;
+        }
+        for (IStepObject stepObject : theProject.getStepObjectList()) {
+            String nameLong = stepObject.getNameLong();
+            if (nameLong == null || nameLong.isEmpty()) {
+                continue;
+            }
+            String objectName = stepObject.getName();
+            int lastSlash = nameLong.lastIndexOf('/');
+            String component = lastSlash > 0 ? nameLong.substring(0, lastSlash) : "";
+            String description = SheepDogUtility.getStatementListAsString(stepObject.getStatementList());
+
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId(objectName);
+            proposal.setValue("The " + (component.isEmpty() ? "" : component + " ") + objectName);
+            proposal.setDescription(description);
+            proposals.add(proposal);
         }
         return proposals;
     }
