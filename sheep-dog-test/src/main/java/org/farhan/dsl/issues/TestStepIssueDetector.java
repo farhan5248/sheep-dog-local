@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.StepDefinitionRefFragments;
+import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -26,7 +28,17 @@ public class TestStepIssueDetector {
      */
     public static String validateStepObjectNameOnly(ITestStep theTestStep) {
         logger.debug("Entering validateStepObjectNameOnly");
-
+        String text = theTestStep.getStepObjectName();
+        if (text != null && text.isEmpty()) {
+            logger.debug("Exiting validateStepObjectNameOnly with error");
+            return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
+        }
+        if (text != null && !text.isEmpty()) {
+            if (StepObjectRefFragments.getObject(text).isEmpty()) {
+                logger.debug("Exiting validateStepObjectNameOnly with error");
+                return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
+            }
+        }
         logger.debug("Exiting validateStepObjectNameOnly");
         return "";
     }
@@ -41,7 +53,17 @@ public class TestStepIssueDetector {
      */
     public static String validateStepDefinitionNameOnly(ITestStep theTestStep) {
         logger.debug("Entering validateStepDefinitionNameOnly");
-
+        String text = theTestStep.getStepDefinitionName();
+        if (text != null && text.isEmpty()) {
+            logger.debug("Exiting validateStepDefinitionNameOnly with error");
+            return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
+        }
+        if (text != null && !text.isEmpty()) {
+            if (StepDefinitionRefFragments.getState(text).isEmpty()) {
+                logger.debug("Exiting validateStepDefinitionNameOnly with error");
+                return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
+            }
+        }
         logger.debug("Exiting validateStepDefinitionNameOnly");
         return "";
     }
