@@ -2,7 +2,9 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.slf4j.Logger;
@@ -22,6 +24,17 @@ public class TextIssueResolver {
         logger.debug("Entering correctNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        if (theTestStep != null && theTestStep.getText() != null) {
+            IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(null, "Content");
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId("Generate Content");
+            proposal.setValue(newStepParameters);
+            proposal.setDescription("");
+            proposals.add(proposal);
+            logger.debug("Added generate content proposal");
+        }
+
         logger.debug("Exiting correctNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }

@@ -6,6 +6,7 @@ import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -60,6 +61,23 @@ public class RowIssueResolver {
                             }
                         }
                     }
+                }
+            }
+        }
+
+        if (theTestStep != null) {
+            if (theTestStep.getTable() != null && theTestStep.getTable().getRowList() != null
+                    && !theTestStep.getTable().getRowList().isEmpty()) {
+                String cellListAsString = SheepDogUtility
+                        .getCellListAsString(theTestStep.getTable().getRowList().getFirst().getCellList());
+                if (cellListAsString != null && !cellListAsString.isEmpty()) {
+                    IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(null, cellListAsString);
+                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                    proposal.setId("Generate " + cellListAsString);
+                    proposal.setValue(newStepParameters);
+                    proposal.setDescription("");
+                    proposals.add(proposal);
+                    logger.debug("Added generate cell list proposal: Generate {}", cellListAsString);
                 }
             }
         }
