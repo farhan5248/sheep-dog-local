@@ -27,6 +27,12 @@ public class TestStepContainerIssueDetector {
     public static String validateNameOnly(ITestStepContainer theTestStepContainer) throws Exception {
         logger.debug("Entering validateNameOnly");
 
+        String name = theTestStepContainer.getName();
+        if (name != null && !name.isEmpty() && Character.isLowerCase(name.charAt(0))) {
+            logger.debug("Exiting validateNameOnly with error");
+            return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
+        }
+
         logger.debug("Exiting validateNameOnly");
         return "";
     }
