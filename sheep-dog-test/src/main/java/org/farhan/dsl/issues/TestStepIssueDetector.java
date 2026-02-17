@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.StepDefinitionRefFragments;
 import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
@@ -54,6 +55,18 @@ public class TestStepIssueDetector {
      */
     public static String validateStepDefinitionNameOnly(ITestStep theTestStep) {
         logger.debug("Entering validateStepDefinitionNameOnly");
+
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
+            logger.debug("Exiting validateStepDefinitionNameOnly with error");
+            return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
+        }
+
+        String state = StepDefinitionRefFragments.getState(stepDefinitionName);
+        if (state.isEmpty()) {
+            logger.debug("Exiting validateStepDefinitionNameOnly with error");
+            return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
+        }
 
         logger.debug("Exiting validateStepDefinitionNameOnly");
         return "";
