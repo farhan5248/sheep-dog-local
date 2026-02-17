@@ -79,32 +79,19 @@ public class TestStepIssueResolver {
                     String object = StepObjectRefFragments.getObject(stepObjectName);
 
                     if (!object.isEmpty()) {
+                        // Generate description once for both proposals
+                        String description = "Referred in: " + SheepDogUtility.getTestStepNameLong(previousStep);
+
                         // Proposal 1: Just the object (e.g., "The Output file")
                         String shortValue = "The " + object.trim();
                         String shortId = object.trim();
-                        if (!addedObjects.contains(shortId)) {
-                            SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
-                            shortProposal.setId(shortId);
-                            shortProposal.setValue(shortValue);
-                            shortProposal.setDescription("Referred in: " + SheepDogUtility.getTestStepNameLong(previousStep));
-                            proposals.add(shortProposal);
-                            addedObjects.add(shortId);
-                            logger.debug("Added short proposal: {} = {}", shortId, shortValue);
-                        }
+                        addProposal(proposals, addedObjects, shortId, shortValue, description, "short");
 
                         // Proposal 2: Component + object (e.g., "The daily batchjob Output file")
                         if (!component.isEmpty()) {
                             String longValue = "The " + component.trim() + " " + object.trim();
                             String longId = component.trim() + "/" + object.trim();
-                            if (!addedObjects.contains(longId)) {
-                                SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
-                                longProposal.setId(longId);
-                                longProposal.setValue(longValue);
-                                longProposal.setDescription("Referred in: " + SheepDogUtility.getTestStepNameLong(previousStep));
-                                proposals.add(longProposal);
-                                addedObjects.add(longId);
-                                logger.debug("Added long proposal: {} = {}", longId, longValue);
-                            }
+                            addProposal(proposals, addedObjects, longId, longValue, description, "long");
                         }
                     }
                 }
@@ -129,6 +116,32 @@ public class TestStepIssueResolver {
 
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
+    }
+
+    /**
+     * Helper method to add a proposal to the list if it hasn't been added already.
+     * Eliminates duplication in proposal creation logic.
+     *
+     * @param proposals     the list to add the proposal to
+     * @param addedObjects  tracking set to prevent duplicates
+     * @param id            proposal ID
+     * @param value         proposal value
+     * @param description   proposal description
+     * @param logPrefix     prefix for debug logging (e.g., "short" or "long")
+     */
+    private static void addProposal(ArrayList<SheepDogIssueProposal> proposals,
+            ArrayList<String> addedObjects,
+            String id, String value, String description,
+            String logPrefix) {
+        if (!addedObjects.contains(id)) {
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId(id);
+            proposal.setValue(value);
+            proposal.setDescription(description);
+            proposals.add(proposal);
+            addedObjects.add(id);
+            logger.debug("Added {} proposal: {} = {}", logPrefix, id, value);
+        }
     }
 
 }
