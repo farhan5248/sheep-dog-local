@@ -3,7 +3,13 @@ package org.farhan.dsl.issues;
 import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -26,7 +32,30 @@ public class RowIssueDetector {
      */
     public static String validateCellListWorkspace(IRow theRow) throws Exception {
         logger.debug("Entering validateCellListWorkspace");
-
+        ITable table = theRow.getParent();
+        if (table.getParent() instanceof ITestStep) {
+            ITestStep testStep = (ITestStep) table.getParent();
+            ITestProject testProject = SheepDogUtility.getTestProjectParentForTestStep(testStep);
+            if (testProject != null) {
+                String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(testStep);
+                if (!qualifiedName.isEmpty()) {
+                    IStepObject theStepObject = testProject.getStepObject(qualifiedName);
+                    if (theStepObject != null) {
+                        String stepDefinitionName = testStep.getStepDefinitionName();
+                        if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                            IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                            if (theStepDefinition != null) {
+                                String cellListAsString = SheepDogUtility.getCellListAsString(theRow.getCellList());
+                                if (theStepDefinition.getStepParameters(cellListAsString) == null) {
+                                    logger.debug("Exiting validateCellListWorkspace with error");
+                                    return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         logger.debug("Exiting validateCellListWorkspace");
         return "";
     }
