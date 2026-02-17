@@ -40,7 +40,7 @@ public class CellIssueDetector {
                 // Only validate that header row cells start with capital letter
                 if (parentRow == headerRow && !Character.isUpperCase(name.charAt(0))) {
                     logger.debug("Exiting validateNameOnly with error");
-                    return "Name should start with a capital";
+                    return CellIssueTypes.CELL_NAME_ONLY.description;
                 }
             }
         }

@@ -32,7 +32,7 @@ public class TestSuiteIssueDetector {
             // Check if name starts with a capital letter
             if (!Character.isUpperCase(name.charAt(0))) {
                 logger.debug("Exiting validateNameOnly with error");
-                return "Name should start with a capital";
+                return TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description;
             }
         }
 

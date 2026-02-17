@@ -34,7 +34,7 @@ public class TestStepContainerIssueDetector {
             // Check if name starts with a capital letter
             if (!Character.isUpperCase(name.charAt(0))) {
                 logger.debug("Exiting validateNameOnly with error");
-                return "Name should start with a capital";
+                return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
             }
         }
 
@@ -60,7 +60,7 @@ public class TestStepContainerIssueDetector {
                 String component = StepObjectRefFragments.getComponent(stepObjectName);
                 if (component == null || component.isEmpty()) {
                     logger.debug("Exiting validateTestStepListFile with error");
-                    return "The first step must have a component";
+                    return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE.description;
                 }
             }
         }
