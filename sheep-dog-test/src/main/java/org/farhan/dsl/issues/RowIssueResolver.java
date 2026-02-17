@@ -94,7 +94,7 @@ public class RowIssueResolver {
                             if (stepDefinition != null) {
                                 for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
                                     String name = stepParameters.getName();
-                                    if (name != null && !name.isEmpty()) {
+                                    if (name != null && !name.isEmpty() && !name.equals("Content")) {
                                         String description = SheepDogUtility
                                                 .getStatementListAsString(stepParameters.getStatementList());
                                         SheepDogIssueProposal proposal = new SheepDogIssueProposal();
