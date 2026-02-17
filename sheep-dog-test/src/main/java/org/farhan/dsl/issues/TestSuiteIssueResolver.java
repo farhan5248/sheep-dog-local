@@ -17,6 +17,14 @@ public class TestSuiteIssueResolver {
 
 	private static final Logger logger = SheepDogLoggerFactory.getLogger(TestSuiteIssueResolver.class);
 
+	private static SheepDogIssueProposal createProposal(String id, String value, String description) {
+		SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+		proposal.setId(id);
+		proposal.setValue(value);
+		proposal.setDescription(description);
+		return proposal;
+	}
+
 	/**
 	 * Generates proposals correcting values when an assignment exists but is
 	 * invalid.
@@ -31,11 +39,8 @@ public class TestSuiteIssueResolver {
 			String name = theTestSuite.getName();
 			if (name != null && !name.isEmpty()) {
 				String correctedName = Character.toUpperCase(name.charAt(0)) + name.substring(1);
-				SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-				proposal.setId("Capitalize test suite name");
-				proposal.setDescription("Capitalize the first letter of the name");
-				proposal.setValue(correctedName);
-				proposals.add(proposal);
+				proposals.add(createProposal("Capitalize test suite name", correctedName,
+						"Capitalize the first letter of the name"));
 			}
 		}
 		logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
