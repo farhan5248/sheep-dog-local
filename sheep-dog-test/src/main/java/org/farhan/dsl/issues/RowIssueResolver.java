@@ -7,8 +7,10 @@ import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -91,7 +93,16 @@ public class RowIssueResolver {
                     .map(ICell::getName)
                     .collect(Collectors.joining(", "));
             if (!currentCellNames.isEmpty()) {
-                proposals.add(createProposal("Generate " + currentCellNames, currentCellNames, ""));
+                IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition,
+                        currentCellNames);
+                if (newStepParameters.getTable() == null) {
+                    ITable table = SheepDogBuilder.createTable(newStepParameters);
+                    IRow row = SheepDogBuilder.createRow(table);
+                    for (String h : currentCellNames.split(",")) {
+                        SheepDogBuilder.createCell(row, h.trim());
+                    }
+                }
+                proposals.add(createProposal("Generate " + currentCellNames, newStepParameters.getName(), ""));
             }
         }
 

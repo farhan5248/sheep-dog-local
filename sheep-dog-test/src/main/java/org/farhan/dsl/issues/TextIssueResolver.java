@@ -2,10 +2,14 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -60,9 +64,13 @@ public class TextIssueResolver {
         boolean hasContentParameter = theStepDefinition.getStepParameterList().stream()
                 .anyMatch(sp -> "Content".equals(sp.getName()));
         if (!hasContentParameter) {
+            IStepParameters contentParameters = SheepDogBuilder.createStepParameters(theStepDefinition, "Content");
+            ITable table = SheepDogBuilder.createTable(contentParameters);
+            IRow row = SheepDogBuilder.createRow(table);
+            SheepDogBuilder.createCell(row, "Content");
             SheepDogIssueProposal proposal = new SheepDogIssueProposal();
             proposal.setId("Generate Content");
-            proposal.setValue("Content");
+            proposal.setValue(contentParameters.getName());
             proposal.setDescription("");
             proposals.add(proposal);
         }

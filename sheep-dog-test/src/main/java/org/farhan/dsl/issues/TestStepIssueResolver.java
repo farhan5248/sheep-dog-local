@@ -32,10 +32,14 @@ public class TestStepIssueResolver {
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         if (!qualifiedName.isEmpty()) {
             IStepObject theStepObject = SheepDogBuilder.createStepObject(null, qualifiedName);
+            String stepDefinitionName = theTestStep.getStepDefinitionName();
+            if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                SheepDogBuilder.createStepDefinition(theStepObject, stepDefinitionName);
+            }
             SheepDogIssueProposal proposal = new SheepDogIssueProposal();
             proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getNameLong());
             proposal.setDescription(SheepDogUtility.getStatementListAsString(theStepObject.getStatementList()));
-            proposal.setValue(theStepObject.getContent());
+            proposal.setValue(theStepObject);
             proposals.add(proposal);
         }
         logger.debug("Exiting correctStepObjectNameWorkspace with {} proposals", proposals.size());
@@ -72,13 +76,17 @@ public class TestStepIssueResolver {
             return proposals;
         }
 
-        for (IStepDefinition stepDefinition : theStepObject.getStepDefinitionList()) {
-            String defName = stepDefinition.getName();
-            String defDescription = SheepDogUtility.getStatementListAsString(stepDefinition.getStatementList());
-            proposals.add(createProposal(defName, defName, defDescription));
-        }
+        IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+        if (theStepDefinition == null) {
+            for (IStepDefinition stepDefinition : theStepObject.getStepDefinitionList()) {
+                String defName = stepDefinition.getName();
+                String defDescription = SheepDogUtility.getStatementListAsString(stepDefinition.getStatementList());
+                proposals.add(createProposal(defName, defName, defDescription));
+            }
 
-        proposals.add(createProposal("Generate " + stepDefinitionName, stepDefinitionName, ""));
+            theStepDefinition = SheepDogBuilder.createStepDefinition(theStepObject, stepDefinitionName);
+            proposals.add(createProposal("Generate " + theStepDefinition.getName(), theStepDefinition.getName(), ""));
+        }
 
         logger.debug("Exiting correctStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
