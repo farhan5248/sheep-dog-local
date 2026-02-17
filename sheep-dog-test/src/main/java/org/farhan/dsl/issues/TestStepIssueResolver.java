@@ -1,6 +1,8 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
@@ -66,11 +68,50 @@ public class TestStepIssueResolver {
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
         if (theTestStep != null) {
-            // Get previous steps in the test case
-            ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
-
             // Track unique objects we've already added to avoid duplicates
             ArrayList<String> addedObjects = new ArrayList<>();
+
+            // First, add proposals from workspace step objects
+            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (project != null) {
+                for (IStepObject stepObject : project.getStepObjectList()) {
+                    String stepObjectNameLong = stepObject.getNameLong();
+                    if (stepObjectNameLong != null && !stepObjectNameLong.isEmpty()) {
+                        // Parse step object name: "component/object.extension"
+                        // e.g., "daily batchjob/Input file.feature"
+                        String component = "";
+                        String object = "";
+
+                        int slashIndex = stepObjectNameLong.lastIndexOf('/');
+                        if (slashIndex > 0) {
+                            component = stepObjectNameLong.substring(0, slashIndex);
+                            String objectWithExtension = stepObjectNameLong.substring(slashIndex + 1);
+                            // Remove file extension
+                            int dotIndex = objectWithExtension.lastIndexOf('.');
+                            if (dotIndex > 0) {
+                                object = objectWithExtension.substring(0, dotIndex);
+                            } else {
+                                object = objectWithExtension;
+                            }
+                        }
+
+                        if (!object.isEmpty() && !component.isEmpty()) {
+                            // Get description from step object statements
+                            String description = SheepDogUtility.getStatementListAsString(stepObject.getStatementList());
+
+                            // For workspace step objects, create proposal with:
+                            // - id = just object name (e.g., "Input file")
+                            // - value = full form with component (e.g., "The daily batchjob Input file")
+                            String proposalId = object.trim();
+                            String proposalValue = "The " + component.trim() + " " + object.trim();
+                            addProposal(proposals, addedObjects, proposalId, proposalValue, description, "workspace");
+                        }
+                    }
+                }
+            }
+
+            // Then, add proposals from previous steps in the test case
+            ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
 
             for (ITestStep previousStep : previousSteps) {
                 String stepObjectName = previousStep.getStepObjectName();
