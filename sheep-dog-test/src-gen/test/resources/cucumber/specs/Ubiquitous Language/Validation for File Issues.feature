@@ -16,6 +16,9 @@ Feature: Validation for File Issues
   \@sheep-dog-test
   Some problems prevent code generation.
   For example not knowing which component an object belongs to gets in the way of knowing where to create the file.
+  \@sheep-dog-test
+  Some problems prevent code generation.
+  For example not knowing which component an object belongs to gets in the way of knowing where to create the file.
 
   @Validate
   Scenario: The first step needs to have a component specified validation
