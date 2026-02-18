@@ -28,6 +28,15 @@ public class TestStepContainerIssueResolver {
 	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) {
 		logger.debug("Entering correctNameOnly");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+		String name = theTestStepContainer.getName();
+		if (name != null && !name.isEmpty()) {
+			String capitalized = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+			proposal.setId("Capitalize test step container name");
+			proposal.setDescription("Capitalize the first letter of the name");
+			proposal.setValue(capitalized);
+			proposals.add(proposal);
+		}
 		logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
 		return proposals;
 	}
