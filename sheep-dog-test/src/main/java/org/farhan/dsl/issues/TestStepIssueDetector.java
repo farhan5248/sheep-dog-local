@@ -26,7 +26,11 @@ public class TestStepIssueDetector {
      */
     public static String validateStepObjectNameOnly(ITestStep theTestStep) {
         logger.debug("Entering validateStepObjectNameOnly");
-
+        String stepObjectName = theTestStep.getStepObjectName();
+        if (stepObjectName == null || stepObjectName.isEmpty()) {
+            logger.debug("Exiting validateStepObjectNameOnly with issue");
+            return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
+        }
         logger.debug("Exiting validateStepObjectNameOnly");
         return "";
     }
@@ -41,7 +45,11 @@ public class TestStepIssueDetector {
      */
     public static String validateStepDefinitionNameOnly(ITestStep theTestStep) {
         logger.debug("Entering validateStepDefinitionNameOnly");
-
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
+            logger.debug("Exiting validateStepDefinitionNameOnly with issue");
+            return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
+        }
         logger.debug("Exiting validateStepDefinitionNameOnly");
         return "";
     }
