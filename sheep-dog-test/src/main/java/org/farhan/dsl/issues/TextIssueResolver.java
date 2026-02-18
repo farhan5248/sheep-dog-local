@@ -22,6 +22,10 @@ public class TextIssueResolver {
         logger.debug("Entering correctNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
+        generateProposal.setId("Generate Content");
+        proposals.add(generateProposal);
+        logger.debug("Added generate proposal: Generate Content");
         logger.debug("Exiting correctNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
