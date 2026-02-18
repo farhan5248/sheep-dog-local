@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -69,7 +70,8 @@ public class TestStepIssueDetector {
         logger.debug("Entering validateStepObjectNameWorkspace");
         String message = "";
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-        IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        IStepObject theStepObject = theProject.getStepObject(qualifiedName);
         if (theStepObject == null) {
             message = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
         }
@@ -89,7 +91,8 @@ public class TestStepIssueDetector {
         logger.debug("Entering validateStepDefinitionNameWorkspace");
         String message = "";
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-        IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        IStepObject theStepObject = theProject.getStepObject(qualifiedName);
         if (theStepObject != null) {
             String stepDefinitionName = theTestStep.getStepDefinitionName();
             IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
