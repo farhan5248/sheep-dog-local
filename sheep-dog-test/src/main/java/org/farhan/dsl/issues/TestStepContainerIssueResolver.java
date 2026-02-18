@@ -24,8 +24,10 @@ public class TestStepContainerIssueResolver {
 	 *
 	 * @param theTestStepContainer the element needing corrections
 	 * @return list of quick fix proposals
+	 * @throws Exception if an error occurs during proposal generation
 	 */
-	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) {
+	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer)
+			throws Exception {
 		logger.debug("Entering correctNameOnly");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 		String name = theTestStepContainer.getName();

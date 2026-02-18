@@ -23,8 +23,9 @@ public class TestSuiteIssueResolver {
 	 *
 	 * @param theTestSuite the element needing corrections
 	 * @return list of quick fix proposals
+	 * @throws Exception if an error occurs during proposal generation
 	 */
-	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestSuite theTestSuite) {
+	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestSuite theTestSuite) throws Exception {
 		logger.debug("Entering correctNameOnly");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 		String name = theTestSuite.getName();
