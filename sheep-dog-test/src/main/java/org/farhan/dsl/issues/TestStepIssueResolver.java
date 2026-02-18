@@ -113,6 +113,48 @@ public class TestStepIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
+        logger.debug("previousSteps count: {}", previousSteps.size());
+        for (ITestStep previousStep : previousSteps) {
+            String previousStepObjectName = previousStep.getStepObjectName();
+            if (previousStepObjectName == null || previousStepObjectName.isEmpty()) {
+                continue;
+            }
+            String component = StepObjectRefFragments.getComponent(previousStepObjectName);
+            String object = StepObjectRefFragments.getObject(previousStepObjectName);
+            logger.debug("previousStep component: {}, object: {}", component, object);
+            if (object.isEmpty()) {
+                continue;
+            }
+            String referredIn = "Referred in: " + SheepDogUtility.getTestStepNameLong(previousStep);
+
+            // Short form: just the object name
+            String shortId = object;
+            String shortValue = "The " + object;
+            if (proposals.stream().noneMatch(p -> p.getId().equals(shortId))) {
+                SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
+                shortProposal.setId(shortId);
+                shortProposal.setValue(shortValue);
+                shortProposal.setDescription(referredIn);
+                proposals.add(shortProposal);
+                logger.debug("Added short proposal: {}", shortId);
+            }
+
+            // Long form: component/object
+            if (!component.isEmpty()) {
+                String longId = component + "/" + object;
+                String longValue = "The " + component + " " + object;
+                if (proposals.stream().noneMatch(p -> p.getId().equals(longId))) {
+                    SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
+                    longProposal.setId(longId);
+                    longProposal.setValue(longValue);
+                    longProposal.setDescription(referredIn);
+                    proposals.add(longProposal);
+                    logger.debug("Added long proposal: {}", longId);
+                }
+            }
+        }
+
         logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
