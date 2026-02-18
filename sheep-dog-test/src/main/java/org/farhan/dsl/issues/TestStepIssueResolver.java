@@ -191,7 +191,37 @@ public class TestStepIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        for (SheepDogIssueProposal proposal : getStepDefinitions(theTestStep)) {
+            proposals.add(proposal);
+        }
+
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
+        return proposals;
+    }
+
+    private static ArrayList<SheepDogIssueProposal> getStepDefinitions(ITestStep theTestStep) throws Exception {
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        logger.debug("getStepDefinitions stepObjectNameLong: {}", stepObjectNameLong);
+        if (!stepObjectNameLong.isEmpty()) {
+            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (project != null) {
+                IStepObject stepObject = project.getStepObject(stepObjectNameLong);
+                logger.debug("getStepDefinitions stepObject: {}", stepObject != null ? stepObject.getName() : "null");
+                if (stepObject != null) {
+                    for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                        proposal.setId(stepDefinition.getName());
+                        proposal.setValue(stepDefinition.getName());
+                        proposal.setDescription(SheepDogUtility.getStatementListAsString(stepDefinition.getStatementList()));
+                        proposals.add(proposal);
+                        logger.debug("getStepDefinitions added proposal: {}", stepDefinition.getName());
+                    }
+                }
+            }
+        }
+
         return proposals;
     }
 
