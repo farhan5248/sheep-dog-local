@@ -93,7 +93,27 @@ public class RowIssueResolver {
         logger.debug("Entering suggestCellListWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        if (!stepDefinitionName.isEmpty()) {
+            ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+            if (theStepObject != null) {
+                IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                if (theStepDefinition != null) {
+                    for (IStepParameters existingParams : theStepDefinition.getStepParameterList()) {
+                        if ("Content".equals(existingParams.getName())) {
+                            continue;
+                        }
+                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                        proposal.setId(existingParams.getName());
+                        proposal.setDescription(SheepDogUtility.getStatementListAsString(existingParams.getStatementList()));
+                        proposal.setValue(existingParams.getName());
+                        proposals.add(proposal);
+                    }
+                }
+            }
+        }
         logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
         return proposals;
     }
