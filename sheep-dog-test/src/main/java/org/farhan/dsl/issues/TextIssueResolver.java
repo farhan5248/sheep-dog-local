@@ -36,34 +36,31 @@ public class TextIssueResolver {
             IStepObject theStepObject = theProject.getStepObject(qualifiedName);
             if (theStepObject != null) {
                 IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
-                if (theStepDefinition != null) {
-                    boolean found = false;
-                    for (IStepParameters stepParameters : theStepDefinition.getStepParameterList()) {
-                        ITable paramsTable = stepParameters.getTable();
-                        if (paramsTable != null && !paramsTable.getRowList().isEmpty()) {
-                            for (ICell cell : paramsTable.getRow(0).getCellList()) {
-                                if ("Content".equals(cell.getName())) {
-                                    found = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if (found) {
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                        proposal.setId("Generate Content");
-                        proposal.setDescription("");
-                        proposal.setValue(theStepObject.getContent());
-                        proposals.add(proposal);
-                    }
+                if (theStepDefinition != null && !hasContentCell(theStepDefinition)) {
+                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                    proposal.setId("Generate Content");
+                    proposal.setDescription("");
+                    proposal.setValue(theStepObject.getContent());
+                    proposals.add(proposal);
                 }
             }
         }
         logger.debug("Exiting correctNameWorkspace with {} proposals", proposals.size());
         return proposals;
+    }
+
+    private static boolean hasContentCell(IStepDefinition theStepDefinition) {
+        for (IStepParameters stepParameters : theStepDefinition.getStepParameterList()) {
+            ITable paramsTable = stepParameters.getTable();
+            if (paramsTable != null && !paramsTable.getRowList().isEmpty()) {
+                for (ICell cell : paramsTable.getRow(0).getCellList()) {
+                    if ("Content".equals(cell.getName())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }
