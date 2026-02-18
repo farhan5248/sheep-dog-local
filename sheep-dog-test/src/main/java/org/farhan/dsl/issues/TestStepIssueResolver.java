@@ -1,14 +1,18 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.ITestStepContainer;
+import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
+import org.farhan.dsl.lang.StepObjectRefFragments;
 import org.slf4j.Logger;
 
 /**
@@ -102,7 +106,48 @@ public class TestStepIssueResolver {
         logger.debug("Entering suggestStepObjectNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (theProject != null) {
+            LinkedHashSet<String> seenIds = new LinkedHashSet<>();
+            for (ITestSuite suite : theProject.getTestSuiteList()) {
+                for (ITestStepContainer container : suite.getTestStepContainerList()) {
+                    for (ITestStep step : container.getTestStepList()) {
+                        if (step.equals(theTestStep)) {
+                            continue;
+                        }
+                        String stepObjectName = step.getStepObjectName();
+                        if (stepObjectName == null || stepObjectName.isEmpty()) {
+                            continue;
+                        }
+                        String component = StepObjectRefFragments.getComponent(stepObjectName);
+                        String object = StepObjectRefFragments.getObject(stepObjectName);
+                        if (component.isEmpty() || object.isEmpty()) {
+                            continue;
+                        }
+                        String fullStepName = stepObjectName + " " + step.getStepDefinitionName();
+                        String description = "Referred in: " + fullStepName.trim();
+                        String shortId = object;
+                        if (!seenIds.contains(shortId)) {
+                            seenIds.add(shortId);
+                            SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
+                            shortProposal.setId(shortId);
+                            shortProposal.setValue("The " + object);
+                            shortProposal.setDescription(description);
+                            proposals.add(shortProposal);
+                        }
+                        String longId = component + "/" + object;
+                        if (!seenIds.contains(longId)) {
+                            seenIds.add(longId);
+                            SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
+                            longProposal.setId(longId);
+                            longProposal.setValue("The " + component + " " + object);
+                            longProposal.setDescription(description);
+                            proposals.add(longProposal);
+                        }
+                    }
+                }
+            }
+        }
         logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
