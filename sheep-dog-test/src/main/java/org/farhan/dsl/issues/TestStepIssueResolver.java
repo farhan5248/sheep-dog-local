@@ -1,9 +1,14 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
 
 /**
@@ -29,7 +34,15 @@ public class TestStepIssueResolver {
         logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
+        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (!qualifiedName.isEmpty()) {
+            IStepObject theStepObject = SheepDogBuilder.createStepObject(null, qualifiedName);
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getNameLong());
+            proposal.setDescription(SheepDogUtility.getStatementListAsString(theStepObject.getStatementList()));
+            proposal.setValue(theStepObject);
+            proposals.add(proposal);
+        }
         logger.debug("Exiting correctStepObjectNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
@@ -46,7 +59,30 @@ public class TestStepIssueResolver {
         logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        if (!stepDefinitionName.isEmpty()) {
+            ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+            if (theStepObject != null) {
+                IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                if (theStepDefinition == null) {
+                    for (IStepDefinition existingStepDef : theStepObject.getStepDefinitionList()) {
+                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                        proposal.setId(existingStepDef.getName());
+                        proposal.setDescription(SheepDogUtility.getStatementListAsString(existingStepDef.getStatementList()));
+                        proposal.setValue(existingStepDef.getName());
+                        proposals.add(proposal);
+                    }
+                    IStepDefinition newStepDefinition = SheepDogBuilder.createStepDefinition(null, stepDefinitionName);
+                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                    proposal.setId("Generate " + newStepDefinition.getName());
+                    proposal.setDescription(SheepDogUtility.getStatementListAsString(newStepDefinition.getStatementList()));
+                    proposal.setValue(theStepObject.getContent());
+                    proposals.add(proposal);
+                }
+            }
+        }
         logger.debug("Exiting correctStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }

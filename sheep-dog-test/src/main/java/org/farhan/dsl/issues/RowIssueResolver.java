@@ -1,9 +1,14 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IStepDefinition;
+import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 import org.slf4j.Logger;
 
 /**
@@ -28,7 +33,40 @@ public class RowIssueResolver {
         logger.debug("Entering correctCellListWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        if (!stepDefinitionName.isEmpty()) {
+            ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+            if (theStepObject != null) {
+                IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                if (theStepDefinition != null) {
+                    String specCellList = SheepDogUtility.getCellListAsString(
+                            theTestStep.getTable().getRowList().getFirst().getCellList());
+                    boolean matchFound = false;
+                    for (IStepParameters existingParams : theStepDefinition.getStepParameterList()) {
+                        if (existingParams.getName().contentEquals(specCellList)) {
+                            matchFound = true;
+                            break;
+                        }
+                    }
+                    if (!matchFound) {
+                        for (IStepParameters existingParams : theStepDefinition.getStepParameterList()) {
+                            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                            proposal.setId(existingParams.getName());
+                            proposal.setDescription(SheepDogUtility.getStatementListAsString(existingParams.getStatementList()));
+                            proposal.setValue(existingParams.getName());
+                            proposals.add(proposal);
+                        }
+                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                        proposal.setId("Generate " + specCellList);
+                        proposal.setDescription("");
+                        proposal.setValue(theStepObject.getContent());
+                        proposals.add(proposal);
+                    }
+                }
+            }
+        }
         logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
         return proposals;
     }
