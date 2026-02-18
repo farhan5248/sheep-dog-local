@@ -81,14 +81,19 @@ public class TestStepIssueResolver {
                         logger.debug("Added existing step definition proposal: {}", stepDefinition.getName());
                     }
                 }
-            }
-            String stepDefinitionName = theTestStep.getStepDefinitionName();
-            logger.debug("stepDefinitionName: {}", stepDefinitionName);
-            if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
-                SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
-                generateProposal.setId("Generate " + stepDefinitionName);
-                proposals.add(generateProposal);
-                logger.debug("Added generate proposal: Generate {}", stepDefinitionName);
+                String stepDefinitionName = theTestStep.getStepDefinitionName();
+                logger.debug("stepDefinitionName: {}", stepDefinitionName);
+                if (stepDefinitionName != null && !stepDefinitionName.isEmpty()) {
+                    SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
+                    generateProposal.setId("Generate " + stepDefinitionName);
+                    if (stepObject != null) {
+                        IStepDefinition newStepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
+                                stepDefinitionName);
+                        generateProposal.setValue(newStepDefinition);
+                    }
+                    proposals.add(generateProposal);
+                    logger.debug("Added generate proposal: Generate {}", stepDefinitionName);
+                }
             }
         }
 

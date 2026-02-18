@@ -1,11 +1,14 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -54,17 +57,25 @@ public class RowIssueResolver {
                             proposals.add(proposal);
                             logger.debug("Added existing step parameters proposal: {}", stepParameters.getName());
                         }
+                        String rowCellsAsString = SheepDogUtility.getCellListAsString(
+                                theTestStep.getTable().getRowList().getFirst().getCellList());
+                        logger.debug("rowCellsAsString: {}", rowCellsAsString);
+                        if (!rowCellsAsString.isEmpty()) {
+                            IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(stepDefinition,
+                                    rowCellsAsString);
+                            ITable table = SheepDogBuilder.createTable(newStepParameters);
+                            IRow row = SheepDogBuilder.createRow(table);
+                            for (String h : rowCellsAsString.split(", ")) {
+                                SheepDogBuilder.createCell(row, h.trim());
+                            }
+                            SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
+                            generateProposal.setId("Generate " + rowCellsAsString);
+                            generateProposal.setValue(newStepParameters);
+                            proposals.add(generateProposal);
+                            logger.debug("Added generate proposal: Generate {}", rowCellsAsString);
+                        }
                     }
                 }
-            }
-            String rowCellsAsString = SheepDogUtility.getCellListAsString(
-                    theTestStep.getTable().getRowList().getFirst().getCellList());
-            logger.debug("rowCellsAsString: {}", rowCellsAsString);
-            if (!rowCellsAsString.isEmpty()) {
-                SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
-                generateProposal.setId("Generate " + rowCellsAsString);
-                proposals.add(generateProposal);
-                logger.debug("Added generate proposal: Generate {}", rowCellsAsString);
             }
         }
 
