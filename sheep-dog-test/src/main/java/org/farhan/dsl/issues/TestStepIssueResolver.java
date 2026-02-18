@@ -188,7 +188,20 @@ public class TestStepIssueResolver {
         logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (theProject != null) {
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+            if (theStepObject != null) {
+                for (IStepDefinition existingStepDef : theStepObject.getStepDefinitionList()) {
+                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                    proposal.setId(existingStepDef.getName());
+                    proposal.setDescription(SheepDogUtility.getStatementListAsString(existingStepDef.getStatementList()));
+                    proposal.setValue(existingStepDef.getName());
+                    proposals.add(proposal);
+                }
+            }
+        }
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
