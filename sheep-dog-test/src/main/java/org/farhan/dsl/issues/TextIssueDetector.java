@@ -1,12 +1,14 @@
 package org.farhan.dsl.issues;
 
+import org.slf4j.Logger;
+
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.IText;
-import org.farhan.dsl.lang.SheepDogUtility;
-import org.slf4j.Logger;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.farhan.dsl.lang.SheepDogUtility;
 
 /**
  * Validation logic for grammar elements at different scopes.
@@ -28,18 +30,43 @@ public class TextIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateNameWorkspace(IText theText) throws Exception {
-        logger.debug("Entering validateNameWorkspace for text: {}", theText != null ? theText.getName() : "null");
-        ITestStep theTestStep = (ITestStep) theText.getParent();
-        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-        IStepObject theStepObject = theTestStep.getParent().getParent().getParent().getStepObject(qualifiedName);
-        IStepDefinition theStepDefinition = theStepObject.getStepDefinition(theTestStep.getStepDefinitionName());
-        if (!theText.getName().isEmpty()) {
-            if (theStepDefinition.getStepParameters("Content") == null) {
-                logger.debug("Exiting validateNameWorkspace");
-                return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
-            }
+        logger.debug("Entering validateNameWorkspace");
+
+        ITestStep theTestStep = theText.getParent();
+        if (theTestStep == null) {
+            logger.debug("Exiting validateNameWorkspace - no parent test step");
+            return "";
         }
-        logger.debug("Exiting validateNameWorkspace");
-        return "";
+        ITestProject testProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (testProject == null) {
+            logger.debug("Exiting validateNameWorkspace - no test project found");
+            return "";
+        }
+        String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        if (stepObjectNameLong.isEmpty()) {
+            logger.debug("Exiting validateNameWorkspace - no step object name");
+            return "";
+        }
+        IStepObject theStepObject = testProject.getStepObject(stepObjectNameLong);
+        if (theStepObject == null) {
+            logger.debug("Exiting validateNameWorkspace - step object not found");
+            return "";
+        }
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
+            logger.debug("Exiting validateNameWorkspace - no step definition name");
+            return "";
+        }
+        IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+        if (theStepDefinition == null) {
+            logger.debug("Exiting validateNameWorkspace - step definition not found");
+            return "";
+        }
+        if (theStepDefinition.getStepParameters("Content") != null) {
+            logger.debug("Exiting validateNameWorkspace - Content parameter found");
+            return "";
+        }
+        logger.debug("Exiting validateNameWorkspace with error");
+        return TextIssueTypes.TEXT_NAME_WORKSPACE.description;
     }
 }
