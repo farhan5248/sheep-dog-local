@@ -147,6 +147,31 @@ public class TestStepIssueResolver {
                     }
                 }
             }
+            for (IStepObject stepObject : theProject.getStepObjectList()) {
+                String nameLong = stepObject.getNameLong();
+                if (nameLong == null || nameLong.isEmpty()) {
+                    continue;
+                }
+                int lastSlash = nameLong.lastIndexOf('/');
+                if (lastSlash < 0) {
+                    continue;
+                }
+                String component = nameLong.substring(0, lastSlash);
+                String objectName = stepObject.getName();
+                if (component.isEmpty() || objectName.isEmpty()) {
+                    continue;
+                }
+                String shortId = objectName;
+                if (!seenIds.contains(shortId)) {
+                    seenIds.add(shortId);
+                    String description = SheepDogUtility.getStatementListAsString(stepObject.getStatementList());
+                    SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
+                    shortProposal.setId(shortId);
+                    shortProposal.setValue("The " + component + " " + objectName);
+                    shortProposal.setDescription(description);
+                    proposals.add(shortProposal);
+                }
+            }
         }
         logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
         return proposals;
