@@ -75,13 +75,7 @@ public class TestStepIssueResolver {
             if (theStepObject != null) {
                 IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
                 if (theStepDefinition == null) {
-                    for (IStepDefinition existingStepDef : theStepObject.getStepDefinitionList()) {
-                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                        proposal.setId(existingStepDef.getName());
-                        proposal.setDescription(SheepDogUtility.getStatementListAsString(existingStepDef.getStatementList()));
-                        proposal.setValue(existingStepDef.getName());
-                        proposals.add(proposal);
-                    }
+                    proposals.addAll(getStepDefinitions(theTestStep));
                     SheepDogBuilder.createStepDefinition(theStepObject, stepDefinitionName);
                     SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                     proposal.setId("Generate " + stepDefinitionName);
@@ -193,6 +187,20 @@ public class TestStepIssueResolver {
             String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
             IStepObject theStepObject = theProject.getStepObject(qualifiedName);
             if (theStepObject != null) {
+                proposals.addAll(getStepDefinitions(theTestStep));
+            }
+        }
+        logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
+        return proposals;
+    }
+
+    private static ArrayList<SheepDogIssueProposal> getStepDefinitions(ITestStep theTestStep) throws Exception {
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (theProject != null) {
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+            if (theStepObject != null) {
                 for (IStepDefinition existingStepDef : theStepObject.getStepDefinitionList()) {
                     SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                     proposal.setId(existingStepDef.getName());
@@ -202,7 +210,6 @@ public class TestStepIssueResolver {
                 }
             }
         }
-        logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
         return proposals;
     }
 
