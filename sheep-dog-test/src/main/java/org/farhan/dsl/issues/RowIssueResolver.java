@@ -1,11 +1,15 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStep;
+import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 import org.farhan.dsl.lang.SheepDogUtility;
@@ -58,10 +62,18 @@ public class RowIssueResolver {
                             proposal.setValue(existingParams.getName());
                             proposals.add(proposal);
                         }
+                        IStepObject clonedStepObject = SheepDogUtility.cloneStepObject(theStepObject);
+                        IStepDefinition clonedStepDefinition = clonedStepObject.getStepDefinition(theStepDefinition.getName());
+                        IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(clonedStepDefinition, specCellList);
+                        ITable newTable = SheepDogBuilder.createTable(newStepParameters);
+                        IRow newRow = SheepDogBuilder.createRow(newTable);
+                        for (ICell cell : theTestStep.getTable().getRowList().getFirst().getCellList()) {
+                            SheepDogBuilder.createCell(newRow, cell.getName());
+                        }
                         SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                         proposal.setId("Generate " + specCellList);
                         proposal.setDescription("");
-                        proposal.setValue(theStepObject.getContent());
+                        proposal.setValue(clonedStepObject);
                         proposals.add(proposal);
                     }
                 }

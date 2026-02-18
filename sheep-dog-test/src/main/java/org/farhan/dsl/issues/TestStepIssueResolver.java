@@ -37,6 +37,10 @@ public class TestStepIssueResolver {
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         if (!qualifiedName.isEmpty()) {
             IStepObject theStepObject = SheepDogBuilder.createStepObject(null, qualifiedName);
+            String stepDefinitionName = theTestStep.getStepDefinitionName();
+            if (!stepDefinitionName.isEmpty()) {
+                SheepDogBuilder.createStepDefinition(theStepObject, stepDefinitionName);
+            }
             SheepDogIssueProposal proposal = new SheepDogIssueProposal();
             proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getNameLong());
             proposal.setDescription(SheepDogUtility.getStatementListAsString(theStepObject.getStatementList()));
@@ -74,11 +78,11 @@ public class TestStepIssueResolver {
                         proposal.setValue(existingStepDef.getName());
                         proposals.add(proposal);
                     }
-                    IStepDefinition newStepDefinition = SheepDogBuilder.createStepDefinition(null, stepDefinitionName);
+                    SheepDogBuilder.createStepDefinition(theStepObject, stepDefinitionName);
                     SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                    proposal.setId("Generate " + newStepDefinition.getName());
-                    proposal.setDescription(SheepDogUtility.getStatementListAsString(newStepDefinition.getStatementList()));
-                    proposal.setValue(theStepObject.getContent());
+                    proposal.setId("Generate " + stepDefinitionName);
+                    proposal.setDescription(SheepDogUtility.getStatementListAsString(theStepObject.getStepDefinition(stepDefinitionName).getStatementList()));
+                    proposal.setValue(theStepObject);
                     proposals.add(proposal);
                 }
             }
