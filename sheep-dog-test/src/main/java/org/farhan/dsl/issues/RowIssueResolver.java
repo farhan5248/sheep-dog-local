@@ -94,6 +94,38 @@ public class RowIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        logger.debug("stepObjectNameLong: {}", stepObjectNameLong);
+        if (!stepObjectNameLong.isEmpty()) {
+            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (project != null) {
+                IStepObject stepObject = project.getStepObject(stepObjectNameLong);
+                logger.debug("stepObject: {}", stepObject != null ? stepObject.getName() : "null");
+                if (stepObject != null) {
+                    String stepDefinitionName = theTestStep.getStepDefinitionName();
+                    logger.debug("stepDefinitionName: {}", stepDefinitionName);
+                    IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
+                    logger.debug("stepDefinition: {}", stepDefinition != null ? stepDefinition.getName() : "null");
+                    if (stepDefinition != null) {
+                        for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
+                            if (stepParameters.getName().equals("Content")) {
+                                logger.debug("Skipping Content parameter - not for table rows");
+                                continue;
+                            }
+                            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                            proposal.setId(stepParameters.getName());
+                            proposal.setValue(stepParameters.getName());
+                            if (!stepParameters.getStatementList().isEmpty()) {
+                                proposal.setDescription(stepParameters.getStatementList().getFirst().getName());
+                            }
+                            proposals.add(proposal);
+                            logger.debug("Added suggest step parameters proposal: {}", stepParameters.getName());
+                        }
+                    }
+                }
+            }
+        }
+
         logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
         return proposals;
     }
