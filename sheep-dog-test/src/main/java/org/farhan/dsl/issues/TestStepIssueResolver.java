@@ -113,6 +113,26 @@ public class TestStepIssueResolver {
                 theTestStep != null ? theTestStep.toString() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
+        ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (theProject != null) {
+            for (IStepObject stepObject : theProject.getStepObjectList()) {
+                String nameLong = stepObject.getNameLong();
+                String objectName = stepObject.getName();
+                String component = nameLong.contains("/") ? nameLong.substring(0, nameLong.lastIndexOf("/")) : "";
+                logger.debug("workspace stepObject component: {}, name: {}", component, objectName);
+                String id = objectName;
+                String value = component.isEmpty() ? "The " + objectName : "The " + component + " " + objectName;
+                if (proposals.stream().noneMatch(p -> p.getId().equals(id))) {
+                    SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                    proposal.setId(id);
+                    proposal.setValue(value);
+                    proposal.setDescription(SheepDogUtility.getStatementListAsString(stepObject.getStatementList()));
+                    proposals.add(proposal);
+                    logger.debug("Added workspace proposal: {}", id);
+                }
+            }
+        }
+
         ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
         logger.debug("previousSteps count: {}", previousSteps.size());
         for (ITestStep previousStep : previousSteps) {
