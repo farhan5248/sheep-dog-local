@@ -25,4 +25,9 @@ public class StatementImpl implements IStatement {
 		return parent;
 	}
 
+	@Override
+	public String toString() {
+		return name != null ? name : "";
+	}
+
 }

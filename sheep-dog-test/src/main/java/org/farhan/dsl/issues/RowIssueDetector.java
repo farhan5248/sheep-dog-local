@@ -33,57 +33,39 @@ public class RowIssueDetector {
      */
     public static String validateCellListWorkspace(IRow theRow) throws Exception {
         logger.debug("Entering validateCellListWorkspace");
-
+        String message = "";
         ITable table = theRow.getParent();
-        if (table == null) {
-            logger.debug("Exiting validateCellListWorkspace - no parent table");
-            return "";
-        }
-        Object tableParent = table.getParent();
-        if (!(tableParent instanceof ITestStep)) {
-            logger.debug("Exiting validateCellListWorkspace - table parent is not a TestStep");
-            return "";
-        }
-        ITestStep theTestStep = (ITestStep) tableParent;
-        ITestProject testProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-        if (testProject == null) {
-            logger.debug("Exiting validateCellListWorkspace - no test project found");
-            return "";
-        }
-        String stepObjectNameLong = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-        if (stepObjectNameLong.isEmpty()) {
-            logger.debug("Exiting validateCellListWorkspace - no step object name");
-            return "";
-        }
-        IStepObject theStepObject = testProject.getStepObject(stepObjectNameLong);
-        if (theStepObject == null) {
-            logger.debug("Exiting validateCellListWorkspace - step object not found");
-            return "";
-        }
-        String stepDefinitionName = theTestStep.getStepDefinitionName();
-        if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
-            logger.debug("Exiting validateCellListWorkspace - no step definition name");
-            return "";
-        }
-        IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
-        if (theStepDefinition == null) {
-            logger.debug("Exiting validateCellListWorkspace - step definition not found");
-            return "";
-        }
-        String rowCellsAsString = SheepDogUtility.getCellListAsString(theRow.getCellList());
-        for (IStepParameters stepParameters : theStepDefinition.getStepParameterList()) {
-            ITable stepParamsTable = stepParameters.getTable();
-            if (stepParamsTable != null && !stepParamsTable.getRowList().isEmpty()) {
-                IRow headerRow = stepParamsTable.getRow(0);
-                String headerCellsAsString = SheepDogUtility.getCellListAsString(headerRow.getCellList());
-                if (rowCellsAsString.equals(headerCellsAsString)) {
-                    logger.debug("Exiting validateCellListWorkspace - cells match step parameters");
-                    return "";
+        if (table != null && table.getParent() instanceof ITestStep) {
+            ITestStep testStep = (ITestStep) table.getParent();
+            ITestProject testProject = SheepDogUtility.getTestProjectParentForRow(theRow);
+            if (testProject != null) {
+                String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(testStep);
+                IStepObject theStepObject = testProject.getStepObject(qualifiedName);
+                if (theStepObject != null) {
+                    String stepDefinitionName = testStep.getStepDefinitionName();
+                    IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                    if (theStepDefinition != null) {
+                        String rowCells = SheepDogUtility.getCellListAsString(theRow.getCellList());
+                        boolean found = false;
+                        for (IStepParameters stepParameters : theStepDefinition.getStepParameterList()) {
+                            ITable paramsTable = stepParameters.getTable();
+                            if (paramsTable != null && !paramsTable.getRowList().isEmpty()) {
+                                String paramCells = SheepDogUtility.getCellListAsString(paramsTable.getRow(0).getCellList());
+                                if (rowCells.equals(paramCells)) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!found) {
+                            message = RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
+                        }
+                    }
                 }
             }
         }
-        logger.debug("Exiting validateCellListWorkspace with error");
-        return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
+        logger.debug("Exiting validateCellListWorkspace");
+        return message;
     }
 
 }

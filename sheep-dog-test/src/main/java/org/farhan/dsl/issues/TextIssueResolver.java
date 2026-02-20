@@ -2,6 +2,7 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
@@ -26,44 +27,48 @@ public class TextIssueResolver {
 
     private static final Logger logger = SheepDogLoggerFactory.getLogger(TextIssueResolver.class);
 
-    /**
-     * Generates proposals correcting values when an assignment exists but is
-     * invalid.
-     *
-     * @param theTestStep the element needing corrections
-     * @return list of quick fix proposals
-     */
     public static ArrayList<SheepDogIssueProposal> correctNameWorkspace(ITestStep theTestStep) throws Exception {
-        logger.debug("Entering correctNameWorkspace");
-        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-
-        ITestProject theProject = theTestStep.getParent().getParent().getParent();
-        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-        IStepObject theStepObject = theProject.getStepObject(qualifiedName);
-        if (theStepObject != null) {
-            theStepObject = SheepDogUtility.cloneStepObject(theStepObject);
-            String stepDefinitonName = theTestStep.getStepDefinitionName();
-            IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitonName);
-            if (theStepDefinition != null) {
-                // This assumes that the step is valid but the parameters don't exist
-                IStepParameters theStepParameters = theStepDefinition.getStepParameters("Content");
-                if (theStepParameters == null) {
-                    theStepParameters = SheepDogBuilder.createStepParameters(theStepDefinition, "Content");
-                    ITable table = SheepDogBuilder.createTable(theStepParameters);
-                    IRow row = SheepDogBuilder.createRow(table);
-                    SheepDogBuilder.createCell(row, "Content");
+        logger.debug("Entering correctNameWorkspace for step: {}",
+                theTestStep != null ? theTestStep.toString() : "null");
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        if (!stepDefinitionName.isEmpty()) {
+            ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+            IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+            if (theStepObject != null) {
+                IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                if (theStepDefinition != null && !hasContentCell(theStepDefinition)) {
+                    IStepObject clonedStepObject = SheepDogUtility.cloneStepObject(theStepObject);
+                    IStepDefinition clonedStepDefinition = clonedStepObject.getStepDefinition(stepDefinitionName);
+                    IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(clonedStepDefinition, "Content");
+                    ITable newTable = SheepDogBuilder.createTable(newStepParameters);
+                    IRow newRow = SheepDogBuilder.createRow(newTable);
+                    SheepDogBuilder.createCell(newRow, "Content");
                     SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                    proposal.setId("Generate "
-                            + SheepDogUtility.getCellListAsString(theStepParameters.getTable().getRowList().getFirst().getCellList()));
-                    proposal.setDescription(
-                            SheepDogUtility.getStatementListAsString(theStepParameters.getStatementList()));
-                    proposal.setValue(theStepObject);
+                    proposal.setId("Generate Content");
+                    proposal.setDescription("");
+                    proposal.setValue(clonedStepObject);
                     proposals.add(proposal);
                 }
             }
         }
         logger.debug("Exiting correctNameWorkspace with {} proposals", proposals.size());
         return proposals;
+    }
+
+    private static boolean hasContentCell(IStepDefinition theStepDefinition) {
+        for (IStepParameters stepParameters : theStepDefinition.getStepParameterList()) {
+            ITable paramsTable = stepParameters.getTable();
+            if (paramsTable != null && !paramsTable.getRowList().isEmpty()) {
+                for (ICell cell : paramsTable.getRow(0).getCellList()) {
+                    if ("Content".equals(cell.getName())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }

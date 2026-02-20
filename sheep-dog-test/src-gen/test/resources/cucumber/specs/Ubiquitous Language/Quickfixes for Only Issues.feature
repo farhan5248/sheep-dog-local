@@ -4,10 +4,7 @@ Feature: Quickfixes for Only Issues
   \@sheep-dog-test
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
-  @Correct
   Scenario: Cell name should start with a capital letter quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                | Row Contents     |
@@ -26,10 +23,7 @@ Feature: Quickfixes for Only Issues
           | Quickfix Name        | Quickfix Description                    | Quickfix         |
           | Capitalize cell name | Capitalize the first letter of the name | Lowercase header |
 
-  @Correct
   Scenario: Body row Cell names can be any case quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                | Row Contents |
@@ -41,10 +35,7 @@ Feature: Quickfixes for Only Issues
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/2/Cell/1 |
      Then The xtext plugin list quickfixes dialog will be empty
 
-  @Correct
   Scenario: Test suite name should start with a capital letter quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name   |
@@ -60,10 +51,7 @@ Feature: Quickfixes for Only Issues
           | Quickfix Name              | Quickfix Description                    | Quickfix          |
           | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
 
-  @Correct
   Scenario: Test case name should start with a capital letter quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name | Test Case Name      |
@@ -79,10 +67,7 @@ Feature: Quickfixes for Only Issues
           | Quickfix Name                       | Quickfix Description                    | Quickfix            |
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
 
-  @Correct
   Scenario: Test step must have a valid object name quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name      |
@@ -103,10 +88,7 @@ Feature: Quickfixes for Only Issues
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list quickfixes dialog will be empty
 
-  @Correct
   Scenario: Test step must have a valid step definition name quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                     |

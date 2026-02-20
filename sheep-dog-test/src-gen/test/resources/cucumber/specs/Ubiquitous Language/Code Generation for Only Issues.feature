@@ -4,10 +4,7 @@ Feature: Code Generation for Only Issues
   \@sheep-dog-test
   These tests verify that code generation works correctly when names follow proper capitalization rules.
 
-  @Generate
   Scenario: Cell name should start with a capital letter generation
-
-    \@Generate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                | Row Contents     |
@@ -25,10 +22,7 @@ Feature: Code Generation for Only Issues
           | Step Name                                | Row Contents     |
           | The daily batchjob Input file is present | Lowercase header |
 
-  @Generate
   Scenario: Test suite name should start with a capital letter generation
-
-    \@Generate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name   |
@@ -43,10 +37,7 @@ Feature: Code Generation for Only Issues
           | Test Suite Name   |
           | Lowercase process |
 
-  @Generate
   Scenario: Test case name should start with a capital letter generation
-
-    \@Generate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name | Test Case Name      |

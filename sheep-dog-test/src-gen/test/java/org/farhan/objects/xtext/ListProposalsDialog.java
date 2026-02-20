@@ -8,7 +8,7 @@ public interface ListProposalsDialog {
 
     public void assertSuggestion(HashMap<String, String> keyMap);
 
-    public void assertSuggestionDescription(HashMap<String, String> keyMap);
-
     public void assertSuggestionName(HashMap<String, String> keyMap);
+
+    public void assertSuggestionDescription(HashMap<String, String> keyMap);
 }

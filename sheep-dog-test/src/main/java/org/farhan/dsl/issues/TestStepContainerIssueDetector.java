@@ -29,9 +29,11 @@ public class TestStepContainerIssueDetector {
     public static String validateNameOnly(ITestStepContainer theTestStepContainer) throws Exception {
         logger.debug("Entering validateNameOnly");
         String name = theTestStepContainer.getName();
-        if (name != null && !name.isEmpty() && !Character.isUpperCase(name.charAt(0))) {
-            logger.debug("Exiting validateNameOnly");
-            return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
+        if (name != null && !name.isEmpty()) {
+            if (!Character.isUpperCase(name.charAt(0))) {
+                logger.debug("Exiting validateNameOnly");
+                return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
+            }
         }
         logger.debug("Exiting validateNameOnly");
         return "";
@@ -48,10 +50,10 @@ public class TestStepContainerIssueDetector {
     public static String validateTestStepListFile(ITestStepContainer theTestStepContainer) throws Exception {
         logger.debug("Entering validateTestStepListFile");
         if (!theTestStepContainer.getTestStepList().isEmpty()) {
-            ITestStep firstStep = theTestStepContainer.getTestStep(0);
-            String component = StepObjectRefFragments.getComponent(firstStep.getStepObjectName());
-            if (component.isEmpty()) {
-                logger.debug("Exiting validateTestStepListFile with error");
+            ITestStep firstTestStep = theTestStepContainer.getTestStep(0);
+            String stepObjectName = firstTestStep.getStepObjectName();
+            if (StepObjectRefFragments.getComponent("The " + stepObjectName).isEmpty()) {
+                logger.debug("Exiting validateTestStepListFile with issue");
                 return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE.description;
             }
         }

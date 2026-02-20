@@ -15,11 +15,6 @@ public class XtextApplyQuickfixActionSteps extends TestSteps {
         super(object, "xtext", "apply quickfix");
     }
 
-    @Given("^The xtext plugin apply quickfix action is performed$")
-    public void isPerformed() {
-        object.transition();
-    }
-
     @Given("^The xtext plugin apply quickfix action is performed as follows$")
     public void isPerformedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable);

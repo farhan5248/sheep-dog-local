@@ -1,42 +1,38 @@
 package org.farhan.dsl.issues;
 
 /**
- * Enum constants for validation error types.
+ * Validation issue types for test step grammar elements.
  * <p>
- * Separates error type definitions from validation logic, providing stable
- * identifiers for detector-resolver coordination.
+ * Separates issue definitions from validation logic, enabling consistent error
+ * messages across validators.
  * </p>
  */
 public enum TestStepIssueTypes {
 
-	/**
-	 * Defines a validation error type with unique identifier and user-facing
-	 * description.
-	 */
 	TEST_STEP_STEP_OBJECT_NAME_ONLY("TEST_STEP_STEP_OBJECT_NAME_ONLY",
-			"Every test case must have at least one component specified."
-					+ "\nThis should be the first part of the test step name." + "\nThe component is optional."
-					+ "\nComponent ending words are: application, service, plugin, batchjob, project."
-					+ "\nExamples are: \"The something application,\" or \"The something service,\""
-					+ "Every test step must have the object specified."
-					+ "\nThe object can have the complete path or not."
-					+ "\nObject ending words are: file, page, response, dialog, directory, request, goal, job, action."
-					+ "\nExamples are: \"src/test/resources/file.txt file\" or \"Home page\""),
+			"Every test case must have at least one component specified.\n"
+					+ "This should be the first part of the test step name.\n"
+					+ "The component is optional.\n"
+					+ "Component ending words are: application, service, plugin, batchjob, project.\n"
+					+ "Examples are: \"The something application,\" or \"The something service,\"Every test step must have the object specified.\n"
+					+ "The object can have the complete path or not.\n"
+					+ "Object ending words are: file, page, response, dialog, directory, request, goal, job, action.\n"
+					+ "Examples are: \"src/test/resources/file.txt file\" or \"Home page\""),
 
 	TEST_STEP_STEP_DEFINITION_NAME_ONLY("TEST_STEP_STEP_DEFINITION_NAME_ONLY",
-			"After specifying the step object name, a step definition name is specified."
-					+ "\nIt has 3 parts, details (optional), state and time (optional)."
-					+ "\nDetails is used to specify a part in a document, like the header or body."
-					+ "\nThe details ending words are: section, fragment, table, snippet, list."
-					+ "\nExamples are: \"Customer details section\" or \"Order History table\""
-					+ "\nState part begins with words like is or isn't which get converted to setters or assertions in the test automation."
-					+ "\nNext it's followed by the state attribute which is optional and can be any word."
-					+ "\nThe state starting words are: is, isn't, will be, won't be."
-					+ "\nExamples are: \"is present\" or \"will be created as follows\""
-					+ "\nA test step can end with the time specified."
-					+ "\nTime was useful running describing a sequence of steps like submitting an order before 5pm."
-					+ "\nThe time endings are: early, late, on time, at, before, after, in, on."
-					+ "\nExamples are: \"after the next day\" or \"on time\""),
+			"After specifying the step object name, a step definition name is specified.\n"
+					+ "It has 3 parts, details (optional), state and time (optional).\n"
+					+ "Details is used to specify a part in a document, like the header or body.\n"
+					+ "The details ending words are: section, fragment, table, snippet, list.\n"
+					+ "Examples are: \"Customer details section\" or \"Order History table\"\n"
+					+ "State part begins with words like is or isn't which get converted to setters or assertions in the test automation.\n"
+					+ "Next it's followed by the state attribute which is optional and can be any word.\n"
+					+ "The state starting words are: is, isn't, will be, won't be.\n"
+					+ "Examples are: \"is present\" or \"will be created as follows\"\n"
+					+ "A test step can end with the time specified.\n"
+					+ "Time was useful running describing a sequence of steps like submitting an order before 5pm.\n"
+					+ "The time endings are: early, late, on time, at, before, after, in, on.\n"
+					+ "Examples are: \"after the next day\" or \"on time\""),
 
 	TEST_STEP_STEP_OBJECT_NAME_WORKSPACE("TEST_STEP_STEP_OBJECT_NAME_WORKSPACE",
 			"The step object file doesn't exist for the component"),
@@ -45,18 +41,24 @@ public enum TestStepIssueTypes {
 			"The step definition doesn't exist for the step object");
 
 	/**
-	 * Unique identifier matching the enum name, used to link detectors with
-	 * resolvers.
+	 * Issue identifier following structured naming pattern.
 	 */
 	public final String id;
 
 	/**
-	 * Human-readable error message displayed to users when validation fails.
+	 * Human-readable description of the validation issue.
 	 */
 	public final String description;
 
+	/**
+	 * Initializes issue type with identifier and description.
+	 *
+	 * @param value       the issue identifier
+	 * @param description the issue description
+	 */
 	TestStepIssueTypes(String value, String description) {
 		this.id = value;
 		this.description = description;
 	}
+
 }

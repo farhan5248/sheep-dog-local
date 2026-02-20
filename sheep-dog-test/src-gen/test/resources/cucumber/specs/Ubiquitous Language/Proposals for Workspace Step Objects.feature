@@ -10,10 +10,8 @@ Feature: Proposals for Workspace Step Objects
   3. Previous Object in Test Case: If there's a previous object with the fully qualified name, then only the name is suggested
   4. Test Setup: The test setup section is checked if it has a component or object specified.
 
-  @Suggest
   Scenario: No component no existing
 
-    \@Suggest
     TODO make this an outline with various steps like "The" or "The batchjob" etc
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
@@ -24,10 +22,7 @@ Feature: Proposals for Workspace Step Objects
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be empty
 
-  @Suggest
   Scenario: No component has existing
-
-    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name |
@@ -42,10 +37,7 @@ Feature: Proposals for Workspace Step Objects
           | Suggestion                    | Suggestion Name | Suggestion Description |
           | The daily batchjob Input file | Input file      | Description\n          |
 
-  @Suggest
   Scenario: Has component no existing
-
-    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name          |
@@ -55,10 +47,7 @@ Feature: Proposals for Workspace Step Objects
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
      Then The xtext plugin list proposals dialog will be empty
 
-  @Suggest
   Scenario: Has component has existing
-
-    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name          |

@@ -14,10 +14,7 @@ Feature: Code Generation for Workspace Issues
   2. A keyword or statement aka step definition about that object such as whether is exists, or has certain attributes or fields.
   3. A combination of parameters for that statement. This could be different combinations of search fields used in a search page.
 
-  @Generate
   Scenario: This object doesn't exist generation
-
-    \@Generate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
@@ -32,10 +29,7 @@ Feature: Code Generation for Workspace Issues
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
 
-  @Generate
   Scenario: This object step definition doesn't exist generation
-
-    \@Generate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
@@ -54,10 +48,7 @@ Feature: Code Generation for Workspace Issues
           | daily batchjob/Input file.feature | is absent            |
           | daily batchjob/Input file.feature | is present           |
 
-  @Generate
   Scenario: This object step definition parameter set doesn't exist generation
-
-    \@Generate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                       | Row Contents |
@@ -76,10 +67,7 @@ Feature: Code Generation for Workspace Issues
           | daily batchjob/Input file.feature | is set as follows    | E1, E2, E3 |
           | daily batchjob/Input file.feature | is set as follows    | N1, N2     |
 
-  @Generate
   Scenario: This object step definition text parameter doesn't exist generation
-
-    \@Generate
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                       | Text Content |

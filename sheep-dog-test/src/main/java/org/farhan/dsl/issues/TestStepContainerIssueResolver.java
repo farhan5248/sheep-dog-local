@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
-import org.slf4j.Logger;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.slf4j.Logger;
 
 /**
  * Quick fix proposal generation for validation errors.
@@ -25,16 +25,19 @@ public class TestStepContainerIssueResolver {
 	 * @param theTestStepContainer the element needing corrections
 	 * @return list of quick fix proposals
 	 */
-	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) {
-		logger.debug("Entering proposeNameOnly for test step container: {}", theTestStepContainer != null ? theTestStepContainer.getName() : "null");
-		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-		SheepDogIssueProposal proposal;
-		proposal = new SheepDogIssueProposal();
-		proposal.setId("Capitalize test step container name");
-		proposal.setDescription("Capitalize the first letter of the name");
-		proposal.setValue(theTestStepContainer.getName().substring(0, 1).toUpperCase() + theTestStepContainer.getName().substring(1));
-		proposals.add(proposal);
-		logger.debug("Exiting proposeNameOnly with {} proposals", proposals.size());
+	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) throws Exception {
+		logger.debug("Entering correctNameOnly");
+		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+		String name = theTestStepContainer.getName();
+		if (name != null && !name.isEmpty()) {
+			String capitalized = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+			proposal.setId("Capitalize test step container name");
+			proposal.setDescription("Capitalize the first letter of the name");
+			proposal.setValue(capitalized);
+			proposals.add(proposal);
+		}
+		logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
 		return proposals;
 	}
 

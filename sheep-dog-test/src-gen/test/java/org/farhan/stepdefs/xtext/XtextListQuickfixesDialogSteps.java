@@ -15,6 +15,11 @@ public class XtextListQuickfixesDialogSteps extends TestSteps {
         super(object, "xtext", "list quickfixes");
     }
 
+    @Given("^The xtext plugin list quickfixes dialog is set as follows$")
+    public void isSetAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable);
+    }
+
     @Given("^The xtext plugin list quickfixes dialog will be empty$")
     public void willBeEmpty() {
         object.assertInputOutputs("Empty");
@@ -23,10 +28,5 @@ public class XtextListQuickfixesDialogSteps extends TestSteps {
     @Given("^The xtext plugin list quickfixes dialog will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
-    }
-
-    @Given("^The xtext plugin list quickfixes dialog is set as follows$")
-    public void isSetAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable);
     }
 }

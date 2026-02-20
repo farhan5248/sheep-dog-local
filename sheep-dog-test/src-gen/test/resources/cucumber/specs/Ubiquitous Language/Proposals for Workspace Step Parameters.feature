@@ -4,10 +4,7 @@ Feature: Proposals for Workspace Step Parameters
   \@sheep-dog-test
   If the step definition has step parameters, they'll be proposed.
 
-  @Suggest
   Scenario: No existing step object
-
-    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                           |
@@ -17,10 +14,7 @@ Feature: Proposals for Workspace Step Parameters
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
-  @Suggest
   Scenario: No existing step definition
-
-    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                           |
@@ -33,10 +27,7 @@ Feature: Proposals for Workspace Step Parameters
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
-  @Suggest
   Scenario: Has existing step definition without parameters
-
-    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
@@ -49,10 +40,8 @@ Feature: Proposals for Workspace Step Parameters
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
      Then The xtext plugin list proposals dialog will be empty
 
-  @Suggest
   Scenario: Has existing step definition with parameters
 
-    \@Suggest
     TODO I should add more parameter combinations to describe this better.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
@@ -68,10 +57,8 @@ Feature: Proposals for Workspace Step Parameters
           | Suggestion | Suggestion Name | Suggestion Description       |
           | H1, H2, H3 | H1, H2, H3      | Header parameters for tables |
 
-  @Suggest
   Scenario: Has existing step definition with Content parameter
 
-    \@Suggest
     Content parameters shouldn't be proposed as they are for text blocks, not table rows.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows

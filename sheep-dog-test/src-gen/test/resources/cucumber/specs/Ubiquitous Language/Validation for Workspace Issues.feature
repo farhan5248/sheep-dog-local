@@ -1,8 +1,7 @@
-@sheep-dog-test @Validate
+@sheep-dog-test
 Feature: Validation for Workspace Issues
 
   \@sheep-dog-test
-  \@Validate
   Some problems are fixed by code generation.
   They're typically things like keywords or objects that are not defined in the step objects layer.
   I could just ignore all those warnings and then use the Build Project menu item and it'll create everything at once.

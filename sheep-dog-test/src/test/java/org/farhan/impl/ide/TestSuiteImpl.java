@@ -113,4 +113,9 @@ public class TestSuiteImpl implements ITestSuite {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return qualifiedName != null ? qualifiedName : (name != null ? name : "");
+	}
+
 }

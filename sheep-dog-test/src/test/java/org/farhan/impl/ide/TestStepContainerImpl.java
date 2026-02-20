@@ -81,4 +81,9 @@ public class TestStepContainerImpl implements ITestStepContainer {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return name != null ? name : "";
+    }
+
 }

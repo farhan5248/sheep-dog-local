@@ -7,10 +7,7 @@ Feature: Quickfixes for Workspace Issues
   I could just ignore all those warnings and then use the Build Project menu item and it'll create everything at once.
   There's 4 types of warnings, the scenarios below cover them.
 
-  @Correct
   Scenario: This object doesn't exist quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
@@ -26,10 +23,7 @@ Feature: Quickfixes for Workspace Issues
           | Quickfix Name                                           | Quickfix Description |
           | Generate Input file - daily batchjob/Input file.feature | empty                |
 
-  @Correct
   Scenario: This object step definition doesn't exist quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                |
@@ -51,10 +45,7 @@ Feature: Quickfixes for Workspace Issues
           | Quickfix Name       | Quickfix Description |
           | Generate is present | empty                |
 
-  @Correct
   Scenario: This object step definition parameter set doesn't exist quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                       | Row Contents |
@@ -76,10 +67,7 @@ Feature: Quickfixes for Workspace Issues
           | Quickfix Name   | Quickfix Description |
           | Generate N1, N2 | empty                |
 
-  @Correct
   Scenario: This object step definition text parameter exists quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                       | Text Content |
@@ -93,10 +81,7 @@ Feature: Quickfixes for Workspace Issues
           | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
      Then The xtext plugin list quickfixes dialog will be empty
 
-  @Correct
   Scenario: This object step definition text parameter doesn't exist quickfix
-
-    \@Correct
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                       | Text Content |

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.ITable;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
@@ -28,12 +29,15 @@ public class CellIssueDetector {
     public static String validateNameOnly(ICell theCell) throws Exception {
         logger.debug("Entering validateNameOnly");
         IRow parentRow = theCell.getParent();
-        boolean isHeaderRow = parentRow.getParent().getRowList().indexOf(parentRow) == 0;
+        ITable parentTable = parentRow.getParent();
+        boolean isHeaderRow = parentTable.getRowList().indexOf(parentRow) == 0;
         if (isHeaderRow) {
             String name = theCell.getName();
-            if (name != null && !name.isEmpty() && !Character.isUpperCase(name.charAt(0))) {
-                logger.debug("Exiting validateNameOnly");
-                return CellIssueTypes.CELL_NAME_ONLY.description;
+            if (name != null && !name.isEmpty()) {
+                if (!Character.isUpperCase(name.charAt(0))) {
+                    logger.debug("Exiting validateNameOnly");
+                    return CellIssueTypes.CELL_NAME_ONLY.description;
+                }
             }
         }
         logger.debug("Exiting validateNameOnly");

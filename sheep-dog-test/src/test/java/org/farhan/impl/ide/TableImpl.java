@@ -38,4 +38,10 @@ public class TableImpl implements ITable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		int count = rowList != null ? rowList.size() : 0;
+		return "Table[" + count + " rows]";
+	}
+
 }

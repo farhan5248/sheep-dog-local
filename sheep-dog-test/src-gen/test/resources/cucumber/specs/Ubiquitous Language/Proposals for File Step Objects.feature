@@ -10,10 +10,7 @@ Feature: Proposals for File Step Objects
   3. Previous Object in Test Case: If there's a previous object, propose both just the name and the long form name
   4. Test Setup: The test setup section is checked if it has a component or object specified.
 
-  @Suggest
   Scenario: No component no existing
-
-    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                 |
@@ -27,10 +24,7 @@ Feature: Proposals for File Step Objects
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
           | The daily batchjob Output file | daily batchjob/Output file | Referred in: The daily batchjob Output file is present |
 
-  @Suggest
   Scenario: Has component no existing
-
-    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
           | Step Name                                 |
@@ -44,10 +38,7 @@ Feature: Proposals for File Step Objects
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
           | The daily batchjob Output file | daily batchjob/Output file | Referred in: The daily batchjob Output file is present |
 
-  @Suggest
   Scenario: No component no existing has background
-
-    \@Suggest
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file background steps snippet is created as follows
           | Step Name                                 |

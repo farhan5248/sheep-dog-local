@@ -3,8 +3,8 @@ package org.farhan.dsl.issues;
 import java.util.ArrayList;
 import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
-import org.slf4j.Logger;
 import org.farhan.dsl.lang.SheepDogLoggerFactory;
+import org.slf4j.Logger;
 
 /**
  * Quick fix proposal generation for validation errors.
@@ -24,16 +24,19 @@ public class TestSuiteIssueResolver {
 	 * @param theTestSuite the element needing corrections
 	 * @return list of quick fix proposals
 	 */
-	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestSuite theTestSuite) {
-		logger.debug("Entering proposeNameOnly for test suite: {}", theTestSuite != null ? theTestSuite.getName() : "null");
-		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<SheepDogIssueProposal>();
-		SheepDogIssueProposal proposal;
-		proposal = new SheepDogIssueProposal();
-		proposal.setId("Capitalize test suite name");
-		proposal.setDescription("Capitalize the first letter of the name");
-		proposal.setValue(theTestSuite.getName().substring(0, 1).toUpperCase() + theTestSuite.getName().substring(1));
-		proposals.add(proposal);
-		logger.debug("Exiting proposeNameOnly with {} proposals", proposals.size());
+	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestSuite theTestSuite) throws Exception {
+		logger.debug("Entering correctNameOnly");
+		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+		String name = theTestSuite.getName();
+		if (name != null && !name.isEmpty()) {
+			String capitalized = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+			proposal.setId("Capitalize test suite name");
+			proposal.setDescription("Capitalize the first letter of the name");
+			proposal.setValue(capitalized);
+			proposals.add(proposal);
+		}
+		logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
 		return proposals;
 	}
 

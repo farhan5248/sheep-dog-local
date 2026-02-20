@@ -1,33 +1,36 @@
 package org.farhan.dsl.issues;
 
 /**
- * Enum constants for validation error types.
+ * Validation issue types for text grammar elements.
  * <p>
- * Separates error type definitions from validation logic, providing stable
- * identifiers for detector-resolver coordination.
+ * Separates issue definitions from validation logic, enabling consistent error
+ * messages across validators.
  * </p>
  */
 public enum TextIssueTypes {
 
-	/**
-	 * Defines a validation error type with unique identifier and user-facing
-	 * description.
-	 */
-	TEXT_NAME_WORKSPACE("TEXT_NAME_WORKSPACE", "The step parameters don't exist for the step definition");
+	TEXT_NAME_WORKSPACE("TEXT_NAME_WORKSPACE",
+			"The step parameters don't exist for the step definition");
 
 	/**
-	 * Unique identifier matching the enum name, used to link detectors with
-	 * resolvers.
+	 * Issue identifier following structured naming pattern.
 	 */
 	public final String id;
 
 	/**
-	 * Human-readable error message displayed to users when validation fails.
+	 * Human-readable description of the validation issue.
 	 */
 	public final String description;
 
+	/**
+	 * Initializes issue type with identifier and description.
+	 *
+	 * @param value       the issue identifier
+	 * @param description the issue description
+	 */
 	TextIssueTypes(String value, String description) {
 		this.id = value;
 		this.description = description;
 	}
+
 }

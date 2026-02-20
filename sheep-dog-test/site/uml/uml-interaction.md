@@ -10,7 +10,7 @@ These patterns define which classes have loggers and which operations should be 
 
 ### Entry/Exit Logging Pattern
 
-All public methods in Detector, Resolver, and Builder classes MUST have entry and exit logging.
+All public methods in Utility, Detector, Resolver, and Builder classes MUST have entry and exit logging.
 
 **Rules**
 - Entry log is the first statement in each public method
@@ -18,7 +18,7 @@ All public methods in Detector, Resolver, and Builder classes MUST have entry an
 
 ### No Logger Pattern
 
-Utility classes, interfaces, and factory classes do not declare loggers to keep them lightweight and focused on their single responsibility.
+Interfaces, and factory classes do not declare loggers to keep them lightweight and focused on their single responsibility.
 
 **Examples**
 
@@ -170,9 +170,8 @@ Detector methods validate grammar assignments at different scopes: Only (element
 **Example: Element-level validation (Only)**
 ```java
 public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Exception {
-    logger.debug("Entering validateStepObjectNameOnly for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
-    String text = theTestStep.getName();
+    logger.debug("Entering validateStepObjectNameOnly");
+    String text = theTestStep.getStepObjectName();
     if (text != null) {
         if (!TestStepUtility.isValid(text)) {
             if (TestStepUtility.getStepObjectName(text).isEmpty()) {
@@ -189,8 +188,7 @@ public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Ex
 **Example: Cross-file validation (Workspace)**
 ```java
 public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
-    logger.debug("Entering validateStepObjectNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering validateStepObjectNameWorkspace");
     String message = "";
     String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
     IStepObject theStepObject = theTestStep.getParent().getParent().getParent()
@@ -330,11 +328,25 @@ Utility methods construct fully qualified or long-form names for grammar element
 **Example: Getting step object qualified name**
 ```java
 public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
-    String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
-    String component = StepObjectRefFragments.getComponent(stepNameLong);
-    String object = StepObjectRefFragments.getObject(stepNameLong);
-    String fileExt = theStep.getParent().getParent().getParent().getFileExtension();
-    return component + "/" + object + fileExt;
+    if (theStep != null) {
+        String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
+        if (stepNameLong != null && !stepNameLong.isEmpty()) {
+            String component = StepObjectRefFragments.getComponent(stepNameLong);
+            String object = StepObjectRefFragments.getObject(stepNameLong);
+
+            if (!component.isEmpty() && !object.isEmpty()) {
+                // Use utility method to navigate to project
+                ITestProject project = getTestProjectParentForTestStep(theStep);
+                if (project != null) {
+                    String fileExt = project.getFileExtension();
+                    if (fileExt != null && !fileExt.isEmpty()) {
+                        return component + "/" + object + fileExt;
+                    }
+                }
+            }
+        }
+    }
+    return "";
 }
 ```
 
@@ -740,8 +752,7 @@ Resolver methods generate quick fix proposals when values are missing. They sugg
 ```java
 public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering suggestStepObjectNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering suggestStepObjectNameWorkspace");
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
     ITestProject theProject = theTestStep.getParent().getParent().getParent();
 
@@ -765,8 +776,7 @@ public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(
 ```java
 public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering suggestStepDefinitionNameWorkspace");
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
     // Get all step definitions from the step object
@@ -788,8 +798,7 @@ Resolver methods generate quick fix proposals when values exist but are wrong. T
 ```java
 public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering correctStepObjectNameWorkspace");
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
     if (!theTestStep.getStepObjectName().isEmpty()) {
@@ -820,11 +829,10 @@ public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(
 ```java
 public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
-            theTestStep != null ? theTestStep.getName() : "null");
+    logger.debug("Entering correctStepDefinitionNameWorkspace");
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
     String stepDefinitionName = TestStepUtility.getStepDefinitionName(
-            theTestStep.getName());
+            theTestStep.getStepDefinitionName());
 
     if (!stepDefinitionName.isEmpty()) {
         ITestProject theProject = theTestStep.getParent().getParent().getParent();

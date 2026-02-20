@@ -4,17 +4,17 @@ import java.util.HashMap;
 
 public interface ListQuickfixesDialog {
 
-    public void assertEmpty(HashMap<String, String> keyMap);
-
-    public void assertQuickfix(HashMap<String, String> keyMap);
-
-    public void assertQuickfixDescription(HashMap<String, String> keyMap);
-
-    public void assertQuickfixName(HashMap<String, String> keyMap);
-
     public void setQuickfixName(HashMap<String, String> keyMap);
 
     public void setQuickfixDescription(HashMap<String, String> keyMap);
 
     public void setQuickfix(HashMap<String, String> keyMap);
+
+    public void assertEmpty(HashMap<String, String> keyMap);
+
+    public void assertQuickfixName(HashMap<String, String> keyMap);
+
+    public void assertQuickfixDescription(HashMap<String, String> keyMap);
+
+    public void assertQuickfix(HashMap<String, String> keyMap);
 }
