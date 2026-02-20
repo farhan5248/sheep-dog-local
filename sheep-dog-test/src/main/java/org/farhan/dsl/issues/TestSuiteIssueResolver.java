@@ -1,8 +1,6 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
 import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
 
