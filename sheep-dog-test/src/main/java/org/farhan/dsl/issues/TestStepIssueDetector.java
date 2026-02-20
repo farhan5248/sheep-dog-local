@@ -28,7 +28,7 @@ public class TestStepIssueDetector {
      * @return empty string if valid, error description otherwise
      * @throws Exception if validation fails
      */
-    public static String validateStepObjectNameOnly(ITestStep theTestStep) {
+    public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepObjectNameOnly for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         String stepObjectName = theTestStep.getStepObjectName();
         if (stepObjectName == null || stepObjectName.isEmpty()) {
@@ -47,7 +47,7 @@ public class TestStepIssueDetector {
      * @return empty string if valid, error description otherwise
      * @throws Exception if validation fails
      */
-    public static String validateStepDefinitionNameOnly(ITestStep theTestStep) {
+    public static String validateStepDefinitionNameOnly(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepDefinitionNameOnly for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {

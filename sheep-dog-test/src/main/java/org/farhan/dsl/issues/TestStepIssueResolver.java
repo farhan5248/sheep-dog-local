@@ -103,44 +103,7 @@ public class TestStepIssueResolver {
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
         if (theProject != null) {
             LinkedHashSet<String> seenIds = new LinkedHashSet<>();
-            for (ITestSuite suite : theProject.getTestSuiteList()) {
-                for (ITestStepContainer container : suite.getTestStepContainerList()) {
-                    for (ITestStep step : container.getTestStepList()) {
-                        if (step.equals(theTestStep)) {
-                            continue;
-                        }
-                        String stepObjectName = step.getStepObjectName();
-                        if (stepObjectName == null || stepObjectName.isEmpty()) {
-                            continue;
-                        }
-                        String component = StepObjectRefFragments.getComponent(stepObjectName);
-                        String object = StepObjectRefFragments.getObject(stepObjectName);
-                        if (component.isEmpty() || object.isEmpty()) {
-                            continue;
-                        }
-                        String fullStepName = stepObjectName + " " + step.getStepDefinitionName();
-                        String description = "Referred in: " + fullStepName.trim();
-                        String shortId = object;
-                        if (!seenIds.contains(shortId)) {
-                            seenIds.add(shortId);
-                            SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
-                            shortProposal.setId(shortId);
-                            shortProposal.setValue("The " + object);
-                            shortProposal.setDescription(description);
-                            proposals.add(shortProposal);
-                        }
-                        String longId = component + "/" + object;
-                        if (!seenIds.contains(longId)) {
-                            seenIds.add(longId);
-                            SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
-                            longProposal.setId(longId);
-                            longProposal.setValue("The " + component + " " + object);
-                            longProposal.setDescription(description);
-                            proposals.add(longProposal);
-                        }
-                    }
-                }
-            }
+            addStepObjectProposalsFromWorkspace(theProject, theTestStep, seenIds, proposals);
             for (IStepObject stepObject : theProject.getStepObjectList()) {
                 String nameLong = stepObject.getNameLong();
                 if (nameLong == null || nameLong.isEmpty()) {
@@ -192,6 +155,48 @@ public class TestStepIssueResolver {
         }
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with result: {} proposals", proposals.size());
         return proposals;
+    }
+
+    private static void addStepObjectProposalsFromWorkspace(ITestProject theProject, ITestStep theTestStep,
+            LinkedHashSet<String> seenIds, ArrayList<SheepDogIssueProposal> proposals) {
+        for (ITestSuite suite : theProject.getTestSuiteList()) {
+            for (ITestStepContainer container : suite.getTestStepContainerList()) {
+                for (ITestStep step : container.getTestStepList()) {
+                    if (step.equals(theTestStep)) {
+                        continue;
+                    }
+                    String stepObjectName = step.getStepObjectName();
+                    if (stepObjectName == null || stepObjectName.isEmpty()) {
+                        continue;
+                    }
+                    String component = StepObjectRefFragments.getComponent(stepObjectName);
+                    String object = StepObjectRefFragments.getObject(stepObjectName);
+                    if (component.isEmpty() || object.isEmpty()) {
+                        continue;
+                    }
+                    String fullStepName = stepObjectName + " " + step.getStepDefinitionName();
+                    String description = "Referred in: " + fullStepName.trim();
+                    String shortId = object;
+                    if (!seenIds.contains(shortId)) {
+                        seenIds.add(shortId);
+                        SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
+                        shortProposal.setId(shortId);
+                        shortProposal.setValue("The " + object);
+                        shortProposal.setDescription(description);
+                        proposals.add(shortProposal);
+                    }
+                    String longId = component + "/" + object;
+                    if (!seenIds.contains(longId)) {
+                        seenIds.add(longId);
+                        SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
+                        longProposal.setId(longId);
+                        longProposal.setValue("The " + component + " " + object);
+                        longProposal.setDescription(description);
+                        proposals.add(longProposal);
+                    }
+                }
+            }
+        }
     }
 
     private static ArrayList<SheepDogIssueProposal> getStepDefinitions(ITestStep theTestStep) throws Exception {

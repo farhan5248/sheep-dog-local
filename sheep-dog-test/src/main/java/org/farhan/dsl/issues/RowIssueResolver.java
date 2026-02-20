@@ -1,6 +1,7 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
@@ -45,8 +46,8 @@ public class RowIssueResolver {
             if (theStepObject != null) {
                 IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
                 if (theStepDefinition != null) {
-                    String specCellList = SheepDogUtility.getCellListAsString(
-                            theTestStep.getTable().getRowList().getFirst().getCellList());
+                    List<ICell> firstRowCells = theTestStep.getTable().getRowList().getFirst().getCellList();
+                    String specCellList = SheepDogUtility.getCellListAsString(firstRowCells);
                     boolean matchFound = false;
                     for (IStepParameters existingParams : theStepDefinition.getStepParameterList()) {
                         if (existingParams.getName().contentEquals(specCellList)) {
@@ -67,7 +68,7 @@ public class RowIssueResolver {
                         IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(clonedStepDefinition, specCellList);
                         ITable newTable = SheepDogBuilder.createTable(newStepParameters);
                         IRow newRow = SheepDogBuilder.createRow(newTable);
-                        for (ICell cell : theTestStep.getTable().getRowList().getFirst().getCellList()) {
+                        for (ICell cell : firstRowCells) {
                             SheepDogBuilder.createCell(newRow, cell.getName());
                         }
                         SheepDogIssueProposal proposal = new SheepDogIssueProposal();
