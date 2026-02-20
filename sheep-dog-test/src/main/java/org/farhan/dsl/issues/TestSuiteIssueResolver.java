@@ -25,7 +25,7 @@ public class TestSuiteIssueResolver {
 	 * @return list of quick fix proposals
 	 */
 	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestSuite theTestSuite) throws Exception {
-		logger.debug("Entering correctNameOnly");
+		logger.debug("Entering correctNameOnly for theTestSuite: {}", theTestSuite != null ? theTestSuite.getName() : "null");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 		String name = theTestSuite.getName();
 		if (name != null && !name.isEmpty()) {
@@ -36,7 +36,7 @@ public class TestSuiteIssueResolver {
 			proposal.setValue(capitalized);
 			proposals.add(proposal);
 		}
-		logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
+		logger.debug("Exiting correctNameOnly with result: {} proposals", proposals.size());
 		return proposals;
 	}
 

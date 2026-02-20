@@ -29,13 +29,13 @@ public class TestStepIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateStepObjectNameOnly(ITestStep theTestStep) {
-        logger.debug("Entering validateStepObjectNameOnly");
+        logger.debug("Entering validateStepObjectNameOnly for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         String stepObjectName = theTestStep.getStepObjectName();
         if (stepObjectName == null || stepObjectName.isEmpty()) {
-            logger.debug("Exiting validateStepObjectNameOnly with issue");
+            logger.debug("Exiting validateStepObjectNameOnly with result: {}", TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description);
             return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
         }
-        logger.debug("Exiting validateStepObjectNameOnly");
+        logger.debug("Exiting validateStepObjectNameOnly with result: {}", "");
         return "";
     }
 
@@ -48,13 +48,13 @@ public class TestStepIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateStepDefinitionNameOnly(ITestStep theTestStep) {
-        logger.debug("Entering validateStepDefinitionNameOnly");
+        logger.debug("Entering validateStepDefinitionNameOnly for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
-            logger.debug("Exiting validateStepDefinitionNameOnly with issue");
+            logger.debug("Exiting validateStepDefinitionNameOnly with result: {}", TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description);
             return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
         }
-        logger.debug("Exiting validateStepDefinitionNameOnly");
+        logger.debug("Exiting validateStepDefinitionNameOnly with result: {}", "");
         return "";
     }
 
@@ -67,7 +67,7 @@ public class TestStepIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
-        logger.debug("Entering validateStepObjectNameWorkspace");
+        logger.debug("Entering validateStepObjectNameWorkspace for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         String message = "";
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
@@ -75,7 +75,7 @@ public class TestStepIssueDetector {
         if (theStepObject == null) {
             message = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
         }
-        logger.debug("Exiting validateStepObjectNameWorkspace");
+        logger.debug("Exiting validateStepObjectNameWorkspace with result: {}", message);
         return message;
     }
 
@@ -88,7 +88,7 @@ public class TestStepIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
-        logger.debug("Entering validateStepDefinitionNameWorkspace");
+        logger.debug("Entering validateStepDefinitionNameWorkspace for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         String message = "";
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
@@ -100,7 +100,7 @@ public class TestStepIssueDetector {
                 message = TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
             }
         }
-        logger.debug("Exiting validateStepDefinitionNameWorkspace");
+        logger.debug("Exiting validateStepDefinitionNameWorkspace with result: {}", message);
         return message;
     }
 

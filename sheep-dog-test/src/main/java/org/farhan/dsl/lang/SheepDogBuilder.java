@@ -30,7 +30,7 @@ public class SheepDogBuilder {
         cell.setName(name);
         if (parent != null)
             parent.addCell(cell);
-        logger.debug("Exiting createCell");
+        logger.debug("Exiting createCell with result: {}", cell != null ? cell.getName() : "null");
         return cell;
     }
 
@@ -42,11 +42,11 @@ public class SheepDogBuilder {
      * @return the created and initialized instance
      */
     public static IRow createRow(ITable parent) {
-        logger.debug("Entering createRow");
+        logger.debug("Entering createRow for parent: {}", parent != null ? "non-null" : "null");
         IRow row = SheepDogFactory.instance.createRow();
         if (parent != null)
             parent.addRow(row);
-        logger.debug("Exiting createRow");
+        logger.debug("Exiting createRow with result: {}", row != null ? "non-null" : "null");
         return row;
     }
 
@@ -64,7 +64,7 @@ public class SheepDogBuilder {
         statement.setName(name);
         if (parent != null)
             parent.addStatement(statement);
-        logger.debug("Exiting createStatement");
+        logger.debug("Exiting createStatement with result: {}", statement != null ? statement.getName() : "null");
         return statement;
     }
 
@@ -82,7 +82,7 @@ public class SheepDogBuilder {
         statement.setName(name);
         if (parent != null)
             parent.addStatement(statement);
-        logger.debug("Exiting createStatement");
+        logger.debug("Exiting createStatement with result: {}", statement != null ? statement.getName() : "null");
         return statement;
     }
 
@@ -92,7 +92,7 @@ public class SheepDogBuilder {
         statement.setName(name);
         if (parent != null)
             parent.addStatement(statement);
-        logger.debug("Exiting createStatement");
+        logger.debug("Exiting createStatement with result: {}", statement != null ? statement.getName() : "null");
         return statement;
     }
 
@@ -115,7 +115,7 @@ public class SheepDogBuilder {
             if (parent != null)
                 parent.addStepDefinition(stepDefinition);
         }
-        logger.debug("Exiting createStepDefinition");
+        logger.debug("Exiting createStepDefinition with result: {}", stepDefinition != null ? stepDefinition.getName() : "null");
         return stepDefinition;
     }
 
@@ -138,7 +138,7 @@ public class SheepDogBuilder {
             if (parent != null)
                 parent.addStepObject(stepObject);
         }
-        logger.debug("Exiting createStepObject");
+        logger.debug("Exiting createStepObject with result: {}", stepObject != null ? stepObject.getNameLong() : "null");
         return stepObject;
     }
 
@@ -151,7 +151,7 @@ public class SheepDogBuilder {
      * @return the created and initialized instance
      */
     public static IStepParameters createStepParameters(IStepDefinition parent, String name) {
-        logger.debug("Entering createStepParameters for IRow");
+        logger.debug("Entering createStepParameters for name: {}", name);
         IStepParameters stepParameters = null;
         if (parent != null)
             stepParameters = parent.getStepParameters(name);
@@ -161,7 +161,7 @@ public class SheepDogBuilder {
             if (parent != null)
                 parent.addStepParameters(stepParameters);
         }
-        logger.debug("Exiting createStepParameters");
+        logger.debug("Exiting createStepParameters with result: {}", stepParameters != null ? stepParameters.getName() : "null");
         return stepParameters;
     }
 
@@ -173,11 +173,11 @@ public class SheepDogBuilder {
      * @return the created and initialized instance
      */
     public static ITable createTable(IStepParameters parent) {
-        logger.debug("Entering createTable");
+        logger.debug("Entering createTable for parent: {}", parent != null ? parent.getName() : "null");
         ITable table = SheepDogFactory.instance.createTable();
         if (parent != null)
             parent.setTable(table);
-        logger.debug("Exiting createTable");
+        logger.debug("Exiting createTable with result: {}", table != null ? "non-null" : "null");
         return table;
     }
 
@@ -189,7 +189,7 @@ public class SheepDogBuilder {
      * @return the created and initialized instance
      */
     public static ITable createTable(ITestStep parent) {
-        logger.debug("Entering createTable");
+        logger.debug("Entering createTable for parent: {}", parent != null ? parent.getStepObjectName() : "null");
         ITable table;
         if (parent != null) {
             table = parent.getTable();
@@ -200,7 +200,7 @@ public class SheepDogBuilder {
         } else {
             table = SheepDogFactory.instance.createTable();
         }
-        logger.debug("Exiting createTable");
+        logger.debug("Exiting createTable with result: {}", table != null ? "non-null" : "null");
         return table;
     }
 
@@ -221,7 +221,7 @@ public class SheepDogBuilder {
             if (parent != null)
                 parent.addTestCase(testCase);
         }
-        logger.debug("Exiting createTestCase");
+        logger.debug("Exiting createTestCase with result: {}", testCase != null ? testCase.getName() : "null");
         return testCase;
     }
 
@@ -235,7 +235,7 @@ public class SheepDogBuilder {
     public static ITestProject createTestProject() {
         logger.debug("Entering createTestProject");
         ITestProject testProject = SheepDogFactory.instance.createTestProject();
-        logger.debug("Exiting createTestProject");
+        logger.debug("Exiting createTestProject with result: {}", testProject != null ? "non-null" : "null");
         return testProject;
     }
 
@@ -256,7 +256,7 @@ public class SheepDogBuilder {
             if (parent != null)
                 parent.addTestSetup(testSetup);
         }
-        logger.debug("Exiting createTestSetup");
+        logger.debug("Exiting createTestSetup with result: {}", testSetup != null ? testSetup.getName() : "null");
         return testSetup;
     }
 
@@ -276,7 +276,7 @@ public class SheepDogBuilder {
                 StepDefinitionRefFragments.getAll(name.replace(testStep.getStepObjectName(), "")));
         if (parent != null)
             parent.addTestStep(testStep);
-        logger.debug("Exiting createTestStep");
+        logger.debug("Exiting createTestStep with result: {}", testStep != null ? testStep.getStepObjectName() : "null");
         return testStep;
     }
 
@@ -297,7 +297,7 @@ public class SheepDogBuilder {
             if (parent != null)
                 parent.addTestSuite(testSuite);
         }
-        logger.debug("Exiting createTestSuite");
+        logger.debug("Exiting createTestSuite with result: {}", testSuite != null ? testSuite.getNameLong() : "null");
         return testSuite;
     }
 
@@ -310,12 +310,12 @@ public class SheepDogBuilder {
      * @return the created and initialized instance
      */
     public static IText createText(ITestStep parent, String name) {
-        logger.debug("Entering createText");
+        logger.debug("Entering createText for name: {}", name);
         IText text = SheepDogFactory.instance.createText();
         text.setName(name);
         if (parent != null)
             parent.setText(text);
-        logger.debug("Exiting createText");
+        logger.debug("Exiting createText with result: {}", text != null ? text.getName() : "null");
         return text;
     }
 

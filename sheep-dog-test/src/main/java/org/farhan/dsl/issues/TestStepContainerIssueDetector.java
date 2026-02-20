@@ -27,15 +27,15 @@ public class TestStepContainerIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateNameOnly(ITestStepContainer theTestStepContainer) throws Exception {
-        logger.debug("Entering validateNameOnly");
+        logger.debug("Entering validateNameOnly for theTestStepContainer: {}", theTestStepContainer != null ? theTestStepContainer.getName() : "null");
         String name = theTestStepContainer.getName();
         if (name != null && !name.isEmpty()) {
             if (!Character.isUpperCase(name.charAt(0))) {
-                logger.debug("Exiting validateNameOnly");
+                logger.debug("Exiting validateNameOnly with result: {}", TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description);
                 return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
             }
         }
-        logger.debug("Exiting validateNameOnly");
+        logger.debug("Exiting validateNameOnly with result: {}", "");
         return "";
     }
 
@@ -48,16 +48,16 @@ public class TestStepContainerIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateTestStepListFile(ITestStepContainer theTestStepContainer) throws Exception {
-        logger.debug("Entering validateTestStepListFile");
+        logger.debug("Entering validateTestStepListFile for theTestStepContainer: {}", theTestStepContainer != null ? theTestStepContainer.getName() : "null");
         if (!theTestStepContainer.getTestStepList().isEmpty()) {
             ITestStep firstTestStep = theTestStepContainer.getTestStep(0);
             String stepObjectName = firstTestStep.getStepObjectName();
             if (StepObjectRefFragments.getComponent("The " + stepObjectName).isEmpty()) {
-                logger.debug("Exiting validateTestStepListFile with issue");
+                logger.debug("Exiting validateTestStepListFile with result: {}", TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE.description);
                 return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE.description;
             }
         }
-        logger.debug("Exiting validateTestStepListFile");
+        logger.debug("Exiting validateTestStepListFile with result: {}", "");
         return "";
     }
 

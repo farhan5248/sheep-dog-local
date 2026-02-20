@@ -26,7 +26,7 @@ public class CellIssueResolver {
      * @throws Exception if an error occurs during proposal generation
      */
     public static ArrayList<SheepDogIssueProposal> correctNameOnly(ICell theCell) throws Exception {
-        logger.debug("Entering correctNameOnly");
+        logger.debug("Entering correctNameOnly for theCell: {}", theCell != null ? theCell.getName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String name = theCell.getName();
         if (name != null && !name.isEmpty()) {
@@ -37,7 +37,7 @@ public class CellIssueResolver {
             proposal.setValue(capitalized);
             proposals.add(proposal);
         }
-        logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
+        logger.debug("Exiting correctNameOnly with result: {} proposals", proposals.size());
         return proposals;
     }
 

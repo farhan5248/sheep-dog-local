@@ -27,7 +27,7 @@ public class CellIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateNameOnly(ICell theCell) throws Exception {
-        logger.debug("Entering validateNameOnly");
+        logger.debug("Entering validateNameOnly for theCell: {}", theCell != null ? theCell.getName() : "null");
         IRow parentRow = theCell.getParent();
         ITable parentTable = parentRow.getParent();
         boolean isHeaderRow = parentTable.getRowList().indexOf(parentRow) == 0;
@@ -35,12 +35,12 @@ public class CellIssueDetector {
             String name = theCell.getName();
             if (name != null && !name.isEmpty()) {
                 if (!Character.isUpperCase(name.charAt(0))) {
-                    logger.debug("Exiting validateNameOnly");
+                    logger.debug("Exiting validateNameOnly with result: {}", CellIssueTypes.CELL_NAME_ONLY.description);
                     return CellIssueTypes.CELL_NAME_ONLY.description;
                 }
             }
         }
-        logger.debug("Exiting validateNameOnly");
+        logger.debug("Exiting validateNameOnly with result: {}", "");
         return "";
     }
 }

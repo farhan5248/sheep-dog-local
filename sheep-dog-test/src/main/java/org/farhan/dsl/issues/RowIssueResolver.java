@@ -34,8 +34,8 @@ public class RowIssueResolver {
      * @return list of quick fix proposals
      */
     public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep theTestStep) throws Exception {
-        logger.debug("Entering correctCellListWorkspace for step: {}",
-                theTestStep != null ? theTestStep.toString() : "null");
+        logger.debug("Entering correctCellListWorkspace for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (!stepDefinitionName.isEmpty()) {
@@ -79,7 +79,7 @@ public class RowIssueResolver {
                 }
             }
         }
-        logger.debug("Exiting correctCellListWorkspace with {} proposals", proposals.size());
+        logger.debug("Exiting correctCellListWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 
@@ -90,8 +90,8 @@ public class RowIssueResolver {
      * @return list of quick fix proposals
      */
     public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(ITestStep theTestStep) throws Exception {
-        logger.debug("Entering suggestCellListWorkspace for step: {}",
-                theTestStep != null ? theTestStep.toString() : "null");
+        logger.debug("Entering suggestCellListWorkspace for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (!stepDefinitionName.isEmpty()) {
@@ -114,7 +114,7 @@ public class RowIssueResolver {
                 }
             }
         }
-        logger.debug("Exiting suggestCellListWorkspace with {} proposals", proposals.size());
+        logger.debug("Exiting suggestCellListWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 

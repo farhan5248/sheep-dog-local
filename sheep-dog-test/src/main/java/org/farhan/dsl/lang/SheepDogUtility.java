@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+
 /**
  * Static helper methods for grammar element operations.
  * <p>
@@ -12,6 +14,8 @@ import java.util.List;
  * </p>
  */
 public class SheepDogUtility {
+
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(SheepDogUtility.class);
 
     /**
      * Creates a deep clone of a step object without parent association.
@@ -25,6 +29,7 @@ public class SheepDogUtility {
      * @return a deep clone of the step object with null parent
      */
     public static IStepObject cloneStepObject(IStepObject original) {
+        logger.debug("Entering cloneStepObject for original: {}", original != null ? original.getNameLong() : "null");
         IStepObject clone = SheepDogBuilder.createStepObject(null, original.getNameLong());
 
         // Clone statements
@@ -67,6 +72,7 @@ public class SheepDogUtility {
             }
         }
 
+        logger.debug("Exiting cloneStepObject with result: {}", clone != null ? clone.getNameLong() : "null");
         return clone;
     }
 
@@ -78,6 +84,7 @@ public class SheepDogUtility {
      * @return formatted string representation of the cell list
      */
     public static String getCellListAsString(List<ICell> list) {
+        logger.debug("Entering getCellListAsString for list: {} items", list != null ? list.size() : "null");
         String cellsAsString = "";
         List<String> theList = new ArrayList<String>();
         for (ICell cell : list) {
@@ -87,7 +94,9 @@ public class SheepDogUtility {
         for (String cell : theList) {
             cellsAsString += ", " + cell;
         }
-        return cellsAsString.replaceFirst(", ", "").trim();
+        String result = cellsAsString.replaceFirst(", ", "").trim();
+        logger.debug("Exiting getCellListAsString with result: {}", result);
+        return result;
     }
 
     /**
@@ -98,10 +107,12 @@ public class SheepDogUtility {
      * @return String concatenation of all statement names
      */
     public static String getStatementListAsString(List<IStatement> statementList) {
+        logger.debug("Entering getStatementListAsString for statementList: {} items", statementList != null ? statementList.size() : "null");
         String documentation = "";
         for (IStatement s : statementList) {
             documentation += s.getName();
         }
+        logger.debug("Exiting getStatementListAsString with result: {}", documentation);
         return documentation;
     }
 
@@ -114,6 +125,7 @@ public class SheepDogUtility {
      * @return qualified name string with component, object, and file extension
      */
     public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
+        logger.debug("Entering getStepObjectNameLongForTestStep for theStep: {}", theStep != null ? theStep.getStepObjectName() : "null");
         if (theStep != null) {
             String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
             if (stepNameLong != null && !stepNameLong.isEmpty()) {
@@ -126,12 +138,15 @@ public class SheepDogUtility {
                     if (project != null) {
                         String fileExt = project.getFileExtension();
                         if (fileExt != null && !fileExt.isEmpty()) {
-                            return component + "/" + object + fileExt;
+                            String result = component + "/" + object + fileExt;
+                            logger.debug("Exiting getStepObjectNameLongForTestStep with result: {}", result);
+                            return result;
                         }
                     }
                 }
             }
         }
+        logger.debug("Exiting getStepObjectNameLongForTestStep with result: {}", "");
         return "";
     }
 
@@ -144,7 +159,7 @@ public class SheepDogUtility {
      * @return the long-form name of the test step
      */
     public static String getTestStepNameLong(ITestStep theStep) {
-
+        logger.debug("Entering getTestStepNameLong for theStep: {}", theStep != null ? theStep.getStepObjectName() : "null");
         String component = StepObjectRefFragments.getComponent(theStep.getStepObjectName());
         String object = StepObjectRefFragments.getObject(theStep.getStepObjectName());
 
@@ -181,7 +196,9 @@ public class SheepDogUtility {
                 component = lastComponent;
             }
         }
-        return "The " + component + " " + object + " " + theStep.getStepDefinitionName();
+        String result = "The " + component + " " + object + " " + theStep.getStepDefinitionName();
+        logger.debug("Exiting getTestStepNameLong with result: {}", result);
+        return result;
     }
 
     /**
@@ -192,6 +209,7 @@ public class SheepDogUtility {
      * @return the TestProject parent, or null if not found
      */
     public static ITestProject getTestProjectParentForText(IText theText) {
+        logger.debug("Entering getTestProjectParentForText for theText: {}", theText != null ? theText.getName() : "null");
         if (theText != null) {
             ITestStep testStep = theText.getParent();
             if (testStep != null) {
@@ -199,11 +217,14 @@ public class SheepDogUtility {
                 if (container != null) {
                     ITestSuite suite = container.getParent();
                     if (suite != null) {
-                        return suite.getParent();
+                        ITestProject result = suite.getParent();
+                        logger.debug("Exiting getTestProjectParentForText with result: {}", result != null ? "non-null" : "null");
+                        return result;
                     }
                 }
             }
         }
+        logger.debug("Exiting getTestProjectParentForText with result: {}", "null");
         return null;
     }
 
@@ -215,15 +236,19 @@ public class SheepDogUtility {
      * @return the TestProject parent, or null if not found
      */
     public static ITestProject getTestProjectParentForTestStep(ITestStep theTestStep) {
+        logger.debug("Entering getTestProjectParentForTestStep for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         if (theTestStep != null) {
             ITestStepContainer container = theTestStep.getParent();
             if (container != null) {
                 ITestSuite suite = container.getParent();
                 if (suite != null) {
-                    return suite.getParent();
+                    ITestProject result = suite.getParent();
+                    logger.debug("Exiting getTestProjectParentForTestStep with result: {}", result != null ? "non-null" : "null");
+                    return result;
                 }
             }
         }
+        logger.debug("Exiting getTestProjectParentForTestStep with result: {}", "null");
         return null;
     }
 
@@ -235,15 +260,19 @@ public class SheepDogUtility {
      * @return the TestProject parent, or null if not found
      */
     public static ITestProject getTestProjectParentForRow(IRow theRow) {
+        logger.debug("Entering getTestProjectParentForRow for theRow: {}", theRow != null ? "non-null" : "null");
         if (theRow != null) {
             ITable table = theRow.getParent();
             if (table != null) {
                 Object tableParent = table.getParent();
                 if (tableParent instanceof ITestStep) {
-                    return getTestProjectParentForTestStep((ITestStep) tableParent);
+                    ITestProject result = getTestProjectParentForTestStep((ITestStep) tableParent);
+                    logger.debug("Exiting getTestProjectParentForRow with result: {}", result != null ? "non-null" : "null");
+                    return result;
                 }
             }
         }
+        logger.debug("Exiting getTestProjectParentForRow with result: {}", "null");
         return null;
     }
 
@@ -256,6 +285,7 @@ public class SheepDogUtility {
      * @return list of test steps up to the specified step in reverse chronological order
      */
     public static ArrayList<ITestStep> getTestStepListUpToTestStep(ITestStep theTestStep) {
+        logger.debug("Entering getTestStepListUpToTestStep for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
         if (theTestStep != null && theTestStep.getParent() != null) {
             ITestStepContainer currentContainer = theTestStep.getParent();
@@ -285,6 +315,7 @@ public class SheepDogUtility {
                 }
             }
         }
+        logger.debug("Exiting getTestStepListUpToTestStep with result: {} steps", steps.size());
         return steps;
     }
 }

@@ -35,8 +35,8 @@ public class TestStepIssueResolver {
      */
     public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {
-        logger.debug("Entering correctStepObjectNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.toString() : "null");
+        logger.debug("Entering correctStepObjectNameWorkspace for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
         if (!qualifiedName.isEmpty()) {
@@ -51,7 +51,7 @@ public class TestStepIssueResolver {
             proposal.setValue(theStepObject);
             proposals.add(proposal);
         }
-        logger.debug("Exiting correctStepObjectNameWorkspace with {} proposals", proposals.size());
+        logger.debug("Exiting correctStepObjectNameWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 
@@ -64,8 +64,8 @@ public class TestStepIssueResolver {
      */
     public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep)
             throws Exception {
-        logger.debug("Entering correctStepDefinitionNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.toString() : "null");
+        logger.debug("Entering correctStepDefinitionNameWorkspace for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (!stepDefinitionName.isEmpty()) {
@@ -85,7 +85,7 @@ public class TestStepIssueResolver {
                 }
             }
         }
-        logger.debug("Exiting correctStepDefinitionNameWorkspace with {} proposals", proposals.size());
+        logger.debug("Exiting correctStepDefinitionNameWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 
@@ -97,8 +97,8 @@ public class TestStepIssueResolver {
      */
     public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {
-        logger.debug("Entering suggestStepObjectNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.toString() : "null");
+        logger.debug("Entering suggestStepObjectNameWorkspace for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
         if (theProject != null) {
@@ -167,7 +167,7 @@ public class TestStepIssueResolver {
                 }
             }
         }
-        logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals", proposals.size());
+        logger.debug("Exiting suggestStepObjectNameWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 
@@ -179,8 +179,8 @@ public class TestStepIssueResolver {
      */
     public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep)
             throws Exception {
-        logger.debug("Entering suggestStepDefinitionNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.toString() : "null");
+        logger.debug("Entering suggestStepDefinitionNameWorkspace for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
         if (theProject != null) {
@@ -190,7 +190,7 @@ public class TestStepIssueResolver {
                 proposals.addAll(getStepDefinitions(theTestStep));
             }
         }
-        logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals", proposals.size());
+        logger.debug("Exiting suggestStepDefinitionNameWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 

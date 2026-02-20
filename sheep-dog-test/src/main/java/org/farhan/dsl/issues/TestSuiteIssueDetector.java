@@ -25,15 +25,15 @@ public class TestSuiteIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateNameOnly(ITestSuite theTestSuite) throws Exception {
-        logger.debug("Entering validateNameOnly");
+        logger.debug("Entering validateNameOnly for theTestSuite: {}", theTestSuite != null ? theTestSuite.getName() : "null");
         String name = theTestSuite.getName();
         if (name != null && !name.isEmpty()) {
             if (!Character.isUpperCase(name.charAt(0))) {
-                logger.debug("Exiting validateNameOnly");
+                logger.debug("Exiting validateNameOnly with result: {}", TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description);
                 return TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description;
             }
         }
-        logger.debug("Exiting validateNameOnly");
+        logger.debug("Exiting validateNameOnly with result: {}", "");
         return "";
     }
 }

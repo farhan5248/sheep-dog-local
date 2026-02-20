@@ -32,7 +32,7 @@ public class RowIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateCellListWorkspace(IRow theRow) throws Exception {
-        logger.debug("Entering validateCellListWorkspace");
+        logger.debug("Entering validateCellListWorkspace for theRow: {}", theRow != null ? "non-null" : "null");
         String message = "";
         ITable table = theRow.getParent();
         if (table != null && table.getParent() instanceof ITestStep) {
@@ -64,7 +64,7 @@ public class RowIssueDetector {
                 }
             }
         }
-        logger.debug("Exiting validateCellListWorkspace");
+        logger.debug("Exiting validateCellListWorkspace with result: {}", message);
         return message;
     }
 

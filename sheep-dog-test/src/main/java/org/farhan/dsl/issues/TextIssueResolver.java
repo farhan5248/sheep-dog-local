@@ -28,8 +28,8 @@ public class TextIssueResolver {
     private static final Logger logger = SheepDogLoggerFactory.getLogger(TextIssueResolver.class);
 
     public static ArrayList<SheepDogIssueProposal> correctNameWorkspace(ITestStep theTestStep) throws Exception {
-        logger.debug("Entering correctNameWorkspace for step: {}",
-                theTestStep != null ? theTestStep.toString() : "null");
+        logger.debug("Entering correctNameWorkspace for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (!stepDefinitionName.isEmpty()) {
@@ -53,7 +53,7 @@ public class TextIssueResolver {
                 }
             }
         }
-        logger.debug("Exiting correctNameWorkspace with {} proposals", proposals.size());
+        logger.debug("Exiting correctNameWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 

@@ -26,7 +26,7 @@ public class TestStepContainerIssueResolver {
 	 * @return list of quick fix proposals
 	 */
 	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) throws Exception {
-		logger.debug("Entering correctNameOnly");
+		logger.debug("Entering correctNameOnly for theTestStepContainer: {}", theTestStepContainer != null ? theTestStepContainer.getName() : "null");
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 		String name = theTestStepContainer.getName();
 		if (name != null && !name.isEmpty()) {
@@ -37,7 +37,7 @@ public class TestStepContainerIssueResolver {
 			proposal.setValue(capitalized);
 			proposals.add(proposal);
 		}
-		logger.debug("Exiting correctNameOnly with {} proposals", proposals.size());
+		logger.debug("Exiting correctNameOnly with result: {} proposals", proposals.size());
 		return proposals;
 	}
 

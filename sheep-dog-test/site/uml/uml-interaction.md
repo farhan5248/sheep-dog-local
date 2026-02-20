@@ -2,7 +2,8 @@
 
 **References**
 
-1. `sheep-dog-main/site/impl/impl-xtext-logging.md` - SLF4J logging patterns specific to sheep-dog-test that supplement
+1. `sheep-dog-main/site/impl/impl-logging.md` - SLF4J logging patterns
+2. `sheep-dog-main/site/impl/impl-xtext-logging.md` - Xtext logging patterns
 
 ## All
 
@@ -13,8 +14,8 @@ These patterns define which classes have loggers and which operations should be 
 All public methods in Utility, Detector, Resolver, and Builder classes MUST have entry and exit logging.
 
 **Rules**
-- Entry log is the first statement in each public method
-- Exit log is placed before each return statement
+- Entry log is the first statement in each public method and includes method parameters
+- Exit log is placed before each return statement and includes the return value
 
 ### No Logger Pattern
 
@@ -22,7 +23,6 @@ Interfaces, and factory classes do not declare loggers to keep them lightweight 
 
 **Examples**
 
-- {Language}Utility classes have no logger
 - I{Type} interfaces have no logger
 - {Language}Factory has no logger
 
@@ -72,36 +72,6 @@ public interface IResourceRepository {
 ### No Exception Handling Pattern
 
 No try-catch blocks, custom exceptions, RuntimeException usage, null returns for errors, or graceful degradation. All errors propagate immediately.
-
-**Examples**
-
-- No try-catch:
-```java
-// Not allowed
-try {
-    riskyOperation();
-} catch (Exception e) {
-    // handle
-}
-```
-
-- No custom exceptions:
-```java
-// Not allowed
-class CustomException extends Exception { }
-```
-
-- No null returns for errors:
-```java
-// Not allowed
-public Object loadFile() {
-    try {
-        return readFile();
-    } catch (Exception e) {
-        return null; // Bad - use throws Exception instead
-    }
-}
-```
 
 ## {Language}Factory
 
@@ -170,17 +140,15 @@ Detector methods validate grammar assignments at different scopes: Only (element
 **Example: Element-level validation (Only)**
 ```java
 public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Exception {
-    logger.debug("Entering validateStepObjectNameOnly");
+    // entry/exit logging omitted
     String text = theTestStep.getStepObjectName();
     if (text != null) {
         if (!TestStepUtility.isValid(text)) {
             if (TestStepUtility.getStepObjectName(text).isEmpty()) {
-                logger.debug("Exiting validateStepObjectNameOnly");
                 return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
             }
         }
     }
-    logger.debug("Exiting validateStepObjectNameOnly");
     return "";
 }
 ```
@@ -188,7 +156,7 @@ public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Ex
 **Example: Cross-file validation (Workspace)**
 ```java
 public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
-    logger.debug("Entering validateStepObjectNameWorkspace");
+    // entry/exit logging omitted
     String message = "";
     String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
     IStepObject theStepObject = theTestStep.getParent().getParent().getParent()
@@ -196,7 +164,6 @@ public static String validateStepObjectNameWorkspace(ITestStep theTestStep) thro
     if (theStepObject == null) {
         message = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
     }
-    logger.debug("Exiting validateStepObjectNameWorkspace");
     return message;
 }
 ```
@@ -210,12 +177,11 @@ Builder methods create instances via the factory, set attributes, and add to par
 **Example: Simple creation with parent**
 ```java
 public static ICell createCell(IRow parent, String name) {
-    logger.debug("Entering createCell for name: {}", name);
+    // entry/exit logging omitted
     ICell cell = SheepDogFactory.instance.createCell();
     cell.setName(name);
     if (parent != null)
         parent.addCell(cell);
-    logger.debug("Exiting createCell");
     return cell;
 }
 ```
@@ -223,7 +189,7 @@ public static ICell createCell(IRow parent, String name) {
 **Example: Creation with deduplication**
 ```java
 public static IStepDefinition createStepDefinition(IStepObject parent, String name) {
-    logger.debug("Entering createStepDefinition for name: {}", name);
+    // entry/exit logging omitted
     IStepDefinition stepDefinition = null;
     if (parent != null)
         stepDefinition = parent.getStepDefinition(name);
@@ -233,30 +199,7 @@ public static IStepDefinition createStepDefinition(IStepObject parent, String na
         if (parent != null)
             parent.addStepDefinition(stepDefinition);
     }
-    logger.debug("Exiting createStepDefinition");
     return stepDefinition;
-}
-```
-
-**Example: Creation with complex initialization**
-```java
-public static IStepParameters createStepParameters(IStepDefinition parent, String headers) {
-    logger.debug("Entering createStepParameters for IRow");
-    IStepParameters stepParameters = null;
-    if (parent != null)
-        stepParameters = parent.getStepParameters(headers);
-    if (stepParameters == null) {
-        stepParameters = SheepDogFactory.instance.createStepParameters();
-        ITable table = createTable(stepParameters);
-        IRow row = createRow(table);
-        for (String h : headers.replaceFirst("^\\|\\s+", "").split("\\|")) {
-            SheepDogBuilder.createCell(row, h);
-        }
-        if (parent != null)
-            parent.addStepParameters(stepParameters);
-    }
-    logger.debug("Exiting createStepParameters");
-    return stepParameters;
 }
 ```
 
@@ -269,28 +212,6 @@ Gets a logger for the specified class. Uses SLF4J when available, otherwise dele
 **Example: Standard usage**
 ```java
 private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueDetector.class);
-
-public static String validate(ITestStep step) {
-    logger.debug("Starting validation");
-    // validation logic
-    logger.debug("Validation complete");
-    return "";
-}
-```
-
-**Example: Implementation with fallback**
-```java
-public static Logger getLogger(Class<?> clazz) {
-    // Use custom impl if SLF4J has no real provider
-    if (org.slf4j.LoggerFactory.getILoggerFactory()
-            instanceof org.slf4j.helpers.NOPLoggerFactory) {
-        if (provider != null) {
-            return provider.getLogger(clazz);
-        }
-    }
-    // Use SLF4J (either real provider exists, or fall back to NOP)
-    return org.slf4j.LoggerFactory.getLogger(clazz);
-}
 ```
 
 ### setLoggerImplementation
@@ -308,17 +229,6 @@ SheepDogLoggerFactory.setLoggerImplementation(new LoggerProvider() {
 });
 ```
 
-**Example: Implementation with validation**
-```java
-public static void setLoggerImplementation(SheepDogLoggerProvider provider) {
-    if (provider == null) {
-        throw new IllegalArgumentException("Logger implementation cannot be null");
-    } else {
-        SheepDogLoggerFactory.provider = provider;
-    }
-}
-```
-
 ## {Language}Utility
 
 ### get{Type}NameLongFor{Type}
@@ -328,14 +238,13 @@ Utility methods construct fully qualified or long-form names for grammar element
 **Example: Getting step object qualified name**
 ```java
 public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
+    // entry/exit logging omitted
     if (theStep != null) {
         String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
         if (stepNameLong != null && !stepNameLong.isEmpty()) {
             String component = StepObjectRefFragments.getComponent(stepNameLong);
             String object = StepObjectRefFragments.getObject(stepNameLong);
-
             if (!component.isEmpty() && !object.isEmpty()) {
-                // Use utility method to navigate to project
                 ITestProject project = getTestProjectParentForTestStep(theStep);
                 if (project != null) {
                     String fileExt = project.getFileExtension();
@@ -351,49 +260,19 @@ public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
 ```
 
 **Example: Getting test step qualified name with context inference**
+
+When component or object is missing from the current step, infer from previous steps by iterating `getPreviousSteps(theStep)` and matching via `StepObjectRefFragments`. Returns `"The " + component + " " + object + " " + stepDefinitionName`.
+
 ```java
 public static String getTestStepNameLong(ITestStep theStep) {
+    // entry/exit logging omitted
     String component = StepObjectRefFragments.getComponent(theStep.getStepObjectName());
     String object = StepObjectRefFragments.getObject(theStep.getStepObjectName());
-
     if (component.isEmpty() || !object.contains("/")) {
-        ArrayList<ITestStep> previousSteps = getPreviousSteps(theStep);
-        for (ITestStep previousStep : previousSteps) {
-            String previousObject = StepObjectRefFragments.getObject(previousStep.getStepObjectName());
-            String previousComponent = StepObjectRefFragments.getComponent(previousStep.getStepObjectName());
-            if (previousObject.endsWith("/" + object)) {
-                if (!object.contains("/") && previousObject.contains("/")) {
-                    object = previousObject;
-                }
-                if (component.isEmpty() && !previousComponent.isEmpty()) {
-                    component = previousComponent;
-                }
-                if (!component.isEmpty() && object.contains("/")) {
-                    break;
-                }
-            }
-        }
-        if (component.isEmpty()) {
-            String lastComponent = "Unknown service";
-            for (ITestStep aStep : previousSteps) {
-                if (!StepObjectRefFragments.getComponent(aStep.getStepObjectName()).isEmpty()) {
-                    lastComponent = StepObjectRefFragments.getComponent(aStep.getStepObjectName());
-                    break;
-                }
-            }
-            component = lastComponent;
-        }
+        // Iterate getPreviousSteps(theStep) to infer missing component/object
+        // Falls back to "Unknown service" if no component found
     }
     return "The " + component + " " + object + " " + theStep.getStepDefinitionName();
-}
-```
-
-**Example: Using getStepObjectNameLongForTestStep in validation**
-```java
-public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
-    ...
-    String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-    ...
 }
 ```
 
@@ -404,79 +283,21 @@ Utility methods create deep clones of grammar elements to avoid side effects dur
 **Example: Cloning a step object**
 ```java
 public static IStepObject cloneStepObject(IStepObject original) {
+    // entry/exit logging omitted
     IStepObject clone = SheepDogBuilder.createStepObject(null, original.getNameLong());
-
-    // Clone statements
     for (IStatement statement : original.getStatementList()) {
         SheepDogBuilder.createStatement(clone, statement.getName());
     }
-
-    // Clone step definitions
-    for (IStepDefinition stepDefinition : original.getStepDefinitionList()) {
-        IStepDefinition clonedStepDef = SheepDogBuilder.createStepDefinition(clone, stepDefinition.getName());
-
-        // Clone statements for step definition
-        for (IStatement statement : stepDefinition.getStatementList()) {
-            SheepDogBuilder.createStatement(clonedStepDef, statement.getName());
-        }
-
-        // Clone step parameters
-        for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
-            IStepParameters clonedStepParams = SheepDogBuilder.createStepParameters(clonedStepDef, stepParameters.getName());
-
-            // Clone statements for step parameters
-            for (IStatement statement : stepParameters.getStatementList()) {
-                SheepDogBuilder.createStatement(clonedStepParams, statement.getName());
-            }
-
-            // Clone table
-            if (stepParameters.getTable() != null) {
-                ITable clonedTable = SheepDogBuilder.createTable(clonedStepParams);
-
-                // Clone rows
-                for (IRow row : stepParameters.getTable().getRowList()) {
-                    IRow clonedRow = SheepDogBuilder.createRow(clonedTable);
-
-                    // Clone cells
-                    for (ICell cell : row.getCellList()) {
-                        SheepDogBuilder.createCell(clonedRow, cell.getName());
-                    }
-                }
-            }
-        }
-    }
-
+    // Recursively clone stepDefinitions, stepParameters, tables, rows, cells
+    // using SheepDogBuilder.create{Type}() for each child element
     return clone;
-}
-```
-
-**Example: Using cloneStepObject in proposal generation**
-```java
-public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep theTestStep) throws Exception {
-    ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
-    ITestProject theProject = theTestStep.getParent().getParent().getParent();
-    String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-    IStepObject theStepObject = theProject.getStepObject(qualifiedName);
-
-    if (theStepObject != null) {
-        // Clone before modification to avoid side effects
-        theStepObject = SheepDogUtility.cloneStepObject(theStepObject);
-
-        // Now safe to modify without affecting original
-        // ...
-    }
-
-    return proposals;
 }
 ```
 
 **Key Principles:**
 - Always clone before modification to avoid unintended side effects
 - Create clone with null parent to prevent adding to original tree
-- Recursively clone all child elements for deep copy
-- Use SheepDogBuilder for all element creation to maintain consistency
-- Preserve element names and structure from original
+- Recursively clone all child elements using SheepDogBuilder for consistency
 
 ## {Type}Fragments
 
@@ -495,31 +316,13 @@ public static String getAll(String text) {
 
 Extracts a specific named fragment from formatted text using predefined regex patterns and group positions. Each getter targets a specific capture group in the composed pattern.
 
-**Example: Extracting component fragments**
+**Example: Extracting a named fragment**
+
+All `get{Fragment}` methods follow this pattern — call `getGroup` with a regex pattern, input text, and capture group index:
+
 ```java
 public static String getComponent(String text) {
     return getGroup("(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 2);
-}
-```
-
-**Example: Extracting object fragments**
-```java
-public static String getObject(String text) {
-    return getGroup(STEP_OBJECT_REF, text, 5);
-}
-```
-
-**Example: Extracting state fragments**
-```java
-public static String getState(String text) {
-    return getGroup(STEP_DEFINITION_REF, text, 5);
-}
-```
-
-**Example: Extracting title fragments**
-```java
-public static String getTagDesc(String text) {
-    return getGroup(TAG, text, 3);
 }
 ```
 
@@ -588,18 +391,6 @@ for (TestStepComponentTypes component : TestStepComponentTypes.values()) {
         // Found component type
         return component;
     }
-}
-```
-
-### {Type}{Fragment}Types
-
-Private constructor initializes the value and description fields for each enum constant.
-
-**Example: Constructor usage**
-```java
-TestStepComponentTypes(String value, String description) {
-    this.value = value;
-    this.description = description;
 }
 ```
 
@@ -702,16 +493,6 @@ public interface IRow {
 }
 ```
 
-**Example: Using accessors**
-```java
-ITestStep step = SheepDogFactory.instance.createTestStep();
-step.setStepObjectName("HomePage");
-step.setStepDefinitionName("is loaded");
-
-ITable table = SheepDogFactory.instance.createTable();
-step.setTable(table);
-```
-
 ### NameLong
 
 Methods that return qualified or full path names use 'NameLong' suffix. Some are computed properties without setters.
@@ -748,44 +529,20 @@ step.getNameLong(); // Returns "The HomePage is loaded" (computed)
 
 Resolver methods generate quick fix proposals when values are missing. They suggest valid options from the workspace.
 
-**Example: Suggesting step objects**
+**Example: Suggesting valid options from workspace**
 ```java
 public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering suggestStepObjectNameWorkspace");
+    // entry/exit logging omitted
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
     ITestProject theProject = theTestStep.getParent().getParent().getParent();
 
-    // Suggest objects from all components
     for (String componentName : TestProjectUtility.getComponentList(theProject)) {
         proposals.addAll(getComponentObjects(theTestStep, componentName));
     }
-
-    // Suggest objects from previous steps
     for (SheepDogIssueProposal proposal : getPreviousObjects(theTestStep)) {
         proposals.add(proposal);
     }
-
-    logger.debug("Exiting suggestStepObjectNameWorkspace with {} proposals",
-            proposals.size());
-    return proposals;
-}
-```
-
-**Example: Suggesting step definitions**
-```java
-public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(
-        ITestStep theTestStep) throws Exception {
-    logger.debug("Entering suggestStepDefinitionNameWorkspace");
-    ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-
-    // Get all step definitions from the step object
-    for (SheepDogIssueProposal proposal : getStepDefinitions(theTestStep)) {
-        proposals.add(proposal);
-    }
-
-    logger.debug("Exiting suggestStepDefinitionNameWorkspace with {} proposals",
-            proposals.size());
     return proposals;
 }
 ```
@@ -794,11 +551,11 @@ public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspac
 
 Resolver methods generate quick fix proposals when values exist but are wrong. They correct invalid references or offer to create missing resources.
 
-**Example: Correcting invalid step object**
+**Example: Correcting invalid references or creating missing resources**
 ```java
 public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(
         ITestStep theTestStep) throws Exception {
-    logger.debug("Entering correctStepObjectNameWorkspace");
+    // entry/exit logging omitted
     ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
     if (!theTestStep.getStepObjectName().isEmpty()) {
@@ -818,52 +575,6 @@ public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(
         proposal.setQualifiedName(theStepObject.getNameLong());
         proposals.add(proposal);
     }
-
-    logger.debug("Exiting correctStepObjectNameWorkspace with {} proposals",
-            proposals.size());
-    return proposals;
-}
-```
-
-**Example: Correcting invalid step definition**
-```java
-public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(
-        ITestStep theTestStep) throws Exception {
-    logger.debug("Entering correctStepDefinitionNameWorkspace");
-    ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-    String stepDefinitionName = TestStepUtility.getStepDefinitionName(
-            theTestStep.getStepDefinitionName());
-
-    if (!stepDefinitionName.isEmpty()) {
-        ITestProject theProject = theTestStep.getParent().getParent().getParent();
-        IStepObject theStepObject = theProject.getStepObject(
-                TestStepUtility.getStepObjectQualifiedName(theTestStep));
-
-        if (theStepObject != null) {
-            IStepDefinition theStepDefinition = theStepObject.getStepDefinition(
-                    stepDefinitionName);
-
-            if (theStepDefinition == null) {
-                // Valid name but doesn't exist - suggest existing or create new
-                for (SheepDogIssueProposal proposal : getStepDefinitions(theTestStep)) {
-                    proposals.add(proposal);
-                }
-
-                theStepDefinition = SheepDogBuilder.createStepDefinition(
-                        theStepObject, stepDefinitionName);
-                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                proposal.setId("Generate " + theStepDefinition.getName());
-                proposal.setDescription(StatementUtility.getStatementListAsString(
-                        theStepDefinition.getStatementList()));
-                proposal.setValue(theStepObject.getContent());
-                proposal.setQualifiedName(theStepObject.getNameLong());
-                proposals.add(proposal);
-            }
-        }
-    }
-
-    logger.debug("Exiting correctStepDefinitionNameWorkspace with {} proposals",
-            proposals.size());
     return proposals;
 }
 ```
@@ -872,17 +583,7 @@ public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspac
 
 ### {Language}IssueProposal
 
-Default constructor initializes all attributes to empty strings, ready for population by resolver methods.
-
-**Example: Constructor usage**
-```java
-public SheepDogIssueProposal() {
-    this.id = "";
-    this.description = "";
-    this.value = "";
-    this.qualifiedName = "";
-}
-```
+Default constructor initializes all attributes (id, description, value, qualifiedName) to empty strings.
 
 **Example: Creating proposal in resolver**
 ```java
