@@ -6,6 +6,8 @@ import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.sheepdog.sheepDog.NestedStatementList;
+import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
@@ -69,7 +71,11 @@ public class StepParametersImpl implements IStepParameters {
 
     @Override
     public boolean addStatement(IStatement value) {
-        eObject.getStatementList().getStatementList().add(((StatementImpl) value).eObject);
+        NestedStatementList list = eObject.getStatementList();
+        if (list == null) {
+            list = SheepDogFactory.eINSTANCE.createNestedStatementList();
+        }
+        list.getStatementList().add(((StatementImpl) value).eObject);
         return true;
     }
 

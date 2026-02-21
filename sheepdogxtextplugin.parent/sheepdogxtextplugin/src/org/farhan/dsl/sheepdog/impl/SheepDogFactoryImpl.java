@@ -83,8 +83,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public IStatement createStatement() {
-        // TODO Auto-generated method stub
-        return null;
+        return new StatementImpl(SheepDogFactory.eINSTANCE.createStatement());
     }
 
     @Override

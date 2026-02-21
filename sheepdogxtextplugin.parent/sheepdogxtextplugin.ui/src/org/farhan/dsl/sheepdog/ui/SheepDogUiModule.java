@@ -6,12 +6,20 @@ package org.farhan.dsl.sheepdog.ui;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.farhan.dsl.sheepdog.ide.contentassist.antlr.internal.InternalSheepDogLexer;
+import org.farhan.dsl.sheepdog.ide.contentassist.antlr.internal.SheepDogContentAssistLexer;
 import org.farhan.dsl.sheepdog.ui.syntaxcoloring.SheepDogAntlrTokenToAttributeIdMapper;
 import org.farhan.dsl.sheepdog.ui.syntaxcoloring.SheepDogHighlightingConfiguration;
 import org.farhan.dsl.sheepdog.ui.syntaxcoloring.SheepDogSemanticHighlightingCalculator;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -36,6 +44,18 @@ public class SheepDogUiModule extends AbstractSheepDogUiModule {
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return SheepDogSemanticHighlightingCalculator.class;
+	}
+
+	@Override
+	public void configureContentAssistLexer(Binder binder) {
+		binder.bind(Lexer.class)
+			.annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST))
+			.to(SheepDogContentAssistLexer.class);
+	}
+
+	@Override
+	public void configureContentAssistLexerProvider(Binder binder) {
+		binder.bind(InternalSheepDogLexer.class).toProvider(LexerProvider.create(SheepDogContentAssistLexer.class));
 	}
 
 }
