@@ -52,7 +52,7 @@ public class TestStepContainerIssueDetector {
         if (!theTestStepContainer.getTestStepList().isEmpty()) {
             ITestStep firstTestStep = theTestStepContainer.getTestStep(0);
             String stepObjectName = firstTestStep.getStepObjectName();
-            if (StepObjectRefFragments.getComponent("The " + stepObjectName).isEmpty()) {
+            if (StepObjectRefFragments.getComponent(stepObjectName).isEmpty()) {
                 logger.debug("Exiting validateTestStepListFile with result: {}", TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE.description);
                 return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE.description;
             }

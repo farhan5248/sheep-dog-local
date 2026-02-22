@@ -13,7 +13,7 @@ public class StepObjectRefFragments {
     private static final String OBJECT_VERTEX_TYPE = getRegexFromTypes(TestStepObjectVertexTypes.values());
     private static final String OBJECT_TYPE = "(" + OBJECT_VERTEX_TYPE + "|" + OBJECT_EDGE_TYPE + ")";
     private static final String OBJECT = "(" + OBJECT_NAME + OBJECT_TYPE + ")";
-    private static final String STEP_OBJECT_REF = "(The" + COMPONENT + "?" + OBJECT + ")";
+    private static final String STEP_OBJECT_REF = "^(The" + COMPONENT + "?" + OBJECT + ")";
 
     /**
      * Extracts the complete matched text from formatted input, returning the
@@ -35,7 +35,7 @@ public class StepObjectRefFragments {
      * @return the component portion
      */
     public static String getComponent(String text) {
-        return getGroup("(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 2);
+        return getGroup("^(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 2);
     }
 
     /**
@@ -46,7 +46,7 @@ public class StepObjectRefFragments {
      * @return the component name portion
      */
     public static String getComponentName(String text) {
-        return getGroup("(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 3);
+        return getGroup("^(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 3);
     }
 
     /**
@@ -57,7 +57,7 @@ public class StepObjectRefFragments {
      * @return the component type portion
      */
     public static String getComponentType(String text) {
-        return getGroup("(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 4);
+        return getGroup("^(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 4);
     }
 
     /**
