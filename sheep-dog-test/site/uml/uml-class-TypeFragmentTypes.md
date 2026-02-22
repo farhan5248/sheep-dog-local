@@ -21,7 +21,7 @@ Enum constants for test step keyword patterns. Separates keyword definitions fro
 
 **Desc**: Stores the lowercase keyword string that appears in actual test step definitions.
 
-**Rule**: ONE field matches this pattern.
+**Rule**: ONE attribute matches this pattern.
  - **Name**: `^value$`
  - **Return**: `^String$`
  - **Modifier**: `^public\s+final$`
@@ -33,7 +33,7 @@ Enum constants for test step keyword patterns. Separates keyword definitions fro
 
 **Desc**: Provides human-readable explanation of the keyword for documentation and UI display.
 
-**Rule**: ONE field matches this pattern.
+**Rule**: ONE attribute matches this pattern.
  - **Name**: `^description$`
  - **Return**: `^String$`
  - **Modifier**: `^public\s+final$`

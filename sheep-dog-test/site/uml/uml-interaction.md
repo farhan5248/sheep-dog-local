@@ -209,6 +209,18 @@ public static IStepDefinition createStepDefinition(IStepObject parent, String na
 
 Gets a logger for the specified class. Uses SLF4J when available, otherwise delegates to custom {Language}LoggerProvider.
 
+**Example: Method body**
+```java
+public static Logger getLogger(Class<?> clazz) {
+    if (org.slf4j.LoggerFactory.getILoggerFactory() instanceof org.slf4j.helpers.NOPLoggerFactory) {
+        if (provider != null) {
+            return provider.getLogger(clazz);
+        }
+    }
+    return org.slf4j.LoggerFactory.getLogger(clazz);
+}
+```
+
 **Example: Standard usage**
 ```java
 private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueDetector.class);
@@ -604,5 +616,22 @@ for (SheepDogIssueProposal proposal : proposals) {
     System.out.println("ID: " + proposal.getId());
     System.out.println("Description: " + proposal.getDescription());
     System.out.println("Value: " + proposal.getValue());
+}
+```
+
+### toString
+
+Generates formatted string representation for debugging and logging purposes.
+
+**Example: toString implementation**
+```java
+@Override
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("SheepDogIssueProposal [id=").append(id);
+    sb.append(", description=").append(description);
+    sb.append(", value=").append(value);
+    sb.append("]");
+    return sb.toString();
 }
 ```

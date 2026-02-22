@@ -47,7 +47,7 @@ Data transfer object holding quick fix proposal data. Separates proposal data (i
 
 **Desc**: Generates formatted string representation for debugging and logging purposes.
 
-**Rule**: SOME method names follow toString pattern.
+**Rule**: ONE method names follow toString pattern.
  - **Name**: `^toString$`
  - **Return**: `^String$`
  - **Parameters**: `^\(\)$`
