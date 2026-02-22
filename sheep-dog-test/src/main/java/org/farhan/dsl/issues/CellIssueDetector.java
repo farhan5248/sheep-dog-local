@@ -24,9 +24,8 @@ public class CellIssueDetector {
      *
      * @param theCell the element to validate
      * @return empty string if valid, error description otherwise
-     * @throws Exception if validation fails
      */
-    public static String validateNameOnly(ICell theCell) throws Exception {
+    public static String validateNameOnly(ICell theCell) {
         logger.debug("Entering validateNameOnly for theCell: {}", theCell != null ? theCell.getName() : "null");
         IRow parentRow = theCell.getParent();
         ITable parentTable = parentRow.getParent();

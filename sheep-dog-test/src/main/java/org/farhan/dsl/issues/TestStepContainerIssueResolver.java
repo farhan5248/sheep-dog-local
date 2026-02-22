@@ -16,29 +16,30 @@ import org.slf4j.Logger;
  */
 public class TestStepContainerIssueResolver {
 
-	private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepContainerIssueResolver.class);
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepContainerIssueResolver.class);
 
-	/**
-	 * Generates proposals correcting values when an assignment exists but is
-	 * invalid.
-	 *
-	 * @param theTestStepContainer the element needing corrections
-	 * @return list of quick fix proposals
-	 */
-	public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) throws Exception {
-		logger.debug("Entering correctNameOnly for theTestStepContainer: {}", theTestStepContainer != null ? theTestStepContainer.getName() : "null");
-		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-		String name = theTestStepContainer.getName();
-		if (name != null && !name.isEmpty()) {
-			String capitalized = Character.toUpperCase(name.charAt(0)) + name.substring(1);
-			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-			proposal.setId("Capitalize test step container name");
-			proposal.setDescription("Capitalize the first letter of the name");
-			proposal.setValue(capitalized);
-			proposals.add(proposal);
-		}
-		logger.debug("Exiting correctNameOnly with result: {} proposals", proposals.size());
-		return proposals;
-	}
+    /**
+     * Generates proposals correcting values when an assignment exists but is
+     * invalid.
+     *
+     * @param theTestStepContainer the element needing corrections
+     * @return list of quick fix proposals
+     */
+    public static ArrayList<SheepDogIssueProposal> correctNameOnly(ITestStepContainer theTestStepContainer) {
+        logger.debug("Entering correctNameOnly for theTestStepContainer: {}",
+                theTestStepContainer != null ? theTestStepContainer.getName() : "null");
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        String name = theTestStepContainer.getName();
+        if (name != null && !name.isEmpty()) {
+            String capitalized = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId("Capitalize test step container name");
+            proposal.setDescription("Capitalize the first letter of the name");
+            proposal.setValue(capitalized);
+            proposals.add(proposal);
+        }
+        logger.debug("Exiting correctNameOnly with result: {} proposals", proposals.size());
+        return proposals;
+    }
 
 }
