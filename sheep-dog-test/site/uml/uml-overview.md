@@ -39,10 +39,3 @@ Pattern variables used in UML files to represent families of classes following s
    - Used in: validate{Assignment}{Scope}(), correct{Assignment}{Scope}(), suggest{Assignment}{Scope}()
    - Case variants: `{scope}` (camelCase), `{SCOPE}` (UPPER_SNAKE_CASE)
 
-6. **{Proposal}** - Proposal attributes.
-   - Values: `(Id|Description|Value|QualifiedName)`
-
-7. **{IO}** - File operations. 
-   - Values: `(get|put|delete|list|clear|contains)`
-
-See `sheep-dog-main/site/impl/impl-xtext.md` Domain Terminology section for additional context.

@@ -408,43 +408,6 @@ for (TestStepComponentTypes component : TestStepComponentTypes.values()) {
 }
 ```
 
-## IResourceRepository
-
-### {IO}
-
-Repository methods follow standard CRUD patterns for managing file resources with tagging support.
-
-**Example: Reading and writing files**
-```java
-public interface IResourceRepository {
-    String get(String tags, String path) throws Exception;
-    void put(String tags, String path, String content) throws Exception;
-    void delete(String tags, String path);
-    List<String> list(String tags, String path, String extension);
-    boolean contains(String tags, String path);
-    void clear(String tags);
-}
-```
-
-**Example: Using repository in builder**
-```java
-IResourceRepository repo = getRepository();
-
-// Read file
-String content = repo.get("test", "src/test/resources/feature.txt");
-
-// Write file
-repo.put("test", "output/result.txt", generatedContent);
-
-// Check existence
-if (repo.contains("test", "config.properties")) {
-    // Load configuration
-}
-
-// List files
-List<String> features = repo.list("test", "src/test/resources", ".feature");
-```
-
 ## {Language}LoggerProvider
 
 ### getLogger
@@ -596,7 +559,7 @@ public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(
 
 ### {Language}IssueProposal
 
-Default constructor initializes all attributes (id, description, value, qualifiedName) to empty strings.
+Default constructor initializes all attributes (id, description, value) to empty strings.
 
 **Example: Creating proposal in resolver**
 ```java
@@ -606,17 +569,69 @@ proposal.setDescription("Home page for application");
 proposal.setValue("The application HomePage");
 ```
 
-### get{Proposal}
+### getId
 
-Getters provide read access to proposal attributes following JavaBeans convention.
+Provides read access to the proposal identifier for matching and lookup.
 
-**Example: Using getters**
+**Example: Using getId**
 ```java
-ArrayList<SheepDogIssueProposal> proposals = resolver.suggestStepObjectNameWorkspace(step);
-for (SheepDogIssueProposal proposal : proposals) {
-    System.out.println("ID: " + proposal.getId());
-    System.out.println("Description: " + proposal.getDescription());
-    System.out.println("Value: " + proposal.getValue());
+public String getId() {
+    return id;
+}
+```
+
+### setId
+
+Provides write access to the proposal identifier.
+
+**Example: Using setId**
+```java
+public void setId(String id) {
+    this.id = id;
+}
+```
+
+### getDescription
+
+Provides read access to the proposal description for UI display.
+
+**Example: Using getDescription**
+```java
+public String getDescription() {
+    return description;
+}
+```
+
+### setDescription
+
+Provides write access to the proposal description.
+
+**Example: Using setDescription**
+```java
+public void setDescription(String description) {
+    this.description = description;
+}
+```
+
+### getValue
+
+Provides read access to the proposal value. Returns Object to support both String and IStepObject types.
+
+**Example: Using getValue**
+```java
+public Object getValue() {
+    return value;
+}
+```
+
+### setValue
+
+Provides write access to the proposal value. Accepts Object to support both String and IStepObject types.
+
+**Example: Using setValue**
+```java
+public void setValue(Object value) {
+    this.value = value;
 }
 ```
 

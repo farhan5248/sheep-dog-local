@@ -1,6 +1,6 @@
 # {Language}IssueProposal
 
-Data transfer object holding quick fix proposal data. Separates proposal data (id, description, value, qualifiedName) from proposal generation and application logic.
+Data transfer object holding quick fix proposal data. Separates proposal data (id, description, value) from proposal generation and application logic.
 
 ## {Language}IssueProposal
 
@@ -14,33 +14,82 @@ Data transfer object holding quick fix proposal data. Separates proposal data (i
 **Examples**:
  - `public SheepDogIssueProposal()`
 
-## get{Proposal}
+## getId
 
-**Desc**: Provides read access to proposal attributes, allowing resolvers and UI to query proposal details. getValue returns Object to support both String and IStepObject types.
+**Desc**: Provides read access to the proposal identifier for matching and lookup.
 
-**Rule**: SOME method names follow getter pattern.
- - **Name**: `^get{Proposal}$`
- - **Return**: `^(String|Object)$`
+**Rule**: ONE method names follow getId pattern.
+ - **Name**: `^getId$`
+ - **Return**: `^String$`
  - **Parameters**: `^\(\)$`
  - **Modifier**: `^public$`
 
 **Examples**:
  - `public String getId()`
- - `public String getDescription()`
- - `public Object getValue()`
 
-## set{Proposal}
+## setId
 
-**Desc**: Provides write access for resolvers to populate proposal attributes during generation. setValue accepts Object to support both String and IStepObject types.
+**Desc**: Provides write access to the proposal identifier.
 
-**Rule**: SOME method names follow setter pattern.
- - **Name**: `^set{Proposal}$`
+**Rule**: ONE method names follow setId pattern.
+ - **Name**: `^setId$`
  - **Return**: `^void$`
- - **Parameters**: `^\((String|Object)\s+\w+\)$`
+ - **Parameters**: `^\(String\s+\w+\)$`
+ - **Modifier**: `^public$`
 
 **Examples**:
  - `public void setId(String id)`
+
+## getDescription
+
+**Desc**: Provides read access to the proposal description for UI display.
+
+**Rule**: ONE method names follow getDescription pattern.
+ - **Name**: `^getDescription$`
+ - **Return**: `^String$`
+ - **Parameters**: `^\(\)$`
+ - **Modifier**: `^public$`
+
+**Examples**:
+ - `public String getDescription()`
+
+## setDescription
+
+**Desc**: Provides write access to the proposal description.
+
+**Rule**: ONE method names follow setDescription pattern.
+ - **Name**: `^setDescription$`
+ - **Return**: `^void$`
+ - **Parameters**: `^\(String\s+\w+\)$`
+ - **Modifier**: `^public$`
+
+**Examples**:
  - `public void setDescription(String description)`
+
+## getValue
+
+**Desc**: Provides read access to the proposal value. Returns Object to support both String and IStepObject types.
+
+**Rule**: ONE method names follow getValue pattern.
+ - **Name**: `^getValue$`
+ - **Return**: `^Object$`
+ - **Parameters**: `^\(\)$`
+ - **Modifier**: `^public$`
+
+**Examples**:
+ - `public Object getValue()`
+
+## setValue
+
+**Desc**: Provides write access to the proposal value. Accepts Object to support both String and IStepObject types.
+
+**Rule**: ONE method names follow setValue pattern.
+ - **Name**: `^setValue$`
+ - **Return**: `^void$`
+ - **Parameters**: `^\(Object\s+\w+\)$`
+ - **Modifier**: `^public$`
+
+**Examples**:
  - `public void setValue(Object value)`
 
 ## toString

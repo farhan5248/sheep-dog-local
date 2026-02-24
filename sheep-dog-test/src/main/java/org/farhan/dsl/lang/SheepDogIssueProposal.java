@@ -3,7 +3,7 @@ package org.farhan.dsl.lang;
 /**
  * Data transfer object holding quick fix proposal data.
  * <p>
- * Separates proposal data (id, description, value, qualifiedName) from proposal
+ * Separates proposal data (id, description, value) from proposal
  * generation and application logic.
  * </p>
  */
