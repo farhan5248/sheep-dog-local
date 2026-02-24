@@ -6,5 +6,5 @@ public interface ListQuickfixesAction {
 
     public void transition();
 
-    public void setSelectedElement(HashMap<String, String> keyMap);
+    public void setNodePath(HashMap<String, String> keyMap);
 }

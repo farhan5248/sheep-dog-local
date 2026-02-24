@@ -15,9 +15,9 @@ public class SpecPrjProcess2AsciidocFileSteps extends TestSteps {
         super(object, "spec-prj", "src/test/resources/asciidoc/specs/Process2.asciidoc");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file background steps snippet is created as follows$")
-    public void backgroundStepsSnippetIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "BackgroundStepsSnippet");
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file background test step list assignment is created as follows$")
+    public void backgroundTestStepListAssignmentIsCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable, "BackgroundTestStepListAssignment");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows$")
@@ -25,9 +25,9 @@ public class SpecPrjProcess2AsciidocFileSteps extends TestSteps {
         object.setInputOutputs(dataTable);
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows$")
-    public void stepsSnippetIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "StepsSnippet");
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows$")
+    public void testStepListAssignmentIsCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable, "TestStepListAssignment");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file will be created as follows$")

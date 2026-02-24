@@ -6,21 +6,21 @@ import org.farhan.impl.objects.AppInputFileAsciidocFileImpl;
 import org.farhan.impl.objects.ApplyQuickfixActionImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;
 import org.farhan.impl.objects.ListProposalsActionImpl;
-import org.farhan.impl.objects.ListProposalsDialogImpl;
+import org.farhan.impl.objects.ListProposalsPopupImpl;
 import org.farhan.impl.objects.ListQuickfixesActionImpl;
-import org.farhan.impl.objects.ListQuickfixesDialogImpl;
+import org.farhan.impl.objects.ListQuickfixesPopupImpl;
 import org.farhan.impl.objects.Process2AsciidocFileImpl;
 import org.farhan.impl.objects.ValidateActionImpl;
-import org.farhan.impl.objects.ValidateDialogImpl;
+import org.farhan.impl.objects.ValidateAnnotationImpl;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.farhan.objects.xtext.ListProposalsAction;
-import org.farhan.objects.xtext.ListProposalsDialog;
+import org.farhan.objects.xtext.ListProposalsPopup;
 import org.farhan.objects.xtext.ListQuickfixesAction;
-import org.farhan.objects.xtext.ListQuickfixesDialog;
+import org.farhan.objects.xtext.ListQuickfixesPopup;
 import org.farhan.objects.xtext.ValidateAction;
-import org.farhan.objects.xtext.ValidateDialog;
+import org.farhan.objects.xtext.ValidateAnnotation;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -52,11 +52,11 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
 		bind(Process2AsciidocFile.class).to(Process2AsciidocFileImpl.class);
 		bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);
 		bind(ListProposalsAction.class).to(ListProposalsActionImpl.class);
-		bind(ListProposalsDialog.class).to(ListProposalsDialogImpl.class);
+		bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);
 		bind(ListQuickfixesAction.class).to(ListQuickfixesActionImpl.class);
-		bind(ListQuickfixesDialog.class).to(ListQuickfixesDialogImpl.class);
+		bind(ListQuickfixesPopup.class).to(ListQuickfixesPopupImpl.class);
 		bind(ValidateAction.class).to(ValidateActionImpl.class);
-		bind(ValidateDialog.class).to(ValidateDialogImpl.class);
+		bind(ValidateAnnotation.class).to(ValidateAnnotationImpl.class);
 	}
 
 }

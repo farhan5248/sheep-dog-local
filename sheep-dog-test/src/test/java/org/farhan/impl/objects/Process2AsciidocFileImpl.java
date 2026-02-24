@@ -18,25 +18,25 @@ import io.cucumber.guice.ScenarioScoped;
 public class Process2AsciidocFileImpl extends TestIDEObject implements Process2AsciidocFile {
 
     @Override
-    public void setBackgroundStepsSnippetStepName(HashMap<String, String> keyMap) {
-        addTestSetupStep(replaceKeyword(keyMap.get("Step Name")));
+    public void setBackgroundTestStepListAssignmentTestStepFullName(HashMap<String, String> keyMap) {
+        addTestSetupStep(replaceKeyword(keyMap.get("Test Step Full Name")));
     }
 
     @Override
-    public void setStepsSnippetRowContents(HashMap<String, String> keyMap) {
+    public void setTestStepListAssignmentRowCellList(HashMap<String, String> keyMap) {
         addTable();
         addRow();
-        for (String h : keyMap.get("Row Contents").split(",")) {
+        for (String h : keyMap.get("Row Cell List").split(",")) {
             addCell(h.trim());
         }
     }
 
-    public void setStepsSnippetStepName(HashMap<String, String> keyMap) {
-        addTestCaseStep(replaceKeyword(keyMap.get("Step Name")));
+    public void setTestStepListAssignmentTestStepFullName(HashMap<String, String> keyMap) {
+        addTestCaseStep(replaceKeyword(keyMap.get("Test Step Full Name")));
     }
 
     @Override
-    public void setStepsSnippetTextContent(HashMap<String, String> keyMap) {
+    public void setTestStepListAssignmentTextContent(HashMap<String, String> keyMap) {
         addText(keyMap.get("Text Content"));
     }
 
@@ -51,10 +51,10 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
     }
 
     @Override
-    public void assertStepName(HashMap<String, String> keyMap) {
+    public void assertTestStepFullName(HashMap<String, String> keyMap) {
         try {
             ITestStep testStep = (ITestStep) TestIDEObject.getElementByType("TestStep");
-            String expectedStepName = replaceKeyword(keyMap.get("Step Name"));
+            String expectedStepName = replaceKeyword(keyMap.get("Test Step Full Name"));
             String actualStepName = testStep.getStepObjectName() + " " + testStep.getStepDefinitionName();
 
             if (!actualStepName.contentEquals(expectedStepName)) {
@@ -67,10 +67,10 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
     }
 
     @Override
-    public void assertRowContents(HashMap<String, String> keyMap) {
+    public void assertRowCellList(HashMap<String, String> keyMap) {
         try {
             IRow row = (IRow) TestIDEObject.getElementByType("Row");
-            String[] expectedContents = keyMap.get("Row Contents").split(",");
+            String[] expectedContents = keyMap.get("Row Cell List").split(",");
             List<ICell> cells = row.getCellList();
 
             if (cells.size() != expectedContents.length) {

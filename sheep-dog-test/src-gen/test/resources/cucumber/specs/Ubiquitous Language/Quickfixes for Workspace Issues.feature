@@ -9,94 +9,94 @@ Feature: Quickfixes for Workspace Issues
 
   Scenario: This object doesn't exist quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name                      |
           | The daily batchjob Input file is present |
-      And The xtext plugin validate dialog is set as follows
+      And The xtext plugin validate annotation is set as follows
           """
           The step object file doesn't exist for the component
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                           |
+          | Node Path                                  |
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
-     Then The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name                                           | Quickfix Description |
+     Then The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id                                             | Proposal Description |
           | Generate Input file - daily batchjob/Input file.feature | empty                |
 
   Scenario: This object step definition doesn't exist quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name                      |
           | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name |
+          | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is absent            |
-      And The xtext plugin validate dialog is set as follows
+      And The xtext plugin validate annotation is set as follows
           """
           The step definition doesn't exist for the step object
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                           |
+          | Node Path                                  |
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
-     Then The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name | Quickfix Description | Quickfix  |
-          | is absent     | empty                | is absent |
-      And The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name       | Quickfix Description |
+     Then The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id | Proposal Description | Proposal Value |
+          | is absent   | empty                | is absent      |
+      And The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id         | Proposal Description |
           | Generate is present | empty                |
 
   Scenario: This object step definition parameter set doesn't exist quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                       | Row Contents |
-          | The daily batchjob Input file is set as follows | N1, N2       |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name                             | Row Cell List |
+          | The daily batchjob Input file is set as follows | N1, N2        |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name | Parameters |
-          | daily batchjob/Input file.feature | is set as follows    | E1, E2, E3 |
-      And The xtext plugin validate dialog is set as follows
+          | Step Object Name                  | Step Definition Name | Step Parameters Name |
+          | daily batchjob/Input file.feature | is set as follows    | E1, E2, E3           |
+      And The xtext plugin validate annotation is set as follows
           """
           The step parameters don't exist for the step definition
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                                       |
+          | Node Path                                              |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
-     Then The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name | Quickfix Description | Quickfix   |
-          | E1, E2, E3    | empty                | E1, E2, E3 |
-      And The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name   | Quickfix Description |
+     Then The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id | Proposal Description | Proposal Value |
+          | E1, E2, E3  | empty                | E1, E2, E3     |
+      And The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id     | Proposal Description |
           | Generate N1, N2 | empty                |
 
   Scenario: This object step definition text parameter exists quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                       | Text Content |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name                             | Text Content |
           | The daily batchjob Input file is set as follows | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name | Parameters |
-          | daily batchjob/Input file.feature | is set as follows    | Content    |
-      And The xtext plugin validate dialog is empty
+          | Step Object Name                  | Step Definition Name | Step Parameters Name |
+          | daily batchjob/Input file.feature | is set as follows    | Content              |
+      And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                                 |
+          | Node Path                                        |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
-     Then The xtext plugin list quickfixes dialog will be empty
+     Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: This object step definition text parameter doesn't exist quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                       | Text Content |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name                             | Text Content |
           | The daily batchjob Input file is set as follows | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name |
+          | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is set as follows    |
-      And The xtext plugin validate dialog is set as follows
+      And The xtext plugin validate annotation is set as follows
           """
           The step parameters don't exist for the step definition
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                                 |
+          | Node Path                                        |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
-     Then The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name    | Quickfix Description |
+     Then The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id      | Proposal Description |
           | Generate Content | empty                |
 

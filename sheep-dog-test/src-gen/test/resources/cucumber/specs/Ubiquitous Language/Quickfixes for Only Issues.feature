@@ -6,49 +6,49 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Cell name should start with a capital letter quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                | Row Contents     |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name                      | Row Cell List    |
           | The daily batchjob Input file is present | lowercase header |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name | Parameters       |
-          | daily batchjob/Input file.feature | is present           | lowercase header |
-      And The xtext plugin validate dialog is set as follows
+          | Step Object Name                  | Step Definition Name | Step Parameters Name |
+          | daily batchjob/Input file.feature | is present           | lowercase header     |
+      And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                                              |
+          | Node Path                                                     |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell/1 |
-     Then The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name        | Quickfix Description                    | Quickfix         |
+     Then The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id          | Proposal Description                    | Proposal Value   |
           | Capitalize cell name | Capitalize the first letter of the name | Lowercase header |
 
   Scenario: Body row Cell names can be any case quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                | Row Contents |
-          | The daily batchjob Input file is present | Header       |
-          | The daily batchjob Input file is present | value        |
-      And The xtext plugin validate dialog is empty
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name                      | Row Cell List |
+          | The daily batchjob Input file is present | Header        |
+          | The daily batchjob Input file is present | value         |
+      And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                                              |
+          | Node Path                                                     |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/2/Cell/1 |
-     Then The xtext plugin list quickfixes dialog will be empty
+     Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: Test suite name should start with a capital letter quickfix
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name   |
           | lowercase process |
-      And The xtext plugin validate dialog is set as follows
+      And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element |
-          | TestSuite/1      |
-     Then The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name              | Quickfix Description                    | Quickfix          |
+          | Node Path   |
+          | TestSuite/1 |
+     Then The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id                | Proposal Description                    | Proposal Value    |
           | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
 
   Scenario: Test case name should start with a capital letter quickfix
@@ -56,23 +56,23 @@ Feature: Quickfixes for Only Issues
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
           | Test Suite Name | Test Case Name      |
           | Process2        | lowercase test case |
-      And The xtext plugin validate dialog is set as follows
+      And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                |
+          | Node Path                       |
           | TestSuite/1/TestStepContainer/1 |
-     Then The xtext plugin list quickfixes dialog will be set as follows
-          | Quickfix Name                       | Quickfix Description                    | Quickfix            |
+     Then The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id                         | Proposal Description                    | Proposal Value      |
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
 
   Scenario: Test step must have a valid object name quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name      |
-          | The is present |
-      And The xtext plugin validate dialog is set as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name |
+          | The is present      |
+      And The xtext plugin validate annotation is set as follows
           """
           Every test case must have at least one component specified.
           This should be the first part of the test step name.
@@ -80,25 +80,25 @@ Feature: Quickfixes for Only Issues
           Component ending words are: application, service, plugin, batchjob, project.
           Examples are: "The something application," or "The something service,"Every test step must have the object specified.
           The object can have the complete path or not.
-          Object ending words are: file, page, response, dialog, directory, request, goal, job, action.
+          Object ending words are: file, page, response, popup, annotation, hover, tooltip, directory, request, goal, job, action.
           Examples are: "src/test/resources/file.txt file" or "Home page"
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                           |
+          | Node Path                                  |
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
-     Then The xtext plugin list quickfixes dialog will be empty
+     Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: Test step must have a valid step definition name quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                     |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name           |
           | The daily batchjob Input file |
-      And The xtext plugin validate dialog is set as follows
+      And The xtext plugin validate annotation is set as follows
           """
           After specifying the step object name, a step definition name is specified.
           It has 3 parts, details (optional), state and time (optional).
           Details is used to specify a part in a document, like the header or body.
-          The details ending words are: section, fragment, table, snippet, list.
+          The details ending words are: type, fragment, table, snippet, list.
           Examples are: "Customer details section" or "Order History table"
           State part begins with words like is or isn't which get converted to setters or assertions in the test automation.
           Next it's followed by the state attribute which is optional and can be any word.
@@ -110,7 +110,7 @@ Feature: Quickfixes for Only Issues
           Examples are: "after the next day" or "on time"
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                           |
+          | Node Path                                  |
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
-     Then The xtext plugin list quickfixes dialog will be empty
+     Then The xtext plugin list quickfixes popup will be empty
 

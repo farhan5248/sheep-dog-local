@@ -7,34 +7,34 @@ Feature: Quickfixes for File Issues
 
   Scenario: The first step needs to have a component specified quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name                      |
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Object Name                       | Step Definition Name | Step Definition Description |
+          | Step Object Name                  | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
-      And The xtext plugin validate dialog is empty
+      And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                |
+          | Node Path                       |
           | TestSuite/1/TestStepContainer/1 |
-     Then The xtext plugin list quickfixes dialog will be empty
+     Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: No component in the first step triggers an error quickfix
 
     The first step needs to have a component specified.
     The other steps default to that one.
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
-          | Step Name                                   |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+          | Test Step Full Name                         |
           | The Input file is present                   |
           | The daily batchjob Input file is downloaded |
-      And The xtext plugin validate dialog is set as follows
+      And The xtext plugin validate annotation is set as follows
           """
           The first step must have a component
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Selected Element                |
+          | Node Path                       |
           | TestSuite/1/TestStepContainer/1 |
-     Then The xtext plugin list quickfixes dialog will be empty
+     Then The xtext plugin list quickfixes popup will be empty
 

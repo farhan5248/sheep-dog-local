@@ -14,9 +14,9 @@ import io.cucumber.guice.ScenarioScoped;
 public class AppInputFileAsciidocFileImpl extends TestIDEObject implements InputFileAsciidocFile {
 
 	@Override
-	public void setObjectName(HashMap<String, String> keyMap) {
+	public void setStepObjectName(HashMap<String, String> keyMap) {
 		try {
-			SheepDogBuilder.createStepObject(TestIDEObject.testProject, keyMap.get("Object Name"));
+			SheepDogBuilder.createStepObject(TestIDEObject.testProject, keyMap.get("Step Object Name"));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
@@ -25,7 +25,7 @@ public class AppInputFileAsciidocFileImpl extends TestIDEObject implements Input
 	@Override
 	public void setStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
-			IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject, keyMap.get("Object Name"));
+			IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject, keyMap.get("Step Object Name"));
 			SheepDogBuilder.createStepDefinition(stepObject, keyMap.get("Step Definition Name"));
 		} catch (Exception e) {
 			Assertions.fail(e);

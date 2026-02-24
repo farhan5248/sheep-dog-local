@@ -75,8 +75,8 @@ public class ApplyQuickfixActionImpl extends TestIDEObject implements ApplyQuick
     }
 
     @Override
-    public void setSelectedElement(HashMap<String, String> keyMap) {
-        setSelectedElement(keyMap.get("Selected Element"));
+    public void setNodePath(HashMap<String, String> keyMap) {
+        setSelectedElement(keyMap.get("Node Path"));
     }
 
 }

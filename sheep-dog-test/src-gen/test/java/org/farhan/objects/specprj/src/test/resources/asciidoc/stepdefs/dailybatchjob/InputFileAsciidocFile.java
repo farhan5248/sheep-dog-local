@@ -4,21 +4,21 @@ import java.util.HashMap;
 
 public interface InputFileAsciidocFile {
 
-    public void setObjectName(HashMap<String, String> keyMap);
+    public void setStepObjectName(HashMap<String, String> keyMap);
 
     public void setStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void setObjectDescription(HashMap<String, String> keyMap);
+    public void setStepObjectDescription(HashMap<String, String> keyMap);
 
-    public void setParameters(HashMap<String, String> keyMap);
+    public void setStepParametersName(HashMap<String, String> keyMap);
 
-    public void setParametersDescription(HashMap<String, String> keyMap);
+    public void setStepParametersDescription(HashMap<String, String> keyMap);
 
     public void setStepDefinitionDescription(HashMap<String, String> keyMap);
 
-    public void assertObjectName(HashMap<String, String> keyMap);
+    public void assertStepObjectName(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertParameters(HashMap<String, String> keyMap);
+    public void assertStepParametersName(HashMap<String, String> keyMap);
 }

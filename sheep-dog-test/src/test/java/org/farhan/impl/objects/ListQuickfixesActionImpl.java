@@ -87,7 +87,7 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
     }
 
     @Override
-    public void setSelectedElement(HashMap<String, String> keyMap) {
-        setSelectedElement(keyMap.get("Selected Element"));
+    public void setNodePath(HashMap<String, String> keyMap) {
+        setSelectedElement(keyMap.get("Node Path"));
     }
 }

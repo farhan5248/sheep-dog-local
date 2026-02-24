@@ -4,21 +4,21 @@ import java.util.HashMap;
 
 public interface Process2AsciidocFile {
 
-    public void setBackgroundStepsSnippetStepName(HashMap<String, String> keyMap);
+    public void setBackgroundTestStepListAssignmentTestStepFullName(HashMap<String, String> keyMap);
 
     public void setTestSuiteName(HashMap<String, String> keyMap);
 
     public void setTestCaseName(HashMap<String, String> keyMap);
 
-    public void setStepsSnippetStepName(HashMap<String, String> keyMap);
+    public void setTestStepListAssignmentTestStepFullName(HashMap<String, String> keyMap);
 
-    public void setStepsSnippetRowContents(HashMap<String, String> keyMap);
+    public void setTestStepListAssignmentRowCellList(HashMap<String, String> keyMap);
 
-    public void setStepsSnippetTextContent(HashMap<String, String> keyMap);
+    public void setTestStepListAssignmentTextContent(HashMap<String, String> keyMap);
 
-    public void assertStepName(HashMap<String, String> keyMap);
+    public void assertTestStepFullName(HashMap<String, String> keyMap);
 
-    public void assertRowContents(HashMap<String, String> keyMap);
+    public void assertRowCellList(HashMap<String, String> keyMap);
 
     public void assertTestSuiteName(HashMap<String, String> keyMap);
 

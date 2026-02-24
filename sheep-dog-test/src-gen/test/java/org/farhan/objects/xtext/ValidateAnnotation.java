@@ -2,7 +2,7 @@ package org.farhan.objects.xtext;
 
 import java.util.HashMap;
 
-public interface ValidateDialog {
+public interface ValidateAnnotation {
 
     public void setEmpty(HashMap<String, String> keyMap);
 

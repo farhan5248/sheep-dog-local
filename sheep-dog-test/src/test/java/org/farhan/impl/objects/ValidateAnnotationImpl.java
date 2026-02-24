@@ -3,13 +3,13 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.common.TestIDEObject;
-import org.farhan.objects.xtext.ValidateDialog;
+import org.farhan.objects.xtext.ValidateAnnotation;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ValidateDialogImpl extends TestIDEObject implements ValidateDialog {
+public class ValidateAnnotationImpl extends TestIDEObject implements ValidateAnnotation {
 
 	@Override
 	public void assertEmpty(HashMap<String, String> keyMap) {

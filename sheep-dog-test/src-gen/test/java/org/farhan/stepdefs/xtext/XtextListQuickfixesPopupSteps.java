@@ -5,27 +5,27 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
-import org.farhan.objects.xtext.ListQuickfixesDialog;
+import org.farhan.objects.xtext.ListQuickfixesPopup;
 
 @ScenarioScoped
-public class XtextListQuickfixesDialogSteps extends TestSteps {
+public class XtextListQuickfixesPopupSteps extends TestSteps {
 
     @Inject
-    public XtextListQuickfixesDialogSteps(ListQuickfixesDialog object) {
+    public XtextListQuickfixesPopupSteps(ListQuickfixesPopup object) {
         super(object, "xtext", "list quickfixes");
     }
 
-    @Given("^The xtext plugin list quickfixes dialog is set as follows$")
+    @Given("^The xtext plugin list quickfixes popup is set as follows$")
     public void isSetAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable);
     }
 
-    @Given("^The xtext plugin list quickfixes dialog will be empty$")
+    @Given("^The xtext plugin list quickfixes popup will be empty$")
     public void willBeEmpty() {
         object.assertInputOutputs("Empty");
     }
 
-    @Given("^The xtext plugin list quickfixes dialog will be set as follows$")
+    @Given("^The xtext plugin list quickfixes popup will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }

@@ -33,7 +33,7 @@ public class ListProposalsActionImpl extends TestIDEObject implements ListPropos
     }
 
     @Override
-    public void setSelectedElement(HashMap<String, String> keyMap) {
-        setSelectedElement(keyMap.get("Selected Element"));
+    public void setNodePath(HashMap<String, String> keyMap) {
+        setSelectedElement(keyMap.get("Node Path"));
     }
 }

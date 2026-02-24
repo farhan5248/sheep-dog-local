@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 import org.farhan.common.TestIDEObject;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
-import org.farhan.objects.xtext.ListProposalsDialog;
+import org.farhan.objects.xtext.ListProposalsPopup;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListProposalsDialogImpl extends TestIDEObject implements ListProposalsDialog {
+public class ListProposalsPopupImpl extends TestIDEObject implements ListProposalsPopup {
 
     @Override
     public void assertEmpty(HashMap<String, String> keyMap) {
@@ -18,44 +18,44 @@ public class ListProposalsDialogImpl extends TestIDEObject implements ListPropos
     }
 
     @Override
-    public void assertSuggestion(HashMap<String, String> keyMap) {
+    public void assertProposalValue(HashMap<String, String> keyMap) {
         for (SheepDogIssueProposal p : TestIDEObject.listProposalsDialog) {
-            if (p.getId().equals(keyMap.get("Suggestion Name"))
-                    && p.getValue().toString().contentEquals(keyMap.get("Suggestion"))) {
+            if (p.getId().equals(keyMap.get("Proposal Id"))
+                    && p.getValue().toString().contentEquals(keyMap.get("Proposal Value"))) {
                 return;
             }
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("No proposal found with ID that matches the name: ").append(keyMap.get("Suggestion Name"));
-        sb.append(" and value: ").append(keyMap.get("Suggestion"));
+        sb.append("No proposal found with ID that matches the name: ").append(keyMap.get("Proposal Id"));
+        sb.append(" and value: ").append(keyMap.get("Proposal Value"));
         sb.append(listToString(TestIDEObject.listProposalsDialog));
         Assertions.fail(sb.toString());
     }
 
     @Override
-    public void assertSuggestionDescription(HashMap<String, String> keyMap) {
+    public void assertProposalDescription(HashMap<String, String> keyMap) {
         for (SheepDogIssueProposal p : TestIDEObject.listProposalsDialog) {
-            if (p.getId().equals(keyMap.get("Suggestion Name"))
-                    && p.getDescription().contentEquals(replaceKeyword(keyMap.get("Suggestion Description")))) {
+            if (p.getId().equals(keyMap.get("Proposal Id"))
+                    && p.getDescription().contentEquals(replaceKeyword(keyMap.get("Proposal Description")))) {
                 return;
             }
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("No proposal found with ID that matches the name: ").append(keyMap.get("Suggestion Name"));
-        sb.append(" and description: ").append(replaceKeyword(keyMap.get("Suggestion Description")));
+        sb.append("No proposal found with ID that matches the name: ").append(keyMap.get("Proposal Id"));
+        sb.append(" and description: ").append(replaceKeyword(keyMap.get("Proposal Description")));
         sb.append(listToString(TestIDEObject.listProposalsDialog));
         Assertions.fail(sb.toString());
     }
 
     @Override
-    public void assertSuggestionName(HashMap<String, String> keyMap) {
+    public void assertProposalId(HashMap<String, String> keyMap) {
         for (SheepDogIssueProposal p : TestIDEObject.listProposalsDialog) {
-            if (p.getId().equals(keyMap.get("Suggestion Name"))) {
+            if (p.getId().equals(keyMap.get("Proposal Id"))) {
                 return;
             }
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("No proposal found with ID that matches the name: ").append(keyMap.get("Suggestion Name"));
+        sb.append("No proposal found with ID that matches the name: ").append(keyMap.get("Proposal Id"));
         sb.append(listToString(TestIDEObject.listProposalsDialog));
         Assertions.fail(sb.toString());
     }
