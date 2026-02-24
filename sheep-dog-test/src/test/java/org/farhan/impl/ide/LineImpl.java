@@ -1,13 +1,13 @@
 package org.farhan.impl.ide;
 
-import org.farhan.dsl.lang.IStatement;
+import org.farhan.dsl.lang.ILine;
 
-public class StatementImpl implements IStatement {
+public class LineImpl implements ILine {
 
 	String name;
 	Object parent;
 
-	StatementImpl() {
+	LineImpl() {
 	}
 
 	@Override

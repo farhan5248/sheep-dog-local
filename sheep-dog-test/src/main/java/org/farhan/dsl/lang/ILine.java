@@ -1,6 +1,6 @@
 package org.farhan.dsl.lang;
 
-public interface IStatement {
+public interface ILine {
 
 	String getName();
 

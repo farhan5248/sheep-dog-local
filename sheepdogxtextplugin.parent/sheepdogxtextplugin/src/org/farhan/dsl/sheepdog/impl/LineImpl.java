@@ -1,17 +1,17 @@
 package org.farhan.dsl.sheepdog.impl;
 
-import org.farhan.dsl.lang.IStatement;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
+import org.farhan.dsl.lang.ILine;
+import org.farhan.dsl.sheepdog.sheepDog.Line;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 
-public class StatementImpl implements IStatement {
+public class LineImpl implements ILine {
 
-	Statement eObject;
+	Line eObject;
 	private Object parent;
 
-	public StatementImpl(Statement statement) {
-		this.eObject = statement;
+	public LineImpl(Line line) {
+		this.eObject = line;
 	}
 
 	@Override

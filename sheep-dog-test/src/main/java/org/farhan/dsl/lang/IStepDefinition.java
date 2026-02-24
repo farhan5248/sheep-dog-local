@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IStepDefinition {
 
-    boolean addStatement(IStatement value);
+    boolean addLine(ILine value);
 
     boolean addStepParameters(IStepParameters value);
 
@@ -12,11 +12,7 @@ public interface IStepDefinition {
 
     IStepObject getParent();
 
-    IStatement getStatement(int index);
-
-    IStatement getStatement(String name);
-
-    List<IStatement> getStatementList();
+    IDescription getDescription();
 
     List<IStepParameters> getStepParameterList();
 

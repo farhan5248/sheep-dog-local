@@ -10,11 +10,7 @@ public interface IStepObject extends IModel {
 
 	ITestProject getParent();
 
-	IStatement getStatement(int index);
-
-	IStatement getStatement(String name);
-
-	List<IStatement> getStatementList();
+	IDescription getDescription();
 
 	IStepDefinition getStepDefinition(int index);
 
@@ -26,7 +22,7 @@ public interface IStepObject extends IModel {
 
 	void setName(String value);
 
-	boolean addStatement(IStatement value);
+	boolean addLine(ILine value);
 
 	boolean addStepDefinition(IStepDefinition value);
 

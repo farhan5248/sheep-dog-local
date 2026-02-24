@@ -121,7 +121,7 @@ public class SheepDogLexer extends InternalSheepDogLexer {
 			super.mTokens();
 			// single line no collection
 		} else if (isKeyword("+")) {
-			mT__23();
+			mT__19();
 		} else if (isKeyword("|===")) {
 			mT__24();
 		} else if (isKeyword("*")) {
@@ -161,16 +161,16 @@ public class SheepDogLexer extends InternalSheepDogLexer {
 			hasConstantDelimiter = true;
 			// single line variable delimiter collection
 		} else if (isKeyword("Given:")) {
-			mT__19();// 'Given'
+			mT__20();// 'Given'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("When:")) {
-			mT__20();// 'When'
+			mT__21();// 'When'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("Then:")) {
-			mT__21();// 'Then'
+			mT__22();// 'Then'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("And:")) {
-			mT__22();// 'And'
+			mT__23();// 'And'
 			hasVariableDelimiter = true;
 		// catch all
 		} else {

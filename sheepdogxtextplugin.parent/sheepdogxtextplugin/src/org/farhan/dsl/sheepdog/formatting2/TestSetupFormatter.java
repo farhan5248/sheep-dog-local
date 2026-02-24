@@ -36,7 +36,7 @@ public class TestSetupFormatter extends TestStepContainerFormatter {
 
 	@Override
 	protected RuleCall getTitleRuleCall(AbstractParserRuleElementFinder a) {
-		return ((TestSetupElements) a).getNameTitleParserRuleCall_2_0();
+		return ((TestSetupElements) a).getNamePhraseParserRuleCall_2_0();
 	}
 
 	@Override

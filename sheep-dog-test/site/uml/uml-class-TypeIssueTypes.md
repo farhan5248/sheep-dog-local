@@ -2,12 +2,12 @@
 
 Enum constants for validation error types. Separates error type definitions from validation logic, providing stable identifiers for detector-resolver coordination.
 
-## {TYPE}{ASSIGNMENT}{ISSUE}
+## {TYPE}{ASSIGNMENT}{SCOPE}
 
 **Desc**: Defines a validation error type with unique identifier and user-facing description.
 
-**Rule**: ALL constant names follow {TYPE}_{ASSIGNMENT}_{ISSUE} pattern.
- - **Name**: `^{TYPE}(_{ASSIGNMENT})*_{ISSUE}$`
+**Rule**: ALL constant names follow {TYPE}_{ASSIGNMENT}_{SCOPE} pattern.
+ - **Name**: `^{TYPE}(_{ASSIGNMENT})*_{SCOPE}$`
 
 **Examples**:
  - `TEST_SUITE_NAME_ONLY`

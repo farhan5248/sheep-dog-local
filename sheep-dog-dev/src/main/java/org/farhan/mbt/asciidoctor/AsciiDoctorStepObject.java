@@ -17,8 +17,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
+import org.farhan.dsl.sheepdog.sheepDog.Description;
+import org.farhan.dsl.sheepdog.sheepDog.Line;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
@@ -37,10 +38,10 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 		theStepObject.setName(name);
 	}
 
-	private String convertStatementsToString(EList<Statement> statements) {
+	private String convertLinesToString(EList<Line> lines) {
 		String contents = "";
-		for (Statement s : statements) {
-			contents += s.getName() + "\n";
+		for (Line l : lines) {
+			contents += l.getName() + "\n";
 		}
 		return contents.trim();
 	}
@@ -102,7 +103,10 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 	}
 
 	public String getStepDefinitionDescription(StepDefinition stepDefinitionSrc) {
-		return convertStatementsToString(stepDefinitionSrc.getStatementList());
+		if (stepDefinitionSrc.getDescription() != null) {
+			return convertLinesToString(stepDefinitionSrc.getDescription().getLineList());
+		}
+		return "";
 	}
 
 	public EList<StepDefinition> getStepDefinitionList() {
@@ -114,7 +118,10 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 	}
 
 	public String getStepObjectDescription() {
-		return convertStatementsToString(theStepObject.getStatementList());
+		if (theStepObject.getDescription() != null) {
+			return convertLinesToString(theStepObject.getDescription().getLineList());
+		}
+		return "";
 	}
 
 	public String getStepObjectName() {
@@ -171,21 +178,24 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 
 	public void setStepDefinitionDescription(StepDefinition stepDefinition, String stepDefinitionDescription) {
 		if (!stepDefinitionDescription.isEmpty()) {
+			Description desc = SheepDogFactory.eINSTANCE.createDescription();
+			stepDefinition.setDescription(desc);
 			for (String line : stepDefinitionDescription.split("\n")) {
-				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
-				statement.setName(line);
-				stepDefinition.getStatementList().add(statement);
+				Line l = SheepDogFactory.eINSTANCE.createLine();
+				l.setName(line);
+				desc.getLineList().add(l);
 			}
 		}
 	}
 
 	public void setStepObjectDescription(String stepObjectDescription) {
 		if (!stepObjectDescription.isEmpty()) {
-			theStepObject.getStatementList().clear();
+			Description desc = SheepDogFactory.eINSTANCE.createDescription();
+			theStepObject.setDescription(desc);
 			for (String line : stepObjectDescription.split("\n")) {
-				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
-				statement.setName(line);
-				theStepObject.getStatementList().add(statement);
+				Line l = SheepDogFactory.eINSTANCE.createLine();
+				l.setName(line);
+				desc.getLineList().add(l);
 			}
 		}
 	}

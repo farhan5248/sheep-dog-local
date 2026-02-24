@@ -8,16 +8,12 @@ public interface ITestData {
 
     ITestCase getParent();
 
-    IStatement getStatement(int index);
-
-    IStatement getStatement(String name);
-
-    List<IStatement> getStatementList();
+    INestedDescription getNestedDescription();
 
     List<List<String>> getTable();
 
     void setName(String value);
 
-    boolean addStatement(IStatement value);
+    boolean addLine(ILine value);
 
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TitleFragments {
+public class PhraseFragments {
 
     private static final String TODO_TYPE = "(TODO)";
     private static final String TODO_DESC = "( \\S.*)";
@@ -12,10 +12,10 @@ public class TitleFragments {
     private static final String TAG_TYPE = "(@)";
     private static final String TAG_DESC = "(\\S+)";
     private static final String TAG = "(" + TAG_TYPE + TAG_DESC + ")";
-    private static final String TITLE = "((" + TAG + ")+|" + TODO + "|.+)";
+    private static final String PHRASE = "((" + TAG + ")+|" + TODO + "|.+)";
 
     public static String getAll(String text) {
-        return getGroup(TitleFragments.TITLE, text, 0);
+        return getGroup(PhraseFragments.PHRASE, text, 0);
     }
 
     /**

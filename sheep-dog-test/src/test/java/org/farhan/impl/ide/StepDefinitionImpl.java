@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.lang.IStatement;
+import org.farhan.dsl.lang.IDescription;
+import org.farhan.dsl.lang.ILine;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
@@ -14,12 +15,11 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     String name;
     ArrayList<StepParametersImpl> stepParametersList;
-    ArrayList<StatementImpl> statementList;
+    DescriptionImpl description;
     StepObjectImpl parent;
 
     StepDefinitionImpl() {
         this.stepParametersList = new ArrayList<StepParametersImpl>();
-        this.statementList = new ArrayList<StatementImpl>();
     }
 
     @Override
@@ -33,18 +33,8 @@ public class StepDefinitionImpl implements IStepDefinition {
     }
 
     @Override
-    public IStatement getStatement(int index) {
-        throw new UnsupportedOperationException("getStatement(int index) is not implemented");
-    }
-
-    @Override
-    public IStatement getStatement(String name) {
-        throw new UnsupportedOperationException("getStatement(String name) is not implemented");
-    }
-
-    @Override
-    public List<IStatement> getStatementList() {
-        return Collections.unmodifiableList(statementList);
+    public IDescription getDescription() {
+        return description;
     }
 
     @Override
@@ -75,9 +65,12 @@ public class StepDefinitionImpl implements IStepDefinition {
     }
 
     @Override
-    public boolean addStatement(IStatement value) {
-        statementList.add((StatementImpl) value);
-        statementList.getLast().parent = this;
+    public boolean addLine(ILine value) {
+        if (description == null) {
+            description = new DescriptionImpl();
+            description.parent = this;
+        }
+        description.addLine(value);
         return true;
     }
 

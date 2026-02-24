@@ -3,12 +3,8 @@
  */
 package org.farhan.dsl.sheepdog.sheepDog.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -16,12 +12,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.farhan.dsl.sheepdog.sheepDog.Description;
 import org.farhan.dsl.sheepdog.sheepDog.Model;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +25,7 @@ import org.farhan.dsl.sheepdog.sheepDog.Statement;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.ModelImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.ModelImpl#getStatementList <em>Statement List</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.ModelImpl#getDescription <em>Description</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,14 +53,14 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getStatementList() <em>Statement List</em>}' containment reference list.
+   * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatementList()
+   * @see #getDescription()
    * @generated
    * @ordered
    */
-  protected EList<Statement> statementList;
+  protected Description description;
 
   /**
    * <!-- begin-user-doc -->
@@ -121,13 +114,48 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public EList<Statement> getStatementList()
+  public Description getDescription()
   {
-    if (statementList == null)
+    return description;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDescription(Description newDescription, NotificationChain msgs)
+  {
+    Description oldDescription = description;
+    description = newDescription;
+    if (eNotificationRequired())
     {
-      statementList = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.MODEL__STATEMENT_LIST);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.MODEL__DESCRIPTION, oldDescription, newDescription);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return statementList;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDescription(Description newDescription)
+  {
+    if (newDescription != description)
+    {
+      NotificationChain msgs = null;
+      if (description != null)
+        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.MODEL__DESCRIPTION, null, msgs);
+      if (newDescription != null)
+        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.MODEL__DESCRIPTION, null, msgs);
+      msgs = basicSetDescription(newDescription, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.MODEL__DESCRIPTION, newDescription, newDescription));
   }
 
   /**
@@ -140,8 +168,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case SheepDogPackage.MODEL__STATEMENT_LIST:
-        return ((InternalEList<?>)getStatementList()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.MODEL__DESCRIPTION:
+        return basicSetDescription(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -158,8 +186,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case SheepDogPackage.MODEL__NAME:
         return getName();
-      case SheepDogPackage.MODEL__STATEMENT_LIST:
-        return getStatementList();
+      case SheepDogPackage.MODEL__DESCRIPTION:
+        return getDescription();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -169,7 +197,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -178,9 +205,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SheepDogPackage.MODEL__NAME:
         setName((String)newValue);
         return;
-      case SheepDogPackage.MODEL__STATEMENT_LIST:
-        getStatementList().clear();
-        getStatementList().addAll((Collection<? extends Statement>)newValue);
+      case SheepDogPackage.MODEL__DESCRIPTION:
+        setDescription((Description)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -199,8 +225,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SheepDogPackage.MODEL__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SheepDogPackage.MODEL__STATEMENT_LIST:
-        getStatementList().clear();
+      case SheepDogPackage.MODEL__DESCRIPTION:
+        setDescription((Description)null);
         return;
     }
     super.eUnset(featureID);
@@ -218,8 +244,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case SheepDogPackage.MODEL__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SheepDogPackage.MODEL__STATEMENT_LIST:
-        return statementList != null && !statementList.isEmpty();
+      case SheepDogPackage.MODEL__DESCRIPTION:
+        return description != null;
     }
     return super.eIsSet(featureID);
   }

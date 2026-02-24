@@ -32,27 +32,33 @@ public class SheepDogUtility {
         logger.debug("Entering cloneStepObject for original: {}", original != null ? original.getNameLong() : "null");
         IStepObject clone = SheepDogBuilder.createStepObject(null, original.getNameLong());
 
-        // Clone statements
-        for (IStatement statement : original.getStatementList()) {
-            SheepDogBuilder.createStatement(clone, statement.getName());
+        // Clone lines
+        if (original.getDescription() != null) {
+            for (ILine line : original.getDescription().getLineList()) {
+                SheepDogBuilder.createLine(clone, line.getName());
+            }
         }
 
         // Clone step definitions
         for (IStepDefinition stepDefinition : original.getStepDefinitionList()) {
             IStepDefinition clonedStepDef = SheepDogBuilder.createStepDefinition(clone, stepDefinition.getName());
 
-            // Clone statements for step definition
-            for (IStatement statement : stepDefinition.getStatementList()) {
-                SheepDogBuilder.createStatement(clonedStepDef, statement.getName());
+            // Clone lines for step definition
+            if (stepDefinition.getDescription() != null) {
+                for (ILine line : stepDefinition.getDescription().getLineList()) {
+                    SheepDogBuilder.createLine(clonedStepDef, line.getName());
+                }
             }
 
             // Clone step parameters
             for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
                 IStepParameters clonedStepParams = SheepDogBuilder.createStepParameters(clonedStepDef, stepParameters.getName());
 
-                // Clone statements for step parameters
-                for (IStatement statement : stepParameters.getStatementList()) {
-                    SheepDogBuilder.createStatement(clonedStepParams, statement.getName());
+                // Clone lines for step parameters
+                if (stepParameters.getNestedDescription() != null) {
+                    for (ILine line : stepParameters.getNestedDescription().getLineList()) {
+                        SheepDogBuilder.createLine(clonedStepParams, line.getName());
+                    }
                 }
 
                 // Clone table
@@ -106,13 +112,13 @@ public class SheepDogUtility {
      * @param statementList the list of statements to convert
      * @return String concatenation of all statement names
      */
-    public static String getStatementListAsString(List<IStatement> statementList) {
-        logger.debug("Entering getStatementListAsString for statementList: {} items", statementList != null ? statementList.size() : "null");
+    public static String getLineListAsString(List<ILine> lineList) {
+        logger.debug("Entering getLineListAsString for lineList: {} items", lineList != null ? lineList.size() : "null");
         String documentation = "";
-        for (IStatement s : statementList) {
+        for (ILine s : lineList) {
             documentation += s.getName();
         }
-        logger.debug("Exiting getStatementListAsString with result: {}", documentation);
+        logger.debug("Exiting getLineListAsString with result: {}", documentation);
         return documentation;
     }
 

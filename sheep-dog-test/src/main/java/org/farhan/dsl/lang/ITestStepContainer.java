@@ -8,11 +8,7 @@ public interface ITestStepContainer {
 
     ITestSuite getParent();
 
-    IStatement getStatement(int index);
-
-    IStatement getStatement(String name);
-
-    List<IStatement> getStatementList();
+    IDescription getDescription();
 
     ITestStep getTestStep(int index);
 
@@ -22,7 +18,7 @@ public interface ITestStepContainer {
 
     void setName(String value);
 
-    boolean addStatement(IStatement value);
+    boolean addLine(ILine value);
 
     boolean addTestStep(ITestStep value);
 

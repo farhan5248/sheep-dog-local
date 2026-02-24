@@ -7,7 +7,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
+import org.farhan.dsl.sheepdog.sheepDog.Line;
 
 public class TestSuiteFormatter extends Formatter {
 
@@ -30,12 +30,14 @@ public class TestSuiteFormatter extends Formatter {
 
 		formatKeywordTrailingSpace(df.getRegion(theFeature, a.getEqualsSignKeyword_0()), doc);
 		formatKeywordTrailingSpace(df.getRegion(theFeature, a.getTestSuiteKeyword_1()), doc);
-		formatTitle(df.getRegion(theFeature, a.getNameTitleParserRuleCall_2_0()), doc);
+		formatTitle(df.getRegion(theFeature, a.getNamePhraseParserRuleCall_2_0()), doc);
 		formatEOL2RuleCall(df.getRegion(theFeature, a.getEOLTerminalRuleCall_3()), doc);
-		for (Statement s : theFeature.getStatementList()) {
-			StatementFormatter formatter = new StatementFormatter(s);
-			formatter.isLast(isLastElement(s, theFeature.getStatementList()));
-			formatter.format(doc, ga, df);
+		if (theFeature.getDescription() != null) {
+			for (Line s : theFeature.getDescription().getLineList()) {
+				StatementFormatter formatter = new StatementFormatter(s);
+				formatter.isLast(isLastElement(s, theFeature.getDescription().getLineList()));
+				formatter.format(doc, ga, df);
+			}
 		}
 		for (TestStepContainer s : theFeature.getTestStepContainerList()) {
 			TestStepContainerFormatter formatter = newAbstractTestCaseFormatter(s);

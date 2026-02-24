@@ -36,7 +36,7 @@ public interface ISheepDogFactory {
      *
      * @return the created instance
      */
-    IStatement createStatement();
+    ILine createLine();
 
     /**
      * Creates uninitialized grammar element instance for subsequent attribute

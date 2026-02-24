@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.lang.IStatement;
+import org.farhan.dsl.lang.IDescription;
+import org.farhan.dsl.lang.ILine;
 import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
@@ -17,6 +18,7 @@ public class TestSuiteImpl implements ITestSuite {
 	String qualifiedName;
 	String name;
 	TestProjectImpl parent;
+	DescriptionImpl description;
 
 	TestSuiteImpl() {
 		this.testStepContainerList = new ArrayList<TestStepContainerImpl>();
@@ -43,18 +45,8 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public IStatement getStatement(int index) {
-		throw new UnsupportedOperationException("getStatement(int index) is not implemented");
-	}
-
-	@Override
-	public IStatement getStatement(String name) {
-		throw new UnsupportedOperationException("getStatement(String name) is not implemented");
-	}
-
-	@Override
-	public ArrayList<IStatement> getStatementList() {
-		throw new UnsupportedOperationException("getStatementList() is not implemented");
+	public IDescription getDescription() {
+		return description;
 	}
 
 	@Override
@@ -95,8 +87,13 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public boolean addStatement(IStatement value) {
-		throw new UnsupportedOperationException("addStatement(IStatement value) is not implemented");
+	public boolean addLine(ILine value) {
+		if (description == null) {
+			description = new DescriptionImpl();
+			description.parent = this;
+		}
+		description.addLine(value);
+		return true;
 	}
 
 	@Override

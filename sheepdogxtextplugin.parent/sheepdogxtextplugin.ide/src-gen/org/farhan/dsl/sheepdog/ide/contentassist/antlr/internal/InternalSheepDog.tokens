@@ -1,9 +1,9 @@
 '*'=22
-'+'=32
+'+'=28
 '='=18
 '=='=20
-'And:'=31
-'Given:'=28
+'And:'=32
+'Given:'=29
 'Step-Definition:'=21
 'Step-Object:'=19
 'Step-Parameters:'=23
@@ -11,8 +11,8 @@
 'Test-Data:'=27
 'Test-Setup:'=25
 'Test-Suite:'=24
-'Then:'=30
-'When:'=29
+'Then:'=31
+'When:'=30
 'action'=17
 'dialog'=12
 'directory'=13

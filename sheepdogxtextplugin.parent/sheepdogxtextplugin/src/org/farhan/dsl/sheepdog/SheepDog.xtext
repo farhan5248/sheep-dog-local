@@ -8,43 +8,50 @@ Model:
 	StepObject | TestSuite;
 
 StepObject:
-	'=' 'Step-Object:' name=Title EOL
-	statementList+=Statement*
+	'=' 'Step-Object:' name=Phrase EOL
+	description=Description?
 	stepDefinitionList+=StepDefinition*;
 
 StepDefinition:
-	'==' 'Step-Definition:' name=Title EOL
-	statementList+=Statement*
+	'==' 'Step-Definition:' name=Phrase EOL
+	description=Description?
 	stepParameterList+=StepParameters*;
 
 StepParameters:
-	'*' 'Step-Parameters:' name=Title EOL
-	statementList=NestedStatementList?
+	'*' 'Step-Parameters:' name=Phrase EOL
+	nestedDescription=NestedDescription?
 	table=Table;
 
 TestSuite:
-	'=' 'Test-Suite:' name=Title EOL
-	statementList+=Statement*
+	'=' 'Test-Suite:' name=Phrase EOL
+	description=Description?
 	testStepContainerList+=TestStepContainer*;
 
 TestStepContainer:
 	TestSetup | TestCase;
 
 TestSetup:
-	'==' 'Test-Setup:' name=Title EOL
-	statementList+=Statement*
+	'==' 'Test-Setup:' name=Phrase EOL
+	description=Description?
 	testStepList+=TestStep*;
 
 TestCase:
-	'==' 'Test-Case:' name=Title EOL
-	statementList+=Statement*
+	'==' 'Test-Case:' name=Phrase EOL
+	description=Description?
 	testStepList+=TestStep*
 	testDataList+=TestData*;
 
 TestData:
-	'*' 'Test-Data:' name=Title EOL
-	statementList=NestedStatementList?
+	'*' 'Test-Data:' name=Phrase EOL
+	nestedDescription=NestedDescription?
 	table=Table;
+
+Description:
+	lineList+=Line+;
+
+NestedDescription:
+	'+' EOL
+	lineList+=Line+;
 
 TestStep:
 	Given | When | Then | And;
@@ -69,10 +76,6 @@ Text:
 	'+' EOL
 	name=RAWTEXT EOL;
 
-NestedStatementList:
-	'+' EOL
-	statementList+=Statement+;
-
 Table:
 	'+' EOL
 	'|===' EOL
@@ -83,13 +86,12 @@ Row:
 	cellList+=Cell+ EOL;
 
 Cell:
-	'|' name=Title;
+	'|' name=Phrase;
 
-// TODO There need to be better names than Text, Statement, Title, WORD etc ...
-Statement:
-	name=Title EOL;
+Line:
+	name=Phrase EOL;
 
-Title:
+Phrase:
 	WORD+;
 
 // TODO the regular expression here is a partial duplication of what's in sheep-dog-test
@@ -102,7 +104,6 @@ Title:
 // to make sure the Impl classes have implemented this correctly
 // For now I'm putting the whole regex to make it possible to distinguish between STEP_OBJECT and STEP_DEFINITION
 // without breaking it up into its parts
-// TODO do I need to define single spaces?
 StepObjectRef:
 	WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action');
 

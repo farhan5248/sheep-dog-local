@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ITestSuite extends IModel {
 
-    boolean addStatement(IStatement value);
+    boolean addLine(ILine value);
 
     boolean addTestCase(ITestCase value);
 
@@ -16,11 +16,7 @@ public interface ITestSuite extends IModel {
 
     ITestProject getParent();
 
-    IStatement getStatement(int index);
-
-    IStatement getStatement(String name);
-
-    List<IStatement> getStatementList();
+    IDescription getDescription();
 
     ITestStepContainer getTestStepContainer(int index);
 

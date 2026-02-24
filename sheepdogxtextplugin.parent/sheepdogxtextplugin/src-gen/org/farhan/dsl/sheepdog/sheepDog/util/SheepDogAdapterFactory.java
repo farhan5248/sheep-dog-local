@@ -121,6 +121,16 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createTestDataAdapter();
       }
       @Override
+      public Adapter caseDescription(Description object)
+      {
+        return createDescriptionAdapter();
+      }
+      @Override
+      public Adapter caseNestedDescription(NestedDescription object)
+      {
+        return createNestedDescriptionAdapter();
+      }
+      @Override
       public Adapter caseTestStep(TestStep object)
       {
         return createTestStepAdapter();
@@ -151,11 +161,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createTextAdapter();
       }
       @Override
-      public Adapter caseNestedStatementList(NestedStatementList object)
-      {
-        return createNestedStatementListAdapter();
-      }
-      @Override
       public Adapter caseTable(Table object)
       {
         return createTableAdapter();
@@ -171,9 +176,9 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createCellAdapter();
       }
       @Override
-      public Adapter caseStatement(Statement object)
+      public Adapter caseLine(Line object)
       {
-        return createStatementAdapter();
+        return createLineAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -333,6 +338,36 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.Description <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.dsl.sheepdog.sheepDog.Description
+   * @generated
+   */
+  public Adapter createDescriptionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.NestedDescription <em>Nested Description</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.dsl.sheepdog.sheepDog.NestedDescription
+   * @generated
+   */
+  public Adapter createNestedDescriptionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep <em>Test Step</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -423,21 +458,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.NestedStatementList <em>Nested Statement List</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.dsl.sheepdog.sheepDog.NestedStatementList
-   * @generated
-   */
-  public Adapter createNestedStatementListAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.Table <em>Table</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -483,16 +503,16 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.Statement <em>Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.Line <em>Line</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.farhan.dsl.sheepdog.sheepDog.Statement
+   * @see org.farhan.dsl.sheepdog.sheepDog.Line
    * @generated
    */
-  public Adapter createStatementAdapter()
+  public Adapter createLineAdapter()
   {
     return null;
   }

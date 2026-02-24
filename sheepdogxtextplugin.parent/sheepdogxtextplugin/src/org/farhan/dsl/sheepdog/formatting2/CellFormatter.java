@@ -35,7 +35,7 @@ public class CellFormatter extends Formatter {
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		CellElements a = ga.getCellAccess();
 		formatKeyword(df.getRegion(theCell, a.getVerticalLineKeyword_0()), doc);
-		formatPhraseRuleCall(df.getRegion(theCell, a.getNameTitleParserRuleCall_1_0()), doc);
+		formatPhraseRuleCall(df.getRegion(theCell, a.getNamePhraseParserRuleCall_1_0()), doc);
 	}
 
 	protected void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {

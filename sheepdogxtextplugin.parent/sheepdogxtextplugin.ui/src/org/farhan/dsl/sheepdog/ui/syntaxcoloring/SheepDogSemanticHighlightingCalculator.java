@@ -2,8 +2,8 @@ package org.farhan.dsl.sheepdog.ui.syntaxcoloring;
 
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.farhan.dsl.lang.*;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
+import org.farhan.dsl.lang.PhraseFragments;
+import org.farhan.dsl.sheepdog.sheepDog.Line;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
@@ -28,22 +28,28 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
         }
         if (resource.getContents().get(0) instanceof TestSuite) {
             TestSuite testSuite = (TestSuite) resource.getContents().get(0);
-            for (Statement s : testSuite.getStatementList()) {
-                highlightStatement(s, acceptor, 0);
+            if (testSuite.getDescription() != null) {
+                for (Line s : testSuite.getDescription().getLineList()) {
+                    highlightStatement(s, acceptor, 0);
+                }
             }
             for (Object child : testSuite.getTestStepContainerList()) {
                 if (child instanceof TestSetup) {
                     TestSetup ts = (TestSetup) child;
-                    for (Statement s : ts.getStatementList()) {
-                        highlightStatement(s, acceptor, 0);
+                    if (ts.getDescription() != null) {
+                        for (Line s : ts.getDescription().getLineList()) {
+                            highlightStatement(s, acceptor, 0);
+                        }
                     }
                     for (TestStep s : ts.getTestStepList()) {
                         highlightTable(s.getTable(), acceptor);
                     }
                 } else if (child instanceof TestCase) {
                     TestCase tc = (TestCase) child;
-                    for (Statement s : tc.getStatementList()) {
-                        highlightStatement(s, acceptor, 0);
+                    if (tc.getDescription() != null) {
+                        for (Line s : tc.getDescription().getLineList()) {
+                            highlightStatement(s, acceptor, 0);
+                        }
                     }
                     for (TestStep s : tc.getTestStepList()) {
                         if (tc.getTestDataList().size() > 0) {
@@ -52,8 +58,8 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
                         highlightTable(s.getTable(), acceptor);
                     }
                     for (TestData example : tc.getTestDataList()) {
-                        if (example.getStatementList() != null) {
-                            for (Statement s : example.getStatementList().getStatementList()) {
+                        if (example.getNestedDescription() != null) {
+                            for (Line s : example.getNestedDescription().getLineList()) {
                                 highlightStatement(s, acceptor, 0);
                             }
                         }
@@ -63,16 +69,20 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
             }
         } else {
             StepObject stepObject = (StepObject) resource.getContents().get(0);
-            for (Statement s : stepObject.getStatementList()) {
-                highlightStatement(s, acceptor, 0);
-            }
-            for (StepDefinition child : stepObject.getStepDefinitionList()) {
-                for (Statement s : child.getStatementList()) {
+            if (stepObject.getDescription() != null) {
+                for (Line s : stepObject.getDescription().getLineList()) {
                     highlightStatement(s, acceptor, 0);
                 }
+            }
+            for (StepDefinition child : stepObject.getStepDefinitionList()) {
+                if (child.getDescription() != null) {
+                    for (Line s : child.getDescription().getLineList()) {
+                        highlightStatement(s, acceptor, 0);
+                    }
+                }
                 for (StepParameters sp : child.getStepParameterList()) {
-                    if (sp.getStatementList() != null) {
-                        for (Statement s : sp.getStatementList().getStatementList()) {
+                    if (sp.getNestedDescription() != null) {
+                        for (Line s : sp.getNestedDescription().getLineList()) {
                             highlightStatement(s, acceptor, 0);
                         }
                     }
@@ -97,17 +107,17 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
         }
     }
 
-    private void highlightStatement(Statement statement, IHighlightedPositionAcceptor acceptor, int current) {
+    private void highlightStatement(Line statement, IHighlightedPositionAcceptor acceptor, int current) {
         if (statement != null) {
             INode node = NodeModelUtils.getNode(statement);
             int offset = node.getTotalOffset();
             for (String line : node.getText().split("\n")) {
-                if (TitleFragments.isTodo(line)) {
+                if (PhraseFragments.isTodo(line)) {
                     acceptor.addPosition(offset + current, line.length(), SheepDogHighlightingConfiguration.TODO_ID);
                     current += line.length() + 1;
                 } else {
                     for (String word : line.split(" ")) {
-                        if (TitleFragments.isTag(word)) {
+                        if (PhraseFragments.isTag(word)) {
                             acceptor.addPosition(offset + current, word.length(),
                                     SheepDogHighlightingConfiguration.TAG_ID);
                         } else {

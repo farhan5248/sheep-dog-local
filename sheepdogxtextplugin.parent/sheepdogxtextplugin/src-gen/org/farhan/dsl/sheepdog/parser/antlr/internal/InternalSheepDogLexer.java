@@ -271,11 +271,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:21:7: ( 'Given:' )
-            // InternalSheepDog.g:21:9: 'Given:'
+            // InternalSheepDog.g:21:7: ( '+' )
+            // InternalSheepDog.g:21:9: '+'
             {
-            match("Given:"); 
-
+            match('+'); 
 
             }
 
@@ -292,10 +291,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:22:7: ( 'When:' )
-            // InternalSheepDog.g:22:9: 'When:'
+            // InternalSheepDog.g:22:7: ( 'Given:' )
+            // InternalSheepDog.g:22:9: 'Given:'
             {
-            match("When:"); 
+            match("Given:"); 
 
 
             }
@@ -313,10 +312,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:23:7: ( 'Then:' )
-            // InternalSheepDog.g:23:9: 'Then:'
+            // InternalSheepDog.g:23:7: ( 'When:' )
+            // InternalSheepDog.g:23:9: 'When:'
             {
-            match("Then:"); 
+            match("When:"); 
 
 
             }
@@ -334,10 +333,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:24:7: ( 'And:' )
-            // InternalSheepDog.g:24:9: 'And:'
+            // InternalSheepDog.g:24:7: ( 'Then:' )
+            // InternalSheepDog.g:24:9: 'Then:'
             {
-            match("And:"); 
+            match("Then:"); 
 
 
             }
@@ -355,10 +354,11 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:25:7: ( '+' )
-            // InternalSheepDog.g:25:9: '+'
+            // InternalSheepDog.g:25:7: ( 'And:' )
+            // InternalSheepDog.g:25:9: 'And:'
             {
-            match('+'); 
+            match("And:"); 
+
 
             }
 
@@ -605,10 +605,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:1682:9: ( ( ' ' | '\\t' | '\\r' )+ )
-            // InternalSheepDog.g:1682:11: ( ' ' | '\\t' | '\\r' )+
+            // InternalSheepDog.g:1718:9: ( ( ' ' | '\\t' | '\\r' )+ )
+            // InternalSheepDog.g:1718:11: ( ' ' | '\\t' | '\\r' )+
             {
-            // InternalSheepDog.g:1682:11: ( ' ' | '\\t' | '\\r' )+
+            // InternalSheepDog.g:1718:11: ( ' ' | '\\t' | '\\r' )+
             int cnt1=0;
             loop1:
             do {
@@ -662,11 +662,11 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:1684:17: ( '#' (~ ( '\\n' ) )* RULE_EOL )
-            // InternalSheepDog.g:1684:19: '#' (~ ( '\\n' ) )* RULE_EOL
+            // InternalSheepDog.g:1720:17: ( '#' (~ ( '\\n' ) )* RULE_EOL )
+            // InternalSheepDog.g:1720:19: '#' (~ ( '\\n' ) )* RULE_EOL
             {
             match('#'); 
-            // InternalSheepDog.g:1684:23: (~ ( '\\n' ) )*
+            // InternalSheepDog.g:1720:23: (~ ( '\\n' ) )*
             loop2:
             do {
                 int alt2=2;
@@ -679,7 +679,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalSheepDog.g:1684:23: ~ ( '\\n' )
+            	    // InternalSheepDog.g:1720:23: ~ ( '\\n' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -716,10 +716,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:1686:10: ( ( '\\n' )+ )
-            // InternalSheepDog.g:1686:12: ( '\\n' )+
+            // InternalSheepDog.g:1722:10: ( ( '\\n' )+ )
+            // InternalSheepDog.g:1722:12: ( '\\n' )+
             {
-            // InternalSheepDog.g:1686:12: ( '\\n' )+
+            // InternalSheepDog.g:1722:12: ( '\\n' )+
             int cnt3=0;
             loop3:
             do {
@@ -733,7 +733,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalSheepDog.g:1686:12: '\\n'
+            	    // InternalSheepDog.g:1722:12: '\\n'
             	    {
             	    match('\n'); 
 
@@ -765,13 +765,13 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_RAWTEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:1688:14: ( '----' '\\n' ( . )+ '\\n' '----' )
-            // InternalSheepDog.g:1688:16: '----' '\\n' ( . )+ '\\n' '----'
+            // InternalSheepDog.g:1724:14: ( '----' '\\n' ( . )+ '\\n' '----' )
+            // InternalSheepDog.g:1724:16: '----' '\\n' ( . )+ '\\n' '----'
             {
             match("----"); 
 
             match('\n'); 
-            // InternalSheepDog.g:1688:28: ( . )+
+            // InternalSheepDog.g:1724:28: ( . )+
             int cnt4=0;
             loop4:
             do {
@@ -824,7 +824,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalSheepDog.g:1688:28: .
+            	    // InternalSheepDog.g:1724:28: .
             	    {
             	    matchAny(); 
 
@@ -859,10 +859,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_WORD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:1690:11: ( (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+ )
-            // InternalSheepDog.g:1690:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+
+            // InternalSheepDog.g:1726:11: ( (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+ )
+            // InternalSheepDog.g:1726:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+
             {
-            // InternalSheepDog.g:1690:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+
+            // InternalSheepDog.g:1726:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+
             int cnt5=0;
             loop5:
             do {
@@ -876,7 +876,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalSheepDog.g:1690:13: ~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+            	    // InternalSheepDog.g:1726:13: ~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001F')||(input.LA(1)>='!' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1141,27 +1141,27 @@ public class InternalSheepDogLexer extends Lexer {
 
     protected DFA6 dfa6 = new DFA6(this);
     static final String DFA6_eotS =
-        "\1\uffff\1\27\1\25\1\31\4\25\1\37\1\41\7\25\1\uffff\1\25\1\uffff\1\25\1\uffff\1\54\1\uffff\1\25\1\uffff\5\25\1\uffff\1\25\1\uffff\10\25\1\uffff\1\25\1\uffff\16\25\1\114\7\25\1\124\1\125\1\126\1\127\4\25\1\134\1\uffff\4\25\1\145\1\25\1\147\4\uffff\4\25\1\uffff\1\25\1\uffff\6\25\1\uffff\1\164\1\uffff\2\25\1\167\1\25\1\171\7\25\1\uffff\1\25\1\u0082\1\uffff\1\25\1\uffff\7\25\1\u008b\1\uffff\10\25\1\uffff\1\u0094\5\25\1\u009a\1\u009b\1\uffff\3\25\1\u009f\1\u00a0\2\uffff\1\u00a1\2\25\3\uffff\6\25\1\u00aa\1\u00ab\2\uffff";
+        "\1\uffff\1\27\1\25\1\31\1\25\1\34\3\25\1\41\7\25\1\uffff\1\25\1\uffff\1\25\1\uffff\1\54\1\uffff\1\25\1\uffff\2\25\1\uffff\4\25\1\uffff\10\25\1\uffff\1\25\1\uffff\16\25\1\114\7\25\1\124\1\125\1\126\1\127\4\25\1\134\1\uffff\4\25\1\145\1\25\1\147\4\uffff\4\25\1\uffff\1\25\1\uffff\6\25\1\uffff\1\164\1\uffff\2\25\1\167\1\25\1\171\7\25\1\uffff\1\25\1\u0082\1\uffff\1\25\1\uffff\7\25\1\u008b\1\uffff\10\25\1\uffff\1\u0094\5\25\1\u009a\1\u009b\1\uffff\3\25\1\u009f\1\u00a0\2\uffff\1\u00a1\2\25\3\uffff\6\25\1\u00aa\1\u00ab\2\uffff";
     static final String DFA6_eofS =
         "\u00ac\uffff";
     static final String DFA6_minS =
-        "\2\0\1\164\1\0\1\145\1\151\1\150\1\156\2\0\1\151\1\141\1\145\1\151\2\157\1\143\1\uffff\1\0\1\uffff\1\55\1\uffff\1\0\1\uffff\1\145\1\uffff\1\163\1\145\1\166\1\145\1\144\1\uffff\1\75\1\uffff\1\154\1\147\1\161\2\141\1\142\1\164\1\0\1\uffff\1\55\1\uffff\1\160\1\164\1\156\1\145\1\156\1\72\1\75\2\145\1\160\1\165\1\154\1\145\1\154\1\0\1\151\3\55\1\72\1\156\1\72\4\0\1\157\1\145\1\157\1\143\1\0\1\uffff\1\157\1\12\1\104\1\103\1\0\1\72\1\0\4\uffff\1\156\1\163\1\147\1\164\1\uffff\1\156\1\uffff\1\142\1\145\1\141\1\145\2\141\1\uffff\1\0\1\uffff\1\163\1\164\1\0\1\157\1\0\1\152\1\146\1\162\1\151\1\164\1\163\1\164\1\uffff\1\145\1\0\1\uffff\1\162\1\uffff\1\145\1\151\1\141\1\164\1\165\1\145\1\141\1\0\1\uffff\1\171\1\143\1\156\1\155\1\145\1\160\2\72\1\uffff\1\0\1\164\1\151\1\145\2\72\2\0\1\uffff\1\72\2\164\2\0\2\uffff\1\0\1\151\1\145\3\uffff\1\157\1\162\1\156\1\163\2\72\2\0\2\uffff";
+        "\2\0\1\164\1\0\1\145\1\0\1\151\1\150\1\156\1\0\1\151\1\141\1\145\1\151\2\157\1\143\1\uffff\1\0\1\uffff\1\55\1\uffff\1\0\1\uffff\1\145\1\uffff\1\163\1\145\1\uffff\1\166\1\145\1\144\1\75\1\uffff\1\154\1\147\1\161\2\141\1\142\1\164\1\0\1\uffff\1\55\1\uffff\1\160\1\164\1\156\1\145\1\156\1\72\1\75\2\145\1\160\1\165\1\154\1\145\1\154\1\0\1\151\3\55\1\72\1\156\1\72\4\0\1\157\1\145\1\157\1\143\1\0\1\uffff\1\157\1\12\1\104\1\103\1\0\1\72\1\0\4\uffff\1\156\1\163\1\147\1\164\1\uffff\1\156\1\uffff\1\142\1\145\1\141\1\145\2\141\1\uffff\1\0\1\uffff\1\163\1\164\1\0\1\157\1\0\1\152\1\146\1\162\1\151\1\164\1\163\1\164\1\uffff\1\145\1\0\1\uffff\1\162\1\uffff\1\145\1\151\1\141\1\164\1\165\1\145\1\141\1\0\1\uffff\1\171\1\143\1\156\1\155\1\145\1\160\2\72\1\uffff\1\0\1\164\1\151\1\145\2\72\2\0\1\uffff\1\72\2\164\2\0\2\uffff\1\0\1\151\1\145\3\uffff\1\157\1\162\1\156\1\163\2\72\2\0\2\uffff";
     static final String DFA6_maxS =
-        "\2\uffff\1\164\1\uffff\1\150\1\151\1\150\1\156\2\uffff\1\151\1\141\1\145\1\151\2\157\1\143\1\uffff\1\uffff\1\uffff\1\55\1\uffff\1\uffff\1\uffff\1\145\1\uffff\1\163\1\145\1\166\1\145\1\144\1\uffff\1\75\1\uffff\1\154\1\147\1\163\1\162\1\141\1\142\1\164\1\uffff\1\uffff\1\55\1\uffff\1\160\1\164\1\156\1\145\1\156\1\72\1\75\2\145\1\160\1\165\1\154\1\145\1\154\1\uffff\1\151\3\55\1\72\1\156\1\72\4\uffff\1\157\1\145\1\157\1\143\1\uffff\1\uffff\1\157\1\12\1\120\1\123\1\uffff\1\72\1\uffff\4\uffff\1\156\1\163\1\147\1\164\1\uffff\1\156\1\uffff\1\142\1\145\1\141\1\165\2\141\1\uffff\1\uffff\1\uffff\1\163\1\164\1\uffff\1\157\1\uffff\1\152\1\146\1\162\1\151\1\164\1\163\1\164\1\uffff\1\145\1\uffff\1\uffff\1\162\1\uffff\1\145\1\151\1\141\1\164\1\165\1\145\1\141\1\uffff\1\uffff\1\171\1\143\1\156\1\155\1\145\1\160\2\72\1\uffff\1\uffff\1\164\1\151\1\145\2\72\2\uffff\1\uffff\1\72\2\164\2\uffff\2\uffff\1\uffff\1\151\1\145\3\uffff\1\157\1\162\1\156\1\163\2\72\2\uffff\2\uffff";
+        "\2\uffff\1\164\1\uffff\1\150\1\uffff\1\151\1\150\1\156\1\uffff\1\151\1\141\1\145\1\151\2\157\1\143\1\uffff\1\uffff\1\uffff\1\55\1\uffff\1\uffff\1\uffff\1\145\1\uffff\1\163\1\145\1\uffff\1\166\1\145\1\144\1\75\1\uffff\1\154\1\147\1\163\1\162\1\141\1\142\1\164\1\uffff\1\uffff\1\55\1\uffff\1\160\1\164\1\156\1\145\1\156\1\72\1\75\2\145\1\160\1\165\1\154\1\145\1\154\1\uffff\1\151\3\55\1\72\1\156\1\72\4\uffff\1\157\1\145\1\157\1\143\1\uffff\1\uffff\1\157\1\12\1\120\1\123\1\uffff\1\72\1\uffff\4\uffff\1\156\1\163\1\147\1\164\1\uffff\1\156\1\uffff\1\142\1\145\1\141\1\165\2\141\1\uffff\1\uffff\1\uffff\1\163\1\164\1\uffff\1\157\1\uffff\1\152\1\146\1\162\1\151\1\164\1\163\1\164\1\uffff\1\145\1\uffff\1\uffff\1\162\1\uffff\1\145\1\151\1\141\1\164\1\165\1\145\1\141\1\uffff\1\uffff\1\171\1\143\1\156\1\155\1\145\1\160\2\72\1\uffff\1\uffff\1\164\1\151\1\145\2\72\2\uffff\1\uffff\1\72\2\164\2\uffff\2\uffff\1\uffff\1\151\1\145\3\uffff\1\157\1\162\1\156\1\163\2\72\2\uffff\2\uffff";
     static final String DFA6_acceptS =
-        "\21\uffff\1\33\1\uffff\1\35\1\uffff\1\37\1\uffff\1\1\1\uffff\1\5\5\uffff\1\17\1\uffff\1\21\10\uffff\1\34\1\uffff\1\3\37\uffff\1\31\7\uffff\1\16\1\20\1\22\1\23\4\uffff\1\30\1\uffff\1\36\6\uffff\1\15\1\uffff\1\14\14\uffff\1\13\2\uffff\1\25\1\uffff\1\32\10\uffff\1\27\10\uffff\1\24\10\uffff\1\26\5\uffff\1\11\1\12\3\uffff\1\7\1\10\1\2\10\uffff\1\4\1\6";
+        "\21\uffff\1\33\1\uffff\1\35\1\uffff\1\37\1\uffff\1\1\1\uffff\1\5\2\uffff\1\13\4\uffff\1\21\10\uffff\1\34\1\uffff\1\3\37\uffff\1\31\7\uffff\1\17\1\20\1\22\1\23\4\uffff\1\30\1\uffff\1\36\6\uffff\1\16\1\uffff\1\15\14\uffff\1\14\2\uffff\1\25\1\uffff\1\32\10\uffff\1\27\10\uffff\1\24\10\uffff\1\26\5\uffff\1\11\1\12\3\uffff\1\7\1\10\1\2\10\uffff\1\4\1\6";
     static final String DFA6_specialS =
-        "\1\31\1\17\1\uffff\1\15\4\uffff\1\5\1\4\10\uffff\1\32\3\uffff\1\10\22\uffff\1\11\21\uffff\1\30\7\uffff\1\3\1\6\1\12\1\14\4\uffff\1\26\5\uffff\1\2\1\uffff\1\1\22\uffff\1\0\3\uffff\1\20\1\uffff\1\33\11\uffff\1\24\12\uffff\1\16\12\uffff\1\22\5\uffff\1\27\1\34\4\uffff\1\23\1\25\2\uffff\1\7\13\uffff\1\13\1\21\2\uffff}>";
+        "\1\24\1\16\1\uffff\1\14\1\uffff\1\34\3\uffff\1\3\10\uffff\1\31\3\uffff\1\7\22\uffff\1\10\21\uffff\1\30\7\uffff\1\4\1\5\1\11\1\13\4\uffff\1\26\5\uffff\1\2\1\uffff\1\1\22\uffff\1\0\3\uffff\1\17\1\uffff\1\32\11\uffff\1\23\12\uffff\1\15\12\uffff\1\21\5\uffff\1\27\1\33\4\uffff\1\22\1\25\2\uffff\1\6\13\uffff\1\12\1\20\2\uffff}>";
     static final String[] DFA6_transitionS = {
-            "\11\25\1\21\1\23\2\25\1\21\22\25\1\21\2\25\1\22\6\25\1\3\1\10\1\25\1\24\17\25\1\1\3\25\1\7\5\25\1\5\13\25\1\2\1\4\2\25\1\6\11\25\1\20\2\25\1\15\1\25\1\12\1\16\2\25\1\17\5\25\1\13\1\25\1\14\11\25\1\11\uff83\25",
+            "\11\25\1\21\1\23\2\25\1\21\22\25\1\21\2\25\1\22\6\25\1\3\1\5\1\25\1\24\17\25\1\1\3\25\1\10\5\25\1\6\13\25\1\2\1\4\2\25\1\7\11\25\1\20\2\25\1\15\1\25\1\12\1\16\2\25\1\17\5\25\1\13\1\25\1\14\11\25\1\11\uff83\25",
             "\11\25\2\uffff\2\25\1\uffff\22\25\1\uffff\34\25\1\26\uffc2\25",
             "\1\30",
             "\11\25\2\uffff\2\25\1\uffff\22\25\1\uffff\uffdf\25",
             "\1\32\2\uffff\1\33",
-            "\1\34",
+            "\11\25\2\uffff\2\25\1\uffff\22\25\1\uffff\uffdf\25",
             "\1\35",
             "\1\36",
-            "\11\25\2\uffff\2\25\1\uffff\22\25\1\uffff\uffdf\25",
+            "\1\37",
             "\11\25\2\uffff\2\25\1\uffff\22\25\1\uffff\34\25\1\40\uffc2\25",
             "\1\42",
             "\1\43",
@@ -1181,10 +1181,10 @@ public class InternalSheepDogLexer extends Lexer {
             "",
             "\1\56",
             "\1\57",
+            "",
             "\1\60",
             "\1\61",
             "\1\62",
-            "",
             "\1\63",
             "",
             "\1\64",
@@ -1394,16 +1394,6 @@ public class InternalSheepDogLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
-                        int LA6_67 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA6_67>='\u0000' && LA6_67<='\b')||(LA6_67>='\u000B' && LA6_67<='\f')||(LA6_67>='\u000E' && LA6_67<='\u001F')||(LA6_67>='!' && LA6_67<='\uFFFF')) ) {s = 21;}
-
-                        else s = 84;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
                         int LA6_9 = input.LA(1);
 
                         s = -1;
@@ -1415,17 +1405,17 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
-                        int LA6_8 = input.LA(1);
+                    case 4 : 
+                        int LA6_67 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA6_8>='\u0000' && LA6_8<='\b')||(LA6_8>='\u000B' && LA6_8<='\f')||(LA6_8>='\u000E' && LA6_8<='\u001F')||(LA6_8>='!' && LA6_8<='\uFFFF')) ) {s = 21;}
+                        if ( ((LA6_67>='\u0000' && LA6_67<='\b')||(LA6_67>='\u000B' && LA6_67<='\f')||(LA6_67>='\u000E' && LA6_67<='\u001F')||(LA6_67>='!' && LA6_67<='\uFFFF')) ) {s = 21;}
 
-                        else s = 31;
+                        else s = 84;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 5 : 
                         int LA6_68 = input.LA(1);
 
                         s = -1;
@@ -1435,7 +1425,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 7 : 
+                    case 6 : 
                         int LA6_156 = input.LA(1);
 
                         s = -1;
@@ -1445,7 +1435,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 8 : 
+                    case 7 : 
                         int LA6_22 = input.LA(1);
 
                         s = -1;
@@ -1455,7 +1445,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 9 : 
+                    case 8 : 
                         int LA6_41 = input.LA(1);
 
                         s = -1;
@@ -1467,7 +1457,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 10 : 
+                    case 9 : 
                         int LA6_69 = input.LA(1);
 
                         s = -1;
@@ -1477,7 +1467,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 11 : 
+                    case 10 : 
                         int LA6_168 = input.LA(1);
 
                         s = -1;
@@ -1487,7 +1477,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 12 : 
+                    case 11 : 
                         int LA6_70 = input.LA(1);
 
                         s = -1;
@@ -1497,7 +1487,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 13 : 
+                    case 12 : 
                         int LA6_3 = input.LA(1);
 
                         s = -1;
@@ -1507,7 +1497,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 14 : 
+                    case 13 : 
                         int LA6_129 = input.LA(1);
 
                         s = -1;
@@ -1517,7 +1507,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 15 : 
+                    case 14 : 
                         int LA6_1 = input.LA(1);
 
                         s = -1;
@@ -1529,7 +1519,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 16 : 
+                    case 15 : 
                         int LA6_106 = input.LA(1);
 
                         s = -1;
@@ -1539,7 +1529,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 17 : 
+                    case 16 : 
                         int LA6_169 = input.LA(1);
 
                         s = -1;
@@ -1549,7 +1539,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 18 : 
+                    case 17 : 
                         int LA6_140 = input.LA(1);
 
                         s = -1;
@@ -1559,7 +1549,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 19 : 
+                    case 18 : 
                         int LA6_152 = input.LA(1);
 
                         s = -1;
@@ -1569,13 +1559,61 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 20 : 
+                    case 19 : 
                         int LA6_118 = input.LA(1);
 
                         s = -1;
                         if ( ((LA6_118>='\u0000' && LA6_118<='\b')||(LA6_118>='\u000B' && LA6_118<='\f')||(LA6_118>='\u000E' && LA6_118<='\u001F')||(LA6_118>='!' && LA6_118<='\uFFFF')) ) {s = 21;}
 
                         else s = 130;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 20 : 
+                        int LA6_0 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA6_0=='=') ) {s = 1;}
+
+                        else if ( (LA6_0=='S') ) {s = 2;}
+
+                        else if ( (LA6_0=='*') ) {s = 3;}
+
+                        else if ( (LA6_0=='T') ) {s = 4;}
+
+                        else if ( (LA6_0=='+') ) {s = 5;}
+
+                        else if ( (LA6_0=='G') ) {s = 6;}
+
+                        else if ( (LA6_0=='W') ) {s = 7;}
+
+                        else if ( (LA6_0=='A') ) {s = 8;}
+
+                        else if ( (LA6_0=='|') ) {s = 9;}
+
+                        else if ( (LA6_0=='f') ) {s = 10;}
+
+                        else if ( (LA6_0=='p') ) {s = 11;}
+
+                        else if ( (LA6_0=='r') ) {s = 12;}
+
+                        else if ( (LA6_0=='d') ) {s = 13;}
+
+                        else if ( (LA6_0=='g') ) {s = 14;}
+
+                        else if ( (LA6_0=='j') ) {s = 15;}
+
+                        else if ( (LA6_0=='a') ) {s = 16;}
+
+                        else if ( (LA6_0=='\t'||LA6_0=='\r'||LA6_0==' ') ) {s = 17;}
+
+                        else if ( (LA6_0=='#') ) {s = 18;}
+
+                        else if ( (LA6_0=='\n') ) {s = 19;}
+
+                        else if ( (LA6_0=='-') ) {s = 20;}
+
+                        else if ( ((LA6_0>='\u0000' && LA6_0<='\b')||(LA6_0>='\u000B' && LA6_0<='\f')||(LA6_0>='\u000E' && LA6_0<='\u001F')||(LA6_0>='!' && LA6_0<='\"')||(LA6_0>='$' && LA6_0<=')')||LA6_0==','||(LA6_0>='.' && LA6_0<='<')||(LA6_0>='>' && LA6_0<='@')||(LA6_0>='B' && LA6_0<='F')||(LA6_0>='H' && LA6_0<='R')||(LA6_0>='U' && LA6_0<='V')||(LA6_0>='X' && LA6_0<='`')||(LA6_0>='b' && LA6_0<='c')||LA6_0=='e'||(LA6_0>='h' && LA6_0<='i')||(LA6_0>='k' && LA6_0<='o')||LA6_0=='q'||(LA6_0>='s' && LA6_0<='{')||(LA6_0>='}' && LA6_0<='\uFFFF')) ) {s = 21;}
 
                         if ( s>=0 ) return s;
                         break;
@@ -1620,54 +1658,6 @@ public class InternalSheepDogLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 25 : 
-                        int LA6_0 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA6_0=='=') ) {s = 1;}
-
-                        else if ( (LA6_0=='S') ) {s = 2;}
-
-                        else if ( (LA6_0=='*') ) {s = 3;}
-
-                        else if ( (LA6_0=='T') ) {s = 4;}
-
-                        else if ( (LA6_0=='G') ) {s = 5;}
-
-                        else if ( (LA6_0=='W') ) {s = 6;}
-
-                        else if ( (LA6_0=='A') ) {s = 7;}
-
-                        else if ( (LA6_0=='+') ) {s = 8;}
-
-                        else if ( (LA6_0=='|') ) {s = 9;}
-
-                        else if ( (LA6_0=='f') ) {s = 10;}
-
-                        else if ( (LA6_0=='p') ) {s = 11;}
-
-                        else if ( (LA6_0=='r') ) {s = 12;}
-
-                        else if ( (LA6_0=='d') ) {s = 13;}
-
-                        else if ( (LA6_0=='g') ) {s = 14;}
-
-                        else if ( (LA6_0=='j') ) {s = 15;}
-
-                        else if ( (LA6_0=='a') ) {s = 16;}
-
-                        else if ( (LA6_0=='\t'||LA6_0=='\r'||LA6_0==' ') ) {s = 17;}
-
-                        else if ( (LA6_0=='#') ) {s = 18;}
-
-                        else if ( (LA6_0=='\n') ) {s = 19;}
-
-                        else if ( (LA6_0=='-') ) {s = 20;}
-
-                        else if ( ((LA6_0>='\u0000' && LA6_0<='\b')||(LA6_0>='\u000B' && LA6_0<='\f')||(LA6_0>='\u000E' && LA6_0<='\u001F')||(LA6_0>='!' && LA6_0<='\"')||(LA6_0>='$' && LA6_0<=')')||LA6_0==','||(LA6_0>='.' && LA6_0<='<')||(LA6_0>='>' && LA6_0<='@')||(LA6_0>='B' && LA6_0<='F')||(LA6_0>='H' && LA6_0<='R')||(LA6_0>='U' && LA6_0<='V')||(LA6_0>='X' && LA6_0<='`')||(LA6_0>='b' && LA6_0<='c')||LA6_0=='e'||(LA6_0>='h' && LA6_0<='i')||(LA6_0>='k' && LA6_0<='o')||LA6_0=='q'||(LA6_0>='s' && LA6_0<='{')||(LA6_0>='}' && LA6_0<='\uFFFF')) ) {s = 21;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 26 : 
                         int LA6_18 = input.LA(1);
 
                         s = -1;
@@ -1679,7 +1669,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 27 : 
+                    case 26 : 
                         int LA6_108 = input.LA(1);
 
                         s = -1;
@@ -1689,13 +1679,23 @@ public class InternalSheepDogLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 28 : 
+                    case 27 : 
                         int LA6_147 = input.LA(1);
 
                         s = -1;
                         if ( ((LA6_147>='\u0000' && LA6_147<='\b')||(LA6_147>='\u000B' && LA6_147<='\f')||(LA6_147>='\u000E' && LA6_147<='\u001F')||(LA6_147>='!' && LA6_147<='\uFFFF')) ) {s = 21;}
 
                         else s = 155;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 28 : 
+                        int LA6_5 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA6_5>='\u0000' && LA6_5<='\b')||(LA6_5>='\u000B' && LA6_5<='\f')||(LA6_5>='\u000E' && LA6_5<='\u001F')||(LA6_5>='!' && LA6_5<='\uFFFF')) ) {s = 21;}
+
+                        else s = 28;
 
                         if ( s>=0 ) return s;
                         break;

@@ -20,25 +20,24 @@ Pattern variables used in UML files to represent families of classes following s
    - Used in: {Language}Builder, {Language}Factory, I{Language}Factory, {Language}IssueProposal
 
 2. **{Type}** - Grammar types (non-terminal rules) defined in the .xtext file
-   - Values: `(And|Cell|Given|Model|Row|Statement|StatementList|StepDefinition|StepDefinitionRef|StepObject|StepObjectRef|StepParameters|Table|TestCase|TestData|TestProject|TestSetup|TestStep|TestStepContainer|TestSuite|Text|Then|When)`
+   - Values: `(And|Cell|Description|Given|Line|Model|NestedDescription|Phrase|Row|StepDefinition|StepDefinitionRef|StepObject|StepObjectRef|StepParameters|Table|TestCase|TestData|TestProject|TestSetup|TestStep|TestStepContainer|TestSuite|Text|Then|When)`
    - Used in: I{Type}, create{Type}(), {Type}Utility, {Type}IssueTypes, {Type}IssueDetector, {Type}IssueResolver
    - Case variants: `{type}` (camelCase), `{TYPE}` (UPPER_SNAKE_CASE)
 
 3. **{Assignment}** - Named assignments within grammar rules
-   - Values: `(Name|StatementList|StepDefinitionList|StepParameterList|Table|TestStepContainerList|TestStepList|TestDataList|StepObjectName|StepDefinitionName|Text|RowList|CellList|StepObjectList|TestSuiteList)`
-   - Used in: validate{Assignment}{Issue}(), correct{Assignment}{Issue}(), suggest{Assignment}{Issue}()
+   - Values: `(Name|Description|NestedDescription|LineList|StepDefinitionList|StepParameterList|Table|TestStepContainerList|TestStepList|TestDataList|StepObjectName|StepDefinitionName|Text|RowList|CellList|StepObjectList|TestSuiteList)`
+   - Used in: validate{Assignment}{Scope}(), correct{Assignment}{Scope}(), suggest{Assignment}{Scope}()
    - Case variants: `{assignment}` (camelCase for get/set methods), `{ASSIGNMENT}` (UPPER_SNAKE_CASE for enum constants)
 
 4. **{Fragment}** - Test step regex fragments defining type enumerations
-   - Values: `(Component|Object|ObjectVertex|ObjectEdge|Part|State|Time|Attachment)`
+   - Values: `(Component|Object|ObjectVertex|ObjectEdge|Part|State|Time|Attachment|Tag|Todo)`
    - Used in: {Type}{Fragment}Types
-   - Derived from: Regex constants with _TYPE suffix in TestStepUtility (COMPONENT_TYPE, OBJECT_TYPE_VERTEX, OBJECT_TYPE_EDGE, PART_TYPE, STATE_TYPE, TIME_TYPE, ATTACHMENT)
    - Case variants: `{fragment}` (camelCase), `{FRAGMENT}` (UPPER_SNAKE_CASE)
 
-5. **{Issue}** - Issue scope levels from {Type}IssueTypes enum
+5. **{Scope}** - Issue scope levels from {Type}IssueTypes enum
    - Values: `(Only|File|Workspace)`
-   - Used in: validate{Assignment}{Issue}(), correct{Assignment}{Issue}(), suggest{Assignment}{Issue}()
-   - Case variants: `{issue}` (camelCase), `{ISSUE}` (UPPER_SNAKE_CASE)
+   - Used in: validate{Assignment}{Scope}(), correct{Assignment}{Scope}(), suggest{Assignment}{Scope}()
+   - Case variants: `{scope}` (camelCase), `{SCOPE}` (UPPER_SNAKE_CASE)
 
 6. **{Proposal}** - Proposal attributes.
    - Values: `(Id|Description|Value|QualifiedName)`

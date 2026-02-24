@@ -1,24 +1,18 @@
 package org.farhan.dsl.lang;
 
-import java.util.List;
-
 public interface IStepParameters {
 
     String getName();
 
     IStepDefinition getParent();
 
-    IStatement getStatement(int index);
-
-    IStatement getStatement(String name);
-
-    List<IStatement> getStatementList();
+    INestedDescription getNestedDescription();
 
     ITable getTable();
 
     void setName(String value);
 
-    boolean addStatement(IStatement value);
+    boolean addLine(ILine value);
 
     void setTable(ITable value);
 }

@@ -47,7 +47,7 @@ public class TestStepIssueResolver {
             }
             SheepDogIssueProposal proposal = new SheepDogIssueProposal();
             proposal.setId("Generate " + theStepObject.getName() + " - " + theStepObject.getNameLong());
-            proposal.setDescription(SheepDogUtility.getStatementListAsString(theStepObject.getStatementList()));
+            proposal.setDescription(theStepObject.getDescription() != null ? SheepDogUtility.getLineListAsString(theStepObject.getDescription().getLineList()) : "");
             proposal.setValue(theStepObject);
             proposals.add(proposal);
         }
@@ -79,7 +79,8 @@ public class TestStepIssueResolver {
                     SheepDogBuilder.createStepDefinition(theStepObject, stepDefinitionName);
                     SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                     proposal.setId("Generate " + stepDefinitionName);
-                    proposal.setDescription(SheepDogUtility.getStatementListAsString(theStepObject.getStepDefinition(stepDefinitionName).getStatementList()));
+                    IStepDefinition generatedStepDef = theStepObject.getStepDefinition(stepDefinitionName);
+                    proposal.setDescription(generatedStepDef.getDescription() != null ? SheepDogUtility.getLineListAsString(generatedStepDef.getDescription().getLineList()) : "");
                     proposal.setValue(theStepObject);
                     proposals.add(proposal);
                 }
@@ -121,7 +122,7 @@ public class TestStepIssueResolver {
                 String shortId = objectName;
                 if (!seenIds.contains(shortId)) {
                     seenIds.add(shortId);
-                    String description = SheepDogUtility.getStatementListAsString(stepObject.getStatementList());
+                    String description = stepObject.getDescription() != null ? SheepDogUtility.getLineListAsString(stepObject.getDescription().getLineList()) : "";
                     SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
                     shortProposal.setId(shortId);
                     shortProposal.setValue("The " + component + " " + objectName);
@@ -209,7 +210,7 @@ public class TestStepIssueResolver {
                 for (IStepDefinition existingStepDef : theStepObject.getStepDefinitionList()) {
                     SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                     proposal.setId(existingStepDef.getName());
-                    proposal.setDescription(SheepDogUtility.getStatementListAsString(existingStepDef.getStatementList()));
+                    proposal.setDescription(existingStepDef.getDescription() != null ? SheepDogUtility.getLineListAsString(existingStepDef.getDescription().getLineList()) : "");
                     proposal.setValue(existingStepDef.getName());
                     proposals.add(proposal);
                 }

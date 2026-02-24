@@ -1,7 +1,10 @@
 package org.farhan.dsl.sheepdog.impl;
 
 import java.util.ArrayList;
-import org.farhan.dsl.lang.IStatement;
+
+import org.farhan.dsl.lang.IDescription;
+import org.farhan.dsl.lang.ILine;
+import org.farhan.dsl.sheepdog.sheepDog.Description;
 import org.farhan.dsl.lang.ITestCase;
 import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestSetup;
@@ -23,8 +26,13 @@ public class TestSuiteImpl implements ITestSuite {
     }
 
     @Override
-    public boolean addStatement(IStatement value) {
-        eObject.getStatementList().add(((StatementImpl) value).eObject);
+    public boolean addLine(ILine value) {
+        Description list = eObject.getDescription();
+        if (list == null) {
+            list = org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory.eINSTANCE.createDescription();
+            eObject.setDescription(list);
+        }
+        list.getLineList().add(((LineImpl) value).eObject);
         return true;
     }
 
@@ -64,18 +72,11 @@ public class TestSuiteImpl implements ITestSuite {
     }
 
     @Override
-    public IStatement getStatement(int index) {
-        throw new UnsupportedOperationException("getStatement(int index) is not implemented");
-    }
-
-    @Override
-    public IStatement getStatement(String name) {
-        throw new UnsupportedOperationException("getStatement(String name) is not implemented");
-    }
-
-    @Override
-    public ArrayList<IStatement> getStatementList() {
-        throw new UnsupportedOperationException("ArrayList<IStatement> getStatementList() is not implemented");
+    public IDescription getDescription() {
+        if (eObject.getDescription() != null) {
+            return new DescriptionImpl(eObject.getDescription());
+        }
+        return null;
     }
 
     @Override

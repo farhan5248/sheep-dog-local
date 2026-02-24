@@ -8,19 +8,19 @@
       fileExtensions="asciidoc" ecorePackage="SheepDog.ecore#/">
     <genClasses ecoreClass="SheepDog.ecore#//Model">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Model/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Model/statementList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Model/description"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//StepObject">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepObject/stepDefinitionList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//StepDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//StepDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepDefinition/statementList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepDefinition/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepDefinition/stepParameterList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//StepParameters">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//StepParameters/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/statementList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/nestedDescription"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/table"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestSuite">
@@ -28,7 +28,7 @@
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestStepContainer">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStepContainer/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStepContainer/statementList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStepContainer/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStepContainer/testStepList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestSetup"/>
@@ -37,8 +37,14 @@
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestData">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestData/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/statementList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/nestedDescription"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/table"/>
+    </genClasses>
+    <genClasses ecoreClass="SheepDog.ecore#//Description">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Description/lineList"/>
+    </genClasses>
+    <genClasses ecoreClass="SheepDog.ecore#//NestedDescription">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//NestedDescription/lineList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestStep">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStep/stepObjectName"/>
@@ -53,9 +59,6 @@
     <genClasses ecoreClass="SheepDog.ecore#//Text">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Text/name"/>
     </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//NestedStatementList">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//NestedStatementList/statementList"/>
-    </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Table">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Table/rowList"/>
     </genClasses>
@@ -65,8 +68,8 @@
     <genClasses ecoreClass="SheepDog.ecore#//Cell">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Cell/name"/>
     </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//Statement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Statement/name"/>
+    <genClasses ecoreClass="SheepDog.ecore#//Line">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Line/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

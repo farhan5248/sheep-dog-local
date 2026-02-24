@@ -60,7 +60,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
         try {
             IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
                     keyMap.get("Object Name"));
-            SheepDogBuilder.createStatement(stepObject, replaceKeyword(keyMap.get("Object Description")));
+            SheepDogBuilder.createLine(stepObject, replaceKeyword(keyMap.get("Object Description")));
         } catch (Exception e) {
             Assertions.fail(e);
         }
@@ -101,7 +101,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
                     keyMap.get("Object Name"));
             IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
                     keyMap.get("Step Definition Name"));
-            SheepDogBuilder.createStatement(stepDefinition, replaceKeyword(keyMap.get("Step Definition Description")));
+            SheepDogBuilder.createLine(stepDefinition, replaceKeyword(keyMap.get("Step Definition Description")));
         } catch (Exception e) {
             Assertions.fail(e);
         }
@@ -132,7 +132,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
             for (String h : name.split(",")) {
                 SheepDogBuilder.createCell(row, h.trim());
             }
-            SheepDogBuilder.createStatement(stepParameters, replaceKeyword(keyMap.get("Parameters Description")));
+            SheepDogBuilder.createLine(stepParameters, replaceKeyword(keyMap.get("Parameters Description")));
         } catch (Exception e) {
             Assertions.fail(e);
         }

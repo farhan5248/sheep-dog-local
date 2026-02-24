@@ -10,23 +10,23 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.farhan.dsl.sheepdog.sheepDog.Line;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Statement</b></em>'.
+ * An implementation of the model object '<em><b>Line</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.StatementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.LineImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class StatementImpl extends MinimalEObjectImpl.Container implements Statement
+public class LineImpl extends MinimalEObjectImpl.Container implements Line
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -53,7 +53,7 @@ public class StatementImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  protected StatementImpl()
+  protected LineImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class StatementImpl extends MinimalEObjectImpl.Container implements State
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.STATEMENT;
+    return SheepDogPackage.Literals.LINE;
   }
 
   /**
@@ -91,7 +91,7 @@ public class StatementImpl extends MinimalEObjectImpl.Container implements State
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.STATEMENT__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.LINE__NAME, oldName, name));
   }
 
   /**
@@ -104,7 +104,7 @@ public class StatementImpl extends MinimalEObjectImpl.Container implements State
   {
     switch (featureID)
     {
-      case SheepDogPackage.STATEMENT__NAME:
+      case SheepDogPackage.LINE__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ public class StatementImpl extends MinimalEObjectImpl.Container implements State
   {
     switch (featureID)
     {
-      case SheepDogPackage.STATEMENT__NAME:
+      case SheepDogPackage.LINE__NAME:
         setName((String)newValue);
         return;
     }
@@ -137,7 +137,7 @@ public class StatementImpl extends MinimalEObjectImpl.Container implements State
   {
     switch (featureID)
     {
-      case SheepDogPackage.STATEMENT__NAME:
+      case SheepDogPackage.LINE__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -154,7 +154,7 @@ public class StatementImpl extends MinimalEObjectImpl.Container implements State
   {
     switch (featureID)
     {
-      case SheepDogPackage.STATEMENT__NAME:
+      case SheepDogPackage.LINE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
@@ -177,4 +177,4 @@ public class StatementImpl extends MinimalEObjectImpl.Container implements State
     return result.toString();
   }
 
-} //StatementImpl
+} //LineImpl

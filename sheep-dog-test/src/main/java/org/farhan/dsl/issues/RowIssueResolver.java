@@ -59,7 +59,7 @@ public class RowIssueResolver {
                         for (IStepParameters existingParams : theStepDefinition.getStepParameterList()) {
                             SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                             proposal.setId(existingParams.getName());
-                            proposal.setDescription(SheepDogUtility.getStatementListAsString(existingParams.getStatementList()));
+                            proposal.setDescription(existingParams.getNestedDescription() != null ? SheepDogUtility.getLineListAsString(existingParams.getNestedDescription().getLineList()) : "");
                             proposal.setValue(existingParams.getName());
                             proposals.add(proposal);
                         }
@@ -108,7 +108,7 @@ public class RowIssueResolver {
                         }
                         SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                         proposal.setId(existingParams.getName());
-                        proposal.setDescription(SheepDogUtility.getStatementListAsString(existingParams.getStatementList()));
+                        proposal.setDescription(existingParams.getNestedDescription() != null ? SheepDogUtility.getLineListAsString(existingParams.getNestedDescription().getLineList()) : "");
                         proposal.setValue(existingParams.getName());
                         proposals.add(proposal);
                     }

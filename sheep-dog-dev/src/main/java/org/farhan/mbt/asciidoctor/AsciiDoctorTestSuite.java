@@ -21,7 +21,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
 import org.farhan.dsl.lang.SheepDogUtility;
 import org.farhan.dsl.lang.StepObjectRefFragments;
-import org.farhan.dsl.lang.TitleFragments;
+import org.farhan.dsl.lang.PhraseFragments;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
@@ -29,8 +29,10 @@ import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.mbt.core.IConvertibleObject;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
+import org.farhan.dsl.sheepdog.sheepDog.Description;
+import org.farhan.dsl.sheepdog.sheepDog.Line;
+import org.farhan.dsl.sheepdog.sheepDog.NestedDescription;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
@@ -108,10 +110,10 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
         return step;
     }
 
-    private String convertStatementsToString(EList<Statement> statements) {
+    private String convertLinesToString(EList<Line> lines) {
         String contents = "";
-        for (Statement s : statements) {
-            contents += s.getName() + "\n";
+        for (Line l : lines) {
+            contents += l.getName() + "\n";
         }
         return contents.trim();
     }
@@ -155,14 +157,19 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public ArrayList<String> getAbstractScenarioTags(TestStepContainer abstractScenario) {
         ArrayList<String> tags = new ArrayList<String>();
-        for (Statement s : abstractScenario.getStatementList()) {
-            tags.addAll(TitleFragments.getTagAsList(s.getName()));
+        if (abstractScenario.getDescription() != null) {
+            for (Line l : abstractScenario.getDescription().getLineList()) {
+                tags.addAll(PhraseFragments.getTagAsList(l.getName()));
+            }
         }
         return tags;
     }
 
     public String getBackgroundDescription(TestStepContainer abstractScenario) {
-        return convertStatementsToString(abstractScenario.getStatementList());
+        if (abstractScenario.getDescription() != null) {
+            return convertLinesToString(abstractScenario.getDescription().getLineList());
+        }
+        return "";
     }
 
     public String getBackgroundName(TestStepContainer abstractScenario) {
@@ -208,16 +215,19 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public ArrayList<String> getExamplesTags(TestData examples) {
         ArrayList<String> tags = new ArrayList<String>();
-        if (examples.getStatementList() != null) {
-            for (Statement s : examples.getStatementList().getStatementList()) {
-                tags.addAll(TitleFragments.getTagAsList(s.getName()));
+        if (examples.getNestedDescription() != null) {
+            for (Line l : examples.getNestedDescription().getLineList()) {
+                tags.addAll(PhraseFragments.getTagAsList(l.getName()));
             }
         }
         return tags;
     }
 
     public String getFeatureDescription() {
-        return convertStatementsToString(theTestSuite.getStatementList());
+        if (theTestSuite.getDescription() != null) {
+            return convertLinesToString(theTestSuite.getDescription().getLineList());
+        }
+        return "";
     }
 
     public String getFeatureName() {
@@ -226,8 +236,10 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public ArrayList<String> getFeatureTags() {
         ArrayList<String> tags = new ArrayList<String>();
-        for (Statement s : theTestSuite.getStatementList()) {
-            tags.addAll(TitleFragments.getTagAsList(s.getName()));
+        if (theTestSuite.getDescription() != null) {
+            for (Line l : theTestSuite.getDescription().getLineList()) {
+                tags.addAll(PhraseFragments.getTagAsList(l.getName()));
+            }
         }
         return tags;
     }
@@ -238,7 +250,10 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     }
 
     public String getScenarioDescription(TestStepContainer scenario) {
-        return convertStatementsToString(scenario.getStatementList());
+        if (scenario.getDescription() != null) {
+            return convertLinesToString(scenario.getDescription().getLineList());
+        }
+        return "";
     }
 
     public String getScenarioName(TestStepContainer abstractScenario) {
@@ -246,7 +261,10 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     }
 
     public String getScenarioOutlineDescription(TestStepContainer abstractScenario) {
-        return convertStatementsToString(abstractScenario.getStatementList());
+        if (abstractScenario.getDescription() != null) {
+            return convertLinesToString(abstractScenario.getDescription().getLineList());
+        }
+        return "";
     }
 
     public String getScenarioOutlineName(TestStepContainer abstractScenario) {
@@ -254,7 +272,10 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     }
 
     public String getStepDefinitionDescription(StepDefinition stepDefinitionSrc) {
-        return convertStatementsToString(stepDefinitionSrc.getStatementList());
+        if (stepDefinitionSrc.getDescription() != null) {
+            return convertLinesToString(stepDefinitionSrc.getDescription().getLineList());
+        }
+        return "";
     }
 
     public String getStepDefinitionName(StepDefinition stepDefinitionSrc) {
@@ -366,11 +387,12 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     private void setDescription(TestStepContainer abstractScenario, String scenarioDescription) {
         if (!scenarioDescription.isEmpty()) {
-            abstractScenario.getStatementList().clear();
+            Description desc = SheepDogFactory.eINSTANCE.createDescription();
+            abstractScenario.setDescription(desc);
             for (String line : scenarioDescription.split("\n")) {
-                Statement statement = SheepDogFactory.eINSTANCE.createStatement();
-                statement.setName(line);
-                abstractScenario.getStatementList().add(statement);
+                Line l = SheepDogFactory.eINSTANCE.createLine();
+                l.setName(line);
+                desc.getLineList().add(l);
             }
         }
     }
@@ -386,11 +408,12 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public void setFeatureDescription(String featureDescription) {
         if (!featureDescription.isEmpty()) {
-            theTestSuite.getStatementList().clear();
+            Description desc = SheepDogFactory.eINSTANCE.createDescription();
+            theTestSuite.setDescription(desc);
             for (String line : featureDescription.split("\n")) {
-                Statement statement = SheepDogFactory.eINSTANCE.createStatement();
-                statement.setName(line);
-                theTestSuite.getStatementList().add(statement);
+                Line l = SheepDogFactory.eINSTANCE.createLine();
+                l.setName(line);
+                desc.getLineList().add(l);
             }
         }
     }
@@ -409,12 +432,14 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public void setStepDefinitionDescription(StepDefinition stepDefinition, String stepDefinitionDescription) {
         if (!stepDefinitionDescription.isEmpty()) {
+            Description desc = SheepDogFactory.eINSTANCE.createDescription();
+            stepDefinition.setDescription(desc);
             for (String line : stepDefinitionDescription.split("\n")) {
-                Statement statement = SheepDogFactory.eINSTANCE.createStatement();
+                Line l = SheepDogFactory.eINSTANCE.createLine();
                 // TODO test what happens if there's multiple \n, don't assume there's just one.
                 // Then create the EOL like Given is created
-                statement.setName(line);
-                stepDefinition.getStatementList().add(statement);
+                l.setName(line);
+                desc.getLineList().add(l);
             }
         }
     }
@@ -442,8 +467,8 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     }
 
     public String getExamplesDescription(TestData examples) {
-        if (examples.getStatementList() != null) {
-            return convertStatementsToString(examples.getStatementList().getStatementList());
+        if (examples.getNestedDescription() != null) {
+            return convertLinesToString(examples.getNestedDescription().getLineList());
         } else {
             return "";
         }
@@ -451,11 +476,12 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public void setExamplesDescription(TestData examples, String description) {
         if (!description.isEmpty()) {
-            examples.setStatementList(SheepDogFactory.eINSTANCE.createNestedStatementList());
+            NestedDescription nd = SheepDogFactory.eINSTANCE.createNestedDescription();
+            examples.setNestedDescription(nd);
             for (String line : description.split("\n")) {
-                Statement statement = SheepDogFactory.eINSTANCE.createStatement();
-                statement.setName(line);
-                examples.getStatementList().getStatementList().add(statement);
+                Line l = SheepDogFactory.eINSTANCE.createLine();
+                l.setName(line);
+                nd.getLineList().add(l);
             }
         }
     }

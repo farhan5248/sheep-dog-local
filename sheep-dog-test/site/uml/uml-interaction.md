@@ -92,7 +92,7 @@ IRow row = SheepDogFactory.instance.createRow();
 
 ## {Type}IssueTypes
 
-### {TYPE}{ASSIGNMENT}{ISSUE}
+### {TYPE}{ASSIGNMENT}{SCOPE}
 
 Enum constants define validation issue types using a structured naming pattern. Each constant represents a specific validation error with an ID and description message.
 
@@ -133,7 +133,7 @@ public static String validateStepObjectNameOnly(ITestStep theTestStep) {
 
 ## {Type}IssueDetector
 
-### validate{Assignment}{Issue}
+### validate{Assignment}{Scope}
 
 Detector methods validate grammar assignments at different scopes: Only (element-level), File (file-level), or Workspace (cross-file).
 
@@ -297,8 +297,10 @@ Utility methods create deep clones of grammar elements to avoid side effects dur
 public static IStepObject cloneStepObject(IStepObject original) {
     // entry/exit logging omitted
     IStepObject clone = SheepDogBuilder.createStepObject(null, original.getNameLong());
-    for (IStatement statement : original.getStatementList()) {
-        SheepDogBuilder.createStatement(clone, statement.getName());
+    if (original.getDescription() != null) {
+        for (ILine line : original.getDescription().getLineList()) {
+            SheepDogBuilder.createLine(clone, line.getName());
+        }
     }
     // Recursively clone stepDefinitions, stepParameters, tables, rows, cells
     // using SheepDogBuilder.create{Type}() for each child element
@@ -537,7 +539,7 @@ step.getNameLong(); // Returns "The HomePage is loaded" (computed)
 
 ## {Type}IssueResolver
 
-### suggest{Assignment}{Issue}(I{Type})
+### suggest{Assignment}{Scope}(I{Type})
 
 Resolver methods generate quick fix proposals when values are missing. They suggest valid options from the workspace.
 
@@ -559,7 +561,7 @@ public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(
 }
 ```
 
-### correct{Assignment}{Issue}(I{Type})
+### correct{Assignment}{Scope}(I{Type})
 
 Resolver methods generate quick fix proposals when values exist but are wrong. They correct invalid references or offer to create missing resources.
 
@@ -581,8 +583,7 @@ public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(
         SheepDogIssueProposal proposal = new SheepDogIssueProposal();
         proposal.setId("Generate " + theStepObject.getName() + " - " +
                 theStepObject.getNameLong());
-        proposal.setDescription(StatementUtility.getStatementListAsString(
-                theStepObject.getStatementList()));
+        proposal.setDescription(theStepObject.getDescription() != null ? SheepDogUtility.getLineListAsString(theStepObject.getDescription().getLineList()) : "");
         proposal.setValue(theStepObject.getContent());
         proposal.setQualifiedName(theStepObject.getNameLong());
         proposals.add(proposal);

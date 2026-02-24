@@ -37,8 +37,8 @@ public class SheepDogContentAssistLexer extends InternalSheepDogLexer {
 	// T__18 = '='           T__19 = 'Step-Object:'     T__20 = '=='
 	// T__21 = 'Step-Definition:'  T__22 = '*'          T__23 = 'Step-Parameters:'
 	// T__24 = 'Test-Suite:'       T__25 = 'Test-Setup:'  T__26 = 'Test-Case:'
-	// T__27 = 'Test-Data:'        T__28 = 'Given:'       T__29 = 'When:'
-	// T__30 = 'Then:'             T__31 = 'And:'         T__32 = '+'
+	// T__27 = 'Test-Data:'        T__28 = '+'            T__29 = 'Given:'
+	// T__30 = 'When:'             T__31 = 'Then:'        T__32 = 'And:'
 	// T__33 = '|==='             T__34 = '|'
 
 	@Override
@@ -68,7 +68,7 @@ public class SheepDogContentAssistLexer extends InternalSheepDogLexer {
 			super.mTokens();
 			// single line no collection
 		} else if (isKeyword("+")) {
-			mT__32(); // '+'
+			mT__28(); // '+'
 		} else if (isKeyword("|===")) {
 			mT__33(); // '|==='
 		} else if (isKeyword("*")) {
@@ -108,16 +108,16 @@ public class SheepDogContentAssistLexer extends InternalSheepDogLexer {
 			hasConstantDelimiter = true;
 			// single line variable delimiter collection
 		} else if (isKeyword("Given:")) {
-			mT__28(); // 'Given:'
+			mT__29(); // 'Given:'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("When:")) {
-			mT__29(); // 'When:'
+			mT__30(); // 'When:'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("Then:")) {
-			mT__30(); // 'Then:'
+			mT__31(); // 'Then:'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("And:")) {
-			mT__31(); // 'And:'
+			mT__32(); // 'And:'
 			hasVariableDelimiter = true;
 		// catch all
 		} else {

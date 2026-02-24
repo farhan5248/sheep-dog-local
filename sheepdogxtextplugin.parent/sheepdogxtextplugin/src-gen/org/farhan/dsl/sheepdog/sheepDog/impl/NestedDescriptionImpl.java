@@ -17,41 +17,41 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.farhan.dsl.sheepdog.sheepDog.NestedStatementList;
+import org.farhan.dsl.sheepdog.sheepDog.Line;
+import org.farhan.dsl.sheepdog.sheepDog.NestedDescription;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Nested Statement List</b></em>'.
+ * An implementation of the model object '<em><b>Nested Description</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.NestedStatementListImpl#getStatementList <em>Statement List</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.NestedDescriptionImpl#getLineList <em>Line List</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class NestedStatementListImpl extends MinimalEObjectImpl.Container implements NestedStatementList
+public class NestedDescriptionImpl extends MinimalEObjectImpl.Container implements NestedDescription
 {
   /**
-   * The cached value of the '{@link #getStatementList() <em>Statement List</em>}' containment reference list.
+   * The cached value of the '{@link #getLineList() <em>Line List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatementList()
+   * @see #getLineList()
    * @generated
    * @ordered
    */
-  protected EList<Statement> statementList;
+  protected EList<Line> lineList;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected NestedStatementListImpl()
+  protected NestedDescriptionImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class NestedStatementListImpl extends MinimalEObjectImpl.Container implem
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.NESTED_STATEMENT_LIST;
+    return SheepDogPackage.Literals.NESTED_DESCRIPTION;
   }
 
   /**
@@ -73,13 +73,13 @@ public class NestedStatementListImpl extends MinimalEObjectImpl.Container implem
    * @generated
    */
   @Override
-  public EList<Statement> getStatementList()
+  public EList<Line> getLineList()
   {
-    if (statementList == null)
+    if (lineList == null)
     {
-      statementList = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.NESTED_STATEMENT_LIST__STATEMENT_LIST);
+      lineList = new EObjectContainmentEList<Line>(Line.class, this, SheepDogPackage.NESTED_DESCRIPTION__LINE_LIST);
     }
-    return statementList;
+    return lineList;
   }
 
   /**
@@ -92,8 +92,8 @@ public class NestedStatementListImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case SheepDogPackage.NESTED_STATEMENT_LIST__STATEMENT_LIST:
-        return ((InternalEList<?>)getStatementList()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.NESTED_DESCRIPTION__LINE_LIST:
+        return ((InternalEList<?>)getLineList()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +108,8 @@ public class NestedStatementListImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case SheepDogPackage.NESTED_STATEMENT_LIST__STATEMENT_LIST:
-        return getStatementList();
+      case SheepDogPackage.NESTED_DESCRIPTION__LINE_LIST:
+        return getLineList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +125,9 @@ public class NestedStatementListImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case SheepDogPackage.NESTED_STATEMENT_LIST__STATEMENT_LIST:
-        getStatementList().clear();
-        getStatementList().addAll((Collection<? extends Statement>)newValue);
+      case SheepDogPackage.NESTED_DESCRIPTION__LINE_LIST:
+        getLineList().clear();
+        getLineList().addAll((Collection<? extends Line>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +143,8 @@ public class NestedStatementListImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case SheepDogPackage.NESTED_STATEMENT_LIST__STATEMENT_LIST:
-        getStatementList().clear();
+      case SheepDogPackage.NESTED_DESCRIPTION__LINE_LIST:
+        getLineList().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +160,10 @@ public class NestedStatementListImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case SheepDogPackage.NESTED_STATEMENT_LIST__STATEMENT_LIST:
-        return statementList != null && !statementList.isEmpty();
+      case SheepDogPackage.NESTED_DESCRIPTION__LINE_LIST:
+        return lineList != null && !lineList.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //NestedStatementListImpl
+} //NestedDescriptionImpl

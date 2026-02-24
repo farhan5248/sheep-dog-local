@@ -105,6 +105,24 @@ public interface SheepDogFactory extends EFactory
   TestData createTestData();
 
   /**
+   * Returns a new object of class '<em>Description</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Description</em>'.
+   * @generated
+   */
+  Description createDescription();
+
+  /**
+   * Returns a new object of class '<em>Nested Description</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Nested Description</em>'.
+   * @generated
+   */
+  NestedDescription createNestedDescription();
+
+  /**
    * Returns a new object of class '<em>Test Step</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -159,15 +177,6 @@ public interface SheepDogFactory extends EFactory
   Text createText();
 
   /**
-   * Returns a new object of class '<em>Nested Statement List</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Nested Statement List</em>'.
-   * @generated
-   */
-  NestedStatementList createNestedStatementList();
-
-  /**
    * Returns a new object of class '<em>Table</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -195,13 +204,13 @@ public interface SheepDogFactory extends EFactory
   Cell createCell();
 
   /**
-   * Returns a new object of class '<em>Statement</em>'.
+   * Returns a new object of class '<em>Line</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Statement</em>'.
+   * @return a new object of class '<em>Line</em>'.
    * @generated
    */
-  Statement createStatement();
+  Line createLine();
 
   /**
    * Returns the package supported by this factory.

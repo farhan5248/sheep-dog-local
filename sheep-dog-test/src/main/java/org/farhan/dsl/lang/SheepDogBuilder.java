@@ -58,14 +58,14 @@ public class SheepDogBuilder {
      * @param name   the name of the statement
      * @return the created and initialized instance
      */
-    public static IStatement createStatement(IStepDefinition parent, String name) {
-        logger.debug("Entering createStatement for name: {}", name);
-        IStatement statement = SheepDogFactory.instance.createStatement();
-        statement.setName(name);
+    public static ILine createLine(IStepDefinition parent, String name) {
+        logger.debug("Entering createLine for name: {}", name);
+        ILine line = SheepDogFactory.instance.createLine();
+        line.setName(name);
         if (parent != null)
-            parent.addStatement(statement);
-        logger.debug("Exiting createStatement with result: {}", statement != null ? statement.getName() : "null");
-        return statement;
+            parent.addLine(line);
+        logger.debug("Exiting createLine with result: {}", line != null ? line.getName() : "null");
+        return line;
     }
 
     /**
@@ -73,27 +73,27 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name   the name of the statement
+     * @param name   the name of the line
      * @return the created and initialized instance
      */
-    public static IStatement createStatement(IStepObject parent, String name) {
-        logger.debug("Entering createStatement for name: {}", name);
-        IStatement statement = SheepDogFactory.instance.createStatement();
-        statement.setName(name);
+    public static ILine createLine(IStepObject parent, String name) {
+        logger.debug("Entering createLine for name: {}", name);
+        ILine line = SheepDogFactory.instance.createLine();
+        line.setName(name);
         if (parent != null)
-            parent.addStatement(statement);
-        logger.debug("Exiting createStatement with result: {}", statement != null ? statement.getName() : "null");
-        return statement;
+            parent.addLine(line);
+        logger.debug("Exiting createLine with result: {}", line != null ? line.getName() : "null");
+        return line;
     }
 
-    public static IStatement createStatement(IStepParameters parent, String name) {
-        logger.debug("Entering createStatement for name: {}", name);
-        IStatement statement = SheepDogFactory.instance.createStatement();
-        statement.setName(name);
+    public static ILine createLine(IStepParameters parent, String name) {
+        logger.debug("Entering createLine for name: {}", name);
+        ILine line = SheepDogFactory.instance.createLine();
+        line.setName(name);
         if (parent != null)
-            parent.addStatement(statement);
-        logger.debug("Exiting createStatement with result: {}", statement != null ? statement.getName() : "null");
-        return statement;
+            parent.addLine(line);
+        logger.debug("Exiting createLine with result: {}", line != null ? line.getName() : "null");
+        return line;
     }
 
     /**

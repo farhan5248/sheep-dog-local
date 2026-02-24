@@ -1,10 +1,10 @@
 package org.farhan.dsl.sheepdog.impl;
 
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.ILine;
 import org.farhan.dsl.lang.IResourceRepository;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.ISheepDogFactory;
-import org.farhan.dsl.lang.IStatement;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
@@ -82,8 +82,8 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
     }
 
     @Override
-    public IStatement createStatement() {
-        return new StatementImpl(SheepDogFactory.eINSTANCE.createStatement());
+    public ILine createLine() {
+        return new LineImpl(SheepDogFactory.eINSTANCE.createLine());
     }
 
     @Override
