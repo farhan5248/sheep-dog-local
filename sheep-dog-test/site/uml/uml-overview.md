@@ -30,7 +30,7 @@ Pattern variables used in UML files to represent families of classes following s
    - Case variants: `{assignment}` (camelCase for get/set methods), `{ASSIGNMENT}` (UPPER_SNAKE_CASE for enum constants)
 
 4. **{Fragment}** - Test step regex fragments defining type enumerations
-   - Values: `(Component|Object|ObjectVertex|ObjectEdge|Part|State|Time|Attachment|Tag|Todo)`
+   - Values: `(Component|Object|ObjectVertex|ObjectEdge|Part|State|Tag|Todo)`
    - Used in: {Type}{Fragment}Types
    - Case variants: `{fragment}` (camelCase), `{FRAGMENT}` (UPPER_SNAKE_CASE)
 

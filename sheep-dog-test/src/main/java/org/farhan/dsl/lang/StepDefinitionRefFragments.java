@@ -7,14 +7,10 @@ public class StepDefinitionRefFragments {
     private static final String PART_DESC = "(.+)";
     private static final String PART_TYPE = getRegexFromTypes(TestStepPartTypes.values());
     private static final String PART = "(" + PART_DESC + " " + PART_TYPE + " )";
-    private static final String STATE_DESC = "(\\S+)";
+    private static final String STATE_DESC = "(.+)";
     private static final String STATE_TYPE = getRegexFromTypes(TestStepStateTypes.values());
     private static final String STATE = "(" + STATE_TYPE + " " + STATE_DESC + ")";
-    private static final String TIME_DESC = "(.+)";
-    private static final String TIME_TYPE = getRegexFromTypes(TestStepTimeTypes.values());
-    private static final String TIME = "( " + TIME_TYPE + " " + TIME_DESC + ")";
-    private static final String ATTACHMENT = "( " + getRegexFromTypes(TestStepAttachmentTypes.values()) + ")";
-    private static final String STEP_DEFINITION_REF = "(" + PART + "?" + STATE + TIME + "?" + ATTACHMENT + "?" + ")";
+    private static final String STEP_DEFINITION_REF = "(" + PART + "?" + STATE + ")";
 
     /**
      * Extracts the complete matched text from formatted input, returning the
@@ -26,17 +22,6 @@ public class StepDefinitionRefFragments {
      */
     public static String getAll(String text) {
         return getGroup(StepDefinitionRefFragments.STEP_DEFINITION_REF, text, 0);
-    }
-
-    /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
-     *
-     * @param text the text to parse
-     * @return the attachment portion
-     */
-    public static String getAttachment(String text) {
-        return getGroup(STEP_DEFINITION_REF, text, 11);
     }
 
     /**
@@ -106,39 +91,6 @@ public class StepDefinitionRefFragments {
     }
 
     /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
-     *
-     * @param text the text to parse
-     * @return the time portion
-     */
-    public static String getTime(String text) {
-        return getGroup(STEP_DEFINITION_REF, text, 8);
-    }
-
-    /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
-     *
-     * @param text the text to parse
-     * @return the time description portion
-     */
-    public static String getTimeDesc(String text) {
-        return getGroup(STEP_DEFINITION_REF, text, 10);
-    }
-
-    /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
-     *
-     * @param text the text to parse
-     * @return the time type portion
-     */
-    public static String getTimeType(String text) {
-        return getGroup(STEP_DEFINITION_REF, text, 9);
-    }
-
-    /**
      * Performs parsing, formatting, or computation operations on grammar elements
      * without maintaining state.
      *
@@ -170,14 +122,10 @@ public class StepDefinitionRefFragments {
     private static String getRegexFromTypes(Enum<?>[] enumValues) {
         String regex = "(";
         for (Enum<?> enumValue : enumValues) {
-            if (enumValue instanceof TestStepAttachmentTypes) {
-                regex += ((TestStepAttachmentTypes) enumValue).value + "|";
-            } else if (enumValue instanceof TestStepPartTypes) {
+            if (enumValue instanceof TestStepPartTypes) {
                 regex += ((TestStepPartTypes) enumValue).value + "|";
             } else if (enumValue instanceof TestStepStateTypes) {
                 regex += ((TestStepStateTypes) enumValue).value + "|";
-            } else if (enumValue instanceof TestStepTimeTypes) {
-                regex += ((TestStepTimeTypes) enumValue).value + "|";
             }
         }
         return regex.replaceAll("\\|$", ")");

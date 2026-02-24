@@ -145,5 +145,3 @@
  - `TestStepObjectEdgeTypes`
  - `TestStepPartTypes`
  - `TestStepStateTypes`
- - `TestStepTimeTypes`
- - `TestStepAttachmentTypes`

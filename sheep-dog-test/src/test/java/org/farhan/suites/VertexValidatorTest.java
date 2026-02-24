@@ -135,14 +135,7 @@ public class VertexValidatorTest {
     public void testStateRegexAsFollows() {
         Assertions.assertTrue(StepDefinitionRefFragments
                 .getStateType("The Something1 application Something2 file is created as follows")
-                .contentEquals("created"));
-    }
-
-    @Test
-    public void testGetAttachment() {
-        Assertions.assertTrue(StepDefinitionRefFragments
-                .getAttachment("The Something1 application Something2 file is created as follows")
-                .contentEquals("as follows"));
+                .contentEquals("created as follows"));
     }
 
     @Test

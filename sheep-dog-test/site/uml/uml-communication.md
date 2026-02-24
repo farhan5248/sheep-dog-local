@@ -16,7 +16,7 @@ Enum with type constants for grammar element aspects. Each constant represents a
 
 ### {Type}{Fragment}Types
 
-Enum with type constants for test step regex fragments. Each constant represents a fragment type (Component, ObjectVertex, ObjectEdge, Part, State, Time, Attachment) used in test step parsing.
+Enum with type constants for test step regex fragments. Each constant represents a fragment type (Component, ObjectVertex, ObjectEdge, Part, State) used in test step parsing.
 
 ## Suggest
 

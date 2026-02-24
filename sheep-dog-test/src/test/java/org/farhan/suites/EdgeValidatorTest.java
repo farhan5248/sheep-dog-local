@@ -51,7 +51,7 @@ public class EdgeValidatorTest {
     public void testGetState() {
         Assertions.assertTrue(
                 StepDefinitionRefFragments.getState("The Something1 application Something2 request is executed with")
-                        .contentEquals("is executed"));
+                        .contentEquals("is executed with"));
     }
 
     @Test
@@ -64,26 +64,14 @@ public class EdgeValidatorTest {
     public void testGetStateType() {
         Assertions.assertTrue(StepDefinitionRefFragments
                 .getStateType("The Something1 application Something2 request is executed with")
-                .contentEquals("executed"));
-    }
-
-    @Test
-    public void testGetAttachment() {
-        Assertions.assertTrue(StepDefinitionRefFragments
-                .getAttachment("The Something1 application Something2 request is executed with").contentEquals("with"));
-    }
-
-    @Test
-    public void testGetTime() {
-        Assertions.assertTrue(StepDefinitionRefFragments
-                .getTime("The Something1 application Something2 request is executed on time").contentEquals("on time"));
+                .contentEquals("executed with"));
     }
 
     @Test
     public void testStateRegexWith() {
         Assertions.assertTrue(StepDefinitionRefFragments
                 .getStateType("The Something1 application Something2 request is executed with")
-                .contentEquals("executed"));
+                .contentEquals("executed with"));
     }
 
     @Test
@@ -158,37 +146,6 @@ public class EdgeValidatorTest {
     public void testAppRegexPlugIn() {
         Assertions.assertTrue(StepObjectRefFragments
                 .getComponentType("The Something1 plugin Something2 request is sent").contentEquals("plugin"));
-    }
-
-    @Test
-    public void testTimeRegexAt() {
-        Assertions.assertTrue(StepDefinitionRefFragments
-                .getTimeType("The Something1 plugin Something2 request is sent at noon").contentEquals("at"));
-    }
-
-    @Test
-    public void testTimeRegexBefore() {
-        Assertions.assertTrue(StepDefinitionRefFragments
-                .getTimeType("The Something1 plugin Something2 request is sent before midday").contentEquals("before"));
-    }
-
-    @Test
-    public void testTimeRegexAfter() {
-        Assertions.assertTrue(StepDefinitionRefFragments
-                .getTimeType("The Something1 plugin Something2 request is sent after the next day")
-                .contentEquals("after"));
-    }
-
-    @Test
-    public void testTimeRegexIn() {
-        Assertions.assertTrue(StepDefinitionRefFragments
-                .getTimeType("The Something1 plugin Something2 request is sent in 5 years").contentEquals("in"));
-    }
-
-    @Test
-    public void testTimeRegexOnTime() {
-        Assertions.assertTrue(StepDefinitionRefFragments
-                .getTime("The Something1 plugin Something2 request is sent on time").contentEquals("on time"));
     }
 
 }
