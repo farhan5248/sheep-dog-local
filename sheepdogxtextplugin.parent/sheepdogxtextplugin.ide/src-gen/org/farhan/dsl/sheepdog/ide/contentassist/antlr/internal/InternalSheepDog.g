@@ -887,6 +887,30 @@ rule__StepObjectRef__Alternatives_1
 		'action'
 		{ after(grammarAccess.getStepObjectRefAccess().getActionKeyword_1_8()); }
 	)
+	|
+	(
+		{ before(grammarAccess.getStepObjectRefAccess().getPopupKeyword_1_9()); }
+		'popup'
+		{ after(grammarAccess.getStepObjectRefAccess().getPopupKeyword_1_9()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getStepObjectRefAccess().getAnnotationKeyword_1_10()); }
+		'annotation'
+		{ after(grammarAccess.getStepObjectRefAccess().getAnnotationKeyword_1_10()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getStepObjectRefAccess().getHoverKeyword_1_11()); }
+		'hover'
+		{ after(grammarAccess.getStepObjectRefAccess().getHoverKeyword_1_11()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getStepObjectRefAccess().getTooltipKeyword_1_12()); }
+		'tooltip'
+		{ after(grammarAccess.getStepObjectRefAccess().getTooltipKeyword_1_12()); }
+	)
 ;
 finally {
 	restoreStackSize(stackSize);

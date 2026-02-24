@@ -9,31 +9,32 @@ package org.farhan.dsl.lang;
  */
 public enum TestStepPartTypes {
 
+	SECTION("section", "backwards-compatible alias for 'type' to support legacy test steps"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	SECTION("section", "Used to specify a part in a document"),
+	LANGUAGE("language", "The name of the Xtext grammar/language implementation"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	FRAGMENT("fragment", "Used to specify a part in some code"),
+	TYPE("type", "Grammar types (non-terminal rules) defined in the .xtext file"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	TABLE("table", "Table in a document"),
+	ASSIGNMENT("assignment", "Named assignments within grammar rules"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	SNIPPET("snippet", "Same as fragment"),
+	FRAGMENT("fragment", "Test step regex fragments defining type enumerations"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	LIST("list", "Same as table");
+	SCOPE("scope", "Issue scope levels from TypeIssueTypes enum");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step

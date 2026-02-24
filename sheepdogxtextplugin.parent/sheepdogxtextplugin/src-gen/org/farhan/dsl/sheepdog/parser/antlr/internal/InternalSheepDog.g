@@ -1685,6 +1685,30 @@ ruleStepObjectRef returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 				$current.merge(kw);
 				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getActionKeyword_1_8());
 			}
+			    |
+			kw='popup'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getPopupKeyword_1_9());
+			}
+			    |
+			kw='annotation'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getAnnotationKeyword_1_10());
+			}
+			    |
+			kw='hover'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getHoverKeyword_1_11());
+			}
+			    |
+			kw='tooltip'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getTooltipKeyword_1_12());
+			}
 		)
 	)
 ;

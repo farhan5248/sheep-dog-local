@@ -11,45 +11,45 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 
 public class TableImpl implements ITable {
 
-	Table eObject;
-	private ArrayList<IRow> rowList;
-	private Object parent;
+    Table eObject;
+    private ArrayList<IRow> rowList;
+    private Object parent;
 
-	@Override
-	public Object getParent() {
-		if (parent == null && eObject != null) {
-			if (eObject.eContainer() instanceof TestStep) {
-				parent = new TestStepImpl((TestStep) eObject.eContainer());
-			} else if (eObject.eContainer() instanceof StepParameters) {
-				parent = new StepParametersImpl((StepParameters) eObject.eContainer());
-			}
-		}
-		return parent;
-	}
+    @Override
+    public Object getParent() {
+        if (parent == null && eObject != null) {
+            if (eObject.eContainer() instanceof TestStep) {
+                parent = new TestStepImpl((TestStep) eObject.eContainer());
+            } else if (eObject.eContainer() instanceof StepParameters) {
+                parent = new StepParametersImpl((StepParameters) eObject.eContainer());
+            }
+        }
+        return parent;
+    }
 
-	public TableImpl(Table table) {
-		this.eObject = table;
-		rowList = new ArrayList<IRow>();
-	}
+    public TableImpl(Table table) {
+        this.eObject = table;
+        rowList = new ArrayList<IRow>();
+    }
 
-	@Override
-	public ArrayList<IRow> getRowList() {
-		rowList.clear();
-		for (Row row : eObject.getRowList()) {
-			rowList.add(new RowImpl(row));
-		}
-		return rowList;
-	}
+    @Override
+    public ArrayList<IRow> getRowList() {
+        rowList.clear();
+        for (Row row : eObject.getRowList()) {
+            rowList.add(new RowImpl(row));
+        }
+        return rowList;
+    }
 
-	@Override
-	public IRow getRow(int index) {
-		throw new UnsupportedOperationException("getRow(int index) is not implemented");
-	}
+    @Override
+    public IRow getRow(int index) {
+        return new RowImpl(eObject.getRowList().get(index));
+    }
 
-	@Override
-	public boolean addRow(IRow value) {
-		eObject.getRowList().add(((RowImpl) value).eObject);
-		return true;
-	}
+    @Override
+    public boolean addRow(IRow value) {
+        eObject.getRowList().add(((RowImpl) value).eObject);
+        return true;
+    }
 
 }

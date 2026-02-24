@@ -21,13 +21,15 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EOL", "RULE_RAWTEXT", "RULE_WORD", "RULE_WS", "RULE_SL_COMMENT", "'='", "'Step-Object:'", "'=='", "'Step-Definition:'", "'*'", "'Step-Parameters:'", "'Test-Suite:'", "'Test-Setup:'", "'Test-Case:'", "'Test-Data:'", "'+'", "'Given:'", "'When:'", "'Then:'", "'And:'", "'|==='", "'|'", "'file'", "'page'", "'response'", "'dialog'", "'directory'", "'request'", "'goal'", "'job'", "'action'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EOL", "RULE_RAWTEXT", "RULE_WORD", "RULE_WS", "RULE_SL_COMMENT", "'='", "'Step-Object:'", "'=='", "'Step-Definition:'", "'*'", "'Step-Parameters:'", "'Test-Suite:'", "'Test-Setup:'", "'Test-Case:'", "'Test-Data:'", "'+'", "'Given:'", "'When:'", "'Then:'", "'And:'", "'|==='", "'|'", "'file'", "'page'", "'response'", "'dialog'", "'directory'", "'request'", "'goal'", "'job'", "'action'", "'popup'", "'annotation'", "'hover'", "'tooltip'"
     };
     public static final int RULE_WORD=6;
     public static final int RULE_SL_COMMENT=8;
     public static final int T__19=19;
     public static final int T__15=15;
+    public static final int T__37=37;
     public static final int T__16=16;
+    public static final int T__38=38;
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__11=11;
@@ -35,7 +37,9 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     public static final int T__12=12;
     public static final int T__34=34;
     public static final int T__13=13;
+    public static final int T__35=35;
     public static final int T__14=14;
+    public static final int T__36=36;
     public static final int EOF=-1;
     public static final int T__30=30;
     public static final int T__31=31;
@@ -4180,7 +4184,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStepObjectRef"
-    // InternalSheepDog.g:1617:1: ruleStepObjectRef returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' ) ) ;
+    // InternalSheepDog.g:1617:1: ruleStepObjectRef returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' | kw= 'popup' | kw= 'annotation' | kw= 'hover' | kw= 'tooltip' ) ) ;
     public final AntlrDatatypeRuleToken ruleStepObjectRef() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4191,11 +4195,11 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:1623:2: ( ( (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' ) ) )
-            // InternalSheepDog.g:1624:2: ( (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' ) )
+            // InternalSheepDog.g:1623:2: ( ( (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' | kw= 'popup' | kw= 'annotation' | kw= 'hover' | kw= 'tooltip' ) ) )
+            // InternalSheepDog.g:1624:2: ( (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' | kw= 'popup' | kw= 'annotation' | kw= 'hover' | kw= 'tooltip' ) )
             {
-            // InternalSheepDog.g:1624:2: ( (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' ) )
-            // InternalSheepDog.g:1625:3: (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' )
+            // InternalSheepDog.g:1624:2: ( (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' | kw= 'popup' | kw= 'annotation' | kw= 'hover' | kw= 'tooltip' ) )
+            // InternalSheepDog.g:1625:3: (this_WORD_0= RULE_WORD )+ (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' | kw= 'popup' | kw= 'annotation' | kw= 'hover' | kw= 'tooltip' )
             {
             // InternalSheepDog.g:1625:3: (this_WORD_0= RULE_WORD )+
             int cnt26=0;
@@ -4233,8 +4237,8 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 cnt26++;
             } while (true);
 
-            // InternalSheepDog.g:1634:3: (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' )
-            int alt27=9;
+            // InternalSheepDog.g:1634:3: (kw= 'file' | kw= 'page' | kw= 'response' | kw= 'dialog' | kw= 'directory' | kw= 'request' | kw= 'goal' | kw= 'job' | kw= 'action' | kw= 'popup' | kw= 'annotation' | kw= 'hover' | kw= 'tooltip' )
+            int alt27=13;
             switch ( input.LA(1) ) {
             case 26:
                 {
@@ -4279,6 +4283,26 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             case 34:
                 {
                 alt27=9;
+                }
+                break;
+            case 35:
+                {
+                alt27=10;
+                }
+                break;
+            case 36:
+                {
+                alt27=11;
+                }
+                break;
+            case 37:
+                {
+                alt27=12;
+                }
+                break;
+            case 38:
+                {
+                alt27=13;
                 }
                 break;
             default:
@@ -4388,6 +4412,50 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
                     }
                     break;
+                case 10 :
+                    // InternalSheepDog.g:1689:4: kw= 'popup'
+                    {
+                    kw=(Token)match(input,35,FOLLOW_2); 
+
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getPopupKeyword_1_9());
+                    			
+
+                    }
+                    break;
+                case 11 :
+                    // InternalSheepDog.g:1695:4: kw= 'annotation'
+                    {
+                    kw=(Token)match(input,36,FOLLOW_2); 
+
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getAnnotationKeyword_1_10());
+                    			
+
+                    }
+                    break;
+                case 12 :
+                    // InternalSheepDog.g:1701:4: kw= 'hover'
+                    {
+                    kw=(Token)match(input,37,FOLLOW_2); 
+
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getHoverKeyword_1_11());
+                    			
+
+                    }
+                    break;
+                case 13 :
+                    // InternalSheepDog.g:1707:4: kw= 'tooltip'
+                    {
+                    kw=(Token)match(input,38,FOLLOW_2); 
+
+                    				current.merge(kw);
+                    				newLeafNode(kw, grammarAccess.getStepObjectRefAccess().getTooltipKeyword_1_12());
+                    			
+
+                    }
+                    break;
 
             }
 
@@ -4414,7 +4482,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStepDefinitionRef"
-    // InternalSheepDog.g:1693:1: entryRuleStepDefinitionRef returns [String current=null] : iv_ruleStepDefinitionRef= ruleStepDefinitionRef EOF ;
+    // InternalSheepDog.g:1717:1: entryRuleStepDefinitionRef returns [String current=null] : iv_ruleStepDefinitionRef= ruleStepDefinitionRef EOF ;
     public final String entryRuleStepDefinitionRef() throws RecognitionException {
         String current = null;
 
@@ -4422,8 +4490,8 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalSheepDog.g:1693:57: (iv_ruleStepDefinitionRef= ruleStepDefinitionRef EOF )
-            // InternalSheepDog.g:1694:2: iv_ruleStepDefinitionRef= ruleStepDefinitionRef EOF
+            // InternalSheepDog.g:1717:57: (iv_ruleStepDefinitionRef= ruleStepDefinitionRef EOF )
+            // InternalSheepDog.g:1718:2: iv_ruleStepDefinitionRef= ruleStepDefinitionRef EOF
             {
              newCompositeNode(grammarAccess.getStepDefinitionRefRule()); 
             pushFollow(FOLLOW_1);
@@ -4450,7 +4518,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStepDefinitionRef"
-    // InternalSheepDog.g:1700:1: ruleStepDefinitionRef returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD )+ ;
+    // InternalSheepDog.g:1724:1: ruleStepDefinitionRef returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD )+ ;
     public final AntlrDatatypeRuleToken ruleStepDefinitionRef() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4460,10 +4528,10 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:1706:2: ( (this_WORD_0= RULE_WORD )+ )
-            // InternalSheepDog.g:1707:2: (this_WORD_0= RULE_WORD )+
+            // InternalSheepDog.g:1730:2: ( (this_WORD_0= RULE_WORD )+ )
+            // InternalSheepDog.g:1731:2: (this_WORD_0= RULE_WORD )+
             {
-            // InternalSheepDog.g:1707:2: (this_WORD_0= RULE_WORD )+
+            // InternalSheepDog.g:1731:2: (this_WORD_0= RULE_WORD )+
             int cnt28=0;
             loop28:
             do {
@@ -4477,7 +4545,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
                 switch (alt28) {
             	case 1 :
-            	    // InternalSheepDog.g:1708:3: this_WORD_0= RULE_WORD
+            	    // InternalSheepDog.g:1732:3: this_WORD_0= RULE_WORD
             	    {
             	    this_WORD_0=(Token)match(input,RULE_WORD,FOLLOW_17); 
 
@@ -4549,6 +4617,6 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000002000000L});
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000003000000L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000002000010L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x00000007FC000040L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000007FFC000040L});
 
 }

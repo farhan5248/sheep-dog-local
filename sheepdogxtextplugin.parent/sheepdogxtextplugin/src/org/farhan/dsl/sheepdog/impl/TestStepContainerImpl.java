@@ -60,7 +60,7 @@ public class TestStepContainerImpl implements ITestStepContainer {
 
     @Override
     public ITestStep getTestStep(int index) {
-        throw new UnsupportedOperationException("getTestStep(int index) is not implemented");
+        return new TestStepImpl(eObject.getTestStepList().get(index));
     }
 
     @Override

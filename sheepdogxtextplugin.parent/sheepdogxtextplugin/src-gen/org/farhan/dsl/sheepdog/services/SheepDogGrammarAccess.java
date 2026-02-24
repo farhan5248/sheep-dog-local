@@ -917,6 +917,10 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Keyword cGoalKeyword_1_6 = (Keyword)cAlternatives_1.eContents().get(6);
 		private final Keyword cJobKeyword_1_7 = (Keyword)cAlternatives_1.eContents().get(7);
 		private final Keyword cActionKeyword_1_8 = (Keyword)cAlternatives_1.eContents().get(8);
+		private final Keyword cPopupKeyword_1_9 = (Keyword)cAlternatives_1.eContents().get(9);
+		private final Keyword cAnnotationKeyword_1_10 = (Keyword)cAlternatives_1.eContents().get(10);
+		private final Keyword cHoverKeyword_1_11 = (Keyword)cAlternatives_1.eContents().get(11);
+		private final Keyword cTooltipKeyword_1_12 = (Keyword)cAlternatives_1.eContents().get(12);
 		
 		//// TODO the regular expression here is a partial duplication of what's in sheep-dog-test
 		//// It should only be defined here but that is more work than I want to do right now
@@ -929,16 +933,16 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//// For now I'm putting the whole regex to make it possible to distinguish between STEP_OBJECT and STEP_DEFINITION
 		//// without breaking it up into its parts
 		//StepObjectRef:
-		//    WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action');
+		//    WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action' | 'popup' | 'annotation' | 'hover' | 'tooltip');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action')
+		//WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action' | 'popup' | 'annotation' | 'hover' | 'tooltip')
 		public Group getGroup() { return cGroup; }
 		
 		//WORD+
 		public RuleCall getWORDTerminalRuleCall_0() { return cWORDTerminalRuleCall_0; }
 		
-		//('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action')
+		//('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action' | 'popup' | 'annotation' | 'hover' | 'tooltip')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'file'
@@ -967,6 +971,18 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		
 		//'action'
 		public Keyword getActionKeyword_1_8() { return cActionKeyword_1_8; }
+		
+		//'popup'
+		public Keyword getPopupKeyword_1_9() { return cPopupKeyword_1_9; }
+		
+		//'annotation'
+		public Keyword getAnnotationKeyword_1_10() { return cAnnotationKeyword_1_10; }
+		
+		//'hover'
+		public Keyword getHoverKeyword_1_11() { return cHoverKeyword_1_11; }
+		
+		//'tooltip'
+		public Keyword getTooltipKeyword_1_12() { return cTooltipKeyword_1_12; }
 	}
 	public class StepDefinitionRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.StepDefinitionRef");
@@ -1325,7 +1341,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//// For now I'm putting the whole regex to make it possible to distinguish between STEP_OBJECT and STEP_DEFINITION
 	//// without breaking it up into its parts
 	//StepObjectRef:
-	//    WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action');
+	//    WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action' | 'popup' | 'annotation' | 'hover' | 'tooltip');
 	public StepObjectRefElements getStepObjectRefAccess() {
 		return pStepObjectRef;
 	}

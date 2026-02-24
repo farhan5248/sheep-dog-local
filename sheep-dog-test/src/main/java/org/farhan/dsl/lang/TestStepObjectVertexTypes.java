@@ -33,7 +33,27 @@ public enum TestStepObjectVertexTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	DIRECTORY("directory", "File directory");
+	DIRECTORY("directory", "File directory"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	POPUP("popup", "List of options for quickfix or content proposal"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	ANNOTATION("annotation", "Visual indicator for error or warning messages"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	HOVER("hover", "Popup displaying information on mouse hover"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	TOOLTIP("tooltip", "Small popup displaying descriptive text");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step

@@ -10,71 +10,71 @@ public class VertexValidatorTest {
     @Test
     public void testIsVertex() {
         Assertions.assertTrue(StepObjectRefFragments
-                .isObjectVertexType("The Something1 application Something2 file Something3 section is empty"));
+                .isObjectVertexType("The Something1 application Something2 file Something3 type is empty"));
     }
 
     @Test
     public void testGetAppName() {
         Assertions.assertTrue(StepObjectRefFragments
-                .getComponentName("The Something1 application Something2 file Something3 section is empty")
+                .getComponentName("The Something1 application Something2 file Something3 type is empty")
                 .contentEquals("Something1"));
     }
 
     @Test
     public void testGetAppType() {
         Assertions.assertTrue(StepObjectRefFragments
-                .getComponentType("The Something1 application Something2 file Something3 section is empty")
+                .getComponentType("The Something1 application Something2 file Something3 type is empty")
                 .contentEquals("application"));
     }
 
     @Test
     public void testGetObjName() {
         Assertions.assertTrue(StepObjectRefFragments
-                .getObjectName("The Something1 application Something2 file Something3 section is empty")
+                .getObjectName("The Something1 application Something2 file Something3 type is empty")
                 .contentEquals("Something2"));
     }
 
     @Test
     public void testGetObjType() {
         Assertions.assertTrue(StepObjectRefFragments
-                .getObjectType("The Something1 application Something2 file Something3 section is empty")
+                .getObjectType("The Something1 application Something2 file Something3 type is empty")
                 .contentEquals("file"));
     }
 
     @Test
     public void testGetDetailsName() {
         Assertions.assertTrue(
-                StepDefinitionRefFragments.getPartDesc("Something3 section is empty").contentEquals("Something3"));
+                StepDefinitionRefFragments.getPartDesc("Something3 type is empty").contentEquals("Something3"));
     }
 
     @Test
     public void testGetDetails() {
         Assertions.assertTrue(
-                StepDefinitionRefFragments.getPart("Something3 section is empty").contentEquals("Something3 section"));
+                StepDefinitionRefFragments.getPart("Something3 type is empty").contentEquals("Something3 type"));
     }
 
     @Test
     public void testGetDetailsType() {
         Assertions.assertTrue(
-                StepDefinitionRefFragments.getPartType("Something3 section is empty").contentEquals("section"));
+                StepDefinitionRefFragments.getPartType("Something3 type is empty").contentEquals("type"));
     }
 
     @Test
     public void testGetState() {
         Assertions.assertTrue(
-                StepDefinitionRefFragments.getState("Something3 section is empty").contentEquals("is empty"));
+                StepDefinitionRefFragments.getState("Something3 type is empty").contentEquals("is empty"));
     }
 
     @Test
     public void testGetStateModality() {
         Assertions
-                .assertTrue(StepDefinitionRefFragments.getStateDesc("Something3 section is empty").contentEquals("is"));
+                .assertTrue(StepDefinitionRefFragments.getStateDesc("Something3 type is empty").contentEquals("is"));
     }
 
     @Test
     public void testGetStateType() {
         Assertions.assertTrue(
-                StepDefinitionRefFragments.getStateType("Something3 section is empty").contentEquals("empty"));
+                StepDefinitionRefFragments.getStateType("Something3 type is empty").contentEquals("empty"));
     }
 
     @Test
@@ -164,17 +164,24 @@ public class VertexValidatorTest {
     }
 
     @Test
-    public void testDetailsRegexSection() {
+    public void testDetailsRegexLanguage() {
         Assertions.assertTrue(StepDefinitionRefFragments
-                .getPartType("The Something1 application Something2 file Something3 section is empty")
-                .contentEquals("section"));
+                .getPartType("The Something1 application Something2 file Something3 language is empty")
+                .contentEquals("language"));
     }
 
     @Test
-    public void testDetailsRegexList() {
+    public void testDetailsRegexType() {
         Assertions.assertTrue(StepDefinitionRefFragments
-                .getPartType("The Something1 application Something2 file Something3 list is empty")
-                .contentEquals("list"));
+                .getPartType("The Something1 application Something2 file Something3 type is empty")
+                .contentEquals("type"));
+    }
+
+    @Test
+    public void testDetailsRegexAssignment() {
+        Assertions.assertTrue(StepDefinitionRefFragments
+                .getPartType("The Something1 application Something2 file Something3 assignment is empty")
+                .contentEquals("assignment"));
     }
 
     @Test
@@ -185,17 +192,10 @@ public class VertexValidatorTest {
     }
 
     @Test
-    public void testDetailsRegexTable() {
+    public void testDetailsRegexScope() {
         Assertions.assertTrue(StepDefinitionRefFragments
-                .getPartType("The Something1 application Something2 file Something3 table is empty")
-                .contentEquals("table"));
-    }
-
-    @Test
-    public void testDetailsRegexSnippet() {
-        Assertions.assertTrue(StepDefinitionRefFragments
-                .getPartType("The Something1 application Something2 file Something3 snippet is empty")
-                .contentEquals("snippet"));
+                .getPartType("The Something1 application Something2 file Something3 scope is empty")
+                .contentEquals("scope"));
     }
 
     @Test
@@ -220,6 +220,30 @@ public class VertexValidatorTest {
     public void testObjectRegexResponse() {
         Assertions.assertTrue(StepObjectRefFragments
                 .getObjectType("The Something1 application Something2 response is empty").contentEquals("response"));
+    }
+
+    @Test
+    public void testObjectRegexPopup() {
+        Assertions.assertTrue(StepObjectRefFragments
+                .getObjectType("The Something1 application Something2 popup is empty").contentEquals("popup"));
+    }
+
+    @Test
+    public void testObjectRegexAnnotation() {
+        Assertions.assertTrue(StepObjectRefFragments
+                .getObjectType("The Something1 application Something2 annotation is empty").contentEquals("annotation"));
+    }
+
+    @Test
+    public void testObjectRegexHover() {
+        Assertions.assertTrue(StepObjectRefFragments
+                .getObjectType("The Something1 application Something2 hover is empty").contentEquals("hover"));
+    }
+
+    @Test
+    public void testObjectRegexTooltip() {
+        Assertions.assertTrue(StepObjectRefFragments
+                .getObjectType("The Something1 application Something2 tooltip is empty").contentEquals("tooltip"));
     }
 
     @Test
