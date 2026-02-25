@@ -9,8 +9,8 @@ Feature: Validation for Workspace Issues
 
   Scenario: This object doesn't exist validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                      |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
           | The daily batchjob Input file is present |
      When The xtext plugin validate action is performed as follows
           | Node Path                                  |
@@ -22,8 +22,8 @@ Feature: Validation for Workspace Issues
 
   Scenario: This object step definition doesn't exist validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                      |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
           | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name |
@@ -38,9 +38,12 @@ Feature: Validation for Workspace Issues
 
   Scenario: This object step definition parameter set doesn't exist validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                             | Row Cell List |
-          | The daily batchjob Input file is set as follows | New Header    |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                       |
+          | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell node is created as follows
+          | Name       |
+          | New Header |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name | Step Parameters Name |
           | daily batchjob/Input file.feature | is set as follows    | Existing Header      |
@@ -56,9 +59,12 @@ Feature: Validation for Workspace Issues
 
     Step definitions for Text Content only have one parameter called "Content"
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                             | Text Content |
-          | The daily batchjob Input file is set as follows | Some text    |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                       |
+          | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Text node is created as follows
+          | Content   |
+          | Some text |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name | Step Parameters Name |
           | daily batchjob/Input file.feature | is set as follows    | Content              |
@@ -71,9 +77,12 @@ Feature: Validation for Workspace Issues
 
     If there isn't a step definition in the step object file with a Content header, then a warning is displayed.
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                             | Text Content |
-          | The daily batchjob Input file is set as follows | Some text    |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                       |
+          | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Text node is created as follows
+          | Content   |
+          | Some text |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is set as follows    |

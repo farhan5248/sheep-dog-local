@@ -6,9 +6,12 @@ Feature: Validation for Only Issues
 
   Scenario: Header row Cell names should start with a capital letter validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                      | Row Cell List |
-          | The daily batchjob Input file is present | header        |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell node is created as follows
+          | Name   |
+          | header |
      When The xtext plugin validate action is performed as follows
           | Node Path                                                     |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell/1 |
@@ -19,10 +22,18 @@ Feature: Validation for Only Issues
 
   Scenario: Body row Cell names can be any case validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                      | Row Cell List |
-          | The daily batchjob Input file is present | Header        |
-          | The daily batchjob Input file is present | value         |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell node is created as follows
+          | Name   |
+          | Header |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/2/Cell node is created as follows
+          | Name  |
+          | value |
      When The xtext plugin validate action is performed as follows
           | Node Path                                                     |
           | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/2/Cell/1 |
@@ -31,7 +42,7 @@ Feature: Validation for Only Issues
   Scenario: Test suite name should start with a capital letter validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
-          | Test Suite Name   |
+          | Name              |
           | lowercase process |
      When The xtext plugin validate action is performed as follows
           | Node Path   |
@@ -43,9 +54,9 @@ Feature: Validation for Only Issues
 
   Scenario: Test case name should start with a capital letter validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
-          | Test Suite Name | Test Case Name      |
-          | Process2        | lowercase test case |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1 node is created as follows
+          | Name                |
+          | lowercase test case |
      When The xtext plugin validate action is performed as follows
           | Node Path                       |
           | TestSuite/1/TestStepContainer/1 |
@@ -56,9 +67,9 @@ Feature: Validation for Only Issues
 
   Scenario: Test step must have a valid object name validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name |
-          | The is present      |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name      |
+          | The is present |
      When The xtext plugin validate action is performed as follows
           | Node Path                                  |
           | TestSuite/1/TestStepContainer/1/TestStep/1 |
@@ -76,8 +87,8 @@ Feature: Validation for Only Issues
 
   Scenario: Test step must have a valid step definition name validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name           |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                     |
           | The daily batchjob Input file |
      When The xtext plugin validate action is performed as follows
           | Node Path                                  |

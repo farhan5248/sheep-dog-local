@@ -120,4 +120,8 @@ public abstract class TestObject {
     void setPath(String path) {
         keyValue.put("path", path);
     }
+
+    public void setPart(String part) {
+        keyValue.put("part", part);
+    }
 }

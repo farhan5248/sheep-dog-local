@@ -6,9 +6,12 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Cell name should start with a capital letter quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                      | Row Cell List    |
-          | The daily batchjob Input file is present | lowercase header |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell node is created as follows
+          | Name             |
+          | lowercase header |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name | Step Parameters Name |
           | daily batchjob/Input file.feature | is present           | lowercase header     |
@@ -25,10 +28,18 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Body row Cell names can be any case quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                      | Row Cell List |
-          | The daily batchjob Input file is present | Header        |
-          | The daily batchjob Input file is present | value         |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell node is created as follows
+          | Name   |
+          | Header |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
+          | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/2/Cell node is created as follows
+          | Name  |
+          | value |
       And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
           | Node Path                                                     |
@@ -38,7 +49,7 @@ Feature: Quickfixes for Only Issues
   Scenario: Test suite name should start with a capital letter quickfix
 
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
-          | Test Suite Name   |
+          | Name              |
           | lowercase process |
       And The xtext plugin validate annotation is set as follows
           """
@@ -53,9 +64,9 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Test case name should start with a capital letter quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file is created as follows
-          | Test Suite Name | Test Case Name      |
-          | Process2        | lowercase test case |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1 node is created as follows
+          | Name                |
+          | lowercase test case |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
@@ -69,9 +80,9 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Test step must have a valid object name quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name |
-          | The is present      |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name      |
+          | The is present |
       And The xtext plugin validate annotation is set as follows
           """
           Every test case must have at least one component specified.
@@ -90,8 +101,8 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Test step must have a valid step definition name quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name           |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                     |
           | The daily batchjob Input file |
       And The xtext plugin validate annotation is set as follows
           """

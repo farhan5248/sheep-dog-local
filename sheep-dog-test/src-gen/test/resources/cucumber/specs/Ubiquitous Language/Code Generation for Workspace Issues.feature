@@ -16,8 +16,8 @@ Feature: Code Generation for Workspace Issues
 
   Scenario: This object doesn't exist generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                      |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
           | The daily batchjob Input file is present |
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id                                             | Proposal Description |
@@ -31,8 +31,8 @@ Feature: Code Generation for Workspace Issues
 
   Scenario: This object step definition doesn't exist generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                      |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                |
           | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name |
@@ -50,9 +50,13 @@ Feature: Code Generation for Workspace Issues
 
   Scenario: This object step definition parameter set doesn't exist generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                             | Row Cell List |
-          | The daily batchjob Input file is set as follows | N1, N2        |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                       |
+          | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell node is created as follows
+          | Name |
+          | N1   |
+          | N2   |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name | Step Parameters Name |
           | daily batchjob/Input file.feature | is set as follows    | E1, E2, E3           |
@@ -69,9 +73,12 @@ Feature: Code Generation for Workspace Issues
 
   Scenario: This object step definition text parameter doesn't exist generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
-          | Test Step Full Name                             | Text Content |
-          | The daily batchjob Input file is set as follows | Some text    |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
+          | Full Name                                       |
+          | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Text node is created as follows
+          | Content   |
+          | Some text |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is set as follows    |

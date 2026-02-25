@@ -123,4 +123,144 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
         }
     }
 
+    @Override
+    public void setLineTypeLine(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertPhraseTagFragmentTagList(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertPhraseTodoFragmentTodoType(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertPhraseTodoFragmentTodoDescription(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepDefinitionRefPartFragmentPart(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepDefinitionRefPartFragmentPartName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepDefinitionRefPartFragmentPartType(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepDefinitionRefStateFragmentStateModality(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefComponentFragmentComponent(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefComponentFragmentComponentName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefComponentFragmentComponentType(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefObjectEdgeFragmentObjectName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefObjectEdgeFragmentObjectType(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefObjectFragmentObject(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefObjectFragmentObjectName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefObjectFragmentObjectType(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefObjectVertexFragmentObjectName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectRefObjectVertexFragmentObjectType(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestStepTypeTestStepFullName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setRowCellList(HashMap<String, String> keyMap) {
+        addTable();
+        addRow();
+        for (String h : keyMap.get("Row Cell List").split(",")) {
+            addCell(h.trim());
+        }
+    }
+
+    @Override
+    public void setTextContent(HashMap<String, String> keyMap) {
+        addText(keyMap.get("Text Content"));
+    }
+
 }

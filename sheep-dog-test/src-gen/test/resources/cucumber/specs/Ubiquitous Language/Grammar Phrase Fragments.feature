@@ -1,0 +1,32 @@
+@sheep-dog-test
+Feature: Grammar Phrase Fragments
+
+  \@sheep-dog-test
+  A phrase is a sequence of words. Tags and TODOs are special phrases.
+
+  Scenario Outline: Tag Fragment
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file line type is created as follows
+          | Line   |
+          | <Line> |
+     When The xtext plugin content highlight action is performed
+     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file phrase tag fragment will be decomposed as follows
+          | Tag List   |
+          | <Tag List> |
+
+    Examples: Fragments
+
+          | Line              | Tag List         |
+          | @tag1             | tag1             |
+          | @tag1 @tag2 @tag3 | tag1, tag2, tag3 |
+
+  Scenario: Todo Fragment
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file line type is created as follows
+          | Line   |
+          | <Line> |
+     When The xtext plugin content highlight action is performed
+     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file phrase todo fragment will be decomposed as follows
+          | Todo Type | Todo Description |
+          | TODO      | Do something     |
+
