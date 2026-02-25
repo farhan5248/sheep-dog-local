@@ -39,8 +39,8 @@ public class RowIssueDetector {
             ITestStep testStep = (ITestStep) table.getParent();
             ITestProject testProject = SheepDogUtility.getTestProjectParentForRow(theRow);
             if (testProject != null) {
-                String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(testStep);
-                IStepObject theStepObject = testProject.getStepObject(qualifiedName);
+                String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+                IStepObject theStepObject = testProject.getStepObject(fullName);
                 if (theStepObject != null) {
                     String stepDefinitionName = testStep.getStepDefinitionName();
                     IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);

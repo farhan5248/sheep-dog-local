@@ -28,7 +28,7 @@ Static resolution class that suggests existing alternatives for absent grammar e
 
 ### {Language}IssueProposal
 
-Data container for suggestion proposals with properties for id, description, value, and optional qualifiedName.
+Data container for suggestion proposals with properties for id, description, value, and optional fullName.
 
 ### I{Type}
 
@@ -64,7 +64,7 @@ Enum with issue type constants. Each constant has a description field (String) u
 
 ### {Language}IssueProposal
 
-Data container for correction proposals with properties for id, description, value, and optional qualifiedName.
+Data container for correction proposals with properties for id, description, value, and optional fullName.
 
 ### I{Type}
 

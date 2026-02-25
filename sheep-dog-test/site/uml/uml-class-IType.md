@@ -26,17 +26,17 @@ Grammar element interface contracts. Separates interface definitions from implem
  - `ICell getCell(String name)`
  - `boolean addCell(ICell value)`
 
-## NameLong
+## FullName
 
 **Desc**: Provides fully qualified name for elements requiring unique workspace identification.
 
-**Rule**: SOME method names include NameLong.
- - **Name**: `^(get|set)NameLong$`
+**Rule**: SOME method names include FullName.
+ - **Name**: `^(get|set)FullName$`
 
 **Examples**:
- - `String getNameLong()` (in IModel - with setter)
- - `String getNameLong()` (in ITestStep - computed, no setter)
- - `String getNameLong()` (in IStepDefinition - computed, no setter)
+ - `String getFullName()` (in IModel - with setter)
+ - `String getFullName()` (in ITestStep - computed, no setter)
+ - `String getFullName()` (in IStepDefinition - computed, no setter)
 
 ## Parent
 

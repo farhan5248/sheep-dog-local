@@ -14,13 +14,13 @@ public interface ITestProject {
 
 	IStepObject getStepObject(int index);
 
-	IStepObject getStepObject(String qualifiedName);
+	IStepObject getStepObject(String fullName);
 
 	List<IStepObject> getStepObjectList();
 
 	ITestSuite getTestSuite(int index);
 
-	ITestSuite getTestSuite(String qualifiedName);
+	ITestSuite getTestSuite(String fullName);
 
 	List<ITestSuite> getTestSuiteList();
 

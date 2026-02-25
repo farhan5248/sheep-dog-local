@@ -124,21 +124,21 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent   the parent element (or null if root)
-     * @param nameLong the qualified name of the step object
+     * @param fullName the full name of the step object
      * @return the created and initialized instance
      */
-    public static IStepObject createStepObject(ITestProject parent, String nameLong) {
-        logger.debug("Entering createStepObject for nameLong: {}", nameLong);
+    public static IStepObject createStepObject(ITestProject parent, String fullName) {
+        logger.debug("Entering createStepObject for fullName: {}", fullName);
         IStepObject stepObject = null;
         if (parent != null)
-            stepObject = parent.getStepObject(nameLong);
+            stepObject = parent.getStepObject(fullName);
         if (stepObject == null) {
             stepObject = SheepDogFactory.instance.createStepObject();
-            stepObject.setNameLong(nameLong);
+            stepObject.setFullName(fullName);
             if (parent != null)
                 parent.addStepObject(stepObject);
         }
-        logger.debug("Exiting createStepObject with result: {}", stepObject != null ? stepObject.getNameLong() : "null");
+        logger.debug("Exiting createStepObject with result: {}", stepObject != null ? stepObject.getFullName() : "null");
         return stepObject;
     }
 
@@ -285,19 +285,19 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent   the parent element (or null if root)
-     * @param nameLong the qualified name of the test suite
+     * @param fullName the full name of the test suite
      * @return the created and initialized instance
      */
-    public static ITestSuite createTestSuite(ITestProject parent, String nameLong) {
-        logger.debug("Entering createTestSuite for nameLong: {}", nameLong);
-        ITestSuite testSuite = parent.getTestSuite(nameLong);
+    public static ITestSuite createTestSuite(ITestProject parent, String fullName) {
+        logger.debug("Entering createTestSuite for fullName: {}", fullName);
+        ITestSuite testSuite = parent.getTestSuite(fullName);
         if (testSuite == null) {
             testSuite = SheepDogFactory.instance.createTestSuite();
-            testSuite.setNameLong(nameLong);
+            testSuite.setFullName(fullName);
             if (parent != null)
                 parent.addTestSuite(testSuite);
         }
-        logger.debug("Exiting createTestSuite with result: {}", testSuite != null ? testSuite.getNameLong() : "null");
+        logger.debug("Exiting createTestSuite with result: {}", testSuite != null ? testSuite.getFullName() : "null");
         return testSuite;
     }
 

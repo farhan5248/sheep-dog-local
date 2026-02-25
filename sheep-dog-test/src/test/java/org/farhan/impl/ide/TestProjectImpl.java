@@ -24,9 +24,9 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public IStepObject getStepObject(String qualifiedName) {
+	public IStepObject getStepObject(String fullName) {
 		for (IStepObject so : this.stepObjectList) {
-			if (so.getNameLong().contentEquals(qualifiedName)) {
+			if (so.getFullName().contentEquals(fullName)) {
 				return so;
 			}
 		}
@@ -65,9 +65,9 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public boolean addTestSuite(ITestSuite value) {
-		// Check for duplicates using getNameLong as unique identifier and replace if found
+		// Check for duplicates using getFullName as unique identifier and replace if found
 		for (int i = 0; i < testSuiteList.size(); i++) {
-			if (testSuiteList.get(i).getNameLong().contentEquals(value.getNameLong())) {
+			if (testSuiteList.get(i).getFullName().contentEquals(value.getFullName())) {
 				testSuiteList.set(i, (TestSuiteImpl) value);
 				testSuiteList.get(i).parent = this;
 				return true;
@@ -80,9 +80,9 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public boolean addStepObject(IStepObject value) {
-		// Check for duplicates using getNameLong as unique identifier and replace if found
+		// Check for duplicates using getFullName as unique identifier and replace if found
 		for (int i = 0; i < stepObjectList.size(); i++) {
-			if (stepObjectList.get(i).getNameLong().contentEquals(value.getNameLong())) {
+			if (stepObjectList.get(i).getFullName().contentEquals(value.getFullName())) {
 				stepObjectList.set(i, (StepObjectImpl) value);
 				stepObjectList.get(i).parent = this;
 				return true;

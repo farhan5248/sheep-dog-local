@@ -15,7 +15,7 @@ import org.farhan.dsl.lang.ITestSuite;
 public class TestSuiteImpl implements ITestSuite {
 
 	ArrayList<TestStepContainerImpl> testStepContainerList;
-	String qualifiedName;
+	String fullName;
 	String name;
 	TestProjectImpl parent;
 	DescriptionImpl description;
@@ -40,8 +40,8 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public String getNameLong() {
-		return qualifiedName;
+	public String getFullName() {
+		return fullName;
 	}
 
 	@Override
@@ -80,9 +80,9 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
-	public void setNameLong(String value) {
-		this.qualifiedName = value;
-		String[] nameParts = qualifiedName.split("/");
+	public void setFullName(String value) {
+		this.fullName = value;
+		String[] nameParts = fullName.split("/");
 		this.name = nameParts[nameParts.length - 1];
 	}
 
@@ -112,7 +112,7 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public String toString() {
-		return qualifiedName != null ? qualifiedName : (name != null ? name : "");
+		return fullName != null ? fullName : (name != null ? name : "");
 	}
 
 }

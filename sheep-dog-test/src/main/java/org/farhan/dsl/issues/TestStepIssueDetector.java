@@ -69,9 +69,9 @@ public class TestStepIssueDetector {
     public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepObjectNameWorkspace for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         String message = "";
-        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-        IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+        IStepObject theStepObject = theProject.getStepObject(fullName);
         if (theStepObject == null) {
             message = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
         }
@@ -90,9 +90,9 @@ public class TestStepIssueDetector {
     public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
         logger.debug("Entering validateStepDefinitionNameWorkspace for theTestStep: {}", theTestStep != null ? theTestStep.getStepObjectName() : "null");
         String message = "";
-        String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
+        String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-        IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+        IStepObject theStepObject = theProject.getStepObject(fullName);
         if (theStepObject != null) {
             String stepDefinitionName = theTestStep.getStepDefinitionName();
             IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);

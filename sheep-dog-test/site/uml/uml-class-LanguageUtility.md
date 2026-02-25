@@ -15,19 +15,19 @@ Static helper methods for grammar element operations. Separates utility operatio
 **Examples**:
  - `public static String getCellListAsString(List<ICell> list)`
 
-## get{Type}NameLongFor{Type}
+## get{Type}FullNameFor{Type}
 
 **Desc**: Constructs fully qualified or long-form names for grammar elements by combining components, objects, and contextual information from parent elements.
 
-**Rule**: SOME method names follow get{Type}NameLong or get{Type}NameLongFor{Type} pattern.
- - **Name**: `^get{Type}NameLong(For{Type})?$`
+**Rule**: SOME method names follow get{Type}FullName or get{Type}FullNameFor{Type} pattern.
+ - **Name**: `^get{Type}FullName(For{Type})?$`
  - **Return**: `^String$`
  - **Parameters**: `^\(I{Type}\s+\w+\)$`
  - **Modifier**: `^public\s+static$`
 
 **Examples**:
- - `public static String getStepObjectNameLongForTestStep(ITestStep theStep)`
- - `public static String getTestStepNameLong(ITestStep theStep)`
+ - `public static String getStepObjectFullNameForTestStep(ITestStep theStep)`
+ - `public static String getTestStepFullName(ITestStep theStep)`
 
 ## get{Type}ParentFor{Type}
 

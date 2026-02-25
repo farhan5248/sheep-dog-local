@@ -13,7 +13,7 @@ import org.farhan.dsl.lang.ITestProject;
 public class StepObjectImpl implements IStepObject {
 
 	String name;
-	String qualifiedName;
+	String fullName;
 	String content;
 	TestProjectImpl parent;
 	ArrayList<StepDefinitionImpl> stepDefinitionList;
@@ -41,8 +41,8 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
-	public String getNameLong() {
-		return qualifiedName;
+	public String getFullName() {
+		return fullName;
 	}
 
 	@Override
@@ -81,9 +81,9 @@ public class StepObjectImpl implements IStepObject {
 	}
 
 	@Override
-	public void setNameLong(String value) {
-		this.qualifiedName = value;
-		String[] nameParts = qualifiedName.split("/");
+	public void setFullName(String value) {
+		this.fullName = value;
+		String[] nameParts = fullName.split("/");
 		name = nameParts[nameParts.length - 1].replace(".feature", "");
 	}
 
@@ -106,7 +106,7 @@ public class StepObjectImpl implements IStepObject {
 
 	@Override
 	public String toString() {
-		return qualifiedName != null ? qualifiedName : (name != null ? name : "");
+		return fullName != null ? fullName : (name != null ? name : "");
 	}
 
 }

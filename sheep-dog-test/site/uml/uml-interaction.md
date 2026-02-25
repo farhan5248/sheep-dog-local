@@ -158,9 +158,9 @@ public static String validateStepObjectNameOnly(ITestStep theTestStep) throws Ex
 public static String validateStepObjectNameWorkspace(ITestStep theTestStep) throws Exception {
     // entry/exit logging omitted
     String message = "";
-    String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
+    String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
     IStepObject theStepObject = theTestStep.getParent().getParent().getParent()
-            .getStepObject(qualifiedName);
+            .getStepObject(fullName);
     if (theStepObject == null) {
         message = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
     }
@@ -243,19 +243,19 @@ SheepDogLoggerFactory.setLoggerImplementation(new LoggerProvider() {
 
 ## {Language}Utility
 
-### get{Type}NameLongFor{Type}
+### get{Type}FullNameFor{Type}
 
 Utility methods construct fully qualified or long-form names for grammar elements by combining components, objects, and contextual information from parent elements. These methods navigate the parent hierarchy and apply domain-specific formatting rules.
 
-**Example: Getting step object qualified name**
+**Example: Getting step object full name**
 ```java
-public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
+public static String getStepObjectFullNameForTestStep(ITestStep theStep) {
     // entry/exit logging omitted
     if (theStep != null) {
-        String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
-        if (stepNameLong != null && !stepNameLong.isEmpty()) {
-            String component = StepObjectRefFragments.getComponent(stepNameLong);
-            String object = StepObjectRefFragments.getObject(stepNameLong);
+        String stepFullName = SheepDogUtility.getTestStepFullName(theStep);
+        if (stepFullName != null && !stepFullName.isEmpty()) {
+            String component = StepObjectRefFragments.getComponent(stepFullName);
+            String object = StepObjectRefFragments.getObject(stepFullName);
             if (!component.isEmpty() && !object.isEmpty()) {
                 ITestProject project = getTestProjectParentForTestStep(theStep);
                 if (project != null) {
@@ -271,12 +271,12 @@ public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
 }
 ```
 
-**Example: Getting test step qualified name with context inference**
+**Example: Getting test step full name with context inference**
 
 When component or object is missing from the current step, infer from previous steps by iterating `getPreviousSteps(theStep)` and matching via `StepObjectRefFragments`. Returns `"The " + component + " " + object + " " + stepDefinitionName`.
 
 ```java
-public static String getTestStepNameLong(ITestStep theStep) {
+public static String getTestStepFullName(ITestStep theStep) {
     // entry/exit logging omitted
     String component = StepObjectRefFragments.getComponent(theStep.getStepObjectName());
     String object = StepObjectRefFragments.getObject(theStep.getStepObjectName());
@@ -296,7 +296,7 @@ Utility methods create deep clones of grammar elements to avoid side effects dur
 ```java
 public static IStepObject cloneStepObject(IStepObject original) {
     // entry/exit logging omitted
-    IStepObject clone = SheepDogBuilder.createStepObject(null, original.getNameLong());
+    IStepObject clone = SheepDogBuilder.createStepObject(null, original.getFullName());
     if (original.getDescription() != null) {
         for (ILine line : original.getDescription().getLineList()) {
             SheepDogBuilder.createLine(clone, line.getName());
@@ -470,34 +470,34 @@ public interface IRow {
 }
 ```
 
-### NameLong
+### FullName
 
-Methods that return qualified or full path names use 'NameLong' suffix. Some are computed properties without setters.
+Methods that return qualified or full path names use 'FullName' suffix. Some are computed properties without setters.
 
-**Example: Stored qualified name (with setter)**
+**Example: Stored full name (with setter)**
 ```java
 public interface IStepObject {
     String getName();        // Just the name
-    String getNameLong();    // Full qualified path
-    void setNameLong(String value);
+    String getFullName();    // Full qualified path
+    void setFullName(String value);
 }
 
 // Usage
 IStepObject obj = createStepObject(project, "components/HomePage.obj");
-obj.getNameLong(); // Returns "components/HomePage.obj"
+obj.getFullName(); // Returns "components/HomePage.obj"
 ```
 
-**Example: Computed qualified name (no setter)**
+**Example: Computed full name (no setter)**
 ```java
 public interface ITestStep {
     String getName();        // Step definition name only
-    String getNameLong();    // Full step text (computed)
-    // No setNameLong() - computed from stepObjectName + stepDefinitionName
+    String getFullName();    // Full step text (computed)
+    // No setFullName() - computed from stepObjectName + stepDefinitionName
 }
 
 // Usage
 ITestStep step = createTestStep(parent, "The HomePage is loaded");
-step.getNameLong(); // Returns "The HomePage is loaded" (computed)
+step.getFullName(); // Returns "The HomePage is loaded" (computed)
 ```
 
 ## {Type}IssueResolver
@@ -537,18 +537,18 @@ public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(
 
     if (!theTestStep.getStepObjectName().isEmpty()) {
         // Suggest other component objects
-        String component = TestStepUtility.getComponent(theTestStep.getNameLong());
+        String component = TestStepUtility.getComponent(theTestStep.getFullName());
         proposals.addAll(getComponentObjects(theTestStep, component));
 
         // Or create a new one
-        String qualifiedName = TestStepUtility.getStepObjectQualifiedName(theTestStep);
-        IStepObject theStepObject = SheepDogBuilder.createStepObject(null, qualifiedName);
+        String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
+        IStepObject theStepObject = SheepDogBuilder.createStepObject(null, fullName);
         SheepDogIssueProposal proposal = new SheepDogIssueProposal();
         proposal.setId("Generate " + theStepObject.getName() + " - " +
-                theStepObject.getNameLong());
+                theStepObject.getFullName());
         proposal.setDescription(theStepObject.getDescription() != null ? SheepDogUtility.getLineListAsString(theStepObject.getDescription().getLineList()) : "");
         proposal.setValue(theStepObject.getContent());
-        proposal.setQualifiedName(theStepObject.getNameLong());
+        proposal.setFullName(theStepObject.getFullName());
         proposals.add(proposal);
     }
     return proposals;

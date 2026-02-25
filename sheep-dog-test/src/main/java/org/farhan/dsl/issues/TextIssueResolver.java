@@ -34,8 +34,8 @@ public class TextIssueResolver {
         String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (!stepDefinitionName.isEmpty()) {
             ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(theTestStep);
-            IStepObject theStepObject = theProject.getStepObject(qualifiedName);
+            String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
+            IStepObject theStepObject = theProject.getStepObject(fullName);
             if (theStepObject != null) {
                 IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
                 if (theStepDefinition != null && !hasContentCell(theStepDefinition)) {

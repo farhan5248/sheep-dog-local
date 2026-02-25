@@ -38,8 +38,8 @@ public class TextIssueDetector {
         ITestStep testStep = theText.getParent();
         ITestProject testProject = SheepDogUtility.getTestProjectParentForText(theText);
         if (testProject != null) {
-            String qualifiedName = SheepDogUtility.getStepObjectNameLongForTestStep(testStep);
-            IStepObject theStepObject = testProject.getStepObject(qualifiedName);
+            String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+            IStepObject theStepObject = testProject.getStepObject(fullName);
             if (theStepObject != null) {
                 String stepDefinitionName = testStep.getStepDefinitionName();
                 IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);

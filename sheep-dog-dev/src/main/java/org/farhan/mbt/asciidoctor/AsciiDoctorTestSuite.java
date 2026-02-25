@@ -304,7 +304,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     }
 
     public String getStepNameLong(TestStep step) throws Exception {
-        return getStepKeyword(step) + " " + SheepDogUtility.getTestStepNameLong(new TestStepImpl(step));
+        return getStepKeyword(step) + " " + SheepDogUtility.getTestStepFullName(new TestStepImpl(step));
     }
 
     public EList<StepParameters> getStepParametersList(StepDefinition stepDefinitionSrc) {

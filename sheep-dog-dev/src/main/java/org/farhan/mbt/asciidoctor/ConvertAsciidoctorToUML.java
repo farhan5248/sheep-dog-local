@@ -127,7 +127,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
     private void convertTestStep(UMLTestStep step, TestStep srcStep) throws Exception {
         logger.debug("test step: " + srcStep.getStepObjectName() + " " + srcStep.getStepDefinitionName());
-        stepObjects.add(SheepDogUtility.getStepObjectNameLongForTestStep(new TestStepImpl(srcStep)));
+        stepObjects.add(SheepDogUtility.getStepObjectFullNameForTestStep(new TestStepImpl(srcStep)));
         step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
         step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));
         stepDefinitions.add(step.getNameLong().replaceFirst(step.getKeyword(), "").trim());

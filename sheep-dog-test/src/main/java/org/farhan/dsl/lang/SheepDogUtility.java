@@ -29,8 +29,8 @@ public class SheepDogUtility {
      * @return a deep clone of the step object with null parent
      */
     public static IStepObject cloneStepObject(IStepObject original) {
-        logger.debug("Entering cloneStepObject for original: {}", original != null ? original.getNameLong() : "null");
-        IStepObject clone = SheepDogBuilder.createStepObject(null, original.getNameLong());
+        logger.debug("Entering cloneStepObject for original: {}", original != null ? original.getFullName() : "null");
+        IStepObject clone = SheepDogBuilder.createStepObject(null, original.getFullName());
 
         // Clone lines
         if (original.getDescription() != null) {
@@ -78,7 +78,7 @@ public class SheepDogUtility {
             }
         }
 
-        logger.debug("Exiting cloneStepObject with result: {}", clone != null ? clone.getNameLong() : "null");
+        logger.debug("Exiting cloneStepObject with result: {}", clone != null ? clone.getFullName() : "null");
         return clone;
     }
 
@@ -128,15 +128,15 @@ public class SheepDogUtility {
      * elements.
      *
      * @param theStep the test step to process
-     * @return qualified name string with component, object, and file extension
+     * @return full name string with component, object, and file extension
      */
-    public static String getStepObjectNameLongForTestStep(ITestStep theStep) {
-        logger.debug("Entering getStepObjectNameLongForTestStep for theStep: {}", theStep != null ? theStep.getStepObjectName() : "null");
+    public static String getStepObjectFullNameForTestStep(ITestStep theStep) {
+        logger.debug("Entering getStepObjectFullNameForTestStep for theStep: {}", theStep != null ? theStep.getStepObjectName() : "null");
         if (theStep != null) {
-            String stepNameLong = SheepDogUtility.getTestStepNameLong(theStep);
-            if (stepNameLong != null && !stepNameLong.isEmpty()) {
-                String component = StepObjectRefFragments.getComponent(stepNameLong);
-                String object = StepObjectRefFragments.getObject(stepNameLong);
+            String stepFullName = SheepDogUtility.getTestStepFullName(theStep);
+            if (stepFullName != null && !stepFullName.isEmpty()) {
+                String component = StepObjectRefFragments.getComponent(stepFullName);
+                String object = StepObjectRefFragments.getObject(stepFullName);
 
                 if (!component.isEmpty() && !object.isEmpty()) {
                     // Use the new utility method to navigate to project
@@ -145,14 +145,14 @@ public class SheepDogUtility {
                         String fileExt = project.getFileExtension();
                         if (fileExt != null && !fileExt.isEmpty()) {
                             String result = component + "/" + object + fileExt;
-                            logger.debug("Exiting getStepObjectNameLongForTestStep with result: {}", result);
+                            logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", result);
                             return result;
                         }
                     }
                 }
             }
         }
-        logger.debug("Exiting getStepObjectNameLongForTestStep with result: {}", "");
+        logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", "");
         return "";
     }
 
@@ -162,10 +162,10 @@ public class SheepDogUtility {
      * elements.
      *
      * @param theStep the test step to process
-     * @return the long-form name of the test step
+     * @return the full name of the test step
      */
-    public static String getTestStepNameLong(ITestStep theStep) {
-        logger.debug("Entering getTestStepNameLong for theStep: {}", theStep != null ? theStep.getStepObjectName() : "null");
+    public static String getTestStepFullName(ITestStep theStep) {
+        logger.debug("Entering getTestStepFullName for theStep: {}", theStep != null ? theStep.getStepObjectName() : "null");
         String component = StepObjectRefFragments.getComponent(theStep.getStepObjectName());
         String object = StepObjectRefFragments.getObject(theStep.getStepObjectName());
 
@@ -203,7 +203,7 @@ public class SheepDogUtility {
             }
         }
         String result = "The " + component + " " + object + " " + theStep.getStepDefinitionName();
-        logger.debug("Exiting getTestStepNameLong with result: {}", result);
+        logger.debug("Exiting getTestStepFullName with result: {}", result);
         return result;
     }
 
