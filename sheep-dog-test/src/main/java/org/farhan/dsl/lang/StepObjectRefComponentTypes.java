@@ -7,28 +7,33 @@ package org.farhan.dsl.lang;
  * maintenance of domain vocabulary.
  * </p>
  */
-public enum TestStepObjectEdgeTypes {
+public enum StepObjectRefComponentTypes {
 
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	REQUEST("request", "Web-service request"),
+	APPLICATION("application", "GUI web application"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	GOAL("goal", "Maven plugin goal"),
+	SERVICE("service", "RESTful or SOAP webservice"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	JOB("job", "EOD or ETL batchjob"),
+	PLUGIN("plugin", "Maven or Eclipse plugin"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	ACTION("action", "Eclipse plugin action");
+	BATCHJOB("batchjob", "EOD or ETL batchjob"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	PROJECT("project", "Collection of files such as a Maven project");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step
@@ -48,7 +53,7 @@ public enum TestStepObjectEdgeTypes {
 	 * @param value the keyword value
 	 * @param description the keyword description
 	 */
-	TestStepObjectEdgeTypes(String value, String description) {
+	StepObjectRefComponentTypes(String value, String description) {
 		this.value = value;
 		this.description = description;
 	}

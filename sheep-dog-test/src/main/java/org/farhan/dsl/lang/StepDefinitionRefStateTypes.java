@@ -7,7 +7,7 @@ package org.farhan.dsl.lang;
  * maintenance of domain vocabulary.
  * </p>
  */
-public enum TestStepStateTypes {
+public enum StepDefinitionRefStateTypes {
 
 	/**
 	 * Defines a keyword constant with associated value and description for test step
@@ -48,7 +48,7 @@ public enum TestStepStateTypes {
 	 * @param value the keyword value
 	 * @param description the keyword description
 	 */
-	TestStepStateTypes(String value, String description) {
+	StepDefinitionRefStateTypes(String value, String description) {
 		this.value = value;
 		this.description = description;
 	}

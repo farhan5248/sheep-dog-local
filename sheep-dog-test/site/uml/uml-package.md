@@ -140,8 +140,8 @@
 **Rule**: SOME class matches {Type}{Fragment}Types pattern
 
 **Regex**: `^{Type}{Fragment}Types$`
- - `TestStepComponentTypes`
- - `TestStepObjectVertexTypes`
- - `TestStepObjectEdgeTypes`
- - `TestStepPartTypes`
- - `TestStepStateTypes`
+ - `StepObjectRefComponentTypes`
+ - `StepObjectRefObjectVertexTypes`
+ - `StepObjectRefObjectEdgeTypes`
+ - `StepDefinitionRefPartTypes`
+ - `StepDefinitionRefStateTypes`

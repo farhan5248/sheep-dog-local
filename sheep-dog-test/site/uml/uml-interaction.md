@@ -383,13 +383,13 @@ Enum constants follow UPPER_SNAKE_CASE naming and represent keywords or patterns
 
 **Example: Defining fragment types**
 ```java
-public enum TestStepComponentTypes {
+public enum StepObjectRefComponentTypes {
     APPLICATION("application", "GUI web application");
 
     public final String value;
     public final String description;
 
-    TestStepComponentTypes(String value, String description) {
+    StepObjectRefComponentTypes(String value, String description) {
         this.value = value;
         this.description = description;
     }
@@ -400,7 +400,7 @@ public enum TestStepComponentTypes {
 ```java
 // Match component type in test step
 String stepText = "The customer application";
-for (TestStepComponentTypes component : TestStepComponentTypes.values()) {
+for (StepObjectRefComponentTypes component : StepObjectRefComponentTypes.values()) {
     if (stepText.contains(component.value)) {
         // Found component type
         return component;

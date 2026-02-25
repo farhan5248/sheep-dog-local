@@ -50,5 +50,5 @@ Enum constants for test step keyword patterns. Separates keyword definitions fro
  - **Parameters**: `^\(String\s+value,\s*String\s+description\)$`
 
 **Examples**:
- - `TestStepComponentTypes(String value, String description)`
- - `TestStepObjectVertexTypes(String value, String description)`
+ - `StepObjectRefComponentTypes(String value, String description)`
+ - `StepObjectRefObjectVertexTypes(String value, String description)`

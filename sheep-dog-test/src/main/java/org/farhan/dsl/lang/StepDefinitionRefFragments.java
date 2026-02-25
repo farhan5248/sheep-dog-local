@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 
 public class StepDefinitionRefFragments {
     private static final String PART_DESC = "(.+)";
-    private static final String PART_TYPE = getRegexFromTypes(TestStepPartTypes.values());
+    private static final String PART_TYPE = getRegexFromTypes(StepDefinitionRefPartTypes.values());
     private static final String PART = "(" + PART_DESC + " " + PART_TYPE + " )";
     private static final String STATE_DESC = "(.+)";
-    private static final String STATE_TYPE = getRegexFromTypes(TestStepStateTypes.values());
+    private static final String STATE_TYPE = getRegexFromTypes(StepDefinitionRefStateTypes.values());
     private static final String STATE = "(" + STATE_TYPE + " " + STATE_DESC + ")";
     private static final String STEP_DEFINITION_REF = "(" + PART + "?" + STATE + ")";
 
@@ -122,10 +122,10 @@ public class StepDefinitionRefFragments {
     private static String getRegexFromTypes(Enum<?>[] enumValues) {
         String regex = "(";
         for (Enum<?> enumValue : enumValues) {
-            if (enumValue instanceof TestStepPartTypes) {
-                regex += ((TestStepPartTypes) enumValue).value + "|";
-            } else if (enumValue instanceof TestStepStateTypes) {
-                regex += ((TestStepStateTypes) enumValue).value + "|";
+            if (enumValue instanceof StepDefinitionRefPartTypes) {
+                regex += ((StepDefinitionRefPartTypes) enumValue).value + "|";
+            } else if (enumValue instanceof StepDefinitionRefStateTypes) {
+                regex += ((StepDefinitionRefStateTypes) enumValue).value + "|";
             }
         }
         return regex.replaceAll("\\|$", ")");

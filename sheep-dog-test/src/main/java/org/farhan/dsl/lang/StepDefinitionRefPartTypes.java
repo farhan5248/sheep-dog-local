@@ -7,53 +7,39 @@ package org.farhan.dsl.lang;
  * maintenance of domain vocabulary.
  * </p>
  */
-public enum TestStepObjectVertexTypes {
+public enum StepDefinitionRefPartTypes {
 
+	SECTION("section", "backwards-compatible alias for 'type' to support legacy test steps"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	FILE("file", "Any sort of file"),
+	LANGUAGE("language", "The name of the Xtext grammar/language implementation"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	PAGE("page", "Web page"),
+	TYPE("type", "Grammar types (non-terminal rules) defined in the .xtext file"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	RESPONSE("response", "Web service response"),
+	ASSIGNMENT("assignment", "Named assignments within grammar rules"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	DIALOG("dialog", "Window dialog box"),
+	FRAGMENT("fragment", "Test step regex fragments defining type enumerations"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	DIRECTORY("directory", "File directory"),
+	SCOPE("scope", "Issue scope levels from TypeIssueTypes enum"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	POPUP("popup", "List of options for quickfix or content proposal"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	ANNOTATION("annotation", "Visual indicator for error or warning messages"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	HOVER("hover", "Popup displaying information on mouse hover"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	TOOLTIP("tooltip", "Small popup displaying descriptive text");
+	NODE("node", "AST node elements in the parsed syntax tree");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step
@@ -73,7 +59,7 @@ public enum TestStepObjectVertexTypes {
 	 * @param value the keyword value
 	 * @param description the keyword description
 	 */
-	TestStepObjectVertexTypes(String value, String description) {
+	StepDefinitionRefPartTypes(String value, String description) {
 		this.value = value;
 		this.description = description;
 	}

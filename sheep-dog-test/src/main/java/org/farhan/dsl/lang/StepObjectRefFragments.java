@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 public class StepObjectRefFragments {
 
     private static final String COMPONENT_NAME = "( " + "[^/]" + "+)";
-    private static final String COMPONENT_TYPE = getRegexFromTypes(TestStepComponentTypes.values());
+    private static final String COMPONENT_TYPE = getRegexFromTypes(StepObjectRefComponentTypes.values());
     private static final String COMPONENT = "(" + COMPONENT_NAME + COMPONENT_TYPE + ")";
     private static final String OBJECT_NAME = "( .+)";
-    private static final String OBJECT_EDGE_TYPE = getRegexFromTypes(TestStepObjectEdgeTypes.values());
-    private static final String OBJECT_VERTEX_TYPE = getRegexFromTypes(TestStepObjectVertexTypes.values());
+    private static final String OBJECT_EDGE_TYPE = getRegexFromTypes(StepObjectRefObjectEdgeTypes.values());
+    private static final String OBJECT_VERTEX_TYPE = getRegexFromTypes(StepObjectRefObjectVertexTypes.values());
     private static final String OBJECT_TYPE = "(" + OBJECT_VERTEX_TYPE + "|" + OBJECT_EDGE_TYPE + ")";
     private static final String OBJECT = "(" + OBJECT_NAME + OBJECT_TYPE + ")";
     private static final String STEP_OBJECT_REF = "^(The" + COMPONENT + "?" + OBJECT + ")";
@@ -162,12 +162,12 @@ public class StepObjectRefFragments {
     private static String getRegexFromTypes(Enum<?>[] enumValues) {
         String regex = "(";
         for (Enum<?> enumValue : enumValues) {
-            if (enumValue instanceof TestStepComponentTypes) {
-                regex += " " + ((TestStepComponentTypes) enumValue).value + "|";
-            } else if (enumValue instanceof TestStepObjectEdgeTypes) {
-                regex += " " + ((TestStepObjectEdgeTypes) enumValue).value + "|";
-            } else if (enumValue instanceof TestStepObjectVertexTypes) {
-                regex += " " + ((TestStepObjectVertexTypes) enumValue).value + "|";
+            if (enumValue instanceof StepObjectRefComponentTypes) {
+                regex += " " + ((StepObjectRefComponentTypes) enumValue).value + "|";
+            } else if (enumValue instanceof StepObjectRefObjectEdgeTypes) {
+                regex += " " + ((StepObjectRefObjectEdgeTypes) enumValue).value + "|";
+            } else if (enumValue instanceof StepObjectRefObjectVertexTypes) {
+                regex += " " + ((StepObjectRefObjectVertexTypes) enumValue).value + "|";
             }
         }
         return regex.replaceAll("\\|$", ")");

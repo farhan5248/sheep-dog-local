@@ -7,33 +7,53 @@ package org.farhan.dsl.lang;
  * maintenance of domain vocabulary.
  * </p>
  */
-public enum TestStepComponentTypes {
+public enum StepObjectRefObjectVertexTypes {
 
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	APPLICATION("application", "GUI web application"),
+	FILE("file", "Any sort of file"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	SERVICE("service", "RESTful or SOAP webservice"),
+	PAGE("page", "Web page"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	PLUGIN("plugin", "Maven or Eclipse plugin"),
+	RESPONSE("response", "Web service response"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	BATCHJOB("batchjob", "EOD or ETL batchjob"),
+	DIALOG("dialog", "Window dialog box"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	PROJECT("project", "Collection of files such as a Maven project");
+	DIRECTORY("directory", "File directory"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	POPUP("popup", "List of options for quickfix or content proposal"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	ANNOTATION("annotation", "Visual indicator for error or warning messages"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	HOVER("hover", "Popup displaying information on mouse hover"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	TOOLTIP("tooltip", "Small popup displaying descriptive text");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step
@@ -53,7 +73,7 @@ public enum TestStepComponentTypes {
 	 * @param value the keyword value
 	 * @param description the keyword description
 	 */
-	TestStepComponentTypes(String value, String description) {
+	StepObjectRefObjectVertexTypes(String value, String description) {
 		this.value = value;
 		this.description = description;
 	}

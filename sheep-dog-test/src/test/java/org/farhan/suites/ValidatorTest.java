@@ -9,32 +9,32 @@ public class ValidatorTest {
     @Test
     public void testGetComponentObjectState() {
         Assertions
-                .assertTrue(StepObjectRefFragments.getComponent("The Something1 application Something2 request is executed with")
-                        .contentEquals("Something1 application"));
+                .assertTrue(StepObjectRefFragments.getComponent("The graph-viewer application uml-to-cucumber request is executed with")
+                        .contentEquals("graph-viewer application"));
     }
 
     @Test
     public void testGetComponentObject() {
-        Assertions.assertTrue(StepObjectRefFragments.getComponent("The Something1 application Something2 request")
-                .contentEquals("Something1 application"));
+        Assertions.assertTrue(StepObjectRefFragments.getComponent("The graph-viewer application uml-to-cucumber request")
+                .contentEquals("graph-viewer application"));
     }
 
     @Test
     public void testGetComponent() {
         Assertions.assertTrue(
-                StepObjectRefFragments.getComponent("The Something1 application ").contentEquals("Something1 application"));
+                StepObjectRefFragments.getComponent("The graph-viewer application ").contentEquals("graph-viewer application"));
     }
 
     @Test
     public void testGetObjectComponentState() {
-        Assertions.assertTrue(StepObjectRefFragments.getObject("The Something1 application Something2 request is executed with")
-                .contentEquals("Something2 request"));
+        Assertions.assertTrue(StepObjectRefFragments.getObject("The graph-viewer application uml-to-cucumber request is executed with")
+                .contentEquals("uml-to-cucumber request"));
     }
 
     @Test
     public void testGetObjectComponent() {
-        Assertions.assertTrue(StepObjectRefFragments.getObject("The Something1 application Something2 request")
-                .contentEquals("Something2 request"));
+        Assertions.assertTrue(StepObjectRefFragments.getObject("The graph-viewer application uml-to-cucumber request")
+                .contentEquals("uml-to-cucumber request"));
     }
 
 }

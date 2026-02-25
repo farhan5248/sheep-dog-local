@@ -7,39 +7,28 @@ package org.farhan.dsl.lang;
  * maintenance of domain vocabulary.
  * </p>
  */
-public enum TestStepPartTypes {
+public enum StepObjectRefObjectEdgeTypes {
 
-	SECTION("section", "backwards-compatible alias for 'type' to support legacy test steps"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	LANGUAGE("language", "The name of the Xtext grammar/language implementation"),
+	REQUEST("request", "Web-service request"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	TYPE("type", "Grammar types (non-terminal rules) defined in the .xtext file"),
+	GOAL("goal", "Maven plugin goal"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	ASSIGNMENT("assignment", "Named assignments within grammar rules"),
+	JOB("job", "EOD or ETL batchjob"),
 	/**
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	FRAGMENT("fragment", "Test step regex fragments defining type enumerations"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	SCOPE("scope", "Issue scope levels from TypeIssueTypes enum"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	NODE("node", "AST node elements in the parsed syntax tree");
+	ACTION("action", "Eclipse plugin action");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step
@@ -59,7 +48,7 @@ public enum TestStepPartTypes {
 	 * @param value the keyword value
 	 * @param description the keyword description
 	 */
-	TestStepPartTypes(String value, String description) {
+	StepObjectRefObjectEdgeTypes(String value, String description) {
 		this.value = value;
 		this.description = description;
 	}
