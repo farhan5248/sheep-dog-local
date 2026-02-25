@@ -697,7 +697,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getText_Name()
+  public EAttribute getText_Content()
   {
     return (EAttribute)textEClass.getEStructuralFeatures().get(0);
   }
@@ -785,7 +785,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getLine_Name()
+  public EAttribute getLine_Content()
   {
     return (EAttribute)lineEClass.getEStructuralFeatures().get(0);
   }
@@ -877,7 +877,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     andEClass = createEClass(AND);
 
     textEClass = createEClass(TEXT);
-    createEAttribute(textEClass, TEXT__NAME);
+    createEAttribute(textEClass, TEXT__CONTENT);
 
     tableEClass = createEClass(TABLE);
     createEReference(tableEClass, TABLE__ROW_LIST);
@@ -889,7 +889,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     createEAttribute(cellEClass, CELL__NAME);
 
     lineEClass = createEClass(LINE);
-    createEAttribute(lineEClass, LINE__NAME);
+    createEAttribute(lineEClass, LINE__CONTENT);
   }
 
   /**
@@ -987,7 +987,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     initEClass(andEClass, And.class, "And", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(textEClass, Text.class, "Text", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getText_Name(), ecorePackage.getEString(), "name", null, 0, 1, Text.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getText_Content(), ecorePackage.getEString(), "content", null, 0, 1, Text.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(tableEClass, Table.class, "Table", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTable_RowList(), this.getRow(), null, "rowList", null, 0, -1, Table.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -999,7 +999,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     initEAttribute(getCell_Name(), ecorePackage.getEString(), "name", null, 0, 1, Cell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lineEClass, Line.class, "Line", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLine_Name(), ecorePackage.getEString(), "name", null, 0, 1, Line.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLine_Content(), ecorePackage.getEString(), "content", null, 0, 1, Line.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

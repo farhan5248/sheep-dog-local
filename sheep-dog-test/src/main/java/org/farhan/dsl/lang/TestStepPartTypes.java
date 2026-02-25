@@ -34,7 +34,12 @@ public enum TestStepPartTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	SCOPE("scope", "Issue scope levels from TypeIssueTypes enum");
+	SCOPE("scope", "Issue scope levels from TypeIssueTypes enum"),
+	/**
+	 * Defines a keyword constant with associated value and description for test step
+	 * matching.
+	 */
+	NODE("node", "AST node elements in the parsed syntax tree");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step

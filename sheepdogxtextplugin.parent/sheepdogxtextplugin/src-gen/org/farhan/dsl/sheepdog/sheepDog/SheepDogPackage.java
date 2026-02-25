@@ -813,13 +813,13 @@ public interface SheepDogPackage extends EPackage
   int TEXT = 16;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Content</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TEXT__NAME = 0;
+  int TEXT__CONTENT = 0;
 
   /**
    * The number of structural features of the '<em>Text</em>' class.
@@ -925,13 +925,13 @@ public interface SheepDogPackage extends EPackage
   int LINE = 20;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Content</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LINE__NAME = 0;
+  int LINE__CONTENT = 0;
 
   /**
    * The number of structural features of the '<em>Line</em>' class.
@@ -1367,15 +1367,15 @@ public interface SheepDogPackage extends EPackage
   EClass getText();
 
   /**
-   * Returns the meta object for the attribute '{@link org.farhan.dsl.sheepdog.sheepDog.Text#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.farhan.dsl.sheepdog.sheepDog.Text#getContent <em>Content</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.Text#getName()
+   * @return the meta object for the attribute '<em>Content</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.Text#getContent()
    * @see #getText()
    * @generated
    */
-  EAttribute getText_Name();
+  EAttribute getText_Content();
 
   /**
    * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.Table <em>Table</em>}'.
@@ -1451,15 +1451,15 @@ public interface SheepDogPackage extends EPackage
   EClass getLine();
 
   /**
-   * Returns the meta object for the attribute '{@link org.farhan.dsl.sheepdog.sheepDog.Line#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.farhan.dsl.sheepdog.sheepDog.Line#getContent <em>Content</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.Line#getName()
+   * @return the meta object for the attribute '<em>Content</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.Line#getContent()
    * @see #getLine()
    * @generated
    */
-  EAttribute getLine_Name();
+  EAttribute getLine_Content();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1839,12 +1839,12 @@ public interface SheepDogPackage extends EPackage
     EClass TEXT = eINSTANCE.getText();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TEXT__NAME = eINSTANCE.getText_Name();
+    EAttribute TEXT__CONTENT = eINSTANCE.getText_Content();
 
     /**
      * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.TableImpl <em>Table</em>}' class.
@@ -1911,12 +1911,12 @@ public interface SheepDogPackage extends EPackage
     EClass LINE = eINSTANCE.getLine();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute LINE__NAME = eINSTANCE.getLine_Name();
+    EAttribute LINE__CONTENT = eINSTANCE.getLine_Content();
 
   }
 

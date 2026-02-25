@@ -113,7 +113,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     private String convertLinesToString(EList<Line> lines) {
         String contents = "";
         for (Line l : lines) {
-            contents += l.getName() + "\n";
+            contents += l.getContent() + "\n";
         }
         return contents.trim();
     }
@@ -159,7 +159,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
         ArrayList<String> tags = new ArrayList<String>();
         if (abstractScenario.getDescription() != null) {
             for (Line l : abstractScenario.getDescription().getLineList()) {
-                tags.addAll(PhraseFragments.getTagAsList(l.getName()));
+                tags.addAll(PhraseFragments.getTagAsList(l.getContent()));
             }
         }
         return tags;
@@ -177,7 +177,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     }
 
     public String getDocString(TestStep step) {
-        return step.getText().getName().replaceFirst("^----\n", "").replaceFirst("\n----$", "").replace("\\----",
+        return step.getText().getContent().replaceFirst("^----\n", "").replaceFirst("\n----$", "").replace("\\----",
                 "----");
     }
 
@@ -217,7 +217,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
         ArrayList<String> tags = new ArrayList<String>();
         if (examples.getNestedDescription() != null) {
             for (Line l : examples.getNestedDescription().getLineList()) {
-                tags.addAll(PhraseFragments.getTagAsList(l.getName()));
+                tags.addAll(PhraseFragments.getTagAsList(l.getContent()));
             }
         }
         return tags;
@@ -238,7 +238,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
         ArrayList<String> tags = new ArrayList<String>();
         if (theTestSuite.getDescription() != null) {
             for (Line l : theTestSuite.getDescription().getLineList()) {
-                tags.addAll(PhraseFragments.getTagAsList(l.getName()));
+                tags.addAll(PhraseFragments.getTagAsList(l.getContent()));
             }
         }
         return tags;
@@ -391,7 +391,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
             abstractScenario.setDescription(desc);
             for (String line : scenarioDescription.split("\n")) {
                 Line l = SheepDogFactory.eINSTANCE.createLine();
-                l.setName(line);
+                l.setContent(line);
                 desc.getLineList().add(l);
             }
         }
@@ -399,7 +399,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public void setDocString(TestStep step, String docString) {
         step.setText(SheepDogFactory.eINSTANCE.createText());
-        step.getText().setName("----\n" + docString.replace("----", "\\----") + "\n----");
+        step.getText().setContent("----\n" + docString.replace("----", "\\----") + "\n----");
     }
 
     public void setExamplesTable(TestData examples) {
@@ -412,7 +412,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
             theTestSuite.setDescription(desc);
             for (String line : featureDescription.split("\n")) {
                 Line l = SheepDogFactory.eINSTANCE.createLine();
-                l.setName(line);
+                l.setContent(line);
                 desc.getLineList().add(l);
             }
         }
@@ -438,7 +438,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
                 Line l = SheepDogFactory.eINSTANCE.createLine();
                 // TODO test what happens if there's multiple \n, don't assume there's just one.
                 // Then create the EOL like Given is created
-                l.setName(line);
+                l.setContent(line);
                 desc.getLineList().add(l);
             }
         }
@@ -480,7 +480,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
             examples.setNestedDescription(nd);
             for (String line : description.split("\n")) {
                 Line l = SheepDogFactory.eINSTANCE.createLine();
-                l.setName(line);
+                l.setContent(line);
                 nd.getLineList().add(l);
             }
         }

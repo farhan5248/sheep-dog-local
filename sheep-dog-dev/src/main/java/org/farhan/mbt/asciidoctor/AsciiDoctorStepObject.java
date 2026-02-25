@@ -41,7 +41,7 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 	private String convertLinesToString(EList<Line> lines) {
 		String contents = "";
 		for (Line l : lines) {
-			contents += l.getName() + "\n";
+			contents += l.getContent() + "\n";
 		}
 		return contents.trim();
 	}
@@ -182,7 +182,7 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 			stepDefinition.setDescription(desc);
 			for (String line : stepDefinitionDescription.split("\n")) {
 				Line l = SheepDogFactory.eINSTANCE.createLine();
-				l.setName(line);
+				l.setContent(line);
 				desc.getLineList().add(l);
 			}
 		}
@@ -194,7 +194,7 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 			theStepObject.setDescription(desc);
 			for (String line : stepObjectDescription.split("\n")) {
 				Line l = SheepDogFactory.eINSTANCE.createLine();
-				l.setName(line);
+				l.setContent(line);
 				desc.getLineList().add(l);
 			}
 		}

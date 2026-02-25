@@ -192,6 +192,13 @@ public class VertexValidatorTest {
     }
 
     @Test
+    public void testDetailsRegexNode() {
+        Assertions.assertTrue(StepDefinitionRefFragments
+                .getPartType("The Something1 application Something2 file Something3 node is empty")
+                .contentEquals("node"));
+    }
+
+    @Test
     public void testObjectRegexDirectory() {
         Assertions.assertTrue(StepObjectRefFragments
                 .getObjectType("The Something1 application Something2 directory is empty").contentEquals("directory"));

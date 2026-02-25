@@ -178,16 +178,16 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Line returns Line
 	 *
 	 * Constraint:
-	 *     name=Phrase
+	 *     content=Phrase
 	 * </pre>
 	 */
 	protected void sequence_Line(ISerializationContext context, Line semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.LINE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.LINE__NAME));
+			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.LINE__CONTENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.LINE__CONTENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getLineAccess().getNamePhraseParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getLineAccess().getContentPhraseParserRuleCall_0_0(), semanticObject.getContent());
 		feeder.finish();
 	}
 	
@@ -342,16 +342,16 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Text returns Text
 	 *
 	 * Constraint:
-	 *     name=RAWTEXT
+	 *     content=TEXT_BLOCK
 	 * </pre>
 	 */
 	protected void sequence_Text(ISerializationContext context, Text semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.TEXT__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.TEXT__NAME));
+			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.TEXT__CONTENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.TEXT__CONTENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTextAccess().getNameRAWTEXTTerminalRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getTextAccess().getContentTEXT_BLOCKTerminalRuleCall_2_0(), semanticObject.getContent());
 		feeder.finish();
 	}
 	

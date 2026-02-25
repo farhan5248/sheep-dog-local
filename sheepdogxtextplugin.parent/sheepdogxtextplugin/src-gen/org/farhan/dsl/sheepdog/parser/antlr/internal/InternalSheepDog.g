@@ -1369,9 +1369,9 @@ ruleText returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_2_0=RULE_RAWTEXT
+				lv_content_2_0=RULE_TEXT_BLOCK
 				{
-					newLeafNode(lv_name_2_0, grammarAccess.getTextAccess().getNameRAWTEXTTerminalRuleCall_2_0());
+					newLeafNode(lv_content_2_0, grammarAccess.getTextAccess().getContentTEXT_BLOCKTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -1379,9 +1379,9 @@ ruleText returns [EObject current=null]
 					}
 					setWithLastConsumed(
 						$current,
-						"name",
-						lv_name_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.RAWTEXT");
+						"content",
+						lv_content_2_0,
+						"org.farhan.dsl.sheepdog.SheepDog.TEXT_BLOCK");
 				}
 			)
 		)
@@ -1557,17 +1557,17 @@ ruleLine returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getLineAccess().getNamePhraseParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getLineAccess().getContentPhraseParserRuleCall_0_0());
 				}
-				lv_name_0_0=rulePhrase
+				lv_content_0_0=rulePhrase
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getLineRule());
 					}
 					set(
 						$current,
-						"name",
-						lv_name_0_0,
+						"content",
+						lv_content_0_0,
 						"org.farhan.dsl.sheepdog.SheepDog.Phrase");
 					afterParserOrEnumRuleCall();
 				}
@@ -1745,6 +1745,6 @@ RULE_SL_COMMENT : '#' ~('\n')* RULE_EOL;
 
 RULE_EOL : '\n'+;
 
-RULE_RAWTEXT : '----' '\n' .+ '\n' '----';
+RULE_TEXT_BLOCK : '----' '\n' .+ '\n' '----';
 
 RULE_WORD : ~((' '|'\t'|'\r'|'\n'))+;

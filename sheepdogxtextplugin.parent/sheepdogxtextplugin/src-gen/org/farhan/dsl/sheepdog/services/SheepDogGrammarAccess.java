@@ -746,17 +746,17 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPlusSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameRAWTEXTTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Assignment cContentAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cContentTEXT_BLOCKTerminalRuleCall_2_0 = (RuleCall)cContentAssignment_2.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//Text:
 		//    '+' EOL
-		//    name=RAWTEXT EOL;
+		//    content=TEXT_BLOCK EOL;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'+' EOL
-		//name=RAWTEXT EOL
+		//content=TEXT_BLOCK EOL
 		public Group getGroup() { return cGroup; }
 		
 		//'+'
@@ -765,11 +765,11 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
 		
-		//name=RAWTEXT
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		//content=TEXT_BLOCK
+		public Assignment getContentAssignment_2() { return cContentAssignment_2; }
 		
-		//RAWTEXT
-		public RuleCall getNameRAWTEXTTerminalRuleCall_2_0() { return cNameRAWTEXTTerminalRuleCall_2_0; }
+		//TEXT_BLOCK
+		public RuleCall getContentTEXT_BLOCKTerminalRuleCall_2_0() { return cContentTEXT_BLOCKTerminalRuleCall_2_0; }
 		
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_3() { return cEOLTerminalRuleCall_3; }
@@ -872,22 +872,22 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class LineElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.Line");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNamePhraseParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Assignment cContentAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cContentPhraseParserRuleCall_0_0 = (RuleCall)cContentAssignment_0.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Line:
-		//    name=Phrase EOL;
+		//    content=Phrase EOL;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=Phrase EOL
+		//content=Phrase EOL
 		public Group getGroup() { return cGroup; }
 		
-		//name=Phrase
-		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		//content=Phrase
+		public Assignment getContentAssignment_0() { return cContentAssignment_0; }
 		
 		//Phrase
-		public RuleCall getNamePhraseParserRuleCall_0_0() { return cNamePhraseParserRuleCall_0_0; }
+		public RuleCall getContentPhraseParserRuleCall_0_0() { return cContentPhraseParserRuleCall_0_0; }
 		
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
@@ -1024,7 +1024,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final TerminalRule tWS;
 	private final TerminalRule tSL_COMMENT;
 	private final TerminalRule tEOL;
-	private final TerminalRule tRAWTEXT;
+	private final TerminalRule tTEXT_BLOCK;
 	private final TerminalRule tWORD;
 	
 	private final Grammar grammar;
@@ -1059,7 +1059,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.WS");
 		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.SL_COMMENT");
 		this.tEOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.EOL");
-		this.tRAWTEXT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.RAWTEXT");
+		this.tTEXT_BLOCK = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.TEXT_BLOCK");
 		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.WORD");
 	}
 	
@@ -1268,7 +1268,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	//Text:
 	//    '+' EOL
-	//    name=RAWTEXT EOL;
+	//    content=TEXT_BLOCK EOL;
 	public TextElements getTextAccess() {
 		return pText;
 	}
@@ -1311,7 +1311,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Line:
-	//    name=Phrase EOL;
+	//    content=Phrase EOL;
 	public LineElements getLineAccess() {
 		return pLine;
 	}
@@ -1378,10 +1378,10 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return tEOL;
 	}
 	
-	//terminal RAWTEXT:
+	//terminal TEXT_BLOCK:
 	//    '----' '\n' (.)+ '\n' '----';
-	public TerminalRule getRAWTEXTRule() {
-		return tRAWTEXT;
+	public TerminalRule getTEXT_BLOCKRule() {
+		return tTEXT_BLOCK;
 	}
 	
 	//terminal WORD:

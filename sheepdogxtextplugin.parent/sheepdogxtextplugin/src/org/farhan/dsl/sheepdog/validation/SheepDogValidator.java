@@ -193,13 +193,13 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 
     @Check(CheckType.FAST)
     public void checkTextNameWorkspace(Text text) {
-        logger.debug("Entering checkTextNameWorkspace for element: " + (text != null ? text.getName() : "null"));
+        logger.debug("Entering checkTextNameWorkspace for element: " + (text != null ? text.getContent() : "null"));
         initProject(text.eResource());
         if (text != null) {
             try {
                 String problems = TextIssueDetector.validateNameWorkspace(new TextImpl(text));
                 if (!problems.isEmpty()) {
-                    warning(problems, SheepDogPackage.Literals.TEXT__NAME, TEXT_NAME_WORKSPACE);
+                    warning(problems, SheepDogPackage.Literals.TEXT__CONTENT, TEXT_NAME_WORKSPACE);
                 }
             } catch (Exception e) {
                 logger.error("Failed in checkTextNameWorkspace for : " + e.getMessage(), e);

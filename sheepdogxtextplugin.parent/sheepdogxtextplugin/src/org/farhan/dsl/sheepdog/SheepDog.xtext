@@ -74,7 +74,7 @@ And:
 
 Text:
 	'+' EOL
-	name=RAWTEXT EOL;
+	content=TEXT_BLOCK EOL;
 
 Table:
 	'+' EOL
@@ -89,7 +89,7 @@ Cell:
 	'|' name=Phrase;
 
 Line:
-	name=Phrase EOL;
+	content=Phrase EOL;
 
 Phrase:
 	WORD+;
@@ -119,7 +119,7 @@ terminal SL_COMMENT:
 terminal EOL:
 	('\n')+;
 
-terminal RAWTEXT:
+terminal TEXT_BLOCK:
 	'----' '\n' (.)+ '\n' '----';
 
 terminal WORD:

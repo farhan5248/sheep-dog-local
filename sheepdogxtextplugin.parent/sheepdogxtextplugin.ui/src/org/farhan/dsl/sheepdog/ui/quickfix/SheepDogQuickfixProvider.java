@@ -117,7 +117,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
     @Fix(SheepDogValidator.TEXT_NAME_WORKSPACE)
     public void fixTextNameWorkspace(final Issue issue, IssueResolutionAcceptor acceptor) {
         Text theText = (Text) getEObject(issue);
-        logger.debug("Entering fixTextNameWorkspace for element: " + theText.getName());
+        logger.debug("Entering fixTextNameWorkspace for element: " + theText.getContent());
         try {
             createAcceptor(issue, acceptor,
                     TextIssueResolver.correctNameWorkspace(new TestStepImpl((TestStep) theText.eContainer())));

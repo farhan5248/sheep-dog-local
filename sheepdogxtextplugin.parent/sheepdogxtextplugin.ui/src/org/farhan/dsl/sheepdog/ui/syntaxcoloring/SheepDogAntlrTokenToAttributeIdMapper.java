@@ -18,7 +18,7 @@ public class SheepDogAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			return SheepDogHighlightingConfiguration.WORD_ID;
 		case "RULE_SL_COMMENT":
 			return SheepDogHighlightingConfiguration.COMMENT_ID;
-		case "RULE_RAWTEXT":
+		case "RULE_TEXT_BLOCK":
 			return SheepDogHighlightingConfiguration.DOC_ID;
 		case "'='":
 			return SheepDogHighlightingConfiguration.KEYWORD_LVL_1;
