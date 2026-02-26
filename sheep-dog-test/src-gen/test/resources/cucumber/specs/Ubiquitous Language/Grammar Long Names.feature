@@ -12,7 +12,7 @@ Feature: Grammar Long Names
     Add more examples of all the combinations for a single object.
     Then add examples of how two objects in the same test affect the inheritance.
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step list assignment is created as follows
           | Test Step Full Name                          |
           | The daily batchjob app/Input file is present |
           | The Input file is absent                     |
@@ -21,7 +21,7 @@ Feature: Grammar Long Names
           | daily batchjob/app/Input file.feature | is present           |
           | daily batchjob/app/Input file.feature | is absent            |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/1 |
      Then The xtext plugin validate annotation will be empty
 

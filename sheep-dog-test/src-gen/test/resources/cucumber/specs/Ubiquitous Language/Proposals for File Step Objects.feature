@@ -12,13 +12,13 @@ Feature: Proposals for File Step Objects
 
   Scenario: No component no existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name                       |
           | The daily batchjob Output file is present |
           | empty                                     |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/2 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/2 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                | Proposal Description                                   |
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
@@ -26,13 +26,13 @@ Feature: Proposals for File Step Objects
 
   Scenario: Has component no existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name                       |
           | The daily batchjob Output file is present |
           | The daily batchjob                        |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/2 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/2 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                | Proposal Description                                   |
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
@@ -40,15 +40,15 @@ Feature: Proposals for File Step Objects
 
   Scenario: No component no existing has background
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file background test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestSetup/1/TestStep node is created as follows
           | Test Step Full Name                       |
           | The daily batchjob Output file is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/2/TestStep node is created as follows
           | Test Step Full Name |
           | empty               |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/2/TestStep/1 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/2/TestStep/1 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                | Proposal Description                                   |
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |

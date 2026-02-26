@@ -121,7 +121,7 @@ public abstract class TestObject {
         keyValue.put("path", path);
     }
 
-    public void setPart(String part) {
+    public void createStepDependencies(String part) {
         keyValue.put("part", part);
     }
 }

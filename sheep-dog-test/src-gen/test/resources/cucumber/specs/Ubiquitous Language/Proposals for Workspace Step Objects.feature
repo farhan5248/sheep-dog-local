@@ -14,50 +14,50 @@ Feature: Proposals for Workspace Step Objects
 
     TODO make this an outline with various steps like "The" or "The batchjob" etc
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name |
           | empty               |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/1 |
      Then The xtext plugin list proposals popup will be empty
 
   Scenario: No component has existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name |
           | empty               |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name | Step Object Description |
           | daily batchjob/Input file.feature | is present           | Description\n           |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/1 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                | Proposal Id | Proposal Description |
           | The daily batchjob Input file | Input file  | Description\n        |
 
   Scenario: Has component no existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name |
           | The daily batchjob  |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/1 |
      Then The xtext plugin list proposals popup will be empty
 
   Scenario: Has component has existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name |
           | The daily batchjob  |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name | Step Object Description |
           | daily batchjob/Input file.feature | is present           | Description             |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/1 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                | Proposal Id | Proposal Description |
           | The daily batchjob Input file | Input file  | Description          |

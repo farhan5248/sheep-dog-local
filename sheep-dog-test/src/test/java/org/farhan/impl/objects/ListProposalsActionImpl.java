@@ -16,10 +16,10 @@ public class ListProposalsActionImpl extends TestIDEObject implements ListPropos
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedElement.contains("Row/")) {
+            if (TestIDEObject.selectedNode.contains("Row/")) {
                 TestIDEObject.listProposalsDialog
                         .addAll(RowIssueResolver.suggestCellListWorkspace((ITestStep) TestIDEObject.focus));
-            } else if (TestIDEObject.selectedElement.contains("TestStep/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestStep/")) {
                 TestIDEObject.listProposalsDialog
                         .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) TestIDEObject.focus));
                 TestIDEObject.listProposalsDialog.addAll(
@@ -34,6 +34,6 @@ public class ListProposalsActionImpl extends TestIDEObject implements ListPropos
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        setSelectedElement(keyMap.get("Node Path"));
+        setSelectedNode(keyMap.get("Node Path"));
     }
 }

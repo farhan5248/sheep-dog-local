@@ -31,12 +31,12 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedElement.contains("Cell/")) {
+            if (TestIDEObject.selectedNode.contains("Cell/")) {
                 ICell cell = (ICell) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                     TestIDEObject.listQuickfixesDialog.addAll(CellIssueResolver.correctNameOnly(cell));
                 }
-            } else if (TestIDEObject.selectedElement.contains("Row/")) {
+            } else if (TestIDEObject.selectedNode.contains("Row/")) {
                 IRow row = (IRow) TestIDEObject.focus;
                 ITestStep testStep = (ITestStep) row.getParent().getParent();
                 if (TestIDEObject.validateDialog.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
@@ -49,13 +49,13 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
                         }
                     }
                 }
-            } else if (TestIDEObject.selectedElement.contains("Text/")) {
+            } else if (TestIDEObject.selectedNode.contains("Text/")) {
                 IText text = (IText) TestIDEObject.focus;
                 ITestStep testStep = (ITestStep) text.getParent();
                 if (TestIDEObject.validateDialog.contentEquals(TextIssueTypes.TEXT_NAME_WORKSPACE.description)) {
                     TestIDEObject.listQuickfixesDialog.addAll(TextIssueResolver.correctNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedElement.contains("TestStep/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestStep/")) {
                 ITestStep testStep = (ITestStep) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog
                         .contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
@@ -66,14 +66,15 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
                     TestIDEObject.listQuickfixesDialog
                             .addAll(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedElement.contains("TestStepContainer/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestCase/")
+                    || TestIDEObject.selectedNode.contains("TestSetup/")) {
                 ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog
                         .contentEquals(TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description)) {
                     TestIDEObject.listQuickfixesDialog
                             .addAll(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));
                 }
-            } else if (TestIDEObject.selectedElement.contains("TestSuite/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestSuite/")) {
                 ITestSuite testSuite = (ITestSuite) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog.contentEquals(TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description)) {
                     TestIDEObject.listQuickfixesDialog.addAll(TestSuiteIssueResolver.correctNameOnly(testSuite));
@@ -88,6 +89,6 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        setSelectedElement(keyMap.get("Node Path"));
+        setSelectedNode(keyMap.get("Node Path"));
     }
 }

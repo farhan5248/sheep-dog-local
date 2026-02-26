@@ -14,7 +14,7 @@ Feature: Proposals for File and Workspace Step Objects
 
     It should show that if there's objects from more than one component, it only picks the matching component
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name                       |
           | The daily batchjob Output file is present |
           | empty                                     |
@@ -22,8 +22,8 @@ Feature: Proposals for File and Workspace Step Objects
           | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/2 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/2 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                |
           | The Output file                | Output file                |
@@ -32,7 +32,7 @@ Feature: Proposals for File and Workspace Step Objects
 
   Scenario: Has component has existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name                       |
           | The daily batchjob Output file is present |
           | The daily batchjob                        |
@@ -40,8 +40,8 @@ Feature: Proposals for File and Workspace Step Objects
           | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/2 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/2 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                |
           | The Output file                | Output file                |

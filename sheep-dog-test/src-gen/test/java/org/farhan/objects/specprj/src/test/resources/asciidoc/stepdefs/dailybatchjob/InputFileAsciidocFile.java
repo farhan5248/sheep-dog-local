@@ -8,13 +8,13 @@ public interface InputFileAsciidocFile {
 
     public void setStepDefinitionName(HashMap<String, String> keyMap);
 
+    public void setStepDefinitionDescription(HashMap<String, String> keyMap);
+
     public void setStepObjectDescription(HashMap<String, String> keyMap);
 
     public void setStepParametersName(HashMap<String, String> keyMap);
 
     public void setStepParametersDescription(HashMap<String, String> keyMap);
-
-    public void setStepDefinitionDescription(HashMap<String, String> keyMap);
 
     public void assertStepObjectName(HashMap<String, String> keyMap);
 

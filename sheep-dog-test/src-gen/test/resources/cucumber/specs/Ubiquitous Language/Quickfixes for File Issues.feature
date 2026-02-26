@@ -7,7 +7,7 @@ Feature: Quickfixes for File Issues
 
   Scenario: The first step needs to have a component specified quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
@@ -16,8 +16,8 @@ Feature: Quickfixes for File Issues
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
       And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                       |
-          | TestSuite/1/TestStepContainer/1 |
+          | Node Path              |
+          | TestSuite/1/TestCase/1 |
      Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: No component in the first step triggers an error quickfix
@@ -25,7 +25,7 @@ Feature: Quickfixes for File Issues
     The first step needs to have a component specified.
     The other steps default to that one.
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name                         |
           | The Input file is present                   |
           | The daily batchjob Input file is downloaded |
@@ -34,7 +34,7 @@ Feature: Quickfixes for File Issues
           The first step must have a component
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                       |
-          | TestSuite/1/TestStepContainer/1 |
+          | Node Path              |
+          | TestSuite/1/TestCase/1 |
      Then The xtext plugin list quickfixes popup will be empty
 

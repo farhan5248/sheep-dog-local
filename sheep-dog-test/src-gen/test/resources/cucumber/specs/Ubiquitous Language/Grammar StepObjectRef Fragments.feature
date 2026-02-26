@@ -6,11 +6,11 @@ Feature: Grammar StepObjectRef Fragments
 
   Scenario Outline: Component Fragment
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step type is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
      When The xtext plugin validate action is performed
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file step object ref component fragment will be decomposed as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref component fragment will be decomposed as follows
           | Component   | Component Name   | Component Type   |
           | <Component> | <Component Name> | <Component Type> |
 
@@ -27,11 +27,11 @@ Feature: Grammar StepObjectRef Fragments
 
   Scenario Outline: Object Fragment
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step type is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
      When The xtext plugin validate action is performed
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file step object ref object fragment will be decomposed as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref object fragment will be decomposed as follows
           | Object   | Object Name   | Object Type   |
           | <Object> | <Object Name> | <Object Type> |
 
@@ -44,11 +44,11 @@ Feature: Grammar StepObjectRef Fragments
 
   Scenario Outline: Object Vertex Fragment
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step type is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
      When The xtext plugin validate action is performed
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file step object ref object vertex fragment will be decomposed as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref object vertex fragment will be decomposed as follows
           | Object Name   | Object Type   |
           | <Object Name> | <Object Type> |
 
@@ -67,11 +67,11 @@ Feature: Grammar StepObjectRef Fragments
 
   Scenario Outline: Object Edge Fragment
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step type is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
      When The xtext plugin validate action is performed
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file step object ref object edge fragment will be decomposed as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref object edge fragment will be decomposed as follows
           | Object Name   | Object Type   |
           | <Object Name> | <Object Type> |
 

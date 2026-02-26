@@ -16,23 +16,23 @@ Feature: Code Generation for Workspace Issues
 
   Scenario: This object doesn't exist generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
-          | Full Name                                |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
+          | Test Step Full Name                      |
           | The daily batchjob Input file is present |
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id                                             | Proposal Description |
           | Generate Input file - daily batchjob/Input file.feature | empty                |
      When The xtext plugin apply quickfix action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/1 |
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
           | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
 
   Scenario: This object step definition doesn't exist generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
-          | Full Name                                |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
+          | Test Step Full Name                      |
           | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name |
@@ -41,8 +41,8 @@ Feature: Code Generation for Workspace Issues
           | Proposal Id         | Proposal Description |
           | Generate is present | empty                |
      When The xtext plugin apply quickfix action is performed as follows
-          | Node Path                                  |
-          | TestSuite/1/TestStepContainer/1/TestStep/1 |
+          | Node Path                         |
+          | TestSuite/1/TestCase/1/TestStep/1 |
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
           | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is absent            |
@@ -50,13 +50,13 @@ Feature: Code Generation for Workspace Issues
 
   Scenario: This object step definition parameter set doesn't exist generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
-          | Full Name                                       |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
+          | Test Step Full Name                             |
           | The daily batchjob Input file is set as follows |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1/Cell node is created as follows
-          | Name |
-          | N1   |
-          | N2   |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell node is created as follows
+          | Cell Name |
+          | N1        |
+          | N2        |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name | Step Parameters Name |
           | daily batchjob/Input file.feature | is set as follows    | E1, E2, E3           |
@@ -64,8 +64,8 @@ Feature: Code Generation for Workspace Issues
           | Proposal Id     | Proposal Description |
           | Generate N1, N2 | empty                |
      When The xtext plugin apply quickfix action is performed as follows
-          | Node Path                                              |
-          | TestSuite/1/TestStepContainer/1/TestStep/1/Table/Row/1 |
+          | Node Path                                     |
+          | TestSuite/1/TestCase/1/TestStep/1/Table/Row/1 |
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
           | Step Object Name                  | Step Definition Name | Step Parameters Name |
           | daily batchjob/Input file.feature | is set as follows    | E1, E2, E3           |
@@ -73,12 +73,12 @@ Feature: Code Generation for Workspace Issues
 
   Scenario: This object step definition text parameter doesn't exist generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1 node is created as follows
-          | Full Name                                       |
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
+          | Test Step Full Name                             |
           | The daily batchjob Input file is set as follows |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestStepContainer/1/TestStep/1/Text node is created as follows
-          | Content   |
-          | Some text |
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Text node is created as follows
+          | Text Content |
+          | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is set as follows    |
@@ -86,8 +86,8 @@ Feature: Code Generation for Workspace Issues
           | Proposal Id      | Proposal Description |
           | Generate Content | empty                |
      When The xtext plugin apply quickfix action is performed as follows
-          | Node Path                                        |
-          | TestSuite/1/TestStepContainer/1/TestStep/1/Text/ |
+          | Node Path                               |
+          | TestSuite/1/TestCase/1/TestStep/1/Text/ |
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
           | Step Object Name                  | Step Definition Name | Step Parameters Name |
           | daily batchjob/Input file.feature | is set as follows    | Content              |

@@ -10,13 +10,13 @@ Feature: Validation for File Issues
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Object Name                  | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
      When The xtext plugin validate action is performed as follows
-          | Node Path                       |
-          | TestSuite/1/TestStepContainer/1 |
+          | Node Path              |
+          | TestSuite/1/TestCase/1 |
      Then The xtext plugin validate annotation will be empty
 
   Scenario: No component in the first step triggers an error validation
@@ -24,13 +24,13 @@ Feature: Validation for File Issues
     The first step needs to have a component specified.
     The other steps default to that one.
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step list assignment is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name                         |
           | The Input file is present                   |
           | The daily batchjob Input file is downloaded |
      When The xtext plugin validate action is performed as follows
-          | Node Path                       |
-          | TestSuite/1/TestStepContainer/1 |
+          | Node Path              |
+          | TestSuite/1/TestCase/1 |
      Then The xtext plugin validate annotation will be set as follows
           """
           The first step must have a component

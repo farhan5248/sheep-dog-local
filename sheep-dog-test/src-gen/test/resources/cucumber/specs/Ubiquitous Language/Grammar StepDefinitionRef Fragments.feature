@@ -6,11 +6,11 @@ Feature: Grammar StepDefinitionRef Fragments
 
   Scenario Outline: Part Fragment
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step type is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name                                       |
           | The daily batchjob Output file <Step Definition Ref Name> |
      When The xtext plugin validate action is performed
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file step definition ref part fragment will be decomposed as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step definition ref part fragment will be decomposed as follows
           | Part   | Part Name   | Part Type   |
           | <Part> | <Part Name> | <Part Type> |
 
@@ -26,11 +26,11 @@ Feature: Grammar StepDefinitionRef Fragments
 
   Scenario Outline: State Fragment
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file test step type is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name                                       |
           | The daily batchjob Output file <Step Definition Ref Name> |
      When The xtext plugin validate action is performed
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file step definition ref state fragment will be decomposed as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step definition ref state fragment will be decomposed as follows
           | State   | State Modality   | State Type   |
           | <State> | <State Modality> | <State Type> |
 
