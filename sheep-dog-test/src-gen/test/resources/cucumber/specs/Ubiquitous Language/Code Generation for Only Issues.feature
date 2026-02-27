@@ -12,9 +12,15 @@ Feature: Code Generation for Only Issues
       And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell node is created as follows
           | Cell Name        |
           | lowercase header |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Object Name                  | Step Definition Name | Step Parameters Name |
-          | daily batchjob/Input file.feature | is present           | lowercase header     |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+          | Step Object Name                  |
+          | daily batchjob/Input file.feature |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
+          | Step Definition Name |
+          | is present           |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition/1/StepParameters node is created as follows
+          | Step Parameters Name |
+          | lowercase header     |
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id          | Proposal Description                    | Proposal Value   |
           | Capitalize cell name | Capitalize the first letter of the name | Lowercase header |
@@ -36,7 +42,7 @@ Feature: Code Generation for Only Issues
      When The xtext plugin apply quickfix action is performed as follows
           | Node Path   |
           | TestSuite/1 |
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file will be created as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1 node will be created as follows
           | Test Suite Name   |
           | Lowercase process |
 

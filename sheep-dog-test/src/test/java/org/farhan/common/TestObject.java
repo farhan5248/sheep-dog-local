@@ -63,8 +63,16 @@ public abstract class TestObject {
     }
 
     private void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
-        List<List<String>> data = dataTable.asLists();
 
+        if (keyValue.get("part") != null) {
+            if (operation.contentEquals("set")) {
+                createStepDependencies(keyValue.get("part"));
+            } else {
+                setSelectedNode(keyValue.get("part"));
+            }
+        }
+
+        List<List<String>> data = dataTable.asLists();
         ArrayList<String> headers = new ArrayList<String>();
         for (String cell : data.get(0)) {
             headers.add(cell);
@@ -86,6 +94,15 @@ public abstract class TestObject {
     }
 
     private void processInputOutputs(String key, String value, String operation, String sectionName) {
+
+        if (keyValue.get("part") != null) {
+            if (operation.contentEquals("set")) {
+                createStepDependencies(keyValue.get("part"));
+            } else {
+                setSelectedNode(keyValue.get("part"));
+            }
+        }
+        
         HashMap<String, String> row = new HashMap<String, String>();
         row.put(key, value);
         try {
@@ -121,7 +138,11 @@ public abstract class TestObject {
         keyValue.put("path", path);
     }
 
-    public void createStepDependencies(String part) {
+    protected abstract void createStepDependencies(String path);
+
+    protected abstract void setSelectedNode(String path);
+
+    public void setPart(String part) {
         keyValue.put("part", part);
     }
 }

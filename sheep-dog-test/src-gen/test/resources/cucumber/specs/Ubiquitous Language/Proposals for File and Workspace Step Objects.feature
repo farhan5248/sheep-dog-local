@@ -18,9 +18,12 @@ Feature: Proposals for File and Workspace Step Objects
           | Test Step Full Name                       |
           | The daily batchjob Output file is present |
           | empty                                     |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Object Name                  | Step Definition Name |
-          | daily batchjob/Input file.feature | is present           |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+          | Step Object Name                  |
+          | daily batchjob/Input file.feature |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
+          | Step Definition Name |
+          | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                         |
           | TestSuite/1/TestCase/1/TestStep/2 |
@@ -36,9 +39,12 @@ Feature: Proposals for File and Workspace Step Objects
           | Test Step Full Name                       |
           | The daily batchjob Output file is present |
           | The daily batchjob                        |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Object Name                  | Step Definition Name |
-          | daily batchjob/Input file.feature | is present           |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+          | Step Object Name                  |
+          | daily batchjob/Input file.feature |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
+          | Step Definition Name |
+          | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                         |
           | TestSuite/1/TestCase/1/TestStep/2 |

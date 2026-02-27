@@ -35,9 +35,12 @@ Feature: Proposals for Workspace Step Definitions
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name           |
           | The daily batchjob Input file |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Object Name                  | Step Definition Name | Step Definition Description |
-          | daily batchjob/Input file.feature | is present           | Creates empty file          |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+          | Step Object Name                  |
+          | daily batchjob/Input file.feature |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
+          | Step Definition Name | Step Definition Description |
+          | is present           | Creates empty file          |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                         |
           | TestSuite/1/TestCase/1/TestStep/1 |
@@ -51,9 +54,12 @@ Feature: Proposals for Workspace Step Definitions
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
           | The Input file                           |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Object Name                  | Step Definition Name | Step Definition Description |
-          | daily batchjob/Input file.feature | is present           | Creates empty file          |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+          | Step Object Name                  |
+          | daily batchjob/Input file.feature |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
+          | Step Definition Name | Step Definition Description |
+          | is present           | Creates empty file          |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                         |
           | TestSuite/1/TestCase/1/TestStep/1 |

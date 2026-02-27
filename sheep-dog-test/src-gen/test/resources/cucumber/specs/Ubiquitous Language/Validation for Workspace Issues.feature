@@ -25,9 +25,12 @@ Feature: Validation for Workspace Issues
     Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Object Name                  | Step Definition Name |
-          | daily batchjob/Input file.feature | is absent            |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+          | Step Object Name                  |
+          | daily batchjob/Input file.feature |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
+          | Step Definition Name |
+          | is absent            |
      When The xtext plugin validate action is performed as follows
           | Node Path                         |
           | TestSuite/1/TestCase/1/TestStep/1 |
@@ -44,9 +47,18 @@ Feature: Validation for Workspace Issues
       And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell node is created as follows
           | Cell Name  |
           | New Header |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Object Name                  | Step Definition Name | Step Parameters Name |
-          | daily batchjob/Input file.feature | is set as follows    | Existing Header      |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+          | Step Object Name                  |
+          | daily batchjob/Input file.feature |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
+          | Step Definition Name |
+          | is set as follows    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition/1/StepParameters node is created as follows
+          | Step Parameters Name |
+          | Existing Header      |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition/1/StepParameters/1/Table/Row/1/Cell node is created as follows
+          | Cell Name       |
+          | Existing Header |
      When The xtext plugin validate action is performed as follows
           | Node Path                                     |
           | TestSuite/1/TestCase/1/TestStep/1/Table/Row/1 |
@@ -65,9 +77,18 @@ Feature: Validation for Workspace Issues
       And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Text node is created as follows
           | Text Content |
           | Some text    |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Object Name                  | Step Definition Name | Step Parameters Name |
-          | daily batchjob/Input file.feature | is set as follows    | Content              |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+          | Step Object Name                  |
+          | daily batchjob/Input file.feature |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
+          | Step Definition Name |
+          | is set as follows    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition/1/StepParameters node is created as follows
+          | Step Parameters Name |
+          | Content              |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition/1/StepParameters/1/Table/Row/1/Cell node is created as follows
+          | Cell Name |
+          | Content   |
      When The xtext plugin validate action is performed as follows
           | Node Path                               |
           | TestSuite/1/TestCase/1/TestStep/1/Text/ |
@@ -83,9 +104,12 @@ Feature: Validation for Workspace Issues
       And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Text node is created as follows
           | Text Content |
           | Some text    |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Object Name                  | Step Definition Name |
-          | daily batchjob/Input file.feature | is set as follows    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+          | Step Object Name                  |
+          | daily batchjob/Input file.feature |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
+          | Step Definition Name |
+          | is set as follows    |
      When The xtext plugin validate action is performed as follows
           | Node Path                               |
           | TestSuite/1/TestCase/1/TestStep/1/Text/ |

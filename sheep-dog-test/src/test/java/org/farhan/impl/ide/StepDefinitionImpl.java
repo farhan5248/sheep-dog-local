@@ -44,7 +44,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     @Override
     public IStepParameters getStepParameters(int index) {
-        throw new UnsupportedOperationException("getStepParameters(int index) is not implemented");
+        return stepParametersList.get(index);
     }
 
     @Override

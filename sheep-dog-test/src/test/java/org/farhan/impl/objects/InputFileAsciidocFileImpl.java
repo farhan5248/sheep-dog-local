@@ -2,11 +2,12 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 import org.farhan.common.TestIDEObject;
+import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
-import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.junit.jupiter.api.Assertions;
@@ -17,42 +18,56 @@ import io.cucumber.guice.ScenarioScoped;
 public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFileAsciidocFile {
 
     @Override
-    public void assertStepObjectName(HashMap<String, String> keyMap) {
-        try {
-            Assertions.assertNotNull(TestIDEObject.testProject.getStepObject(keyMap.get("Step Object Name")));
-        } catch (Exception e) {
-            Assertions.fail(e);
+    public void assertCellName(HashMap<String, String> keyMap) {
+        if (focus instanceof ICell) {
+            focus = ((ICell) focus).getParent();
         }
-    }
-
-    @Override
-    public void assertStepParametersName(HashMap<String, String> keyMap) {
-        try {
-            IStepObject stepObject = TestIDEObject.testProject.getStepObject(keyMap.get("Step Object Name"));
-            IStepDefinition stepDefinition = stepObject.getStepDefinition(keyMap.get("Step Definition Name"));
-            if (stepDefinition.getStepParameters(keyMap.get("Step Parameters Name")) != null) {
-                return;
-            }
-            Assertions.fail("No parameters found: " + keyMap.get("Step Parameters Name"));
-        } catch (Exception e) {
-            Assertions.fail(e);
-        }
+        ICell cell = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
+        Assertions.assertNotNull(cell);
     }
 
     @Override
     public void assertStepDefinitionName(HashMap<String, String> keyMap) {
-        try {
-            IStepObject stepObject = TestIDEObject.testProject.getStepObject(keyMap.get("Step Object Name"));
-            Assertions.assertNotNull(stepObject);
-            for (IStepDefinition stepDef : stepObject.getStepDefinitionList()) {
-                if (stepDef.getName().contentEquals(keyMap.get("Step Definition Name"))) {
-                    return;
-                }
-            }
-            Assertions.fail("No step defintion found" + keyMap.get("Step Definition Name"));
-        } catch (Exception e) {
-            Assertions.fail(e);
+        if (focus instanceof IStepDefinition) {
+            focus = ((IStepDefinition) focus).getParent();
         }
+        IStepDefinition stepDef = ((IStepObject) focus)
+                .getStepDefinition(replaceKeyword(keyMap.get("Step Definition Name")));
+        Assertions.assertNotNull(stepDef);
+    }
+
+    @Override
+    public void assertStepObjectName(HashMap<String, String> keyMap) {
+        if (focus instanceof IStepObject) {
+            focus = ((IStepObject) focus).getParent();
+        }
+        IStepObject stepObject = ((ITestProject) focus).getStepObject(replaceKeyword(keyMap.get("Step Object Name")));
+        Assertions.assertNotNull(stepObject);
+    }
+
+    @Override
+    public void assertStepParametersName(HashMap<String, String> keyMap) {
+        if (focus instanceof IStepParameters) {
+            focus = ((IStepParameters) focus).getParent();
+        }
+        IStepParameters stepParameters = ((IStepDefinition) focus)
+                .getStepParameters(replaceKeyword(keyMap.get("Step Parameters Name")));
+        Assertions.assertNotNull(stepParameters);
+    }
+
+    @Override
+    public void setCellName(HashMap<String, String> keyMap) {
+        addCellWithName(keyMap.get("Cell Name"));
+    }
+
+    @Override
+    public void setStepDefinitionDescription(HashMap<String, String> keyMap) {
+        setStepDefinitionDescription(replaceKeyword(keyMap.get("Step Definition Description")));
+    }
+
+    @Override
+    public void setStepDefinitionName(HashMap<String, String> keyMap) {
+        addStepDefinitionWithName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
     @Override
@@ -68,73 +83,17 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
 
     @Override
     public void setStepObjectName(HashMap<String, String> keyMap) {
-        try {
-            SheepDogBuilder.createStepObject(TestIDEObject.testProject, keyMap.get("Step Object Name"));
-        } catch (Exception e) {
-            Assertions.fail(e);
-        }
-    }
-
-    @Override
-    public void setStepParametersName(HashMap<String, String> keyMap) {
-        try {
-            IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
-                    keyMap.get("Step Object Name"));
-            IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
-                    keyMap.get("Step Definition Name"));
-            String name = keyMap.get("Step Parameters Name");
-            IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDefinition, name);
-            ITable table = SheepDogBuilder.createTable(stepParameters);
-            IRow row = SheepDogBuilder.createRow(table);
-            for (String h : name.split(",")) {
-                SheepDogBuilder.createCell(row, h.trim());
-            }
-        } catch (Exception e) {
-            Assertions.fail(e);
-        }
-    }
-
-    @Override
-    public void setStepDefinitionDescription(HashMap<String, String> keyMap) {
-        try {
-            IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
-                    keyMap.get("Step Object Name"));
-            IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
-                    keyMap.get("Step Definition Name"));
-            SheepDogBuilder.createLine(stepDefinition, replaceKeyword(keyMap.get("Step Definition Description")));
-        } catch (Exception e) {
-            Assertions.fail(e);
-        }
-    }
-
-    @Override
-    public void setStepDefinitionName(HashMap<String, String> keyMap) {
-        try {
-            IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
-                    keyMap.get("Step Object Name"));
-            SheepDogBuilder.createStepDefinition(stepObject, keyMap.get("Step Definition Name"));
-        } catch (Exception e) {
-            Assertions.fail(e);
-        }
+        addStepObjectWithName(replaceKeyword(keyMap.get("Step Object Name")));
     }
 
     @Override
     public void setStepParametersDescription(HashMap<String, String> keyMap) {
-        try {
-            IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
-                    keyMap.get("Step Object Name"));
-            IStepDefinition stepDefinition = SheepDogBuilder.createStepDefinition(stepObject,
-                    keyMap.get("Step Definition Name"));
-            String name = keyMap.get("Step Parameters Name");
-            IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDefinition, name);
-            ITable table = SheepDogBuilder.createTable(stepParameters);
-            IRow row = SheepDogBuilder.createRow(table);
-            for (String h : name.split(",")) {
-                SheepDogBuilder.createCell(row, h.trim());
-            }
-            SheepDogBuilder.createLine(stepParameters, replaceKeyword(keyMap.get("Step Parameters Description")));
-        } catch (Exception e) {
-            Assertions.fail(e);
-        }
+        setStepParametersDescription(replaceKeyword(keyMap.get("Step Parameters Description")));
     }
+
+    @Override
+    public void setStepParametersName(HashMap<String, String> keyMap) {
+        addStepParametersWithName(replaceKeyword(keyMap.get("Step Parameters Name")));
+    }
+
 }

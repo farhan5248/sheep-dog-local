@@ -34,7 +34,12 @@ public class RowImpl implements IRow {
 
     @Override
     public ICell getCell(String name) {
-        throw new UnsupportedOperationException("getCell(String name) is not implemented");
+        for (ICell c : cellList) {
+            if (c.getName().contentEquals(name)) {
+                return c;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -51,7 +56,8 @@ public class RowImpl implements IRow {
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < cellList.size(); i++) {
-            if (i > 0) sb.append(", ");
+            if (i > 0)
+                sb.append(", ");
             sb.append(cellList.get(i).getName());
         }
         return sb.toString();

@@ -1,11 +1,10 @@
 package org.farhan.impl.objects;
 
 import java.util.HashMap;
-import java.util.List;
-
 import org.farhan.common.TestIDEObject;
 import org.farhan.dsl.lang.ICell;
 import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.lang.ITestProject;
 import org.farhan.dsl.lang.ITestStepContainer;
 import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;
@@ -18,55 +17,30 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
 
     @Override
     public void assertCellName(HashMap<String, String> keyMap) {
-        try {
-            IRow row = (IRow) focus;
-            String[] expectedContents = keyMap.get("Cell Name").split(",");
-            List<ICell> cells = row.getCellList();
-
-            if (cells.size() != expectedContents.length) {
-                Assertions.fail("Expected " + expectedContents.length + " cells but found " + cells.size());
-            }
-
-            for (int i = 0; i < expectedContents.length; i++) {
-                String expected = expectedContents[i].trim();
-                String actual = cells.get(i).getName();
-                if (!actual.contentEquals(expected)) {
-                    Assertions.fail("Cell " + i + ": Expected '" + expected + "' but found '" + actual + "'");
-                }
-            }
-        } catch (Exception e) {
-            Assertions.fail(e);
+        if (focus instanceof ICell) {
+            focus = ((ICell) focus).getParent();
         }
+        ICell cell = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
+        Assertions.assertNotNull(cell);
     }
 
     @Override
     public void assertTestCaseName(HashMap<String, String> keyMap) {
-        try {
-            ITestStepContainer testCase = (ITestStepContainer) focus;
-            String expectedName = replaceKeyword(keyMap.get("Test Case Name"));
-            String actualName = testCase.getName();
-
-            if (!actualName.contentEquals(expectedName)) {
-                Assertions.fail("Expected test case name: '" + expectedName + "' but found: '" + actualName + "'");
-            }
-        } catch (Exception e) {
-            Assertions.fail(e);
+        if (focus instanceof ITestStepContainer) {
+            focus = ((ITestStepContainer) focus).getParent();
         }
+        ITestStepContainer testCase = ((ITestSuite) focus)
+                .getTestStepContainer(replaceKeyword(keyMap.get("Test Case Name")));
+        Assertions.assertNotNull(testCase);
     }
 
     @Override
     public void assertTestSuiteName(HashMap<String, String> keyMap) {
-        try {
-            ITestSuite testSuite = (ITestSuite) focus;
-            String expectedName = replaceKeyword(keyMap.get("Test Suite Name"));
-            String actualName = testSuite.getName();
-
-            if (!actualName.contentEquals(expectedName)) {
-                Assertions.fail("Expected test suite name: '" + expectedName + "' but found: '" + actualName + "'");
-            }
-        } catch (Exception e) {
-            Assertions.fail(e);
+        if (focus instanceof ITestSuite) {
+            focus = ((ITestSuite) focus).getParent();
         }
+        ITestSuite testSuite = ((ITestProject) focus).getTestSuite(replaceKeyword(keyMap.get("Test Suite Name")));
+        Assertions.assertNotNull(testSuite);
     }
 
     @Override
@@ -90,12 +64,12 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
 
     @Override
     public void setTestSuiteName(HashMap<String, String> keyMap) {
-        addTestSuite(replaceKeyword(keyMap.get("Test Suite Name")));
+        addTestSuiteWithName(replaceKeyword(keyMap.get("Test Suite Name")));
     }
 
     @Override
     public void setTextContent(HashMap<String, String> keyMap) {
-        addText(keyMap.get("Text Content"));
+        addTextWithContent(keyMap.get("Text Content"));
     }
 
 }
