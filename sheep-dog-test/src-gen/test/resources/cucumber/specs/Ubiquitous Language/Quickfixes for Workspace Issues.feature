@@ -29,11 +29,8 @@ Feature: Quickfixes for Workspace Issues
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
-          | Step Object Name                  |
-          | daily batchjob/Input file.feature |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
-          | Step Definition Name |
-          | is absent            |
+          | Step Object Name                  | Step Definition Name |
+          | daily batchjob/Input file.feature | is absent            |
       And The xtext plugin validate annotation is set as follows
           """
           The step definition doesn't exist for the step object
@@ -58,14 +55,8 @@ Feature: Quickfixes for Workspace Issues
           | N1        |
           | N2        |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
-          | Step Object Name                  |
-          | daily batchjob/Input file.feature |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
-          | Step Definition Name |
-          | is set as follows    |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition/1/StepParameters node is created as follows
-          | Step Parameters Name |
-          | E1, E2, E3           |
+          | Step Object Name                  | Step Definition Name | Step Parameters Name |
+          | daily batchjob/Input file.feature | is set as follows    | E1, E2, E3           |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition/1/StepParameters/1/Table/Row/1/Cell node is created as follows
           | Cell Name |
           | E1        |
@@ -94,14 +85,8 @@ Feature: Quickfixes for Workspace Issues
           | Text Content |
           | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
-          | Step Object Name                  |
-          | daily batchjob/Input file.feature |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
-          | Step Definition Name |
-          | is set as follows    |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition/1/StepParameters node is created as follows
-          | Step Parameters Name |
-          | Content              |
+          | Step Object Name                  | Step Definition Name | Step Parameters Name |
+          | daily batchjob/Input file.feature | is set as follows    | Content              |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition/1/StepParameters/1/Table/Row/1/Cell node is created as follows
           | Cell Name |
           | Content   |
@@ -120,11 +105,8 @@ Feature: Quickfixes for Workspace Issues
           | Text Content |
           | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
-          | Step Object Name                  |
-          | daily batchjob/Input file.feature |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
-          | Step Definition Name |
-          | is set as follows    |
+          | Step Object Name                  | Step Definition Name |
+          | daily batchjob/Input file.feature | is set as follows    |
       And The xtext plugin validate annotation is set as follows
           """
           The step parameters don't exist for the step definition

@@ -22,8 +22,8 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
         if (focus instanceof ICell) {
             focus = ((ICell) focus).getParent();
         }
-        ICell cell = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
-        Assertions.assertNotNull(cell);
+        focus = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
+        Assertions.assertNotNull(focus);
     }
 
     @Override
@@ -31,9 +31,8 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
         if (focus instanceof IStepDefinition) {
             focus = ((IStepDefinition) focus).getParent();
         }
-        IStepDefinition stepDef = ((IStepObject) focus)
-                .getStepDefinition(replaceKeyword(keyMap.get("Step Definition Name")));
-        Assertions.assertNotNull(stepDef);
+        focus = ((IStepObject) focus).getStepDefinition(replaceKeyword(keyMap.get("Step Definition Name")));
+        Assertions.assertNotNull(focus);
     }
 
     @Override
@@ -41,8 +40,8 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
         if (focus instanceof IStepObject) {
             focus = ((IStepObject) focus).getParent();
         }
-        IStepObject stepObject = ((ITestProject) focus).getStepObject(replaceKeyword(keyMap.get("Step Object Name")));
-        Assertions.assertNotNull(stepObject);
+        focus = ((ITestProject) focus).getStepObject(replaceKeyword(keyMap.get("Step Object Name")));
+        Assertions.assertNotNull(focus);
     }
 
     @Override
@@ -50,9 +49,8 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
         if (focus instanceof IStepParameters) {
             focus = ((IStepParameters) focus).getParent();
         }
-        IStepParameters stepParameters = ((IStepDefinition) focus)
-                .getStepParameters(replaceKeyword(keyMap.get("Step Parameters Name")));
-        Assertions.assertNotNull(stepParameters);
+        focus = ((IStepDefinition) focus).getStepParameters(replaceKeyword(keyMap.get("Step Parameters Name")));
+        Assertions.assertNotNull(focus);
     }
 
     @Override

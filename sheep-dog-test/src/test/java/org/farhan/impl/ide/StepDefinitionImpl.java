@@ -29,7 +29,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     @Override
     public IStepObject getParent() {
-        throw new UnsupportedOperationException("getParent() is not implemented");
+        return parent;
     }
 
     @Override

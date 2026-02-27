@@ -28,11 +28,8 @@ Feature: Proposals for Workspace Step Objects
           | Test Step Full Name |
           | empty               |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
-          | Step Object Name                  | Step Object Description |
-          | daily batchjob/Input file.feature | Description\n           |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
-          | Step Definition Name |
-          | is present           |
+          | Step Object Name                  | Step Object Description | Step Definition Name |
+          | daily batchjob/Input file.feature | Description             | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                         |
           | TestSuite/1/TestCase/1/TestStep/1 |
@@ -56,11 +53,8 @@ Feature: Proposals for Workspace Step Objects
           | Test Step Full Name |
           | The daily batchjob  |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
-          | Step Object Name                  | Step Object Description |
-          | daily batchjob/Input file.feature | Description             |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject/1/StepDefinition node is created as follows
-          | Step Definition Name |
-          | is present           |
+          | Step Object Name                  | Step Object Description | Step Definition Name |
+          | daily batchjob/Input file.feature | Description             | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                         |
           | TestSuite/1/TestCase/1/TestStep/1 |

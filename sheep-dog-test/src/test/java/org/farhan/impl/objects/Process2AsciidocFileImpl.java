@@ -20,8 +20,8 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
         if (focus instanceof ICell) {
             focus = ((ICell) focus).getParent();
         }
-        ICell cell = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
-        Assertions.assertNotNull(cell);
+        focus = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
+        Assertions.assertNotNull(focus);
     }
 
     @Override
@@ -29,9 +29,8 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
         if (focus instanceof ITestStepContainer) {
             focus = ((ITestStepContainer) focus).getParent();
         }
-        ITestStepContainer testCase = ((ITestSuite) focus)
-                .getTestStepContainer(replaceKeyword(keyMap.get("Test Case Name")));
-        Assertions.assertNotNull(testCase);
+        focus = ((ITestSuite) focus).getTestStepContainer(replaceKeyword(keyMap.get("Test Case Name")));
+        Assertions.assertNotNull(focus);
     }
 
     @Override
@@ -39,8 +38,8 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
         if (focus instanceof ITestSuite) {
             focus = ((ITestSuite) focus).getParent();
         }
-        ITestSuite testSuite = ((ITestProject) focus).getTestSuite(replaceKeyword(keyMap.get("Test Suite Name")));
-        Assertions.assertNotNull(testSuite);
+        focus = ((ITestProject) focus).getTestSuite(replaceKeyword(keyMap.get("Test Suite Name")));
+        Assertions.assertNotNull(focus);
     }
 
     @Override
