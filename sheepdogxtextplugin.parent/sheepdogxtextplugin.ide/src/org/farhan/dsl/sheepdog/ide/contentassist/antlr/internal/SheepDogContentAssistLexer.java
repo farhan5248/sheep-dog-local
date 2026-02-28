@@ -34,12 +34,12 @@ public class SheepDogContentAssistLexer extends InternalSheepDogLexer {
 	}
 
 	// Content Assist token mapping (different from runtime):
-	// T__18 = '='           T__19 = 'Step-Object:'     T__20 = '=='
-	// T__21 = 'Step-Definition:'  T__22 = '*'          T__23 = 'Step-Parameters:'
-	// T__24 = 'Test-Suite:'       T__25 = 'Test-Setup:'  T__26 = 'Test-Case:'
-	// T__27 = 'Test-Data:'        T__28 = '+'            T__29 = 'Given:'
-	// T__30 = 'When:'             T__31 = 'Then:'        T__32 = 'And:'
-	// T__33 = '|==='             T__34 = '|'
+	// T__22 = '='           T__23 = 'Step-Object:'     T__24 = '=='
+	// T__25 = 'Step-Definition:'  T__26 = '*'          T__27 = 'Step-Parameters:'
+	// T__28 = 'Test-Suite:'       T__29 = 'Test-Setup:'  T__30 = 'Test-Case:'
+	// T__31 = 'Test-Data:'        T__32 = '+'            T__33 = 'Given:'
+	// T__34 = 'When:'             T__35 = 'Then:'        T__36 = 'And:'
+	// T__37 = '|==='             T__38 = '|'
 
 	@Override
 	public void mTokens() throws RecognitionException {
@@ -60,7 +60,7 @@ public class SheepDogContentAssistLexer extends InternalSheepDogLexer {
 			mRULE_WORD();
 		} else if (hasConstantDelimiter) {
 			if (isKeyword("|")) {
-				mT__34(); // '|'
+				mT__38(); // '|'
 			} else {
 				mRULE_WORD();
 			}
@@ -68,56 +68,56 @@ public class SheepDogContentAssistLexer extends InternalSheepDogLexer {
 			super.mTokens();
 			// single line no collection
 		} else if (isKeyword("+")) {
-			mT__28(); // '+'
+			mT__32(); // '+'
 		} else if (isKeyword("|===")) {
-			mT__33(); // '|==='
+			mT__37(); // '|==='
 		} else if (isKeyword("*")) {
-			mT__22(); // '*'
+			mT__26(); // '*'
 		} else if (isKeyword("==")) {
-			mT__20(); // '=='
+			mT__24(); // '=='
 		} else if (isKeyword("=")) {
-			mT__18(); // '='
+			mT__22(); // '='
 			// single line automatic collection
 		} else if (isKeyword("#")) {
 			mRULE_SL_COMMENT();
 			// single line no delimiter collection
 		} else if (isKeyword("Step-Object:")) {
-			mT__19(); // 'Step-Object:'
+			mT__23(); // 'Step-Object:'
 			hasNoDelimiter = true;
 		} else if (isKeyword("Step-Definition:")) {
-			mT__21(); // 'Step-Definition:'
+			mT__25(); // 'Step-Definition:'
 			hasNoDelimiter = true;
 		} else if (isKeyword("Step-Parameters:")) {
-			mT__23(); // 'Step-Parameters:'
+			mT__27(); // 'Step-Parameters:'
 			hasNoDelimiter = true;
 		} else if (isKeyword("Test-Suite:")) {
-			mT__24(); // 'Test-Suite:'
+			mT__28(); // 'Test-Suite:'
 			hasNoDelimiter = true;
 		} else if (isKeyword("Test-Setup:")) {
-			mT__25(); // 'Test-Setup:'
+			mT__29(); // 'Test-Setup:'
 			hasNoDelimiter = true;
 		} else if (isKeyword("Test-Case:")) {
-			mT__26(); // 'Test-Case:'
+			mT__30(); // 'Test-Case:'
 			hasNoDelimiter = true;
 		} else if (isKeyword("Test-Data:")) {
-			mT__27(); // 'Test-Data:'
+			mT__31(); // 'Test-Data:'
 			hasNoDelimiter = true;
 			// single line constant delimiter collection
 		} else if (isKeyword("|")) {
-			mT__34(); // '|'
+			mT__38(); // '|'
 			hasConstantDelimiter = true;
 			// single line variable delimiter collection
 		} else if (isKeyword("Given:")) {
-			mT__29(); // 'Given:'
+			mT__33(); // 'Given:'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("When:")) {
-			mT__30(); // 'When:'
+			mT__34(); // 'When:'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("Then:")) {
-			mT__31(); // 'Then:'
+			mT__35(); // 'Then:'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("And:")) {
-			mT__32(); // 'And:'
+			mT__36(); // 'And:'
 			hasVariableDelimiter = true;
 		// catch all
 		} else {
