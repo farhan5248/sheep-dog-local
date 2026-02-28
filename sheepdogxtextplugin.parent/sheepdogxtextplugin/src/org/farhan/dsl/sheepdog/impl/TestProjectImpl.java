@@ -15,6 +15,7 @@ public class TestProjectImpl implements ITestProject {
 
 	private IResourceRepository sr;
 	private String projectPath;
+    public final String layer1dir;
 	public final String layer2dir;
 
 	TestProjectImpl(IResourceRepository sr) {
@@ -23,6 +24,7 @@ public class TestProjectImpl implements ITestProject {
 		// can then intercept the project name and save it.
 		this.sr = sr;
 		layer2dir = "src/test/resources/asciidoc/stepdefs";
+        layer1dir = "src/test/resources/asciidoc/specs";
 		projectPath = null;
 	}
 
@@ -102,7 +104,15 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public ArrayList<ITestSuite> getTestSuiteList() {
-		throw new UnsupportedOperationException("getTestSuiteList() is not implemented");
+        ArrayList<ITestSuite> objects = new ArrayList<ITestSuite>();
+        try {
+            for (String testSuiteFileName : sr.list("", projectPath + "/" + layer1dir, getFileExtension())) {
+                objects.add(getTestSuite(testSuiteFileName.replace(projectPath + "/" + layer1dir + "/", "")));
+            }
+        } catch (Exception e) {
+            logger.error("Couldn't get TestSuite list:", e);
+        }
+        return objects;
 	}
 
 	public void setName(String projectPath) {
