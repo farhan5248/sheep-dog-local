@@ -9,7 +9,6 @@ Feature: Grammar Phrase Fragments
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file line type is created as follows
           | Line   |
           | <Line> |
-     When The xtext plugin content highlight action is performed
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file phrase tag fragment will be decomposed as follows
           | Tag List   |
           | <Tag List> |
@@ -23,9 +22,8 @@ Feature: Grammar Phrase Fragments
   Scenario: Todo Fragment
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file line type is created as follows
-          | Line   |
-          | <Line> |
-     When The xtext plugin content highlight action is performed
+          | Line              |
+          | TODO Do something |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file phrase todo fragment will be decomposed as follows
           | Todo Type | Todo Description |
           | TODO      | Do something     |

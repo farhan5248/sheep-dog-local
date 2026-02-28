@@ -76,7 +76,7 @@ public class StepDefinitionRefFragments {
      * @return the state description portion
      */
     public static String getStateDesc(String text) {
-        return getGroup(STEP_DEFINITION_REF, text, 6);
+        return getGroup(STEP_DEFINITION_REF, text, 7);
     }
 
     /**
@@ -87,7 +87,7 @@ public class StepDefinitionRefFragments {
      * @return the state type portion
      */
     public static String getStateType(String text) {
-        return getGroup(STEP_DEFINITION_REF, text, 7);
+        return getGroup(STEP_DEFINITION_REF, text, 6);
     }
 
     /**

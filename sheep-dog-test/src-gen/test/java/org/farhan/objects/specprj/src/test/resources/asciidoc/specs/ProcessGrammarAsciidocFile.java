@@ -14,13 +14,13 @@ public interface ProcessGrammarAsciidocFile {
 
     public void assertStepDefinitionRefPartFragmentPart(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefPartFragmentPartName(HashMap<String, String> keyMap);
+    public void assertStepDefinitionRefPartFragmentPartDescription(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionRefPartFragmentPartType(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefStateFragmentStateModality(HashMap<String, String> keyMap);
+    public void assertStepDefinitionRefStateFragmentStateDescription(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap);
 
@@ -43,8 +43,6 @@ public interface ProcessGrammarAsciidocFile {
     public void assertStepObjectRefObjectVertexFragmentObjectName(HashMap<String, String> keyMap);
 
     public void assertStepObjectRefObjectVertexFragmentObjectType(HashMap<String, String> keyMap);
-
-    public void setTestStepListAssignmentTestStepFullName(HashMap<String, String> keyMap);
 
     public void setTestStepTypeTestStepFullName(HashMap<String, String> keyMap);
 }

@@ -9,7 +9,7 @@ import io.cucumber.datatable.DataTable;
 
 public abstract class TestObject {
 
-    protected HashMap<String, String> keyValue = new HashMap<String, String>();
+    protected HashMap<String, Object> objectKeyMap = new HashMap<String, Object>();
 
     public void assertInputOutputs(DataTable dataTable) {
         processInputOutputs(dataTable, "assert", "");
@@ -64,11 +64,11 @@ public abstract class TestObject {
 
     private void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
 
-        if (keyValue.get("part") != null) {
+        if (objectKeyMap.get("part") != null) {
             if (operation.contentEquals("set")) {
-                createStepDependencies(keyValue.get("part"));
+                createStepDependencies(objectKeyMap.get("part").toString());
             } else {
-                setSelectedNode(keyValue.get("part"));
+                setSelectedNode(objectKeyMap.get("part").toString());
             }
         }
 
@@ -95,14 +95,14 @@ public abstract class TestObject {
 
     private void processInputOutputs(String key, String value, String operation, String sectionName) {
 
-        if (keyValue.get("part") != null) {
+        if (objectKeyMap.get("part") != null) {
             if (operation.contentEquals("set")) {
-                createStepDependencies(keyValue.get("part"));
+                createStepDependencies(objectKeyMap.get("part").toString());
             } else {
-                setSelectedNode(keyValue.get("part"));
+                setSelectedNode(objectKeyMap.get("part").toString());
             }
         }
-        
+
         HashMap<String, String> row = new HashMap<String, String>();
         row.put(key, value);
         try {
@@ -131,11 +131,11 @@ public abstract class TestObject {
     }
 
     void setComponent(String component) {
-        keyValue.put("component", component);
+        objectKeyMap.put("component", component);
     }
 
     void setPath(String path) {
-        keyValue.put("path", path);
+        objectKeyMap.put("path", path);
     }
 
     protected abstract void createStepDependencies(String path);
@@ -143,6 +143,6 @@ public abstract class TestObject {
     protected abstract void setSelectedNode(String path);
 
     public void setPart(String part) {
-        keyValue.put("part", part);
+        objectKeyMap.put("part", part);
     }
 }

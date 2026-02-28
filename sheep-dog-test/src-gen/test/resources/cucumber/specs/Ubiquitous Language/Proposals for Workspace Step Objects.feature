@@ -35,7 +35,7 @@ Feature: Proposals for Workspace Step Objects
           | TestSuite/1/TestCase/1/TestStep/1 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                | Proposal Id | Proposal Description |
-          | The daily batchjob Input file | Input file  | Description\n        |
+          | The daily batchjob Input file | Input file  | Description          |
 
   Scenario: Has component no existing
 

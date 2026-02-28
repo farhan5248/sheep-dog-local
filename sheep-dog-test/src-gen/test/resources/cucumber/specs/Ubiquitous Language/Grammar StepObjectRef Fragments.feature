@@ -9,7 +9,6 @@ Feature: Grammar StepObjectRef Fragments
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
-     When The xtext plugin validate action is performed
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref component fragment will be decomposed as follows
           | Component   | Component Name   | Component Type   |
           | <Component> | <Component Name> | <Component Type> |
@@ -24,13 +23,16 @@ Feature: Grammar StepObjectRef Fragments
           | The sheep-dog-dev-svc service validate annotation file is empty                   | sheep-dog-dev-svc service | sheep-dog-dev-svc | service        |
           | The maven plugin validate annotation file is empty                                | maven plugin              | maven             | plugin         |
           | The nightly batchjob validate annotation file is empty                            | nightly batchjob          | nightly           | batchjob       |
+          | The validate annotation file is empty                                             | empty                     | empty             | empty          |
+          | The uml-to-cucumber request is executed with                                      | empty                     | empty             | empty          |
+          | The xtext plugin                                                                  | xtext plugin              | xtext             | plugin         |
+          | The spec-prj project                                                              | spec-prj project          | spec-prj          | project        |
 
   Scenario Outline: Object Fragment
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
-     When The xtext plugin validate action is performed
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref object fragment will be decomposed as follows
           | Object   | Object Name   | Object Type   |
           | <Object> | <Object Name> | <Object Type> |
@@ -47,7 +49,6 @@ Feature: Grammar StepObjectRef Fragments
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
-     When The xtext plugin validate action is performed
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref object vertex fragment will be decomposed as follows
           | Object Name   | Object Type   |
           | <Object Name> | <Object Type> |
@@ -70,7 +71,6 @@ Feature: Grammar StepObjectRef Fragments
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
-     When The xtext plugin validate action is performed
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref object edge fragment will be decomposed as follows
           | Object Name   | Object Type   |
           | <Object Name> | <Object Type> |
