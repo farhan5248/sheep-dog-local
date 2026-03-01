@@ -24,7 +24,7 @@ public class CellIssueResolver {
      * @param theCell the element needing corrections
      * @return list of quick fix proposals
      */
-    public static ArrayList<SheepDogIssueProposal> correctNameOnly(ICell theCell) {
+    public static ArrayList<SheepDogIssueProposal> correctNameOnly(ICell theCell) throws Exception {
         logger.debug("Entering correctNameOnly for theCell: {}", theCell != null ? theCell.getName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String name = theCell.getName();
