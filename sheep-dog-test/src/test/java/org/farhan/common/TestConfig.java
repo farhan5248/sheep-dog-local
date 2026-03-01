@@ -2,9 +2,7 @@ package org.farhan.common;
 
 import org.farhan.dsl.lang.SheepDogFactory;
 import org.farhan.impl.ide.SheepDogFactoryImpl;
-import org.farhan.impl.objects.AppInputFileAsciidocFileImpl;
 import org.farhan.impl.objects.ApplyQuickfixActionImpl;
-import org.farhan.impl.objects.ContentHighlightActionImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;
 import org.farhan.impl.objects.ListProposalsActionImpl;
 import org.farhan.impl.objects.ListProposalsPopupImpl;
@@ -18,7 +16,6 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2Asci
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
-import org.farhan.objects.xtext.ContentHighlightAction;
 import org.farhan.objects.xtext.ListProposalsAction;
 import org.farhan.objects.xtext.ListProposalsPopup;
 import org.farhan.objects.xtext.ListQuickfixesAction;
@@ -51,12 +48,9 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
     @Override
     protected void configure() {
         bind(InputFileAsciidocFile.class).to(InputFileAsciidocFileImpl.class);
-        bind(org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile.class)
-                .to(AppInputFileAsciidocFileImpl.class);
         bind(Process2AsciidocFile.class).to(Process2AsciidocFileImpl.class);
         bind(ProcessGrammarAsciidocFile.class).to(ProcessGrammarAsciidocFileImpl.class);
         bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);
-        bind(ContentHighlightAction.class).to(ContentHighlightActionImpl.class);
         bind(ListProposalsAction.class).to(ListProposalsActionImpl.class);
         bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);
         bind(ListQuickfixesAction.class).to(ListQuickfixesActionImpl.class);

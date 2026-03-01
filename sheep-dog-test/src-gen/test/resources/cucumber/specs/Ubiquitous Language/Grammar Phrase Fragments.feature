@@ -4,7 +4,10 @@ Feature: Grammar Phrase Fragments
   \@sheep-dog-test
   A phrase is a sequence of words. Tags and TODOs are special phrases.
 
+  @Grammar
   Scenario Outline: Tag Fragment
+
+    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file line type is created as follows
           | Line   |
@@ -18,13 +21,25 @@ Feature: Grammar Phrase Fragments
           | Line              | Tag List         |
           | @tag1             | tag1             |
           | @tag1 @tag2 @tag3 | tag1, tag2, tag3 |
+          | @tag1 TODO @tag3  | empty            |
+          | TODO @tag2 @tag3  | empty            |
 
-  Scenario: Todo Fragment
+  @Grammar
+  Scenario Outline: Todo Fragment
+
+    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file line type is created as follows
-          | Line              |
-          | TODO Do something |
+          | Line   |
+          | <Line> |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file phrase todo fragment will be decomposed as follows
-          | Todo Type | Todo Description |
-          | TODO      | Do something     |
+          | Todo Type   | Todo Description   |
+          | <Todo Type> | <Todo Description> |
+
+    Examples: Fragments
+
+          | Line              | Todo Type | Todo Description |
+          | TODO Do something | TODO      | Do something     |
+          | @tag1 TODO @tag3  | TODO      | @tag3            |
+          | TODO @tag2 @tag3  | TODO      | @tag2 @tag3      |
 

@@ -4,25 +4,31 @@ import java.util.HashMap;
 
 public interface InputFileAsciidocFile {
 
-    public void setStepObjectName(HashMap<String, String> keyMap);
+    public void setStepObjectNodeStepObjectName(HashMap<String, String> keyMap);
 
-    public void setStepObjectDescription(HashMap<String, String> keyMap);
+    public void setStepObjectNodeStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertStepObjectName(HashMap<String, String> keyMap);
+    public void setStepObjectNodeStepDefinitionDescription(HashMap<String, String> keyMap);
 
-    public void setStepDefinitionName(HashMap<String, String> keyMap);
+    public void setStepObjectNodeStepObjectDescription(HashMap<String, String> keyMap);
 
-    public void setStepDefinitionDescription(HashMap<String, String> keyMap);
+    public void setStepObjectNodeStepParametersName(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionName(HashMap<String, String> keyMap);
+    public void setStepObjectNodeStepParametersDescription(HashMap<String, String> keyMap);
 
-    public void setStepParametersName(HashMap<String, String> keyMap);
+    public void assertStepObject1NodeStepObjectName(HashMap<String, String> keyMap);
 
-    public void setStepParametersDescription(HashMap<String, String> keyMap);
+    public void assertStepObject1NodeStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertStepParametersName(HashMap<String, String> keyMap);
+    public void assertStepObject1NodeStepParametersName(HashMap<String, String> keyMap);
 
-    public void setCellName(HashMap<String, String> keyMap);
+    public void assertStepObject1StepDefinitionNodeStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertCellName(HashMap<String, String> keyMap);
+    public void assertStepObject1StepDefinition1StepParametersNodeStepParametersName(HashMap<String, String> keyMap);
+
+    public void setStepObject1StepDefinition1StepParameters1TableRow1CellNodeCellName(HashMap<String, String> keyMap);
+
+    public void assertStepObject1StepDefinition1StepParameters1TableRow1CellNodeCellName(HashMap<String, String> keyMap);
+
+    public void assertStepObject1StepDefinition1StepParameters2TableRow1CellNodeCellName(HashMap<String, String> keyMap);
 }

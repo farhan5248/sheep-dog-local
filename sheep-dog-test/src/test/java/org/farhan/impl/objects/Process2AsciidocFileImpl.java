@@ -16,25 +16,7 @@ import io.cucumber.guice.ScenarioScoped;
 public class Process2AsciidocFileImpl extends TestIDEObject implements Process2AsciidocFile {
 
     @Override
-    public void assertCellName(HashMap<String, String> keyMap) {
-        if (focus instanceof ICell) {
-            focus = ((ICell) focus).getParent();
-        }
-        focus = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
-        Assertions.assertNotNull(focus);
-    }
-
-    @Override
-    public void assertTestCaseName(HashMap<String, String> keyMap) {
-        if (focus instanceof ITestStepContainer) {
-            focus = ((ITestStepContainer) focus).getParent();
-        }
-        focus = ((ITestSuite) focus).getTestStepContainer(replaceKeyword(keyMap.get("Test Case Name")));
-        Assertions.assertNotNull(focus);
-    }
-
-    @Override
-    public void assertTestSuiteName(HashMap<String, String> keyMap) {
+    public void assertTestSuite1NodeTestSuiteName(HashMap<String, String> keyMap) {
         if (focus instanceof ITestSuite) {
             focus = ((ITestSuite) focus).getParent();
         }
@@ -43,32 +25,61 @@ public class Process2AsciidocFileImpl extends TestIDEObject implements Process2A
     }
 
     @Override
-    public void setCellName(HashMap<String, String> keyMap) {
+    public void assertTestSuite1TestCase1NodeTestCaseName(HashMap<String, String> keyMap) {
+        if (focus instanceof ITestStepContainer) {
+            focus = ((ITestStepContainer) focus).getParent();
+        }
+        focus = ((ITestSuite) focus).getTestStepContainer(replaceKeyword(keyMap.get("Test Case Name")));
+        Assertions.assertNotNull(focus);
+    }
+
+    @Override
+    public void assertTestSuite1TestCase1TestStep1TableRow1CellNodeCellName(HashMap<String, String> keyMap) {
+        if (focus instanceof ICell) {
+            focus = ((ICell) focus).getParent();
+        }
+        focus = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
+        Assertions.assertNotNull(focus);
+    }
+
+    @Override
+    public void setTestSuite1TestCase1TestStep1TableRow1CellNodeCellName(HashMap<String, String> keyMap) {
         addCellWithName(keyMap.get("Cell Name"));
     }
 
     @Override
-    public void setTestCaseName(HashMap<String, String> keyMap) {
+    public void setTestSuite1TestCase1TestStep1TableRow2CellNodeCellName(HashMap<String, String> keyMap) {
+        addCellWithName(keyMap.get("Cell Name"));
+    }
+
+    @Override
+    public void setTestSuite1TestCase1TestStep1TextNodeTextContent(HashMap<String, String> keyMap) {
+        addTextWithContent(keyMap.get("Text Content"));
+    }
+
+    @Override
+    public void setTestSuite1TestCase1TestStepNodeTestStepFullName(HashMap<String, String> keyMap) {
+        addTestStepWithFullName(replaceKeyword(keyMap.get("Test Step Full Name")));
+    }
+
+    @Override
+    public void setTestSuite1TestCase2TestStepNodeTestStepFullName(HashMap<String, String> keyMap) {
+        addTestStepWithFullName(replaceKeyword(keyMap.get("Test Step Full Name")));
+    }
+
+    @Override
+    public void setTestSuite1TestCaseNodeTestCaseName(HashMap<String, String> keyMap) {
         addTestCaseWithName(replaceKeyword(keyMap.get("Test Case Name")));
     }
 
     @Override
-    public void setTestStepFullName(HashMap<String, String> keyMap) {
-        addTestStepWithFullName(replaceKeyword(keyMap.get("Test Step Full Name")));
-    }
-
-    public void setTestStepListAssignmentTestStepFullName(HashMap<String, String> keyMap) {
+    public void setTestSuite1TestSetup1TestStepNodeTestStepFullName(HashMap<String, String> keyMap) {
         addTestStepWithFullName(replaceKeyword(keyMap.get("Test Step Full Name")));
     }
 
     @Override
-    public void setTestSuiteName(HashMap<String, String> keyMap) {
+    public void setTestSuiteNodeTestSuiteName(HashMap<String, String> keyMap) {
         addTestSuiteWithName(replaceKeyword(keyMap.get("Test Suite Name")));
-    }
-
-    @Override
-    public void setTextContent(HashMap<String, String> keyMap) {
-        addTextWithContent(keyMap.get("Text Content"));
     }
 
 }

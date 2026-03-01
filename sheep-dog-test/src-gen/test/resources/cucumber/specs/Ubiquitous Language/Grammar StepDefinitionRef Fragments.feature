@@ -4,7 +4,10 @@ Feature: Grammar StepDefinitionRef Fragments
   \@sheep-dog-test
   A StepDefinitionRef identifies the part and state in a test step.
 
+  @Grammar
   Scenario Outline: Part Fragment
+
+    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name                                       |
@@ -23,7 +26,10 @@ Feature: Grammar StepDefinitionRef Fragments
           | Only scope is absent                | Only scope                | Only             | scope      |
           | StepObjectRef node is absent        | StepObjectRef node        | StepObjectRef    | node       |
 
+  @Grammar
   Scenario Outline: State Fragment
+
+    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name                                       |

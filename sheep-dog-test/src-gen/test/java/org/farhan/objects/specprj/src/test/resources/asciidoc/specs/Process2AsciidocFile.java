@@ -4,19 +4,25 @@ import java.util.HashMap;
 
 public interface Process2AsciidocFile {
 
-    public void setTestSuiteName(HashMap<String, String> keyMap);
+    public void setTestSuiteNodeTestSuiteName(HashMap<String, String> keyMap);
 
-    public void assertTestSuiteName(HashMap<String, String> keyMap);
+    public void assertTestSuite1NodeTestSuiteName(HashMap<String, String> keyMap);
 
-    public void setTestCaseName(HashMap<String, String> keyMap);
+    public void setTestSuite1TestCaseNodeTestCaseName(HashMap<String, String> keyMap);
 
-    public void assertTestCaseName(HashMap<String, String> keyMap);
+    public void assertTestSuite1TestCase1NodeTestCaseName(HashMap<String, String> keyMap);
 
-    public void setTestStepFullName(HashMap<String, String> keyMap);
+    public void setTestSuite1TestCase1TestStepNodeTestStepFullName(HashMap<String, String> keyMap);
 
-    public void setCellName(HashMap<String, String> keyMap);
+    public void setTestSuite1TestCase1TestStep1TableRow1CellNodeCellName(HashMap<String, String> keyMap);
 
-    public void assertCellName(HashMap<String, String> keyMap);
+    public void assertTestSuite1TestCase1TestStep1TableRow1CellNodeCellName(HashMap<String, String> keyMap);
 
-    public void setTextContent(HashMap<String, String> keyMap);
+    public void setTestSuite1TestCase1TestStep1TableRow2CellNodeCellName(HashMap<String, String> keyMap);
+
+    public void setTestSuite1TestCase1TestStep1TextNodeTextContent(HashMap<String, String> keyMap);
+
+    public void setTestSuite1TestCase2TestStepNodeTestStepFullName(HashMap<String, String> keyMap);
+
+    public void setTestSuite1TestSetup1TestStepNodeTestStepFullName(HashMap<String, String> keyMap);
 }

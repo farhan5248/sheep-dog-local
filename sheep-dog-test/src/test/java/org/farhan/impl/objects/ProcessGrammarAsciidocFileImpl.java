@@ -26,8 +26,9 @@ public class ProcessGrammarAsciidocFileImpl extends TestIDEObject implements Pro
 
     @Override
     public void assertPhraseTagFragmentTagList(HashMap<String, String> keyMap) {
-        Assertions.assertTrue(Arrays.asList(replaceKeyword(keyMap.get("Tag List")).split(", "))
-                .containsAll(PhraseFragments.getTagAsList(objectKeyMap.get("Line").toString())));
+        String expected = replaceKeyword(keyMap.get("Tag List"));
+        Assertions.assertTrue(PhraseFragments.getTagAsList(objectKeyMap.get("Line").toString())
+                .containsAll(expected.isEmpty() ? Arrays.asList() : Arrays.asList(expected.split(", "))));
     }
 
     @Override

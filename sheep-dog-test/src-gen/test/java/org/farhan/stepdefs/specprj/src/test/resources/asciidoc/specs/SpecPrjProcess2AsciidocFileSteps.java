@@ -18,66 +18,66 @@ public class SpecPrjProcess2AsciidocFileSteps extends TestSteps {
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite node is created as follows$")
     public void testSuiteNodeIsCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite");
-        object.setInputOutputs(dataTable);
+        object.setInputOutputs(dataTable, "TestSuiteNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1 node will be created as follows$")
     public void testSuite1NodeWillBeCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1");
-        object.assertInputOutputs(dataTable);
+        object.assertInputOutputs(dataTable, "TestSuite1Node");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase node is created as follows$")
     public void testSuite1TestCaseNodeIsCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1/TestCase");
-        object.setInputOutputs(dataTable);
+        object.setInputOutputs(dataTable, "TestSuite1TestCaseNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1 node will be created as follows$")
     public void testSuite1TestCase1NodeWillBeCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1/TestCase/1");
-        object.assertInputOutputs(dataTable);
+        object.assertInputOutputs(dataTable, "TestSuite1TestCase1Node");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows$")
     public void testSuite1TestCase1TestStepNodeIsCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1/TestCase/1/TestStep");
-        object.setInputOutputs(dataTable);
+        object.setInputOutputs(dataTable, "TestSuite1TestCase1TestStepNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell node is created as follows$")
     public void testSuite1TestCase1TestStep1TableRow1CellNodeIsCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell");
-        object.setInputOutputs(dataTable);
+        object.setInputOutputs(dataTable, "TestSuite1TestCase1TestStep1TableRow1CellNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell node will be created as follows$")
     public void testSuite1TestCase1TestStep1TableRow1CellNodeWillBeCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell/1");
-        object.assertInputOutputs(dataTable);
+        object.assertInputOutputs(dataTable, "TestSuite1TestCase1TestStep1TableRow1CellNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Table/Row/2/Cell node is created as follows$")
     public void testSuite1TestCase1TestStep1TableRow2CellNodeIsCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1/TestCase/1/TestStep/1/Table/Row/2/Cell");
-        object.setInputOutputs(dataTable);
+        object.setInputOutputs(dataTable, "TestSuite1TestCase1TestStep1TableRow2CellNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Text node is created as follows$")
     public void testSuite1TestCase1TestStep1TextNodeIsCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1/TestCase/1/TestStep/1/Text");
-        object.setInputOutputs(dataTable);
+        object.setInputOutputs(dataTable, "TestSuite1TestCase1TestStep1TextNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/2/TestStep node is created as follows$")
     public void testSuite1TestCase2TestStepNodeIsCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1/TestCase/2/TestStep");
-        object.setInputOutputs(dataTable);
+        object.setInputOutputs(dataTable, "TestSuite1TestCase2TestStepNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestSetup/1/TestStep node is created as follows$")
     public void testSuite1TestSetup1TestStepNodeIsCreatedAsFollows(DataTable dataTable) {
         object.setPart("TestSuite/1/TestSetup/1/TestStep");
-        object.setInputOutputs(dataTable);
+        object.setInputOutputs(dataTable, "TestSuite1TestSetup1TestStepNode");
     }
 }

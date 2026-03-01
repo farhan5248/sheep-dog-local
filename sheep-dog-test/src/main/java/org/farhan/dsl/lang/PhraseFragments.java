@@ -7,44 +7,41 @@ import java.util.regex.Pattern;
 public class PhraseFragments {
 
     private static final String TODO_TYPE = "(TODO)";
-    private static final String TODO_DESC = "( \\S.*)";
-    private static final String TODO = "(" + TODO_TYPE + TODO_DESC + ")";
+    private static final String TODO_DESC = "(.+)";
+    private static final String TODO = TODO_TYPE + TODO_DESC;
     private static final String TAG_TYPE = "(@)";
     private static final String TAG_DESC = "(\\S+)";
-    private static final String TAG = "(" + TAG_TYPE + TAG_DESC + ")";
-    private static final String PHRASE = "((" + TAG + ")+|" + TODO + "|.+)";
-
-    public static String getAll(String text) {
-        return getGroup(PhraseFragments.PHRASE, text, 0);
-    }
+    private static final String TAG = TAG_TYPE + TAG_DESC;
 
     /**
      * Performs parsing, formatting, or computation operations on grammar elements
      * without maintaining state.
      *
-     * @param name the name string to extract tags from
+     * @param line the name string to extract tags from
      * @return TreeSet of tag strings without the "@" prefix
      */
-    public static ArrayList<String> getTagAsList(String name) {
+    public static ArrayList<String> getTagAsList(String line) {
         ArrayList<String> tags = new ArrayList<String>();
-        for (String word : name.split(" ")) {
-            if (isTag(word)) {
-                tags.add(getTagDesc(word));
+        if (getTodo(line).isEmpty()) {
+            for (String word : line.split(" ")) {
+                if (!getTag(word).isEmpty()) {
+                    tags.add(getTagDesc(word));
+                }
             }
         }
         return tags;
     }
 
     public static String getTagDesc(String text) {
-        return getGroup(TAG, text, 3);
+        return getGroup(TAG, text, 2);
     }
 
     public static String getTodoType(String text) {
-        return getGroup(TODO, text, 2);
+        return getGroup(TODO, text, 1);
     }
 
     public static String getTodoDesc(String text) {
-        return getGroup(TODO, text, 3);
+        return getGroup(TODO, text, 2);
     }
 
     /**
@@ -54,8 +51,8 @@ public class PhraseFragments {
      * @param word the word to check
      * @return true if the word starts with "@", false otherwise
      */
-    public static boolean isTag(String text) {
-        return !getGroup(TAG, text, 0).isEmpty();
+    public static String getTag(String text) {
+        return getGroup(TAG, text, 0);
     }
 
     /**
@@ -65,8 +62,8 @@ public class PhraseFragments {
      * @param word the word to check
      * @return true if the word equals "TODO", false otherwise
      */
-    public static boolean isTodo(String text) {
-        return !getGroup(TODO, text, 0).isEmpty();
+    public static String getTodo(String text) {
+        return getGroup(TODO, text, 0);
     }
 
     /**

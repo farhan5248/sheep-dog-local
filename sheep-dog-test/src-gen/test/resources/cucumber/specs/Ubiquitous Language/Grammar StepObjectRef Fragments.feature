@@ -4,7 +4,10 @@ Feature: Grammar StepObjectRef Fragments
   \@sheep-dog-test
   A StepObjectRef identifies the component and object in a test step.
 
+  @Grammar
   Scenario Outline: Component Fragment
+
+    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
@@ -28,7 +31,10 @@ Feature: Grammar StepObjectRef Fragments
           | The xtext plugin                                                                  | xtext plugin              | xtext             | plugin         |
           | The spec-prj project                                                              | spec-prj project          | spec-prj          | project        |
 
+  @Grammar
   Scenario Outline: Object Fragment
+
+    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
@@ -44,7 +50,10 @@ Feature: Grammar StepObjectRef Fragments
           | The graph-viewer application uml-to-cucumber request                              | uml-to-cucumber request  | uml-to-cucumber     | request     |
           | The graph-viewer application validate annotation file StepObjectRef type is empty | validate annotation file | validate annotation | file        |
 
+  @Grammar
   Scenario Outline: Object Vertex Fragment
+
+    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
@@ -66,7 +75,10 @@ Feature: Grammar StepObjectRef Fragments
           | The graph-viewer application description hover is empty                           | description         | hover       |
           | The graph-viewer application status tooltip is empty                              | status              | tooltip     |
 
+  @Grammar
   Scenario Outline: Object Edge Fragment
+
+    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |

@@ -60,11 +60,6 @@ public class SpecPrjProcessGrammarAsciidocFileSteps extends TestSteps {
         object.assertInputOutputs(dataTable, "StepObjectRefObjectVertexFragment");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step list assignment is created as follows$")
-    public void testStepListAssignmentIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "TestStepListAssignment");
-    }
-
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows$")
     public void testStepTypeIsCreatedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable, "TestStepType");

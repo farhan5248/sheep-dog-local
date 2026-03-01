@@ -18,16 +18,7 @@ import io.cucumber.guice.ScenarioScoped;
 public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFileAsciidocFile {
 
     @Override
-    public void assertCellName(HashMap<String, String> keyMap) {
-        if (focus instanceof ICell) {
-            focus = ((ICell) focus).getParent();
-        }
-        focus = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
-        Assertions.assertNotNull(focus);
-    }
-
-    @Override
-    public void assertStepDefinitionName(HashMap<String, String> keyMap) {
+    public void assertStepObject1NodeStepDefinitionName(HashMap<String, String> keyMap) {
         if (focus instanceof IStepDefinition) {
             focus = ((IStepDefinition) focus).getParent();
         }
@@ -36,7 +27,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void assertStepObjectName(HashMap<String, String> keyMap) {
+    public void assertStepObject1NodeStepObjectName(HashMap<String, String> keyMap) {
         if (focus instanceof IStepObject) {
             focus = ((IStepObject) focus).getParent();
         }
@@ -45,7 +36,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void assertStepParametersName(HashMap<String, String> keyMap) {
+    public void assertStepObject1NodeStepParametersName(HashMap<String, String> keyMap) {
         if (focus instanceof IStepParameters) {
             focus = ((IStepParameters) focus).getParent();
         }
@@ -54,22 +45,60 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void setCellName(HashMap<String, String> keyMap) {
+    public void assertStepObject1StepDefinition1StepParameters1TableRow1CellNodeCellName(
+            HashMap<String, String> keyMap) {
+        if (focus instanceof ICell) {
+            focus = ((ICell) focus).getParent();
+        }
+        focus = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
+        Assertions.assertNotNull(focus);
+    }
+
+    @Override
+    public void assertStepObject1StepDefinition1StepParameters2TableRow1CellNodeCellName(
+            HashMap<String, String> keyMap) {
+        if (focus instanceof ICell) {
+            focus = ((ICell) focus).getParent();
+        }
+        focus = ((IRow) focus).getCell(replaceKeyword(keyMap.get("Cell Name")));
+        Assertions.assertNotNull(focus);
+    }
+
+    @Override
+    public void assertStepObject1StepDefinition1StepParametersNodeStepParametersName(HashMap<String, String> keyMap) {
+        if (focus instanceof IStepParameters) {
+            focus = ((IStepParameters) focus).getParent();
+        }
+        focus = ((IStepDefinition) focus).getStepParameters(replaceKeyword(keyMap.get("Step Parameters Name")));
+        Assertions.assertNotNull(focus);
+    }
+
+    @Override
+    public void assertStepObject1StepDefinitionNodeStepDefinitionName(HashMap<String, String> keyMap) {
+        if (focus instanceof IStepDefinition) {
+            focus = ((IStepDefinition) focus).getParent();
+        }
+        focus = ((IStepObject) focus).getStepDefinition(replaceKeyword(keyMap.get("Step Definition Name")));
+        Assertions.assertNotNull(focus);
+    }
+
+    @Override
+    public void setStepObject1StepDefinition1StepParameters1TableRow1CellNodeCellName(HashMap<String, String> keyMap) {
         addCellWithName(keyMap.get("Cell Name"));
     }
 
     @Override
-    public void setStepDefinitionDescription(HashMap<String, String> keyMap) {
+    public void setStepObjectNodeStepDefinitionDescription(HashMap<String, String> keyMap) {
         setStepDefinitionDescription(replaceKeyword(keyMap.get("Step Definition Description")));
     }
 
     @Override
-    public void setStepDefinitionName(HashMap<String, String> keyMap) {
+    public void setStepObjectNodeStepDefinitionName(HashMap<String, String> keyMap) {
         addStepDefinitionWithName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
     @Override
-    public void setStepObjectDescription(HashMap<String, String> keyMap) {
+    public void setStepObjectNodeStepObjectDescription(HashMap<String, String> keyMap) {
         try {
             IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
                     keyMap.get("Step Object Name"));
@@ -80,17 +109,17 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void setStepObjectName(HashMap<String, String> keyMap) {
+    public void setStepObjectNodeStepObjectName(HashMap<String, String> keyMap) {
         addStepObjectWithName(replaceKeyword(keyMap.get("Step Object Name")));
     }
 
     @Override
-    public void setStepParametersDescription(HashMap<String, String> keyMap) {
+    public void setStepObjectNodeStepParametersDescription(HashMap<String, String> keyMap) {
         setStepParametersDescription(replaceKeyword(keyMap.get("Step Parameters Description")));
     }
 
     @Override
-    public void setStepParametersName(HashMap<String, String> keyMap) {
+    public void setStepObjectNodeStepParametersName(HashMap<String, String> keyMap) {
         addStepParametersWithName(replaceKeyword(keyMap.get("Step Parameters Name")));
     }
 

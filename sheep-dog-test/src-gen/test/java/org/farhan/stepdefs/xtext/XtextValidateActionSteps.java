@@ -15,11 +15,6 @@ public class XtextValidateActionSteps extends TestSteps {
         super(object, "xtext", "validate");
     }
 
-    @Given("^The xtext plugin validate action is performed$")
-    public void isPerformed() {
-        object.transition();
-    }
-
     @Given("^The xtext plugin validate action is performed as follows$")
     public void isPerformedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable);

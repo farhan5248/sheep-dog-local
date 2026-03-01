@@ -112,12 +112,12 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
             INode node = NodeModelUtils.getNode(statement);
             int offset = node.getTotalOffset();
             for (String line : node.getText().split("\n")) {
-                if (PhraseFragments.isTodo(line)) {
+                if (!PhraseFragments.getTodo(line).isEmpty()) {
                     acceptor.addPosition(offset + current, line.length(), SheepDogHighlightingConfiguration.TODO_ID);
                     current += line.length() + 1;
                 } else {
                     for (String word : line.split(" ")) {
-                        if (PhraseFragments.isTag(word)) {
+                        if (!PhraseFragments.getTag(word).isEmpty()) {
                             acceptor.addPosition(offset + current, word.length(),
                                     SheepDogHighlightingConfiguration.TAG_ID);
                         } else {
