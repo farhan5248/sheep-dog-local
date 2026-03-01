@@ -1,3 +1,0 @@
-File: Grammar Phrase Fragments
-  Scenario: Tag Fragment
-    Tag: Grammar
