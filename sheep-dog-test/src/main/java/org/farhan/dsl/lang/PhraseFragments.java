@@ -28,7 +28,7 @@ public class PhraseFragments {
 
     public static String getTodoType(String text) {
         for (String word : text.split(" ")) {
-            if (word.equals("TODO")) {
+            if (isTodo(word)) {
                 return "TODO";
             }
         }
@@ -37,9 +37,9 @@ public class PhraseFragments {
 
     public static String getTodoDesc(String text) {
         for (String word : text.split(" ")) {
-            if (word.equals("TODO")) {
-                int idx = text.indexOf("TODO");
-                return text.substring(idx + "TODO".length()).trim();
+            if (isTodo(word)) {
+                int idx = text.indexOf(word);
+                return text.substring(idx + word.length()).trim();
             }
         }
         return "";
