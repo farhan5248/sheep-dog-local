@@ -31,25 +31,21 @@ public class StepDefinitionRefFragments {
     }
 
     public static String getState(String text) {
-        String result = getGroup(STEP_DEFINITION_REF, text, 4);
-        if (result.isEmpty()) {
-            result = getGroup(STATE_ONLY, text, 1);
-        }
-        return result;
+        return getStateGroup(text, 4, 1);
     }
 
     public static String getStateType(String text) {
-        String result = getGroup(STEP_DEFINITION_REF, text, 5);
-        if (result.isEmpty()) {
-            result = getGroup(STATE_ONLY, text, 2);
-        }
-        return result;
+        return getStateGroup(text, 5, 2);
     }
 
     public static String getStateDesc(String text) {
-        String result = getGroup(STEP_DEFINITION_REF, text, 6);
+        return getStateGroup(text, 6, 3);
+    }
+
+    private static String getStateGroup(String text, int refGroup, int stateOnlyGroup) {
+        String result = getGroup(STEP_DEFINITION_REF, text, refGroup);
         if (result.isEmpty()) {
-            result = getGroup(STATE_ONLY, text, 3);
+            result = getGroup(STATE_ONLY, text, stateOnlyGroup);
         }
         return result;
     }
