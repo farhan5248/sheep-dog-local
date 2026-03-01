@@ -27,10 +27,21 @@ public class PhraseFragments {
     }
 
     public static String getTodoType(String text) {
+        for (String word : text.split(" ")) {
+            if (word.equals("TODO")) {
+                return "TODO";
+            }
+        }
         return "";
     }
 
     public static String getTodoDesc(String text) {
+        for (String word : text.split(" ")) {
+            if (word.equals("TODO")) {
+                int idx = text.indexOf("TODO");
+                return text.substring(idx + "TODO".length()).trim();
+            }
+        }
         return "";
     }
 

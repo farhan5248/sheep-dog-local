@@ -24,3 +24,22 @@ Feature: Grammar Phrase Fragments
           | @tag1 TODO @tag3  | empty            |
           | TODO @tag2 @tag3  | empty            |
 
+  @Grammar
+  Scenario Outline: Todo Fragment
+
+    \@Grammar
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file line type is created as follows
+          | Line   |
+          | <Line> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file phrase todo fragment will be decomposed as follows
+          | Todo Type   | Todo Description   |
+          | <Todo Type> | <Todo Description> |
+
+    Examples: Fragments
+
+          | Line              | Todo Type | Todo Description |
+          | TODO Do something | TODO      | Do something     |
+          | @tag1 TODO @tag3  | TODO      | @tag3            |
+          | TODO @tag2 @tag3  | TODO      | @tag2 @tag3      |
+
