@@ -12,6 +12,9 @@ public class PhraseFragments {
     public static ArrayList<String> getTagAsList(String name) {
         ArrayList<String> tags = new ArrayList<String>();
         for (String word : name.split(" ")) {
+            if (isTodo(word)) {
+                return tags;
+            }
             if (isTag(word)) {
                 tags.add(getTagDesc(word));
             }
@@ -41,6 +44,10 @@ public class PhraseFragments {
 
     public static boolean isTag(String text) {
         return !getGroup(TAG, text, 0).isEmpty();
+    }
+
+    public static boolean isTodo(String text) {
+        return !getGroup(TODO, text, 0).isEmpty();
     }
 
     private static String getGroup(String regex, String text, int group) {
