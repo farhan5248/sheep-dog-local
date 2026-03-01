@@ -4,10 +4,7 @@ Feature: Grammar StepDefinitionRef Fragments
   \@sheep-dog-test
   A StepDefinitionRef identifies the part and state in a test step.
 
-  @Grammar
   Scenario Outline: Part Fragment
-
-    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name                                       |
@@ -26,10 +23,7 @@ Feature: Grammar StepDefinitionRef Fragments
           | Only scope is absent                | Only scope                | Only             | scope      |
           | StepObjectRef node is absent        | StepObjectRef node        | StepObjectRef    | node       |
 
-  @Grammar
   Scenario Outline: State Fragment
-
-    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name                                       |
@@ -40,15 +34,13 @@ Feature: Grammar StepDefinitionRef Fragments
 
     Examples: Fragments
 
-          | Step Definition Ref Name     | State                 | State Type | State Description  |
-          | StepObjectRef type is absent | is absent             | is         | absent             |
-          | is absent                    | is absent             | is         | absent             |
-          | is created as follows        | is created as follows | is         | created as follows |
-          | isn't absent                 | isn't absent          | isn't      | absent             |
-          | will be absent               | will be absent        | will be    | absent             |
-          | won't be absent              | won't be absent       | won't be   | absent             |
-          | is executed with             | is executed with      | is         | executed with      |
-          | isn't executed               | isn't executed        | isn't      | executed           |
-          | will be executed             | will be executed      | will be    | executed           |
-          | won't be executed            | won't be executed     | won't be   | executed           |
+          | Step Definition Ref Name    | State                       | State Type | State Description  |
+          | is created as follows       | is created as follows       | is         | created as follows |
+          | is executed with            | is executed with            | is         | executed with      |
+          | isn't created as follows    | isn't created as follows    | isn't      | created as follows |
+          | isn't executed with         | isn't executed with         | isn't      | executed with      |
+          | will be created as follows  | will be created as follows  | will be    | created as follows |
+          | will be executed with       | will be executed with       | will be    | executed with      |
+          | won't be created as follows | won't be created as follows | won't be   | created as follows |
+          | won't be executed with      | won't be executed with      | won't be   | executed with      |
 

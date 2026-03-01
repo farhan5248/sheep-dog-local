@@ -16,9 +16,8 @@ public class StepObjectRefFragments {
     private static final String STEP_OBJECT_REF = "^(The" + COMPONENT + "?" + OBJECT + ")";
 
     /**
-     * Extracts the complete matched text from formatted input, returning the
-     * entire reference as a single string for full pattern validation or
-     * processing.
+     * Extracts the complete matched text from formatted input, returning the entire
+     * reference as a single string for full pattern validation or processing.
      *
      * @param text the text to parse
      * @return the step object name portion
@@ -28,8 +27,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
+     * Extracts a specific named fragment from formatted text using predefined regex
+     * patterns and group positions.
      *
      * @param text the text to parse
      * @return the component portion
@@ -39,8 +38,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
+     * Extracts a specific named fragment from formatted text using predefined regex
+     * patterns and group positions.
      *
      * @param text the text to parse
      * @return the component name portion
@@ -50,8 +49,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
+     * Extracts a specific named fragment from formatted text using predefined regex
+     * patterns and group positions.
      *
      * @param text the text to parse
      * @return the component type portion
@@ -61,8 +60,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
+     * Extracts a specific named fragment from formatted text using predefined regex
+     * patterns and group positions.
      *
      * @param text the text to parse
      * @return the object portion
@@ -72,8 +71,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
+     * Extracts a specific named fragment from formatted text using predefined regex
+     * patterns and group positions.
      *
      * @param text the text to parse
      * @return the object edge type portion
@@ -83,8 +82,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
+     * Extracts a specific named fragment from formatted text using predefined regex
+     * patterns and group positions.
      *
      * @param text the text to parse
      * @return the object name portion
@@ -94,8 +93,8 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
+     * Extracts a specific named fragment from formatted text using predefined regex
+     * patterns and group positions.
      *
      * @param text the text to parse
      * @return the object type portion
@@ -105,29 +104,14 @@ public class StepObjectRefFragments {
     }
 
     /**
-     * Extracts a specific named fragment from formatted text using predefined
-     * regex patterns and group positions.
+     * Extracts a specific named fragment from formatted text using predefined regex
+     * patterns and group positions.
      *
      * @param text the text to parse
      * @return the object vertex type portion
      */
     public static String getObjectVertexType(String text) {
         return getGroup(STEP_OBJECT_REF, text, 8);
-    }
-
-    /**
-     * Performs parsing, formatting, or computation operations on grammar elements
-     * without maintaining state.
-     *
-     * @param text the text to check
-     * @return true if the text contains an edge object type, false otherwise
-     */
-    public static boolean isObjectEdgeType(String text) {
-        return !getObjectEdgeType(text).isEmpty();
-    }
-
-    public static boolean isObjectVertexType(String text) {
-        return !getObjectVertexType(text).isEmpty();
     }
 
     /**

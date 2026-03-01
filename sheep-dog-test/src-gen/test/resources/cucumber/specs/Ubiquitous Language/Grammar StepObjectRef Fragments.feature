@@ -4,10 +4,7 @@ Feature: Grammar StepObjectRef Fragments
   \@sheep-dog-test
   A StepObjectRef identifies the component and object in a test step.
 
-  @Grammar
   Scenario Outline: Component Fragment
-
-    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
@@ -16,25 +13,22 @@ Feature: Grammar StepObjectRef Fragments
           | Component   | Component Name   | Component Type   |
           | <Component> | <Component Name> | <Component Type> |
 
-    Examples: Fragments
+    Examples: Component and object
 
-          | Test Step Full Name                                                               | Component                 | Component Name    | Component Type |
-          | The graph-viewer application validate annotation file StepObjectRef type is empty | graph-viewer application  | graph-viewer      | application    |
-          | The graph-viewer application uml-to-cucumber request is executed with             | graph-viewer application  | graph-viewer      | application    |
-          | The graph-viewer application uml-to-cucumber request                              | graph-viewer application  | graph-viewer      | application    |
-          | The spec-prj project validate annotation file is present                          | spec-prj project          | spec-prj          | project        |
-          | The sheep-dog-dev-svc service validate annotation file is empty                   | sheep-dog-dev-svc service | sheep-dog-dev-svc | service        |
-          | The maven plugin validate annotation file is empty                                | maven plugin              | maven             | plugin         |
-          | The nightly batchjob validate annotation file is empty                            | nightly batchjob          | nightly           | batchjob       |
-          | The validate annotation file is empty                                             | empty                     | empty             | empty          |
-          | The uml-to-cucumber request is executed with                                      | empty                     | empty             | empty          |
-          | The xtext plugin                                                                  | xtext plugin              | xtext             | plugin         |
-          | The spec-prj project                                                              | spec-prj project          | spec-prj          | project        |
+          | Test Step Full Name                                                   | Component                | Component Name | Component Type |
+          | The graph-viewer application uml-to-cucumber request is executed with | graph-viewer application | graph-viewer   | application    |
+          | The graph-viewer application uml-to-cucumber request                  | graph-viewer application | graph-viewer   | application    |
+          | The uml-to-cucumber request is empty                                  | empty                    | empty          | empty          |
 
-  @Grammar
+    Examples: Types
+
+          | Test Step Full Name           | Component                 | Component Name    | Component Type |
+          | The spec-prj project          | spec-prj project          | spec-prj          | project        |
+          | The sheep-dog-dev-svc service | sheep-dog-dev-svc service | sheep-dog-dev-svc | service        |
+          | The nightly batchjob          | nightly batchjob          | nightly           | batchjob       |
+          | The xtext plugin              | xtext plugin              | xtext             | plugin         |
+
   Scenario Outline: Object Fragment
-
-    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
@@ -45,15 +39,12 @@ Feature: Grammar StepObjectRef Fragments
 
     Examples: Fragments
 
-          | Test Step Full Name                                                               | Object                   | Object Name         | Object Type |
-          | The graph-viewer application uml-to-cucumber request is executed with             | uml-to-cucumber request  | uml-to-cucumber     | request     |
-          | The graph-viewer application uml-to-cucumber request                              | uml-to-cucumber request  | uml-to-cucumber     | request     |
-          | The graph-viewer application validate annotation file StepObjectRef type is empty | validate annotation file | validate annotation | file        |
+          | Test Step Full Name                                                              | Object                  | Object Name     | Object Type |
+          | The graph-viewer application uml-to-cucumber request StepObjectRef type is empty | uml-to-cucumber request | uml-to-cucumber | request     |
+          | The graph-viewer application uml-to-cucumber request is executed with            | uml-to-cucumber request | uml-to-cucumber | request     |
+          | The graph-viewer application uml-to-cucumber request                             | uml-to-cucumber request | uml-to-cucumber | request     |
 
-  @Grammar
   Scenario Outline: Object Vertex Fragment
-
-    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
@@ -64,21 +55,18 @@ Feature: Grammar StepObjectRef Fragments
 
     Examples: Fragments
 
-          | Test Step Full Name                                                               | Object Name         | Object Type |
-          | The graph-viewer application validate annotation file StepObjectRef type is empty | validate annotation | file        |
-          | The graph-viewer application output directory is empty                            | output              | directory   |
-          | The graph-viewer application home page is empty                                   | home                | page        |
-          | The graph-viewer application settings dialog is empty                             | settings            | dialog      |
-          | The graph-viewer application validate response is empty                           | validate            | response    |
-          | The xtext plugin list proposals popup is empty                                    | list proposals      | popup       |
-          | The xtext plugin validate annotation is empty                                     | validate            | annotation  |
-          | The graph-viewer application description hover is empty                           | description         | hover       |
-          | The graph-viewer application status tooltip is empty                              | status              | tooltip     |
+          | Test Step Full Name                            | Object Name         | Object Type |
+          | The xtext plugin input file is empty           | input               | file        |
+          | The xtext plugin output directory is empty     | output              | directory   |
+          | The xtext plugin home page is empty            | home                | page        |
+          | The xtext plugin settings dialog is empty      | settings            | dialog      |
+          | The xtext plugin validate response is empty    | validate            | response    |
+          | The xtext plugin list proposals popup is empty | list proposals      | popup       |
+          | The xtext plugin validate annotation is empty  | validate            | annotation  |
+          | The xtext plugin description hover is empty    | description         | hover       |
+          | The xtext plugin status tooltip is empty       | status              | tooltip     |
 
-  @Grammar
   Scenario Outline: Object Edge Fragment
-
-    \@Grammar
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
           | Test Step Full Name   |
