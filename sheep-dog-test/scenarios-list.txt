@@ -1,4 +1,5 @@
-File: Grammar Phrase Fragments
-  Scenario: Todo Fragment
+File: Grammar StepDefinitionRef Fragments
+  Scenario: Part Fragment
     Tag: Grammar
-
+  Scenario: State Fragment
+    Tag: Grammar
