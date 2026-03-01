@@ -1,0 +1,54 @@
+@sheep-dog-test
+Feature: Grammar StepDefinitionRef Fragments
+
+  \@sheep-dog-test
+  A StepDefinitionRef identifies the part and state in a test step.
+
+  @Grammar
+  Scenario Outline: Part Fragment
+
+    \@Grammar
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
+          | Test Step Full Name                                       |
+          | The daily batchjob Output file <Step Definition Ref Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step definition ref part fragment will be decomposed as follows
+          | Part   | Part Description   | Part Type   |
+          | <Part> | <Part Description> | <Part Type> |
+
+    Examples: Fragments
+
+          | Step Definition Ref Name            | Part                      | Part Description | Part Type  |
+          | StepObjectRef type is absent        | StepObjectRef type        | StepObjectRef    | type       |
+          | SheepDog language is absent         | SheepDog language         | SheepDog         | language   |
+          | StepObjectName assignment is absent | StepObjectName assignment | StepObjectName   | assignment |
+          | Component fragment is absent        | Component fragment        | Component        | fragment   |
+          | Only scope is absent                | Only scope                | Only             | scope      |
+          | StepObjectRef node is absent        | StepObjectRef node        | StepObjectRef    | node       |
+
+  @Grammar
+  Scenario Outline: State Fragment
+
+    \@Grammar
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
+          | Test Step Full Name                                       |
+          | The daily batchjob Output file <Step Definition Ref Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step definition ref state fragment will be decomposed as follows
+          | State   | State Description   | State Type   |
+          | <State> | <State Description> | <State Type> |
+
+    Examples: Fragments
+
+          | Step Definition Ref Name     | State                 | State Type | State Description  |
+          | StepObjectRef type is absent | is absent             | is         | absent             |
+          | is absent                    | is absent             | is         | absent             |
+          | is created as follows        | is created as follows | is         | created as follows |
+          | isn't absent                 | isn't absent          | isn't      | absent             |
+          | will be absent               | will be absent        | will be    | absent             |
+          | won't be absent              | won't be absent       | won't be   | absent             |
+          | is executed with             | is executed with      | is         | executed with      |
+          | isn't executed               | isn't executed        | isn't      | executed           |
+          | will be executed             | will be executed      | will be    | executed           |
+          | won't be executed            | won't be executed     | won't be   | executed           |
+
