@@ -1,5 +1,9 @@
-File: Grammar StepDefinitionRef Fragments
-  Scenario: Part Fragment
+File: Grammar StepObjectRef Fragments
+  Scenario: Component Fragment
     Tag: Grammar
-  Scenario: State Fragment
+  Scenario: Object Fragment
+    Tag: Grammar
+  Scenario: Object Vertex Fragment
+    Tag: Grammar
+  Scenario: Object Edge Fragment
     Tag: Grammar
