@@ -13,7 +13,15 @@ public enum StepObjectRefObjectVertexTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	FILE("file", "Any sort of file");
+	FILE("file", "Any sort of file"),
+	DIRECTORY("directory", "File system directory"),
+	PAGE("page", "Web or document page"),
+	DIALOG("dialog", "UI dialog or modal window"),
+	RESPONSE("response", "Service or API response"),
+	POPUP("popup", "UI popup or overlay"),
+	ANNOTATION("annotation", "Code or UI annotation"),
+	HOVER("hover", "Hover tooltip or overlay"),
+	TOOLTIP("tooltip", "Tooltip UI element");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step

@@ -13,7 +13,11 @@ public enum StepObjectRefComponentTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	APPLICATION("application", "GUI web application");
+	APPLICATION("application", "GUI web application"),
+	PROJECT("project", "Development project"),
+	SERVICE("service", "Microservice or backend service"),
+	BATCHJOB("batchjob", "Scheduled batch job"),
+	PLUGIN("plugin", "IDE or framework plugin");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step
