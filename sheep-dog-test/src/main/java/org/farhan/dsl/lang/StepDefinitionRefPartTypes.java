@@ -9,7 +9,13 @@ package org.farhan.dsl.lang;
  */
 public enum StepDefinitionRefPartTypes {
 
-	SECTION("section", "backwards-compatible alias for 'type' to support legacy test steps");
+	SECTION("section", "backwards-compatible alias for 'type' to support legacy test steps"),
+	TYPE("type", "The grammar element type being referenced"),
+	LANGUAGE("language", "The language or grammar being referenced"),
+	ASSIGNMENT("assignment", "The property assignment in the test step"),
+	FRAGMENT("fragment", "A syntax fragment being referenced"),
+	SCOPE("scope", "The validation scope level"),
+	NODE("node", "A node in the grammar structure");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step

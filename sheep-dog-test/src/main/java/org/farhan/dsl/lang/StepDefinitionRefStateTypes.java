@@ -13,6 +13,9 @@ public enum StepDefinitionRefStateTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
+	WON_T_BE("won't be", "Maps to negative future setter method"),
+	WILL_BE("will be", "Maps to positive future setter method"),
+	ISN_T("isn't", "Maps to negative setter method"),
 	IS("is", "Maps to setter method");
 
 	/**
