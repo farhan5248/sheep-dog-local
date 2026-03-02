@@ -1,9 +1,3 @@
-File: Grammar Phrase Fragments
-  Scenario: Tag Fragment
-    Tag: Grammar
-  Scenario: Todo Fragment
-    Tag: Grammar
-
 File: Grammar StepObjectRef Fragments
   Scenario: Component Fragment
     Tag: Grammar
@@ -19,3 +13,10 @@ File: Grammar StepDefinitionRef Fragments
     Tag: Grammar
   Scenario: State Fragment
     Tag: Grammar
+
+File: Grammar Phrase Fragments
+  Scenario: Tag Fragment
+    Tag: Grammar
+  Scenario: Todo Fragment
+    Tag: Grammar
+    
