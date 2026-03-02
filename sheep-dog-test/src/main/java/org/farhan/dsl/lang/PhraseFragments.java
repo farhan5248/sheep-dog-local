@@ -4,28 +4,54 @@ import java.util.ArrayList;
 
 public class PhraseFragments {
 
-    public static ArrayList<String> getTagAsList(String line) {
-        return null;
+    public static ArrayList<String> getTagAsList(String name) {
+        ArrayList<String> tags = new ArrayList<String>();
+        for (String word : name.split(" ")) {
+            if (!getTag(word).isEmpty()) {
+                tags.add(getTagDesc(word));
+            }
+        }
+        return tags;
     }
 
     public static String getTagDesc(String text) {
-        return null;
+        String tag = getTag(text);
+        if (!tag.isEmpty()) {
+            return tag.substring(1);
+        }
+        return "";
     }
 
     public static String getTodoType(String text) {
-        return null;
+        return getTodo(text);
     }
 
     public static String getTodoDesc(String text) {
-        return null;
+        if (text != null) {
+            int idx = text.indexOf("TODO");
+            if (idx >= 0) {
+                return text.substring(idx + "TODO".length()).trim();
+            }
+        }
+        return "";
     }
 
     public static String getTag(String text) {
-        return null;
+        if (text != null && text.startsWith("@")) {
+            return text;
+        }
+        return "";
     }
 
     public static String getTodo(String text) {
-        return null;
+        if (text != null) {
+            for (String word : text.split(" ")) {
+                if (word.equals("TODO")) {
+                    return "TODO";
+                }
+            }
+        }
+        return "";
     }
 
 }
