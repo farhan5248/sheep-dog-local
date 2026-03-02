@@ -29,6 +29,15 @@ public class StepObjectRefFragments {
         return -1;
     }
 
+    private static String joinWords(String[] words, int start, int end) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = start; i <= end; i++) {
+            if (i > start) sb.append(" ");
+            sb.append(words[i]);
+        }
+        return sb.toString();
+    }
+
     public static String getAll(String text) {
         if (text != null) {
             String[] words = text.split(" ");
@@ -36,12 +45,7 @@ public class StepObjectRefFragments {
             if (compIdx >= 0) {
                 int objIdx = findObjectTypeIndex(words, compIdx + 1);
                 if (objIdx >= 0) {
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i <= objIdx; i++) {
-                        if (i > 0) sb.append(" ");
-                        sb.append(words[i]);
-                    }
-                    return sb.toString();
+                    return joinWords(words, 0, objIdx);
                 }
             }
         }
@@ -51,17 +55,9 @@ public class StepObjectRefFragments {
     public static String getComponent(String text) {
         if (text != null) {
             String[] words = text.split(" ");
-            for (int i = 1; i < words.length; i++) {
-                for (StepObjectRefComponentTypes type : StepObjectRefComponentTypes.values()) {
-                    if (words[i].equals(type.value)) {
-                        StringBuilder sb = new StringBuilder();
-                        for (int j = 1; j <= i; j++) {
-                            if (j > 1) sb.append(" ");
-                            sb.append(words[j]);
-                        }
-                        return sb.toString();
-                    }
-                }
+            int compIdx = findComponentTypeIndex(words);
+            if (compIdx >= 0) {
+                return joinWords(words, 1, compIdx);
             }
         }
         return "";
@@ -70,17 +66,9 @@ public class StepObjectRefFragments {
     public static String getComponentName(String text) {
         if (text != null) {
             String[] words = text.split(" ");
-            for (int i = 1; i < words.length; i++) {
-                for (StepObjectRefComponentTypes type : StepObjectRefComponentTypes.values()) {
-                    if (words[i].equals(type.value)) {
-                        StringBuilder sb = new StringBuilder();
-                        for (int j = 1; j < i; j++) {
-                            if (j > 1) sb.append(" ");
-                            sb.append(words[j]);
-                        }
-                        return sb.toString();
-                    }
-                }
+            int compIdx = findComponentTypeIndex(words);
+            if (compIdx >= 0) {
+                return joinWords(words, 1, compIdx - 1);
             }
         }
         return "";
@@ -88,12 +76,10 @@ public class StepObjectRefFragments {
 
     public static String getComponentType(String text) {
         if (text != null) {
-            for (String word : text.split(" ")) {
-                for (StepObjectRefComponentTypes type : StepObjectRefComponentTypes.values()) {
-                    if (word.equals(type.value)) {
-                        return type.value;
-                    }
-                }
+            String[] words = text.split(" ");
+            int compIdx = findComponentTypeIndex(words);
+            if (compIdx >= 0) {
+                return words[compIdx];
             }
         }
         return "";
@@ -106,12 +92,7 @@ public class StepObjectRefFragments {
             if (compIdx >= 0) {
                 int objIdx = findObjectTypeIndex(words, compIdx + 1);
                 if (objIdx >= 0) {
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = compIdx + 1; i <= objIdx; i++) {
-                        if (i > compIdx + 1) sb.append(" ");
-                        sb.append(words[i]);
-                    }
-                    return sb.toString();
+                    return joinWords(words, compIdx + 1, objIdx);
                 }
             }
         }
@@ -142,12 +123,7 @@ public class StepObjectRefFragments {
             if (compIdx >= 0) {
                 int objIdx = findObjectTypeIndex(words, compIdx + 1);
                 if (objIdx >= 0) {
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = compIdx + 1; i < objIdx; i++) {
-                        if (i > compIdx + 1) sb.append(" ");
-                        sb.append(words[i]);
-                    }
-                    return sb.toString();
+                    return joinWords(words, compIdx + 1, objIdx - 1);
                 }
             }
         }
