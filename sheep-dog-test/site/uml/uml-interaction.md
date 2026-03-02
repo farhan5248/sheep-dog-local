@@ -335,8 +335,42 @@ Extracts a specific named fragment from formatted text using predefined regex pa
 All `get{Fragment}` methods follow this pattern — call `getGroup` with a regex pattern, input text, and capture group index:
 
 ```java
-public static String getComponent(String text) {
-    return getGroup("(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 2);
+public class StepObjectRefFragments {
+
+    private static final String COMPONENT_NAME = "( " + "[^/]" + "+)";
+    private static final String COMPONENT_TYPE = getRegexFromTypes(StepObjectRefComponentTypes.values());
+    private static final String COMPONENT = "(" + COMPONENT_NAME + COMPONENT_TYPE + ")";
+
+    public static String getComponentType(String text) {
+        return getGroup("^(The" + StepObjectRefFragments.COMPONENT + "?" + ")", text, 4);
+    }
+
+    private static String getGroup(String regex, String text, int group) {
+        Matcher m = Pattern.compile(regex).matcher(text);
+        if (m.find()) {
+            String temp = m.group(group);
+            if (temp != null) {
+                return temp.trim();
+            } else {
+                return "";
+            }
+        }
+        return "";
+    }    
+
+    private static String getRegexFromTypes(Enum<?>[] enumValues) {
+        String regex = "(";
+        for (Enum<?> enumValue : enumValues) {
+            if (enumValue instanceof StepObjectRefComponentTypes) {
+                regex += " " + ((StepObjectRefComponentTypes) enumValue).value + "|";
+            } else if (enumValue instanceof StepObjectRefObjectEdgeTypes) {
+                regex += " " + ((StepObjectRefObjectEdgeTypes) enumValue).value + "|";
+            } else if (enumValue instanceof StepObjectRefObjectVertexTypes) {
+                regex += " " + ((StepObjectRefObjectVertexTypes) enumValue).value + "|";
+            }
+        }
+        return regex.replaceAll("\\|$", ")");
+    }    
 }
 ```
 
