@@ -10,15 +10,22 @@ public class PhraseFragments {
             return tags;
         }
         for (String word : line.trim().split("\\s+")) {
-            if (word.startsWith("@")) {
-                tags.add(word.substring(1));
+            if (isTag(word)) {
+                tags.add(getTagDesc(word));
             }
         }
         return tags;
     }
 
     public static String getTagDesc(String text) {
-        return null;
+        if (text != null && text.startsWith("@")) {
+            return text.substring(1);
+        }
+        return "";
+    }
+
+    private static boolean isTag(String word) {
+        return word.startsWith("@");
     }
 
     public static String getTodoType(String text) {
