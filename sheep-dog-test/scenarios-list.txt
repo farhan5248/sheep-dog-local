@@ -1,0 +1,21 @@
+File: Grammar Phrase Fragments
+  Scenario: Tag Fragment
+    Tag: Grammar
+  Scenario: Todo Fragment
+    Tag: Grammar
+
+File: Grammar StepObjectRef Fragments
+  Scenario: Component Fragment
+    Tag: Grammar
+  Scenario: Object Fragment
+    Tag: Grammar
+  Scenario: Object Vertex Fragment
+    Tag: Grammar
+  Scenario: Object Edge Fragment
+    Tag: Grammar
+
+File: Grammar StepDefinitionRef Fragments
+  Scenario: Part Fragment
+    Tag: Grammar
+  Scenario: State Fragment
+    Tag: Grammar

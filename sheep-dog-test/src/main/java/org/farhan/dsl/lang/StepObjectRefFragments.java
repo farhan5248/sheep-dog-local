@@ -1,8 +1,5 @@
 package org.farhan.dsl.lang;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StepObjectRefFragments {
 
     public static String getAll(String text) {

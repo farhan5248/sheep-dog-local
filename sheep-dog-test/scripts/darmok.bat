@@ -1,3 +1,3 @@
 cd ..
-call mvn org.farhan:darmok-maven-plugin:run -l target/darmok.log
+call mvn org.farhan:darmok-maven-plugin:run -l darmok.log
 cd scripts
