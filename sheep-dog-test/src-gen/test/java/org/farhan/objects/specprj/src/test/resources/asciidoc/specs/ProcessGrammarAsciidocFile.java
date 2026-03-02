@@ -18,21 +18,27 @@ public interface ProcessGrammarAsciidocFile {
 
     public void assertStepDefinitionRefPartFragmentPartType(HashMap<String, String> keyMap);
 
+    public void assertStepDefinitionRefPartFragmentPartTypeDescription(HashMap<String, String> keyMap);
+
     public void assertStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionRefStateFragmentStateDescription(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap);
 
+    public void assertStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap);
+
+    public void assertStepObjectRefComponentFragmentComponentType(HashMap<String, String> keyMap);
+
+    public void assertStepObjectRefComponentFragmentComponentTypeDescription(HashMap<String, String> keyMap);
+
     public void assertStepObjectRefComponentFragmentComponent(HashMap<String, String> keyMap);
 
     public void assertStepObjectRefComponentFragmentComponentName(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefComponentFragmentComponentType(HashMap<String, String> keyMap);
-
-    public void assertStepObjectRefObjectEdgeFragmentObjectName(HashMap<String, String> keyMap);
-
     public void assertStepObjectRefObjectEdgeFragmentObjectType(HashMap<String, String> keyMap);
+
+    public void assertStepObjectRefObjectEdgeFragmentObjectTypeDescription(HashMap<String, String> keyMap);
 
     public void assertStepObjectRefObjectFragmentObject(HashMap<String, String> keyMap);
 
@@ -40,9 +46,9 @@ public interface ProcessGrammarAsciidocFile {
 
     public void assertStepObjectRefObjectFragmentObjectType(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectVertexFragmentObjectName(HashMap<String, String> keyMap);
-
     public void assertStepObjectRefObjectVertexFragmentObjectType(HashMap<String, String> keyMap);
+
+    public void assertStepObjectRefObjectVertexFragmentObjectTypeDescription(HashMap<String, String> keyMap);
 
     public void setTestStepTypeTestStepFullName(HashMap<String, String> keyMap);
 }
