@@ -20,6 +20,22 @@ public interface ISheepDogFactory {
      *
      * @return the created instance
      */
+    IDescription createDescription();
+
+    /**
+     * Creates uninitialized grammar element instance for subsequent attribute
+     * setting by builder.
+     *
+     * @return the created instance
+     */
+    INestedDescription createNestedDescription();
+
+    /**
+     * Creates uninitialized grammar element instance for subsequent attribute
+     * setting by builder.
+     *
+     * @return the created instance
+     */
     ICell createCell();
 
     /**

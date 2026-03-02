@@ -34,8 +34,9 @@ public class SheepDogUtility {
 
         // Clone lines
         if (original.getDescription() != null) {
+            IDescription clonedDescription = SheepDogBuilder.createDescription(clone);
             for (ILine line : original.getDescription().getLineList()) {
-                SheepDogBuilder.createLine(clone, line.getName());
+                SheepDogBuilder.createLine(clonedDescription, line.getName());
             }
         }
 
@@ -45,8 +46,9 @@ public class SheepDogUtility {
 
             // Clone lines for step definition
             if (stepDefinition.getDescription() != null) {
+                IDescription clonedStepDefDescription = SheepDogBuilder.createDescription(clonedStepDef);
                 for (ILine line : stepDefinition.getDescription().getLineList()) {
-                    SheepDogBuilder.createLine(clonedStepDef, line.getName());
+                    SheepDogBuilder.createLine(clonedStepDefDescription, line.getName());
                 }
             }
 
@@ -56,8 +58,9 @@ public class SheepDogUtility {
 
                 // Clone lines for step parameters
                 if (stepParameters.getNestedDescription() != null) {
+                    INestedDescription clonedNestedDescription = SheepDogBuilder.createNestedDescription(clonedStepParams);
                     for (ILine line : stepParameters.getNestedDescription().getLineList()) {
-                        SheepDogBuilder.createLine(clonedStepParams, line.getName());
+                        SheepDogBuilder.createLine(clonedNestedDescription, line.getName());
                     }
                 }
 

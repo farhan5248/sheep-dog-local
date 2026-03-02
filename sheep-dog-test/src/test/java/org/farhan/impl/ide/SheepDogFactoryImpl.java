@@ -1,7 +1,9 @@
 package org.farhan.impl.ide;
 
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IDescription;
 import org.farhan.dsl.lang.ILine;
+import org.farhan.dsl.lang.INestedDescription;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.ISheepDogFactory;
 import org.farhan.dsl.lang.IStepDefinition;
@@ -16,6 +18,16 @@ import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.IText;
 
 public class SheepDogFactoryImpl implements ISheepDogFactory {
+
+    @Override
+    public IDescription createDescription() {
+        return new DescriptionImpl();
+    }
+
+    @Override
+    public INestedDescription createNestedDescription() {
+        return new NestedDescriptionImpl();
+    }
 
     @Override
     public ICell createCell() {

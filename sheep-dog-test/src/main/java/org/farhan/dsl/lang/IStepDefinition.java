@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IStepDefinition {
 
-    boolean addLine(ILine value);
+    void setDescription(IDescription value);
 
     boolean addStepParameters(IStepParameters value);
 

@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.farhan.dsl.lang.IDescription;
-import org.farhan.dsl.lang.ILine;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
@@ -65,13 +64,9 @@ public class StepDefinitionImpl implements IStepDefinition {
     }
 
     @Override
-    public boolean addLine(ILine value) {
-        if (description == null) {
-            description = new DescriptionImpl();
-            description.parent = this;
-        }
-        description.addLine(value);
-        return true;
+    public void setDescription(IDescription value) {
+        description = (DescriptionImpl) value;
+        description.parent = this;
     }
 
     @Override

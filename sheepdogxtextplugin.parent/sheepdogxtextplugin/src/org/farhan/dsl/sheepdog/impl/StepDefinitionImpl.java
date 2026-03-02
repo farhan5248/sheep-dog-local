@@ -5,13 +5,10 @@ import java.util.TreeMap;
 
 import org.eclipse.emf.common.util.EList;
 import org.farhan.dsl.lang.IDescription;
-import org.farhan.dsl.lang.ILine;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.SheepDogUtility;
-import org.farhan.dsl.sheepdog.sheepDog.Description;
-import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
@@ -26,14 +23,8 @@ public class StepDefinitionImpl implements IStepDefinition {
     }
 
     @Override
-    public boolean addLine(ILine value) {
-        Description list = eObject.getDescription();
-        if (list == null) {
-            list = SheepDogFactory.eINSTANCE.createDescription();
-            eObject.setDescription(list);
-        }
-        list.getLineList().add(((LineImpl) value).eObject);
-        return true;
+    public void setDescription(IDescription value) {
+        eObject.setDescription(((DescriptionImpl) value).eObject);
     }
 
     @Override

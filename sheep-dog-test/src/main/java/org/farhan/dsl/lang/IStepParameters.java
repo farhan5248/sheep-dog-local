@@ -12,7 +12,7 @@ public interface IStepParameters {
 
     void setName(String value);
 
-    boolean addLine(ILine value);
+    void setNestedDescription(INestedDescription value);
 
     void setTable(ITable value);
 }

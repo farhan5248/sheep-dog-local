@@ -1,7 +1,9 @@
 package org.farhan.dsl.sheepdog.impl;
 
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IDescription;
 import org.farhan.dsl.lang.ILine;
+import org.farhan.dsl.lang.INestedDescription;
 import org.farhan.dsl.lang.IResourceRepository;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.ISheepDogFactory;
@@ -16,6 +18,8 @@ import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.IText;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
+import org.farhan.dsl.sheepdog.sheepDog.Description;
+import org.farhan.dsl.sheepdog.sheepDog.NestedDescription;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
@@ -33,6 +37,18 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     public SheepDogFactoryImpl(IResourceRepository sourceFileRepository) {
         sr = sourceFileRepository;
+    }
+
+    @Override
+    public IDescription createDescription() {
+        Description description = SheepDogFactory.eINSTANCE.createDescription();
+        return new DescriptionImpl(description);
+    }
+
+    @Override
+    public INestedDescription createNestedDescription() {
+        NestedDescription nestedDescription = SheepDogFactory.eINSTANCE.createNestedDescription();
+        return new NestedDescriptionImpl(nestedDescription);
     }
 
     @Override

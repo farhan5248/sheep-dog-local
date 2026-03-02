@@ -2,6 +2,8 @@ package org.farhan.common;
 
 import java.util.ArrayList;
 import org.farhan.dsl.lang.ICell;
+import org.farhan.dsl.lang.IDescription;
+import org.farhan.dsl.lang.INestedDescription;
 import org.farhan.dsl.lang.IRow;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepObject;
@@ -284,11 +286,13 @@ public class TestIDEObject extends TestObject {
     }
 
     protected void setStepDefinitionDescription(String name) {
-        SheepDogBuilder.createLine((IStepDefinition) focus, name);
+        IDescription description = SheepDogBuilder.createDescription((IStepDefinition) focus);
+        SheepDogBuilder.createLine(description, name);
     }
 
     protected void setStepParametersDescription(String name) {
-        SheepDogBuilder.createLine((IStepParameters) focus, name);
+        INestedDescription nestedDescription = SheepDogBuilder.createNestedDescription((IStepParameters) focus);
+        SheepDogBuilder.createLine(nestedDescription, name);
     }
 
 }

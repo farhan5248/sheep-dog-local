@@ -1,12 +1,9 @@
 package org.farhan.dsl.sheepdog.impl;
 
-import org.farhan.dsl.lang.ILine;
 import org.farhan.dsl.lang.INestedDescription;
 import org.farhan.dsl.lang.IStepDefinition;
 import org.farhan.dsl.lang.IStepParameters;
 import org.farhan.dsl.lang.ITable;
-import org.farhan.dsl.sheepdog.sheepDog.NestedDescription;
-import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 
@@ -55,14 +52,8 @@ public class StepParametersImpl implements IStepParameters {
     }
 
     @Override
-    public boolean addLine(ILine value) {
-        NestedDescription list = eObject.getNestedDescription();
-        if (list == null) {
-            list = SheepDogFactory.eINSTANCE.createNestedDescription();
-            eObject.setNestedDescription(list);
-        }
-        list.getLineList().add(((LineImpl) value).eObject);
-        return true;
+    public void setNestedDescription(INestedDescription value) {
+        eObject.setNestedDescription(((NestedDescriptionImpl) value).eObject);
     }
 
 }

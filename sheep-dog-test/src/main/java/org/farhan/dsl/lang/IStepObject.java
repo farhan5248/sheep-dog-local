@@ -22,7 +22,7 @@ public interface IStepObject extends IModel {
 
 	void setName(String value);
 
-	boolean addLine(ILine value);
+	void setDescription(IDescription value);
 
 	boolean addStepDefinition(IStepDefinition value);
 

@@ -2,6 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 import org.farhan.common.TestIDEObject;
+import org.farhan.dsl.lang.IDescription;
 import org.farhan.dsl.lang.IStepObject;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
@@ -69,7 +70,8 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
         try {
             IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
                     keyMap.get("Step Object Name"));
-            SheepDogBuilder.createLine(stepObject, replaceKeyword(keyMap.get("Step Object Description")));
+            IDescription description = SheepDogBuilder.createDescription(stepObject);
+            SheepDogBuilder.createLine(description, replaceKeyword(keyMap.get("Step Object Description")));
         } catch (Exception e) {
             Assertions.fail(e);
         }
