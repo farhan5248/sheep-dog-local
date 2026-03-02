@@ -43,16 +43,3 @@ Parser utilities for extracting typed fragments from formatted text strings. Sep
 **Examples**:
  - `public static ArrayList<String> getTagAsList(String name)`
 
-## is{Fragment}
-
-**Desc**: Tests whether text contains or matches a specific fragment pattern, returning boolean result for conditional logic.
-
-**Rule**: SOME method names follow is{Fragment} pattern.
- - **Name**: `^is{Fragment}(Desc|Type|Name|Edge|Vertex)*$`
- - **Return**: `^boolean$`
- - **Parameters**: `^\(String\s+\w+\)$`
- - **Modifier**: `^public\s+static$`
-
-**Examples**:
- - `public static boolean isTag(String text)`
- - `public static boolean isObjectEdgeType(String text)`

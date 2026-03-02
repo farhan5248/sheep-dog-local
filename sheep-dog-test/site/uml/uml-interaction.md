@@ -340,24 +340,6 @@ public static String getComponent(String text) {
 }
 ```
 
-### is{Fragment}
-
-Boolean methods check for the presence of specific fragments by testing if extraction returns a non-empty result.
-
-**Example: Checking for tags and todos**
-```java
-public static boolean isTag(String text) {
-    return !getGroup(TAG, text, 0).isEmpty();
-}
-```
-
-**Example: Checking for object types**
-```java
-public static boolean isObjectEdgeType(String text) {
-    return !getObjectEdgeType(text).isEmpty();
-}
-```
-
 ### get{Fragment}AsList
 
 Specialized methods parse text into collections of structured data, applying domain-specific logic during iteration.

@@ -40,12 +40,4 @@ public class StepObjectRefFragments {
     public static String getObjectVertexType(String text) {
         return null;
     }
-
-    public static boolean isObjectEdgeType(String text) {
-        return false;
-    }
-
-    public static boolean isObjectVertexType(String text) {
-        return false;
-    }
 }
