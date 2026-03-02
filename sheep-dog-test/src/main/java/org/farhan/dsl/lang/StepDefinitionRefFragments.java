@@ -5,9 +5,12 @@ import java.util.regex.Pattern;
 
 public class StepDefinitionRefFragments {
 
-    private static final String OBJECT_TYPE = buildObjectTypeRegex();
-    private static final String PART_TYPE = buildPartTypeRegex();
-    private static final String STATE_TYPE = buildStateTypeRegex();
+    private static final String OBJECT_VERTEX_TYPE = getRegexFromTypes(StepObjectRefObjectVertexTypes.values());
+    private static final String OBJECT_EDGE_TYPE = getRegexFromTypes(StepObjectRefObjectEdgeTypes.values());
+    private static final String OBJECT_TYPE = OBJECT_VERTEX_TYPE.substring(0, OBJECT_VERTEX_TYPE.length() - 1) + "|"
+            + OBJECT_EDGE_TYPE.substring(1);
+    private static final String PART_TYPE = getRegexFromTypes(StepDefinitionRefPartTypes.values());
+    private static final String STATE_TYPE = getRegexFromTypes(StepDefinitionRefStateTypes.values());
 
     // Pattern: ^\s*[^/]+ OBJECT_TYPE (PART_DESC) PART_TYPE STATE_TYPE (STATE_DESC)
     // Group 1: OBJECT_TYPE, Group 2: PART_DESC, Group 3: PART_TYPE,
@@ -73,29 +76,18 @@ public class StepDefinitionRefFragments {
         return "";
     }
 
-    private static String buildObjectTypeRegex() {
+    private static String getRegexFromTypes(Enum<?>[] enumValues) {
         String regex = "(";
-        for (StepObjectRefObjectVertexTypes t : StepObjectRefObjectVertexTypes.values()) {
-            regex += " " + t.value + "|";
-        }
-        for (StepObjectRefObjectEdgeTypes t : StepObjectRefObjectEdgeTypes.values()) {
-            regex += " " + t.value + "|";
-        }
-        return regex.replaceAll("\\|$", ")");
-    }
-
-    private static String buildPartTypeRegex() {
-        String regex = "(";
-        for (StepDefinitionRefPartTypes t : StepDefinitionRefPartTypes.values()) {
-            regex += " " + t.value + "|";
-        }
-        return regex.replaceAll("\\|$", ")");
-    }
-
-    private static String buildStateTypeRegex() {
-        String regex = "(";
-        for (StepDefinitionRefStateTypes t : StepDefinitionRefStateTypes.values()) {
-            regex += " " + t.value + "|";
+        for (Enum<?> enumValue : enumValues) {
+            if (enumValue instanceof StepObjectRefObjectVertexTypes) {
+                regex += " " + ((StepObjectRefObjectVertexTypes) enumValue).value + "|";
+            } else if (enumValue instanceof StepObjectRefObjectEdgeTypes) {
+                regex += " " + ((StepObjectRefObjectEdgeTypes) enumValue).value + "|";
+            } else if (enumValue instanceof StepDefinitionRefPartTypes) {
+                regex += " " + ((StepDefinitionRefPartTypes) enumValue).value + "|";
+            } else if (enumValue instanceof StepDefinitionRefStateTypes) {
+                regex += " " + ((StepDefinitionRefStateTypes) enumValue).value + "|";
+            }
         }
         return regex.replaceAll("\\|$", ")");
     }
