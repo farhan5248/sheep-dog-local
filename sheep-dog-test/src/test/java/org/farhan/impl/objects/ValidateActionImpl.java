@@ -25,7 +25,7 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedNode.contains("Cell/")) {
+            if (TestIDEObject.selectedNode.contains("CellList/")) {
                 ICell cell = (ICell) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = CellIssueDetector.validateNameOnly(cell);
@@ -33,7 +33,7 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
                         TestIDEObject.validateDialog = "";
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("Row/")) {
+            } else if (TestIDEObject.selectedNode.contains("RowList/")) {
                 IRow row = (IRow) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = RowIssueDetector.validateCellListWorkspace(row);
@@ -49,7 +49,7 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
                         TestIDEObject.validateDialog = "";
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestStep/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestStepList/")) {
                 ITestStep testStep = (ITestStep) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = TestStepIssueDetector.validateStepObjectNameOnly(testStep);
@@ -77,8 +77,8 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
                         }
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestCase/")
-                    || TestIDEObject.selectedNode.contains("TestSetup/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestCaseList/")
+                    || TestIDEObject.selectedNode.contains("TestSetupList/")) {
                 ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = TestStepContainerIssueDetector
@@ -94,7 +94,7 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
                         }
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestSuite/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestSuiteList/")) {
                 ITestSuite testSuite = (ITestSuite) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = TestSuiteIssueDetector.validateNameOnly(testSuite);

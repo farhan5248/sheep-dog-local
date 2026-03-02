@@ -31,12 +31,12 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedNode.contains("Cell/")) {
+            if (TestIDEObject.selectedNode.contains("CellList/")) {
                 ICell cell = (ICell) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                     TestIDEObject.listQuickfixesDialog.addAll(CellIssueResolver.correctNameOnly(cell));
                 }
-            } else if (TestIDEObject.selectedNode.contains("Row/")) {
+            } else if (TestIDEObject.selectedNode.contains("RowList/")) {
                 IRow row = (IRow) TestIDEObject.focus;
                 ITestStep testStep = (ITestStep) row.getParent().getParent();
                 if (TestIDEObject.validateDialog.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
@@ -55,7 +55,7 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
                 if (TestIDEObject.validateDialog.contentEquals(TextIssueTypes.TEXT_NAME_WORKSPACE.description)) {
                     TestIDEObject.listQuickfixesDialog.addAll(TextIssueResolver.correctNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestStep/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestStepList/")) {
                 ITestStep testStep = (ITestStep) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog
                         .contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
@@ -66,15 +66,15 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
                     TestIDEObject.listQuickfixesDialog
                             .addAll(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestCase/")
-                    || TestIDEObject.selectedNode.contains("TestSetup/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestCaseList/")
+                    || TestIDEObject.selectedNode.contains("TestSetupList/")) {
                 ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog
                         .contentEquals(TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description)) {
                     TestIDEObject.listQuickfixesDialog
                             .addAll(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestSuite/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestSuiteList/")) {
                 ITestSuite testSuite = (ITestSuite) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog.contentEquals(TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description)) {
                     TestIDEObject.listQuickfixesDialog.addAll(TestSuiteIssueResolver.correctNameOnly(testSuite));

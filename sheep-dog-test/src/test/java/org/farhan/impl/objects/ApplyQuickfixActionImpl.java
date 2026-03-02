@@ -30,12 +30,12 @@ public class ApplyQuickfixActionImpl extends TestIDEObject implements ApplyQuick
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedNode.contains("Cell/")) {
+            if (TestIDEObject.selectedNode.contains("CellList/")) {
                 ICell cell = (ICell) TestIDEObject.focus;
                 if (!CellIssueDetector.validateNameOnly(cell).isEmpty()) {
                     TestIDEObject.applyProposal(CellIssueResolver.correctNameOnly(cell));
                 }
-            } else if (TestIDEObject.selectedNode.contains("Row/")) {
+            } else if (TestIDEObject.selectedNode.contains("RowList/")) {
                 IRow row = (IRow) TestIDEObject.focus;
                 ITestStep testStep = (ITestStep) row.getParent().getParent();
                 if (!testStep.getTable().getRowList().isEmpty()
@@ -50,7 +50,7 @@ public class ApplyQuickfixActionImpl extends TestIDEObject implements ApplyQuick
                 if (!TextIssueDetector.validateNameWorkspace(text).isEmpty()) {
                     TestIDEObject.applyProposal(TextIssueResolver.correctNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestStep/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestStepList/")) {
                 ITestStep testStep = (ITestStep) TestIDEObject.focus;
                 if (!TestStepIssueDetector.validateStepObjectNameWorkspace(testStep).isEmpty()) {
                     TestIDEObject.applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
@@ -58,13 +58,13 @@ public class ApplyQuickfixActionImpl extends TestIDEObject implements ApplyQuick
                 if (!TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep).isEmpty()) {
                     TestIDEObject.applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestCase/")
-                    || TestIDEObject.selectedNode.contains("TestSetup/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestCaseList/")
+                    || TestIDEObject.selectedNode.contains("TestSetupList/")) {
                 ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
                 if (!TestStepContainerIssueDetector.validateNameOnly(testStepContainer).isEmpty()) {
                     TestIDEObject.applyProposal(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestSuite/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestSuiteList/")) {
                 ITestSuite testSuite = (ITestSuite) TestIDEObject.focus;
                 if (!TestSuiteIssueDetector.validateNameOnly(testSuite).isEmpty()) {
                     TestIDEObject.applyProposal(TestSuiteIssueResolver.correctNameOnly(testSuite));

@@ -4,25 +4,25 @@ import java.util.HashMap;
 
 public interface Process2AsciidocFile {
 
-    public void setTestSuiteNodeTestSuiteName(HashMap<String, String> keyMap);
+    public void setTestSuiteListNodeTestSuiteName(HashMap<String, String> keyMap);
 
-    public void assertTestSuite1NodeTestSuiteName(HashMap<String, String> keyMap);
+    public void assertTestSuiteList1NodeTestSuiteName(HashMap<String, String> keyMap);
 
-    public void setTestSuite1TestCaseNodeTestCaseName(HashMap<String, String> keyMap);
+    public void setTestSuiteList1TestCaseListNodeTestCaseName(HashMap<String, String> keyMap);
 
-    public void assertTestSuite1TestCase1NodeTestCaseName(HashMap<String, String> keyMap);
+    public void assertTestSuiteList1TestCaseList1NodeTestCaseName(HashMap<String, String> keyMap);
 
-    public void setTestSuite1TestCase1TestStepNodeTestStepFullName(HashMap<String, String> keyMap);
+    public void setTestSuiteList1TestCaseList1TestStepListNodeTestStepFullName(HashMap<String, String> keyMap);
 
-    public void setTestSuite1TestCase1TestStep1TableRow1CellNodeCellName(HashMap<String, String> keyMap);
+    public void setTestSuiteList1TestCaseList1TestStepList1TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
 
-    public void assertTestSuite1TestCase1TestStep1TableRow1CellNodeCellName(HashMap<String, String> keyMap);
+    public void assertTestSuiteList1TestCaseList1TestStepList1TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
 
-    public void setTestSuite1TestCase1TestStep1TableRow2CellNodeCellName(HashMap<String, String> keyMap);
+    public void setTestSuiteList1TestCaseList1TestStepList1TableRowList2CellListNodeCellName(HashMap<String, String> keyMap);
 
-    public void setTestSuite1TestCase1TestStep1TextNodeTextContent(HashMap<String, String> keyMap);
+    public void setTestSuiteList1TestCaseList1TestStepList1TextNodeTextContent(HashMap<String, String> keyMap);
 
-    public void setTestSuite1TestCase2TestStepNodeTestStepFullName(HashMap<String, String> keyMap);
+    public void setTestSuiteList1TestCaseList2TestStepListNodeTestStepFullName(HashMap<String, String> keyMap);
 
-    public void setTestSuite1TestSetup1TestStepNodeTestStepFullName(HashMap<String, String> keyMap);
+    public void setTestSuiteList1TestSetupList1TestStepListNodeTestStepFullName(HashMap<String, String> keyMap);
 }

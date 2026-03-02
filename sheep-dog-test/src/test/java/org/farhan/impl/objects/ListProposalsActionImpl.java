@@ -16,10 +16,10 @@ public class ListProposalsActionImpl extends TestIDEObject implements ListPropos
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedNode.contains("Row/")) {
+            if (TestIDEObject.selectedNode.contains("RowList/")) {
                 TestIDEObject.listProposalsDialog
                         .addAll(RowIssueResolver.suggestCellListWorkspace((ITestStep) TestIDEObject.focus));
-            } else if (TestIDEObject.selectedNode.contains("TestStep/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestStepList/")) {
                 TestIDEObject.listProposalsDialog
                         .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) TestIDEObject.focus));
                 TestIDEObject.listProposalsDialog.addAll(

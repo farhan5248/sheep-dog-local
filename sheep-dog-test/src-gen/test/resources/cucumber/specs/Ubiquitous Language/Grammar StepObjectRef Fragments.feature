@@ -20,6 +20,24 @@ Feature: Grammar StepObjectRef Fragments
           | The graph-viewer application uml-to-cucumber request                  | graph-viewer application | graph-viewer   | application    |
           | The uml-to-cucumber request is empty                                  | empty                    | empty          | empty          |
 
+  Scenario Outline: Component Fragment Types
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
+          | Test Step Full Name   |
+          | <Test Step Full Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref component fragment will be decomposed as follows
+          | Component Type   | Component Type Description   |
+          | <Component Type> | <Component Type Description> |
+
+    Examples: Types
+
+          | Test Step Full Name           | Component Type | Component Type Description                  |
+          | The graph-viewer application  | application    | GUI web application                         |
+          | The spec-prj project          | project        | Collection of files such as a Maven project |
+          | The sheep-dog-dev-svc service | service        | RESTful or SOAP webservice                  |
+          | The nightly batchjob          | batchjob       | EOD or ETL batchjob                         |
+          | The xtext plugin              | plugin         | Maven or Eclipse plugin                     |
+
   Scenario Outline: Object Fragment
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
@@ -74,22 +92,4 @@ Feature: Grammar StepObjectRef Fragments
           | The maven plugin asciidoctor-to-uml goal is executed                  | goal        | Maven plugin goal       |
           | The xtext plugin validate action is performed                         | action      | Eclipse plugin action   |
           | The nightly batchjob process job is executed with                     | job         | EOD or ETL batchjob     |
-
-  Scenario Outline: Component Fragment Types
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
-          | Test Step Full Name   |
-          | <Test Step Full Name> |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step object ref component fragment will be decomposed as follows
-          | Component Type   | Component Type Description   |
-          | <Component Type> | <Component Type Description> |
-
-    Examples: Types
-
-          | Test Step Full Name           | Component Type | Component Type Description                  |
-          | The graph-viewer application  | application    | GUI web application                         |
-          | The spec-prj project          | project        | Collection of files such as a Maven project |
-          | The sheep-dog-dev-svc service | service        | RESTful or SOAP webservice                  |
-          | The nightly batchjob          | batchjob       | EOD or ETL batchjob                         |
-          | The xtext plugin              | plugin         | Maven or Eclipse plugin                     |
 

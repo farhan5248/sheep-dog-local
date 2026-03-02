@@ -6,13 +6,13 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Cell name should start with a capital letter quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
           | Cell Name        |
           | lowercase header |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObject node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObjectList node is created as follows
           | Step Object Name                  | Step Definition Name | Step Parameters Name |
           | daily batchjob/Input file.feature | is present           | lowercase header     |
       And The xtext plugin validate annotation is set as follows
@@ -20,32 +20,32 @@ Feature: Quickfixes for Only Issues
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                            |
-          | TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell/1 |
+          | Node Path                                                                |
+          | TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList/1 |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id          | Proposal Description                    | Proposal Value   |
           | Capitalize cell name | Capitalize the first letter of the name | Lowercase header |
 
   Scenario: Body row Cell names can be any case quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Table/Row/1/Cell node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
           | Cell Name |
           | Header    |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep/1/Table/Row/2/Cell node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/2/CellList node is created as follows
           | Cell Name |
           | value     |
       And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                            |
-          | TestSuite/1/TestCase/1/TestStep/1/Table/Row/2/Cell/1 |
+          | Node Path                                                                |
+          | TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/2/CellList/1 |
      Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: Test suite name should start with a capital letter quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList node is created as follows
           | Test Suite Name   |
           | lowercase process |
       And The xtext plugin validate annotation is set as follows
@@ -53,15 +53,15 @@ Feature: Quickfixes for Only Issues
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path   |
-          | TestSuite/1 |
+          | Node Path       |
+          | TestSuiteList/1 |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id                | Proposal Description                    | Proposal Value    |
           | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
 
   Scenario: Test case name should start with a capital letter quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList node is created as follows
           | Test Case Name      |
           | lowercase test case |
       And The xtext plugin validate annotation is set as follows
@@ -69,15 +69,15 @@ Feature: Quickfixes for Only Issues
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path              |
-          | TestSuite/1/TestCase/1 |
+          | Node Path                      |
+          | TestSuiteList/1/TestCaseList/1 |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id                         | Proposal Description                    | Proposal Value      |
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
 
   Scenario: Test step must have a valid object name quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | The is present      |
       And The xtext plugin validate annotation is set as follows
@@ -92,13 +92,13 @@ Feature: Quickfixes for Only Issues
           Examples are: "src/test/resources/file.txt file" or "Home page"
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                         |
-          | TestSuite/1/TestCase/1/TestStep/1 |
+          | Node Path                                     |
+          | TestSuiteList/1/TestCaseList/1/TestStepList/1 |
      Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: Test step must have a valid step definition name quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuite/1/TestCase/1/TestStep node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name           |
           | The daily batchjob Input file |
       And The xtext plugin validate annotation is set as follows
@@ -118,7 +118,7 @@ Feature: Quickfixes for Only Issues
           Examples are: "after the next day" or "on time"
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                         |
-          | TestSuite/1/TestCase/1/TestStep/1 |
+          | Node Path                                     |
+          | TestSuiteList/1/TestCaseList/1/TestStepList/1 |
      Then The xtext plugin list quickfixes popup will be empty
 

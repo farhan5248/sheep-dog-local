@@ -14,6 +14,7 @@ import org.farhan.dsl.lang.ITestSuite;
 import org.farhan.dsl.lang.ITestStep;
 import org.farhan.dsl.lang.SheepDogBuilder;
 import org.farhan.dsl.lang.SheepDogIssueProposal;
+import org.junit.jupiter.api.Assertions;
 
 public class TestIDEObject extends TestObject {
 
@@ -87,22 +88,22 @@ public class TestIDEObject extends TestObject {
 
     private Object getChildNode(Object parent, String elementType, int index) {
         switch (elementType) {
-        case "TestSuite":
+        case "TestSuiteList":
             return ((ITestProject) parent).getTestSuite(index);
-        case "TestCase":
-        case "TestSetup":
+        case "TestCaseList":
+        case "TestSetupList":
             return ((ITestSuite) parent).getTestStepContainer(index);
-        case "TestStep":
+        case "TestStepList":
             return ((ITestStepContainer) parent).getTestStep(index);
-        case "Row":
+        case "RowList":
             return ((ITable) parent).getRow(index);
-        case "Cell":
+        case "CellList":
             return ((IRow) parent).getCell(index);
-        case "StepObject":
+        case "StepObjectList":
             return ((ITestProject) parent).getStepObject(index);
-        case "StepDefinition":
+        case "StepDefinitionList":
             return ((IStepObject) parent).getStepDefinition(index);
-        case "StepParameters":
+        case "StepParametersList":
             return ((IStepDefinition) parent).getStepParameters(index);
         default:
             throw new IllegalArgumentException("Unknown element type: " + elementType);
@@ -114,28 +115,76 @@ public class TestIDEObject extends TestObject {
             return getChildNode(parent, elementType, index);
         } catch (IndexOutOfBoundsException e) {
             switch (elementType) {
-            case "TestSuite":
+            case "TestSuiteList":
                 return SheepDogBuilder.createTestSuite((ITestProject) parent, "Test Suite");
-            case "TestCase":
+            case "TestCaseList":
                 return SheepDogBuilder.createTestCase((ITestSuite) parent, "Test Case");
-            case "TestSetup":
+            case "TestSetupList":
                 return SheepDogBuilder.createTestSetup((ITestSuite) parent, "Background");
-            case "TestStep":
+            case "TestStepList":
                 return SheepDogBuilder.createTestStep((ITestStepContainer) parent, "");
-            case "Row":
+            case "RowList":
                 return SheepDogBuilder.createRow((ITable) parent);
-            case "Cell":
+            case "CellList":
                 return SheepDogBuilder.createCell((IRow) parent, "");
-            case "StepObject":
+            case "StepObjectList":
                 return SheepDogBuilder.createStepObject((ITestProject) parent, "");
-            case "StepDefinition":
+            case "StepDefinitionList":
                 return SheepDogBuilder.createStepDefinition((IStepObject) parent, "");
-            case "StepParameters":
+            case "StepParametersList":
                 return SheepDogBuilder.createStepParameters((IStepDefinition) parent, "");
             default:
                 throw new IllegalArgumentException("Unknown element type: " + elementType);
             }
         }
+    }
+
+    protected void assertCellByName(String name) {
+        if (focus instanceof ICell) {
+            focus = ((ICell) focus).getParent();
+        }
+        focus = ((IRow) focus).getCell(name);
+        Assertions.assertNotNull(focus);
+    }
+
+    protected void assertStepDefinitionByName(String name) {
+        if (focus instanceof IStepDefinition) {
+            focus = ((IStepDefinition) focus).getParent();
+        }
+        focus = ((IStepObject) focus).getStepDefinition(name);
+        Assertions.assertNotNull(focus);
+    }
+
+    protected void assertStepObjectByName(String name) {
+        if (focus instanceof IStepObject) {
+            focus = ((IStepObject) focus).getParent();
+        }
+        focus = ((ITestProject) focus).getStepObject(name);
+        Assertions.assertNotNull(focus);
+    }
+
+    protected void assertStepParametersByName(String name) {
+        if (focus instanceof IStepParameters) {
+            focus = ((IStepParameters) focus).getParent();
+        }
+        focus = ((IStepDefinition) focus).getStepParameters(name);
+        Assertions.assertNotNull(focus);
+    }
+
+    protected void assertTestStepContainerByName(String name) {
+        if (focus instanceof ITestStepContainer) {
+            focus = ((ITestStepContainer) focus).getParent();
+        }
+        focus = ((ITestSuite) focus).getTestStepContainer(name);
+        Assertions.assertNotNull(focus);
+    }
+
+    protected void assertTestSuiteByName(String name) {
+        if (focus instanceof ITestSuite) {
+            focus = ((ITestSuite) focus).getParent();
+        }
+        focus = ((ITestProject) focus).getTestSuite(name);
+        Assertions.assertNotNull(focus);
     }
 
     protected void addCellWithName(String name) {
@@ -219,7 +268,7 @@ public class TestIDEObject extends TestObject {
                     current = table;
                 }
                 i++;
-            } else if (elementType.equals("Text") || elementType.equals("Cell")) {
+            } else if (elementType.equals("Text") || elementType.equals("CellList")) {
                 break;
             } else {
                 if (i + 1 >= parts.length || !parts[i + 1].matches("\\d+")) {
