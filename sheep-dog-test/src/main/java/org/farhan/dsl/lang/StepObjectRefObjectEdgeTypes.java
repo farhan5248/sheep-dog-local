@@ -13,22 +13,7 @@ public enum StepObjectRefObjectEdgeTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	REQUEST("request", "Web-service request"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	GOAL("goal", "Maven plugin goal"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	JOB("job", "EOD or ETL batchjob"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	ACTION("action", "Eclipse plugin action");
+	REQUEST("request", "Web-service request");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step

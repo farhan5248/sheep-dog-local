@@ -13,27 +13,7 @@ public enum StepObjectRefComponentTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	APPLICATION("application", "GUI web application"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	SERVICE("service", "RESTful or SOAP webservice"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	PLUGIN("plugin", "Maven or Eclipse plugin"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	BATCHJOB("batchjob", "EOD or ETL batchjob"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	PROJECT("project", "Collection of files such as a Maven project");
+	APPLICATION("application", "GUI web application");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step

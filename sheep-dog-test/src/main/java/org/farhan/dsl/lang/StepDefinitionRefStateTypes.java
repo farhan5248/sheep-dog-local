@@ -13,22 +13,7 @@ public enum StepDefinitionRefStateTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	IS("is", "Maps to setter method"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	ISNT("isn't", "Maps to setter method but used to remove something"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	WILL_BE("will be", "Maps to assertion method"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	WONT_BE("won't be", "Maps to assertion method for negative testing");
+	IS("is", "Maps to setter method");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step

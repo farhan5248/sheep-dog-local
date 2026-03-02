@@ -13,47 +13,7 @@ public enum StepObjectRefObjectVertexTypes {
 	 * Defines a keyword constant with associated value and description for test step
 	 * matching.
 	 */
-	FILE("file", "Any sort of file"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	PAGE("page", "Web page"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	RESPONSE("response", "Web service response"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	DIALOG("dialog", "Window dialog box"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	DIRECTORY("directory", "File directory"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	POPUP("popup", "List of options for quickfix or content proposal"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	ANNOTATION("annotation", "Visual indicator for error or warning messages"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	HOVER("hover", "Popup displaying information on mouse hover"),
-	/**
-	 * Defines a keyword constant with associated value and description for test step
-	 * matching.
-	 */
-	TOOLTIP("tooltip", "Small popup displaying descriptive text");
+	FILE("file", "Any sort of file");
 
 	/**
 	 * Stores the lowercase keyword string that appears in actual test step
