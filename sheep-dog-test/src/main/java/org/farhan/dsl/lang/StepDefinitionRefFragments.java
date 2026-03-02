@@ -43,7 +43,14 @@ public class StepDefinitionRefFragments {
     }
 
     public static String getAll(String text) {
-        return null;
+        if (text != null) {
+            String[] words = text.split(" ");
+            int partIdx = findPartTypeIndex(words);
+            if (partIdx >= 0) {
+                return text;
+            }
+        }
+        return "";
     }
 
     public static String getPart(String text) {
