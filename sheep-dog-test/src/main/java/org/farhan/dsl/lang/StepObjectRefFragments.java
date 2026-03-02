@@ -8,7 +8,8 @@ public class StepObjectRefFragments {
     private static final String COMPONENT_NAME = "( [^/]+)";
     private static final String COMPONENT_TYPE = getRegexFromTypes(StepObjectRefComponentTypes.values());
     private static final String COMPONENT = "(" + COMPONENT_NAME + COMPONENT_TYPE + ")";
-    private static final String OBJECT_TYPE = buildObjectTypeRegex();
+    private static final String OBJECT_TYPE = getRegexFromTypes(StepObjectRefObjectEdgeTypes.values(),
+            StepObjectRefObjectVertexTypes.values());
     private static final String OBJECT_NAME = "( [^/]+)";
     private static final String OBJECT = "(" + OBJECT_NAME + OBJECT_TYPE + ")";
 
@@ -33,13 +34,7 @@ public class StepObjectRefFragments {
     }
 
     public static String getObjectEdgeType(String text) {
-        String objectType = getObjectType(text);
-        for (StepObjectRefObjectEdgeTypes e : StepObjectRefObjectEdgeTypes.values()) {
-            if (e.value.equals(objectType)) {
-                return objectType;
-            }
-        }
-        return null;
+        return getObjectTypeIfInEnum(text, StepObjectRefObjectEdgeTypes.values());
     }
 
     public static String getObjectName(String text) {
@@ -51,10 +46,20 @@ public class StepObjectRefFragments {
     }
 
     public static String getObjectVertexType(String text) {
+        return getObjectTypeIfInEnum(text, StepObjectRefObjectVertexTypes.values());
+    }
+
+    private static String getObjectTypeIfInEnum(String text, Enum<?>[] enumValues) {
         String objectType = getObjectType(text);
-        for (StepObjectRefObjectVertexTypes v : StepObjectRefObjectVertexTypes.values()) {
-            if (v.value.equals(objectType)) {
-                return objectType;
+        for (Enum<?> e : enumValues) {
+            if (e instanceof StepObjectRefObjectEdgeTypes) {
+                if (((StepObjectRefObjectEdgeTypes) e).value.equals(objectType)) {
+                    return objectType;
+                }
+            } else if (e instanceof StepObjectRefObjectVertexTypes) {
+                if (((StepObjectRefObjectVertexTypes) e).value.equals(objectType)) {
+                    return objectType;
+                }
             }
         }
         return null;
@@ -73,26 +78,17 @@ public class StepObjectRefFragments {
         return "";
     }
 
-    private static String buildObjectTypeRegex() {
+    private static String getRegexFromTypes(Enum<?>[]... enumArrays) {
         String regex = "(";
-        for (StepObjectRefObjectEdgeTypes e : StepObjectRefObjectEdgeTypes.values()) {
-            regex += " " + e.value + "|";
-        }
-        for (StepObjectRefObjectVertexTypes v : StepObjectRefObjectVertexTypes.values()) {
-            regex += " " + v.value + "|";
-        }
-        return regex.replaceAll("\\|$", ")");
-    }
-
-    private static String getRegexFromTypes(Enum<?>[] enumValues) {
-        String regex = "(";
-        for (Enum<?> enumValue : enumValues) {
-            if (enumValue instanceof StepObjectRefComponentTypes) {
-                regex += " " + ((StepObjectRefComponentTypes) enumValue).value + "|";
-            } else if (enumValue instanceof StepObjectRefObjectEdgeTypes) {
-                regex += " " + ((StepObjectRefObjectEdgeTypes) enumValue).value + "|";
-            } else if (enumValue instanceof StepObjectRefObjectVertexTypes) {
-                regex += " " + ((StepObjectRefObjectVertexTypes) enumValue).value + "|";
+        for (Enum<?>[] enumValues : enumArrays) {
+            for (Enum<?> enumValue : enumValues) {
+                if (enumValue instanceof StepObjectRefComponentTypes) {
+                    regex += " " + ((StepObjectRefComponentTypes) enumValue).value + "|";
+                } else if (enumValue instanceof StepObjectRefObjectEdgeTypes) {
+                    regex += " " + ((StepObjectRefObjectEdgeTypes) enumValue).value + "|";
+                } else if (enumValue instanceof StepObjectRefObjectVertexTypes) {
+                    regex += " " + ((StepObjectRefObjectVertexTypes) enumValue).value + "|";
+                }
             }
         }
         return regex.replaceAll("\\|$", ")");
