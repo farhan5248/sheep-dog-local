@@ -11,6 +11,7 @@ import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
+import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSetup;
 import org.farhan.dsl.grammar.ITestStep;
@@ -92,6 +93,11 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
     @Override
     public IText createText() {
         return new TextImpl();
+    }
+
+    @Override
+    public ITestData createTestData() {
+        return new TestDataImpl();
     }
 
 }

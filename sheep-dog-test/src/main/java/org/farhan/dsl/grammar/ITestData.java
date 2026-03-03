@@ -1,7 +1,5 @@
 package org.farhan.dsl.grammar;
 
-import java.util.List;
-
 public interface ITestData {
 
     String getName();
@@ -10,10 +8,14 @@ public interface ITestData {
 
     INestedDescription getNestedDescription();
 
-    List<List<String>> getTable();
+    ITable getTable();
+
+    void setTable(ITable value);
 
     void setName(String value);
 
     boolean addLine(ILine value);
+
+    void setNestedDescription(INestedDescription value);
 
 }

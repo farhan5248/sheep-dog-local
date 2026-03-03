@@ -14,5 +14,7 @@ public interface IStepParameters {
 
     void setNestedDescription(INestedDescription value);
 
+    boolean addLine(ILine value);
+
     void setTable(ITable value);
 }

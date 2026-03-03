@@ -28,4 +28,6 @@ public interface ITestSuite extends IModel {
 
     void setName(String value);
 
+    void setDescription(IDescription value);
+
 }

@@ -11,6 +11,7 @@ import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
+import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
@@ -61,6 +62,9 @@ public class TestIDEObject extends TestObject {
         Object current = testProject;
 
         int i = 0;
+        if (parts.length > 0 && parts[0].equals("Model")) {
+            i = 1;
+        }
         while (i < parts.length && current != null) {
             String elementType = parts[i];
 
@@ -74,6 +78,24 @@ public class TestIDEObject extends TestObject {
                 i++;
             } else if (elementType.equals("Text")) {
                 current = ((ITestStep) current).getText();
+                i++;
+            } else if (elementType.equals("Description")) {
+                if (current instanceof ITestSuite) {
+                    current = ((ITestSuite) current).getDescription();
+                } else if (current instanceof ITestStepContainer) {
+                    current = ((ITestStepContainer) current).getDescription();
+                } else if (current instanceof IStepObject) {
+                    current = ((IStepObject) current).getDescription();
+                } else {
+                    current = ((IStepDefinition) current).getDescription();
+                }
+                i++;
+            } else if (elementType.equals("NestedDescription")) {
+                if (current instanceof IStepParameters) {
+                    current = ((IStepParameters) current).getNestedDescription();
+                } else {
+                    current = ((ITestData) current).getNestedDescription();
+                }
                 i++;
             } else {
                 if (i + 1 >= parts.length || !parts[i + 1].matches("\\d+")) {
@@ -93,8 +115,7 @@ public class TestIDEObject extends TestObject {
         switch (elementType) {
         case "TestSuiteList":
             return ((ITestProject) parent).getTestSuite(index);
-        case "TestCaseList":
-        case "TestSetupList":
+        case "TestStepContainerList":
             return ((ITestSuite) parent).getTestStepContainer(index);
         case "TestStepList":
             return ((ITestStepContainer) parent).getTestStep(index);
@@ -108,6 +129,14 @@ public class TestIDEObject extends TestObject {
             return ((IStepObject) parent).getStepDefinition(index);
         case "StepParametersList":
             return ((IStepDefinition) parent).getStepParameters(index);
+        case "LineList":
+            if (parent instanceof IDescription) {
+                return ((IDescription) parent).getLine(index);
+            } else {
+                return ((INestedDescription) parent).getLine(index);
+            }
+        case "TestDataList":
+            return ((ITestCase) parent).getTestData(index);
         default:
             throw new IllegalArgumentException("Unknown element type: " + elementType);
         }
@@ -120,10 +149,8 @@ public class TestIDEObject extends TestObject {
             switch (elementType) {
             case "TestSuiteList":
                 return SheepDogBuilder.createTestSuite((ITestProject) parent, "Test Suite");
-            case "TestCaseList":
+            case "TestStepContainerList":
                 return SheepDogBuilder.createTestCase((ITestSuite) parent, "Test Case");
-            case "TestSetupList":
-                return SheepDogBuilder.createTestSetup((ITestSuite) parent, "Background");
             case "TestStepList":
                 return SheepDogBuilder.createTestStep((ITestStepContainer) parent, "");
             case "RowList":
@@ -136,6 +163,14 @@ public class TestIDEObject extends TestObject {
                 return SheepDogBuilder.createStepDefinition((IStepObject) parent, "");
             case "StepParametersList":
                 return SheepDogBuilder.createStepParameters((IStepDefinition) parent, "");
+            case "LineList":
+                if (parent instanceof IDescription) {
+                    return SheepDogBuilder.createLine((IDescription) parent, "");
+                } else {
+                    return SheepDogBuilder.createLine((INestedDescription) parent, "");
+                }
+            case "TestDataList":
+                return SheepDogBuilder.createTestData((ITestCase) parent, "");
             default:
                 throw new IllegalArgumentException("Unknown element type: " + elementType);
             }
@@ -226,6 +261,13 @@ public class TestIDEObject extends TestObject {
         focus = SheepDogBuilder.createTestCase((ITestSuite) focus, testStepContainerName);
     }
 
+    protected void addTestSetupWithName(String testSetupName) {
+        if (focus instanceof ITestStepContainer) {
+            focus = ((ITestStepContainer) focus).getParent();
+        }
+        focus = SheepDogBuilder.createTestSetup((ITestSuite) focus, testSetupName);
+    }
+
     protected void addTestStepWithFullName(String stepName) {
         if (focus instanceof ITestStep) {
             focus = ((ITestStep) focus).getParent();
@@ -240,6 +282,17 @@ public class TestIDEObject extends TestObject {
         focus = SheepDogBuilder.createTestSuite(testProject, testSuiteName);
     }
 
+    protected void addLineWithContent(String content) {
+        if (focus instanceof ILine) {
+            focus = ((ILine) focus).getParent();
+        }
+        IDescription description = ((IStepObject) focus).getDescription();
+        if (description == null) {
+            description = SheepDogBuilder.createDescription((IStepObject) focus);
+        }
+        focus = SheepDogBuilder.createLine(description, content);
+    }
+
     protected void addTextWithContent(String content) {
         focus = SheepDogBuilder.createText((ITestStep) focus, content);
     }
@@ -250,6 +303,9 @@ public class TestIDEObject extends TestObject {
         String[] parts = part.split("/");
         Object current = testProject;
         int i = 0;
+        if (parts.length > 0 && parts[0].equals("Model")) {
+            i = 1;
+        }
 
         while (i < parts.length) {
             String elementType = parts[i];
@@ -269,6 +325,30 @@ public class TestIDEObject extends TestObject {
                     }
                 } else {
                     current = table;
+                }
+                i++;
+            } else if (elementType.equals("Description")) {
+                if (current instanceof ITestSuite) {
+                    IDescription desc = ((ITestSuite) current).getDescription();
+                    current = desc != null ? desc : SheepDogBuilder.createDescription((ITestSuite) current);
+                } else if (current instanceof ITestStepContainer) {
+                    IDescription desc = ((ITestStepContainer) current).getDescription();
+                    current = desc != null ? desc : SheepDogBuilder.createDescription((ITestStepContainer) current);
+                } else if (current instanceof IStepObject) {
+                    IDescription desc = ((IStepObject) current).getDescription();
+                    current = desc != null ? desc : SheepDogBuilder.createDescription((IStepObject) current);
+                } else {
+                    IDescription desc = ((IStepDefinition) current).getDescription();
+                    current = desc != null ? desc : SheepDogBuilder.createDescription((IStepDefinition) current);
+                }
+                i++;
+            } else if (elementType.equals("NestedDescription")) {
+                if (current instanceof IStepParameters) {
+                    INestedDescription nd = ((IStepParameters) current).getNestedDescription();
+                    current = nd != null ? nd : SheepDogBuilder.createNestedDescription((IStepParameters) current);
+                } else {
+                    INestedDescription nd = ((ITestData) current).getNestedDescription();
+                    current = nd != null ? nd : SheepDogBuilder.createNestedDescription((ITestData) current);
                 }
                 i++;
             } else if (elementType.equals("Text") || elementType.equals("CellList")) {

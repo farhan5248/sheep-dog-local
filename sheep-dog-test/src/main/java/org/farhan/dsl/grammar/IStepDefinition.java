@@ -6,6 +6,8 @@ public interface IStepDefinition {
 
     void setDescription(IDescription value);
 
+    boolean addLine(ILine value);
+
     boolean addStepParameters(IStepParameters value);
 
     String getName();

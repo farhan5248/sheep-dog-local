@@ -58,8 +58,7 @@ public class ApplyQuickfixActionImpl extends TestIDEObject implements ApplyQuick
                 if (!TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep).isEmpty()) {
                     TestIDEObject.applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestCaseList/")
-                    || TestIDEObject.selectedNode.contains("TestSetupList/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestStepContainerList/")) {
                 ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
                 if (!TestStepContainerIssueDetector.validateNameOnly(testStepContainer).isEmpty()) {
                     TestIDEObject.applyProposal(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));

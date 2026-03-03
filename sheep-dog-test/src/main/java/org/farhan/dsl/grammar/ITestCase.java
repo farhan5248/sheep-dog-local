@@ -10,4 +10,6 @@ public interface ITestCase extends ITestStepContainer {
 
 	List<ITestData> getTestDataList();
 
+	boolean addTestData(ITestData value);
+
 }

@@ -72,6 +72,12 @@ public class TestStepContainerImpl implements ITestStepContainer {
     }
 
     @Override
+    public void setDescription(IDescription value) {
+        this.description = (DescriptionImpl) value;
+        this.description.parent = this;
+    }
+
+    @Override
     public boolean addTestStep(ITestStep value) {
         testStepList.add((TestStepImpl) value);
         testStepList.getLast().parent = this;

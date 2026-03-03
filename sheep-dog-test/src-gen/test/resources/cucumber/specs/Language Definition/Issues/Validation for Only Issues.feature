@@ -6,15 +6,15 @@ Feature: Validation for Only Issues
 
   Scenario: Header row Cell names should start with a capital letter validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
           | Cell Name |
           | header    |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                                                |
-          | TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList/1 |
+          | Node Path                                                                               |
+          | Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList/1 |
      Then The xtext plugin validate annotation will be set as follows
           """
           Name should start with a capital
@@ -22,28 +22,28 @@ Feature: Validation for Only Issues
 
   Scenario: Body row Cell names can be any case validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
           | Cell Name |
           | Header    |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/2/CellList node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList node is created as follows
           | Cell Name |
           | value     |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                                                |
-          | TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/2/CellList/1 |
+          | Node Path                                                                               |
+          | Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList/1 |
      Then The xtext plugin validate annotation will be empty
 
   Scenario: Test suite name should start with a capital letter validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList node is created as follows
           | Test Suite Name   |
           | lowercase process |
      When The xtext plugin validate action is performed as follows
-          | Node Path       |
-          | TestSuiteList/1 |
+          | Node Path             |
+          | Model/TestSuiteList/1 |
      Then The xtext plugin validate annotation will be set as follows
           """
           Name should start with a capital
@@ -51,12 +51,12 @@ Feature: Validation for Only Issues
 
   Scenario: Test case name should start with a capital letter validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList node is created as follows
           | Test Case Name      |
           | lowercase test case |
      When The xtext plugin validate action is performed as follows
-          | Node Path                      |
-          | TestSuiteList/1/TestCaseList/1 |
+          | Node Path                                     |
+          | Model/TestSuiteList/1/TestStepContainerList/1 |
      Then The xtext plugin validate annotation will be set as follows
           """
           Name should start with a capital
@@ -64,12 +64,12 @@ Feature: Validation for Only Issues
 
   Scenario: Test step must have a valid object name validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | The is present      |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                     |
-          | TestSuiteList/1/TestCaseList/1/TestStepList/1 |
+          | Node Path                                                    |
+          | Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin validate annotation will be set as follows
           """
           Every test case must have at least one component specified.
@@ -84,12 +84,12 @@ Feature: Validation for Only Issues
 
   Scenario: Test step must have a valid step definition name validation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name           |
           | The daily batchjob Input file |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                     |
-          | TestSuiteList/1/TestCaseList/1/TestStepList/1 |
+          | Node Path                                                    |
+          | Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin validate annotation will be set as follows
           """
           After specifying the step object name, a step definition name is specified.

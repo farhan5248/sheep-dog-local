@@ -1,5 +1,6 @@
 package org.farhan.impl.ide;
 
+import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.INestedDescription;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepParameters;
@@ -50,6 +51,16 @@ public class StepParametersImpl implements IStepParameters {
     public void setNestedDescription(INestedDescription value) {
         nestedDescription = (NestedDescriptionImpl) value;
         nestedDescription.parent = this;
+    }
+
+    @Override
+    public boolean addLine(ILine value) {
+        if (nestedDescription == null) {
+            nestedDescription = new NestedDescriptionImpl();
+            nestedDescription.parent = this;
+        }
+        nestedDescription.addLine(value);
+        return true;
     }
 
     @Override

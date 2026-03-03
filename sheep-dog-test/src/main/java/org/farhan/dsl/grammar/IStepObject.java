@@ -24,6 +24,8 @@ public interface IStepObject extends IModel {
 
 	void setDescription(IDescription value);
 
+	boolean addLine(ILine value);
+
 	boolean addStepDefinition(IStepDefinition value);
 
 }

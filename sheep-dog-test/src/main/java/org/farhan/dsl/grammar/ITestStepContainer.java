@@ -22,4 +22,6 @@ public interface ITestStepContainer {
 
     boolean addTestStep(ITestStep value);
 
+    void setDescription(IDescription value);
+
 }

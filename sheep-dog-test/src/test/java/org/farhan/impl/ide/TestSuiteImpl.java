@@ -87,6 +87,12 @@ public class TestSuiteImpl implements ITestSuite {
 	}
 
 	@Override
+	public void setDescription(IDescription value) {
+		this.description = (DescriptionImpl) value;
+		this.description.parent = this;
+	}
+
+	@Override
 	public boolean addLine(ILine value) {
 		if (description == null) {
 			description = new DescriptionImpl();

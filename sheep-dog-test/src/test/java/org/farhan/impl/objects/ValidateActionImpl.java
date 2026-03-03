@@ -77,8 +77,7 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
                         }
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestCaseList/")
-                    || TestIDEObject.selectedNode.contains("TestSetupList/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestStepContainerList/")) {
                 ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = TestStepContainerIssueDetector

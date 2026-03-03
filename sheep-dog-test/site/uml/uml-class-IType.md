@@ -2,6 +2,19 @@
 
 Grammar element interface contracts. Separates interface definitions from implementations, allowing multiple backends (EMF, POJO) for the same grammar model.
 
+**Grammar-to-Interface Mapping**
+
+| Grammar construct | Interface pattern |
+|---|---|
+| `name=Phrase` | `getName(): String` + `setName(String)` |
+| `description=Description?` | `getDescription(): IDescription` + `setDescription(IDescription)` + `addLine(ILine): boolean` |
+| `nestedDescription=NestedDescription?` | `getNestedDescription(): INestedDescription` + `setNestedDescription(INestedDescription)` + `addLine(ILine): boolean` |
+| `table=Table` | `getTable(): ITable` + `setTable(ITable)` |
+| `xxxList+=Type*` | `getType(int): IType` + `getType(String): IType` + `getTypeList(): List<IType>` + `addType(IType): boolean` |
+| parent-child relationship | `getParent(): IParentType` |
+
+Note: `addLine()` is a convenience method — it auto-creates the Description/NestedDescription if null, then appends the Line. All types with `description=Description?` or `nestedDescription=NestedDescription?` should have it.
+
 ## {Assignment}
 
 **Desc**: Provides access to grammar attributes and child elements using standard JavaBeans conventions.

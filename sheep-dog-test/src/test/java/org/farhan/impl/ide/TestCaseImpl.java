@@ -1,29 +1,46 @@
 package org.farhan.impl.ide;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
 
 public class TestCaseImpl extends TestStepContainerImpl implements ITestCase {
 
+	ArrayList<TestDataImpl> testDataList;
+
 	TestCaseImpl() {
 		super();
+		testDataList = new ArrayList<TestDataImpl>();
 	}
 
 	@Override
-	public ArrayList<ITestData> getTestDataList() {
-		throw new UnsupportedOperationException("getTestDataList() is not implemented");
+	public List<ITestData> getTestDataList() {
+		return Collections.unmodifiableList(testDataList);
 	}
 
 	@Override
 	public ITestData getTestData(int index) {
-		throw new UnsupportedOperationException("getTestData(int index) is not implemented");
+		return testDataList.get(index);
 	}
 
 	@Override
 	public ITestData getTestData(String name) {
-		throw new UnsupportedOperationException("getTestData(String name) is not implemented");
+		for (ITestData td : testDataList) {
+			if (td.getName().contentEquals(name)) {
+				return td;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public boolean addTestData(ITestData value) {
+		testDataList.add((TestDataImpl) value);
+		testDataList.getLast().parent = this;
+		return true;
 	}
 
 }

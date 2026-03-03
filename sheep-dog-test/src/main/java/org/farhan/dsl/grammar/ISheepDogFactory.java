@@ -133,4 +133,12 @@ public interface ISheepDogFactory {
      * @return the created instance
      */
     IText createText();
+
+    /**
+     * Creates uninitialized grammar element instance for subsequent attribute
+     * setting by builder.
+     *
+     * @return the created instance
+     */
+    ITestData createTestData();
 }

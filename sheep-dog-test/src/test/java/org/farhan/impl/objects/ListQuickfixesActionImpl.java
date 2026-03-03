@@ -66,8 +66,7 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
                     TestIDEObject.listQuickfixesDialog
                             .addAll(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestCaseList/")
-                    || TestIDEObject.selectedNode.contains("TestSetupList/")) {
+            } else if (TestIDEObject.selectedNode.contains("TestStepContainerList/")) {
                 ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
                 if (TestIDEObject.validateDialog
                         .contentEquals(TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description)) {

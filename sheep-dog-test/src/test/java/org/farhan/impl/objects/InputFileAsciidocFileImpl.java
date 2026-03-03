@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 import org.farhan.common.TestIDEObject;
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
@@ -13,60 +14,96 @@ import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFileAsciidocFile {
 
+    public void assertEmpty(HashMap<String, String> keyMap) {
+        if (selectedNode.endsWith("StepDefinitionList")) {
+            Assertions.assertTrue(((IStepObject) focus).getStepDefinitionList().isEmpty());
+        } else if (selectedNode.endsWith("Description")) {
+            if (focus instanceof IDescription) {
+                Assertions.assertTrue(((IDescription) focus).getLineList().isEmpty());
+            } else {
+                Assertions.assertNull(((IStepObject) focus).getDescription());
+            }
+        }
+    }
+
     @Override
-    public void assertStepObjectList1NodeStepDefinitionName(HashMap<String, String> keyMap) {
+    public void assertModelStepObjectList1DescriptionNodeEmpty(HashMap<String, String> keyMap) {
+        if (focus instanceof IDescription) {
+            Assertions.assertTrue(((IDescription) focus).getLineList().isEmpty());
+        } else {
+            Assertions.assertNull(((IStepObject) focus).getDescription());
+        }
+    }
+
+    @Override
+    public void assertModelStepObjectList1NodeStepDefinitionName(HashMap<String, String> keyMap) {
         assertStepDefinitionByName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
     @Override
-    public void assertStepObjectList1NodeStepObjectName(HashMap<String, String> keyMap) {
+    public void assertModelStepObjectList1NodeStepObjectName(HashMap<String, String> keyMap) {
         assertStepObjectByName(replaceKeyword(keyMap.get("Step Object Name")));
     }
 
     @Override
-    public void assertStepObjectList1NodeStepParametersName(HashMap<String, String> keyMap) {
+    public void assertModelStepObjectList1NodeStepParametersName(HashMap<String, String> keyMap) {
         assertStepParametersByName(replaceKeyword(keyMap.get("Step Parameters Name")));
     }
 
     @Override
-    public void assertStepObjectList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(
+    public void assertModelStepObjectList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(
             HashMap<String, String> keyMap) {
         assertCellByName(replaceKeyword(keyMap.get("Cell Name")));
     }
 
     @Override
-    public void assertStepObjectList1StepDefinitionList1StepParametersList2TableRowList1CellListNodeCellName(
+    public void assertModelStepObjectList1StepDefinitionList1StepParametersList2TableRowList1CellListNodeCellName(
             HashMap<String, String> keyMap) {
         assertCellByName(replaceKeyword(keyMap.get("Cell Name")));
     }
 
     @Override
-    public void assertStepObjectList1StepDefinitionList1StepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
+    public void assertModelStepObjectList1StepDefinitionList1StepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
         assertStepParametersByName(replaceKeyword(keyMap.get("Step Parameters Name")));
     }
 
     @Override
-    public void assertStepObjectList1StepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
+    public void assertModelStepObjectList1StepDefinitionListNodeEmpty(HashMap<String, String> keyMap) {
+        Assertions.assertTrue(((IStepObject) focus).getStepDefinitionList().isEmpty());
+    }
+
+    @Override
+    public void assertModelStepObjectList1StepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
         assertStepDefinitionByName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
     @Override
-    public void setStepObjectList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(HashMap<String, String> keyMap) {
+    public void setCreated(HashMap<String, String> keyMap) {
+        // TODO clear the list of step objects and test suites or change the step to doesn't exist
+    }
+
+    @Override
+    public void setLineContent(HashMap<String, String> keyMap) {
+        ((ILine) focus).setName(replaceKeyword(keyMap.get("Line Content")));
+    }
+
+    @Override
+    public void setModelStepObjectList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(HashMap<String, String> keyMap) {
         addCellWithName(keyMap.get("Cell Name"));
     }
 
     @Override
-    public void setStepObjectListNodeStepDefinitionDescription(HashMap<String, String> keyMap) {
+    public void setModelStepObjectListNodeStepDefinitionDescription(HashMap<String, String> keyMap) {
         setStepDefinitionDescription(replaceKeyword(keyMap.get("Step Definition Description")));
     }
 
     @Override
-    public void setStepObjectListNodeStepDefinitionName(HashMap<String, String> keyMap) {
+    public void setModelStepObjectListNodeStepDefinitionName(HashMap<String, String> keyMap) {
         addStepDefinitionWithName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
     @Override
-    public void setStepObjectListNodeStepObjectDescription(HashMap<String, String> keyMap) {
+    public void setModelStepObjectListNodeStepObjectDescription(HashMap<String, String> keyMap) {
         try {
             IStepObject stepObject = SheepDogBuilder.createStepObject(TestIDEObject.testProject,
                     keyMap.get("Step Object Name"));
@@ -78,18 +115,23 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void setStepObjectListNodeStepObjectName(HashMap<String, String> keyMap) {
+    public void setModelStepObjectListNodeStepObjectName(HashMap<String, String> keyMap) {
         addStepObjectWithName(replaceKeyword(keyMap.get("Step Object Name")));
     }
 
     @Override
-    public void setStepObjectListNodeStepParametersDescription(HashMap<String, String> keyMap) {
+    public void setModelStepObjectListNodeStepParametersDescription(HashMap<String, String> keyMap) {
         setStepParametersDescription(replaceKeyword(keyMap.get("Step Parameters Description")));
     }
 
     @Override
-    public void setStepObjectListNodeStepParametersName(HashMap<String, String> keyMap) {
+    public void setModelStepObjectListNodeStepParametersName(HashMap<String, String> keyMap) {
         addStepParametersWithName(replaceKeyword(keyMap.get("Step Parameters Name")));
+    }
+
+    @Override
+    public void setStepDefinitionName(HashMap<String, String> keyMap) {
+        addStepDefinitionWithName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
 }
