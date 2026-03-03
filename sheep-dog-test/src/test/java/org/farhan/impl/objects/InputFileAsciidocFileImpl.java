@@ -2,9 +2,9 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 import org.farhan.common.TestIDEObject;
-import org.farhan.dsl.lang.IDescription;
-import org.farhan.dsl.lang.IStepObject;
-import org.farhan.dsl.lang.SheepDogBuilder;
+import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.junit.jupiter.api.Assertions;
 

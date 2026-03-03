@@ -2,17 +2,18 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import org.farhan.dsl.lang.IStepDefinition;
-import org.farhan.dsl.lang.IStepObject;
-import org.farhan.dsl.lang.ITestProject;
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.SheepDogBuilder;
-import org.farhan.dsl.lang.SheepDogIssueProposal;
-import org.farhan.dsl.lang.SheepDogLoggerFactory;
-import org.farhan.dsl.lang.SheepDogUtility;
-import org.farhan.dsl.lang.StepObjectRefFragments;
+
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.ITestStepContainer;
+import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.SheepDogBuilder;
+import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
+import org.farhan.dsl.grammar.SheepDogUtility;
+import org.farhan.dsl.grammar.StepObjectRefFragments;
 import org.slf4j.Logger;
 
 /**

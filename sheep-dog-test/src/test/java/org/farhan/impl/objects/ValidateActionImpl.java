@@ -3,18 +3,18 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.common.TestIDEObject;
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.ITestStepContainer;
+import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.issues.RowIssueDetector;
 import org.farhan.dsl.issues.TestStepContainerIssueDetector;
 import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.issues.TestSuiteIssueDetector;
 import org.farhan.dsl.issues.TextIssueDetector;
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.IText;
 import org.farhan.objects.xtext.ValidateAction;
 import org.junit.jupiter.api.Assertions;
 

@@ -1,0 +1,14 @@
+@sheep-dog-test
+Feature: Grammar TestProject
+
+  \@sheep-dog-test
+  A TestProject is a collection of StepObject and TestSuite files within a project.
+
+  Scenario: Assignments
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestProject type is as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestProject type assignments will be as follows
+          | Assignment     | Type       | Multiplicity |
+          | StepObjectList | StepObject | list         |
+          | TestSuiteList  | TestSuite  | list         |
+

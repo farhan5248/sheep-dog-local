@@ -1,6 +1,6 @@
 package org.farhan.mbt.cucumber;
 
-import org.farhan.dsl.lang.IResourceRepository;
+import org.farhan.dsl.grammar.IResourceRepository;
 import org.farhan.mbt.core.UMLTestProject;
 
 public class ConvertUMLToCucumberSpring extends ConvertUMLToCucumber {

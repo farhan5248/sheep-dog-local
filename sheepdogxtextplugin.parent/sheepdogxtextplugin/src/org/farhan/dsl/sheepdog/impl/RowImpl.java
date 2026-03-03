@@ -2,9 +2,9 @@ package org.farhan.dsl.sheepdog.impl;
 
 import java.util.ArrayList;
 
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
-import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.Table;

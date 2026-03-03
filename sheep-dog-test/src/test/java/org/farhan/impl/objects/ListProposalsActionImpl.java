@@ -3,9 +3,9 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.common.TestIDEObject;
+import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueResolver;
-import org.farhan.dsl.lang.ITestStep;
 import org.farhan.objects.xtext.ListProposalsAction;
 import org.junit.jupiter.api.Assertions;
 

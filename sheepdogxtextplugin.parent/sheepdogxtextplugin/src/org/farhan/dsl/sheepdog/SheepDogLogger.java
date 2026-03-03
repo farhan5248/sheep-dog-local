@@ -3,7 +3,7 @@ package org.farhan.dsl.sheepdog;
 import org.apache.log4j.Level;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-import org.farhan.dsl.lang.SheepDogLoggerProvider;
+import org.farhan.dsl.grammar.SheepDogLoggerProvider;
 
 public class SheepDogLogger implements Logger, SheepDogLoggerProvider {
 

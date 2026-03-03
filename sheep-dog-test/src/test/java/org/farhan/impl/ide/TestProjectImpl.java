@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.lang.IStepObject;
-import org.farhan.dsl.lang.ITestProject;
-import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestSuite;
 
 public class TestProjectImpl implements ITestProject {
 

@@ -1,7 +1,7 @@
 package org.farhan.impl.ide;
 
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 
 public class CellImpl implements ICell {
 

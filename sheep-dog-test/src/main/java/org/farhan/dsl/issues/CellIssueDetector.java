@@ -1,11 +1,10 @@
 package org.farhan.dsl.issues;
 
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.ITable;
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.slf4j.Logger;
-
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
-import org.farhan.dsl.lang.ITable;
-import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
  * Validation logic for grammar elements at different scopes.

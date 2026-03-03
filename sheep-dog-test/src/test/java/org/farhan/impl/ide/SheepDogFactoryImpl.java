@@ -1,21 +1,21 @@
 package org.farhan.impl.ide;
 
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IDescription;
-import org.farhan.dsl.lang.ILine;
-import org.farhan.dsl.lang.INestedDescription;
-import org.farhan.dsl.lang.IRow;
-import org.farhan.dsl.lang.ISheepDogFactory;
-import org.farhan.dsl.lang.IStepDefinition;
-import org.farhan.dsl.lang.IStepObject;
-import org.farhan.dsl.lang.IStepParameters;
-import org.farhan.dsl.lang.ITable;
-import org.farhan.dsl.lang.ITestCase;
-import org.farhan.dsl.lang.ITestProject;
-import org.farhan.dsl.lang.ITestSetup;
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ILine;
+import org.farhan.dsl.grammar.INestedDescription;
+import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.ISheepDogFactory;
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.ITable;
+import org.farhan.dsl.grammar.ITestCase;
+import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestSetup;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 
 public class SheepDogFactoryImpl implements ISheepDogFactory {
 

@@ -12,7 +12,7 @@ import org.farhan.dsl.cucumber.cucumber.Step;
 import org.farhan.dsl.cucumber.cucumber.StepTable;
 import org.farhan.mbt.core.Converter;
 
-import org.farhan.dsl.lang.IResourceRepository;
+import org.farhan.dsl.grammar.IResourceRepository;
 import org.farhan.mbt.core.UMLStepDefinition;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;

@@ -1,6 +1,6 @@
 package org.farhan.impl.ide;
 
-import org.farhan.dsl.lang.ILine;
+import org.farhan.dsl.grammar.ILine;
 
 public class LineImpl implements ILine {
 

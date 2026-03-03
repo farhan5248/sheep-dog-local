@@ -1,0 +1,10 @@
+package org.farhan.dsl.grammar;
+
+public interface ICell {
+
+	String getName();
+
+	void setName(String value);
+
+	IRow getParent();
+}

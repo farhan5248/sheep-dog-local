@@ -1,6 +1,6 @@
 package org.farhan.common;
 
-import org.farhan.dsl.lang.IResourceRepository;
+import org.farhan.dsl.grammar.IResourceRepository;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends TestObject {

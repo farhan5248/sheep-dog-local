@@ -3,6 +3,12 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.common.TestIDEObject;
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.ITestStepContainer;
+import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
 import org.farhan.dsl.issues.RowIssueResolver;
@@ -15,12 +21,6 @@ import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueTypes;
 import org.farhan.dsl.issues.TextIssueResolver;
 import org.farhan.dsl.issues.TextIssueTypes;
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.IText;
 import org.farhan.objects.xtext.ListQuickfixesAction;
 import org.junit.jupiter.api.Assertions;
 

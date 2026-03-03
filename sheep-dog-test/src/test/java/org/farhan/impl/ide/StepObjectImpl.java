@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.lang.IDescription;
-import org.farhan.dsl.lang.IStepDefinition;
-import org.farhan.dsl.lang.IStepObject;
-import org.farhan.dsl.lang.ITestProject;
+import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestProject;
 
 public class StepObjectImpl implements IStepObject {
 

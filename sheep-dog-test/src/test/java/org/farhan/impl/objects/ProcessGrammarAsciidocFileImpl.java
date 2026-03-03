@@ -3,14 +3,14 @@ package org.farhan.impl.objects;
 import java.util.Arrays;
 import java.util.HashMap;
 import org.farhan.common.TestIDEObject;
-import org.farhan.dsl.lang.PhraseFragments;
-import org.farhan.dsl.lang.StepDefinitionRefFragments;
-import org.farhan.dsl.lang.StepDefinitionRefPartTypes;
-import org.farhan.dsl.lang.StepDefinitionRefStateTypes;
-import org.farhan.dsl.lang.StepObjectRefComponentTypes;
-import org.farhan.dsl.lang.StepObjectRefFragments;
-import org.farhan.dsl.lang.StepObjectRefObjectEdgeTypes;
-import org.farhan.dsl.lang.StepObjectRefObjectVertexTypes;
+import org.farhan.dsl.grammar.PhraseFragments;
+import org.farhan.dsl.grammar.StepDefinitionRefFragments;
+import org.farhan.dsl.grammar.StepDefinitionRefPartTypes;
+import org.farhan.dsl.grammar.StepDefinitionRefStateTypes;
+import org.farhan.dsl.grammar.StepObjectRefComponentTypes;
+import org.farhan.dsl.grammar.StepObjectRefFragments;
+import org.farhan.dsl.grammar.StepObjectRefObjectEdgeTypes;
+import org.farhan.dsl.grammar.StepObjectRefObjectVertexTypes;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarAsciidocFile;
 import org.junit.jupiter.api.Assertions;
 
@@ -180,5 +180,179 @@ public class ProcessGrammarAsciidocFileImpl extends TestIDEObject implements Pro
     private String getStepDefinitionRef() {
         String testStep = objectKeyMap.get("Test Step Full Name").toString();
         return testStep.substring(StepObjectRefFragments.getAll(testStep).length()).trim();
+    }
+
+    @Override
+    public void assertAssignment(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertType(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertMultiplicity(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setCellTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setDescriptionTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setLineTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setModelTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setNestedDescriptionTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setRowTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setStepDefinitionTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setStepObjectTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setStepObjectTypeFullName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setStepParametersTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTableTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestCaseTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestDataTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestProjectTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestSetupTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertGroup(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertKeyword(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepObjectName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void assertStepDefinitionName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestStepTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestStepTypeFullName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestStepContainerTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestSuiteTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTestSuiteTypeFullName(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setTextTypeAsFollows(HashMap<String, String> keyMap) {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -1,17 +1,16 @@
 package org.farhan.dsl.issues;
 
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.ITable;
+import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.slf4j.Logger;
-
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IStepDefinition;
-import org.farhan.dsl.lang.IStepObject;
-import org.farhan.dsl.lang.IStepParameters;
-import org.farhan.dsl.lang.ITable;
-import org.farhan.dsl.lang.ITestProject;
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.IText;
-import org.farhan.dsl.lang.SheepDogLoggerFactory;
-import org.farhan.dsl.lang.SheepDogUtility;
 
 /**
  * Validation logic for grammar elements at different scopes.

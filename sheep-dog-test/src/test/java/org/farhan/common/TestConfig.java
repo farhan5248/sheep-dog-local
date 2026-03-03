@@ -1,6 +1,6 @@
 package org.farhan.common;
 
-import org.farhan.dsl.lang.SheepDogFactory;
+import org.farhan.dsl.grammar.SheepDogFactory;
 import org.farhan.impl.ide.SheepDogFactoryImpl;
 import org.farhan.impl.objects.ApplyQuickfixActionImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;

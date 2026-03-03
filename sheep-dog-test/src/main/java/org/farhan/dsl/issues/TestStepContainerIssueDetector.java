@@ -1,11 +1,10 @@
 package org.farhan.dsl.issues;
 
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.ITestStepContainer;
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
+import org.farhan.dsl.grammar.StepObjectRefFragments;
 import org.slf4j.Logger;
-
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.SheepDogLoggerFactory;
-import org.farhan.dsl.lang.StepObjectRefFragments;
 
 /**
  * Validation logic for grammar elements at different scopes.

@@ -1,7 +1,7 @@
 package org.farhan.dsl.sheepdog.impl;
 
-import org.farhan.dsl.lang.ICell;
-import org.farhan.dsl.lang.IRow;
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 

@@ -2,7 +2,7 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-import org.farhan.dsl.lang.IResourceRepository;
+import org.farhan.dsl.grammar.IResourceRepository;
 
 public abstract class Converter {
 

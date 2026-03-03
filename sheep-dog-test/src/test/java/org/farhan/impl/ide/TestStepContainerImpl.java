@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.lang.IDescription;
-import org.farhan.dsl.lang.ILine;
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
+import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ILine;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.ITestStepContainer;
+import org.farhan.dsl.grammar.ITestSuite;
 
 public class TestStepContainerImpl implements ITestStepContainer {
 

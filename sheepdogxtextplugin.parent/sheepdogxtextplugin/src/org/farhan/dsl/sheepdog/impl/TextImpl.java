@@ -1,7 +1,7 @@
 package org.farhan.dsl.sheepdog.impl;
 
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
 

@@ -1,6 +1,6 @@
 package org.farhan.dsl.sheepdog.impl;
 
-import org.farhan.dsl.lang.ILine;
+import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.sheepdog.sheepDog.Line;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;

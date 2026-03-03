@@ -2,9 +2,9 @@ package org.farhan.mbt.asciidoctor;
 
 import java.util.TreeSet;
 import org.farhan.mbt.core.Converter;
-import org.farhan.dsl.lang.IResourceRepository;
-import org.farhan.dsl.lang.SheepDogFactory;
-import org.farhan.dsl.lang.SheepDogUtility;
+import org.farhan.dsl.grammar.IResourceRepository;
+import org.farhan.dsl.grammar.SheepDogFactory;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
 import org.farhan.mbt.core.UMLTestData;

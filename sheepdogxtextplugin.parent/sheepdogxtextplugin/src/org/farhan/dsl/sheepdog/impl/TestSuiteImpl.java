@@ -2,15 +2,15 @@ package org.farhan.dsl.sheepdog.impl;
 
 import java.util.ArrayList;
 
-import org.farhan.dsl.lang.IDescription;
-import org.farhan.dsl.lang.ILine;
+import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.sheepdog.sheepDog.Description;
-import org.farhan.dsl.lang.ITestCase;
-import org.farhan.dsl.lang.ITestProject;
-import org.farhan.dsl.lang.ITestSetup;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.SheepDogFactory;
+import org.farhan.dsl.grammar.ITestCase;
+import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestSetup;
+import org.farhan.dsl.grammar.ITestStepContainer;
+import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;

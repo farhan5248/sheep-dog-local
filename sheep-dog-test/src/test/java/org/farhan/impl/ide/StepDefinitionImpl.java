@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.lang.IDescription;
-import org.farhan.dsl.lang.IStepDefinition;
-import org.farhan.dsl.lang.IStepObject;
-import org.farhan.dsl.lang.IStepParameters;
-import org.farhan.dsl.lang.SheepDogUtility;
+import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.SheepDogUtility;
 
 public class StepDefinitionImpl implements IStepDefinition {
 

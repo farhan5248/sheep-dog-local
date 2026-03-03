@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.lang.IRow;
-import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.ITable;
 
 public class TableImpl implements ITable {
 

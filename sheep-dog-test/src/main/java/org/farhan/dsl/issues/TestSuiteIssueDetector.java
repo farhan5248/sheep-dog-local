@@ -1,9 +1,8 @@
 package org.farhan.dsl.issues;
 
+import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.slf4j.Logger;
-
-import org.farhan.dsl.lang.ITestSuite;
-import org.farhan.dsl.lang.SheepDogLoggerFactory;
 
 /**
  * Validation logic for grammar elements at different scopes.

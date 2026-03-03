@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.xtext,
  slf4j.api;bundle-version="2.0.16"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.farhan.dsl.issues,
- org.farhan.dsl.lang,
+ org.farhan.dsl.grammar,
  org.farhan.dsl.sheepdog,
  org.farhan.dsl.sheepdog.formatting2,
  org.farhan.dsl.sheepdog.generator,

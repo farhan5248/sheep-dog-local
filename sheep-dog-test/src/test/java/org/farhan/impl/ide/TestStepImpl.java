@@ -1,9 +1,9 @@
 package org.farhan.impl.ide;
 
-import org.farhan.dsl.lang.ITable;
-import org.farhan.dsl.lang.ITestStep;
-import org.farhan.dsl.lang.ITestStepContainer;
-import org.farhan.dsl.lang.IText;
+import org.farhan.dsl.grammar.ITable;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.ITestStepContainer;
+import org.farhan.dsl.grammar.IText;
 
 public class TestStepImpl implements ITestStep {
 

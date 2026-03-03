@@ -2,7 +2,7 @@ package org.farhan.dsl.sheepdog.ui.syntaxcoloring;
 
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.farhan.dsl.lang.PhraseFragments;
+import org.farhan.dsl.grammar.PhraseFragments;
 import org.farhan.dsl.sheepdog.sheepDog.Line;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;

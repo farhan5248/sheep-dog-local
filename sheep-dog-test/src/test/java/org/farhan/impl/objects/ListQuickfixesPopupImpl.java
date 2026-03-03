@@ -3,7 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.common.TestIDEObject;
-import org.farhan.dsl.lang.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.objects.xtext.ListQuickfixesPopup;
 import org.junit.jupiter.api.Assertions;
 

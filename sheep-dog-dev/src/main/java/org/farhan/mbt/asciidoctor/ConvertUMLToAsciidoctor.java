@@ -3,7 +3,7 @@ package org.farhan.mbt.asciidoctor;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.Converter;
-import org.farhan.dsl.lang.IResourceRepository;
+import org.farhan.dsl.grammar.IResourceRepository;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
 import org.farhan.mbt.core.UMLTestData;

@@ -3,7 +3,7 @@ package org.farhan.common;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.Converter;
-import org.farhan.dsl.lang.IResourceRepository;
+import org.farhan.dsl.grammar.IResourceRepository;
 import org.junit.jupiter.api.Assertions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

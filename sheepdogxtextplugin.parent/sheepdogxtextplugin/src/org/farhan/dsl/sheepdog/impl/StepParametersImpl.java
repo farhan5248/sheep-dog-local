@@ -1,9 +1,9 @@
 package org.farhan.dsl.sheepdog.impl;
 
-import org.farhan.dsl.lang.INestedDescription;
-import org.farhan.dsl.lang.IStepDefinition;
-import org.farhan.dsl.lang.IStepParameters;
-import org.farhan.dsl.lang.ITable;
+import org.farhan.dsl.grammar.INestedDescription;
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 

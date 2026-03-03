@@ -2,8 +2,8 @@ package org.farhan.impl.ide;
 
 import java.util.ArrayList;
 
-import org.farhan.dsl.lang.ITestCase;
-import org.farhan.dsl.lang.ITestData;
+import org.farhan.dsl.grammar.ITestCase;
+import org.farhan.dsl.grammar.ITestData;
 
 public class TestCaseImpl extends TestStepContainerImpl implements ITestCase {
 

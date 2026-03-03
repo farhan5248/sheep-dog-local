@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import org.farhan.dsl.sheepdog.SheepDogStandaloneSetup;
 import org.farhan.mbt.core.IConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.dsl.lang.IResourceRepository;
+import org.farhan.dsl.grammar.IResourceRepository;
 
 public class AsciiDoctorTestProject extends ConvertibleProject {
 
