@@ -14,7 +14,7 @@ Feature: Proposals for Workspace Step Objects
 
     TODO make this an outline with various steps like "The" or "The batchjob" etc
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | empty               |
      When The xtext plugin list proposals action is performed as follows
@@ -24,7 +24,7 @@ Feature: Proposals for Workspace Step Objects
 
   Scenario: No component has existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | empty               |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObjectList node is created as follows
@@ -39,7 +39,7 @@ Feature: Proposals for Workspace Step Objects
 
   Scenario: Has component no existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | The daily batchjob  |
      When The xtext plugin list proposals action is performed as follows
@@ -49,7 +49,7 @@ Feature: Proposals for Workspace Step Objects
 
   Scenario: Has component has existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | The daily batchjob  |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObjectList node is created as follows

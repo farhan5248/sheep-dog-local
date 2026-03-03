@@ -14,7 +14,7 @@ Feature: Proposals for File and Workspace Step Objects
 
     It should show that if there's objects from more than one component, it only picks the matching component
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                       |
           | The daily batchjob Output file is present |
           | empty                                     |
@@ -32,7 +32,7 @@ Feature: Proposals for File and Workspace Step Objects
 
   Scenario: Has component has existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                       |
           | The daily batchjob Output file is present |
           | The daily batchjob                        |

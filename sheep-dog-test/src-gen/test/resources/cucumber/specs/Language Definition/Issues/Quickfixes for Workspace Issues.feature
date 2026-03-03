@@ -9,7 +9,7 @@ Feature: Quickfixes for Workspace Issues
 
   Scenario: This object doesn't exist quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
       And The xtext plugin validate annotation is set as follows
@@ -25,7 +25,7 @@ Feature: Quickfixes for Workspace Issues
 
   Scenario: This object step definition doesn't exist quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObjectList node is created as follows
@@ -47,10 +47,10 @@ Feature: Quickfixes for Workspace Issues
 
   Scenario: This object step definition parameter set doesn't exist quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                             |
           | The daily batchjob Input file is set as follows |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
           | Cell Name |
           | N1        |
           | N2        |
@@ -78,10 +78,10 @@ Feature: Quickfixes for Workspace Issues
 
   Scenario: This object step definition text parameter exists quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                             |
           | The daily batchjob Input file is set as follows |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Text node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Text node is created as follows
           | Text Content |
           | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObjectList node is created as follows
@@ -98,10 +98,10 @@ Feature: Quickfixes for Workspace Issues
 
   Scenario: This object step definition text parameter doesn't exist quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                             |
           | The daily batchjob Input file is set as follows |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Text node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Text node is created as follows
           | Text Content |
           | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObjectList node is created as follows

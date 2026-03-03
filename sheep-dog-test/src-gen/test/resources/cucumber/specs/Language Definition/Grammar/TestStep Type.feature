@@ -1,13 +1,13 @@
 @sheep-dog-test
-Feature: Grammar TestStep
+Feature: TestStep Type
 
   \@sheep-dog-test
   A TestStep is a grammar element representing a test step with a keyword.
 
   Scenario: Concrete Types
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestStep type is as follows
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestStep type concrete types will be as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file TestStep type is as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file TestStep type concrete types will be as follows
           | Type  | Keyword |
           | Given | Given:  |
           | When  | When:   |
@@ -16,8 +16,8 @@ Feature: Grammar TestStep
 
   Scenario: Assignments
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestStep type is as follows
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestStep type assignments will be as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file TestStep type is as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file TestStep type assignments will be as follows
           | Assignment         | Type              | Multiplicity | Group   |
           | StepObjectName     | StepObjectRef     | required     | -       |
           | StepDefinitionName | StepDefinitionRef | required     | -       |
@@ -26,10 +26,10 @@ Feature: Grammar TestStep
 
   Scenario Outline: Derived Attributes
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestStep type is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file TestStep type is created as follows
           | Full Name   |
           | <Full Name> |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestStep type derived attributes will be as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file TestStep type derived attributes will be as follows
           | Step Object Name   | Step Definition Name   |
           | <Step Object Name> | <Step Definition Name> |
 

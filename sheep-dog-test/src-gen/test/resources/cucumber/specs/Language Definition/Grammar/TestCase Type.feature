@@ -1,13 +1,13 @@
 @sheep-dog-test
-Feature: Grammar TestCase
+Feature: TestCase Type
 
   \@sheep-dog-test
   A TestCase is a grammar element representing a test case.
 
   Scenario: Assignments
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestCase type is as follows
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file TestCase type assignments will be as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file TestCase type is as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file TestCase type assignments will be as follows
           | Assignment   | Type        | Multiplicity |
           | Name         | Phrase      | required     |
           | Description  | Description | optional     |

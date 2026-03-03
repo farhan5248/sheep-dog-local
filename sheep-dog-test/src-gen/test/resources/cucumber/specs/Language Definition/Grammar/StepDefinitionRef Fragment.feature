@@ -1,15 +1,15 @@
 @sheep-dog-test
-Feature: Grammar StepDefinitionRef Fragments
+Feature: StepDefinitionRef Fragment
 
   \@sheep-dog-test
   A StepDefinitionRef identifies the part and state in a test step.
 
   Scenario Outline: Part Fragment
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
           | Test Step Full Name                                       |
           | The daily batchjob Output file <Step Definition Ref Name> |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step definition ref part fragment will be decomposed as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepDefinitionRef part fragment will be decomposed as follows
           | Part   | Part Description   | Part Type   | Part Type Description   |
           | <Part> | <Part Description> | <Part Type> | <Part Type Description> |
 
@@ -25,10 +25,10 @@ Feature: Grammar StepDefinitionRef Fragments
 
   Scenario Outline: State Fragment
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file test step type is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
           | Test Step Full Name                                       |
           | The daily batchjob Output file <Step Definition Ref Name> |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammar.asciidoc file step definition ref state fragment will be decomposed as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepDefinitionRef state fragment will be decomposed as follows
           | State   | State Description   | State Type   | State Type Description   |
           | <State> | <State Description> | <State Type> | <State Type Description> |
 

@@ -2,12 +2,12 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 import org.farhan.common.TestIDEObject;
-import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class Process2AsciidocFileImpl extends TestIDEObject implements Process2AsciidocFile {
+public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements ProcessIssuesAsciidocFile {
 
     @Override
     public void assertTestSuiteList1NodeTestSuiteName(HashMap<String, String> keyMap) {

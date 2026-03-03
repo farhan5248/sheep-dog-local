@@ -10,7 +10,7 @@ Feature: Validation for File Issues
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepObjectList node is created as follows
           | Step Object Name                  | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
@@ -24,7 +24,7 @@ Feature: Validation for File Issues
     The first step needs to have a component specified.
     The other steps default to that one.
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                         |
           | The Input file is present                   |
           | The daily batchjob Input file is downloaded |

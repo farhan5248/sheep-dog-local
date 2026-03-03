@@ -1,0 +1,13 @@
+@sheep-dog-test
+Feature: Text Type
+
+  \@sheep-dog-test
+  A Text is a grammar element representing the text content of a test step.
+
+  Scenario: Assignments
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file Text type is as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarType.asciidoc file Text type assignments will be as follows
+          | Assignment | Type      | Multiplicity |
+          | Content    | TextBlock | required     |
+

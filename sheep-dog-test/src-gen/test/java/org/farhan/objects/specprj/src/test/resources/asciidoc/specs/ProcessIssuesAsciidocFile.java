@@ -2,7 +2,7 @@ package org.farhan.objects.specprj.src.test.resources.asciidoc.specs;
 
 import java.util.HashMap;
 
-public interface Process2AsciidocFile {
+public interface ProcessIssuesAsciidocFile {
 
     public void setTestSuiteListNodeTestSuiteName(HashMap<String, String> keyMap);
 

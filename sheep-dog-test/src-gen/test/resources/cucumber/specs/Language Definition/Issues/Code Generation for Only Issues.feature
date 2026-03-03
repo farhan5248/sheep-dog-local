@@ -6,10 +6,10 @@ Feature: Code Generation for Only Issues
 
   Scenario: Cell name should start with a capital letter generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
           | Cell Name        |
           | lowercase header |
       And The xtext plugin list quickfixes popup is set as follows
@@ -18,13 +18,13 @@ Feature: Code Generation for Only Issues
      When The xtext plugin apply quickfix action is performed as follows
           | Node Path                                                                |
           | TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList/1 |
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node will be created as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1/TestStepList/1/Table/RowList/1/CellList node will be created as follows
           | Cell Name        |
           | Lowercase header |
 
   Scenario: Test suite name should start with a capital letter generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList node is created as follows
           | Test Suite Name   |
           | lowercase process |
       And The xtext plugin list quickfixes popup is set as follows
@@ -33,13 +33,13 @@ Feature: Code Generation for Only Issues
      When The xtext plugin apply quickfix action is performed as follows
           | Node Path       |
           | TestSuiteList/1 |
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1 node will be created as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1 node will be created as follows
           | Test Suite Name   |
           | Lowercase process |
 
   Scenario: Test case name should start with a capital letter generation
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList node is created as follows
           | Test Case Name      |
           | lowercase test case |
       And The xtext plugin list quickfixes popup is set as follows
@@ -48,7 +48,7 @@ Feature: Code Generation for Only Issues
      When The xtext plugin apply quickfix action is performed as follows
           | Node Path                      |
           | TestSuiteList/1/TestCaseList/1 |
-     Then The spec-prj project src/test/resources/asciidoc/specs/Process2.asciidoc file TestSuiteList/1/TestCaseList/1 node will be created as follows
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestSuiteList/1/TestCaseList/1 node will be created as follows
           | Test Case Name      |
           | Lowercase test case |
 

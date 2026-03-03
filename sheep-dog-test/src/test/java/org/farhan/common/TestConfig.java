@@ -8,12 +8,14 @@ import org.farhan.impl.objects.ListProposalsActionImpl;
 import org.farhan.impl.objects.ListProposalsPopupImpl;
 import org.farhan.impl.objects.ListQuickfixesActionImpl;
 import org.farhan.impl.objects.ListQuickfixesPopupImpl;
-import org.farhan.impl.objects.Process2AsciidocFileImpl;
-import org.farhan.impl.objects.ProcessGrammarAsciidocFileImpl;
+import org.farhan.impl.objects.ProcessGrammarFragmentAsciidocFileImpl;
+import org.farhan.impl.objects.ProcessGrammarTypeAsciidocFileImpl;
+import org.farhan.impl.objects.ProcessIssuesAsciidocFileImpl;
 import org.farhan.impl.objects.ValidateActionImpl;
 import org.farhan.impl.objects.ValidateAnnotationImpl;
-import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;
-import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarFragmentAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarTypeAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.farhan.objects.xtext.ListProposalsAction;
@@ -48,8 +50,9 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
     @Override
     protected void configure() {
         bind(InputFileAsciidocFile.class).to(InputFileAsciidocFileImpl.class);
-        bind(Process2AsciidocFile.class).to(Process2AsciidocFileImpl.class);
-        bind(ProcessGrammarAsciidocFile.class).to(ProcessGrammarAsciidocFileImpl.class);
+        bind(ProcessIssuesAsciidocFile.class).to(ProcessIssuesAsciidocFileImpl.class);
+        bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
+        bind(ProcessGrammarTypeAsciidocFile.class).to(ProcessGrammarTypeAsciidocFileImpl.class);
         bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);
         bind(ListProposalsAction.class).to(ListProposalsActionImpl.class);
         bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);
