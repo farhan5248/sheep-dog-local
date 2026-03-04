@@ -19,7 +19,7 @@ Feature: Proposals for File and Workspace Step Objects
           | The daily batchjob Output file is present |
           | empty                                     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
-          | Step Object Name                  | Step Definition Name |
+          | Step Object Full Name             | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                    |
@@ -37,7 +37,7 @@ Feature: Proposals for File and Workspace Step Objects
           | The daily batchjob Output file is present |
           | The daily batchjob                        |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
-          | Step Object Name                  | Step Definition Name |
+          | Step Object Full Name             | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                    |

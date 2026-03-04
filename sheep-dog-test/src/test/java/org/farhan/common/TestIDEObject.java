@@ -145,7 +145,7 @@ public class TestIDEObject extends TestObject {
         cursor = SheepDogBuilder.createStepDefinition((IStepObject) cursor, name);
     }
 
-    protected void addStepObjectWithName(String stepObjectName) {
+    protected void addStepObjectWithFullName(String stepObjectName) {
         if (cursor instanceof IStepObject) {
             cursor = ((IStepObject) cursor).getParent();
         }
@@ -221,6 +221,7 @@ public class TestIDEObject extends TestObject {
             Assertions.assertNotNull(cursor);
         }
     }
+
     protected void assertLineContent(String content) {
         if (cursor instanceof ILine) {
             if (getNode(properties.get("part").toString()) instanceof ILine) {
@@ -244,10 +245,10 @@ public class TestIDEObject extends TestObject {
         }
     }
 
-    protected void assertStepObjectName(String name) {
+    protected void assertStepObjectFullName(String name) {
         if (cursor instanceof IStepObject) {
             if (getNode(properties.get("part").toString()) instanceof IStepObject) {
-                Assertions.assertEquals(name, ((IStepObject) cursor).getName());
+                Assertions.assertEquals(name, ((IStepObject) cursor).getFullName());
             } else {
                 cursor = ((IStepObject) cursor).getParent();
                 cursor = ((ITestProject) cursor).getStepObject(name);

@@ -8,7 +8,7 @@ Feature: Validation for File Issues
   Scenario: The first step needs to have a component specified validation
 
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
-          | Step Object Name                  | Step Definition Name | Step Definition Description |
+          | Step Object Full Name             | Step Definition Name | Step Definition Description |
           | daily batchjob/Input file.feature | is present           | Creates empty file          |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name                      |

@@ -10,5 +10,5 @@ public interface EditDocumentAction {
 
     public void setStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void setStepObjectName(HashMap<String, String> keyMap);
+    public void setStepObjectFullName(HashMap<String, String> keyMap);
 }

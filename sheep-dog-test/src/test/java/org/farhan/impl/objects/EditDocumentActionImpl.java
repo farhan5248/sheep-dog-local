@@ -12,9 +12,9 @@ public class EditDocumentActionImpl extends TestIDEObject implements EditDocumen
 
     @Override
     public void transition() {
-        if (properties.get("Step Object Name") != null) {
-            addStepObjectWithName(replaceKeyword(properties.get("Step Object Name").toString()));
-            properties.remove("Step Object Name");
+        if (properties.get("Step Object Full Name") != null) {
+            addStepObjectWithFullName(replaceKeyword(properties.get("Step Object Full Name").toString()));
+            properties.remove("Step Object Full Name");
         } else if (properties.get("Step Definition Name") != null) {
             addStepDefinitionWithName(replaceKeyword(properties.get("Step Definition Name").toString()));
             properties.remove("Step Definition Name");
@@ -35,8 +35,8 @@ public class EditDocumentActionImpl extends TestIDEObject implements EditDocumen
     }
 
     @Override
-    public void setStepObjectName(HashMap<String, String> keyMap) {
-        properties.put("Step Object Name", keyMap.get("Step Object Name"));
+    public void setStepObjectFullName(HashMap<String, String> keyMap) {
+        properties.put("Step Object Full Name", keyMap.get("Step Object Full Name"));
     }
 
 }

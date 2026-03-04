@@ -23,7 +23,7 @@ Feature: Proposals for Workspace Step Parameters
           | Cell Name |
           | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
-          | Step Object Name                  | Step Definition Name |
+          | Step Object Full Name             | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                                    |
@@ -39,7 +39,7 @@ Feature: Proposals for Workspace Step Parameters
           | Cell Name |
           | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
-          | Step Object Name                  | Step Definition Name  | Step Parameters Name |
+          | Step Object Full Name             | Step Definition Name  | Step Parameters Name |
           | daily batchjob/Input file.feature | is created as follows | H1, H2, H3           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                                    |
@@ -57,7 +57,7 @@ Feature: Proposals for Workspace Step Parameters
           | Cell Name |
           | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
-          | Step Object Name                  | Step Definition Name  | Step Parameters Name | Step Parameters Description  |
+          | Step Object Full Name             | Step Definition Name  | Step Parameters Name | Step Parameters Description  |
           | daily batchjob/Input file.feature | is created as follows | H1, H2, H3           | Header parameters for tables |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                                    |
@@ -77,7 +77,7 @@ Feature: Proposals for Workspace Step Parameters
           | Cell Name |
           | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
-          | Step Object Name                  | Step Definition Name  | Step Parameters Name |
+          | Step Object Full Name             | Step Definition Name  | Step Parameters Name |
           | daily batchjob/Input file.feature | is created as follows | Content              |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                                    |

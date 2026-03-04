@@ -13,7 +13,7 @@ Feature: Quickfixes for Only Issues
           | Cell Name        |
           | lowercase header |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
-          | Step Object Name                  | Step Definition Name | Step Parameters Name |
+          | Step Object Full Name             | Step Definition Name | Step Parameters Name |
           | daily batchjob/Input file.feature | is present           | lowercase header     |
       And The xtext plugin validate annotation is set as follows
           """
