@@ -246,7 +246,7 @@ public class SheepDogBuilder {
             stepObject = SheepDogFactory.instance.createStepObject();
             stepObject.setFullName(fullName);
             if (parent != null)
-                parent.addTestDocument(stepObject);
+                parent.addStepObject(stepObject);
         }
         logger.debug("Exiting createStepObject with result: {}", stepObject != null ? stepObject.getFullName() : "null");
         return stepObject;
@@ -400,7 +400,7 @@ public class SheepDogBuilder {
      */
     public static ITestSuite createTestSuite(ITestProject parent, String fullName) {
         logger.debug("Entering createTestSuite for fullName: {}", fullName);
-        ITestSuite testSuite = parent.getTestSuite(fullName);
+        ITestSuite testSuite = (ITestSuite) parent.getTestDocument(fullName);
         if (testSuite == null) {
             testSuite = SheepDogFactory.instance.createTestSuite();
             testSuite.setFullName(fullName);

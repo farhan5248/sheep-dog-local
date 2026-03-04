@@ -18,6 +18,22 @@ public class SheepDogUtility {
     private static final Logger logger = SheepDogLoggerFactory.getLogger(SheepDogUtility.class);
 
     /**
+     * Returns all TestSuites from a project's unified TestDocumentList.
+     *
+     * @param project the test project to filter
+     * @return list of ITestSuite instances from the project's document list
+     */
+    public static List<ITestSuite> getTestSuiteList(ITestProject project) {
+        List<ITestSuite> result = new ArrayList<>();
+        for (ITestDocument doc : project.getTestDocumentList()) {
+            if (doc instanceof ITestSuite) {
+                result.add((ITestSuite) doc);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Creates a deep clone of a step object without parent association.
      * <p>
      * Clones the step object and all its children (statements, step definitions,
@@ -147,7 +163,7 @@ public class SheepDogUtility {
                     if (project != null) {
                         String fileExt = project.getFileExtension();
                         if (fileExt != null && !fileExt.isEmpty()) {
-                            String result = component + "/" + object + fileExt;
+                            String result = "stepdefs/" + component + "/" + object + fileExt;
                             logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", result);
                             return result;
                         }

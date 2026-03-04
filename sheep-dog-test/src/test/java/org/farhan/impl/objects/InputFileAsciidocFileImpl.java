@@ -20,40 +20,8 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void assertTestProjectTestDocumentList1NodeStepDefinitionName(HashMap<String, String> keyMap) {
-        assertStepDefinitionName(replaceKeyword(keyMap.get("Step Definition Name")));
-    }
-
-    @Override
-    public void assertTestProjectTestDocumentList1NodeStepObjectFullName(HashMap<String, String> keyMap) {
-        assertStepObjectFullName(replaceKeyword(keyMap.get("Step Object Full Name")));
-    }
-
-    @Override
-    public void assertTestProjectTestDocumentList1NodeStepParametersName(HashMap<String, String> keyMap) {
-        assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")));
-    }
-
-    @Override
-    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(
+    public void assertTestProjectTestDocumentList1StepDefinitionList2NodeStepDefinitionName(
             HashMap<String, String> keyMap) {
-        assertCellName(replaceKeyword(keyMap.get("Cell Name")));
-    }
-
-    @Override
-    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersList2TableRowList1CellListNodeCellName(
-            HashMap<String, String> keyMap) {
-        assertCellName(replaceKeyword(keyMap.get("Cell Name")));
-    }
-
-    @Override
-    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersListNodeStepParametersName(
-            HashMap<String, String> keyMap) {
-        assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")));
-    }
-
-    @Override
-    public void assertTestProjectTestDocumentList1StepDefinitionList2NodeStepDefinitionName(HashMap<String, String> keyMap) {
         assertStepDefinitionName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
@@ -63,7 +31,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void assertTestProjectTestDocumentList1StepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
+    public void assertTestProjectTestDocumentList2NodeStepDefinitionName(HashMap<String, String> keyMap) {
         assertStepDefinitionName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
@@ -73,19 +41,49 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
+    public void assertTestProjectTestDocumentList2NodeStepParametersName(HashMap<String, String> keyMap) {
+        assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList2StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(
+            HashMap<String, String> keyMap) {
+        assertCellName(replaceKeyword(keyMap.get("Cell Name")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList2StepDefinitionList1StepParametersList2TableRowList1CellListNodeCellName(
+            HashMap<String, String> keyMap) {
+        assertCellName(replaceKeyword(keyMap.get("Cell Name")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList2StepDefinitionList1StepParametersListNodeStepParametersName(
+            HashMap<String, String> keyMap) {
+        assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList2StepDefinitionListNodeStepDefinitionName(
+            HashMap<String, String> keyMap) {
+        assertStepDefinitionName(replaceKeyword(keyMap.get("Step Definition Name")));
+    }
+
+    @Override
     public void setTestProjectTestDocumentList1DescriptionLineListNodeLineContent(HashMap<String, String> keyMap) {
         addLineWithContent(replaceKeyword(keyMap.get("Line Content")));
     }
 
     @Override
-    public void setTestProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(
+    public void setTestProjectTestDocumentList1StepDefinitionListNodeStepDefinitionName(
             HashMap<String, String> keyMap) {
-        addCellWithName(keyMap.get("Cell Name"));
+        addStepDefinitionWithName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
     @Override
-    public void setTestProjectTestDocumentList1StepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
-        addStepDefinitionWithName(replaceKeyword(keyMap.get("Step Definition Name")));
+    public void setTestProjectTestDocumentList2StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(
+            HashMap<String, String> keyMap) {
+        addCellWithName(keyMap.get("Cell Name"));
     }
 
     @Override

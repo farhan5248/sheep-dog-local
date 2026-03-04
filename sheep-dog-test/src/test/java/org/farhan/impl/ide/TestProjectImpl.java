@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSuite;
 
 public class TestProjectImpl implements ITestProject {
 
-	ArrayList<TestSuiteImpl> testSuiteList;
-	ArrayList<StepObjectImpl> stepObjectList;
+	ArrayList<ITestDocument> testDocumentList;
 
 	TestProjectImpl() {
-		this.testSuiteList = new ArrayList<TestSuiteImpl>();
-		this.stepObjectList = new ArrayList<StepObjectImpl>();
+		this.testDocumentList = new ArrayList<ITestDocument>();
 	}
 
 	@Override
@@ -25,9 +24,9 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public ITestDocument getTestDocument(String fullName) {
-		for (StepObjectImpl so : this.stepObjectList) {
-			if (so.getFullName().contentEquals(fullName)) {
-				return so;
+		for (ITestDocument td : this.testDocumentList) {
+			if (td.getFullName().contentEquals(fullName)) {
+				return td;
 			}
 		}
 		return null;
@@ -35,62 +34,49 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public List<ITestDocument> getTestDocumentList() {
-		return Collections.unmodifiableList(stepObjectList);
-	}
-
-	@Override
-	public ITestSuite getTestSuite(String fullName) {
-		for (ITestSuite ts : this.testSuiteList) {
-			if (ts.getFullName().contentEquals(fullName)) {
-				return ts;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public List<ITestSuite> getTestSuiteList() {
-		return Collections.unmodifiableList(testSuiteList);
+		return Collections.unmodifiableList(testDocumentList);
 	}
 
 	@Override
 	public ITestDocument getTestDocument(int index) {
-		return stepObjectList.get(index);
-	}
-
-	@Override
-	public ITestSuite getTestSuite(int index) {
-		return testSuiteList.get(index);
+		return testDocumentList.get(index);
 	}
 
 	@Override
 	public boolean addTestSuite(ITestSuite value) {
-		// Check for duplicates using getFullName as unique identifier and replace if found
-		for (int i = 0; i < testSuiteList.size(); i++) {
-			if (testSuiteList.get(i).getFullName().contentEquals(value.getFullName())) {
-				testSuiteList.set(i, (TestSuiteImpl) value);
-				testSuiteList.get(i).parent = this;
-				return true;
-			}
-		}
-		testSuiteList.add((TestSuiteImpl) value);
-		testSuiteList.getLast().parent = this;
-		return true;
+		return addToSortedList(value, (TestSuiteImpl) value);
 	}
 
 	@Override
-	public boolean addTestDocument(ITestDocument value) {
-		// Check for duplicates using getFullName as unique identifier and replace if found
-		for (int i = 0; i < stepObjectList.size(); i++) {
-			if (stepObjectList.get(i).getFullName().contentEquals(value.getFullName())) {
-				stepObjectList.set(i, (StepObjectImpl) value);
-				stepObjectList.get(i).parent = this;
+	public boolean addStepObject(IStepObject value) {
+		return addToSortedList(value, (StepObjectImpl) value);
+	}
+
+	private boolean addToSortedList(ITestDocument value, Object implValue) {
+		for (int i = 0; i < testDocumentList.size(); i++) {
+			if (testDocumentList.get(i).getFullName().contentEquals(value.getFullName())) {
+				testDocumentList.set(i, value);
+				setParent(implValue);
 				return true;
 			}
 		}
-		stepObjectList.add((StepObjectImpl) value);
-		stepObjectList.getLast().parent = this;
+		int insertIndex = Collections.binarySearch(
+				testDocumentList.stream().map(ITestDocument::getFullName).toList(),
+				value.getFullName());
+		if (insertIndex < 0) {
+			insertIndex = -(insertIndex + 1);
+		}
+		testDocumentList.add(insertIndex, value);
+		setParent(implValue);
 		return true;
+	}
+
+	private void setParent(Object implValue) {
+		if (implValue instanceof TestSuiteImpl ts) {
+			ts.parent = this;
+		} else if (implValue instanceof StepObjectImpl so) {
+			so.parent = this;
+		}
 	}
 
 	@Override
@@ -105,8 +91,8 @@ public class TestProjectImpl implements ITestProject {
 
 	@Override
 	public String toString() {
-		int count = testSuiteList != null ? testSuiteList.size() : 0;
-		return "TestProject[" + count + " suites]";
+		int count = testDocumentList != null ? testDocumentList.size() : 0;
+		return "TestProject[" + count + " documents]";
 	}
 
 }

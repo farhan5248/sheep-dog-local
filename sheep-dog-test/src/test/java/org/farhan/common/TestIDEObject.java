@@ -33,7 +33,7 @@ public class TestIDEObject extends TestObject {
     public static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
         for (SheepDogIssueProposal p : proposals) {
             if (p.getValue() instanceof IStepObject) {
-                testProject.addTestDocument((IStepObject) p.getValue());
+                testProject.addStepObject((IStepObject) p.getValue());
             } else {
                 if (cursor instanceof ICell) {
                     ((ICell) cursor).setName(p.getValue().toString());
@@ -56,8 +56,6 @@ public class TestIDEObject extends TestObject {
 
     private Object getChildNode(Object parent, String elementType, int index) {
         switch (elementType) {
-        case "TestSuiteList":
-            return ((ITestProject) parent).getTestSuite(index);
         case "TestStepContainerList":
             return ((ITestSuite) parent).getTestStepContainer(index);
         case "TestStepList":
@@ -90,8 +88,6 @@ public class TestIDEObject extends TestObject {
             return getChildNode(parent, elementType, index);
         } catch (IndexOutOfBoundsException e) {
             switch (elementType) {
-            case "TestSuiteList":
-                return SheepDogBuilder.createTestSuite((ITestProject) parent, "Test Suite");
             case "TestStepContainerList":
                 return SheepDogBuilder.createTestCase((ITestSuite) parent, "Test Case");
             case "TestStepList":
@@ -186,6 +182,12 @@ public class TestIDEObject extends TestObject {
             cursor = ((ITestSuite) cursor).getParent();
         }
         cursor = SheepDogBuilder.createTestSuite(testProject, testSuiteFullName);
+    }
+
+    protected void setTestSuiteName(String name) {
+        if (cursor instanceof ITestSuite) {
+            ((ITestSuite) cursor).setName(name);
+        }
     }
 
     protected void addTextWithContent(String content) {
@@ -298,17 +300,21 @@ public class TestIDEObject extends TestObject {
         }
     }
 
+    protected void assertTestSuiteName(String name) {
+        Assertions.assertEquals(name, ((ITestSuite) cursor).getName());
+    }
+
     protected void assertTestSuiteFullName(String fullName) {
         if (cursor instanceof ITestSuite) {
             if (getNode(properties.get("part").toString()) instanceof ITestSuite) {
                 Assertions.assertEquals(fullName, ((ITestSuite) cursor).getFullName());
             } else {
                 cursor = ((ITestSuite) cursor).getParent();
-                cursor = ((ITestProject) cursor).getTestSuite(fullName);
+                cursor = ((ITestProject) cursor).getTestDocument(fullName);
                 Assertions.assertNotNull(cursor);
             }
         } else {
-            cursor = ((ITestProject) cursor).getTestSuite(fullName);
+            cursor = ((ITestProject) cursor).getTestDocument(fullName);
             Assertions.assertNotNull(cursor);
         }
     }
@@ -372,7 +378,45 @@ public class TestIDEObject extends TestObject {
                     break;
                 }
                 int index = Integer.parseInt(parts[i + 1]) - 1;
-                current = getOrCreateNode(current, elementType, index);
+                if (elementType.equals("TestDocumentList") && i + 2 < parts.length
+                        && parts[i + 2].equals("TestStepContainerList")) {
+                    Object doc = null;
+                    try {
+                        doc = getChildNode(current, elementType, index);
+                    } catch (IndexOutOfBoundsException e) {
+                    }
+                    if (doc instanceof ITestSuite) {
+                        current = doc;
+                    } else {
+                        current = SheepDogBuilder.createTestSuite((ITestProject) current, "");
+                    }
+                } else if (elementType.equals("TestDocumentList") && i + 2 < parts.length
+                        && parts[i + 2].equals("StepDefinitionList")) {
+                    Object doc = null;
+                    try {
+                        doc = getChildNode(current, elementType, index);
+                    } catch (IndexOutOfBoundsException e) {
+                    }
+                    if (doc instanceof IStepObject) {
+                        current = doc;
+                    } else {
+                        current = SheepDogBuilder.createStepObject((ITestProject) current, "");
+                    }
+                } else if (elementType.equals("TestStepContainerList") && i + 2 < parts.length
+                        && parts[i + 2].equals("TestDataList")) {
+                    Object container = null;
+                    try {
+                        container = getChildNode(current, elementType, index);
+                    } catch (IndexOutOfBoundsException e) {
+                    }
+                    if (container instanceof ITestCase) {
+                        current = container;
+                    } else {
+                        current = SheepDogBuilder.createTestCase((ITestSuite) current, "Test Case");
+                    }
+                } else {
+                    current = getOrCreateNode(current, elementType, index);
+                }
                 i += 2;
             }
         }

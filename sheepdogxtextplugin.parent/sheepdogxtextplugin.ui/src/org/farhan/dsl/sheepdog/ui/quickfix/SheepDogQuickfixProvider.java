@@ -135,7 +135,7 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
                 public void apply(IModificationContext context) throws BadLocationException {
                     if (p.getValue() instanceof IStepObject) {
                         try {
-                            SheepDogBuilder.createTestProject().addTestDocument((IStepObject) p.getValue());
+                            SheepDogBuilder.createTestProject().addStepObject((IStepObject) p.getValue());
                         } catch (Exception e) {
                             logger.error("Failed writing file for " + p.getValue().toString(), e);
                         }

@@ -12,112 +12,116 @@ import org.farhan.dsl.grammar.SheepDogFactory;
 
 public class TestProjectImpl implements ITestProject {
 
-	private static Logger logger = Logger.getLogger(TestProjectImpl.class);
+    private static Logger logger = Logger.getLogger(TestProjectImpl.class);
 
-	private IResourceRepository sr;
-	private String projectPath;
+    private IResourceRepository sr;
+    private String projectPath;
+    public final String baseDir;
     public final String layer1dir;
-	public final String layer2dir;
+    public final String layer2dir;
 
-	TestProjectImpl(IResourceRepository sr) {
-		// TODO In the future the project name should be accessible here. The
-		// constructor should get a path that includes the project name. It
-		// can then intercept the project name and save it.
-		this.sr = sr;
-		layer2dir = "src/test/resources/asciidoc/stepdefs";
+    TestProjectImpl(IResourceRepository sr) {
+        // TODO In the future the project name should be accessible here. The
+        // constructor should get a path that includes the project name. It
+        // can then intercept the project name and save it.
+        this.sr = sr;
+        baseDir = "src/test/resources/asciidoc";
+        layer2dir = "src/test/resources/asciidoc/stepdefs";
         layer1dir = "src/test/resources/asciidoc/specs";
-		projectPath = null;
-	}
+        projectPath = null;
+    }
 
-	public boolean addTestDocument(ITestDocument value) {
-		try {
-			IStepObject stepObject = (IStepObject) value;
-			sr.put("", projectPath + "/" + layer2dir + "/" + stepObject.getFullName(), stepObject.getContent());
-			return true;
-		} catch (Exception e) {
-			logger.error("Couldn't write step object:", e);
-			return false;
-		}
-	}
-
-	@Override
-	public boolean addTestSuite(ITestSuite value) {
-		throw new UnsupportedOperationException("addTestSuite(ITestSuite value) is not implemented");
-	}
-
-	@Override
-	public String getFileExtension() {
-		// TODO make a static config object for this and they layer 2 directory
-		return ".asciidoc";
-	}
-
-	public String getName() {
-		return projectPath;
-	}
-
-	@Override
-	public ITestDocument getTestDocument(int index) {
-		throw new UnsupportedOperationException("getTestDocument(int index) is not implemented");
-	}
-
-	@Override
-	public ITestDocument getTestDocument(String qualifiedName) {
-		if (sr.contains("", projectPath + "/" + layer2dir + "/" + qualifiedName)) {
-			try {
-				String text = sr.get("", projectPath + "/" + layer2dir + "/" + qualifiedName);
-				if (text.isEmpty()) {
-					logger.error("Couldn't load StepObject for, file is empty: " + qualifiedName);
-				} else {
-					IStepObject stepObject = SheepDogFactory.instance.createStepObject();
-					stepObject.setFullName(qualifiedName);
-					stepObject.setContent(text);
-					return stepObject;
-				}
-			} catch (Exception e) {
-				logger.error("Couldn't load StepObject for: " + qualifiedName, e);
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<ITestDocument> getTestDocumentList() {
-		ArrayList<ITestDocument> objects = new ArrayList<ITestDocument>();
-		try {
-			// TODO instead of empty tags, append it to the prefix?
-			for (String stepObjectFileName : sr.list("", projectPath + "/" + layer2dir, getFileExtension())) {
-				objects.add(getTestDocument(stepObjectFileName.replace(projectPath + "/" + layer2dir + "/", "")));
-			}
-		} catch (Exception e) {
-			logger.error("Couldn't get StepObject list:", e);
-		}
-		return objects;
-	}
-
-	@Override
-	public ITestSuite getTestSuite(int index) {
-		throw new UnsupportedOperationException("getTestSuite(int index) is not implemented");
-	}
-
-	@Override
-	public ITestSuite getTestSuite(String name) {
-		throw new UnsupportedOperationException("getTestSuite(String name) is not implemented");
-	}
-
-	@Override
-	public ArrayList<ITestSuite> getTestSuiteList() {
-        ArrayList<ITestSuite> objects = new ArrayList<ITestSuite>();
+    public boolean addStepObject(IStepObject value) {
         try {
-            for (String testSuiteFileName : sr.list("", projectPath + "/" + layer1dir, getFileExtension())) {
-                objects.add(getTestSuite(testSuiteFileName.replace(projectPath + "/" + layer1dir + "/", "")));
+            sr.put("", projectPath + "/" + baseDir + "/" + value.getFullName(), value.getContent());
+            return true;
+        } catch (Exception e) {
+            logger.error("Couldn't write step object:", e);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addTestSuite(ITestSuite value) {
+        try {
+            sr.put("", projectPath + "/" + baseDir + "/" + value.getFullName(), value.getContent());
+            return true;
+        } catch (Exception e) {
+            logger.error("Couldn't write test suite:", e);
+            return false;
+        }
+    }
+
+    @Override
+    public String getFileExtension() {
+        // TODO make a static config object for this and they layer 2 directory
+        return ".asciidoc";
+    }
+
+    public String getName() {
+        return projectPath;
+    }
+
+    @Override
+    public ITestDocument getTestDocument(int index) {
+        throw new UnsupportedOperationException("getTestDocument(int index) is not implemented");
+    }
+
+    @Override
+    public ITestDocument getTestDocument(String fullName) {
+        try {
+            ITestDocument testDocument;
+            if (fullName.startsWith("stepdefs/")) {
+                String filePath = projectPath + "/" + baseDir + "/" + fullName;
+                if (sr.contains("", filePath)) {
+                    String text = sr.get("", filePath);
+                    if (text.isEmpty()) {
+                        logger.error("Couldn't load TestDocument for, file is empty: " + fullName);
+                    } else {
+                        IStepObject stepObject = SheepDogFactory.instance.createStepObject();
+                        stepObject.setFullName(fullName);
+                        stepObject.setContent(text);
+                        return stepObject;
+                    }
+                }
+            } else if (fullName.startsWith("specs/")) {
+                String filePath = projectPath + "/" + baseDir + "/" + fullName;
+                if (sr.contains("", filePath)) {
+                    String text = sr.get("", filePath);
+                    if (text.isEmpty()) {
+                        logger.error("Couldn't load TestDocument for, file is empty: " + fullName);
+                    } else {
+                        ITestSuite testSuite = SheepDogFactory.instance.createTestSuite();
+                        testSuite.setFullName(fullName);
+                        testSuite.setContent(text);
+                        return testSuite;
+                    }
+                }
             }
         } catch (Exception e) {
-            logger.error("Couldn't get TestSuite list:", e);
+            logger.error("Couldn't load TestDocument for: " + fullName, e);
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<ITestDocument> getTestDocumentList() {
+        ArrayList<ITestDocument> objects = new ArrayList<ITestDocument>();
+        try {
+            // TODO instead of empty tags, append it to the prefix?
+            for (String stepObjectFileName : sr.list("", projectPath + "/" + layer2dir, getFileExtension())) {
+                objects.add(getTestDocument("stepdefs/" + stepObjectFileName.replace(projectPath + "/" + layer2dir + "/", "")));
+            }
+            for (String testSuiteFileName : sr.list("", projectPath + "/" + layer1dir, getFileExtension())) {
+                objects.add(getTestDocument("specs/" + testSuiteFileName.replace(projectPath + "/" + layer1dir + "/", "")));
+            }
+        } catch (Exception e) {
+            logger.error("Couldn't get TestDocument list:", e);
         }
         return objects;
-	}
+    }
 
-	public void setName(String projectPath) {
-		this.projectPath = projectPath.replace(File.separator, "/");
-	}
+    public void setName(String projectPath) {
+        this.projectPath = projectPath.replace(File.separator, "/");
+    }
 }
