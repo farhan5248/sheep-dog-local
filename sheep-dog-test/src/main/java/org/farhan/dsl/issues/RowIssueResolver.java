@@ -43,7 +43,7 @@ public class RowIssueResolver {
         if (!stepDefinitionName.isEmpty()) {
             ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
             String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
-            IStepObject theStepObject = theProject.getStepObject(fullName);
+            IStepObject theStepObject = (IStepObject) theProject.getTestDocument(fullName);
             if (theStepObject != null) {
                 IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
                 if (theStepDefinition != null) {
@@ -99,7 +99,7 @@ public class RowIssueResolver {
         if (!stepDefinitionName.isEmpty()) {
             ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
             String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
-            IStepObject theStepObject = theProject.getStepObject(fullName);
+            IStepObject theStepObject = (IStepObject) theProject.getTestDocument(fullName);
             if (theStepObject != null) {
                 IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
                 if (theStepDefinition != null) {

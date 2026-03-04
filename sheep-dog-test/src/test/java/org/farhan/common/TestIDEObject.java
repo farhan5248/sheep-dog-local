@@ -33,7 +33,7 @@ public class TestIDEObject extends TestObject {
     public static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
         for (SheepDogIssueProposal p : proposals) {
             if (p.getValue() instanceof IStepObject) {
-                testProject.addStepObject((IStepObject) p.getValue());
+                testProject.addTestDocument((IStepObject) p.getValue());
             } else {
                 if (cursor instanceof ICell) {
                     ((ICell) cursor).setName(p.getValue().toString());
@@ -66,8 +66,8 @@ public class TestIDEObject extends TestObject {
             return ((ITable) parent).getRow(index);
         case "CellList":
             return ((IRow) parent).getCell(index);
-        case "StepObjectList":
-            return ((ITestProject) parent).getStepObject(index);
+        case "TestDocumentList":
+            return ((ITestProject) parent).getTestDocument(index);
         case "StepDefinitionList":
             return ((IStepObject) parent).getStepDefinition(index);
         case "StepParametersList":
@@ -100,7 +100,7 @@ public class TestIDEObject extends TestObject {
                 return SheepDogBuilder.createRow((ITable) parent);
             case "CellList":
                 return SheepDogBuilder.createCell((IRow) parent, "");
-            case "StepObjectList":
+            case "TestDocumentList":
                 return SheepDogBuilder.createStepObject((ITestProject) parent, "");
             case "StepDefinitionList":
                 return SheepDogBuilder.createStepDefinition((IStepObject) parent, "");
@@ -207,19 +207,8 @@ public class TestIDEObject extends TestObject {
         }
     }
 
-    protected void assertStepDefinitionName(String name) {
-        if (cursor instanceof IStepDefinition) {
-            if (getNode(properties.get("part").toString()) instanceof IStepDefinition) {
-                Assertions.assertEquals(name, ((IStepDefinition) cursor).getName());
-            } else {
-                cursor = ((IStepDefinition) cursor).getParent();
-                cursor = ((IStepObject) cursor).getStepDefinition(name);
-                Assertions.assertNotNull(cursor);
-            }
-        } else {
-            cursor = ((IStepObject) cursor).getStepDefinition(name);
-            Assertions.assertNotNull(cursor);
-        }
+    protected void assertDescriptionEmpty(String replaceKeyword) {
+        Assertions.assertTrue(((IDescription) cursor).getLineList().isEmpty());
     }
 
     protected void assertLineContent(String content) {
@@ -245,17 +234,36 @@ public class TestIDEObject extends TestObject {
         }
     }
 
+    protected void assertStepDefinitionListEmpty(String state) {
+        Assertions.assertTrue(((IStepObject) cursor).getStepDefinitionList().isEmpty());
+    }
+
+    protected void assertStepDefinitionName(String name) {
+        if (cursor instanceof IStepDefinition) {
+            if (getNode(properties.get("part").toString()) instanceof IStepDefinition) {
+                Assertions.assertEquals(name, ((IStepDefinition) cursor).getName());
+            } else {
+                cursor = ((IStepDefinition) cursor).getParent();
+                cursor = ((IStepObject) cursor).getStepDefinition(name);
+                Assertions.assertNotNull(cursor);
+            }
+        } else {
+            cursor = ((IStepObject) cursor).getStepDefinition(name);
+            Assertions.assertNotNull(cursor);
+        }
+    }
+
     protected void assertStepObjectFullName(String name) {
         if (cursor instanceof IStepObject) {
             if (getNode(properties.get("part").toString()) instanceof IStepObject) {
                 Assertions.assertEquals(name, ((IStepObject) cursor).getFullName());
             } else {
                 cursor = ((IStepObject) cursor).getParent();
-                cursor = ((ITestProject) cursor).getStepObject(name);
+                cursor = ((ITestProject) cursor).getTestDocument(name);
                 Assertions.assertNotNull(cursor);
             }
         } else {
-            cursor = ((ITestProject) cursor).getStepObject(name);
+            cursor = ((ITestProject) cursor).getTestDocument(name);
             Assertions.assertNotNull(cursor);
         }
     }
@@ -309,7 +317,7 @@ public class TestIDEObject extends TestObject {
         String[] parts = part.split("/");
         Object current = testProject;
         int i = 0;
-        if (parts.length > 0 && parts[0].equals("Model")) {
+        if (parts.length > 0 && parts[0].equals("TestProject")) {
             i = 1;
         }
 
@@ -372,40 +380,12 @@ public class TestIDEObject extends TestObject {
         cursor = current;
     }
 
-    protected void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
-
-        Object part = properties.get("part");
-        if (part != null) {
-            if (operation.contentEquals("set")) {
-                createStepDependencies(part.toString());
-            } else if (operation.contentEquals("assert")) {
-                setCursor(part.toString());
-            }
-        }
-
-        super.processInputOutputs(dataTable, operation, sectionName);
-    }
-
-    protected void processInputOutputs(String key, String value, String operation, String sectionName) {
-
-        Object part = properties.get("part");
-        if (part != null) {
-            if (operation.contentEquals("set")) {
-                createStepDependencies(part.toString());
-            } else if (operation.contentEquals("assert")) {
-                setCursor(part.toString());
-            }
-        }
-
-        super.processInputOutputs(key, value, operation, sectionName);
-    }
-
     protected Object getNode(String path) {
         String[] parts = path.split("/");
         Object current = testProject;
 
         int i = 0;
-        if (parts.length > 0 && parts[0].equals("Model")) {
+        if (parts.length > 0 && parts[0].equals("TestProject")) {
             i = 1;
         }
         while (i < parts.length && current != null) {
@@ -452,12 +432,40 @@ public class TestIDEObject extends TestObject {
         return current;
     }
 
+    protected void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
+
+        Object part = properties.get("part");
+        if (part != null) {
+            if (operation.contentEquals("set")) {
+                createStepDependencies(part.toString());
+            } else if (operation.contentEquals("assert")) {
+                setCursor(part.toString());
+            }
+        }
+
+        super.processInputOutputs(dataTable, operation, sectionName);
+    }
+
+    protected void processInputOutputs(String key, String value, String operation, String sectionName) {
+
+        Object part = properties.get("part");
+        if (part != null) {
+            if (operation.contentEquals("set")) {
+                createStepDependencies(part.toString());
+            } else if (operation.contentEquals("assert")) {
+                setCursor(part.toString());
+            }
+        }
+
+        super.processInputOutputs(key, value, operation, sectionName);
+    }
+
     protected void setCursor(String path) {
         String[] parts = path.split("/");
         Object current = testProject;
 
         int i = 0;
-        if (parts.length > 0 && parts[0].equals("Model")) {
+        if (parts.length > 0 && parts[0].equals("TestProject")) {
             i = 1;
         }
         while (i < parts.length && current != null) {
@@ -507,9 +515,15 @@ public class TestIDEObject extends TestObject {
     }
 
     // TODO this needs to be changed to Table/RowList/Cell style of building
-    protected void setStepDefinitionDescription(String name) {
+    protected void setStepDefinitionDescription(String content) {
         IDescription description = SheepDogBuilder.createDescription((IStepDefinition) cursor);
-        SheepDogBuilder.createLine(description, name);
+        SheepDogBuilder.createLine(description, content);
+    }
+
+    // TODO this needs to be changed to Table/RowList/Cell style of building
+    protected void setStepObjectDescription(String content) {
+        IDescription description = SheepDogBuilder.createDescription((IStepObject) cursor);
+        SheepDogBuilder.createLine(description, content);
     }
 
     // TODO this needs to be changed to Table/RowList/Cell style of building

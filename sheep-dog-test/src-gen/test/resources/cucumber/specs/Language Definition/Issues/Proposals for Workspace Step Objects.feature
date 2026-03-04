@@ -14,50 +14,50 @@ Feature: Proposals for Workspace Step Objects
 
     TODO make this an outline with various steps like "The" or "The batchjob" etc
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | empty               |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                                    |
-          | Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
+          | Node Path                                                          |
+          | TestProject/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list proposals popup will be empty
 
   Scenario: No component has existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | empty               |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows
           | Step Object Full Name             | Step Object Description | Step Definition Name |
           | daily batchjob/Input file.feature | Description             | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                                    |
-          | Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
+          | Node Path                                                          |
+          | TestProject/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                | Proposal Id | Proposal Description |
           | The daily batchjob Input file | Input file  | Description          |
 
   Scenario: Has component no existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | The daily batchjob  |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                                    |
-          | Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
+          | Node Path                                                          |
+          | TestProject/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list proposals popup will be empty
 
   Scenario: Has component has existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name |
           | The daily batchjob  |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows
           | Step Object Full Name             | Step Object Description | Step Definition Name |
           | daily batchjob/Input file.feature | Description             | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                                    |
-          | Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
+          | Node Path                                                          |
+          | TestProject/TestSuiteList/1/TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                | Proposal Id | Proposal Description |
           | The daily batchjob Input file | Input file  | Description          |

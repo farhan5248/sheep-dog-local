@@ -39,7 +39,7 @@ public class RowIssueDetector {
             ITestProject testProject = SheepDogUtility.getTestProjectParentForRow(theRow);
             if (testProject != null) {
                 String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
-                IStepObject theStepObject = testProject.getStepObject(fullName);
+                IStepObject theStepObject = (IStepObject) testProject.getTestDocument(fullName);
                 if (theStepObject != null) {
                     String stepDefinitionName = testStep.getStepDefinitionName();
                     IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);

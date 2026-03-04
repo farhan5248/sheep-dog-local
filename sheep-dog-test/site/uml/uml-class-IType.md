@@ -47,7 +47,7 @@ Note: `addLine()` is a convenience method — it auto-creates the Description/Ne
  - **Name**: `^(get|set)FullName$`
 
 **Examples**:
- - `String getFullName()` (in IModel - with setter)
+ - `String getFullName()` (in ITestDocument - with setter)
  - `String getFullName()` (in ITestStep - computed, no setter)
  - `String getFullName()` (in IStepDefinition - computed, no setter)
 

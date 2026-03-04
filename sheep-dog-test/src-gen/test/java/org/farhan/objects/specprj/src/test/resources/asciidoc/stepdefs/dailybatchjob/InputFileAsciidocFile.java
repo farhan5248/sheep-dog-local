@@ -4,45 +4,45 @@ import java.util.HashMap;
 
 public interface InputFileAsciidocFile {
 
-    public void setModelStepObjectListNodeStepObjectFullName(HashMap<String, String> keyMap);
+    public void setTestProjectTestDocumentListNodeStepObjectFullName(HashMap<String, String> keyMap);
 
-    public void setModelStepObjectListNodeStepDefinitionName(HashMap<String, String> keyMap);
+    public void setTestProjectTestDocumentListNodeStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void setModelStepObjectListNodeStepDefinitionDescription(HashMap<String, String> keyMap);
+    public void setTestProjectTestDocumentListNodeStepDefinitionDescription(HashMap<String, String> keyMap);
 
-    public void setModelStepObjectListNodeStepObjectDescription(HashMap<String, String> keyMap);
+    public void setTestProjectTestDocumentListNodeStepObjectDescription(HashMap<String, String> keyMap);
 
-    public void setModelStepObjectListNodeStepParametersName(HashMap<String, String> keyMap);
+    public void setTestProjectTestDocumentListNodeStepParametersName(HashMap<String, String> keyMap);
 
-    public void setModelStepObjectListNodeStepParametersDescription(HashMap<String, String> keyMap);
+    public void setTestProjectTestDocumentListNodeStepParametersDescription(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1NodeStepObjectFullName(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1NodeStepObjectFullName(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1NodeStepDefinitionName(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1NodeStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1NodeStepParametersName(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1NodeStepParametersName(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1StepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1DescriptionNodeEmpty(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1StepDefinitionList1StepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
+    public void setTestProjectTestDocumentList1DescriptionLineListNodeLineContent(HashMap<String, String> keyMap);
 
-    public void setModelStepObjectList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1DescriptionLineList2NodeLineContent(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
+    public void setTestProjectTestDocumentList1StepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1StepDefinitionList1StepParametersList2TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1StepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1DescriptionNodeEmpty(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1StepDefinitionListNodeEmpty(HashMap<String, String> keyMap);
 
-    public void setModelStepObjectList1DescriptionLineListNodeLineContent(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1DescriptionLineList2NodeLineContent(HashMap<String, String> keyMap);
+    public void setTestProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
 
-    public void setModelStepObjectList1StepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1StepDefinitionListNodeEmpty(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersList2TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1StepDefinitionList2NodeStepDefinitionName(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList1StepDefinitionList2NodeStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void setCreated(HashMap<String, String> keyMap);
+    public void assertTestProjectTestDocumentList2NodeStepObjectFullName(HashMap<String, String> keyMap);
 }

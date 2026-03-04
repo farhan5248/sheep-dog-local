@@ -1,10 +1,11 @@
 package org.farhan.dsl.grammar;
 
 /**
- * Root interface representing a SheepDog model file. A model can be either a
- * StepObject or TestSuite. IStepObject and ITestSuite extend this interface.
+ * Root interface representing a SheepDog test document. A test document can be
+ * either a StepObject or TestSuite. IStepObject and ITestSuite extend this
+ * interface.
  */
-public interface IModel {
+public interface ITestDocument {
 
 	String getFullName();
 
@@ -17,7 +18,7 @@ public interface IModel {
 	/**
 	 * Gets the parent test project containing this model. Meta-attribute (not in
 	 * grammar).
-	 * 
+	 *
 	 * @return the parent test project
 	 */
 	ITestProject getParent();

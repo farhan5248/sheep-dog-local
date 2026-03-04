@@ -2,7 +2,7 @@ package org.farhan.dsl.grammar;
 
 import java.util.List;
 
-public interface IStepObject extends IModel {
+public interface IStepObject extends ITestDocument {
 
 	String getContent() throws Exception;
 

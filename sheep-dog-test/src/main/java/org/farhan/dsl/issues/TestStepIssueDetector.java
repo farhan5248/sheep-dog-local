@@ -70,7 +70,7 @@ public class TestStepIssueDetector {
         String message = "";
         String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-        IStepObject theStepObject = theProject.getStepObject(fullName);
+        IStepObject theStepObject = (IStepObject) theProject.getTestDocument(fullName);
         if (theStepObject == null) {
             message = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
         }
@@ -91,7 +91,7 @@ public class TestStepIssueDetector {
         String message = "";
         String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-        IStepObject theStepObject = theProject.getStepObject(fullName);
+        IStepObject theStepObject = (IStepObject) theProject.getTestDocument(fullName);
         if (theStepObject != null) {
             String stepDefinitionName = theTestStep.getStepDefinitionName();
             IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);

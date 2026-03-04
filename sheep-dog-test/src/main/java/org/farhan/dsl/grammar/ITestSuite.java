@@ -2,7 +2,7 @@ package org.farhan.dsl.grammar;
 
 import java.util.List;
 
-public interface ITestSuite extends IModel {
+public interface ITestSuite extends ITestDocument {
 
     boolean addLine(ILine value);
 

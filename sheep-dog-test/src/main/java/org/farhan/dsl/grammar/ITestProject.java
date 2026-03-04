@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ITestProject {
 
-	boolean addStepObject(IStepObject value);
+	boolean addTestDocument(ITestDocument value);
 
 	boolean addTestSuite(ITestSuite value);
 
@@ -12,11 +12,11 @@ public interface ITestProject {
 
 	String getName();
 
-	IStepObject getStepObject(int index);
+	ITestDocument getTestDocument(int index);
 
-	IStepObject getStepObject(String fullName);
+	ITestDocument getTestDocument(String fullName);
 
-	List<IStepObject> getStepObjectList();
+	List<ITestDocument> getTestDocumentList();
 
 	ITestSuite getTestSuite(int index);
 

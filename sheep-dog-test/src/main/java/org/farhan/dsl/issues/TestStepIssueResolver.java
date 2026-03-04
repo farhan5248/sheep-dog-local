@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
@@ -72,7 +73,7 @@ public class TestStepIssueResolver {
         if (!stepDefinitionName.isEmpty()) {
             ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
             String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
-            IStepObject theStepObject = theProject.getStepObject(fullName);
+            IStepObject theStepObject = (IStepObject) theProject.getTestDocument(fullName);
             if (theStepObject != null) {
                 IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
                 if (theStepDefinition == null) {
@@ -106,7 +107,8 @@ public class TestStepIssueResolver {
         if (theProject != null) {
             LinkedHashSet<String> seenIds = new LinkedHashSet<>();
             addStepObjectProposalsFromWorkspace(theProject, theTestStep, seenIds, proposals);
-            for (IStepObject stepObject : theProject.getStepObjectList()) {
+            for (ITestDocument testDocument : theProject.getTestDocumentList()) {
+                IStepObject stepObject = (IStepObject) testDocument;
                 String fullName = stepObject.getFullName();
                 if (fullName == null || fullName.isEmpty()) {
                     continue;
@@ -150,7 +152,7 @@ public class TestStepIssueResolver {
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
         if (theProject != null) {
             String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
-            IStepObject theStepObject = theProject.getStepObject(fullName);
+            IStepObject theStepObject = (IStepObject) theProject.getTestDocument(fullName);
             if (theStepObject != null) {
                 proposals.addAll(getStepDefinitions(theTestStep));
             }
@@ -206,7 +208,7 @@ public class TestStepIssueResolver {
         ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
         if (theProject != null) {
             String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
-            IStepObject theStepObject = theProject.getStepObject(fullName);
+            IStepObject theStepObject = (IStepObject) theProject.getTestDocument(fullName);
             if (theStepObject != null) {
                 for (IStepDefinition existingStepDef : theStepObject.getStepDefinitionList()) {
                     SheepDogIssueProposal proposal = new SheepDogIssueProposal();

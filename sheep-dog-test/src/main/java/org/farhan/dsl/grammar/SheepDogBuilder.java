@@ -241,12 +241,12 @@ public class SheepDogBuilder {
         logger.debug("Entering createStepObject for fullName: {}", fullName);
         IStepObject stepObject = null;
         if (parent != null)
-            stepObject = parent.getStepObject(fullName);
+            stepObject = (IStepObject) parent.getTestDocument(fullName);
         if (stepObject == null) {
             stepObject = SheepDogFactory.instance.createStepObject();
             stepObject.setFullName(fullName);
             if (parent != null)
-                parent.addStepObject(stepObject);
+                parent.addTestDocument(stepObject);
         }
         logger.debug("Exiting createStepObject with result: {}", stepObject != null ? stepObject.getFullName() : "null");
         return stepObject;

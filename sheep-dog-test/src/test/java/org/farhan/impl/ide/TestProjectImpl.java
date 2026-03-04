@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSuite;
 
@@ -24,8 +24,8 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public IStepObject getStepObject(String fullName) {
-		for (IStepObject so : this.stepObjectList) {
+	public ITestDocument getTestDocument(String fullName) {
+		for (StepObjectImpl so : this.stepObjectList) {
 			if (so.getFullName().contentEquals(fullName)) {
 				return so;
 			}
@@ -34,7 +34,7 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public List<IStepObject> getStepObjectList() {
+	public List<ITestDocument> getTestDocumentList() {
 		return Collections.unmodifiableList(stepObjectList);
 	}
 
@@ -54,7 +54,7 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public IStepObject getStepObject(int index) {
+	public ITestDocument getTestDocument(int index) {
 		return stepObjectList.get(index);
 	}
 
@@ -79,7 +79,7 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public boolean addStepObject(IStepObject value) {
+	public boolean addTestDocument(ITestDocument value) {
 		// Check for duplicates using getFullName as unique identifier and replace if found
 		for (int i = 0; i < stepObjectList.size(); i++) {
 			if (stepObjectList.get(i).getFullName().contentEquals(value.getFullName())) {
