@@ -15,7 +15,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void assertTestProjectTestDocumentList1DescriptionNodeEmpty(HashMap<String, String> keyMap) {
+    public void assertTestProjectTestDocumentList1DescriptionLineListNodeEmpty(HashMap<String, String> keyMap) {
         assertDescriptionEmpty(replaceKeyword(keyMap.get("Empty")));
     }
 
@@ -87,8 +87,20 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void setTestProjectTestDocumentListNodeStepDefinitionDescription(HashMap<String, String> keyMap) {
-        setStepDefinitionDescription(replaceKeyword(keyMap.get("Step Definition Description")));
+    public void setTestProjectTestDocumentList2DescriptionLineListNodeLineContent(HashMap<String, String> keyMap) {
+        addLineWithContent(replaceKeyword(keyMap.get("Line Content")));
+    }
+
+    @Override
+    public void setTestProjectTestDocumentList2StepDefinitionList1DescriptionLineListNodeLineContent(
+            HashMap<String, String> keyMap) {
+        addLineWithContent(replaceKeyword(keyMap.get("Line Content")));
+    }
+
+    @Override
+    public void setTestProjectTestDocumentList2StepDefinitionList1StepParametersList1NestedDescriptionLineListNodeLineContent(
+            HashMap<String, String> keyMap) {
+        addLineWithContent(replaceKeyword(keyMap.get("Line Content")));
     }
 
     @Override
@@ -97,18 +109,8 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void setTestProjectTestDocumentListNodeStepObjectDescription(HashMap<String, String> keyMap) {
-        setStepObjectDescription(replaceKeyword(keyMap.get("Step Object Description")));
-    }
-
-    @Override
     public void setTestProjectTestDocumentListNodeStepObjectFullName(HashMap<String, String> keyMap) {
         addStepObjectWithFullName(replaceKeyword(keyMap.get("Step Object Full Name")));
-    }
-
-    @Override
-    public void setTestProjectTestDocumentListNodeStepParametersDescription(HashMap<String, String> keyMap) {
-        setStepParametersDescription(replaceKeyword(keyMap.get("Step Parameters Description")));
     }
 
     @Override

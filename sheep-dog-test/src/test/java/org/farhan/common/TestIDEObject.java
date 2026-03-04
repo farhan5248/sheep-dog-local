@@ -558,21 +558,4 @@ public class TestIDEObject extends TestObject {
 
     }
 
-    // TODO this needs to be changed to Table/RowList/Cell style of building
-    protected void setStepDefinitionDescription(String content) {
-        IDescription description = SheepDogBuilder.createDescription((IStepDefinition) cursor);
-        SheepDogBuilder.createLine(description, content);
-    }
-
-    // TODO this needs to be changed to Table/RowList/Cell style of building
-    protected void setStepObjectDescription(String content) {
-        IDescription description = SheepDogBuilder.createDescription((IStepObject) cursor);
-        SheepDogBuilder.createLine(description, content);
-    }
-
-    // TODO this needs to be changed to Table/RowList/Cell style of building
-    protected void setStepParametersDescription(String name) {
-        INestedDescription nestedDescription = SheepDogBuilder.createNestedDescription((IStepParameters) cursor);
-        SheepDogBuilder.createLine(nestedDescription, name);
-    }
 }

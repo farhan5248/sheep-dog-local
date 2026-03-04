@@ -57,8 +57,11 @@ Feature: Proposals for Workspace Step Parameters
           | Cell Name |
           | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows
-          | Step Object Full Name                      | Step Definition Name  | Step Parameters Name | Step Parameters Description  |
-          | stepdefs/daily batchjob/Input file.feature | is created as follows | H1, H2, H3           | Header parameters for tables |
+          | Step Object Full Name                      | Step Definition Name  | Step Parameters Name |
+          | stepdefs/daily batchjob/Input file.feature | is created as follows | H1, H2, H3           |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList node is created as follows
+          | Line Content                 |
+          | Header parameters for tables |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1 |

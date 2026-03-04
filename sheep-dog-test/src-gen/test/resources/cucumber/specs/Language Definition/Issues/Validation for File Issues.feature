@@ -7,13 +7,16 @@ Feature: Validation for File Issues
 
   Scenario: The first step needs to have a component specified validation
 
-    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows
-          | Step Object Full Name                      | Step Definition Name | Step Definition Description |
-          | stepdefs/daily batchjob/Input file.feature | is present           | Creates empty file          |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows
+          | Step Object Full Name                      | Step Definition Name |
+          | stepdefs/daily batchjob/Input file.feature | is present           |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList/1/Description/LineList node is created as follows
+          | Line Content       |
+          | Creates empty file |
      When The xtext plugin validate action is performed as follows
           | Node Path                                              |
           | TestProject/TestDocumentList/1/TestStepContainerList/1 |

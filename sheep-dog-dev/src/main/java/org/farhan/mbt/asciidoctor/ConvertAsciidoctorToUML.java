@@ -161,6 +161,9 @@ public class ConvertAsciidoctorToUML extends Converter {
     }
 
     public void initProjects() throws Exception {
+        if (model != null && project != null) {
+            return;
+        }
         project = new AsciiDoctorTestProject(this.tags, this.fa);
         model = new UMLTestProject(this.tags, this.fa);
         project.init();

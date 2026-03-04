@@ -154,6 +154,9 @@ public class UMLTestProject extends UMLElement {
 			for (Class c : objects) {
 				secondLayerObjects.add(new UMLStepObject(c, this, String.valueOf(secondLayerObjects.size())));
 			}
+			resource.getContents().clear();
+			resource.unload();
+			resourceSet.getResources().clear();
 		}
 	}
 
@@ -171,5 +174,8 @@ public class UMLTestProject extends UMLElement {
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
 		fa.put(id, path, os.toString());
+		resource.getContents().clear();
+		resource.unload();
+		resourceSet.getResources().clear();
 	}
 }

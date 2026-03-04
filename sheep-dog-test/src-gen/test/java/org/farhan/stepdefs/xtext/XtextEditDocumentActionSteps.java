@@ -15,8 +15,8 @@ public class XtextEditDocumentActionSteps extends TestSteps {
         super(object, "xtext", "edit document");
     }
 
-    @Given("^The xtext plugin edit document action is performed to modify Description with$")
-    public void isPerformedToModifyDescriptionWith(DataTable dataTable) {
+    @Given("^The xtext plugin edit document action is performed to modify LineList with$")
+    public void isPerformedToModifyLineListWith(DataTable dataTable) {
         object.setInputOutputs(dataTable);
         object.transition();
     }

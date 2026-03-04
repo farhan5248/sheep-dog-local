@@ -15,7 +15,7 @@ Feature: StepObject Type
           | Step Object Full Name       |
           | stepdefs/Second Step Object |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList node will be empty
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description node will be empty
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description/LineList node will be empty
 
   Scenario: Step Definition
 
@@ -40,7 +40,7 @@ Feature: StepObject Type
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description/LineList node is created as follows
           | Line Content |
           | First Line   |
-     When The xtext plugin edit document action is performed to modify Description with
+     When The xtext plugin edit document action is performed to modify LineList with
           | Line Content |
           | Second Line  |
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description/LineList/2 node will be created as follows

@@ -12,8 +12,11 @@ Feature: Quickfixes for File Issues
           | The daily batchjob Input file is present |
           | The Input file is downloaded             |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows
-          | Step Object Full Name                      | Step Definition Name | Step Definition Description |
-          | stepdefs/daily batchjob/Input file.feature | is present           | Creates empty file          |
+          | Step Object Full Name                      | Step Definition Name |
+          | stepdefs/daily batchjob/Input file.feature | is present           |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList/1/Description/LineList node is created as follows
+          | Line Content       |
+          | Creates empty file |
       And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
           | Node Path                                              |
