@@ -19,6 +19,8 @@ public class TestStepContainerImpl implements ITestStepContainer {
 
     TestStepContainerImpl() {
         testStepList = new ArrayList<TestStepImpl>();
+        this.description = new DescriptionImpl();
+        this.description.parent = this;
     }
 
     @Override

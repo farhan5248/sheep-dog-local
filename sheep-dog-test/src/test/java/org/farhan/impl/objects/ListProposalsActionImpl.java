@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.common.TestIDEObject;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueResolver;
@@ -16,14 +17,16 @@ public class ListProposalsActionImpl extends TestIDEObject implements ListPropos
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedNode.contains("RowList/")) {
+            if (TestIDEObject.cursor instanceof IRow) {
+                IRow row = (IRow) TestIDEObject.cursor;
+                ITestStep testStep = (ITestStep) row.getParent().getParent();
                 TestIDEObject.listProposalsDialog
-                        .addAll(RowIssueResolver.suggestCellListWorkspace((ITestStep) TestIDEObject.focus));
-            } else if (TestIDEObject.selectedNode.contains("TestStepList/")) {
+                        .addAll(RowIssueResolver.suggestCellListWorkspace((ITestStep) testStep));
+            } else if (TestIDEObject.cursor instanceof ITestStep) {
                 TestIDEObject.listProposalsDialog
-                        .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) TestIDEObject.focus));
+                        .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) TestIDEObject.cursor));
                 TestIDEObject.listProposalsDialog.addAll(
-                        TestStepIssueResolver.suggestStepDefinitionNameWorkspace((ITestStep) TestIDEObject.focus));
+                        TestStepIssueResolver.suggestStepDefinitionNameWorkspace((ITestStep) TestIDEObject.cursor));
             } else {
                 Assertions.fail("Unknown Element Type");
             }
@@ -34,6 +37,6 @@ public class ListProposalsActionImpl extends TestIDEObject implements ListPropos
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        setSelectedNode(keyMap.get("Node Path"));
+        setCursor(keyMap.get("Node Path"));
     }
 }

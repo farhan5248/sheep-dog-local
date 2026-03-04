@@ -27,10 +27,40 @@ public class SpecPrjInputFileAsciidocFileSteps extends TestSteps {
         object.assertInputOutputs(dataTable, "ModelStepObjectList1Node");
     }
 
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description node will be empty$")
+    public void modelStepObjectList1DescriptionNodeWillBeEmpty() {
+        object.setPart("Model/StepObjectList/1/Description");
+        object.assertInputOutputs("Empty", "ModelStepObjectList1DescriptionNode");
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description/LineList node is created as follows$")
+    public void modelStepObjectList1DescriptionLineList1NodeIsCreatedAsFollows(DataTable dataTable) {
+        object.setPart("Model/StepObjectList/1/Description/LineList");
+        object.setInputOutputs(dataTable, "ModelStepObjectList1DescriptionLineList1Node");
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description/LineList/2 node will be created as follows$")
+    public void modelStepObjectList1DescriptionLineList2NodeWillBeCreatedAsFollows(DataTable dataTable) {
+        object.setPart("Model/StepObjectList/1/Description/LineList/2");
+        object.assertInputOutputs(dataTable, "ModelStepObjectList1DescriptionLineList2Node");
+    }
+
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList node will be created as follows$")
     public void modelStepObjectList1StepDefinitionListNodeWillBeCreatedAsFollows(DataTable dataTable) {
         object.setPart("Model/StepObjectList/1/StepDefinitionList");
         object.assertInputOutputs(dataTable, "ModelStepObjectList1StepDefinitionListNode");
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList node will be empty$")
+    public void modelStepObjectList1StepDefinitionListNodeWillBeEmpty() {
+        object.setPart("Model/StepObjectList/1/StepDefinitionList");
+        object.assertInputOutputs("Empty", "ModelStepObjectList1StepDefinitionListNode");
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList node is created as follows$")
+    public void modelStepObjectList1StepDefinitionList1NodeIsCreatedAsFollows(DataTable dataTable) {
+        object.setPart("Model/StepObjectList/1/StepDefinitionList");
+        object.setInputOutputs(dataTable, "ModelStepObjectList1StepDefinitionList1Node");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList/1/StepParametersList node will be created as follows$")
@@ -57,40 +87,10 @@ public class SpecPrjInputFileAsciidocFileSteps extends TestSteps {
         object.assertInputOutputs(dataTable, "ModelStepObjectList1StepDefinitionList1StepParametersList2TableRowList1CellListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description node will be empty$")
-    public void modelStepObjectList1DescriptionNodeWillBeEmpty() {
-        object.setPart("Model/StepObjectList/1/Description");
-        object.assertInputOutputs("Empty", "ModelStepObjectList1DescriptionNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description/LineList/1 node will be$")
-    public void modelStepObjectList1DescriptionLineList1NodeWillBe(DataTable dataTable) {
-        object.setPart("Model/StepObjectList/1/Description/LineList/1");
-        object.setInputOutputs(dataTable);
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description/LineList/2 node will be$")
-    public void modelStepObjectList1DescriptionLineList2NodeWillBe(DataTable dataTable) {
-        object.setPart("Model/StepObjectList/1/Description/LineList/2");
-        object.setInputOutputs(dataTable);
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList node will be empty$")
-    public void modelStepObjectList1StepDefinitionListNodeWillBeEmpty() {
-        object.setPart("Model/StepObjectList/1/StepDefinitionList");
-        object.assertInputOutputs("Empty", "ModelStepObjectList1StepDefinitionListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList/1 node will be$")
-    public void modelStepObjectList1StepDefinitionList1NodeWillBe(DataTable dataTable) {
-        object.setPart("Model/StepObjectList/1/StepDefinitionList/1");
-        object.setInputOutputs(dataTable);
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList/2 node will be$")
-    public void modelStepObjectList1StepDefinitionList2NodeWillBe(DataTable dataTable) {
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList/2 node will be created as follows$")
+    public void modelStepObjectList1StepDefinitionList2NodeWillBeCreatedAsFollows(DataTable dataTable) {
         object.setPart("Model/StepObjectList/1/StepDefinitionList/2");
-        object.setInputOutputs(dataTable);
+        object.assertInputOutputs(dataTable, "ModelStepObjectList1StepDefinitionList2Node");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created$")

@@ -12,34 +12,31 @@ public class EditDocumentActionImpl extends TestIDEObject implements EditDocumen
 
     @Override
     public void transition() {
-        if (objectKeyMap.get("Step Object Name") != null) {
-            addStepObjectWithName(replaceKeyword(objectKeyMap.get("Step Object Name").toString()));
-            objectKeyMap.remove("Step Object Name");
-        } else if (objectKeyMap.get("Step Definition Name") != null) {
-            addStepDefinitionWithName(replaceKeyword(objectKeyMap.get("Step Definition Name").toString()));
-            objectKeyMap.remove("Step Definition Name");
-        } else if (objectKeyMap.get("Line Content") != null) {
-            addLineWithContent(replaceKeyword(objectKeyMap.get("Line Content").toString()));
-            objectKeyMap.remove("Line Content");
+        if (properties.get("Step Object Name") != null) {
+            addStepObjectWithName(replaceKeyword(properties.get("Step Object Name").toString()));
+            properties.remove("Step Object Name");
+        } else if (properties.get("Step Definition Name") != null) {
+            addStepDefinitionWithName(replaceKeyword(properties.get("Step Definition Name").toString()));
+            properties.remove("Step Definition Name");
+        } else if (properties.get("Line Content") != null) {
+            addLineWithContent(replaceKeyword(properties.get("Line Content").toString()));
+            properties.remove("Line Content");
         }
     }
 
     @Override
     public void setLineContent(HashMap<String, String> keyMap) {
-        objectKeyMap.put("Line Content", keyMap.get("Line Content"));
-        transition();
+        properties.put("Line Content", keyMap.get("Line Content"));
     }
 
     @Override
     public void setStepDefinitionName(HashMap<String, String> keyMap) {
-        objectKeyMap.put("Step Definition Name", keyMap.get("Step Definition Name"));
-        transition();
+        properties.put("Step Definition Name", keyMap.get("Step Definition Name"));
     }
 
     @Override
     public void setStepObjectName(HashMap<String, String> keyMap) {
-        objectKeyMap.put("Step Object Name", keyMap.get("Step Object Name"));
-        transition();
+        properties.put("Step Object Name", keyMap.get("Step Object Name"));
     }
 
 }

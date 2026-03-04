@@ -25,32 +25,32 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedNode.contains("CellList/")) {
-                ICell cell = (ICell) TestIDEObject.focus;
+            if (TestIDEObject.cursor instanceof ICell) {
+                ICell cell = (ICell) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = CellIssueDetector.validateNameOnly(cell);
                     if (TestIDEObject.validateDialog == null) {
                         TestIDEObject.validateDialog = "";
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("RowList/")) {
-                IRow row = (IRow) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof IRow) {
+                IRow row = (IRow) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = RowIssueDetector.validateCellListWorkspace(row);
                     if (TestIDEObject.validateDialog == null) {
                         TestIDEObject.validateDialog = "";
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("Text/")) {
-                IText text = (IText) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof IText) {
+                IText text = (IText) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = TextIssueDetector.validateNameWorkspace(text);
                     if (TestIDEObject.validateDialog == null) {
                         TestIDEObject.validateDialog = "";
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestStepList/")) {
-                ITestStep testStep = (ITestStep) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof ITestStep) {
+                ITestStep testStep = (ITestStep) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = TestStepIssueDetector.validateStepObjectNameOnly(testStep);
                     if (TestIDEObject.validateDialog == null) {
@@ -77,8 +77,8 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
                         }
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestStepContainerList/")) {
-                ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof ITestStepContainer) {
+                ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = TestStepContainerIssueDetector
                             .validateTestStepListFile(testStepContainer);
@@ -93,8 +93,8 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
                         }
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestSuiteList/")) {
-                ITestSuite testSuite = (ITestSuite) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof ITestSuite) {
+                ITestSuite testSuite = (ITestSuite) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog == null || TestIDEObject.validateDialog.isEmpty()) {
                     TestIDEObject.validateDialog = TestSuiteIssueDetector.validateNameOnly(testSuite);
                     if (TestIDEObject.validateDialog == null) {
@@ -111,6 +111,6 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        setSelectedNode(keyMap.get("Node Path"));
+        setCursor(keyMap.get("Node Path"));
     }
 }

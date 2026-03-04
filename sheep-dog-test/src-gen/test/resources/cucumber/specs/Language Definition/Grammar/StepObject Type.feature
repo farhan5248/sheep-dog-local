@@ -17,14 +17,13 @@ Feature: StepObject Type
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
           | Step Object Name |
           | A Step Object    |
-     When The xtext plugin edit document action is performed to modify StepDefinitionList with
-          | Step Definition Name   |
-          | First Step Definition  |
-          | Second Step Definition |
-     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList/1 node will be
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList node is created as follows
           | Step Definition Name  |
           | First Step Definition |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList/2 node will be
+     When The xtext plugin edit document action is performed to modify StepDefinitionList with
+          | Step Definition Name   |
+          | Second Step Definition |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/StepDefinitionList/2 node will be created as follows
           | Step Definition Name   |
           | Second Step Definition |
 
@@ -33,14 +32,13 @@ Feature: StepObject Type
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
           | Step Object Name |
           | A Step Object    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description/LineList node is created as follows
+          | Line Content |
+          | First Line   |
      When The xtext plugin edit document action is performed to modify Description with
           | Line Content |
-          | First Line   |
           | Second Line  |
-     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description/LineList/1 node will be
-          | Line Content |
-          | First Line   |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description/LineList/2 node will be
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList/1/Description/LineList/2 node will be created as follows
           | Line Content |
           | Second Line  |
 

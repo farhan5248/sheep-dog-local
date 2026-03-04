@@ -30,13 +30,13 @@ public class ApplyQuickfixActionImpl extends TestIDEObject implements ApplyQuick
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedNode.contains("CellList/")) {
-                ICell cell = (ICell) TestIDEObject.focus;
+            if (TestIDEObject.cursor instanceof ICell) {
+                ICell cell = (ICell) TestIDEObject.cursor;
                 if (!CellIssueDetector.validateNameOnly(cell).isEmpty()) {
                     TestIDEObject.applyProposal(CellIssueResolver.correctNameOnly(cell));
                 }
-            } else if (TestIDEObject.selectedNode.contains("RowList/")) {
-                IRow row = (IRow) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof IRow) {
+                IRow row = (IRow) TestIDEObject.cursor;
                 ITestStep testStep = (ITestStep) row.getParent().getParent();
                 if (!testStep.getTable().getRowList().isEmpty()
                         && (testStep.getTable().getRowList().getFirst() != null)) {
@@ -44,27 +44,27 @@ public class ApplyQuickfixActionImpl extends TestIDEObject implements ApplyQuick
                         TestIDEObject.applyProposal(RowIssueResolver.correctCellListWorkspace(testStep));
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("Text/")) {
-                IText text = (IText) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof IText) {
+                IText text = (IText) TestIDEObject.cursor;
                 ITestStep testStep = (ITestStep) text.getParent();
                 if (!TextIssueDetector.validateNameWorkspace(text).isEmpty()) {
                     TestIDEObject.applyProposal(TextIssueResolver.correctNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestStepList/")) {
-                ITestStep testStep = (ITestStep) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof ITestStep) {
+                ITestStep testStep = (ITestStep) TestIDEObject.cursor;
                 if (!TestStepIssueDetector.validateStepObjectNameWorkspace(testStep).isEmpty()) {
                     TestIDEObject.applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
                 }
                 if (!TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep).isEmpty()) {
                     TestIDEObject.applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestStepContainerList/")) {
-                ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof ITestStepContainer) {
+                ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.cursor;
                 if (!TestStepContainerIssueDetector.validateNameOnly(testStepContainer).isEmpty()) {
                     TestIDEObject.applyProposal(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestSuiteList/")) {
-                ITestSuite testSuite = (ITestSuite) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof ITestSuite) {
+                ITestSuite testSuite = (ITestSuite) TestIDEObject.cursor;
                 if (!TestSuiteIssueDetector.validateNameOnly(testSuite).isEmpty()) {
                     TestIDEObject.applyProposal(TestSuiteIssueResolver.correctNameOnly(testSuite));
                 }
@@ -76,7 +76,7 @@ public class ApplyQuickfixActionImpl extends TestIDEObject implements ApplyQuick
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        setSelectedNode(keyMap.get("Node Path"));
+        setCursor(keyMap.get("Node Path"));
     }
 
 }

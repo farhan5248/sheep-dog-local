@@ -31,13 +31,13 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
 
     public void transition() {
         try {
-            if (TestIDEObject.selectedNode.contains("CellList/")) {
-                ICell cell = (ICell) TestIDEObject.focus;
+            if (TestIDEObject.cursor instanceof ICell) {
+                ICell cell = (ICell) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                     TestIDEObject.listQuickfixesDialog.addAll(CellIssueResolver.correctNameOnly(cell));
                 }
-            } else if (TestIDEObject.selectedNode.contains("RowList/")) {
-                IRow row = (IRow) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof IRow) {
+                IRow row = (IRow) TestIDEObject.cursor;
                 ITestStep testStep = (ITestStep) row.getParent().getParent();
                 if (TestIDEObject.validateDialog.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
                     if (testStep.getTable() != null) {
@@ -49,14 +49,14 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
                         }
                     }
                 }
-            } else if (TestIDEObject.selectedNode.contains("Text/")) {
-                IText text = (IText) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof IText) {
+                IText text = (IText) TestIDEObject.cursor;
                 ITestStep testStep = (ITestStep) text.getParent();
                 if (TestIDEObject.validateDialog.contentEquals(TextIssueTypes.TEXT_NAME_WORKSPACE.description)) {
                     TestIDEObject.listQuickfixesDialog.addAll(TextIssueResolver.correctNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestStepList/")) {
-                ITestStep testStep = (ITestStep) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof ITestStep) {
+                ITestStep testStep = (ITestStep) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog
                         .contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
                     TestIDEObject.listQuickfixesDialog
@@ -66,15 +66,15 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
                     TestIDEObject.listQuickfixesDialog
                             .addAll(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestStepContainerList/")) {
-                ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof ITestStepContainer) {
+                ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog
                         .contentEquals(TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description)) {
                     TestIDEObject.listQuickfixesDialog
                             .addAll(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));
                 }
-            } else if (TestIDEObject.selectedNode.contains("TestSuiteList/")) {
-                ITestSuite testSuite = (ITestSuite) TestIDEObject.focus;
+            } else if (TestIDEObject.cursor instanceof ITestSuite) {
+                ITestSuite testSuite = (ITestSuite) TestIDEObject.cursor;
                 if (TestIDEObject.validateDialog.contentEquals(TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description)) {
                     TestIDEObject.listQuickfixesDialog.addAll(TestSuiteIssueResolver.correctNameOnly(testSuite));
                 }
@@ -88,6 +88,6 @@ public class ListQuickfixesActionImpl extends TestIDEObject implements ListQuick
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        setSelectedNode(keyMap.get("Node Path"));
+        setCursor(keyMap.get("Node Path"));
     }
 }

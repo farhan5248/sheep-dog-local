@@ -19,6 +19,9 @@ Feature: Proposals for Workspace Step Parameters
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name                                 |
           | The daily batchjob Input file is created as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
+          | Cell Name |
+          | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
           | Step Object Name                  | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
@@ -32,6 +35,9 @@ Feature: Proposals for Workspace Step Parameters
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name                      |
           | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
+          | Cell Name |
+          | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
           | Step Object Name                  | Step Definition Name  | Step Parameters Name |
           | daily batchjob/Input file.feature | is created as follows | H1, H2, H3           |
@@ -47,6 +53,9 @@ Feature: Proposals for Workspace Step Parameters
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name                                 |
           | The daily batchjob Input file is created as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
+          | Cell Name |
+          | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
           | Step Object Name                  | Step Definition Name  | Step Parameters Name | Step Parameters Description  |
           | daily batchjob/Input file.feature | is created as follows | H1, H2, H3           | Header parameters for tables |
@@ -64,6 +73,9 @@ Feature: Proposals for Workspace Step Parameters
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList node is created as follows
           | Test Step Full Name                                 |
           | The daily batchjob Input file is created as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Model/TestSuiteList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
+          | Cell Name |
+          | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Model/StepObjectList node is created as follows
           | Step Object Name                  | Step Definition Name  | Step Parameters Name |
           | daily batchjob/Input file.feature | is created as follows | Content              |

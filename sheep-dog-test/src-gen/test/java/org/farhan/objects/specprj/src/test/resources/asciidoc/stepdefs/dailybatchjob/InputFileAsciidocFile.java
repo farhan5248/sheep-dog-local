@@ -22,7 +22,17 @@ public interface InputFileAsciidocFile {
 
     public void assertModelStepObjectList1NodeStepParametersName(HashMap<String, String> keyMap);
 
+    public void assertModelStepObjectList1DescriptionNodeEmpty(HashMap<String, String> keyMap);
+
+    public void setModelStepObjectList1DescriptionLineList1NodeLineContent(HashMap<String, String> keyMap);
+
+    public void assertModelStepObjectList1DescriptionLineList2NodeLineContent(HashMap<String, String> keyMap);
+
     public void assertModelStepObjectList1StepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap);
+
+    public void assertModelStepObjectList1StepDefinitionListNodeEmpty(HashMap<String, String> keyMap);
+
+    public void setModelStepObjectList1StepDefinitionList1NodeStepDefinitionName(HashMap<String, String> keyMap);
 
     public void assertModelStepObjectList1StepDefinitionList1StepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
 
@@ -32,13 +42,7 @@ public interface InputFileAsciidocFile {
 
     public void assertModelStepObjectList1StepDefinitionList1StepParametersList2TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
 
-    public void assertModelStepObjectList1DescriptionNodeEmpty(HashMap<String, String> keyMap);
-
-    public void setLineContent(HashMap<String, String> keyMap);
-
-    public void assertModelStepObjectList1StepDefinitionListNodeEmpty(HashMap<String, String> keyMap);
-
-    public void setStepDefinitionName(HashMap<String, String> keyMap);
+    public void assertModelStepObjectList1StepDefinitionList2NodeStepDefinitionName(HashMap<String, String> keyMap);
 
     public void setCreated(HashMap<String, String> keyMap);
 }

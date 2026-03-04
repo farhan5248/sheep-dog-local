@@ -20,6 +20,8 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     StepDefinitionImpl() {
         this.stepParametersList = new ArrayList<StepParametersImpl>();
+        this.description = new DescriptionImpl();
+        this.description.parent = this;
     }
 
     @Override

@@ -9,7 +9,7 @@ import io.cucumber.datatable.DataTable;
 
 public abstract class TestObject {
 
-    protected HashMap<String, Object> objectKeyMap = new HashMap<String, Object>();
+    protected HashMap<String, Object> properties = new HashMap<String, Object>();
 
     public void assertInputOutputs(DataTable dataTable) {
         processInputOutputs(dataTable, "assert", "");
@@ -32,7 +32,13 @@ public abstract class TestObject {
     }
 
     public void assertInputOutputs(String key, String value) {
-        processInputOutputs(key, value, "assert", "");
+        // TODO this is a temp hack until these InputOutput methods are changed
+        if (key.contentEquals("Content")) {
+            processInputOutputs(key, value, "assert", "");
+        } else {
+            processInputOutputs(key, "", "assert", value);
+        }
+
     }
 
     public void assertInputOutputs(String key, String value, String sectionName) {
@@ -62,15 +68,7 @@ public abstract class TestObject {
     public void transition() {
     }
 
-    private void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
-
-        if (objectKeyMap.get("part") != null) {
-            if (operation.contentEquals("set")) {
-                createStepDependencies(objectKeyMap.get("part").toString());
-            } else {
-                setSelectedNode(objectKeyMap.get("part").toString());
-            }
-        }
+    protected void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
 
         List<List<String>> data = dataTable.asLists();
         ArrayList<String> headers = new ArrayList<String>();
@@ -93,15 +91,7 @@ public abstract class TestObject {
         }
     }
 
-    private void processInputOutputs(String key, String value, String operation, String sectionName) {
-
-        if (objectKeyMap.get("part") != null) {
-            if (operation.contentEquals("set")) {
-                createStepDependencies(objectKeyMap.get("part").toString());
-            } else {
-                setSelectedNode(objectKeyMap.get("part").toString());
-            }
-        }
+    protected void processInputOutputs(String key, String value, String operation, String sectionName) {
 
         HashMap<String, String> row = new HashMap<String, String>();
         row.put(key, value);
@@ -130,19 +120,15 @@ public abstract class TestObject {
         }
     }
 
-    void setComponent(String component) {
-        objectKeyMap.put("component", component);
+    protected void setComponent(String component) {
+        properties.put("component", component);
     }
 
-    void setPath(String path) {
-        objectKeyMap.put("path", path);
+    protected void setPath(String path) {
+        properties.put("path", path);
     }
-
-    protected abstract void createStepDependencies(String path);
-
-    protected abstract void setSelectedNode(String path);
 
     public void setPart(String part) {
-        objectKeyMap.put("part", part);
+        properties.put("part", part);
     }
 }
