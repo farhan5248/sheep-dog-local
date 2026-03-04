@@ -180,7 +180,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
     private boolean isStepObjectSelected() {
         for (String s : stepObjects) {
-            if (srcObjStepObject.getPath().contentEquals(project.getDir(project.TEST_STEPS) + "/" + s)) {
+            if (srcObjStepObject.getPath().contentEquals(project.getDir("") + "/" + s)) {
                 return true;
             }
         }
