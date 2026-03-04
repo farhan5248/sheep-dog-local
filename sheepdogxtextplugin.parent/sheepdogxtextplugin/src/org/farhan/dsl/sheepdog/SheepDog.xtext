@@ -53,6 +53,9 @@ NestedDescription:
 	'+' EOL
 	lineList+=Line+;
 
+Line:
+	content=Phrase EOL;
+
 TestStep:
 	Given | When | Then | And;
 
@@ -87,9 +90,6 @@ Row:
 
 Cell:
 	'|' name=Phrase;
-
-Line:
-	content=Phrase EOL;
 
 Phrase:
 	WORD+;

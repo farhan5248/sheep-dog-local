@@ -10,8 +10,8 @@ import io.cucumber.guice.ScenarioScoped;
 public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements ProcessIssuesAsciidocFile {
 
     @Override
-    public void assertTestProjectTestSuiteList1NodeTestSuiteName(HashMap<String, String> keyMap) {
-        assertTestSuiteName(replaceKeyword(keyMap.get("Test Suite Name")));
+    public void assertTestProjectTestSuiteList1NodeTestSuiteFullName(HashMap<String, String> keyMap) {
+        assertTestSuiteFullName(replaceKeyword(keyMap.get("Test Suite Full Name")));
     }
 
     @Override
@@ -66,8 +66,8 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
     }
 
     @Override
-    public void setTestProjectTestSuiteListNodeTestSuiteName(HashMap<String, String> keyMap) {
-        addTestSuiteWithName(replaceKeyword(keyMap.get("Test Suite Name")));
+    public void setTestProjectTestSuiteListNodeTestSuiteFullName(HashMap<String, String> keyMap) {
+        addTestSuiteWithFullName(replaceKeyword(keyMap.get("Test Suite Full Name")));
     }
 
 }

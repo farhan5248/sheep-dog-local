@@ -38,7 +38,7 @@ public class TestIDEObject extends TestObject {
                 if (cursor instanceof ICell) {
                     ((ICell) cursor).setName(p.getValue().toString());
                 } else if (cursor instanceof ITestSuite) {
-                    ((ITestSuite) cursor).setName(p.getValue().toString());
+                    ((ITestSuite) cursor).setFullName(p.getValue().toString());
                 } else if (cursor instanceof ITestStepContainer) {
                     ((ITestStepContainer) cursor).setName(p.getValue().toString());
                 }
@@ -181,11 +181,11 @@ public class TestIDEObject extends TestObject {
         cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepName);
     }
 
-    protected void addTestSuiteWithName(String testSuiteName) {
+    protected void addTestSuiteWithFullName(String testSuiteFullName) {
         if (cursor instanceof ITestSuite) {
             cursor = ((ITestSuite) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createTestSuite(testProject, testSuiteName);
+        cursor = SheepDogBuilder.createTestSuite(testProject, testSuiteFullName);
     }
 
     protected void addTextWithContent(String content) {
@@ -298,17 +298,17 @@ public class TestIDEObject extends TestObject {
         }
     }
 
-    protected void assertTestSuiteName(String name) {
+    protected void assertTestSuiteFullName(String fullName) {
         if (cursor instanceof ITestSuite) {
             if (getNode(properties.get("part").toString()) instanceof ITestSuite) {
-                Assertions.assertEquals(name, ((ITestSuite) cursor).getName());
+                Assertions.assertEquals(fullName, ((ITestSuite) cursor).getFullName());
             } else {
                 cursor = ((ITestSuite) cursor).getParent();
-                cursor = ((ITestProject) cursor).getTestSuite(name);
+                cursor = ((ITestProject) cursor).getTestSuite(fullName);
                 Assertions.assertNotNull(cursor);
             }
         } else {
-            cursor = ((ITestProject) cursor).getTestSuite(name);
+            cursor = ((ITestProject) cursor).getTestSuite(fullName);
             Assertions.assertNotNull(cursor);
         }
     }

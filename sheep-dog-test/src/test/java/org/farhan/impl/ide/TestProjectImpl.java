@@ -39,9 +39,9 @@ public class TestProjectImpl implements ITestProject {
 	}
 
 	@Override
-	public ITestSuite getTestSuite(String name) {
+	public ITestSuite getTestSuite(String fullName) {
 		for (ITestSuite ts : this.testSuiteList) {
-			if (ts.getName().contentEquals(name)) {
+			if (ts.getFullName().contentEquals(fullName)) {
 				return ts;
 			}
 		}

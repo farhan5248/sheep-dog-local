@@ -39,8 +39,8 @@ Feature: Validation for Only Issues
   Scenario: Test suite name should start with a capital letter validation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestSuiteList node is created as follows
-          | Test Suite Name   |
-          | lowercase process |
+          | Test Suite Full Name |
+          | lowercase process    |
      When The xtext plugin validate action is performed as follows
           | Node Path                   |
           | TestProject/TestSuiteList/1 |

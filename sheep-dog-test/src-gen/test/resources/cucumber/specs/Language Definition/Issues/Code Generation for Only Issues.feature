@@ -25,8 +25,8 @@ Feature: Code Generation for Only Issues
   Scenario: Test suite name should start with a capital letter generation
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestSuiteList node is created as follows
-          | Test Suite Name   |
-          | lowercase process |
+          | Test Suite Full Name |
+          | lowercase process    |
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id                | Proposal Description                    | Proposal Value    |
           | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
@@ -34,8 +34,8 @@ Feature: Code Generation for Only Issues
           | Node Path                   |
           | TestProject/TestSuiteList/1 |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestSuiteList/1 node will be created as follows
-          | Test Suite Name   |
-          | Lowercase process |
+          | Test Suite Full Name |
+          | Lowercase process    |
 
   Scenario: Test case name should start with a capital letter generation
 

@@ -46,8 +46,8 @@ Feature: Quickfixes for Only Issues
   Scenario: Test suite name should start with a capital letter quickfix
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestSuiteList node is created as follows
-          | Test Suite Name   |
-          | lowercase process |
+          | Test Suite Full Name |
+          | lowercase process    |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
