@@ -1,0 +1,17 @@
+@sheep-dog-test
+Feature: NestedDescription Type
+
+  \@sheep-dog-test
+
+  Scenario: Initial State
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/NestedDescription/LineList node is created as follows
+          | Line Content |
+          | First Line   |
+     When The xtext plugin edit document action is performed to modify LineList with
+          | Line Content |
+          | Second Line  |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/NestedDescription/LineList/2 node will be created as follows
+          | Line Content |
+          | Second Line  |
+

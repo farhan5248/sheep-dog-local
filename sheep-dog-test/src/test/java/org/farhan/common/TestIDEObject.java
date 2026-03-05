@@ -252,6 +252,90 @@ public class TestIDEObject extends TestObject {
         }
     }
 
+    protected void addTestDataWithName(String name) {
+        if (cursor instanceof ITestData) {
+            cursor = ((ITestData) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestData((ITestCase) cursor, name);
+    }
+
+    protected void addRowWithContent(String content) {
+        if (cursor instanceof IRow) {
+            cursor = ((IRow) cursor).getParent();
+        }
+        IRow row = SheepDogBuilder.createRow((ITable) cursor);
+        SheepDogBuilder.createCell(row, content);
+        cursor = row;
+    }
+
+    protected void addGivenWithStepObjectName(String stepObjectName) {
+        if (cursor instanceof ITestStep) {
+            cursor = ((ITestStep) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
+    }
+
+    protected void addWhenWithStepObjectName(String stepObjectName) {
+        if (cursor instanceof ITestStep) {
+            cursor = ((ITestStep) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
+    }
+
+    protected void addThenWithStepObjectName(String stepObjectName) {
+        if (cursor instanceof ITestStep) {
+            cursor = ((ITestStep) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
+    }
+
+    protected void addAndWithStepObjectName(String stepObjectName) {
+        if (cursor instanceof ITestStep) {
+            cursor = ((ITestStep) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
+    }
+
+    protected void setTestStepDefinitionName(String name) {
+        ((ITestStep) cursor).setStepDefinitionName(name);
+    }
+
+    protected void assertTestStepStepObjectName(String name) {
+        Assertions.assertEquals(name, ((ITestStep) cursor).getStepObjectName());
+    }
+
+    protected void assertTestStepStepDefinitionName(String name) {
+        Assertions.assertEquals(name, ((ITestStep) cursor).getStepDefinitionName());
+    }
+
+    protected void assertTestDataName(String name) {
+        if (cursor instanceof ITestData) {
+            if (getNode(properties.get("part").toString()) instanceof ITestData) {
+                Assertions.assertEquals(name, ((ITestData) cursor).getName());
+            } else {
+                cursor = ((ITestData) cursor).getParent();
+                cursor = ((ITestCase) cursor).getTestData(name);
+                Assertions.assertNotNull(cursor);
+            }
+        } else {
+            cursor = ((ITestCase) cursor).getTestData(name);
+            Assertions.assertNotNull(cursor);
+        }
+    }
+
+    protected void assertTestDataListEmpty(String state) {
+        Assertions.assertTrue(((ITestCase) cursor).getTestDataList().isEmpty());
+    }
+
+    protected void assertTestStepListEmpty(String state) {
+        Assertions.assertTrue(((ITestStepContainer) cursor).getTestStepList().isEmpty());
+    }
+
+    protected void assertRowContent(String content) {
+        cursor = ((IRow) cursor).getCell(content);
+        Assertions.assertNotNull(cursor);
+    }
+
     protected void assertStepDefinitionListEmpty(String state) {
         Assertions.assertTrue(((IStepObject) cursor).getStepDefinitionList().isEmpty());
     }
@@ -350,12 +434,16 @@ public class TestIDEObject extends TestObject {
                 ITable table;
                 if (current instanceof ITestStep) {
                     table = ((ITestStep) current).getTable();
+                } else if (current instanceof ITestData) {
+                    table = ((ITestData) current).getTable();
                 } else {
                     table = ((IStepParameters) current).getTable();
                 }
                 if (table == null) {
                     if (current instanceof ITestStep) {
                         current = SheepDogBuilder.createTable((ITestStep) current);
+                    } else if (current instanceof ITestData) {
+                        current = SheepDogBuilder.createTable((ITestData) current);
                     } else {
                         current = SheepDogBuilder.createTable((IStepParameters) current);
                     }
@@ -454,6 +542,8 @@ public class TestIDEObject extends TestObject {
             if (elementType.equals("Table")) {
                 if (current instanceof ITestStep) {
                     current = ((ITestStep) current).getTable();
+                } else if (current instanceof ITestData) {
+                    current = ((ITestData) current).getTable();
                 } else {
                     current = ((IStepParameters) current).getTable();
                 }
@@ -535,6 +625,8 @@ public class TestIDEObject extends TestObject {
             if (elementType.equals("Table")) {
                 if (current instanceof ITestStep) {
                     current = ((ITestStep) current).getTable();
+                } else if (current instanceof ITestData) {
+                    current = ((ITestData) current).getTable();
                 } else {
                     current = ((IStepParameters) current).getTable();
                 }

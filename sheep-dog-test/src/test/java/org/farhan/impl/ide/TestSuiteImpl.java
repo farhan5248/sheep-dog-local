@@ -113,8 +113,8 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public boolean addTestSetup(ITestSetup value) {
-		testStepContainerList.add(0, (TestSetupImpl) value);
-		testStepContainerList.getFirst().parent = this;
+		testStepContainerList.add((TestSetupImpl) value);
+		testStepContainerList.getLast().parent = this;
 		return true;
 	}
 

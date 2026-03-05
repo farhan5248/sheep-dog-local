@@ -28,16 +28,34 @@ Feature: TestSuite Type
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/2 node will be created as follows
           | Test Case Name   |
           | Second Test Case |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node will be empty
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList node will be empty
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/Description/LineList node will be empty
 
-  Scenario: Description
+  Scenario: Test Setup
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/Description/LineList node is created as follows
-          | Line Content |
-          | First Line   |
-     When The xtext plugin edit document action is performed to modify LineList with
-          | Line Content |
-          | Second Line  |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/Description/LineList/2 node will be created as follows
-          | Line Content |
-          | Second Line  |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList node is created as follows
+          | Test Setup Name  |
+          | First Test Setup |
+     When The xtext plugin edit document action is performed to modify TestStepContainerList with
+          | Test Setup Name   |
+          | Second Test Setup |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/2 node will be created as follows
+          | Test Setup Name   |
+          | Second Test Setup |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node will be empty
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/Description/LineList node will be empty
+
+  Scenario: Test Data
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList node is created as follows
+          | Test Data Name  |
+          | First Test Data |
+     When The xtext plugin edit document action is performed to modify TestDataList with
+          | Test Data Name   |
+          | Second Test Data |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/2 node will be created as follows
+          | Test Data Name   |
+          | Second Test Data |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/NestedDescription/LineList node will be empty
 

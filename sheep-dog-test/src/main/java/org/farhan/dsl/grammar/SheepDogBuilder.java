@@ -291,6 +291,15 @@ public class SheepDogBuilder {
         return table;
     }
 
+    public static ITable createTable(ITestData parent) {
+        logger.debug("Entering createTable for parent: {}", parent != null ? parent.getName() : "null");
+        ITable table = SheepDogFactory.instance.createTable();
+        if (parent != null)
+            parent.setTable(table);
+        logger.debug("Exiting createTable with result: {}", table != null ? "non-null" : "null");
+        return table;
+    }
+
     /**
      * Creates grammar element using factory, initializes attributes, establishes
      * parent-child relationships, and handles singleton lookups where needed.
