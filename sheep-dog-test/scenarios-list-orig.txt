@@ -126,13 +126,13 @@ File: Proposals for Workspace Step Parameters
   Scenario: Has existing step definition with Content parameter
     Tag: Suggest
 
-File: Grammar Phrase Fragments
+File: Grammar Phrase Fragment
   Scenario: Tag Fragment
     Tag: Grammar
   Scenario: Todo Fragment
     Tag: Grammar
 
-File: Grammar StepObjectRef Fragments
+File: Grammar StepObjectRef Fragment
   Scenario: Component Fragment
     Tag: Grammar
   Scenario: Object Fragment
@@ -142,8 +142,52 @@ File: Grammar StepObjectRef Fragments
   Scenario: Object Edge Fragment
     Tag: Grammar
 
-File: Grammar StepDefinitionRef Fragments
+File: Grammar StepDefinitionRef Fragment
   Scenario: Part Fragment
     Tag: Grammar
   Scenario: State Fragment
+    Tag: Grammar
+
+File: Grammar Type Description
+  Scenario: Initial State
+    Tag: Grammar
+
+File: Grammar Type Nested Description
+  Scenario: Initial State
+    Tag: Grammar
+
+File: Grammar Type Step Object
+  Scenario: Initial State
+    Tag: Grammar
+  Scenario: Step Definition
+    Tag: Grammar
+  Scenario: Step Parameters
+    Tag: Grammar
+
+File: Grammar Type Table
+  Scenario: Row
+    Tag: Grammar
+  Scenario: Cell
+    Tag: Grammar
+
+File: Grammar Type Test Suite
+  Scenario: Initial State
+    Tag: Grammar
+  Scenario: Test Case
+    Tag: Grammar
+  Scenario: Test Setup
+    Tag: Grammar
+  Scenario: Test Data
+    Tag: Grammar
+
+File: Grammar Type Test Step
+  Scenario: Initial State Given
+    Tag: Grammar
+  Scenario: Initial State When
+    Tag: Grammar
+  Scenario: Initial State Then
+    Tag: Grammar
+  Scenario: Initial State And
+    Tag: Grammar
+  Scenario: Table
     Tag: Grammar

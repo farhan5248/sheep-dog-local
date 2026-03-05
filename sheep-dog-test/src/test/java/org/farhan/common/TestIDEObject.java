@@ -116,11 +116,25 @@ public class TestIDEObject extends TestObject {
         }
     }
 
+    protected void addAndWithStepObjectName(String stepObjectName) {
+        if (cursor instanceof ITestStep) {
+            cursor = ((ITestStep) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
+    }
+
     protected void addCellWithName(String name) {
         if (cursor instanceof ICell) {
             cursor = ((ICell) cursor).getParent();
         }
         cursor = SheepDogBuilder.createCell((IRow) cursor, name);
+    }
+
+    protected void addGivenWithStepObjectName(String stepObjectName) {
+        if (cursor instanceof ITestStep) {
+            cursor = ((ITestStep) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
     }
 
     protected void addLineWithContent(String content) {
@@ -132,6 +146,15 @@ public class TestIDEObject extends TestObject {
         } else {
             cursor = SheepDogBuilder.createLine((INestedDescription) cursor, content);
         }
+    }
+
+    protected void addRowWithContent(String content) {
+        if (cursor instanceof IRow) {
+            cursor = ((IRow) cursor).getParent();
+        }
+        IRow row = SheepDogBuilder.createRow((ITable) cursor);
+        SheepDogBuilder.createCell(row, content);
+        cursor = row;
     }
 
     protected void addStepDefinitionWithName(String name) {
@@ -163,6 +186,13 @@ public class TestIDEObject extends TestObject {
         cursor = SheepDogBuilder.createTestCase((ITestSuite) cursor, testStepContainerName);
     }
 
+    protected void addTestDataWithName(String name) {
+        if (cursor instanceof ITestData) {
+            cursor = ((ITestData) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestData((ITestCase) cursor, name);
+    }
+
     protected void addTestSetupWithName(String testSetupName) {
         if (cursor instanceof ITestStepContainer) {
             cursor = ((ITestStepContainer) cursor).getParent();
@@ -184,19 +214,27 @@ public class TestIDEObject extends TestObject {
         cursor = SheepDogBuilder.createTestSuite(testProject, testSuiteFullName);
     }
 
-    protected void setTestSuiteName(String name) {
-        if (cursor instanceof ITestSuite) {
-            ((ITestSuite) cursor).setName(name);
-        }
-    }
-
     protected void addTextWithContent(String content) {
         cursor = SheepDogBuilder.createText((ITestStep) cursor, content);
     }
 
-    protected void assertCellName(String name) {
+    protected void addThenWithStepObjectName(String stepObjectName) {
+        if (cursor instanceof ITestStep) {
+            cursor = ((ITestStep) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
+    }
+
+    protected void addWhenWithStepObjectName(String stepObjectName) {
+        if (cursor instanceof ITestStep) {
+            cursor = ((ITestStep) cursor).getParent();
+        }
+        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
+    }
+
+    protected void assertCellName(String name, String nodePath) {
         if (cursor instanceof ICell) {
-            if (getNode(properties.get("part").toString()) instanceof ICell) {
+            if (getNode(nodePath) instanceof ICell) {
                 Assertions.assertEquals(name, ((ICell) cursor).getName());
             } else {
                 cursor = ((ICell) cursor).getParent();
@@ -213,25 +251,9 @@ public class TestIDEObject extends TestObject {
         Assertions.assertTrue(((IDescription) cursor).getLineList().isEmpty());
     }
 
-    protected void assertNestedDescriptionEmpty(String state) {
-        Assertions.assertTrue(((INestedDescription) cursor).getLineList().isEmpty());
-    }
-
-    protected void assertStepParametersListEmpty(String state) {
-        Assertions.assertTrue(((IStepDefinition) cursor).getStepParameterList().isEmpty());
-    }
-
-    protected void assertStepObjectName(String name) {
-        Assertions.assertEquals(name, ((IStepObject) cursor).getName());
-    }
-
-    protected void assertTestStepContainerListEmpty(String state) {
-        Assertions.assertTrue(((ITestSuite) cursor).getTestStepContainerList().isEmpty());
-    }
-
-    protected void assertLineContent(String content) {
+    protected void assertLineContent(String content, String nodePath) {
         if (cursor instanceof ILine) {
-            if (getNode(properties.get("part").toString()) instanceof ILine) {
+            if (getNode(nodePath) instanceof ILine) {
                 Assertions.assertEquals(content, ((ILine) cursor).getName());
             } else {
                 cursor = ((ILine) cursor).getParent();
@@ -252,83 +274,8 @@ public class TestIDEObject extends TestObject {
         }
     }
 
-    protected void addTestDataWithName(String name) {
-        if (cursor instanceof ITestData) {
-            cursor = ((ITestData) cursor).getParent();
-        }
-        cursor = SheepDogBuilder.createTestData((ITestCase) cursor, name);
-    }
-
-    protected void addRowWithContent(String content) {
-        if (cursor instanceof IRow) {
-            cursor = ((IRow) cursor).getParent();
-        }
-        IRow row = SheepDogBuilder.createRow((ITable) cursor);
-        SheepDogBuilder.createCell(row, content);
-        cursor = row;
-    }
-
-    protected void addGivenWithStepObjectName(String stepObjectName) {
-        if (cursor instanceof ITestStep) {
-            cursor = ((ITestStep) cursor).getParent();
-        }
-        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
-    }
-
-    protected void addWhenWithStepObjectName(String stepObjectName) {
-        if (cursor instanceof ITestStep) {
-            cursor = ((ITestStep) cursor).getParent();
-        }
-        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
-    }
-
-    protected void addThenWithStepObjectName(String stepObjectName) {
-        if (cursor instanceof ITestStep) {
-            cursor = ((ITestStep) cursor).getParent();
-        }
-        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
-    }
-
-    protected void addAndWithStepObjectName(String stepObjectName) {
-        if (cursor instanceof ITestStep) {
-            cursor = ((ITestStep) cursor).getParent();
-        }
-        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName);
-    }
-
-    protected void setTestStepDefinitionName(String name) {
-        ((ITestStep) cursor).setStepDefinitionName(name);
-    }
-
-    protected void assertTestStepStepObjectName(String name) {
-        Assertions.assertEquals(name, ((ITestStep) cursor).getStepObjectName());
-    }
-
-    protected void assertTestStepStepDefinitionName(String name) {
-        Assertions.assertEquals(name, ((ITestStep) cursor).getStepDefinitionName());
-    }
-
-    protected void assertTestDataName(String name) {
-        if (cursor instanceof ITestData) {
-            if (getNode(properties.get("part").toString()) instanceof ITestData) {
-                Assertions.assertEquals(name, ((ITestData) cursor).getName());
-            } else {
-                cursor = ((ITestData) cursor).getParent();
-                cursor = ((ITestCase) cursor).getTestData(name);
-                Assertions.assertNotNull(cursor);
-            }
-        } else {
-            cursor = ((ITestCase) cursor).getTestData(name);
-            Assertions.assertNotNull(cursor);
-        }
-    }
-
-    protected void assertTestDataListEmpty(String state) {
-        Assertions.assertTrue(((ITestCase) cursor).getTestDataList().isEmpty());
-    }
-
-    protected void assertTestStepListEmpty(String state) {
-        Assertions.assertTrue(((ITestStepContainer) cursor).getTestStepList().isEmpty());
+    protected void assertNestedDescriptionEmpty(String state) {
+        Assertions.assertTrue(((INestedDescription) cursor).getLineList().isEmpty());
     }
 
     protected void assertRowContent(String content) {
@@ -340,9 +287,9 @@ public class TestIDEObject extends TestObject {
         Assertions.assertTrue(((IStepObject) cursor).getStepDefinitionList().isEmpty());
     }
 
-    protected void assertStepDefinitionName(String name) {
+    protected void assertStepDefinitionName(String name, String nodePath) {
         if (cursor instanceof IStepDefinition) {
-            if (getNode(properties.get("part").toString()) instanceof IStepDefinition) {
+            if (getNode(nodePath) instanceof IStepDefinition) {
                 Assertions.assertEquals(name, ((IStepDefinition) cursor).getName());
             } else {
                 cursor = ((IStepDefinition) cursor).getParent();
@@ -355,9 +302,9 @@ public class TestIDEObject extends TestObject {
         }
     }
 
-    protected void assertStepObjectFullName(String name) {
+    protected void assertStepObjectFullName(String name, String nodePath) {
         if (cursor instanceof IStepObject) {
-            if (getNode(properties.get("part").toString()) instanceof IStepObject) {
+            if (getNode(nodePath) instanceof IStepObject) {
                 Assertions.assertEquals(name, ((IStepObject) cursor).getFullName());
             } else {
                 cursor = ((IStepObject) cursor).getParent();
@@ -370,9 +317,17 @@ public class TestIDEObject extends TestObject {
         }
     }
 
-    protected void assertStepParametersName(String name) {
+    protected void assertStepObjectName(String name) {
+        Assertions.assertEquals(name, ((IStepObject) cursor).getName());
+    }
+
+    protected void assertStepParametersListEmpty(String state) {
+        Assertions.assertTrue(((IStepDefinition) cursor).getStepParameterList().isEmpty());
+    }
+
+    protected void assertStepParametersName(String name, String nodePath) {
         if (cursor instanceof IStepParameters) {
-            if (getNode(properties.get("part").toString()) instanceof IStepParameters) {
+            if (getNode(nodePath) instanceof IStepParameters) {
                 Assertions.assertEquals(name, ((IStepParameters) cursor).getName());
             } else {
                 cursor = ((IStepParameters) cursor).getParent();
@@ -385,9 +340,32 @@ public class TestIDEObject extends TestObject {
         }
     }
 
-    protected void assertTestStepContainerName(String name) {
+    protected void assertTestDataListEmpty(String state) {
+        Assertions.assertTrue(((ITestCase) cursor).getTestDataList().isEmpty());
+    }
+
+    protected void assertTestDataName(String name, String nodePath) {
+        if (cursor instanceof ITestData) {
+            if (getNode(nodePath) instanceof ITestData) {
+                Assertions.assertEquals(name, ((ITestData) cursor).getName());
+            } else {
+                cursor = ((ITestData) cursor).getParent();
+                cursor = ((ITestCase) cursor).getTestData(name);
+                Assertions.assertNotNull(cursor);
+            }
+        } else {
+            cursor = ((ITestCase) cursor).getTestData(name);
+            Assertions.assertNotNull(cursor);
+        }
+    }
+
+    protected void assertTestStepContainerListEmpty(String state) {
+        Assertions.assertTrue(((ITestSuite) cursor).getTestStepContainerList().isEmpty());
+    }
+
+    protected void assertTestStepContainerName(String name, String nodePath) {
         if (cursor instanceof ITestStepContainer) {
-            if (getNode(properties.get("part").toString()) instanceof ITestStepContainer) {
+            if (getNode(nodePath) instanceof ITestStepContainer) {
                 Assertions.assertEquals(name, ((ITestStepContainer) cursor).getName());
             } else {
                 cursor = ((ITestStepContainer) cursor).getParent();
@@ -400,13 +378,21 @@ public class TestIDEObject extends TestObject {
         }
     }
 
-    protected void assertTestSuiteName(String name) {
-        Assertions.assertEquals(name, ((ITestSuite) cursor).getName());
+    protected void assertTestStepListEmpty(String state) {
+        Assertions.assertTrue(((ITestStepContainer) cursor).getTestStepList().isEmpty());
     }
 
-    protected void assertTestSuiteFullName(String fullName) {
+    protected void assertTestStepStepDefinitionName(String name) {
+        Assertions.assertEquals(name, ((ITestStep) cursor).getStepDefinitionName());
+    }
+
+    protected void assertTestStepStepObjectName(String name) {
+        Assertions.assertEquals(name, ((ITestStep) cursor).getStepObjectName());
+    }
+
+    protected void assertTestSuiteFullName(String fullName, String nodePath) {
         if (cursor instanceof ITestSuite) {
-            if (getNode(properties.get("part").toString()) instanceof ITestSuite) {
+            if (getNode(nodePath) instanceof ITestSuite) {
                 Assertions.assertEquals(fullName, ((ITestSuite) cursor).getFullName());
             } else {
                 cursor = ((ITestSuite) cursor).getParent();
@@ -417,6 +403,10 @@ public class TestIDEObject extends TestObject {
             cursor = ((ITestProject) cursor).getTestDocument(fullName);
             Assertions.assertNotNull(cursor);
         }
+    }
+
+    protected void assertTestSuiteName(String name) {
+        Assertions.assertEquals(name, ((ITestSuite) cursor).getName());
     }
 
     protected void createStepDependencies(String part) {
@@ -583,30 +573,10 @@ public class TestIDEObject extends TestObject {
     }
 
     protected void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
-
-        Object part = properties.get("part");
-        if (part != null) {
-            if (operation.contentEquals("set")) {
-                createStepDependencies(part.toString());
-            } else if (operation.contentEquals("assert")) {
-                setCursor(part.toString());
-            }
-        }
-
         super.processInputOutputs(dataTable, operation, sectionName);
     }
 
     protected void processInputOutputs(String key, String value, String operation, String sectionName) {
-
-        Object part = properties.get("part");
-        if (part != null) {
-            if (operation.contentEquals("set")) {
-                createStepDependencies(part.toString());
-            } else if (operation.contentEquals("assert")) {
-                setCursor(part.toString());
-            }
-        }
-
         super.processInputOutputs(key, value, operation, sectionName);
     }
 
@@ -664,6 +634,16 @@ public class TestIDEObject extends TestObject {
                 cursor = current;
         }
 
+    }
+
+    protected void setTestStepDefinitionName(String name) {
+        ((ITestStep) cursor).setStepDefinitionName(name);
+    }
+
+    protected void setTestSuiteName(String name) {
+        if (cursor instanceof ITestSuite) {
+            ((ITestSuite) cursor).setName(name);
+        }
     }
 
 }

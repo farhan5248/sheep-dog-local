@@ -5,61 +5,61 @@ Feature: TestStep Type
 
   Scenario: Initial State Given
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | Given StepObject Name | Given StepDefinition Name |
-          | The First action file | is performed              |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Given StepObject Name | Given StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed              |
      When The xtext plugin edit document action is performed to modify TestStepList with
-          | Given StepObject Name  | Given StepDefinition Name |
-          | The Second action file | is performed              |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 node will be created as follows
-          | Given StepObject Name  | Given StepDefinition Name |
-          | The Second action file | is performed              |
+          | Node Path                                                           | Given StepObject Name  | Given StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed              |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
+          | Node Path                                                             | Given StepObject Name  | Given StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed              |
 
   Scenario: Initial State When
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | When StepObject Name  | When StepDefinition Name |
-          | The First action file | is performed             |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | When StepObject Name  | When StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed             |
      When The xtext plugin edit document action is performed to modify TestStepList with
-          | When StepObject Name   | When StepDefinition Name |
-          | The Second action file | is performed             |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 node will be created as follows
-          | When StepObject Name   | When StepDefinition Name |
-          | The Second action file | is performed             |
+          | Node Path                                                           | When StepObject Name   | When StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed             |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
+          | Node Path                                                             | When StepObject Name   | When StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed             |
 
   Scenario: Initial State Then
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | Then StepObject Name  | Then StepDefinition Name |
-          | The First action file | is performed             |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Then StepObject Name  | Then StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed             |
      When The xtext plugin edit document action is performed to modify TestStepList with
-          | Then StepObject Name   | Then StepDefinition Name |
-          | The Second action file | is performed             |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 node will be created as follows
-          | Then StepObject Name   | Then StepDefinition Name |
-          | The Second action file | is performed             |
+          | Node Path                                                           | Then StepObject Name   | Then StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed             |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
+          | Node Path                                                             | Then StepObject Name   | Then StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed             |
 
   Scenario: Initial State And
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | And StepObject Name   | And StepDefinition Name |
-          | The First action file | is performed            |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | And StepObject Name   | And StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed            |
      When The xtext plugin edit document action is performed to modify TestStepList with
-          | And StepObject Name    | And StepDefinition Name |
-          | The Second action file | is performed            |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 node will be created as follows
-          | And StepObject Name    | And StepDefinition Name |
-          | The Second action file | is performed            |
+          | Node Path                                                           | And StepObject Name    | And StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed            |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
+          | Node Path                                                             | And StepObject Name    | And StepDefinition Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed            |
 
   Scenario: Table
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
-          | Cell Name  |
-          | First Cell |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                                                      | Cell Name  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | First Cell |
      When The xtext plugin edit document action is performed to modify CellList with
-          | Cell Name   |
-          | Second Cell |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList/2 node will be created as follows
-          | Cell Name   |
-          | Second Cell |
+          | Node Path                                                                                      | Cell Name   |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | Second Cell |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows
+          | Node Path                                                                                        | Cell Name   |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList/2 | Second Cell |
 

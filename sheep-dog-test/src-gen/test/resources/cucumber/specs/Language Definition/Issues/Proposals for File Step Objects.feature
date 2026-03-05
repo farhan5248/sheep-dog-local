@@ -12,10 +12,10 @@ Feature: Proposals for File Step Objects
 
   Scenario: No component no existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | Test Step Full Name                       |
-          | The daily batchjob Output file is present |
-          | empty                                     |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Test Step Full Name                       |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | empty                                     |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 |
@@ -26,10 +26,10 @@ Feature: Proposals for File Step Objects
 
   Scenario: Has component no existing
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | Test Step Full Name                       |
-          | The daily batchjob Output file is present |
-          | The daily batchjob                        |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Test Step Full Name                       |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob                        |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 |
@@ -40,15 +40,15 @@ Feature: Proposals for File Step Objects
 
   Scenario: No component no existing has background
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList node is created as follows
-          | Test Setup Name |
-          | Background      |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | Test Step Full Name                       |
-          | The daily batchjob Output file is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/2/TestStepList node is created as follows
-          | Test Step Full Name |
-          | empty               |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path                                            | Test Setup Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList | Background      |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Test Step Full Name                       |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Test Step Full Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/2/TestStepList | empty               |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/2/TestStepList/1 |

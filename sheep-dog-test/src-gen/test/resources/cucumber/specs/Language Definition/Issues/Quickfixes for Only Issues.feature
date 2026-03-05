@@ -6,15 +6,15 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Cell name should start with a capital letter quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | Test Step Full Name                      |
-          | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
-          | Cell Name        |
-          | lowercase header |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows
-          | Step Object Full Name                      | Step Definition Name | Step Parameters Name |
-          | stepdefs/daily batchjob/Input file.feature | is present           | lowercase header     |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Test Step Full Name                      |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                                                      | Cell Name        |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | lowercase header |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
+          | Node Path                    | Step Object Full Name                      | Step Definition Name | Step Parameters Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is present           | lowercase header     |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
@@ -28,15 +28,15 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Body row Cell names can be any case quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | Test Step Full Name                      |
-          | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList node is created as follows
-          | Cell Name |
-          | Header    |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList node is created as follows
-          | Cell Name |
-          | value     |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Test Step Full Name                      |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                                                      | Cell Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | Header    |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                                                      | Cell Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList | value     |
       And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
           | Node Path                                                                                        |
@@ -45,9 +45,9 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Test suite name should start with a capital letter quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList node is created as follows
-          | Test Suite Full Name    | Test Suite Name   |
-          | specs/lowercase process | lowercase process |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
+          | Node Path                    | Test Suite Full Name    | Test Suite Name   |
+          | TestProject/TestDocumentList | specs/lowercase process | lowercase process |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
@@ -61,9 +61,9 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Test case name should start with a capital letter quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList node is created as follows
-          | Test Case Name      |
-          | lowercase test case |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path                                            | Test Case Name      |
+          | TestProject/TestDocumentList/1/TestStepContainerList | lowercase test case |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
@@ -77,9 +77,9 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Test step must have a valid object name quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | Test Step Full Name |
-          | The is present      |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Test Step Full Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The is present      |
       And The xtext plugin validate annotation is set as follows
           """
           Every test case must have at least one component specified.
@@ -98,9 +98,9 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Test step must have a valid step definition name quickfix
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList node is created as follows
-          | Test Step Full Name           |
-          | The daily batchjob Input file |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                                                           | Test Step Full Name           |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file |
       And The xtext plugin validate annotation is set as follows
           """
           After specifying the step object name, a step definition name is specified.

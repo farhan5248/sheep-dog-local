@@ -15,165 +15,68 @@ public class SpecPrjInputFileAsciidocFileSteps extends TestSteps {
         super(object, "spec-prj", "src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows$")
-    public void testProjectTestDocumentListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows$")
+    public void cellListNodeIsCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable, "CellListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description/LineList node is created as follows$")
-    public void testProjectTestDocumentList1DescriptionLineListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/Description/LineList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList1DescriptionLineListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node will be created as follows$")
+    public void cellListNodeWillBeCreatedAsFollows(DataTable dataTable) {
+        object.assertInputOutputs(dataTable, "CellListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description/LineList node will be empty$")
-    public void testProjectTestDocumentList1DescriptionLineListNodeWillBeEmpty() {
-        object.setPart("TestProject/TestDocumentList/1/Description/LineList");
-        object.assertInputOutputs("Empty", "TestProjectTestDocumentList1DescriptionLineListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows$")
+    public void lineListNodeIsCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable, "LineListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description/LineList/2 node will be created as follows$")
-    public void testProjectTestDocumentList1DescriptionLineList2NodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/Description/LineList/2");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList1DescriptionLineList2Node");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node will be as follows$")
+    public void lineListNodeWillBeAsFollows(DataTable dataTable) {
+        object.assertInputOutputs(dataTable, "LineListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList node is created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node will be created as follows$")
+    public void lineListNodeWillBeCreatedAsFollows(DataTable dataTable) {
+        object.assertInputOutputs(dataTable, "LineListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList node will be empty$")
-    public void testProjectTestDocumentList1StepDefinitionListNodeWillBeEmpty() {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList");
-        object.assertInputOutputs("Empty", "TestProjectTestDocumentList1StepDefinitionListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node is created as follows$")
+    public void stepDefinitionListNodeIsCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable, "StepDefinitionListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/Description/LineList node is created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionList1DescriptionLineListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/Description/LineList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionList1DescriptionLineListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be as follows$")
+    public void stepDefinitionListNodeWillBeAsFollows(DataTable dataTable) {
+        object.assertInputOutputs(dataTable, "StepDefinitionListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/Description/LineList node will be empty$")
-    public void testProjectTestDocumentList1StepDefinitionList1DescriptionLineListNodeWillBeEmpty() {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/Description/LineList");
-        object.assertInputOutputs("Empty", "TestProjectTestDocumentList1StepDefinitionList1DescriptionLineListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be created as follows$")
+    public void stepDefinitionListNodeWillBeCreatedAsFollows(DataTable dataTable) {
+        object.assertInputOutputs(dataTable, "StepDefinitionListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/Description/LineList/2 node will be created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionList1DescriptionLineList2NodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/Description/LineList/2");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionList1DescriptionLineList2Node");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node is created as follows$")
+    public void stepParametersListNodeIsCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable, "StepParametersListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList node is created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionList1StepParametersListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionList1StepParametersListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node will be as follows$")
+    public void stepParametersListNodeWillBeAsFollows(DataTable dataTable) {
+        object.assertInputOutputs(dataTable, "StepParametersListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList node will be empty$")
-    public void testProjectTestDocumentList1StepDefinitionList1StepParametersListNodeWillBeEmpty() {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList");
-        object.assertInputOutputs("Empty", "TestProjectTestDocumentList1StepDefinitionList1StepParametersListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node will be created as follows$")
+    public void stepParametersListNodeWillBeCreatedAsFollows(DataTable dataTable) {
+        object.assertInputOutputs(dataTable, "StepParametersListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList node is created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionList1StepParametersList1NestedDescriptionLineListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionList1StepParametersList1NestedDescriptionLineListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows$")
+    public void testDocumentListNodeIsCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable, "TestDocumentListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList node will be empty$")
-    public void testProjectTestDocumentList1StepDefinitionList1StepParametersList1NestedDescriptionLineListNodeWillBeEmpty() {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList");
-        object.assertInputOutputs("Empty", "TestProjectTestDocumentList1StepDefinitionList1StepParametersList1NestedDescriptionLineListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList/2 node will be created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionList1StepParametersList1NestedDescriptionLineList2NodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList/2");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionList1StepParametersList1NestedDescriptionLineList2Node");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList node is created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList/2 node will be created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellList2NodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList/2");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellList2Node");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/2 node will be created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionList1StepParametersList2NodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/2");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionList1StepParametersList2Node");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList/2 node will be created as follows$")
-    public void testProjectTestDocumentList1StepDefinitionList2NodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/1/StepDefinitionList/2");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList1StepDefinitionList2Node");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2 node will be created as follows$")
-    public void testProjectTestDocumentList2NodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/2");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList2Node");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/Description/LineList node is created as follows$")
-    public void testProjectTestDocumentList2DescriptionLineListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/2/Description/LineList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList2DescriptionLineListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList node will be created as follows$")
-    public void testProjectTestDocumentList2StepDefinitionListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/2/StepDefinitionList");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList2StepDefinitionListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList/1/Description/LineList node is created as follows$")
-    public void testProjectTestDocumentList2StepDefinitionList1DescriptionLineListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/2/StepDefinitionList/1/Description/LineList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList2StepDefinitionList1DescriptionLineListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList node will be created as follows$")
-    public void testProjectTestDocumentList2StepDefinitionList1StepParametersListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList2StepDefinitionList1StepParametersListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList node is created as follows$")
-    public void testProjectTestDocumentList2StepDefinitionList1StepParametersList1NestedDescriptionLineListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList2StepDefinitionList1StepParametersList1NestedDescriptionLineListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList node is created as follows$")
-    public void testProjectTestDocumentList2StepDefinitionList1StepParametersList1TableRowList1CellListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList");
-        object.setInputOutputs(dataTable, "TestProjectTestDocumentList2StepDefinitionList1StepParametersList1TableRowList1CellListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList node will be created as follows$")
-    public void testProjectTestDocumentList2StepDefinitionList1StepParametersList1TableRowList1CellListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList2StepDefinitionList1StepParametersList1TableRowList1CellListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/2/Table/RowList/1/CellList node will be created as follows$")
-    public void testProjectTestDocumentList2StepDefinitionList1StepParametersList2TableRowList1CellListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setPart("TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/2/Table/RowList/1/CellList");
-        object.assertInputOutputs(dataTable, "TestProjectTestDocumentList2StepDefinitionList1StepParametersList2TableRowList1CellListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node will be created as follows$")
+    public void testDocumentListNodeWillBeCreatedAsFollows(DataTable dataTable) {
+        object.assertInputOutputs(dataTable, "TestDocumentListNode");
     }
 }

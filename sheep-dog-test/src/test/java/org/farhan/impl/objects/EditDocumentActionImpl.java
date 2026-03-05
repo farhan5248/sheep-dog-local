@@ -163,4 +163,9 @@ public class EditDocumentActionImpl extends TestIDEObject implements EditDocumen
         properties.put("When StepDefinition Name", keyMap.get("When StepDefinition Name"));
     }
 
+    @Override
+    public void setNodePath(HashMap<String, String> keyMap) {
+        setCursor(keyMap.get("Node Path"));
+    }
+
 }
