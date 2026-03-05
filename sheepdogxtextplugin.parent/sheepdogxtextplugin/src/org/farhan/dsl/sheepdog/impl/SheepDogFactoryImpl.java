@@ -31,10 +31,8 @@ import org.farhan.dsl.sheepdog.sheepDog.Text;
 
 public class SheepDogFactoryImpl implements ISheepDogFactory {
 
-    // TODO this assumes that there's just one open project in the eclipse
-    // workspace.
-    private static TestProjectImpl testProject;
-    private static IResourceRepository sr;
+    private TestProjectImpl testProject;
+    private IResourceRepository sr;
 
     public SheepDogFactoryImpl(IResourceRepository sourceFileRepository) {
         sr = sourceFileRepository;
