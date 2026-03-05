@@ -1,0 +1,43 @@
+@sheep-dog-test
+Feature: TestSuite Type
+
+  \@sheep-dog-test
+
+  Scenario: Initial State
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList node is created as follows
+          | Test Suite Full Name   |
+          | specs/First Test Suite |
+     When The xtext plugin edit document action is performed to modify TestDocumentList with
+          | Test Suite Full Name    |
+          | specs/Second Test Suite |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/2 node will be created as follows
+          | Test Suite Full Name    | Test Suite Name   |
+          | specs/Second Test Suite | Second Test Suite |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList node will be empty
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/Description/LineList node will be empty
+
+  Scenario: Test Case
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList node is created as follows
+          | Test Case Name  |
+          | First Test Case |
+     When The xtext plugin edit document action is performed to modify TestStepContainerList with
+          | Test Case Name   |
+          | Second Test Case |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/TestStepContainerList/2 node will be created as follows
+          | Test Case Name   |
+          | Second Test Case |
+
+  Scenario: Description
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/Description/LineList node is created as follows
+          | Line Content |
+          | First Line   |
+     When The xtext plugin edit document action is performed to modify LineList with
+          | Line Content |
+          | Second Line  |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestProject/TestDocumentList/1/Description/LineList/2 node will be created as follows
+          | Line Content |
+          | Second Line  |
+

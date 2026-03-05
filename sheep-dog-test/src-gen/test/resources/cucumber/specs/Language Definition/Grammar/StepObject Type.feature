@@ -12,17 +12,14 @@ Feature: StepObject Type
           | Step Object Full Name       |
           | stepdefs/Second Step Object |
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/2 node will be created as follows
-          | Step Object Full Name       |
-          | stepdefs/Second Step Object |
+          | Step Object Full Name       | Step Object Name   |
+          | stepdefs/Second Step Object | Second Step Object |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList node will be empty
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description/LineList node will be empty
 
   Scenario: Step Definition
 
-    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows
-          | Step Object Full Name  |
-          | stepdefs/A Step Object |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/StepDefinitionList node is created as follows
           | Step Definition Name  |
           | First Step Definition |
      When The xtext plugin edit document action is performed to modify StepDefinitionList with
@@ -34,10 +31,7 @@ Feature: StepObject Type
 
   Scenario: Description
 
-    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList node is created as follows
-          | Step Object Full Name  |
-          | stepdefs/A Step Object |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description/LineList node is created as follows
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestProject/TestDocumentList/1/Description/LineList node is created as follows
           | Line Content |
           | First Line   |
      When The xtext plugin edit document action is performed to modify LineList with

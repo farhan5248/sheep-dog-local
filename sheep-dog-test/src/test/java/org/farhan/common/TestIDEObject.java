@@ -213,6 +213,22 @@ public class TestIDEObject extends TestObject {
         Assertions.assertTrue(((IDescription) cursor).getLineList().isEmpty());
     }
 
+    protected void assertNestedDescriptionEmpty(String state) {
+        Assertions.assertTrue(((INestedDescription) cursor).getLineList().isEmpty());
+    }
+
+    protected void assertStepParametersListEmpty(String state) {
+        Assertions.assertTrue(((IStepDefinition) cursor).getStepParameterList().isEmpty());
+    }
+
+    protected void assertStepObjectName(String name) {
+        Assertions.assertEquals(name, ((IStepObject) cursor).getName());
+    }
+
+    protected void assertTestStepContainerListEmpty(String state) {
+        Assertions.assertTrue(((ITestSuite) cursor).getTestStepContainerList().isEmpty());
+    }
+
     protected void assertLineContent(String content) {
         if (cursor instanceof ILine) {
             if (getNode(properties.get("part").toString()) instanceof ILine) {

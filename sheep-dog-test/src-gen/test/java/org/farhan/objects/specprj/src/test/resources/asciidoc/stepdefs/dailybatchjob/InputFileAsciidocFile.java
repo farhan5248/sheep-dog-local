@@ -20,6 +20,28 @@ public interface InputFileAsciidocFile {
 
     public void assertTestProjectTestDocumentList1StepDefinitionListNodeEmpty(HashMap<String, String> keyMap);
 
+    public void setTestProjectTestDocumentList1StepDefinitionList1DescriptionLineListNodeLineContent(HashMap<String, String> keyMap);
+
+    public void assertTestProjectTestDocumentList1StepDefinitionList1DescriptionLineListNodeEmpty(HashMap<String, String> keyMap);
+
+    public void assertTestProjectTestDocumentList1StepDefinitionList1DescriptionLineList2NodeLineContent(HashMap<String, String> keyMap);
+
+    public void setTestProjectTestDocumentList1StepDefinitionList1StepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
+
+    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersListNodeEmpty(HashMap<String, String> keyMap);
+
+    public void setTestProjectTestDocumentList1StepDefinitionList1StepParametersList1NestedDescriptionLineListNodeLineContent(HashMap<String, String> keyMap);
+
+    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersList1NestedDescriptionLineListNodeEmpty(HashMap<String, String> keyMap);
+
+    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersList1NestedDescriptionLineList2NodeLineContent(HashMap<String, String> keyMap);
+
+    public void setTestProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellListNodeCellName(HashMap<String, String> keyMap);
+
+    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersList1TableRowList1CellList2NodeCellName(HashMap<String, String> keyMap);
+
+    public void assertTestProjectTestDocumentList1StepDefinitionList1StepParametersList2NodeStepParametersName(HashMap<String, String> keyMap);
+
     public void assertTestProjectTestDocumentList1StepDefinitionList2NodeStepDefinitionName(HashMap<String, String> keyMap);
 
     public void assertTestProjectTestDocumentList2NodeStepObjectFullName(HashMap<String, String> keyMap);
@@ -27,6 +49,8 @@ public interface InputFileAsciidocFile {
     public void assertTestProjectTestDocumentList2NodeStepDefinitionName(HashMap<String, String> keyMap);
 
     public void assertTestProjectTestDocumentList2NodeStepParametersName(HashMap<String, String> keyMap);
+
+    public void assertTestProjectTestDocumentList2NodeStepObjectName(HashMap<String, String> keyMap);
 
     public void setTestProjectTestDocumentList2DescriptionLineListNodeLineContent(HashMap<String, String> keyMap);
 

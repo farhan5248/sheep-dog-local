@@ -66,6 +66,11 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
     }
 
     @Override
+    public void setTestProjectTestDocumentList1DescriptionLineListNodeLineContent(HashMap<String, String> keyMap) {
+        addLineWithContent(replaceKeyword(keyMap.get("Line Content")));
+    }
+
+    @Override
     public void setTestProjectTestDocumentListNodeTestSuiteFullName(HashMap<String, String> keyMap) {
         addTestSuiteWithFullName(replaceKeyword(keyMap.get("Test Suite Full Name")));
     }
@@ -73,6 +78,36 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
     @Override
     public void setTestProjectTestDocumentListNodeTestSuiteName(HashMap<String, String> keyMap) {
         setTestSuiteName(replaceKeyword(keyMap.get("Test Suite Name")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList1DescriptionLineListNodeEmpty(HashMap<String, String> keyMap) {
+        assertDescriptionEmpty(replaceKeyword(keyMap.get("Empty")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList1DescriptionLineList2NodeLineContent(HashMap<String, String> keyMap) {
+        assertLineContent(replaceKeyword(keyMap.get("Line Content")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList1TestStepContainerListNodeEmpty(HashMap<String, String> keyMap) {
+        assertTestStepContainerListEmpty(replaceKeyword(keyMap.get("Empty")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList1TestStepContainerList2NodeTestCaseName(HashMap<String, String> keyMap) {
+        assertTestStepContainerName(replaceKeyword(keyMap.get("Test Case Name")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList2NodeTestSuiteFullName(HashMap<String, String> keyMap) {
+        assertTestSuiteFullName(replaceKeyword(keyMap.get("Test Suite Full Name")));
+    }
+
+    @Override
+    public void assertTestProjectTestDocumentList2NodeTestSuiteName(HashMap<String, String> keyMap) {
+        assertTestSuiteName(replaceKeyword(keyMap.get("Test Suite Name")));
     }
 
 }

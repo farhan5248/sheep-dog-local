@@ -52,8 +52,8 @@ public class StepDefinitionImpl implements IStepDefinition {
     @Override
     public IStepParameters getStepParameters(String name) {
         for (IStepParameters sp : stepParametersList) {
-            String rowAsString = SheepDogUtility
-                    .getCellListAsString(sp.getTable().getRowList().getFirst().getCellList());
+            String rowAsString = sp.getTable().getRowList().isEmpty() ? ""
+                    : SheepDogUtility.getCellListAsString(sp.getTable().getRowList().getFirst().getCellList());
             if (name.contentEquals(rowAsString)) {
                 return sp;
             }

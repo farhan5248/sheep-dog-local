@@ -15,6 +15,12 @@ public class XtextEditDocumentActionSteps extends TestSteps {
         super(object, "xtext", "edit document");
     }
 
+    @Given("^The xtext plugin edit document action is performed to modify CellList with$")
+    public void isPerformedToModifyCellListWith(DataTable dataTable) {
+        object.setInputOutputs(dataTable);
+        object.transition();
+    }
+
     @Given("^The xtext plugin edit document action is performed to modify LineList with$")
     public void isPerformedToModifyLineListWith(DataTable dataTable) {
         object.setInputOutputs(dataTable);
@@ -27,8 +33,20 @@ public class XtextEditDocumentActionSteps extends TestSteps {
         object.transition();
     }
 
+    @Given("^The xtext plugin edit document action is performed to modify StepParametersList with$")
+    public void isPerformedToModifyStepParametersListWith(DataTable dataTable) {
+        object.setInputOutputs(dataTable);
+        object.transition();
+    }
+
     @Given("^The xtext plugin edit document action is performed to modify TestDocumentList with$")
     public void isPerformedToModifyTestDocumentListWith(DataTable dataTable) {
+        object.setInputOutputs(dataTable);
+        object.transition();
+    }
+
+    @Given("^The xtext plugin edit document action is performed to modify TestStepContainerList with$")
+    public void isPerformedToModifyTestStepContainerListWith(DataTable dataTable) {
         object.setInputOutputs(dataTable);
         object.transition();
     }
