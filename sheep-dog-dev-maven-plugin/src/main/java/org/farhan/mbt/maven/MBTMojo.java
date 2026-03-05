@@ -11,7 +11,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.farhan.mbt.core.Converter;
-import org.farhan.dsl.lang.IResourceRepository;
+import org.farhan.dsl.grammar.IResourceRepository;
 
 public abstract class MBTMojo extends AbstractMojo {
 
