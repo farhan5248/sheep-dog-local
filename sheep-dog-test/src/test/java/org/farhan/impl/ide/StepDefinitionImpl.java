@@ -20,8 +20,6 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     StepDefinitionImpl() {
         this.stepParametersList = new ArrayList<StepParametersImpl>();
-        this.description = new DescriptionImpl();
-        this.description.parent = this;
     }
 
     @Override
@@ -52,8 +50,10 @@ public class StepDefinitionImpl implements IStepDefinition {
     @Override
     public IStepParameters getStepParameters(String name) {
         for (IStepParameters sp : stepParametersList) {
-            String rowAsString = sp.getTable().getRowList().isEmpty() ? ""
-                    : SheepDogUtility.getCellListAsString(sp.getTable().getRowList().getFirst().getCellList());
+            String rowAsString = "";
+            if (sp.getTable() != null && !sp.getTable().getRowList().isEmpty()) {
+                rowAsString = SheepDogUtility.getCellListAsString(sp.getTable().getRowList().getFirst().getCellList());
+            }
             if (name.contentEquals(rowAsString)) {
                 return sp;
             }

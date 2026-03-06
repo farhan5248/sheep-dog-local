@@ -12,15 +12,21 @@ public interface InputFileAsciidocFile {
 
     public void assertCellListNodeCellName(HashMap<String, String> keyMap);
 
+    public void assertDescriptionNodeNodePath(HashMap<String, String> keyMap);
+
+    public void assertDescriptionNodeState(HashMap<String, String> keyMap);
+
     public void setLineListNodeNodePath(HashMap<String, String> keyMap);
 
     public void setLineListNodeLineContent(HashMap<String, String> keyMap);
 
     public void assertLineListNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertLineListNodeState(HashMap<String, String> keyMap);
-
     public void assertLineListNodeLineContent(HashMap<String, String> keyMap);
+
+    public void assertNestedDescriptionNodeNodePath(HashMap<String, String> keyMap);
+
+    public void assertNestedDescriptionNodeState(HashMap<String, String> keyMap);
 
     public void setStepDefinitionListNodeNodePath(HashMap<String, String> keyMap);
 
@@ -41,6 +47,10 @@ public interface InputFileAsciidocFile {
     public void assertStepParametersListNodeState(HashMap<String, String> keyMap);
 
     public void assertStepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
+
+    public void assertTableNodeNodePath(HashMap<String, String> keyMap);
+
+    public void assertTableNodeState(HashMap<String, String> keyMap);
 
     public void setTestDocumentListNodeNodePath(HashMap<String, String> keyMap);
 

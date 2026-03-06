@@ -20,6 +20,30 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
+    public void assertDescriptionNodeNodePath(HashMap<String, String> keyMap) {
+        setCursor(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void assertDescriptionNodeState(HashMap<String, String> keyMap) {
+        if (keyMap.get("State").contentEquals("Absent")) {
+            assertDescriptionEmpty("true");
+        }
+    }
+
+    @Override
+    public void assertNestedDescriptionNodeNodePath(HashMap<String, String> keyMap) {
+        setCursor(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void assertNestedDescriptionNodeState(HashMap<String, String> keyMap) {
+        if (keyMap.get("State").contentEquals("Absent")) {
+            assertNestedDescriptionEmpty("true");
+        }
+    }
+
+    @Override
     public void assertLineListNodeLineContent(HashMap<String, String> keyMap) {
         assertLineContent(replaceKeyword(keyMap.get("Line Content")), keyMap.get("Node Path"));
     }
@@ -30,24 +54,13 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void assertLineListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Empty")) {
-            if (keyMap.get("Node Path").contains("NestedDescription")) {
-                assertNestedDescriptionEmpty("true");
-            } else {
-                assertDescriptionEmpty("true");
-            }
-        }
-    }
-
-    @Override
     public void assertStepDefinitionListNodeNodePath(HashMap<String, String> keyMap) {
         setCursor(keyMap.get("Node Path"));
     }
 
     @Override
     public void assertStepDefinitionListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Empty")) {
+        if (keyMap.get("State").contentEquals("Absent")) {
             assertStepDefinitionListEmpty("true");
         }
     }
@@ -64,7 +77,7 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
 
     @Override
     public void assertStepParametersListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Empty")) {
+        if (keyMap.get("State").contentEquals("Absent")) {
             assertStepParametersListEmpty("true");
         }
 
@@ -73,6 +86,20 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     @Override
     public void assertStepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
         assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")), keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void assertTableNodeNodePath(HashMap<String, String> keyMap) {
+        setCursor(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void assertTableNodeState(HashMap<String, String> keyMap) {
+        if (keyMap.get("State").contentEquals("Absent")) {
+            assertTableAbsent();
+        } else if (keyMap.get("State").contentEquals("Present")) {
+            assertTablePresent();
+        }
     }
 
     @Override

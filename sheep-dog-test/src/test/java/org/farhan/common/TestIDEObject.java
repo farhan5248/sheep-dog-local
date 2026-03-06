@@ -214,6 +214,14 @@ public class TestIDEObject extends TestObject {
         cursor = SheepDogBuilder.createTestSuite(testProject, testSuiteFullName);
     }
 
+    protected void addTable() {
+        if (cursor instanceof ITestStep) {
+            cursor = SheepDogBuilder.createTable((ITestStep) cursor);
+        } else if (cursor instanceof IStepParameters) {
+            cursor = SheepDogBuilder.createTable((IStepParameters) cursor);
+        }
+    }
+
     protected void addTextWithContent(String content) {
         cursor = SheepDogBuilder.createText((ITestStep) cursor, content);
     }
@@ -248,7 +256,16 @@ public class TestIDEObject extends TestObject {
     }
 
     protected void assertDescriptionEmpty(String replaceKeyword) {
-        Assertions.assertTrue(((IDescription) cursor).getLineList().isEmpty());
+        IDescription desc = null;
+        if (cursor instanceof ITestSuite)
+            desc = ((ITestSuite) cursor).getDescription();
+        else if (cursor instanceof ITestStepContainer)
+            desc = ((ITestStepContainer) cursor).getDescription();
+        else if (cursor instanceof IStepObject)
+            desc = ((IStepObject) cursor).getDescription();
+        else if (cursor instanceof IStepDefinition)
+            desc = ((IStepDefinition) cursor).getDescription();
+        Assertions.assertNull(desc);
     }
 
     protected void assertLineContent(String content, String nodePath) {
@@ -275,7 +292,12 @@ public class TestIDEObject extends TestObject {
     }
 
     protected void assertNestedDescriptionEmpty(String state) {
-        Assertions.assertTrue(((INestedDescription) cursor).getLineList().isEmpty());
+        INestedDescription nd = null;
+        if (cursor instanceof IStepParameters)
+            nd = ((IStepParameters) cursor).getNestedDescription();
+        else if (cursor instanceof ITestData)
+            nd = ((ITestData) cursor).getNestedDescription();
+        Assertions.assertNull(nd);
     }
 
     protected void assertRowContent(String content) {
@@ -338,6 +360,19 @@ public class TestIDEObject extends TestObject {
             cursor = ((IStepDefinition) cursor).getStepParameters(name);
             Assertions.assertNotNull(cursor);
         }
+    }
+
+    protected void assertTableAbsent() {
+        ITable t = null;
+        if (cursor instanceof IStepParameters)
+            t = ((IStepParameters) cursor).getTable();
+        else if (cursor instanceof ITestData)
+            t = ((ITestData) cursor).getTable();
+        Assertions.assertNull(t);
+    }
+
+    protected void assertTablePresent() {
+        Assertions.assertNotNull(cursor);
     }
 
     protected void assertTestDataListEmpty(String state) {
@@ -407,6 +442,14 @@ public class TestIDEObject extends TestObject {
 
     protected void assertTestSuiteName(String name) {
         Assertions.assertEquals(name, ((ITestSuite) cursor).getName());
+    }
+
+    protected void assertTextAbsent() {
+        Assertions.assertNull(((ITestStep) cursor).getText());
+    }
+
+    protected void assertTextPresent() {
+        Assertions.assertNotNull(((ITestStep) cursor).getText());
     }
 
     protected void createStepDependencies(String part) {

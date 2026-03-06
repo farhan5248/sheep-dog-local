@@ -12,15 +12,21 @@ public interface ProcessIssuesAsciidocFile {
 
     public void assertCellListNodeCellName(HashMap<String, String> keyMap);
 
+    public void assertDescriptionNodeNodePath(HashMap<String, String> keyMap);
+
+    public void assertDescriptionNodeState(HashMap<String, String> keyMap);
+
     public void setLineListNodeNodePath(HashMap<String, String> keyMap);
 
     public void setLineListNodeLineContent(HashMap<String, String> keyMap);
 
     public void assertLineListNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertLineListNodeState(HashMap<String, String> keyMap);
-
     public void assertLineListNodeLineContent(HashMap<String, String> keyMap);
+
+    public void assertNestedDescriptionNodeNodePath(HashMap<String, String> keyMap);
+
+    public void assertNestedDescriptionNodeState(HashMap<String, String> keyMap);
 
     public void setRowListNodeNodePath(HashMap<String, String> keyMap);
 
@@ -29,6 +35,12 @@ public interface ProcessIssuesAsciidocFile {
     public void assertRowListNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertRowListNodeRowContent(HashMap<String, String> keyMap);
+
+    public void setTableNodeNodePath(HashMap<String, String> keyMap);
+
+    public void assertTableNodeNodePath(HashMap<String, String> keyMap);
+
+    public void assertTableNodeState(HashMap<String, String> keyMap);
 
     public void setTestDataListNodeNodePath(HashMap<String, String> keyMap);
 
@@ -109,4 +121,8 @@ public interface ProcessIssuesAsciidocFile {
     public void setTextNodeNodePath(HashMap<String, String> keyMap);
 
     public void setTextNodeTextContent(HashMap<String, String> keyMap);
+
+    public void assertTextNodeNodePath(HashMap<String, String> keyMap);
+
+    public void assertTextNodeState(HashMap<String, String> keyMap);
 }

@@ -22,8 +22,6 @@ public class TestSuiteImpl implements ITestSuite {
 
 	TestSuiteImpl() {
 		this.testStepContainerList = new ArrayList<TestStepContainerImpl>();
-		this.description = new DescriptionImpl();
-		this.description.parent = this;
 	}
 
 	@Override

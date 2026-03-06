@@ -463,19 +463,20 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Assignment cStepDefinitionNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cStepDefinitionNameStepDefinitionRefParserRuleCall_3_0 = (RuleCall)cStepDefinitionNameAssignment_3.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
-		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
-		private final Assignment cTableAssignment_5_0 = (Assignment)cAlternatives_5.eContents().get(0);
-		private final RuleCall cTableTableParserRuleCall_5_0_0 = (RuleCall)cTableAssignment_5_0.eContents().get(0);
-		private final Assignment cTextAssignment_5_1 = (Assignment)cAlternatives_5.eContents().get(1);
-		private final RuleCall cTextTextParserRuleCall_5_1_0 = (RuleCall)cTextAssignment_5_1.eContents().get(0);
+		private final Assignment cTableAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cTableTableParserRuleCall_5_0 = (RuleCall)cTableAssignment_5.eContents().get(0);
+		private final Assignment cTextAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cTextTextParserRuleCall_6_0 = (RuleCall)cTextAssignment_6.eContents().get(0);
 		
 		//Given:
 		//    '*' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-		//    (table=Table | text=Text)?;
+		//    table=Table?
+		//    text=Text?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'*' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-		//(table=Table | text=Text)?
+		//table=Table?
+		//text=Text?
 		public Group getGroup() { return cGroup; }
 		
 		//'*'
@@ -499,20 +500,17 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_4() { return cEOLTerminalRuleCall_4; }
 		
-		//(table=Table | text=Text)?
-		public Alternatives getAlternatives_5() { return cAlternatives_5; }
-		
-		//table=Table
-		public Assignment getTableAssignment_5_0() { return cTableAssignment_5_0; }
+		//table=Table?
+		public Assignment getTableAssignment_5() { return cTableAssignment_5; }
 		
 		//Table
-		public RuleCall getTableTableParserRuleCall_5_0_0() { return cTableTableParserRuleCall_5_0_0; }
+		public RuleCall getTableTableParserRuleCall_5_0() { return cTableTableParserRuleCall_5_0; }
 		
-		//text=Text
-		public Assignment getTextAssignment_5_1() { return cTextAssignment_5_1; }
+		//text=Text?
+		public Assignment getTextAssignment_6() { return cTextAssignment_6; }
 		
 		//Text
-		public RuleCall getTextTextParserRuleCall_5_1_0() { return cTextTextParserRuleCall_5_1_0; }
+		public RuleCall getTextTextParserRuleCall_6_0() { return cTextTextParserRuleCall_6_0; }
 	}
 	public class WhenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.When");
@@ -524,19 +522,20 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Assignment cStepDefinitionNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cStepDefinitionNameStepDefinitionRefParserRuleCall_3_0 = (RuleCall)cStepDefinitionNameAssignment_3.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
-		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
-		private final Assignment cTableAssignment_5_0 = (Assignment)cAlternatives_5.eContents().get(0);
-		private final RuleCall cTableTableParserRuleCall_5_0_0 = (RuleCall)cTableAssignment_5_0.eContents().get(0);
-		private final Assignment cTextAssignment_5_1 = (Assignment)cAlternatives_5.eContents().get(1);
-		private final RuleCall cTextTextParserRuleCall_5_1_0 = (RuleCall)cTextAssignment_5_1.eContents().get(0);
+		private final Assignment cTableAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cTableTableParserRuleCall_5_0 = (RuleCall)cTableAssignment_5.eContents().get(0);
+		private final Assignment cTextAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cTextTextParserRuleCall_6_0 = (RuleCall)cTextAssignment_6.eContents().get(0);
 		
 		//When:
 		//    '*' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-		//    (table=Table | text=Text)?;
+		//    table=Table?
+		//    text=Text?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'*' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-		//(table=Table | text=Text)?
+		//table=Table?
+		//text=Text?
 		public Group getGroup() { return cGroup; }
 		
 		//'*'
@@ -560,20 +559,17 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_4() { return cEOLTerminalRuleCall_4; }
 		
-		//(table=Table | text=Text)?
-		public Alternatives getAlternatives_5() { return cAlternatives_5; }
-		
-		//table=Table
-		public Assignment getTableAssignment_5_0() { return cTableAssignment_5_0; }
+		//table=Table?
+		public Assignment getTableAssignment_5() { return cTableAssignment_5; }
 		
 		//Table
-		public RuleCall getTableTableParserRuleCall_5_0_0() { return cTableTableParserRuleCall_5_0_0; }
+		public RuleCall getTableTableParserRuleCall_5_0() { return cTableTableParserRuleCall_5_0; }
 		
-		//text=Text
-		public Assignment getTextAssignment_5_1() { return cTextAssignment_5_1; }
+		//text=Text?
+		public Assignment getTextAssignment_6() { return cTextAssignment_6; }
 		
 		//Text
-		public RuleCall getTextTextParserRuleCall_5_1_0() { return cTextTextParserRuleCall_5_1_0; }
+		public RuleCall getTextTextParserRuleCall_6_0() { return cTextTextParserRuleCall_6_0; }
 	}
 	public class ThenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.Then");
@@ -585,19 +581,20 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Assignment cStepDefinitionNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cStepDefinitionNameStepDefinitionRefParserRuleCall_3_0 = (RuleCall)cStepDefinitionNameAssignment_3.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
-		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
-		private final Assignment cTableAssignment_5_0 = (Assignment)cAlternatives_5.eContents().get(0);
-		private final RuleCall cTableTableParserRuleCall_5_0_0 = (RuleCall)cTableAssignment_5_0.eContents().get(0);
-		private final Assignment cTextAssignment_5_1 = (Assignment)cAlternatives_5.eContents().get(1);
-		private final RuleCall cTextTextParserRuleCall_5_1_0 = (RuleCall)cTextAssignment_5_1.eContents().get(0);
+		private final Assignment cTableAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cTableTableParserRuleCall_5_0 = (RuleCall)cTableAssignment_5.eContents().get(0);
+		private final Assignment cTextAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cTextTextParserRuleCall_6_0 = (RuleCall)cTextAssignment_6.eContents().get(0);
 		
 		//Then:
 		//    '*' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-		//    (table=Table | text=Text)?;
+		//    table=Table?
+		//    text=Text?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'*' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-		//(table=Table | text=Text)?
+		//table=Table?
+		//text=Text?
 		public Group getGroup() { return cGroup; }
 		
 		//'*'
@@ -621,20 +618,17 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_4() { return cEOLTerminalRuleCall_4; }
 		
-		//(table=Table | text=Text)?
-		public Alternatives getAlternatives_5() { return cAlternatives_5; }
-		
-		//table=Table
-		public Assignment getTableAssignment_5_0() { return cTableAssignment_5_0; }
+		//table=Table?
+		public Assignment getTableAssignment_5() { return cTableAssignment_5; }
 		
 		//Table
-		public RuleCall getTableTableParserRuleCall_5_0_0() { return cTableTableParserRuleCall_5_0_0; }
+		public RuleCall getTableTableParserRuleCall_5_0() { return cTableTableParserRuleCall_5_0; }
 		
-		//text=Text
-		public Assignment getTextAssignment_5_1() { return cTextAssignment_5_1; }
+		//text=Text?
+		public Assignment getTextAssignment_6() { return cTextAssignment_6; }
 		
 		//Text
-		public RuleCall getTextTextParserRuleCall_5_1_0() { return cTextTextParserRuleCall_5_1_0; }
+		public RuleCall getTextTextParserRuleCall_6_0() { return cTextTextParserRuleCall_6_0; }
 	}
 	public class AndElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.And");
@@ -646,19 +640,20 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Assignment cStepDefinitionNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cStepDefinitionNameStepDefinitionRefParserRuleCall_3_0 = (RuleCall)cStepDefinitionNameAssignment_3.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
-		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
-		private final Assignment cTableAssignment_5_0 = (Assignment)cAlternatives_5.eContents().get(0);
-		private final RuleCall cTableTableParserRuleCall_5_0_0 = (RuleCall)cTableAssignment_5_0.eContents().get(0);
-		private final Assignment cTextAssignment_5_1 = (Assignment)cAlternatives_5.eContents().get(1);
-		private final RuleCall cTextTextParserRuleCall_5_1_0 = (RuleCall)cTextAssignment_5_1.eContents().get(0);
+		private final Assignment cTableAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cTableTableParserRuleCall_5_0 = (RuleCall)cTableAssignment_5.eContents().get(0);
+		private final Assignment cTextAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cTextTextParserRuleCall_6_0 = (RuleCall)cTextAssignment_6.eContents().get(0);
 		
 		//And:
 		//    '*' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-		//    (table=Table | text=Text)?;
+		//    table=Table?
+		//    text=Text?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'*' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-		//(table=Table | text=Text)?
+		//table=Table?
+		//text=Text?
 		public Group getGroup() { return cGroup; }
 		
 		//'*'
@@ -682,20 +677,17 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_4() { return cEOLTerminalRuleCall_4; }
 		
-		//(table=Table | text=Text)?
-		public Alternatives getAlternatives_5() { return cAlternatives_5; }
-		
-		//table=Table
-		public Assignment getTableAssignment_5_0() { return cTableAssignment_5_0; }
+		//table=Table?
+		public Assignment getTableAssignment_5() { return cTableAssignment_5; }
 		
 		//Table
-		public RuleCall getTableTableParserRuleCall_5_0_0() { return cTableTableParserRuleCall_5_0_0; }
+		public RuleCall getTableTableParserRuleCall_5_0() { return cTableTableParserRuleCall_5_0; }
 		
-		//text=Text
-		public Assignment getTextAssignment_5_1() { return cTextAssignment_5_1; }
+		//text=Text?
+		public Assignment getTextAssignment_6() { return cTextAssignment_6; }
 		
 		//Text
-		public RuleCall getTextTextParserRuleCall_5_1_0() { return cTextTextParserRuleCall_5_1_0; }
+		public RuleCall getTextTextParserRuleCall_6_0() { return cTextTextParserRuleCall_6_0; }
 	}
 	public class TextElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.Text");
@@ -1195,7 +1187,8 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	//Given:
 	//    '*' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-	//    (table=Table | text=Text)?;
+	//    table=Table?
+	//    text=Text?;
 	public GivenElements getGivenAccess() {
 		return pGiven;
 	}
@@ -1206,7 +1199,8 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	//When:
 	//    '*' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-	//    (table=Table | text=Text)?;
+	//    table=Table?
+	//    text=Text?;
 	public WhenElements getWhenAccess() {
 		return pWhen;
 	}
@@ -1217,7 +1211,8 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	//Then:
 	//    '*' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-	//    (table=Table | text=Text)?;
+	//    table=Table?
+	//    text=Text?;
 	public ThenElements getThenAccess() {
 		return pThen;
 	}
@@ -1228,7 +1223,8 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	//And:
 	//    '*' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-	//    (table=Table | text=Text)?;
+	//    table=Table?
+	//    text=Text?;
 	public AndElements getAndAccess() {
 		return pAnd;
 	}

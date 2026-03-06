@@ -51,19 +51,23 @@ TestStep:
 
 Given:
 	'*' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-	(table=Table | text=Text)?;
+	table=Table?
+	text=Text?;
 
 When:
 	'*' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-	(table=Table | text=Text)?;
+	table=Table?
+	text=Text?;
 
 Then:
 	'*' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-	(table=Table | text=Text)?;
+	table=Table?
+	text=Text?;
 
 And:
 	'*' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
-	(table=Table | text=Text)?;
+	table=Table?
+	text=Text?;
 
 Text:
 	'+' EOL

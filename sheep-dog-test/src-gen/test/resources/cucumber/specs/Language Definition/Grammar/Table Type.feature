@@ -8,7 +8,7 @@ Feature: Table Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
           | Node Path                                                                           | Row Content |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
-     When The xtext plugin edit document action is performed to modify RowList with
+     When The xtext plugin edit document node action is performed to modify RowList with
           | Node Path                                                                           | Row Content |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList | Second Row  |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
@@ -20,7 +20,7 @@ Feature: Table Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
           | Node Path                                                                                      | Cell Name  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | First Cell |
-     When The xtext plugin edit document action is performed to modify CellList with
+     When The xtext plugin edit document node action is performed to modify CellList with
           | Node Path                                                                                      | Cell Name   |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | Second Cell |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows

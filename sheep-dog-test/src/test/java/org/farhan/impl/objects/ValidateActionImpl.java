@@ -24,6 +24,10 @@ import io.cucumber.guice.ScenarioScoped;
 public class ValidateActionImpl extends TestIDEObject implements ValidateAction {
 
     public void transition() {
+        if (properties.get("Node Path") != null) {
+            setCursor(properties.get("Node Path").toString());
+            properties.remove("Node Path");
+        }
         try {
             if (TestIDEObject.cursor instanceof ICell) {
                 ICell cell = (ICell) TestIDEObject.cursor;
@@ -111,6 +115,6 @@ public class ValidateActionImpl extends TestIDEObject implements ValidateAction 
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        setCursor(keyMap.get("Node Path"));
+        properties.put("Node Path", keyMap.get("Node Path"));
     }
 }

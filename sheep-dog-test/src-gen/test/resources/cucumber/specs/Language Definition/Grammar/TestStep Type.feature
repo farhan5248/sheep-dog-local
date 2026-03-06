@@ -8,58 +8,94 @@ Feature: TestStep Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Given StepObject Name | Given StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed              |
-     When The xtext plugin edit document action is performed to modify TestStepList with
+     When The xtext plugin edit document node action is performed to modify TestStepList with
           | Node Path                                                           | Given StepObject Name  | Given StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed              |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
           | Node Path                                                             | Given StepObject Name  | Given StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed              |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
+          | Node Path                                                                  | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Text | Absent |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
+          | Node Path                                                                   | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Table | Absent |
 
   Scenario: Initial State When
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | When StepObject Name  | When StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed             |
-     When The xtext plugin edit document action is performed to modify TestStepList with
+     When The xtext plugin edit document node action is performed to modify TestStepList with
           | Node Path                                                           | When StepObject Name   | When StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed             |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
           | Node Path                                                             | When StepObject Name   | When StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed             |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
+          | Node Path                                                                  | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Text | Absent |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
+          | Node Path                                                                   | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Table | Absent |
 
   Scenario: Initial State Then
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Then StepObject Name  | Then StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed             |
-     When The xtext plugin edit document action is performed to modify TestStepList with
+     When The xtext plugin edit document node action is performed to modify TestStepList with
           | Node Path                                                           | Then StepObject Name   | Then StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed             |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
           | Node Path                                                             | Then StepObject Name   | Then StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed             |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
+          | Node Path                                                                  | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Text | Absent |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
+          | Node Path                                                                   | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Table | Absent |
 
   Scenario: Initial State And
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | And StepObject Name   | And StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed            |
-     When The xtext plugin edit document action is performed to modify TestStepList with
+     When The xtext plugin edit document node action is performed to modify TestStepList with
           | Node Path                                                           | And StepObject Name    | And StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed            |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
           | Node Path                                                             | And StepObject Name    | And StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed            |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
+          | Node Path                                                                  | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Text | Absent |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
+          | Node Path                                                                   | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Table | Absent |
 
-  Scenario: Table
+  Scenario: Table Excludes Text
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
-          | Node Path                                                                                      | Cell Name  |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | First Cell |
-     When The xtext plugin edit document action is performed to modify CellList with
-          | Node Path                                                                                      | Cell Name   |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | Second Cell |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows
-          | Node Path                                                                                        | Cell Name   |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList/2 | Second Cell |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node is created as follows
+          | Node Path                                                                   |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table |
+     When The xtext plugin add document node action is performed to add Text at
+          | Node Path                                                                  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
+          | Node Path                                                                  | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text | Absent |
+
+  Scenario: Text Excludes Table
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
+          | Node Path                                                                  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text |
+     When The xtext plugin add document node action is performed to add Table at
+          | Node Path                                                                   |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
+          | Node Path                                                                   | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table | Absent |
 

@@ -14,8 +14,6 @@ public class TestDataImpl implements ITestData {
 	TableImpl table;
 
 	TestDataImpl() {
-		this.nestedDescription = new NestedDescriptionImpl();
-		this.nestedDescription.parent = this;
 	}
 
 	@Override

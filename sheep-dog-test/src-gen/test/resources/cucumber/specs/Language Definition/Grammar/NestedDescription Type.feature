@@ -8,7 +8,7 @@ Feature: NestedDescription Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file LineList node is created as follows
           | Node Path                                                                                        | Line Content |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/NestedDescription/LineList | First Line   |
-     When The xtext plugin edit document action is performed to modify LineList with
+     When The xtext plugin edit document node action is performed to modify LineList with
           | Node Path                                                                                        | Line Content |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/NestedDescription/LineList | Second Line  |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file LineList node will be created as follows

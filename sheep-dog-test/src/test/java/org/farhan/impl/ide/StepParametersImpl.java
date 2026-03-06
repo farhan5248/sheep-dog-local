@@ -14,10 +14,6 @@ public class StepParametersImpl implements IStepParameters {
     NestedDescriptionImpl nestedDescription;
 
     StepParametersImpl() {
-        this.nestedDescription = new NestedDescriptionImpl();
-        this.nestedDescription.parent = this;
-        this.table = new TableImpl();
-        this.table.parent = this;
     }
 
     @Override

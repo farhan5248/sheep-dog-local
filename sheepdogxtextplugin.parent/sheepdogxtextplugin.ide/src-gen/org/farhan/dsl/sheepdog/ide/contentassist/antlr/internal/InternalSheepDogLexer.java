@@ -693,10 +693,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4025:9: ( ( ' ' | '\\t' | '\\r' )+ )
-            // InternalSheepDog.g:4025:11: ( ' ' | '\\t' | '\\r' )+
+            // InternalSheepDog.g:4049:9: ( ( ' ' | '\\t' | '\\r' )+ )
+            // InternalSheepDog.g:4049:11: ( ' ' | '\\t' | '\\r' )+
             {
-            // InternalSheepDog.g:4025:11: ( ' ' | '\\t' | '\\r' )+
+            // InternalSheepDog.g:4049:11: ( ' ' | '\\t' | '\\r' )+
             int cnt1=0;
             loop1:
             do {
@@ -750,11 +750,11 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4027:17: ( '#' (~ ( '\\n' ) )* RULE_EOL )
-            // InternalSheepDog.g:4027:19: '#' (~ ( '\\n' ) )* RULE_EOL
+            // InternalSheepDog.g:4051:17: ( '#' (~ ( '\\n' ) )* RULE_EOL )
+            // InternalSheepDog.g:4051:19: '#' (~ ( '\\n' ) )* RULE_EOL
             {
             match('#'); 
-            // InternalSheepDog.g:4027:23: (~ ( '\\n' ) )*
+            // InternalSheepDog.g:4051:23: (~ ( '\\n' ) )*
             loop2:
             do {
                 int alt2=2;
@@ -767,7 +767,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalSheepDog.g:4027:23: ~ ( '\\n' )
+            	    // InternalSheepDog.g:4051:23: ~ ( '\\n' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -804,10 +804,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4029:10: ( ( '\\n' )+ )
-            // InternalSheepDog.g:4029:12: ( '\\n' )+
+            // InternalSheepDog.g:4053:10: ( ( '\\n' )+ )
+            // InternalSheepDog.g:4053:12: ( '\\n' )+
             {
-            // InternalSheepDog.g:4029:12: ( '\\n' )+
+            // InternalSheepDog.g:4053:12: ( '\\n' )+
             int cnt3=0;
             loop3:
             do {
@@ -821,7 +821,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalSheepDog.g:4029:12: '\\n'
+            	    // InternalSheepDog.g:4053:12: '\\n'
             	    {
             	    match('\n'); 
 
@@ -853,13 +853,13 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_TEXT_BLOCK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4031:17: ( '----' '\\n' ( . )+ '\\n' '----' )
-            // InternalSheepDog.g:4031:19: '----' '\\n' ( . )+ '\\n' '----'
+            // InternalSheepDog.g:4055:17: ( '----' '\\n' ( . )+ '\\n' '----' )
+            // InternalSheepDog.g:4055:19: '----' '\\n' ( . )+ '\\n' '----'
             {
             match("----"); 
 
             match('\n'); 
-            // InternalSheepDog.g:4031:31: ( . )+
+            // InternalSheepDog.g:4055:31: ( . )+
             int cnt4=0;
             loop4:
             do {
@@ -912,7 +912,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalSheepDog.g:4031:31: .
+            	    // InternalSheepDog.g:4055:31: .
             	    {
             	    matchAny(); 
 
@@ -947,10 +947,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_WORD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4033:11: ( (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+ )
-            // InternalSheepDog.g:4033:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+
+            // InternalSheepDog.g:4057:11: ( (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+ )
+            // InternalSheepDog.g:4057:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+
             {
-            // InternalSheepDog.g:4033:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+
+            // InternalSheepDog.g:4057:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) ) )+
             int cnt5=0;
             loop5:
             do {
@@ -964,7 +964,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalSheepDog.g:4033:13: ~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+            	    // InternalSheepDog.g:4057:13: ~ ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001F')||(input.LA(1)>='!' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();

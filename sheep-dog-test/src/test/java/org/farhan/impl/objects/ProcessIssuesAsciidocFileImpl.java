@@ -20,6 +20,30 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
     }
 
     @Override
+    public void assertDescriptionNodeNodePath(HashMap<String, String> keyMap) {
+        setCursor(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void assertDescriptionNodeState(HashMap<String, String> keyMap) {
+        if (keyMap.get("State").contentEquals("Absent")) {
+            assertDescriptionEmpty("true");
+        }
+    }
+
+    @Override
+    public void assertNestedDescriptionNodeNodePath(HashMap<String, String> keyMap) {
+        setCursor(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void assertNestedDescriptionNodeState(HashMap<String, String> keyMap) {
+        if (keyMap.get("State").contentEquals("Absent")) {
+            assertNestedDescriptionEmpty("true");
+        }
+    }
+
+    @Override
     public void assertLineListNodeLineContent(HashMap<String, String> keyMap) {
         assertLineContent(replaceKeyword(keyMap.get("Line Content")), keyMap.get("Node Path"));
     }
@@ -27,17 +51,6 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
     @Override
     public void assertLineListNodeNodePath(HashMap<String, String> keyMap) {
         setCursor(keyMap.get("Node Path"));
-    }
-
-    @Override
-    public void assertLineListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Empty")) {
-            if (keyMap.get("Node Path").contains("NestedDescription")) {
-                assertNestedDescriptionEmpty("true");
-            } else {
-                assertDescriptionEmpty("true");
-            }
-        }
     }
 
     @Override
@@ -58,7 +71,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
 
     @Override
     public void assertTestDataListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Empty")) {
+        if (keyMap.get("State").contentEquals("Absent")) {
             assertTestDataListEmpty("true");
         }
     }
@@ -90,7 +103,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
 
     @Override
     public void assertTestStepContainerListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Empty")) {
+        if (keyMap.get("State").contentEquals("Absent")) {
             assertTestStepContainerListEmpty("true");
         }
     }
@@ -133,7 +146,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
 
     @Override
     public void assertTestStepListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Empty")) {
+        if (keyMap.get("State").contentEquals("Absent")) {
             assertTestStepListEmpty("true");
         }
     }
@@ -279,6 +292,25 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
     }
 
     @Override
+    public void setTableNodeNodePath(HashMap<String, String> keyMap) {
+        createStepDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void assertTableNodeNodePath(HashMap<String, String> keyMap) {
+        setCursor(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void assertTableNodeState(HashMap<String, String> keyMap) {
+        if (keyMap.get("State").contentEquals("Absent")) {
+            assertTableAbsent();
+        } else if (keyMap.get("State").contentEquals("Present")) {
+            assertTablePresent();
+        }
+    }
+
+    @Override
     public void setTextNodeNodePath(HashMap<String, String> keyMap) {
         createStepDependencies(keyMap.get("Node Path"));
     }
@@ -286,6 +318,22 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
     @Override
     public void setTextNodeTextContent(HashMap<String, String> keyMap) {
         addTextWithContent(keyMap.get("Text Content"));
+    }
+
+    @Override
+    public void assertTextNodeNodePath(HashMap<String, String> keyMap) {
+        String path = keyMap.get("Node Path");
+        String parentPath = path.substring(0, path.lastIndexOf("/"));
+        setCursor(parentPath);
+    }
+
+    @Override
+    public void assertTextNodeState(HashMap<String, String> keyMap) {
+        if (keyMap.get("State").contentEquals("Absent")) {
+            assertTextAbsent();
+        } else if (keyMap.get("State").contentEquals("Present")) {
+            assertTextPresent();
+        }
     }
 
 }

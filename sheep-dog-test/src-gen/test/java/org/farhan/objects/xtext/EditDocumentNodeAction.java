@@ -2,7 +2,7 @@ package org.farhan.objects.xtext;
 
 import java.util.HashMap;
 
-public interface EditDocumentAction {
+public interface EditDocumentNodeAction {
 
     public void transition();
 

@@ -21,8 +21,6 @@ public class StepObjectImpl implements IStepObject {
 
     StepObjectImpl() {
         this.stepDefinitionList = new ArrayList<StepDefinitionImpl>();
-        this.description = new DescriptionImpl();
-        this.description.parent = this;
     }
 
     @Override
