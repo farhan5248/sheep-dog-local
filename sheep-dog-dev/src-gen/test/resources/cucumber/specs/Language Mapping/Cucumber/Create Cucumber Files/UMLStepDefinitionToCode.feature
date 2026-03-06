@@ -73,8 +73,8 @@ Feature: UMLStepDefinitionToCode
           | Method Name | Annotation                                            | Visibility | Return Type |
           | isEmpty     | @Given("^The blah application Object page is empty$") | public     | void        |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name | Statement                        |
-          | isEmpty     | object.setInputOutputs("Empty"); |
+          | Method Name | Statement                             |
+          | isEmpty     | object.setInputOutputsState("Empty"); |
 
   Scenario: Layer 2 with datatable without DI
 
@@ -87,16 +87,16 @@ Feature: UMLStepDefinitionToCode
           | Method Name                      | Parameter Name | Parameter Type |
           | topSectionWillBeCreatedAsFollows | dataTable      | DataTable      |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                      | Statement                                           |
-          | topSectionWillBeCreatedAsFollows | object.assertInputOutputs(dataTable, "TopSection"); |
+          | Method Name                      | Statement                                                    |
+          | topSectionWillBeCreatedAsFollows | object.assertInputOutputsDataTable(dataTable, "TopSection"); |
 
   Scenario: Layer 2 with datatable, negative without DI
 
      When The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                      | Statement                                                 |
-          | topSectionWontBeCreatedAsFollows | object.assertInputOutputs(dataTable, "TopSection", true); |
+          | Method Name                      | Statement                                                          |
+          | topSectionWontBeCreatedAsFollows | object.assertInputOutputsDataTable(dataTable, "TopSection", true); |
 
   Scenario: Layer 2 with docstring without DI
 
@@ -106,8 +106,8 @@ Feature: UMLStepDefinitionToCode
           | Method Name        | Parameter Name | Parameter Type |
           | isCreatedAsFollows | docString      | String         |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name        | Statement                                     |
-          | isCreatedAsFollows | object.setInputOutputs("Content", docString); |
+          | Method Name        | Statement                                              |
+          | isCreatedAsFollows | object.setInputOutputsDocString("Content", docString); |
 
   Scenario: Layer 3
 
@@ -135,8 +135,8 @@ Feature: UMLStepDefinitionToCode
           | Constructor Name    | Statement                        |
           | BlahObjectPageSteps | super(object, "blah", "Object"); |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name | Statement                        |
-          | isEmpty     | object.setInputOutputs("Empty"); |
+          | Method Name | Statement                             |
+          | isEmpty     | object.setInputOutputsState("Empty"); |
 
   Scenario: Layer 2 without parameters with guice
 
@@ -153,6 +153,6 @@ Feature: UMLStepDefinitionToCode
           | Constructor Name    | Constructor Annotation |
           | BlahObjectPageSteps | Inject                 |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name | Statement                        |
-          | isEmpty     | object.setInputOutputs("Empty"); |
+          | Method Name | Statement                             |
+          | isEmpty     | object.setInputOutputsState("Empty"); |
 

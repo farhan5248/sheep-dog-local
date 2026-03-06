@@ -14,135 +14,131 @@ import io.cucumber.datatable.DataTable;
 
 public abstract class TestObject {
 
-	protected HashMap<String, String> attributes = new HashMap<String, String>();
+    protected HashMap<String, String> attributes = new HashMap<String, String>();
 
-	protected GoalObject getGoalClass(String contains) throws Exception {
-		for (Key<?> b : Config.classes.getBindings().keySet()) {
-			if (b.getTypeLiteral().toString().contains(contains)
-					&& b.getTypeLiteral().toString().startsWith("org.farhan.objects.maven.")) {
-				GoalObject object = (GoalObject) Config.classes.getInstance(b);
-				if (object.attributes.size() > 1) {
-					return object;
-				}
-			}
-		}
-		return null;
-	}
+    public void assertInputOutputsDataTable(DataTable dataTable) {
+        processInputOutputs(dataTable, "assert", "", false);
+    }
 
-	public String getStackTraceAsString(Exception e) {
-		StringWriter sw = new StringWriter();
-		e.printStackTrace(new PrintWriter(sw));
-		String exceptionAsString = sw.toString();
-		return exceptionAsString;
-	}
+    public void assertInputOutputsDataTable(DataTable dataTable, String sectionName) {
+        processInputOutputs(dataTable, "assert", sectionName, false);
+    }
 
-	public void assertInputOutputs(DataTable dataTable) {
-		processInputOutputs(dataTable, "assert", "", false);
-	}
+    public void assertInputOutputsDataTable(DataTable dataTable, String sectionName, boolean negativeTest) {
+        processInputOutputs(dataTable, "assert", sectionName, negativeTest);
+    }
 
-	public void assertInputOutputs(DataTable dataTable, String sectionName) {
-		processInputOutputs(dataTable, "assert", sectionName, false);
-	}
+    public void assertInputOutputsDocString(String key, String value) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, value);
+        processInputOutputs(row, "assert", "", false);
+    }
 
-	public void assertInputOutputs(List<List<String>> dataTable, String sectionName) {
-		processInputOutputs(dataTable, "assert", sectionName, false);
-	}
+    public void assertInputOutputsState(String key) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, "true");
+        processInputOutputs(row, "assert", "", false);
+    }
 
-	public void assertInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
-		processInputOutputs(dataTable, "assert", sectionName, negativeTest);
-	}
+    public void assertInputOutputsState(String key, boolean negativeTest) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, Boolean.toString(negativeTest));
+        processInputOutputs(row, "assert", "", negativeTest);
+    }
 
-	public void assertInputOutputs(String key) {
-		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, "true");
-		processInputOutputs(row, "assert", "", false);
-	}
+    public String getStackTraceAsString(Exception e) {
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        String exceptionAsString = sw.toString();
+        return exceptionAsString;
+    }
 
-	public void assertInputOutputs(String key, boolean negativeTest) {
-		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, Boolean.toString(negativeTest));
-		processInputOutputs(row, "assert", "", negativeTest);
-	}
+    public void setComponent(String component) {
+        attributes.put("component", component);
+    }
 
-	public void assertInputOutputs(String key, String value) {
-		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, value);
-		processInputOutputs(row, "assert", "", false);
-	}
+    public void setInputOutputsDataTable(DataTable dataTable) {
+        processInputOutputs(dataTable, "set", "", false);
+    }
 
-	private String cleanName(String name) {
-		return name.replaceAll("[ \\-\\(\\)/]", "");
-	}
+    public void setInputOutputsDataTable(DataTable dataTable, String sectionName) {
+        processInputOutputs(dataTable, "set", sectionName, false);
+    }
 
-	private void processInputOutputs(DataTable dataTable, String operation, String sectionName, boolean negativeTest) {
-		processInputOutputs(dataTable.asLists(), operation, sectionName, negativeTest);
-	}
+    public void setInputOutputsDataTable(DataTable dataTable, String sectionName, boolean negativeTest) {
+        processInputOutputs(dataTable, "set", sectionName, negativeTest);
+    }
 
-	private void processInputOutputs(List<List<String>> data, String operation, String sectionName,
-			boolean negativeTest) {
+    public void setInputOutputsDocString(String key, String value) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, value);
+        processInputOutputs(row, "set", "", false);
+    }
 
-		ArrayList<String> headers = new ArrayList<String>();
-		for (String cell : data.get(0)) {
-			headers.add(cell);
-		}
-		for (int i = 1; i < data.size(); i++) {
-			HashMap<String, String> row = new HashMap<String, String>();
-			for (int j = 0; j < data.get(i).size(); j++) {
-				row.put(headers.get(j), data.get(i).get(j));
-			}
-			processInputOutputs(row, operation, sectionName, negativeTest);
-		}
-	}
+    public void setInputOutputsState(String key) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, "true");
+        processInputOutputs(row, "set", "", false);
+    }
 
-	private void processInputOutputs(HashMap<String, String> row, String operation, String sectionName,
-			boolean negativeTest) {
-		try {
-			if (negativeTest) {
-				this.getClass().getMethod(operation + cleanName(sectionName) + "Negative", HashMap.class).invoke(this,
-						row);
-			} else {
-				for (String columnName : row.keySet()) {
-					this.getClass().getMethod(operation + cleanName(sectionName) + cleanName(columnName), HashMap.class)
-							.invoke(this, row);
-				}
-			}
-		} catch (Exception e) {
-			Assertions.fail(getStackTraceAsString(e));
-		}
-	}
+    public void setPath(String path) {
+        attributes.put("path", path);
+    }
 
-	public void setComponent(String component) {
-		attributes.put("component", component);
-	}
+    public void transition() {
+    }
 
-	public void setInputOutputs(DataTable dataTable) {
-		processInputOutputs(dataTable, "set", "", false);
-	}
+    private String cleanName(String name) {
+        return name.replaceAll("[ \\-\\(\\)/]", "");
+    }
 
-	public void setInputOutputs(DataTable dataTable, String sectionName) {
-		processInputOutputs(dataTable, "set", sectionName, false);
-	}
+    private void processInputOutputs(DataTable dataTable, String operation, String sectionName, boolean negativeTest) {
+        processInputOutputs(dataTable.asLists(), operation, sectionName, negativeTest);
+    }
 
-	public void setInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
-		processInputOutputs(dataTable, "set", sectionName, negativeTest);
-	}
+    private void processInputOutputs(HashMap<String, String> row, String operation, String sectionName,
+            boolean negativeTest) {
+        try {
+            if (negativeTest) {
+                this.getClass().getMethod(operation + cleanName(sectionName) + "Negative", HashMap.class).invoke(this,
+                        row);
+            } else {
+                for (String columnName : row.keySet()) {
+                    this.getClass().getMethod(operation + cleanName(sectionName) + cleanName(columnName), HashMap.class)
+                            .invoke(this, row);
+                }
+            }
+        } catch (Exception e) {
+            Assertions.fail(getStackTraceAsString(e));
+        }
+    }
 
-	public void setInputOutputs(String key, String value) {
-		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, value);
-		processInputOutputs(row, "set", "", false);
-	}
+    private void processInputOutputs(List<List<String>> data, String operation, String sectionName,
+            boolean negativeTest) {
 
-	public void setPath(String path) {
-		attributes.put("path", path);
-	}
+        ArrayList<String> headers = new ArrayList<String>();
+        for (String cell : data.get(0)) {
+            headers.add(cell);
+        }
+        for (int i = 1; i < data.size(); i++) {
+            HashMap<String, String> row = new HashMap<String, String>();
+            for (int j = 0; j < data.get(i).size(); j++) {
+                row.put(headers.get(j), data.get(i).get(j));
+            }
+            processInputOutputs(row, operation, sectionName, negativeTest);
+        }
+    }
 
-	public void transition() {
-	}
-
-	public void setInputOutputs(String key) {
-		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, "true");
-		processInputOutputs(row, "set", "", false);
-	}
+    protected GoalObject getGoalClass(String contains) throws Exception {
+        for (Key<?> b : Config.classes.getBindings().keySet()) {
+            if (b.getTypeLiteral().toString().contains(contains)
+                    && b.getTypeLiteral().toString().startsWith("org.farhan.objects.maven.")) {
+                GoalObject object = (GoalObject) Config.classes.getInstance(b);
+                if (object.attributes.size() > 1) {
+                    return object;
+                }
+            }
+        }
+        return null;
+    }
 }

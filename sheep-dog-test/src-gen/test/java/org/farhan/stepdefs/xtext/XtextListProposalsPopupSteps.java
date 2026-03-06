@@ -17,11 +17,11 @@ public class XtextListProposalsPopupSteps extends TestSteps {
 
     @Given("^The xtext plugin list proposals popup will be empty$")
     public void willBeEmpty() {
-        object.assertInputOutputs("Empty");
+        object.assertInputOutputsState("Empty");
     }
 
     @Given("^The xtext plugin list proposals popup will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable);
+        object.assertInputOutputsDataTable(dataTable);
     }
 }

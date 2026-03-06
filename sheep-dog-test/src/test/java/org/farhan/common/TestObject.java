@@ -11,61 +11,71 @@ public abstract class TestObject {
 
     protected HashMap<String, Object> properties = new HashMap<String, Object>();
 
-    public void assertInputOutputs(DataTable dataTable) {
+    public void assertInputOutputsDataTable(DataTable dataTable) {
         processInputOutputs(dataTable, "assert", "");
     }
 
-    public void assertInputOutputs(DataTable dataTable, String sectionName) {
+    public void assertInputOutputsDataTable(DataTable dataTable, String sectionName) {
         processInputOutputs(dataTable, "assert", sectionName);
     }
 
-    public void assertInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
+    public void assertInputOutputsDataTable(DataTable dataTable, String sectionName, boolean negativeTest) {
         processInputOutputs(dataTable, "assert", sectionName);
     }
 
-    public void assertInputOutputs(String key) {
+    public void assertInputOutputsDocString(String key, String value) {
+        processInputOutputs(key, value, "assert", "");
+    }
+
+    public void assertInputOutputsState(String key) {
         processInputOutputs(key, "true", "assert", "");
     }
 
-    public void assertInputOutputs(String key, boolean negativeTest) {
+    public void assertInputOutputsState(String key, boolean negativeTest) {
         processInputOutputs(key, Boolean.toString(negativeTest), "assert", "");
     }
 
-    public void assertInputOutputs(String key, String value) {
-        // TODO this is a temp hack until these InputOutput methods are changed
-        if (key.contentEquals("Content")) {
-            processInputOutputs(key, value, "assert", "");
-        } else {
-            processInputOutputs(key, "", "assert", value);
-        }
-
+    public void assertInputOutputsState(String key, String sectionName) {
+        processInputOutputs(key, "", "assert", sectionName);
     }
 
-    public void assertInputOutputs(String key, String value, String sectionName) {
+    public void assertInputOutputsState(String key, String value, String sectionName) {
         processInputOutputs(key, value, "assert", sectionName);
     }
 
-    public void setInputOutputs(DataTable dataTable) {
+    public void setInputOutputsDataTable(DataTable dataTable) {
         processInputOutputs(dataTable, "set", "");
     }
 
-    public void setInputOutputs(DataTable dataTable, String sectionName) {
+    public void setInputOutputsDataTable(DataTable dataTable, String sectionName) {
         processInputOutputs(dataTable, "set", sectionName);
     }
 
-    public void setInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
+    public void setInputOutputsDataTable(DataTable dataTable, String sectionName, boolean negativeTest) {
         processInputOutputs(dataTable, "set", sectionName);
     }
 
-    public void setInputOutputs(String key) {
-        processInputOutputs(key, "true", "set", "");
-    }
-
-    public void setInputOutputs(String key, String value) {
+    public void setInputOutputsDocString(String key, String value) {
         processInputOutputs(key, value, "set", "");
     }
 
+    public void setInputOutputsState(String key) {
+        processInputOutputs(key, "true", "set", "");
+    }
+
+    public void setPart(String part) {
+        properties.put("part", part);
+    }
+
     public void transition() {
+    }
+
+    protected String listToString(ArrayList<?> proposals) {
+        StringBuilder sb = new StringBuilder();
+        for (Object p : proposals) {
+            sb.append("\n").append(p.toString());
+        }
+        return sb.toString();
     }
 
     protected void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
@@ -104,14 +114,6 @@ public abstract class TestObject {
         }
     }
 
-    protected String listToString(ArrayList<?> proposals) {
-        StringBuilder sb = new StringBuilder();
-        for (Object p : proposals) {
-            sb.append("\n").append(p.toString());
-        }
-        return sb.toString();
-    }
-
     protected String replaceKeyword(String value) {
         if (value.contentEquals("empty")) {
             return "";
@@ -126,9 +128,5 @@ public abstract class TestObject {
 
     protected void setPath(String path) {
         properties.put("path", path);
-    }
-
-    public void setPart(String part) {
-        properties.put("part", part);
     }
 }

@@ -16,21 +16,21 @@ public class XtextValidateAnnotationSteps extends TestSteps {
 
     @Given("^The xtext plugin validate annotation is empty$")
     public void isEmpty() {
-        object.setInputOutputs("Empty");
+        object.setInputOutputsState("Empty");
     }
 
     @Given("^The xtext plugin validate annotation is set as follows$")
     public void isSetAsFollows(String docString) {
-        object.setInputOutputs("Content", docString);
+        object.setInputOutputsDocString("Content", docString);
     }
 
     @Given("^The xtext plugin validate annotation will be empty$")
     public void willBeEmpty() {
-        object.assertInputOutputs("Empty");
+        object.assertInputOutputsState("Empty");
     }
 
     @Given("^The xtext plugin validate annotation will be set as follows$")
     public void willBeSetAsFollows(String docString) {
-        object.assertInputOutputs("Content", docString);
+        object.assertInputOutputsDocString("Content", docString);
     }
 }

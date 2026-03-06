@@ -60,18 +60,18 @@ public class CucumberClass extends CucumberJava {
     }
 
     private String getCallForInputOutputsForDataTable(String step) throws Exception {
-        return "." + getSetOrAssert(step) + "InputOutputs(" + "dataTable" + getSectionArg(step) + getNegativeArg(step)
+        return "." + getSetOrAssert(step) + "InputOutputsDataTable(" + "dataTable" + getSectionArg(step) + getNegativeArg(step)
                 + ")";
     }
 
     private String getCallForInputOutputsForDocString(String step) throws Exception {
-        return "." + getSetOrAssert(step) + "InputOutputs(" + "\"Content\", docString" + getSectionArg(step)
+        return "." + getSetOrAssert(step) + "InputOutputsDocString(" + "\"Content\", docString" + getSectionArg(step)
                 + getNegativeArg(step) + ")";
     }
 
     private String getCallForInputOutputsForState(String step) throws Exception {
         String stepObjectName = StepObjectRefFragments.getAll(step);
-        return "." + getSetOrAssert(step) + "InputOutputs(\""
+        return "." + getSetOrAssert(step) + "InputOutputsState(\""
                 + StringUtils.capitalize(StepDefinitionRefFragments.getStateDesc(step.replace(stepObjectName, "")))
                 + "\"" + getSectionArg(step) + getNegativeArg(step) + ")";
     }

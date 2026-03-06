@@ -17,26 +17,26 @@ public class CodePrjObjectPageJavaFileSteps extends TestSteps {
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Header section will be created as follows$")
     public void headerSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "HeaderSection");
+        object.assertInputOutputsDataTable(dataTable, "HeaderSection");
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Methods section will be created as follows$")
     public void methodsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "MethodsSection");
+        object.assertInputOutputsDataTable(dataTable, "MethodsSection");
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows$")
     public void isCreatedAsFollows(String docString) {
-        object.setInputOutputs("Content", docString);
+        object.setInputOutputsDocString("Content", docString);
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows$")
     public void willBeCreatedAsFollows(String docString) {
-        object.assertInputOutputs("Content", docString);
+        object.assertInputOutputsDocString("Content", docString);
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present$")
     public void willBePresent() {
-        object.assertInputOutputs("Present");
+        object.assertInputOutputsState("Present");
     }
 }

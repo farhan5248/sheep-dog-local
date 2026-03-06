@@ -17,96 +17,96 @@ public class SpecPrjProcessIssuesAsciidocFileSteps extends TestSteps {
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows$")
     public void cellListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "CellListNode");
+        object.setInputOutputsDataTable(dataTable, "CellListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows$")
     public void cellListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "CellListNode");
+        object.assertInputOutputsDataTable(dataTable, "CellListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file LineList node is created as follows$")
     public void lineListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "LineListNode");
+        object.setInputOutputsDataTable(dataTable, "LineListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file LineList node will be as follows$")
     public void lineListNodeWillBeAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "LineListNode");
+        object.assertInputOutputsDataTable(dataTable, "LineListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file LineList node will be created as follows$")
     public void lineListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "LineListNode");
+        object.assertInputOutputsDataTable(dataTable, "LineListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows$")
     public void rowListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "RowListNode");
+        object.setInputOutputsDataTable(dataTable, "RowListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows$")
     public void rowListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "RowListNode");
+        object.assertInputOutputsDataTable(dataTable, "RowListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node is created as follows$")
     public void testDataListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "TestDataListNode");
+        object.setInputOutputsDataTable(dataTable, "TestDataListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node will be as follows$")
     public void testDataListNodeWillBeAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "TestDataListNode");
+        object.assertInputOutputsDataTable(dataTable, "TestDataListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node will be created as follows$")
     public void testDataListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "TestDataListNode");
+        object.assertInputOutputsDataTable(dataTable, "TestDataListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows$")
     public void testDocumentListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "TestDocumentListNode");
+        object.setInputOutputsDataTable(dataTable, "TestDocumentListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node will be created as follows$")
     public void testDocumentListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "TestDocumentListNode");
+        object.assertInputOutputsDataTable(dataTable, "TestDocumentListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows$")
     public void testStepContainerListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "TestStepContainerListNode");
+        object.setInputOutputsDataTable(dataTable, "TestStepContainerListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be as follows$")
     public void testStepContainerListNodeWillBeAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "TestStepContainerListNode");
+        object.assertInputOutputsDataTable(dataTable, "TestStepContainerListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows$")
     public void testStepContainerListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "TestStepContainerListNode");
+        object.assertInputOutputsDataTable(dataTable, "TestStepContainerListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows$")
     public void testStepListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "TestStepListNode");
+        object.setInputOutputsDataTable(dataTable, "TestStepListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be as follows$")
     public void testStepListNodeWillBeAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "TestStepListNode");
+        object.assertInputOutputsDataTable(dataTable, "TestStepListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows$")
     public void testStepListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "TestStepListNode");
+        object.assertInputOutputsDataTable(dataTable, "TestStepListNode");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows$")
     public void textNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputs(dataTable, "TextNode");
+        object.setInputOutputsDataTable(dataTable, "TextNode");
     }
 }

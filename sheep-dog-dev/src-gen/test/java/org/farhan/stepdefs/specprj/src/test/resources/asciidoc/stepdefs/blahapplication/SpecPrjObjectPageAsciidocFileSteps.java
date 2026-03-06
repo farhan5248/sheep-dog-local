@@ -17,36 +17,36 @@ public class SpecPrjObjectPageAsciidocFileSteps extends TestSteps {
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Header section will be created as follows$")
     public void headerSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "HeaderSection");
+        object.assertInputOutputsDataTable(dataTable, "HeaderSection");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Step Definition Parameters Table section will be created as follows$")
     public void stepDefinitionParametersTableSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "StepDefinitionParametersTableSection");
+        object.assertInputOutputsDataTable(dataTable, "StepDefinitionParametersTableSection");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Step Definition section will be created as follows$")
     public void stepDefinitionSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputs(dataTable, "StepDefinitionSection");
+        object.assertInputOutputsDataTable(dataTable, "StepDefinitionSection");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows$")
     public void isCreatedAsFollows(String docString) {
-        object.setInputOutputs("Content", docString);
+        object.setInputOutputsDocString("Content", docString);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted$")
     public void isDeleted() {
-        object.setInputOutputs("Deleted");
+        object.setInputOutputsState("Deleted");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be created as follows$")
     public void willBeCreatedAsFollows(String docString) {
-        object.assertInputOutputs("Content", docString);
+        object.assertInputOutputsDocString("Content", docString);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present$")
     public void willBePresent() {
-        object.assertInputOutputs("Present");
+        object.assertInputOutputsState("Present");
     }
 }
