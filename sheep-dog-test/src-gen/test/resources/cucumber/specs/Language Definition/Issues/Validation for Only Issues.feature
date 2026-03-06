@@ -6,6 +6,8 @@ Feature: Validation for Only Issues
 
   Scenario: Header row Cell names should start with a capital letter validation
 
+    The first row of a table contains header cells. CellIssueTypes.CELL_NAME_ONLY validates that header cell names start with a capital letter.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
@@ -21,6 +23,8 @@ Feature: Validation for Only Issues
           """
 
   Scenario: Body row Cell names can be any case validation
+
+    Body rows (non-header rows) contain data values. The capitalization rule only applies to header row cells.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
@@ -38,6 +42,8 @@ Feature: Validation for Only Issues
 
   Scenario: Test suite name should start with a capital letter validation
 
+    TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY validates that the test suite name starts with a capital letter.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
           | Node Path                    | Test Suite Full Name    | Test Suite Name   |
           | TestProject/TestDocumentList | specs/lowercase process | lowercase process |
@@ -51,6 +57,8 @@ Feature: Validation for Only Issues
 
   Scenario: Test case name should start with a capital letter validation
 
+    TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY validates that the test case name starts with a capital letter.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
           | Node Path                                            | Test Case Name      |
           | TestProject/TestDocumentList/1/TestStepContainerList | lowercase test case |
@@ -63,6 +71,8 @@ Feature: Validation for Only Issues
           """
 
   Scenario: Test step must have a valid object name validation
+
+    TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY validates that the step object reference has a valid component and object. The validation message describes the expected format.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name |
@@ -83,6 +93,8 @@ Feature: Validation for Only Issues
           """
 
   Scenario: Test step must have a valid step definition name validation
+
+    TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY validates that the step definition reference has a valid part and state. The validation message describes the expected format.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name           |

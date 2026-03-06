@@ -145,7 +145,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class StepParametersElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.StepParameters");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAsteriskKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignEqualsSignEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cStepParametersKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNamePhraseParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
@@ -156,18 +156,18 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final RuleCall cTableTableParserRuleCall_5_0 = (RuleCall)cTableAssignment_5.eContents().get(0);
 		
 		//StepParameters:
-		//    '*' 'Step-Parameters:' name=Phrase EOL
+		//    '===' 'Step-Parameters:' name=Phrase EOL
 		//    nestedDescription=NestedDescription?
 		//    table=Table?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'*' 'Step-Parameters:' name=Phrase EOL
+		//'===' 'Step-Parameters:' name=Phrase EOL
 		//nestedDescription=NestedDescription?
 		//table=Table?
 		public Group getGroup() { return cGroup; }
 		
-		//'*'
-		public Keyword getAsteriskKeyword_0() { return cAsteriskKeyword_0; }
+		//'==='
+		public Keyword getEqualsSignEqualsSignEqualsSignKeyword_0() { return cEqualsSignEqualsSignEqualsSignKeyword_0; }
 		
 		//'Step-Parameters:'
 		public Keyword getStepParametersKeyword_1() { return cStepParametersKeyword_1; }
@@ -378,7 +378,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class TestDataElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.TestData");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAsteriskKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignEqualsSignEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cTestDataKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNamePhraseParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
@@ -389,18 +389,18 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final RuleCall cTableTableParserRuleCall_5_0 = (RuleCall)cTableAssignment_5.eContents().get(0);
 		
 		//TestData:
-		//    '*' 'Test-Data:' name=Phrase EOL
+		//    '===' 'Test-Data:' name=Phrase EOL
 		//    nestedDescription=NestedDescription?
 		//    table=Table?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'*' 'Test-Data:' name=Phrase EOL
+		//'===' 'Test-Data:' name=Phrase EOL
 		//nestedDescription=NestedDescription?
 		//table=Table?
 		public Group getGroup() { return cGroup; }
 		
-		//'*'
-		public Keyword getAsteriskKeyword_0() { return cAsteriskKeyword_0; }
+		//'==='
+		public Keyword getEqualsSignEqualsSignEqualsSignKeyword_0() { return cEqualsSignEqualsSignEqualsSignKeyword_0; }
 		
 		//'Test-Data:'
 		public Keyword getTestDataKeyword_1() { return cTestDataKeyword_1; }
@@ -456,7 +456,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class GivenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.Given");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAsteriskKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignEqualsSignEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cGivenKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cStepObjectNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cStepObjectNameStepObjectRefParserRuleCall_2_0 = (RuleCall)cStepObjectNameAssignment_2.eContents().get(0);
@@ -469,18 +469,18 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final RuleCall cTextTextParserRuleCall_6_0 = (RuleCall)cTextAssignment_6.eContents().get(0);
 		
 		//Given:
-		//    '*' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+		//    '===' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 		//    table=Table?
 		//    text=Text?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'*' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+		//'===' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 		//table=Table?
 		//text=Text?
 		public Group getGroup() { return cGroup; }
 		
-		//'*'
-		public Keyword getAsteriskKeyword_0() { return cAsteriskKeyword_0; }
+		//'==='
+		public Keyword getEqualsSignEqualsSignEqualsSignKeyword_0() { return cEqualsSignEqualsSignEqualsSignKeyword_0; }
 		
 		//'Given:'
 		public Keyword getGivenKeyword_1() { return cGivenKeyword_1; }
@@ -515,7 +515,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class WhenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.When");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAsteriskKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignEqualsSignEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cWhenKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cStepObjectNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cStepObjectNameStepObjectRefParserRuleCall_2_0 = (RuleCall)cStepObjectNameAssignment_2.eContents().get(0);
@@ -528,18 +528,18 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final RuleCall cTextTextParserRuleCall_6_0 = (RuleCall)cTextAssignment_6.eContents().get(0);
 		
 		//When:
-		//    '*' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+		//    '===' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 		//    table=Table?
 		//    text=Text?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'*' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+		//'===' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 		//table=Table?
 		//text=Text?
 		public Group getGroup() { return cGroup; }
 		
-		//'*'
-		public Keyword getAsteriskKeyword_0() { return cAsteriskKeyword_0; }
+		//'==='
+		public Keyword getEqualsSignEqualsSignEqualsSignKeyword_0() { return cEqualsSignEqualsSignEqualsSignKeyword_0; }
 		
 		//'When:'
 		public Keyword getWhenKeyword_1() { return cWhenKeyword_1; }
@@ -574,7 +574,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class ThenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.Then");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAsteriskKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignEqualsSignEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cThenKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cStepObjectNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cStepObjectNameStepObjectRefParserRuleCall_2_0 = (RuleCall)cStepObjectNameAssignment_2.eContents().get(0);
@@ -587,18 +587,18 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final RuleCall cTextTextParserRuleCall_6_0 = (RuleCall)cTextAssignment_6.eContents().get(0);
 		
 		//Then:
-		//    '*' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+		//    '===' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 		//    table=Table?
 		//    text=Text?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'*' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+		//'===' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 		//table=Table?
 		//text=Text?
 		public Group getGroup() { return cGroup; }
 		
-		//'*'
-		public Keyword getAsteriskKeyword_0() { return cAsteriskKeyword_0; }
+		//'==='
+		public Keyword getEqualsSignEqualsSignEqualsSignKeyword_0() { return cEqualsSignEqualsSignEqualsSignKeyword_0; }
 		
 		//'Then:'
 		public Keyword getThenKeyword_1() { return cThenKeyword_1; }
@@ -633,7 +633,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class AndElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.And");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAsteriskKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignEqualsSignEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cAndKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cStepObjectNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cStepObjectNameStepObjectRefParserRuleCall_2_0 = (RuleCall)cStepObjectNameAssignment_2.eContents().get(0);
@@ -646,18 +646,18 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final RuleCall cTextTextParserRuleCall_6_0 = (RuleCall)cTextAssignment_6.eContents().get(0);
 		
 		//And:
-		//    '*' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+		//    '===' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 		//    table=Table?
 		//    text=Text?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'*' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+		//'===' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 		//table=Table?
 		//text=Text?
 		public Group getGroup() { return cGroup; }
 		
-		//'*'
-		public Keyword getAsteriskKeyword_0() { return cAsteriskKeyword_0; }
+		//'==='
+		public Keyword getEqualsSignEqualsSignEqualsSignKeyword_0() { return cEqualsSignEqualsSignEqualsSignKeyword_0; }
 		
 		//'And:'
 		public Keyword getAndKeyword_1() { return cAndKeyword_1; }
@@ -1105,7 +1105,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//StepParameters:
-	//    '*' 'Step-Parameters:' name=Phrase EOL
+	//    '===' 'Step-Parameters:' name=Phrase EOL
 	//    nestedDescription=NestedDescription?
 	//    table=Table?;
 	public StepParametersElements getStepParametersAccess() {
@@ -1164,7 +1164,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//TestData:
-	//    '*' 'Test-Data:' name=Phrase EOL
+	//    '===' 'Test-Data:' name=Phrase EOL
 	//    nestedDescription=NestedDescription?
 	//    table=Table?;
 	public TestDataElements getTestDataAccess() {
@@ -1186,7 +1186,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Given:
-	//    '*' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+	//    '===' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 	//    table=Table?
 	//    text=Text?;
 	public GivenElements getGivenAccess() {
@@ -1198,7 +1198,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//When:
-	//    '*' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+	//    '===' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 	//    table=Table?
 	//    text=Text?;
 	public WhenElements getWhenAccess() {
@@ -1210,7 +1210,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Then:
-	//    '*' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+	//    '===' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 	//    table=Table?
 	//    text=Text?;
 	public ThenElements getThenAccess() {
@@ -1222,7 +1222,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//And:
-	//    '*' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+	//    '===' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
 	//    table=Table?
 	//    text=Text?;
 	public AndElements getAndAccess() {

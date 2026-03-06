@@ -11,10 +11,10 @@ Feature: UMLStepToCode
           
           == Test-Case: Submit
           
-          * Given: The blah application Given page is empty
-          * When: The blah application When page is empty
-          * Then: The blah application Then page is empty
-          * And: The blah application And page is empty
+          === Given: The blah application Given page is empty
+          === When: The blah application When page is empty
+          === Then: The blah application Then page is empty
+          === And: The blah application And page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The maven plugin uml-to-cucumber goal is executed
@@ -34,7 +34,7 @@ Feature: UMLStepToCode
           
           == Test-Case: Submit's'
           
-          * Given: The blah application Given page isn't empty
+          === Given: The blah application Given page isn't empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The maven plugin uml-to-cucumber goal is executed

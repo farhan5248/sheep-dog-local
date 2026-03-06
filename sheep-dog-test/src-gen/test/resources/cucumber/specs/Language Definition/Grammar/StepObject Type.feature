@@ -2,8 +2,15 @@
 Feature: StepObject Type
 
   \@sheep-dog-test
+  Step Object is a top-level grammar rule in SheepDog.xtext. A Step Object contains Step Definitions which contain Step Parameters.
 
   Scenario: Initial State
+
+    Step Object must have
+    - Name
+    and optionally have these
+    - Description
+    - Step Definition List
 
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
           | Node Path                    | Step Object Full Name      |
@@ -23,6 +30,12 @@ Feature: StepObject Type
 
   Scenario: Step Definition
 
+    Step Definition must have
+    - Name
+    and optionally have these
+    - Description
+    - Step Parameters List
+
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node is created as follows
           | Node Path                                         | Step Definition Name  |
           | TestProject/TestDocumentList/1/StepDefinitionList | First Step Definition |
@@ -40,6 +53,12 @@ Feature: StepObject Type
           | TestProject/TestDocumentList/1/StepDefinitionList/1/Description | Absent |
 
   Scenario: Step Parameters
+
+    Step Parameters must have
+    - Name
+    - Table
+    and optionally have these
+    - Description
 
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node is created as follows
           | Node Path                                                              | Step Parameters Name  |

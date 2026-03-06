@@ -18,9 +18,9 @@ public class ExamplesFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("\n");
-		sb.append("* Given: The one service, one file is valid\n");
+		sb.append("=== Given: The one service, one file is valid\n");
 		sb.append("\n");
-		sb.append("* Test-Data: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("@tag1\n");
 		sb.append("Basic EDI claim\n");
@@ -54,9 +54,9 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
-			sb.append("* Given: The one service, one file is valid\n");
+			sb.append("=== Given: The one service, one file is valid\n");
 			sb.append("\n");
-			sb.append(" *  Test-Data:  Describe what this data is about \n");
+			sb.append(" ===  Test-Data:  Describe what this data is about \n");
 			sb.append("+\n");
 			sb.append("@tag1\n");
 			sb.append(" Basic EDI claim \n");
@@ -82,9 +82,9 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
-			sb.append("* Given: The one service, one file is valid\n");
+			sb.append("=== Given: The one service, one file is valid\n");
 			sb.append("\n");
-			sb.append("*Test-Data:Describe what this data is about\n");
+			sb.append("===Test-Data:Describe what this data is about\n");
 			sb.append("+\n");
 			sb.append("@tag1\n");
 			sb.append("Basic EDI claim\n");
@@ -111,9 +111,9 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
-			sb.append("* Given: The one service, one file is valid\n");
+			sb.append("=== Given: The one service, one file is valid\n");
 			sb.append("\n");
-			sb.append("* Test-Data: Describe what this data is about\n");
+			sb.append("=== Test-Data: Describe what this data is about\n");
 			sb.append("\n");
 			sb.append("+\n");
 			sb.append("@tag1\n");

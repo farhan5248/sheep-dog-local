@@ -9,6 +9,8 @@ Feature: Validation for Workspace Issues
 
   Scenario: This object doesn't exist validation
 
+    TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE validates that the step object file exists in the workspace for the specified component.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
@@ -21,6 +23,8 @@ Feature: Validation for Workspace Issues
           """
 
   Scenario: This object step definition doesn't exist validation
+
+    TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE validates that the step definition exists in the step object file. The step object file exists but doesn't have a matching step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
@@ -37,6 +41,8 @@ Feature: Validation for Workspace Issues
           """
 
   Scenario: This object step definition parameter set doesn't exist validation
+
+    RowIssueTypes.ROW_CELL_LIST_WORKSPACE validates that the header row cells in the test step match a parameter set defined in the step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                             |

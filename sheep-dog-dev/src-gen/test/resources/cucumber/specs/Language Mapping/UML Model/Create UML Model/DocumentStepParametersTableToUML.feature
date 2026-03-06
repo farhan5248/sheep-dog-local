@@ -11,7 +11,7 @@ Feature: DocumentStepParametersTableToUML
           
           == Test-Case: Submit
           
-          * Given: The blah application Object page is created as follows
+          === Given: The blah application Object page is created as follows
           +
           |===
           | h1
@@ -28,7 +28,7 @@ Feature: DocumentStepParametersTableToUML
           
           Desc line 1
           
-          * Step-Parameters: 1
+          === Step-Parameters: 1
           +
           |===
           | h1 | h2 | h3

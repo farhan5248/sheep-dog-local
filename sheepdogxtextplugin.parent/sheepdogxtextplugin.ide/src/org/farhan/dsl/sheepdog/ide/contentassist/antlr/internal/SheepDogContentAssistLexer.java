@@ -35,10 +35,10 @@ public class SheepDogContentAssistLexer extends InternalSheepDogLexer {
 
 	// Content Assist token mapping (different from runtime):
 	// T__22 = '='           T__23 = 'Step-Object:'     T__24 = '=='
-	// T__25 = 'Step-Definition:'  T__26 = '*'          T__27 = 'Step-Parameters:'
+	// T__25 = 'Step-Definition:'  T__26 = '==='        T__27 = 'Step-Parameters:'
 	// T__28 = 'Test-Suite:'       T__29 = 'Test-Setup:'  T__30 = 'Test-Case:'
-	// T__31 = 'Test-Data:'        T__32 = '+'            T__33 = 'Given:'
-	// T__34 = 'When:'             T__35 = 'Then:'        T__36 = 'And:'
+	// T__31 = 'Test-Data:'        T__32 = 'Given:'       T__33 = 'When:'
+	// T__34 = 'Then:'             T__35 = 'And:'         T__36 = '+'
 	// T__37 = '|==='             T__38 = '|'
 
 	@Override
@@ -68,11 +68,11 @@ public class SheepDogContentAssistLexer extends InternalSheepDogLexer {
 			super.mTokens();
 			// single line no collection
 		} else if (isKeyword("+")) {
-			mT__32(); // '+'
+			mT__36(); // '+'
 		} else if (isKeyword("|===")) {
 			mT__37(); // '|==='
-		} else if (isKeyword("*")) {
-			mT__26(); // '*'
+		} else if (isKeyword("===")) {
+			mT__26(); // '==='
 		} else if (isKeyword("==")) {
 			mT__24(); // '=='
 		} else if (isKeyword("=")) {
@@ -108,16 +108,16 @@ public class SheepDogContentAssistLexer extends InternalSheepDogLexer {
 			hasConstantDelimiter = true;
 			// single line variable delimiter collection
 		} else if (isKeyword("Given:")) {
-			mT__33(); // 'Given:'
+			mT__32(); // 'Given:'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("When:")) {
-			mT__34(); // 'When:'
+			mT__33(); // 'When:'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("Then:")) {
-			mT__35(); // 'Then:'
+			mT__34(); // 'Then:'
 			hasVariableDelimiter = true;
 		} else if (isKeyword("And:")) {
-			mT__36(); // 'And:'
+			mT__35(); // 'And:'
 			hasVariableDelimiter = true;
 		// catch all
 		} else {

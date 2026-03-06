@@ -12,7 +12,7 @@ Feature: UMLStepObjectToCode
           
           == Test-Case: Submit
           
-          * Given: The blah application Object page is empty
+          === Given: The blah application Object page is empty
           """
       And The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """

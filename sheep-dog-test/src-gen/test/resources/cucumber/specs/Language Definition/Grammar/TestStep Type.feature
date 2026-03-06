@@ -2,8 +2,16 @@
 Feature: TestStep Type
 
   \@sheep-dog-test
+  Test Step is a grammar rule in SheepDog.xtext with four keyword variants: Given, When, Then, and And.
 
   Scenario: Initial State Given
+
+    Test Step must have
+    - Step Object Ref
+    - Step Definition Ref
+    and optionally have one of these
+    - Table
+    - Text
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Given StepObject Name | Given StepDefinition Name |
@@ -23,6 +31,8 @@ Feature: TestStep Type
 
   Scenario: Initial State When
 
+    Verify the When keyword variant follows the same Test Step structure.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | When StepObject Name  | When StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed             |
@@ -40,6 +50,8 @@ Feature: TestStep Type
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Table | Absent |
 
   Scenario: Initial State Then
+
+    Verify the Then keyword variant follows the same Test Step structure.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Then StepObject Name  | Then StepDefinition Name |
@@ -59,6 +71,8 @@ Feature: TestStep Type
 
   Scenario: Initial State And
 
+    Verify the And keyword variant follows the same Test Step structure.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | And StepObject Name   | And StepDefinition Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed            |
@@ -77,6 +91,8 @@ Feature: TestStep Type
 
   Scenario: Table Excludes Text
 
+    Table and Text are mutually exclusive on a Test Step. A Test Step with a Table cannot also have Text.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node is created as follows
           | Node Path                                                                   |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table |
@@ -88,6 +104,8 @@ Feature: TestStep Type
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text | Absent |
 
   Scenario: Text Excludes Table
+
+    Table and Text are mutually exclusive on a Test Step. A Test Step with Text cannot also have a Table.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
           | Node Path                                                                  |

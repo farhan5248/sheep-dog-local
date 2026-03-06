@@ -11,10 +11,10 @@ Feature: DocumentStepToUML
           
           == Test-Case: Submit
           
-          * Given: The blah application Given page is empty
-          * When: The blah application When page is empty
-          * Then: The blah application Then page is empty
-          * And: The blah application And page is empty
+          === Given: The blah application Given page is empty
+          === When: The blah application When page is empty
+          === Then: The blah application Then page is empty
+          === And: The blah application And page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
      Then The spec-prj project uml/pst.uml file will be present
@@ -33,7 +33,7 @@ Feature: DocumentStepToUML
           
           == Test-Case: Submit's'
           
-          * Given: The blah application Given page isn't empty
+          === Given: The blah application Given page isn't empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
      Then The spec-prj project uml/pst.uml file will be present

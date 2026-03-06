@@ -12,7 +12,7 @@ Feature: UMLStepDefinitionToDocument
           
           == Test-Case: Submit
           
-          * Given: The blah application Object page is created as follows
+          === Given: The blah application Object page is created as follows
           +
           |===
           | h1
@@ -27,7 +27,7 @@ Feature: UMLStepDefinitionToDocument
           
           == Step-Definition: is created as follows
           
-          * Step-Parameters: 1
+          === Step-Parameters: 1
           +
           |===
           | h1
@@ -53,19 +53,19 @@ Feature: UMLStepDefinitionToDocument
           Desc line 2
           Desc line 3
           
-          * Step-Parameters: 1
+          === Step-Parameters: 1
           +
           |===
           | h1
           |===
           
-          * Step-Parameters: 2
+          === Step-Parameters: 2
           +
           |===
           | h2
           |===
           
-          * Step-Parameters: 3
+          === Step-Parameters: 3
           +
           |===
           | h3

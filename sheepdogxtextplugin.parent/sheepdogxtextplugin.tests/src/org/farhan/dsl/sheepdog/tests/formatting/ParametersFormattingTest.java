@@ -18,7 +18,7 @@ public class ParametersFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("== Step-Definition: Submit a claim\n");
 		sb.append("\n");
-		sb.append("* Step-Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
@@ -51,7 +51,7 @@ public class ParametersFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Step-Definition: Submit a claim\n");
 			sb.append("\n");
-			sb.append(" *  Step-Parameters:  Describe what this data is about \n");
+			sb.append(" ===  Step-Parameters:  Describe what this data is about \n");
 			sb.append("+\n");
 			sb.append(" Basic EDI claim \n");
 			sb.append(" No deductible \n");
@@ -76,7 +76,7 @@ public class ParametersFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Step-Definition: Submit a claim\n");
 			sb.append("\n");
-			sb.append("*Step-Parameters:Describe what this data is about\n");
+			sb.append("===Step-Parameters:Describe what this data is about\n");
 			sb.append("+\n");
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
@@ -102,7 +102,7 @@ public class ParametersFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Step-Definition: Submit a claim\n");
 			sb.append("\n");
-			sb.append("* Step-Parameters: Describe what this data is about\n");
+			sb.append("=== Step-Parameters: Describe what this data is about\n");
 			sb.append("\n");
 			sb.append("+\n");
 			sb.append("Basic EDI claim\n");

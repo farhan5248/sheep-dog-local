@@ -2,8 +2,12 @@
 Feature: Table Type
 
   \@sheep-dog-test
+  Table is a grammar rule in SheepDog.xtext used by Test Step, Step Parameters, and Test Data. A Table contains Rows which contain Cells.
 
   Scenario: Row
+
+    Table must have
+    - Row List
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
           | Node Path                                                                           | Row Content |
@@ -16,6 +20,11 @@ Feature: Table Type
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList/2 | Second Row  |
 
   Scenario: Cell
+
+    Row must have
+    - Cell List
+    Cell must have
+    - Name
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
           | Node Path                                                                                      | Cell Name  |

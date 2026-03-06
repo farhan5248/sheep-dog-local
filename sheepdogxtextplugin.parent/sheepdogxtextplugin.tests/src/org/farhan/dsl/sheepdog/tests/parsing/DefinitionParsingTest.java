@@ -18,7 +18,7 @@ public class DefinitionParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("== Step-Definition: Submit a claim\n");
-		sb.append("* Step-Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -47,7 +47,7 @@ public class DefinitionParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("== Step-Definition: Submit a claim\n");
-		sb.append("* Step-Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 
 		sb.append("+\n");
 		sb.append("|===\n");
@@ -62,7 +62,7 @@ public class DefinitionParsingTest extends ParsingTest {
 		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("== Step-Definition: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
-		sb.append("* Step-Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -77,7 +77,7 @@ public class DefinitionParsingTest extends ParsingTest {
 		sb.append("== Step-Definition: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
-		sb.append("* Step-Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -99,7 +99,7 @@ public class DefinitionParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("== Step-Definition: Submit a claim\n");
-		sb.append("* Step-Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -114,7 +114,7 @@ public class DefinitionParsingTest extends ParsingTest {
 		sb.append("== Step-Definition: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
-		sb.append("* Step-Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");

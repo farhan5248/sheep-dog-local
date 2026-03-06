@@ -6,6 +6,8 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Cell name should start with a capital letter quickfix
 
+    The quickfix capitalizes the first letter of a header cell name that starts with a lowercase letter.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
@@ -28,6 +30,8 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Body row Cell names can be any case quickfix
 
+    Body row cells don't trigger a validation error, so no quickfix is available.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
@@ -45,6 +49,8 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Test suite name should start with a capital letter quickfix
 
+    The quickfix capitalizes the first letter of a test suite name that starts with a lowercase letter.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
           | Node Path                    | Test Suite Full Name    | Test Suite Name   |
           | TestProject/TestDocumentList | specs/lowercase process | lowercase process |
@@ -61,6 +67,8 @@ Feature: Quickfixes for Only Issues
 
   Scenario: Test case name should start with a capital letter quickfix
 
+    The quickfix capitalizes the first letter of a test case name that starts with a lowercase letter.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
           | Node Path                                            | Test Case Name      |
           | TestProject/TestDocumentList/1/TestStepContainerList | lowercase test case |
@@ -76,6 +84,8 @@ Feature: Quickfixes for Only Issues
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
 
   Scenario: Test step must have a valid object name quickfix
+
+    No quickfix is available for invalid object names. The user must manually correct the step object reference.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name |
@@ -97,6 +107,8 @@ Feature: Quickfixes for Only Issues
      Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: Test step must have a valid step definition name quickfix
+
+    No quickfix is available for invalid step definition names. The user must manually correct the step definition reference.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name           |

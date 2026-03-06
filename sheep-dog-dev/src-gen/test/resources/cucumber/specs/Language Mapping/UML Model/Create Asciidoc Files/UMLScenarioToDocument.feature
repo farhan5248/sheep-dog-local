@@ -11,7 +11,7 @@ Feature: UMLScenarioToDocument
           
           == Test-Case: Submit
           
-          * Given: The blah application Object page is empty
+          === Given: The blah application Object page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
@@ -34,11 +34,11 @@ Feature: UMLScenarioToDocument
           Desc line 2
           Desc line 3
           
-          * Given: The blah application Object page is empty
+          === Given: The blah application Object page is empty
           
-          * Given: The blah application Object2 page is empty
+          === Given: The blah application Object2 page is empty
           
-          * Given: The blah application Object3 page is empty
+          === Given: The blah application Object3 page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is deleted

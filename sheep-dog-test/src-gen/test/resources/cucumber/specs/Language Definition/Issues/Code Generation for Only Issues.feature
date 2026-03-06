@@ -6,6 +6,8 @@ Feature: Code Generation for Only Issues
 
   Scenario: Cell name should start with a capital letter generation
 
+    Applying the quickfix capitalizes the first letter of the header cell name in place.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
@@ -24,6 +26,8 @@ Feature: Code Generation for Only Issues
 
   Scenario: Test suite name should start with a capital letter generation
 
+    Applying the quickfix capitalizes the first letter of the test suite name in place.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
           | Node Path                    | Test Suite Full Name    | Test Suite Name   |
           | TestProject/TestDocumentList | specs/lowercase process | lowercase process |
@@ -38,6 +42,8 @@ Feature: Code Generation for Only Issues
           | TestProject/TestDocumentList/1 | Lowercase process |
 
   Scenario: Test case name should start with a capital letter generation
+
+    Applying the quickfix capitalizes the first letter of the test case name in place.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
           | Node Path                                            | Test Case Name      |

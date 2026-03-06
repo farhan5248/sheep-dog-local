@@ -13,11 +13,11 @@ Feature: UMLBackgroundToDocument
           
           Desc line 1
           
-          * Given: The Object0 page is valid
+          === Given: The Object0 page is valid
           
           == Test-Case: Submit
           
-          * Given: The Object page is valid
+          === Given: The Object page is valid
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
@@ -41,19 +41,19 @@ Feature: UMLBackgroundToDocument
           
           == Test-Setup: Setup
           
-          * Given: The Object0 page is valid
+          === Given: The Object0 page is valid
           
           == Test-Case: Submit 1
           
-          * Given: The Object page is valid
+          === Given: The Object page is valid
           
           == Test-Case: Submit 2
           
-          * Given: The Object2 page is valid
+          === Given: The Object2 page is valid
           
           == Test-Case: Submit 3
           
-          * Given: The Object3 page is valid
+          === Given: The Object3 page is valid
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
@@ -76,13 +76,13 @@ Feature: UMLBackgroundToDocument
           
           == Test-Setup: Setup
           
-          * Given: The Object page is valid
-          * Given: The Object2 page is valid
-          * Given: The Object3 page is valid
+          === Given: The Object page is valid
+          === Given: The Object2 page is valid
+          === Given: The Object3 page is valid
           
           == Test-Case: Submit
           
-          * Given: The Object page is valid
+          === Given: The Object page is valid
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is deleted

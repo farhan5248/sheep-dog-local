@@ -15,7 +15,7 @@ public class TestDataFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		TestDataElements a = ga.getTestDataAccess();
-		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getAsteriskKeyword_0()), doc);
+		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getEqualsSignEqualsSignEqualsSignKeyword_0()), doc);
 		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getTestDataKeyword_1()), doc);
 		formatTitle(df.getRegion(theTestData, a.getNamePhraseParserRuleCall_2_0()), doc);
 

@@ -6,6 +6,8 @@ Feature: Phrase Fragment
 
   Scenario Outline: Tag Fragment
 
+    The tag regex in PhraseFragments captures at symbol prefixed words from a Phrase into a comma-separated tag list. A Phrase containing TODO is not treated as tags.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file Line type is created as follows
           | Line   |
           | <Line> |
@@ -22,6 +24,8 @@ Feature: Phrase Fragment
           | TODO @tag2 @tag3  | empty            |
 
   Scenario Outline: Todo Fragment
+
+    The todo regex in PhraseFragments captures the uppercase todo keyword and its description from a Phrase.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file Line type is created as follows
           | Line   |

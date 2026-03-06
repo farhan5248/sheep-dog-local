@@ -12,6 +12,7 @@ Feature: Proposals for Workspace Step Objects
 
   Scenario: No component no existing
 
+    Without a component and without workspace step objects, no proposals are available.
     TODO make this an outline with various steps like "The" or "The batchjob" etc
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -23,6 +24,8 @@ Feature: Proposals for Workspace Step Objects
      Then The xtext plugin list proposals popup will be empty
 
   Scenario: No component has existing
+
+    Without a component but with workspace step objects, all step objects are proposed with their description from the step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name |
@@ -42,6 +45,8 @@ Feature: Proposals for Workspace Step Objects
 
   Scenario: Has component no existing
 
+    With a component but without workspace step objects for it, no proposals are available.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob  |
@@ -51,6 +56,8 @@ Feature: Proposals for Workspace Step Objects
      Then The xtext plugin list proposals popup will be empty
 
   Scenario: Has component has existing
+
+    With a component and workspace step objects, step objects matching the component are proposed with their description.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name |

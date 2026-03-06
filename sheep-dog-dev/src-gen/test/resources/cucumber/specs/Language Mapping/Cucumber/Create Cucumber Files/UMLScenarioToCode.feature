@@ -11,7 +11,7 @@ Feature: UMLScenarioToCode
           
           == Test-Case: Submit
           
-          * Given: The blah application Object1 page is empty
+          === Given: The blah application Object1 page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The maven plugin uml-to-cucumber goal is executed
@@ -33,11 +33,11 @@ Feature: UMLScenarioToCode
           Desc line 2
           Desc line 3
           
-          * Given: The blah application Object1 page is empty
+          === Given: The blah application Object1 page is empty
           
-          * Given: The blah application Object2 page is empty
+          === Given: The blah application Object2 page is empty
           
-          * Given: The blah application Object3 page is empty
+          === Given: The blah application Object3 page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The maven plugin uml-to-cucumber goal is executed

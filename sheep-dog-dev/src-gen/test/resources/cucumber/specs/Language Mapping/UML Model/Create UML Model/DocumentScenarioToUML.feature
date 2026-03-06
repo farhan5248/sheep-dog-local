@@ -11,7 +11,7 @@ Feature: DocumentScenarioToUML
           
           == Test-Case: Submit
           
-          * Given: The blah application Object page is empty
+          === Given: The blah application Object page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
      Then The spec-prj project uml/pst.uml file will be present
@@ -32,11 +32,11 @@ Feature: DocumentScenarioToUML
           Desc line 2
           Desc line 3
           
-          * Given: The blah application Object page is empty
+          === Given: The blah application Object page is empty
           
-          * Given: The blah application Object2 page is empty
+          === Given: The blah application Object2 page is empty
           
-          * Given: The blah application Object3 page is empty
+          === Given: The blah application Object3 page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed
      Then The spec-prj project uml/pst.uml file will be present
@@ -64,13 +64,13 @@ Feature: DocumentScenarioToUML
           
           @tag1
           
-          * Given: The blah application Object page is empty
+          === Given: The blah application Object page is empty
           
           == Test-Case: Submit2
           
           @tag2
           
-          * Given: The blah application Object page is empty
+          === Given: The blah application Object page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed with
           | Tags |

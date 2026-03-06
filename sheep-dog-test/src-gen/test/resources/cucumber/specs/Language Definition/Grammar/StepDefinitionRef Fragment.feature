@@ -6,6 +6,14 @@ Feature: StepDefinitionRef Fragment
 
   Scenario Outline: Part Fragment
 
+    The part regex in StepDefinitionRefFragments captures a grammar element name and its type category from a StepDefinitionRef. The StepDefinitionRef grammar rule is WORD+ in SheepDog.xtext. The part types are defined in StepDefinitionRefPartTypes enum.
+    - type - Grammar types (non-terminal rules) defined in the .xtext file
+    - language - The name of the Xtext grammar/language implementation
+    - assignment - Named assignments within grammar rules
+    - fragment - Test step regex fragments defining type enumerations
+    - scope - Issue scope levels from TypeIssueTypes enum
+    - node - AST node elements in the parsed syntax tree
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
           | Test Step Full Name                                       |
           | The daily batchjob Output file <Step Definition Ref Name> |
@@ -24,6 +32,12 @@ Feature: StepDefinitionRef Fragment
           | StepObjectRef node is absent        | StepObjectRef node        | StepObjectRef    | node       | AST node elements in the parsed syntax tree                   |
 
   Scenario Outline: State Fragment
+
+    The state regex in StepDefinitionRefFragments captures the verb and description from a StepDefinitionRef. The verb maps to setter or assertion methods in the generated code. The state types are defined in StepDefinitionRefStateTypes enum.
+    - is - Maps to setter method
+    - isn't - Maps to setter method but used to remove something
+    - will be - Maps to assertion method
+    - won't be - Maps to assertion method for negative testing
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
           | Test Step Full Name                                       |

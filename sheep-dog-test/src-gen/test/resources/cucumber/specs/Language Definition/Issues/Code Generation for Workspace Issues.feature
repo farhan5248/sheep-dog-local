@@ -16,6 +16,8 @@ Feature: Code Generation for Workspace Issues
 
   Scenario: This object doesn't exist generation
 
+    Applying the quickfix creates the step object file with the first step definition.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
@@ -30,6 +32,8 @@ Feature: Code Generation for Workspace Issues
           | TestProject/TestDocumentList/2 | stepdefs/daily batchjob/Input file.feature | is present           |
 
   Scenario: This object step definition doesn't exist generation
+
+    Applying the quickfix adds the missing step definition to the existing step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
@@ -49,6 +53,8 @@ Feature: Code Generation for Workspace Issues
           | TestProject/TestDocumentList/2/StepDefinitionList | is present           |
 
   Scenario: This object step definition parameter set doesn't exist generation
+
+    Applying the quickfix adds the new parameter set to the step definition in the step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                             |
@@ -84,6 +90,8 @@ Feature: Code Generation for Workspace Issues
           | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/2/Table/RowList/1/CellList | N2        |
 
   Scenario: This object step definition text parameter doesn't exist generation
+
+    Applying the quickfix adds the Content parameter to the step definition for text blocks.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                             |

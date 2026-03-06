@@ -113,7 +113,7 @@ public class SheepDogLexer extends InternalSheepDogLexer {
 			mRULE_WORD();
 		} else if (hasConstantDelimiter) {
 			if (isKeyword("|")) {
-				mT__25();
+				mT__25();// '|'
 			} else {
 				mRULE_WORD();
 			}
@@ -121,15 +121,15 @@ public class SheepDogLexer extends InternalSheepDogLexer {
 			super.mTokens();
 			// single line no collection
 		} else if (isKeyword("+")) {
-			mT__23();
+			mT__23();// '+'
 		} else if (isKeyword("|===")) {
-			mT__24();
-		} else if (isKeyword("*")) {
-			mT__13();
+			mT__24();// '|==='
+		} else if (isKeyword("===")) {
+			mT__13();// '==='
 		} else if (isKeyword("==")) {
-			mT__11();
+			mT__11();// '=='
 		} else if (isKeyword("=")) {
-			mT__9();
+			mT__9();// '='
 			// single line automatic collection
 		} else if (isKeyword("#")) {
 			mRULE_SL_COMMENT();
@@ -157,7 +157,7 @@ public class SheepDogLexer extends InternalSheepDogLexer {
 			hasNoDelimiter = true;
 			// single line constant delimiter collection
 		} else if (isKeyword("|")) {
-			mT__25();
+			mT__25();// '|'
 			hasConstantDelimiter = true;
 			// single line variable delimiter collection
 		} else if (isKeyword("Given:")) {

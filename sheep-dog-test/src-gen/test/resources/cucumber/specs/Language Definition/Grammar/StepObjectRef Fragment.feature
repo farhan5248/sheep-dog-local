@@ -6,6 +6,8 @@ Feature: StepObjectRef Fragment
 
   Scenario Outline: Component Fragment
 
+    The component regex in StepObjectRefFragments captures the system name and type from a StepObjectRef. The StepObjectRef grammar rule is WORD+ followed by an object type keyword in SheepDog.xtext. When no component is present the result is empty.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
@@ -21,6 +23,13 @@ Feature: StepObjectRef Fragment
           | The uml-to-cucumber request is empty                                  | empty                    | empty          | empty          |
 
   Scenario Outline: Component Fragment Types
+
+    The component type keywords are defined in StepObjectRefComponentTypes enum.
+    - application - GUI web application
+    - project - Collection of files such as a Maven project
+    - service - RESTful or SOAP webservice
+    - batchjob - EOD or ETL batchjob
+    - plugin - Maven or Eclipse plugin
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
           | Test Step Full Name   |
@@ -40,6 +49,8 @@ Feature: StepObjectRef Fragment
 
   Scenario Outline: Object Fragment
 
+    The object regex in StepObjectRefFragments captures the object name and type from a StepObjectRef. The object type is the terminal keyword defined in the StepObjectRef grammar rule in SheepDog.xtext. Object types are split into vertex types (state holders) and edge types (actions).
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
           | Test Step Full Name   |
           | <Test Step Full Name> |
@@ -55,6 +66,17 @@ Feature: StepObjectRef Fragment
           | The graph-viewer application uml-to-cucumber request                             | uml-to-cucumber request | uml-to-cucumber | request     |
 
   Scenario Outline: Object Vertex Fragment
+
+    Vertex object types are defined in StepObjectRefObjectVertexTypes enum and represent state holders.
+    - file - Any sort of file
+    - directory - File directory
+    - page - Web page
+    - dialog - Window dialog box
+    - response - Web service response
+    - popup - List of options for quickfix or content proposal
+    - annotation - Visual indicator for error or warning messages
+    - hover - Popup displaying information on mouse hover
+    - tooltip - Small popup displaying descriptive text
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
           | Test Step Full Name   |
@@ -77,6 +99,12 @@ Feature: StepObjectRef Fragment
           | The xtext plugin status tooltip is empty       | tooltip     | Small popup displaying descriptive text          |
 
   Scenario Outline: Object Edge Fragment
+
+    Edge object types are defined in StepObjectRefObjectEdgeTypes enum and represent actions or transitions.
+    - request - Web-service request
+    - goal - Maven plugin goal
+    - action - Eclipse plugin action
+    - job - EOD or ETL batchjob
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
           | Test Step Full Name   |

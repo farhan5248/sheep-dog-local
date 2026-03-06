@@ -11,7 +11,7 @@ Feature: UMLStepParametersTableToCode
           
           == Test-Case: Submit
           
-          * Given: The blah application Object page Top section will be created as follows
+          === Given: The blah application Object page Top section will be created as follows
           +
           |===
           | h1
@@ -24,19 +24,19 @@ Feature: UMLStepParametersTableToCode
           
           == Step-Definition: Top section will be created as follows
           
-          * Step-Parameters: 1
+          === Step-Parameters: 1
           +
           |===
           | h1
           |===
           
-          * Step-Parameters: 2
+          === Step-Parameters: 2
           +
           |===
           | h1 | h2
           |===
           
-          * Step-Parameters: 3
+          === Step-Parameters: 3
           +
           |===
           | h1 | h2 | h3

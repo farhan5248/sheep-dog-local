@@ -2,8 +2,12 @@
 Feature: Description Type
 
   \@sheep-dog-test
+  Description is a grammar rule in SheepDog.xtext used by Step Object, Step Definition, Test Suite, Test Setup, and Test Case.
 
   Scenario: Initial State
+
+    Description must have
+    - Line List
 
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows
           | Node Path                                           | Line Content |

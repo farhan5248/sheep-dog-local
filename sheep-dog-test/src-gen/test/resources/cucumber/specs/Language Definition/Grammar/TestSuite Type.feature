@@ -2,8 +2,15 @@
 Feature: TestSuite Type
 
   \@sheep-dog-test
+  Test Suite is a top-level grammar rule in SheepDog.xtext. A Test Suite contains Test Step Containers (Test Case or Test Setup), and Test Case contains Test Data.
 
   Scenario: Initial State
+
+    Test Suite must have
+    - Name
+    and optionally have these
+    - Description
+    - Test Step Container List
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
           | Node Path                    | Test Suite Full Name   |
@@ -22,6 +29,13 @@ Feature: TestSuite Type
           | TestProject/TestDocumentList/1/Description | Absent |
 
   Scenario: Test Case
+
+    Test Case must have
+    - Name
+    and optionally have these
+    - Description
+    - Test Step List
+    - Test Data List
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
           | Node Path                                            | Test Case Name  |
@@ -44,6 +58,12 @@ Feature: TestSuite Type
 
   Scenario: Test Setup
 
+    Test Setup must have
+    - Name
+    and optionally have these
+    - Description
+    - Test Step List
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
           | Node Path                                            | Test Setup Name  |
           | TestProject/TestDocumentList/1/TestStepContainerList | First Test Setup |
@@ -61,6 +81,12 @@ Feature: TestSuite Type
           | TestProject/TestDocumentList/1/TestStepContainerList/1/Description | Absent |
 
   Scenario: Test Data
+
+    Test Data must have
+    - Name
+    - Table
+    and optionally have these
+    - Description
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node is created as follows
           | Node Path                                                           | Test Data Name  |

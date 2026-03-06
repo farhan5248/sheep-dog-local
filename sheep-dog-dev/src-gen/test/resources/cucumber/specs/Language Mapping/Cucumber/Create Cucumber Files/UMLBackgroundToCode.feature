@@ -13,11 +13,11 @@ Feature: UMLBackgroundToCode
           
           Desc line 1
           
-          * Given: The Object0 page is valid
+          === Given: The Object0 page is valid
           
           == Test-Case: Submit
           
-          * Given: The Object1 page is valid
+          === Given: The Object1 page is valid
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The maven plugin uml-to-cucumber goal is executed
@@ -34,19 +34,19 @@ Feature: UMLBackgroundToCode
           
           == Test-Setup: Setup
           
-          * Given: The Object0 page is valid
+          === Given: The Object0 page is valid
           
           == Test-Case: Submit 1
           
-          * Given: The Object1 page is valid
+          === Given: The Object1 page is valid
           
           == Test-Case: Submit 2
           
-          * Given: The Object2 page is valid
+          === Given: The Object2 page is valid
           
           == Test-Case: Submit 3
           
-          * Given: The Object3 page is valid
+          === Given: The Object3 page is valid
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The maven plugin uml-to-cucumber goal is executed
@@ -68,13 +68,13 @@ Feature: UMLBackgroundToCode
           
           == Test-Setup: Setup
           
-          * Given: The Object1 page is valid
-          * Given: The Object2 page is valid
-          * Given: The Object3 page is valid
+          === Given: The Object1 page is valid
+          === Given: The Object2 page is valid
+          === Given: The Object3 page is valid
           
           == Test-Case: Submit
           
-          * Given: The Object page is valid
+          === Given: The Object page is valid
           """
      When The maven plugin asciidoctor-to-uml goal is executed
       And The maven plugin uml-to-cucumber goal is executed
