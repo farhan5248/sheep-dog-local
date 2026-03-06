@@ -46,22 +46,26 @@ public class UMLTestProject extends UMLElement {
 	}
 
 	public UMLStepObject addStepObject(String qualifiedName) {
-		if (getPackagedElement(qualifiedName, null) == null) {
-			UMLStepObject stepObject = new UMLStepObject(qualifiedName, this,
-					String.valueOf(secondLayerObjects.size()));
-			secondLayerObjects.add(stepObject);
-			return stepObject;
+		PackageableElement existing = getPackagedElement(qualifiedName, null);
+		if (existing != null) {
+			secondLayerObjects.removeIf(so -> so.getUmlElement().getQualifiedName().contentEquals(qualifiedName));
+			existing.destroy();
 		}
-		return null;
+		UMLStepObject stepObject = new UMLStepObject(qualifiedName, this,
+				String.valueOf(secondLayerObjects.size()));
+		secondLayerObjects.add(stepObject);
+		return stepObject;
 	}
 
 	public UMLTestSuite addTestSuite(String qualifiedName) {
-		if (getPackagedElement(qualifiedName, null) == null) {
-			UMLTestSuite testSuite = new UMLTestSuite(qualifiedName, this, String.valueOf(firstLayerObjects.size()));
-			firstLayerObjects.add(testSuite);
-			return testSuite;
+		PackageableElement existing = getPackagedElement(qualifiedName, null);
+		if (existing != null) {
+			firstLayerObjects.removeIf(ts -> ts.getUmlElement().getQualifiedName().contentEquals(qualifiedName));
+			existing.destroy();
 		}
-		return null;
+		UMLTestSuite testSuite = new UMLTestSuite(qualifiedName, this, String.valueOf(firstLayerObjects.size()));
+		firstLayerObjects.add(testSuite);
+		return testSuite;
 	}
 
 	public String getDir() {
