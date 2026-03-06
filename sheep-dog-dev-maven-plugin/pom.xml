@@ -3,7 +3,7 @@
 
 	<groupId>org.farhan</groupId>
 	<artifactId>sheep-dog-dev-maven-plugin</artifactId>
-	<version>1.46-SNAPSHOT</version>
+	<version>1.45</version>
 	<packaging>maven-plugin</packaging>
 	<name>Lean Sheep Dog Tools for Developers Maven Plugin</name>
 
@@ -148,7 +148,7 @@
 			<plugin>
 				<groupId>org.farhan</groupId>
 				<artifactId>sheep-dog-dev-maven-plugin</artifactId>
-				<version>1.44</version>
+				<version>1.45</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
