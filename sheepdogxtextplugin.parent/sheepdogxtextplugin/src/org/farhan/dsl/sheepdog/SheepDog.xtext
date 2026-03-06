@@ -20,7 +20,7 @@ StepDefinition:
 StepParameters:
 	'*' 'Step-Parameters:' name=Phrase EOL
 	nestedDescription=NestedDescription?
-	table=Table;
+	table=Table?;
 
 TestSuite:
 	'=' 'Test-Suite:' name=Phrase EOL
@@ -44,7 +44,7 @@ TestCase:
 TestData:
 	'*' 'Test-Data:' name=Phrase EOL
 	nestedDescription=NestedDescription?
-	table=Table;
+	table=Table?;
 
 Description:
 	lineList+=Line+;

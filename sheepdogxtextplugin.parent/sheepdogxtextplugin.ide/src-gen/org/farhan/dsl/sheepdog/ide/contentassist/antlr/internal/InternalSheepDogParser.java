@@ -2071,11 +2071,11 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             if ( (LA4_0==22) ) {
                 int LA4_1 = input.LA(2);
 
-                if ( (LA4_1==23) ) {
-                    alt4=1;
-                }
-                else if ( (LA4_1==28) ) {
+                if ( (LA4_1==28) ) {
                     alt4=2;
+                }
+                else if ( (LA4_1==23) ) {
+                    alt4=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -2248,6 +2248,11 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
             if ( (LA6_0==26) ) {
                 switch ( input.LA(2) ) {
+                case 33:
+                    {
+                    alt6=1;
+                    }
+                    break;
                 case 36:
                     {
                     alt6=4;
@@ -2261,11 +2266,6 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 case 34:
                     {
                     alt6=2;
-                    }
-                    break;
-                case 33:
-                    {
-                    alt6=1;
                     }
                     break;
                 default:
@@ -4493,9 +4493,9 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int LA16_1 = input.LA(2);
 
                 if ( (LA16_1==RULE_EOL) ) {
-                    int LA16_2 = input.LA(3);
+                    int LA16_3 = input.LA(3);
 
-                    if ( (LA16_2==RULE_WORD) ) {
+                    if ( (LA16_3==RULE_WORD) ) {
                         alt16=1;
                     }
                 }
@@ -4571,27 +4571,38 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__5__Impl"
-    // InternalSheepDog.g:1389:1: rule__StepParameters__Group__5__Impl : ( ( rule__StepParameters__TableAssignment_5 ) ) ;
+    // InternalSheepDog.g:1389:1: rule__StepParameters__Group__5__Impl : ( ( rule__StepParameters__TableAssignment_5 )? ) ;
     public final void rule__StepParameters__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1393:1: ( ( ( rule__StepParameters__TableAssignment_5 ) ) )
-            // InternalSheepDog.g:1394:1: ( ( rule__StepParameters__TableAssignment_5 ) )
+            // InternalSheepDog.g:1393:1: ( ( ( rule__StepParameters__TableAssignment_5 )? ) )
+            // InternalSheepDog.g:1394:1: ( ( rule__StepParameters__TableAssignment_5 )? )
             {
-            // InternalSheepDog.g:1394:1: ( ( rule__StepParameters__TableAssignment_5 ) )
-            // InternalSheepDog.g:1395:2: ( rule__StepParameters__TableAssignment_5 )
+            // InternalSheepDog.g:1394:1: ( ( rule__StepParameters__TableAssignment_5 )? )
+            // InternalSheepDog.g:1395:2: ( rule__StepParameters__TableAssignment_5 )?
             {
              before(grammarAccess.getStepParametersAccess().getTableAssignment_5()); 
-            // InternalSheepDog.g:1396:2: ( rule__StepParameters__TableAssignment_5 )
-            // InternalSheepDog.g:1396:3: rule__StepParameters__TableAssignment_5
-            {
-            pushFollow(FOLLOW_2);
-            rule__StepParameters__TableAssignment_5();
+            // InternalSheepDog.g:1396:2: ( rule__StepParameters__TableAssignment_5 )?
+            int alt17=2;
+            int LA17_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA17_0==32) ) {
+                alt17=1;
+            }
+            switch (alt17) {
+                case 1 :
+                    // InternalSheepDog.g:1396:3: rule__StepParameters__TableAssignment_5
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__StepParameters__TableAssignment_5();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 
@@ -4980,13 +4991,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getTestSuiteAccess().getDescriptionAssignment_4()); 
             // InternalSheepDog.g:1532:2: ( rule__TestSuite__DescriptionAssignment_4 )?
-            int alt17=2;
-            int LA17_0 = input.LA(1);
+            int alt18=2;
+            int LA18_0 = input.LA(1);
 
-            if ( (LA17_0==RULE_WORD) ) {
-                alt17=1;
+            if ( (LA18_0==RULE_WORD) ) {
+                alt18=1;
             }
-            switch (alt17) {
+            switch (alt18) {
                 case 1 :
                     // InternalSheepDog.g:1532:3: rule__TestSuite__DescriptionAssignment_4
                     {
@@ -5071,17 +5082,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getTestSuiteAccess().getTestStepContainerListAssignment_5()); 
             // InternalSheepDog.g:1558:2: ( rule__TestSuite__TestStepContainerListAssignment_5 )*
-            loop18:
+            loop19:
             do {
-                int alt18=2;
-                int LA18_0 = input.LA(1);
+                int alt19=2;
+                int LA19_0 = input.LA(1);
 
-                if ( (LA18_0==24) ) {
-                    alt18=1;
+                if ( (LA19_0==24) ) {
+                    alt19=1;
                 }
 
 
-                switch (alt18) {
+                switch (alt19) {
             	case 1 :
             	    // InternalSheepDog.g:1558:3: rule__TestSuite__TestStepContainerListAssignment_5
             	    {
@@ -5095,7 +5106,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop18;
+            	    break loop19;
                 }
             } while (true);
 
@@ -5484,13 +5495,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getTestSetupAccess().getDescriptionAssignment_4()); 
             // InternalSheepDog.g:1694:2: ( rule__TestSetup__DescriptionAssignment_4 )?
-            int alt19=2;
-            int LA19_0 = input.LA(1);
+            int alt20=2;
+            int LA20_0 = input.LA(1);
 
-            if ( (LA19_0==RULE_WORD) ) {
-                alt19=1;
+            if ( (LA20_0==RULE_WORD) ) {
+                alt20=1;
             }
-            switch (alt19) {
+            switch (alt20) {
                 case 1 :
                     // InternalSheepDog.g:1694:3: rule__TestSetup__DescriptionAssignment_4
                     {
@@ -5575,17 +5586,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getTestSetupAccess().getTestStepListAssignment_5()); 
             // InternalSheepDog.g:1720:2: ( rule__TestSetup__TestStepListAssignment_5 )*
-            loop20:
+            loop21:
             do {
-                int alt20=2;
-                int LA20_0 = input.LA(1);
+                int alt21=2;
+                int LA21_0 = input.LA(1);
 
-                if ( (LA20_0==26) ) {
-                    alt20=1;
+                if ( (LA21_0==26) ) {
+                    alt21=1;
                 }
 
 
-                switch (alt20) {
+                switch (alt21) {
             	case 1 :
             	    // InternalSheepDog.g:1720:3: rule__TestSetup__TestStepListAssignment_5
             	    {
@@ -5599,7 +5610,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop20;
+            	    break loop21;
                 }
             } while (true);
 
@@ -5988,13 +5999,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getTestCaseAccess().getDescriptionAssignment_4()); 
             // InternalSheepDog.g:1856:2: ( rule__TestCase__DescriptionAssignment_4 )?
-            int alt21=2;
-            int LA21_0 = input.LA(1);
+            int alt22=2;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA21_0==RULE_WORD) ) {
-                alt21=1;
+            if ( (LA22_0==RULE_WORD) ) {
+                alt22=1;
             }
-            switch (alt21) {
+            switch (alt22) {
                 case 1 :
                     // InternalSheepDog.g:1856:3: rule__TestCase__DescriptionAssignment_4
                     {
@@ -6084,23 +6095,23 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getTestCaseAccess().getTestStepListAssignment_5()); 
             // InternalSheepDog.g:1883:2: ( rule__TestCase__TestStepListAssignment_5 )*
-            loop22:
+            loop23:
             do {
-                int alt22=2;
-                int LA22_0 = input.LA(1);
+                int alt23=2;
+                int LA23_0 = input.LA(1);
 
-                if ( (LA22_0==26) ) {
-                    int LA22_1 = input.LA(2);
+                if ( (LA23_0==26) ) {
+                    int LA23_1 = input.LA(2);
 
-                    if ( ((LA22_1>=33 && LA22_1<=36)) ) {
-                        alt22=1;
+                    if ( ((LA23_1>=33 && LA23_1<=36)) ) {
+                        alt23=1;
                     }
 
 
                 }
 
 
-                switch (alt22) {
+                switch (alt23) {
             	case 1 :
             	    // InternalSheepDog.g:1883:3: rule__TestCase__TestStepListAssignment_5
             	    {
@@ -6114,7 +6125,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop22;
+            	    break loop23;
                 }
             } while (true);
 
@@ -6188,17 +6199,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getTestCaseAccess().getTestDataListAssignment_6()); 
             // InternalSheepDog.g:1909:2: ( rule__TestCase__TestDataListAssignment_6 )*
-            loop23:
+            loop24:
             do {
-                int alt23=2;
-                int LA23_0 = input.LA(1);
+                int alt24=2;
+                int LA24_0 = input.LA(1);
 
-                if ( (LA23_0==26) ) {
-                    alt23=1;
+                if ( (LA24_0==26) ) {
+                    alt24=1;
                 }
 
 
-                switch (alt23) {
+                switch (alt24) {
             	case 1 :
             	    // InternalSheepDog.g:1909:3: rule__TestCase__TestDataListAssignment_6
             	    {
@@ -6212,7 +6223,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop23;
+            	    break loop24;
                 }
             } while (true);
 
@@ -6601,21 +6612,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getTestDataAccess().getNestedDescriptionAssignment_4()); 
             // InternalSheepDog.g:2045:2: ( rule__TestData__NestedDescriptionAssignment_4 )?
-            int alt24=2;
-            int LA24_0 = input.LA(1);
+            int alt25=2;
+            int LA25_0 = input.LA(1);
 
-            if ( (LA24_0==32) ) {
-                int LA24_1 = input.LA(2);
+            if ( (LA25_0==32) ) {
+                int LA25_1 = input.LA(2);
 
-                if ( (LA24_1==RULE_EOL) ) {
-                    int LA24_2 = input.LA(3);
+                if ( (LA25_1==RULE_EOL) ) {
+                    int LA25_3 = input.LA(3);
 
-                    if ( (LA24_2==RULE_WORD) ) {
-                        alt24=1;
+                    if ( (LA25_3==RULE_WORD) ) {
+                        alt25=1;
                     }
                 }
             }
-            switch (alt24) {
+            switch (alt25) {
                 case 1 :
                     // InternalSheepDog.g:2045:3: rule__TestData__NestedDescriptionAssignment_4
                     {
@@ -6686,27 +6697,38 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__TestData__Group__5__Impl"
-    // InternalSheepDog.g:2064:1: rule__TestData__Group__5__Impl : ( ( rule__TestData__TableAssignment_5 ) ) ;
+    // InternalSheepDog.g:2064:1: rule__TestData__Group__5__Impl : ( ( rule__TestData__TableAssignment_5 )? ) ;
     public final void rule__TestData__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2068:1: ( ( ( rule__TestData__TableAssignment_5 ) ) )
-            // InternalSheepDog.g:2069:1: ( ( rule__TestData__TableAssignment_5 ) )
+            // InternalSheepDog.g:2068:1: ( ( ( rule__TestData__TableAssignment_5 )? ) )
+            // InternalSheepDog.g:2069:1: ( ( rule__TestData__TableAssignment_5 )? )
             {
-            // InternalSheepDog.g:2069:1: ( ( rule__TestData__TableAssignment_5 ) )
-            // InternalSheepDog.g:2070:2: ( rule__TestData__TableAssignment_5 )
+            // InternalSheepDog.g:2069:1: ( ( rule__TestData__TableAssignment_5 )? )
+            // InternalSheepDog.g:2070:2: ( rule__TestData__TableAssignment_5 )?
             {
              before(grammarAccess.getTestDataAccess().getTableAssignment_5()); 
-            // InternalSheepDog.g:2071:2: ( rule__TestData__TableAssignment_5 )
-            // InternalSheepDog.g:2071:3: rule__TestData__TableAssignment_5
-            {
-            pushFollow(FOLLOW_2);
-            rule__TestData__TableAssignment_5();
+            // InternalSheepDog.g:2071:2: ( rule__TestData__TableAssignment_5 )?
+            int alt26=2;
+            int LA26_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA26_0==32) ) {
+                alt26=1;
+            }
+            switch (alt26) {
+                case 1 :
+                    // InternalSheepDog.g:2071:3: rule__TestData__TableAssignment_5
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__TestData__TableAssignment_5();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 
@@ -6952,17 +6974,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getNestedDescriptionAccess().getLineListAssignment_2()); 
             // InternalSheepDog.g:2158:3: ( rule__NestedDescription__LineListAssignment_2 )*
-            loop25:
+            loop27:
             do {
-                int alt25=2;
-                int LA25_0 = input.LA(1);
+                int alt27=2;
+                int LA27_0 = input.LA(1);
 
-                if ( (LA25_0==RULE_WORD) ) {
-                    alt25=1;
+                if ( (LA27_0==RULE_WORD) ) {
+                    alt27=1;
                 }
 
 
-                switch (alt25) {
+                switch (alt27) {
             	case 1 :
             	    // InternalSheepDog.g:2158:4: rule__NestedDescription__LineListAssignment_2
             	    {
@@ -6976,7 +6998,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop25;
+            	    break loop27;
                 }
             } while (true);
 
@@ -7448,13 +7470,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getGivenAccess().getAlternatives_5()); 
             // InternalSheepDog.g:2321:2: ( rule__Given__Alternatives_5 )?
-            int alt26=2;
-            int LA26_0 = input.LA(1);
+            int alt28=2;
+            int LA28_0 = input.LA(1);
 
-            if ( (LA26_0==32) ) {
-                alt26=1;
+            if ( (LA28_0==32) ) {
+                alt28=1;
             }
-            switch (alt26) {
+            switch (alt28) {
                 case 1 :
                     // InternalSheepDog.g:2321:3: rule__Given__Alternatives_5
                     {
@@ -7934,13 +7956,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getWhenAccess().getAlternatives_5()); 
             // InternalSheepDog.g:2483:2: ( rule__When__Alternatives_5 )?
-            int alt27=2;
-            int LA27_0 = input.LA(1);
+            int alt29=2;
+            int LA29_0 = input.LA(1);
 
-            if ( (LA27_0==32) ) {
-                alt27=1;
+            if ( (LA29_0==32) ) {
+                alt29=1;
             }
-            switch (alt27) {
+            switch (alt29) {
                 case 1 :
                     // InternalSheepDog.g:2483:3: rule__When__Alternatives_5
                     {
@@ -8420,13 +8442,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getThenAccess().getAlternatives_5()); 
             // InternalSheepDog.g:2645:2: ( rule__Then__Alternatives_5 )?
-            int alt28=2;
-            int LA28_0 = input.LA(1);
+            int alt30=2;
+            int LA30_0 = input.LA(1);
 
-            if ( (LA28_0==32) ) {
-                alt28=1;
+            if ( (LA30_0==32) ) {
+                alt30=1;
             }
-            switch (alt28) {
+            switch (alt30) {
                 case 1 :
                     // InternalSheepDog.g:2645:3: rule__Then__Alternatives_5
                     {
@@ -8906,13 +8928,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getAndAccess().getAlternatives_5()); 
             // InternalSheepDog.g:2807:2: ( rule__And__Alternatives_5 )?
-            int alt29=2;
-            int LA29_0 = input.LA(1);
+            int alt31=2;
+            int LA31_0 = input.LA(1);
 
-            if ( (LA29_0==32) ) {
-                alt29=1;
+            if ( (LA31_0==32) ) {
+                alt31=1;
             }
-            switch (alt29) {
+            switch (alt31) {
                 case 1 :
                     // InternalSheepDog.g:2807:3: rule__And__Alternatives_5
                     {
@@ -9629,17 +9651,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getTableAccess().getRowListAssignment_4()); 
             // InternalSheepDog.g:3057:3: ( rule__Table__RowListAssignment_4 )*
-            loop30:
+            loop32:
             do {
-                int alt30=2;
-                int LA30_0 = input.LA(1);
+                int alt32=2;
+                int LA32_0 = input.LA(1);
 
-                if ( (LA30_0==38) ) {
-                    alt30=1;
+                if ( (LA32_0==38) ) {
+                    alt32=1;
                 }
 
 
-                switch (alt30) {
+                switch (alt32) {
             	case 1 :
             	    // InternalSheepDog.g:3057:4: rule__Table__RowListAssignment_4
             	    {
@@ -9653,7 +9675,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop30;
+            	    break loop32;
                 }
             } while (true);
 
@@ -9902,17 +9924,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getRowAccess().getCellListAssignment_0()); 
             // InternalSheepDog.g:3145:3: ( rule__Row__CellListAssignment_0 )*
-            loop31:
+            loop33:
             do {
-                int alt31=2;
-                int LA31_0 = input.LA(1);
+                int alt33=2;
+                int LA33_0 = input.LA(1);
 
-                if ( (LA31_0==38) ) {
-                    alt31=1;
+                if ( (LA33_0==38) ) {
+                    alt33=1;
                 }
 
 
-                switch (alt31) {
+                switch (alt33) {
             	case 1 :
             	    // InternalSheepDog.g:3145:4: rule__Row__CellListAssignment_0
             	    {
@@ -9926,7 +9948,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop31;
+            	    break loop33;
                 }
             } while (true);
 
@@ -10406,17 +10428,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             {
              before(grammarAccess.getStepObjectRefAccess().getWORDTerminalRuleCall_0()); 
             // InternalSheepDog.g:3314:3: ( RULE_WORD )*
-            loop32:
+            loop34:
             do {
-                int alt32=2;
-                int LA32_0 = input.LA(1);
+                int alt34=2;
+                int LA34_0 = input.LA(1);
 
-                if ( (LA32_0==RULE_WORD) ) {
-                    alt32=1;
+                if ( (LA34_0==RULE_WORD) ) {
+                    alt34=1;
                 }
 
 
-                switch (alt32) {
+                switch (alt34) {
             	case 1 :
             	    // InternalSheepDog.g:3314:4: RULE_WORD
             	    {
@@ -10426,7 +10448,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop32;
+            	    break loop34;
                 }
             } while (true);
 

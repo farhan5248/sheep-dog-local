@@ -255,7 +255,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     StepParameters returns StepParameters
 	 *
 	 * Constraint:
-	 *     (name=Phrase nestedDescription=NestedDescription? table=Table)
+	 *     (name=Phrase nestedDescription=NestedDescription? table=Table?)
 	 * </pre>
 	 */
 	protected void sequence_StepParameters(ISerializationContext context, StepParameters semanticObject) {
@@ -298,7 +298,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     TestData returns TestData
 	 *
 	 * Constraint:
-	 *     (name=Phrase nestedDescription=NestedDescription? table=Table)
+	 *     (name=Phrase nestedDescription=NestedDescription? table=Table?)
 	 * </pre>
 	 */
 	protected void sequence_TestData(ISerializationContext context, TestData semanticObject) {

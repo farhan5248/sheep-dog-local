@@ -158,12 +158,12 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//StepParameters:
 		//    '*' 'Step-Parameters:' name=Phrase EOL
 		//    nestedDescription=NestedDescription?
-		//    table=Table;
+		//    table=Table?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'*' 'Step-Parameters:' name=Phrase EOL
 		//nestedDescription=NestedDescription?
-		//table=Table
+		//table=Table?
 		public Group getGroup() { return cGroup; }
 		
 		//'*'
@@ -187,7 +187,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//NestedDescription
 		public RuleCall getNestedDescriptionNestedDescriptionParserRuleCall_4_0() { return cNestedDescriptionNestedDescriptionParserRuleCall_4_0; }
 		
-		//table=Table
+		//table=Table?
 		public Assignment getTableAssignment_5() { return cTableAssignment_5; }
 		
 		//Table
@@ -391,12 +391,12 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//TestData:
 		//    '*' 'Test-Data:' name=Phrase EOL
 		//    nestedDescription=NestedDescription?
-		//    table=Table;
+		//    table=Table?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'*' 'Test-Data:' name=Phrase EOL
 		//nestedDescription=NestedDescription?
-		//table=Table
+		//table=Table?
 		public Group getGroup() { return cGroup; }
 		
 		//'*'
@@ -420,7 +420,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//NestedDescription
 		public RuleCall getNestedDescriptionNestedDescriptionParserRuleCall_4_0() { return cNestedDescriptionNestedDescriptionParserRuleCall_4_0; }
 		
-		//table=Table
+		//table=Table?
 		public Assignment getTableAssignment_5() { return cTableAssignment_5; }
 		
 		//Table
@@ -1123,7 +1123,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//StepParameters:
 	//    '*' 'Step-Parameters:' name=Phrase EOL
 	//    nestedDescription=NestedDescription?
-	//    table=Table;
+	//    table=Table?;
 	public StepParametersElements getStepParametersAccess() {
 		return pStepParameters;
 	}
@@ -1182,7 +1182,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//TestData:
 	//    '*' 'Test-Data:' name=Phrase EOL
 	//    nestedDescription=NestedDescription?
-	//    table=Table;
+	//    table=Table?;
 	public TestDataElements getTestDataAccess() {
 		return pTestData;
 	}

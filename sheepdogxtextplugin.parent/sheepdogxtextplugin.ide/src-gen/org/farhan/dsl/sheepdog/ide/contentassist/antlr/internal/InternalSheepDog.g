@@ -1393,7 +1393,7 @@ rule__StepParameters__Group__5__Impl
 :
 (
 	{ before(grammarAccess.getStepParametersAccess().getTableAssignment_5()); }
-	(rule__StepParameters__TableAssignment_5)
+	(rule__StepParameters__TableAssignment_5)?
 	{ after(grammarAccess.getStepParametersAccess().getTableAssignment_5()); }
 )
 ;
@@ -2068,7 +2068,7 @@ rule__TestData__Group__5__Impl
 :
 (
 	{ before(grammarAccess.getTestDataAccess().getTableAssignment_5()); }
-	(rule__TestData__TableAssignment_5)
+	(rule__TestData__TableAssignment_5)?
 	{ after(grammarAccess.getTestDataAccess().getTableAssignment_5()); }
 )
 ;
