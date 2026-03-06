@@ -140,20 +140,6 @@ public class SheepDogSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case SheepDogPackage.DESCRIPTION:
-      {
-        Description description = (Description)theEObject;
-        T result = caseDescription(description);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SheepDogPackage.NESTED_DESCRIPTION:
-      {
-        NestedDescription nestedDescription = (NestedDescription)theEObject;
-        T result = caseNestedDescription(nestedDescription);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case SheepDogPackage.TEST_STEP:
       {
         TestStep testStep = (TestStep)theEObject;
@@ -218,6 +204,20 @@ public class SheepDogSwitch<T> extends Switch<T>
       {
         Cell cell = (Cell)theEObject;
         T result = caseCell(cell);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SheepDogPackage.DESCRIPTION:
+      {
+        Description description = (Description)theEObject;
+        T result = caseDescription(description);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SheepDogPackage.NESTED_DESCRIPTION:
+      {
+        NestedDescription nestedDescription = (NestedDescription)theEObject;
+        T result = caseNestedDescription(nestedDescription);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -377,38 +377,6 @@ public class SheepDogSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Description</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Description</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDescription(Description object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Nested Description</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Nested Description</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseNestedDescription(NestedDescription object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Test Step</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -548,6 +516,38 @@ public class SheepDogSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseCell(Cell object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Description</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Description</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDescription(Description object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Nested Description</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Nested Description</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNestedDescription(NestedDescription object)
   {
     return null;
   }

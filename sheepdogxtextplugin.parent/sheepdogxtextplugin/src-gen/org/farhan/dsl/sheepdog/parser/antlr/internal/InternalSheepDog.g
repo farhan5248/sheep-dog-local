@@ -767,88 +767,6 @@ ruleTestData returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleDescription
-entryRuleDescription returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getDescriptionRule()); }
-	iv_ruleDescription=ruleDescription
-	{ $current=$iv_ruleDescription.current; }
-	EOF;
-
-// Rule Description
-ruleDescription returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			{
-				newCompositeNode(grammarAccess.getDescriptionAccess().getLineListLineParserRuleCall_0());
-			}
-			lv_lineList_0_0=ruleLine
-			{
-				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getDescriptionRule());
-				}
-				add(
-					$current,
-					"lineList",
-					lv_lineList_0_0,
-					"org.farhan.dsl.sheepdog.SheepDog.Line");
-				afterParserOrEnumRuleCall();
-			}
-		)
-	)+
-;
-
-// Entry rule entryRuleNestedDescription
-entryRuleNestedDescription returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getNestedDescriptionRule()); }
-	iv_ruleNestedDescription=ruleNestedDescription
-	{ $current=$iv_ruleNestedDescription.current; }
-	EOF;
-
-// Rule NestedDescription
-ruleNestedDescription returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='+'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getNestedDescriptionAccess().getPlusSignKeyword_0());
-		}
-		this_EOL_1=RULE_EOL
-		{
-			newLeafNode(this_EOL_1, grammarAccess.getNestedDescriptionAccess().getEOLTerminalRuleCall_1());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getNestedDescriptionAccess().getLineListLineParserRuleCall_2_0());
-				}
-				lv_lineList_2_0=ruleLine
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getNestedDescriptionRule());
-					}
-					add(
-						$current,
-						"lineList",
-						lv_lineList_2_0,
-						"org.farhan.dsl.sheepdog.SheepDog.Line");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)+
-	)
-;
-
 // Entry rule entryRuleTestStep
 entryRuleTestStep returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getTestStepRule()); }
@@ -1535,6 +1453,88 @@ ruleCell returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleDescription
+entryRuleDescription returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getDescriptionRule()); }
+	iv_ruleDescription=ruleDescription
+	{ $current=$iv_ruleDescription.current; }
+	EOF;
+
+// Rule Description
+ruleDescription returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getDescriptionAccess().getLineListLineParserRuleCall_0());
+			}
+			lv_lineList_0_0=ruleLine
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getDescriptionRule());
+				}
+				add(
+					$current,
+					"lineList",
+					lv_lineList_0_0,
+					"org.farhan.dsl.sheepdog.SheepDog.Line");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)+
+;
+
+// Entry rule entryRuleNestedDescription
+entryRuleNestedDescription returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getNestedDescriptionRule()); }
+	iv_ruleNestedDescription=ruleNestedDescription
+	{ $current=$iv_ruleNestedDescription.current; }
+	EOF;
+
+// Rule NestedDescription
+ruleNestedDescription returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='+'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getNestedDescriptionAccess().getPlusSignKeyword_0());
+		}
+		this_EOL_1=RULE_EOL
+		{
+			newLeafNode(this_EOL_1, grammarAccess.getNestedDescriptionAccess().getEOLTerminalRuleCall_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getNestedDescriptionAccess().getLineListLineParserRuleCall_2_0());
+				}
+				lv_lineList_2_0=ruleLine
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getNestedDescriptionRule());
+					}
+					add(
+						$current,
+						"lineList",
+						lv_lineList_2_0,
+						"org.farhan.dsl.sheepdog.SheepDog.Line");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)+
 	)
 ;
 

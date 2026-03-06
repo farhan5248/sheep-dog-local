@@ -110,20 +110,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass descriptionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass nestedDescriptionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass testStepEClass = null;
 
   /**
@@ -181,6 +167,20 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   private EClass cellEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass descriptionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass nestedDescriptionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -543,50 +543,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getDescription()
-  {
-    return descriptionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getDescription_LineList()
-  {
-    return (EReference)descriptionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getNestedDescription()
-  {
-    return nestedDescriptionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getNestedDescription_LineList()
-  {
-    return (EReference)nestedDescriptionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getTestStep()
   {
     return testStepEClass;
@@ -774,6 +730,50 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
+  public EClass getDescription()
+  {
+    return descriptionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getDescription_LineList()
+  {
+    return (EReference)descriptionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getNestedDescription()
+  {
+    return nestedDescriptionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getNestedDescription_LineList()
+  {
+    return (EReference)nestedDescriptionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getLine()
   {
     return lineEClass;
@@ -856,12 +856,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     createEReference(testDataEClass, TEST_DATA__NESTED_DESCRIPTION);
     createEReference(testDataEClass, TEST_DATA__TABLE);
 
-    descriptionEClass = createEClass(DESCRIPTION);
-    createEReference(descriptionEClass, DESCRIPTION__LINE_LIST);
-
-    nestedDescriptionEClass = createEClass(NESTED_DESCRIPTION);
-    createEReference(nestedDescriptionEClass, NESTED_DESCRIPTION__LINE_LIST);
-
     testStepEClass = createEClass(TEST_STEP);
     createEAttribute(testStepEClass, TEST_STEP__STEP_OBJECT_NAME);
     createEAttribute(testStepEClass, TEST_STEP__STEP_DEFINITION_NAME);
@@ -887,6 +881,12 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     cellEClass = createEClass(CELL);
     createEAttribute(cellEClass, CELL__NAME);
+
+    descriptionEClass = createEClass(DESCRIPTION);
+    createEReference(descriptionEClass, DESCRIPTION__LINE_LIST);
+
+    nestedDescriptionEClass = createEClass(NESTED_DESCRIPTION);
+    createEReference(nestedDescriptionEClass, NESTED_DESCRIPTION__LINE_LIST);
 
     lineEClass = createEClass(LINE);
     createEAttribute(lineEClass, LINE__CONTENT);
@@ -966,12 +966,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     initEReference(getTestData_NestedDescription(), this.getNestedDescription(), null, "nestedDescription", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTestData_Table(), this.getTable(), null, "table", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(descriptionEClass, Description.class, "Description", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDescription_LineList(), this.getLine(), null, "lineList", null, 0, -1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(nestedDescriptionEClass, NestedDescription.class, "NestedDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNestedDescription_LineList(), this.getLine(), null, "lineList", null, 0, -1, NestedDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(testStepEClass, TestStep.class, "TestStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTestStep_StepObjectName(), ecorePackage.getEString(), "stepObjectName", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTestStep_StepDefinitionName(), ecorePackage.getEString(), "stepDefinitionName", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -997,6 +991,12 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     initEClass(cellEClass, Cell.class, "Cell", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCell_Name(), ecorePackage.getEString(), "name", null, 0, 1, Cell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(descriptionEClass, Description.class, "Description", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDescription_LineList(), this.getLine(), null, "lineList", null, 0, -1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(nestedDescriptionEClass, NestedDescription.class, "NestedDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNestedDescription_LineList(), this.getLine(), null, "lineList", null, 0, -1, NestedDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lineEClass, Line.class, "Line", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLine_Content(), ecorePackage.getEString(), "content", null, 0, 1, Line.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

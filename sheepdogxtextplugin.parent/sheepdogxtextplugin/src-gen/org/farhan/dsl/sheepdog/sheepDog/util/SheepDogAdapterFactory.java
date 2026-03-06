@@ -121,16 +121,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createTestDataAdapter();
       }
       @Override
-      public Adapter caseDescription(Description object)
-      {
-        return createDescriptionAdapter();
-      }
-      @Override
-      public Adapter caseNestedDescription(NestedDescription object)
-      {
-        return createNestedDescriptionAdapter();
-      }
-      @Override
       public Adapter caseTestStep(TestStep object)
       {
         return createTestStepAdapter();
@@ -174,6 +164,16 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
       public Adapter caseCell(Cell object)
       {
         return createCellAdapter();
+      }
+      @Override
+      public Adapter caseDescription(Description object)
+      {
+        return createDescriptionAdapter();
+      }
+      @Override
+      public Adapter caseNestedDescription(NestedDescription object)
+      {
+        return createNestedDescriptionAdapter();
       }
       @Override
       public Adapter caseLine(Line object)
@@ -338,36 +338,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.Description <em>Description</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.dsl.sheepdog.sheepDog.Description
-   * @generated
-   */
-  public Adapter createDescriptionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.NestedDescription <em>Nested Description</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.dsl.sheepdog.sheepDog.NestedDescription
-   * @generated
-   */
-  public Adapter createNestedDescriptionAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep <em>Test Step</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -498,6 +468,36 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createCellAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.Description <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.dsl.sheepdog.sheepDog.Description
+   * @generated
+   */
+  public Adapter createDescriptionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.NestedDescription <em>Nested Description</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.dsl.sheepdog.sheepDog.NestedDescription
+   * @generated
+   */
+  public Adapter createNestedDescriptionAdapter()
   {
     return null;
   }

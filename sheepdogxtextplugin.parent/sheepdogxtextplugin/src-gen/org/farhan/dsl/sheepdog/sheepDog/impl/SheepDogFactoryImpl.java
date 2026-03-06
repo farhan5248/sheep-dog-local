@@ -74,8 +74,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
       case SheepDogPackage.TEST_SETUP: return createTestSetup();
       case SheepDogPackage.TEST_CASE: return createTestCase();
       case SheepDogPackage.TEST_DATA: return createTestData();
-      case SheepDogPackage.DESCRIPTION: return createDescription();
-      case SheepDogPackage.NESTED_DESCRIPTION: return createNestedDescription();
       case SheepDogPackage.TEST_STEP: return createTestStep();
       case SheepDogPackage.GIVEN: return createGiven();
       case SheepDogPackage.WHEN: return createWhen();
@@ -85,6 +83,8 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
       case SheepDogPackage.TABLE: return createTable();
       case SheepDogPackage.ROW: return createRow();
       case SheepDogPackage.CELL: return createCell();
+      case SheepDogPackage.DESCRIPTION: return createDescription();
+      case SheepDogPackage.NESTED_DESCRIPTION: return createNestedDescription();
       case SheepDogPackage.LINE: return createLine();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -205,30 +205,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public Description createDescription()
-  {
-    DescriptionImpl description = new DescriptionImpl();
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NestedDescription createNestedDescription()
-  {
-    NestedDescriptionImpl nestedDescription = new NestedDescriptionImpl();
-    return nestedDescription;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public TestStep createTestStep()
   {
     TestStepImpl testStep = new TestStepImpl();
@@ -329,6 +305,30 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
   {
     CellImpl cell = new CellImpl();
     return cell;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Description createDescription()
+  {
+    DescriptionImpl description = new DescriptionImpl();
+    return description;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NestedDescription createNestedDescription()
+  {
+    NestedDescriptionImpl nestedDescription = new NestedDescriptionImpl();
+    return nestedDescription;
   }
 
   /**

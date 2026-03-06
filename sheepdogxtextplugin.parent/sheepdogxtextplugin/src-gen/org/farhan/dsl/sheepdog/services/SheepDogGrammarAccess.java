@@ -426,50 +426,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//Table
 		public RuleCall getTableTableParserRuleCall_5_0() { return cTableTableParserRuleCall_5_0; }
 	}
-	public class DescriptionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.Description");
-		private final Assignment cLineListAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cLineListLineParserRuleCall_0 = (RuleCall)cLineListAssignment.eContents().get(0);
-		
-		//Description:
-		//    lineList+=Line+;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//lineList+=Line+
-		public Assignment getLineListAssignment() { return cLineListAssignment; }
-		
-		//Line
-		public RuleCall getLineListLineParserRuleCall_0() { return cLineListLineParserRuleCall_0; }
-	}
-	public class NestedDescriptionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.NestedDescription");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPlusSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Assignment cLineListAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cLineListLineParserRuleCall_2_0 = (RuleCall)cLineListAssignment_2.eContents().get(0);
-		
-		//NestedDescription:
-		//    '+' EOL
-		//    lineList+=Line+;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'+' EOL
-		//lineList+=Line+
-		public Group getGroup() { return cGroup; }
-		
-		//'+'
-		public Keyword getPlusSignKeyword_0() { return cPlusSignKeyword_0; }
-		
-		//EOL
-		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
-		
-		//lineList+=Line+
-		public Assignment getLineListAssignment_2() { return cLineListAssignment_2; }
-		
-		//Line
-		public RuleCall getLineListLineParserRuleCall_2_0() { return cLineListLineParserRuleCall_2_0; }
-	}
 	public class TestStepElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.TestStep");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -869,6 +825,50 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//Phrase
 		public RuleCall getNamePhraseParserRuleCall_1_0() { return cNamePhraseParserRuleCall_1_0; }
 	}
+	public class DescriptionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.Description");
+		private final Assignment cLineListAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cLineListLineParserRuleCall_0 = (RuleCall)cLineListAssignment.eContents().get(0);
+		
+		//Description:
+		//    lineList+=Line+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//lineList+=Line+
+		public Assignment getLineListAssignment() { return cLineListAssignment; }
+		
+		//Line
+		public RuleCall getLineListLineParserRuleCall_0() { return cLineListLineParserRuleCall_0; }
+	}
+	public class NestedDescriptionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.NestedDescription");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPlusSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cLineListAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cLineListLineParserRuleCall_2_0 = (RuleCall)cLineListAssignment_2.eContents().get(0);
+		
+		//NestedDescription:
+		//    '+' EOL
+		//    lineList+=Line+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'+' EOL
+		//lineList+=Line+
+		public Group getGroup() { return cGroup; }
+		
+		//'+'
+		public Keyword getPlusSignKeyword_0() { return cPlusSignKeyword_0; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
+		
+		//lineList+=Line+
+		public Assignment getLineListAssignment_2() { return cLineListAssignment_2; }
+		
+		//Line
+		public RuleCall getLineListLineParserRuleCall_2_0() { return cLineListLineParserRuleCall_2_0; }
+	}
 	public class LineElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.dsl.sheepdog.SheepDog.Line");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -924,14 +924,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		
 		//// TODO the regular expression here is a partial duplication of what's in sheep-dog-test
 		//// It should only be defined here but that is more work than I want to do right now
-		//// When testing sheep-dog-test, it doesn't need a regex.
-		//// It's enough that the Impl classes return what parts it needs.
-		//// If all the parts accessible from the utility are defined here,
-		//// then the TestStepImpl class + its utility can extract that information
-		//// Also any tests in sheep-dog-test must be implemented in the xtext project
-		//// to make sure the Impl classes have implemented this correctly
-		//// For now I'm putting the whole regex to make it possible to distinguish between STEP_OBJECT and STEP_DEFINITION
-		//// without breaking it up into its parts
 		//StepObjectRef:
 		//    WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action' | 'popup' | 'annotation' | 'hover' | 'tooltip');
 		@Override public ParserRule getRule() { return rule; }
@@ -1006,8 +998,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final TestSetupElements pTestSetup;
 	private final TestCaseElements pTestCase;
 	private final TestDataElements pTestData;
-	private final DescriptionElements pDescription;
-	private final NestedDescriptionElements pNestedDescription;
 	private final TestStepElements pTestStep;
 	private final GivenElements pGiven;
 	private final WhenElements pWhen;
@@ -1017,6 +1007,8 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final TableElements pTable;
 	private final RowElements pRow;
 	private final CellElements pCell;
+	private final DescriptionElements pDescription;
+	private final NestedDescriptionElements pNestedDescription;
 	private final LineElements pLine;
 	private final PhraseElements pPhrase;
 	private final StepObjectRefElements pStepObjectRef;
@@ -1041,8 +1033,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pTestSetup = new TestSetupElements();
 		this.pTestCase = new TestCaseElements();
 		this.pTestData = new TestDataElements();
-		this.pDescription = new DescriptionElements();
-		this.pNestedDescription = new NestedDescriptionElements();
 		this.pTestStep = new TestStepElements();
 		this.pGiven = new GivenElements();
 		this.pWhen = new WhenElements();
@@ -1052,6 +1042,8 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pTable = new TableElements();
 		this.pRow = new RowElements();
 		this.pCell = new CellElements();
+		this.pDescription = new DescriptionElements();
+		this.pNestedDescription = new NestedDescriptionElements();
 		this.pLine = new LineElements();
 		this.pPhrase = new PhraseElements();
 		this.pStepObjectRef = new StepObjectRefElements();
@@ -1191,27 +1183,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getTestDataAccess().getRule();
 	}
 	
-	//Description:
-	//    lineList+=Line+;
-	public DescriptionElements getDescriptionAccess() {
-		return pDescription;
-	}
-	
-	public ParserRule getDescriptionRule() {
-		return getDescriptionAccess().getRule();
-	}
-	
-	//NestedDescription:
-	//    '+' EOL
-	//    lineList+=Line+;
-	public NestedDescriptionElements getNestedDescriptionAccess() {
-		return pNestedDescription;
-	}
-	
-	public ParserRule getNestedDescriptionRule() {
-		return getNestedDescriptionAccess().getRule();
-	}
-	
 	//TestStep:
 	//    Given | When | Then | And;
 	public TestStepElements getTestStepAccess() {
@@ -1310,6 +1281,27 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getCellAccess().getRule();
 	}
 	
+	//Description:
+	//    lineList+=Line+;
+	public DescriptionElements getDescriptionAccess() {
+		return pDescription;
+	}
+	
+	public ParserRule getDescriptionRule() {
+		return getDescriptionAccess().getRule();
+	}
+	
+	//NestedDescription:
+	//    '+' EOL
+	//    lineList+=Line+;
+	public NestedDescriptionElements getNestedDescriptionAccess() {
+		return pNestedDescription;
+	}
+	
+	public ParserRule getNestedDescriptionRule() {
+		return getNestedDescriptionAccess().getRule();
+	}
+	
 	//Line:
 	//    content=Phrase EOL;
 	public LineElements getLineAccess() {
@@ -1332,14 +1324,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	//// TODO the regular expression here is a partial duplication of what's in sheep-dog-test
 	//// It should only be defined here but that is more work than I want to do right now
-	//// When testing sheep-dog-test, it doesn't need a regex.
-	//// It's enough that the Impl classes return what parts it needs.
-	//// If all the parts accessible from the utility are defined here,
-	//// then the TestStepImpl class + its utility can extract that information
-	//// Also any tests in sheep-dog-test must be implemented in the xtext project
-	//// to make sure the Impl classes have implemented this correctly
-	//// For now I'm putting the whole regex to make it possible to distinguish between STEP_OBJECT and STEP_DEFINITION
-	//// without breaking it up into its parts
 	//StepObjectRef:
 	//    WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action' | 'popup' | 'annotation' | 'hover' | 'tooltip');
 	public StepObjectRefElements getStepObjectRefAccess() {

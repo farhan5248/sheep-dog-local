@@ -472,62 +472,6 @@ public interface SheepDogPackage extends EPackage
   int TEST_DATA_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.DescriptionImpl <em>Description</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.farhan.dsl.sheepdog.sheepDog.impl.DescriptionImpl
-   * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getDescription()
-   * @generated
-   */
-  int DESCRIPTION = 9;
-
-  /**
-   * The feature id for the '<em><b>Line List</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DESCRIPTION__LINE_LIST = 0;
-
-  /**
-   * The number of structural features of the '<em>Description</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DESCRIPTION_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.NestedDescriptionImpl <em>Nested Description</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.farhan.dsl.sheepdog.sheepDog.impl.NestedDescriptionImpl
-   * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getNestedDescription()
-   * @generated
-   */
-  int NESTED_DESCRIPTION = 10;
-
-  /**
-   * The feature id for the '<em><b>Line List</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NESTED_DESCRIPTION__LINE_LIST = 0;
-
-  /**
-   * The number of structural features of the '<em>Nested Description</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NESTED_DESCRIPTION_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepImpl <em>Test Step</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -535,7 +479,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getTestStep()
    * @generated
    */
-  int TEST_STEP = 11;
+  int TEST_STEP = 9;
 
   /**
    * The feature id for the '<em><b>Step Object Name</b></em>' attribute.
@@ -590,7 +534,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getGiven()
    * @generated
    */
-  int GIVEN = 12;
+  int GIVEN = 10;
 
   /**
    * The feature id for the '<em><b>Step Object Name</b></em>' attribute.
@@ -645,7 +589,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getWhen()
    * @generated
    */
-  int WHEN = 13;
+  int WHEN = 11;
 
   /**
    * The feature id for the '<em><b>Step Object Name</b></em>' attribute.
@@ -700,7 +644,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getThen()
    * @generated
    */
-  int THEN = 14;
+  int THEN = 12;
 
   /**
    * The feature id for the '<em><b>Step Object Name</b></em>' attribute.
@@ -755,7 +699,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getAnd()
    * @generated
    */
-  int AND = 15;
+  int AND = 13;
 
   /**
    * The feature id for the '<em><b>Step Object Name</b></em>' attribute.
@@ -810,7 +754,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getText()
    * @generated
    */
-  int TEXT = 16;
+  int TEXT = 14;
 
   /**
    * The feature id for the '<em><b>Content</b></em>' attribute.
@@ -838,7 +782,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getTable()
    * @generated
    */
-  int TABLE = 17;
+  int TABLE = 15;
 
   /**
    * The feature id for the '<em><b>Row List</b></em>' containment reference list.
@@ -866,7 +810,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getRow()
    * @generated
    */
-  int ROW = 18;
+  int ROW = 16;
 
   /**
    * The feature id for the '<em><b>Cell List</b></em>' containment reference list.
@@ -894,7 +838,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getCell()
    * @generated
    */
-  int CELL = 19;
+  int CELL = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -913,6 +857,62 @@ public interface SheepDogPackage extends EPackage
    * @ordered
    */
   int CELL_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.DescriptionImpl <em>Description</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.dsl.sheepdog.sheepDog.impl.DescriptionImpl
+   * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getDescription()
+   * @generated
+   */
+  int DESCRIPTION = 18;
+
+  /**
+   * The feature id for the '<em><b>Line List</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DESCRIPTION__LINE_LIST = 0;
+
+  /**
+   * The number of structural features of the '<em>Description</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DESCRIPTION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.NestedDescriptionImpl <em>Nested Description</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.dsl.sheepdog.sheepDog.impl.NestedDescriptionImpl
+   * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getNestedDescription()
+   * @generated
+   */
+  int NESTED_DESCRIPTION = 19;
+
+  /**
+   * The feature id for the '<em><b>Line List</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NESTED_DESCRIPTION__LINE_LIST = 0;
+
+  /**
+   * The number of structural features of the '<em>Nested Description</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NESTED_DESCRIPTION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.LineImpl <em>Line</em>}' class.
@@ -1221,48 +1221,6 @@ public interface SheepDogPackage extends EPackage
   EReference getTestData_Table();
 
   /**
-   * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.Description <em>Description</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Description</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.Description
-   * @generated
-   */
-  EClass getDescription();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.dsl.sheepdog.sheepDog.Description#getLineList <em>Line List</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Line List</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.Description#getLineList()
-   * @see #getDescription()
-   * @generated
-   */
-  EReference getDescription_LineList();
-
-  /**
-   * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.NestedDescription <em>Nested Description</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Nested Description</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.NestedDescription
-   * @generated
-   */
-  EClass getNestedDescription();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.dsl.sheepdog.sheepDog.NestedDescription#getLineList <em>Line List</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Line List</em>'.
-   * @see org.farhan.dsl.sheepdog.sheepDog.NestedDescription#getLineList()
-   * @see #getNestedDescription()
-   * @generated
-   */
-  EReference getNestedDescription_LineList();
-
-  /**
    * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.TestStep <em>Test Step</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1439,6 +1397,48 @@ public interface SheepDogPackage extends EPackage
    * @generated
    */
   EAttribute getCell_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.Description <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Description</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.Description
+   * @generated
+   */
+  EClass getDescription();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.dsl.sheepdog.sheepDog.Description#getLineList <em>Line List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Line List</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.Description#getLineList()
+   * @see #getDescription()
+   * @generated
+   */
+  EReference getDescription_LineList();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.NestedDescription <em>Nested Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Nested Description</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.NestedDescription
+   * @generated
+   */
+  EClass getNestedDescription();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.dsl.sheepdog.sheepDog.NestedDescription#getLineList <em>Line List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Line List</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.NestedDescription#getLineList()
+   * @see #getNestedDescription()
+   * @generated
+   */
+  EReference getNestedDescription_LineList();
 
   /**
    * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.Line <em>Line</em>}'.
@@ -1711,42 +1711,6 @@ public interface SheepDogPackage extends EPackage
     EReference TEST_DATA__TABLE = eINSTANCE.getTestData_Table();
 
     /**
-     * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.DescriptionImpl <em>Description</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.farhan.dsl.sheepdog.sheepDog.impl.DescriptionImpl
-     * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getDescription()
-     * @generated
-     */
-    EClass DESCRIPTION = eINSTANCE.getDescription();
-
-    /**
-     * The meta object literal for the '<em><b>Line List</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference DESCRIPTION__LINE_LIST = eINSTANCE.getDescription_LineList();
-
-    /**
-     * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.NestedDescriptionImpl <em>Nested Description</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.farhan.dsl.sheepdog.sheepDog.impl.NestedDescriptionImpl
-     * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getNestedDescription()
-     * @generated
-     */
-    EClass NESTED_DESCRIPTION = eINSTANCE.getNestedDescription();
-
-    /**
-     * The meta object literal for the '<em><b>Line List</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference NESTED_DESCRIPTION__LINE_LIST = eINSTANCE.getNestedDescription_LineList();
-
-    /**
      * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepImpl <em>Test Step</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1899,6 +1863,42 @@ public interface SheepDogPackage extends EPackage
      * @generated
      */
     EAttribute CELL__NAME = eINSTANCE.getCell_Name();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.DescriptionImpl <em>Description</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.dsl.sheepdog.sheepDog.impl.DescriptionImpl
+     * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getDescription()
+     * @generated
+     */
+    EClass DESCRIPTION = eINSTANCE.getDescription();
+
+    /**
+     * The meta object literal for the '<em><b>Line List</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DESCRIPTION__LINE_LIST = eINSTANCE.getDescription_LineList();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.NestedDescriptionImpl <em>Nested Description</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.dsl.sheepdog.sheepDog.impl.NestedDescriptionImpl
+     * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getNestedDescription()
+     * @generated
+     */
+    EClass NESTED_DESCRIPTION = eINSTANCE.getNestedDescription();
+
+    /**
+     * The meta object literal for the '<em><b>Line List</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NESTED_DESCRIPTION__LINE_LIST = eINSTANCE.getNestedDescription_LineList();
 
     /**
      * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.LineImpl <em>Line</em>}' class.

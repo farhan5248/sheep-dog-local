@@ -46,13 +46,6 @@ TestData:
 	nestedDescription=NestedDescription?
 	table=Table?;
 
-Description:
-	lineList+=Line+;
-
-NestedDescription:
-	'+' EOL
-	lineList+=Line+;
-
 TestStep:
 	Given | When | Then | And;
 
@@ -88,6 +81,13 @@ Row:
 Cell:
 	'|' name=Phrase;
 
+Description:
+	lineList+=Line+;
+
+NestedDescription:
+	'+' EOL
+	lineList+=Line+;
+
 Line:
 	content=Phrase EOL;
 
@@ -96,14 +96,6 @@ Phrase:
 
 // TODO the regular expression here is a partial duplication of what's in sheep-dog-test
 // It should only be defined here but that is more work than I want to do right now
-// When testing sheep-dog-test, it doesn't need a regex.
-// It's enough that the Impl classes return what parts it needs.
-// If all the parts accessible from the utility are defined here, 
-// then the TestStepImpl class + its utility can extract that information
-// Also any tests in sheep-dog-test must be implemented in the xtext project
-// to make sure the Impl classes have implemented this correctly
-// For now I'm putting the whole regex to make it possible to distinguish between STEP_OBJECT and STEP_DEFINITION
-// without breaking it up into its parts
 StepObjectRef:
 	WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action' | 'popup' | 'annotation' | 'hover' | 'tooltip');
 
