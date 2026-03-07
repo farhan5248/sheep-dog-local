@@ -28,7 +28,6 @@ public interface ISheepDogFactory {
      *
      * @return the created instance
      */
-    INestedDescription createNestedDescription();
 
     /**
      * Creates uninitialized grammar element instance for subsequent attribute

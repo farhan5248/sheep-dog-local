@@ -58,8 +58,8 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
                         highlightTable(s.getTable(), acceptor);
                     }
                     for (TestData example : tc.getTestDataList()) {
-                        if (example.getNestedDescription() != null) {
-                            for (Line s : example.getNestedDescription().getLineList()) {
+                        if (example.getDescription() != null) {
+                            for (Line s : example.getDescription().getLineList()) {
                                 highlightStatement(s, acceptor, 0);
                             }
                         }
@@ -81,8 +81,8 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
                     }
                 }
                 for (StepParameters sp : child.getStepParameterList()) {
-                    if (sp.getNestedDescription() != null) {
-                        for (Line s : sp.getNestedDescription().getLineList()) {
+                    if (sp.getDescription() != null) {
+                        for (Line s : sp.getDescription().getLineList()) {
                             highlightStatement(s, acceptor, 0);
                         }
                     }

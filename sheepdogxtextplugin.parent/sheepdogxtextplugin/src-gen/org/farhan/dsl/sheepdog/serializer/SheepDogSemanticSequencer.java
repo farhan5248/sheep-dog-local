@@ -20,7 +20,6 @@ import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Description;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
 import org.farhan.dsl.sheepdog.sheepDog.Line;
-import org.farhan.dsl.sheepdog.sheepDog.NestedDescription;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
@@ -63,9 +62,6 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case SheepDogPackage.LINE:
 				sequence_Line(context, (Line) semanticObject); 
-				return; 
-			case SheepDogPackage.NESTED_DESCRIPTION:
-				sequence_NestedDescription(context, (NestedDescription) semanticObject); 
 				return; 
 			case SheepDogPackage.ROW:
 				sequence_Row(context, (Row) semanticObject); 
@@ -195,20 +191,6 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     NestedDescription returns NestedDescription
-	 *
-	 * Constraint:
-	 *     lineList+=Line+
-	 * </pre>
-	 */
-	protected void sequence_NestedDescription(ISerializationContext context, NestedDescription semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     Row returns Row
 	 *
 	 * Constraint:
@@ -255,7 +237,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     StepParameters returns StepParameters
 	 *
 	 * Constraint:
-	 *     (name=Phrase nestedDescription=NestedDescription? table=Table?)
+	 *     (name=Phrase description=Description? table=Table?)
 	 * </pre>
 	 */
 	protected void sequence_StepParameters(ISerializationContext context, StepParameters semanticObject) {
@@ -298,7 +280,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     TestData returns TestData
 	 *
 	 * Constraint:
-	 *     (name=Phrase nestedDescription=NestedDescription? table=Table?)
+	 *     (name=Phrase description=Description? table=Table?)
 	 * </pre>
 	 */
 	protected void sequence_TestData(ISerializationContext context, TestData semanticObject) {
@@ -351,7 +333,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.TEXT__CONTENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTextAccess().getContentTEXT_BLOCKTerminalRuleCall_2_0(), semanticObject.getContent());
+		feeder.accept(grammarAccess.getTextAccess().getContentTEXT_BLOCKTerminalRuleCall_0_0(), semanticObject.getContent());
 		feeder.finish();
 	}
 	

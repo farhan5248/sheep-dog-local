@@ -8,12 +8,11 @@ Grammar element interface contracts. Separates interface definitions from implem
 |---|---|
 | `name=Phrase` | `getName(): String` + `setName(String)` |
 | `description=Description?` | `getDescription(): IDescription` + `setDescription(IDescription)` + `addLine(ILine): boolean` |
-| `nestedDescription=NestedDescription?` | `getNestedDescription(): INestedDescription` + `setNestedDescription(INestedDescription)` + `addLine(ILine): boolean` |
 | `table=Table` | `getTable(): ITable` + `setTable(ITable)` |
 | `xxxList+=Type*` | `getType(int): IType` + `getType(String): IType` + `getTypeList(): List<IType>` + `addType(IType): boolean` |
 | parent-child relationship | `getParent(): IParentType` |
 
-Note: `addLine()` is a convenience method — it auto-creates the Description/NestedDescription if null, then appends the Line. All types with `description=Description?` or `nestedDescription=NestedDescription?` should have it.
+Note: `addLine()` is a convenience method — it auto-creates the Description if null, then appends the Line. All types with `description=Description?` should have it.
 
 ## {Assignment}
 

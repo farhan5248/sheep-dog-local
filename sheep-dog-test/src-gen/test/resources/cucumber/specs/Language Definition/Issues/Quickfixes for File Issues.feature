@@ -7,6 +7,8 @@ Feature: Quickfixes for File Issues
 
   Scenario: The first step needs to have a component specified quickfix
 
+    If the first step has a component, no quickfix is needed.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |

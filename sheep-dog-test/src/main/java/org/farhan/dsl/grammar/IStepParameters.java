@@ -6,13 +6,13 @@ public interface IStepParameters {
 
     IStepDefinition getParent();
 
-    INestedDescription getNestedDescription();
+    IDescription getDescription();
 
     ITable getTable();
 
     void setName(String value);
 
-    void setNestedDescription(INestedDescription value);
+    void setDescription(IDescription value);
 
     boolean addLine(ILine value);
 

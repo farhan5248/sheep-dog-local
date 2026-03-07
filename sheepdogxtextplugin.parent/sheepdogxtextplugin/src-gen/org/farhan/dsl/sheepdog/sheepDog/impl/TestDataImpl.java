@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.farhan.dsl.sheepdog.sheepDog.NestedDescription;
+import org.farhan.dsl.sheepdog.sheepDog.Description;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
@@ -26,7 +26,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestData;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestDataImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestDataImpl#getNestedDescription <em>Nested Description</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestDataImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestDataImpl#getTable <em>Table</em>}</li>
  * </ul>
  *
@@ -55,14 +55,14 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getNestedDescription() <em>Nested Description</em>}' containment reference.
+   * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNestedDescription()
+   * @see #getDescription()
    * @generated
    * @ordered
    */
-  protected NestedDescription nestedDescription;
+  protected Description description;
 
   /**
    * The cached value of the '{@link #getTable() <em>Table</em>}' containment reference.
@@ -126,9 +126,9 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
    * @generated
    */
   @Override
-  public NestedDescription getNestedDescription()
+  public Description getDescription()
   {
-    return nestedDescription;
+    return description;
   }
 
   /**
@@ -136,13 +136,13 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetNestedDescription(NestedDescription newNestedDescription, NotificationChain msgs)
+  public NotificationChain basicSetDescription(Description newDescription, NotificationChain msgs)
   {
-    NestedDescription oldNestedDescription = nestedDescription;
-    nestedDescription = newNestedDescription;
+    Description oldDescription = description;
+    description = newDescription;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_DATA__NESTED_DESCRIPTION, oldNestedDescription, newNestedDescription);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_DATA__DESCRIPTION, oldDescription, newDescription);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -154,20 +154,20 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
    * @generated
    */
   @Override
-  public void setNestedDescription(NestedDescription newNestedDescription)
+  public void setDescription(Description newDescription)
   {
-    if (newNestedDescription != nestedDescription)
+    if (newDescription != description)
     {
       NotificationChain msgs = null;
-      if (nestedDescription != null)
-        msgs = ((InternalEObject)nestedDescription).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_DATA__NESTED_DESCRIPTION, null, msgs);
-      if (newNestedDescription != null)
-        msgs = ((InternalEObject)newNestedDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_DATA__NESTED_DESCRIPTION, null, msgs);
-      msgs = basicSetNestedDescription(newNestedDescription, msgs);
+      if (description != null)
+        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_DATA__DESCRIPTION, null, msgs);
+      if (newDescription != null)
+        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_DATA__DESCRIPTION, null, msgs);
+      msgs = basicSetDescription(newDescription, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_DATA__NESTED_DESCRIPTION, newNestedDescription, newNestedDescription));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_DATA__DESCRIPTION, newDescription, newDescription));
   }
 
   /**
@@ -230,8 +230,8 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_DATA__NESTED_DESCRIPTION:
-        return basicSetNestedDescription(null, msgs);
+      case SheepDogPackage.TEST_DATA__DESCRIPTION:
+        return basicSetDescription(null, msgs);
       case SheepDogPackage.TEST_DATA__TABLE:
         return basicSetTable(null, msgs);
     }
@@ -250,8 +250,8 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
     {
       case SheepDogPackage.TEST_DATA__NAME:
         return getName();
-      case SheepDogPackage.TEST_DATA__NESTED_DESCRIPTION:
-        return getNestedDescription();
+      case SheepDogPackage.TEST_DATA__DESCRIPTION:
+        return getDescription();
       case SheepDogPackage.TEST_DATA__TABLE:
         return getTable();
     }
@@ -271,8 +271,8 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
       case SheepDogPackage.TEST_DATA__NAME:
         setName((String)newValue);
         return;
-      case SheepDogPackage.TEST_DATA__NESTED_DESCRIPTION:
-        setNestedDescription((NestedDescription)newValue);
+      case SheepDogPackage.TEST_DATA__DESCRIPTION:
+        setDescription((Description)newValue);
         return;
       case SheepDogPackage.TEST_DATA__TABLE:
         setTable((Table)newValue);
@@ -294,8 +294,8 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
       case SheepDogPackage.TEST_DATA__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SheepDogPackage.TEST_DATA__NESTED_DESCRIPTION:
-        setNestedDescription((NestedDescription)null);
+      case SheepDogPackage.TEST_DATA__DESCRIPTION:
+        setDescription((Description)null);
         return;
       case SheepDogPackage.TEST_DATA__TABLE:
         setTable((Table)null);
@@ -316,8 +316,8 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
     {
       case SheepDogPackage.TEST_DATA__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SheepDogPackage.TEST_DATA__NESTED_DESCRIPTION:
-        return nestedDescription != null;
+      case SheepDogPackage.TEST_DATA__DESCRIPTION:
+        return description != null;
       case SheepDogPackage.TEST_DATA__TABLE:
         return table != null;
     }

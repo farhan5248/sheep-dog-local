@@ -84,9 +84,9 @@ Feature: TestSuite Type
 
     Test Data must have
     - Name
-    - Table
     and optionally have these
     - Description
+    - Table
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node is created as follows
           | Node Path                                                           | Test Data Name  |
@@ -98,8 +98,8 @@ Feature: TestSuite Type
           | Node Path                                                             | Test Data Name   |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/2 | Second Test Data |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file NestedDescription node will be as follows
-          | Node Path                                                                               | State  |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/NestedDescription | Absent |
+          | Node Path                                                                         | State  |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Description | Absent |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
           | Node Path                                                                   | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table | Absent |

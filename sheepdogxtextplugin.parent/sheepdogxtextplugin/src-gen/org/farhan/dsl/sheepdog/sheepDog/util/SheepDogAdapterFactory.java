@@ -171,11 +171,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createDescriptionAdapter();
       }
       @Override
-      public Adapter caseNestedDescription(NestedDescription object)
-      {
-        return createNestedDescriptionAdapter();
-      }
-      @Override
       public Adapter caseLine(Line object)
       {
         return createLineAdapter();
@@ -483,21 +478,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDescriptionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.NestedDescription <em>Nested Description</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.dsl.sheepdog.sheepDog.NestedDescription
-   * @generated
-   */
-  public Adapter createNestedDescriptionAdapter()
   {
     return null;
   }

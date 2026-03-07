@@ -7,6 +7,8 @@ Feature: Validation for File Issues
 
   Scenario: The first step needs to have a component specified validation
 
+    If the first step has a component, subsequent steps can omit it and default to the first step's component. No validation error is triggered.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |

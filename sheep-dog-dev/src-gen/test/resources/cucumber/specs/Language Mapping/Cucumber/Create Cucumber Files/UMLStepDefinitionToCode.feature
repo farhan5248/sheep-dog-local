@@ -14,21 +14,18 @@ Feature: UMLStepDefinitionToCode
           === Given: The blah application Object page is empty
           
           === Given: The blah application Object page Top section will be created as follows
-          +
           |===
           | h1
           | v1
           |===
           
           === Given: The blah application Object page Top section won't be created as follows
-          +
           |===
           | h1
           | v1
           |===
           
           === Given: The blah application Object page is created as follows
-          +
           ----
           text1
           ----
@@ -42,7 +39,6 @@ Feature: UMLStepDefinitionToCode
           == Step-Definition: Top section will be created as follows
           
           === Step-Parameters: 1
-          +
           |===
           | h1
           |===
@@ -50,7 +46,6 @@ Feature: UMLStepDefinitionToCode
           == Step-Definition: Top section won't be created as follows
           
           === Step-Parameters: 1
-          +
           |===
           | h1
           |===
@@ -58,7 +53,6 @@ Feature: UMLStepDefinitionToCode
           == Step-Definition: is created as follows
           
           === Step-Parameters: 1
-          +
           |===
           | Content
           |===

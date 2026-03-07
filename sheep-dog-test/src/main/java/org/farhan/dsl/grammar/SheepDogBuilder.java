@@ -105,13 +105,13 @@ public class SheepDogBuilder {
      * @param parent the parent element (or null if root)
      * @return the created and initialized instance
      */
-    public static INestedDescription createNestedDescription(IStepParameters parent) {
-        logger.debug("Entering createNestedDescription for parent: {}", parent != null ? parent.getName() : "null");
-        INestedDescription nestedDescription = SheepDogFactory.instance.createNestedDescription();
+    public static IDescription createDescription(IStepParameters parent) {
+        logger.debug("Entering createDescription for parent: {}", parent != null ? parent.getName() : "null");
+        IDescription description = SheepDogFactory.instance.createDescription();
         if (parent != null)
-            parent.setNestedDescription(nestedDescription);
-        logger.debug("Exiting createNestedDescription with result: {}", nestedDescription != null ? "non-null" : "null");
-        return nestedDescription;
+            parent.setDescription(description);
+        logger.debug("Exiting createDescription with result: {}", description != null ? "non-null" : "null");
+        return description;
     }
 
     /**
@@ -119,16 +119,15 @@ public class SheepDogBuilder {
      * parent-child relationships, and handles singleton lookups where needed.
      *
      * @param parent the parent element (or null if root)
-     * @param name   the name of the line
      * @return the created and initialized instance
      */
-    public static INestedDescription createNestedDescription(ITestData parent) {
-        logger.debug("Entering createNestedDescription for parent: {}", parent != null ? parent.getName() : "null");
-        INestedDescription nestedDescription = SheepDogFactory.instance.createNestedDescription();
+    public static IDescription createDescription(ITestData parent) {
+        logger.debug("Entering createDescription for parent: {}", parent != null ? parent.getName() : "null");
+        IDescription description = SheepDogFactory.instance.createDescription();
         if (parent != null)
-            parent.setNestedDescription(nestedDescription);
-        logger.debug("Exiting createNestedDescription with result: {}", nestedDescription != null ? "non-null" : "null");
-        return nestedDescription;
+            parent.setDescription(description);
+        logger.debug("Exiting createDescription with result: {}", description != null ? "non-null" : "null");
+        return description;
     }
 
     /**
@@ -152,24 +151,6 @@ public class SheepDogBuilder {
         }
         logger.debug("Exiting createTestData with result: {}", testData != null ? testData.getName() : "null");
         return testData;
-    }
-
-    /**
-     * Creates grammar element using factory, initializes attributes, establishes
-     * parent-child relationships, and handles singleton lookups where needed.
-     *
-     * @param parent the parent element (or null if root)
-     * @param name   the name of the line
-     * @return the created and initialized instance
-     */
-    public static ILine createLine(INestedDescription parent, String name) {
-        logger.debug("Entering createLine for name: {}", name);
-        ILine line = SheepDogFactory.instance.createLine();
-        line.setName(name);
-        if (parent != null)
-            parent.addLine(line);
-        logger.debug("Exiting createLine with result: {}", line != null ? line.getName() : "null");
-        return line;
     }
 
     /**

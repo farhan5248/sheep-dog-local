@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ILine;
-import org.farhan.dsl.grammar.INestedDescription;
+
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
@@ -71,11 +71,7 @@ public class TestIDEObject extends TestObject {
         case "StepParametersList":
             return ((IStepDefinition) parent).getStepParameters(index);
         case "LineList":
-            if (parent instanceof IDescription) {
-                return ((IDescription) parent).getLine(index);
-            } else {
-                return ((INestedDescription) parent).getLine(index);
-            }
+            return ((IDescription) parent).getLine(index);
         case "TestDataList":
             return ((ITestCase) parent).getTestData(index);
         default:
@@ -103,11 +99,7 @@ public class TestIDEObject extends TestObject {
             case "StepParametersList":
                 return SheepDogBuilder.createStepParameters((IStepDefinition) parent, "");
             case "LineList":
-                if (parent instanceof IDescription) {
-                    return SheepDogBuilder.createLine((IDescription) parent, "");
-                } else {
-                    return SheepDogBuilder.createLine((INestedDescription) parent, "");
-                }
+                return SheepDogBuilder.createLine((IDescription) parent, "");
             case "TestDataList":
                 return SheepDogBuilder.createTestData((ITestCase) parent, "");
             default:
@@ -141,11 +133,7 @@ public class TestIDEObject extends TestObject {
         if (cursor instanceof ILine) {
             cursor = ((ILine) cursor).getParent();
         }
-        if (cursor instanceof IDescription) {
-            cursor = SheepDogBuilder.createLine((IDescription) cursor, content);
-        } else {
-            cursor = SheepDogBuilder.createLine((INestedDescription) cursor, content);
-        }
+        cursor = SheepDogBuilder.createLine((IDescription) cursor, content);
     }
 
     protected void addRowWithContent(String content) {
@@ -274,29 +262,21 @@ public class TestIDEObject extends TestObject {
                 Assertions.assertEquals(content, ((ILine) cursor).getName());
             } else {
                 cursor = ((ILine) cursor).getParent();
-                if (cursor instanceof IDescription) {
-                    cursor = ((IDescription) cursor).getLine(content);
-                } else {
-                    cursor = ((INestedDescription) cursor).getLine(content);
-                }
+                cursor = ((IDescription) cursor).getLine(content);
                 Assertions.assertNotNull(cursor);
             }
         } else {
-            if (cursor instanceof IDescription) {
-                cursor = ((IDescription) cursor).getLine(content);
-            } else {
-                cursor = ((INestedDescription) cursor).getLine(content);
-            }
+            cursor = ((IDescription) cursor).getLine(content);
             Assertions.assertNotNull(cursor);
         }
     }
 
     protected void assertNestedDescriptionEmpty(String state) {
-        INestedDescription nd = null;
+        IDescription nd = null;
         if (cursor instanceof IStepParameters)
-            nd = ((IStepParameters) cursor).getNestedDescription();
+            nd = ((IStepParameters) cursor).getDescription();
         else if (cursor instanceof ITestData)
-            nd = ((ITestData) cursor).getNestedDescription();
+            nd = ((ITestData) cursor).getDescription();
         Assertions.assertNull(nd);
     }
 
@@ -425,6 +405,12 @@ public class TestIDEObject extends TestObject {
         Assertions.assertEquals(name, ((ITestStep) cursor).getStepObjectName());
     }
 
+    protected void assertTestStepFullName(String fullName) {
+        ITestStep testStep = (ITestStep) cursor;
+        String actual = testStep.getStepObjectName() + " " + testStep.getStepDefinitionName();
+        Assertions.assertEquals(fullName, actual);
+    }
+
     protected void assertTestSuiteFullName(String fullName, String nodePath) {
         if (cursor instanceof ITestSuite) {
             if (getNode(nodePath) instanceof ITestSuite) {
@@ -484,7 +470,7 @@ public class TestIDEObject extends TestObject {
                     current = table;
                 }
                 i++;
-            } else if (elementType.equals("Description")) {
+            } else if (elementType.equals("Description") || elementType.equals("NestedDescription")) {
                 if (current instanceof ITestSuite) {
                     IDescription desc = ((ITestSuite) current).getDescription();
                     current = desc != null ? desc : SheepDogBuilder.createDescription((ITestSuite) current);
@@ -494,18 +480,15 @@ public class TestIDEObject extends TestObject {
                 } else if (current instanceof IStepObject) {
                     IDescription desc = ((IStepObject) current).getDescription();
                     current = desc != null ? desc : SheepDogBuilder.createDescription((IStepObject) current);
-                } else {
+                } else if (current instanceof IStepDefinition) {
                     IDescription desc = ((IStepDefinition) current).getDescription();
                     current = desc != null ? desc : SheepDogBuilder.createDescription((IStepDefinition) current);
-                }
-                i++;
-            } else if (elementType.equals("NestedDescription")) {
-                if (current instanceof IStepParameters) {
-                    INestedDescription nd = ((IStepParameters) current).getNestedDescription();
-                    current = nd != null ? nd : SheepDogBuilder.createNestedDescription((IStepParameters) current);
+                } else if (current instanceof IStepParameters) {
+                    IDescription desc = ((IStepParameters) current).getDescription();
+                    current = desc != null ? desc : SheepDogBuilder.createDescription((IStepParameters) current);
                 } else {
-                    INestedDescription nd = ((ITestData) current).getNestedDescription();
-                    current = nd != null ? nd : SheepDogBuilder.createNestedDescription((ITestData) current);
+                    IDescription desc = ((ITestData) current).getDescription();
+                    current = desc != null ? desc : SheepDogBuilder.createDescription((ITestData) current);
                 }
                 i++;
             } else if (elementType.equals("Text") || elementType.equals("CellList")) {
@@ -584,22 +567,19 @@ public class TestIDEObject extends TestObject {
             } else if (elementType.equals("Text")) {
                 current = ((ITestStep) current).getText();
                 i++;
-            } else if (elementType.equals("Description")) {
+            } else if (elementType.equals("Description") || elementType.equals("NestedDescription")) {
                 if (current instanceof ITestSuite) {
                     current = ((ITestSuite) current).getDescription();
                 } else if (current instanceof ITestStepContainer) {
                     current = ((ITestStepContainer) current).getDescription();
                 } else if (current instanceof IStepObject) {
                     current = ((IStepObject) current).getDescription();
-                } else {
+                } else if (current instanceof IStepDefinition) {
                     current = ((IStepDefinition) current).getDescription();
-                }
-                i++;
-            } else if (elementType.equals("NestedDescription")) {
-                if (current instanceof IStepParameters) {
-                    current = ((IStepParameters) current).getNestedDescription();
+                } else if (current instanceof IStepParameters) {
+                    current = ((IStepParameters) current).getDescription();
                 } else {
-                    current = ((ITestData) current).getNestedDescription();
+                    current = ((ITestData) current).getDescription();
                 }
                 i++;
             } else {
@@ -647,22 +627,19 @@ public class TestIDEObject extends TestObject {
             } else if (elementType.equals("Text")) {
                 current = ((ITestStep) current).getText();
                 i++;
-            } else if (elementType.equals("Description")) {
+            } else if (elementType.equals("Description") || elementType.equals("NestedDescription")) {
                 if (current instanceof ITestSuite) {
                     current = ((ITestSuite) current).getDescription();
                 } else if (current instanceof ITestStepContainer) {
                     current = ((ITestStepContainer) current).getDescription();
                 } else if (current instanceof IStepObject) {
                     current = ((IStepObject) current).getDescription();
-                } else {
+                } else if (current instanceof IStepDefinition) {
                     current = ((IStepDefinition) current).getDescription();
-                }
-                i++;
-            } else if (elementType.equals("NestedDescription")) {
-                if (current instanceof IStepParameters) {
-                    current = ((IStepParameters) current).getNestedDescription();
+                } else if (current instanceof IStepParameters) {
+                    current = ((IStepParameters) current).getDescription();
                 } else {
-                    current = ((ITestData) current).getNestedDescription();
+                    current = ((ITestData) current).getDescription();
                 }
                 i++;
             } else {

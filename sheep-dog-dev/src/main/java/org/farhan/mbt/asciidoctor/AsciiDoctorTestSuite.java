@@ -31,7 +31,6 @@ import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.Description;
 import org.farhan.dsl.sheepdog.sheepDog.Line;
-import org.farhan.dsl.sheepdog.sheepDog.NestedDescription;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
@@ -215,8 +214,8 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public ArrayList<String> getExamplesTags(TestData examples) {
         ArrayList<String> tags = new ArrayList<String>();
-        if (examples.getNestedDescription() != null) {
-            for (Line l : examples.getNestedDescription().getLineList()) {
+        if (examples.getDescription() != null) {
+            for (Line l : examples.getDescription().getLineList()) {
                 tags.addAll(PhraseFragments.getTagAsList(l.getContent()));
             }
         }
@@ -467,8 +466,8 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     }
 
     public String getExamplesDescription(TestData examples) {
-        if (examples.getNestedDescription() != null) {
-            return convertLinesToString(examples.getNestedDescription().getLineList());
+        if (examples.getDescription() != null) {
+            return convertLinesToString(examples.getDescription().getLineList());
         } else {
             return "";
         }
@@ -476,8 +475,8 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public void setExamplesDescription(TestData examples, String description) {
         if (!description.isEmpty()) {
-            NestedDescription nd = SheepDogFactory.eINSTANCE.createNestedDescription();
-            examples.setNestedDescription(nd);
+            Description nd = SheepDogFactory.eINSTANCE.createDescription();
+            examples.setDescription(nd);
             for (String line : description.split("\n")) {
                 Line l = SheepDogFactory.eINSTANCE.createLine();
                 l.setContent(line);

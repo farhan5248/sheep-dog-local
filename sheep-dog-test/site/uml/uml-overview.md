@@ -20,12 +20,12 @@ Pattern variables used in UML files to represent families of classes following s
    - Used in: {Language}Builder, {Language}Factory, I{Language}Factory, {Language}IssueProposal
 
 2. **{Type}** - Grammar types (non-terminal rules) defined in the .xtext file
-   - Values: `(And|Cell|Description|Given|Line|TestDocument|NestedDescription|Phrase|Row|StepDefinition|StepDefinitionRef|StepObject|StepObjectRef|StepParameters|Table|TestCase|TestData|TestProject|TestSetup|TestStep|TestStepContainer|TestSuite|Text|Then|When)`
+   - Values: `(And|Cell|Description|Given|Line|TestDocument|Phrase|Row|StepDefinition|StepDefinitionRef|StepObject|StepObjectRef|StepParameters|Table|TestCase|TestData|TestProject|TestSetup|TestStep|TestStepContainer|TestSuite|Text|Then|When)`
    - Used in: I{Type}, create{Type}(), {Type}Utility, {Type}IssueTypes, {Type}IssueDetector, {Type}IssueResolver
    - Case variants: `{type}` (camelCase), `{TYPE}` (UPPER_SNAKE_CASE)
 
 3. **{Assignment}** - Named assignments within grammar rules
-   - Values: `(Name|Description|NestedDescription|LineList|StepDefinitionList|StepParameterList|Table|TestStepContainerList|TestStepList|TestDataList|StepObjectName|StepDefinitionName|Text|RowList|CellList|TestDocumentList)`
+   - Values: `(Name|Description|LineList|StepDefinitionList|StepParameterList|Table|TestStepContainerList|TestStepList|TestDataList|StepObjectName|StepDefinitionName|Text|RowList|CellList|TestDocumentList)`
    - Used in: validate{Assignment}{Scope}(), correct{Assignment}{Scope}(), suggest{Assignment}{Scope}()
    - Case variants: `{assignment}` (camelCase for get/set methods), `{ASSIGNMENT}` (UPPER_SNAKE_CASE for enum constants)
 

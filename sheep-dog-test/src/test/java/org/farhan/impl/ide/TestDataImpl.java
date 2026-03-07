@@ -1,7 +1,7 @@
 package org.farhan.impl.ide;
 
+import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ILine;
-import org.farhan.dsl.grammar.INestedDescription;
 import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
@@ -10,7 +10,7 @@ public class TestDataImpl implements ITestData {
 
 	String name;
 	TestCaseImpl parent;
-	NestedDescriptionImpl nestedDescription;
+	DescriptionImpl description;
 	TableImpl table;
 
 	TestDataImpl() {
@@ -27,8 +27,8 @@ public class TestDataImpl implements ITestData {
 	}
 
 	@Override
-	public INestedDescription getNestedDescription() {
-		return nestedDescription;
+	public IDescription getDescription() {
+		return description;
 	}
 
 	@Override
@@ -49,18 +49,18 @@ public class TestDataImpl implements ITestData {
 
 	@Override
 	public boolean addLine(ILine value) {
-		if (nestedDescription == null) {
-			nestedDescription = new NestedDescriptionImpl();
-			nestedDescription.parent = this;
+		if (description == null) {
+			description = new DescriptionImpl();
+			description.parent = this;
 		}
-		nestedDescription.addLine(value);
+		description.addLine(value);
 		return true;
 	}
 
 	@Override
-	public void setNestedDescription(INestedDescription value) {
-		this.nestedDescription = (NestedDescriptionImpl) value;
-		this.nestedDescription.parent = this;
+	public void setDescription(IDescription value) {
+		this.description = (DescriptionImpl) value;
+		this.description.parent = this;
 	}
 
 	@Override

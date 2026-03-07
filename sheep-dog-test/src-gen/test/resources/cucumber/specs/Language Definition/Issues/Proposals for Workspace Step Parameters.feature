@@ -6,6 +6,8 @@ Feature: Proposals for Workspace Step Parameters
 
   Scenario: No existing step object
 
+    If the step object file doesn't exist in the workspace, no parameter proposals are available.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                                 |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is created as follows |
@@ -15,6 +17,8 @@ Feature: Proposals for Workspace Step Parameters
      Then The xtext plugin list proposals popup will be empty
 
   Scenario: No existing step definition
+
+    If the step object exists but the step definition doesn't match, no parameter proposals are available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                                 |
@@ -32,6 +36,8 @@ Feature: Proposals for Workspace Step Parameters
 
   Scenario: Has existing step definition without parameters
 
+    If the step definition exists but the test step uses a different step definition name, no parameter proposals are available.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
@@ -48,6 +54,7 @@ Feature: Proposals for Workspace Step Parameters
 
   Scenario: Has existing step definition with parameters
 
+    If the step definition has parameters with a nested description, they are proposed with their description.
     TODO I should add more parameter combinations to describe this better.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -60,8 +67,8 @@ Feature: Proposals for Workspace Step Parameters
           | Node Path                    | Step Object Full Name                      | Step Definition Name  | Step Parameters Name |
           | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is created as follows | H1, H2, H3           |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows
-          | Node Path                                                                                           | Line Content                 |
-          | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/NestedDescription/LineList | Header parameters for tables |
+          | Node Path                                                                                     | Line Content                 |
+          | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Description/LineList | Header parameters for tables |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1 |

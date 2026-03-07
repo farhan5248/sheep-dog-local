@@ -9,6 +9,8 @@ Feature: Quickfixes for Workspace Issues
 
   Scenario: This object doesn't exist quickfix
 
+    The quickfix proposes generating the step object file at the expected path for the component.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
@@ -24,6 +26,8 @@ Feature: Quickfixes for Workspace Issues
           | Generate Input file - stepdefs/daily batchjob/Input file.feature | empty                |
 
   Scenario: This object step definition doesn't exist quickfix
+
+    The quickfix proposes two options: switching to an existing step definition, or generating the missing step definition in the step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |
@@ -46,6 +50,8 @@ Feature: Quickfixes for Workspace Issues
           | Generate is present | empty                |
 
   Scenario: This object step definition parameter set doesn't exist quickfix
+
+    The quickfix proposes two options: switching to an existing parameter set, or generating the new parameter set in the step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                             |
@@ -78,6 +84,8 @@ Feature: Quickfixes for Workspace Issues
 
   Scenario: This object step definition text parameter exists quickfix
 
+    If the Content parameter exists in the step definition, no quickfix is needed for the text block.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
@@ -97,6 +105,8 @@ Feature: Quickfixes for Workspace Issues
      Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: This object step definition text parameter doesn't exist quickfix
+
+    The quickfix proposes generating the Content parameter in the step definition for the text block.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                             |

@@ -3,7 +3,6 @@ package org.farhan.impl.ide;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ILine;
-import org.farhan.dsl.grammar.INestedDescription;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ISheepDogFactory;
 import org.farhan.dsl.grammar.IStepDefinition;
@@ -23,11 +22,6 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
     @Override
     public IDescription createDescription() {
         return new DescriptionImpl();
-    }
-
-    @Override
-    public INestedDescription createNestedDescription() {
-        return new NestedDescriptionImpl();
     }
 
     @Override

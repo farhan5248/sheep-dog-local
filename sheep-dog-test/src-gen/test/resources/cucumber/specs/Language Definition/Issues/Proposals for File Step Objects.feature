@@ -12,6 +12,8 @@ Feature: Proposals for File Step Objects
 
   Scenario: No component no existing
 
+    If a step has no component and no object, proposals come from objects referenced in previous steps within the same test case. Both the short form and fully qualified form are proposed.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                       |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
@@ -26,6 +28,8 @@ Feature: Proposals for File Step Objects
 
   Scenario: Has component no existing
 
+    If a step has a component but no object, proposals still come from objects referenced in previous steps. The component doesn't filter the proposals from previous steps.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                       |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
@@ -39,6 +43,8 @@ Feature: Proposals for File Step Objects
           | The daily batchjob Output file | daily batchjob/Output file | Referred in: The daily batchjob Output file is present |
 
   Scenario: No component no existing has background
+
+    If a test case step has no component and no object, proposals include objects from the test setup (background) steps.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
           | Node Path                                            | Test Setup Name |

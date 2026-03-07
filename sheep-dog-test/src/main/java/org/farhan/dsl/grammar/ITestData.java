@@ -6,7 +6,7 @@ public interface ITestData {
 
     ITestCase getParent();
 
-    INestedDescription getNestedDescription();
+    IDescription getDescription();
 
     ITable getTable();
 
@@ -16,6 +16,6 @@ public interface ITestData {
 
     boolean addLine(ILine value);
 
-    void setNestedDescription(INestedDescription value);
+    void setDescription(IDescription value);
 
 }

@@ -1,10 +1,11 @@
 package org.farhan.dsl.sheepdog.impl;
 
+import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ILine;
-import org.farhan.dsl.grammar.INestedDescription;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITable;
+import org.farhan.dsl.sheepdog.sheepDog.Description;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 
@@ -30,9 +31,9 @@ public class StepParametersImpl implements IStepParameters {
     }
 
     @Override
-    public INestedDescription getNestedDescription() {
-        if (eObject.getNestedDescription() != null) {
-            return new NestedDescriptionImpl(eObject.getNestedDescription());
+    public IDescription getDescription() {
+        if (eObject.getDescription() != null) {
+            return new DescriptionImpl(eObject.getDescription());
         }
         return null;
     }
@@ -53,16 +54,16 @@ public class StepParametersImpl implements IStepParameters {
     }
 
     @Override
-    public void setNestedDescription(INestedDescription value) {
-        eObject.setNestedDescription(((NestedDescriptionImpl) value).eObject);
+    public void setDescription(IDescription value) {
+        eObject.setDescription(((DescriptionImpl) value).eObject);
     }
 
     @Override
     public boolean addLine(ILine value) {
-        org.farhan.dsl.sheepdog.sheepDog.NestedDescription list = eObject.getNestedDescription();
+        Description list = eObject.getDescription();
         if (list == null) {
-            list = org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory.eINSTANCE.createNestedDescription();
-            eObject.setNestedDescription(list);
+            list = org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory.eINSTANCE.createDescription();
+            eObject.setDescription(list);
         }
         list.getLineList().add(((LineImpl) value).eObject);
         return true;

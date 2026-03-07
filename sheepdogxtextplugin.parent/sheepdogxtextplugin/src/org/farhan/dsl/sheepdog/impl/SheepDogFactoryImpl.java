@@ -3,7 +3,7 @@ package org.farhan.dsl.sheepdog.impl;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ILine;
-import org.farhan.dsl.grammar.INestedDescription;
+
 import org.farhan.dsl.grammar.IResourceRepository;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ISheepDogFactory;
@@ -20,7 +20,6 @@ import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.Description;
-import org.farhan.dsl.sheepdog.sheepDog.NestedDescription;
 import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
@@ -42,12 +41,6 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
     public IDescription createDescription() {
         Description description = SheepDogFactory.eINSTANCE.createDescription();
         return new DescriptionImpl(description);
-    }
-
-    @Override
-    public INestedDescription createNestedDescription() {
-        NestedDescription nestedDescription = SheepDogFactory.eINSTANCE.createNestedDescription();
-        return new NestedDescriptionImpl(nestedDescription);
     }
 
     @Override

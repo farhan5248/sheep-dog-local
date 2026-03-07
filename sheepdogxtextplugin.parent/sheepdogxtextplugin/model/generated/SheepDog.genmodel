@@ -20,7 +20,7 @@
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//StepParameters">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//StepParameters/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/nestedDescription"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/table"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestSuite">
@@ -37,7 +37,7 @@
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestData">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestData/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/nestedDescription"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/table"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestStep">
@@ -64,9 +64,6 @@
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Description">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Description/lineList"/>
-    </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//NestedDescription">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//NestedDescription/lineList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Line">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Line/content"/>

@@ -8,9 +8,11 @@ Feature: Proposals for Workspace Step Definitions
   3. The path/to/file/Input file is empty
   4. The Input file is empty
   So instead of saving all combinations, only the details section and predicate are saved.
-  When the reference look-up is done, the step-object is located using the full path and component.
+  If the reference look-up is done, the step-object is located using the full path and component.
 
   Scenario: Has component no existing step object
+
+    If the step object file doesn't exist in the workspace, no step definition proposals are available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name           |
@@ -22,6 +24,8 @@ Feature: Proposals for Workspace Step Definitions
 
   Scenario: Has component no existing step definition
 
+    If the step object file exists but has no matching step definition, no proposals are available.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name           |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file |
@@ -31,6 +35,8 @@ Feature: Proposals for Workspace Step Definitions
      Then The xtext plugin list proposals popup will be empty
 
   Scenario: Has component has existing step definition
+
+    If the step object file has step definitions, they are proposed with their description.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name           |
@@ -49,6 +55,8 @@ Feature: Proposals for Workspace Step Definitions
           | is present     | is present  | Creates empty file   |
 
   Scenario: No component has existing step definition
+
+    If a step omits the component but a previous step specified it, the component is inferred and step definitions are proposed from the matching step object.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                      |

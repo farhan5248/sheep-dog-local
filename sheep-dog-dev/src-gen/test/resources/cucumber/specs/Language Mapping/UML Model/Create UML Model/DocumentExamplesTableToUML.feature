@@ -12,19 +12,16 @@ Feature: DocumentExamplesTableToUML
           == Test-Case: Submit
           
           === Given: The Object page is created as follows
-          +
           |===
           | h1 | h2 | h3
           | {h1} | {h2} | {h3}
           |===
           
           === Test-Data: Examples 1
-          +
           @tag1 @tag2 @tag3
           Desc1
           Desc2
           Desc3
-          +
           |===
           | h1 | h2 | h3
           | v1 | v2 | v3

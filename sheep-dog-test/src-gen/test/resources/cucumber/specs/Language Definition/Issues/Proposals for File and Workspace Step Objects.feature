@@ -32,6 +32,8 @@ Feature: Proposals for File and Workspace Step Objects
 
   Scenario: Has component has existing
 
+    If a step has a component and workspace step objects exist, proposals combine objects from previous steps and objects from the workspace.
+
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                                                           | Test Step Full Name                       |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |

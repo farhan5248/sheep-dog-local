@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.StepParameters#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.StepParameters#getNestedDescription <em>Nested Description</em>}</li>
+ *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.StepParameters#getDescription <em>Description</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.StepParameters#getTable <em>Table</em>}</li>
  * </ul>
  *
@@ -48,26 +48,26 @@ public interface StepParameters extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Nested Description</b></em>' containment reference.
+   * Returns the value of the '<em><b>Description</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Nested Description</em>' containment reference.
-   * @see #setNestedDescription(NestedDescription)
-   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getStepParameters_NestedDescription()
+   * @return the value of the '<em>Description</em>' containment reference.
+   * @see #setDescription(Description)
+   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getStepParameters_Description()
    * @model containment="true"
    * @generated
    */
-  NestedDescription getNestedDescription();
+  Description getDescription();
 
   /**
-   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.StepParameters#getNestedDescription <em>Nested Description</em>}' containment reference.
+   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.StepParameters#getDescription <em>Description</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Nested Description</em>' containment reference.
-   * @see #getNestedDescription()
+   * @param value the new value of the '<em>Description</em>' containment reference.
+   * @see #getDescription()
    * @generated
    */
-  void setNestedDescription(NestedDescription value);
+  void setDescription(Description value);
 
   /**
    * Returns the value of the '<em><b>Table</b></em>' containment reference.

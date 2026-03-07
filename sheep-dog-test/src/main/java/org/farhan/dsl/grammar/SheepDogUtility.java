@@ -73,10 +73,10 @@ public class SheepDogUtility {
                 IStepParameters clonedStepParams = SheepDogBuilder.createStepParameters(clonedStepDef, stepParameters.getName());
 
                 // Clone lines for step parameters
-                if (stepParameters.getNestedDescription() != null) {
-                    INestedDescription clonedNestedDescription = SheepDogBuilder.createNestedDescription(clonedStepParams);
-                    for (ILine line : stepParameters.getNestedDescription().getLineList()) {
-                        SheepDogBuilder.createLine(clonedNestedDescription, line.getName());
+                if (stepParameters.getDescription() != null) {
+                    IDescription clonedDescription = SheepDogBuilder.createDescription(clonedStepParams);
+                    for (ILine line : stepParameters.getDescription().getLineList()) {
+                        SheepDogBuilder.createLine(clonedDescription, line.getName());
                     }
                 }
 

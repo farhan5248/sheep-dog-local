@@ -56,9 +56,9 @@ Feature: StepObject Type
 
     Step Parameters must have
     - Name
-    - Table
     and optionally have these
     - Description
+    - Table
 
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node is created as follows
           | Node Path                                                              | Step Parameters Name  |
@@ -70,8 +70,8 @@ Feature: StepObject Type
           | Node Path                                                                | Step Parameters Name   |
           | TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/2 | Second Step Parameters |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file NestedDescription node will be as follows
-          | Node Path                                                                                  | State  |
-          | TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/2/NestedDescription | Absent |
+          | Node Path                                                                            | State  |
+          | TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/2/Description | Absent |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Table node will be as follows
           | Node Path                                                                      | State  |
           | TestProject/TestDocumentList/1/StepDefinitionList/1/StepParametersList/2/Table | Absent |

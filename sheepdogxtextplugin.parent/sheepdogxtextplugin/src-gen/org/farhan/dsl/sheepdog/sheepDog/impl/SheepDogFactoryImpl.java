@@ -84,7 +84,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
       case SheepDogPackage.ROW: return createRow();
       case SheepDogPackage.CELL: return createCell();
       case SheepDogPackage.DESCRIPTION: return createDescription();
-      case SheepDogPackage.NESTED_DESCRIPTION: return createNestedDescription();
       case SheepDogPackage.LINE: return createLine();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -317,18 +316,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
   {
     DescriptionImpl description = new DescriptionImpl();
     return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NestedDescription createNestedDescription()
-  {
-    NestedDescriptionImpl nestedDescription = new NestedDescriptionImpl();
-    return nestedDescription;
   }
 
   /**

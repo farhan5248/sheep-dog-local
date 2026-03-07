@@ -7,21 +7,21 @@ Feature: TestStep Type
   Scenario: Initial State Given
 
     Test Step must have
-    - Step Object Ref
-    - Step Definition Ref
+    - StepObjectRef Name
+    - StepDefinitionRef Name
     and optionally have one of these
     - Table
     - Text
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Given StepObject Name | Given StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed              |
+          | Node Path                                                           | Given StepObjectRef Name | Given StepDefinitionRef Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file    | is performed                 |
      When The xtext plugin edit document node action is performed to modify TestStepList with
-          | Node Path                                                           | Given StepObject Name  | Given StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed              |
+          | Node Path                                                           | Given StepObjectRef Name | Given StepDefinitionRef Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file   | is performed                 |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
-          | Node Path                                                             | Given StepObject Name  | Given StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed              |
+          | Node Path                                                             | Given StepObjectRef Name | Given StepDefinitionRef Name | Given Full Name                     |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file   | is performed                 | The Second action file is performed |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
           | Node Path                                                                  | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Text | Absent |
@@ -34,14 +34,14 @@ Feature: TestStep Type
     Verify the When keyword variant follows the same Test Step structure.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | When StepObject Name  | When StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed             |
+          | Node Path                                                           | When StepObjectRef Name | When StepDefinitionRef Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file   | is performed                |
      When The xtext plugin edit document node action is performed to modify TestStepList with
-          | Node Path                                                           | When StepObject Name   | When StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed             |
+          | Node Path                                                           | When StepObjectRef Name | When StepDefinitionRef Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file  | is performed                |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
-          | Node Path                                                             | When StepObject Name   | When StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed             |
+          | Node Path                                                             | When StepObjectRef Name | When StepDefinitionRef Name | When Full Name                      |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file  | is performed                | The Second action file is performed |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
           | Node Path                                                                  | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Text | Absent |
@@ -54,14 +54,14 @@ Feature: TestStep Type
     Verify the Then keyword variant follows the same Test Step structure.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Then StepObject Name  | Then StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed             |
+          | Node Path                                                           | Then StepObjectRef Name | Then StepDefinitionRef Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file   | is performed                |
      When The xtext plugin edit document node action is performed to modify TestStepList with
-          | Node Path                                                           | Then StepObject Name   | Then StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed             |
+          | Node Path                                                           | Then StepObjectRef Name | Then StepDefinitionRef Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file  | is performed                |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
-          | Node Path                                                             | Then StepObject Name   | Then StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed             |
+          | Node Path                                                             | Then StepObjectRef Name | Then StepDefinitionRef Name | Then Full Name                      |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file  | is performed                | The Second action file is performed |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
           | Node Path                                                                  | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Text | Absent |
@@ -74,14 +74,14 @@ Feature: TestStep Type
     Verify the And keyword variant follows the same Test Step structure.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | And StepObject Name   | And StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file | is performed            |
+          | Node Path                                                           | And StepObjectRef Name | And StepDefinitionRef Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The First action file  | is performed               |
      When The xtext plugin edit document node action is performed to modify TestStepList with
-          | Node Path                                                           | And StepObject Name    | And StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed            |
+          | Node Path                                                           | And StepObjectRef Name | And StepDefinitionRef Name |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The Second action file | is performed               |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
-          | Node Path                                                             | And StepObject Name    | And StepDefinition Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed            |
+          | Node Path                                                             | And StepObjectRef Name | And StepDefinitionRef Name | And Full Name                       |
+          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 | The Second action file | is performed               | The Second action file is performed |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
           | Node Path                                                                  | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Text | Absent |

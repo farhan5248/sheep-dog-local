@@ -11,13 +11,13 @@ import io.cucumber.guice.ScenarioScoped;
 public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDocumentNodeAction {
 
     @Override
-    public void setAndStepDefinitionName(HashMap<String, String> keyMap) {
-        properties.put("And StepDefinition Name", keyMap.get("And StepDefinition Name"));
+    public void setAndStepDefinitionRefName(HashMap<String, String> keyMap) {
+        properties.put("And StepDefinitionRef Name", keyMap.get("And StepDefinitionRef Name"));
     }
 
     @Override
-    public void setAndStepObjectName(HashMap<String, String> keyMap) {
-        properties.put("And StepObject Name", keyMap.get("And StepObject Name"));
+    public void setAndStepObjectRefName(HashMap<String, String> keyMap) {
+        properties.put("And StepObjectRef Name", keyMap.get("And StepObjectRef Name"));
     }
 
     @Override
@@ -26,13 +26,13 @@ public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDoc
     }
 
     @Override
-    public void setGivenStepDefinitionName(HashMap<String, String> keyMap) {
-        properties.put("Given StepDefinition Name", keyMap.get("Given StepDefinition Name"));
+    public void setGivenStepDefinitionRefName(HashMap<String, String> keyMap) {
+        properties.put("Given StepDefinitionRef Name", keyMap.get("Given StepDefinitionRef Name"));
     }
 
     @Override
-    public void setGivenStepObjectName(HashMap<String, String> keyMap) {
-        properties.put("Given StepObject Name", keyMap.get("Given StepObject Name"));
+    public void setGivenStepObjectRefName(HashMap<String, String> keyMap) {
+        properties.put("Given StepObjectRef Name", keyMap.get("Given StepObjectRef Name"));
     }
 
     @Override
@@ -86,23 +86,23 @@ public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDoc
     }
 
     @Override
-    public void setThenStepDefinitionName(HashMap<String, String> keyMap) {
-        properties.put("Then StepDefinition Name", keyMap.get("Then StepDefinition Name"));
+    public void setThenStepDefinitionRefName(HashMap<String, String> keyMap) {
+        properties.put("Then StepDefinitionRef Name", keyMap.get("Then StepDefinitionRef Name"));
     }
 
     @Override
-    public void setThenStepObjectName(HashMap<String, String> keyMap) {
-        properties.put("Then StepObject Name", keyMap.get("Then StepObject Name"));
+    public void setThenStepObjectRefName(HashMap<String, String> keyMap) {
+        properties.put("Then StepObjectRef Name", keyMap.get("Then StepObjectRef Name"));
     }
 
     @Override
-    public void setWhenStepDefinitionName(HashMap<String, String> keyMap) {
-        properties.put("When StepDefinition Name", keyMap.get("When StepDefinition Name"));
+    public void setWhenStepDefinitionRefName(HashMap<String, String> keyMap) {
+        properties.put("When StepDefinitionRef Name", keyMap.get("When StepDefinitionRef Name"));
     }
 
     @Override
-    public void setWhenStepObjectName(HashMap<String, String> keyMap) {
-        properties.put("When StepObject Name", keyMap.get("When StepObject Name"));
+    public void setWhenStepObjectRefName(HashMap<String, String> keyMap) {
+        properties.put("When StepObjectRef Name", keyMap.get("When StepObjectRef Name"));
     }
 
     @Override
@@ -144,34 +144,34 @@ public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDoc
         } else if (properties.get("Line Content") != null) {
             addLineWithContent(replaceKeyword(properties.get("Line Content").toString()));
             properties.remove("Line Content");
-        } else if (properties.get("Given StepObject Name") != null) {
-            addGivenWithStepObjectName(replaceKeyword(properties.get("Given StepObject Name").toString()));
-            if (properties.get("Given StepDefinition Name") != null) {
-                setTestStepDefinitionName(replaceKeyword(properties.get("Given StepDefinition Name").toString()));
-                properties.remove("Given StepDefinition Name");
+        } else if (properties.get("Given StepObjectRef Name") != null) {
+            addGivenWithStepObjectName(replaceKeyword(properties.get("Given StepObjectRef Name").toString()));
+            if (properties.get("Given StepDefinitionRef Name") != null) {
+                setTestStepDefinitionName(replaceKeyword(properties.get("Given StepDefinitionRef Name").toString()));
+                properties.remove("Given StepDefinitionRef Name");
             }
-            properties.remove("Given StepObject Name");
-        } else if (properties.get("When StepObject Name") != null) {
-            addWhenWithStepObjectName(replaceKeyword(properties.get("When StepObject Name").toString()));
-            if (properties.get("When StepDefinition Name") != null) {
-                setTestStepDefinitionName(replaceKeyword(properties.get("When StepDefinition Name").toString()));
-                properties.remove("When StepDefinition Name");
+            properties.remove("Given StepObjectRef Name");
+        } else if (properties.get("When StepObjectRef Name") != null) {
+            addWhenWithStepObjectName(replaceKeyword(properties.get("When StepObjectRef Name").toString()));
+            if (properties.get("When StepDefinitionRef Name") != null) {
+                setTestStepDefinitionName(replaceKeyword(properties.get("When StepDefinitionRef Name").toString()));
+                properties.remove("When StepDefinitionRef Name");
             }
-            properties.remove("When StepObject Name");
-        } else if (properties.get("Then StepObject Name") != null) {
-            addThenWithStepObjectName(replaceKeyword(properties.get("Then StepObject Name").toString()));
-            if (properties.get("Then StepDefinition Name") != null) {
-                setTestStepDefinitionName(replaceKeyword(properties.get("Then StepDefinition Name").toString()));
-                properties.remove("Then StepDefinition Name");
+            properties.remove("When StepObjectRef Name");
+        } else if (properties.get("Then StepObjectRef Name") != null) {
+            addThenWithStepObjectName(replaceKeyword(properties.get("Then StepObjectRef Name").toString()));
+            if (properties.get("Then StepDefinitionRef Name") != null) {
+                setTestStepDefinitionName(replaceKeyword(properties.get("Then StepDefinitionRef Name").toString()));
+                properties.remove("Then StepDefinitionRef Name");
             }
-            properties.remove("Then StepObject Name");
-        } else if (properties.get("And StepObject Name") != null) {
-            addAndWithStepObjectName(replaceKeyword(properties.get("And StepObject Name").toString()));
-            if (properties.get("And StepDefinition Name") != null) {
-                setTestStepDefinitionName(replaceKeyword(properties.get("And StepDefinition Name").toString()));
-                properties.remove("And StepDefinition Name");
+            properties.remove("Then StepObjectRef Name");
+        } else if (properties.get("And StepObjectRef Name") != null) {
+            addAndWithStepObjectName(replaceKeyword(properties.get("And StepObjectRef Name").toString()));
+            if (properties.get("And StepDefinitionRef Name") != null) {
+                setTestStepDefinitionName(replaceKeyword(properties.get("And StepDefinitionRef Name").toString()));
+                properties.remove("And StepDefinitionRef Name");
             }
-            properties.remove("And StepObject Name");
+            properties.remove("And StepObjectRef Name");
         }
     }
 

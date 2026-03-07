@@ -12,14 +12,12 @@ Feature: UMLScenarioOutlineToDocument
           == Test-Case: Submit
           
           === Given: The blah application Object page is created as follows
-          +
           |===
           | h1
           | {h3}
           |===
           
           === Test-Data: Examples 1
-          +
           |===
           | h3
           | v31
@@ -51,42 +49,36 @@ Feature: UMLScenarioOutlineToDocument
           Desc line 3
           
           === Given: The blah application Object page is created as follows
-          +
           |===
           | h1
           | {h3}
           |===
           
           === Given: The blah application Object2 page is created as follows
-          +
           |===
           | h1
           | {h3}
           |===
           
           === Given: The blah application Object3 page is created as follows
-          +
           |===
           | h1
           | {h3}
           |===
           
           === Test-Data: Examples 1
-          +
           |===
           | h3
           | v31
           |===
           
           === Test-Data: Examples 2
-          +
           |===
           | h3
           | v32
           |===
           
           === Test-Data: Examples 3
-          +
           |===
           | h3
           | v33
