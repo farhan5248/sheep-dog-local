@@ -4,6 +4,8 @@ import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.StepDefinitionRefFragments;
+import org.farhan.dsl.grammar.StepObjectRefFragments;
 
 public class TestStepImpl implements ITestStep {
 
@@ -13,6 +15,19 @@ public class TestStepImpl implements ITestStep {
     TestStepContainerImpl parent;
     TableImpl table;
     TextImpl text;
+
+    @Override
+    public String getFullName() {
+        String obj = stepObjectName != null ? stepObjectName : "";
+        String def = stepDefinitionName != null ? stepDefinitionName : "";
+        return ("The " + obj + " " + def).trim();
+    }
+
+    @Override
+    public void setFullName(String value) {
+        stepObjectName = StepObjectRefFragments.getAll(value);
+        stepDefinitionName = StepDefinitionRefFragments.getAll(value.replace(stepObjectName, ""));
+    }
 
     @Override
     public ITestStepContainer getParent() {

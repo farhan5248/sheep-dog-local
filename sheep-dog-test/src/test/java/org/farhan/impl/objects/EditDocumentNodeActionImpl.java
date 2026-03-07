@@ -11,28 +11,8 @@ import io.cucumber.guice.ScenarioScoped;
 public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDocumentNodeAction {
 
     @Override
-    public void setAndStepDefinitionRefName(HashMap<String, String> keyMap) {
-        properties.put("And StepDefinitionRef Name", keyMap.get("And StepDefinitionRef Name"));
-    }
-
-    @Override
-    public void setAndStepObjectRefName(HashMap<String, String> keyMap) {
-        properties.put("And StepObjectRef Name", keyMap.get("And StepObjectRef Name"));
-    }
-
-    @Override
     public void setCellName(HashMap<String, String> keyMap) {
         properties.put("Cell Name", keyMap.get("Cell Name"));
-    }
-
-    @Override
-    public void setGivenStepDefinitionRefName(HashMap<String, String> keyMap) {
-        properties.put("Given StepDefinitionRef Name", keyMap.get("Given StepDefinitionRef Name"));
-    }
-
-    @Override
-    public void setGivenStepObjectRefName(HashMap<String, String> keyMap) {
-        properties.put("Given StepObjectRef Name", keyMap.get("Given StepObjectRef Name"));
     }
 
     @Override
@@ -81,28 +61,13 @@ public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDoc
     }
 
     @Override
+    public void setTestStepFullName(HashMap<String, String> keyMap) {
+        properties.put("Test Step Full Name", keyMap.get("Test Step Full Name"));
+    }
+
+    @Override
     public void setTestSuiteFullName(HashMap<String, String> keyMap) {
         properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
-    }
-
-    @Override
-    public void setThenStepDefinitionRefName(HashMap<String, String> keyMap) {
-        properties.put("Then StepDefinitionRef Name", keyMap.get("Then StepDefinitionRef Name"));
-    }
-
-    @Override
-    public void setThenStepObjectRefName(HashMap<String, String> keyMap) {
-        properties.put("Then StepObjectRef Name", keyMap.get("Then StepObjectRef Name"));
-    }
-
-    @Override
-    public void setWhenStepDefinitionRefName(HashMap<String, String> keyMap) {
-        properties.put("When StepDefinitionRef Name", keyMap.get("When StepDefinitionRef Name"));
-    }
-
-    @Override
-    public void setWhenStepObjectRefName(HashMap<String, String> keyMap) {
-        properties.put("When StepObjectRef Name", keyMap.get("When StepObjectRef Name"));
     }
 
     @Override
@@ -144,6 +109,9 @@ public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDoc
         } else if (properties.get("Line Content") != null) {
             addLineWithContent(replaceKeyword(properties.get("Line Content").toString()));
             properties.remove("Line Content");
+        } else if (properties.get("Test Step Full Name") != null) {
+            addTestStepWithFullName(replaceKeyword(properties.get("Test Step Full Name").toString()));
+            properties.remove("Test Step Full Name");
         } else if (properties.get("Given StepObjectRef Name") != null) {
             addGivenWithStepObjectName(replaceKeyword(properties.get("Given StepObjectRef Name").toString()));
             if (properties.get("Given StepDefinitionRef Name") != null) {

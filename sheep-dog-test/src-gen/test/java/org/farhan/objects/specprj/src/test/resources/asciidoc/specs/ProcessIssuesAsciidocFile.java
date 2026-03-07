@@ -80,51 +80,39 @@ public interface ProcessIssuesAsciidocFile {
 
     public void setTestStepListNodeNodePath(HashMap<String, String> keyMap);
 
-    public void setTestStepListNodeAndStepObjectRefName(HashMap<String, String> keyMap);
-
-    public void setTestStepListNodeAndStepDefinitionRefName(HashMap<String, String> keyMap);
-
     public void setTestStepListNodeGivenStepObjectRefName(HashMap<String, String> keyMap);
 
     public void setTestStepListNodeGivenStepDefinitionRefName(HashMap<String, String> keyMap);
 
     public void setTestStepListNodeTestStepFullName(HashMap<String, String> keyMap);
 
-    public void setTestStepListNodeThenStepObjectRefName(HashMap<String, String> keyMap);
-
-    public void setTestStepListNodeThenStepDefinitionRefName(HashMap<String, String> keyMap);
-
-    public void setTestStepListNodeWhenStepObjectRefName(HashMap<String, String> keyMap);
-
-    public void setTestStepListNodeWhenStepDefinitionRefName(HashMap<String, String> keyMap);
-
     public void assertTestStepListNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeState(HashMap<String, String> keyMap);
+
+    public void assertTestStepListNodeAndFullName(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeAndStepObjectRefName(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeAndStepDefinitionRefName(HashMap<String, String> keyMap);
 
-    public void assertTestStepListNodeAndFullName(HashMap<String, String> keyMap);
+    public void assertTestStepListNodeGivenFullName(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeGivenStepObjectRefName(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeGivenStepDefinitionRefName(HashMap<String, String> keyMap);
 
-    public void assertTestStepListNodeGivenFullName(HashMap<String, String> keyMap);
+    public void assertTestStepListNodeThenFullName(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeThenStepObjectRefName(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeThenStepDefinitionRefName(HashMap<String, String> keyMap);
 
-    public void assertTestStepListNodeThenFullName(HashMap<String, String> keyMap);
+    public void assertTestStepListNodeWhenFullName(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeWhenStepObjectRefName(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeWhenStepDefinitionRefName(HashMap<String, String> keyMap);
-
-    public void assertTestStepListNodeWhenFullName(HashMap<String, String> keyMap);
 
     public void setTextNodeNodePath(HashMap<String, String> keyMap);
 

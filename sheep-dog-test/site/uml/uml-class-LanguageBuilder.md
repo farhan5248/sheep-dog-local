@@ -23,6 +23,6 @@ Static factory for creating and initializing grammar elements. Separates object 
  - `public static IText createText(ITestStep parent, String name)`
  - `public static ITestCase createTestCase(ITestSuite parent, String name)`
  - `public static ITestSetup createTestSetup(ITestSuite parent, String name)`
- - `public static ITestStep createTestStep(ITestStepContainer parent, String name)`
+ - `public static ITestStep createTestStep(ITestStepContainer parent, String fullName)`
  - `public static ITestSuite createTestSuite(ITestProject parent, String fullName)`
  - `public static ITestProject createTestProject()`

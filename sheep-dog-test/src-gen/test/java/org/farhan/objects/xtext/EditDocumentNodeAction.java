@@ -28,19 +28,5 @@ public interface EditDocumentNodeAction {
 
     public void setTestSetupName(HashMap<String, String> keyMap);
 
-    public void setAndStepObjectRefName(HashMap<String, String> keyMap);
-
-    public void setAndStepDefinitionRefName(HashMap<String, String> keyMap);
-
-    public void setGivenStepObjectRefName(HashMap<String, String> keyMap);
-
-    public void setGivenStepDefinitionRefName(HashMap<String, String> keyMap);
-
-    public void setThenStepObjectRefName(HashMap<String, String> keyMap);
-
-    public void setThenStepDefinitionRefName(HashMap<String, String> keyMap);
-
-    public void setWhenStepObjectRefName(HashMap<String, String> keyMap);
-
-    public void setWhenStepDefinitionRefName(HashMap<String, String> keyMap);
+    public void setTestStepFullName(HashMap<String, String> keyMap);
 }

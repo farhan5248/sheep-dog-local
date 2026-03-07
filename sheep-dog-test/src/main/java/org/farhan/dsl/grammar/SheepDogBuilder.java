@@ -366,16 +366,14 @@ public class SheepDogBuilder {
      * Creates grammar element using factory, initializes attributes, establishes
      * parent-child relationships, and handles singleton lookups where needed.
      *
-     * @param parent the parent element (or null if root)
-     * @param name   the name of the test step
+     * @param parent   the parent element (or null if root)
+     * @param fullName the full name of the test step
      * @return the created and initialized instance
      */
-    public static ITestStep createTestStep(ITestStepContainer parent, String name) {
-        logger.debug("Entering createTestStep for name: {}", name);
+    public static ITestStep createTestStep(ITestStepContainer parent, String fullName) {
+        logger.debug("Entering createTestStep for fullName: {}", fullName);
         ITestStep testStep = SheepDogFactory.instance.createTestStep();
-        testStep.setStepObjectName(StepObjectRefFragments.getAll(name));
-        testStep.setStepDefinitionName(
-                StepDefinitionRefFragments.getAll(name.replace(testStep.getStepObjectName(), "")));
+        testStep.setFullName(fullName);
         if (parent != null)
             parent.addTestStep(testStep);
         logger.debug("Exiting createTestStep with result: {}", testStep != null ? testStep.getStepObjectName() : "null");

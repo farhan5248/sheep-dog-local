@@ -4,6 +4,7 @@ import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
@@ -16,6 +17,16 @@ public class TestStepImpl implements ITestStep {
     public TestStepImpl(TestStep testStep) {
         this.eObject = testStep;
         parent = null;
+    }
+
+    @Override
+    public String getFullName() {
+        return SheepDogUtility.getTestStepFullName(this);
+    }
+
+    @Override
+    public void setFullName(String value) {
+        throw new UnsupportedOperationException("setFullName(String value) is not implemented");
     }
 
     @Override

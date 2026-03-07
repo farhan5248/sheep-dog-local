@@ -503,17 +503,20 @@ IStepObject obj = createStepObject(project, "components/HomePage.obj");
 obj.getFullName(); // Returns "components/HomePage.obj"
 ```
 
-**Example: Computed full name (no setter)**
+**Example: Stored full name (with setter, parses into parts)**
 ```java
 public interface ITestStep {
-    String getName();        // Step definition name only
-    String getFullName();    // Full step text (computed)
-    // No setFullName() - computed from stepObjectName + stepDefinitionName
+    String getFullName();    // Full step text
+    void setFullName(String value); // Parses into stepObjectName + stepDefinitionName
+    String getStepObjectName();
+    String getStepDefinitionName();
 }
 
 // Usage
 ITestStep step = createTestStep(parent, "The HomePage is loaded");
-step.getFullName(); // Returns "The HomePage is loaded" (computed)
+step.getFullName(); // Returns "The HomePage is loaded"
+step.getStepObjectName(); // Returns "The HomePage"
+step.getStepDefinitionName(); // Returns "is loaded"
 ```
 
 ## {Type}IssueResolver

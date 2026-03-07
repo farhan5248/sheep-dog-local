@@ -5,6 +5,7 @@ import org.farhan.impl.ide.SheepDogFactoryImpl;
 import org.farhan.impl.objects.ApplyQuickfixActionImpl;
 import org.farhan.impl.objects.EditDocumentNodeActionImpl;
 import org.farhan.impl.objects.AddDocumentNodeActionImpl;
+import org.farhan.impl.objects.AppInputFileAsciidocFileImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;
 import org.farhan.impl.objects.ListProposalsActionImpl;
 import org.farhan.impl.objects.ListProposalsPopupImpl;
@@ -51,6 +52,9 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
 
     @Override
     protected void configure() {
+
+        bind(org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile.class)
+                .to(AppInputFileAsciidocFileImpl.class);
         bind(InputFileAsciidocFile.class).to(InputFileAsciidocFileImpl.class);
         bind(ProcessIssuesAsciidocFile.class).to(ProcessIssuesAsciidocFileImpl.class);
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);

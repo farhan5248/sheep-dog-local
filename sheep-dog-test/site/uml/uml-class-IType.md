@@ -47,7 +47,7 @@ Note: `addLine()` is a convenience method — it auto-creates the Description if
 
 **Examples**:
  - `String getFullName()` (in ITestDocument - with setter)
- - `String getFullName()` (in ITestStep - computed, no setter)
+ - `String getFullName()` (in ITestStep - with setter, parses into stepObjectName + stepDefinitionName)
  - `String getFullName()` (in IStepDefinition - computed, no setter)
 
 ## Parent
