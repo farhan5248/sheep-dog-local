@@ -15,8 +15,8 @@ Feature: Validation for TestStep Full Name
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 3 StepObjectRef>   | is performed                 |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 4 StepObjectRef>   | is performed                 |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                          | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/app/Input file.feature | is performed         |
+          | Node Path                    | Step Object Full Name                           | Step Definition Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/app/Input file.asciidoc | is performed         |
      When The xtext plugin validate action is performed as follows
           | Node Path                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/4 |
@@ -49,8 +49,8 @@ Feature: Validation for TestStep Full Name
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 2 StepObjectRef>   | is performed                 |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 3 StepObjectRef>   | is performed                 |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is performed         |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is performed         |
      When The xtext plugin validate action is performed as follows
           | Node Path                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/3 |

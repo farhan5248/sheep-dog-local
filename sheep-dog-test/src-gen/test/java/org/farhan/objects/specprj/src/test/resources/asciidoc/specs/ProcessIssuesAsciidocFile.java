@@ -60,8 +60,6 @@ public interface ProcessIssuesAsciidocFile {
 
     public void assertTestDocumentListNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertTestDocumentListNodeTestSuiteFullName(HashMap<String, String> keyMap);
-
     public void assertTestDocumentListNodeTestSuiteName(HashMap<String, String> keyMap);
 
     public void setTestStepContainerListNodeNodePath(HashMap<String, String> keyMap);

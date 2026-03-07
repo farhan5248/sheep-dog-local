@@ -6,17 +6,21 @@ import org.farhan.impl.objects.ApplyQuickfixActionImpl;
 import org.farhan.impl.objects.EditDocumentNodeActionImpl;
 import org.farhan.impl.objects.AddDocumentNodeActionImpl;
 import org.farhan.impl.objects.AppInputFileAsciidocFileImpl;
+import org.farhan.impl.objects.Input2FileAsciidocFileImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;
 import org.farhan.impl.objects.ListProposalsActionImpl;
 import org.farhan.impl.objects.ListProposalsPopupImpl;
 import org.farhan.impl.objects.ListQuickfixesActionImpl;
 import org.farhan.impl.objects.ListQuickfixesPopupImpl;
 import org.farhan.impl.objects.ProcessGrammarFragmentAsciidocFileImpl;
+import org.farhan.impl.objects.ProcessIssues2AsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssuesAsciidocFileImpl;
 import org.farhan.impl.objects.ValidateActionImpl;
 import org.farhan.impl.objects.ValidateAnnotationImpl;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarFragmentAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssues2AsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.Input2FileAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.farhan.objects.xtext.EditDocumentNodeAction;
@@ -55,7 +59,9 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
 
         bind(org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile.class)
                 .to(AppInputFileAsciidocFileImpl.class);
+        bind(Input2FileAsciidocFile.class).to(Input2FileAsciidocFileImpl.class);
         bind(InputFileAsciidocFile.class).to(InputFileAsciidocFileImpl.class);
+        bind(ProcessIssues2AsciidocFile.class).to(ProcessIssues2AsciidocFileImpl.class);
         bind(ProcessIssuesAsciidocFile.class).to(ProcessIssuesAsciidocFileImpl.class);
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
         bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);

@@ -31,8 +31,8 @@ Feature: Proposals for Workspace Step Objects
           | Node Path                                                           | Test Step Full Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | empty               |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is present           |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is present           |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows
           | Node Path                                           | Line Content |
           | TestProject/TestDocumentList/2/Description/LineList | Description  |
@@ -63,8 +63,8 @@ Feature: Proposals for Workspace Step Objects
           | Node Path                                                           | Test Step Full Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob  |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is present           |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is present           |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows
           | Node Path                                           | Line Content |
           | TestProject/TestDocumentList/2/Description/LineList | Description  |

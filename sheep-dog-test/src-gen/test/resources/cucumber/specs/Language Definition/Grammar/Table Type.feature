@@ -4,8 +4,10 @@ Feature: Table Type
   \@sheep-dog-test
   Table is a grammar rule in SheepDog.xtext used by Test Step, Step Parameters, and Test Data. A Table contains Rows which contain Cells.
 
+  @list
   Scenario: Row
 
+    \@list
     Table must have
     - Row List
 
@@ -19,8 +21,10 @@ Feature: Table Type
           | Node Path                                                                             | Row Content |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList/2 | Second Row  |
 
+  @list
   Scenario: Cell
 
+    \@list
     Row must have
     - Cell List
     Cell must have

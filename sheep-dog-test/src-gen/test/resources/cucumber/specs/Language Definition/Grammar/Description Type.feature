@@ -4,8 +4,10 @@ Feature: Description Type
   \@sheep-dog-test
   Description is a grammar rule in SheepDog.xtext used by Step Object, Step Definition, Test Suite, Test Setup, and Test Case.
 
+  @list
   Scenario: Initial State
 
+    \@list
     Description must have
     - Line List
 

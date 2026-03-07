@@ -45,8 +45,8 @@ Feature: Validation for Only Issues
     TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY validates that the test suite name starts with a capital letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Test Suite Full Name    | Test Suite Name   |
-          | TestProject/TestDocumentList | specs/lowercase process | lowercase process |
+          | Node Path                    | Test Suite Full Name             | Test Suite Name   |
+          | TestProject/TestDocumentList | specs/lowercase process.asciidoc | lowercase process |
      When The xtext plugin validate action is performed as follows
           | Node Path                      |
           | TestProject/TestDocumentList/1 |

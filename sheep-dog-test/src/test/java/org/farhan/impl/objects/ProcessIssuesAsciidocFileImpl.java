@@ -101,11 +101,6 @@ public class ProcessIssuesAsciidocFileImpl extends TestIDEObject implements Proc
     }
 
     @Override
-    public void assertTestDocumentListNodeTestSuiteFullName(HashMap<String, String> keyMap) {
-        assertTestSuiteFullName(replaceKeyword(keyMap.get("Test Suite Full Name")), keyMap.get("Node Path"));
-    }
-
-    @Override
     public void assertTestDocumentListNodeTestSuiteName(HashMap<String, String> keyMap) {
         assertTestSuiteName(replaceKeyword(keyMap.get("Test Suite Name")));
     }

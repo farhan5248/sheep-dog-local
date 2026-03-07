@@ -15,8 +15,8 @@ Feature: Quickfixes for Only Issues
           | Node Path                                                                                      | Cell Name        |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | lowercase header |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is present           | lowercase header     |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name | Step Parameters Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is present           | lowercase header     |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
@@ -52,8 +52,8 @@ Feature: Quickfixes for Only Issues
     The quickfix capitalizes the first letter of a test suite name that starts with a lowercase letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Test Suite Full Name    | Test Suite Name   |
-          | TestProject/TestDocumentList | specs/lowercase process | lowercase process |
+          | Node Path                    | Test Suite Full Name             | Test Suite Name   |
+          | TestProject/TestDocumentList | specs/lowercase process.asciidoc | lowercase process |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital

@@ -29,8 +29,8 @@ Feature: Code Generation for Only Issues
     Applying the quickfix capitalizes the first letter of the test suite name in place.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Test Suite Full Name    | Test Suite Name   |
-          | TestProject/TestDocumentList | specs/lowercase process | lowercase process |
+          | Node Path                    | Test Suite Full Name             | Test Suite Name   |
+          | TestProject/TestDocumentList | specs/lowercase process.asciidoc | lowercase process |
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id                | Proposal Description                    | Proposal Value    |
           | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |

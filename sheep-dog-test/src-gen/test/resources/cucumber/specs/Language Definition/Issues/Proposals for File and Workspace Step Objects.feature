@@ -19,8 +19,8 @@ Feature: Proposals for File and Workspace Step Objects
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | empty                                     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is present           |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 |
@@ -39,8 +39,8 @@ Feature: Proposals for File and Workspace Step Objects
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob                        |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is present           |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 |

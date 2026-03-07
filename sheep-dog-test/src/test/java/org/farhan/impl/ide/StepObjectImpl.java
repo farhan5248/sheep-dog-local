@@ -84,7 +84,7 @@ public class StepObjectImpl implements IStepObject {
     public void setFullName(String value) {
         this.fullName = value;
         String[] nameParts = fullName.split("/");
-        name = nameParts[nameParts.length - 1].replace(".feature", "");
+        name = nameParts[nameParts.length - 1].replaceAll("\\.[^.]+$", "");
     }
 
     @Override

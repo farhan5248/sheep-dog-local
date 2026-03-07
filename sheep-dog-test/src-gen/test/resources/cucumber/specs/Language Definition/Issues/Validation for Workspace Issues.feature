@@ -30,8 +30,8 @@ Feature: Validation for Workspace Issues
           | Node Path                                                           | Test Step Full Name                      |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is absent            |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is absent            |
      When The xtext plugin validate action is performed as follows
           | Node Path                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1 |
@@ -51,8 +51,8 @@ Feature: Validation for Workspace Issues
           | Node Path                                                                                      | Cell Name  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | New Header |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is set as follows    | Existing Header      |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name | Step Parameters Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is set as follows    | Existing Header      |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows
           | Node Path                                                                                         | Cell Name       |
           | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Existing Header |
@@ -75,8 +75,8 @@ Feature: Validation for Workspace Issues
           | Node Path                                                                  | Text Content |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is set as follows    | Content              |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name | Step Parameters Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is set as follows    | Content              |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows
           | Node Path                                                                                         | Cell Name |
           | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Content   |
@@ -96,8 +96,8 @@ Feature: Validation for Workspace Issues
           | Node Path                                                                  | Text Content |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text | Some text    |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is set as follows    |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is set as follows    |
      When The xtext plugin validate action is performed as follows
           | Node Path                                                                   |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text/ |

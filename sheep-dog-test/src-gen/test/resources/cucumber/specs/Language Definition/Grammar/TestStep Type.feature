@@ -4,8 +4,10 @@ Feature: TestStep Type
   \@sheep-dog-test
   Test Step is a grammar rule in SheepDog.xtext with four keyword variants: Given, When, Then, and And.
 
+  @list
   Scenario: Initial State Given
 
+    \@list
     Test Step must have
     - StepObjectRef Name
     - StepDefinitionRef Name
@@ -29,8 +31,10 @@ Feature: TestStep Type
           | Node Path                                                                   | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Table | Absent |
 
+  @list
   Scenario: Initial State When
 
+    \@list
     Verify the When keyword variant follows the same Test Step structure.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -49,8 +53,10 @@ Feature: TestStep Type
           | Node Path                                                                   | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Table | Absent |
 
+  @list
   Scenario: Initial State Then
 
+    \@list
     Verify the Then keyword variant follows the same Test Step structure.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -69,8 +75,10 @@ Feature: TestStep Type
           | Node Path                                                                   | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2/Table | Absent |
 
+  @list
   Scenario: Initial State And
 
+    \@list
     Verify the And keyword variant follows the same Test Step structure.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows

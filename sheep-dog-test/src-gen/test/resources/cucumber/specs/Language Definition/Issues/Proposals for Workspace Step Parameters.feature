@@ -27,8 +27,8 @@ Feature: Proposals for Workspace Step Parameters
           | Node Path                                                                                      | Cell Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is present           |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is present           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
@@ -45,8 +45,8 @@ Feature: Proposals for Workspace Step Parameters
           | Node Path                                                                                      | Cell Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name  | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is created as follows | H1, H2, H3           |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name  | Step Parameters Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is created as follows | H1, H2, H3           |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
@@ -64,8 +64,8 @@ Feature: Proposals for Workspace Step Parameters
           | Node Path                                                                                      | Cell Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name  | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is created as follows | H1, H2, H3           |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name  | Step Parameters Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is created as follows | H1, H2, H3           |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows
           | Node Path                                                                                     | Line Content                 |
           | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Description/LineList | Header parameters for tables |
@@ -87,8 +87,8 @@ Feature: Proposals for Workspace Step Parameters
           | Node Path                                                                                      | Cell Name |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | empty     |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                      | Step Definition Name  | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.feature | is created as follows | Content              |
+          | Node Path                    | Step Object Full Name                       | Step Definition Name  | Step Parameters Name |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is created as follows | Content              |
      When The xtext plugin list proposals action is performed as follows
           | Node Path                                                                             |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1 |

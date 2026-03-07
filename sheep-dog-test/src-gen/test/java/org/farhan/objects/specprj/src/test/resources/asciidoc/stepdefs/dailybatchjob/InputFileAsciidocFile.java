@@ -67,6 +67,4 @@ public interface InputFileAsciidocFile {
     public void assertTestDocumentListNodeStepDefinitionName(HashMap<String, String> keyMap);
 
     public void assertTestDocumentListNodeStepParametersName(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeStepObjectName(HashMap<String, String> keyMap);
 }

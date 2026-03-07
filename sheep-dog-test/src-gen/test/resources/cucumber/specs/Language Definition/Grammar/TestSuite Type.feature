@@ -4,8 +4,10 @@ Feature: TestSuite Type
   \@sheep-dog-test
   Test Suite is a top-level grammar rule in SheepDog.xtext. A Test Suite contains Test Step Containers (Test Case or Test Setup), and Test Case contains Test Data.
 
+  @list
   Scenario: Initial State
 
+    \@list
     Test Suite must have
     - Name
     and optionally have these
@@ -13,14 +15,14 @@ Feature: TestSuite Type
     - Test Step Container List
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Test Suite Full Name   |
-          | TestProject/TestDocumentList | specs/First Test Suite |
+          | Node Path                    | Test Suite Full Name         |
+          | TestProject/TestDocumentList | specs/ProcessIssues.asciidoc |
      When The xtext plugin edit document node action is performed to modify TestDocumentList with
-          | Node Path                    | Test Suite Full Name    |
-          | TestProject/TestDocumentList | specs/Second Test Suite |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node will be created as follows
-          | Node Path                      | Test Suite Full Name    | Test Suite Name   |
-          | TestProject/TestDocumentList/2 | specs/Second Test Suite | Second Test Suite |
+          | Node Path                    | Test Suite Full Name          |
+          | TestProject/TestDocumentList | specs/ProcessIssues2.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues2.asciidoc file TestDocumentList node will be created as follows
+          | Node Path                      | Test Suite Full Name          | Test Suite Name |
+          | TestProject/TestDocumentList/2 | specs/ProcessIssues2.asciidoc | ProcessIssues2  |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be as follows
           | Node Path                                            | State |
           | TestProject/TestDocumentList/1/TestStepContainerList | Empty |
@@ -28,8 +30,10 @@ Feature: TestSuite Type
           | Node Path                                  | State  |
           | TestProject/TestDocumentList/1/Description | Absent |
 
+  @list
   Scenario: Test Case
 
+    \@list
     Test Case must have
     - Name
     and optionally have these
@@ -56,8 +60,10 @@ Feature: TestSuite Type
           | Node Path                                                          | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/Description | Absent |
 
+  @list
   Scenario: Test Setup
 
+    \@list
     Test Setup must have
     - Name
     and optionally have these
@@ -80,8 +86,10 @@ Feature: TestSuite Type
           | Node Path                                                          | State  |
           | TestProject/TestDocumentList/1/TestStepContainerList/1/Description | Absent |
 
+  @list
   Scenario: Test Data
 
+    \@list
     Test Data must have
     - Name
     and optionally have these

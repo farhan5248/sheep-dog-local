@@ -83,7 +83,7 @@ public class TestSuiteImpl implements ITestSuite {
 	public void setFullName(String value) {
 		this.fullName = value;
 		String[] nameParts = fullName.split("/");
-		this.name = nameParts[nameParts.length - 1];
+		this.name = nameParts[nameParts.length - 1].replaceAll("\\.[^.]+$", "");
 	}
 
 	@Override

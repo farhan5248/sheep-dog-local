@@ -4,8 +4,10 @@ Feature: NestedDescription Type
   \@sheep-dog-test
   Nested Description is a grammar rule in SheepDog.xtext used by Step Parameters and Test Data. It is preceded by a block delimiter.
 
+  @list
   Scenario: Initial State
 
+    \@list
     Nested Description must have
     - Line List
 

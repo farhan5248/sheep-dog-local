@@ -118,11 +118,6 @@ public class InputFileAsciidocFileImpl extends TestIDEObject implements InputFil
     }
 
     @Override
-    public void assertTestDocumentListNodeStepObjectName(HashMap<String, String> keyMap) {
-        assertStepObjectName(replaceKeyword(keyMap.get("Step Object Name")));
-    }
-
-    @Override
     public void assertTestDocumentListNodeStepParametersName(HashMap<String, String> keyMap) {
         assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")), keyMap.get("Node Path"));
     }

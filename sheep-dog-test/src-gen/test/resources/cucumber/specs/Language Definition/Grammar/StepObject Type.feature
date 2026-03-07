@@ -4,8 +4,10 @@ Feature: StepObject Type
   \@sheep-dog-test
   Step Object is a top-level grammar rule in SheepDog.xtext. A Step Object contains Step Definitions which contain Step Parameters.
 
+  @list
   Scenario: Initial State
 
+    \@list
     Step Object must have
     - Name
     and optionally have these
@@ -13,14 +15,14 @@ Feature: StepObject Type
     - Step Definition List
 
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name      |
-          | TestProject/TestDocumentList | stepdefs/First Step Object |
+          | Node Path                    | Step Object Full Name                       |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc |
      When The xtext plugin edit document node action is performed to modify TestDocumentList with
-          | Node Path                    | Step Object Full Name       |
-          | TestProject/TestDocumentList | stepdefs/Second Step Object |
-     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node will be created as follows
-          | Node Path                      | Step Object Full Name       | Step Object Name   |
-          | TestProject/TestDocumentList/2 | stepdefs/Second Step Object | Second Step Object |
+          | Node Path                    | Step Object Full Name                        |
+          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input2 file.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input2 file.asciidoc file TestDocumentList node will be created as follows
+          | Node Path                      | Step Object Full Name                        | Step Object Name |
+          | TestProject/TestDocumentList/2 | stepdefs/daily batchjob/Input2 file.asciidoc | Input2 file      |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be as follows
           | Node Path                                         | State |
           | TestProject/TestDocumentList/1/StepDefinitionList | Empty |
@@ -28,8 +30,10 @@ Feature: StepObject Type
           | Node Path                                  | State  |
           | TestProject/TestDocumentList/1/Description | Absent |
 
+  @list
   Scenario: Step Definition
 
+    \@list
     Step Definition must have
     - Name
     and optionally have these
@@ -52,8 +56,10 @@ Feature: StepObject Type
           | Node Path                                                       | State  |
           | TestProject/TestDocumentList/1/StepDefinitionList/1/Description | Absent |
 
+  @list
   Scenario: Step Parameters
 
+    \@list
     Step Parameters must have
     - Name
     and optionally have these
