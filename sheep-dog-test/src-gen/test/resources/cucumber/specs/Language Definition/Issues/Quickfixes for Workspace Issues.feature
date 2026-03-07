@@ -12,15 +12,15 @@ Feature: Quickfixes for Workspace Issues
     The quickfix proposes generating the step object file at the expected path for the component.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                      |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
       And The xtext plugin validate annotation is set as follows
           """
           The step object file doesn't exist for the component
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id                                                       | Proposal Description |
           | Generate Input file - stepdefs/daily batchjob/Input file.asciidoc | empty                |
@@ -30,18 +30,18 @@ Feature: Quickfixes for Workspace Issues
     The quickfix proposes two options: switching to an existing step definition, or generating the missing step definition in the step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                      |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is absent            |
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is absent            |
       And The xtext plugin validate annotation is set as follows
           """
           The step definition doesn't exist for the step object
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id | Proposal Description | Proposal Value |
           | is absent   | empty                | is absent      |
@@ -54,27 +54,27 @@ Feature: Quickfixes for Workspace Issues
     The quickfix proposes two options: switching to an existing parameter set, or generating the new parameter set in the step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
-          | Node Path                                                                                      | Cell Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | N1        |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | N2        |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is set as follows    | E1, E2, E3           |
+          | Node Path                                                       | Cell Name |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | N1        |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | N2        |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name | Step Parameters Name |
+          | is set as follows    | E1, E2, E3           |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows
-          | Node Path                                                                                         | Cell Name |
-          | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E1        |
-          | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E2        |
-          | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E3        |
+          | Node Path                                                          | Cell Name |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E1        |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E2        |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E3        |
       And The xtext plugin validate annotation is set as follows
           """
           The step parameters don't exist for the step definition
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
+          | Test Suite Full Name         | Node Path                                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id | Proposal Description | Proposal Value |
           | E1, E2, E3  | empty                | E1, E2, E3     |
@@ -87,21 +87,21 @@ Feature: Quickfixes for Workspace Issues
     If the Content parameter exists in the step definition, no quickfix is needed for the text block.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
-          | Node Path                                                                  | Text Content |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text | Some text    |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is set as follows    | Content              |
+          | Node Path                                   | Text Content |
+          | TestStepContainerList/1/TestStepList/1/Text | Some text    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name | Step Parameters Name |
+          | is set as follows    | Content              |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows
-          | Node Path                                                                                         | Cell Name |
-          | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Content   |
+          | Node Path                                                          | Cell Name |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Content   |
       And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                                                   |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text/ |
+          | Test Suite Full Name         | Node Path                                    |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
      Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: This object step definition text parameter doesn't exist quickfix
@@ -109,21 +109,21 @@ Feature: Quickfixes for Workspace Issues
     The quickfix proposes generating the Content parameter in the step definition for the text block.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
-          | Node Path                                                                  | Text Content |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text | Some text    |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is set as follows    |
+          | Node Path                                   | Text Content |
+          | TestStepContainerList/1/TestStepList/1/Text | Some text    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is set as follows    |
       And The xtext plugin validate annotation is set as follows
           """
           The step parameters don't exist for the step definition
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                                                   |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text/ |
+          | Test Suite Full Name         | Node Path                                    |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id      | Proposal Description |
           | Generate Content | empty                |

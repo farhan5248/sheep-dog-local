@@ -2,13 +2,13 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestIDEObject;
+import org.farhan.common.TestObjectIDE;
 import org.farhan.objects.xtext.EditDocumentNodeAction;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDocumentNodeAction {
+public class EditDocumentNodeActionImpl extends TestObjectIDE implements EditDocumentNodeAction {
 
     @Override
     public void setCellName(HashMap<String, String> keyMap) {
@@ -36,11 +36,6 @@ public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDoc
     }
 
     @Override
-    public void setStepObjectFullName(HashMap<String, String> keyMap) {
-        properties.put("Step Object Full Name", keyMap.get("Step Object Full Name"));
-    }
-
-    @Override
     public void setStepParametersName(HashMap<String, String> keyMap) {
         properties.put("Step Parameters Name", keyMap.get("Step Parameters Name"));
     }
@@ -61,8 +56,8 @@ public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDoc
     }
 
     @Override
-    public void setTestStepFullName(HashMap<String, String> keyMap) {
-        properties.put("Test Step Full Name", keyMap.get("Test Step Full Name"));
+    public void setStepObjectFullName(HashMap<String, String> keyMap) {
+        properties.put("Step Object Full Name", keyMap.get("Step Object Full Name"));
     }
 
     @Override
@@ -71,20 +66,20 @@ public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDoc
     }
 
     @Override
+    public void setTestStepFullName(HashMap<String, String> keyMap) {
+        properties.put("Test Step Full Name", keyMap.get("Test Step Full Name"));
+    }
+
+    @Override
     public void transition() {
+        super.transition();
         if (properties.get("Node Path") != null) {
-            setCursor(properties.get("Node Path").toString());
+            setCursorAtNode(properties.get("Node Path").toString());
             properties.remove("Node Path");
         }
-        if (properties.get("Step Object Full Name") != null) {
-            addStepObjectWithFullName(replaceKeyword(properties.get("Step Object Full Name").toString()));
-            properties.remove("Step Object Full Name");
-        } else if (properties.get("Step Definition Name") != null) {
+        if (properties.get("Step Definition Name") != null) {
             addStepDefinitionWithName(replaceKeyword(properties.get("Step Definition Name").toString()));
             properties.remove("Step Definition Name");
-        } else if (properties.get("Test Suite Full Name") != null) {
-            addTestSuiteWithFullName(replaceKeyword(properties.get("Test Suite Full Name").toString()));
-            properties.remove("Test Suite Full Name");
         } else if (properties.get("Test Case Name") != null) {
             addTestCaseWithName(replaceKeyword(properties.get("Test Case Name").toString()));
             properties.remove("Test Case Name");
@@ -112,34 +107,6 @@ public class EditDocumentNodeActionImpl extends TestIDEObject implements EditDoc
         } else if (properties.get("Test Step Full Name") != null) {
             addTestStepWithFullName(replaceKeyword(properties.get("Test Step Full Name").toString()));
             properties.remove("Test Step Full Name");
-        } else if (properties.get("Given StepObjectRef Name") != null) {
-            addGivenWithStepObjectName(replaceKeyword(properties.get("Given StepObjectRef Name").toString()));
-            if (properties.get("Given StepDefinitionRef Name") != null) {
-                setTestStepDefinitionName(replaceKeyword(properties.get("Given StepDefinitionRef Name").toString()));
-                properties.remove("Given StepDefinitionRef Name");
-            }
-            properties.remove("Given StepObjectRef Name");
-        } else if (properties.get("When StepObjectRef Name") != null) {
-            addWhenWithStepObjectName(replaceKeyword(properties.get("When StepObjectRef Name").toString()));
-            if (properties.get("When StepDefinitionRef Name") != null) {
-                setTestStepDefinitionName(replaceKeyword(properties.get("When StepDefinitionRef Name").toString()));
-                properties.remove("When StepDefinitionRef Name");
-            }
-            properties.remove("When StepObjectRef Name");
-        } else if (properties.get("Then StepObjectRef Name") != null) {
-            addThenWithStepObjectName(replaceKeyword(properties.get("Then StepObjectRef Name").toString()));
-            if (properties.get("Then StepDefinitionRef Name") != null) {
-                setTestStepDefinitionName(replaceKeyword(properties.get("Then StepDefinitionRef Name").toString()));
-                properties.remove("Then StepDefinitionRef Name");
-            }
-            properties.remove("Then StepObjectRef Name");
-        } else if (properties.get("And StepObjectRef Name") != null) {
-            addAndWithStepObjectName(replaceKeyword(properties.get("And StepObjectRef Name").toString()));
-            if (properties.get("And StepDefinitionRef Name") != null) {
-                setTestStepDefinitionName(replaceKeyword(properties.get("And StepDefinitionRef Name").toString()));
-                properties.remove("And StepDefinitionRef Name");
-            }
-            properties.remove("And StepObjectRef Name");
         }
     }
 

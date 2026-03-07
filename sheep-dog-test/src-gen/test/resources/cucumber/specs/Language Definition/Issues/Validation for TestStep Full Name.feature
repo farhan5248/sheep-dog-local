@@ -9,17 +9,17 @@ Feature: Validation for TestStep Full Name
     StepObjectRef Name has 3 parts: component, object path, and object name. The algorithm searches previous steps for a matching object name to borrow missing component or path. It stops at the first match with a component.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Given StepObjectRef Name | Given StepDefinitionRef Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 1 StepObjectRef>   | is performed                 |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 2 StepObjectRef>   | is performed                 |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 3 StepObjectRef>   | is performed                 |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 4 StepObjectRef>   | is performed                 |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                           | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/app/Input file.asciidoc | is performed         |
+          | Node Path                            | Given StepObjectRef Name | Given StepDefinitionRef Name |
+          | TestStepContainerList/1/TestStepList | <Line 1 StepObjectRef>   | is performed                 |
+          | TestStepContainerList/1/TestStepList | <Line 2 StepObjectRef>   | is performed                 |
+          | TestStepContainerList/1/TestStepList | <Line 3 StepObjectRef>   | is performed                 |
+          | TestStepContainerList/1/TestStepList | <Line 4 StepObjectRef>   | is performed                 |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is performed         |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/4 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/4 |
      Then The xtext plugin validate annotation will be empty
 
     Examples: Full
@@ -44,16 +44,16 @@ Feature: Validation for TestStep Full Name
     StepObjectRef Name has 3 parts: component, object path, and object name. The algorithm searches previous steps for a matching object name to borrow missing component or path. It stops at the first match with a component.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Given StepObjectRef Name | Given StepDefinitionRef Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 1 StepObjectRef>   | is performed                 |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 2 StepObjectRef>   | is performed                 |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | <Line 3 StepObjectRef>   | is performed                 |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is performed         |
+          | Node Path                            | Given StepObjectRef Name | Given StepDefinitionRef Name |
+          | TestStepContainerList/1/TestStepList | <Line 1 StepObjectRef>   | is performed                 |
+          | TestStepContainerList/1/TestStepList | <Line 2 StepObjectRef>   | is performed                 |
+          | TestStepContainerList/1/TestStepList | <Line 3 StepObjectRef>   | is performed                 |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is performed         |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/3 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/3 |
      Then The xtext plugin validate annotation will be empty
 
     Examples: Component and Name

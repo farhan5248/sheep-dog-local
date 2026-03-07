@@ -9,52 +9,52 @@ Feature: Code Generation for Only Issues
     Applying the quickfix capitalizes the first letter of the header cell name in place.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                      |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
-          | Node Path                                                                                      | Cell Name        |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | lowercase header |
+          | Node Path                                                       | Cell Name        |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | lowercase header |
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id          | Proposal Description                    | Proposal Value   |
           | Capitalize cell name | Capitalize the first letter of the name | Lowercase header |
      When The xtext plugin apply quickfix action is performed as follows
-          | Node Path                                                                                        |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList/1 |
+          | Test Suite Full Name         | Node Path                                                         |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList/1 |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows
-          | Node Path                                                                                      | Cell Name        |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | Lowercase header |
+          | Node Path                                                       | Cell Name        |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | Lowercase header |
 
   Scenario: Test suite name should start with a capital letter generation
 
     Applying the quickfix capitalizes the first letter of the test suite name in place.
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Test Suite Full Name             | Test Suite Name   |
-          | TestProject/TestDocumentList | specs/lowercase process.asciidoc | lowercase process |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file is created as follows
+          | Test Suite Name |
+          | process issues  |
       And The xtext plugin list quickfixes popup is set as follows
-          | Proposal Id                | Proposal Description                    | Proposal Value    |
-          | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
+          | Proposal Id                | Proposal Description                    | Proposal Value |
+          | Capitalize test suite name | Capitalize the first letter of the name | Process issues |
      When The xtext plugin apply quickfix action is performed as follows
-          | Node Path                      |
-          | TestProject/TestDocumentList/1 |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node will be created as follows
-          | Node Path                      | Test Suite Name   |
-          | TestProject/TestDocumentList/1 | Lowercase process |
+          | Test Suite Full Name         |
+          | specs/ProcessIssues.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file will be created as follows
+          | Test Suite Name |
+          | Process issues  |
 
   Scenario: Test case name should start with a capital letter generation
 
     Applying the quickfix capitalizes the first letter of the test case name in place.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
-          | Node Path                                            | Test Case Name      |
-          | TestProject/TestDocumentList/1/TestStepContainerList | lowercase test case |
+          | Node Path             | Test Case Name      |
+          | TestStepContainerList | lowercase test case |
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id                         | Proposal Description                    | Proposal Value      |
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
      When The xtext plugin apply quickfix action is performed as follows
-          | Node Path                                              |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1 |
+          | Test Suite Full Name         | Node Path               |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1 |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows
-          | Node Path                                              | Test Case Name      |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1 | Lowercase test case |
+          | Node Path               | Test Case Name      |
+          | TestStepContainerList/1 | Lowercase test case |
 

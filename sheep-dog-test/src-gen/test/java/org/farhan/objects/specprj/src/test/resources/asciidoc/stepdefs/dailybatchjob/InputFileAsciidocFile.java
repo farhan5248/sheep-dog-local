@@ -52,19 +52,13 @@ public interface InputFileAsciidocFile {
 
     public void assertTableNodeState(HashMap<String, String> keyMap);
 
-    public void setTestDocumentListNodeNodePath(HashMap<String, String> keyMap);
+    public void setCreated(HashMap<String, String> keyMap);
 
-    public void setTestDocumentListNodeStepObjectFullName(HashMap<String, String> keyMap);
+    public void setStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void setTestDocumentListNodeStepDefinitionName(HashMap<String, String> keyMap);
+    public void setStepParametersName(HashMap<String, String> keyMap);
 
-    public void setTestDocumentListNodeStepParametersName(HashMap<String, String> keyMap);
+    public void assertStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertTestDocumentListNodeNodePath(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeStepObjectFullName(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeStepDefinitionName(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeStepParametersName(HashMap<String, String> keyMap);
+    public void assertStepParametersName(HashMap<String, String> keyMap);
 }

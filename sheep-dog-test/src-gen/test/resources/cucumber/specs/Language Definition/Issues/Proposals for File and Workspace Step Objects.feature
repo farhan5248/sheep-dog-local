@@ -15,15 +15,15 @@ Feature: Proposals for File and Workspace Step Objects
     It should show that if there's objects from more than one component, it only picks the matching component
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                       |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | empty                                     |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is present           |
+          | Node Path                            | Test Step Full Name                       |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+          | TestStepContainerList/1/TestStepList | empty                                     |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/2 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                |
           | The Output file                | Output file                |
@@ -35,15 +35,15 @@ Feature: Proposals for File and Workspace Step Objects
     If a step has a component and workspace step objects exist, proposals combine objects from previous steps and objects from the workspace.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                       |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob                        |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is present           |
+          | Node Path                            | Test Step Full Name                       |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+          | TestStepContainerList/1/TestStepList | The daily batchjob                        |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is present           |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/2 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                |
           | The Output file                | Output file                |

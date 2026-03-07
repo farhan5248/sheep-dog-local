@@ -9,21 +9,21 @@ Feature: Quickfixes for Only Issues
     The quickfix capitalizes the first letter of a header cell name that starts with a lowercase letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                      |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
-          | Node Path                                                                                      | Cell Name        |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | lowercase header |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is present           | lowercase header     |
+          | Node Path                                                       | Cell Name        |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | lowercase header |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name | Step Parameters Name |
+          | is present           | lowercase header     |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                                                                        |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList/1 |
+          | Test Suite Full Name         | Node Path                                                         |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList/1 |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id          | Proposal Description                    | Proposal Value   |
           | Capitalize cell name | Capitalize the first letter of the name | Lowercase header |
@@ -33,34 +33,34 @@ Feature: Quickfixes for Only Issues
     Body row cells don't trigger a validation error, so no quickfix is available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                      |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
-          | Node Path                                                                                      | Cell Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | Header    |
+          | Node Path                                                       | Cell Name |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | Header    |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
-          | Node Path                                                                                      | Cell Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList | value     |
+          | Node Path                                                       | Cell Name |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList | value     |
       And The xtext plugin validate annotation is empty
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                                                                        |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList/1 |
+          | Test Suite Full Name         | Node Path                                                         |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList/1 |
      Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: Test suite name should start with a capital letter quickfix
 
     The quickfix capitalizes the first letter of a test suite name that starts with a lowercase letter.
 
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Test Suite Full Name             | Test Suite Name   |
-          | TestProject/TestDocumentList | specs/lowercase process.asciidoc | lowercase process |
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file is created as follows
+          | Test Suite Name   |
+          | lowercase process |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                      |
-          | TestProject/TestDocumentList/1 |
+          | Test Suite Full Name         |
+          | specs/ProcessIssues.asciidoc |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id                | Proposal Description                    | Proposal Value    |
           | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
@@ -70,15 +70,15 @@ Feature: Quickfixes for Only Issues
     The quickfix capitalizes the first letter of a test case name that starts with a lowercase letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
-          | Node Path                                            | Test Case Name      |
-          | TestProject/TestDocumentList/1/TestStepContainerList | lowercase test case |
+          | Node Path             | Test Case Name      |
+          | TestStepContainerList | lowercase test case |
       And The xtext plugin validate annotation is set as follows
           """
           Name should start with a capital
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                              |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1 |
+          | Test Suite Full Name         | Node Path               |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1 |
      Then The xtext plugin list quickfixes popup will be set as follows
           | Proposal Id                         | Proposal Description                    | Proposal Value      |
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
@@ -88,8 +88,8 @@ Feature: Quickfixes for Only Issues
     No quickfix is available for invalid object names. The user must manually correct the step object reference.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The is present      |
+          | Node Path                            | Test Step Full Name |
+          | TestStepContainerList/1/TestStepList | The is present      |
       And The xtext plugin validate annotation is set as follows
           """
           Every test case must have at least one component specified.
@@ -102,8 +102,8 @@ Feature: Quickfixes for Only Issues
           Examples are: "src/test/resources/file.txt file" or "Home page"
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list quickfixes popup will be empty
 
   Scenario: Test step must have a valid step definition name quickfix
@@ -111,8 +111,8 @@ Feature: Quickfixes for Only Issues
     No quickfix is available for invalid step definition names. The user must manually correct the step definition reference.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name           |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file |
+          | Node Path                            | Test Step Full Name           |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file |
       And The xtext plugin validate annotation is set as follows
           """
           After specifying the step object name, a step definition name is specified.
@@ -130,7 +130,7 @@ Feature: Quickfixes for Only Issues
           Examples are: "after the next day" or "on time"
           """
      When The xtext plugin list quickfixes action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list quickfixes popup will be empty
 

@@ -2,18 +2,19 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestIDEObject;
+import org.farhan.common.TestObjectIDE;
 import org.farhan.objects.xtext.AddDocumentNodeAction;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class AddDocumentNodeActionImpl extends TestIDEObject implements AddDocumentNodeAction {
+public class AddDocumentNodeActionImpl extends TestObjectIDE implements AddDocumentNodeAction {
 
     @Override
     public void transition() {
+        super.transition();
         if (properties.get("Node Path") != null) {
-            setCursor(properties.get("Node Path").toString());
+            setCursorAtNode(properties.get("Node Path").toString());
             if (properties.get("Node Path").toString().endsWith("Table")) {
                 addTable();
             } else if (properties.get("Node Path").toString().endsWith("Text")) {
@@ -26,6 +27,11 @@ public class AddDocumentNodeActionImpl extends TestIDEObject implements AddDocum
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
         properties.put("Node Path", keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTestSuiteFullName(HashMap<String, String> keyMap) {
+        properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
     }
 
 }

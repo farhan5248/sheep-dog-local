@@ -12,14 +12,14 @@ Feature: Table Type
     - Row List
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
-          | Node Path                                                                           | Row Content |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
+          | Node Path                                            | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
      When The xtext plugin edit document node action is performed to modify RowList with
-          | Node Path                                                                           | Row Content |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList | Second Row  |
+          | Test Suite Full Name         | Node Path                                            | Row Content |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList | Second Row  |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
-          | Node Path                                                                             | Row Content |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList/2 | Second Row  |
+          | Node Path                                              | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/2 | Second Row  |
 
   @list
   Scenario: Cell
@@ -31,12 +31,12 @@ Feature: Table Type
     - Name
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
-          | Node Path                                                                                      | Cell Name  |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | First Cell |
+          | Node Path                                                       | Cell Name  |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | First Cell |
      When The xtext plugin edit document node action is performed to modify CellList with
-          | Node Path                                                                                      | Cell Name   |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | Second Cell |
+          | Test Suite Full Name         | Node Path                                                       | Cell Name   |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | Second Cell |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows
-          | Node Path                                                                                        | Cell Name   |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList/2 | Second Cell |
+          | Node Path                                                         | Cell Name   |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList/2 | Second Cell |
 

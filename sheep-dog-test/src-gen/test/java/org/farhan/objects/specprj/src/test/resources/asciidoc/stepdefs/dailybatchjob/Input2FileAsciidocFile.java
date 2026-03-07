@@ -4,9 +4,5 @@ import java.util.HashMap;
 
 public interface Input2FileAsciidocFile {
 
-    public void assertTestDocumentListNodeNodePath(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeStepObjectFullName(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeStepObjectName(HashMap<String, String> keyMap);
+    public void assertStepObjectName(HashMap<String, String> keyMap);
 }

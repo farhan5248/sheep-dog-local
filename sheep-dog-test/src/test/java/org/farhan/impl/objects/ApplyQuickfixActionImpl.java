@@ -1,14 +1,17 @@
 package org.farhan.impl.objects;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.farhan.common.TestIDEObject;
+import org.farhan.common.TestObjectIDE;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.RowIssueDetector;
@@ -26,61 +29,83 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ApplyQuickfixActionImpl extends TestIDEObject implements ApplyQuickfixAction {
+public class ApplyQuickfixActionImpl extends TestObjectIDE implements ApplyQuickfixAction {
 
-    public void transition() {
-        if (properties.get("Node Path") != null) {
-            setCursor(properties.get("Node Path").toString());
-            properties.remove("Node Path");
-        }
-        try {
-            if (TestIDEObject.cursor instanceof ICell) {
-                ICell cell = (ICell) TestIDEObject.cursor;
-                if (!CellIssueDetector.validateNameOnly(cell).isEmpty()) {
-                    TestIDEObject.applyProposal(CellIssueResolver.correctNameOnly(cell));
-                }
-            } else if (TestIDEObject.cursor instanceof IRow) {
-                IRow row = (IRow) TestIDEObject.cursor;
-                ITestStep testStep = (ITestStep) row.getParent().getParent();
-                if (!testStep.getTable().getRowList().isEmpty()
-                        && (testStep.getTable().getRowList().getFirst() != null)) {
-                    if (!RowIssueDetector.validateCellListWorkspace(row).isEmpty()) {
-                        TestIDEObject.applyProposal(RowIssueResolver.correctCellListWorkspace(testStep));
-                    }
-                }
-            } else if (TestIDEObject.cursor instanceof IText) {
-                IText text = (IText) TestIDEObject.cursor;
-                ITestStep testStep = (ITestStep) text.getParent();
-                if (!TextIssueDetector.validateNameWorkspace(text).isEmpty()) {
-                    TestIDEObject.applyProposal(TextIssueResolver.correctNameWorkspace(testStep));
-                }
-            } else if (TestIDEObject.cursor instanceof ITestStep) {
-                ITestStep testStep = (ITestStep) TestIDEObject.cursor;
-                if (!TestStepIssueDetector.validateStepObjectNameWorkspace(testStep).isEmpty()) {
-                    TestIDEObject.applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
-                }
-                if (!TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep).isEmpty()) {
-                    TestIDEObject.applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
-                }
-            } else if (TestIDEObject.cursor instanceof ITestStepContainer) {
-                ITestStepContainer testStepContainer = (ITestStepContainer) TestIDEObject.cursor;
-                if (!TestStepContainerIssueDetector.validateNameOnly(testStepContainer).isEmpty()) {
-                    TestIDEObject.applyProposal(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));
-                }
-            } else if (TestIDEObject.cursor instanceof ITestSuite) {
-                ITestSuite testSuite = (ITestSuite) TestIDEObject.cursor;
-                if (!TestSuiteIssueDetector.validateNameOnly(testSuite).isEmpty()) {
-                    TestIDEObject.applyProposal(TestSuiteIssueResolver.correctNameOnly(testSuite));
+    private static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
+        for (SheepDogIssueProposal p : proposals) {
+            if (p.getValue() instanceof IStepObject) {
+                testProject.addStepObject((IStepObject) p.getValue());
+            } else {
+                if (cursor instanceof ICell) {
+                    ((ICell) cursor).setName(p.getValue().toString());
+                } else if (cursor instanceof ITestSuite) {
+                    ((ITestSuite) cursor).setName(p.getValue().toString());
+                } else if (cursor instanceof ITestStepContainer) {
+                    ((ITestStepContainer) cursor).setName(p.getValue().toString());
                 }
             }
-        } catch (Exception e) {
-            Assertions.fail(e);
         }
     }
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
         properties.put("Node Path", keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTestSuiteFullName(HashMap<String, String> keyMap) {
+        properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+    }
+
+    public void transition() {
+        super.transition();
+        if (properties.get("Node Path") != null) {
+            setCursorAtNode(properties.get("Node Path").toString());
+            properties.remove("Node Path");
+        }
+        try {
+            if (TestObjectIDE.cursor instanceof ICell) {
+                ICell cell = (ICell) TestObjectIDE.cursor;
+                if (!CellIssueDetector.validateNameOnly(cell).isEmpty()) {
+                    applyProposal(CellIssueResolver.correctNameOnly(cell));
+                }
+            } else if (TestObjectIDE.cursor instanceof IRow) {
+                IRow row = (IRow) TestObjectIDE.cursor;
+                ITestStep testStep = (ITestStep) row.getParent().getParent();
+                if (!testStep.getTable().getRowList().isEmpty()
+                        && (testStep.getTable().getRowList().getFirst() != null)) {
+                    if (!RowIssueDetector.validateCellListWorkspace(row).isEmpty()) {
+                        applyProposal(RowIssueResolver.correctCellListWorkspace(testStep));
+                    }
+                }
+            } else if (TestObjectIDE.cursor instanceof IText) {
+                IText text = (IText) TestObjectIDE.cursor;
+                ITestStep testStep = (ITestStep) text.getParent();
+                if (!TextIssueDetector.validateNameWorkspace(text).isEmpty()) {
+                    applyProposal(TextIssueResolver.correctNameWorkspace(testStep));
+                }
+            } else if (TestObjectIDE.cursor instanceof ITestStep) {
+                ITestStep testStep = (ITestStep) TestObjectIDE.cursor;
+                if (!TestStepIssueDetector.validateStepObjectNameWorkspace(testStep).isEmpty()) {
+                    applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
+                }
+                if (!TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep).isEmpty()) {
+                    applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
+                }
+            } else if (TestObjectIDE.cursor instanceof ITestStepContainer) {
+                ITestStepContainer testStepContainer = (ITestStepContainer) TestObjectIDE.cursor;
+                if (!TestStepContainerIssueDetector.validateNameOnly(testStepContainer).isEmpty()) {
+                    applyProposal(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));
+                }
+            } else if (TestObjectIDE.cursor instanceof ITestSuite) {
+                ITestSuite testSuite = (ITestSuite) TestObjectIDE.cursor;
+                if (!TestSuiteIssueDetector.validateNameOnly(testSuite).isEmpty()) {
+                    applyProposal(TestSuiteIssueResolver.correctNameOnly(testSuite));
+                }
+            }
+        } catch (Exception e) {
+            Assertions.fail(e);
+        }
     }
 
 }

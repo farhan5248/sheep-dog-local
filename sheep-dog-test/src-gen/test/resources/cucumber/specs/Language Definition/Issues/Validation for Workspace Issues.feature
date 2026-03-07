@@ -12,11 +12,11 @@ Feature: Validation for Workspace Issues
     TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE validates that the step object file exists in the workspace for the specified component.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                      |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin validate annotation will be set as follows
           """
           The step object file doesn't exist for the component
@@ -27,14 +27,14 @@ Feature: Validation for Workspace Issues
     TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE validates that the step definition exists in the step object file. The step object file exists but doesn't have a matching step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                      |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is absent            |
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is absent            |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin validate annotation will be set as follows
           """
           The step definition doesn't exist for the step object
@@ -45,20 +45,20 @@ Feature: Validation for Workspace Issues
     RowIssueTypes.ROW_CELL_LIST_WORKSPACE validates that the header row cells in the test step match a parameter set defined in the step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
-          | Node Path                                                                                      | Cell Name  |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | New Header |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is set as follows    | Existing Header      |
+          | Node Path                                                       | Cell Name  |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | New Header |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name | Step Parameters Name |
+          | is set as follows    | Existing Header      |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows
-          | Node Path                                                                                         | Cell Name       |
-          | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Existing Header |
+          | Node Path                                                          | Cell Name       |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Existing Header |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
+          | Test Suite Full Name         | Node Path                                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin validate annotation will be set as follows
           """
           The step parameters don't exist for the step definition
@@ -69,20 +69,20 @@ Feature: Validation for Workspace Issues
     Step definitions for Text Content only have one parameter called "Content"
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
-          | Node Path                                                                  | Text Content |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text | Some text    |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name | Step Parameters Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is set as follows    | Content              |
+          | Node Path                                   | Text Content |
+          | TestStepContainerList/1/TestStepList/1/Text | Some text    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name | Step Parameters Name |
+          | is set as follows    | Content              |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows
-          | Node Path                                                                                         | Cell Name |
-          | TestProject/TestDocumentList/2/StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Content   |
+          | Node Path                                                          | Cell Name |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Content   |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                                                   |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text/ |
+          | Test Suite Full Name         | Node Path                                    |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
      Then The xtext plugin validate annotation will be empty
 
   Scenario: This object step definition text parameter doesn't exist validation
@@ -90,17 +90,17 @@ Feature: Validation for Workspace Issues
     If there isn't a step definition in the step object file with a Content header, then a warning is displayed.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
-          | Node Path                                                                  | Text Content |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text | Some text    |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows
-          | Node Path                    | Step Object Full Name                       | Step Definition Name |
-          | TestProject/TestDocumentList | stepdefs/daily batchjob/Input file.asciidoc | is set as follows    |
+          | Node Path                                   | Text Content |
+          | TestStepContainerList/1/TestStepList/1/Text | Some text    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is set as follows    |
      When The xtext plugin validate action is performed as follows
-          | Node Path                                                                   |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/1/Text/ |
+          | Test Suite Full Name         | Node Path                                    |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
      Then The xtext plugin validate annotation will be set as follows
           """
           The step parameters don't exist for the step definition

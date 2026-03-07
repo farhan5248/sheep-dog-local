@@ -30,16 +30,6 @@ public class SpecPrjProcessIssuesAsciidocFileSteps extends TestSteps {
         object.assertInputOutputsDataTable(dataTable, "DescriptionNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file LineList node is created as follows$")
-    public void lineListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsDataTable(dataTable, "LineListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file LineList node will be created as follows$")
-    public void lineListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsDataTable(dataTable, "LineListNode");
-    }
-
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file NestedDescription node will be as follows$")
     public void nestedDescriptionNodeWillBeAsFollows(DataTable dataTable) {
         object.assertInputOutputsDataTable(dataTable, "NestedDescriptionNode");
@@ -80,16 +70,6 @@ public class SpecPrjProcessIssuesAsciidocFileSteps extends TestSteps {
         object.assertInputOutputsDataTable(dataTable, "TestDataListNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node is created as follows$")
-    public void testDocumentListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsDataTable(dataTable, "TestDocumentListNode");
-    }
-
-    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDocumentList node will be created as follows$")
-    public void testDocumentListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsDataTable(dataTable, "TestDocumentListNode");
-    }
-
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows$")
     public void testStepContainerListNodeIsCreatedAsFollows(DataTable dataTable) {
         object.setInputOutputsDataTable(dataTable, "TestStepContainerListNode");
@@ -128,5 +108,20 @@ public class SpecPrjProcessIssuesAsciidocFileSteps extends TestSteps {
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows$")
     public void textNodeWillBeAsFollows(DataTable dataTable) {
         object.assertInputOutputsDataTable(dataTable, "TextNode");
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file is created$")
+    public void isCreated() {
+        object.setInputOutputsState("Created");
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file is created as follows$")
+    public void isCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputsDataTable(dataTable);
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file will be created as follows$")
+    public void willBeCreatedAsFollows(DataTable dataTable) {
+        object.assertInputOutputsDataTable(dataTable);
     }
 }

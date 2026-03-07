@@ -15,8 +15,8 @@ public class SpecPrjInput2FileAsciidocFileSteps extends TestSteps {
         super(object, "spec-prj", "src/test/resources/asciidoc/stepdefs/daily batchjob/Input2 file.asciidoc");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input2 file.asciidoc file TestDocumentList node will be created as follows$")
-    public void testDocumentListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsDataTable(dataTable, "TestDocumentListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input2 file.asciidoc file will be created as follows$")
+    public void willBeCreatedAsFollows(DataTable dataTable) {
+        object.assertInputOutputsDataTable(dataTable);
     }
 }

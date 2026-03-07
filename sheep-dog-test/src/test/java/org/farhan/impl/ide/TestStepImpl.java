@@ -20,7 +20,7 @@ public class TestStepImpl implements ITestStep {
     public String getFullName() {
         String obj = stepObjectName != null ? stepObjectName : "";
         String def = stepDefinitionName != null ? stepDefinitionName : "";
-        return ("The " + obj + " " + def).trim();
+        return (obj + " " + def).trim();
     }
 
     @Override

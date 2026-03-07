@@ -16,14 +16,6 @@ public interface ProcessIssuesAsciidocFile {
 
     public void assertDescriptionNodeState(HashMap<String, String> keyMap);
 
-    public void setLineListNodeNodePath(HashMap<String, String> keyMap);
-
-    public void setLineListNodeLineContent(HashMap<String, String> keyMap);
-
-    public void assertLineListNodeNodePath(HashMap<String, String> keyMap);
-
-    public void assertLineListNodeLineContent(HashMap<String, String> keyMap);
-
     public void assertNestedDescriptionNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertNestedDescriptionNodeState(HashMap<String, String> keyMap);
@@ -51,16 +43,6 @@ public interface ProcessIssuesAsciidocFile {
     public void assertTestDataListNodeState(HashMap<String, String> keyMap);
 
     public void assertTestDataListNodeTestDataName(HashMap<String, String> keyMap);
-
-    public void setTestDocumentListNodeNodePath(HashMap<String, String> keyMap);
-
-    public void setTestDocumentListNodeTestSuiteFullName(HashMap<String, String> keyMap);
-
-    public void setTestDocumentListNodeTestSuiteName(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeNodePath(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeTestSuiteName(HashMap<String, String> keyMap);
 
     public void setTestStepContainerListNodeNodePath(HashMap<String, String> keyMap);
 
@@ -119,4 +101,10 @@ public interface ProcessIssuesAsciidocFile {
     public void assertTextNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertTextNodeState(HashMap<String, String> keyMap);
+
+    public void setCreated(HashMap<String, String> keyMap);
+
+    public void setTestSuiteName(HashMap<String, String> keyMap);
+
+    public void assertTestSuiteName(HashMap<String, String> keyMap);
 }

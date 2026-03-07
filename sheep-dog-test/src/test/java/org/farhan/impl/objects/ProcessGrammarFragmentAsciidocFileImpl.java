@@ -2,7 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import org.farhan.common.TestIDEObject;
+import org.farhan.common.TestObjectIDE;
 import org.farhan.dsl.grammar.PhraseFragments;
 import org.farhan.dsl.grammar.StepDefinitionRefFragments;
 import org.farhan.dsl.grammar.StepDefinitionRefPartTypes;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessGrammarFragmentAsciidocFileImpl extends TestIDEObject implements ProcessGrammarFragmentAsciidocFile {
+public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectIDE implements ProcessGrammarFragmentAsciidocFile {
 
     @Override
     public void assertPhraseTagFragmentTagList(HashMap<String, String> keyMap) {

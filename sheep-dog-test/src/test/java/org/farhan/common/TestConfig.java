@@ -4,6 +4,7 @@ import org.farhan.dsl.grammar.SheepDogFactory;
 import org.farhan.impl.ide.SheepDogFactoryImpl;
 import org.farhan.impl.objects.ApplyQuickfixActionImpl;
 import org.farhan.impl.objects.EditDocumentNodeActionImpl;
+import org.farhan.impl.objects.AddDocumentActionImpl;
 import org.farhan.impl.objects.AddDocumentNodeActionImpl;
 import org.farhan.impl.objects.AppInputFileAsciidocFileImpl;
 import org.farhan.impl.objects.Input2FileAsciidocFileImpl;
@@ -24,6 +25,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatc
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.farhan.objects.xtext.EditDocumentNodeAction;
+import org.farhan.objects.xtext.AddDocumentAction;
 import org.farhan.objects.xtext.AddDocumentNodeAction;
 import org.farhan.objects.xtext.ListProposalsAction;
 import org.farhan.objects.xtext.ListProposalsPopup;
@@ -51,7 +53,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
     @Before
     public void resetTestProject() throws Exception {
         SheepDogFactory.instance = new SheepDogFactoryImpl();
-        TestIDEObject.reset();
+        TestObjectIDE.reset();
     }
 
     @Override
@@ -66,6 +68,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
         bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);
         bind(EditDocumentNodeAction.class).to(EditDocumentNodeActionImpl.class);
+        bind(AddDocumentAction.class).to(AddDocumentActionImpl.class);
         bind(AddDocumentNodeAction.class).to(AddDocumentNodeActionImpl.class);
         bind(ListProposalsAction.class).to(ListProposalsActionImpl.class);
         bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);

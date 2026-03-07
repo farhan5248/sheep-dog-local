@@ -80,13 +80,18 @@ public class SpecPrjInputFileAsciidocFileSteps extends TestSteps {
         object.assertInputOutputsDataTable(dataTable, "TableNode");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node is created as follows$")
-    public void testDocumentListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsDataTable(dataTable, "TestDocumentListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created$")
+    public void isCreated() {
+        object.setInputOutputsState("Created");
     }
 
-    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file TestDocumentList node will be created as follows$")
-    public void testDocumentListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsDataTable(dataTable, "TestDocumentListNode");
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows$")
+    public void isCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputsDataTable(dataTable);
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows$")
+    public void willBeCreatedAsFollows(DataTable dataTable) {
+        object.assertInputOutputsDataTable(dataTable);
     }
 }

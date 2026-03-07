@@ -15,12 +15,12 @@ Feature: Proposals for File Step Objects
     If a step has no component and no object, proposals come from objects referenced in previous steps within the same test case. Both the short form and fully qualified form are proposed.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                       |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | empty                                     |
+          | Node Path                            | Test Step Full Name                       |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+          | TestStepContainerList/1/TestStepList | empty                                     |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/2 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                | Proposal Description                                   |
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
@@ -31,12 +31,12 @@ Feature: Proposals for File Step Objects
     If a step has a component but no object, proposals still come from objects referenced in previous steps. The component doesn't filter the proposals from previous steps.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                       |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob                        |
+          | Node Path                            | Test Step Full Name                       |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+          | TestStepContainerList/1/TestStepList | The daily batchjob                        |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList/2 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/2 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                | Proposal Description                                   |
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
@@ -47,17 +47,17 @@ Feature: Proposals for File Step Objects
     If a test case step has no component and no object, proposals include objects from the test setup (background) steps.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
-          | Node Path                                            | Test Setup Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList | Background      |
+          | Node Path             | Test Setup Name |
+          | TestStepContainerList | Background      |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name                       |
-          | TestProject/TestDocumentList/1/TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+          | Node Path                            | Test Step Full Name                       |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                                                           | Test Step Full Name |
-          | TestProject/TestDocumentList/1/TestStepContainerList/2/TestStepList | empty               |
+          | Node Path                            | Test Step Full Name |
+          | TestStepContainerList/2/TestStepList | empty               |
      When The xtext plugin list proposals action is performed as follows
-          | Node Path                                                             |
-          | TestProject/TestDocumentList/1/TestStepContainerList/2/TestStepList/1 |
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/2/TestStepList/1 |
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value                 | Proposal Id                | Proposal Description                                   |
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |

@@ -2,7 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestIDEObject;
+import org.farhan.common.TestObjectIDE;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.issues.RowIssueResolver;
@@ -13,24 +13,25 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListProposalsActionImpl extends TestIDEObject implements ListProposalsAction {
+public class ListProposalsActionImpl extends TestObjectIDE implements ListProposalsAction {
 
     public void transition() {
+        super.transition();
         if (properties.get("Node Path") != null) {
-            setCursor(properties.get("Node Path").toString());
+            setCursorAtNode(properties.get("Node Path").toString());
             properties.remove("Node Path");
         }
         try {
-            if (TestIDEObject.cursor instanceof IRow) {
-                IRow row = (IRow) TestIDEObject.cursor;
+            if (TestObjectIDE.cursor instanceof IRow) {
+                IRow row = (IRow) TestObjectIDE.cursor;
                 ITestStep testStep = (ITestStep) row.getParent().getParent();
-                TestIDEObject.listProposalsDialog
+                TestObjectIDE.listProposalsDialog
                         .addAll(RowIssueResolver.suggestCellListWorkspace((ITestStep) testStep));
-            } else if (TestIDEObject.cursor instanceof ITestStep) {
-                TestIDEObject.listProposalsDialog
-                        .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) TestIDEObject.cursor));
-                TestIDEObject.listProposalsDialog.addAll(
-                        TestStepIssueResolver.suggestStepDefinitionNameWorkspace((ITestStep) TestIDEObject.cursor));
+            } else if (TestObjectIDE.cursor instanceof ITestStep) {
+                TestObjectIDE.listProposalsDialog
+                        .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) TestObjectIDE.cursor));
+                TestObjectIDE.listProposalsDialog.addAll(
+                        TestStepIssueResolver.suggestStepDefinitionNameWorkspace((ITestStep) TestObjectIDE.cursor));
             } else {
                 Assertions.fail("Unknown Element Type");
             }
@@ -42,5 +43,10 @@ public class ListProposalsActionImpl extends TestIDEObject implements ListPropos
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
         properties.put("Node Path", keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTestSuiteFullName(HashMap<String, String> keyMap) {
+        properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
     }
 }

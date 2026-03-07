@@ -4,9 +4,5 @@ import java.util.HashMap;
 
 public interface ProcessIssues2AsciidocFile {
 
-    public void assertTestDocumentListNodeNodePath(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeTestSuiteFullName(HashMap<String, String> keyMap);
-
-    public void assertTestDocumentListNodeTestSuiteName(HashMap<String, String> keyMap);
+    public void assertTestSuiteName(HashMap<String, String> keyMap);
 }
