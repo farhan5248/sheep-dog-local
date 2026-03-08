@@ -38,8 +38,9 @@ public class TestCaseImpl extends TestStepContainerImpl implements ITestCase {
 
 	@Override
 	public boolean addTestData(ITestData value) {
-		testDataList.add((TestDataImpl) value);
-		testDataList.getLast().parent = this;
+		TestDataImpl impl = (TestDataImpl) value;
+		testDataList.add(impl);
+		impl.parent = this;
 		return true;
 	}
 

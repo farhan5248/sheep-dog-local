@@ -80,8 +80,15 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     @Override
     public boolean addStepParameters(IStepParameters value) {
-        stepParametersList.add((StepParametersImpl) value);
-        stepParametersList.getLast().parent = this;
+        StepParametersImpl impl = (StepParametersImpl) value;
+        int insertIndex = Collections.binarySearch(
+                stepParametersList.stream().map(StepParametersImpl::getName).toList(),
+                impl.getName());
+        if (insertIndex < 0) {
+            insertIndex = -(insertIndex + 1);
+        }
+        stepParametersList.add(insertIndex, impl);
+        impl.parent = this;
         return true;
     }
 

@@ -104,15 +104,22 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public boolean addTestCase(ITestCase value) {
-		testStepContainerList.add((TestCaseImpl) value);
-		testStepContainerList.getLast().parent = this;
+		TestCaseImpl impl = (TestCaseImpl) value;
+		testStepContainerList.add(impl);
+		impl.parent = this;
 		return true;
 	}
 
 	@Override
 	public boolean addTestSetup(ITestSetup value) {
-		testStepContainerList.add((TestSetupImpl) value);
-		testStepContainerList.getLast().parent = this;
+		TestStepContainerImpl impl = (TestStepContainerImpl) value;
+		int insertIndex = 0;
+		while (insertIndex < testStepContainerList.size()
+				&& testStepContainerList.get(insertIndex) instanceof TestSetupImpl) {
+			insertIndex++;
+		}
+		testStepContainerList.add(insertIndex, impl);
+		impl.parent = this;
 		return true;
 	}
 

@@ -76,13 +76,8 @@ Feature: TestSuite Type
           | specs/ProcessIssues.asciidoc | TestStepContainerList | Second Test Setup |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows
           | Node Path               | Test Setup Name   |
+          | TestStepContainerList/1 | First Test Setup  |
           | TestStepContainerList/2 | Second Test Setup |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be as follows
-          | Node Path                            | State |
-          | TestStepContainerList/1/TestStepList | Empty |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Description node will be as follows
-          | Node Path                           | State  |
-          | TestStepContainerList/1/Description | Absent |
 
   @list
   Scenario: Test Data
@@ -151,4 +146,62 @@ Feature: TestSuite Type
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node will be as follows
           | Node Path                              | State  |
           | TestStepContainerList/1/TestDataList/2 | Absent |
+
+  Scenario: Test Case Insertion Order
+
+    Test Cases maintain insertion order within a Test Suite.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name   |
+          | TestStepContainerList | Second Test Case |
+     When The xtext plugin edit document node action is performed to modify TestStepContainerList with
+          | Test Suite Full Name         | Node Path             | Test Case Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList | First Test Case |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows
+          | Node Path               | Test Case Name   |
+          | TestStepContainerList/1 | Second Test Case |
+          | TestStepContainerList/2 | First Test Case  |
+
+  Scenario: Duplicate Test Setup Name
+
+    Test Setup name must be unique within a Test Suite. Creating a Test Setup with an existing name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Setup Name |
+          | TestStepContainerList | Background      |
+     When The xtext plugin edit document node action is performed to modify TestStepContainerList with
+          | Test Suite Full Name         | Node Path             | Test Setup Name |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList | Background      |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be as follows
+          | Node Path               | State  |
+          | TestStepContainerList/2 | Absent |
+
+  Scenario: Test Setup Is First
+
+    Test Setup is always at position 1 in the Test Step Container list, even when added after Test Cases.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name  |
+          | TestStepContainerList | First Test Case |
+     When The xtext plugin edit document node action is performed to modify TestStepContainerList with
+          | Test Suite Full Name         | Node Path             | Test Setup Name |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList | Background      |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows
+          | Node Path               | Test Setup Name |
+          | TestStepContainerList/1 | Background      |
+
+  Scenario: Test Data Insertion Order
+
+    Test Data entries maintain insertion order within a Test Case.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node is created as follows
+          | Node Path                            | Test Data Name   |
+          | TestStepContainerList/1/TestDataList | Second Test Data |
+     When The xtext plugin edit document node action is performed to modify TestDataList with
+          | Test Suite Full Name         | Node Path                            | Test Data Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList | First Test Data |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node will be created as follows
+          | Node Path                              | Test Data Name   |
+          | TestStepContainerList/1/TestDataList/1 | Second Test Data |
+          | TestStepContainerList/1/TestDataList/2 | First Test Data  |
 

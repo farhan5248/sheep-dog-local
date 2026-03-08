@@ -105,8 +105,15 @@ public class StepObjectImpl implements IStepObject {
 
     @Override
     public boolean addStepDefinition(IStepDefinition value) {
-        stepDefinitionList.add((StepDefinitionImpl) value);
-        stepDefinitionList.getLast().parent = this;
+        StepDefinitionImpl impl = (StepDefinitionImpl) value;
+        int insertIndex = Collections.binarySearch(
+                stepDefinitionList.stream().map(StepDefinitionImpl::getName).toList(),
+                impl.getName());
+        if (insertIndex < 0) {
+            insertIndex = -(insertIndex + 1);
+        }
+        stepDefinitionList.add(insertIndex, impl);
+        impl.parent = this;
         return true;
     }
 
