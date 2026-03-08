@@ -231,7 +231,12 @@ public class TestObjectIDE extends TestObjectDoc {
                     break;
                 }
                 int index = Integer.parseInt(parts[i + 1]) - 1;
-                current = getChildNode(current, elementType, index);
+                try {
+                    current = getChildNode(current, elementType, index);
+                } catch (IndexOutOfBoundsException e) {
+                    cursor = null;
+                    return;
+                }
                 i += 2;
             }
             if (current != null)

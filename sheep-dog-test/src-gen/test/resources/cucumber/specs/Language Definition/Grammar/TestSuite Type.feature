@@ -110,3 +110,45 @@ Feature: TestSuite Type
           | Node Path                                    | State  |
           | TestStepContainerList/1/TestDataList/1/Table | Absent |
 
+  Scenario: Duplicate Test Suite Full Name
+
+    Test Suite full name must be unique within a Test Project. Creating a Test Suite with an existing full name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name  |
+          | TestStepContainerList | First Test Case |
+     When The xtext plugin add document action is performed to create a TestSuite with
+          | Test Suite Full Name         |
+          | specs/ProcessIssues.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows
+          | Node Path               | Test Case Name  |
+          | TestStepContainerList/1 | First Test Case |
+
+  Scenario: Duplicate Test Case Name
+
+    Test Case name must be unique within a Test Suite. Creating a Test Case with an existing name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name  |
+          | TestStepContainerList | First Test Case |
+     When The xtext plugin edit document node action is performed to modify TestStepContainerList with
+          | Test Suite Full Name         | Node Path             | Test Case Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList | First Test Case |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be as follows
+          | Node Path               | State  |
+          | TestStepContainerList/2 | Absent |
+
+  Scenario: Duplicate Test Data Name
+
+    Test Data name must be unique within a Test Case. Creating Test Data with an existing name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node is created as follows
+          | Node Path                            | Test Data Name  |
+          | TestStepContainerList/1/TestDataList | First Test Data |
+     When The xtext plugin edit document node action is performed to modify TestDataList with
+          | Test Suite Full Name         | Node Path                            | Test Data Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList | First Test Data |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node will be as follows
+          | Node Path                              | State  |
+          | TestStepContainerList/1/TestDataList/2 | Absent |
+

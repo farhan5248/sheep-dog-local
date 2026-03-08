@@ -80,3 +80,45 @@ Feature: StepObject Type
           | Node Path                                       | State  |
           | StepDefinitionList/1/StepParametersList/2/Table | Absent |
 
+  Scenario: Duplicate Step Object Full Name
+
+    Step Object full name must be unique within a Test Project. Creating a Step Object with an existing full name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node is created as follows
+          | Node Path          | Step Definition Name  |
+          | StepDefinitionList | First Step Definition |
+     When The xtext plugin add document action is performed to create a StepObject with
+          | Step Object Full Name                       |
+          | stepdefs/daily batchjob/Input file.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be created as follows
+          | Node Path            | Step Definition Name  |
+          | StepDefinitionList/1 | First Step Definition |
+
+  Scenario: Duplicate Step Definition Name
+
+    Step Definition name must be unique within a Step Object. Creating a Step Definition with an existing name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node is created as follows
+          | Node Path          | Step Definition Name  |
+          | StepDefinitionList | First Step Definition |
+     When The xtext plugin edit document node action is performed to modify StepDefinitionList with
+          | Step Object Full Name                       | Node Path          | Step Definition Name  |
+          | stepdefs/daily batchjob/Input file.asciidoc | StepDefinitionList | First Step Definition |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be as follows
+          | Node Path            | State  |
+          | StepDefinitionList/2 | Absent |
+
+  Scenario: Duplicate Step Parameters Name
+
+    Step Parameters name must be unique within a Step Definition. Creating Step Parameters with an existing name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node is created as follows
+          | Node Path                               | Step Parameters Name  |
+          | StepDefinitionList/1/StepParametersList | First Step Parameters |
+     When The xtext plugin edit document node action is performed to modify StepParametersList with
+          | Step Object Full Name                       | Node Path                               | Step Parameters Name  |
+          | stepdefs/daily batchjob/Input file.asciidoc | StepDefinitionList/1/StepParametersList | First Step Parameters |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node will be as follows
+          | Node Path                                 | State  |
+          | StepDefinitionList/1/StepParametersList/2 | Absent |
+

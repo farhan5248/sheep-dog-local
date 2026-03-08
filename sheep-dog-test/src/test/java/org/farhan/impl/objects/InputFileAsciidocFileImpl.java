@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 import org.farhan.common.TestObjectIDE;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
+import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
@@ -60,8 +61,10 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
 
     @Override
     public void assertStepDefinitionListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Absent")) {
+        if (keyMap.get("State").contentEquals("Empty")) {
             assertStepDefinitionListEmpty();
+        } else if (keyMap.get("State").contentEquals("Absent")) {
+            Assertions.assertNull(cursor);
         }
     }
 
@@ -77,8 +80,10 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
 
     @Override
     public void assertStepParametersListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Absent")) {
+        if (keyMap.get("State").contentEquals("Empty")) {
             assertStepParametersListEmpty();
+        } else if (keyMap.get("State").contentEquals("Absent")) {
+            Assertions.assertNull(cursor);
         }
     }
 

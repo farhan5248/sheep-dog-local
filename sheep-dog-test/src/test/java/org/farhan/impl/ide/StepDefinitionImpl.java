@@ -9,7 +9,7 @@ import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
-import org.farhan.dsl.grammar.SheepDogUtility;
+
 
 public class StepDefinitionImpl implements IStepDefinition {
 
@@ -50,11 +50,7 @@ public class StepDefinitionImpl implements IStepDefinition {
     @Override
     public IStepParameters getStepParameters(String name) {
         for (IStepParameters sp : stepParametersList) {
-            String rowAsString = "";
-            if (sp.getTable() != null && !sp.getTable().getRowList().isEmpty()) {
-                rowAsString = SheepDogUtility.getCellListAsString(sp.getTable().getRowList().getFirst().getCellList());
-            }
-            if (name.contentEquals(rowAsString)) {
+            if (name.contentEquals(sp.getName())) {
                 return sp;
             }
         }

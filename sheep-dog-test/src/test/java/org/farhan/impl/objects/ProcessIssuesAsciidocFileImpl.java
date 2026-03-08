@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 import org.farhan.common.TestObjectIDE;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
+import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
@@ -75,8 +76,10 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectIDE implements Proc
 
     @Override
     public void assertTestDataListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Absent")) {
+        if (keyMap.get("State").contentEquals("Empty")) {
             assertTestDataListEmpty();
+        } else if (keyMap.get("State").contentEquals("Absent")) {
+            Assertions.assertNull(cursor);
         }
     }
 
@@ -92,8 +95,10 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectIDE implements Proc
 
     @Override
     public void assertTestStepContainerListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Absent")) {
+        if (keyMap.get("State").contentEquals("Empty")) {
             assertTestStepContainerListEmpty();
+        } else if (keyMap.get("State").contentEquals("Absent")) {
+            Assertions.assertNull(cursor);
         }
     }
 
