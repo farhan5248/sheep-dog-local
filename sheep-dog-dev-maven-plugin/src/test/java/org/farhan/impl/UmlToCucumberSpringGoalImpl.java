@@ -2,7 +2,7 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.Config;
+import org.farhan.common.TestConfig;
 import org.farhan.common.GoalObject;
 import org.farhan.objects.maven.UmlToCucumberSpringGoal;
 
@@ -12,8 +12,8 @@ import io.cucumber.guice.ScenarioScoped;
 public class UmlToCucumberSpringGoalImpl extends GoalObject implements UmlToCucumberSpringGoal {
 
 	public void transition() {
-		runGoal("org.farhan.mbt.maven.UMLToCucumberSpringMojo", Config.getWorkingDir() + "code-prj/",
-				Config.getWorkingDir() + "spec-prj/");
+		runGoal("org.farhan.mbt.maven.UMLToCucumberSpringMojo", TestConfig.getWorkingDir() + "code-prj/",
+				TestConfig.getWorkingDir() + "spec-prj/");
 	}
 
 	@Override

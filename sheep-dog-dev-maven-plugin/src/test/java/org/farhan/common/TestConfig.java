@@ -35,29 +35,26 @@ import io.cucumber.guice.CucumberModules;
 import io.cucumber.guice.InjectorSource;
 import io.cucumber.java.Before;
 
-public final class Config extends AbstractModule implements InjectorSource {
+public final class TestConfig extends AbstractModule implements InjectorSource {
 
 	public static String getWorkingDir() {
 		return "target/src-gen/";
 	}
 
-	public void deleteDir(File aDir) throws Exception {
+	public void deleteDir(File aDir) {
 		if (aDir.exists()) {
 			for (String s : aDir.list()) {
 				File f = new File(aDir.getAbsolutePath() + File.separator + s);
 				if (f.isDirectory()) {
 					deleteDir(f);
-				} else {
-					if (!f.delete()) {
-						throw new Exception("Failed to delete: " + f.getAbsolutePath());
-					}
 				}
+				f.delete();
 			}
 		}
 	}
 
 	@Before
-	public void before() throws Exception {
+	public void resetTestProject() throws Exception {
 		deleteDir(new File(getWorkingDir()));
 	}
 
@@ -82,6 +79,8 @@ public final class Config extends AbstractModule implements InjectorSource {
 
 	@Override
 	public Injector getInjector() {
-		return Guice.createInjector(Stage.DEVELOPMENT, CucumberModules.createScenarioModule(), new Config());
+		Injector injector = Guice.createInjector(Stage.DEVELOPMENT, CucumberModules.createScenarioModule(), new TestConfig());
+		TestObject.injector = injector;
+		return injector;
 	}
 }

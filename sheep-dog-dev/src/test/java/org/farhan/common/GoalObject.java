@@ -21,13 +21,13 @@ public abstract class GoalObject extends TestObject {
 	public GoalObject() {
 		or = new ServiceFileRepository();
 		sr = new SourceFileRepository();
-		attributes.put("tags", "");
+		properties.put("tags", "");
 	}
 
 	protected void runGoal(String goal) {
 		logger.debug("Entering runGoal for goal: {}", goal != null ? goal : "null");
 		try {
-			tags = attributes.get("tags");
+			tags = properties.get("tags").toString();
 			Class<?> mojoClass = Class.forName(goal);
 			Converter mojo = (Converter) mojoClass.getConstructor(String.class, IResourceRepository.class)
 					.newInstance(tags, or);
@@ -58,7 +58,7 @@ public abstract class GoalObject extends TestObject {
 			logger.debug("Exiting runGoal");
 		} catch (Exception e) {
 			logger.error("Failed in runGoal for goal '{}': {}", goal != null ? goal : "null", e.getMessage(), e);
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 }

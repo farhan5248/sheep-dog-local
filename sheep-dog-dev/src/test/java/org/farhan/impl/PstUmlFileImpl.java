@@ -150,7 +150,7 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
 	@Override
 	public void setPath(String path) {
-		attributes.put("path", path);
+		properties.put("path", path);
 	}
 
 }

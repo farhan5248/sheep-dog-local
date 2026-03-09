@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 public abstract class GoalObject extends TestObject {
 
 	public GoalObject() {
-		attributes.put("tags", "");
+		properties.put("tags", "");
 	}
 
 	protected void runGoal(String goal, String baseDir) {
@@ -17,12 +17,12 @@ public abstract class GoalObject extends TestObject {
 		try {
 			Class<?> mojoClass = Class.forName(goal);
 			MBTMojo mojo = (MBTMojo) mojoClass.getConstructor().newInstance();
-			mojo.tags = attributes.get("tags");
+			mojo.tags = properties.get("tags").toString();
 			mojo.baseDir = baseDir;
 			mojo.repoDir = repoDir;
 			mojo.execute();
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 }

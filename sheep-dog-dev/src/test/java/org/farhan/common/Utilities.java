@@ -2,7 +2,6 @@ package org.farhan.common;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,14 +16,7 @@ public class Utilities {
 		}
 	}
 
-	public static String getStackTraceAsString(Exception e) {
-		StringWriter sw = new StringWriter();
-		e.printStackTrace(new PrintWriter(sw));
-		String exceptionAsString = sw.toString();
-		return exceptionAsString;
-	}
-
-	public static String readFile(File aFile) throws Exception {
+public static String readFile(File aFile) throws Exception {
 		String content = new String(Files.readAllBytes(Paths.get(aFile.toURI())), StandardCharsets.UTF_8);
 		return content;
 	}

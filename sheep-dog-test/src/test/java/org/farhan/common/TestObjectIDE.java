@@ -21,8 +21,6 @@ import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 
-import io.cucumber.datatable.DataTable;
-
 public class TestObjectIDE extends TestObjectDoc {
 
     public static ArrayList<SheepDogIssueProposal> listProposalsDialog = new ArrayList<SheepDogIssueProposal>();
@@ -195,21 +193,7 @@ public class TestObjectIDE extends TestObjectDoc {
         cursor = current;
     }
 
-    protected void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
-        String fullName = getFullNameFromPath();
-        if (operation.contentEquals("set")) {
-            if (fullName.startsWith("specs/")) {
-                addTestSuiteWithFullName(fullName);
-            } else if (fullName.startsWith("stepdefs/")) {
-                addStepObjectWithFullName(fullName);
-            }
-        } else if (operation.contentEquals("assert")) {
-            cursor = testProject.getTestDocument(fullName);
-        }
-        super.processInputOutputs(dataTable, operation, sectionName);
-    }
-
-    protected String getFullNameFromPath() {
+protected String getFullNameFromPath() {
         String path = (String) properties.get("path");
         return path.replace("src/test/resources/asciidoc/", "");
     }

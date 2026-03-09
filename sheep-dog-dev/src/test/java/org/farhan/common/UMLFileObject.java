@@ -125,10 +125,10 @@ public abstract class UMLFileObject extends FileObject {
 
 	protected void assertFileExists() {
 		try {
-			project = new UMLTestProject(getGoalClass("ToUml").attributes.get("tags"), new ServiceFileRepository());
+			project = new UMLTestProject(getTestObjectClass("ToUml", "org.farhan.objects.maven.").properties.get("tags").toString(), new ServiceFileRepository());
 			project.init();
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 

@@ -93,10 +93,10 @@ public class AdocFileObject extends FileObject {
 	protected void assertStepObjectExists() {
 		super.assertFileExists();
 		try {
-			stepObject = new AsciiDoctorStepObject(attributes.get("path"));
-			stepObject.parse(sr.get("", attributes.get("path")));
+			stepObject = new AsciiDoctorStepObject(properties.get("path").toString());
+			stepObject.parse(sr.get("", properties.get("path").toString()));
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
@@ -111,19 +111,19 @@ public class AdocFileObject extends FileObject {
 	protected void assertTestSuiteExists() {
 		super.assertFileExists();
 		try {
-			testSuite = new AsciiDoctorTestSuite(attributes.get("path"));
-			testSuite.parse(sr.get("", attributes.get("path")));
+			testSuite = new AsciiDoctorTestSuite(properties.get("path").toString());
+			testSuite.parse(sr.get("", properties.get("path").toString()));
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
 	protected void deleteObject() {
 		super.assertFileExists();
 		try {
-			sr.delete("", attributes.get("path"));
+			sr.delete("", properties.get("path").toString());
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+			Assertions.fail(e);
 		}
 	}
 
