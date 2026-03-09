@@ -170,4 +170,79 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
     public void assertStepParametersName(HashMap<String, String> keyMap) {
         assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")));
     }
+
+    @Override
+    public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void setCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertTableNodeAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void setCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void setLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void setStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepDefinitionListNodeAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void setStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
 }

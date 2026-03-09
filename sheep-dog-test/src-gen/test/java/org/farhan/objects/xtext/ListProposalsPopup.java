@@ -6,6 +6,8 @@ public interface ListProposalsPopup {
 
     public void assertEmpty(HashMap<String, String> keyMap);
 
+    public void assertSetAsFollows(HashMap<String, String> keyMap);
+
     public void assertProposalValue(HashMap<String, String> keyMap);
 
     public void assertProposalId(HashMap<String, String> keyMap);

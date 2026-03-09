@@ -11,8 +11,14 @@ import io.cucumber.guice.ScenarioScoped;
 public class ObjectPageJavaFileImpl extends JavaFileObject
 		implements ObjectPageJavaFile {
 
+	@Override
 	public void assertContent(HashMap<String, String> keyMap) {
 		assertContent(keyMap.get("Content"));
+	}
+
+	@Override
+	public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
 	}
 
 	@Override
@@ -61,7 +67,23 @@ public class ObjectPageJavaFileImpl extends JavaFileObject
 		assertFileExists();
 	}
 
+	@Override
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
+	}
+
+	@Override
+	public void setCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertMethodsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
 	}
 }

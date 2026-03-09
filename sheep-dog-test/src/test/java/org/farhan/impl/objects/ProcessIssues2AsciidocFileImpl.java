@@ -13,4 +13,9 @@ public class ProcessIssues2AsciidocFileImpl extends TestObjectIDE implements Pro
     public void assertTestSuiteName(HashMap<String, String> keyMap) {
         assertTestSuiteName(replaceKeyword(keyMap.get("Test Suite Name")));
     }
+
+    @Override
+    public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
 }

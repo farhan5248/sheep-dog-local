@@ -17,48 +17,56 @@ public class XtextEditDocumentNodeActionSteps extends TestSteps {
 
     @Given("^The xtext plugin edit document node action is performed to modify CellList with$")
     public void isPerformedToModifyCellListWith(DataTable dataTable) {
+        object.setInputOutputsState("Performed to modify CellList with");
         object.setInputOutputsDataTable(dataTable);
         object.transition();
     }
 
     @Given("^The xtext plugin edit document node action is performed to modify LineList with$")
     public void isPerformedToModifyLineListWith(DataTable dataTable) {
+        object.setInputOutputsState("Performed to modify LineList with");
         object.setInputOutputsDataTable(dataTable);
         object.transition();
     }
 
     @Given("^The xtext plugin edit document node action is performed to modify RowList with$")
     public void isPerformedToModifyRowListWith(DataTable dataTable) {
+        object.setInputOutputsState("Performed to modify RowList with");
         object.setInputOutputsDataTable(dataTable);
         object.transition();
     }
 
     @Given("^The xtext plugin edit document node action is performed to modify StepDefinitionList with$")
     public void isPerformedToModifyStepDefinitionListWith(DataTable dataTable) {
+        object.setInputOutputsState("Performed to modify StepDefinitionList with");
         object.setInputOutputsDataTable(dataTable);
         object.transition();
     }
 
     @Given("^The xtext plugin edit document node action is performed to modify StepParametersList with$")
     public void isPerformedToModifyStepParametersListWith(DataTable dataTable) {
+        object.setInputOutputsState("Performed to modify StepParametersList with");
         object.setInputOutputsDataTable(dataTable);
         object.transition();
     }
 
     @Given("^The xtext plugin edit document node action is performed to modify TestDataList with$")
     public void isPerformedToModifyTestDataListWith(DataTable dataTable) {
+        object.setInputOutputsState("Performed to modify TestDataList with");
         object.setInputOutputsDataTable(dataTable);
         object.transition();
     }
 
     @Given("^The xtext plugin edit document node action is performed to modify TestStepContainerList with$")
     public void isPerformedToModifyTestStepContainerListWith(DataTable dataTable) {
+        object.setInputOutputsState("Performed to modify TestStepContainerList with");
         object.setInputOutputsDataTable(dataTable);
         object.transition();
     }
 
     @Given("^The xtext plugin edit document node action is performed to modify TestStepList with$")
     public void isPerformedToModifyTestStepListWith(DataTable dataTable) {
+        object.setInputOutputsState("Performed to modify TestStepList with");
         object.setInputOutputsDataTable(dataTable);
         object.transition();
     }

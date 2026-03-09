@@ -92,8 +92,8 @@ public abstract class TestObject {
             }
             for (String fieldName : headers) {
                 try {
-                    this.getClass().getMethod(operation + sectionName.replaceAll("[ \\-\\(\\)/]", "")
-                            + fieldName.replaceAll("[ \\-\\(\\)/]", ""), HashMap.class).invoke(this, row);
+                    this.getClass().getMethod(operation + convertToPascalCase(sectionName)
+                            + convertToPascalCase(fieldName), HashMap.class).invoke(this, row);
                 } catch (Exception e) {
                     Assertions.fail(e);
                 }
@@ -107,11 +107,24 @@ public abstract class TestObject {
         row.put(key, value);
         try {
             this.getClass().getMethod(
-                    operation + sectionName.replaceAll("[ \\-\\(\\)/]", "") + key.replaceAll("[ \\-\\(\\)/]", ""),
+                    operation + convertToPascalCase(sectionName) + convertToPascalCase(key),
                     HashMap.class).invoke(this, row);
         } catch (Exception e) {
             Assertions.fail(e);
         }
+    }
+
+    private String convertToPascalCase(String s) {
+        StringBuilder result = new StringBuilder();
+        for (String word : s.split("[ \\-\\(\\)/]+")) {
+            if (!word.isEmpty()) {
+                result.append(Character.toUpperCase(word.charAt(0)));
+                if (word.length() > 1) {
+                    result.append(word.substring(1));
+                }
+            }
+        }
+        return result.toString();
     }
 
     protected String replaceKeyword(String value) {
@@ -128,5 +141,10 @@ public abstract class TestObject {
 
     protected void setPath(String path) {
         properties.put("path", path);
+    }
+
+    public void setInputOutputsState(String string, String string2) {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -113,6 +113,42 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 		assertFileExists();
 	}
 
+	@Override
+	public void assertClassAnnotationsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertClassCommentsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertClassSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertInteractionAnnotationsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertInteractionCommentsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertInteractionMessagesSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertInteractionSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
 	public void setPath(String path) {
 		attributes.put("path", path);
 	}

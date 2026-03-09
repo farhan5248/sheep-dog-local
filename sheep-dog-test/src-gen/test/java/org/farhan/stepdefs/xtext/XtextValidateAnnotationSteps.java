@@ -21,6 +21,7 @@ public class XtextValidateAnnotationSteps extends TestSteps {
 
     @Given("^The xtext plugin validate annotation is set as follows$")
     public void isSetAsFollows(String docString) {
+        object.setInputOutputsState("Set as follows");
         object.setInputOutputsDocString("Content", docString);
     }
 
@@ -31,6 +32,7 @@ public class XtextValidateAnnotationSteps extends TestSteps {
 
     @Given("^The xtext plugin validate annotation will be set as follows$")
     public void willBeSetAsFollows(String docString) {
+        object.assertInputOutputsState("Set as follows");
         object.assertInputOutputsDocString("Content", docString);
     }
 }

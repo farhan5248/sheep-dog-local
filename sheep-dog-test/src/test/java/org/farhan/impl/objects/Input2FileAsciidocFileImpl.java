@@ -13,4 +13,9 @@ public class Input2FileAsciidocFileImpl extends TestObjectIDE implements Input2F
     public void assertStepObjectName(HashMap<String, String> keyMap) {
         assertStepObjectName(replaceKeyword(keyMap.get("Step Object Name")));
     }
+
+    @Override
+    public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
 }

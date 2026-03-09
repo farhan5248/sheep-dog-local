@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public interface BlahObjectPageStepsJavaFile {
 
+    public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertHeaderSectionClassAnnotation(HashMap<String, String> keyMap);
 
     public void assertHeaderSectionClassName(HashMap<String, String> keyMap);
@@ -20,6 +22,8 @@ public interface BlahObjectPageStepsJavaFile {
 
     public void assertHeaderSectionImport(HashMap<String, String> keyMap);
 
+    public void assertMethodsSectionCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertMethodsSectionMethodName(HashMap<String, String> keyMap);
 
     public void assertMethodsSectionAnnotation(HashMap<String, String> keyMap);
@@ -34,7 +38,11 @@ public interface BlahObjectPageStepsJavaFile {
 
     public void assertMethodsSectionStatement(HashMap<String, String> keyMap);
 
+    public void setCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setContent(HashMap<String, String> keyMap);
+
+    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertContent(HashMap<String, String> keyMap);
 

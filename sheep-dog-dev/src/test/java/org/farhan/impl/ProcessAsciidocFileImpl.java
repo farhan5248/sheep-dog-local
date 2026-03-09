@@ -37,6 +37,11 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 	}
 
 	@Override
+	public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
 	public void assertFeatureSectionName(HashMap<String, String> keyMap) {
 		assertFeatureName(keyMap.get("Name"));
 	}
@@ -133,8 +138,53 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 	}
 
 	@Override
+	public void assertBackgroundSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertBackgroundStepsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertFeatureSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenarioOutlineExamplesTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenariosSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenariosStepsDocStringSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenariosStepsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenariosStepsStepTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
+	}
+
+	@Override
+	public void setCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
 	}
 
 	@Override

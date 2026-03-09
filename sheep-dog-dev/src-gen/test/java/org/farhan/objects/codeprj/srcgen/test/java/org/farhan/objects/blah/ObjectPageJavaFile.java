@@ -4,11 +4,15 @@ import java.util.HashMap;
 
 public interface ObjectPageJavaFile {
 
+    public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertHeaderSectionImport(HashMap<String, String> keyMap);
 
     public void assertHeaderSectionInterfaceName(HashMap<String, String> keyMap);
 
     public void assertHeaderSectionPackage(HashMap<String, String> keyMap);
+
+    public void assertMethodsSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertMethodsSectionMethodName(HashMap<String, String> keyMap);
 
@@ -20,7 +24,11 @@ public interface ObjectPageJavaFile {
 
     public void assertMethodsSectionParameterType(HashMap<String, String> keyMap);
 
+    public void setCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setContent(HashMap<String, String> keyMap);
+
+    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertContent(HashMap<String, String> keyMap);
 

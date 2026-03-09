@@ -4,5 +4,7 @@ import java.util.HashMap;
 
 public interface InputFileAsciidocFile {
 
+    public void setCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setStepDefinitionName(HashMap<String, String> keyMap);
 }

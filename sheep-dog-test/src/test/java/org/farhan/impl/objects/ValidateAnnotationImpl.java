@@ -30,4 +30,14 @@ public class ValidateAnnotationImpl extends TestObjectIDE implements ValidateAnn
 	public void setContent(HashMap<String, String> keyMap) {
 		TestObjectIDE.validateDialog = keyMap.get("Content");
 	}
+
+	@Override
+	public void assertSetAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void setSetAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
 }

@@ -17,6 +17,7 @@ public class XtextListQuickfixesPopupSteps extends TestSteps {
 
     @Given("^The xtext plugin list quickfixes popup is set as follows$")
     public void isSetAsFollows(DataTable dataTable) {
+        object.setInputOutputsState("Set as follows");
         object.setInputOutputsDataTable(dataTable);
     }
 
@@ -27,6 +28,7 @@ public class XtextListQuickfixesPopupSteps extends TestSteps {
 
     @Given("^The xtext plugin list quickfixes popup will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
+        object.assertInputOutputsState("Set as follows");
         object.assertInputOutputsDataTable(dataTable);
     }
 }

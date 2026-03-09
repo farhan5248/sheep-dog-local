@@ -61,6 +61,31 @@ public class ObjectPageAsciidocFileImpl extends AdocFileObject implements Object
 	}
 
 	@Override
+	public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void setCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertStepDefinitionSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertStepDefinitionParametersTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
 	public void setDeleted(HashMap<String, String> keyMap) {
 		deleteObject();
 	}

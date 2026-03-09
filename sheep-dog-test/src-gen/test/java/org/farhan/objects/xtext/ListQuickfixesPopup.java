@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public interface ListQuickfixesPopup {
 
+    public void setSetAsFollows(HashMap<String, String> keyMap);
+
     public void setProposalId(HashMap<String, String> keyMap);
 
     public void setProposalDescription(HashMap<String, String> keyMap);
@@ -11,6 +13,8 @@ public interface ListQuickfixesPopup {
     public void setProposalValue(HashMap<String, String> keyMap);
 
     public void assertEmpty(HashMap<String, String> keyMap);
+
+    public void assertSetAsFollows(HashMap<String, String> keyMap);
 
     public void assertProposalId(HashMap<String, String> keyMap);
 

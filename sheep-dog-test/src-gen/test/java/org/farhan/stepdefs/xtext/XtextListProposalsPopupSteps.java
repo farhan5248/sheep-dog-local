@@ -22,6 +22,7 @@ public class XtextListProposalsPopupSteps extends TestSteps {
 
     @Given("^The xtext plugin list proposals popup will be set as follows$")
     public void willBeSetAsFollows(DataTable dataTable) {
+        object.assertInputOutputsState("Set as follows");
         object.assertInputOutputsDataTable(dataTable);
     }
 }

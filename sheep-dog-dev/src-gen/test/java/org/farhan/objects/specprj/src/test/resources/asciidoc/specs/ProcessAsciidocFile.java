@@ -4,17 +4,25 @@ import java.util.HashMap;
 
 public interface ProcessAsciidocFile {
 
+    public void assertBackgroundStepsSectionCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertBackgroundStepsSectionName(HashMap<String, String> keyMap);
 
     public void assertBackgroundStepsSectionStep(HashMap<String, String> keyMap);
+
+    public void assertBackgroundSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertBackgroundSectionName(HashMap<String, String> keyMap);
 
     public void assertBackgroundSectionDescription(HashMap<String, String> keyMap);
 
+    public void assertFeatureSectionCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertFeatureSectionName(HashMap<String, String> keyMap);
 
     public void assertFeatureSectionStatements(HashMap<String, String> keyMap);
+
+    public void assertScenarioOutlineExamplesTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertScenarioOutlineExamplesTableSectionName(HashMap<String, String> keyMap);
 
@@ -26,11 +34,15 @@ public interface ProcessAsciidocFile {
 
     public void assertScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap);
 
+    public void assertScenariosStepsDocStringSectionCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertScenariosStepsDocStringSectionName(HashMap<String, String> keyMap);
 
     public void assertScenariosStepsDocStringSectionStep(HashMap<String, String> keyMap);
 
     public void assertScenariosStepsDocStringSectionContent(HashMap<String, String> keyMap);
+
+    public void assertScenariosStepsStepTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertScenariosStepsStepTableSectionName(HashMap<String, String> keyMap);
 
@@ -38,15 +50,21 @@ public interface ProcessAsciidocFile {
 
     public void assertScenariosStepsStepTableSectionRow(HashMap<String, String> keyMap);
 
+    public void assertScenariosStepsSectionCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertScenariosStepsSectionName(HashMap<String, String> keyMap);
 
     public void assertScenariosStepsSectionStep(HashMap<String, String> keyMap);
+
+    public void assertScenariosSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertScenariosSectionName(HashMap<String, String> keyMap);
 
     public void assertScenariosSectionTags(HashMap<String, String> keyMap);
 
     public void assertScenariosSectionDescription(HashMap<String, String> keyMap);
+
+    public void setCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
 

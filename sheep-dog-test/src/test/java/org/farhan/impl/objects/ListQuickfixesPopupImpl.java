@@ -76,4 +76,14 @@ public class ListQuickfixesPopupImpl extends TestObjectIDE implements ListQuickf
         TestObjectIDE.listQuickfixesDialog.getLast().setValue(keyMap.get("Proposal Value"));
     }
 
+    @Override
+    public void assertSetAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void setSetAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
 }

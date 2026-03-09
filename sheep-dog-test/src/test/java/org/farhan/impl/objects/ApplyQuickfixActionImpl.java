@@ -57,6 +57,11 @@ public class ApplyQuickfixActionImpl extends TestObjectIDE implements ApplyQuick
         properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
     }
 
+    @Override
+    public void setPerformedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
     public void transition() {
         super.transition();
         if (properties.get("Node Path") != null) {

@@ -177,6 +177,56 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectIDE implem
         properties.put("Test Step Full Name", keyMap.get("Test Step Full Name"));
     }
 
+    @Override
+    public void setTestStepTypeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepObjectRefObjectVertexFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepObjectRefObjectFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void setLineTypeCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertPhraseTagFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertPhraseTodoFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepObjectRefComponentFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void assertStepObjectRefObjectEdgeFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
     private String getStepDefinitionRef() {
         String testStep = properties.get("Test Step Full Name").toString();
         return testStep.substring(StepObjectRefFragments.getAll(testStep).length()).trim();

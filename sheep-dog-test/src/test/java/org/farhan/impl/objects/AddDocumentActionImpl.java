@@ -32,4 +32,14 @@ public class AddDocumentActionImpl extends TestObjectIDE implements AddDocumentA
         }
     }
 
+    @Override
+    public void setPerformedToCreateATestSuiteWith(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void setPerformedToCreateAStepObjectWith(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
 }

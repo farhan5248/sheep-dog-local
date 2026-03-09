@@ -34,4 +34,14 @@ public class AddDocumentNodeActionImpl extends TestObjectIDE implements AddDocum
         properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
     }
 
+    @Override
+    public void setPerformedToAddTextAt(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
+    @Override
+    public void setPerformedToAddTableAt(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
 }

@@ -60,4 +60,9 @@ public class ListProposalsPopupImpl extends TestObjectIDE implements ListProposa
         Assertions.fail(sb.toString());
     }
 
+    @Override
+    public void assertSetAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
 }

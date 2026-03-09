@@ -17,6 +17,7 @@ public class SpecPrjProcessIssues2AsciidocFileSteps extends TestSteps {
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues2.asciidoc file will be created as follows$")
     public void willBeCreatedAsFollows(DataTable dataTable) {
+        object.assertInputOutputsState("Created as follows");
         object.assertInputOutputsDataTable(dataTable);
     }
 }

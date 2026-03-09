@@ -4,45 +4,69 @@ import java.util.HashMap;
 
 public interface ProcessIssuesAsciidocFile {
 
+    public void setCellListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setCellListNodeNodePath(HashMap<String, String> keyMap);
 
     public void setCellListNodeCellName(HashMap<String, String> keyMap);
+
+    public void assertCellListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertCellListNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertCellListNodeCellName(HashMap<String, String> keyMap);
 
+    public void assertDescriptionNodeAsFollows(HashMap<String, String> keyMap);
+
     public void assertDescriptionNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertDescriptionNodeState(HashMap<String, String> keyMap);
+
+    public void assertNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap);
 
     public void assertNestedDescriptionNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertNestedDescriptionNodeState(HashMap<String, String> keyMap);
 
+    public void setRowListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setRowListNodeNodePath(HashMap<String, String> keyMap);
 
     public void setRowListNodeRowContent(HashMap<String, String> keyMap);
+
+    public void assertRowListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertRowListNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertRowListNodeRowContent(HashMap<String, String> keyMap);
 
+    public void setTableNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setTableNodeNodePath(HashMap<String, String> keyMap);
+
+    public void assertTableNodeAsFollows(HashMap<String, String> keyMap);
 
     public void assertTableNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertTableNodeState(HashMap<String, String> keyMap);
 
+    public void setTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setTestDataListNodeNodePath(HashMap<String, String> keyMap);
 
     public void setTestDataListNodeTestDataName(HashMap<String, String> keyMap);
+
+    public void assertTestDataListNodeAsFollows(HashMap<String, String> keyMap);
 
     public void assertTestDataListNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertTestDataListNodeState(HashMap<String, String> keyMap);
 
+    public void assertTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertTestDataListNodeTestDataName(HashMap<String, String> keyMap);
+
+    public void setTestStepContainerListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setTestStepContainerListNodeNodePath(HashMap<String, String> keyMap);
 
@@ -50,13 +74,19 @@ public interface ProcessIssuesAsciidocFile {
 
     public void setTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap);
 
+    public void assertTestStepContainerListNodeAsFollows(HashMap<String, String> keyMap);
+
     public void assertTestStepContainerListNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertTestStepContainerListNodeState(HashMap<String, String> keyMap);
 
+    public void assertTestStepContainerListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertTestStepContainerListNodeTestCaseName(HashMap<String, String> keyMap);
 
     public void assertTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap);
+
+    public void setTestStepListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setTestStepListNodeNodePath(HashMap<String, String> keyMap);
 
@@ -66,9 +96,13 @@ public interface ProcessIssuesAsciidocFile {
 
     public void setTestStepListNodeTestStepFullName(HashMap<String, String> keyMap);
 
+    public void assertTestStepListNodeAsFollows(HashMap<String, String> keyMap);
+
     public void assertTestStepListNodeNodePath(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeState(HashMap<String, String> keyMap);
+
+    public void assertTestStepListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertTestStepListNodeAndFullName(HashMap<String, String> keyMap);
 
@@ -94,9 +128,13 @@ public interface ProcessIssuesAsciidocFile {
 
     public void assertTestStepListNodeWhenStepDefinitionRefName(HashMap<String, String> keyMap);
 
+    public void setTextNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setTextNodeNodePath(HashMap<String, String> keyMap);
 
     public void setTextNodeTextContent(HashMap<String, String> keyMap);
+
+    public void assertTextNodeAsFollows(HashMap<String, String> keyMap);
 
     public void assertTextNodeNodePath(HashMap<String, String> keyMap);
 
@@ -104,7 +142,11 @@ public interface ProcessIssuesAsciidocFile {
 
     public void setCreated(HashMap<String, String> keyMap);
 
+    public void setCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setTestSuiteName(HashMap<String, String> keyMap);
+
+    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertTestSuiteName(HashMap<String, String> keyMap);
 }

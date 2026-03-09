@@ -123,4 +123,9 @@ public class ValidateActionImpl extends TestObjectIDE implements ValidateAction 
     public void setTestSuiteFullName(HashMap<String, String> keyMap) {
         properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
     }
+
+    @Override
+    public void setPerformedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
 }

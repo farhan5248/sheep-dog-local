@@ -14,4 +14,9 @@ public class AppInputFileAsciidocFileImpl extends TestObjectIDE implements Input
         addStepDefinitionWithName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
+    @Override
+    public void setCreatedAsFollows(HashMap<String, String> keyMap) {
+        // TODO implement later
+    }
+
 }

@@ -16,6 +16,11 @@ public class CucumberToUmlGoalImpl extends GoalObject implements CucumberToUmlGo
 	}
 
 	@Override
+	public void setExecutedWith(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
 	public void transition() {
 		runGoal("org.farhan.mbt.maven.CucumberToUMLMojo", Config.getWorkingDir() + "code-prj/",
 				Config.getWorkingDir() + "spec-prj/");

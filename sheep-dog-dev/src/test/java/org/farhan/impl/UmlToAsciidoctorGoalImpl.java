@@ -14,6 +14,17 @@ public class UmlToAsciidoctorGoalImpl extends GoalObject implements UmlToAsciido
 		attributes.put("tags", keyMap.get("Tags"));
 	}
 
+	@Override
+	public void setExecuted(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void setExecutedWith(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
 	public void transition() {
 		runGoal("org.farhan.mbt.asciidoctor.ConvertUMLToAsciidoctor");
 	}

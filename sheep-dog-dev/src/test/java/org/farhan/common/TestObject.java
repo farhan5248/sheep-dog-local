@@ -40,6 +40,18 @@ public abstract class TestObject {
         processInputOutputs(row, "assert", "", false);
     }
 
+    public void assertInputOutputsState(String key, String sectionName) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, "true");
+        processInputOutputs(row, "assert", sectionName, false);
+    }
+
+    public void assertInputOutputsState(String key, String sectionName, boolean negativeTest) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, Boolean.toString(negativeTest));
+        processInputOutputs(row, "assert", sectionName, negativeTest);
+    }
+
     public void assertInputOutputsState(String key, boolean negativeTest) {
         HashMap<String, String> row = new HashMap<String, String>();
         row.put(key, Boolean.toString(negativeTest));
@@ -81,6 +93,24 @@ public abstract class TestObject {
         processInputOutputs(row, "set", "", false);
     }
 
+    public void setInputOutputsState(String key, String sectionName) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, "true");
+        processInputOutputs(row, "set", sectionName, false);
+    }
+
+    public void setInputOutputsState(String key, String sectionName, boolean negativeTest) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, Boolean.toString(negativeTest));
+        processInputOutputs(row, "set", sectionName, negativeTest);
+    }
+
+    public void setInputOutputsState(String key, boolean negativeTest) {
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(key, Boolean.toString(negativeTest));
+        processInputOutputs(row, "set", "", negativeTest);
+    }
+
     public void setPath(String path) {
         attributes.put("path", path);
     }
@@ -88,8 +118,17 @@ public abstract class TestObject {
     public void transition() {
     }
 
-    private String cleanName(String name) {
-        return name.replaceAll("[ \\-\\(\\)/]", "");
+    private String convertToPascalCase(String s) {
+        StringBuilder result = new StringBuilder();
+        for (String word : s.split("[ \\-\\(\\)/]+")) {
+            if (!word.isEmpty()) {
+                result.append(Character.toUpperCase(word.charAt(0)));
+                if (word.length() > 1) {
+                    result.append(word.substring(1));
+                }
+            }
+        }
+        return result.toString();
     }
 
     private void processInputOutputs(DataTable dataTable, String operation, String sectionName, boolean negativeTest) {
@@ -100,11 +139,11 @@ public abstract class TestObject {
             boolean negativeTest) {
         try {
             if (negativeTest) {
-                this.getClass().getMethod(operation + cleanName(sectionName) + "Negative", HashMap.class).invoke(this,
+                this.getClass().getMethod(operation + convertToPascalCase(sectionName) + "Negative", HashMap.class).invoke(this,
                         row);
             } else {
                 for (String columnName : row.keySet()) {
-                    this.getClass().getMethod(operation + cleanName(sectionName) + cleanName(columnName), HashMap.class)
+                    this.getClass().getMethod(operation + convertToPascalCase(sectionName) + convertToPascalCase(columnName), HashMap.class)
                             .invoke(this, row);
                 }
             }

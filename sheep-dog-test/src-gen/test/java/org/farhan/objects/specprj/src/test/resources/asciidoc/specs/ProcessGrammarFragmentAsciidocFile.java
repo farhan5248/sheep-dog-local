@@ -4,13 +4,21 @@ import java.util.HashMap;
 
 public interface ProcessGrammarFragmentAsciidocFile {
 
+    public void setLineTypeCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setLineTypeLine(HashMap<String, String> keyMap);
 
+    public void assertPhraseTagFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+
     public void assertPhraseTagFragmentTagList(HashMap<String, String> keyMap);
+
+    public void assertPhraseTodoFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
     public void assertPhraseTodoFragmentTodoType(HashMap<String, String> keyMap);
 
     public void assertPhraseTodoFragmentTodoDescription(HashMap<String, String> keyMap);
+
+    public void assertStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionRefPartFragmentPart(HashMap<String, String> keyMap);
 
@@ -20,6 +28,8 @@ public interface ProcessGrammarFragmentAsciidocFile {
 
     public void assertStepDefinitionRefPartFragmentPartTypeDescription(HashMap<String, String> keyMap);
 
+    public void assertStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+
     public void assertStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionRefStateFragmentStateDescription(HashMap<String, String> keyMap);
@@ -27,6 +37,8 @@ public interface ProcessGrammarFragmentAsciidocFile {
     public void assertStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap);
+
+    public void assertStepObjectRefComponentFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
     public void assertStepObjectRefComponentFragmentComponentType(HashMap<String, String> keyMap);
 
@@ -36,9 +48,13 @@ public interface ProcessGrammarFragmentAsciidocFile {
 
     public void assertStepObjectRefComponentFragmentComponentName(HashMap<String, String> keyMap);
 
+    public void assertStepObjectRefObjectEdgeFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+
     public void assertStepObjectRefObjectEdgeFragmentObjectType(HashMap<String, String> keyMap);
 
     public void assertStepObjectRefObjectEdgeFragmentObjectTypeDescription(HashMap<String, String> keyMap);
+
+    public void assertStepObjectRefObjectFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
     public void assertStepObjectRefObjectFragmentObject(HashMap<String, String> keyMap);
 
@@ -46,9 +62,13 @@ public interface ProcessGrammarFragmentAsciidocFile {
 
     public void assertStepObjectRefObjectFragmentObjectType(HashMap<String, String> keyMap);
 
+    public void assertStepObjectRefObjectVertexFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+
     public void assertStepObjectRefObjectVertexFragmentObjectType(HashMap<String, String> keyMap);
 
     public void assertStepObjectRefObjectVertexFragmentObjectTypeDescription(HashMap<String, String> keyMap);
+
+    public void setTestStepTypeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setTestStepTypeTestStepFullName(HashMap<String, String> keyMap);
 }

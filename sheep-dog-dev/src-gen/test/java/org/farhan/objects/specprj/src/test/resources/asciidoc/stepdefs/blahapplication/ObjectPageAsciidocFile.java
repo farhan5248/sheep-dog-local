@@ -4,9 +4,13 @@ import java.util.HashMap;
 
 public interface ObjectPageAsciidocFile {
 
+    public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertHeaderSectionName(HashMap<String, String> keyMap);
 
     public void assertHeaderSectionStatements(HashMap<String, String> keyMap);
+
+    public void assertStepDefinitionParametersTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionParametersTableSectionName(HashMap<String, String> keyMap);
 
@@ -14,13 +18,19 @@ public interface ObjectPageAsciidocFile {
 
     public void assertStepDefinitionParametersTableSectionRow(HashMap<String, String> keyMap);
 
+    public void assertStepDefinitionSectionCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void assertStepDefinitionSectionName(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionSectionDescription(HashMap<String, String> keyMap);
 
+    public void setCreatedAsFollows(HashMap<String, String> keyMap);
+
     public void setContent(HashMap<String, String> keyMap);
 
     public void setDeleted(HashMap<String, String> keyMap);
+
+    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void assertContent(HashMap<String, String> keyMap);
 

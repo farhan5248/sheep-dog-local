@@ -81,16 +81,18 @@ Feature: UMLStepDefinitionToCode
           | Method Name                      | Parameter Name | Parameter Type |
           | topSectionWillBeCreatedAsFollows | dataTable      | DataTable      |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                      | Statement                                                    |
-          | topSectionWillBeCreatedAsFollows | object.assertInputOutputsDataTable(dataTable, "TopSection"); |
+          | Method Name                      | Statement                                                           |
+          | topSectionWillBeCreatedAsFollows | object.assertInputOutputsState("Created as follows", "TopSection"); |
+          | topSectionWillBeCreatedAsFollows | object.assertInputOutputsDataTable(dataTable, "TopSection");        |
 
   Scenario: Layer 2 with datatable, negative without DI
 
      When The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                      | Statement                                                          |
-          | topSectionWontBeCreatedAsFollows | object.assertInputOutputsDataTable(dataTable, "TopSection", true); |
+          | Method Name                      | Statement                                                                 |
+          | topSectionWontBeCreatedAsFollows | object.assertInputOutputsState("Created as follows", "TopSection", true); |
+          | topSectionWontBeCreatedAsFollows | object.assertInputOutputsDataTable(dataTable, "TopSection", true);        |
 
   Scenario: Layer 2 with docstring without DI
 
@@ -101,6 +103,7 @@ Feature: UMLStepDefinitionToCode
           | isCreatedAsFollows | docString      | String         |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
           | Method Name        | Statement                                              |
+          | isCreatedAsFollows | object.setInputOutputsState("Created as follows");     |
           | isCreatedAsFollows | object.setInputOutputsDocString("Content", docString); |
 
   Scenario: Layer 3
@@ -108,11 +111,13 @@ Feature: UMLStepDefinitionToCode
      When The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
       And The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Methods section will be created as follows
-          | Method Name              | Visibility | Return Type | Parameter Name | Parameter Type         |
-          | setEmpty                 | public     | void        | keyMap         | HashMap<String,String> |
-          | assertTopSectionNegative | public     | void        | keyMap         | HashMap<String,String> |
-          | assertTopSectionH1       | public     | void        | keyMap         | HashMap<String,String> |
-          | setContent               | public     | void        | keyMap         | HashMap<String,String> |
+          | Method Name                      | Visibility | Return Type | Parameter Name | Parameter Type         |
+          | setEmpty                         | public     | void        | keyMap         | HashMap<String,String> |
+          | assertTopSectionCreatedAsFollows | public     | void        | keyMap         | HashMap<String,String> |
+          | assertTopSectionNegative         | public     | void        | keyMap         | HashMap<String,String> |
+          | assertTopSectionH1               | public     | void        | keyMap         | HashMap<String,String> |
+          | setCreatedAsFollows              | public     | void        | keyMap         | HashMap<String,String> |
+          | setContent                       | public     | void        | keyMap         | HashMap<String,String> |
 
   Scenario: Layer 2 without parameters with spring
 

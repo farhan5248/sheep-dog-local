@@ -31,8 +31,14 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
+	@Override
 	public void assertContent(HashMap<String, String> keyMap) {
 		assertContent(keyMap.get("Content"));
+	}
+
+	@Override
+	public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
 	}
 
 	@Override
@@ -161,8 +167,64 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
+	@Override
+	public void assertBackgroundSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertBackgroundStepsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertFeatureSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenarioOutlineExamplesTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenarioOutlineStepsDataTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenarioOutlinesSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenarioStepsDataTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenarioStepsDocStringSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenariosSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
+	public void assertScenariosStepsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+	}
+
+	@Override
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
+	}
+
+	@Override
+	public void setCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
 	}
 
 }
