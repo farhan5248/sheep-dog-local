@@ -36,12 +36,10 @@ public class AddDocumentNodeActionImpl extends TestObjectIDE implements AddDocum
 
     @Override
     public void setPerformedToAddTextAt(HashMap<String, String> keyMap) {
-        // TODO implement later
     }
 
     @Override
     public void setPerformedToAddTableAt(HashMap<String, String> keyMap) {
-        // TODO implement later
     }
 
 }

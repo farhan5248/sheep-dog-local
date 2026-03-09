@@ -179,52 +179,52 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectIDE implem
 
     @Override
     public void setTestStepTypeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertStepObjectRefObjectVertexFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertStepObjectRefObjectFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setLineTypeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertPhraseTagFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertPhraseTodoFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertStepObjectRefComponentFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertStepObjectRefObjectEdgeFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     private String getStepDefinitionRef() {

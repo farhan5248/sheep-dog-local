@@ -16,6 +16,6 @@ public class ProcessIssues2AsciidocFileImpl extends TestObjectIDE implements Pro
 
     @Override
     public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 }

@@ -16,6 +16,6 @@ public class Input2FileAsciidocFileImpl extends TestObjectIDE implements Input2F
 
     @Override
     public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 }

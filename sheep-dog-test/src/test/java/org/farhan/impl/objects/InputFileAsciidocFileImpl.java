@@ -173,76 +173,76 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
 
     @Override
     public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addStepObjectWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertTableNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addStepObjectWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addStepObjectWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addStepObjectWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertStepDefinitionListNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addStepObjectWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 }

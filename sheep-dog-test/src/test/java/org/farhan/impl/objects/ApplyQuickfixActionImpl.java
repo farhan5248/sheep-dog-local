@@ -59,7 +59,6 @@ public class ApplyQuickfixActionImpl extends TestObjectIDE implements ApplyQuick
 
     @Override
     public void setPerformedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
     }
 
     public void transition() {

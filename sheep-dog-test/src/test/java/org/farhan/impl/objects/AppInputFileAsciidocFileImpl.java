@@ -16,7 +16,7 @@ public class AppInputFileAsciidocFileImpl extends TestObjectIDE implements Input
 
     @Override
     public void setCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addStepObjectWithFullName(getFullNameFromPath());
     }
 
 }

@@ -298,107 +298,107 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectIDE implements Proc
 
     @Override
     public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertTextNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setRowListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertRowListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setTableNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertTableNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertTestDataListNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setTestStepContainerListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertTestStepContainerListNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertTestStepContainerListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setTestStepListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
     @Override
     public void assertTestStepListNodeAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void assertTestStepListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        cursor = testProject.getTestDocument(getFullNameFromPath());
     }
 
     @Override
     public void setTextNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
+        addTestSuiteWithFullName(getFullNameFromPath());
     }
 
 }

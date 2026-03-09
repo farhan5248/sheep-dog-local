@@ -62,7 +62,6 @@ public class ListProposalsPopupImpl extends TestObjectIDE implements ListProposa
 
     @Override
     public void assertSetAsFollows(HashMap<String, String> keyMap) {
-        // TODO implement later
     }
 
 }

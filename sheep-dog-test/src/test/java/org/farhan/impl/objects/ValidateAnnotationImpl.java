@@ -33,11 +33,9 @@ public class ValidateAnnotationImpl extends TestObjectIDE implements ValidateAnn
 
 	@Override
 	public void assertSetAsFollows(HashMap<String, String> keyMap) {
-		// TODO implement later
 	}
 
 	@Override
 	public void setSetAsFollows(HashMap<String, String> keyMap) {
-		// TODO implement later
 	}
 }
