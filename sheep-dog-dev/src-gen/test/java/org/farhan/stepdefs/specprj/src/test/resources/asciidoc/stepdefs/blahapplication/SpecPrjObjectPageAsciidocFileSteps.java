@@ -17,20 +17,20 @@ public class SpecPrjObjectPageAsciidocFileSteps extends TestSteps {
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Header section will be created as follows$")
     public void headerSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "HeaderSection");
-        object.assertInputOutputsDataTable(dataTable, "HeaderSection");
+        object.assertInputOutputsState("Created as follows", "Header section");
+        object.assertInputOutputsDataTable(dataTable, "Header section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Step Definition Parameters Table section will be created as follows$")
     public void stepDefinitionParametersTableSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "StepDefinitionParametersTableSection");
-        object.assertInputOutputsDataTable(dataTable, "StepDefinitionParametersTableSection");
+        object.assertInputOutputsState("Created as follows", "Step Definition Parameters Table section");
+        object.assertInputOutputsDataTable(dataTable, "Step Definition Parameters Table section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Step Definition section will be created as follows$")
     public void stepDefinitionSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "StepDefinitionSection");
-        object.assertInputOutputsDataTable(dataTable, "StepDefinitionSection");
+        object.assertInputOutputsState("Created as follows", "Step Definition section");
+        object.assertInputOutputsDataTable(dataTable, "Step Definition section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows$")

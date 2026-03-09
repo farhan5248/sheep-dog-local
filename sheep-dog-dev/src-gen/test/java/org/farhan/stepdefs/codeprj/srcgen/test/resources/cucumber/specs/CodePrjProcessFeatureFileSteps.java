@@ -17,62 +17,62 @@ public class CodePrjProcessFeatureFileSteps extends TestSteps {
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Background Steps section will be created as follows$")
     public void backgroundStepsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "BackgroundStepsSection");
-        object.assertInputOutputsDataTable(dataTable, "BackgroundStepsSection");
+        object.assertInputOutputsState("Created as follows", "Background Steps section");
+        object.assertInputOutputsDataTable(dataTable, "Background Steps section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Background section will be created as follows$")
     public void backgroundSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "BackgroundSection");
-        object.assertInputOutputsDataTable(dataTable, "BackgroundSection");
+        object.assertInputOutputsState("Created as follows", "Background section");
+        object.assertInputOutputsDataTable(dataTable, "Background section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Feature section will be created as follows$")
     public void featureSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "FeatureSection");
-        object.assertInputOutputsDataTable(dataTable, "FeatureSection");
+        object.assertInputOutputsState("Created as follows", "Feature section");
+        object.assertInputOutputsDataTable(dataTable, "Feature section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows$")
     public void scenarioOutlineExamplesTableSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenarioOutlineExamplesTableSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenarioOutlineExamplesTableSection");
+        object.assertInputOutputsState("Created as follows", "Scenario Outline Examples Table section");
+        object.assertInputOutputsDataTable(dataTable, "Scenario Outline Examples Table section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Steps Data Table section will be created as follows$")
     public void scenarioOutlineStepsDataTableSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenarioOutlineStepsDataTableSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenarioOutlineStepsDataTableSection");
+        object.assertInputOutputsState("Created as follows", "Scenario Outline Steps Data Table section");
+        object.assertInputOutputsDataTable(dataTable, "Scenario Outline Steps Data Table section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outlines section will be created as follows$")
     public void scenarioOutlinesSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenarioOutlinesSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenarioOutlinesSection");
+        object.assertInputOutputsState("Created as follows", "Scenario Outlines section");
+        object.assertInputOutputsDataTable(dataTable, "Scenario Outlines section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Steps Data Table section will be created as follows$")
     public void scenarioStepsDataTableSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenarioStepsDataTableSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenarioStepsDataTableSection");
+        object.assertInputOutputsState("Created as follows", "Scenario Steps Data Table section");
+        object.assertInputOutputsDataTable(dataTable, "Scenario Steps Data Table section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenario Steps Doc String section will be created as follows$")
     public void scenarioStepsDocStringSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenarioStepsDocStringSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenarioStepsDocStringSection");
+        object.assertInputOutputsState("Created as follows", "Scenario Steps Doc String section");
+        object.assertInputOutputsDataTable(dataTable, "Scenario Steps Doc String section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenarios Steps section will be created as follows$")
     public void scenariosStepsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenariosStepsSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenariosStepsSection");
+        object.assertInputOutputsState("Created as follows", "Scenarios Steps section");
+        object.assertInputOutputsDataTable(dataTable, "Scenarios Steps section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file Scenarios section will be created as follows$")
     public void scenariosSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenariosSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenariosSection");
+        object.assertInputOutputsState("Created as follows", "Scenarios section");
+        object.assertInputOutputsDataTable(dataTable, "Scenarios section");
     }
 
     @Given("^The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file is created as follows$")

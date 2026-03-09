@@ -17,14 +17,14 @@ public class CodePrjBlahObjectPageStepsJavaFileSteps extends TestSteps {
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Header section will be created as follows$")
     public void headerSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "HeaderSection");
-        object.assertInputOutputsDataTable(dataTable, "HeaderSection");
+        object.assertInputOutputsState("Created as follows", "Header section");
+        object.assertInputOutputsDataTable(dataTable, "Header section");
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows$")
     public void methodsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "MethodsSection");
-        object.assertInputOutputsDataTable(dataTable, "MethodsSection");
+        object.assertInputOutputsState("Created as follows", "Methods section");
+        object.assertInputOutputsDataTable(dataTable, "Methods section");
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")

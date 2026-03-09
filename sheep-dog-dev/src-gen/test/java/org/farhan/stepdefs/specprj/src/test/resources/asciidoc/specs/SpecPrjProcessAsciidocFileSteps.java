@@ -17,50 +17,50 @@ public class SpecPrjProcessAsciidocFileSteps extends TestSteps {
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Background Steps section will be created as follows$")
     public void backgroundStepsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "BackgroundStepsSection");
-        object.assertInputOutputsDataTable(dataTable, "BackgroundStepsSection");
+        object.assertInputOutputsState("Created as follows", "Background Steps section");
+        object.assertInputOutputsDataTable(dataTable, "Background Steps section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Background section will be created as follows$")
     public void backgroundSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "BackgroundSection");
-        object.assertInputOutputsDataTable(dataTable, "BackgroundSection");
+        object.assertInputOutputsState("Created as follows", "Background section");
+        object.assertInputOutputsDataTable(dataTable, "Background section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Feature section will be created as follows$")
     public void featureSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "FeatureSection");
-        object.assertInputOutputsDataTable(dataTable, "FeatureSection");
+        object.assertInputOutputsState("Created as follows", "Feature section");
+        object.assertInputOutputsDataTable(dataTable, "Feature section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenario Outline Examples Table section will be created as follows$")
     public void scenarioOutlineExamplesTableSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenarioOutlineExamplesTableSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenarioOutlineExamplesTableSection");
+        object.assertInputOutputsState("Created as follows", "Scenario Outline Examples Table section");
+        object.assertInputOutputsDataTable(dataTable, "Scenario Outline Examples Table section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps Doc String section will be created as follows$")
     public void scenariosStepsDocStringSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenariosStepsDocStringSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenariosStepsDocStringSection");
+        object.assertInputOutputsState("Created as follows", "Scenarios Steps Doc String section");
+        object.assertInputOutputsDataTable(dataTable, "Scenarios Steps Doc String section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps Step Table section will be created as follows$")
     public void scenariosStepsStepTableSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenariosStepsStepTableSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenariosStepsStepTableSection");
+        object.assertInputOutputsState("Created as follows", "Scenarios Steps Step Table section");
+        object.assertInputOutputsDataTable(dataTable, "Scenarios Steps Step Table section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps section will be created as follows$")
     public void scenariosStepsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenariosStepsSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenariosStepsSection");
+        object.assertInputOutputsState("Created as follows", "Scenarios Steps section");
+        object.assertInputOutputsDataTable(dataTable, "Scenarios Steps section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios section will be created as follows$")
     public void scenariosSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "ScenariosSection");
-        object.assertInputOutputsDataTable(dataTable, "ScenariosSection");
+        object.assertInputOutputsState("Created as follows", "Scenarios section");
+        object.assertInputOutputsDataTable(dataTable, "Scenarios section");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows$")
