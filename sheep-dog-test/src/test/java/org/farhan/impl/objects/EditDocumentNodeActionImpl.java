@@ -2,13 +2,13 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectIDE;
+import org.farhan.common.TestObjectAction;
 import org.farhan.objects.xtext.EditDocumentNodeAction;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class EditDocumentNodeActionImpl extends TestObjectIDE implements EditDocumentNodeAction {
+public class EditDocumentNodeActionImpl extends TestObjectAction implements EditDocumentNodeAction {
 
     @Override
     public void setCellName(HashMap<String, String> keyMap) {

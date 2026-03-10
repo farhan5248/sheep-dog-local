@@ -12,13 +12,13 @@ public interface ListQuickfixesPopup {
 
     public void setProposalValue(HashMap<String, String> keyMap);
 
-    public void assertEmpty(HashMap<String, String> keyMap);
+    public String getEmpty(HashMap<String, String> keyMap);
 
-    public void assertSetAsFollows(HashMap<String, String> keyMap);
+    public String getSetAsFollows(HashMap<String, String> keyMap);
 
-    public void assertProposalId(HashMap<String, String> keyMap);
+    public String getProposalId(HashMap<String, String> keyMap);
 
-    public void assertProposalDescription(HashMap<String, String> keyMap);
+    public String getProposalDescription(HashMap<String, String> keyMap);
 
-    public void assertProposalValue(HashMap<String, String> keyMap);
+    public String getProposalValue(HashMap<String, String> keyMap);
 }

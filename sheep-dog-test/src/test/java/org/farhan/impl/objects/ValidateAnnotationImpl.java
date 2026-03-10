@@ -2,37 +2,37 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectIDE;
+import org.farhan.common.TestObjectAnnotation;
 import org.farhan.objects.xtext.ValidateAnnotation;
-import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ValidateAnnotationImpl extends TestObjectIDE implements ValidateAnnotation {
+public class ValidateAnnotationImpl extends TestObjectAnnotation implements ValidateAnnotation {
 
 	@Override
-	public void assertEmpty(HashMap<String, String> keyMap) {
-		Assertions.assertTrue(TestObjectIDE.validateDialog.isEmpty());
+	public String getEmpty(HashMap<String, String> keyMap) {
+		return validateDialog;
 	}
 
 	@Override
-	public void assertContent(HashMap<String, String> keyMap) {
-		Assertions.assertEquals(keyMap.get("Content"), TestObjectIDE.validateDialog);
+	public String getContent(HashMap<String, String> keyMap) {
+		return validateDialog;
 	}
 
 	@Override
 	public void setEmpty(HashMap<String, String> keyMap) {
-		TestObjectIDE.validateDialog = replaceKeyword("empty");
+		validateDialog = replaceKeyword("empty");
 	}
 
 	@Override
 	public void setContent(HashMap<String, String> keyMap) {
-		TestObjectIDE.validateDialog = keyMap.get("Content");
+		validateDialog = keyMap.get("Content");
 	}
 
 	@Override
-	public void assertSetAsFollows(HashMap<String, String> keyMap) {
+	public String getSetAsFollows(HashMap<String, String> keyMap) {
+		return validateDialog;
 	}
 
 	@Override

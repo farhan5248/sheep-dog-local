@@ -10,17 +10,17 @@ public interface InputFileAsciidocFile {
 
     public void setCellListNodeCellName(HashMap<String, String> keyMap);
 
-    public void assertCellListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getCellListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertCellListNodeNodePath(HashMap<String, String> keyMap);
+    public String getCellListNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertCellListNodeCellName(HashMap<String, String> keyMap);
+    public String getCellListNodeCellName(HashMap<String, String> keyMap);
 
-    public void assertDescriptionNodeAsFollows(HashMap<String, String> keyMap);
+    public String getDescriptionNodeAsFollows(HashMap<String, String> keyMap);
 
-    public void assertDescriptionNodeNodePath(HashMap<String, String> keyMap);
+    public String getDescriptionNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertDescriptionNodeState(HashMap<String, String> keyMap);
+    public String getDescriptionNodeState(HashMap<String, String> keyMap);
 
     public void setLineListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
@@ -28,17 +28,17 @@ public interface InputFileAsciidocFile {
 
     public void setLineListNodeLineContent(HashMap<String, String> keyMap);
 
-    public void assertLineListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getLineListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertLineListNodeNodePath(HashMap<String, String> keyMap);
+    public String getLineListNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertLineListNodeLineContent(HashMap<String, String> keyMap);
+    public String getLineListNodeLineContent(HashMap<String, String> keyMap);
 
-    public void assertNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap);
+    public String getNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap);
 
-    public void assertNestedDescriptionNodeNodePath(HashMap<String, String> keyMap);
+    public String getNestedDescriptionNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertNestedDescriptionNodeState(HashMap<String, String> keyMap);
+    public String getNestedDescriptionNodeState(HashMap<String, String> keyMap);
 
     public void setStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
@@ -46,15 +46,15 @@ public interface InputFileAsciidocFile {
 
     public void setStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionListNodeAsFollows(HashMap<String, String> keyMap);
+    public String getStepDefinitionListNodeAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionListNodeNodePath(HashMap<String, String> keyMap);
+    public String getStepDefinitionListNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionListNodeState(HashMap<String, String> keyMap);
+    public String getStepDefinitionListNodeState(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap);
+    public String getStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap);
 
     public void setStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
@@ -62,21 +62,21 @@ public interface InputFileAsciidocFile {
 
     public void setStepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
 
-    public void assertStepParametersListNodeAsFollows(HashMap<String, String> keyMap);
+    public String getStepParametersListNodeAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepParametersListNodeNodePath(HashMap<String, String> keyMap);
+    public String getStepParametersListNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertStepParametersListNodeState(HashMap<String, String> keyMap);
+    public String getStepParametersListNodeState(HashMap<String, String> keyMap);
 
-    public void assertStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
+    public String getStepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
 
-    public void assertTableNodeAsFollows(HashMap<String, String> keyMap);
+    public String getTableNodeAsFollows(HashMap<String, String> keyMap);
 
-    public void assertTableNodeNodePath(HashMap<String, String> keyMap);
+    public String getTableNodeNodePath(HashMap<String, String> keyMap);
 
-    public void assertTableNodeState(HashMap<String, String> keyMap);
+    public String getTableNodeState(HashMap<String, String> keyMap);
 
     public void setCreated(HashMap<String, String> keyMap);
 
@@ -86,9 +86,9 @@ public interface InputFileAsciidocFile {
 
     public void setStepParametersName(HashMap<String, String> keyMap);
 
-    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionName(HashMap<String, String> keyMap);
+    public String getStepDefinitionName(HashMap<String, String> keyMap);
 
-    public void assertStepParametersName(HashMap<String, String> keyMap);
+    public String getStepParametersName(HashMap<String, String> keyMap);
 }

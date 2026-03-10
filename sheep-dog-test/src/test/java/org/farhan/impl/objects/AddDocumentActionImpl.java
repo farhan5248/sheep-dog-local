@@ -2,13 +2,13 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectIDE;
+import org.farhan.common.TestObjectAction;
 import org.farhan.objects.xtext.AddDocumentAction;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class AddDocumentActionImpl extends TestObjectIDE implements AddDocumentAction {
+public class AddDocumentActionImpl extends TestObjectAction implements AddDocumentAction {
 
     @Override
     public void setStepObjectFullName(HashMap<String, String> keyMap) {

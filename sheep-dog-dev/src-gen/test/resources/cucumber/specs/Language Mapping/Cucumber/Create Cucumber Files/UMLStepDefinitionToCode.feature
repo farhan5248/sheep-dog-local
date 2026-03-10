@@ -112,12 +112,12 @@ Feature: UMLStepDefinitionToCode
      Then The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
       And The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Methods section will be created as follows
           | Method Name                      | Visibility | Return Type | Parameter Name | Parameter Type         |
-          | setEmpty                         | public     | void        | keyMap         | HashMap<String,String> |
-          | assertTopSectionCreatedAsFollows | public     | void        | keyMap         | HashMap<String,String> |
-          | assertTopSectionNegative         | public     | void        | keyMap         | HashMap<String,String> |
-          | assertTopSectionH1               | public     | void        | keyMap         | HashMap<String,String> |
-          | setCreatedAsFollows              | public     | void        | keyMap         | HashMap<String,String> |
-          | setContent                       | public     | void        | keyMap         | HashMap<String,String> |
+          | setEmpty                      | public     | void   | keyMap         | HashMap<String,String> |
+          | getTopSectionCreatedAsFollows | public     | String | keyMap         | HashMap<String,String> |
+          | getTopSectionNegative         | public     | String | keyMap         | HashMap<String,String> |
+          | getTopSectionH1               | public     | String | keyMap         | HashMap<String,String> |
+          | setCreatedAsFollows           | public     | void   | keyMap         | HashMap<String,String> |
+          | setContent                    | public     | void   | keyMap         | HashMap<String,String> |
 
   Scenario: Layer 2 without parameters with spring
 

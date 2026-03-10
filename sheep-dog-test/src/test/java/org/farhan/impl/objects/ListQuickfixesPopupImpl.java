@@ -2,82 +2,71 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectIDE;
+import org.farhan.common.TestObjectPopup;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.objects.xtext.ListQuickfixesPopup;
-import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListQuickfixesPopupImpl extends TestObjectIDE implements ListQuickfixesPopup {
+public class ListQuickfixesPopupImpl extends TestObjectPopup implements ListQuickfixesPopup {
 
     @Override
-    public void assertEmpty(HashMap<String, String> keyMap) {
-        Assertions.assertTrue(TestObjectIDE.listQuickfixesDialog.isEmpty());
+    public String getEmpty(HashMap<String, String> keyMap) {
+        return listToString(listQuickfixesDialog);
     }
 
     @Override
-    public void assertProposalValue(HashMap<String, String> keyMap) {
-        for (SheepDogIssueProposal p : TestObjectIDE.listQuickfixesDialog) {
+    public String getProposalValue(HashMap<String, String> keyMap) {
+        for (SheepDogIssueProposal p : listQuickfixesDialog) {
             if (p.getId().equals(keyMap.get("Proposal Id"))
                     && p.getValue().toString().contentEquals(keyMap.get("Proposal Value"))) {
-                return;
+                return p.getValue().toString();
             }
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("No quickfix found with ID that matches the name: ").append(keyMap.get("Proposal Id"));
-        sb.append(" and value: ").append(keyMap.get("Proposal Value"));
-        sb.append(listToString(TestObjectIDE.listQuickfixesDialog));
-        Assertions.fail(sb.toString());
+        return null;
     }
 
     @Override
-    public void assertProposalDescription(HashMap<String, String> keyMap) {
-        for (SheepDogIssueProposal p : TestObjectIDE.listQuickfixesDialog) {
+    public String getProposalDescription(HashMap<String, String> keyMap) {
+        for (SheepDogIssueProposal p : listQuickfixesDialog) {
             if (p.getId().equals(keyMap.get("Proposal Id"))
                     && p.getDescription().contentEquals(replaceKeyword(keyMap.get("Proposal Description")))) {
-                return;
+                return p.getDescription();
             }
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("No quickfix found with ID that matches the name: ").append(keyMap.get("Proposal Id"));
-        sb.append(" and description: ").append(keyMap.get("Proposal Description"));
-        sb.append(listToString(TestObjectIDE.listQuickfixesDialog));
-        Assertions.fail(sb.toString());
+        return null;
     }
 
     @Override
-    public void assertProposalId(HashMap<String, String> keyMap) {
-        for (SheepDogIssueProposal p : TestObjectIDE.listQuickfixesDialog) {
+    public String getProposalId(HashMap<String, String> keyMap) {
+        for (SheepDogIssueProposal p : listQuickfixesDialog) {
             if (p.getId().equals(keyMap.get("Proposal Id"))) {
-                return;
+                return p.getId();
             }
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("No quickfix found with ID that matches the name: ").append(keyMap.get("Proposal Id"));
-        sb.append(listToString(TestObjectIDE.listQuickfixesDialog));
-        Assertions.fail(sb.toString());
+        return null;
     }
 
     @Override
     public void setProposalId(HashMap<String, String> keyMap) {
-        TestObjectIDE.listQuickfixesDialog.add(new SheepDogIssueProposal());
-        TestObjectIDE.listQuickfixesDialog.getLast().setId(keyMap.get("Proposal Id"));
+        listQuickfixesDialog.add(new SheepDogIssueProposal());
+        listQuickfixesDialog.getLast().setId(keyMap.get("Proposal Id"));
     }
 
     @Override
     public void setProposalDescription(HashMap<String, String> keyMap) {
-        TestObjectIDE.listQuickfixesDialog.getLast().setDescription(keyMap.get("Proposal Description"));
+        listQuickfixesDialog.getLast().setDescription(keyMap.get("Proposal Description"));
     }
 
     @Override
     public void setProposalValue(HashMap<String, String> keyMap) {
-        TestObjectIDE.listQuickfixesDialog.getLast().setValue(keyMap.get("Proposal Value"));
+        listQuickfixesDialog.getLast().setValue(keyMap.get("Proposal Value"));
     }
 
     @Override
-    public void assertSetAsFollows(HashMap<String, String> keyMap) {
+    public String getSetAsFollows(HashMap<String, String> keyMap) {
+        return listToString(listQuickfixesDialog);
     }
 
     @Override

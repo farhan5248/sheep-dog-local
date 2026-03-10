@@ -2,13 +2,13 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectIDE;
+import org.farhan.common.TestObjectAction;
 import org.farhan.objects.xtext.AddDocumentNodeAction;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class AddDocumentNodeActionImpl extends TestObjectIDE implements AddDocumentNodeAction {
+public class AddDocumentNodeActionImpl extends TestObjectAction implements AddDocumentNodeAction {
 
     @Override
     public void transition() {

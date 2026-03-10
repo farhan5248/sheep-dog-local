@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public interface Input2FileAsciidocFile {
 
-    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepObjectName(HashMap<String, String> keyMap);
+    public String getStepObjectName(HashMap<String, String> keyMap);
 }

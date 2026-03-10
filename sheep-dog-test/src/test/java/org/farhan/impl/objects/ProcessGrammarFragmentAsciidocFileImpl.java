@@ -2,7 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import org.farhan.common.TestObjectIDE;
+import org.farhan.common.TestObjectFile;
 import org.farhan.dsl.grammar.PhraseFragments;
 import org.farhan.dsl.grammar.StepDefinitionRefFragments;
 import org.farhan.dsl.grammar.StepDefinitionRefPartTypes;
@@ -17,154 +17,129 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectIDE implements ProcessGrammarFragmentAsciidocFile {
+public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectFile implements ProcessGrammarFragmentAsciidocFile {
 
     @Override
-    public void assertPhraseTagFragmentTagList(HashMap<String, String> keyMap) {
+    public String getPhraseTagFragmentTagList(HashMap<String, String> keyMap) {
         String expected = replaceKeyword(keyMap.get("Tag List"));
-        Assertions.assertTrue(PhraseFragments.getTagAsList(properties.get("Line").toString())
+        java.util.List<String> actual = PhraseFragments.getTagAsList(properties.get("Line").toString());
+        Assertions.assertTrue(actual
                 .containsAll(expected.isEmpty() ? Arrays.asList() : Arrays.asList(expected.split(", "))));
+        return listToString(actual);
     }
 
     @Override
-    public void assertPhraseTodoFragmentTodoDescription(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Todo Description")),
-                PhraseFragments.getTodoDesc(properties.get("Line").toString()));
+    public String getPhraseTodoFragmentTodoDescription(HashMap<String, String> keyMap) {
+        return PhraseFragments.getTodoDesc(properties.get("Line").toString());
     }
 
     @Override
-    public void assertPhraseTodoFragmentTodoType(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Todo Type")),
-                PhraseFragments.getTodoType(properties.get("Line").toString()));
+    public String getPhraseTodoFragmentTodoType(HashMap<String, String> keyMap) {
+        return PhraseFragments.getTodoType(properties.get("Line").toString());
     }
 
     @Override
-    public void assertStepDefinitionRefPartFragmentPart(HashMap<String, String> keyMap) {
-        String stepDefRef = getStepDefinitionRef();
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Part")), StepDefinitionRefFragments.getPart(stepDefRef));
+    public String getStepDefinitionRefPartFragmentPart(HashMap<String, String> keyMap) {
+        return StepDefinitionRefFragments.getPart(getStepDefinitionRef());
     }
 
     @Override
-    public void assertStepDefinitionRefPartFragmentPartDescription(HashMap<String, String> keyMap) {
-        String stepDefRef = getStepDefinitionRef();
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Part Description")),
-                StepDefinitionRefFragments.getPartDesc(stepDefRef));
+    public String getStepDefinitionRefPartFragmentPartDescription(HashMap<String, String> keyMap) {
+        return StepDefinitionRefFragments.getPartDesc(getStepDefinitionRef());
     }
 
     @Override
-    public void assertStepDefinitionRefPartFragmentPartType(HashMap<String, String> keyMap) {
-        String stepDefRef = getStepDefinitionRef();
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Part Type")),
-                StepDefinitionRefFragments.getPartType(stepDefRef));
+    public String getStepDefinitionRefPartFragmentPartType(HashMap<String, String> keyMap) {
+        return StepDefinitionRefFragments.getPartType(getStepDefinitionRef());
     }
 
     @Override
-    public void assertStepDefinitionRefPartFragmentPartTypeDescription(HashMap<String, String> keyMap) {
-        String stepDefRef = getStepDefinitionRef();
-        String partType = StepDefinitionRefFragments.getPartType(stepDefRef);
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Part Type Description")),
-                StepDefinitionRefPartTypes.valueOf(partType.toUpperCase()).description);
+    public String getStepDefinitionRefPartFragmentPartTypeDescription(HashMap<String, String> keyMap) {
+        String partType = StepDefinitionRefFragments.getPartType(getStepDefinitionRef());
+        return StepDefinitionRefPartTypes.valueOf(partType.toUpperCase()).description;
     }
 
     @Override
-    public void assertStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap) {
-        String stepDefRef = getStepDefinitionRef();
-        Assertions.assertEquals(replaceKeyword(keyMap.get("State")), StepDefinitionRefFragments.getState(stepDefRef));
+    public String getStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap) {
+        return StepDefinitionRefFragments.getState(getStepDefinitionRef());
     }
 
     @Override
-    public void assertStepDefinitionRefStateFragmentStateDescription(HashMap<String, String> keyMap) {
-        String stepDefRef = getStepDefinitionRef();
-        Assertions.assertEquals(replaceKeyword(keyMap.get("State Description")),
-                StepDefinitionRefFragments.getStateDesc(stepDefRef));
+    public String getStepDefinitionRefStateFragmentStateDescription(HashMap<String, String> keyMap) {
+        return StepDefinitionRefFragments.getStateDesc(getStepDefinitionRef());
     }
 
     @Override
-    public void assertStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap) {
-        String stepDefRef = getStepDefinitionRef();
-        Assertions.assertEquals(replaceKeyword(keyMap.get("State Type")),
-                StepDefinitionRefFragments.getStateType(stepDefRef));
+    public String getStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap) {
+        return StepDefinitionRefFragments.getStateType(getStepDefinitionRef());
     }
 
     @Override
-    public void assertStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap) {
-        String stepDefRef = getStepDefinitionRef();
-        String stateType = StepDefinitionRefFragments.getStateType(stepDefRef);
-        String description = Arrays.stream(StepDefinitionRefStateTypes.values()).filter(e -> e.value.equals(stateType))
+    public String getStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap) {
+        String stateType = StepDefinitionRefFragments.getStateType(getStepDefinitionRef());
+        return Arrays.stream(StepDefinitionRefStateTypes.values()).filter(e -> e.value.equals(stateType))
                 .findFirst().orElseThrow().description;
-        Assertions.assertEquals(replaceKeyword(keyMap.get("State Type Description")), description);
     }
 
     @Override
-    public void assertStepObjectRefComponentFragmentComponent(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Component")),
-                StepObjectRefFragments.getComponent(properties.get("Test Step Full Name").toString()));
+    public String getStepObjectRefComponentFragmentComponent(HashMap<String, String> keyMap) {
+        return StepObjectRefFragments.getComponent(properties.get("Test Step Full Name").toString());
     }
 
     @Override
-    public void assertStepObjectRefComponentFragmentComponentName(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Component Name")),
-                StepObjectRefFragments.getComponentName(properties.get("Test Step Full Name").toString()));
+    public String getStepObjectRefComponentFragmentComponentName(HashMap<String, String> keyMap) {
+        return StepObjectRefFragments.getComponentName(properties.get("Test Step Full Name").toString());
     }
 
     @Override
-    public void assertStepObjectRefComponentFragmentComponentType(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Component Type")),
-                StepObjectRefFragments.getComponentType(properties.get("Test Step Full Name").toString()));
+    public String getStepObjectRefComponentFragmentComponentType(HashMap<String, String> keyMap) {
+        return StepObjectRefFragments.getComponentType(properties.get("Test Step Full Name").toString());
     }
 
     @Override
-    public void assertStepObjectRefComponentFragmentComponentTypeDescription(HashMap<String, String> keyMap) {
+    public String getStepObjectRefComponentFragmentComponentTypeDescription(HashMap<String, String> keyMap) {
         String componentType = StepObjectRefFragments
                 .getComponentType(properties.get("Test Step Full Name").toString());
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Component Type Description")),
-                StepObjectRefComponentTypes.valueOf(componentType.toUpperCase()).description);
+        return StepObjectRefComponentTypes.valueOf(componentType.toUpperCase()).description;
     }
 
     @Override
-    public void assertStepObjectRefObjectEdgeFragmentObjectType(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Object Type")),
-                StepObjectRefFragments.getObjectEdgeType(properties.get("Test Step Full Name").toString()));
+    public String getStepObjectRefObjectEdgeFragmentObjectType(HashMap<String, String> keyMap) {
+        return StepObjectRefFragments.getObjectEdgeType(properties.get("Test Step Full Name").toString());
     }
 
     @Override
-    public void assertStepObjectRefObjectEdgeFragmentObjectTypeDescription(HashMap<String, String> keyMap) {
+    public String getStepObjectRefObjectEdgeFragmentObjectTypeDescription(HashMap<String, String> keyMap) {
         String objectType = StepObjectRefFragments
                 .getObjectEdgeType(properties.get("Test Step Full Name").toString());
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Object Type Description")),
-                StepObjectRefObjectEdgeTypes.valueOf(objectType.toUpperCase()).description);
+        return StepObjectRefObjectEdgeTypes.valueOf(objectType.toUpperCase()).description;
     }
 
     @Override
-    public void assertStepObjectRefObjectFragmentObject(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Object")),
-                StepObjectRefFragments.getObject(properties.get("Test Step Full Name").toString()));
+    public String getStepObjectRefObjectFragmentObject(HashMap<String, String> keyMap) {
+        return StepObjectRefFragments.getObject(properties.get("Test Step Full Name").toString());
     }
 
     @Override
-    public void assertStepObjectRefObjectFragmentObjectName(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Object Name")),
-                StepObjectRefFragments.getObjectName(properties.get("Test Step Full Name").toString()));
+    public String getStepObjectRefObjectFragmentObjectName(HashMap<String, String> keyMap) {
+        return StepObjectRefFragments.getObjectName(properties.get("Test Step Full Name").toString());
     }
 
     @Override
-    public void assertStepObjectRefObjectFragmentObjectType(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Object Type")),
-                StepObjectRefFragments.getObjectType(properties.get("Test Step Full Name").toString()));
+    public String getStepObjectRefObjectFragmentObjectType(HashMap<String, String> keyMap) {
+        return StepObjectRefFragments.getObjectType(properties.get("Test Step Full Name").toString());
     }
 
     @Override
-    public void assertStepObjectRefObjectVertexFragmentObjectType(HashMap<String, String> keyMap) {
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Object Type")),
-                StepObjectRefFragments.getObjectVertexType(properties.get("Test Step Full Name").toString()));
+    public String getStepObjectRefObjectVertexFragmentObjectType(HashMap<String, String> keyMap) {
+        return StepObjectRefFragments.getObjectVertexType(properties.get("Test Step Full Name").toString());
     }
 
     @Override
-    public void assertStepObjectRefObjectVertexFragmentObjectTypeDescription(HashMap<String, String> keyMap) {
+    public String getStepObjectRefObjectVertexFragmentObjectTypeDescription(HashMap<String, String> keyMap) {
         String objectType = StepObjectRefFragments
                 .getObjectVertexType(properties.get("Test Step Full Name").toString());
-        Assertions.assertEquals(replaceKeyword(keyMap.get("Object Type Description")),
-                StepObjectRefObjectVertexTypes.valueOf(objectType.toUpperCase()).description);
+        return StepObjectRefObjectVertexTypes.valueOf(objectType.toUpperCase()).description;
     }
 
     @Override
@@ -183,13 +158,15 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectIDE implem
     }
 
     @Override
-    public void assertStepObjectRefObjectVertexFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+    public String getStepObjectRefObjectVertexFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertStepObjectRefObjectFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+    public String getStepObjectRefObjectFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
@@ -198,33 +175,39 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectIDE implem
     }
 
     @Override
-    public void assertPhraseTagFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+    public String getPhraseTagFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertPhraseTodoFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+    public String getPhraseTodoFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+    public String getStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+    public String getStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertStepObjectRefComponentFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+    public String getStepObjectRefComponentFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertStepObjectRefObjectEdgeFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+    public String getStepObjectRefObjectEdgeFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     private String getStepDefinitionRef() {

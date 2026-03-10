@@ -1,109 +1,108 @@
 package org.farhan.impl.objects;
 
 import java.util.HashMap;
-import org.farhan.common.TestObjectIDE;
+import org.farhan.common.TestObjectFile;
+import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITable;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
-import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFileAsciidocFile {
+public class InputFileAsciidocFileImpl extends TestObjectFile implements InputFileAsciidocFile {
 
     @Override
-    public void assertCellListNodeCellName(HashMap<String, String> keyMap) {
-        assertCellName(replaceKeyword(keyMap.get("Cell Name")));
+    public String getCellListNodeCellName(HashMap<String, String> keyMap) {
+        return assertCellName(replaceKeyword(keyMap.get("Cell Name")));
     }
 
     @Override
-    public void assertCellListNodeNodePath(HashMap<String, String> keyMap) {
+    public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertDescriptionNodeNodePath(HashMap<String, String> keyMap) {
+    public String getDescriptionNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertDescriptionNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Absent")) {
-            assertDescriptionEmpty();
-        }
+    public String getDescriptionNodeState(HashMap<String, String> keyMap) {
+        IDescription desc = getDescriptionFromCursor();
+        return desc == null ? null : desc.toString();
     }
 
     @Override
-    public void assertLineListNodeLineContent(HashMap<String, String> keyMap) {
-        assertLineContent(replaceKeyword(keyMap.get("Line Content")));
+    public String getLineListNodeLineContent(HashMap<String, String> keyMap) {
+        return assertLineContent(replaceKeyword(keyMap.get("Line Content")));
     }
 
     @Override
-    public void assertLineListNodeNodePath(HashMap<String, String> keyMap) {
+    public String getLineListNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertNestedDescriptionNodeNodePath(HashMap<String, String> keyMap) {
+    public String getNestedDescriptionNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertNestedDescriptionNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Absent")) {
-            assertDescriptionEmpty();
-        }
+    public String getNestedDescriptionNodeState(HashMap<String, String> keyMap) {
+        IDescription desc = getDescriptionFromCursor();
+        return desc == null ? null : desc.toString();
     }
 
     @Override
-    public void assertStepDefinitionListNodeNodePath(HashMap<String, String> keyMap) {
+    public String getStepDefinitionListNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertStepDefinitionListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Empty")) {
-            assertStepDefinitionListEmpty();
-        } else if (keyMap.get("State").contentEquals("Absent")) {
-            Assertions.assertNull(cursor);
-        }
+    public String getStepDefinitionListNodeState(HashMap<String, String> keyMap) {
+        if (cursor == null) return null;
+        return listToString(((IStepObject) cursor).getStepDefinitionList());
     }
 
     @Override
-    public void assertStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
-        assertStepDefinitionName(replaceKeyword(keyMap.get("Step Definition Name")));
+    public String getStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
+        return assertStepDefinitionName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
     @Override
-    public void assertStepParametersListNodeNodePath(HashMap<String, String> keyMap) {
+    public String getStepParametersListNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertStepParametersListNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Empty")) {
-            assertStepParametersListEmpty();
-        } else if (keyMap.get("State").contentEquals("Absent")) {
-            Assertions.assertNull(cursor);
-        }
+    public String getStepParametersListNodeState(HashMap<String, String> keyMap) {
+        if (cursor == null) return null;
+        return listToString(((IStepDefinition) cursor).getStepParameterList());
     }
 
     @Override
-    public void assertStepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
-        assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")));
+    public String getStepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
+        return assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")));
     }
 
     @Override
-    public void assertTableNodeNodePath(HashMap<String, String> keyMap) {
+    public String getTableNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertTableNodeState(HashMap<String, String> keyMap) {
-        if (keyMap.get("State").contentEquals("Absent")) {
-            assertTableAbsent();
-        } else if (keyMap.get("State").contentEquals("Present")) {
-            assertTablePresent();
-        }
+    public String getTableNodeState(HashMap<String, String> keyMap) {
+        ITable table = getTableFromCursor();
+        return table == null ? null : table.toString();
     }
 
     @Override
@@ -162,18 +161,19 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
     }
 
     @Override
-    public void assertStepDefinitionName(HashMap<String, String> keyMap) {
-        assertStepDefinitionName(replaceKeyword(keyMap.get("Step Definition Name")));
+    public String getStepDefinitionName(HashMap<String, String> keyMap) {
+        return assertStepDefinitionName(replaceKeyword(keyMap.get("Step Definition Name")));
     }
 
     @Override
-    public void assertStepParametersName(HashMap<String, String> keyMap) {
-        assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")));
+    public String getStepParametersName(HashMap<String, String> keyMap) {
+        return assertStepParametersName(replaceKeyword(keyMap.get("Step Parameters Name")));
     }
 
     @Override
-    public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+    public String getCreatedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
@@ -182,8 +182,9 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
     }
 
     @Override
-    public void assertTableNodeAsFollows(HashMap<String, String> keyMap) {
+    public String getTableNodeAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
@@ -192,13 +193,15 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
     }
 
     @Override
-    public void assertCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+    public String getCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
+    public String getDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
@@ -207,13 +210,15 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
     }
 
     @Override
-    public void assertLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+    public String getLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
+    public String getNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
@@ -222,13 +227,15 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
     }
 
     @Override
-    public void assertStepDefinitionListNodeAsFollows(HashMap<String, String> keyMap) {
+    public String getStepDefinitionListNodeAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+    public String getStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
@@ -237,12 +244,14 @@ public class InputFileAsciidocFileImpl extends TestObjectIDE implements InputFil
     }
 
     @Override
-    public void assertStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
+    public String getStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 
     @Override
-    public void assertStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+    public String getStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
         cursor = testProject.getTestDocument(getFullNameFromPath());
+        return cursor == null ? null : cursor.toString();
     }
 }

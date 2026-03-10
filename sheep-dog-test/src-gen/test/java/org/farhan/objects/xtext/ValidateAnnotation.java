@@ -10,9 +10,9 @@ public interface ValidateAnnotation {
 
     public void setContent(HashMap<String, String> keyMap);
 
-    public void assertEmpty(HashMap<String, String> keyMap);
+    public String getEmpty(HashMap<String, String> keyMap);
 
-    public void assertSetAsFollows(HashMap<String, String> keyMap);
+    public String getSetAsFollows(HashMap<String, String> keyMap);
 
-    public void assertContent(HashMap<String, String> keyMap);
+    public String getContent(HashMap<String, String> keyMap);
 }

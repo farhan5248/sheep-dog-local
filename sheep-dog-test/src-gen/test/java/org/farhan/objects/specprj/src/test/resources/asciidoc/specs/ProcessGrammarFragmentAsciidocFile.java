@@ -8,65 +8,65 @@ public interface ProcessGrammarFragmentAsciidocFile {
 
     public void setLineTypeLine(HashMap<String, String> keyMap);
 
-    public void assertPhraseTagFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+    public String getPhraseTagFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertPhraseTagFragmentTagList(HashMap<String, String> keyMap);
+    public String getPhraseTagFragmentTagList(HashMap<String, String> keyMap);
 
-    public void assertPhraseTodoFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+    public String getPhraseTodoFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertPhraseTodoFragmentTodoType(HashMap<String, String> keyMap);
+    public String getPhraseTodoFragmentTodoType(HashMap<String, String> keyMap);
 
-    public void assertPhraseTodoFragmentTodoDescription(HashMap<String, String> keyMap);
+    public String getPhraseTodoFragmentTodoDescription(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefPartFragmentPart(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefPartFragmentPart(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefPartFragmentPartDescription(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefPartFragmentPartDescription(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefPartFragmentPartType(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefPartFragmentPartType(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefPartFragmentPartTypeDescription(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefPartFragmentPartTypeDescription(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefStateFragmentStateDescription(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefStateFragmentStateDescription(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap);
+    public String getStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefComponentFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+    public String getStepObjectRefComponentFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefComponentFragmentComponentType(HashMap<String, String> keyMap);
+    public String getStepObjectRefComponentFragmentComponentType(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefComponentFragmentComponentTypeDescription(HashMap<String, String> keyMap);
+    public String getStepObjectRefComponentFragmentComponentTypeDescription(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefComponentFragmentComponent(HashMap<String, String> keyMap);
+    public String getStepObjectRefComponentFragmentComponent(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefComponentFragmentComponentName(HashMap<String, String> keyMap);
+    public String getStepObjectRefComponentFragmentComponentName(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectEdgeFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectEdgeFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectEdgeFragmentObjectType(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectEdgeFragmentObjectType(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectEdgeFragmentObjectTypeDescription(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectEdgeFragmentObjectTypeDescription(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectFragmentObject(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectFragmentObject(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectFragmentObjectName(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectFragmentObjectName(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectFragmentObjectType(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectFragmentObjectType(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectVertexFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectVertexFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectVertexFragmentObjectType(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectVertexFragmentObjectType(HashMap<String, String> keyMap);
 
-    public void assertStepObjectRefObjectVertexFragmentObjectTypeDescription(HashMap<String, String> keyMap);
+    public String getStepObjectRefObjectVertexFragmentObjectTypeDescription(HashMap<String, String> keyMap);
 
     public void setTestStepTypeCreatedAsFollows(HashMap<String, String> keyMap);
 

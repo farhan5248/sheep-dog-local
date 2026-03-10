@@ -2,7 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectIDE;
+import org.farhan.common.TestObjectAction;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.issues.RowIssueResolver;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListProposalsActionImpl extends TestObjectIDE implements ListProposalsAction {
+public class ListProposalsActionImpl extends TestObjectAction implements ListProposalsAction {
 
     public void transition() {
         super.transition();
@@ -22,16 +22,16 @@ public class ListProposalsActionImpl extends TestObjectIDE implements ListPropos
             properties.remove("Node Path");
         }
         try {
-            if (TestObjectIDE.cursor instanceof IRow) {
-                IRow row = (IRow) TestObjectIDE.cursor;
+            if (cursor instanceof IRow) {
+                IRow row = (IRow) cursor;
                 ITestStep testStep = (ITestStep) row.getParent().getParent();
-                TestObjectIDE.listProposalsDialog
+                listProposalsDialog
                         .addAll(RowIssueResolver.suggestCellListWorkspace((ITestStep) testStep));
-            } else if (TestObjectIDE.cursor instanceof ITestStep) {
-                TestObjectIDE.listProposalsDialog
-                        .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) TestObjectIDE.cursor));
-                TestObjectIDE.listProposalsDialog.addAll(
-                        TestStepIssueResolver.suggestStepDefinitionNameWorkspace((ITestStep) TestObjectIDE.cursor));
+            } else if (cursor instanceof ITestStep) {
+                listProposalsDialog
+                        .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) cursor));
+                listProposalsDialog.addAll(
+                        TestStepIssueResolver.suggestStepDefinitionNameWorkspace((ITestStep) cursor));
             } else {
                 Assertions.fail("Unknown Element Type");
             }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public interface ProcessIssues2AsciidocFile {
 
-    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertTestSuiteName(HashMap<String, String> keyMap);
+    public String getTestSuiteName(HashMap<String, String> keyMap);
 }
