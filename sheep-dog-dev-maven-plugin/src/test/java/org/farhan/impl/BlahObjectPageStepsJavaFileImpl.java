@@ -2,16 +2,16 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.FileObject;
+import org.farhan.common.TestObjectFile;
 import org.farhan.objects.codeprj.srcgen.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class BlahObjectPageStepsJavaFileImpl extends FileObject implements BlahObjectPageStepsJavaFile {
+public class BlahObjectPageStepsJavaFileImpl extends TestObjectFile implements BlahObjectPageStepsJavaFile {
 
 	@Override
-	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
+	public String getContent(HashMap<String, String> keyMap) {
+		return getContent();
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class BlahObjectPageStepsJavaFileImpl extends FileObject implements BlahO
 	}
 
 	@Override
-	public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
-		// TODO implement later
+	public String getCreatedAsFollows(HashMap<String, String> keyMap) {
+		return getObjectExists();
 	}
 }
