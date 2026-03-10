@@ -79,8 +79,7 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 
 	@Override
 	public String getScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap) {
-		// TODO implement: need getExamplesTagsValue in AdocFileObject, returning actual tags from model
-		return keyMap.get("Tags");
+		return getExamplesTagsValue(keyMap.get("Name"), keyMap.get("Examples"));
 	}
 
 	@Override

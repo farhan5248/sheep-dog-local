@@ -48,6 +48,10 @@ public class AdocFileObject extends TestObjectFile {
 		return testSuite.getFeatureDescription();
 	}
 
+	protected String getExamplesTagsValue(String name, String examplesName) {
+		return (String) Utilities.listAsCsv(testSuite.getExamplesTags(getExamples(name, examplesName)));
+	}
+
 	protected String getScenarioOutlineExamplesTableDescriptionValue(String name, String examplesName) {
 		return testSuite.getExamplesDescription(getExamples(name, examplesName));
 	}
@@ -96,8 +100,8 @@ public class AdocFileObject extends TestObjectFile {
 	}
 
 	protected String getStepDefinitionParametersExistsValue(String name, String parametersName) {
-		// TODO implement: need to query stepObject for actual parameters existence
-		return parametersName;
+		StepParameters p = getParameters(name, parametersName);
+		return p == null ? null : stepObject.getStepParametersName(p);
 	}
 
 	protected String getStepDefinitionParametersTableRowExistsValue(String name, String parametersName, String rowName) {
@@ -137,7 +141,7 @@ public class AdocFileObject extends TestObjectFile {
 		return null;
 	}
 
-	private TestData getExamples(String name, String examplesName) {
+	protected TestData getExamples(String name, String examplesName) {
 		for (TestData e : testSuite.getExamplesList(getAbstractScenario(name))) {
 			if (testSuite.getExamplesName(e).contentEquals(examplesName)) {
 				return e;
@@ -150,7 +154,7 @@ public class AdocFileObject extends TestObjectFile {
 		return getRow(testSuite.getExamplesRowList(examples), testSuite.getExamplesTable(examples), rowName);
 	}
 
-	private StepParameters getParameters(String name, String parametersName) {
+	protected StepParameters getParameters(String name, String parametersName) {
 		for (StepParameters e : stepObject.getStepParametersList(getStepDefinition(name))) {
 			if (stepObject.getStepParametersName(e).contentEquals(parametersName)) {
 				return e;
