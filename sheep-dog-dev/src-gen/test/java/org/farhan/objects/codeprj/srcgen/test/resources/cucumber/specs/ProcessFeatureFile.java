@@ -4,89 +4,89 @@ import java.util.HashMap;
 
 public interface ProcessFeatureFile {
 
-    public void assertBackgroundStepsSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getBackgroundStepsSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertBackgroundStepsSectionName(HashMap<String, String> keyMap);
+    public String getBackgroundStepsSectionName(HashMap<String, String> keyMap);
 
-    public void assertBackgroundStepsSectionStep(HashMap<String, String> keyMap);
+    public String getBackgroundStepsSectionStep(HashMap<String, String> keyMap);
 
-    public void assertBackgroundSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getBackgroundSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertBackgroundSectionName(HashMap<String, String> keyMap);
+    public String getBackgroundSectionName(HashMap<String, String> keyMap);
 
-    public void assertBackgroundSectionDescription(HashMap<String, String> keyMap);
+    public String getBackgroundSectionDescription(HashMap<String, String> keyMap);
 
-    public void assertFeatureSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getFeatureSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertFeatureSectionName(HashMap<String, String> keyMap);
+    public String getFeatureSectionName(HashMap<String, String> keyMap);
 
-    public void assertFeatureSectionTags(HashMap<String, String> keyMap);
+    public String getFeatureSectionTags(HashMap<String, String> keyMap);
 
-    public void assertFeatureSectionStatements(HashMap<String, String> keyMap);
+    public String getFeatureSectionStatements(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineExamplesTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getScenarioOutlineExamplesTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineExamplesTableSectionName(HashMap<String, String> keyMap);
+    public String getScenarioOutlineExamplesTableSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineExamplesTableSectionExamples(HashMap<String, String> keyMap);
+    public String getScenarioOutlineExamplesTableSectionExamples(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap);
+    public String getScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineExamplesTableSectionDescription(HashMap<String, String> keyMap);
+    public String getScenarioOutlineExamplesTableSectionDescription(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap);
+    public String getScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineStepsDataTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getScenarioOutlineStepsDataTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineStepsDataTableSectionName(HashMap<String, String> keyMap);
+    public String getScenarioOutlineStepsDataTableSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineStepsDataTableSectionStep(HashMap<String, String> keyMap);
+    public String getScenarioOutlineStepsDataTableSectionStep(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlinesSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getScenarioOutlinesSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlinesSectionName(HashMap<String, String> keyMap);
+    public String getScenarioOutlinesSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlinesSectionTags(HashMap<String, String> keyMap);
+    public String getScenarioOutlinesSectionTags(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlinesSectionDescription(HashMap<String, String> keyMap);
+    public String getScenarioOutlinesSectionDescription(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getScenarioStepsDataTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionName(HashMap<String, String> keyMap);
+    public String getScenarioStepsDataTableSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionStep(HashMap<String, String> keyMap);
+    public String getScenarioStepsDataTableSectionStep(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionRow(HashMap<String, String> keyMap);
+    public String getScenarioStepsDataTableSectionRow(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDocStringSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getScenarioStepsDocStringSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDocStringSectionName(HashMap<String, String> keyMap);
+    public String getScenarioStepsDocStringSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDocStringSectionStep(HashMap<String, String> keyMap);
+    public String getScenarioStepsDocStringSectionStep(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDocStringSectionContent(HashMap<String, String> keyMap);
+    public String getScenarioStepsDocStringSectionContent(HashMap<String, String> keyMap);
 
-    public void assertScenariosStepsSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getScenariosStepsSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertScenariosStepsSectionName(HashMap<String, String> keyMap);
+    public String getScenariosStepsSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenariosStepsSectionStep(HashMap<String, String> keyMap);
+    public String getScenariosStepsSectionStep(HashMap<String, String> keyMap);
 
-    public void assertScenariosSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getScenariosSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertScenariosSectionName(HashMap<String, String> keyMap);
+    public String getScenariosSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenariosSectionTags(HashMap<String, String> keyMap);
+    public String getScenariosSectionTags(HashMap<String, String> keyMap);
 
-    public void assertScenariosSectionDescription(HashMap<String, String> keyMap);
+    public String getScenariosSectionDescription(HashMap<String, String> keyMap);
 
     public void setCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
 
-    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertContent(HashMap<String, String> keyMap);
+    public String getContent(HashMap<String, String> keyMap);
 
-    public void assertPresent(HashMap<String, String> keyMap);
+    public String getPresent(HashMap<String, String> keyMap);
 }

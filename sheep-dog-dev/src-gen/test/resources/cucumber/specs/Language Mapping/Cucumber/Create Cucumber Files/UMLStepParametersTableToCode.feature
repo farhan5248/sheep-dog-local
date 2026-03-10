@@ -42,8 +42,8 @@ Feature: UMLStepParametersTableToCode
      When The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
       And The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Methods section will be created as follows
-          | Method Name        | Visibility | Return Type | Parameter Name | Parameter Type         |
-          | getTopSectionH1 | public     | String | keyMap         | HashMap<String,String> |
-          | getTopSectionH2 | public     | String | keyMap         | HashMap<String,String> |
-          | getTopSectionH3 | public     | String | keyMap         | HashMap<String,String> |
+          | Method Name     | Visibility | Return Type | Parameter Name | Parameter Type         |
+          | getTopSectionH1 | public     | String      | keyMap         | HashMap<String,String> |
+          | getTopSectionH2 | public     | String      | keyMap         | HashMap<String,String> |
+          | getTopSectionH3 | public     | String      | keyMap         | HashMap<String,String> |
 

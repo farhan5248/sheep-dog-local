@@ -2,12 +2,12 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.GoalObject;
+import org.farhan.common.TestObjectGoal;
 import org.farhan.objects.maven.UmlToCucumberGoal;
 
 import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
-public class UmlToCucumberGoalImpl extends GoalObject implements UmlToCucumberGoal {
+public class UmlToCucumberGoalImpl extends TestObjectGoal implements UmlToCucumberGoal {
 
 	@Override
 	public void setTags(HashMap<String, String> keyMap) {

@@ -11,141 +11,148 @@ import io.cucumber.guice.ScenarioScoped;
 public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
 	@Override
-	public void assertClassAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
-		assertClassAnnotationDetailExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"),
+	public String getClassAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
+		return getClassAnnotationDetailExistsValue(keyMap.get("Class Name"), keyMap.get("Annotation Name"),
 				keyMap.get("Annotation Detail"));
 	}
 
 	@Override
-	public void assertClassAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
-		assertClassAnnotationNameExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"));
+	public String getClassAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
+		return getClassAnnotationNameExistsValue(keyMap.get("Class Name"), keyMap.get("Annotation Name"));
 	}
 
 	@Override
-	public void assertClassAnnotationsSectionClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
+	public String getClassAnnotationsSectionClassName(HashMap<String, String> keyMap) {
+		return getClassExistsValue(keyMap.get("Class Name"));
 	}
 
-	public void assertClassClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
-	}
-
-	@Override
-	public void assertClassCommentsSectionClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
+	public String getClassClassName(HashMap<String, String> keyMap) {
+		return getClassExistsValue(keyMap.get("Class Name"));
 	}
 
 	@Override
-	public void assertClassCommentsSectionComment(HashMap<String, String> keyMap) {
-		assertClassCommentValue(keyMap.get("Class Name"), keyMap.get("Comment"));
+	public String getClassCommentsSectionClassName(HashMap<String, String> keyMap) {
+		return getClassExistsValue(keyMap.get("Class Name"));
 	}
 
 	@Override
-	public void assertClassSectionClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
+	public String getClassCommentsSectionComment(HashMap<String, String> keyMap) {
+		return getClassCommentValueValue(keyMap.get("Class Name"));
 	}
 
 	@Override
-	public void assertClassSectionNegative(HashMap<String, String> keyMap) {
-		assertClassNotExists(keyMap.get("Class Name"));
+	public String getClassSectionClassName(HashMap<String, String> keyMap) {
+		return getClassExistsValue(keyMap.get("Class Name"));
 	}
 
 	@Override
-	public void assertInteractionAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
-		assertInteractionAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"),
+	public String getClassSectionNegative(HashMap<String, String> keyMap) {
+		return getClassNotExistsValue(keyMap.get("Class Name"));
+	}
+
+	@Override
+	public String getInteractionAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
+		return getInteractionAnnotationDetailExistsValue(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"),
 				keyMap.get("Annotation Detail"));
 	}
 
 	@Override
-	public void assertInteractionAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
-		assertInteractionAnnotationNameExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"));
+	public String getInteractionAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
+		return getInteractionAnnotationNameExistsValue(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"));
 	}
 
 	@Override
-	public void assertInteractionAnnotationsSectionInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionExists(keyMap.get("Interaction Name"));
+	public String getInteractionAnnotationsSectionInteractionName(HashMap<String, String> keyMap) {
+		return getInteractionExistsValue(keyMap.get("Interaction Name"));
 	}
 
 	@Override
-	public void assertInteractionCommentsSectionComment(HashMap<String, String> keyMap) {
-		assertInteractionCommentValue(keyMap.get("Interaction Name"), keyMap.get("Comment"));
+	public String getInteractionCommentsSectionComment(HashMap<String, String> keyMap) {
+		return getInteractionCommentValueValue(keyMap.get("Interaction Name"));
 	}
 
 	@Override
-	public void assertInteractionCommentsSectionInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionExists(keyMap.get("Interaction Name"));
+	public String getInteractionCommentsSectionInteractionName(HashMap<String, String> keyMap) {
+		return getInteractionExistsValue(keyMap.get("Interaction Name"));
 	}
 
 	@Override
-	public void assertInteractionMessagesSectionAnnotationDetail(HashMap<String, String> keyMap) {
-		assertInteractionMessageAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Message"),
+	public String getInteractionMessagesSectionAnnotationDetail(HashMap<String, String> keyMap) {
+		return getInteractionMessageAnnotationDetailExistsValue(keyMap.get("Interaction Name"), keyMap.get("Message"),
 				keyMap.get("Argument Name"), keyMap.get("Annotation Detail"));
 	}
 
 	@Override
-	public void assertInteractionMessagesSectionArgumentName(HashMap<String, String> keyMap) {
-		assertInteractionMessageArgumentNameExists(keyMap.get("Interaction Name"), keyMap.get("Message"),
+	public String getInteractionMessagesSectionArgumentName(HashMap<String, String> keyMap) {
+		return getInteractionMessageArgumentNameExistsValue(keyMap.get("Interaction Name"), keyMap.get("Message"),
 				keyMap.get("Argument Name"));
 	}
 
 	@Override
-	public void assertInteractionMessagesSectionInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionExists(keyMap.get("Interaction Name"));
+	public String getInteractionMessagesSectionInteractionName(HashMap<String, String> keyMap) {
+		return getInteractionExistsValue(keyMap.get("Interaction Name"));
 	}
 
 	@Override
-	public void assertInteractionMessagesSectionMessage(HashMap<String, String> keyMap) {
-		assertInteractionMessageValue(keyMap.get("Interaction Name"), keyMap.get("Message"));
+	public String getInteractionMessagesSectionMessage(HashMap<String, String> keyMap) {
+		return getInteractionMessageValueValue(keyMap.get("Interaction Name"), keyMap.get("Message"));
 	}
 
 	@Override
-	public void assertInteractionSectionInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionExists(keyMap.get("Interaction Name"));
+	public String getInteractionSectionInteractionName(HashMap<String, String> keyMap) {
+		return getInteractionExistsValue(keyMap.get("Interaction Name"));
 	}
 
 	@Override
-	public void assertInteractionSectionNegative(HashMap<String, String> keyMap) {
-		assertInteractionNotExists(keyMap.get("Interaction Name"));
+	public String getInteractionSectionNegative(HashMap<String, String> keyMap) {
+		return getInteractionNotExistsValue(keyMap.get("Interaction Name"));
 	}
 
 	@Override
-	public void assertPresent(HashMap<String, String> keyMap) {
-		assertFileExists();
+	public String getPresent(HashMap<String, String> keyMap) {
+		return getFileExistsValue();
 	}
 
 	@Override
-	public void assertClassAnnotationsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getClassAnnotationsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertClassCommentsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getClassCommentsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertClassSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getClassSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertInteractionAnnotationsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getInteractionAnnotationsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertInteractionCommentsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getInteractionCommentsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertInteractionMessagesSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getInteractionMessagesSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertInteractionSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getInteractionSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override

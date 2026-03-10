@@ -12,59 +12,59 @@ public class ObjectPageJavaFileImpl extends JavaFileObject
 		implements ObjectPageJavaFile {
 
 	@Override
-	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
+	public String getContent(HashMap<String, String> keyMap) {
+		return getContent();
 	}
 
 	@Override
-	public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertMethodsSectionMethodName(HashMap<String, String> keyMap) {
-		assertMethodExists(keyMap.get("Method Name"));
+	public String getMethodsSectionMethodName(HashMap<String, String> keyMap) {
+		return getMethodExistsValue(keyMap.get("Method Name"));
 	}
 
 	@Override
-	public void assertMethodsSectionParameterName(HashMap<String, String> keyMap) {
-		assertMethodParameterExists(keyMap.get("Method Name"), keyMap.get("Parameter Name"));
+	public String getMethodsSectionParameterName(HashMap<String, String> keyMap) {
+		return getMethodParameterExistsValue(keyMap.get("Method Name"), keyMap.get("Parameter Name"));
 	}
 
 	@Override
-	public void assertMethodsSectionParameterType(HashMap<String, String> keyMap) {
-		assertMethodParameterType(keyMap.get("Method Name"), keyMap.get("Parameter Name"),
-				keyMap.get("Parameter Type"));
+	public String getMethodsSectionParameterType(HashMap<String, String> keyMap) {
+		return getMethodParameterTypeValue(keyMap.get("Method Name"), keyMap.get("Parameter Name"));
 	}
 
 	@Override
-	public void assertMethodsSectionReturnType(HashMap<String, String> keyMap) {
-		assertMethodReturnType(keyMap.get("Method Name"), keyMap.get("Return Type"));
+	public String getMethodsSectionReturnType(HashMap<String, String> keyMap) {
+		return getMethodReturnTypeValue(keyMap.get("Method Name"));
 	}
 
 	@Override
-	public void assertMethodsSectionVisibility(HashMap<String, String> keyMap) {
-		assertMethodAccessSpecifier(keyMap.get("Method Name"), keyMap.get("Visibility"));
+	public String getMethodsSectionVisibility(HashMap<String, String> keyMap) {
+		return getMethodAccessSpecifierValue(keyMap.get("Method Name"));
 	}
 
 	@Override
-	public void assertHeaderSectionImport(HashMap<String, String> keyMap) {
-		assertImportExists(keyMap.get("Import"));
+	public String getHeaderSectionImport(HashMap<String, String> keyMap) {
+		return getImportExistsValue(keyMap.get("Import"));
 	}
 
 	@Override
-	public void assertHeaderSectionInterfaceName(HashMap<String, String> keyMap) {
-		assertInterfaceNameIs(keyMap.get("Interface Name"));
+	public String getHeaderSectionInterfaceName(HashMap<String, String> keyMap) {
+		return getInterfaceNameValue();
 	}
 
 	@Override
-	public void assertHeaderSectionPackage(HashMap<String, String> keyMap) {
-		assertPackage(keyMap.get("Package"));
+	public String getHeaderSectionPackage(HashMap<String, String> keyMap) {
+		return getPackageValue();
 	}
 
 	@Override
-	public void assertPresent(HashMap<String, String> keyMap) {
-		assertFileExists();
+	public String getPresent(HashMap<String, String> keyMap) {
+		return getFileExistsValue();
 	}
 
 	@Override
@@ -78,12 +78,14 @@ public class ObjectPageJavaFileImpl extends JavaFileObject
 	}
 
 	@Override
-	public void assertMethodsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getMethodsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 }

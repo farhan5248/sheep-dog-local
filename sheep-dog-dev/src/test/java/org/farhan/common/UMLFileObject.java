@@ -12,80 +12,83 @@ import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.core.UMLTestProject;
 import org.junit.jupiter.api.Assertions;
 
-public abstract class UMLFileObject extends FileObject {
+public abstract class UMLFileObject extends TestObjectFile {
 
 	private UMLTestProject project;
 
-	protected void assertClassAnnotationDetailExists(String className, String annotationName, String annotationDetail) {
-		assertClassExists(className);
+	// --- get methods: return actual values, no assertions ---
+
+	// Category 1: Value equality
+	protected String getClassCommentValueValue(String className) {
+		return getObject(className).getOwnedComments().get(0).getBody();
+	}
+
+	protected String getInteractionCommentValueValue(String interactionName) {
+		return getInteraction(interactionName).getOwnedComments().getFirst().getBody();
+	}
+
+	// Category 2: Existence checks
+	protected String getClassExistsValue(String className) {
+		Class c = getObject(className);
+		return c == null ? null : className;
+	}
+
+	protected String getClassNotExistsValue(String className) {
+		Class c = getObject(className);
+		return c != null ? null : className;
+	}
+
+	protected String getClassAnnotationNameExistsValue(String className, String annotationName) {
+		EAnnotation a = getAnnotation(getObject(className), annotationName);
+		return a == null ? null : annotationName;
+	}
+
+	protected String getClassAnnotationDetailExistsValue(String className, String annotationName, String annotationDetail) {
 		EAnnotation annotation = getAnnotation(getObject(className), annotationName);
-		Assertions.assertTrue(getAnnotationDetail(annotation, annotationDetail) != null, "Class " + className
-				+ " Annotation " + annotationName + " Annotation Detail " + annotationDetail + " doesn't exist");
+		Entry<String, String> detail = getAnnotationDetail(annotation, annotationDetail);
+		return detail == null ? null : annotationDetail;
 	}
 
-	protected void assertClassAnnotationNameExists(String className, String annotationName) {
-		assertClassExists(className);
-		Assertions.assertTrue(getAnnotation(getObject(className), annotationName) != null,
-				"Class " + className + " Annotation " + annotationName + " doesn't exist");
+	protected String getClassInteractionExistsValue(String className, String interactionName) {
+		Object behavior = getObject(className).getOwnedBehavior(interactionName);
+		return behavior == null ? null : interactionName;
 	}
 
-	protected void assertClassCommentValue(String className, String commentBody) {
-		assertClassExists(className);
-		Assertions.assertEquals(commentBody, getObject(className).getOwnedComments().get(0).getBody());
+	protected String getInteractionExistsValue(String interactionName) {
+		Interaction i = getInteraction(interactionName);
+		return i == null ? null : interactionName;
 	}
 
-	protected void assertClassExists(String className) {
-		Assertions.assertTrue(getObject(className) != null, "Class " + className + " doesn't exist");
+	protected String getInteractionNotExistsValue(String interactionName) {
+		Interaction i = getInteraction(interactionName);
+		return i != null ? null : interactionName;
 	}
 
-	protected void assertClassNotExists(String className) {
-		Assertions.assertFalse(getObject(className) != null, "Class " + className + " does exist");
+	protected String getInteractionAnnotationNameExistsValue(String interactionName, String annotationName) {
+		EAnnotation a = getAnnotation(getInteraction(interactionName), annotationName);
+		return a == null ? null : annotationName;
 	}
 
-	protected void assertClassInteractionExists(String className, String interactionName) {
-		assertClassExists(className);
-		Assertions.assertTrue(getObject(className).getOwnedBehavior(interactionName) != null,
-				"Class " + className + " Interaction " + interactionName + " doesn't exist");
-	}
-
-	protected void assertInteractionAnnotationDetailExists(String interactionName, String annotationName,
-			String annotationDetail) {
-		assertInteractionExists(interactionName);
+	protected String getInteractionAnnotationDetailExistsValue(String interactionName, String annotationName, String annotationDetail) {
 		EAnnotation annotation = getAnnotation(getInteraction(interactionName), annotationName);
-		Assertions.assertTrue(getAnnotationDetail(annotation, annotationDetail) != null,
-				"Interaction " + interactionName + " Annotation " + annotationName + " Annotation Detail "
-						+ annotationDetail + " doesn't exist");
+		Entry<String, String> detail = getAnnotationDetail(annotation, annotationDetail);
+		return detail == null ? null : annotationDetail;
 	}
 
-	protected void assertInteractionAnnotationNameExists(String interactionName, String annotationName) {
-		assertInteractionExists(interactionName);
-		EAnnotation annotation = getAnnotation(getInteraction(interactionName), annotationName);
-		Assertions.assertTrue(annotation != null,
-				"Interaction " + interactionName + " Annotation " + annotationName + " doesn't exist");
+	protected String getInteractionMessageValueValue(String interactionName, String messageName) {
+		Message m = getMessage(getInteraction(interactionName), messageName);
+		return m == null ? null : messageName;
 	}
 
-	protected void assertInteractionCommentValue(String interactionName, String commentBody) {
-		assertInteractionExists(interactionName);
-		Assertions.assertEquals(commentBody, getInteraction(interactionName).getOwnedComments().getFirst().getBody());
-
-	}
-
-	protected void assertInteractionExists(String interactionName) {
-		Assertions.assertTrue(getInteraction(interactionName) != null,
-				"Interaction " + interactionName + " doesn't exist");
-	}
-
-	protected void assertInteractionNotExists(String interactionName) {
-		Assertions.assertFalse(getInteraction(interactionName) != null,
-				"Interaction " + interactionName + " does exist");
-	}
-
-	protected void assertInteractionMessageAnnotationDetailExists(String interactionName, String messageName,
-			String argumentName, String annotationDetail) {
-		assertInteractionExists(interactionName);
+	protected String getInteractionMessageArgumentNameExistsValue(String interactionName, String messageName, String argumentName) {
 		Message message = getMessage(getInteraction(interactionName), messageName);
 		ValueSpecification vs = (LiteralString) message.getArgument(argumentName, null);
+		return vs == null ? null : argumentName;
+	}
 
+	protected String getInteractionMessageAnnotationDetailExistsValue(String interactionName, String messageName, String argumentName, String annotationDetail) {
+		Message message = getMessage(getInteraction(interactionName), messageName);
+		ValueSpecification vs = (LiteralString) message.getArgument(argumentName, null);
 		EAnnotation annotation = null;
 		for (EAnnotation e : vs.getEAnnotations()) {
 			if (e.getSource().contentEquals(argumentName)) {
@@ -101,35 +104,18 @@ public abstract class UMLFileObject extends FileObject {
 				break;
 			}
 		}
-		Assertions.assertTrue(detail != null, "Interaction " + interactionName + " Message " + messageName
-				+ " Argument Name " + argumentName + " Annotation Detail " + annotationDetail + " doesn't exist");
-
+		return detail == null ? null : annotationDetail;
 	}
 
-	protected void assertInteractionMessageArgumentNameExists(String interactionName, String messageName,
-			String argumentName) {
-		assertInteractionExists(interactionName);
-		Message message = getMessage(getInteraction(interactionName), messageName);
-		ValueSpecification vs = (LiteralString) message.getArgument(argumentName, null);
-		Assertions.assertTrue(vs != null, "Interaction " + interactionName + " Message " + messageName
-				+ " Argument Name " + argumentName + " doesn't exist");
-
-	}
-
-	protected void assertInteractionMessageValue(String interactionName, String messageName) {
-		assertInteractionExists(interactionName);
-		Assertions.assertTrue(getMessage(getInteraction(interactionName), messageName) != null,
-				"Interaction " + interactionName + " Message " + messageName + " doesn't exist");
-
-	}
-
-	protected void assertFileExists() {
+	// Category 3: Parse + init
+	protected String getFileExistsValue() {
 		try {
 			project = new UMLTestProject(getTestObjectClass("ToUml", "org.farhan.objects.maven.").properties.get("tags").toString(), new ServiceFileRepository());
 			project.init();
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
+		return "true";
 	}
 
 	private EAnnotation getAnnotation(Class theClass, String annotationName) {

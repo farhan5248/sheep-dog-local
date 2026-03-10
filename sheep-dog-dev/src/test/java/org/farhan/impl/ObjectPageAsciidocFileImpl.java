@@ -11,43 +11,43 @@ import io.cucumber.guice.ScenarioScoped;
 public class ObjectPageAsciidocFileImpl extends AdocFileObject implements ObjectPageAsciidocFile {
 
 	@Override
-	public void assertHeaderSectionName(HashMap<String, String> keyMap) {
-		assertStepObjectName(keyMap.get("Name"));
+	public String getHeaderSectionName(HashMap<String, String> keyMap) {
+		return getStepObjectNameValue();
 	}
 
 	@Override
-	public void assertHeaderSectionStatements(HashMap<String, String> keyMap) {
-		assertStepObjectStatements(keyMap.get("Name"), keyMap.get("Statements"));
+	public String getHeaderSectionStatements(HashMap<String, String> keyMap) {
+		return getStepObjectStatementsValue();
 	}
 
 	@Override
-	public void assertPresent(HashMap<String, String> keyMap) {
-		assertStepObjectExists();
+	public String getPresent(HashMap<String, String> keyMap) {
+		return getStepObjectExistsValue();
 	}
 
 	@Override
-	public void assertStepDefinitionParametersTableSectionName(HashMap<String, String> keyMap) {
-		assertStepDefinitionExists(keyMap.get("Name"));
+	public String getStepDefinitionParametersTableSectionName(HashMap<String, String> keyMap) {
+		return getStepDefinitionExistsValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertStepDefinitionParametersTableSectionParameters(HashMap<String, String> keyMap) {
-		assertStepDefinitionParametersExists(keyMap.get("Name"), keyMap.get("Parameters"));
+	public String getStepDefinitionParametersTableSectionParameters(HashMap<String, String> keyMap) {
+		return getStepDefinitionParametersExistsValue(keyMap.get("Name"), keyMap.get("Parameters"));
 	}
 
 	@Override
-	public void assertStepDefinitionParametersTableSectionRow(HashMap<String, String> keyMap) {
-		assertStepDefinitionParametersTableRowExists(keyMap.get("Name"), keyMap.get("Parameters"), keyMap.get("Row"));
+	public String getStepDefinitionParametersTableSectionRow(HashMap<String, String> keyMap) {
+		return getStepDefinitionParametersTableRowExistsValue(keyMap.get("Name"), keyMap.get("Parameters"), keyMap.get("Row"));
 	}
 
 	@Override
-	public void assertStepDefinitionSectionDescription(HashMap<String, String> keyMap) {
-		assertStepDefinitionDescription(keyMap.get("Name"), keyMap.get("Description"));
+	public String getStepDefinitionSectionDescription(HashMap<String, String> keyMap) {
+		return getStepDefinitionDescriptionValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertStepDefinitionSectionName(HashMap<String, String> keyMap) {
-		assertStepDefinitionExists(keyMap.get("Name"));
+	public String getStepDefinitionSectionName(HashMap<String, String> keyMap) {
+		return getStepDefinitionExistsValue(keyMap.get("Name"));
 	}
 
 	@Override
@@ -56,13 +56,14 @@ public class ObjectPageAsciidocFileImpl extends AdocFileObject implements Object
 	}
 
 	@Override
-	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
+	public String getContent(HashMap<String, String> keyMap) {
+		return getContent();
 	}
 
 	@Override
-	public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
@@ -71,18 +72,21 @@ public class ObjectPageAsciidocFileImpl extends AdocFileObject implements Object
 	}
 
 	@Override
-	public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertStepDefinitionSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getStepDefinitionSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertStepDefinitionParametersTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getStepDefinitionParametersTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override

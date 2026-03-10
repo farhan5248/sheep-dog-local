@@ -4,33 +4,33 @@ import java.util.HashMap;
 
 public interface ObjectPageJavaFile {
 
-    public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionImport(HashMap<String, String> keyMap);
+    public String getHeaderSectionImport(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionInterfaceName(HashMap<String, String> keyMap);
+    public String getHeaderSectionInterfaceName(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionPackage(HashMap<String, String> keyMap);
+    public String getHeaderSectionPackage(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getMethodsSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionMethodName(HashMap<String, String> keyMap);
+    public String getMethodsSectionMethodName(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionVisibility(HashMap<String, String> keyMap);
+    public String getMethodsSectionVisibility(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionReturnType(HashMap<String, String> keyMap);
+    public String getMethodsSectionReturnType(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionParameterName(HashMap<String, String> keyMap);
+    public String getMethodsSectionParameterName(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionParameterType(HashMap<String, String> keyMap);
+    public String getMethodsSectionParameterType(HashMap<String, String> keyMap);
 
     public void setCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
 
-    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertContent(HashMap<String, String> keyMap);
+    public String getContent(HashMap<String, String> keyMap);
 
-    public void assertPresent(HashMap<String, String> keyMap);
+    public String getPresent(HashMap<String, String> keyMap);
 }

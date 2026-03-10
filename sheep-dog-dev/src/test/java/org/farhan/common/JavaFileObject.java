@@ -10,99 +10,94 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.stmt.Statement;
 
-public class JavaFileObject extends FileObject {
+public class JavaFileObject extends TestObjectFile {
 
 	private CucumberInterface wrapper;
 
-	protected void assertImportExists(String importName) {
-		Assertions.assertTrue(getImport(importName) != null, "Import " + importName + " doesn't exist");
+	// --- get methods: return actual values, no assertions ---
+
+	// Category 1: Value equality
+	protected String getMethodAccessSpecifierValue(String methodName) {
+		return getMethod(methodName).getAccessSpecifier().asString();
 	}
 
-	protected void assertExtendsIs(String name) {
-		Assertions.assertEquals(name, getObject().getExtendedTypes().getFirst().get().getNameAsString());
+	protected String getMethodReturnTypeValue(String methodName) {
+		return getMethod(methodName).getTypeAsString();
 	}
 
-	protected void assertConstructorExists(String name) {
-		Assertions.assertEquals(name, getObject().getConstructors().getFirst().getNameAsString());
+	protected String getMethodParameterTypeValue(String methodName, String parameterName) {
+		return getMethod(methodName).getParameterByName(parameterName).get().getTypeAsString();
 	}
 
-	protected void assertClassNameIs(String name) {
-		Assertions.assertEquals(name, getObject().getNameAsString());
+	protected String getPackageValue() {
+		CompilationUnit cu = (CompilationUnit) wrapper.get();
+		return cu.getPackageDeclaration().get().getNameAsString();
 	}
 
-	protected void assertInterfaceNameIs(String name) {
-		Assertions.assertEquals(name, getObject().getNameAsString());
+	protected String getClassNameValue() {
+		return getObject().getNameAsString();
 	}
 
-	protected void assertMethodAccessSpecifier(String methodName, String visibility) {
-		assertMethodExists(methodName);
-		Assertions.assertEquals(visibility, getMethod(methodName).getAccessSpecifier().asString());
+	protected String getInterfaceNameValue() {
+		return getObject().getNameAsString();
 	}
 
-	protected void assertMethodAnnotationExists(String methodName, String annotation) {
-		assertMethodExists(methodName);
-		Assertions.assertTrue(getAnnotation(methodName, annotation) != null,
-				"Annotation " + annotation + " doesn't exist");
+	protected String getExtendsValue() {
+		return getObject().getExtendedTypes().getFirst().get().getNameAsString();
 	}
 
-	protected void assertMethodExists(String methodName) {
-		Assertions.assertTrue(getMethod(methodName) != null, "Method " + methodName + " doesn't exist");
+	protected String getConstructorStatementValue(String constructorName) {
+		return getObject().getConstructors().getFirst().getBody().getStatement(0).toString();
 	}
 
-	protected void assertMethodParameterExists(String methodName, String parameterName) {
-		assertMethodExists(methodName);
-		Assertions.assertTrue(getMethod(methodName).getParameterByName(parameterName).get() != null,
-				"Parameter Name " + parameterName + " doesn't exist");
+	// Category 2: Existence checks
+	protected String getImportExistsValue(String importName) {
+		ImportDeclaration id = getImport(importName);
+		return id == null ? null : id.getNameAsString();
 	}
 
-	protected void assertMethodParameterType(String methodName, String parameterName, String parameterType) {
-		assertMethodExists(methodName);
-		Assertions.assertEquals(parameterType,
-				getMethod(methodName).getParameterByName(parameterName).get().getTypeAsString());
+	protected String getMethodExistsValue(String methodName) {
+		MethodDeclaration m = getMethod(methodName);
+		return m == null ? null : m.getName().asString();
 	}
 
-	protected void assertMethodReturnType(String methodName, String returnType) {
-		assertMethodExists(methodName);
-		MethodDeclaration methodDeclaration = getMethod(methodName);
-		Assertions.assertEquals(returnType, methodDeclaration.getTypeAsString());
+	protected String getMethodAnnotationExistsValue(String methodName, String annotation) {
+		AnnotationExpr a = getAnnotation(methodName, annotation);
+		return a == null ? null : a.toString();
 	}
 
-	protected void assertConstructorStatementExists(String constructorName, String statement) {
-		assertConstructorExists(constructorName);
-		Assertions.assertEquals(statement,
-				getObject().getConstructors().getFirst().getBody().getStatement(0).toString(),
-				"Statement " + statement + " doesn't exist");
+	protected String getMethodParameterExistsValue(String methodName, String parameterName) {
+		return getMethod(methodName).getParameterByName(parameterName).isPresent() ? parameterName : null;
 	}
 
-	protected void assertClassAnnotationExists(String annotation) {
-		Assertions.assertTrue(getObject().getAnnotationByName(annotation).get() != null,
-				"Class Annotation " + annotation + " doesn't exist");
+	protected String getMethodStatementExistsValue(String methodName, String statement) {
+		Statement s = getStatement(methodName, statement);
+		return s == null ? null : s.toString();
 	}
 
-	protected void assertConstructorAnnotationExists(String constructorName, String annotation) {
-		assertConstructorExists(constructorName);
-		Assertions.assertTrue(getObject().getConstructors().getFirst().getAnnotationByName(annotation) != null,
-				"Constructor Annotation " + annotation + " doesn't exist");
+	protected String getConstructorExistsValue(String name) {
+		return getObject().getConstructors().isEmpty() ? null : getObject().getConstructors().getFirst().getNameAsString();
 	}
 
-	protected void assertMethodStatementExists(String methodName, String statement) {
-		assertMethodExists(methodName);
-		Assertions.assertTrue(getStatement(methodName, statement) != null, "Statement " + statement + " doesn't exist");
+	protected String getClassAnnotationExistsValue(String annotation) {
+		return getObject().getAnnotationByName(annotation).isPresent() ? annotation : null;
 	}
 
-	protected void assertFileExists() {
-		super.assertFileExists();
+	protected String getConstructorAnnotationExistsValue(String constructorName, String annotation) {
+		if (getObject().getConstructors().isEmpty()) return null;
+		return getObject().getConstructors().getFirst().getAnnotationByName(annotation).isPresent() ? annotation : null;
+	}
+
+	// Category 3: Parse + init
+	protected String getFileExistsValue() {
+		String exists = getObjectExists();
 		try {
 			wrapper = new CucumberInterface(properties.get("path").toString());
 			wrapper.parse(sr.get("", properties.get("path").toString()));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
-	}
-
-	protected void assertPackage(String packageName) {
-		CompilationUnit cu = (CompilationUnit) wrapper.get();
-		Assertions.assertEquals(packageName, cu.getPackageDeclaration().get().getNameAsString());
+		return exists;
 	}
 
 	private AnnotationExpr getAnnotation(String methodName, String annotation) {

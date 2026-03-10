@@ -4,25 +4,25 @@ import java.util.HashMap;
 
 public interface ObjectPageAsciidocFile {
 
-    public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionName(HashMap<String, String> keyMap);
+    public String getHeaderSectionName(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionStatements(HashMap<String, String> keyMap);
+    public String getHeaderSectionStatements(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionParametersTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getStepDefinitionParametersTableSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionParametersTableSectionName(HashMap<String, String> keyMap);
+    public String getStepDefinitionParametersTableSectionName(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionParametersTableSectionParameters(HashMap<String, String> keyMap);
+    public String getStepDefinitionParametersTableSectionParameters(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionParametersTableSectionRow(HashMap<String, String> keyMap);
+    public String getStepDefinitionParametersTableSectionRow(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getStepDefinitionSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionSectionName(HashMap<String, String> keyMap);
+    public String getStepDefinitionSectionName(HashMap<String, String> keyMap);
 
-    public void assertStepDefinitionSectionDescription(HashMap<String, String> keyMap);
+    public String getStepDefinitionSectionDescription(HashMap<String, String> keyMap);
 
     public void setCreatedAsFollows(HashMap<String, String> keyMap);
 
@@ -30,9 +30,9 @@ public interface ObjectPageAsciidocFile {
 
     public void setDeleted(HashMap<String, String> keyMap);
 
-    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertContent(HashMap<String, String> keyMap);
+    public String getContent(HashMap<String, String> keyMap);
 
-    public void assertPresent(HashMap<String, String> keyMap);
+    public String getPresent(HashMap<String, String> keyMap);
 }

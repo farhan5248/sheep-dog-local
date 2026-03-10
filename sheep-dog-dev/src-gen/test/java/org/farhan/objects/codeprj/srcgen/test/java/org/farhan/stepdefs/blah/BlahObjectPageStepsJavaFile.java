@@ -4,47 +4,47 @@ import java.util.HashMap;
 
 public interface BlahObjectPageStepsJavaFile {
 
-    public void assertHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getHeaderSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionClassAnnotation(HashMap<String, String> keyMap);
+    public String getHeaderSectionClassAnnotation(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionClassName(HashMap<String, String> keyMap);
+    public String getHeaderSectionClassName(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionPackage(HashMap<String, String> keyMap);
+    public String getHeaderSectionPackage(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionConstructorName(HashMap<String, String> keyMap);
+    public String getHeaderSectionConstructorName(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionConstructorAnnotation(HashMap<String, String> keyMap);
+    public String getHeaderSectionConstructorAnnotation(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionStatement(HashMap<String, String> keyMap);
+    public String getHeaderSectionStatement(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionExtends(HashMap<String, String> keyMap);
+    public String getHeaderSectionExtends(HashMap<String, String> keyMap);
 
-    public void assertHeaderSectionImport(HashMap<String, String> keyMap);
+    public String getHeaderSectionImport(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getMethodsSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionMethodName(HashMap<String, String> keyMap);
+    public String getMethodsSectionMethodName(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionAnnotation(HashMap<String, String> keyMap);
+    public String getMethodsSectionAnnotation(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionVisibility(HashMap<String, String> keyMap);
+    public String getMethodsSectionVisibility(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionReturnType(HashMap<String, String> keyMap);
+    public String getMethodsSectionReturnType(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionParameterName(HashMap<String, String> keyMap);
+    public String getMethodsSectionParameterName(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionParameterType(HashMap<String, String> keyMap);
+    public String getMethodsSectionParameterType(HashMap<String, String> keyMap);
 
-    public void assertMethodsSectionStatement(HashMap<String, String> keyMap);
+    public String getMethodsSectionStatement(HashMap<String, String> keyMap);
 
     public void setCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
 
-    public void assertCreatedAsFollows(HashMap<String, String> keyMap);
+    public String getCreatedAsFollows(HashMap<String, String> keyMap);
 
-    public void assertContent(HashMap<String, String> keyMap);
+    public String getContent(HashMap<String, String> keyMap);
 
-    public void assertPresent(HashMap<String, String> keyMap);
+    public String getPresent(HashMap<String, String> keyMap);
 }

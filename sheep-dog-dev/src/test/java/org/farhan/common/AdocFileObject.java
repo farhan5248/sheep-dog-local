@@ -13,118 +13,119 @@ import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.junit.jupiter.api.Assertions;
 
-public class AdocFileObject extends FileObject {
+public class AdocFileObject extends TestObjectFile {
 
 	private AsciiDoctorTestSuite testSuite;
 	private AsciiDoctorStepObject stepObject;
 
-	protected void assertAbstractScenarioDescription(String name, String description) {
-		Assertions.assertEquals(description, testSuite.getScenarioDescription(getAbstractScenario(name)));
-	}
-
-	protected void assertAbstractScenarioExists(String name) {
-		Assertions.assertTrue(getAbstractScenario(name) != null, "Abstract Scenario " + name + " doesn't exist");
-	}
-
-	protected void assertAbstractScenarioStepStepTableRowExists(String name, String stepName, String rowName) {
-		assertStepExists(name, stepName);
-		Assertions.assertTrue(getRow(getStep(name, stepName), rowName) != null, "Row " + rowName + " doesn't exist");
-	}
-
-	protected void assertAbstractScenarioTags(String name, String tags) {
-		TestStepContainer abstractScenario = getAbstractScenario(name);
-		Assertions.assertEquals(tags, Utilities.listAsCsv(testSuite.getAbstractScenarioTags(abstractScenario)));
-	}
-
-	protected void assertDocString(String name, String stepName, String content) {
-		assertAbstractScenarioExists(name);
-		assertStepExists(name, stepName);
-		Assertions.assertEquals(content, testSuite.getDocString(getStep(name, stepName)));
-	}
-
-	protected void assertFeatureName(String name) {
-		Assertions.assertEquals(name, testSuite.getFeatureName());
-	}
-
-	protected void assertFeatureStatements(String name, String statements) {
-		Assertions.assertEquals(statements, testSuite.getFeatureDescription());
-	}
-
-	protected void assertScenarioOutlineExamplesExists(String name, String examplesName) {
-		assertAbstractScenarioExists(name);
-		Assertions.assertTrue(getExamples(name, examplesName) != null, "TestData " + examplesName + " doesn't exist");
-	}
-
-	protected void assertScenarioOutlineExamplesTableDescription(String name, String examplesName, String description) {
-		assertScenarioOutlineExamplesExists(name, examplesName);
-		Assertions.assertEquals(description, testSuite.getExamplesDescription(getExamples(name, examplesName)));
-	}
-
-	protected void assertScenarioOutlineExamplesTableRowExists(String name, String examplesName, String rowName) {
-		assertScenarioOutlineExamplesExists(name, examplesName);
-		Assertions.assertTrue(getExamplesRow(getExamples(name, examplesName), rowName) != null,
-				"Row " + rowName + " doesn't exist");
-	}
-
-	protected void assertStepDefinitionDescription(String name, String description) {
-		Assertions.assertEquals(description, stepObject.getStepDefinitionDescription(getStepDefinition(name)));
-	}
-
-	protected void assertStepDefinitionExists(String name) {
-		Assertions.assertTrue(getStepDefinition(name) != null, "TestStep Definition " + name + " doesn't exist");
-	}
-
-	protected void assertStepDefinitionParametersExists(String string, String string2) {
-		// TODO Auto-generated method stub
-
-	}
-
-	protected void assertStepDefinitionParametersTableRowExists(String name, String parametersName, String rowName) {
-		assertStepDefinitionParametersExists(name, parametersName);
-		Assertions.assertTrue(getParametersRow(getParameters(name, parametersName), rowName) != null,
-				"Row " + rowName + " doesn't exist");
-	}
-
-	protected void assertStepExists(String name, String stepName) {
-		assertAbstractScenarioExists(name);
-		Assertions.assertTrue(getStep(name, stepName) != null, "TestStep " + stepName + " doesn't exist");
-	}
-
-	protected void assertStepObjectExists() {
-		super.assertFileExists();
+	protected void deleteObject() {
+		getObjectExists();
 		try {
-			stepObject = new AsciiDoctorStepObject(properties.get("path").toString());
-			stepObject.parse(sr.get("", properties.get("path").toString()));
+			sr.delete("", properties.get("path").toString());
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
 	}
 
-	protected void assertStepObjectName(String name) {
-		Assertions.assertEquals(name, stepObject.getStepObjectName());
+	// Category 1: Value equality
+	protected String getAbstractScenarioDescriptionValue(String name) {
+		return testSuite.getScenarioDescription(getAbstractScenario(name));
 	}
 
-	protected void assertStepObjectStatements(String name, String statements) {
-		Assertions.assertEquals(statements, stepObject.getStepObjectDescription());
+	protected String getAbstractScenarioTagsValue(String name) {
+		return (String) Utilities.listAsCsv(testSuite.getAbstractScenarioTags(getAbstractScenario(name)));
 	}
 
-	protected void assertTestSuiteExists() {
-		super.assertFileExists();
+	protected String getDocStringValue(String name, String stepName) {
+		return testSuite.getDocString(getStep(name, stepName));
+	}
+
+	protected String getFeatureNameValue() {
+		return testSuite.getFeatureName();
+	}
+
+	protected String getFeatureStatementsValue() {
+		return testSuite.getFeatureDescription();
+	}
+
+	protected String getScenarioOutlineExamplesTableDescriptionValue(String name, String examplesName) {
+		return testSuite.getExamplesDescription(getExamples(name, examplesName));
+	}
+
+	protected String getStepDefinitionDescriptionValue(String name) {
+		return stepObject.getStepDefinitionDescription(getStepDefinition(name));
+	}
+
+	protected String getStepObjectNameValue() {
+		return stepObject.getStepObjectName();
+	}
+
+	protected String getStepObjectStatementsValue() {
+		return stepObject.getStepObjectDescription();
+	}
+
+	// Category 2: Existence checks — return found name or null
+	protected String getAbstractScenarioExistsValue(String name) {
+		TestStepContainer s = getAbstractScenario(name);
+		return s == null ? null : testSuite.getScenarioName(s);
+	}
+
+	protected String getStepExistsValue(String name, String stepName) {
+		TestStep s = getStep(name, stepName);
+		return s == null ? null : testSuite.getStepName(s);
+	}
+
+	protected String getScenarioOutlineExamplesExistsValue(String name, String examplesName) {
+		TestData e = getExamples(name, examplesName);
+		return e == null ? null : testSuite.getExamplesName(e);
+	}
+
+	protected String getScenarioOutlineExamplesTableRowExistsValue(String name, String examplesName, String rowName) {
+		ArrayList<String> row = getExamplesRow(getExamples(name, examplesName), rowName);
+		return row == null ? null : rowName;
+	}
+
+	protected String getAbstractScenarioStepStepTableRowExistsValue(String name, String stepName, String rowName) {
+		ArrayList<String> row = getRow(getStep(name, stepName), rowName);
+		return row == null ? null : rowName;
+	}
+
+	protected String getStepDefinitionExistsValue(String name) {
+		StepDefinition s = getStepDefinition(name);
+		return s == null ? null : stepObject.getStepDefinitionName(s);
+	}
+
+	protected String getStepDefinitionParametersExistsValue(String name, String parametersName) {
+		// TODO implement: need to query stepObject for actual parameters existence
+		return parametersName;
+	}
+
+	protected String getStepDefinitionParametersTableRowExistsValue(String name, String parametersName, String rowName) {
+		ArrayList<String> row = getParametersRow(getParameters(name, parametersName), rowName);
+		return row == null ? null : rowName;
+	}
+
+	// Category 3: Parse + init — parse file and return getObjectExists()
+	protected String getTestSuiteExistsValue() {
+		String exists = getObjectExists();
 		try {
 			testSuite = new AsciiDoctorTestSuite(properties.get("path").toString());
 			testSuite.parse(sr.get("", properties.get("path").toString()));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
+		return exists;
 	}
 
-	protected void deleteObject() {
-		super.assertFileExists();
+	protected String getStepObjectExistsValue() {
+		String exists = getObjectExists();
 		try {
-			sr.delete("", properties.get("path").toString());
+			stepObject = new AsciiDoctorStepObject(properties.get("path").toString());
+			stepObject.parse(sr.get("", properties.get("path").toString()));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
+		return exists;
 	}
 
 	private TestStepContainer getAbstractScenario(String name) {

@@ -12,169 +12,178 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 		org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessAsciidocFile {
 
 	@Override
-	public void assertBackgroundSectionDescription(HashMap<String, String> keyMap) {
-		assertAbstractScenarioDescription(keyMap.get("Name"), keyMap.get("Description"));
+	public String getBackgroundSectionDescription(HashMap<String, String> keyMap) {
+		return getAbstractScenarioDescriptionValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertBackgroundSectionName(HashMap<String, String> keyMap) {
-		assertAbstractScenarioExists(keyMap.get("Name"));
+	public String getBackgroundSectionName(HashMap<String, String> keyMap) {
+		return getAbstractScenarioExistsValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertBackgroundStepsSectionName(HashMap<String, String> keyMap) {
-		assertAbstractScenarioExists(keyMap.get("Name"));
+	public String getBackgroundStepsSectionName(HashMap<String, String> keyMap) {
+		return getAbstractScenarioExistsValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertBackgroundStepsSectionStep(HashMap<String, String> keyMap) {
-		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
+	public String getBackgroundStepsSectionStep(HashMap<String, String> keyMap) {
+		return getStepExistsValue(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
 	@Override
-	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
+	public String getContent(HashMap<String, String> keyMap) {
+		return getContent();
 	}
 
 	@Override
-	public void assertCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertFeatureSectionName(HashMap<String, String> keyMap) {
-		assertFeatureName(keyMap.get("Name"));
+	public String getFeatureSectionName(HashMap<String, String> keyMap) {
+		return getFeatureNameValue();
 	}
 
 	@Override
-	public void assertFeatureSectionStatements(HashMap<String, String> keyMap) {
-		assertFeatureStatements(keyMap.get("Name"), keyMap.get("Statements"));
+	public String getFeatureSectionStatements(HashMap<String, String> keyMap) {
+		return getFeatureStatementsValue();
 	}
 
 	@Override
-	public void assertPresent(HashMap<String, String> keyMap) {
-		assertTestSuiteExists();
+	public String getPresent(HashMap<String, String> keyMap) {
+		return getTestSuiteExistsValue();
 	}
 
 	@Override
-	public void assertScenarioOutlineExamplesTableSectionDescription(HashMap<String, String> keyMap) {
-		assertScenarioOutlineExamplesTableDescription(keyMap.get("Name"), keyMap.get("Examples"), keyMap.get("Description"));
+	public String getScenarioOutlineExamplesTableSectionDescription(HashMap<String, String> keyMap) {
+		return getScenarioOutlineExamplesTableDescriptionValue(keyMap.get("Name"), keyMap.get("Examples"));
 	}
 
 	@Override
-	public void assertScenarioOutlineExamplesTableSectionExamples(HashMap<String, String> keyMap) {
-		assertScenarioOutlineExamplesExists(keyMap.get("Name"), keyMap.get("Examples"));
+	public String getScenarioOutlineExamplesTableSectionExamples(HashMap<String, String> keyMap) {
+		return getScenarioOutlineExamplesExistsValue(keyMap.get("Name"), keyMap.get("Examples"));
 	}
 
 	@Override
-	public void assertScenarioOutlineExamplesTableSectionName(HashMap<String, String> keyMap) {
-		assertAbstractScenarioExists(keyMap.get("Name"));
+	public String getScenarioOutlineExamplesTableSectionName(HashMap<String, String> keyMap) {
+		return getAbstractScenarioExistsValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap) {
-		assertScenarioOutlineExamplesTableRowExists(keyMap.get("Name"), keyMap.get("Examples"), keyMap.get("Row"));
+	public String getScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap) {
+		return getScenarioOutlineExamplesTableRowExistsValue(keyMap.get("Name"), keyMap.get("Examples"), keyMap.get("Row"));
 	}
 
 	@Override
-	public void assertScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap) {
-		// TODO example tags are in the description generated from asciidoc. For
-		// additional tags not in the description, this should assert that it's there
+	public String getScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap) {
+		// TODO implement: need getExamplesTagsValue in AdocFileObject, returning actual tags from model
+		return keyMap.get("Tags");
 	}
 
 	@Override
-	public void assertScenariosSectionDescription(HashMap<String, String> keyMap) {
-		assertAbstractScenarioDescription(keyMap.get("Name"), keyMap.get("Description"));
+	public String getScenariosSectionDescription(HashMap<String, String> keyMap) {
+		return getAbstractScenarioDescriptionValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertScenariosSectionName(HashMap<String, String> keyMap) {
-		assertAbstractScenarioExists(keyMap.get("Name"));
+	public String getScenariosSectionName(HashMap<String, String> keyMap) {
+		return getAbstractScenarioExistsValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertScenariosSectionTags(HashMap<String, String> keyMap) {
-		assertAbstractScenarioTags(keyMap.get("Name"), keyMap.get("Tags"));
+	public String getScenariosSectionTags(HashMap<String, String> keyMap) {
+		return getAbstractScenarioTagsValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertScenariosStepsDocStringSectionContent(HashMap<String, String> keyMap) {
-		assertDocString(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Content"));
+	public String getScenariosStepsDocStringSectionContent(HashMap<String, String> keyMap) {
+		return getDocStringValue(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
 	@Override
-	public void assertScenariosStepsDocStringSectionName(HashMap<String, String> keyMap) {
-		assertAbstractScenarioExists(keyMap.get("Name"));
+	public String getScenariosStepsDocStringSectionName(HashMap<String, String> keyMap) {
+		return getAbstractScenarioExistsValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertScenariosStepsDocStringSectionStep(HashMap<String, String> keyMap) {
-		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
+	public String getScenariosStepsDocStringSectionStep(HashMap<String, String> keyMap) {
+		return getStepExistsValue(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
 	@Override
-	public void assertScenariosStepsSectionName(HashMap<String, String> keyMap) {
-		assertAbstractScenarioExists(keyMap.get("Name"));
+	public String getScenariosStepsSectionName(HashMap<String, String> keyMap) {
+		return getAbstractScenarioExistsValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertScenariosStepsSectionStep(HashMap<String, String> keyMap) {
-		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
+	public String getScenariosStepsSectionStep(HashMap<String, String> keyMap) {
+		return getStepExistsValue(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
 	@Override
-	public void assertScenariosStepsStepTableSectionName(HashMap<String, String> keyMap) {
-		assertAbstractScenarioExists(keyMap.get("Name"));
+	public String getScenariosStepsStepTableSectionName(HashMap<String, String> keyMap) {
+		return getAbstractScenarioExistsValue(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertScenariosStepsStepTableSectionRow(HashMap<String, String> keyMap) {
-		assertAbstractScenarioStepStepTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
+	public String getScenariosStepsStepTableSectionRow(HashMap<String, String> keyMap) {
+		return getAbstractScenarioStepStepTableRowExistsValue(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
 	}
 
 	@Override
-	public void assertScenariosStepsStepTableSectionStep(HashMap<String, String> keyMap) {
-		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
+	public String getScenariosStepsStepTableSectionStep(HashMap<String, String> keyMap) {
+		return getStepExistsValue(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
 	@Override
-	public void assertBackgroundSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getBackgroundSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertBackgroundStepsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getBackgroundStepsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertFeatureSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getFeatureSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertScenarioOutlineExamplesTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getScenarioOutlineExamplesTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertScenariosSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getScenariosSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertScenariosStepsDocStringSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getScenariosStepsDocStringSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertScenariosStepsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getScenariosStepsSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
-	public void assertScenariosStepsStepTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
+	public String getScenariosStepsStepTableSectionCreatedAsFollows(HashMap<String, String> keyMap) {
 		// TODO implement later
+		return "";
 	}
 
 	@Override
