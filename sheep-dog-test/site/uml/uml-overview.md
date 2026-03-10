@@ -39,3 +39,12 @@ Pattern variables used in UML files to represent families of classes following s
    - Used in: validate{Assignment}{Scope}(), correct{Assignment}{Scope}(), suggest{Assignment}{Scope}()
    - Case variants: `{scope}` (camelCase), `{SCOPE}` (UPPER_SNAKE_CASE)
 
+6. **{ObjectType}** - Object types from StepObjectRef vertex and edge type enums
+   - Values: `(File|Page|Response|Dialog|Directory|Popup|Annotation|Hover|Tooltip|Request|Goal|Job|Action)`
+   - Used in: TestObject{ObjectType}
+   - Case variants: `{objectType}` (camelCase), `{OBJECT_TYPE}` (UPPER_SNAKE_CASE)
+
+7. **{Format}** - Input/output formats for test step data processing
+   - Values: `(DataTable|DocString|State)`
+   - Used in: assertInputOutputs{Format}, setInputOutputs{Format}
+
