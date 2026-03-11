@@ -3,7 +3,6 @@ package org.farhan.impl.objects;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectAction;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepObject;
@@ -29,7 +28,7 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ApplyQuickfixActionImpl extends TestObjectAction implements ApplyQuickfixAction {
+public class ApplyQuickfixActionImpl extends TestObjectActionImpl implements ApplyQuickfixAction {
 
     private static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
         for (SheepDogIssueProposal p : proposals) {
@@ -59,10 +58,10 @@ public class ApplyQuickfixActionImpl extends TestObjectAction implements ApplyQu
 
     @Override
     public void setPerformedAsFollows(HashMap<String, String> keyMap) {
-    }
-
-    public void transition() {
-        super.transition();
+        if (properties.get("Test Suite Full Name") != null) {
+            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+            properties.remove("Test Suite Full Name");
+        }
         if (properties.get("Node Path") != null) {
             setCursorAtNode(properties.get("Node Path").toString());
             properties.remove("Node Path");

@@ -1,7 +1,7 @@
 package org.farhan.impl.objects;
 
 import java.util.HashMap;
-import org.farhan.common.TestObjectFile;
+
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
@@ -11,7 +11,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatc
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class InputFileAsciidocFileImpl extends TestObjectFile implements InputFileAsciidocFile {
+public class InputFileAsciidocFileImpl extends TestObjectFileImpl implements InputFileAsciidocFile {
 
     @Override
     public String getCellListNodeCellName(HashMap<String, String> keyMap) {

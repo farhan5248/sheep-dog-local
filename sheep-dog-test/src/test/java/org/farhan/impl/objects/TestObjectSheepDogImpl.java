@@ -1,7 +1,8 @@
-package org.farhan.common;
+package org.farhan.impl.objects;
 
 import java.util.ArrayList;
 
+import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ILine;
@@ -22,7 +23,7 @@ import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 
-public class TestObjectDSL extends TestObject {
+public class TestObjectSheepDogImpl extends TestObject {
 
     protected static Object cursor;
     protected static ITestProject testProject;
@@ -340,7 +341,7 @@ public class TestObjectDSL extends TestObject {
             } catch (IndexOutOfBoundsException e) {
                 switch (elementType) {
                 case "TestStepContainerList":
-                    return SheepDogBuilder.createTestCase((ITestSuite) parent, "");
+                    return SheepDogBuilder.createTestCase((ITestSuite) parent, "Test Case");
                 case "TestStepList":
                     return SheepDogBuilder.createTestStep((ITestStepContainer) parent, "");
                 case "RowList":
@@ -404,7 +405,7 @@ public class TestObjectDSL extends TestObject {
     }
 
     protected String getFullNameFromPath() {
-        String path = (String) properties.get("path");
+        String path = (String) properties.get("object");
         return path.replace("src/test/resources/asciidoc/", "");
     }
 
@@ -437,16 +438,6 @@ public class TestObjectDSL extends TestObject {
                 cursor = current;
         }
 
-    }
-
-    public void transition() {
-        if (properties.get("Test Suite Full Name") != null) {
-            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
-            properties.remove("Test Suite Full Name");
-        } else if (properties.get("Step Object Full Name") != null) {
-            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Step Object Full Name").toString()));
-            properties.remove("Step Object Full Name");
-        }
     }
 
 }

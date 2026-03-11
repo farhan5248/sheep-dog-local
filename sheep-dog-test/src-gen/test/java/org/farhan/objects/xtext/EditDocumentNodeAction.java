@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 public interface EditDocumentNodeAction {
 
-    public void transition();
-
     public void setPerformedToModifyCellListWith(HashMap<String, String> keyMap);
 
     public void setTestSuiteFullName(HashMap<String, String> keyMap);

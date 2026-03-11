@@ -2,13 +2,12 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectAction;
 import org.farhan.objects.xtext.EditDocumentNodeAction;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class EditDocumentNodeActionImpl extends TestObjectAction implements EditDocumentNodeAction {
+public class EditDocumentNodeActionImpl extends TestObjectActionImpl implements EditDocumentNodeAction {
 
     @Override
     public void setCellName(HashMap<String, String> keyMap) {
@@ -72,73 +71,101 @@ public class EditDocumentNodeActionImpl extends TestObjectAction implements Edit
 
     @Override
     public void setPerformedToModifyTestStepListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (properties.get("Test Step Full Name") != null) {
+            addTestStepWithFullName(replaceKeyword(properties.get("Test Step Full Name").toString()));
+            properties.remove("Test Step Full Name");
+        }
     }
 
     @Override
     public void setPerformedToModifyTestStepContainerListWith(HashMap<String, String> keyMap) {
-    }
-
-    @Override
-    public void setPerformedToModifyTestDataListWith(HashMap<String, String> keyMap) {
-    }
-
-    @Override
-    public void setPerformedToModifyCellListWith(HashMap<String, String> keyMap) {
-    }
-
-    @Override
-    public void setPerformedToModifyLineListWith(HashMap<String, String> keyMap) {
-    }
-
-    @Override
-    public void setPerformedToModifyRowListWith(HashMap<String, String> keyMap) {
-    }
-
-    @Override
-    public void setPerformedToModifyStepDefinitionListWith(HashMap<String, String> keyMap) {
-    }
-
-    @Override
-    public void setPerformedToModifyStepParametersListWith(HashMap<String, String> keyMap) {
-    }
-
-    @Override
-    public void transition() {
-        super.transition();
-        if (properties.get("Node Path") != null) {
-            setCursorAtNode(properties.get("Node Path").toString());
-            properties.remove("Node Path");
-        }
-        if (properties.get("Step Definition Name") != null) {
-            addStepDefinitionWithName(replaceKeyword(properties.get("Step Definition Name").toString()));
-            properties.remove("Step Definition Name");
-        } else if (properties.get("Test Case Name") != null) {
+        navigateToDocument();
+        navigateToNode();
+        if (properties.get("Test Case Name") != null) {
             addTestCaseWithName(replaceKeyword(properties.get("Test Case Name").toString()));
             properties.remove("Test Case Name");
         } else if (properties.get("Test Setup Name") != null) {
             addTestSetupWithName(replaceKeyword(properties.get("Test Setup Name").toString()));
             properties.remove("Test Setup Name");
-        } else if (properties.get("Test Data Name") != null) {
+        }
+    }
+
+    @Override
+    public void setPerformedToModifyTestDataListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (properties.get("Test Data Name") != null) {
             addTestDataWithName(replaceKeyword(properties.get("Test Data Name").toString()));
             properties.remove("Test Data Name");
-        } else if (properties.get("Step Parameters Name") != null) {
-            addStepParametersWithName(replaceKeyword(properties.get("Step Parameters Name").toString()));
-            properties.remove("Step Parameters Name");
-        } else if (properties.get("Row Content") != null) {
-            addRowWithContent(replaceKeyword(properties.get("Row Content").toString()));
-            properties.remove("Row Content");
-        } else if (properties.get("Text Content") != null) {
-            addTextWithContent(replaceKeyword(properties.get("Text Content").toString()));
-            properties.remove("Text Content");
-        } else if (properties.get("Cell Name") != null) {
+        }
+    }
+
+    @Override
+    public void setPerformedToModifyCellListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (properties.get("Cell Name") != null) {
             addCellWithName(replaceKeyword(properties.get("Cell Name").toString()));
             properties.remove("Cell Name");
-        } else if (properties.get("Line Content") != null) {
+        }
+    }
+
+    @Override
+    public void setPerformedToModifyLineListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (properties.get("Line Content") != null) {
             addLineWithContent(replaceKeyword(properties.get("Line Content").toString()));
             properties.remove("Line Content");
-        } else if (properties.get("Test Step Full Name") != null) {
-            addTestStepWithFullName(replaceKeyword(properties.get("Test Step Full Name").toString()));
-            properties.remove("Test Step Full Name");
+        }
+    }
+
+    @Override
+    public void setPerformedToModifyRowListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (properties.get("Row Content") != null) {
+            addRowWithContent(replaceKeyword(properties.get("Row Content").toString()));
+            properties.remove("Row Content");
+        }
+    }
+
+    @Override
+    public void setPerformedToModifyStepDefinitionListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (properties.get("Step Definition Name") != null) {
+            addStepDefinitionWithName(replaceKeyword(properties.get("Step Definition Name").toString()));
+            properties.remove("Step Definition Name");
+        }
+    }
+
+    @Override
+    public void setPerformedToModifyStepParametersListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (properties.get("Step Parameters Name") != null) {
+            addStepParametersWithName(replaceKeyword(properties.get("Step Parameters Name").toString()));
+            properties.remove("Step Parameters Name");
+        }
+    }
+
+    private void navigateToDocument() {
+        if (properties.get("Test Suite Full Name") != null) {
+            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+            properties.remove("Test Suite Full Name");
+        } else if (properties.get("Step Object Full Name") != null) {
+            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Step Object Full Name").toString()));
+            properties.remove("Step Object Full Name");
+        }
+    }
+
+    private void navigateToNode() {
+        if (properties.get("Node Path") != null) {
+            setCursorAtNode(properties.get("Node Path").toString());
+            properties.remove("Node Path");
         }
     }
 

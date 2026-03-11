@@ -2,27 +2,12 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectAction;
 import org.farhan.objects.xtext.AddDocumentNodeAction;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class AddDocumentNodeActionImpl extends TestObjectAction implements AddDocumentNodeAction {
-
-    @Override
-    public void transition() {
-        super.transition();
-        if (properties.get("Node Path") != null) {
-            setCursorAtNode(properties.get("Node Path").toString());
-            if (properties.get("Node Path").toString().endsWith("Table")) {
-                addTable();
-            } else if (properties.get("Node Path").toString().endsWith("Text")) {
-                addTextWithContent("Text");
-            }
-            properties.remove("Node Path");
-        }
-    }
+public class AddDocumentNodeActionImpl extends TestObjectActionImpl implements AddDocumentNodeAction {
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
@@ -36,10 +21,28 @@ public class AddDocumentNodeActionImpl extends TestObjectAction implements AddDo
 
     @Override
     public void setPerformedToAddTextAt(HashMap<String, String> keyMap) {
+        if (properties.get("Test Suite Full Name") != null) {
+            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+            properties.remove("Test Suite Full Name");
+        }
+        if (properties.get("Node Path") != null) {
+            setCursorAtNode(properties.get("Node Path").toString());
+            addTextWithContent("Text");
+            properties.remove("Node Path");
+        }
     }
 
     @Override
     public void setPerformedToAddTableAt(HashMap<String, String> keyMap) {
+        if (properties.get("Test Suite Full Name") != null) {
+            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+            properties.remove("Test Suite Full Name");
+        }
+        if (properties.get("Node Path") != null) {
+            setCursorAtNode(properties.get("Node Path").toString());
+            addTable();
+            properties.remove("Node Path");
+        }
     }
 
 }

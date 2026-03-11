@@ -2,7 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import org.farhan.common.TestObjectFile;
+
 import org.farhan.dsl.grammar.PhraseFragments;
 import org.farhan.dsl.grammar.StepDefinitionRefFragments;
 import org.farhan.dsl.grammar.StepDefinitionRefPartTypes;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectFile implements ProcessGrammarFragmentAsciidocFile {
+public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectFileImpl implements ProcessGrammarFragmentAsciidocFile {
 
     @Override
     public String getPhraseTagFragmentTagList(HashMap<String, String> keyMap) {

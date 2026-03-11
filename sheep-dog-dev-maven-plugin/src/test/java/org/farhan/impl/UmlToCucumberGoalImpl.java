@@ -3,27 +3,23 @@ package org.farhan.impl;
 import java.util.HashMap;
 
 import org.farhan.common.TestConfig;
-import org.farhan.common.TestObjectGoal;
 import org.farhan.objects.maven.UmlToCucumberGoal;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class UmlToCucumberGoalImpl extends TestObjectGoal implements UmlToCucumberGoal {
+public class UmlToCucumberGoalImpl extends TestObjectGoalImpl implements UmlToCucumberGoal {
 
-	public void transition() {
+	@Override
+	public void setExecuted(HashMap<String, String> keyMap) {
 		runGoal("org.farhan.mbt.maven.UMLToCucumberMojo", TestConfig.getWorkingDir() + "code-prj/",
 				TestConfig.getWorkingDir() + "spec-prj/");
 	}
 
 	@Override
-	public void setExecuted(HashMap<String, String> keyMap) {
-		// TODO implement later
-	}
-
-	@Override
 	public void setExecutedWith(HashMap<String, String> keyMap) {
-		// TODO implement later
+		runGoal("org.farhan.mbt.maven.UMLToCucumberMojo", TestConfig.getWorkingDir() + "code-prj/",
+				TestConfig.getWorkingDir() + "spec-prj/");
 	}
 
 	@Override

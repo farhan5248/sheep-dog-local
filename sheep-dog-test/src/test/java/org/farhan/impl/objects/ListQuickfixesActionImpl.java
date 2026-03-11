@@ -2,7 +2,6 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectAction;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestStep;
@@ -27,10 +26,24 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListQuickfixesActionImpl extends TestObjectAction implements ListQuickfixesAction {
+public class ListQuickfixesActionImpl extends TestObjectActionImpl implements ListQuickfixesAction {
 
-    public void transition() {
-        super.transition();
+    @Override
+    public void setNodePath(HashMap<String, String> keyMap) {
+        properties.put("Node Path", keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTestSuiteFullName(HashMap<String, String> keyMap) {
+        properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+    }
+
+    @Override
+    public void setPerformedAsFollows(HashMap<String, String> keyMap) {
+        if (properties.get("Test Suite Full Name") != null) {
+            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+            properties.remove("Test Suite Full Name");
+        }
         if (properties.get("Node Path") != null) {
             setCursorAtNode(properties.get("Node Path").toString());
             properties.remove("Node Path");
@@ -89,19 +102,5 @@ public class ListQuickfixesActionImpl extends TestObjectAction implements ListQu
         } catch (Exception e) {
             Assertions.fail(e);
         }
-    }
-
-    @Override
-    public void setNodePath(HashMap<String, String> keyMap) {
-        properties.put("Node Path", keyMap.get("Node Path"));
-    }
-
-    @Override
-    public void setTestSuiteFullName(HashMap<String, String> keyMap) {
-        properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
-    }
-
-    @Override
-    public void setPerformedAsFollows(HashMap<String, String> keyMap) {
     }
 }

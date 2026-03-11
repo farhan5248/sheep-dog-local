@@ -17,8 +17,6 @@ public class XtextListProposalsActionSteps extends TestSteps {
 
     @Given("^The xtext plugin list proposals action is performed as follows$")
     public void isPerformedAsFollows(DataTable dataTable) {
-        object.setInputOutputsState("Performed as follows");
-        object.setInputOutputsDataTable(dataTable);
-        object.transition();
+        object.doEdgeStep("", "", "is", "performed as follows", dataTable);
     }
 }

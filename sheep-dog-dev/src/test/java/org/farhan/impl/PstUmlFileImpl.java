@@ -2,13 +2,12 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.UMLFileObject;
 import org.farhan.objects.specprj.uml.PstUmlFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
+public class PstUmlFileImpl extends TestObjectFileUMLImpl implements PstUmlFile {
 
 	@Override
 	public String getClassAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
@@ -156,8 +155,8 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 	}
 
 	@Override
-	public void setPath(String path) {
-		properties.put("path", path);
+	public void setObject(String object) {
+		properties.put("object", object);
 	}
 
 }

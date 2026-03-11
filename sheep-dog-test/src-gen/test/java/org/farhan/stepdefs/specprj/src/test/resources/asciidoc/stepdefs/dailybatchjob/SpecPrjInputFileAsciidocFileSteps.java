@@ -17,96 +17,81 @@ public class SpecPrjInputFileAsciidocFileSteps extends TestSteps {
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows$")
     public void cellListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsState("Created as follows", "CellList node");
-        object.setInputOutputsDataTable(dataTable, "CellList node");
+        object.setVertexStep("CellList", "node", "is", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node will be created as follows$")
     public void cellListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "CellList node");
-        object.assertInputOutputsDataTable(dataTable, "CellList node");
+        object.assertVertexStep("CellList", "node", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Description node will be as follows$")
     public void descriptionNodeWillBeAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("As follows", "Description node");
-        object.assertInputOutputsDataTable(dataTable, "Description node");
+        object.assertVertexStep("Description", "node", "will be", "as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows$")
     public void lineListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsState("Created as follows", "LineList node");
-        object.setInputOutputsDataTable(dataTable, "LineList node");
+        object.setVertexStep("LineList", "node", "is", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node will be created as follows$")
     public void lineListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "LineList node");
-        object.assertInputOutputsDataTable(dataTable, "LineList node");
+        object.assertVertexStep("LineList", "node", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file NestedDescription node will be as follows$")
     public void nestedDescriptionNodeWillBeAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("As follows", "NestedDescription node");
-        object.assertInputOutputsDataTable(dataTable, "NestedDescription node");
+        object.assertVertexStep("NestedDescription", "node", "will be", "as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node is created as follows$")
     public void stepDefinitionListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsState("Created as follows", "StepDefinitionList node");
-        object.setInputOutputsDataTable(dataTable, "StepDefinitionList node");
+        object.setVertexStep("StepDefinitionList", "node", "is", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be as follows$")
     public void stepDefinitionListNodeWillBeAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("As follows", "StepDefinitionList node");
-        object.assertInputOutputsDataTable(dataTable, "StepDefinitionList node");
+        object.assertVertexStep("StepDefinitionList", "node", "will be", "as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be created as follows$")
     public void stepDefinitionListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "StepDefinitionList node");
-        object.assertInputOutputsDataTable(dataTable, "StepDefinitionList node");
+        object.assertVertexStep("StepDefinitionList", "node", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node is created as follows$")
     public void stepParametersListNodeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsState("Created as follows", "StepParametersList node");
-        object.setInputOutputsDataTable(dataTable, "StepParametersList node");
+        object.setVertexStep("StepParametersList", "node", "is", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node will be as follows$")
     public void stepParametersListNodeWillBeAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("As follows", "StepParametersList node");
-        object.assertInputOutputsDataTable(dataTable, "StepParametersList node");
+        object.assertVertexStep("StepParametersList", "node", "will be", "as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node will be created as follows$")
     public void stepParametersListNodeWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "StepParametersList node");
-        object.assertInputOutputsDataTable(dataTable, "StepParametersList node");
+        object.assertVertexStep("StepParametersList", "node", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Table node will be as follows$")
     public void tableNodeWillBeAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("As follows", "Table node");
-        object.assertInputOutputsDataTable(dataTable, "Table node");
+        object.assertVertexStep("Table", "node", "will be", "as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created$")
     public void isCreated() {
-        object.setInputOutputsState("Created");
+        object.setVertexStep("", "", "is", "created");
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows$")
     public void isCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsState("Created as follows");
-        object.setInputOutputsDataTable(dataTable);
+        object.setVertexStep("", "", "is", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows$")
     public void willBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows");
-        object.assertInputOutputsDataTable(dataTable);
+        object.assertVertexStep("", "", "will be", "created as follows", dataTable);
     }
 }

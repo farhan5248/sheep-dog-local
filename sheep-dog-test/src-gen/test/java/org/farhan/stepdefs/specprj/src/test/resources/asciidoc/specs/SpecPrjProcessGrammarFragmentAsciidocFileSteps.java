@@ -17,61 +17,51 @@ public class SpecPrjProcessGrammarFragmentAsciidocFileSteps extends TestSteps {
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file Line type is created as follows$")
     public void lineTypeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsState("Created as follows", "Line type");
-        object.setInputOutputsDataTable(dataTable, "Line type");
+        object.setVertexStep("Line", "type", "is", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file Phrase tag fragment will be decomposed as follows$")
     public void phraseTagFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Decomposed as follows", "Phrase tag fragment");
-        object.assertInputOutputsDataTable(dataTable, "Phrase tag fragment");
+        object.assertVertexStep("Phrase tag", "fragment", "will be", "decomposed as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file Phrase todo fragment will be decomposed as follows$")
     public void phraseTodoFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Decomposed as follows", "Phrase todo fragment");
-        object.assertInputOutputsDataTable(dataTable, "Phrase todo fragment");
+        object.assertVertexStep("Phrase todo", "fragment", "will be", "decomposed as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepDefinitionRef part fragment will be decomposed as follows$")
     public void stepDefinitionRefPartFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Decomposed as follows", "StepDefinitionRef part fragment");
-        object.assertInputOutputsDataTable(dataTable, "StepDefinitionRef part fragment");
+        object.assertVertexStep("StepDefinitionRef part", "fragment", "will be", "decomposed as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepDefinitionRef state fragment will be decomposed as follows$")
     public void stepDefinitionRefStateFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Decomposed as follows", "StepDefinitionRef state fragment");
-        object.assertInputOutputsDataTable(dataTable, "StepDefinitionRef state fragment");
+        object.assertVertexStep("StepDefinitionRef state", "fragment", "will be", "decomposed as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepObjectRef component fragment will be decomposed as follows$")
     public void stepObjectRefComponentFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Decomposed as follows", "StepObjectRef component fragment");
-        object.assertInputOutputsDataTable(dataTable, "StepObjectRef component fragment");
+        object.assertVertexStep("StepObjectRef component", "fragment", "will be", "decomposed as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepObjectRef object edge fragment will be decomposed as follows$")
     public void stepObjectRefObjectEdgeFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Decomposed as follows", "StepObjectRef object edge fragment");
-        object.assertInputOutputsDataTable(dataTable, "StepObjectRef object edge fragment");
+        object.assertVertexStep("StepObjectRef object edge", "fragment", "will be", "decomposed as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepObjectRef object fragment will be decomposed as follows$")
     public void stepObjectRefObjectFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Decomposed as follows", "StepObjectRef object fragment");
-        object.assertInputOutputsDataTable(dataTable, "StepObjectRef object fragment");
+        object.assertVertexStep("StepObjectRef object", "fragment", "will be", "decomposed as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepObjectRef object vertex fragment will be decomposed as follows$")
     public void stepObjectRefObjectVertexFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Decomposed as follows", "StepObjectRef object vertex fragment");
-        object.assertInputOutputsDataTable(dataTable, "StepObjectRef object vertex fragment");
+        object.assertVertexStep("StepObjectRef object vertex", "fragment", "will be", "decomposed as follows", dataTable);
     }
 
     @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows$")
     public void testStepTypeIsCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsState("Created as follows", "TestStep type");
-        object.setInputOutputsDataTable(dataTable, "TestStep type");
+        object.setVertexStep("TestStep", "type", "is", "created as follows", dataTable);
     }
 }

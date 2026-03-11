@@ -1,15 +1,16 @@
-package org.farhan.common;
+package org.farhan.impl;
 
+import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.IResourceRepository;
 import org.junit.jupiter.api.Assertions;
 
-public abstract class TestObjectFile extends TestObject {
+public abstract class TestObjectFileImpl extends TestObject {
 
-	protected IResourceRepository sr = new SourceFileRepository();
+	protected IResourceRepository sr = new SourceFileRepositoryImpl();
 
 	protected String getObjectExists() {
 		try {
-			boolean exists = sr.contains("", properties.get("path").toString());
+			boolean exists = sr.contains("", properties.get("object").toString());
 			return exists ? "true" : null;
 		} catch (Exception e) {
 			Assertions.fail(e);
@@ -19,7 +20,7 @@ public abstract class TestObjectFile extends TestObject {
 
 	protected void setContent(String docString) {
 		try {
-			sr.put("", properties.get("path").toString(), docString);
+			sr.put("", properties.get("object").toString(), docString);
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
@@ -27,7 +28,7 @@ public abstract class TestObjectFile extends TestObject {
 
 	protected String getContent() {
 		try {
-			String contents = sr.get("", properties.get("path").toString());
+			String contents = sr.get("", properties.get("object").toString());
 			return contents.replaceAll("\r", "").trim();
 		} catch (Exception e) {
 			Assertions.fail(e);

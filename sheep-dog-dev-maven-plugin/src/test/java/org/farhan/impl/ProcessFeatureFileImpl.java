@@ -2,12 +2,11 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectFile;
 import org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.app.ProcessFeatureFile;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessFeatureFileImpl extends TestObjectFile implements ProcessFeatureFile {
+public class ProcessFeatureFileImpl extends TestObjectFileImpl implements ProcessFeatureFile {
 
 	@Override
 	public String getContent(HashMap<String, String> keyMap) {

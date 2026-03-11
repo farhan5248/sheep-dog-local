@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 public interface ApplyQuickfixAction {
 
-    public void transition();
-
     public void setPerformedAsFollows(HashMap<String, String> keyMap);
 
     public void setTestSuiteFullName(HashMap<String, String> keyMap);

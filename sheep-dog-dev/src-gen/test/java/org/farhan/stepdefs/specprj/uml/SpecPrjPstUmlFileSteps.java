@@ -17,60 +17,51 @@ public class SpecPrjPstUmlFileSteps extends TestSteps {
 
     @Given("^The spec-prj project uml/pst.uml file Class Annotations section will be created as follows$")
     public void classAnnotationsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Class Annotations section");
-        object.assertInputOutputsDataTable(dataTable, "Class Annotations section");
+        object.assertVertexStep("Class Annotations", "section", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project uml/pst.uml file Class Comments section will be created as follows$")
     public void classCommentsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Class Comments section");
-        object.assertInputOutputsDataTable(dataTable, "Class Comments section");
+        object.assertVertexStep("Class Comments", "section", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project uml/pst.uml file Class section will be created as follows$")
     public void classSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Class section");
-        object.assertInputOutputsDataTable(dataTable, "Class section");
+        object.assertVertexStep("Class", "section", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project uml/pst.uml file Class section won't be created as follows$")
     public void classSectionWontBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Class section", true);
-        object.assertInputOutputsDataTable(dataTable, "Class section", true);
+        object.assertVertexStep("Class", "section", "won't be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project uml/pst.uml file Interaction Annotations section will be created as follows$")
     public void interactionAnnotationsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Interaction Annotations section");
-        object.assertInputOutputsDataTable(dataTable, "Interaction Annotations section");
+        object.assertVertexStep("Interaction Annotations", "section", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project uml/pst.uml file Interaction Comments section will be created as follows$")
     public void interactionCommentsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Interaction Comments section");
-        object.assertInputOutputsDataTable(dataTable, "Interaction Comments section");
+        object.assertVertexStep("Interaction Comments", "section", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project uml/pst.uml file Interaction Messages section will be created as follows$")
     public void interactionMessagesSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Interaction Messages section");
-        object.assertInputOutputsDataTable(dataTable, "Interaction Messages section");
+        object.assertVertexStep("Interaction Messages", "section", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project uml/pst.uml file Interaction section will be created as follows$")
     public void interactionSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Interaction section");
-        object.assertInputOutputsDataTable(dataTable, "Interaction section");
+        object.assertVertexStep("Interaction", "section", "will be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project uml/pst.uml file Interaction section won't be created as follows$")
     public void interactionSectionWontBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Interaction section", true);
-        object.assertInputOutputsDataTable(dataTable, "Interaction section", true);
+        object.assertVertexStep("Interaction", "section", "won't be", "created as follows", dataTable);
     }
 
     @Given("^The spec-prj project uml/pst.uml file will be present$")
     public void willBePresent() {
-        object.assertInputOutputsState("Present");
+        object.assertVertexStep("", "", "will be", "present");
     }
 }

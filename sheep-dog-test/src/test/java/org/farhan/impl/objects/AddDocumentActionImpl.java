@@ -2,13 +2,12 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectAction;
 import org.farhan.objects.xtext.AddDocumentAction;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class AddDocumentActionImpl extends TestObjectAction implements AddDocumentAction {
+public class AddDocumentActionImpl extends TestObjectActionImpl implements AddDocumentAction {
 
     @Override
     public void setStepObjectFullName(HashMap<String, String> keyMap) {
@@ -21,23 +20,21 @@ public class AddDocumentActionImpl extends TestObjectAction implements AddDocume
     }
 
     @Override
-    public void transition() {
+    public void setPerformedToCreateATestSuiteWith(HashMap<String, String> keyMap) {
         cursor = testProject;
-        if (properties.get("Step Object Full Name") != null) {
-            addStepObjectWithFullName(replaceKeyword(properties.get("Step Object Full Name").toString()));
-            properties.remove("Step Object Full Name");
-        } else if (properties.get("Test Suite Full Name") != null) {
+        if (properties.get("Test Suite Full Name") != null) {
             addTestSuiteWithFullName(replaceKeyword(properties.get("Test Suite Full Name").toString()));
             properties.remove("Test Suite Full Name");
         }
     }
 
     @Override
-    public void setPerformedToCreateATestSuiteWith(HashMap<String, String> keyMap) {
-    }
-
-    @Override
     public void setPerformedToCreateAStepObjectWith(HashMap<String, String> keyMap) {
+        cursor = testProject;
+        if (properties.get("Step Object Full Name") != null) {
+            addStepObjectWithFullName(replaceKeyword(properties.get("Step Object Full Name").toString()));
+            properties.remove("Step Object Full Name");
+        } 
     }
 
 }

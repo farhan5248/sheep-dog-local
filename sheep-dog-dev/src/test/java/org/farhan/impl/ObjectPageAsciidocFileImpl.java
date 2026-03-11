@@ -2,13 +2,12 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.AdocFileObject;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ObjectPageAsciidocFileImpl extends AdocFileObject implements ObjectPageAsciidocFile {
+public class ObjectPageAsciidocFileImpl extends TestObjectFileAdocImpl implements ObjectPageAsciidocFile {
 
 	@Override
 	public String getHeaderSectionName(HashMap<String, String> keyMap) {

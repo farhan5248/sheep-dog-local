@@ -2,13 +2,12 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.FeatureFileObject;
 import org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.app.ProcessFeatureFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessFeatureFileImpl extends FeatureFileObject implements ProcessFeatureFile,
+public class ProcessFeatureFileImpl extends TestObjectFileFeatureImpl implements ProcessFeatureFile,
 		org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.ProcessFeatureFile {
 
 	@Override

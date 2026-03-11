@@ -17,30 +17,26 @@ public class CodePrjBlahObjectPageStepsJavaFileSteps extends TestSteps {
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Header section will be created as follows$")
     public void headerSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Header section");
-        object.assertInputOutputsDataTable(dataTable, "Header section");
+        object.assertVertexStep("Header", "section", "will be", "created as follows", dataTable);
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows$")
     public void methodsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.assertInputOutputsState("Created as follows", "Methods section");
-        object.assertInputOutputsDataTable(dataTable, "Methods section");
+        object.assertVertexStep("Methods", "section", "will be", "created as follows", dataTable);
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")
     public void isCreatedAsFollows(String docString) {
-        object.setInputOutputsState("Created as follows");
-        object.setInputOutputsDocString("Content", docString);
+        object.setVertexStep("", "", "is", "created as follows", docString);
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows$")
     public void willBeCreatedAsFollows(String docString) {
-        object.assertInputOutputsState("Created as follows");
-        object.assertInputOutputsDocString("Content", docString);
+        object.assertVertexStep("", "", "will be", "created as follows", docString);
     }
 
     @Given("^The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present$")
     public void willBePresent() {
-        object.assertInputOutputsState("Present");
+        object.assertVertexStep("", "", "will be", "present");
     }
 }

@@ -16,6 +16,7 @@ import org.farhan.impl.objects.ListQuickfixesPopupImpl;
 import org.farhan.impl.objects.ProcessGrammarFragmentAsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssues2AsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssuesAsciidocFileImpl;
+import org.farhan.impl.objects.TestObjectSheepDogImpl;
 import org.farhan.impl.objects.ValidateActionImpl;
 import org.farhan.impl.objects.ValidateAnnotationImpl;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarFragmentAsciidocFile;
@@ -55,7 +56,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
     @Before
     public void resetTestProject() throws Exception {
         SheepDogFactory.instance = new SheepDogFactoryImpl();
-        TestObjectDSL.reset();
+        TestObjectSheepDogImpl.reset();
     }
 
     @Override

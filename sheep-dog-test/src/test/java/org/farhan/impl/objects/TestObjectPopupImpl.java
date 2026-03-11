@@ -1,8 +1,8 @@
-package org.farhan.common;
+package org.farhan.impl.objects;
 
 import java.util.ArrayList;
 
-public class TestObjectPopup extends TestObjectDSL {
+public class TestObjectPopupImpl extends TestObjectSheepDogImpl {
 
     protected String listToString(ArrayList<?> proposals) {
         StringBuilder sb = new StringBuilder();

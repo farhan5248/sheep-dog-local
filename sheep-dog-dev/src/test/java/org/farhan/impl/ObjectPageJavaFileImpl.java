@@ -2,13 +2,12 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.JavaFileObject;
 import org.farhan.objects.codeprj.srcgen.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ObjectPageJavaFileImpl extends JavaFileObject
+public class ObjectPageJavaFileImpl extends TestObjectFileJavaImpl
 		implements ObjectPageJavaFile {
 
 	@Override

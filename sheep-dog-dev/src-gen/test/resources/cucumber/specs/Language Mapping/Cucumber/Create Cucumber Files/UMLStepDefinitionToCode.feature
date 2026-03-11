@@ -67,8 +67,8 @@ Feature: UMLStepDefinitionToCode
           | Method Name | Annotation                                            | Visibility | Return Type |
           | isEmpty     | @Given("^The blah application Object page is empty$") | public     | void        |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name | Statement                             |
-          | isEmpty     | object.setInputOutputsState("Empty"); |
+          | Method Name | Statement                                    |
+          | isEmpty     | object.setVertexStep("", "", "is", "empty"); |
 
   Scenario: Layer 2 with datatable without DI
 
@@ -81,18 +81,16 @@ Feature: UMLStepDefinitionToCode
           | Method Name                      | Parameter Name | Parameter Type |
           | topSectionWillBeCreatedAsFollows | dataTable      | DataTable      |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                      | Statement                                                            |
-          | topSectionWillBeCreatedAsFollows | object.assertInputOutputsState("Created as follows", "Top section"); |
-          | topSectionWillBeCreatedAsFollows | object.assertInputOutputsDataTable(dataTable, "Top section");        |
+          | Method Name                      | Statement                                                                              |
+          | topSectionWillBeCreatedAsFollows | object.assertVertexStep("Top", "section", "will be", "created as follows", dataTable); |
 
   Scenario: Layer 2 with datatable, negative without DI
 
      When The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                      | Statement                                                                  |
-          | topSectionWontBeCreatedAsFollows | object.assertInputOutputsState("Created as follows", "Top section", true); |
-          | topSectionWontBeCreatedAsFollows | object.assertInputOutputsDataTable(dataTable, "Top section", true);        |
+          | Method Name                      | Statement                                                                               |
+          | topSectionWontBeCreatedAsFollows | object.assertVertexStep("Top", "section", "won't be", "created as follows", dataTable); |
 
   Scenario: Layer 2 with docstring without DI
 
@@ -102,9 +100,8 @@ Feature: UMLStepDefinitionToCode
           | Method Name        | Parameter Name | Parameter Type |
           | isCreatedAsFollows | docString      | String         |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name        | Statement                                              |
-          | isCreatedAsFollows | object.setInputOutputsState("Created as follows");     |
-          | isCreatedAsFollows | object.setInputOutputsDocString("Content", docString); |
+          | Method Name        | Statement                                                            |
+          | isCreatedAsFollows | object.setVertexStep("", "", "is", "created as follows", docString); |
 
   Scenario: Layer 3
 
@@ -134,8 +131,8 @@ Feature: UMLStepDefinitionToCode
           | Constructor Name    | Statement                        |
           | BlahObjectPageSteps | super(object, "blah", "Object"); |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name | Statement                             |
-          | isEmpty     | object.setInputOutputsState("Empty"); |
+          | Method Name | Statement                                    |
+          | isEmpty     | object.setVertexStep("", "", "is", "empty"); |
 
   Scenario: Layer 2 without parameters with guice
 
@@ -152,6 +149,6 @@ Feature: UMLStepDefinitionToCode
           | Constructor Name    | Constructor Annotation |
           | BlahObjectPageSteps | Inject                 |
       And The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name | Statement                             |
-          | isEmpty     | object.setInputOutputsState("Empty"); |
+          | Method Name | Statement                                    |
+          | isEmpty     | object.setVertexStep("", "", "is", "empty"); |
 

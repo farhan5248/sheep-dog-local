@@ -17,7 +17,6 @@ public class SpecPrjInputFileAsciidocFileSteps extends TestSteps {
 
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/app/Input file.asciidoc file is created as follows$")
     public void isCreatedAsFollows(DataTable dataTable) {
-        object.setInputOutputsState("Created as follows");
-        object.setInputOutputsDataTable(dataTable);
+        object.setVertexStep("", "", "is", "created as follows", dataTable);
     }
 }

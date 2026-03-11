@@ -17,15 +17,11 @@ public class XtextAddDocumentNodeActionSteps extends TestSteps {
 
     @Given("^The xtext plugin add document node action is performed to add Table at$")
     public void isPerformedToAddTableAt(DataTable dataTable) {
-        object.setInputOutputsState("Performed to add Table at");
-        object.setInputOutputsDataTable(dataTable);
-        object.transition();
+        object.doEdgeStep("", "", "is", "performed to add Table at", dataTable);
     }
 
     @Given("^The xtext plugin add document node action is performed to add Text at$")
     public void isPerformedToAddTextAt(DataTable dataTable) {
-        object.setInputOutputsState("Performed to add Text at");
-        object.setInputOutputsDataTable(dataTable);
-        object.transition();
+        object.doEdgeStep("", "", "is", "performed to add Text at", dataTable);
     }
 }

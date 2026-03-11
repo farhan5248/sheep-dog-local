@@ -3,25 +3,20 @@ package org.farhan.impl;
 import java.util.HashMap;
 
 import org.farhan.common.TestConfig;
-import org.farhan.common.TestObjectGoal;
 import org.farhan.objects.maven.AsciidoctorToUmlGoal;
 
 import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
-public class AsciidoctorToUmlGoalImpl extends TestObjectGoal implements AsciidoctorToUmlGoal {
+public class AsciidoctorToUmlGoalImpl extends TestObjectGoalImpl implements AsciidoctorToUmlGoal {
 
-	public void transition() {
+	@Override
+	public void setExecuted(HashMap<String, String> keyMap) {
 		runGoal("org.farhan.mbt.maven.AsciiDoctorToUMLMojo", TestConfig.getWorkingDir() + "spec-prj/");
 	}
 
 	@Override
-	public void setExecuted(HashMap<String, String> keyMap) {
-		// TODO implement later
-	}
-
-	@Override
 	public void setExecutedWith(HashMap<String, String> keyMap) {
-		// TODO implement later
+		runGoal("org.farhan.mbt.maven.AsciiDoctorToUMLMojo", TestConfig.getWorkingDir() + "spec-prj/");
 	}
 
 	@Override

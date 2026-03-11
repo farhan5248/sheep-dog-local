@@ -2,13 +2,12 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.JavaFileObject;
 import org.farhan.objects.codeprj.srcgen.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements BlahObjectPageStepsJavaFile {
+public class BlahObjectPageStepsJavaFileImpl extends TestObjectFileJavaImpl implements BlahObjectPageStepsJavaFile {
 
 	@Override
 	public String getContent(HashMap<String, String> keyMap) {

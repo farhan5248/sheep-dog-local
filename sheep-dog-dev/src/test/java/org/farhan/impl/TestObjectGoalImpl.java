@@ -1,26 +1,27 @@
-package org.farhan.common;
+package org.farhan.impl;
 
 import java.util.ArrayList;
 
+import org.farhan.common.TestObject;
 import org.farhan.mbt.core.Converter;
 import org.farhan.dsl.grammar.IResourceRepository;
 import org.junit.jupiter.api.Assertions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class TestObjectGoal extends TestObject {
+public abstract class TestObjectGoalImpl extends TestObject {
 
-	private static final Logger logger = LoggerFactory.getLogger(TestObjectGoal.class);
+	private static final Logger logger = LoggerFactory.getLogger(TestObjectGoalImpl.class);
 
 	// TODO don't hardcode the directories
 	protected String[] dirs = { "src/test/resources/asciidoc/", "src-gen/test/resources/cucumber/" };
 	protected IResourceRepository or;
-	protected SourceFileRepository sr;
+	protected SourceFileRepositoryImpl sr;
 	protected String tags;
 
-	public TestObjectGoal() {
-		or = new ServiceFileRepository();
-		sr = new SourceFileRepository();
+	public TestObjectGoalImpl() {
+		or = new ServiceFileRepositoryImpl();
+		sr = new SourceFileRepositoryImpl();
 		properties.put("tags", "");
 	}
 

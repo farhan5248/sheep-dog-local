@@ -13,7 +13,7 @@ public class TestSuite {
 
 	protected void init(Object object, String component, String objectName) {
 		((TestObject) object).setComponent(component);
-		((TestObject) object).setPath(objectName);
+		((TestObject) object).setObject(objectName);
 	}
 
 	protected void addRow(String... cells) {

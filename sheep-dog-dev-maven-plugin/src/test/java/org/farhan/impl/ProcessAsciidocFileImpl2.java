@@ -2,13 +2,12 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessAsciidocFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessAsciidocFileImpl2 extends TestObjectFile implements ProcessAsciidocFile {
+public class ProcessAsciidocFileImpl2 extends TestObjectFileImpl implements ProcessAsciidocFile {
 
 	@Override
 	public void setContent(HashMap<String, String> keyMap) {

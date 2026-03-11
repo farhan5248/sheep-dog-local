@@ -1,7 +1,7 @@
 package org.farhan.impl.objects;
 
 import java.util.HashMap;
-import org.farhan.common.TestObjectFile;
+
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
@@ -14,7 +14,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssue
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessIssuesAsciidocFileImpl extends TestObjectFile implements ProcessIssuesAsciidocFile {
+public class ProcessIssuesAsciidocFileImpl extends TestObjectFileImpl implements ProcessIssuesAsciidocFile {
 
     @Override
     public String getCellListNodeCellName(HashMap<String, String> keyMap) {

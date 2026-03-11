@@ -2,14 +2,13 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.common.TestObjectPopup;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.objects.xtext.ListProposalsPopup;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListProposalsPopupImpl extends TestObjectPopup implements ListProposalsPopup {
+public class ListProposalsPopupImpl extends TestObjectPopupImpl implements ListProposalsPopup {
 
     @Override
     public String getEmpty(HashMap<String, String> keyMap) {

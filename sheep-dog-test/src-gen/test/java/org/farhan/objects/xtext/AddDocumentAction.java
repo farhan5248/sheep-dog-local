@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 public interface AddDocumentAction {
 
-    public void transition();
-
     public void setPerformedToCreateAStepObjectWith(HashMap<String, String> keyMap);
 
     public void setStepObjectFullName(HashMap<String, String> keyMap);
