@@ -22,8 +22,6 @@ public interface PstUmlFile {
 
     public String getClassSectionClassName(HashMap<String, String> keyMap);
 
-    public String getClassSectionNegative(HashMap<String, String> keyMap);
-
     public String getInteractionAnnotationsSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
     public String getInteractionAnnotationsSectionInteractionName(HashMap<String, String> keyMap);
@@ -51,8 +49,6 @@ public interface PstUmlFile {
     public String getInteractionSectionCreatedAsFollows(HashMap<String, String> keyMap);
 
     public String getInteractionSectionInteractionName(HashMap<String, String> keyMap);
-
-    public String getInteractionSectionNegative(HashMap<String, String> keyMap);
 
     public String getPresent(HashMap<String, String> keyMap);
 }

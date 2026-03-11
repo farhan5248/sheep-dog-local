@@ -111,7 +111,6 @@ Feature: UMLStepDefinitionToCode
           | Method Name                   | Visibility | Return Type | Parameter Name | Parameter Type         |
           | setEmpty                      | public     | void        | keyMap         | HashMap<String,String> |
           | getTopSectionCreatedAsFollows | public     | String      | keyMap         | HashMap<String,String> |
-          | getTopSectionNegative         | public     | String      | keyMap         | HashMap<String,String> |
           | getTopSectionH1               | public     | String      | keyMap         | HashMap<String,String> |
           | setCreatedAsFollows           | public     | void        | keyMap         | HashMap<String,String> |
           | setContent                    | public     | void        | keyMap         | HashMap<String,String> |

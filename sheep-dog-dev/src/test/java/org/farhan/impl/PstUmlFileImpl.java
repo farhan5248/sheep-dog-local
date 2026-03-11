@@ -45,11 +45,6 @@ public class PstUmlFileImpl extends TestObjectFileUMLImpl implements PstUmlFile 
 	}
 
 	@Override
-	public String getClassSectionNegative(HashMap<String, String> keyMap) {
-		return getClassNotExistsValue(keyMap.get("Class Name"));
-	}
-
-	@Override
 	public String getInteractionAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
 		return getInteractionAnnotationDetailExistsValue(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"),
 				keyMap.get("Annotation Detail"));
@@ -100,11 +95,6 @@ public class PstUmlFileImpl extends TestObjectFileUMLImpl implements PstUmlFile 
 	@Override
 	public String getInteractionSectionInteractionName(HashMap<String, String> keyMap) {
 		return getInteractionExistsValue(keyMap.get("Interaction Name"));
-	}
-
-	@Override
-	public String getInteractionSectionNegative(HashMap<String, String> keyMap) {
-		return getInteractionNotExistsValue(keyMap.get("Interaction Name"));
 	}
 
 	@Override
