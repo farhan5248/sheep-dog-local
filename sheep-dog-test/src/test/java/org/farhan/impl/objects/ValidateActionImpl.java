@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ValidateActionImpl extends TestObjectActionImpl implements ValidateAction {
+public class ValidateActionImpl extends TestObjectSheepDogImpl implements ValidateAction {
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {

@@ -34,7 +34,7 @@
  - `TestStepIssueResolver`
  - `TextIssueResolver`
 
-## src/main/java/org/farhan/dsl/lang
+## src/main/java/org/farhan/dsl/grammar
 
 **Desc**: Grammar model interfaces and creation infrastructure. Separates interface contracts from implementations, initialization logic from factory operations, and persistence contracts from business logic.
 
@@ -145,3 +145,51 @@
  - `StepObjectRefObjectEdgeTypes`
  - `StepDefinitionRefPartTypes`
  - `StepDefinitionRefStateTypes`
+
+## src/test/java/org/farhan/impl/ide
+
+**Desc**: Concrete implementations of grammar model interfaces and factory. Provides POJO-based grammar elements for test environments where EMF is not available.
+
+### {Language}FactoryImpl
+
+**Desc**: Concrete factory that creates POJO implementations of grammar element interfaces. Implements I{Language}Factory to provide {Type}Impl instances for each create{Type}() method.
+
+**Rule**: ONE class matches {Language}FactoryImpl pattern
+
+**Regex**: `^{Language}FactoryImpl$`
+ - `SheepDogFactoryImpl`
+
+### {Type}Impl
+
+**Desc**: POJO implementation of I{Type} grammar element interface. Uses package-private fields typed as impl classes, with parent wiring in setters and adders.
+
+**Rule**: SOME class matches {Type}Impl pattern
+
+**Regex**: `^{Type}Impl$`
+ - `CellImpl`
+ - `TestSuiteImpl`
+ - `TestProjectImpl`
+
+## src/test/java/org/farhan/impl/objects
+
+**Desc**: Test object implementations that bridge Cucumber step definitions to grammar model operations. Base classes provide shared cursor navigation and model manipulation; specific impls implement generated src-gen interfaces.
+
+### TestObject{Language}Impl
+
+**Desc**: Language-specific base class providing shared static state (cursor, testProject, dialogs), grammar element creation/assertion helpers, and node navigation methods. All impl/objects classes inherit from this.
+
+**Rule**: ONE class matches TestObject{Language}Impl pattern
+
+**Regex**: `^TestObject{Language}Impl$`
+ - `TestObjectSheepDogImpl`
+
+### {ObjectName}{ObjectType}Impl
+
+**Desc**: Test object implementation that bridges Cucumber step definitions to grammar model operations. Edge types (Action) buffer parameters in `properties` via setters, then consume them in performed methods. Vertex types (File, Popup, Annotation) operate directly on the document model or dialog state.
+
+**Rule**: SOME class matches {ObjectName}{ObjectType}Impl pattern
+
+**Regex**: `^{ObjectName}{ObjectType}Impl$`
+ - `AddDocumentActionImpl`
+ - `AddDocumentNodeActionImpl`
+

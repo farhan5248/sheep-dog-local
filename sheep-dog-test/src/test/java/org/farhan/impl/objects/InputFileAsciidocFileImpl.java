@@ -11,7 +11,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatc
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class InputFileAsciidocFileImpl extends TestObjectFileImpl implements InputFileAsciidocFile {
+public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements InputFileAsciidocFile {
 
     @Override
     public String getCellListNodeCellName(HashMap<String, String> keyMap) {

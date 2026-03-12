@@ -14,7 +14,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssue
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessIssuesAsciidocFileImpl extends TestObjectFileImpl implements ProcessIssuesAsciidocFile {
+public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implements ProcessIssuesAsciidocFile {
 
     @Override
     public String getCellListNodeCellName(HashMap<String, String> keyMap) {

@@ -7,7 +7,7 @@ import org.farhan.objects.xtext.ValidateAnnotation;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ValidateAnnotationImpl extends TestObjectAnnotationImpl implements ValidateAnnotation {
+public class ValidateAnnotationImpl extends TestObjectSheepDogImpl implements ValidateAnnotation {
 
 	@Override
 	public String getEmpty(HashMap<String, String> keyMap) {

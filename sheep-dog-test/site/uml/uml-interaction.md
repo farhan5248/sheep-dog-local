@@ -73,6 +73,626 @@ public interface IResourceRepository {
 
 No try-catch blocks, custom exceptions, RuntimeException usage, null returns for errors, or graceful degradation. All errors propagate immediately.
 
+## {Language}FactoryImpl
+
+### create{Type}
+
+Creates a new POJO implementation of a grammar element interface.
+
+**Example: Factory method body**
+```java
+@Override
+public ICell createCell() {
+    return new CellImpl();
+}
+```
+
+## {Type}Impl
+
+### set{Assignment}
+
+Setters for child elements cast to impl type and wire the parent reference. Some setFullName implementations parse the value to extract sub-fields.
+
+**Example: Setting a child with parent wiring**
+```java
+@Override
+public void setTable(ITable value) {
+    table = (TableImpl) value;
+    table.parent = this;
+}
+```
+
+**Example: Parsing fullName into parts**
+```java
+@Override
+public void setFullName(String value) {
+    stepObjectName = StepObjectRefFragments.getAll(value);
+    stepDefinitionName = StepDefinitionRefFragments.getAll(value.replace(stepObjectName, ""));
+}
+```
+
+### add{Type}
+
+Adders cast to impl type, add to the internal list, and wire the parent reference.
+
+**Example: Adding a child to a collection**
+```java
+@Override
+public boolean addTestCase(ITestCase value) {
+    TestCaseImpl impl = (TestCaseImpl) value;
+    testStepContainerList.add(impl);
+    impl.parent = this;
+    return true;
+}
+```
+
+### toString
+
+Returns a string representation, typically the name or fullName field.
+
+**Example: toString implementation**
+```java
+@Override
+public String toString() {
+    return name != null ? name : "";
+}
+```
+
+## TestObject{Language}Impl
+
+### reset
+
+Resets all static state for a clean test run.
+
+**Example: reset implementation**
+```java
+public static void reset() {
+    testProject = SheepDogBuilder.createTestProject();
+    cursor = testProject;
+    validateDialog = "";
+    listProposalsDialog = new ArrayList<SheepDogIssueProposal>();
+    listQuickfixesDialog = new ArrayList<SheepDogIssueProposal>();
+}
+```
+
+### add{Type}With{Assignment}
+
+Creates grammar elements with auto-navigation: if cursor is already at the target type, moves up to parent first.
+
+**Example: Creating a test step**
+```java
+protected void addTestStepWithFullName(String stepName) {
+    if (cursor instanceof ITestStep) {
+        cursor = ((ITestStep) cursor).getParent();
+    }
+    cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepName);
+}
+```
+
+### assert{Type}{Assignment}
+
+Queries model elements, navigating to them if needed. Returns the value or null if not found.
+
+**Example: Asserting with navigation**
+```java
+protected String assertTestStepContainerName(String name) {
+    if (cursor instanceof ITestStepContainer) {
+        return ((ITestStepContainer) cursor).getName();
+    } else {
+        cursor = ((ITestSuite) cursor).getTestStepContainer(name);
+        return cursor == null ? null : ((ITestStepContainer) cursor).getName();
+    }
+}
+```
+
+### get{Type}FromCursor
+
+Extracts a grammar element from cursor by type-checking against grammar types.
+
+**Example: getDescriptionFromCursor**
+```java
+protected IDescription getDescriptionFromCursor() {
+    if (cursor instanceof ITestSuite) return ((ITestSuite) cursor).getDescription();
+    else if (cursor instanceof ITestStepContainer) return ((ITestStepContainer) cursor).getDescription();
+    else if (cursor instanceof ITestData) return ((ITestData) cursor).getDescription();
+    return null;
+}
+```
+
+### getDocumentFromNode
+
+Walks up the grammar tree from any node to find the containing ITestDocument.
+
+**Example: getDocumentFromNode implementation**
+```java
+protected static Object getDocumentFromNode(Object node) {
+    Object current = node;
+    while (current != null && !(current instanceof ITestDocument)) {
+        if (current instanceof ICell) {
+            current = ((ICell) current).getParent();
+        } else if (current instanceof ITestProject) {
+            return null;
+        } else {
+            return null;
+        }
+    }
+    return current;
+}
+```
+
+### setCursorAtNode
+
+Navigates cursor along a path string using element type names and 1-based indices.
+
+**Example: setCursorAtNode implementation**
+```java
+protected void setCursorAtNode(String path) {
+    String[] parts = path.split("/");
+    Object current = getDocumentFromNode(cursor);
+    int i = 0;
+    while (i < parts.length && current != null) {
+        String elementType = parts[i];
+        if (elementType.equals("Table") || elementType.equals("Text")
+                || elementType.equals("Description")) {
+            current = getChildNode(current, elementType, 0);
+            i++;
+        } else {
+            int index = Integer.parseInt(parts[i + 1]) - 1;
+            current = getChildNode(current, elementType, index);
+            i += 2;
+        }
+        if (current != null)
+            cursor = current;
+    }
+}
+```
+
+### createNodeDependencies
+
+Ensures all intermediate nodes exist along a path, creating them via {Language}Builder if missing.
+
+**Example: createNodeDependencies implementation**
+```java
+protected void createNodeDependencies(String part) {
+    String[] parts = part.split("/");
+    Object current = getDocumentFromNode(cursor);
+    int i = 0;
+    while (i < parts.length) {
+        String elementType = parts[i];
+        if (elementType.equals("Table") || elementType.equals("Description")) {
+            current = getOrCreateNode(current, elementType, 0);
+            i++;
+        } else if (elementType.equals("Text") || elementType.equals("CellList")) {
+            break;
+        } else {
+            if (i + 1 >= parts.length || !parts[i + 1].matches("\\d+")) {
+                break;
+            }
+            int index = Integer.parseInt(parts[i + 1]) - 1;
+            current = getOrCreateNode(current, elementType, index);
+            i += 2;
+        }
+    }
+    cursor = current;
+}
+```
+
+### getFullNameFromPath
+
+Extracts the document full name from the "object" property.
+
+**Example: getFullNameFromPath implementation**
+```java
+protected String getFullNameFromPath() {
+    String path = (String) properties.get("object");
+    return path.replace("src/test/resources/asciidoc/", "");
+}
+```
+
+### listToString
+
+Converts an ArrayList to a newline-separated string for assertion mapping.
+
+**Example: listToString implementation**
+```java
+protected String listToString(ArrayList<?> list) {
+    StringBuilder sb = new StringBuilder();
+    for (Object item : list) {
+        sb.append("\n").append(item.toString());
+    }
+    return sb.toString();
+}
+```
+
+## {ObjectName}{ObjectType}Impl
+
+Seven implementation patterns from `arch-test.md` map to the method patterns below. Edge (Action) classes use patterns 3, 4, 7. Vertex (File, Popup, Annotation) classes use patterns 1, 2, 5, 6.
+
+### get{Type}{Assignment}
+
+Vertex getter that operates directly on the document model (patterns 1, 2).
+
+**Example: Pattern 1 — get + NodePath → setCursorAtNode**
+```java
+@Override
+public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
+    setCursorAtNode(keyMap.get("Node Path"));
+    return cursor == null ? null : cursor.toString();
+}
+```
+
+**Example: Pattern 1 — get + State → return state/listToString**
+```java
+@Override
+public String getDescriptionNodeState(HashMap<String, String> keyMap) {
+    IDescription desc = getDescriptionFromCursor();
+    return desc == null ? null : desc.toString();
+}
+```
+
+**Example: Pattern 1 — get + State → return listToString for collection**
+```java
+@Override
+public String getStepDefinitionListNodeState(HashMap<String, String> keyMap) {
+    if (cursor == null) return null;
+    return listToString(((IStepObject) cursor).getStepDefinitionList());
+}
+```
+
+**Example: Pattern 1 — get + {Assignment} → assert{Type}{Assignment}**
+```java
+@Override
+public String getCellListNodeCellName(HashMap<String, String> keyMap) {
+    return assertCellName(replaceKeyword(keyMap.get("Cell Name")));
+}
+```
+
+### set{Type}{Assignment}
+
+Edge classes buffer into properties (pattern 7). Vertex classes operate directly on model (patterns 1, 2).
+
+**Example: Pattern 7 — Edge property buffer**
+```java
+@Override
+public void setTestSuiteFullName(HashMap<String, String> keyMap) {
+    properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+}
+```
+
+**Example: Pattern 7 — Edge property buffer (Node Path)**
+```java
+@Override
+public void setNodePath(HashMap<String, String> keyMap) {
+    properties.put("Node Path", keyMap.get("Node Path"));
+}
+```
+
+**Example: Pattern 1 — Vertex set + NodePath → createNodeDependencies**
+```java
+@Override
+public void setCellListNodeNodePath(HashMap<String, String> keyMap) {
+    createNodeDependencies(keyMap.get("Node Path"));
+}
+```
+
+**Example: Pattern 1 — Vertex set + {Assignment} → add{Type}With{Assignment}**
+```java
+@Override
+public void setCellListNodeCellName(HashMap<String, String> keyMap) {
+    addCellWithName(keyMap.get("Cell Name"));
+}
+```
+
+### get{StateDesc}
+
+Vertex getter for document-level or dialog-level state (patterns 2, 5, 6).
+
+**Example: Pattern 2 — Document get via testProject**
+```java
+@Override
+public String getCreatedAsFollows(HashMap<String, String> keyMap) {
+    cursor = testProject.getTestDocument(getFullNameFromPath());
+    return cursor == null ? null : cursor.toString();
+}
+```
+
+**Example: Pattern 5 — Dialog read, return string (Annotation)**
+```java
+@Override
+public String getEmpty(HashMap<String, String> keyMap) {
+    return validateDialog;
+}
+```
+
+**Example: Pattern 5 — Dialog read, return listToString (Popup)**
+```java
+@Override
+public String getEmpty(HashMap<String, String> keyMap) {
+    return listToString(listProposalsDialog);
+}
+```
+
+**Example: Pattern 6 — Proposal read, iterate dialog, match by Id**
+```java
+@Override
+public String getProposalId(HashMap<String, String> keyMap) {
+    for (SheepDogIssueProposal p : listProposalsDialog) {
+        if (p.getId().equals(keyMap.get("Proposal Id"))) {
+            return p.getId();
+        }
+    }
+    return null;
+}
+```
+
+**Example: Pattern 6 — Proposal read, match by Id and value**
+```java
+@Override
+public String getProposalValue(HashMap<String, String> keyMap) {
+    for (SheepDogIssueProposal p : listProposalsDialog) {
+        if (p.getId().equals(keyMap.get("Proposal Id"))
+                && p.getValue().toString().contentEquals(keyMap.get("Proposal Value"))) {
+            return p.getValue().toString();
+        }
+    }
+    return null;
+}
+```
+
+### set{StateDesc}
+
+Edge classes consume buffered properties to execute actions (patterns 3, 4). Vertex File classes create documents (pattern 2). Vertex Popup/Annotation classes write dialog state (patterns 5, 6).
+
+**Example: Pattern 2 — Vertex create TestSuite document**
+```java
+@Override
+public void setCreated(HashMap<String, String> keyMap) {
+    addTestSuiteWithFullName(getFullNameFromPath());
+}
+```
+
+**Example: Pattern 2 — Vertex create StepObject document**
+```java
+@Override
+public void setCreated(HashMap<String, String> keyMap) {
+    addStepObjectWithFullName(getFullNameFromPath());
+}
+```
+
+**Example: Pattern 3 — Edge create document action**
+```java
+@Override
+public void setPerformedToCreateATestSuiteWith(HashMap<String, String> keyMap) {
+    cursor = testProject;
+    if (properties.get("Test Suite Full Name") != null) {
+        addTestSuiteWithFullName(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+        properties.remove("Test Suite Full Name");
+    }
+}
+```
+
+**Example: Pattern 3 — Edge modify list action (navigateToDocument + navigateToNode + add)**
+```java
+@Override
+public void setPerformedToModifyTestStepListWith(HashMap<String, String> keyMap) {
+    navigateToDocument();
+    navigateToNode();
+    if (properties.get("Test Step Full Name") != null) {
+        addTestStepWithFullName(replaceKeyword(properties.get("Test Step Full Name").toString()));
+        properties.remove("Test Step Full Name");
+    }
+}
+```
+
+**Example: Pattern 3 — Edge add text/table action**
+```java
+@Override
+public void setPerformedToAddTextAt(HashMap<String, String> keyMap) {
+    if (properties.get("Test Suite Full Name") != null) {
+        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+        properties.remove("Test Suite Full Name");
+    }
+    if (properties.get("Node Path") != null) {
+        setCursorAtNode(properties.get("Node Path").toString());
+        addTextWithContent("Text");
+        properties.remove("Node Path");
+    }
+}
+```
+
+**Example: Pattern 4 — Edge validate via instanceof → {Type}IssueDetector.validate{Assignment}{Scope}**
+```java
+@Override
+public void setPerformedAsFollows(HashMap<String, String> keyMap) {
+    if (properties.get("Test Suite Full Name") != null) {
+        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+        properties.remove("Test Suite Full Name");
+    }
+    if (properties.get("Node Path") != null) {
+        setCursorAtNode(properties.get("Node Path").toString());
+        properties.remove("Node Path");
+    }
+    try {
+        if (cursor instanceof ICell) {
+            ICell cell = (ICell) cursor;
+            if (validateDialog == null || validateDialog.isEmpty()) {
+                validateDialog = CellIssueDetector.validateNameOnly(cell);
+                if (validateDialog == null) {
+                    validateDialog = "";
+                }
+            }
+        } else if (cursor instanceof IText) {
+            IText text = (IText) cursor;
+            if (validateDialog == null || validateDialog.isEmpty()) {
+                validateDialog = TextIssueDetector.validateNameWorkspace(text);
+                if (validateDialog == null) {
+                    validateDialog = "";
+                }
+            }
+        }
+        // ... instanceof chain for each grammar type
+    } catch (Exception e) {
+        Assertions.fail(e);
+    }
+}
+```
+
+**Example: Pattern 4 — Edge apply quickfix via instanceof → {Type}IssueResolver.correct{Assignment}{Scope} + applyProposal**
+```java
+@Override
+public void setPerformedAsFollows(HashMap<String, String> keyMap) {
+    // ... navigate (same as validate) ...
+    try {
+        if (cursor instanceof ICell) {
+            ICell cell = (ICell) cursor;
+            if (!CellIssueDetector.validateNameOnly(cell).isEmpty()) {
+                applyProposal(CellIssueResolver.correctNameOnly(cell));
+            }
+        } else if (cursor instanceof ITestStep) {
+            ITestStep testStep = (ITestStep) cursor;
+            if (!TestStepIssueDetector.validateStepObjectNameWorkspace(testStep).isEmpty()) {
+                applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
+            }
+        }
+        // ... instanceof chain
+    } catch (Exception e) {
+        Assertions.fail(e);
+    }
+}
+```
+
+**Example: Pattern 4 — Edge list proposals via instanceof → {Type}IssueResolver.suggest{Assignment}{Scope}**
+```java
+@Override
+public void setPerformedAsFollows(HashMap<String, String> keyMap) {
+    // ... navigate (same as validate) ...
+    try {
+        if (cursor instanceof IRow) {
+            IRow row = (IRow) cursor;
+            ITestStep testStep = (ITestStep) row.getParent().getParent();
+            listProposalsDialog.addAll(RowIssueResolver.suggestCellListWorkspace(testStep));
+        } else if (cursor instanceof ITestStep) {
+            listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) cursor));
+            listProposalsDialog.addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace((ITestStep) cursor));
+        }
+        // ... instanceof chain
+    } catch (Exception e) {
+        Assertions.fail(e);
+    }
+}
+```
+
+**Example: Pattern 4 — Edge list quickfixes via instanceof → validateDialog check + {Type}IssueResolver.correct{Assignment}{Scope}**
+```java
+@Override
+public void setPerformedAsFollows(HashMap<String, String> keyMap) {
+    // ... navigate (same as validate) ...
+    try {
+        if (cursor instanceof ICell) {
+            ICell cell = (ICell) cursor;
+            if (validateDialog.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
+                listQuickfixesDialog.addAll(CellIssueResolver.correctNameOnly(cell));
+            }
+        } else if (cursor instanceof ITestStep) {
+            ITestStep testStep = (ITestStep) cursor;
+            if (validateDialog.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
+                listQuickfixesDialog.addAll(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
+            }
+        }
+        // ... instanceof chain
+    } catch (Exception e) {
+        Assertions.fail(e);
+    }
+}
+```
+
+**Example: Pattern 5 — Vertex dialog write (Annotation)**
+```java
+@Override
+public void setContent(HashMap<String, String> keyMap) {
+    validateDialog = keyMap.get("Content");
+}
+```
+
+**Example: Pattern 5 — Vertex dialog write with keyword replacement (Annotation)**
+```java
+@Override
+public void setEmpty(HashMap<String, String> keyMap) {
+    validateDialog = replaceKeyword("empty");
+}
+```
+
+**Example: Pattern 6 — Vertex append new proposal to dialog list**
+```java
+@Override
+public void setProposalId(HashMap<String, String> keyMap) {
+    listQuickfixesDialog.add(new SheepDogIssueProposal());
+    listQuickfixesDialog.getLast().setId(keyMap.get("Proposal Id"));
+}
+```
+
+**Example: Pattern 6 — Vertex set field on last proposal**
+```java
+@Override
+public void setProposalDescription(HashMap<String, String> keyMap) {
+    listQuickfixesDialog.getLast().setDescription(keyMap.get("Proposal Description"));
+}
+```
+
+### navigateToDocument
+
+Navigates cursor to a document by consuming Test Suite Full Name or Step Object Full Name from properties.
+
+**Example: navigateToDocument implementation**
+```java
+private void navigateToDocument() {
+    if (properties.get("Test Suite Full Name") != null) {
+        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+        properties.remove("Test Suite Full Name");
+    } else if (properties.get("Step Object Full Name") != null) {
+        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Step Object Full Name").toString()));
+        properties.remove("Step Object Full Name");
+    }
+}
+```
+
+### navigateToNode
+
+Navigates cursor to a node position by consuming Node Path from properties.
+
+**Example: navigateToNode implementation**
+```java
+private void navigateToNode() {
+    if (properties.get("Node Path") != null) {
+        setCursorAtNode(properties.get("Node Path").toString());
+        properties.remove("Node Path");
+    }
+}
+```
+
+### applyProposal
+
+Static helper that applies issue fix proposals to the current cursor element.
+
+**Example: applyProposal implementation**
+```java
+private static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
+    for (SheepDogIssueProposal p : proposals) {
+        if (p.getValue() instanceof IStepObject) {
+            testProject.addStepObject((IStepObject) p.getValue());
+        } else {
+            if (cursor instanceof ICell) {
+                ((ICell) cursor).setName(p.getValue().toString());
+            } else if (cursor instanceof ITestSuite) {
+                ((ITestSuite) cursor).setName(p.getValue().toString());
+            } else if (cursor instanceof ITestStepContainer) {
+                ((ITestStepContainer) cursor).setName(p.getValue().toString());
+            }
+        }
+    }
+}
+```
+
 ## {Language}Factory
 
 ### instance
@@ -421,390 +1041,6 @@ for (StepObjectRefComponentTypes component : StepObjectRefComponentTypes.values(
         // Found component type
         return component;
     }
-}
-```
-
-## TestObject
-
-### processInputOutputs (DataTable)
-
-Reflection-based dispatch that converts DataTable rows into method calls on impl classes. For get operations, performs centralized assertions. State fields use Absent/Empty/Present mapping.
-
-**Example: DataTable dispatch with State mapping**
-```java
-protected void processInputOutputs(DataTable dataTable, String operation, String sectionName, boolean negativeTest) {
-    List<List<String>> data = dataTable.asLists();
-    ArrayList<String> headers = new ArrayList<String>();
-    for (String cell : data.get(0)) {
-        headers.add(cell);
-    }
-    for (int i = 1; i < data.size(); i++) {
-        HashMap<String, String> row = new HashMap<String, String>();
-        for (int j = 0; j < headers.size(); j++) {
-            row.put(headers.get(j), data.get(i).get(j));
-        }
-        for (String fieldName : headers) {
-            Object returnValue = this.getClass().getMethod(operation + convertToPascalCase(sectionName)
-                    + convertToPascalCase(fieldName), HashMap.class).invoke(this, row);
-            if (operation.equals("get") && !fieldName.contains("Node Path") && !fieldName.equals("Tag List")) {
-                String expected = replaceKeyword(row.get(fieldName));
-                String actual = returnValue == null ? null : returnValue.toString();
-                if (fieldName.equals("State")) {
-                    String mappedActual;
-                    if (actual == null) mappedActual = "Absent";
-                    else if (actual.isEmpty()) mappedActual = "Empty";
-                    else mappedActual = "Present";
-                    Assertions.assertEquals(expected, mappedActual);
-                } else {
-                    Assertions.assertEquals(expected, actual);
-                }
-            }
-        }
-    }
-}
-```
-
-### processInputOutputs (Single value)
-
-Dispatches single key-value pairs to get/set methods via reflection.
-
-**Example: Single value dispatch**
-```java
-protected void processInputOutputs(String key, String value, String operation, String sectionName, boolean negativeTest) {
-    HashMap<String, String> row = new HashMap<String, String>();
-    row.put(key, value);
-    Object returnValue = this.getClass().getMethod(
-            operation + convertToPascalCase(sectionName) + convertToPascalCase(key),
-            HashMap.class).invoke(this, row);
-    if (operation.equals("get")) {
-        String actual = returnValue == null ? null : returnValue.toString();
-        if (value.equals("true")) {
-            Assertions.assertNotNull(actual);
-        } else if (!value.isEmpty()) {
-            Assertions.assertEquals(replaceKeyword(value), actual);
-        }
-    }
-}
-```
-
-### assertInputOutputs{Format}
-
-Public entry points that delegate to processInputOutputs with operation="get".
-
-**Example: assertInputOutputsDataTable**
-```java
-public void assertInputOutputsDataTable(DataTable dataTable) {
-    processInputOutputs(dataTable, "get", "", false);
-}
-```
-
-**Example: assertInputOutputsState**
-```java
-public void assertInputOutputsState(String key) {
-    processInputOutputs(key, "true", "get", "", false);
-}
-```
-
-**Example: assertInputOutputsDocString**
-```java
-public void assertInputOutputsDocString(String key, String value) {
-    processInputOutputs(key, value, "get", "", false);
-}
-```
-
-### setInputOutputs{Format}
-
-Public entry points that delegate to processInputOutputs with operation="set".
-
-**Example: setInputOutputsDataTable**
-```java
-public void setInputOutputsDataTable(DataTable dataTable) {
-    processInputOutputs(dataTable, "set", "", false);
-}
-```
-
-**Example: setInputOutputsState**
-```java
-public void setInputOutputsState(String key) {
-    processInputOutputs(key, "true", "set", "", false);
-}
-```
-
-**Example: setInputOutputsDocString**
-```java
-public void setInputOutputsDocString(String key, String value) {
-    processInputOutputs(key, value, "set", "", false);
-}
-```
-
-### listToString
-
-Converts a List to a string with null/empty/present semantics for assertion mapping.
-
-**Example: listToString implementation**
-```java
-protected String listToString(List<?> list) {
-    if (list == null) return null;
-    if (list.isEmpty()) return "";
-    return list.toString();
-}
-```
-
-### convertToPascalCase
-
-Converts a separated string to PascalCase for reflective method name construction.
-
-**Example: convertToPascalCase implementation**
-```java
-private String convertToPascalCase(String s) {
-    StringBuilder result = new StringBuilder();
-    for (String word : s.split("[ \\-\\(\\)/]+")) {
-        if (!word.isEmpty()) {
-            result.append(Character.toUpperCase(word.charAt(0)));
-            if (word.length() > 1) {
-                result.append(word.substring(1));
-            }
-        }
-    }
-    return result.toString();
-}
-```
-
-### replaceKeyword
-
-Replaces keyword placeholders in expected values.
-
-**Example: replaceKeyword implementation**
-```java
-protected String replaceKeyword(String value) {
-    if (value.contentEquals("empty")) {
-        return "";
-    } else {
-        return value;
-    }
-}
-```
-
-### transition
-
-Empty default implementation, overridden by TestObject{Language}.
-
-**Example: Default transition**
-```java
-public void transition() {
-}
-```
-
-## TestObject{Language}
-
-### reset
-
-Resets all static state for a clean test run.
-
-**Example: reset implementation**
-```java
-public static void reset() {
-    testProject = SheepDogBuilder.createTestProject();
-    cursor = testProject;
-    validateDialog = "";
-    listProposalsDialog = new ArrayList<SheepDogIssueProposal>();
-    listQuickfixesDialog = new ArrayList<SheepDogIssueProposal>();
-}
-```
-
-### add{Type}With{Assignment}
-
-Creates grammar elements with auto-navigation: if cursor is already at the target type, moves up to parent first.
-
-**Example: Creating a test step**
-```java
-protected void addTestStepWithFullName(String stepName) {
-    if (cursor instanceof ITestStep) {
-        cursor = ((ITestStep) cursor).getParent();
-    }
-    cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepName);
-}
-```
-
-**Example: Creating a cell**
-```java
-protected void addCellWithName(String name) {
-    if (cursor instanceof ICell) {
-        cursor = ((ICell) cursor).getParent();
-    }
-    cursor = SheepDogBuilder.createCell((IRow) cursor, name);
-}
-```
-
-### assert{Type}{Assignment}
-
-Queries model elements, navigating to them if needed. Returns the value or null if not found.
-
-**Example: Asserting with navigation**
-```java
-protected String assertTestStepContainerName(String name) {
-    if (cursor instanceof ITestStepContainer) {
-        return ((ITestStepContainer) cursor).getName();
-    } else {
-        cursor = ((ITestSuite) cursor).getTestStepContainer(name);
-        return cursor == null ? null : ((ITestStepContainer) cursor).getName();
-    }
-}
-```
-
-**Example: Asserting without navigation**
-```java
-protected String assertTestStepFullName(String fullName) {
-    return ((ITestStep) cursor).getFullName();
-}
-```
-
-### transition
-
-Navigates cursor to a test document based on property values.
-
-**Example: transition implementation**
-```java
-public void transition() {
-    if (properties.get("Test Suite Full Name") != null) {
-        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
-        properties.remove("Test Suite Full Name");
-    } else if (properties.get("Step Object Full Name") != null) {
-        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Step Object Full Name").toString()));
-        properties.remove("Step Object Full Name");
-    }
-}
-```
-
-### getDescriptionFromCursor
-
-Extracts IDescription from cursor by type-checking against grammar types with description assignments.
-
-**Example: getDescriptionFromCursor implementation**
-```java
-protected IDescription getDescriptionFromCursor() {
-    if (cursor instanceof ITestSuite) return ((ITestSuite) cursor).getDescription();
-    else if (cursor instanceof ITestStepContainer) return ((ITestStepContainer) cursor).getDescription();
-    else if (cursor instanceof IStepObject) return ((IStepObject) cursor).getDescription();
-    else if (cursor instanceof IStepDefinition) return ((IStepDefinition) cursor).getDescription();
-    else if (cursor instanceof IStepParameters) return ((IStepParameters) cursor).getDescription();
-    else if (cursor instanceof ITestData) return ((ITestData) cursor).getDescription();
-    return null;
-}
-```
-
-### getTableFromCursor
-
-Extracts ITable from cursor by type-checking against grammar types with table assignments.
-
-**Example: getTableFromCursor implementation**
-```java
-protected ITable getTableFromCursor() {
-    if (cursor instanceof IStepParameters) return ((IStepParameters) cursor).getTable();
-    else if (cursor instanceof ITestData) return ((ITestData) cursor).getTable();
-    else if (cursor instanceof ITestStep) return ((ITestStep) cursor).getTable();
-    return null;
-}
-```
-
-### getDocumentFromNode
-
-Walks up the grammar tree from any node to find the containing ITestDocument.
-
-**Example: getDocumentFromNode implementation**
-```java
-protected static Object getDocumentFromNode(Object node) {
-    Object current = node;
-    while (current != null && !(current instanceof ITestDocument)) {
-        if (current instanceof ICell) {
-            current = ((ICell) current).getParent();
-        } else if (current instanceof IRow) {
-            current = ((IRow) current).getParent();
-        } else if (current instanceof ITestStep) {
-            current = ((ITestStep) current).getParent();
-        } else if (current instanceof ITestStepContainer) {
-            current = ((ITestStepContainer) current).getParent();
-        } else if (current instanceof ITestProject) {
-            return null;
-        } else {
-            return null;
-        }
-    }
-    return current;
-}
-```
-
-### setCursorAtNode
-
-Navigates cursor along a path string using element type names and 1-based indices.
-
-**Example: setCursorAtNode implementation**
-```java
-protected void setCursorAtNode(String path) {
-    String[] parts = path.split("/");
-    Object current = getDocumentFromNode(cursor);
-    int i = 0;
-    while (i < parts.length && current != null) {
-        String elementType = parts[i];
-        if (elementType.equals("Table") || elementType.equals("Text")
-                || elementType.equals("Description")) {
-            current = getChildNode(current, elementType, 0);
-            i++;
-        } else {
-            int index = Integer.parseInt(parts[i + 1]) - 1;
-            current = getChildNode(current, elementType, index);
-            i += 2;
-        }
-        if (current != null)
-            cursor = current;
-    }
-}
-```
-
-### createNodeDependencies
-
-Ensures all intermediate nodes exist along a path, creating them via {Language}Builder if missing.
-
-**Example: createNodeDependencies implementation**
-```java
-protected void createNodeDependencies(String part) {
-    String[] parts = part.split("/");
-    Object current = getDocumentFromNode(cursor);
-    int i = 0;
-    while (i < parts.length) {
-        String elementType = parts[i];
-        if (elementType.equals("Table") || elementType.equals("Description")) {
-            current = getOrCreateNode(current, elementType, 0);
-            i++;
-        } else if (elementType.equals("Text") || elementType.equals("CellList")) {
-            break;
-        } else {
-            if (i + 1 >= parts.length || !parts[i + 1].matches("\\d+")) {
-                break;
-            }
-            int index = Integer.parseInt(parts[i + 1]) - 1;
-            current = getOrCreateNode(current, elementType, index);
-            i += 2;
-        }
-    }
-    cursor = current;
-}
-```
-
-## TestObject{ObjectType}
-
-### listToString
-
-TestObjectPopup overrides listToString for ArrayList to format proposals with newline separation.
-
-**Example: Popup listToString override**
-```java
-protected String listToString(ArrayList<?> proposals) {
-    StringBuilder sb = new StringBuilder();
-    for (Object p : proposals) {
-        sb.append("\n").append(p.toString());
-    }
-    return sb.toString();
 }
 ```
 

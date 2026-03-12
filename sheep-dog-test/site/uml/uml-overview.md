@@ -25,7 +25,7 @@ Pattern variables used in UML files to represent families of classes following s
    - Case variants: `{type}` (camelCase), `{TYPE}` (UPPER_SNAKE_CASE)
 
 3. **{Assignment}** - Named assignments within grammar rules
-   - Values: `(Name|Description|LineList|StepDefinitionList|StepParameterList|Table|TestStepContainerList|TestStepList|TestDataList|StepObjectName|StepDefinitionName|Text|RowList|CellList|TestDocumentList)`
+   - Values: `(Content|Name|Description|FullName|Parent|LineList|StepDefinitionList|StepParameterList|Table|TestStepContainerList|TestStepList|TestDataList|StepObjectName|StepDefinitionName|Text|RowList|CellList|TestDocumentList)`
    - Used in: validate{Assignment}{Scope}(), correct{Assignment}{Scope}(), suggest{Assignment}{Scope}()
    - Case variants: `{assignment}` (camelCase for get/set methods), `{ASSIGNMENT}` (UPPER_SNAKE_CASE for enum constants)
 
@@ -44,7 +44,26 @@ Pattern variables used in UML files to represent families of classes following s
    - Used in: TestObject{ObjectType}
    - Case variants: `{objectType}` (camelCase), `{OBJECT_TYPE}` (UPPER_SNAKE_CASE)
 
-7. **{Format}** - Input/output formats for test step data processing
-   - Values: `(DataTable|DocString|State)`
-   - Used in: assertInputOutputs{Format}, setInputOutputs{Format}
+7. **{ComponentType}** - Component types from StepObjectRefComponentTypes enum
+   - Values: `(Application|Project|Service|Batchjob|Plugin)`
+   - Used in: StepObjectRef component fragment decomposition
+   - Case variants: `{componentType}` (camelCase), `{COMPONENT_TYPE}` (UPPER_SNAKE_CASE)
+
+8. **{StateType}** - State verb types from StepDefinitionRefStateTypes enum
+   - Values: `(Is|Isn't|WillBe|Won'tBe)`
+   - Used in: StepDefinitionRef state fragment decomposition
+   - Case variants: `{stateType}` (camelCase), `{STATE_TYPE}` (UPPER_SNAKE_CASE)
+
+9. **{PartType}** - Part types from StepDefinitionRefPartTypes enum
+    - Values: `(Type|Language|Assignment|Fragment|Scope|Node)`
+    - Used in: StepDefinitionRef part fragment decomposition
+    - Case variants: `{partType}` (camelCase), `{PART_TYPE}` (UPPER_SNAKE_CASE)
+
+10. **{ObjectName}** - Object name from StepObjectRef, free-form text identifying the specific test object
+    - Values: `.+` (regex from `StepObjectRefFragments.OBJECT_NAME`)
+    - Used in: {ObjectName}ActionImpl, {ObjectName}FileImpl, {ObjectName}PopupImpl, {ObjectName}AnnotationImpl
+
+11. **{StateDesc}** - State description from StepDefinitionRef, free-form text describing the performed action
+    - Values: `.+` (regex from `StepDefinitionRefFragments.STATE_DESC`)
+    - Used in: set{StateDesc}
 

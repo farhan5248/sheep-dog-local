@@ -7,7 +7,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssue
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessIssues2AsciidocFileImpl extends TestObjectFileImpl implements ProcessIssues2AsciidocFile {
+public class ProcessIssues2AsciidocFileImpl extends TestObjectSheepDogImpl implements ProcessIssues2AsciidocFile {
 
     @Override
     public String getTestSuiteName(HashMap<String, String> keyMap) {

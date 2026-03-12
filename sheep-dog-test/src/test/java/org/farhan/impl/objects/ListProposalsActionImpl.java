@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListProposalsActionImpl extends TestObjectActionImpl implements ListProposalsAction {
+public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements ListProposalsAction {
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {

@@ -7,7 +7,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatc
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class Input2FileAsciidocFileImpl extends TestObjectFileImpl implements Input2FileAsciidocFile {
+public class Input2FileAsciidocFileImpl extends TestObjectSheepDogImpl implements Input2FileAsciidocFile {
 
     @Override
     public String getStepObjectName(HashMap<String, String> keyMap) {

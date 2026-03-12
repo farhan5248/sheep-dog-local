@@ -7,7 +7,7 @@ import org.farhan.objects.xtext.AddDocumentNodeAction;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class AddDocumentNodeActionImpl extends TestObjectActionImpl implements AddDocumentNodeAction {
+public class AddDocumentNodeActionImpl extends TestObjectSheepDogImpl implements AddDocumentNodeAction {
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {

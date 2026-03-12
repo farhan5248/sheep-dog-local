@@ -8,7 +8,7 @@ import org.farhan.objects.xtext.ListProposalsPopup;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListProposalsPopupImpl extends TestObjectPopupImpl implements ListProposalsPopup {
+public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements ListProposalsPopup {
 
     @Override
     public String getEmpty(HashMap<String, String> keyMap) {

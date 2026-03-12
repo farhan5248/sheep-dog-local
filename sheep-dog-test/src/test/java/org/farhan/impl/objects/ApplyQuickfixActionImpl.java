@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ApplyQuickfixActionImpl extends TestObjectActionImpl implements ApplyQuickfixAction {
+public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements ApplyQuickfixAction {
 
     private static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
         for (SheepDogIssueProposal p : proposals) {

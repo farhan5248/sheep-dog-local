@@ -58,6 +58,19 @@ Static helper methods for grammar element operations. Separates utility operatio
  - `public static ArrayList<ITestStep> getTestStepListUpToTestStep(ITestStep theTestStep)`
  - Future: `public static ArrayList<ITestStepContainer> getTestStepContainerListUpToTestCase(ITestCase theTestCase)`
 
+## get{Type}List
+
+**Desc**: Filters a parent collection by type, returning only elements matching the target grammar type.
+
+**Rule**: SOME method names follow get{Type}List pattern.
+ - **Name**: `^get{Type}List$`
+ - **Return**: `^List<I{Type}>$`
+ - **Parameters**: `^\(I{Type}\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static List<ITestSuite> getTestSuiteList(ITestProject project)`
+
 ## clone{Type}
 
 **Desc**: Creates deep clones of grammar elements to avoid side effects during operations like proposal generation. Clones are created without parent associations to prevent modification of the original element tree.

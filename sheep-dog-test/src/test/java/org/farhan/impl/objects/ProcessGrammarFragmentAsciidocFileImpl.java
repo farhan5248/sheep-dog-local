@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectFileImpl implements ProcessGrammarFragmentAsciidocFile {
+public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogImpl implements ProcessGrammarFragmentAsciidocFile {
 
     @Override
     public String getPhraseTagFragmentTagList(HashMap<String, String> keyMap) {

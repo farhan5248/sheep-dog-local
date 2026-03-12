@@ -409,6 +409,14 @@ public class TestObjectSheepDogImpl extends TestObject {
         return path.replace("src/test/resources/asciidoc/", "");
     }
 
+    protected String listToString(ArrayList<?> list) {
+        StringBuilder sb = new StringBuilder();
+        for (Object item : list) {
+            sb.append("\n").append(item.toString());
+        }
+        return sb.toString();
+    }
+
     protected void setCursorAtNode(String path) {
         String[] parts = path.split("/");
         Object current = getDocumentFromNode(cursor);

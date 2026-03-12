@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ListQuickfixesActionImpl extends TestObjectActionImpl implements ListQuickfixesAction {
+public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements ListQuickfixesAction {
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
