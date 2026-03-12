@@ -146,7 +146,7 @@ public class PstUmlFileImpl extends TestObjectFileUMLImpl implements PstUmlFile 
 
 	@Override
 	public void setObject(String object) {
-		properties.put("object", object);
+		this.object = object;
 	}
 
 }

@@ -11,27 +11,27 @@ public class ValidateAnnotationImpl extends TestObjectSheepDogImpl implements Va
 
 	@Override
 	public String getEmpty(HashMap<String, String> keyMap) {
-		return validateDialog;
+		return (String) getProperty("validate annotation.Content");
 	}
 
 	@Override
 	public String getContent(HashMap<String, String> keyMap) {
-		return validateDialog;
+		return (String) getProperty("validate annotation.Content");
 	}
 
 	@Override
 	public void setEmpty(HashMap<String, String> keyMap) {
-		validateDialog = replaceKeyword("empty");
+		setProperty("validate annotation.Content", replaceKeyword("empty"));
 	}
 
 	@Override
 	public void setContent(HashMap<String, String> keyMap) {
-		validateDialog = keyMap.get("Content");
+		setProperty("validate annotation.Content", keyMap.get("Content"));
 	}
 
 	@Override
 	public String getSetAsFollows(HashMap<String, String> keyMap) {
-		return validateDialog;
+		return (String) getProperty("validate annotation.Content");
 	}
 
 	@Override

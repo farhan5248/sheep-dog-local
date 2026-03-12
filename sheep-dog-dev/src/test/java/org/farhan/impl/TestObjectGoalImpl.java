@@ -22,13 +22,13 @@ public abstract class TestObjectGoalImpl extends TestObject {
 	public TestObjectGoalImpl() {
 		or = new ServiceFileRepositoryImpl();
 		sr = new SourceFileRepositoryImpl();
-		properties.put("tags", "");
+		setProperty("tags", "");
 	}
 
 	protected void runGoal(String goal) {
 		logger.debug("Entering runGoal for goal: {}", goal != null ? goal : "null");
 		try {
-			tags = properties.get("tags").toString();
+			tags = getProperty("tags").toString();
 			Class<?> mojoClass = Class.forName(goal);
 			Converter mojo = (Converter) mojoClass.getConstructor(String.class, IResourceRepository.class)
 					.newInstance(tags, or);

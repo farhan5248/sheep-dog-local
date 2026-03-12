@@ -8,6 +8,7 @@ import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.issues.RowIssueDetector;
 import org.farhan.dsl.issues.TestStepContainerIssueDetector;
@@ -24,51 +25,52 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        properties.put("Node Path", keyMap.get("Node Path"));
+        setProperty("Node Path", keyMap.get("Node Path"));
     }
 
     @Override
     public void setTestSuiteFullName(HashMap<String, String> keyMap) {
-        properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+        setProperty("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
     }
 
     @Override
     public void setPerformedAsFollows(HashMap<String, String> keyMap) {
-        if (properties.get("Test Suite Full Name") != null) {
-            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+        if (getProperty("Test Suite Full Name") != null) {
+            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
             properties.remove("Test Suite Full Name");
         }
-        if (properties.get("Node Path") != null) {
-            setCursorAtNode(properties.get("Node Path").toString());
+        if (getProperty("Node Path") != null) {
+            setCursorAtNode(getProperty("Node Path").toString());
             properties.remove("Node Path");
         }
         try {
-            if (cursor instanceof ICell) {
-                ICell cell = (ICell) cursor;
+            String validateDialog = (String) getProperty("validate annotation.Content");
+            if (getProperty("cursor") instanceof ICell) {
+                ICell cell = (ICell) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
                     validateDialog = CellIssueDetector.validateNameOnly(cell);
                     if (validateDialog == null) {
                         validateDialog = "";
                     }
                 }
-            } else if (cursor instanceof IRow) {
-                IRow row = (IRow) cursor;
+            } else if (getProperty("cursor") instanceof IRow) {
+                IRow row = (IRow) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
                     validateDialog = RowIssueDetector.validateCellListWorkspace(row);
                     if (validateDialog == null) {
                         validateDialog = "";
                     }
                 }
-            } else if (cursor instanceof IText) {
-                IText text = (IText) cursor;
+            } else if (getProperty("cursor") instanceof IText) {
+                IText text = (IText) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
                     validateDialog = TextIssueDetector.validateNameWorkspace(text);
                     if (validateDialog == null) {
                         validateDialog = "";
                     }
                 }
-            } else if (cursor instanceof ITestStep) {
-                ITestStep testStep = (ITestStep) cursor;
+            } else if (getProperty("cursor") instanceof ITestStep) {
+                ITestStep testStep = (ITestStep) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
                     validateDialog = TestStepIssueDetector.validateStepObjectNameOnly(testStep);
                     if (validateDialog == null) {
@@ -95,8 +97,8 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
                         }
                     }
                 }
-            } else if (cursor instanceof ITestStepContainer) {
-                ITestStepContainer testStepContainer = (ITestStepContainer) cursor;
+            } else if (getProperty("cursor") instanceof ITestStepContainer) {
+                ITestStepContainer testStepContainer = (ITestStepContainer) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
                     validateDialog = TestStepContainerIssueDetector
                             .validateTestStepListFile(testStepContainer);
@@ -111,8 +113,8 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
                         }
                     }
                 }
-            } else if (cursor instanceof ITestSuite) {
-                ITestSuite testSuite = (ITestSuite) cursor;
+            } else if (getProperty("cursor") instanceof ITestSuite) {
+                ITestSuite testSuite = (ITestSuite) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
                     validateDialog = TestSuiteIssueDetector.validateNameOnly(testSuite);
                     if (validateDialog == null) {
@@ -122,6 +124,7 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
             } else {
                 Assertions.fail("Unknown Element Type");
             }
+            setProperty("validate annotation.Content", validateDialog);
         } catch (Exception e) {
             Assertions.fail(e);
         }

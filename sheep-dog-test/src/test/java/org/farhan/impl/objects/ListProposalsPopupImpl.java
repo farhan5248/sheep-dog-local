@@ -12,12 +12,12 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
 
     @Override
     public String getEmpty(HashMap<String, String> keyMap) {
-        return listToString(listProposalsDialog);
+        return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
     }
 
     @Override
     public String getProposalValue(HashMap<String, String> keyMap) {
-        for (SheepDogIssueProposal p : listProposalsDialog) {
+        for (SheepDogIssueProposal p : ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))) {
             if (p.getId().equals(keyMap.get("Proposal Id"))
                     && p.getValue().toString().contentEquals(keyMap.get("Proposal Value"))) {
                 return p.getValue().toString();
@@ -28,7 +28,7 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
 
     @Override
     public String getProposalDescription(HashMap<String, String> keyMap) {
-        for (SheepDogIssueProposal p : listProposalsDialog) {
+        for (SheepDogIssueProposal p : ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))) {
             if (p.getId().equals(keyMap.get("Proposal Id"))
                     && p.getDescription().contentEquals(replaceKeyword(keyMap.get("Proposal Description")))) {
                 return p.getDescription();
@@ -39,7 +39,7 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
 
     @Override
     public String getProposalId(HashMap<String, String> keyMap) {
-        for (SheepDogIssueProposal p : listProposalsDialog) {
+        for (SheepDogIssueProposal p : ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))) {
             if (p.getId().equals(keyMap.get("Proposal Id"))) {
                 return p.getId();
             }
@@ -49,7 +49,7 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
 
     @Override
     public String getSetAsFollows(HashMap<String, String> keyMap) {
-        return listToString(listProposalsDialog);
+        return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
     }
 
 }

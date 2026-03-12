@@ -6,23 +6,24 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
-import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.issues.CellIssueResolver;
-import org.farhan.dsl.issues.RowIssueDetector;
+import org.farhan.dsl.issues.CellIssueTypes;
 import org.farhan.dsl.issues.RowIssueResolver;
-import org.farhan.dsl.issues.TestStepContainerIssueDetector;
+import org.farhan.dsl.issues.RowIssueTypes;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
-import org.farhan.dsl.issues.TestStepIssueDetector;
+import org.farhan.dsl.issues.TestStepContainerIssueTypes;
 import org.farhan.dsl.issues.TestStepIssueResolver;
-import org.farhan.dsl.issues.TestSuiteIssueDetector;
+import org.farhan.dsl.issues.TestStepIssueTypes;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
-import org.farhan.dsl.issues.TextIssueDetector;
+import org.farhan.dsl.issues.TestSuiteIssueTypes;
 import org.farhan.dsl.issues.TextIssueResolver;
+import org.farhan.dsl.issues.TextIssueTypes;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
@@ -33,8 +34,9 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
     private static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
         for (SheepDogIssueProposal p : proposals) {
             if (p.getValue() instanceof IStepObject) {
-                testProject.addStepObject((IStepObject) p.getValue());
+                ((ITestProject) getProperty("workspace")).addStepObject((IStepObject) p.getValue());
             } else {
+                Object cursor = getProperty("cursor");
                 if (cursor instanceof ICell) {
                     ((ICell) cursor).setName(p.getValue().toString());
                 } else if (cursor instanceof ITestSuite) {
@@ -48,61 +50,68 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        properties.put("Node Path", keyMap.get("Node Path"));
+        setProperty("Node Path", keyMap.get("Node Path"));
     }
 
     @Override
     public void setTestSuiteFullName(HashMap<String, String> keyMap) {
-        properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+        setProperty("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
     }
 
     @Override
     public void setPerformedAsFollows(HashMap<String, String> keyMap) {
-        if (properties.get("Test Suite Full Name") != null) {
-            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+        if (getProperty("Test Suite Full Name") != null) {
+            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
             properties.remove("Test Suite Full Name");
         }
-        if (properties.get("Node Path") != null) {
-            setCursorAtNode(properties.get("Node Path").toString());
+        if (getProperty("Node Path") != null) {
+            setCursorAtNode(getProperty("Node Path").toString());
             properties.remove("Node Path");
         }
         try {
+            String validateDialog = (String) getProperty("validate annotation.Content");
+            Object cursor = getProperty("cursor");
             if (cursor instanceof ICell) {
                 ICell cell = (ICell) cursor;
-                if (!CellIssueDetector.validateNameOnly(cell).isEmpty()) {
+                if (validateDialog.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                     applyProposal(CellIssueResolver.correctNameOnly(cell));
                 }
             } else if (cursor instanceof IRow) {
                 IRow row = (IRow) cursor;
                 ITestStep testStep = (ITestStep) row.getParent().getParent();
-                if (!testStep.getTable().getRowList().isEmpty()
-                        && (testStep.getTable().getRowList().getFirst() != null)) {
-                    if (!RowIssueDetector.validateCellListWorkspace(row).isEmpty()) {
-                        applyProposal(RowIssueResolver.correctCellListWorkspace(testStep));
+                if (validateDialog.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
+                    if (testStep.getTable() != null) {
+                        if (testStep.getTable().getRowList() != null) {
+                            if (testStep.getTable().getRowList().getFirst() != null) {
+                                applyProposal(RowIssueResolver.correctCellListWorkspace(testStep));
+                            }
+                        }
                     }
                 }
             } else if (cursor instanceof IText) {
                 IText text = (IText) cursor;
                 ITestStep testStep = (ITestStep) text.getParent();
-                if (!TextIssueDetector.validateNameWorkspace(text).isEmpty()) {
+                if (validateDialog.contentEquals(TextIssueTypes.TEXT_NAME_WORKSPACE.description)) {
                     applyProposal(TextIssueResolver.correctNameWorkspace(testStep));
                 }
             } else if (cursor instanceof ITestStep) {
                 ITestStep testStep = (ITestStep) cursor;
-                if (!TestStepIssueDetector.validateStepObjectNameWorkspace(testStep).isEmpty()) {
-                    applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
-                }
-                if (!TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep).isEmpty()) {
+                if (validateDialog
+                        .contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
                     applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
+                } else if (validateDialog
+                        .contentEquals(TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description)) {
+                    applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
                 }
             } else if (cursor instanceof ITestStepContainer) {
                 ITestStepContainer testStepContainer = (ITestStepContainer) cursor;
-                if (!TestStepContainerIssueDetector.validateNameOnly(testStepContainer).isEmpty()) {
+                if (validateDialog
+                        .contentEquals(TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description)) {
                     applyProposal(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));
                 }
             } else if (cursor instanceof ITestSuite) {
                 ITestSuite testSuite = (ITestSuite) cursor;
-                if (!TestSuiteIssueDetector.validateNameOnly(testSuite).isEmpty()) {
+                if (validateDialog.contentEquals(TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description)) {
                     applyProposal(TestSuiteIssueResolver.correctNameOnly(testSuite));
                 }
             }

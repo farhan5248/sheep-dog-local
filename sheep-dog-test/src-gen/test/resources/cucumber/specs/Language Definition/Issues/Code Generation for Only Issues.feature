@@ -14,6 +14,10 @@ Feature: Code Generation for Only Issues
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
           | Node Path                                                       | Cell Name        |
           | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | lowercase header |
+      And The xtext plugin validate annotation is set as follows
+          """
+          Name should start with a capital
+          """
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id          | Proposal Description                    | Proposal Value   |
           | Capitalize cell name | Capitalize the first letter of the name | Lowercase header |
@@ -31,6 +35,10 @@ Feature: Code Generation for Only Issues
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file is created as follows
           | Test Suite Name |
           | process issues  |
+      And The xtext plugin validate annotation is set as follows
+          """
+          Name should start with a capital
+          """
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id                | Proposal Description                    | Proposal Value |
           | Capitalize test suite name | Capitalize the first letter of the name | Process issues |
@@ -48,6 +56,10 @@ Feature: Code Generation for Only Issues
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
           | Node Path             | Test Case Name      |
           | TestStepContainerList | lowercase test case |
+      And The xtext plugin validate annotation is set as follows
+          """
+          Name should start with a capital
+          """
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id                         | Proposal Description                    | Proposal Value      |
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |

@@ -1,9 +1,12 @@
 package org.farhan.impl.objects;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.objects.xtext.ListProposalsAction;
@@ -16,25 +19,28 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
 
     @Override
     public void setNodePath(HashMap<String, String> keyMap) {
-        properties.put("Node Path", keyMap.get("Node Path"));
+        setProperty("Node Path", keyMap.get("Node Path"));
     }
 
     @Override
     public void setTestSuiteFullName(HashMap<String, String> keyMap) {
-        properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+        setProperty("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
     }
 
     @Override
     public void setPerformedAsFollows(HashMap<String, String> keyMap) {
-        if (properties.get("Test Suite Full Name") != null) {
-            cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+        if (getProperty("Test Suite Full Name") != null) {
+            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
             properties.remove("Test Suite Full Name");
         }
-        if (properties.get("Node Path") != null) {
-            setCursorAtNode(properties.get("Node Path").toString());
+        if (getProperty("Node Path") != null) {
+            setCursorAtNode(getProperty("Node Path").toString());
             properties.remove("Node Path");
         }
         try {
+            Object cursor = getProperty("cursor");
+            @SuppressWarnings("unchecked")
+            ArrayList<SheepDogIssueProposal> listProposalsDialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
             if (cursor instanceof IRow) {
                 IRow row = (IRow) cursor;
                 ITestStep testStep = (ITestStep) row.getParent().getParent();

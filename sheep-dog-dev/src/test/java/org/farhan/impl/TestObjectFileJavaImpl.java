@@ -92,8 +92,8 @@ public class TestObjectFileJavaImpl extends TestObjectFileImpl {
 	protected String getFileExistsValue() {
 		String exists = getObjectExists();
 		try {
-			wrapper = new CucumberInterface(properties.get("object").toString());
-			wrapper.parse(sr.get("", properties.get("object").toString()));
+			wrapper = new CucumberInterface(object);
+			wrapper.parse(sr.get("", object));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}

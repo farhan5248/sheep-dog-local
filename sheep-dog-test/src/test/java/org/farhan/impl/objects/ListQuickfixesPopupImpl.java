@@ -12,12 +12,12 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
 
     @Override
     public String getEmpty(HashMap<String, String> keyMap) {
-        return listToString(listQuickfixesDialog);
+        return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")));
     }
 
     @Override
     public String getProposalValue(HashMap<String, String> keyMap) {
-        for (SheepDogIssueProposal p : listQuickfixesDialog) {
+        for (SheepDogIssueProposal p : ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))) {
             if (p.getId().equals(keyMap.get("Proposal Id"))
                     && p.getValue().toString().contentEquals(keyMap.get("Proposal Value"))) {
                 return p.getValue().toString();
@@ -28,7 +28,7 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
 
     @Override
     public String getProposalDescription(HashMap<String, String> keyMap) {
-        for (SheepDogIssueProposal p : listQuickfixesDialog) {
+        for (SheepDogIssueProposal p : ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))) {
             if (p.getId().equals(keyMap.get("Proposal Id"))
                     && p.getDescription().contentEquals(replaceKeyword(keyMap.get("Proposal Description")))) {
                 return p.getDescription();
@@ -39,7 +39,7 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
 
     @Override
     public String getProposalId(HashMap<String, String> keyMap) {
-        for (SheepDogIssueProposal p : listQuickfixesDialog) {
+        for (SheepDogIssueProposal p : ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))) {
             if (p.getId().equals(keyMap.get("Proposal Id"))) {
                 return p.getId();
             }
@@ -49,23 +49,23 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
 
     @Override
     public void setProposalId(HashMap<String, String> keyMap) {
-        listQuickfixesDialog.add(new SheepDogIssueProposal());
-        listQuickfixesDialog.getLast().setId(keyMap.get("Proposal Id"));
+        ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")).add(new SheepDogIssueProposal());
+        ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")).getLast().setId(keyMap.get("Proposal Id"));
     }
 
     @Override
     public void setProposalDescription(HashMap<String, String> keyMap) {
-        listQuickfixesDialog.getLast().setDescription(keyMap.get("Proposal Description"));
+        ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")).getLast().setDescription(keyMap.get("Proposal Description"));
     }
 
     @Override
     public void setProposalValue(HashMap<String, String> keyMap) {
-        listQuickfixesDialog.getLast().setValue(keyMap.get("Proposal Value"));
+        ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")).getLast().setValue(keyMap.get("Proposal Value"));
     }
 
     @Override
     public String getSetAsFollows(HashMap<String, String> keyMap) {
-        return listToString(listQuickfixesDialog);
+        return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")));
     }
 
     @Override

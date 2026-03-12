@@ -22,7 +22,7 @@ public class TestObjectFileAdocImpl extends TestObjectFileImpl {
 	protected void deleteObject() {
 		getObjectExists();
 		try {
-			sr.delete("", properties.get("object").toString());
+			sr.delete("", object);
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
@@ -114,8 +114,8 @@ public class TestObjectFileAdocImpl extends TestObjectFileImpl {
 	protected String getTestSuiteExistsValue() {
 		String exists = getObjectExists();
 		try {
-			testSuite = new AsciiDoctorTestSuite(properties.get("object").toString());
-			testSuite.parse(sr.get("", properties.get("object").toString()));
+			testSuite = new AsciiDoctorTestSuite(object);
+			testSuite.parse(sr.get("", object));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}
@@ -125,8 +125,8 @@ public class TestObjectFileAdocImpl extends TestObjectFileImpl {
 	protected String getStepObjectExistsValue() {
 		String exists = getObjectExists();
 		try {
-			stepObject = new AsciiDoctorStepObject(properties.get("object").toString());
-			stepObject.parse(sr.get("", properties.get("object").toString()));
+			stepObject = new AsciiDoctorStepObject(object);
+			stepObject.parse(sr.get("", object));
 		} catch (Exception e) {
 			Assertions.fail(e);
 		}

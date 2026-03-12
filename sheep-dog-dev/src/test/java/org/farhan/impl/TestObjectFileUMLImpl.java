@@ -110,7 +110,7 @@ public abstract class TestObjectFileUMLImpl extends TestObjectFileImpl {
 	// Category 3: Parse + init
 	protected String getFileExistsValue() {
 		try {
-			project = new UMLTestProject(getTestObjectClass("ToUml", "org.farhan.objects.maven.").properties.get("tags").toString(), new ServiceFileRepositoryImpl());
+			project = new UMLTestProject(getProperty("tags").toString(), new ServiceFileRepositoryImpl());
 			project.init();
 		} catch (Exception e) {
 			Assertions.fail(e);

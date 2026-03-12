@@ -21,6 +21,10 @@ Feature: Code Generation for Workspace Issues
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                            | Test Step Full Name                      |
           | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+      And The xtext plugin validate annotation is set as follows
+          """
+          The step object file doesn't exist for the component
+          """
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id                                                       | Proposal Description |
           | Generate Input file - stepdefs/daily batchjob/Input file.asciidoc | empty                |
@@ -41,6 +45,10 @@ Feature: Code Generation for Workspace Issues
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Definition Name |
           | is absent            |
+      And The xtext plugin validate annotation is set as follows
+          """
+          The step definition doesn't exist for the step object
+          """
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id         | Proposal Description |
           | Generate is present | empty                |
@@ -71,6 +79,10 @@ Feature: Code Generation for Workspace Issues
           | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E1        |
           | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E2        |
           | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E3        |
+      And The xtext plugin validate annotation is set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id     | Proposal Description |
           | Generate N1, N2 | empty                |
@@ -102,6 +114,10 @@ Feature: Code Generation for Workspace Issues
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
           | Step Definition Name |
           | is set as follows    |
+      And The xtext plugin validate annotation is set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
       And The xtext plugin list quickfixes popup is set as follows
           | Proposal Id      | Proposal Description |
           | Generate Content | empty                |

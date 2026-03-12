@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.ITable;
@@ -21,13 +22,13 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
-        return cursor == null ? null : cursor.toString();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
     public String getDescriptionNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
-        return cursor == null ? null : cursor.toString();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
@@ -44,13 +45,13 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getLineListNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
-        return cursor == null ? null : cursor.toString();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
     public String getNestedDescriptionNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
-        return cursor == null ? null : cursor.toString();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
@@ -62,13 +63,13 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getStepDefinitionListNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
-        return cursor == null ? null : cursor.toString();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
     public String getStepDefinitionListNodeState(HashMap<String, String> keyMap) {
-        if (cursor == null) return null;
-        return listToString(((IStepObject) cursor).getStepDefinitionList());
+        if (getProperty("cursor") == null) return null;
+        return listToString(((IStepObject) getProperty("cursor")).getStepDefinitionList());
     }
 
     @Override
@@ -79,13 +80,13 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getStepParametersListNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
-        return cursor == null ? null : cursor.toString();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
     public String getStepParametersListNodeState(HashMap<String, String> keyMap) {
-        if (cursor == null) return null;
-        return listToString(((IStepDefinition) cursor).getStepParameterList());
+        if (getProperty("cursor") == null) return null;
+        return listToString(((IStepDefinition) getProperty("cursor")).getStepParameterList());
     }
 
     @Override
@@ -96,7 +97,7 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getTableNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
-        return cursor == null ? null : cursor.toString();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
@@ -172,8 +173,8 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getCreatedAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
@@ -183,8 +184,8 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getTableNodeAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
@@ -194,14 +195,14 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
     public String getDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
@@ -211,14 +212,14 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
     public String getNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
@@ -228,14 +229,14 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getStepDefinitionListNodeAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
     public String getStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
@@ -245,13 +246,13 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
     public String getStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        cursor = testProject.getTestDocument(getFullNameFromPath());
-        return cursor == null ? null : cursor.toString();
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 }

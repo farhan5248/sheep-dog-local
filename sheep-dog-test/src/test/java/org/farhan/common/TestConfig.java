@@ -48,9 +48,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
 
     @Override
     public Injector getInjector() {
-        Injector injector = Guice.createInjector(Stage.DEVELOPMENT, CucumberModules.createScenarioModule(), new TestConfig());
-        TestObject.injector = injector;
-        return injector;
+        return Guice.createInjector(Stage.DEVELOPMENT, CucumberModules.createScenarioModule(), new TestConfig());
     }
 
     @Before

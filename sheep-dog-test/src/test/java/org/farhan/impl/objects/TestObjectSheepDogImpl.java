@@ -25,116 +25,125 @@ import org.farhan.dsl.grammar.SheepDogIssueProposal;
 
 public class TestObjectSheepDogImpl extends TestObject {
 
-    protected static Object cursor;
-    protected static ITestProject testProject;
-    protected static String validateDialog = "";
-    protected static ArrayList<SheepDogIssueProposal> listProposalsDialog = new ArrayList<SheepDogIssueProposal>();
-    protected static ArrayList<SheepDogIssueProposal> listQuickfixesDialog = new ArrayList<SheepDogIssueProposal>();
-
     public static void reset() {
-        testProject = SheepDogBuilder.createTestProject();
-        cursor = testProject;
-        validateDialog = "";
-        listProposalsDialog = new ArrayList<SheepDogIssueProposal>();
-        listQuickfixesDialog = new ArrayList<SheepDogIssueProposal>();
+        properties.clear();
+        ITestProject workspace = SheepDogBuilder.createTestProject();
+        setProperty("workspace", workspace);
+        setProperty("cursor", workspace);
+        setProperty("validate annotation.Content", "");
+        setProperty("list proposals popup", new ArrayList<SheepDogIssueProposal>());
+        setProperty("list quickfixes popup", new ArrayList<SheepDogIssueProposal>());
     }
 
     // === add* helpers ===
 
     protected void addCellWithName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ICell) {
             cursor = ((ICell) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createCell((IRow) cursor, name);
+        setProperty("cursor", SheepDogBuilder.createCell((IRow) cursor, name));
     }
 
     protected void addLineWithContent(String content) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ILine) {
             cursor = ((ILine) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createLine((IDescription) cursor, content);
+        setProperty("cursor", SheepDogBuilder.createLine((IDescription) cursor, content));
     }
 
     protected void addRowWithContent(String content) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof IRow) {
             cursor = ((IRow) cursor).getParent();
         }
         IRow row = SheepDogBuilder.createRow((ITable) cursor);
         SheepDogBuilder.createCell(row, content);
-        cursor = row;
+        setProperty("cursor", row);
     }
 
     protected void addStepDefinitionWithName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof IStepDefinition) {
             cursor = ((IStepDefinition) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createStepDefinition((IStepObject) cursor, name);
+        setProperty("cursor", SheepDogBuilder.createStepDefinition((IStepObject) cursor, name));
     }
 
     protected void addStepObjectWithFullName(String stepObjectName) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof IStepObject) {
             cursor = ((IStepObject) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createStepObject(testProject, stepObjectName);
+        setProperty("cursor", SheepDogBuilder.createStepObject((ITestProject) getProperty("workspace"), stepObjectName));
     }
 
     protected void addStepParametersWithName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof IStepParameters) {
             cursor = ((IStepParameters) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createStepParameters((IStepDefinition) cursor, name);
+        setProperty("cursor", SheepDogBuilder.createStepParameters((IStepDefinition) cursor, name));
     }
 
     protected void addTable() {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestStep) {
-            cursor = SheepDogBuilder.createTable((ITestStep) cursor);
+            setProperty("cursor", SheepDogBuilder.createTable((ITestStep) cursor));
         } else if (cursor instanceof IStepParameters) {
-            cursor = SheepDogBuilder.createTable((IStepParameters) cursor);
+            setProperty("cursor", SheepDogBuilder.createTable((IStepParameters) cursor));
         }
     }
 
     protected void addTestCaseWithName(String testStepContainerName) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestCase) {
             cursor = ((ITestCase) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createTestCase((ITestSuite) cursor, testStepContainerName);
+        setProperty("cursor", SheepDogBuilder.createTestCase((ITestSuite) cursor, testStepContainerName));
     }
 
     protected void addTestDataWithName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestData) {
             cursor = ((ITestData) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createTestData((ITestCase) cursor, name);
+        setProperty("cursor", SheepDogBuilder.createTestData((ITestCase) cursor, name));
     }
 
     protected void addTestSetupWithName(String testSetupName) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestStepContainer) {
             cursor = ((ITestStepContainer) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createTestSetup((ITestSuite) cursor, testSetupName);
+        setProperty("cursor", SheepDogBuilder.createTestSetup((ITestSuite) cursor, testSetupName));
     }
 
     protected void addTestStepWithFullName(String stepName) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestStep) {
             cursor = ((ITestStep) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepName);
+        setProperty("cursor", SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepName));
     }
 
     protected void addTestSuiteWithFullName(String testSuiteFullName) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestSuite) {
             cursor = ((ITestSuite) cursor).getParent();
         }
-        cursor = SheepDogBuilder.createTestSuite(testProject, testSuiteFullName);
+        setProperty("cursor", SheepDogBuilder.createTestSuite((ITestProject) getProperty("workspace"), testSuiteFullName));
     }
 
     protected void addTextWithContent(String content) {
-        cursor = SheepDogBuilder.createText((ITestStep) cursor, content);
+        setProperty("cursor", SheepDogBuilder.createText((ITestStep) getProperty("cursor"), content));
     }
 
     // === cursor query helpers ===
 
     protected IDescription getDescriptionFromCursor() {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestSuite) return ((ITestSuite) cursor).getDescription();
         else if (cursor instanceof ITestStepContainer) return ((ITestStepContainer) cursor).getDescription();
         else if (cursor instanceof IStepObject) return ((IStepObject) cursor).getDescription();
@@ -145,6 +154,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     }
 
     protected ITable getTableFromCursor() {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof IStepParameters) return ((IStepParameters) cursor).getTable();
         else if (cursor instanceof ITestData) return ((ITestData) cursor).getTable();
         else if (cursor instanceof ITestStep) return ((ITestStep) cursor).getTable();
@@ -154,91 +164,105 @@ public class TestObjectSheepDogImpl extends TestObject {
     // === assert* helpers (from TestObjectDoc) ===
 
     protected String assertCellName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ICell) {
             return ((ICell) cursor).getName();
         } else {
-            cursor = ((IRow) cursor).getCell(name);
-            return cursor == null ? null : ((ICell) cursor).getName();
+            Object cell = ((IRow) cursor).getCell(name);
+            setProperty("cursor", cell);
+            return cell == null ? null : ((ICell) cell).getName();
         }
     }
 
     protected String assertLineContent(String content) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ILine) {
             return ((ILine) cursor).getName();
         } else {
-            cursor = ((IDescription) cursor).getLine(content);
-            return cursor == null ? null : ((ILine) cursor).getName();
+            Object line = ((IDescription) cursor).getLine(content);
+            setProperty("cursor", line);
+            return line == null ? null : ((ILine) line).getName();
         }
     }
 
     protected String assertRowContent(String content) {
-        cursor = ((IRow) cursor).getCell(content);
-        return cursor == null ? null : ((ICell) cursor).getName();
+        Object cell = ((IRow) getProperty("cursor")).getCell(content);
+        setProperty("cursor", cell);
+        return cell == null ? null : ((ICell) cell).getName();
     }
 
     protected String assertStepDefinitionName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof IStepDefinition) {
             return ((IStepDefinition) cursor).getName();
         } else {
-            cursor = ((IStepObject) cursor).getStepDefinition(name);
-            return cursor == null ? null : ((IStepDefinition) cursor).getName();
+            Object sd = ((IStepObject) cursor).getStepDefinition(name);
+            setProperty("cursor", sd);
+            return sd == null ? null : ((IStepDefinition) sd).getName();
         }
     }
 
     protected String assertStepObjectName(String name) {
-        return ((IStepObject) cursor).getName();
+        return ((IStepObject) getProperty("cursor")).getName();
     }
 
     protected String assertStepParametersName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof IStepParameters) {
             return ((IStepParameters) cursor).getName();
         } else {
-            cursor = ((IStepDefinition) cursor).getStepParameters(name);
-            return cursor == null ? null : ((IStepParameters) cursor).getName();
+            Object sp = ((IStepDefinition) cursor).getStepParameters(name);
+            setProperty("cursor", sp);
+            return sp == null ? null : ((IStepParameters) sp).getName();
         }
     }
 
     protected String assertTestDataName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestData) {
             return ((ITestData) cursor).getName();
         } else {
-            cursor = ((ITestCase) cursor).getTestData(name);
-            return cursor == null ? null : ((ITestData) cursor).getName();
+            Object td = ((ITestCase) cursor).getTestData(name);
+            setProperty("cursor", td);
+            return td == null ? null : ((ITestData) td).getName();
         }
     }
 
     protected String assertTestStepContainerName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestStepContainer) {
             return ((ITestStepContainer) cursor).getName();
         } else {
-            cursor = ((ITestSuite) cursor).getTestStepContainer(name);
-            return cursor == null ? null : ((ITestStepContainer) cursor).getName();
+            Object tsc = ((ITestSuite) cursor).getTestStepContainer(name);
+            setProperty("cursor", tsc);
+            return tsc == null ? null : ((ITestStepContainer) tsc).getName();
         }
     }
 
     protected String assertTestStepFullName(String fullName) {
-        return ((ITestStep) cursor).getFullName();
+        return ((ITestStep) getProperty("cursor")).getFullName();
     }
 
     protected String assertStepDefinitionRefName(String name) {
-        return ((ITestStep) cursor).getStepDefinitionName();
+        return ((ITestStep) getProperty("cursor")).getStepDefinitionName();
     }
 
     protected String assertStepObjectRefName(String name) {
-        return ((ITestStep) cursor).getStepObjectName();
+        return ((ITestStep) getProperty("cursor")).getStepObjectName();
     }
 
     protected String assertTestSuiteName(String name) {
-        return ((ITestSuite) cursor).getName();
+        return ((ITestSuite) getProperty("cursor")).getName();
     }
 
     // === set* helpers (from TestObjectDoc) ===
 
     protected void setStepDefinitionName(String name) {
-        ((ITestStep) cursor).setStepDefinitionName(name);
+        ((ITestStep) getProperty("cursor")).setStepDefinitionName(name);
     }
 
     protected void setTestSuiteName(String name) {
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ITestSuite) {
             ((ITestSuite) cursor).setName(name);
         }
@@ -365,7 +389,7 @@ public class TestObjectSheepDogImpl extends TestObject {
 
     protected void createNodeDependencies(String part) {
         String[] parts = part.split("/");
-        Object current = getDocumentFromNode(cursor);
+        Object current = getDocumentFromNode(getProperty("cursor"));
         int i = 0;
 
         while (i < parts.length) {
@@ -401,12 +425,11 @@ public class TestObjectSheepDogImpl extends TestObject {
             }
         }
 
-        cursor = current;
+        setProperty("cursor", current);
     }
 
     protected String getFullNameFromPath() {
-        String path = (String) properties.get("object");
-        return path.replace("src/test/resources/asciidoc/", "");
+        return object.replace("src/test/resources/asciidoc/", "");
     }
 
     protected String listToString(ArrayList<?> list) {
@@ -419,7 +442,7 @@ public class TestObjectSheepDogImpl extends TestObject {
 
     protected void setCursorAtNode(String path) {
         String[] parts = path.split("/");
-        Object current = getDocumentFromNode(cursor);
+        Object current = getDocumentFromNode(getProperty("cursor"));
 
         int i = 0;
         while (i < parts.length && current != null) {
@@ -437,13 +460,13 @@ public class TestObjectSheepDogImpl extends TestObject {
                 try {
                     current = getChildNode(current, elementType, index);
                 } catch (IndexOutOfBoundsException e) {
-                    cursor = null;
+                    setProperty("cursor", null);
                     return;
                 }
                 i += 2;
             }
             if (current != null)
-                cursor = current;
+                setProperty("cursor", current);
         }
 
     }
