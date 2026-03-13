@@ -15,7 +15,7 @@ public class TestStepContainerIssueDetector {
             ITestStep firstStep = theTestStepContainer.getTestStepList().get(0);
             String component = StepObjectRefFragments.getComponent(firstStep.getFullName());
             if (component == null || component.isEmpty()) {
-                return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_FIRST_STEP_COMPONENT.description;
+                return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_ONLY.description;
             }
         }
         return "";
