@@ -4,8 +4,10 @@ Feature: Quickfixes for Only Issues
   \@sheep-dog-test
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
+  @ListQuickfixesAction
   Scenario: Cell name should start with a capital letter quickfix
 
+    \@ListQuickfixesAction
     The quickfix capitalizes the first letter of a header cell name that starts with a lowercase letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -28,8 +30,10 @@ Feature: Quickfixes for Only Issues
           | Proposal Id          | Proposal Description                    | Proposal Value   |
           | Capitalize cell name | Capitalize the first letter of the name | Lowercase header |
 
+  @ListQuickfixesAction
   Scenario: Body row Cell names can be any case quickfix
 
+    \@ListQuickfixesAction
     Body row cells don't trigger a validation error, so no quickfix is available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -47,8 +51,10 @@ Feature: Quickfixes for Only Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList/1 |
      Then The xtext plugin list quickfixes popup will be empty
 
+  @ListQuickfixesAction
   Scenario: Test suite name should start with a capital letter quickfix
 
+    \@ListQuickfixesAction
     The quickfix capitalizes the first letter of a test suite name that starts with a lowercase letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file is created as follows
@@ -65,8 +71,10 @@ Feature: Quickfixes for Only Issues
           | Proposal Id                | Proposal Description                    | Proposal Value    |
           | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
 
+  @ListQuickfixesAction
   Scenario: Test case name should start with a capital letter quickfix
 
+    \@ListQuickfixesAction
     The quickfix capitalizes the first letter of a test case name that starts with a lowercase letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
@@ -83,8 +91,10 @@ Feature: Quickfixes for Only Issues
           | Proposal Id                         | Proposal Description                    | Proposal Value      |
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
 
+  @ListQuickfixesAction
   Scenario: Test step must have a valid object name quickfix
 
+    \@ListQuickfixesAction
     No quickfix is available for invalid object names. The user must manually correct the step object reference.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -106,8 +116,10 @@ Feature: Quickfixes for Only Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list quickfixes popup will be empty
 
+  @ListQuickfixesAction
   Scenario: Test step must have a valid step definition name quickfix
 
+    \@ListQuickfixesAction
     No quickfix is available for invalid step definition names. The user must manually correct the step definition reference.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
