@@ -45,7 +45,7 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
         String result = "";
         Object cursor = getProperty("cursor");
         if (cursor instanceof IRow) {
-            result = RowIssueDetector.validateWorkspace((IRow) cursor, (ITestProject) getProperty("workspace"));
+            result = RowIssueDetector.validateCellListWorkspace((IRow) cursor);
         } else if (cursor instanceof ICell) {
             result = CellIssueDetector.validateNameOnly((ICell) cursor);
         } else if (cursor instanceof ITestSuite) {
@@ -53,11 +53,12 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
         } else if (cursor instanceof ITestStepContainer) {
             result = TestStepContainerIssueDetector.validateNameOnly((ITestStepContainer) cursor);
         } else if (cursor instanceof ITestStep) {
-            result = TestStepIssueDetector.validateWorkspace((ITestStep) cursor,
-                    (ITestProject) getProperty("workspace"));
+            result = TestStepIssueDetector.validateStepObjectNameWorkspace((ITestStep) cursor);
+            if (result.isEmpty()) {
+                result = TestStepIssueDetector.validateStepDefinitionNameWorkspace((ITestStep) cursor);
+            }
         } else if (cursor instanceof IText) {
-            result = TextIssueDetector.validateWorkspace((IText) cursor,
-                    (ITestProject) getProperty("workspace"));
+            result = TextIssueDetector.validateContentWorkspace((IText) cursor);
         }
         setProperty("validate annotation.Content", result);
     }
