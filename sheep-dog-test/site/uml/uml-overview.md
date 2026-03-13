@@ -67,3 +67,8 @@ Pattern variables used in UML files to represent families of classes following s
     - Values: `.+` (regex from `StepDefinitionRefFragments.STATE_DESC`)
     - Used in: set{StateDesc}
 
+12. **{ComponentName}** - Component name from StepObjectRef, free-form text identifying the specific component
+    - Values: `.+` (regex from `StepObjectRefFragments.COMPONENT_NAME`)
+    - Used in: `org.farhan.objects.{componentName}` (generated interface package), `org.farhan.stepdefs.{componentName}` (generated step definition package)
+    - Case variants: `{componentName}` (camelCase)
+

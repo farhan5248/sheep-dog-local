@@ -1,99 +1,190 @@
 # UML Communication Patterns
 
-These patterns apply to grammar elements (see **Type** definition in Pattern Variables in uml-overview.md). Each non-terminal grammar rule should follow one of these collaboration patterns.
+These patterns describe the communication sequence for When steps in test cases. Each pattern shows the classes involved in processing a When step, starting from the auto-generated interface. Step definitions, TestSteps, and TestObject are generated infrastructure and not included.
 
-## Interface Definition
+## Validate Action
 
-This collaboration applies when defining basic grammar element interfaces with simple getters and setters. There is no proposal, validation or correction for the grammar element.
+**Regex**: `^The {componentName} {componentType} validate action is performed as follows$`
 
-### I{Type}
+This pattern applies when the When step performs validation on a grammar element at a node position. The action navigates to a document and node, then delegates to the appropriate {Type}IssueDetector based on the cursor's grammar type. The validation result is stored in shared state for the corresponding vertex (annotation) to assert.
 
-Interface defining the grammar element with basic accessors and mutators for element properties and relationships.
+| # | Class | Role |
+|---|---|---|
+| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
+| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited base class providing `setCursorAtNode()` |
+| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
+| 4 | [I{Type}](uml-class-IType.md) | Grammar element interfaces for instanceof type-checking |
+| 5 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type} |
+| 6 | [{Type}IssueDetector](uml-class-TypeIssueDetector.md) | Validates the grammar element via `validate{Assignment}{Scope}()` |
+| 7 | [{Type}IssueTypes](uml-class-TypeIssueTypes.md) | Enum constants providing the validation error description string |
+| 8 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Type}IssueDetector |
+| 9 | [{Language}Utility](uml-class-LanguageUtility.md) | Parsing/utility methods used by some {Type}IssueDetectors |
 
-### {Type}IssueTypes
+### Sequence
 
-Enum with type constants for grammar element aspects. Each constant represents a valid keyword or type value used by utility methods and test implementations.
+1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column
+2. **{ObjectName}{ObjectType}Impl**.setPerformedAsFollows(keyMap)
+   - 2.1. → **ITestProject**.getTestDocument()
+   - 2.2. → **TestObject{Language}Impl**.setCursorAtNode() → **{Type}Impl** getters for navigation
+   - 2.3. instanceof **I{Type}** chain
+   - 2.4. → **{Type}IssueDetector**.validate{Assignment}{Scope}(**I{Type}**)
+     - → **{Language}LoggerFactory**.getLogger()
+     - → **{Language}Utility**.get{Type}FullNameFor{Type}() (optional)
+     - → **{Type}IssueTypes**.description
 
-### {Type}{Fragment}Types
+## List Quickfixes Action
 
-Enum with type constants for test step regex fragments. Each constant represents a fragment type (Component, ObjectVertex, ObjectEdge, Part, State) used in test step parsing.
+**Regex**: `^The {componentName} {componentType} list quickfixes action is performed as follows$`
 
-## Suggest
+This pattern applies when the When step generates correction proposals for an already-validated grammar element. The action navigates to a document and node, reads the prior validation result from `validate annotation.Content`, matches it against {Type}IssueTypes to select the appropriate {Type}IssueResolver, and stores the correction proposals in `list quickfixes popup`.
 
-This pattern applies when proposing content assist suggestions for absent grammar elements. The element doesn't exist yet, so we suggest alternatives.
+| # | Class | Role |
+|---|---|---|
+| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
+| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited base class providing `setCursorAtNode()` |
+| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
+| 4 | [I{Type}](uml-class-IType.md) | Grammar element interfaces for instanceof type-checking |
+| 5 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type} |
+| 6 | [{Type}IssueTypes](uml-class-TypeIssueTypes.md) | Enum constants matched against `validate annotation.Content` to select resolver |
+| 7 | [{Type}IssueResolver](uml-class-TypeIssueResolver.md) | Generates correction proposals via `correct{Assignment}{Scope}()` |
+| 8 | [{Language}IssueProposal](uml-class-LanguageIssueProposal.md) | Proposal data objects stored in `list quickfixes popup` |
+| 9 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Type}IssueResolver |
+| 10 | [{Language}Utility](uml-class-LanguageUtility.md) | Parsing/utility methods used by some {Type}IssueResolvers |
 
-### {Type}IssueResolver
+### Sequence
 
-Static resolution class that suggests existing alternatives for absent grammar elements.
+1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column
+2. **{ObjectName}{ObjectType}Impl**.setPerformedAsFollows(keyMap)
+   - 2.1. → **ITestProject**.getTestDocument()
+   - 2.2. → **TestObject{Language}Impl**.setCursorAtNode() → **{Type}Impl** getters for navigation
+   - 2.3. matches validateDialog against **{Type}IssueTypes**.description
+   - 2.4. instanceof **I{Type}** chain
+   - 2.5. → **{Type}IssueResolver**.correct{Assignment}{Scope}(**I{Type}**) → returns ArrayList<**{Language}IssueProposal**>
+     - → **{Language}LoggerFactory**.getLogger()
+     - → **{Language}Utility**.get{Type}FullNameFor{Type}() (optional)
 
-### {Language}IssueProposal
+## Apply Quickfix Action
 
-Data container for suggestion proposals with properties for id, description, value, and optional fullName.
+**Regex**: `^The {componentName} {componentType} apply quickfix action is performed as follows$`
 
-### I{Type}
+This pattern applies when the When step applies correction proposals to fix an invalid grammar element. The action navigates to a document and node, reads the prior validation result, generates corrections via {Type}IssueResolver, then applies the proposals by modifying the model directly via I{Type} setters or adding elements to ITestProject.
 
-Interface defining the grammar element used by suggestion methods to access element properties.
+| # | Class | Role |
+|---|---|---|
+| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
+| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited base class providing `setCursorAtNode()` |
+| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` + `addStepObject()` in applyProposal |
+| 4 | [I{Type}](uml-class-IType.md) | Grammar element interfaces for instanceof type-checking + setters in applyProposal |
+| 5 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type} |
+| 6 | [{Type}IssueTypes](uml-class-TypeIssueTypes.md) | Enum constants matched against `validate annotation.Content` to select resolver |
+| 7 | [{Type}IssueResolver](uml-class-TypeIssueResolver.md) | Generates correction proposals via `correct{Assignment}{Scope}()` |
+| 8 | [{Language}IssueProposal](uml-class-LanguageIssueProposal.md) | Proposal data objects iterated in `applyProposal()` |
+| 9 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Type}IssueResolver |
+| 10 | [{Language}Utility](uml-class-LanguageUtility.md) | Parsing/utility methods used by some {Type}IssueResolvers |
 
-## Validate
+### Sequence
 
-This pattern applies when validating existing grammar elements. The element exists, so we validate its content.
+1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column
+2. **{ObjectName}{ObjectType}Impl**.setPerformedAsFollows(keyMap)
+   - 2.1. → **ITestProject**.getTestDocument()
+   - 2.2. → **TestObject{Language}Impl**.setCursorAtNode() → **{Type}Impl** getters for navigation
+   - 2.3. matches validateDialog against **{Type}IssueTypes**.description
+   - 2.4. instanceof **I{Type}** chain
+   - 2.5. → **{Type}IssueResolver**.correct{Assignment}{Scope}(**I{Type}**) → returns ArrayList<**{Language}IssueProposal**>
+     - → **{Language}LoggerFactory**.getLogger()
+     - → **{Language}Utility**.get{Type}FullNameFor{Type}() (optional)
+   - 2.6. → applyProposal(ArrayList<**{Language}IssueProposal**>)
+     - → **{Language}IssueProposal**.getValue()
+     - → **I{Type}**.setName() or **ITestProject**.addStepObject()
 
-### {Type}IssueDetector
+## List Proposals Action
 
-Static validation class that validates grammar element aspects and returns issue descriptions.
+**Regex**: `^The {componentName} {componentType} list proposals action is performed as follows$`
 
-### {Type}IssueTypes
+This pattern applies when the When step generates content assist suggestions for a grammar element. The action navigates to a document and node, then delegates to {Type}IssueResolver.suggest to generate suggestions without requiring prior validation. The proposals are stored in `list proposals popup`.
 
-Enum with issue type constants. Each constant has a description field (String) used by validation methods.
+| # | Class | Role |
+|---|---|---|
+| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
+| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited base class providing `setCursorAtNode()` |
+| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
+| 4 | [I{Type}](uml-class-IType.md) | Grammar element interfaces for instanceof type-checking |
+| 5 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type} |
+| 6 | [{Type}IssueResolver](uml-class-TypeIssueResolver.md) | Generates suggestion proposals via `suggest{Assignment}{Scope}()` |
+| 7 | [{Language}IssueProposal](uml-class-LanguageIssueProposal.md) | Proposal data objects stored in `list proposals popup` |
+| 8 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Type}IssueResolver |
+| 9 | [{Language}Utility](uml-class-LanguageUtility.md) | Parsing/utility methods used by some {Type}IssueResolvers |
 
-### I{Type}
+### Sequence
 
-Interface defining the grammar element used by issue detection to access element properties.
+1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column
+2. **{ObjectName}{ObjectType}Impl**.setPerformedAsFollows(keyMap)
+   - 2.1. → **ITestProject**.getTestDocument()
+   - 2.2. → **TestObject{Language}Impl**.setCursorAtNode() → **{Type}Impl** getters for navigation
+   - 2.3. instanceof **I{Type}** chain
+   - 2.4. → **{Type}IssueResolver**.suggest{Assignment}{Scope}(**I{Type}**) → returns ArrayList<**{Language}IssueProposal**>
+     - → **{Language}LoggerFactory**.getLogger()
+     - → **{Language}Utility**.get{Type}FullNameFor{Type}() (optional)
 
-## Correct
+## Add Document Action
 
-This pattern applies when proposing corrections for invalid grammar elements. The element exists but is invalid, so we propose corrections.
+**Regex**: `^The {componentName} {componentType} add document action is performed to create a (TestSuite|StepObject) with$`
 
-### {Type}IssueResolver
+This pattern applies when the When step creates a new top-level document (TestSuite or StepObject) in the workspace. The action sets cursor to workspace, then creates the document element via {Language}Builder.
 
-Static resolution class that generates correction proposals for invalid grammar elements.
+| # | Class | Role |
+|---|---|---|
+| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
+| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited `add{Type}WithFullName()` helpers |
+| 3 | [{Language}Builder](uml-class-LanguageBuilder.md) | Creates grammar elements via `create{Type}()` |
 
-### {Type}IssueTypes
+### Sequence
 
-Enum with issue type constants. Each constant has a description field (String) used by validation methods.
+1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column
+2. **{ObjectName}{ObjectType}Impl**.setPerformedToCreateA{Type}With(keyMap)
+   - 2.1. → **TestObject{Language}Impl**.add{Type}WithFullName()
+     - → **{Language}Builder**.create{Type}()
 
-### {Language}IssueProposal
+## Add Document Node Action
 
-Data container for correction proposals with properties for id, description, value, and optional fullName.
+**Regex**: `^The {componentName} {componentType} add document node action is performed to add (Text|Table) at$`
 
-### I{Type}
+This pattern applies when the When step adds a Text or Table child element to an existing node. The action navigates to a document and node, then creates the child element via {Language}Builder.
 
-Interface defining the grammar element used by issue detection and resolution to access element properties.
+| # | Class | Role |
+|---|---|---|
+| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
+| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited `setCursorAtNode()`, `addTextWithContent()`, `addTable()` |
+| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
+| 4 | [{Language}Builder](uml-class-LanguageBuilder.md) | Creates grammar elements via `createText()`, `createTable()` |
 
-### {Language}Builder
+### Sequence
 
-Static factory class for creating and managing elements, adding them to parent elements during correction workflows.
+1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column
+2. **{ObjectName}{ObjectType}Impl**.setPerformedToAdd{Type}At(keyMap)
+   - 2.1. → **ITestProject**.getTestDocument()
+   - 2.2. → **TestObject{Language}Impl**.setCursorAtNode()
+   - 2.3. → **TestObject{Language}Impl**.addTextWithContent() or addTable()
+     - → **{Language}Builder**.createText() or createTable()
 
-### I{Language}Factory
+## Edit Document Node Action
 
-Interface for creating language-specific grammar elements. Defines parameterless create{Type}() methods that return empty instances.
+**Regex**: `^The {componentName} {componentType} edit document node action is performed to modify {Assignment} with$`
 
-### {Language}Factory
+This pattern applies when the When step adds a child element to a list within an existing node. The action navigates to a document and node, then creates the child element via {Language}Builder.
 
-Singleton holder class that provides access to the concrete I{Language}Factory implementation.
+| # | Class | Role |
+|---|---|---|
+| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
+| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited `setCursorAtNode()`, `add{Type}With{Assignment}()` helpers |
+| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
+| 4 | [{Language}Builder](uml-class-LanguageBuilder.md) | Creates grammar elements via `create{Type}()` |
 
-## Common
+### Sequence
 
-This pattern applies to infrastructure and service classes used across all collaboration patterns. These classes provide cross-cutting concerns like logging, resource management, and project structure access.
-
-### {Language}LoggerFactory
-
-Factory class that provides loggers to sheep-dog-test classes. Uses SLF4J when available, otherwise delegates to a custom LoggerProvider implementation.
-
-### {Language}LoggerProvider
-
-Interface that allows external systems (like Eclipse/OSGi plugins) to inject custom logger implementations when SLF4J providers are not available.
-
-### IResourceRepository
-
-Service interface for resource management operations using standard CRUD patterns (get, put, delete, list, clear, contains).
+1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column
+2. **{ObjectName}{ObjectType}Impl**.setPerformedToModify{Assignment}With(keyMap)
+   - 2.1. → navigateToDocument() → **ITestProject**.getTestDocument()
+   - 2.2. → navigateToNode() → **TestObject{Language}Impl**.setCursorAtNode()
+   - 2.3. → **TestObject{Language}Impl**.add{Type}With{Assignment}()
+     - → **{Language}Builder**.create{Type}()

@@ -1,193 +1,205 @@
-File: Validation for Only Issues
-  Scenario: Test suite name should start with a capital letter validation
-    Tag: Validate
-  Scenario: Test case name should start with a capital letter validation
-    Tag: Validate
-  Scenario: Test step must have a valid object name validation
-    Tag: Validate
-  Scenario: Test step must have a valid step definition name validation
-    Tag: Validate
-  Scenario: Header row Cell names should start with a capital letter validation
-    Tag: Validate
-  Scenario: Body row Cell names can be any case validation
-    Tag: Validate
+File: Description Type
+  Scenario: Initial State
+    Tag: EditDocumentNodeAction
+  Scenario: Line Insertion Order
+    Tag: EditDocumentNodeAction
 
-File: Validation for File Issues
-  Scenario: The first step needs to have a component specified validation
-    Tag: Validate
-  Scenario: No component in the first step triggers an error validation
-    Tag: Validate
+File: StepObject Type
+  Scenario: Initial State
+    Tag: AddDocumentAction
+  Scenario: Step Definition
+    Tag: EditDocumentNodeAction
+  Scenario: Step Parameters
+    Tag: EditDocumentNodeAction
+  Scenario: Duplicate Step Object Full Name
+    Tag: AddDocumentAction
+  Scenario: Duplicate Step Definition Name
+    Tag: EditDocumentNodeAction
+  Scenario: Duplicate Step Parameters Name
+    Tag: EditDocumentNodeAction
+  Scenario: Sorted Step Definition Name
+    Tag: EditDocumentNodeAction
+  Scenario: Sorted Step Parameters Name
+    Tag: EditDocumentNodeAction
 
-File: Validation for Workspace Issues
-  Scenario: This object doesn't exist validation
-    Tag: Validate
-  Scenario: This object step definition doesn't exist validation
-    Tag: Validate
-  Scenario: This object step definition parameter set doesn't exist validation
-    Tag: Validate
-  Scenario: This object step definition text parameter exists validation
-    Tag: Validate
-  Scenario: This object step definition text parameter doesn't exist validation
-    Tag: Validate
+File: Table Type
+  Scenario: Row
+    Tag: EditDocumentNodeAction
+  Scenario: Cell
+    Tag: EditDocumentNodeAction
+  Scenario: Duplicate Row
+    Tag: EditDocumentNodeAction
+  Scenario: Row Insertion Order
+    Tag: EditDocumentNodeAction
+  Scenario: Cell Insertion Order
+    Tag: EditDocumentNodeAction
 
-File: Quickfixes for Only Issues
-  Scenario: Test suite name should start with a capital letter quickfix
-    Tag: Correct
-  Scenario: Test case name should start with a capital letter quickfix
-    Tag: Correct
-  Scenario: Test step must have a valid object name quickfix
-    Tag: Correct
-  Scenario: Test step must have a valid step definition name quickfix
-    Tag: Correct
-  Scenario: Cell name should start with a capital letter quickfix
-    Tag: Correct
-  Scenario: Body row Cell names can be any case quickfix
-    Tag: Correct
+File: TestStep Type
+  Scenario: Initial State Given
+    Tag: EditDocumentNodeAction
+  Scenario: Initial State When
+    Tag: EditDocumentNodeAction
+  Scenario: Initial State Then
+    Tag: EditDocumentNodeAction
+  Scenario: Initial State And
+    Tag: EditDocumentNodeAction
+  Scenario: Table Excludes Text
+    Tag: AddDocumentNodeAction
+  Scenario: Text Excludes Table
+    Tag: AddDocumentNodeAction
+  Scenario: Duplicate Test Step
+    Tag: EditDocumentNodeAction
+  Scenario: Test Step Insertion Order
+    Tag: EditDocumentNodeAction
 
-File: Quickfixes for File Issues
-  Scenario: The first step needs to have a component specified quickfix
-    Tag: Correct
-  Scenario: No component in the first step triggers an error quickfix
-    Tag: Correct
-
-File: Quickfixes for Workspace Issues
-  Scenario: This object doesn't exist quickfix
-    Tag: Correct
-  Scenario: This object step definition doesn't exist quickfix
-    Tag: Correct
-  Scenario: This object step definition parameter set doesn't exist quickfix
-    Tag: Correct
-  Scenario: This object step definition text parameter exists quickfix
-    Tag: Correct
-  Scenario: This object step definition text parameter doesn't exist quickfix
-    Tag: Correct
+File: TestSuite Type
+  Scenario: Initial State
+    Tag: AddDocumentAction
+  Scenario: Test Case
+    Tag: EditDocumentNodeAction
+  Scenario: Test Setup
+    Tag: EditDocumentNodeAction
+  Scenario: Test Data
+    Tag: EditDocumentNodeAction
+  Scenario: Duplicate Test Suite Full Name
+    Tag: AddDocumentAction
+  Scenario: Duplicate Test Case Name
+    Tag: EditDocumentNodeAction
+  Scenario: Duplicate Test Data Name
+    Tag: EditDocumentNodeAction
+  Scenario: Test Case Insertion Order
+    Tag: EditDocumentNodeAction
+  Scenario: Duplicate Test Setup Name
+    Tag: EditDocumentNodeAction
+  Scenario: Test Setup Is First
+    Tag: EditDocumentNodeAction
+  Scenario: Test Data Insertion Order
+    Tag: EditDocumentNodeAction
 
 File: Code Generation for Only Issues
-  Scenario: Test suite name should start with a capital letter generation
-    Tag: Generate
-  Scenario: Test case name should start with a capital letter generation
-    Tag: Generate
   Scenario: Cell name should start with a capital letter generation
-    Tag: Generate
+    Tag: ApplyQuickfixAction
+  Scenario: Test suite name should start with a capital letter generation
+    Tag: ApplyQuickfixAction
+  Scenario: Test case name should start with a capital letter generation
+    Tag: ApplyQuickfixAction
 
 File: Code Generation for Workspace Issues
   Scenario: This object doesn't exist generation
-    Tag: Generate
+    Tag: ApplyQuickfixAction
   Scenario: This object step definition doesn't exist generation
-    Tag: Generate
+    Tag: ApplyQuickfixAction
   Scenario: This object step definition parameter set doesn't exist generation
-    Tag: Generate
+    Tag: ApplyQuickfixAction
   Scenario: This object step definition text parameter doesn't exist generation
-    Tag: Generate
-
-File: Proposals for File Step Objects
-  Scenario: No component no existing
-    Tag: Suggest
-  Scenario: Has component no existing
-    Tag: Suggest
-  Scenario: No component no existing has background
-    Tag: Suggest
-
-File: Proposals for Workspace Step Objects
-  Scenario: No component no existing
-    Tag: Suggest
-  Scenario: No component has existing
-    Tag: Suggest
-  Scenario: Has component no existing
-    Tag: Suggest
-  Scenario: Has component has existing
-    Tag: Suggest
+    Tag: ApplyQuickfixAction
 
 File: Proposals for File and Workspace Step Objects
   Scenario: No component has existing
-    Tag: Suggest
+    Tag: ListProposalsAction
   Scenario: Has component has existing
-    Tag: Suggest
+    Tag: ListProposalsAction
+
+File: Proposals for File Step Objects
+  Scenario: No component no existing
+    Tag: ListProposalsAction
+  Scenario: Has component no existing
+    Tag: ListProposalsAction
+  Scenario: No component no existing has background
+    Tag: ListProposalsAction
 
 File: Proposals for Workspace Step Definitions
   Scenario: Has component no existing step object
-    Tag: Suggest
+    Tag: ListProposalsAction
   Scenario: Has component no existing step definition
-    Tag: Suggest
+    Tag: ListProposalsAction
   Scenario: Has component has existing step definition
-    Tag: Suggest
+    Tag: ListProposalsAction
   Scenario: No component has existing step definition
-    Tag: Suggest
+    Tag: ListProposalsAction
+
+File: Proposals for Workspace Step Objects
+  Scenario: No component no existing
+    Tag: ListProposalsAction
+  Scenario: No component has existing
+    Tag: ListProposalsAction
+  Scenario: Has component no existing
+    Tag: ListProposalsAction
+  Scenario: Has component has existing
+    Tag: ListProposalsAction
 
 File: Proposals for Workspace Step Parameters
   Scenario: No existing step object
-    Tag: Suggest
+    Tag: ListProposalsAction
   Scenario: No existing step definition
-    Tag: Suggest
+    Tag: ListProposalsAction
   Scenario: Has existing step definition without parameters
-    Tag: Suggest
+    Tag: ListProposalsAction
   Scenario: Has existing step definition with parameters
-    Tag: Suggest
+    Tag: ListProposalsAction
   Scenario: Has existing step definition with Content parameter
-    Tag: Suggest
+    Tag: ListProposalsAction
 
-File: Grammar Phrase Fragment
-  Scenario: Tag Fragment
-    Tag: Grammar
-  Scenario: Todo Fragment
-    Tag: Grammar
+File: Quickfixes for File Issues
+  Scenario: The first step needs to have a component specified quickfix
+    Tag: ListQuickfixesAction
+  Scenario: No component in the first step triggers an error quickfix
+    Tag: ListQuickfixesAction
 
-File: Grammar StepObjectRef Fragment
-  Scenario: Component Fragment
-    Tag: Grammar
-  Scenario: Object Fragment
-    Tag: Grammar
-  Scenario: Object Vertex Fragment
-    Tag: Grammar
-  Scenario: Object Edge Fragment
-    Tag: Grammar
+File: Quickfixes for Only Issues
+  Scenario: Cell name should start with a capital letter quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Body row Cell names can be any case quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Test suite name should start with a capital letter quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Test case name should start with a capital letter quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Test step must have a valid object name quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Test step must have a valid step definition name quickfix
+    Tag: ListQuickfixesAction
 
-File: Grammar StepDefinitionRef Fragment
-  Scenario: Part Fragment
-    Tag: Grammar
-  Scenario: State Fragment
-    Tag: Grammar
+File: Quickfixes for Workspace Issues
+  Scenario: This object doesn't exist quickfix
+    Tag: ListQuickfixesAction
+  Scenario: This object step definition doesn't exist quickfix
+    Tag: ListQuickfixesAction
+  Scenario: This object step definition parameter set doesn't exist quickfix
+    Tag: ListQuickfixesAction
+  Scenario: This object step definition text parameter exists quickfix
+    Tag: ListQuickfixesAction
+  Scenario: This object step definition text parameter doesn't exist quickfix
+    Tag: ListQuickfixesAction
 
-File: Grammar Type Description
-  Scenario: Initial State
-    Tag: Grammar
+File: Validation for File Issues
+  Scenario: The first step needs to have a component specified validation
+    Tag: ValidateAction
+  Scenario: No component in the first step triggers an error validation
+    Tag: ValidateAction
 
-File: Grammar Type Nested Description
-  Scenario: Initial State
-    Tag: Grammar
+File: Validation for Only Issues
+  Scenario: Header row Cell names should start with a capital letter validation
+    Tag: ValidateAction
+  Scenario: Body row Cell names can be any case validation
+    Tag: ValidateAction
+  Scenario: Test suite name should start with a capital letter validation
+    Tag: ValidateAction
+  Scenario: Test case name should start with a capital letter validation
+    Tag: ValidateAction
+  Scenario: Test step must have a valid object name validation
+    Tag: ValidateAction
+  Scenario: Test step must have a valid step definition name validation
+    Tag: ValidateAction
 
-File: Grammar Type Step Object
-  Scenario: Initial State
-    Tag: Grammar
-  Scenario: Step Definition
-    Tag: Grammar
-  Scenario: Step Parameters
-    Tag: Grammar
-
-File: Grammar Type Table
-  Scenario: Row
-    Tag: Grammar
-  Scenario: Cell
-    Tag: Grammar
-
-File: Grammar Type Test Suite
-  Scenario: Initial State
-    Tag: Grammar
-  Scenario: Test Case
-    Tag: Grammar
-  Scenario: Test Setup
-    Tag: Grammar
-  Scenario: Test Data
-    Tag: Grammar
-
-File: Grammar Type Test Step
-  Scenario: Initial State Given
-    Tag: Grammar
-  Scenario: Initial State When
-    Tag: Grammar
-  Scenario: Initial State Then
-    Tag: Grammar
-  Scenario: Initial State And
-    Tag: Grammar
-  Scenario: Table
-    Tag: Grammar
+File: Validation for Workspace Issues
+  Scenario: This object doesn't exist validation
+    Tag: ValidateAction
+  Scenario: This object step definition doesn't exist validation
+    Tag: ValidateAction
+  Scenario: This object step definition parameter set doesn't exist validation
+    Tag: ValidateAction
+  Scenario: This object step definition text parameter exists validation
+    Tag: ValidateAction
+  Scenario: This object step definition text parameter doesn't exist validation
+    Tag: ValidateAction
