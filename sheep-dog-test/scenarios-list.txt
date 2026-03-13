@@ -1,13 +1,23 @@
-File: Language Definition/Issues/Validation for Only Issues
-  Scenario: Header row Cell names should start with a capital letter validation
+File: Language Definition/Issues/Validation for TestStep Full Name
+  Scenario: With Path Resolution
     Tag: ValidateAction
-  Scenario: Body row Cell names can be any case validation
+  Scenario: Without Path Resolution
     Tag: ValidateAction
-  Scenario: Test suite name should start with a capital letter validation
+
+File: Language Definition/Issues/Validation for File Issues
+  Scenario: The first step needs to have a component specified validation
     Tag: ValidateAction
-  Scenario: Test case name should start with a capital letter validation
+  Scenario: No component in the first step triggers an error validation
     Tag: ValidateAction
-  Scenario: Test step must have a valid object name validation
+
+File: Language Definition/Issues/Validation for Workspace Issues
+  Scenario: This object doesn't exist validation
     Tag: ValidateAction
-  Scenario: Test step must have a valid step definition name validation
+  Scenario: This object step definition doesn't exist validation
+    Tag: ValidateAction
+  Scenario: This object step definition parameter set doesn't exist validation
+    Tag: ValidateAction
+  Scenario: This object step definition text parameter exists validation
+    Tag: ValidateAction
+  Scenario: This object step definition text parameter doesn't exist validation
     Tag: ValidateAction
