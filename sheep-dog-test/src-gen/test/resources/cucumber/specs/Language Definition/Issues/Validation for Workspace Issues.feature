@@ -7,8 +7,10 @@ Feature: Validation for Workspace Issues
   I could just ignore all those warnings and then use the Build Project menu item and it'll create everything at once.
   There's 4 types of warnings, the scenarios below cover them.
 
+  @ValidateAction
   Scenario: This object doesn't exist validation
 
+    \@ValidateAction
     TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE validates that the step object file exists in the workspace for the specified component.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -22,8 +24,10 @@ Feature: Validation for Workspace Issues
           The step object file doesn't exist for the component
           """
 
+  @ValidateAction
   Scenario: This object step definition doesn't exist validation
 
+    \@ValidateAction
     TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE validates that the step definition exists in the step object file. The step object file exists but doesn't have a matching step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -40,8 +44,10 @@ Feature: Validation for Workspace Issues
           The step definition doesn't exist for the step object
           """
 
+  @ValidateAction
   Scenario: This object step definition parameter set doesn't exist validation
 
+    \@ValidateAction
     RowIssueTypes.ROW_CELL_LIST_WORKSPACE validates that the header row cells in the test step match a parameter set defined in the step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -64,8 +70,10 @@ Feature: Validation for Workspace Issues
           The step parameters don't exist for the step definition
           """
 
+  @ValidateAction
   Scenario: This object step definition text parameter exists validation
 
+    \@ValidateAction
     Step definitions for Text Content only have one parameter called "Content"
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -85,8 +93,10 @@ Feature: Validation for Workspace Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
      Then The xtext plugin validate annotation will be empty
 
+  @ValidateAction
   Scenario: This object step definition text parameter doesn't exist validation
 
+    \@ValidateAction
     If there isn't a step definition in the step object file with a Content header, then a warning is displayed.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows

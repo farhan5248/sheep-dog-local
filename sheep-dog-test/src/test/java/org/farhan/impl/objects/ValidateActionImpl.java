@@ -3,14 +3,18 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.issues.CellIssueDetector;
+import org.farhan.dsl.issues.RowIssueDetector;
 import org.farhan.dsl.issues.TestStepContainerIssueDetector;
 import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.issues.TestSuiteIssueDetector;
+import org.farhan.dsl.issues.TextIssueDetector;
 import org.farhan.objects.xtext.ValidateAction;
 
 import io.cucumber.guice.ScenarioScoped;
@@ -40,14 +44,20 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
         }
         String result = "";
         Object cursor = getProperty("cursor");
-        if (cursor instanceof ICell) {
+        if (cursor instanceof IRow) {
+            result = RowIssueDetector.validateWorkspace((IRow) cursor, (ITestProject) getProperty("workspace"));
+        } else if (cursor instanceof ICell) {
             result = CellIssueDetector.validateNameOnly((ICell) cursor);
         } else if (cursor instanceof ITestSuite) {
             result = TestSuiteIssueDetector.validateNameOnly((ITestSuite) cursor);
         } else if (cursor instanceof ITestStepContainer) {
             result = TestStepContainerIssueDetector.validateNameOnly((ITestStepContainer) cursor);
         } else if (cursor instanceof ITestStep) {
-            result = TestStepIssueDetector.validateNameOnly((ITestStep) cursor);
+            result = TestStepIssueDetector.validateWorkspace((ITestStep) cursor,
+                    (ITestProject) getProperty("workspace"));
+        } else if (cursor instanceof IText) {
+            result = TextIssueDetector.validateWorkspace((IText) cursor,
+                    (ITestProject) getProperty("workspace"));
         }
         setProperty("validate annotation.Content", result);
     }

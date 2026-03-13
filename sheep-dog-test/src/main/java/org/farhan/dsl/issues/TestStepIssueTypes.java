@@ -2,6 +2,12 @@ package org.farhan.dsl.issues;
 
 public enum TestStepIssueTypes {
 
+    TEST_STEP_STEP_OBJECT_NAME_WORKSPACE("TEST_STEP_STEP_OBJECT_NAME_WORKSPACE",
+            "The step object file doesn't exist for the component"),
+
+    TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE("TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE",
+            "The step definition doesn't exist for the step object"),
+
     TEST_STEP_STEP_OBJECT_NAME_ONLY("TEST_STEP_STEP_OBJECT_NAME_ONLY",
             "Every test case must have at least one component specified.\n"
                     + "This should be the first part of the test step name.\n"
