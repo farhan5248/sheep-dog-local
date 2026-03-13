@@ -5,8 +5,10 @@ Feature: Validation for File Issues
   Some problems prevent code generation.
   For example not knowing which component an object belongs to gets in the way of knowing where to create the file.
 
+  @ValidateAction
   Scenario: The first step needs to have a component specified validation
 
+    \@ValidateAction
     If the first step has a component, subsequent steps can omit it and default to the first step's component. No validation error is triggered.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -24,8 +26,10 @@ Feature: Validation for File Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1 |
      Then The xtext plugin validate annotation will be empty
 
+  @ValidateAction
   Scenario: No component in the first step triggers an error validation
 
+    \@ValidateAction
     The first step needs to have a component specified.
     The other steps default to that one.
 
