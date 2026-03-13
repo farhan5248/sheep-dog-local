@@ -4,8 +4,10 @@ Feature: Validation for TestStep Full Name
   \@sheep-dog-test
   getTestStepFullName resolves shortened StepObjectRef Names by looking at previous steps to fill in missing component and object path.
 
+  @ValidateAction
   Scenario Outline: With Path Resolution
 
+    \@ValidateAction
     StepObjectRef Name has 3 parts: component, object path, and object name. The algorithm searches previous steps for a matching object name to borrow missing component or path. It stops at the first match with a component.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -39,8 +41,10 @@ Feature: Validation for TestStep Full Name
           | The daily batchjob app/Input file   | The daily batchjob app/Input file | The app/Input file   | The app/Input file   |
           | The nightly batchjob app/Input file | The daily batchjob app/Input file | The app/Input file   | The app/Input file   |
 
+  @ValidateAction
   Scenario Outline: Without Path Resolution
 
+    \@ValidateAction
     StepObjectRef Name has 3 parts: component, object path, and object name. The algorithm searches previous steps for a matching object name to borrow missing component or path. It stops at the first match with a component.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
