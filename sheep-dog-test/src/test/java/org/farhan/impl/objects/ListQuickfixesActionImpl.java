@@ -4,16 +4,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
+import org.farhan.dsl.issues.RowIssueResolver;
+import org.farhan.dsl.issues.RowIssueTypes;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.issues.TestStepContainerIssueTypes;
+import org.farhan.dsl.issues.TestStepIssueResolver;
+import org.farhan.dsl.issues.TestStepIssueTypes;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueTypes;
+import org.farhan.dsl.issues.TextIssueResolver;
+import org.farhan.dsl.issues.TextIssueTypes;
 import org.farhan.objects.xtext.ListQuickfixesAction;
 
 import io.cucumber.guice.ScenarioScoped;
@@ -55,10 +64,27 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
             if (validateContent.contentEquals(TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description)) {
                 list.addAll(TestStepContainerIssueResolver.correctNameOnly(testStepContainer));
             }
+        } else if (cursor instanceof ITestStep) {
+            ITestStep testStep = (ITestStep) cursor;
+            if (validateContent.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description)) {
+                list.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep));
+            } else if (validateContent.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
+                list.addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep));
+            }
+        } else if (cursor instanceof IRow) {
+            IRow row = (IRow) cursor;
+            if (validateContent.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
+                list.addAll(RowIssueResolver.suggestStepParametersNameWorkspace(row));
+            }
         } else if (cursor instanceof ICell) {
             ICell cell = (ICell) cursor;
             if (validateContent.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                 list.addAll(CellIssueResolver.correctNameOnly(cell));
+            }
+        } else if (cursor instanceof IText) {
+            IText text = (IText) cursor;
+            if (validateContent.contentEquals(TextIssueTypes.TEXT_CONTENT_WORKSPACE.description)) {
+                list.addAll(TextIssueResolver.suggestContentNameWorkspace(text));
             }
         }
     }

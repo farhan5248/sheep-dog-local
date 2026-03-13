@@ -7,8 +7,10 @@ Feature: Quickfixes for Workspace Issues
   I could just ignore all those warnings and then use the Build Project menu item and it'll create everything at once.
   There's 4 types of warnings, the scenarios below cover them.
 
+  @ListQuickfixesAction
   Scenario: This object doesn't exist quickfix
 
+    \@ListQuickfixesAction
     The quickfix proposes generating the step object file at the expected path for the component.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -25,8 +27,10 @@ Feature: Quickfixes for Workspace Issues
           | Proposal Id                                                       | Proposal Description |
           | Generate Input file - stepdefs/daily batchjob/Input file.asciidoc | empty                |
 
+  @ListQuickfixesAction
   Scenario: This object step definition doesn't exist quickfix
 
+    \@ListQuickfixesAction
     The quickfix proposes two options: switching to an existing step definition, or generating the missing step definition in the step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -49,8 +53,10 @@ Feature: Quickfixes for Workspace Issues
           | Proposal Id         | Proposal Description |
           | Generate is present | empty                |
 
+  @ListQuickfixesAction
   Scenario: This object step definition parameter set doesn't exist quickfix
 
+    \@ListQuickfixesAction
     The quickfix proposes two options: switching to an existing parameter set, or generating the new parameter set in the step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -82,8 +88,10 @@ Feature: Quickfixes for Workspace Issues
           | Proposal Id     | Proposal Description |
           | Generate N1, N2 | empty                |
 
+  @ListQuickfixesAction
   Scenario: This object step definition text parameter exists quickfix
 
+    \@ListQuickfixesAction
     If the Content parameter exists in the step definition, no quickfix is needed for the text block.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -104,8 +112,10 @@ Feature: Quickfixes for Workspace Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
      Then The xtext plugin list quickfixes popup will be empty
 
+  @ListQuickfixesAction
   Scenario: This object step definition text parameter doesn't exist quickfix
 
+    \@ListQuickfixesAction
     The quickfix proposes generating the Content parameter in the step definition for the text block.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
