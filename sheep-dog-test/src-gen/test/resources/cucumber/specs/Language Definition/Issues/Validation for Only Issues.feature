@@ -4,8 +4,10 @@ Feature: Validation for Only Issues
   \@sheep-dog-test
   These validations check for syntax and naming issues that can be detected by parsing the file alone, without needing to check the workspace.
 
+  @ValidateAction
   Scenario: Header row Cell names should start with a capital letter validation
 
+    \@ValidateAction
     The first row of a table contains header cells. CellIssueTypes.CELL_NAME_ONLY validates that header cell names start with a capital letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -22,8 +24,10 @@ Feature: Validation for Only Issues
           Name should start with a capital
           """
 
+  @ValidateAction
   Scenario: Body row Cell names can be any case validation
 
+    \@ValidateAction
     Body rows (non-header rows) contain data values. The capitalization rule only applies to header row cells.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -40,8 +44,10 @@ Feature: Validation for Only Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList/1 |
      Then The xtext plugin validate annotation will be empty
 
+  @ValidateAction
   Scenario: Test suite name should start with a capital letter validation
 
+    \@ValidateAction
     TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY validates that the test suite name starts with a capital letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file is created as follows
@@ -55,8 +61,10 @@ Feature: Validation for Only Issues
           Name should start with a capital
           """
 
+  @ValidateAction
   Scenario: Test case name should start with a capital letter validation
 
+    \@ValidateAction
     TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY validates that the test case name starts with a capital letter.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
@@ -70,8 +78,10 @@ Feature: Validation for Only Issues
           Name should start with a capital
           """
 
+  @ValidateAction
   Scenario: Test step must have a valid object name validation
 
+    \@ValidateAction
     TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY validates that the step object reference has a valid component and object. The validation message describes the expected format.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -92,8 +102,10 @@ Feature: Validation for Only Issues
           Examples are: "src/test/resources/file.txt file" or "Home page"
           """
 
+  @ValidateAction
   Scenario: Test step must have a valid step definition name validation
 
+    \@ValidateAction
     TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY validates that the step definition reference has a valid part and state. The validation message describes the expected format.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows

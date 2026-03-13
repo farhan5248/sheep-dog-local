@@ -14,6 +14,7 @@ import org.farhan.impl.objects.ProcessGrammarFragmentAsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssues2AsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssuesAsciidocFileImpl;
 import org.farhan.impl.objects.TestObjectSheepDogImpl;
+import org.farhan.impl.objects.ValidateActionImpl;
 import org.farhan.impl.objects.ValidateAnnotationImpl;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarFragmentAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssues2AsciidocFile;
@@ -25,6 +26,7 @@ import org.farhan.objects.xtext.AddDocumentAction;
 import org.farhan.objects.xtext.AddDocumentNodeAction;
 import org.farhan.objects.xtext.ListProposalsPopup;
 import org.farhan.objects.xtext.ListQuickfixesPopup;
+import org.farhan.objects.xtext.ValidateAction;
 import org.farhan.objects.xtext.ValidateAnnotation;
 
 import com.google.inject.AbstractModule;
@@ -64,6 +66,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(AddDocumentNodeAction.class).to(AddDocumentNodeActionImpl.class);
         bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);
         bind(ListQuickfixesPopup.class).to(ListQuickfixesPopupImpl.class);
+        bind(ValidateAction.class).to(ValidateActionImpl.class);
         bind(ValidateAnnotation.class).to(ValidateAnnotationImpl.class);
     }
 
