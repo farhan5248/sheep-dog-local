@@ -10,8 +10,10 @@ Feature: Proposals for Workspace Step Definitions
   So instead of saving all combinations, only the details section and predicate are saved.
   If the reference look-up is done, the step-object is located using the full path and component.
 
+  @ListProposalsAction
   Scenario: Has component no existing step object
 
+    \@ListProposalsAction
     If the step object file doesn't exist in the workspace, no step definition proposals are available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -22,8 +24,10 @@ Feature: Proposals for Workspace Step Definitions
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin list proposals popup will be empty
 
+  @ListProposalsAction
   Scenario: Has component no existing step definition
 
+    \@ListProposalsAction
     If the step object file exists but has no matching step definition, no proposals are available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -34,8 +38,10 @@ Feature: Proposals for Workspace Step Definitions
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin list proposals popup will be empty
 
+  @ListProposalsAction
   Scenario: Has component has existing step definition
 
+    \@ListProposalsAction
     If the step object file has step definitions, they are proposed with their description.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -54,8 +60,10 @@ Feature: Proposals for Workspace Step Definitions
           | Proposal Value | Proposal Id | Proposal Description |
           | is present     | is present  | Creates empty file   |
 
+  @ListProposalsAction
   Scenario: No component has existing step definition
 
+    \@ListProposalsAction
     If a step omits the component but a previous step specified it, the component is inferred and step definitions are proposed from the matching step object.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows

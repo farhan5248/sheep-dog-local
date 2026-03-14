@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.objects.xtext.ListProposalsAction;
 
@@ -38,7 +39,13 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
         ArrayList<SheepDogIssueProposal> list = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestStep) {
-            list.addAll(TestStepIssueResolver.suggestStepObjectNameTestCase((ITestStep) cursor));
+            ITestStep testStep = (ITestStep) cursor;
+            String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+            if (!stepObjectFullName.isEmpty()) {
+                list.addAll(TestStepIssueResolver.suggestStepDefinitionNameTestCase(testStep));
+            } else {
+                list.addAll(TestStepIssueResolver.suggestStepObjectNameTestCase(testStep));
+            }
         }
     }
 }

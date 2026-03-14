@@ -99,6 +99,35 @@ public class TestStepIssueResolver {
         }
     }
 
+    public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameTestCase(ITestStep theTestStep) {
+        logger.debug("Entering suggestStepDefinitionNameTestCase for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
+        if (!stepObjectFullName.isEmpty()) {
+            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (project != null) {
+                ITestDocument doc = project.getTestDocument(stepObjectFullName);
+                if (doc instanceof IStepObject) {
+                    IStepObject stepObject = (IStepObject) doc;
+                    for (IStepDefinition stepDef : stepObject.getStepDefinitionList()) {
+                        String description = "";
+                        if (stepDef.getDescription() != null) {
+                            description = SheepDogUtility.getLineListAsString(stepDef.getDescription().getLineList());
+                        }
+                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                        proposal.setId(stepDef.getName());
+                        proposal.setValue(stepDef.getName());
+                        proposal.setDescription(description);
+                        proposals.add(proposal);
+                    }
+                }
+            }
+        }
+        logger.debug("Exiting suggestStepDefinitionNameTestCase with result: {} proposals", proposals.size());
+        return proposals;
+    }
+
     public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep) {
         logger.debug("Entering suggestStepDefinitionNameWorkspace for theTestStep: {}",
                 theTestStep != null ? theTestStep.getStepObjectName() : "null");
