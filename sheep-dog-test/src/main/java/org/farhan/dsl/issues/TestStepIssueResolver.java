@@ -109,18 +109,7 @@ public class TestStepIssueResolver {
             if (project != null) {
                 ITestDocument doc = project.getTestDocument(stepObjectFullName);
                 if (doc instanceof IStepObject) {
-                    IStepObject stepObject = (IStepObject) doc;
-                    for (IStepDefinition stepDef : stepObject.getStepDefinitionList()) {
-                        String description = "";
-                        if (stepDef.getDescription() != null) {
-                            description = SheepDogUtility.getLineListAsString(stepDef.getDescription().getLineList());
-                        }
-                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                        proposal.setId(stepDef.getName());
-                        proposal.setValue(stepDef.getName());
-                        proposal.setDescription(description);
-                        proposals.add(proposal);
-                    }
+                    addStepDefinitionsFromStepObject((IStepObject) doc, true, proposals);
                 }
             }
         }
@@ -138,14 +127,7 @@ public class TestStepIssueResolver {
             if (project != null) {
                 ITestDocument doc = project.getTestDocument(stepObjectFullName);
                 if (doc instanceof IStepObject) {
-                    IStepObject stepObject = (IStepObject) doc;
-                    for (IStepDefinition stepDef : stepObject.getStepDefinitionList()) {
-                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                        proposal.setId(stepDef.getName());
-                        proposal.setDescription("");
-                        proposal.setValue(stepDef.getName());
-                        proposals.add(proposal);
-                    }
+                    addStepDefinitionsFromStepObject((IStepObject) doc, false, proposals);
                 }
             }
             String stepDefinitionName = theTestStep.getStepDefinitionName();
@@ -156,5 +138,20 @@ public class TestStepIssueResolver {
         }
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with result: {} proposals", proposals.size());
         return proposals;
+    }
+
+    private static void addStepDefinitionsFromStepObject(IStepObject stepObject, boolean includeDescription,
+            ArrayList<SheepDogIssueProposal> proposals) {
+        for (IStepDefinition stepDef : stepObject.getStepDefinitionList()) {
+            String description = "";
+            if (includeDescription && stepDef.getDescription() != null) {
+                description = SheepDogUtility.getLineListAsString(stepDef.getDescription().getLineList());
+            }
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId(stepDef.getName());
+            proposal.setValue(stepDef.getName());
+            proposal.setDescription(description);
+            proposals.add(proposal);
+        }
     }
 }

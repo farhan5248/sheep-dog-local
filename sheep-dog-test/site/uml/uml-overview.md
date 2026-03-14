@@ -35,7 +35,7 @@ Pattern variables used in UML files to represent families of classes following s
    - Case variants: `{fragment}` (camelCase), `{FRAGMENT}` (UPPER_SNAKE_CASE)
 
 5. **{Scope}** - Issue scope levels from {Type}IssueTypes enum
-   - Values: `(Only|File|Workspace|TestCase)`
+   - Values: `(Only|File|Workspace)`
    - Used in: validate{Assignment}{Scope}(), correct{Assignment}{Scope}(), suggest{Assignment}{Scope}()
    - Case variants: `{scope}` (camelCase), `{SCOPE}` (UPPER_SNAKE_CASE)
 
