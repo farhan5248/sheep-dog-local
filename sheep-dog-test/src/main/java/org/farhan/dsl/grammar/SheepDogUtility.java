@@ -34,6 +34,22 @@ public class SheepDogUtility {
     }
 
     /**
+     * Returns all StepObjects from a project's unified TestDocumentList.
+     *
+     * @param project the test project to filter
+     * @return list of IStepObject instances from the project's document list
+     */
+    public static List<IStepObject> getStepObjectList(ITestProject project) {
+        List<IStepObject> result = new ArrayList<>();
+        for (ITestDocument doc : project.getTestDocumentList()) {
+            if (doc instanceof IStepObject) {
+                result.add((IStepObject) doc);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Creates a deep clone of a step object without parent association.
      * <p>
      * Clones the step object and all its children (statements, step definitions,

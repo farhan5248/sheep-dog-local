@@ -70,11 +70,7 @@ public class TestStepIssueResolver {
 
     private static void addProposalsFromStepObjects(ITestProject project, String fileExt,
             ArrayList<SheepDogIssueProposal> proposals) {
-        for (ITestDocument doc : project.getTestDocumentList()) {
-            if (!(doc instanceof IStepObject)) {
-                continue;
-            }
-            IStepObject stepObject = (IStepObject) doc;
+        for (IStepObject stepObject : SheepDogUtility.getStepObjectList(project)) {
             String fullName = stepObject.getFullName();
             String stripped = fullName.startsWith("stepdefs/") ? fullName.substring("stepdefs/".length()) : fullName;
             if (fileExt != null && stripped.endsWith(fileExt)) {
