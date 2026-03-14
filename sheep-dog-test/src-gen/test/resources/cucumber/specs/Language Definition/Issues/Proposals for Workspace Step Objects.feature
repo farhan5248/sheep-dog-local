@@ -10,8 +10,10 @@ Feature: Proposals for Workspace Step Objects
   3. Previous Object in Test Case: If there's a previous object with the fully qualified name, then only the name is suggested
   4. Test Setup: The test setup section is checked if it has a component or object specified.
 
+  @ListProposalsAction
   Scenario: No component no existing
 
+    \@ListProposalsAction
     Without a component and without workspace step objects, no proposals are available.
     TODO make this an outline with various steps like "The" or "The batchjob" etc
 
@@ -23,8 +25,10 @@ Feature: Proposals for Workspace Step Objects
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list proposals popup will be empty
 
+  @ListProposalsAction
   Scenario: No component has existing
 
+    \@ListProposalsAction
     Without a component but with workspace step objects, all step objects are proposed with their description from the step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -43,8 +47,10 @@ Feature: Proposals for Workspace Step Objects
           | Proposal Value                | Proposal Id | Proposal Description |
           | The daily batchjob Input file | Input file  | Description          |
 
+  @ListProposalsAction
   Scenario: Has component no existing
 
+    \@ListProposalsAction
     With a component but without workspace step objects for it, no proposals are available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -55,8 +61,10 @@ Feature: Proposals for Workspace Step Objects
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list proposals popup will be empty
 
+  @ListProposalsAction
   Scenario: Has component has existing
 
+    \@ListProposalsAction
     With a component and workspace step objects, step objects matching the component are proposed with their description.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
