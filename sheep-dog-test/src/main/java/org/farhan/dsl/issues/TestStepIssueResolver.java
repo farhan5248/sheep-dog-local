@@ -60,11 +60,9 @@ public class TestStepIssueResolver {
                 }
             }
         }
-        if (proposals.isEmpty()) {
-            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-            if (project != null) {
-                addProposalsFromStepObjects(project, project.getFileExtension(), proposals);
-            }
+        ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (project != null) {
+            addProposalsFromStepObjects(project, project.getFileExtension(), proposals);
         }
         logger.debug("Exiting suggestStepObjectNameTestCase with result: {} proposals", proposals.size());
         return proposals;
