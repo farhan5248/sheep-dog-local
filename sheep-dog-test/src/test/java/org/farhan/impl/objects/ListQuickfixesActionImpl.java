@@ -74,7 +74,7 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
         } else if (cursor instanceof IRow) {
             IRow row = (IRow) cursor;
             if (validateContent.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
-                list.addAll(RowIssueResolver.suggestStepParametersNameWorkspace(row));
+                list.addAll(RowIssueResolver.suggestCellListWorkspace(row));
             }
         } else if (cursor instanceof ICell) {
             ICell cell = (ICell) cursor;
@@ -84,7 +84,7 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
         } else if (cursor instanceof IText) {
             IText text = (IText) cursor;
             if (validateContent.contentEquals(TextIssueTypes.TEXT_CONTENT_WORKSPACE.description)) {
-                list.addAll(TextIssueResolver.suggestContentNameWorkspace(text));
+                list.addAll(TextIssueResolver.suggestContentWorkspace(text));
             }
         }
     }

@@ -307,6 +307,23 @@ public class SheepDogUtility {
         return null;
     }
 
+    public static ITestStep getTestStepParentForRow(IRow theRow) {
+        logger.debug("Entering getTestStepParentForRow for theRow: {}", theRow != null ? "non-null" : "null");
+        if (theRow != null) {
+            ITable table = theRow.getParent();
+            if (table != null) {
+                Object tableParent = table.getParent();
+                if (tableParent instanceof ITestStep) {
+                    ITestStep result = (ITestStep) tableParent;
+                    logger.debug("Exiting getTestStepParentForRow with result: {}", result);
+                    return result;
+                }
+            }
+        }
+        logger.debug("Exiting getTestStepParentForRow with result: {}", "null");
+        return null;
+    }
+
     /**
      * Gets a list of elements up to (but not including) the specified element.
      * Returns elements in reverse chronological order (most recent first) for

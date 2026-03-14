@@ -6,36 +6,39 @@ import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
-import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.farhan.dsl.grammar.SheepDogUtility;
+import org.slf4j.Logger;
 
 public class RowIssueResolver {
 
-    public static ArrayList<SheepDogIssueProposal> suggestStepParametersNameWorkspace(IRow theRow) {
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(RowIssueResolver.class);
+
+    public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(IRow theRow) {
+        logger.debug("Entering suggestCellListWorkspace for theRow: {}", theRow != null ? "non-null" : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-        ITable table = theRow.getParent();
-        if (table == null) {
+        ITestStep testStep = SheepDogUtility.getTestStepParentForRow(theRow);
+        if (testStep == null) {
+            logger.debug("Exiting suggestCellListWorkspace with result: {} proposals", proposals.size());
             return proposals;
         }
-        Object tableParent = table.getParent();
-        if (!(tableParent instanceof ITestStep)) {
-            return proposals;
-        }
-        ITestStep testStep = (ITestStep) tableParent;
         String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
         if (stepObjectFullName.isEmpty()) {
+            logger.debug("Exiting suggestCellListWorkspace with result: {} proposals", proposals.size());
             return proposals;
         }
         ITestProject project = SheepDogUtility.getTestProjectParentForRow(theRow);
         if (project == null) {
+            logger.debug("Exiting suggestCellListWorkspace with result: {} proposals", proposals.size());
             return proposals;
         }
         ITestDocument doc = project.getTestDocument(stepObjectFullName);
         if (!(doc instanceof IStepObject)) {
+            logger.debug("Exiting suggestCellListWorkspace with result: {} proposals", proposals.size());
             return proposals;
         }
         IStepObject stepObject = (IStepObject) doc;
@@ -54,6 +57,7 @@ public class RowIssueResolver {
         generateProposal.setId("Generate " + cellsAsString);
         generateProposal.setDescription("");
         proposals.add(generateProposal);
+        logger.debug("Exiting suggestCellListWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 }

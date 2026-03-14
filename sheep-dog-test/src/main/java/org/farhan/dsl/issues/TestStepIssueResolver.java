@@ -8,12 +8,18 @@ import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.StepObjectRefFragments;
+import org.slf4j.Logger;
 
 public class TestStepIssueResolver {
 
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
+
     public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep) {
+        logger.debug("Entering suggestStepObjectNameWorkspace for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
         if (!stepObjectFullName.isEmpty()) {
@@ -24,10 +30,13 @@ public class TestStepIssueResolver {
             proposal.setDescription("");
             proposals.add(proposal);
         }
+        logger.debug("Exiting suggestStepObjectNameWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 
     public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep) {
+        logger.debug("Entering suggestStepDefinitionNameWorkspace for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
         if (!stepObjectFullName.isEmpty()) {
@@ -51,6 +60,7 @@ public class TestStepIssueResolver {
             generateProposal.setDescription("");
             proposals.add(generateProposal);
         }
+        logger.debug("Exiting suggestStepDefinitionNameWorkspace with result: {} proposals", proposals.size());
         return proposals;
     }
 }
