@@ -14,6 +14,7 @@ Quick fix proposal generation for validation errors. Separates fix proposal logi
 
 **Examples**:
  - `public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep)`
+ - `public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameTestCase(ITestStep theTestStep)`
  - `public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep)`
  - `public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(ITestStep theTestStep)`
 
