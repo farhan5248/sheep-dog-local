@@ -10,8 +10,10 @@ Feature: Proposals for File Step Objects
   3. Previous Object in Test Case: If there's a previous object, propose both just the name and the long form name
   4. Test Setup: The test setup section is checked if it has a component or object specified.
 
+  @ListProposalsAction
   Scenario: No component no existing
 
+    \@ListProposalsAction
     If a step has no component and no object, proposals come from objects referenced in previous steps within the same test case. Both the short form and fully qualified form are proposed.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -26,8 +28,10 @@ Feature: Proposals for File Step Objects
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
           | The daily batchjob Output file | daily batchjob/Output file | Referred in: The daily batchjob Output file is present |
 
+  @ListProposalsAction
   Scenario: Has component no existing
 
+    \@ListProposalsAction
     If a step has a component but no object, proposals still come from objects referenced in previous steps. The component doesn't filter the proposals from previous steps.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -42,8 +46,10 @@ Feature: Proposals for File Step Objects
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
           | The daily batchjob Output file | daily batchjob/Output file | Referred in: The daily batchjob Output file is present |
 
+  @ListProposalsAction
   Scenario: No component no existing has background
 
+    \@ListProposalsAction
     If a test case step has no component and no object, proposals include objects from the test setup (background) steps.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows

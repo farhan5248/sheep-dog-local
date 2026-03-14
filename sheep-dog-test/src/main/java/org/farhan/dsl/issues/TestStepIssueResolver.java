@@ -34,6 +34,35 @@ public class TestStepIssueResolver {
         return proposals;
     }
 
+    public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameTestCase(ITestStep theTestStep) {
+        logger.debug("Entering suggestStepObjectNameTestCase for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        ArrayList<ITestStep> previousSteps = SheepDogUtility.getTestStepListUpToTestStep(theTestStep);
+        for (ITestStep previousStep : previousSteps) {
+            String stepObjectName = previousStep.getStepObjectName();
+            if (stepObjectName != null && !stepObjectName.isEmpty()) {
+                String componentName = StepObjectRefFragments.getComponent(stepObjectName);
+                String objectName = StepObjectRefFragments.getObject(stepObjectName);
+                String description = "Referred in: " + previousStep.getFullName();
+                SheepDogIssueProposal shortProposal = new SheepDogIssueProposal();
+                shortProposal.setId(objectName);
+                shortProposal.setValue("The " + objectName);
+                shortProposal.setDescription(description);
+                proposals.add(shortProposal);
+                if (!componentName.isEmpty()) {
+                    SheepDogIssueProposal longProposal = new SheepDogIssueProposal();
+                    longProposal.setId(componentName + "/" + objectName);
+                    longProposal.setValue("The " + componentName + " " + objectName);
+                    longProposal.setDescription(description);
+                    proposals.add(longProposal);
+                }
+            }
+        }
+        logger.debug("Exiting suggestStepObjectNameTestCase with result: {} proposals", proposals.size());
+        return proposals;
+    }
+
     public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep) {
         logger.debug("Entering suggestStepDefinitionNameWorkspace for theTestStep: {}",
                 theTestStep != null ? theTestStep.getStepObjectName() : "null");
