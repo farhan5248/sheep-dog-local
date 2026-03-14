@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
@@ -137,6 +138,41 @@ public class TestStepIssueResolver {
             proposals.add(generateProposal);
         }
         logger.debug("Exiting suggestStepDefinitionNameWorkspace with result: {} proposals", proposals.size());
+        return proposals;
+    }
+
+    public static ArrayList<SheepDogIssueProposal> suggestStepParametersForTestCase(ITestStep theTestStep) {
+        logger.debug("Entering suggestStepParametersForTestCase for theTestStep: {}",
+                theTestStep != null ? theTestStep.getStepObjectName() : "null");
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
+        if (!stepObjectFullName.isEmpty()) {
+            ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            if (project != null) {
+                ITestDocument doc = project.getTestDocument(stepObjectFullName);
+                if (doc instanceof IStepObject) {
+                    IStepObject stepObject = (IStepObject) doc;
+                    IStepDefinition stepDef = stepObject.getStepDefinition(theTestStep.getStepDefinitionName());
+                    if (stepDef != null) {
+                        for (IStepParameters stepParams : stepDef.getStepParameterList()) {
+                            String name = stepParams.getName();
+                            if (name != null && !name.equals("Content")) {
+                                String description = "";
+                                if (stepParams.getDescription() != null) {
+                                    description = SheepDogUtility.getLineListAsString(stepParams.getDescription().getLineList());
+                                }
+                                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                                proposal.setId(name);
+                                proposal.setValue(name);
+                                proposal.setDescription(description);
+                                proposals.add(proposal);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        logger.debug("Exiting suggestStepParametersForTestCase with result: {} proposals", proposals.size());
         return proposals;
     }
 

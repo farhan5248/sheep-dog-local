@@ -4,8 +4,10 @@ Feature: Proposals for Workspace Step Parameters
   \@sheep-dog-test
   If the step definition has step parameters, they'll be proposed.
 
+  @ListProposalsAction
   Scenario: No existing step object
 
+    \@ListProposalsAction
     If the step object file doesn't exist in the workspace, no parameter proposals are available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -16,8 +18,10 @@ Feature: Proposals for Workspace Step Parameters
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin list proposals popup will be empty
 
+  @ListProposalsAction
   Scenario: No existing step definition
 
+    \@ListProposalsAction
     If the step object exists but the step definition doesn't match, no parameter proposals are available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -34,8 +38,10 @@ Feature: Proposals for Workspace Step Parameters
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin list proposals popup will be empty
 
+  @ListProposalsAction
   Scenario: Has existing step definition without parameters
 
+    \@ListProposalsAction
     If the step definition exists but the test step uses a different step definition name, no parameter proposals are available.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -52,8 +58,10 @@ Feature: Proposals for Workspace Step Parameters
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin list proposals popup will be empty
 
+  @ListProposalsAction
   Scenario: Has existing step definition with parameters
 
+    \@ListProposalsAction
     If the step definition has parameters with a nested description, they are proposed with their description.
     TODO I should add more parameter combinations to describe this better.
 
@@ -76,8 +84,10 @@ Feature: Proposals for Workspace Step Parameters
           | Proposal Value | Proposal Id | Proposal Description         |
           | H1, H2, H3     | H1, H2, H3  | Header parameters for tables |
 
+  @ListProposalsAction
   Scenario: Has existing step definition with Content parameter
 
+    \@ListProposalsAction
     Content parameters shouldn't be proposed as they are for text blocks, not table rows.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows

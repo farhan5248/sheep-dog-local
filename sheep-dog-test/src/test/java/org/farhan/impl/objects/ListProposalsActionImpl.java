@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
@@ -45,6 +46,11 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
                 list.addAll(TestStepIssueResolver.suggestStepDefinitionNameTestCase(testStep));
             } else {
                 list.addAll(TestStepIssueResolver.suggestStepObjectNameTestCase(testStep));
+            }
+        } else if (cursor instanceof IRow) {
+            ITestStep testStep = SheepDogUtility.getTestStepParentForRow((IRow) cursor);
+            if (testStep != null) {
+                list.addAll(TestStepIssueResolver.suggestStepParametersForTestCase(testStep));
             }
         }
     }
