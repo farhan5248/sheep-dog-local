@@ -50,7 +50,7 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
         } else if (cursor instanceof IRow) {
             ITestStep testStep = SheepDogUtility.getTestStepParentForRow((IRow) cursor);
             if (testStep != null) {
-                list.addAll(TestStepIssueResolver.suggestStepParametersForTestCase(testStep));
+                list.addAll(TestStepIssueResolver.suggestStepParameterListTestCase(testStep));
             }
         }
     }

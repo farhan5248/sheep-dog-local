@@ -141,8 +141,8 @@ public class TestStepIssueResolver {
         return proposals;
     }
 
-    public static ArrayList<SheepDogIssueProposal> suggestStepParametersForTestCase(ITestStep theTestStep) {
-        logger.debug("Entering suggestStepParametersForTestCase for theTestStep: {}",
+    public static ArrayList<SheepDogIssueProposal> suggestStepParameterListTestCase(ITestStep theTestStep) {
+        logger.debug("Entering suggestStepParameterListTestCase for theTestStep: {}",
                 theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
@@ -172,7 +172,7 @@ public class TestStepIssueResolver {
                 }
             }
         }
-        logger.debug("Exiting suggestStepParametersForTestCase with result: {} proposals", proposals.size());
+        logger.debug("Exiting suggestStepParameterListTestCase with result: {} proposals", proposals.size());
         return proposals;
     }
 
