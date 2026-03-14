@@ -4,8 +4,10 @@ Feature: Code Generation for Only Issues
   \@sheep-dog-test
   These tests verify that code generation works correctly when names follow proper capitalization rules.
 
+  @ApplyQuickfixAction
   Scenario: Cell name should start with a capital letter generation
 
+    \@ApplyQuickfixAction
     Applying the quickfix capitalizes the first letter of the header cell name in place.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -28,8 +30,10 @@ Feature: Code Generation for Only Issues
           | Node Path                                                       | Cell Name        |
           | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | Lowercase header |
 
+  @ApplyQuickfixAction
   Scenario: Test suite name should start with a capital letter generation
 
+    \@ApplyQuickfixAction
     Applying the quickfix capitalizes the first letter of the test suite name in place.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file is created as follows
@@ -49,8 +53,10 @@ Feature: Code Generation for Only Issues
           | Test Suite Name |
           | Process issues  |
 
+  @ApplyQuickfixAction
   Scenario: Test case name should start with a capital letter generation
 
+    \@ApplyQuickfixAction
     Applying the quickfix capitalizes the first letter of the test case name in place.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows

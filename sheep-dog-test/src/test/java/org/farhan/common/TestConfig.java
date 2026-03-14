@@ -2,6 +2,7 @@ package org.farhan.common;
 
 import org.farhan.dsl.grammar.SheepDogFactory;
 import org.farhan.impl.ide.SheepDogFactoryImpl;
+import org.farhan.impl.objects.ApplyQuickfixActionImpl;
 import org.farhan.impl.objects.EditDocumentNodeActionImpl;
 import org.farhan.impl.objects.AddDocumentActionImpl;
 import org.farhan.impl.objects.AddDocumentNodeActionImpl;
@@ -22,6 +23,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssue
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.Input2FileAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
+import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.farhan.objects.xtext.EditDocumentNodeAction;
 import org.farhan.objects.xtext.AddDocumentAction;
 import org.farhan.objects.xtext.AddDocumentNodeAction;
@@ -63,6 +65,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(ProcessIssues2AsciidocFile.class).to(ProcessIssues2AsciidocFileImpl.class);
         bind(ProcessIssuesAsciidocFile.class).to(ProcessIssuesAsciidocFileImpl.class);
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
+        bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);
         bind(EditDocumentNodeAction.class).to(EditDocumentNodeActionImpl.class);
         bind(AddDocumentAction.class).to(AddDocumentActionImpl.class);
         bind(AddDocumentNodeAction.class).to(AddDocumentNodeActionImpl.class);
