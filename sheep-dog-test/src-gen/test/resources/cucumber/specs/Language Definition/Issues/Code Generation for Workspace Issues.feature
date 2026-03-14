@@ -14,8 +14,10 @@ Feature: Code Generation for Workspace Issues
   2. A keyword or statement aka step definition about that object such as whether is exists, or has certain attributes or fields.
   3. A combination of parameters for that statement. This could be different combinations of search fields used in a search page.
 
+  @ApplyQuickfixAction
   Scenario: This object doesn't exist generation
 
+    \@ApplyQuickfixAction
     Applying the quickfix creates the step object file with the first step definition.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -35,8 +37,10 @@ Feature: Code Generation for Workspace Issues
           | Step Definition Name |
           | is present           |
 
+  @ApplyQuickfixAction
   Scenario: This object step definition doesn't exist generation
 
+    \@ApplyQuickfixAction
     Applying the quickfix adds the missing step definition to the existing step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -60,8 +64,10 @@ Feature: Code Generation for Workspace Issues
           | StepDefinitionList/1 | is absent            |
           | StepDefinitionList/2 | is present           |
 
+  @ApplyQuickfixAction
   Scenario: This object step definition parameter set doesn't exist generation
 
+    \@ApplyQuickfixAction
     Applying the quickfix adds the new parameter set to the step definition in the step object file.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
@@ -101,8 +107,10 @@ Feature: Code Generation for Workspace Issues
           | StepDefinitionList/1/StepParametersList/2/Table/RowList/1/CellList | N1        |
           | StepDefinitionList/1/StepParametersList/2/Table/RowList/1/CellList | N2        |
 
+  @ApplyQuickfixAction
   Scenario: This object step definition text parameter doesn't exist generation
 
+    \@ApplyQuickfixAction
     Applying the quickfix adds the Content parameter to the step definition for text blocks.
 
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
