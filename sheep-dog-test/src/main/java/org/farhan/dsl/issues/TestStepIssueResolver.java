@@ -62,35 +62,41 @@ public class TestStepIssueResolver {
         if (proposals.isEmpty()) {
             ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
             if (project != null) {
-                String fileExt = project.getFileExtension();
-                for (ITestDocument doc : project.getTestDocumentList()) {
-                    if (doc instanceof IStepObject) {
-                        IStepObject stepObject = (IStepObject) doc;
-                        String fullName = stepObject.getFullName();
-                        String stripped = fullName.startsWith("stepdefs/") ? fullName.substring("stepdefs/".length()) : fullName;
-                        if (fileExt != null && stripped.endsWith(fileExt)) {
-                            stripped = stripped.substring(0, stripped.length() - fileExt.length());
-                        }
-                        int lastSlash = stripped.lastIndexOf('/');
-                        if (lastSlash >= 0) {
-                            String componentName = stripped.substring(0, lastSlash);
-                            String objectName = stripped.substring(lastSlash + 1);
-                            String description = "";
-                            if (stepObject.getDescription() != null) {
-                                description = SheepDogUtility.getLineListAsString(stepObject.getDescription().getLineList());
-                            }
-                            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-                            proposal.setId(objectName);
-                            proposal.setValue("The " + componentName + " " + objectName);
-                            proposal.setDescription(description);
-                            proposals.add(proposal);
-                        }
-                    }
-                }
+                addProposalsFromStepObjects(project, project.getFileExtension(), proposals);
             }
         }
         logger.debug("Exiting suggestStepObjectNameTestCase with result: {} proposals", proposals.size());
         return proposals;
+    }
+
+    private static void addProposalsFromStepObjects(ITestProject project, String fileExt,
+            ArrayList<SheepDogIssueProposal> proposals) {
+        for (ITestDocument doc : project.getTestDocumentList()) {
+            if (!(doc instanceof IStepObject)) {
+                continue;
+            }
+            IStepObject stepObject = (IStepObject) doc;
+            String fullName = stepObject.getFullName();
+            String stripped = fullName.startsWith("stepdefs/") ? fullName.substring("stepdefs/".length()) : fullName;
+            if (fileExt != null && stripped.endsWith(fileExt)) {
+                stripped = stripped.substring(0, stripped.length() - fileExt.length());
+            }
+            int lastSlash = stripped.lastIndexOf('/');
+            if (lastSlash < 0) {
+                continue;
+            }
+            String componentName = stripped.substring(0, lastSlash);
+            String objectName = stripped.substring(lastSlash + 1);
+            String description = "";
+            if (stepObject.getDescription() != null) {
+                description = SheepDogUtility.getLineListAsString(stepObject.getDescription().getLineList());
+            }
+            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+            proposal.setId(objectName);
+            proposal.setValue("The " + componentName + " " + objectName);
+            proposal.setDescription(description);
+            proposals.add(proposal);
+        }
     }
 
     public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep) {
