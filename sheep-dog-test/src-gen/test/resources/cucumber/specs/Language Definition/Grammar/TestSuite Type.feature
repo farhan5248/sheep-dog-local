@@ -98,7 +98,7 @@ Feature: TestSuite Type
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node will be created as follows
           | Node Path                              | Test Data Name   |
           | TestStepContainerList/1/TestDataList/2 | Second Test Data |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file NestedDescription node will be as follows
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Description node will be as follows
           | Node Path                                          | State  |
           | TestStepContainerList/1/TestDataList/1/Description | Absent |
       And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows

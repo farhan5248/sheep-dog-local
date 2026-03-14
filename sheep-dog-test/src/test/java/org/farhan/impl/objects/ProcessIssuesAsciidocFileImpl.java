@@ -41,18 +41,6 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
     }
 
     @Override
-    public String getNestedDescriptionNodeNodePath(HashMap<String, String> keyMap) {
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
-    }
-
-    @Override
-    public String getNestedDescriptionNodeState(HashMap<String, String> keyMap) {
-        IDescription desc = getDescriptionFromCursor();
-        return desc == null ? null : desc.toString();
-    }
-
-    @Override
     public String getRowListNodeNodePath(HashMap<String, String> keyMap) {
         setCursorAtNode(keyMap.get("Node Path"));
         return getProperty("cursor") == null ? null : getProperty("cursor").toString();
@@ -83,7 +71,8 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestDataListNodeState(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null) return null;
+        if (getProperty("cursor") == null)
+            return null;
         return listToString(((ITestCase) getProperty("cursor")).getTestDataList());
     }
 
@@ -100,7 +89,8 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepContainerListNodeState(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null) return null;
+        if (getProperty("cursor") == null)
+            return null;
         return listToString(((ITestSuite) getProperty("cursor")).getTestStepContainerList());
     }
 
@@ -324,12 +314,6 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
-        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
-    }
-
-    @Override
-    public String getNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
         setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
         return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }

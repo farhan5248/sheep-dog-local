@@ -34,12 +34,6 @@ public interface InputFileAsciidocFile {
 
     public String getLineListNodeLineContent(HashMap<String, String> keyMap);
 
-    public String getNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap);
-
-    public String getNestedDescriptionNodeNodePath(HashMap<String, String> keyMap);
-
-    public String getNestedDescriptionNodeState(HashMap<String, String> keyMap);
-
     public void setStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setStepDefinitionListNodeNodePath(HashMap<String, String> keyMap);

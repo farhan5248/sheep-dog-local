@@ -1,12 +1,12 @@
 # UML Communication Patterns
 
-These patterns describe the communication sequence for When steps in test cases. Each pattern shows the classes involved in processing a When step, starting from the auto-generated interface. Step definitions, TestSteps, and TestObject are generated infrastructure and not included.
+These patterns describe the communication sequence for steps in test cases. Each pattern shows the classes involved in processing a step, starting from the auto-generated interface. Step definitions, TestSteps, and TestObject are generated infrastructure and not included.
 
 ## Validate Action
 
 **Regex**: `^The {componentName} {componentType} validate action is performed as follows$`
 
-This pattern applies when the When step performs validation on a grammar element at a node position. The action navigates to a document and node, then delegates to the appropriate {Type}IssueDetector based on the cursor's grammar type. The validation result is stored in shared state for the corresponding vertex (annotation) to assert.
+This pattern applies when a step performs validation on a grammar element at a node position. The action navigates to a document and node, then delegates to the appropriate {Type}IssueDetector based on the cursor's grammar type. The validation result is stored in shared state for the corresponding vertex (annotation) to assert.
 
 | # | Class | Role |
 |---|---|---|
@@ -36,7 +36,7 @@ This pattern applies when the When step performs validation on a grammar element
 
 **Regex**: `^The {componentName} {componentType} list quickfixes action is performed as follows$`
 
-This pattern applies when the When step generates correction proposals for an already-validated grammar element. The action navigates to a document and node, reads the prior validation result from `validate annotation.Content`, matches it against {Type}IssueTypes to select the appropriate {Type}IssueResolver, and stores the correction proposals in `list quickfixes popup`.
+This pattern applies when a step generates correction proposals for an already-validated grammar element. The action navigates to a document and node, reads the prior validation result from `validate annotation.Content`, matches it against {Type}IssueTypes to select the appropriate {Type}IssueResolver, and stores the correction proposals in `list quickfixes popup`.
 
 | # | Class | Role |
 |---|---|---|
@@ -67,7 +67,7 @@ This pattern applies when the When step generates correction proposals for an al
 
 **Regex**: `^The {componentName} {componentType} apply quickfix action is performed as follows$`
 
-This pattern applies when the When step applies correction proposals to fix an invalid grammar element. The action navigates to a document and node, reads the prior validation result, generates corrections via {Type}IssueResolver, then applies the proposals by modifying the model directly via I{Type} setters or adding elements to ITestProject.
+This pattern applies when a step applies correction proposals to fix an invalid grammar element. The action navigates to a document and node, reads the prior validation result, generates corrections via {Type}IssueResolver, then applies the proposals by modifying the model directly via I{Type} setters or adding elements to ITestProject.
 
 | # | Class | Role |
 |---|---|---|
@@ -101,7 +101,7 @@ This pattern applies when the When step applies correction proposals to fix an i
 
 **Regex**: `^The {componentName} {componentType} list proposals action is performed as follows$`
 
-This pattern applies when the When step generates content assist suggestions for a grammar element. The action navigates to a document and node, then delegates to {Type}IssueResolver.suggest to generate suggestions without requiring prior validation. The proposals are stored in `list proposals popup`.
+This pattern applies when a step generates content assist suggestions for a grammar element. The action navigates to a document and node, then delegates to {Type}IssueResolver.suggest to generate suggestions without requiring prior validation. The proposals are stored in `list proposals popup`.
 
 | # | Class | Role |
 |---|---|---|
@@ -130,7 +130,7 @@ This pattern applies when the When step generates content assist suggestions for
 
 **Regex**: `^The {componentName} {componentType} add document action is performed to create a (TestSuite|StepObject) with$`
 
-This pattern applies when the When step creates a new top-level document (TestSuite or StepObject) in the workspace. The action sets cursor to workspace, then creates the document element via {Language}Builder.
+This pattern applies when a step creates a new top-level document (TestSuite or StepObject) in the workspace. The action sets cursor to workspace, then creates the document element via {Language}Builder.
 
 | # | Class | Role |
 |---|---|---|
@@ -149,7 +149,7 @@ This pattern applies when the When step creates a new top-level document (TestSu
 
 **Regex**: `^The {componentName} {componentType} add document node action is performed to add (Text|Table) at$`
 
-This pattern applies when the When step adds a Text or Table child element to an existing node. The action navigates to a document and node, then creates the child element via {Language}Builder.
+This pattern applies when a step adds a Text or Table child element to an existing node. The action navigates to a document and node, then creates the child element via {Language}Builder.
 
 | # | Class | Role |
 |---|---|---|
@@ -171,7 +171,7 @@ This pattern applies when the When step adds a Text or Table child element to an
 
 **Regex**: `^The {componentName} {componentType} edit document node action is performed to modify {Assignment} with$`
 
-This pattern applies when the When step adds a child element to a list within an existing node. The action navigates to a document and node, then creates the child element via {Language}Builder.
+This pattern applies when a step adds a child element to a list within an existing node. The action navigates to a document and node, then creates the child element via {Language}Builder.
 
 | # | Class | Role |
 |---|---|---|
@@ -188,3 +188,28 @@ This pattern applies when the When step adds a child element to a list within an
    - 2.2. → navigateToNode() → **TestObject{Language}Impl**.setCursorAtNode()
    - 2.3. → **TestObject{Language}Impl**.add{Type}With{Assignment}()
      - → **{Language}Builder**.create{Type}()
+
+## Decompose Fragment
+
+**Regex**: `^The {componentName} file {componentName} {componentType} fragment will be decomposed as follows$`
+
+This pattern applies when a step decomposes a grammar element's text into typed fragments using regex-based parsing. The impl creates a document via {Language}Builder, then delegates to the appropriate {Fragment}Fragments class to extract named groups. For fragments with typed values, the corresponding {Fragment}{Aspect}Types enum provides the description string.
+
+| # | Class | Role |
+|---|---|---|
+| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
+| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited `addTestSuiteWithFullName()`, `getFullNameFromPath()` |
+| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
+| 4 | [{Fragment}Fragments](uml-class-FragmentFragments.md) | Regex-based parsing class extracting named groups from text |
+| 5 | [{Fragment}{Aspect}Types](uml-class-FragmentAspectTypes.md) | Enum constants providing description strings for typed fragment values |
+| 6 | [{Language}Builder](uml-class-LanguageBuilder.md) | Creates grammar elements via `createTestProject()`, `createTestSuite()` |
+| 7 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Language}Builder |
+
+### Sequence
+
+1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column (stores input as property)
+2. **{ObjectName}{ObjectType}Impl**.get{Fragment}{Aspect}FragmentDecomposedAsFollows(keyMap)
+   - 2.1. → **ITestProject**.getTestDocument()
+3. **{ObjectName}{ObjectType}Impl**.get{Fragment}{Aspect}Fragment{Column}(keyMap) — for each assertion column
+   - 3.1. → **{Fragment}Fragments**.get{Aspect}() or get{Aspect}Desc()
+   - 3.2. → **{Fragment}{Aspect}Types**.description (optional, when column is a type description)

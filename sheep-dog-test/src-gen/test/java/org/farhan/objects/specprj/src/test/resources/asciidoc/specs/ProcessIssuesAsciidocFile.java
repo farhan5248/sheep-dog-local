@@ -22,12 +22,6 @@ public interface ProcessIssuesAsciidocFile {
 
     public String getDescriptionNodeState(HashMap<String, String> keyMap);
 
-    public String getNestedDescriptionNodeAsFollows(HashMap<String, String> keyMap);
-
-    public String getNestedDescriptionNodeNodePath(HashMap<String, String> keyMap);
-
-    public String getNestedDescriptionNodeState(HashMap<String, String> keyMap);
-
     public void setRowListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setRowListNodeNodePath(HashMap<String, String> keyMap);

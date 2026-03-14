@@ -73,7 +73,7 @@ Feature: StepObject Type
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node will be created as follows
           | Node Path                                 | Step Parameters Name   |
           | StepDefinitionList/1/StepParametersList/2 | Second Step Parameters |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file NestedDescription node will be as follows
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Description node will be as follows
           | Node Path                                             | State  |
           | StepDefinitionList/1/StepParametersList/2/Description | Absent |
       And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Table node will be as follows
