@@ -2,14 +2,13 @@ package org.farhan.impl;
 
 import java.util.ArrayList;
 
-import org.farhan.common.TestObject;
 import org.farhan.mbt.core.Converter;
 import org.farhan.dsl.grammar.IResourceRepository;
 import org.junit.jupiter.api.Assertions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class TestObjectGoalImpl extends TestObject {
+public abstract class TestObjectGoalImpl extends TestObjectSheepDogImpl {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestObjectGoalImpl.class);
 

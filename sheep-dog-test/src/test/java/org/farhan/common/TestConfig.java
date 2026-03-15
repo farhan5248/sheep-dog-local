@@ -1,12 +1,5 @@
 package org.farhan.common;
 
-import java.util.ArrayList;
-
-import org.farhan.dsl.grammar.ITestProject;
-import org.farhan.dsl.grammar.SheepDogBuilder;
-import org.farhan.dsl.grammar.SheepDogFactory;
-import org.farhan.dsl.grammar.SheepDogIssueProposal;
-import org.farhan.impl.ide.SheepDogFactoryImpl;
 import org.farhan.impl.objects.ApplyQuickfixActionImpl;
 import org.farhan.impl.objects.EditDocumentNodeActionImpl;
 import org.farhan.impl.objects.AddDocumentActionImpl;
@@ -21,6 +14,7 @@ import org.farhan.impl.objects.ListQuickfixesPopupImpl;
 import org.farhan.impl.objects.ProcessGrammarFragmentAsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssues2AsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssuesAsciidocFileImpl;
+import org.farhan.impl.objects.TestObjectSheepDogImpl;
 import org.farhan.impl.objects.ValidateActionImpl;
 import org.farhan.impl.objects.ValidateAnnotationImpl;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarFragmentAsciidocFile;
@@ -57,14 +51,8 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
 
     @Before
     public void resetTestProject() throws Exception {
-        SheepDogFactory.instance = new SheepDogFactoryImpl();
-        ITestProject workspace = SheepDogBuilder.createTestProject();
-        TestObject.properties.clear();
-        TestObject.setProperty("workspace", workspace);
-        TestObject.setProperty("cursor", workspace);
-        TestObject.setProperty("validate annotation.Content", "");
-        TestObject.setProperty("list proposals popup", new ArrayList<SheepDogIssueProposal>());
-        TestObject.setProperty("list quickfixes popup", new ArrayList<SheepDogIssueProposal>());
+        TestObject.reset();
+        TestObjectSheepDogImpl.reset();
     }
 
     @Override

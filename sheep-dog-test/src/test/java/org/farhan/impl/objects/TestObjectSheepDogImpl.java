@@ -1,5 +1,7 @@
 package org.farhan.impl.objects;
 
+import java.util.ArrayList;
+
 import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
@@ -17,8 +19,21 @@ import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogBuilder;
+import org.farhan.dsl.grammar.SheepDogFactory;
+import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.impl.ide.SheepDogFactoryImpl;
 
 public class TestObjectSheepDogImpl extends TestObject {
+
+    public static void reset() {
+        SheepDogFactory.instance = new SheepDogFactoryImpl();
+        ITestProject workspace = SheepDogBuilder.createTestProject();
+        setProperty("workspace", workspace);
+        setProperty("cursor", workspace);
+        setProperty("validate annotation.Content", "");
+        setProperty("list proposals popup", new ArrayList<SheepDogIssueProposal>());
+        setProperty("list quickfixes popup", new ArrayList<SheepDogIssueProposal>());
+    }
 
     // === add* helpers ===
 
@@ -264,4 +279,61 @@ public class TestObjectSheepDogImpl extends TestObject {
         }
     }
 
+    // === Node Navigation ===
+
+    protected Object getOrCreateNode(Object parent, String elementType, int index) {
+        switch (elementType) {
+        case "Table": {
+            Object child = getChildNode(parent, elementType, index);
+            if (child != null)
+                return child;
+            if (parent instanceof ITestStep)
+                return SheepDogBuilder.createTable((ITestStep) parent);
+            if (parent instanceof ITestData)
+                return SheepDogBuilder.createTable((ITestData) parent);
+            return SheepDogBuilder.createTable((IStepParameters) parent);
+        }
+        case "Description": {
+            Object child = getChildNode(parent, elementType, index);
+            if (child != null)
+                return child;
+            if (parent instanceof ITestSuite)
+                return SheepDogBuilder.createDescription((ITestSuite) parent);
+            if (parent instanceof ITestStepContainer)
+                return SheepDogBuilder.createDescription((ITestStepContainer) parent);
+            if (parent instanceof IStepObject)
+                return SheepDogBuilder.createDescription((IStepObject) parent);
+            if (parent instanceof IStepDefinition)
+                return SheepDogBuilder.createDescription((IStepDefinition) parent);
+            if (parent instanceof IStepParameters)
+                return SheepDogBuilder.createDescription((IStepParameters) parent);
+            return SheepDogBuilder.createDescription((ITestData) parent);
+        }
+        default:
+            try {
+                return getChildNode(parent, elementType, index);
+            } catch (IndexOutOfBoundsException e) {
+                switch (elementType) {
+                case "TestStepContainerList":
+                    return SheepDogBuilder.createTestCase((ITestSuite) parent, "Test Case");
+                case "TestStepList":
+                    return SheepDogBuilder.createTestStep((ITestStepContainer) parent, "");
+                case "RowList":
+                    return SheepDogBuilder.createRow((ITable) parent);
+                case "CellList":
+                    return SheepDogBuilder.createCell((IRow) parent, "");
+                case "StepDefinitionList":
+                    return SheepDogBuilder.createStepDefinition((IStepObject) parent, "");
+                case "StepParametersList":
+                    return SheepDogBuilder.createStepParameters((IStepDefinition) parent, "");
+                case "LineList":
+                    return SheepDogBuilder.createLine((IDescription) parent, "");
+                case "TestDataList":
+                    return SheepDogBuilder.createTestData((ITestCase) parent, "");
+                default:
+                    throw new IllegalArgumentException("Unknown element type: " + elementType);
+                }
+            }
+        }
+    }
 }

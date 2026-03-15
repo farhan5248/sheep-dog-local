@@ -142,74 +142,139 @@ public String toString() {
 
 ### reset
 
-Resets all static state for a clean test run.
+Resets all static state for a clean test run. Initializes factory, creates workspace, and clears all dialog properties.
 
 **Example: reset implementation**
 ```java
 public static void reset() {
-    testProject = SheepDogBuilder.createTestProject();
-    cursor = testProject;
-    validateDialog = "";
-    listProposalsDialog = new ArrayList<SheepDogIssueProposal>();
-    listQuickfixesDialog = new ArrayList<SheepDogIssueProposal>();
+    SheepDogFactory.instance = new SheepDogFactoryImpl();
+    ITestProject workspace = SheepDogBuilder.createTestProject();
+    setProperty("workspace", workspace);
+    setProperty("cursor", workspace);
+    setProperty("validate annotation.Content", "");
+    setProperty("list proposals popup", new ArrayList<SheepDogIssueProposal>());
+    setProperty("list quickfixes popup", new ArrayList<SheepDogIssueProposal>());
 }
 ```
 
 ### add{Type}With{Assignment}
 
-Creates grammar elements with auto-navigation: if cursor is already at the target type, moves up to parent first.
+Creates grammar elements with auto-navigation: if cursor is already at the target type, moves up to parent first. Updates cursor via `setProperty("cursor", ...)`.
 
 **Example: Creating a test step**
 ```java
 protected void addTestStepWithFullName(String stepName) {
+    Object cursor = getProperty("cursor");
     if (cursor instanceof ITestStep) {
         cursor = ((ITestStep) cursor).getParent();
     }
-    cursor = SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepName);
+    setProperty("cursor", SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepName));
+}
+```
+
+**Example: Creating a cell**
+```java
+protected void addCellWithName(String name) {
+    Object cursor = getProperty("cursor");
+    if (cursor instanceof ICell) {
+        cursor = ((ICell) cursor).getParent();
+    }
+    setProperty("cursor", SheepDogBuilder.createCell((IRow) cursor, name));
+}
+```
+
+**Example: Creating a test suite**
+```java
+protected void addTestSuiteWithFullName(String testSuiteFullName) {
+    Object cursor = getProperty("cursor");
+    if (cursor instanceof ITestSuite) {
+        cursor = ((ITestSuite) cursor).getParent();
+    }
+    setProperty("cursor",
+            SheepDogBuilder.createTestSuite((ITestProject) getProperty("workspace"), testSuiteFullName));
 }
 ```
 
 ### assert{Type}{Assignment}
 
-Queries model elements, navigating to them if needed. Returns the value or null if not found.
+Queries model elements, navigating to them if needed. Returns the value or null if not found. Updates cursor via `setProperty("cursor", ...)` when navigating.
 
 **Example: Asserting with navigation**
 ```java
 protected String assertTestStepContainerName(String name) {
+    Object cursor = getProperty("cursor");
     if (cursor instanceof ITestStepContainer) {
         return ((ITestStepContainer) cursor).getName();
     } else {
-        cursor = ((ITestSuite) cursor).getTestStepContainer(name);
-        return cursor == null ? null : ((ITestStepContainer) cursor).getName();
+        Object tsc = ((ITestSuite) cursor).getTestStepContainer(name);
+        setProperty("cursor", tsc);
+        return tsc == null ? null : ((ITestStepContainer) tsc).getName();
     }
+}
+```
+
+**Example: Direct assertion without navigation**
+```java
+protected String assertTestStepFullName(String fullName) {
+    return ((ITestStep) getProperty("cursor")).getFullName();
 }
 ```
 
 ### get{Type}FromCursor
 
-Extracts a grammar element from cursor by type-checking against grammar types.
+Extracts a grammar element from `getProperty("cursor")` by type-checking against grammar types.
 
 **Example: getDescriptionFromCursor**
 ```java
 protected IDescription getDescriptionFromCursor() {
-    if (cursor instanceof ITestSuite) return ((ITestSuite) cursor).getDescription();
-    else if (cursor instanceof ITestStepContainer) return ((ITestStepContainer) cursor).getDescription();
-    else if (cursor instanceof ITestData) return ((ITestData) cursor).getDescription();
+    Object cursor = getProperty("cursor");
+    if (cursor instanceof ITestSuite)
+        return ((ITestSuite) cursor).getDescription();
+    else if (cursor instanceof ITestStepContainer)
+        return ((ITestStepContainer) cursor).getDescription();
+    else if (cursor instanceof IStepObject)
+        return ((IStepObject) cursor).getDescription();
+    else if (cursor instanceof IStepDefinition)
+        return ((IStepDefinition) cursor).getDescription();
+    else if (cursor instanceof IStepParameters)
+        return ((IStepParameters) cursor).getDescription();
+    else if (cursor instanceof ITestData)
+        return ((ITestData) cursor).getDescription();
     return null;
 }
 ```
 
 ### getDocumentFromNode
 
-Walks up the grammar tree from any node to find the containing ITestDocument.
+Walks up the grammar tree from any node to find the containing ITestDocument. Defined in TestObject as private static.
 
 **Example: getDocumentFromNode implementation**
 ```java
-protected static Object getDocumentFromNode(Object node) {
+private static Object getDocumentFromNode(Object node) {
     Object current = node;
     while (current != null && !(current instanceof ITestDocument)) {
         if (current instanceof ICell) {
             current = ((ICell) current).getParent();
+        } else if (current instanceof IRow) {
+            current = ((IRow) current).getParent();
+        } else if (current instanceof ITable) {
+            current = ((ITable) current).getParent();
+        } else if (current instanceof IText) {
+            current = ((IText) current).getParent();
+        } else if (current instanceof ILine) {
+            current = ((ILine) current).getParent();
+        } else if (current instanceof IDescription) {
+            current = ((IDescription) current).getParent();
+        } else if (current instanceof ITestStep) {
+            current = ((ITestStep) current).getParent();
+        } else if (current instanceof ITestData) {
+            current = ((ITestData) current).getParent();
+        } else if (current instanceof ITestStepContainer) {
+            current = ((ITestStepContainer) current).getParent();
+        } else if (current instanceof IStepParameters) {
+            current = ((IStepParameters) current).getParent();
+        } else if (current instanceof IStepDefinition) {
+            current = ((IStepDefinition) current).getParent();
         } else if (current instanceof ITestProject) {
             return null;
         } else {
@@ -222,70 +287,134 @@ protected static Object getDocumentFromNode(Object node) {
 
 ### setCursorAtNode
 
-Navigates cursor along a path string using element type names and 1-based indices.
+Navigates cursor along a path string using element type names and 1-based indices. Delegates to `navigateToNode(path, false)`.
 
 **Example: setCursorAtNode implementation**
 ```java
 protected void setCursorAtNode(String path) {
+    navigateToNode(path, false);
+}
+```
+
+**Example: navigateToNode implementation (in TestObject)**
+```java
+private void navigateToNode(String path, boolean create) {
     String[] parts = path.split("/");
-    Object current = getDocumentFromNode(cursor);
+    Object current = getDocumentFromNode(getProperty("cursor"));
     int i = 0;
     while (i < parts.length && current != null) {
         String elementType = parts[i];
-        if (elementType.equals("Table") || elementType.equals("Text")
-                || elementType.equals("Description")) {
-            current = getChildNode(current, elementType, 0);
-            i++;
-        } else {
+        if (elementType.endsWith("List")) {
+            if (i + 1 >= parts.length || !parts[i + 1].matches("\\d+")) {
+                break;
+            }
             int index = Integer.parseInt(parts[i + 1]) - 1;
-            current = getChildNode(current, elementType, index);
+            if (create) {
+                current = getOrCreateNode(current, elementType, index);
+            } else {
+                try {
+                    current = getChildNode(current, elementType, index);
+                } catch (IndexOutOfBoundsException e) {
+                    setProperty("cursor", null);
+                    return;
+                }
+            }
             i += 2;
+        } else {
+            if (create && elementType.equals("Text")) {
+                break;
+            }
+            current = create ? getOrCreateNode(current, elementType, 0) : getChildNode(current, elementType, 0);
+            i++;
         }
         if (current != null)
-            cursor = current;
+            setProperty("cursor", current);
     }
 }
 ```
 
 ### createNodeDependencies
 
-Ensures all intermediate nodes exist along a path, creating them via {Language}Builder if missing.
+Ensures all intermediate nodes exist along a path, creating them via {Language}Builder if missing. Delegates to `navigateToNode(path, true)`.
 
 **Example: createNodeDependencies implementation**
 ```java
-protected void createNodeDependencies(String part) {
-    String[] parts = part.split("/");
-    Object current = getDocumentFromNode(cursor);
-    int i = 0;
-    while (i < parts.length) {
-        String elementType = parts[i];
-        if (elementType.equals("Table") || elementType.equals("Description")) {
-            current = getOrCreateNode(current, elementType, 0);
-            i++;
-        } else if (elementType.equals("Text") || elementType.equals("CellList")) {
-            break;
-        } else {
-            if (i + 1 >= parts.length || !parts[i + 1].matches("\\d+")) {
-                break;
+protected void createNodeDependencies(String path) {
+    navigateToNode(path, true);
+}
+```
+
+### getOrCreateNode
+
+Returns existing child node or creates via SheepDogBuilder when missing. Implemented in TestObjectSheepDogImpl.
+
+**Example: getOrCreateNode implementation**
+```java
+protected Object getOrCreateNode(Object parent, String elementType, int index) {
+    switch (elementType) {
+    case "Table": {
+        Object child = getChildNode(parent, elementType, index);
+        if (child != null)
+            return child;
+        if (parent instanceof ITestStep)
+            return SheepDogBuilder.createTable((ITestStep) parent);
+        if (parent instanceof ITestData)
+            return SheepDogBuilder.createTable((ITestData) parent);
+        return SheepDogBuilder.createTable((IStepParameters) parent);
+    }
+    case "Description": {
+        Object child = getChildNode(parent, elementType, index);
+        if (child != null)
+            return child;
+        if (parent instanceof ITestSuite)
+            return SheepDogBuilder.createDescription((ITestSuite) parent);
+        if (parent instanceof ITestStepContainer)
+            return SheepDogBuilder.createDescription((ITestStepContainer) parent);
+        if (parent instanceof IStepObject)
+            return SheepDogBuilder.createDescription((IStepObject) parent);
+        if (parent instanceof IStepDefinition)
+            return SheepDogBuilder.createDescription((IStepDefinition) parent);
+        if (parent instanceof IStepParameters)
+            return SheepDogBuilder.createDescription((IStepParameters) parent);
+        return SheepDogBuilder.createDescription((ITestData) parent);
+    }
+    default:
+        try {
+            return getChildNode(parent, elementType, index);
+        } catch (IndexOutOfBoundsException e) {
+            switch (elementType) {
+            case "TestStepContainerList":
+                return SheepDogBuilder.createTestCase((ITestSuite) parent, "Test Case");
+            case "TestStepList":
+                return SheepDogBuilder.createTestStep((ITestStepContainer) parent, "");
+            case "RowList":
+                return SheepDogBuilder.createRow((ITable) parent);
+            case "CellList":
+                return SheepDogBuilder.createCell((IRow) parent, "");
+            case "StepDefinitionList":
+                return SheepDogBuilder.createStepDefinition((IStepObject) parent, "");
+            case "StepParametersList":
+                return SheepDogBuilder.createStepParameters((IStepDefinition) parent, "");
+            case "LineList":
+                return SheepDogBuilder.createLine((IDescription) parent, "");
+            case "TestDataList":
+                return SheepDogBuilder.createTestData((ITestCase) parent, "");
+            default:
+                throw new IllegalArgumentException("Unknown element type: " + elementType);
             }
-            int index = Integer.parseInt(parts[i + 1]) - 1;
-            current = getOrCreateNode(current, elementType, index);
-            i += 2;
         }
     }
-    cursor = current;
 }
 ```
 
 ### getFullNameFromPath
 
-Extracts the document full name from the "object" property.
+Extracts the document full name from the `object` field, stripping the base path prefix using regex.
 
 **Example: getFullNameFromPath implementation**
 ```java
 protected String getFullNameFromPath() {
-    String path = (String) properties.get("object");
-    return path.replace("src/test/resources/asciidoc/", "");
+    return object.replaceFirst("^src/test/resources/[^/]+/", "");
 }
 ```
 
@@ -317,7 +446,7 @@ Vertex getter that operates directly on the document model (patterns 1, 2).
 @Override
 public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
     setCursorAtNode(keyMap.get("Node Path"));
-    return cursor == null ? null : cursor.toString();
+    return getProperty("cursor") == null ? null : getProperty("cursor").toString();
 }
 ```
 
@@ -334,8 +463,9 @@ public String getDescriptionNodeState(HashMap<String, String> keyMap) {
 ```java
 @Override
 public String getStepDefinitionListNodeState(HashMap<String, String> keyMap) {
-    if (cursor == null) return null;
-    return listToString(((IStepObject) cursor).getStepDefinitionList());
+    if (getProperty("cursor") == null)
+        return null;
+    return listToString(((IStepObject) getProperty("cursor")).getStepDefinitionList());
 }
 ```
 
@@ -349,13 +479,13 @@ public String getCellListNodeCellName(HashMap<String, String> keyMap) {
 
 ### set{Type}{Assignment}
 
-Edge classes buffer into properties (pattern 7). Vertex classes operate directly on model (patterns 1, 2).
+Edge classes buffer into properties via `setProperty()` (pattern 7). Vertex classes operate directly on model (patterns 1, 2).
 
 **Example: Pattern 7 — Edge property buffer**
 ```java
 @Override
 public void setTestSuiteFullName(HashMap<String, String> keyMap) {
-    properties.put("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+    setProperty("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
 }
 ```
 
@@ -363,7 +493,7 @@ public void setTestSuiteFullName(HashMap<String, String> keyMap) {
 ```java
 @Override
 public void setNodePath(HashMap<String, String> keyMap) {
-    properties.put("Node Path", keyMap.get("Node Path"));
+    setProperty("Node Path", keyMap.get("Node Path"));
 }
 ```
 
@@ -387,12 +517,12 @@ public void setCellListNodeCellName(HashMap<String, String> keyMap) {
 
 Vertex getter for document-level or dialog-level state (patterns 2, 5, 6).
 
-**Example: Pattern 2 — Document get via testProject**
+**Example: Pattern 2 — Document get via getProperty("workspace")**
 ```java
 @Override
 public String getCreatedAsFollows(HashMap<String, String> keyMap) {
-    cursor = testProject.getTestDocument(getFullNameFromPath());
-    return cursor == null ? null : cursor.toString();
+    setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+    return getProperty("cursor") == null ? null : getProperty("cursor").toString();
 }
 ```
 
@@ -400,7 +530,7 @@ public String getCreatedAsFollows(HashMap<String, String> keyMap) {
 ```java
 @Override
 public String getEmpty(HashMap<String, String> keyMap) {
-    return validateDialog;
+    return (String) getProperty("validate annotation.Content");
 }
 ```
 
@@ -408,7 +538,7 @@ public String getEmpty(HashMap<String, String> keyMap) {
 ```java
 @Override
 public String getEmpty(HashMap<String, String> keyMap) {
-    return listToString(listProposalsDialog);
+    return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
 }
 ```
 
@@ -416,7 +546,7 @@ public String getEmpty(HashMap<String, String> keyMap) {
 ```java
 @Override
 public String getProposalId(HashMap<String, String> keyMap) {
-    for (SheepDogIssueProposal p : listProposalsDialog) {
+    for (SheepDogIssueProposal p : ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))) {
         if (p.getId().equals(keyMap.get("Proposal Id"))) {
             return p.getId();
         }
@@ -429,7 +559,7 @@ public String getProposalId(HashMap<String, String> keyMap) {
 ```java
 @Override
 public String getProposalValue(HashMap<String, String> keyMap) {
-    for (SheepDogIssueProposal p : listProposalsDialog) {
+    for (SheepDogIssueProposal p : ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))) {
         if (p.getId().equals(keyMap.get("Proposal Id"))
                 && p.getValue().toString().contentEquals(keyMap.get("Proposal Value"))) {
             return p.getValue().toString();
@@ -463,9 +593,9 @@ public void setCreated(HashMap<String, String> keyMap) {
 ```java
 @Override
 public void setPerformedToCreateATestSuiteWith(HashMap<String, String> keyMap) {
-    cursor = testProject;
-    if (properties.get("Test Suite Full Name") != null) {
-        addTestSuiteWithFullName(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+    setProperty("cursor", getProperty("workspace"));
+    if (getProperty("Test Suite Full Name") != null) {
+        addTestSuiteWithFullName(replaceKeyword(getProperty("Test Suite Full Name").toString()));
         properties.remove("Test Suite Full Name");
     }
 }
@@ -477,23 +607,23 @@ public void setPerformedToCreateATestSuiteWith(HashMap<String, String> keyMap) {
 public void setPerformedToModifyTestStepListWith(HashMap<String, String> keyMap) {
     navigateToDocument();
     navigateToNode();
-    if (properties.get("Test Step Full Name") != null) {
-        addTestStepWithFullName(replaceKeyword(properties.get("Test Step Full Name").toString()));
+    if (getProperty("Test Step Full Name") != null) {
+        addTestStepWithFullName(replaceKeyword(getProperty("Test Step Full Name").toString()));
         properties.remove("Test Step Full Name");
     }
 }
 ```
 
-**Example: Pattern 3 — Edge add text/table action**
+**Example: Pattern 3 — Edge add text action**
 ```java
 @Override
 public void setPerformedToAddTextAt(HashMap<String, String> keyMap) {
-    if (properties.get("Test Suite Full Name") != null) {
-        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+    if (getProperty("Test Suite Full Name") != null) {
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
         properties.remove("Test Suite Full Name");
     }
-    if (properties.get("Node Path") != null) {
-        setCursorAtNode(properties.get("Node Path").toString());
+    if (getProperty("Node Path") != null) {
+        setCursorAtNode(getProperty("Node Path").toString());
         addTextWithContent("Text");
         properties.remove("Node Path");
     }
@@ -504,33 +634,33 @@ public void setPerformedToAddTextAt(HashMap<String, String> keyMap) {
 ```java
 @Override
 public void setPerformedAsFollows(HashMap<String, String> keyMap) {
-    if (properties.get("Test Suite Full Name") != null) {
-        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+    if (getProperty("Test Suite Full Name") != null) {
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
         properties.remove("Test Suite Full Name");
     }
-    if (properties.get("Node Path") != null) {
-        setCursorAtNode(properties.get("Node Path").toString());
+    if (getProperty("Node Path") != null) {
+        setCursorAtNode(getProperty("Node Path").toString());
         properties.remove("Node Path");
     }
     try {
-        if (cursor instanceof ICell) {
-            ICell cell = (ICell) cursor;
+        String validateDialog = (String) getProperty("validate annotation.Content");
+        if (getProperty("cursor") instanceof ICell) {
+            ICell cell = (ICell) getProperty("cursor");
             if (validateDialog == null || validateDialog.isEmpty()) {
                 validateDialog = CellIssueDetector.validateNameOnly(cell);
                 if (validateDialog == null) {
                     validateDialog = "";
                 }
             }
-        } else if (cursor instanceof IText) {
-            IText text = (IText) cursor;
+        } else if (getProperty("cursor") instanceof ITestStep) {
+            ITestStep testStep = (ITestStep) getProperty("cursor");
             if (validateDialog == null || validateDialog.isEmpty()) {
-                validateDialog = TextIssueDetector.validateNameWorkspace(text);
-                if (validateDialog == null) {
-                    validateDialog = "";
-                }
+                validateDialog = TestStepIssueDetector.validateStepObjectNameOnly(testStep);
+                // ... cascading validation checks ...
             }
         }
         // ... instanceof chain for each grammar type
+        setProperty("validate annotation.Content", validateDialog);
     } catch (Exception e) {
         Assertions.fail(e);
     }
@@ -543,14 +673,20 @@ public void setPerformedAsFollows(HashMap<String, String> keyMap) {
 public void setPerformedAsFollows(HashMap<String, String> keyMap) {
     // ... navigate (same as validate) ...
     try {
+        String validateDialog = (String) getProperty("validate annotation.Content");
+        Object cursor = getProperty("cursor");
         if (cursor instanceof ICell) {
             ICell cell = (ICell) cursor;
-            if (!CellIssueDetector.validateNameOnly(cell).isEmpty()) {
+            if (validateDialog.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                 applyProposal(CellIssueResolver.correctNameOnly(cell));
             }
         } else if (cursor instanceof ITestStep) {
             ITestStep testStep = (ITestStep) cursor;
-            if (!TestStepIssueDetector.validateStepObjectNameWorkspace(testStep).isEmpty()) {
+            if (validateDialog
+                    .contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
+                applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
+            } else if (validateDialog
+                    .contentEquals(TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description)) {
                 applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
             }
         }
@@ -567,13 +703,18 @@ public void setPerformedAsFollows(HashMap<String, String> keyMap) {
 public void setPerformedAsFollows(HashMap<String, String> keyMap) {
     // ... navigate (same as validate) ...
     try {
+        Object cursor = getProperty("cursor");
+        @SuppressWarnings("unchecked")
+        ArrayList<SheepDogIssueProposal> listProposalsDialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
         if (cursor instanceof IRow) {
             IRow row = (IRow) cursor;
             ITestStep testStep = (ITestStep) row.getParent().getParent();
-            listProposalsDialog.addAll(RowIssueResolver.suggestCellListWorkspace(testStep));
+            listProposalsDialog.addAll(RowIssueResolver.suggestCellListWorkspace((ITestStep) testStep));
         } else if (cursor instanceof ITestStep) {
-            listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) cursor));
-            listProposalsDialog.addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace((ITestStep) cursor));
+            listProposalsDialog
+                    .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) cursor));
+            listProposalsDialog.addAll(
+                    TestStepIssueResolver.suggestStepDefinitionNameWorkspace((ITestStep) cursor));
         }
         // ... instanceof chain
     } catch (Exception e) {
@@ -588,6 +729,10 @@ public void setPerformedAsFollows(HashMap<String, String> keyMap) {
 public void setPerformedAsFollows(HashMap<String, String> keyMap) {
     // ... navigate (same as validate) ...
     try {
+        String validateDialog = (String) getProperty("validate annotation.Content");
+        Object cursor = getProperty("cursor");
+        @SuppressWarnings("unchecked")
+        ArrayList<SheepDogIssueProposal> listQuickfixesDialog = (ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup");
         if (cursor instanceof ICell) {
             ICell cell = (ICell) cursor;
             if (validateDialog.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
@@ -595,8 +740,10 @@ public void setPerformedAsFollows(HashMap<String, String> keyMap) {
             }
         } else if (cursor instanceof ITestStep) {
             ITestStep testStep = (ITestStep) cursor;
-            if (validateDialog.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
-                listQuickfixesDialog.addAll(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
+            if (validateDialog
+                    .contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
+                listQuickfixesDialog
+                        .addAll(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
             }
         }
         // ... instanceof chain
@@ -610,7 +757,7 @@ public void setPerformedAsFollows(HashMap<String, String> keyMap) {
 ```java
 @Override
 public void setContent(HashMap<String, String> keyMap) {
-    validateDialog = keyMap.get("Content");
+    setProperty("validate annotation.Content", keyMap.get("Content"));
 }
 ```
 
@@ -618,7 +765,7 @@ public void setContent(HashMap<String, String> keyMap) {
 ```java
 @Override
 public void setEmpty(HashMap<String, String> keyMap) {
-    validateDialog = replaceKeyword("empty");
+    setProperty("validate annotation.Content", replaceKeyword("empty"));
 }
 ```
 
@@ -626,8 +773,8 @@ public void setEmpty(HashMap<String, String> keyMap) {
 ```java
 @Override
 public void setProposalId(HashMap<String, String> keyMap) {
-    listQuickfixesDialog.add(new SheepDogIssueProposal());
-    listQuickfixesDialog.getLast().setId(keyMap.get("Proposal Id"));
+    ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")).add(new SheepDogIssueProposal());
+    ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")).getLast().setId(keyMap.get("Proposal Id"));
 }
 ```
 
@@ -635,22 +782,22 @@ public void setProposalId(HashMap<String, String> keyMap) {
 ```java
 @Override
 public void setProposalDescription(HashMap<String, String> keyMap) {
-    listQuickfixesDialog.getLast().setDescription(keyMap.get("Proposal Description"));
+    ((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")).getLast().setDescription(keyMap.get("Proposal Description"));
 }
 ```
 
 ### navigateToDocument
 
-Navigates cursor to a document by consuming Test Suite Full Name or Step Object Full Name from properties.
+Navigates cursor to a document by consuming Test Suite Full Name or Step Object Full Name from properties. Private helper in Edge action impls.
 
 **Example: navigateToDocument implementation**
 ```java
 private void navigateToDocument() {
-    if (properties.get("Test Suite Full Name") != null) {
-        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Test Suite Full Name").toString()));
+    if (getProperty("Test Suite Full Name") != null) {
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
         properties.remove("Test Suite Full Name");
-    } else if (properties.get("Step Object Full Name") != null) {
-        cursor = testProject.getTestDocument(replaceKeyword(properties.get("Step Object Full Name").toString()));
+    } else if (getProperty("Step Object Full Name") != null) {
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Step Object Full Name").toString())));
         properties.remove("Step Object Full Name");
     }
 }
@@ -658,13 +805,13 @@ private void navigateToDocument() {
 
 ### navigateToNode
 
-Navigates cursor to a node position by consuming Node Path from properties.
+Navigates cursor to a node position by consuming Node Path from properties. Private helper in Edge action impls.
 
 **Example: navigateToNode implementation**
 ```java
 private void navigateToNode() {
-    if (properties.get("Node Path") != null) {
-        setCursorAtNode(properties.get("Node Path").toString());
+    if (getProperty("Node Path") != null) {
+        setCursorAtNode(getProperty("Node Path").toString());
         properties.remove("Node Path");
     }
 }
@@ -672,15 +819,16 @@ private void navigateToNode() {
 
 ### applyProposal
 
-Static helper that applies issue fix proposals to the current cursor element.
+Static helper that applies issue fix proposals to the current cursor element. Uses `getProperty("workspace")` and `getProperty("cursor")`.
 
 **Example: applyProposal implementation**
 ```java
 private static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
     for (SheepDogIssueProposal p : proposals) {
         if (p.getValue() instanceof IStepObject) {
-            testProject.addStepObject((IStepObject) p.getValue());
+            ((ITestProject) getProperty("workspace")).addStepObject((IStepObject) p.getValue());
         } else {
+            Object cursor = getProperty("cursor");
             if (cursor instanceof ICell) {
                 ((ICell) cursor).setName(p.getValue().toString());
             } else if (cursor instanceof ITestSuite) {
@@ -976,7 +1124,7 @@ public class StepObjectRefFragments {
             }
         }
         return "";
-    }    
+    }
 
     private static String getRegexFromTypes(Enum<?>[] enumValues) {
         String regex = "(";
@@ -990,7 +1138,7 @@ public class StepObjectRefFragments {
             }
         }
         return regex.replaceAll("\\|$", ")");
-    }    
+    }
 }
 ```
 

@@ -1,10 +1,9 @@
 package org.farhan.impl;
 
-import org.farhan.common.TestObject;
 import org.farhan.mbt.maven.MBTMojo;
 import org.junit.jupiter.api.Assertions;
 
-public abstract class TestObjectGoalImpl extends TestObject {
+public abstract class TestObjectGoalImpl extends TestObjectSheepDogImpl {
 
 	public TestObjectGoalImpl() {
 		setProperty("tags", "");

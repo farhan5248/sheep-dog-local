@@ -1,10 +1,9 @@
 package org.farhan.impl;
 
-import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.IResourceRepository;
 import org.junit.jupiter.api.Assertions;
 
-public abstract class TestObjectFileImpl extends TestObject {
+public abstract class TestObjectFileImpl extends TestObjectSheepDogImpl {
 
 	protected IResourceRepository sr = new SourceFileRepositoryImpl();
 
