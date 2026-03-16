@@ -1,6 +1,6 @@
 # {Language}FactoryImpl
 
-**Extends**: I{Language}Factory
+**Implements**: I{Language}Factory
 
 ## create{Type}
 

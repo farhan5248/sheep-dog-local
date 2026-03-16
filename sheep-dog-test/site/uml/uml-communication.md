@@ -10,15 +10,15 @@ This pattern applies when a step performs validation on a grammar element at a n
 
 | # | Class | Role |
 |---|---|---|
-| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
-| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited base class providing `setCursorAtNode()` |
-| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
-| 4 | [I{Type}](uml-class-IType.md) | Grammar element interfaces for instanceof type-checking |
-| 5 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type} |
-| 6 | [{Type}IssueDetector](uml-class-TypeIssueDetector.md) | Validates the grammar element via `validate{Assignment}{Scope}()` |
-| 7 | [{Type}IssueTypes](uml-class-TypeIssueTypes.md) | Enum constants providing the validation error description string |
-| 8 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Type}IssueDetector |
-| 9 | [{Language}Utility](uml-class-LanguageUtility.md) | Parsing/utility methods used by some {Type}IssueDetectors |
+| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `setCursorAtNode()` and model navigation helpers to {ObjectName}{ObjectType}Impl. |
+| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., ValidateAction). Invoked by step definitions via Guice binding. |
+| 3 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type}, returned by model navigation. Used to test methods that use I{Type} interfaces |
+| 4 | [{Type}IssueDetector](uml-class-TypeIssueDetector.md) | Main code entry point. Invoked by {ObjectName}{ObjectType}Impl to validate a grammar element. Delegates to {Type}IssueTypes for error descriptions and optionally to {Language}Utility for name resolution. |
+| 5 | [{Type}IssueTypes](uml-class-TypeIssueTypes.md) | Provides validation error description strings to {Type}IssueDetector. |
+| 6 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers to {Type}IssueDetector for entry/exit logging. |
+| 7 | [{Language}Utility](uml-class-LanguageUtility.md) | Provides parsing/name-resolution methods to {Type}IssueDetector. |
+| 8 | [I{Type}](uml-class-IType.md) | Grammar element interfaces used by {ObjectName}{ObjectType}Impl for instanceof type-checking and by {Type}IssueDetector as parameter types. |
+| 9 | [ITestProject](uml-class-IType.md) | Workspace root used by {ObjectName}{ObjectType}Impl to navigate from workspace to document via `getTestDocument()`. |
 
 ### Sequence
 
@@ -42,16 +42,16 @@ This pattern applies when a step generates correction proposals for an already-v
 
 | # | Class | Role |
 |---|---|---|
-| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
-| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited base class providing `setCursorAtNode()` |
-| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
-| 4 | [I{Type}](uml-class-IType.md) | Grammar element interfaces for instanceof type-checking |
-| 5 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type} |
-| 6 | [{Type}IssueTypes](uml-class-TypeIssueTypes.md) | Enum constants matched against `getProperty("validate annotation.Content")` to select resolver |
-| 7 | [{Type}IssueResolver](uml-class-TypeIssueResolver.md) | Generates correction proposals via `correct{Assignment}{Scope}()` |
-| 8 | [{Language}IssueProposal](uml-class-LanguageIssueProposal.md) | Proposal data objects stored in `getProperty("list quickfixes popup")` |
-| 9 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Type}IssueResolver |
-| 10 | [{Language}Utility](uml-class-LanguageUtility.md) | Parsing/utility methods used by some {Type}IssueResolvers |
+| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `setCursorAtNode()` and model navigation helpers to {ObjectName}{ObjectType}Impl. |
+| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., ListQuickfixesAction). Invoked by step definitions via Guice binding. |
+| 3 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type}, returned by model navigation. Used to test methods that use I{Type} interfaces. |
+| 4 | [{Type}IssueResolver](uml-class-TypeIssueResolver.md) | Main code entry point. Invoked by {ObjectName}{ObjectType}Impl to generate correction proposals. Delegates to {Language}Utility for name resolution and returns {Language}IssueProposal objects. |
+| 5 | [{Type}IssueTypes](uml-class-TypeIssueTypes.md) | Provides validation error description strings matched against prior validation result to select the appropriate {Type}IssueResolver. |
+| 6 | [{Language}IssueProposal](uml-class-LanguageIssueProposal.md) | Proposal data objects returned by {Type}IssueResolver, stored in `getProperty("list quickfixes popup")`. |
+| 7 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers to {Type}IssueResolver for entry/exit logging. |
+| 8 | [{Language}Utility](uml-class-LanguageUtility.md) | Provides parsing/name-resolution methods to {Type}IssueResolver. |
+| 9 | [I{Type}](uml-class-IType.md) | Grammar element interfaces used by {ObjectName}{ObjectType}Impl for instanceof type-checking and by {Type}IssueResolver as parameter types. |
+| 10 | [ITestProject](uml-class-IType.md) | Workspace root used by {ObjectName}{ObjectType}Impl to navigate from workspace to document via `getTestDocument()`. |
 
 ### Sequence
 
@@ -74,16 +74,16 @@ This pattern applies when a step applies correction proposals to fix an invalid 
 
 | # | Class | Role |
 |---|---|---|
-| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
-| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited base class providing `setCursorAtNode()` |
-| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` + `addStepObject()` in applyProposal |
-| 4 | [I{Type}](uml-class-IType.md) | Grammar element interfaces for instanceof type-checking + setters in applyProposal |
-| 5 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type} |
-| 6 | [{Type}IssueTypes](uml-class-TypeIssueTypes.md) | Enum constants matched against `getProperty("validate annotation.Content")` to select resolver |
-| 7 | [{Type}IssueResolver](uml-class-TypeIssueResolver.md) | Generates correction proposals via `correct{Assignment}{Scope}()` |
-| 8 | [{Language}IssueProposal](uml-class-LanguageIssueProposal.md) | Proposal data objects iterated in `applyProposal()` |
-| 9 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Type}IssueResolver |
-| 10 | [{Language}Utility](uml-class-LanguageUtility.md) | Parsing/utility methods used by some {Type}IssueResolvers |
+| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `setCursorAtNode()` and model navigation helpers to {ObjectName}{ObjectType}Impl. |
+| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., ApplyQuickfixAction). Invoked by step definitions via Guice binding. |
+| 3 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type}, returned by model navigation. Used to test methods that use I{Type} interfaces. |
+| 4 | [{Type}IssueResolver](uml-class-TypeIssueResolver.md) | Main code entry point. Invoked by {ObjectName}{ObjectType}Impl to generate correction proposals. Delegates to {Language}Utility for name resolution and returns {Language}IssueProposal objects. |
+| 5 | [{Type}IssueTypes](uml-class-TypeIssueTypes.md) | Provides validation error description strings matched against prior validation result to select the appropriate {Type}IssueResolver. |
+| 6 | [{Language}IssueProposal](uml-class-LanguageIssueProposal.md) | Proposal data objects returned by {Type}IssueResolver, iterated in `applyProposal()` to modify model via I{Type} setters. |
+| 7 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers to {Type}IssueResolver for entry/exit logging. |
+| 8 | [{Language}Utility](uml-class-LanguageUtility.md) | Provides parsing/name-resolution methods to {Type}IssueResolver. |
+| 9 | [I{Type}](uml-class-IType.md) | Grammar element interfaces used by {ObjectName}{ObjectType}Impl for instanceof type-checking and by applyProposal for setters. |
+| 10 | [ITestProject](uml-class-IType.md) | Workspace root used by {ObjectName}{ObjectType}Impl to navigate from workspace to document via `getTestDocument()` and by applyProposal via `addStepObject()`. |
 
 ### Sequence
 
@@ -109,15 +109,15 @@ This pattern applies when a step generates content assist suggestions for a gram
 
 | # | Class | Role |
 |---|---|---|
-| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
-| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited base class providing `setCursorAtNode()` |
-| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
-| 4 | [I{Type}](uml-class-IType.md) | Grammar element interfaces for instanceof type-checking |
-| 5 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type} |
-| 6 | [{Type}IssueResolver](uml-class-TypeIssueResolver.md) | Generates suggestion proposals via `suggest{Assignment}{Scope}()` |
-| 7 | [{Language}IssueProposal](uml-class-LanguageIssueProposal.md) | Proposal data objects stored in `getProperty("list proposals popup")` |
-| 8 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Type}IssueResolver |
-| 9 | [{Language}Utility](uml-class-LanguageUtility.md) | Parsing/utility methods used by some {Type}IssueResolvers |
+| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `setCursorAtNode()` and model navigation helpers to {ObjectName}{ObjectType}Impl. |
+| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., ListProposalsAction). Invoked by step definitions via Guice binding. |
+| 3 | [{Type}Impl](uml-class-TypeImpl.md) | Concrete POJO implementations behind I{Type}, returned by model navigation. Used to test methods that use I{Type} interfaces. |
+| 4 | [{Type}IssueResolver](uml-class-TypeIssueResolver.md) | Main code entry point. Invoked by {ObjectName}{ObjectType}Impl to generate suggestion proposals. Returns {Language}IssueProposal objects. |
+| 5 | [{Language}IssueProposal](uml-class-LanguageIssueProposal.md) | Proposal data objects returned by {Type}IssueResolver, stored in `getProperty("list proposals popup")`. |
+| 6 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers to {Type}IssueResolver for entry/exit logging. |
+| 7 | [{Language}Utility](uml-class-LanguageUtility.md) | Provides parsing/name-resolution methods to {Type}IssueResolver. |
+| 8 | [I{Type}](uml-class-IType.md) | Grammar element interfaces used by {ObjectName}{ObjectType}Impl for instanceof type-checking and by {Type}IssueResolver as parameter types. |
+| 9 | [ITestProject](uml-class-IType.md) | Workspace root used by {ObjectName}{ObjectType}Impl to navigate from workspace to document via `getTestDocument()`. |
 
 ### Sequence
 
@@ -139,9 +139,9 @@ This pattern applies when a step creates a new top-level document (TestSuite or 
 
 | # | Class | Role |
 |---|---|---|
-| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
-| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited `add{Type}WithFullName()` helpers |
-| 3 | [{Language}Builder](uml-class-LanguageBuilder.md) | Creates grammar elements via `create{Type}()` |
+| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `add{Type}WithFullName()` helpers to {ObjectName}{ObjectType}Impl. |
+| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., AddDocumentAction). Invoked by step definitions via Guice binding. |
+| 3 | [{Language}Builder](uml-class-LanguageBuilder.md) | Main code entry point. Invoked by TestObject{Language}Impl to create grammar elements via `create{Type}()`. |
 
 ### Sequence
 
@@ -160,10 +160,10 @@ This pattern applies when a step adds a Text or Table child element to an existi
 
 | # | Class | Role |
 |---|---|---|
-| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
-| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited `setCursorAtNode()`, `addTextWithContent()`, `addTable()` |
-| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
-| 4 | [{Language}Builder](uml-class-LanguageBuilder.md) | Creates grammar elements via `createText()`, `createTable()` |
+| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `setCursorAtNode()`, `addTextWithContent()`, `addTable()` to {ObjectName}{ObjectType}Impl. |
+| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., AddDocumentNodeAction). Invoked by step definitions via Guice binding. |
+| 3 | [{Language}Builder](uml-class-LanguageBuilder.md) | Main code entry point. Invoked by TestObject{Language}Impl to create grammar elements via `createText()`, `createTable()`. |
+| 4 | [ITestProject](uml-class-IType.md) | Workspace root used by {ObjectName}{ObjectType}Impl to navigate from workspace to document via `getTestDocument()`. |
 
 ### Sequence
 
@@ -183,10 +183,10 @@ This pattern applies when a step adds a child element to a list within an existi
 
 | # | Class | Role |
 |---|---|---|
-| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
-| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited `setCursorAtNode()`, `add{Type}With{Assignment}()` helpers |
-| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
-| 4 | [{Language}Builder](uml-class-LanguageBuilder.md) | Creates grammar elements via `create{Type}()` |
+| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `setCursorAtNode()`, `add{Type}With{Assignment}()` helpers to {ObjectName}{ObjectType}Impl. |
+| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., EditDocumentNodeAction). Invoked by step definitions via Guice binding. |
+| 3 | [{Language}Builder](uml-class-LanguageBuilder.md) | Main code entry point. Invoked by TestObject{Language}Impl to create grammar elements via `create{Type}()`. |
+| 4 | [ITestProject](uml-class-IType.md) | Workspace root used by {ObjectName}{ObjectType}Impl to navigate from workspace to document via `getTestDocument()`. |
 
 ### Sequence
 
@@ -206,13 +206,13 @@ This pattern applies when a step decomposes a grammar element's text into typed 
 
 | # | Class | Role |
 |---|---|---|
-| 1 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | Implementation in `src/test/java/org/farhan/impl/objects/`, extends TestObject{Language}Impl |
-| 2 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Inherited `addTestSuiteWithFullName()`, `getFullNameFromPath()` |
-| 3 | [ITestProject](uml-class-IType.md) | Navigate from workspace to document via `getTestDocument()` |
-| 4 | [{Fragment}Fragments](uml-class-TypeFragments.md) | Regex-based parsing class extracting named groups from text |
-| 5 | [{Fragment}{Aspect}Types](uml-class-TypeFragmentTypes.md) | Enum constants providing description strings for typed fragment values |
-| 6 | [{Language}Builder](uml-class-LanguageBuilder.md) | Creates grammar elements via `createTestProject()`, `createTestSuite()` |
-| 7 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers for entry/exit logging in {Language}Builder |
+| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `addTestSuiteWithFullName()`, `getFullNameFromPath()` to {ObjectName}{ObjectType}Impl. |
+| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface. Invoked by step definitions via Guice binding. |
+| 3 | [{Fragment}Fragments](uml-class-TypeFragments.md) | Main code entry point. Invoked by {ObjectName}{ObjectType}Impl to extract named groups from text via regex-based parsing. Delegates to {Fragment}{Aspect}Types for typed values. |
+| 4 | [{Fragment}{Aspect}Types](uml-class-TypeFragmentTypes.md) | Provides description strings for typed fragment values to {Fragment}Fragments. |
+| 5 | [{Language}Builder](uml-class-LanguageBuilder.md) | Invoked by TestObject{Language}Impl to create grammar elements via `createTestProject()`, `createTestSuite()`. |
+| 6 | [{Language}LoggerFactory](uml-class-LanguageLoggerFactory.md) | Provides loggers to {Language}Builder for entry/exit logging. |
+| 7 | [ITestProject](uml-class-IType.md) | Workspace root used by {ObjectName}{ObjectType}Impl to navigate from workspace to document via `getTestDocument()`. |
 
 ### Sequence
 

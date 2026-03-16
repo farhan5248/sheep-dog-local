@@ -1,6 +1,6 @@
 # {Type}Impl
 
-**Extends**: I{Type}
+**Implements**: I{Type}
 
 ## get{Assignment}
 

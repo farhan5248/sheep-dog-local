@@ -2,6 +2,8 @@
 
 **Extends**: TestObject{Language}Impl
 
+**Implements**: {ObjectName}{ObjectType}
+
 **Desc**: Test object implementation that bridges Cucumber step definitions to grammar model operations. Edge types (Action) buffer parameters in `properties` via setters, then consume them in performed methods. Vertex types (File, Popup, Annotation) operate directly on the document model or dialog state.
 
 ## get{Type}{Assignment}
