@@ -22,37 +22,28 @@ public class StepDefinitionRefFragments {
     }
 
     public static String getPart(String text) {
-        if (text == null || text.isEmpty()) {
-            return "";
-        }
-        Matcher matcher = PART_PATTERN.matcher(text);
-        String result = "";
-        while (matcher.find()) {
-            result = matcher.group(1) + " " + matcher.group(2);
-        }
-        return result;
+        String[] parts = getPartGroups(text);
+        return parts == null ? "" : parts[0] + " " + parts[1];
     }
 
     public static String getPartDesc(String text) {
-        if (text == null || text.isEmpty()) {
-            return "";
-        }
-        Matcher matcher = PART_PATTERN.matcher(text);
-        String result = "";
-        while (matcher.find()) {
-            result = matcher.group(1);
-        }
-        return result;
+        String[] parts = getPartGroups(text);
+        return parts == null ? "" : parts[0];
     }
 
     public static String getPartType(String text) {
+        String[] parts = getPartGroups(text);
+        return parts == null ? "" : parts[1];
+    }
+
+    private static String[] getPartGroups(String text) {
         if (text == null || text.isEmpty()) {
-            return "";
+            return null;
         }
         Matcher matcher = PART_PATTERN.matcher(text);
-        String result = "";
+        String[] result = null;
         while (matcher.find()) {
-            result = matcher.group(2);
+            result = new String[]{matcher.group(1), matcher.group(2)};
         }
         return result;
     }
@@ -68,36 +59,29 @@ public class StepDefinitionRefFragments {
     }
 
     public static String getState(String text) {
-        if (text == null || text.isEmpty()) {
-            return "";
-        }
-        Matcher matcher = STATE_PATTERN.matcher(text);
-        if (matcher.find()) {
-            return matcher.group(1) + " " + matcher.group(2);
-        }
-        return "";
+        String[] parts = getStateGroups(text);
+        return parts == null ? "" : parts[0] + " " + parts[1];
     }
 
     public static String getStateDesc(String text) {
-        if (text == null || text.isEmpty()) {
-            return "";
-        }
-        Matcher matcher = STATE_PATTERN.matcher(text);
-        if (matcher.find()) {
-            return matcher.group(2);
-        }
-        return "";
+        String[] parts = getStateGroups(text);
+        return parts == null ? "" : parts[1];
     }
 
     public static String getStateType(String text) {
+        String[] parts = getStateGroups(text);
+        return parts == null ? "" : parts[0];
+    }
+
+    private static String[] getStateGroups(String text) {
         if (text == null || text.isEmpty()) {
-            return "";
+            return null;
         }
         Matcher matcher = STATE_PATTERN.matcher(text);
         if (matcher.find()) {
-            return matcher.group(1);
+            return new String[]{matcher.group(1), matcher.group(2)};
         }
-        return "";
+        return null;
     }
 
     public static String getStateTypeDesc(String text) {
