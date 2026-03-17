@@ -49,4 +49,16 @@ public interface InputFileAsciidocFile {
     public String getTableNodeNodePath(HashMap<String, String> keyMap);
 
     public String getTableNodeState(HashMap<String, String> keyMap);
+
+    public void setLineListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public void setLineListNodeNodePath(HashMap<String, String> keyMap);
+
+    public void setLineListNodeLineContent(HashMap<String, String> keyMap);
+
+    public String getLineListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public String getLineListNodeNodePath(HashMap<String, String> keyMap);
+
+    public String getLineListNodeLineContent(HashMap<String, String> keyMap);
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
@@ -38,6 +39,63 @@ public class TestObjectSheepDogImpl extends TestObject {
     @Override
     protected Object getOrCreateNode(Object parent, String elementType, int index) {
         switch (elementType) {
+        case "Description": {
+            if (parent instanceof ITestSuite) {
+                ITestSuite ts = (ITestSuite) parent;
+                IDescription desc = ts.getDescription();
+                if (desc == null) {
+                    desc = SheepDogFactory.instance.createDescription();
+                    ts.setDescription(desc);
+                }
+                return desc;
+            }
+            if (parent instanceof ITestStepContainer) {
+                ITestStepContainer tsc = (ITestStepContainer) parent;
+                IDescription desc = tsc.getDescription();
+                if (desc == null) {
+                    desc = SheepDogFactory.instance.createDescription();
+                    tsc.setDescription(desc);
+                }
+                return desc;
+            }
+            if (parent instanceof IStepObject) {
+                IStepObject so = (IStepObject) parent;
+                IDescription desc = so.getDescription();
+                if (desc == null) {
+                    desc = SheepDogFactory.instance.createDescription();
+                    so.setDescription(desc);
+                }
+                return desc;
+            }
+            if (parent instanceof IStepDefinition) {
+                IStepDefinition sd = (IStepDefinition) parent;
+                IDescription desc = sd.getDescription();
+                if (desc == null) {
+                    desc = SheepDogFactory.instance.createDescription();
+                    sd.setDescription(desc);
+                }
+                return desc;
+            }
+            if (parent instanceof IStepParameters) {
+                IStepParameters sp = (IStepParameters) parent;
+                IDescription desc = sp.getDescription();
+                if (desc == null) {
+                    desc = SheepDogFactory.instance.createDescription();
+                    sp.setDescription(desc);
+                }
+                return desc;
+            }
+            if (parent instanceof ITestData) {
+                ITestData td = (ITestData) parent;
+                IDescription desc = td.getDescription();
+                if (desc == null) {
+                    desc = SheepDogFactory.instance.createDescription();
+                    td.setDescription(desc);
+                }
+                return desc;
+            }
+            return null;
+        }
         case "TestStepContainerList": {
             ITestSuite testSuite = (ITestSuite) parent;
             if (index < testSuite.getTestStepContainerList().size())
@@ -79,6 +137,12 @@ public class TestObjectSheepDogImpl extends TestObject {
             if (index < row.getCellList().size())
                 return row.getCell(index);
             return SheepDogBuilder.createCell(row, "Cell" + (index + 1));
+        }
+        case "LineList": {
+            IDescription desc = (IDescription) parent;
+            if (index < desc.getLineList().size())
+                return desc.getLine(index);
+            return SheepDogBuilder.createLine(desc, "");
         }
         case "Table": {
             if (parent instanceof ITestStep) {
@@ -175,9 +239,17 @@ public class TestObjectSheepDogImpl extends TestObject {
         setProperty("cursor", cell);
     }
 
+    protected void addLineWithContent(String content) {
+        IDescription parent = getDescriptionFromCursor();
+        ILine line = SheepDogBuilder.createLine(parent, content);
+        setProperty("cursor", line);
+    }
+
     protected IDescription getDescriptionFromCursor() {
         Object cursor = getProperty("cursor");
-        if (cursor instanceof ITestSuite)
+        if (cursor instanceof IDescription)
+            return (IDescription) cursor;
+        else if (cursor instanceof ITestSuite)
             return ((ITestSuite) cursor).getDescription();
         else if (cursor instanceof ITestStepContainer)
             return ((ITestStepContainer) cursor).getDescription();

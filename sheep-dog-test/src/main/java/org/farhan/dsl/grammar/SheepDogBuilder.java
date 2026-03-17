@@ -168,6 +168,16 @@ public class SheepDogBuilder {
         return cell;
     }
 
+    public static ILine createLine(IDescription parent, String content) {
+        logger.debug("createLine(parent={}, content={})", parent, content);
+        ILine line = SheepDogFactory.instance.createLine();
+        line.setName(content);
+        if (parent != null)
+            parent.addLine(line);
+        logger.debug("createLine() = {}", line);
+        return line;
+    }
+
     public static IStepObject createStepObject(ITestProject parent, String fullName) {
         logger.debug("createStepObject(parent={}, fullName={})", parent, fullName);
         IStepObject stepObject = SheepDogFactory.instance.createStepObject();

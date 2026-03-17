@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
@@ -172,6 +173,40 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getTableNodeState(HashMap<String, String> keyMap) {
         return null;
+    }
+
+    @Override
+    public void setLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
+    }
+
+    @Override
+    public void setLineListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setLineListNodeLineContent(HashMap<String, String> keyMap) {
+        addLineWithContent(keyMap.get("Line Content"));
+    }
+
+    @Override
+    public String getLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return null;
+    }
+
+    @Override
+    public String getLineListNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        setCursorAtNode(keyMap.get("Node Path"));
+        return null;
+    }
+
+    @Override
+    public String getLineListNodeLineContent(HashMap<String, String> keyMap) {
+        ILine line = (ILine) getProperty("cursor");
+        return line.getName();
     }
 
 }

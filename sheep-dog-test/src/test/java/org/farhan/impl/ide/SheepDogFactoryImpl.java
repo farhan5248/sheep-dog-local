@@ -6,7 +6,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public IDescription createDescription() {
-        return null;
+        return new DescriptionImpl();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public ILine createLine() {
-        return null;
+        return new LineImpl();
     }
 
     @Override

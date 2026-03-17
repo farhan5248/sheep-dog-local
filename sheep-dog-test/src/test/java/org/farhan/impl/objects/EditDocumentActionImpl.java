@@ -168,4 +168,19 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
             properties.remove("Cell Name");
         }
     }
+
+    @Override
+    public void setLineContent(HashMap<String, String> keyMap) {
+        setProperty("Line Content", keyMap.get("Line Content"));
+    }
+
+    @Override
+    public void setPerformedToModifyLineListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (getProperty("Line Content") != null) {
+            addLineWithContent(replaceKeyword(getProperty("Line Content").toString()));
+            properties.remove("Line Content");
+        }
+    }
 }
