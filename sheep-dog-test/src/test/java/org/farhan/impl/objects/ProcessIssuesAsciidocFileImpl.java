@@ -7,6 +7,7 @@ import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSetup;
+import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
 
@@ -113,5 +114,49 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
     public String getTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap) {
         ITestSetup ts = (ITestSetup) getProperty("cursor");
         return ts.getName();
+    }
+
+    @Override
+    public String getTestDataListNodeAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTestDataListNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        setCursorAtNode(keyMap.get("Node Path"));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTestDataListNodeState(HashMap<String, String> keyMap) {
+        ITestCase tc = (ITestCase) getProperty("cursor");
+        if (tc == null) {
+            return null;
+        }
+        return listToString(tc.getTestDataList());
+    }
+
+    @Override
+    public String getTestStepListNodeAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTestStepListNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        setCursorAtNode(keyMap.get("Node Path"));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTestStepListNodeState(HashMap<String, String> keyMap) {
+        ITestStepContainer tsc = (ITestStepContainer) getProperty("cursor");
+        if (tsc == null) {
+            return null;
+        }
+        return listToString(tsc.getTestStepList());
     }
 }

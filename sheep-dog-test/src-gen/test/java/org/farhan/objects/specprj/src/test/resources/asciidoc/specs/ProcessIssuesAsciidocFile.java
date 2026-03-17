@@ -31,4 +31,16 @@ public interface ProcessIssuesAsciidocFile {
     public String getTestStepContainerListNodeTestCaseName(HashMap<String, String> keyMap);
 
     public String getTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap);
+
+    public String getTestDataListNodeAsFollows(HashMap<String, String> keyMap);
+
+    public String getTestDataListNodeNodePath(HashMap<String, String> keyMap);
+
+    public String getTestDataListNodeState(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeAsFollows(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeNodePath(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeState(HashMap<String, String> keyMap);
 }

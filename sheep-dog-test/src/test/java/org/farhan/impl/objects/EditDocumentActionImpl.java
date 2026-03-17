@@ -86,7 +86,10 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
     public void setPerformedToModifyTestStepContainerListWith(HashMap<String, String> keyMap) {
         navigateToDocument();
         navigateToNode();
-        if (getProperty("Test Setup Name") != null) {
+        if (getProperty("Test Case Name") != null) {
+            addTestCaseWithName(replaceKeyword(getProperty("Test Case Name").toString()));
+            properties.remove("Test Case Name");
+        } else if (getProperty("Test Setup Name") != null) {
             addTestSetupWithName(replaceKeyword(getProperty("Test Setup Name").toString()));
             properties.remove("Test Setup Name");
         }
