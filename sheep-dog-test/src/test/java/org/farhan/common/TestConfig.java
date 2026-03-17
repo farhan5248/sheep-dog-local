@@ -10,6 +10,8 @@ import org.farhan.impl.objects.ProcessIssues2AsciidocFileImpl;
 import org.farhan.impl.objects.ProcessGrammarFragmentAsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssuesAsciidocFileImpl;
 import org.farhan.impl.objects.TestObjectSheepDogImpl;
+import org.farhan.impl.objects.ValidateActionImpl;
+import org.farhan.impl.objects.ValidateAnnotationImpl;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssues2AsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarFragmentAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
@@ -19,6 +21,8 @@ import org.farhan.objects.xtext.AddDocumentAction;
 import org.farhan.objects.xtext.EditDocumentAction;
 import org.farhan.objects.xtext.ListProposalsAction;
 import org.farhan.objects.xtext.ListProposalsPopup;
+import org.farhan.objects.xtext.ValidateAction;
+import org.farhan.objects.xtext.ValidateAnnotation;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -52,6 +56,8 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(ProcessIssues2AsciidocFile.class).to(ProcessIssues2AsciidocFileImpl.class);
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
         bind(ProcessIssuesAsciidocFile.class).to(ProcessIssuesAsciidocFileImpl.class);
+        bind(ValidateAction.class).to(ValidateActionImpl.class);
+        bind(ValidateAnnotation.class).to(ValidateAnnotationImpl.class);
     }
 
 }

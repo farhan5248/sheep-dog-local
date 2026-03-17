@@ -135,4 +135,8 @@ public interface ProcessIssuesAsciidocFile {
     public String getCellListNodeNodePath(HashMap<String, String> keyMap);
 
     public String getCellListNodeCellName(HashMap<String, String> keyMap);
+
+    public void setCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public void setTestSuiteName(HashMap<String, String> keyMap);
 }
