@@ -1,0 +1,47 @@
+@sheep-dog-test
+Feature: Validation for File Issues
+
+  \@sheep-dog-test
+  Some problems prevent code generation.
+  For example not knowing which component an object belongs to gets in the way of knowing where to create the file.
+
+  @ValidateAction
+  Scenario: The first step needs to have a component specified validation
+
+    \@ValidateAction
+    If the first step has a component, subsequent steps can omit it and default to the first step's component. No validation error is triggered.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+          | TestStepContainerList/1/TestStepList | The Input file is downloaded             |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is present           |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows
+          | Node Path                                 | Line Content       |
+          | StepDefinitionList/1/Description/LineList | Creates empty file |
+     When The xtext plugin validate action is performed as follows
+          | Test Suite Full Name         | Node Path               |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1 |
+     Then The xtext plugin validate annotation will be empty
+
+  @ValidateAction
+  Scenario: No component in the first step triggers an error validation
+
+    \@ValidateAction
+    The first step needs to have a component specified.
+    The other steps default to that one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                         |
+          | TestStepContainerList/1/TestStepList | The Input file is present                   |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is downloaded |
+     When The xtext plugin validate action is performed as follows
+          | Test Suite Full Name         | Node Path               |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1 |
+     Then The xtext plugin validate annotation will be set as follows
+          """
+          The first step must have a component
+          """
+
