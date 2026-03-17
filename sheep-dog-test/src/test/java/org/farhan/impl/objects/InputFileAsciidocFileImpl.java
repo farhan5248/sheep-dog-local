@@ -70,8 +70,7 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
         addStepObjectWithFullName(getFullNameFromPath());
     }
 
-    @Override
-    public void setStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+    private void navigateToOrCreateDocument() {
         ITestProject workspace = (ITestProject) getProperty("workspace");
         ITestDocument doc = workspace.getTestDocument(getFullNameFromPath());
         if (doc == null) {
@@ -79,6 +78,11 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
         } else {
             setProperty("cursor", doc);
         }
+    }
+
+    @Override
+    public void setStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
     }
 
     @Override
@@ -127,13 +131,7 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public void setStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestDocument doc = workspace.getTestDocument(getFullNameFromPath());
-        if (doc == null) {
-            addStepObjectWithFullName(getFullNameFromPath());
-        } else {
-            setProperty("cursor", doc);
-        }
+        navigateToOrCreateDocument();
     }
 
     @Override
