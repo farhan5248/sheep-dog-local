@@ -9,6 +9,7 @@ public class TestSetupImpl implements ITestSetup {
     private String name;
     private IDescription description;
     private List<ITestStep> testStepList = new ArrayList<>();
+    ITestSuite parent;
 
     @Override
     public String getName() {
@@ -22,7 +23,7 @@ public class TestSetupImpl implements ITestSetup {
 
     @Override
     public ITestSuite getParent() {
-        return null;
+        return parent;
     }
 
     @Override
@@ -42,6 +43,9 @@ public class TestSetupImpl implements ITestSetup {
 
     @Override
     public boolean addTestStep(ITestStep value) {
+        if (value instanceof TestStepImpl) {
+            ((TestStepImpl) value).parent = this;
+        }
         return testStepList.add(value);
     }
 

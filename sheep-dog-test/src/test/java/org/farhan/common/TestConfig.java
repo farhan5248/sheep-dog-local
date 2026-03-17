@@ -4,6 +4,8 @@ import org.farhan.impl.objects.AddDocumentActionImpl;
 import org.farhan.impl.objects.EditDocumentActionImpl;
 import org.farhan.impl.objects.Input2FileAsciidocFileImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;
+import org.farhan.impl.objects.ListProposalsActionImpl;
+import org.farhan.impl.objects.ListProposalsPopupImpl;
 import org.farhan.impl.objects.ProcessIssues2AsciidocFileImpl;
 import org.farhan.impl.objects.ProcessGrammarFragmentAsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssuesAsciidocFileImpl;
@@ -15,6 +17,8 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatc
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.AddDocumentAction;
 import org.farhan.objects.xtext.EditDocumentAction;
+import org.farhan.objects.xtext.ListProposalsAction;
+import org.farhan.objects.xtext.ListProposalsPopup;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -41,6 +45,8 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
     protected void configure() {
         bind(AddDocumentAction.class).to(AddDocumentActionImpl.class);
         bind(EditDocumentAction.class).to(EditDocumentActionImpl.class);
+        bind(ListProposalsAction.class).to(ListProposalsActionImpl.class);
+        bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);
         bind(InputFileAsciidocFile.class).to(InputFileAsciidocFileImpl.class);
         bind(Input2FileAsciidocFile.class).to(Input2FileAsciidocFileImpl.class);
         bind(ProcessIssues2AsciidocFile.class).to(ProcessIssues2AsciidocFileImpl.class);

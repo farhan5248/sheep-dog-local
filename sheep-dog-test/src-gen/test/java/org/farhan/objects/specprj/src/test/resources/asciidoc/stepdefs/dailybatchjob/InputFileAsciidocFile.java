@@ -61,4 +61,10 @@ public interface InputFileAsciidocFile {
     public String getLineListNodeNodePath(HashMap<String, String> keyMap);
 
     public String getLineListNodeLineContent(HashMap<String, String> keyMap);
+
+    public void setCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public void setStepDefinitionName(HashMap<String, String> keyMap);
+
+    public void setStepParametersName(HashMap<String, String> keyMap);
 }

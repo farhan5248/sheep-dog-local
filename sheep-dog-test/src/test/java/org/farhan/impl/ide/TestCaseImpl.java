@@ -10,6 +10,7 @@ public class TestCaseImpl implements ITestCase {
     private IDescription description;
     private List<ITestStep> testStepList = new ArrayList<>();
     private List<ITestData> testDataList = new ArrayList<>();
+    ITestSuite parent;
 
     @Override
     public String getName() {
@@ -23,7 +24,7 @@ public class TestCaseImpl implements ITestCase {
 
     @Override
     public ITestSuite getParent() {
-        return null;
+        return parent;
     }
 
     @Override
@@ -43,6 +44,9 @@ public class TestCaseImpl implements ITestCase {
 
     @Override
     public boolean addTestStep(ITestStep value) {
+        if (value instanceof TestStepImpl) {
+            ((TestStepImpl) value).parent = this;
+        }
         return testStepList.add(value);
     }
 
