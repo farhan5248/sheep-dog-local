@@ -32,35 +32,34 @@ public class TestObjectSheepDogImpl extends TestObject {
 
     @Override
     protected Object getOrCreateNode(Object parent, String elementType, int index) {
-        if ("TestStepContainerList".equals(elementType) && parent instanceof ITestSuite) {
+        switch (elementType) {
+        case "TestStepContainerList": {
             ITestSuite testSuite = (ITestSuite) parent;
-            if (index < testSuite.getTestStepContainerList().size()) {
+            if (index < testSuite.getTestStepContainerList().size())
                 return testSuite.getTestStepContainer(index);
-            }
             return SheepDogBuilder.createTestCase(testSuite, "TestCase" + (index + 1));
         }
-        if ("TestDataList".equals(elementType) && parent instanceof ITestCase) {
+        case "TestDataList": {
             ITestCase testCase = (ITestCase) parent;
-            if (index < testCase.getTestDataList().size()) {
+            if (index < testCase.getTestDataList().size())
                 return testCase.getTestData(index);
-            }
             return SheepDogBuilder.createTestData(testCase, "TestData" + (index + 1));
         }
-        if ("StepDefinitionList".equals(elementType) && parent instanceof IStepObject) {
+        case "StepDefinitionList": {
             IStepObject stepObject = (IStepObject) parent;
-            if (index < stepObject.getStepDefinitionList().size()) {
+            if (index < stepObject.getStepDefinitionList().size())
                 return stepObject.getStepDefinition(index);
-            }
             return SheepDogBuilder.createStepDefinition(stepObject, "StepDefinition" + (index + 1));
         }
-        if ("StepParametersList".equals(elementType) && parent instanceof IStepDefinition) {
+        case "StepParametersList": {
             IStepDefinition stepDef = (IStepDefinition) parent;
-            if (index < stepDef.getStepParameterList().size()) {
+            if (index < stepDef.getStepParameterList().size())
                 return stepDef.getStepParameters(index);
-            }
             return SheepDogBuilder.createStepParameters(stepDef, "StepParameters" + (index + 1));
         }
-        return null;
+        default:
+            return null;
+        }
     }
 
     protected void addStepDefinitionWithName(String name) {
