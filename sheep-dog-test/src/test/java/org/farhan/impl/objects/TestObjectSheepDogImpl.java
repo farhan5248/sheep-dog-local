@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
@@ -65,6 +67,35 @@ public class TestObjectSheepDogImpl extends TestObject {
             if (index < tsc.getTestStepList().size())
                 return tsc.getTestStep(index);
             return SheepDogBuilder.createTestStep(tsc, "");
+        }
+        case "RowList": {
+            ITable table = (ITable) parent;
+            if (index < table.getRowList().size())
+                return table.getRow(index);
+            return SheepDogBuilder.createRow(table);
+        }
+        case "CellList": {
+            IRow row = (IRow) parent;
+            if (index < row.getCellList().size())
+                return row.getCell(index);
+            return SheepDogBuilder.createCell(row, "Cell" + (index + 1));
+        }
+        case "Table": {
+            if (parent instanceof ITestStep) {
+                ITestStep testStep = (ITestStep) parent;
+                ITable table = testStep.getTable();
+                if (table == null)
+                    return SheepDogBuilder.createTable(testStep);
+                return table;
+            }
+            if (parent instanceof ITestData) {
+                ITestData testData = (ITestData) parent;
+                ITable table = testData.getTable();
+                if (table == null)
+                    return SheepDogBuilder.createTable(testData);
+                return table;
+            }
+            return null;
         }
         default:
             return null;
@@ -129,6 +160,19 @@ public class TestObjectSheepDogImpl extends TestObject {
         ITestStep parent = (ITestStep) getProperty("cursor");
         ITable table = SheepDogBuilder.createTable(parent);
         setProperty("cursor", table);
+    }
+
+    protected void addRowWithContent(String content) {
+        ITable parent = (ITable) getProperty("cursor");
+        IRow row = SheepDogBuilder.createRow(parent);
+        row.setName(content);
+        setProperty("cursor", row);
+    }
+
+    protected void addCellWithName(String name) {
+        IRow parent = (IRow) getProperty("cursor");
+        ICell cell = SheepDogBuilder.createCell(parent, name);
+        setProperty("cursor", cell);
     }
 
     protected IDescription getDescriptionFromCursor() {

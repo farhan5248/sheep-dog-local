@@ -1,0 +1,92 @@
+@sheep-dog-test
+Feature: Table Type
+
+  \@sheep-dog-test
+  Table is a grammar rule in SheepDog.xtext used by Test Step, Step Parameters, and Test Data. A Table contains Rows which contain Cells.
+
+  @list @EditDocumentAction
+  Scenario: Row
+
+    \@list \@EditDocumentAction
+    Table must have
+    - Row List
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
+          | Node Path                                            | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
+     When The xtext plugin edit document action is performed to modify RowList with
+          | Test Suite Full Name         | Node Path                                            | Row Content |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList | Second Row  |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
+          | Node Path                                              | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/2 | Second Row  |
+
+  @list @EditDocumentAction
+  Scenario: Cell
+
+    \@list \@EditDocumentAction
+    Row must have
+    - Cell List
+    Cell must have
+    - Name
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name  |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | First Cell |
+     When The xtext plugin edit document action is performed to modify CellList with
+          | Test Suite Full Name         | Node Path                                                       | Cell Name   |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | Second Cell |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows
+          | Node Path                                                         | Cell Name   |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList/2 | Second Cell |
+
+  @EditDocumentAction
+  Scenario: Duplicate Row
+
+    \@EditDocumentAction
+    Rows are a list and can have duplicate content within a Table.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
+          | Node Path                                            | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
+     When The xtext plugin edit document action is performed to modify RowList with
+          | Test Suite Full Name         | Node Path                                            | Row Content |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
+          | Node Path                                              | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/2 | First Row   |
+
+  @EditDocumentAction
+  Scenario: Row Insertion Order
+
+    \@EditDocumentAction
+    Rows maintain insertion order within a Table.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
+          | Node Path                                            | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList | Second Row  |
+     When The xtext plugin edit document action is performed to modify RowList with
+          | Test Suite Full Name         | Node Path                                            | Row Content |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
+          | Node Path                                              | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1 | Second Row  |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/2 | First Row   |
+
+  @EditDocumentAction
+  Scenario: Cell Insertion Order
+
+    \@EditDocumentAction
+    Cells maintain insertion order within a Row.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name   |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | Second Cell |
+     When The xtext plugin edit document action is performed to modify CellList with
+          | Test Suite Full Name         | Node Path                                                       | Cell Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | First Cell |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows
+          | Node Path                                                         | Cell Name   |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList/1 | Second Cell |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList/2 | First Cell  |
+

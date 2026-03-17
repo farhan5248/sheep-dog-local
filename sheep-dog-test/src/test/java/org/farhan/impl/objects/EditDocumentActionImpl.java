@@ -138,4 +138,34 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
         navigateToNode();
         addTable();
     }
+
+    @Override
+    public void setRowContent(HashMap<String, String> keyMap) {
+        setProperty("Row Content", keyMap.get("Row Content"));
+    }
+
+    @Override
+    public void setPerformedToModifyRowListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (getProperty("Row Content") != null) {
+            addRowWithContent(replaceKeyword(getProperty("Row Content").toString()));
+            properties.remove("Row Content");
+        }
+    }
+
+    @Override
+    public void setCellName(HashMap<String, String> keyMap) {
+        setProperty("Cell Name", keyMap.get("Cell Name"));
+    }
+
+    @Override
+    public void setPerformedToModifyCellListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (getProperty("Cell Name") != null) {
+            addCellWithName(replaceKeyword(getProperty("Cell Name").toString()));
+            properties.remove("Cell Name");
+        }
+    }
 }

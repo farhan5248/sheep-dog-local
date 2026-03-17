@@ -135,6 +135,15 @@ public class SheepDogBuilder {
         ITable table = null;
         if (parent != null)
             table = parent.getTable();
+        logger.debug("createTable() = {}", table);
+        return table;
+    }
+
+    public static ITable createTable(ITestData parent) {
+        logger.debug("createTable(parent={})", parent);
+        ITable table = null;
+        if (parent != null)
+            table = parent.getTable();
         if (table == null) {
             table = SheepDogFactory.instance.createTable();
             if (parent != null)
@@ -142,6 +151,25 @@ public class SheepDogBuilder {
         }
         logger.debug("createTable() = {}", table);
         return table;
+    }
+
+    public static IRow createRow(ITable parent) {
+        logger.debug("createRow(parent={})", parent);
+        IRow row = SheepDogFactory.instance.createRow();
+        if (parent != null)
+            parent.addRow(row);
+        logger.debug("createRow() = {}", row);
+        return row;
+    }
+
+    public static ICell createCell(IRow parent, String name) {
+        logger.debug("createCell(parent={}, name={})", parent, name);
+        ICell cell = SheepDogFactory.instance.createCell();
+        cell.setName(name);
+        if (parent != null)
+            parent.addCell(cell);
+        logger.debug("createCell() = {}", cell);
+        return cell;
     }
 
     public static IStepObject createStepObject(ITestProject parent, String fullName) {

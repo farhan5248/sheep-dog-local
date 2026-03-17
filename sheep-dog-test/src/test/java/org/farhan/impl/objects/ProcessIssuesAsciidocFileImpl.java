@@ -3,6 +3,8 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
@@ -352,5 +354,67 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
     @Override
     public void setTextNodeTextContent(HashMap<String, String> keyMap) {
         addTextWithContent(keyMap.get("Text Content"));
+    }
+
+    @Override
+    public void setRowListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
+    }
+
+    @Override
+    public void setRowListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setRowListNodeRowContent(HashMap<String, String> keyMap) {
+        addRowWithContent(keyMap.get("Row Content"));
+    }
+
+    @Override
+    public String getRowListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        return navigateToDocumentAndGetCursor();
+    }
+
+    @Override
+    public String getRowListNodeNodePath(HashMap<String, String> keyMap) {
+        return navigateToNodeAndGetCursor(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public String getRowListNodeRowContent(HashMap<String, String> keyMap) {
+        IRow row = (IRow) getProperty("cursor");
+        return row == null ? null : row.toString();
+    }
+
+    @Override
+    public void setCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
+    }
+
+    @Override
+    public void setCellListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setCellListNodeCellName(HashMap<String, String> keyMap) {
+        addCellWithName(keyMap.get("Cell Name"));
+    }
+
+    @Override
+    public String getCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        return navigateToDocumentAndGetCursor();
+    }
+
+    @Override
+    public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
+        return navigateToNodeAndGetCursor(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public String getCellListNodeCellName(HashMap<String, String> keyMap) {
+        ICell cell = (ICell) getProperty("cursor");
+        return cell == null ? null : cell.getName();
     }
 }

@@ -11,12 +11,12 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public ICell createCell() {
-        return null;
+        return new CellImpl();
     }
 
     @Override
     public IRow createRow() {
-        return null;
+        return new RowImpl();
     }
 
     @Override
@@ -41,7 +41,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public ITable createTable() {
-        return null;
+        return new TableImpl();
     }
 
     @Override
