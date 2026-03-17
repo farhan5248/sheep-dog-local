@@ -35,24 +35,19 @@ public class TestStepIssueResolver {
         return proposals;
     }
 
-    public static ArrayList<SheepDogIssueProposal> suggestStepParametersWorkspace(IRow theRow) throws Exception {
-        logger.debug("suggestStepParametersWorkspace(theRow={})", theRow);
+    public static ArrayList<SheepDogIssueProposal> suggestCellListWorkspace(ITestStep theTestStep)
+            throws Exception {
+        logger.debug("suggestCellListWorkspace(theTestStep={})", theTestStep);
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-        ITable table = theRow.getParent();
-        if (table == null || !(table.getParent() instanceof ITestStep)) {
-            logger.debug("suggestStepParametersWorkspace() = {}", proposals);
-            return proposals;
-        }
-        ITestStep testStep = (ITestStep) table.getParent();
-        String stepObjectName = testStep.getStepObjectName();
-        String stepDefinitionName = testStep.getStepDefinitionName();
+        String stepObjectName = theTestStep.getStepObjectName();
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (stepObjectName == null || stepObjectName.isEmpty() || stepDefinitionName == null || stepDefinitionName.isEmpty()) {
-            logger.debug("suggestStepParametersWorkspace() = {}", proposals);
+            logger.debug("suggestCellListWorkspace() = {}", proposals);
             return proposals;
         }
-        ITestProject workspace = SheepDogUtility.getTestProjectParentForTestStep(testStep);
+        ITestProject workspace = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
         if (workspace == null) {
-            logger.debug("suggestStepParametersWorkspace() = {}", proposals);
+            logger.debug("suggestCellListWorkspace() = {}", proposals);
             return proposals;
         }
         String component = StepObjectRefFragments.getComponent(stepObjectName);
@@ -81,7 +76,7 @@ public class TestStepIssueResolver {
                 proposals.add(proposal);
             }
         }
-        logger.debug("suggestStepParametersWorkspace() = {}", proposals);
+        logger.debug("suggestCellListWorkspace() = {}", proposals);
         return proposals;
     }
 
