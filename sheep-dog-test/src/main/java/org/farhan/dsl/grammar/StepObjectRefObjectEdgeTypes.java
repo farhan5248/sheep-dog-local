@@ -7,20 +7,12 @@ public enum StepObjectRefObjectEdgeTypes {
     ACTION("action", "Eclipse plugin action"),
     JOB("job", "EOD or ETL batchjob");
 
-    public final String type;
+    public final String value;
     public final String description;
 
-    StepObjectRefObjectEdgeTypes(String type, String description) {
-        this.type = type;
+    StepObjectRefObjectEdgeTypes(String value, String description) {
+        this.value = value;
         this.description = description;
     }
 
-    public static String getDescriptionFor(String type) {
-        for (StepObjectRefObjectEdgeTypes value : values()) {
-            if (value.type.equals(type)) {
-                return value.description;
-            }
-        }
-        return "";
-    }
 }

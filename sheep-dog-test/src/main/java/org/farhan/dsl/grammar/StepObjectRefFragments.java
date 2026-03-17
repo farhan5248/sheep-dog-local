@@ -70,7 +70,13 @@ public class StepObjectRefFragments {
     }
 
     public static String getComponentTypeDesc(String text) {
-        return StepObjectRefComponentTypes.getDescriptionFor(getComponentType(text));
+        String type = getComponentType(text);
+        for (StepObjectRefComponentTypes e : StepObjectRefComponentTypes.values()) {
+            if (e.value.equals(type)) {
+                return e.description;
+            }
+        }
+        return "";
     }
 
     public static String getObject(String text) {
@@ -95,11 +101,23 @@ public class StepObjectRefFragments {
     }
 
     public static String getObjectTypeDesc(String text) {
-        return StepObjectRefObjectVertexTypes.getDescriptionFor(getObjectType(text));
+        String type = getObjectType(text);
+        for (StepObjectRefObjectVertexTypes e : StepObjectRefObjectVertexTypes.values()) {
+            if (e.value.equals(type)) {
+                return e.description;
+            }
+        }
+        return "";
     }
 
     public static String getObjectEdgeTypeDesc(String text) {
-        return StepObjectRefObjectEdgeTypes.getDescriptionFor(getObjectType(text));
+        String type = getObjectType(text);
+        for (StepObjectRefObjectEdgeTypes e : StepObjectRefObjectEdgeTypes.values()) {
+            if (e.value.equals(type)) {
+                return e.description;
+            }
+        }
+        return "";
     }
 
     public static String getObjectType(String text) {

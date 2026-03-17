@@ -8,20 +8,12 @@ public enum StepObjectRefComponentTypes {
     BATCHJOB("batchjob", "EOD or ETL batchjob"),
     PLUGIN("plugin", "Maven or Eclipse plugin");
 
-    public final String type;
+    public final String value;
     public final String description;
 
-    StepObjectRefComponentTypes(String type, String description) {
-        this.type = type;
+    StepObjectRefComponentTypes(String value, String description) {
+        this.value = value;
         this.description = description;
     }
 
-    public static String getDescriptionFor(String type) {
-        for (StepObjectRefComponentTypes value : values()) {
-            if (value.type.equals(type)) {
-                return value.description;
-            }
-        }
-        return "";
-    }
 }

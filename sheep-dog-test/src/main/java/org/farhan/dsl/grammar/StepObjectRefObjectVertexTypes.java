@@ -12,20 +12,12 @@ public enum StepObjectRefObjectVertexTypes {
     HOVER("hover", "Popup displaying information on mouse hover"),
     TOOLTIP("tooltip", "Small popup displaying descriptive text");
 
-    public final String type;
+    public final String value;
     public final String description;
 
-    StepObjectRefObjectVertexTypes(String type, String description) {
-        this.type = type;
+    StepObjectRefObjectVertexTypes(String value, String description) {
+        this.value = value;
         this.description = description;
     }
 
-    public static String getDescriptionFor(String type) {
-        for (StepObjectRefObjectVertexTypes value : values()) {
-            if (value.type.equals(type)) {
-                return value.description;
-            }
-        }
-        return "";
-    }
 }
