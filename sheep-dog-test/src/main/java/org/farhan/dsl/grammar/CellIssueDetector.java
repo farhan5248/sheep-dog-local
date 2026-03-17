@@ -18,7 +18,7 @@ public class CellIssueDetector {
 		IRow parentRow = theCell.getParent();
 		if (parentRow != null) {
 			ITable parentTable = parentRow.getParent();
-			if (parentTable != null) {
+			if (parentTable != null && parentTable.getRowList() != null) {
 				int rowIndex = parentTable.getRowList().indexOf(parentRow);
 				if (rowIndex != 0) {
 					// Not a header row, skip validation
@@ -29,7 +29,7 @@ public class CellIssueDetector {
 		}
 
 		// Check if name starts with a capital letter
-		if (!Character.isUpperCase(name.charAt(0))) {
+		if (!SheepDogUtility.startsWithCapital(name)) {
 			logger.debug("Exiting validateNameOnly - name doesn't start with capital");
 			return CellIssueTypes.CELL_NAME_ONLY.description;
 		}

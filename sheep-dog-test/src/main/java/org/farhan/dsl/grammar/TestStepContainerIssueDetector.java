@@ -15,7 +15,7 @@ public class TestStepContainerIssueDetector {
 		}
 
 		// Check if name starts with a capital letter
-		if (!Character.isUpperCase(name.charAt(0))) {
+		if (!SheepDogUtility.startsWithCapital(name)) {
 			logger.debug("Exiting validateNameOnly - name doesn't start with capital");
 			return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
 		}

@@ -4,6 +4,17 @@ import org.slf4j.Logger;
 
 public class TestStepIssueDetector {
 
+	// Valid object ending words for test step validation
+	private static final String[] OBJECT_ENDING_WORDS = {
+		"page", "response", "file", "directory", "dialog", "popup",
+		"annotation", "hover", "tooltip", "request", "goal", "job", "action"
+	};
+
+	// Valid state types for step definition name validation
+	private static final String[] STATE_TYPES = {
+		" is ", " isn't ", " will be ", " won't be "
+	};
+
 	public static String validateNameOnly(ITestStep theTestStep) {
 		Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueDetector.class);
 		logger.debug("Entering validateNameOnly");
@@ -14,17 +25,11 @@ public class TestStepIssueDetector {
 			return "";
 		}
 
-		// Object ending words to check for
-		String[] objectEndingWords = {
-			"page", "response", "file", "directory", "dialog", "popup",
-			"annotation", "hover", "tooltip", "request", "goal", "job", "action"
-		};
-
 		// Check if the test step has a valid object name
 		boolean hasValidObject = false;
 		String lowerCaseName = fullName.toLowerCase();
 
-		for (String objectWord : objectEndingWords) {
+		for (String objectWord : OBJECT_ENDING_WORDS) {
 			if (lowerCaseName.contains(" " + objectWord + " ") ||
 			    lowerCaseName.endsWith(" " + objectWord)) {
 				hasValidObject = true;
@@ -37,14 +42,9 @@ public class TestStepIssueDetector {
 			return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
 		}
 
-		// State types to check for (step definition name validation)
-		String[] stateTypes = {
-			" is ", " isn't ", " will be ", " won't be "
-		};
-
 		// Check if the test step has a valid state
 		boolean hasValidState = false;
-		for (String state : stateTypes) {
+		for (String state : STATE_TYPES) {
 			if (lowerCaseName.contains(state)) {
 				hasValidState = true;
 				break;
