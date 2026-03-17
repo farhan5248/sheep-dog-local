@@ -18,11 +18,13 @@ public class TestSuiteImpl implements ITestSuite {
 
     @Override
     public boolean addTestCase(ITestCase value) {
+        value.setParent(this);
         return testStepContainerList.add(value);
     }
 
     @Override
     public boolean addTestSetup(ITestSetup value) {
+        value.setParent(this);
         int insertIndex = 0;
         for (int i = 0; i < testStepContainerList.size(); i++) {
             if (testStepContainerList.get(i) instanceof ITestSetup) {

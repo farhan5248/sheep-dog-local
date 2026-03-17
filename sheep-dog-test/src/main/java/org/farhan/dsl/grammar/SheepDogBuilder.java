@@ -105,8 +105,10 @@ public class SheepDogBuilder {
         logger.debug("createTestStep(parent={}, fullName={})", parent, fullName);
         ITestStep testStep = SheepDogFactory.instance.createTestStep();
         testStep.setFullName(fullName);
-        if (parent != null)
+        if (parent != null) {
+            testStep.setParent(parent);
             parent.addTestStep(testStep);
+        }
         logger.debug("createTestStep() = {}", testStep);
         return testStep;
     }

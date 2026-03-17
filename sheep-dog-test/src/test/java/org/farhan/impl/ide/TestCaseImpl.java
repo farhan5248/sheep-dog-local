@@ -7,6 +7,7 @@ import org.farhan.dsl.grammar.*;
 public class TestCaseImpl implements ITestCase {
 
     private String name;
+    private ITestSuite parent;
     private IDescription description;
     private List<ITestStep> testStepList = new ArrayList<>();
     private List<ITestData> testDataList = new ArrayList<>();
@@ -23,7 +24,12 @@ public class TestCaseImpl implements ITestCase {
 
     @Override
     public ITestSuite getParent() {
-        return null;
+        return parent;
+    }
+
+    @Override
+    public void setParent(ITestSuite value) {
+        this.parent = value;
     }
 
     @Override

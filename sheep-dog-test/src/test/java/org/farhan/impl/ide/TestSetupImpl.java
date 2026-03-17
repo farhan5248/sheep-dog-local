@@ -7,6 +7,7 @@ import org.farhan.dsl.grammar.*;
 public class TestSetupImpl implements ITestSetup {
 
     private String name;
+    private ITestSuite parent;
     private IDescription description;
     private List<ITestStep> testStepList = new ArrayList<>();
 
@@ -22,7 +23,12 @@ public class TestSetupImpl implements ITestSetup {
 
     @Override
     public ITestSuite getParent() {
-        return null;
+        return parent;
+    }
+
+    @Override
+    public void setParent(ITestSuite value) {
+        this.parent = value;
     }
 
     @Override
