@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
+import org.farhan.dsl.grammar.IDescription;
 
 public class TestStepIssueResolver {
 
@@ -67,7 +68,6 @@ public class TestStepIssueResolver {
                 components.add(id.substring(0, id.lastIndexOf("/")));
             }
         }
-        if (components.isEmpty()) return;
         for (ITestDocument doc : workspace.getTestDocumentList()) {
             if (!(doc instanceof IStepObject)) continue;
             IStepObject stepObject = (IStepObject) doc;
@@ -75,12 +75,21 @@ public class TestStepIssueResolver {
             String[] parts = fullName.split("/");
             if (parts.length < 3) continue;
             String component = String.join("/", Arrays.copyOfRange(parts, 1, parts.length - 1));
-            if (!components.contains(component)) continue;
+            if (!components.isEmpty() && !components.contains(component)) continue;
             String objectName = stepObject.getName();
             SheepDogIssueProposal proposal = new SheepDogIssueProposal();
             proposal.setValue("The " + component + " " + objectName);
             proposal.setId(objectName);
-            proposal.setDescription("Referred in: " + fullName);
+            if (components.isEmpty()) {
+                String descContent = "";
+                IDescription desc = stepObject.getDescription();
+                if (desc != null && !desc.getLineList().isEmpty()) {
+                    descContent = desc.getLine(0).getName();
+                }
+                proposal.setDescription(descContent);
+            } else {
+                proposal.setDescription("Referred in: " + fullName);
+            }
             proposals.add(proposal);
         }
     }

@@ -44,6 +44,12 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
 
     @SuppressWarnings("unchecked")
     @Override
+    public String getEmpty(HashMap<String, String> keyMap) {
+        return listToString(((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
     public String getProposalDescription(HashMap<String, String> keyMap) {
         ArrayList<SheepDogIssueProposal> dialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
         for (SheepDogIssueProposal proposal : dialog) {
