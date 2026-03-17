@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
@@ -48,7 +50,38 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
         if (cursor instanceof ITestStep) {
             ITestStep testStep = (ITestStep) cursor;
             ITestProject workspace = (ITestProject) getProperty("workspace");
-            ArrayList<SheepDogIssueProposal> proposals = TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep, workspace);
+
+            // Check if test step has both component and object AND the step object file exists
+            String fullName = testStep.getFullName();
+            boolean shouldSuggestDefinitions = false;
+
+            if (fullName != null && !fullName.trim().isEmpty() && !fullName.equals("empty")) {
+                // Use StepObjectRefFragments to check if we have both component and object
+                String component = org.farhan.dsl.grammar.StepObjectRefFragments.getComponent(fullName);
+                String object = org.farhan.dsl.grammar.StepObjectRefFragments.getObject(fullName);
+
+                if (!component.isEmpty() && !object.isEmpty()) {
+                    // Check if the step object file exists in the workspace
+                    String stepObjectPath = "stepdefs/" + component + "/" + object + ".asciidoc";
+                    for (ITestDocument doc : workspace.getTestDocumentList()) {
+                        if (doc instanceof IStepObject) {
+                            if (doc.getFullName().equals(stepObjectPath)) {
+                                shouldSuggestDefinitions = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            ArrayList<SheepDogIssueProposal> proposals;
+            if (shouldSuggestDefinitions) {
+                // Suggest step definitions for test steps with full object names
+                proposals = TestStepIssueResolver.suggestStepDefinitionsWorkspace(testStep, workspace);
+            } else {
+                // Suggest step objects for test steps without full object names
+                proposals = TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep, workspace);
+            }
             setProperty("list proposals popup", proposals);
         } else if (cursor instanceof IRow) {
             IRow row = (IRow) cursor;

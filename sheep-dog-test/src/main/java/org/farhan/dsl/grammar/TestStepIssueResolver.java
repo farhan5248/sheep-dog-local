@@ -347,4 +347,92 @@ public class TestStepIssueResolver {
         }
         return "";
     }
+
+    public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionsWorkspace(ITestStep theTestStep, ITestProject workspace) {
+        Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
+        logger.debug("Entering suggestStepDefinitionsWorkspace");
+
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        if (workspace == null) {
+            logger.debug("Exiting suggestStepDefinitionsWorkspace - no workspace");
+            return proposals;
+        }
+
+        String fullName = theTestStep.getFullName();
+        if (fullName == null || fullName.trim().isEmpty() || fullName.equals("empty")) {
+            logger.debug("Exiting suggestStepDefinitionsWorkspace - test step has no full name");
+            return proposals;
+        }
+
+        // Extract component and object from the test step
+        String[] parts = extractComponentAndObject(fullName);
+        if (parts == null) {
+            logger.debug("Exiting suggestStepDefinitionsWorkspace - cannot extract component and object");
+            return proposals;
+        }
+
+        String component = parts[0];
+        String object = parts[1];
+
+        if (component.isEmpty()) {
+            logger.debug("Exiting suggestStepDefinitionsWorkspace - component is empty");
+            return proposals;
+        }
+
+        // Build the step object path
+        String stepObjectPath = "stepdefs/" + component + "/" + object + ".asciidoc";
+
+        // Find the step object
+        IStepObject stepObject = null;
+        for (ITestDocument doc : workspace.getTestDocumentList()) {
+            if (doc instanceof IStepObject) {
+                if (doc.getFullName().equals(stepObjectPath)) {
+                    stepObject = (IStepObject) doc;
+                    break;
+                }
+            }
+        }
+
+        if (stepObject == null) {
+            logger.debug("Exiting suggestStepDefinitionsWorkspace - step object not found: " + stepObjectPath);
+            return proposals;
+        }
+
+        // Iterate through all step definitions and add them as proposals
+        for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+            String definitionName = stepDefinition.getName();
+            if (definitionName != null && !definitionName.trim().isEmpty()) {
+                // Extract description from step definition
+                String description = extractDescriptionFromDefinition(stepDefinition);
+
+                // Create proposal
+                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                proposal.setValue(definitionName);
+                proposal.setId(definitionName);
+                if (description != null && !description.isEmpty()) {
+                    proposal.setDescription(description);
+                }
+                proposals.add(proposal);
+            }
+        }
+
+        logger.debug("Exiting suggestStepDefinitionsWorkspace with " + proposals.size() + " proposals");
+        return proposals;
+    }
+
+    private static String extractDescriptionFromDefinition(IStepDefinition stepDefinition) {
+        IDescription description = stepDefinition.getDescription();
+        if (description != null && description.getLineList() != null && !description.getLineList().isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ILine line : description.getLineList()) {
+                if (sb.length() > 0) {
+                    sb.append(" ");
+                }
+                sb.append(line.getName());
+            }
+            return sb.toString();
+        }
+        return "";
+    }
 }
