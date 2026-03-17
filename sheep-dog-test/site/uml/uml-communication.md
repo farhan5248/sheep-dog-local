@@ -152,51 +152,28 @@ This pattern applies when a step creates a new top-level document (TestSuite or 
    - 2.2. → **TestObject{Language}Impl**.add{Type}WithFullName()
      - → **{Language}Builder**.create{Type}()
 
-## Add Document Node Action
+## Edit Document Action
 
-**Regex**: `^The {componentName} {componentType} add document node action is performed to add (Text|Table) at$`
+**Regex**: `^The {componentName} {componentType} edit document action is performed to (add (Text|Table) at|modify {Assignment} with)$`
 
-This pattern applies when a step adds a Text or Table child element to an existing node. The action navigates to a document and node, then creates the child element via {Language}Builder.
+This pattern applies when a step adds a child element to an existing node. The action navigates to a document and node, then creates the child element via {Language}Builder. This covers both adding Text/Table elements and modifying list assignments within a node.
 
 | # | Class | Role |
 |---|---|---|
-| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `setCursorAtNode()`, `addTextWithContent()`, `addTable()` to {ObjectName}{ObjectType}Impl. |
-| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., AddDocumentNodeAction). Invoked by step definitions via Guice binding. |
-| 3 | [{Language}Builder](uml-class-LanguageBuilder.md) | Main code entry point. Invoked by TestObject{Language}Impl to create grammar elements via `createText()`, `createTable()`. |
+| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `setCursorAtNode()`, `addTextWithContent()`, `addTable()`, `add{Type}With{Assignment}()` helpers to {ObjectName}{ObjectType}Impl. |
+| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., EditDocumentAction). Invoked by step definitions via Guice binding. |
+| 3 | [{Language}Builder](uml-class-LanguageBuilder.md) | Main code entry point. Invoked by TestObject{Language}Impl to create grammar elements via `createText()`, `createTable()`, `create{Type}()`. |
 | 4 | [ITestProject](uml-class-IType.md) | Workspace root used by {ObjectName}{ObjectType}Impl to navigate from workspace to document via `getTestDocument()`. |
 
 ### Sequence
 
 1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column
    - → `setProperty(key, value)` to buffer column value
-2. **{ObjectName}{ObjectType}Impl**.setPerformedToAdd{Type}At(keyMap)
+2. **{ObjectName}{ObjectType}Impl**.setPerformedToAdd{Type}At(keyMap) or setPerformedToModify{Assignment}With(keyMap)
    - 2.1. → `getProperty("workspace")` cast to **ITestProject**, then `.getTestDocument()` → `setProperty("cursor", ...)`
    - 2.2. → **TestObject{Language}Impl**.setCursorAtNode()
-   - 2.3. → **TestObject{Language}Impl**.addTextWithContent() or addTable()
-     - → **{Language}Builder**.createText() or createTable()
-
-## Edit Document Node Action
-
-**Regex**: `^The {componentName} {componentType} edit document node action is performed to modify {Assignment} with$`
-
-This pattern applies when a step adds a child element to a list within an existing node. The action navigates to a document and node, then creates the child element via {Language}Builder.
-
-| # | Class | Role |
-|---|---|---|
-| 1 | [TestObject{Language}Impl](uml-class-TestObjectLanguageImpl.md) | Connects reusable methods in TestObject to any class implementing a test interface. Provides `setCursorAtNode()`, `add{Type}With{Assignment}()` helpers to {ObjectName}{ObjectType}Impl. |
-| 2 | [{ObjectName}{ObjectType}Impl](uml-class-ObjectNameObjectTypeImpl.md) | extends TestObject{Language}Impl, implements generated interface (e.g., EditDocumentNodeAction). Invoked by step definitions via Guice binding. |
-| 3 | [{Language}Builder](uml-class-LanguageBuilder.md) | Main code entry point. Invoked by TestObject{Language}Impl to create grammar elements via `create{Type}()`. |
-| 4 | [ITestProject](uml-class-IType.md) | Workspace root used by {ObjectName}{ObjectType}Impl to navigate from workspace to document via `getTestDocument()`. |
-
-### Sequence
-
-1. **{ObjectName}{ObjectType}Impl**.set{CellName}(keyMap) — for each non-action column
-   - → `setProperty(key, value)` to buffer column value
-2. **{ObjectName}{ObjectType}Impl**.setPerformedToModify{Assignment}With(keyMap)
-   - 2.1. → navigateToDocument() → `getProperty("workspace")` cast to **ITestProject**, then `.getTestDocument()` → `setProperty("cursor", ...)`
-   - 2.2. → navigateToNode() → **TestObject{Language}Impl**.setCursorAtNode()
-   - 2.3. → **TestObject{Language}Impl**.add{Type}With{Assignment}()
-     - → **{Language}Builder**.create{Type}()
+   - 2.3. → **TestObject{Language}Impl**.addTextWithContent() or addTable() or add{Type}With{Assignment}()
+     - → **{Language}Builder**.createText() or createTable() or create{Type}()
 
 ## Decompose Fragment
 
