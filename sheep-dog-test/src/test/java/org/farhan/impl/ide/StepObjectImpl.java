@@ -82,7 +82,12 @@ public class StepObjectImpl implements IStepObject {
 
     @Override
     public boolean addStepDefinition(IStepDefinition value) {
-        return stepDefinitionList.add(value);
+        int i = 0;
+        while (i < stepDefinitionList.size() && stepDefinitionList.get(i).getName().compareTo(value.getName()) < 0) {
+            i++;
+        }
+        stepDefinitionList.add(i, value);
+        return true;
     }
 
 }

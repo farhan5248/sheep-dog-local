@@ -27,4 +27,10 @@ public interface InputFileAsciidocFile {
     public String getStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public String getStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap);
+
+    public String getStepParametersListNodeAsFollows(HashMap<String, String> keyMap);
+
+    public String getStepParametersListNodeNodePath(HashMap<String, String> keyMap);
+
+    public String getStepParametersListNodeState(HashMap<String, String> keyMap);
 }

@@ -58,6 +58,9 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getStepDefinitionListNodeState(HashMap<String, String> keyMap) {
         IStepObject doc = (IStepObject) getProperty("cursor");
+        if (doc == null) {
+            return null;
+        }
         return listToString(doc.getStepDefinitionList());
     }
 
@@ -97,6 +100,25 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     public String getStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
         IStepDefinition sd = (IStepDefinition) getProperty("cursor");
         return sd.getName();
+    }
+
+    @Override
+    public String getStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return null;
+    }
+
+    @Override
+    public String getStepParametersListNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        setCursorAtNode(keyMap.get("Node Path"));
+        return null;
+    }
+
+    @Override
+    public String getStepParametersListNodeState(HashMap<String, String> keyMap) {
+        IStepDefinition sd = (IStepDefinition) getProperty("cursor");
+        return listToString(sd.getStepParameterList());
     }
 
 }
