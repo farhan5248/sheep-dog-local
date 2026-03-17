@@ -11,11 +11,9 @@ import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements ListQuickfixesPopup {
 
-    @SuppressWarnings("unchecked")
     @Override
     public String getSetAsFollows(HashMap<String, String> keyMap) {
-        ArrayList<SheepDogIssueProposal> dialog = (ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup");
-        return listToString(dialog);
+        return listToString(getListQuickfixesDialog());
     }
 
     @Override
@@ -36,11 +34,14 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
         return p == null ? null : p.getValue().toString();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public String getEmpty(HashMap<String, String> keyMap) {
-        ArrayList<SheepDogIssueProposal> dialog = (ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup");
-        return listToString(dialog);
+        return listToString(getListQuickfixesDialog());
+    }
+
+    @SuppressWarnings("unchecked")
+    private ArrayList<SheepDogIssueProposal> getListQuickfixesDialog() {
+        return (ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup");
     }
 
     @SuppressWarnings("unchecked")

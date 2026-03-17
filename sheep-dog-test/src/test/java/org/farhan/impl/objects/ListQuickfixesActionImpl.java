@@ -42,17 +42,17 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
             String validateResult = validateProperty != null ? validateProperty.toString() : "";
             Object cursor = getProperty("cursor");
             if (cursor instanceof ITestSuite) {
-                if (validateResult.equals(TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description)) {
+                if (validateResult.contentEquals(TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description)) {
                     ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))
                             .addAll(TestSuiteIssueResolver.correctNameOnly((ITestSuite) cursor));
                 }
             } else if (cursor instanceof ITestStepContainer) {
-                if (validateResult.equals(TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description)) {
+                if (validateResult.contentEquals(TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description)) {
                     ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))
                             .addAll(TestStepContainerIssueResolver.correctNameOnly((ITestStepContainer) cursor));
                 }
             } else if (cursor instanceof ICell) {
-                if (validateResult.equals(CellIssueTypes.CELL_NAME_ONLY.description)) {
+                if (validateResult.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                     ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))
                             .addAll(CellIssueResolver.correctNameOnly((ICell) cursor));
                 }
