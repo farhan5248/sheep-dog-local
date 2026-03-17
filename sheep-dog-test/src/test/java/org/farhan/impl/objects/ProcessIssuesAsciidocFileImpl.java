@@ -418,4 +418,17 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
         ICell cell = (ICell) getProperty("cursor");
         return cell == null ? null : cell.getName();
     }
+
+    @Override
+    public void setCreatedAsFollows(HashMap<String, String> keyMap) {
+        addTestSuiteWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setTestSuiteName(HashMap<String, String> keyMap) {
+        ITestSuite suite = (ITestSuite) getProperty("cursor");
+        if (suite != null) {
+            suite.setName(keyMap.get("Test Suite Name"));
+        }
+    }
 }
