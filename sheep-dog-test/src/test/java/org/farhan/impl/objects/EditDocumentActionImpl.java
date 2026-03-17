@@ -94,4 +94,19 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
             properties.remove("Test Setup Name");
         }
     }
+
+    @Override
+    public void setTestDataName(HashMap<String, String> keyMap) {
+        setProperty("Test Data Name", keyMap.get("Test Data Name"));
+    }
+
+    @Override
+    public void setPerformedToModifyTestDataListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (getProperty("Test Data Name") != null) {
+            addTestDataWithName(replaceKeyword(getProperty("Test Data Name").toString()));
+            properties.remove("Test Data Name");
+        }
+    }
 }

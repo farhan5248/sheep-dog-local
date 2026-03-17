@@ -3,7 +3,9 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
+import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSetup;
@@ -158,5 +160,54 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
             return null;
         }
         return listToString(tsc.getTestStepList());
+    }
+
+    @Override
+    public String getTableNodeAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTableNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        setCursorAtNode(keyMap.get("Node Path"));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTableNodeState(HashMap<String, String> keyMap) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof ITable) {
+            return cursor.toString();
+        }
+        return null;
+    }
+
+    @Override
+    public void setTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
+    }
+
+    @Override
+    public void setTestDataListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTestDataListNodeTestDataName(HashMap<String, String> keyMap) {
+        addTestDataWithName(keyMap.get("Test Data Name"));
+    }
+
+    @Override
+    public String getTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTestDataListNodeTestDataName(HashMap<String, String> keyMap) {
+        ITestData td = (ITestData) getProperty("cursor");
+        return td.getName();
     }
 }

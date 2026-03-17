@@ -32,6 +32,20 @@ public class TestObjectSheepDogImpl extends TestObject {
 
     @Override
     protected Object getOrCreateNode(Object parent, String elementType, int index) {
+        if ("TestStepContainerList".equals(elementType) && parent instanceof ITestSuite) {
+            ITestSuite testSuite = (ITestSuite) parent;
+            if (index < testSuite.getTestStepContainerList().size()) {
+                return testSuite.getTestStepContainer(index);
+            }
+            return SheepDogBuilder.createTestCase(testSuite, "TestCase" + (index + 1));
+        }
+        if ("TestDataList".equals(elementType) && parent instanceof ITestCase) {
+            ITestCase testCase = (ITestCase) parent;
+            if (index < testCase.getTestDataList().size()) {
+                return testCase.getTestData(index);
+            }
+            return SheepDogBuilder.createTestData(testCase, "TestData" + (index + 1));
+        }
         if ("StepDefinitionList".equals(elementType) && parent instanceof IStepObject) {
             IStepObject stepObject = (IStepObject) parent;
             if (index < stepObject.getStepDefinitionList().size()) {
@@ -83,6 +97,12 @@ public class TestObjectSheepDogImpl extends TestObject {
         ITestSuite parent = (ITestSuite) getProperty("cursor");
         ITestCase testCase = SheepDogBuilder.createTestCase(parent, name);
         setProperty("cursor", testCase);
+    }
+
+    protected void addTestDataWithName(String name) {
+        ITestCase parent = (ITestCase) getProperty("cursor");
+        ITestData testData = SheepDogBuilder.createTestData(parent, name);
+        setProperty("cursor", testData);
     }
 
     protected IDescription getDescriptionFromCursor() {
