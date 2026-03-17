@@ -231,6 +231,7 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public void setCellListNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
         createNodeDependencies(keyMap.get("Node Path"));
     }
 

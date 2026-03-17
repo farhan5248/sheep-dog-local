@@ -19,19 +19,19 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
     @Override
     public String getProposalId(HashMap<String, String> keyMap) {
         SheepDogIssueProposal p = findProposalById(keyMap.get("Proposal Id"));
-        return p == null ? null : p.getId();
+        return p == null ? "is absent" : p.getId();
     }
 
     @Override
     public String getProposalDescription(HashMap<String, String> keyMap) {
         SheepDogIssueProposal p = findProposalById(keyMap.get("Proposal Id"));
-        return p == null ? null : p.getDescription();
+        return p == null ? "" : p.getDescription();
     }
 
     @Override
     public String getProposalValue(HashMap<String, String> keyMap) {
         SheepDogIssueProposal p = findProposalById(keyMap.get("Proposal Id"));
-        return p == null ? null : p.getValue().toString();
+        return p == null ? "is absent" : p.getValue().toString();
     }
 
     @Override

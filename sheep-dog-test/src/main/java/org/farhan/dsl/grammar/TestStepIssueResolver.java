@@ -5,12 +5,123 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 
 public class TestStepIssueResolver {
 
     private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
+
+    public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep theTestStep)
+            throws Exception {
+        logger.debug("correctStepObjectNameWorkspace(theTestStep={})", theTestStep);
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        String fullName = theTestStep.getFullName();
+        if (fullName == null || fullName.isEmpty()) {
+            logger.debug("correctStepObjectNameWorkspace() = {}", proposals);
+            return proposals;
+        }
+        String component = StepObjectRefFragments.getComponent(fullName);
+        String objectName = StepObjectRefFragments.getObject(fullName);
+        if (component.isEmpty() || objectName.isEmpty()) {
+            logger.debug("correctStepObjectNameWorkspace() = {}", proposals);
+            return proposals;
+        }
+        String filePath = "stepdefs/" + component + "/" + objectName + ".asciidoc";
+        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+        proposal.setId("Generate " + objectName + " - " + filePath);
+        proposal.setDescription("");
+        proposal.setValue(filePath);
+        proposals.add(proposal);
+        logger.debug("correctStepObjectNameWorkspace() = {}", proposals);
+        return proposals;
+    }
+
+    public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep)
+            throws Exception {
+        logger.debug("correctStepDefinitionNameWorkspace(theTestStep={})", theTestStep);
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        String stepDefinitionName = theTestStep.getStepDefinitionName();
+        if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
+            logger.debug("correctStepDefinitionNameWorkspace() = {}", proposals);
+            return proposals;
+        }
+        String fullName = theTestStep.getFullName();
+        String component = StepObjectRefFragments.getComponent(fullName);
+        String objectName = StepObjectRefFragments.getObject(fullName);
+        if (objectName.isEmpty()) {
+            logger.debug("correctStepDefinitionNameWorkspace() = {}", proposals);
+            return proposals;
+        }
+        ITestProject workspace = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (workspace == null) {
+            logger.debug("correctStepDefinitionNameWorkspace() = {}", proposals);
+            return proposals;
+        }
+        for (IStepObject stepObject : getMatchingStepObjects(workspace, objectName, component)) {
+            if (stepObject.getStepDefinition(stepDefinitionName) == null) {
+                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                proposal.setId("Generate " + stepDefinitionName);
+                proposal.setDescription("");
+                proposal.setValue(stepDefinitionName);
+                proposals.add(proposal);
+            }
+        }
+        logger.debug("correctStepDefinitionNameWorkspace() = {}", proposals);
+        return proposals;
+    }
+
+    public static ArrayList<SheepDogIssueProposal> correctStepParametersWorkspace(IRow row) throws Exception {
+        logger.debug("correctStepParametersWorkspace(row={})", row);
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        ITable table = row.getParent();
+        Object tableParent = table.getParent();
+        if (!(tableParent instanceof ITestStep)) {
+            logger.debug("correctStepParametersWorkspace() = {}", proposals);
+            return proposals;
+        }
+        ITestStep testStep = (ITestStep) tableParent;
+        String stepDefinitionName = testStep.getStepDefinitionName();
+        if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
+            logger.debug("correctStepParametersWorkspace() = {}", proposals);
+            return proposals;
+        }
+        String stepObjectName = testStep.getStepObjectName();
+        String component = StepObjectRefFragments.getComponent(stepObjectName);
+        String objectName = StepObjectRefFragments.getObject(stepObjectName);
+        if (objectName.isEmpty()) {
+            logger.debug("correctStepParametersWorkspace() = {}", proposals);
+            return proposals;
+        }
+        ITestProject workspace = SheepDogUtility.getTestProjectParentForTestStep(testStep);
+        if (workspace == null) {
+            logger.debug("correctStepParametersWorkspace() = {}", proposals);
+            return proposals;
+        }
+        for (IStepObject stepObject : getMatchingStepObjects(workspace, objectName, component)) {
+            IStepDefinition stepDef = stepObject.getStepDefinition(stepDefinitionName);
+            if (stepDef == null) continue;
+            for (IStepParameters stepParams : stepDef.getStepParameterList()) {
+                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                proposal.setId(stepParams.getName());
+                proposal.setDescription("");
+                proposal.setValue(stepParams.getName());
+                proposals.add(proposal);
+            }
+        }
+        List<String> cellNames = row.getCellList().stream().map(ICell::getName).collect(Collectors.toList());
+        if (!cellNames.isEmpty()) {
+            String cellNamesCsv = String.join(", ", cellNames);
+            SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
+            generateProposal.setId("Generate " + cellNamesCsv);
+            generateProposal.setDescription("");
+            generateProposal.setValue(cellNamesCsv);
+            proposals.add(generateProposal);
+        }
+        logger.debug("correctStepParametersWorkspace() = {}", proposals);
+        return proposals;
+    }
 
     public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep)
             throws Exception {

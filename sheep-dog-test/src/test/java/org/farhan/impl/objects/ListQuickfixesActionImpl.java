@@ -6,14 +6,21 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.CellIssueResolver;
 import org.farhan.dsl.grammar.CellIssueTypes;
 import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.TestStepContainerIssueResolver;
 import org.farhan.dsl.grammar.TestStepContainerIssueTypes;
+import org.farhan.dsl.grammar.TestStepIssueResolver;
+import org.farhan.dsl.grammar.TestStepIssueTypes;
 import org.farhan.dsl.grammar.TestSuiteIssueResolver;
 import org.farhan.dsl.grammar.TestSuiteIssueTypes;
+import org.farhan.dsl.grammar.TextIssueResolver;
+import org.farhan.dsl.grammar.TextIssueTypes;
 import org.farhan.objects.xtext.ListQuickfixesAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -55,6 +62,24 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
                 if (validateResult.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                     ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))
                             .addAll(CellIssueResolver.correctNameOnly((ICell) cursor));
+                }
+            } else if (cursor instanceof ITestStep) {
+                if (validateResult.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description)) {
+                    ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))
+                            .addAll(TestStepIssueResolver.correctStepObjectNameWorkspace((ITestStep) cursor));
+                } else if (validateResult.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
+                    ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))
+                            .addAll(TestStepIssueResolver.correctStepDefinitionNameWorkspace((ITestStep) cursor));
+                }
+            } else if (cursor instanceof IRow) {
+                if (validateResult.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_PARAMETERS_WORKSPACE.description)) {
+                    ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))
+                            .addAll(TestStepIssueResolver.correctStepParametersWorkspace((IRow) cursor));
+                }
+            } else if (cursor instanceof IText) {
+                if (validateResult.contentEquals(TextIssueTypes.TEXT_STEP_PARAMETER_LIST_WORKSPACE.description)) {
+                    ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))
+                            .addAll(TextIssueResolver.correctStepParameterListWorkspace((IText) cursor));
                 }
             }
         } catch (Exception e) {

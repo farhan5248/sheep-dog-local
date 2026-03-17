@@ -395,6 +395,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public void setCellListNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
         createNodeDependencies(keyMap.get("Node Path"));
     }
 
