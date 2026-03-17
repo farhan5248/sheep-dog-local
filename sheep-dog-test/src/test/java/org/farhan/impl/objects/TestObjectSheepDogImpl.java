@@ -11,6 +11,7 @@ import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSetup;
+import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogBuilder;
@@ -57,6 +58,12 @@ public class TestObjectSheepDogImpl extends TestObject {
                 return stepDef.getStepParameters(index);
             return SheepDogBuilder.createStepParameters(stepDef, "StepParameters" + (index + 1));
         }
+        case "TestStepList": {
+            ITestStepContainer tsc = (ITestStepContainer) parent;
+            if (index < tsc.getTestStepList().size())
+                return tsc.getTestStep(index);
+            return SheepDogBuilder.createTestStep(tsc, "");
+        }
         default:
             return null;
         }
@@ -102,6 +109,12 @@ public class TestObjectSheepDogImpl extends TestObject {
         ITestCase parent = (ITestCase) getProperty("cursor");
         ITestData testData = SheepDogBuilder.createTestData(parent, name);
         setProperty("cursor", testData);
+    }
+
+    protected void addTestStepWithFullName(String fullName) {
+        ITestStepContainer parent = (ITestStepContainer) getProperty("cursor");
+        ITestStep testStep = SheepDogBuilder.createTestStep(parent, fullName);
+        setProperty("cursor", testStep);
     }
 
     protected IDescription getDescriptionFromCursor() {

@@ -9,8 +9,10 @@ import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSetup;
+import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
 
 import io.cucumber.guice.ScenarioScoped;
@@ -209,5 +211,131 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
     public String getTestDataListNodeTestDataName(HashMap<String, String> keyMap) {
         ITestData td = (ITestData) getProperty("cursor");
         return td.getName();
+    }
+
+    @Override
+    public void setTestStepListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
+    }
+
+    @Override
+    public void setTestStepListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTestStepListNodeGivenStepObjectRefName(HashMap<String, String> keyMap) {
+        setProperty("Step Object Ref Name", keyMap.get("Given Step Object Ref Name"));
+    }
+
+    @Override
+    public void setTestStepListNodeGivenStepDefinitionRefName(HashMap<String, String> keyMap) {
+        setProperty("Step Definition Ref Name", keyMap.get("Given Step Definition Ref Name"));
+    }
+
+    @Override
+    public void setTestStepListNodeTestStepFullName(HashMap<String, String> keyMap) {
+        addTestStepWithFullName(keyMap.get("Test Step Full Name"));
+    }
+
+    @Override
+    public String getTestStepListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTestStepListNodeAndFullName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getFullName();
+    }
+
+    @Override
+    public String getTestStepListNodeAndStepObjectRefName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getStepObjectName();
+    }
+
+    @Override
+    public String getTestStepListNodeAndStepDefinitionRefName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getStepDefinitionName();
+    }
+
+    @Override
+    public String getTestStepListNodeGivenFullName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getFullName();
+    }
+
+    @Override
+    public String getTestStepListNodeGivenStepObjectRefName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getStepObjectName();
+    }
+
+    @Override
+    public String getTestStepListNodeGivenStepDefinitionRefName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getStepDefinitionName();
+    }
+
+    @Override
+    public String getTestStepListNodeThenFullName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getFullName();
+    }
+
+    @Override
+    public String getTestStepListNodeThenStepObjectRefName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getStepObjectName();
+    }
+
+    @Override
+    public String getTestStepListNodeThenStepDefinitionRefName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getStepDefinitionName();
+    }
+
+    @Override
+    public String getTestStepListNodeWhenFullName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getFullName();
+    }
+
+    @Override
+    public String getTestStepListNodeWhenStepObjectRefName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getStepObjectName();
+    }
+
+    @Override
+    public String getTestStepListNodeWhenStepDefinitionRefName(HashMap<String, String> keyMap) {
+        ITestStep step = (ITestStep) getProperty("cursor");
+        return step.getStepDefinitionName();
+    }
+
+    @Override
+    public String getTextNodeAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTextNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        setCursorAtNode(keyMap.get("Node Path"));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getTextNodeState(HashMap<String, String> keyMap) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof ITestStep) {
+            IText text = ((ITestStep) cursor).getText();
+            return text == null ? null : text.toString();
+        }
+        return null;
     }
 }

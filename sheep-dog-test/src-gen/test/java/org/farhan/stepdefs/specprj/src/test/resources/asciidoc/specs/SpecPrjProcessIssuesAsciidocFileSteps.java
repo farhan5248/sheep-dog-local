@@ -64,4 +64,19 @@ public class SpecPrjProcessIssuesAsciidocFileSteps extends TestSteps {
     public void testDataListNodeWillBeCreatedAsFollows(DataTable dataTable) {
         object.assertVertexStep("TestDataList", "node", "will be", "created as follows", dataTable);
     }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows$")
+    public void testStepListNodeIsCreatedAsFollows(DataTable dataTable) {
+        object.setVertexStep("TestStepList", "node", "is", "created as follows", dataTable);
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows$")
+    public void testStepListNodeWillBeCreatedAsFollows(DataTable dataTable) {
+        object.assertVertexStep("TestStepList", "node", "will be", "created as follows", dataTable);
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows$")
+    public void textNodeWillBeAsFollows(DataTable dataTable) {
+        object.assertVertexStep("Text", "node", "will be", "as follows", dataTable);
+    }
 }

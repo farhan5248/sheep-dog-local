@@ -61,7 +61,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public ITestStep createTestStep() {
-        return null;
+        return new TestStepImpl();
     }
 
     @Override
