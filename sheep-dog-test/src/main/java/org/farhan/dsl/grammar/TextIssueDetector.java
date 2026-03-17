@@ -55,7 +55,7 @@ public class TextIssueDetector {
 			return result;
 		}
 		if (stepDef.getStepParameterList().isEmpty()) {
-			result = TextIssueTypes.TEXT_STEP_PARAMETERS_WORKSPACE.description;
+			result = TextIssueTypes.TEXT_STEP_PARAMETER_LIST_WORKSPACE.description;
 		}
 		logger.debug("validateNameWorkspace() = {}", result);
 		return result;
