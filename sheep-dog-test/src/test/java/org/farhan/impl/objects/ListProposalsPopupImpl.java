@@ -18,28 +18,16 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
         return listToString(dialog);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public String getProposalValue(HashMap<String, String> keyMap) {
-        ArrayList<SheepDogIssueProposal> dialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
-        for (SheepDogIssueProposal proposal : dialog) {
-            if (proposal.getId().equals(keyMap.get("Proposal Id"))) {
-                return proposal.getValue().toString();
-            }
-        }
-        return null;
+        SheepDogIssueProposal p = findProposalById(keyMap.get("Proposal Id"));
+        return p == null ? null : p.getValue().toString();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public String getProposalId(HashMap<String, String> keyMap) {
-        ArrayList<SheepDogIssueProposal> dialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
-        for (SheepDogIssueProposal proposal : dialog) {
-            if (proposal.getId().equals(keyMap.get("Proposal Id"))) {
-                return proposal.getId();
-            }
-        }
-        return null;
+        SheepDogIssueProposal p = findProposalById(keyMap.get("Proposal Id"));
+        return p == null ? null : p.getId();
     }
 
     @SuppressWarnings("unchecked")
@@ -48,13 +36,18 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
         return listToString(((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public String getProposalDescription(HashMap<String, String> keyMap) {
+        SheepDogIssueProposal p = findProposalById(keyMap.get("Proposal Id"));
+        return p == null ? null : p.getDescription();
+    }
+
+    @SuppressWarnings("unchecked")
+    private SheepDogIssueProposal findProposalById(String proposalId) {
         ArrayList<SheepDogIssueProposal> dialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
         for (SheepDogIssueProposal proposal : dialog) {
-            if (proposal.getId().equals(keyMap.get("Proposal Id"))) {
-                return proposal.getDescription();
+            if (proposal.getId().equals(proposalId)) {
+                return proposal;
             }
         }
         return null;
