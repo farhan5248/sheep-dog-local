@@ -5,6 +5,7 @@ import org.farhan.impl.objects.EditDocumentActionImpl;
 import org.farhan.impl.objects.ListProposalsActionImpl;
 import org.farhan.impl.objects.ListProposalsPopupImpl;
 import org.farhan.impl.objects.Input2FileAsciidocFileImpl;
+import org.farhan.impl.objects.InputFileAsciidocFileAppImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;
 import org.farhan.impl.objects.ProcessIssues2AsciidocFileImpl;
 import org.farhan.impl.objects.ProcessGrammarFragmentAsciidocFileImpl;
@@ -52,6 +53,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(ListProposalsAction.class).to(ListProposalsActionImpl.class);
         bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);
         bind(InputFileAsciidocFile.class).to(InputFileAsciidocFileImpl.class);
+        bind(org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile.class).to(InputFileAsciidocFileAppImpl.class);
         bind(Input2FileAsciidocFile.class).to(Input2FileAsciidocFileImpl.class);
         bind(ProcessIssues2AsciidocFile.class).to(ProcessIssues2AsciidocFileImpl.class);
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
