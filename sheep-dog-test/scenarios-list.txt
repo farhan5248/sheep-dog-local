@@ -1,23 +1,134 @@
-File: Language Definition/Grammar/StepObjectRef Fragment
-  Scenario: Component Fragment
-    Tag: DecomposeFragment
-  Scenario: Component Fragment Types
-    Tag: DecomposeFragment
-  Scenario: Object Fragment
-    Tag: DecomposeFragment
-  Scenario: Object Vertex Fragment
-    Tag: DecomposeFragment
-  Scenario: Object Edge Fragment
-    Tag: DecomposeFragment
+File: Language Definition/Issues/Proposals for File Step Objects
+  Scenario: No component no existing
+    Tag: ListProposalsAction
+  Scenario: Has component no existing
+    Tag: ListProposalsAction
+  Scenario: No component no existing has background
+    Tag: ListProposalsAction
 
-File: Language Definition/Grammar/StepDefinitionRef Fragment
-  Scenario: Part Fragment
-    Tag: DecomposeFragment
-  Scenario: State Fragment
-    Tag: DecomposeFragment
+File: Language Definition/Issues/Proposals for File and Workspace Step Objects
+  Scenario: No component has existing
+    Tag: ListProposalsAction
+  Scenario: Has component has existing
+    Tag: ListProposalsAction
 
-File: Language Definition/Grammar/Phrase Fragment
-  Scenario: Tag Fragment
-    Tag: DecomposeFragment
-  Scenario: Todo Fragment
-    Tag: DecomposeFragment
+File: Language Definition/Issues/Proposals for Workspace Step Objects
+  Scenario: No component no existing
+    Tag: ListProposalsAction
+  Scenario: No component has existing
+    Tag: ListProposalsAction
+  Scenario: Has component no existing
+    Tag: ListProposalsAction
+  Scenario: Has component has existing
+    Tag: ListProposalsAction
+
+File: Language Definition/Issues/Proposals for Workspace Step Parameters
+  Scenario: No existing step object
+    Tag: ListProposalsAction
+  Scenario: No existing step definition
+    Tag: ListProposalsAction
+  Scenario: Has existing step definition without parameters
+    Tag: ListProposalsAction
+  Scenario: Has existing step definition with parameters
+    Tag: ListProposalsAction
+  Scenario: Has existing step definition with Content parameter
+    Tag: ListProposalsAction
+
+File: Language Definition/Issues/Proposals for Workspace Step Definitions
+  Scenario: Has component no existing step object
+    Tag: ListProposalsAction
+  Scenario: Has component no existing step definition
+    Tag: ListProposalsAction
+  Scenario: Has component has existing step definition
+    Tag: ListProposalsAction
+  Scenario: No component has existing step definition
+    Tag: ListProposalsAction
+
+File: Language Definition/Issues/Validation for Only Issues
+  Scenario: Header row Cell names should start with a capital letter validation
+    Tag: ValidateAction
+  Scenario: Body row Cell names can be any case validation
+    Tag: ValidateAction
+  Scenario: Test suite name should start with a capital letter validation
+    Tag: ValidateAction
+  Scenario: Test case name should start with a capital letter validation
+    Tag: ValidateAction
+  Scenario: Test step must have a valid object name validation
+    Tag: ValidateAction
+  Scenario: Test step must have a valid step definition name validation
+    Tag: ValidateAction
+
+File: Language Definition/Issues/Validation for File Issues
+  Scenario: The first step needs to have a component specified validation
+    Tag: ValidateAction
+  Scenario: No component in the first step triggers an error validation
+    Tag: ValidateAction
+
+File: Language Definition/Issues/Validation for TestStep Full Name
+  Scenario: With Path Resolution
+    Tag: ValidateAction
+  Scenario: Without Path Resolution
+    Tag: ValidateAction
+
+File: Language Definition/Issues/Validation for Workspace Issues
+  Scenario: This object doesn't exist validation
+    Tag: ValidateAction
+  Scenario: This object step definition doesn't exist validation
+    Tag: ValidateAction
+  Scenario: This object step definition parameter set doesn't exist validation
+    Tag: ValidateAction
+  Scenario: This object step definition text parameter exists validation
+    Tag: ValidateAction
+  Scenario: This object step definition text parameter doesn't exist validation
+    Tag: ValidateAction
+
+File: Language Definition/Issues/Quickfixes for Only Issues
+  Scenario: Cell name should start with a capital letter quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Body row Cell names can be any case quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Test suite name should start with a capital letter quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Test case name should start with a capital letter quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Test step must have a valid object name quickfix
+    Tag: ListQuickfixesAction
+  Scenario: Test step must have a valid step definition name quickfix
+    Tag: ListQuickfixesAction
+
+File: Language Definition/Issues/Quickfixes for File Issues
+  Scenario: The first step needs to have a component specified quickfix
+    Tag: ListQuickfixesAction
+  Scenario: No component in the first step triggers an error quickfix
+    Tag: ListQuickfixesAction
+
+File: Language Definition/Issues/Quickfixes for Workspace Issues
+  Scenario: This object doesn't exist quickfix
+    Tag: ListQuickfixesAction
+  Scenario: This object step definition doesn't exist quickfix
+    Tag: ListQuickfixesAction
+  Scenario: This object step definition parameter set doesn't exist quickfix
+    Tag: ListQuickfixesAction
+  Scenario: This object step definition text parameter exists quickfix
+    Tag: ListQuickfixesAction
+  Scenario: This object step definition text parameter doesn't exist quickfix
+    Tag: ListQuickfixesAction
+
+File: Language Definition/Issues/Code Generation for Only Issues
+  Scenario: Cell name should start with a capital letter generation
+    Tag: ApplyQuickfixAction
+  Scenario: Test suite name should start with a capital letter generation
+    Tag: ApplyQuickfixAction
+  Scenario: Test case name should start with a capital letter generation
+    Tag: ApplyQuickfixAction
+
+File: Language Definition/Issues/Code Generation for Workspace Issues
+  Scenario: This object doesn't exist generation
+    Tag: ApplyQuickfixAction
+  Scenario: This object step definition doesn't exist generation
+    Tag: ApplyQuickfixAction
+  Scenario: This object step definition parameter set doesn't exist generation
+    Tag: ApplyQuickfixAction
+  Scenario: This object step definition text parameter doesn't exist generation
+    Tag: ApplyQuickfixAction
+
