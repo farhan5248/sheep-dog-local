@@ -8,6 +8,7 @@ import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.TestStepIssueResolver;
 import org.farhan.objects.xtext.ListProposalsAction;
+import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.guice.ScenarioScoped;
 
@@ -27,15 +28,31 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
     @SuppressWarnings("unchecked")
     @Override
     public void setPerformedAsFollows(HashMap<String, String> keyMap) {
-        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
-        properties.remove("Test Suite Full Name");
+        navigateToDocument();
+        navigateToNode();
+        try {
+            Object cursor = getProperty("cursor");
+            if (cursor instanceof ITestStep) {
+                ((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))
+                        .addAll(TestStepIssueResolver.suggestStepObjectNameOnly((ITestStep) cursor));
+            }
+        } catch (Exception e) {
+            Assertions.fail(e);
+        }
+    }
+
+    private void navigateToDocument() {
+        if (getProperty("Test Suite Full Name") != null) {
+            setProperty("cursor", ((ITestProject) getProperty("workspace"))
+                    .getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
+            properties.remove("Test Suite Full Name");
+        }
+    }
+
+    private void navigateToNode() {
         if (getProperty("Node Path") != null) {
             setCursorAtNode(getProperty("Node Path").toString());
             properties.remove("Node Path");
-        }
-        Object cursor = getProperty("cursor");
-        if (cursor instanceof ITestStep) {
-            ((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")).addAll(TestStepIssueResolver.suggestStepObjectNameOnly((ITestStep) cursor));
         }
     }
 }

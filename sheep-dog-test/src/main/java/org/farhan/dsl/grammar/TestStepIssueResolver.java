@@ -3,27 +3,35 @@ package org.farhan.dsl.grammar;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+
 public class TestStepIssueResolver {
 
-    public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameOnly(ITestStep theTestStep) {
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
+
+    public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameOnly(ITestStep theTestStep) throws Exception {
+        logger.debug("suggestStepObjectNameOnly(theTestStep={})", theTestStep);
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         ITestStepContainer parent = theTestStep.getParent();
-        if (parent == null) return proposals;
+        if (parent == null) {
+            logger.debug("suggestStepObjectNameOnly() = {}", proposals);
+            return proposals;
+        }
         if (!(parent instanceof ITestSetup) && parent.getParent() != null) {
             ITestSuite suite = parent.getParent();
             for (ITestStepContainer container : suite.getTestStepContainerList()) {
                 if (container instanceof ITestSetup) {
-                    addProposalsFromSteps(container.getTestStepList(), null, proposals);
+                    addProposalsFromSteps(container.getTestStepList(), proposals);
                 }
             }
         }
-        addProposalsFromSteps(parent.getTestStepList(), theTestStep, proposals);
+        addProposalsFromSteps(SheepDogUtility.getTestStepListUpToTestStep(theTestStep), proposals);
+        logger.debug("suggestStepObjectNameOnly() = {}", proposals);
         return proposals;
     }
 
-    private static void addProposalsFromSteps(List<ITestStep> steps, ITestStep stopAt, ArrayList<SheepDogIssueProposal> proposals) {
+    private static void addProposalsFromSteps(List<ITestStep> steps, ArrayList<SheepDogIssueProposal> proposals) {
         for (ITestStep step : steps) {
-            if (step == stopAt) break;
             String stepObjectName = step.getStepObjectName();
             if (stepObjectName == null || stepObjectName.isEmpty()) continue;
             String component = StepObjectRefFragments.getComponent(stepObjectName);
