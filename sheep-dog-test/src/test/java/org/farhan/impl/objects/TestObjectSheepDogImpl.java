@@ -1,12 +1,12 @@
 package org.farhan.impl.objects;
 
 import org.farhan.common.TestObject;
-import org.farhan.dsl.builder.SheepDogBuilder;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.SheepDogFactory;
-import org.farhan.dsl.grammar.SheepDogFactoryImpl;
+import org.farhan.impl.ide.SheepDogFactoryImpl;
 
 public class TestObjectSheepDogImpl extends TestObject {
 
