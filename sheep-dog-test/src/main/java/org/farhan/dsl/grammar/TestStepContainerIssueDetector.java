@@ -11,7 +11,7 @@ public class TestStepContainerIssueDetector {
 		String result = "";
 		String name = theTestStepContainer.getName();
 		if (name != null && !name.isEmpty() && !Character.isUpperCase(name.charAt(0))) {
-			result = TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY;
+			result = TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
 		}
 		logger.debug("validateNameOnly() = {}", result);
 		return result;

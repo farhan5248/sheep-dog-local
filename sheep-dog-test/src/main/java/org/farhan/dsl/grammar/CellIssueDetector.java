@@ -11,7 +11,7 @@ public class CellIssueDetector {
 		String result = "";
 		String name = theCell.getName();
 		if (name != null && !name.isEmpty() && !Character.isUpperCase(name.charAt(0))) {
-			result = CellIssueTypes.CELL_NAME_ONLY;
+			result = CellIssueTypes.CELL_NAME_ONLY.description;
 		}
 		logger.debug("validateNameOnly() = {}", result);
 		return result;

@@ -13,9 +13,9 @@ public class TestStepIssueDetector {
 		if (fullName != null && !fullName.isEmpty()) {
 			String object = StepObjectRefFragments.getObject(fullName);
 			if (object.isEmpty()) {
-				result = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY;
+				result = TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_ONLY.description;
 			} else if (StepObjectRefFragments.getAll(fullName).isEmpty()) {
-				result = TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY;
+				result = TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
 			}
 		}
 		logger.debug("validateNameOnly() = {}", result);
