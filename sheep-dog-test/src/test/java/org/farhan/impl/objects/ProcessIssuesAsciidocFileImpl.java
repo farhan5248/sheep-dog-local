@@ -338,4 +338,29 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
         }
         return null;
     }
+
+    @Override
+    public void setTableNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
+    }
+
+    @Override
+    public void setTableNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTextNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
+    }
+
+    @Override
+    public void setTextNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTextNodeTextContent(HashMap<String, String> keyMap) {
+        addTextWithContent(keyMap.get("Text Content"));
+    }
 }

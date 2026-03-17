@@ -124,4 +124,18 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
             properties.remove("Test Step Full Name");
         }
     }
+
+    @Override
+    public void setPerformedToAddTextAt(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        addTextWithContent("");
+    }
+
+    @Override
+    public void setPerformedToAddTableAt(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        addTable();
+    }
 }

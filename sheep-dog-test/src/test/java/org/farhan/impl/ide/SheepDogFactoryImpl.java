@@ -71,7 +71,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public IText createText() {
-        return null;
+        return new TextImpl();
     }
 
     @Override

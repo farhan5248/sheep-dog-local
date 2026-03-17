@@ -103,17 +103,41 @@ public class SheepDogBuilder {
 
     public static ITestStep createTestStep(ITestStepContainer parent, String fullName) {
         logger.debug("createTestStep(parent={}, fullName={})", parent, fullName);
-        ITestStep testStep = null;
+        ITestStep testStep = SheepDogFactory.instance.createTestStep();
+        testStep.setFullName(fullName);
         if (parent != null)
-            testStep = parent.getTestStep(fullName);
-        if (testStep == null) {
-            testStep = SheepDogFactory.instance.createTestStep();
-            testStep.setFullName(fullName);
-            if (parent != null)
-                parent.addTestStep(testStep);
-        }
+            parent.addTestStep(testStep);
         logger.debug("createTestStep() = {}", testStep);
         return testStep;
+    }
+
+    public static IText createText(ITestStep parent, String name) {
+        logger.debug("createText(parent={}, name={})", parent, name);
+        IText text = null;
+        if (parent != null)
+            text = parent.getText();
+        if (text == null) {
+            text = SheepDogFactory.instance.createText();
+            text.setName(name);
+            if (parent != null)
+                parent.setText(text);
+        }
+        logger.debug("createText() = {}", text);
+        return text;
+    }
+
+    public static ITable createTable(ITestStep parent) {
+        logger.debug("createTable(parent={})", parent);
+        ITable table = null;
+        if (parent != null)
+            table = parent.getTable();
+        if (table == null) {
+            table = SheepDogFactory.instance.createTable();
+            if (parent != null)
+                parent.setTable(table);
+        }
+        logger.debug("createTable() = {}", table);
+        return table;
     }
 
     public static IStepObject createStepObject(ITestProject parent, String fullName) {

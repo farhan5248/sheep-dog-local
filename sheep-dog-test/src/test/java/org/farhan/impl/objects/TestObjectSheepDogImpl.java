@@ -7,11 +7,13 @@ import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSetup;
 import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogBuilder;
@@ -115,6 +117,18 @@ public class TestObjectSheepDogImpl extends TestObject {
         ITestStepContainer parent = (ITestStepContainer) getProperty("cursor");
         ITestStep testStep = SheepDogBuilder.createTestStep(parent, fullName);
         setProperty("cursor", testStep);
+    }
+
+    protected void addTextWithContent(String content) {
+        ITestStep parent = (ITestStep) getProperty("cursor");
+        IText text = SheepDogBuilder.createText(parent, content);
+        setProperty("cursor", text);
+    }
+
+    protected void addTable() {
+        ITestStep parent = (ITestStep) getProperty("cursor");
+        ITable table = SheepDogBuilder.createTable(parent);
+        setProperty("cursor", table);
     }
 
     protected IDescription getDescriptionFromCursor() {
