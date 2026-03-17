@@ -1,5 +1,7 @@
 package org.farhan.dsl.grammar;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 
 public class TestStepContainerIssueDetector {
@@ -13,12 +15,12 @@ public class TestStepContainerIssueDetector {
 		if (name != null && !name.isEmpty() && !Character.isUpperCase(name.charAt(0))) {
 			result = TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description;
 		} else {
-			java.util.List<ITestStep> steps = theTestStepContainer.getTestStepList();
+			List<ITestStep> steps = theTestStepContainer.getTestStepList();
 			if (!steps.isEmpty()) {
 				ITestStep firstStep = steps.get(0);
 				String component = StepObjectRefFragments.getComponent(firstStep.getFullName());
 				if (component.isEmpty()) {
-					result = TestStepContainerIssueTypes.TEST_STEP_CONTAINER_FIRST_STEP_NO_COMPONENT.description;
+					result = TestStepContainerIssueTypes.TEST_STEP_CONTAINER_STEP_OBJECT_NAME_ONLY.description;
 				}
 			}
 		}
