@@ -52,15 +52,7 @@ public class TestStepIssueResolver {
         }
         String component = StepObjectRefFragments.getComponent(stepObjectName);
         String objectName = StepObjectRefFragments.getObject(stepObjectName);
-        for (ITestDocument doc : workspace.getTestDocumentList()) {
-            if (!(doc instanceof IStepObject)) continue;
-            IStepObject stepObject = (IStepObject) doc;
-            if (!stepObject.getName().equals(objectName)) continue;
-            String fullName = stepObject.getFullName();
-            String[] parts = fullName.split("/");
-            if (parts.length < 3) continue;
-            String docComponent = String.join("/", Arrays.copyOfRange(parts, 1, parts.length - 1));
-            if (!component.isEmpty() && !docComponent.equals(component)) continue;
+        for (IStepObject stepObject : getMatchingStepObjects(workspace, objectName, component)) {
             IStepDefinition stepDef = stepObject.getStepDefinition(stepDefinitionName);
             if (stepDef == null) continue;
             for (IStepParameters stepParams : stepDef.getStepParameterList()) {
@@ -100,15 +92,7 @@ public class TestStepIssueResolver {
             logger.debug("suggestStepDefinitionNameWorkspace() = {}", proposals);
             return proposals;
         }
-        for (ITestDocument doc : workspace.getTestDocumentList()) {
-            if (!(doc instanceof IStepObject)) continue;
-            IStepObject stepObject = (IStepObject) doc;
-            if (!stepObject.getName().equals(objectName)) continue;
-            String stepObjectFullName = stepObject.getFullName();
-            String[] parts = stepObjectFullName.split("/");
-            if (parts.length < 3) continue;
-            String docComponent = String.join("/", Arrays.copyOfRange(parts, 1, parts.length - 1));
-            if (!component.isEmpty() && !docComponent.equals(component)) continue;
+        for (IStepObject stepObject : getMatchingStepObjects(workspace, objectName, component)) {
             for (IStepDefinition stepDef : stepObject.getStepDefinitionList()) {
                 SheepDogIssueProposal proposal = new SheepDogIssueProposal();
                 proposal.setValue(stepDef.getName());
@@ -124,6 +108,23 @@ public class TestStepIssueResolver {
         }
         logger.debug("suggestStepDefinitionNameWorkspace() = {}", proposals);
         return proposals;
+    }
+
+    private static List<IStepObject> getMatchingStepObjects(ITestProject workspace, String objectName,
+            String component) {
+        List<IStepObject> result = new ArrayList<>();
+        for (ITestDocument doc : workspace.getTestDocumentList()) {
+            if (!(doc instanceof IStepObject)) continue;
+            IStepObject stepObject = (IStepObject) doc;
+            if (!stepObject.getName().equals(objectName)) continue;
+            String fullName = stepObject.getFullName();
+            String[] parts = fullName.split("/");
+            if (parts.length < 3) continue;
+            String docComponent = String.join("/", Arrays.copyOfRange(parts, 1, parts.length - 1));
+            if (!component.isEmpty() && !docComponent.equals(component)) continue;
+            result.add(stepObject);
+        }
+        return result;
     }
 
     private static void addProposalsFromSteps(List<ITestStep> steps, ArrayList<SheepDogIssueProposal> proposals) {
