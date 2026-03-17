@@ -225,4 +225,126 @@ public class TestStepIssueResolver {
 
         return new String[] { component, object, fullObjectName };
     }
+
+    public static ArrayList<SheepDogIssueProposal> suggestStepParametersWorkspace(IRow theRow, ITestProject workspace) {
+        Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
+        logger.debug("Entering suggestStepParametersWorkspace");
+
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        // Get the parent table
+        ITable table = theRow.getParent();
+        if (table == null) {
+            logger.debug("Exiting suggestStepParametersWorkspace - no table");
+            return proposals;
+        }
+
+        // Get the parent test step
+        Object tableParent = table.getParent();
+        if (!(tableParent instanceof ITestStep)) {
+            logger.debug("Exiting suggestStepParametersWorkspace - table parent is not a test step");
+            return proposals;
+        }
+
+        ITestStep testStep = (ITestStep) tableParent;
+        String fullName = testStep.getFullName();
+        if (fullName == null || fullName.trim().isEmpty() || fullName.equals("empty")) {
+            logger.debug("Exiting suggestStepParametersWorkspace - test step has no full name");
+            return proposals;
+        }
+
+        // Extract component and object from the test step
+        String[] parts = extractComponentAndObject(fullName);
+        if (parts == null) {
+            logger.debug("Exiting suggestStepParametersWorkspace - cannot extract component and object");
+            return proposals;
+        }
+
+        String component = parts[0];
+        String object = parts[1];
+
+        // Get step definition name from the test step
+        String stepDefinitionName = testStep.getStepDefinitionName();
+        if (stepDefinitionName == null || stepDefinitionName.trim().isEmpty()) {
+            logger.debug("Exiting suggestStepParametersWorkspace - no step definition name");
+            return proposals;
+        }
+
+        // Find the step object in the workspace
+        if (workspace == null) {
+            logger.debug("Exiting suggestStepParametersWorkspace - no workspace");
+            return proposals;
+        }
+
+        // Build the step object path
+        String stepObjectPath;
+        if (component.isEmpty()) {
+            logger.debug("Exiting suggestStepParametersWorkspace - component is empty");
+            return proposals;
+        } else {
+            stepObjectPath = "stepdefs/" + component + "/" + object + ".asciidoc";
+        }
+
+        // Find the step object
+        IStepObject stepObject = null;
+        for (ITestDocument doc : workspace.getTestDocumentList()) {
+            if (doc instanceof IStepObject) {
+                if (doc.getFullName().equals(stepObjectPath)) {
+                    stepObject = (IStepObject) doc;
+                    break;
+                }
+            }
+        }
+
+        if (stepObject == null) {
+            logger.debug("Exiting suggestStepParametersWorkspace - step object not found: " + stepObjectPath);
+            return proposals;
+        }
+
+        // Find the step definition - iterate through all step definitions to find a match
+        for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+            if (stepDefinition.getName().equals(stepDefinitionName)) {
+                // Get the step parameters
+                for (IStepParameters stepParameters : stepDefinition.getStepParameterList()) {
+                    String parametersName = stepParameters.getName();
+                    if (parametersName != null && !parametersName.trim().isEmpty()) {
+                        // Extract description from step parameters
+                        String description = extractDescriptionFromParameters(stepParameters);
+
+                        // Create proposal
+                        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                        proposal.setValue(parametersName);
+                        proposal.setId(parametersName);
+                        if (description != null && !description.isEmpty()) {
+                            proposal.setDescription(description);
+                        }
+                        proposals.add(proposal);
+                    }
+                }
+                break;
+            }
+        }
+
+        if (proposals.isEmpty()) {
+            logger.debug("Exiting suggestStepParametersWorkspace - no step parameters found for step definition: " + stepDefinitionName);
+        }
+
+        logger.debug("Exiting suggestStepParametersWorkspace with " + proposals.size() + " proposals");
+        return proposals;
+    }
+
+    private static String extractDescriptionFromParameters(IStepParameters stepParameters) {
+        IDescription description = stepParameters.getDescription();
+        if (description != null && description.getLineList() != null && !description.getLineList().isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ILine line : description.getLineList()) {
+                if (sb.length() > 0) {
+                    sb.append(" ");
+                }
+                sb.append(line.getName());
+            }
+            return sb.toString();
+        }
+        return "";
+    }
 }

@@ -28,6 +28,11 @@ public class RowImpl implements IRow {
     }
 
     @Override
+    public void setParent(ITable value) {
+        parent = value;
+    }
+
+    @Override
     public boolean addCell(ICell value) {
         return cellList.add(value);
     }

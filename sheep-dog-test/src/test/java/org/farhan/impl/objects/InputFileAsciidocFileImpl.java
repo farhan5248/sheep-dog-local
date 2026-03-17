@@ -211,12 +211,18 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public void setStepParametersName(HashMap<String, String> keyMap) {
-        setProperty("Step Parameters Name", keyMap.get("Step Parameters Name"));
+        String parametersName = keyMap.get("Step Parameters Name");
+        if (parametersName != null && !parametersName.trim().isEmpty()) {
+            addStepParametersWithName(parametersName);
+        }
     }
 
     @Override
     public void setStepDefinitionName(HashMap<String, String> keyMap) {
-        setProperty("Step Definition Name", keyMap.get("Step Definition Name"));
+        String definitionName = keyMap.get("Step Definition Name");
+        if (definitionName != null && !definitionName.trim().isEmpty()) {
+            addStepDefinitionWithName(definitionName);
+        }
     }
 
     @Override

@@ -148,8 +148,11 @@ public class TestObjectSheepDogImpl extends TestObject {
             if (parent instanceof ITestStep) {
                 ITestStep testStep = (ITestStep) parent;
                 ITable table = testStep.getTable();
-                if (table == null)
-                    return SheepDogBuilder.createTable(testStep);
+                if (table == null) {
+                    table = SheepDogFactory.instance.createTable();
+                    table.setParent(testStep);
+                    testStep.setTable(table);
+                }
                 return table;
             }
             if (parent instanceof ITestData) {
@@ -209,13 +212,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     }
 
     protected void addTestStepWithFullName(String fullName) {
-        Object cursor = getProperty("cursor");
-        ITestStepContainer parent;
-        if (cursor instanceof ITestStep) {
-            parent = ((ITestStep) cursor).getParent();
-        } else {
-            parent = (ITestStepContainer) cursor;
-        }
+        ITestStepContainer parent = (ITestStepContainer) getProperty("cursor");
         ITestStep testStep = SheepDogBuilder.createTestStep(parent, fullName);
         setProperty("cursor", testStep);
     }

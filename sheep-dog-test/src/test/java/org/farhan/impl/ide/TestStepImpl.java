@@ -63,6 +63,10 @@ public class TestStepImpl implements ITestStep {
         stepDefinitionName = value;
     }
 
+    public void setParent(ITestStepContainer value) {
+        parent = value;
+    }
+
     @Override
     public void setTable(ITable value) {
         this.table = value;
