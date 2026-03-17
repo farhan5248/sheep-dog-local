@@ -34,12 +34,8 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getDescriptionNodeState(HashMap<String, String> keyMap) {
-        ITestSuite doc = (ITestSuite) getProperty("cursor");
-        IDescription desc = doc.getDescription();
-        if (desc == null) {
-            return null;
-        }
-        return desc.toString();
+        IDescription desc = getDescriptionFromCursor();
+        return desc == null ? null : desc.toString();
     }
 
     @Override

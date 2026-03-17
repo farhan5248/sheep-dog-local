@@ -17,7 +17,10 @@ public class AddDocumentActionImpl extends TestObjectSheepDogImpl implements Add
     @Override
     public void setPerformedToCreateAStepObjectWith(HashMap<String, String> keyMap) {
         setProperty("cursor", getProperty("workspace"));
-        addStepObjectWithFullName((String) getProperty("Step Object Full Name"));
+        if (getProperty("Step Object Full Name") != null) {
+            addStepObjectWithFullName(replaceKeyword(getProperty("Step Object Full Name").toString()));
+            properties.remove("Step Object Full Name");
+        }
     }
 
     @Override
@@ -28,6 +31,9 @@ public class AddDocumentActionImpl extends TestObjectSheepDogImpl implements Add
     @Override
     public void setPerformedToCreateATestSuiteWith(HashMap<String, String> keyMap) {
         setProperty("cursor", getProperty("workspace"));
-        addTestSuiteWithFullName((String) getProperty("Test Suite Full Name"));
+        if (getProperty("Test Suite Full Name") != null) {
+            addTestSuiteWithFullName(replaceKeyword(getProperty("Test Suite Full Name").toString()));
+            properties.remove("Test Suite Full Name");
+        }
     }
 }

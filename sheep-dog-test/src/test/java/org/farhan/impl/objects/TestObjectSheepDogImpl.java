@@ -1,21 +1,32 @@
 package org.farhan.impl.objects;
 
+import java.util.ArrayList;
+
 import org.farhan.common.TestObject;
-import org.farhan.dsl.grammar.SheepDogBuilder;
+import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITestCase;
+import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogFactory;
+import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.impl.ide.SheepDogFactoryImpl;
 
 public class TestObjectSheepDogImpl extends TestObject {
 
     public static void reset() {
         SheepDogFactory.instance = new SheepDogFactoryImpl();
-        setProperty("workspace", SheepDogBuilder.createTestProject());
+        ITestProject workspace = SheepDogBuilder.createTestProject();
+        setProperty("workspace", workspace);
+        setProperty("cursor", workspace);
+        setProperty("validate annotation.Content", "");
+        setProperty("list proposals popup", new ArrayList<SheepDogIssueProposal>());
+        setProperty("list quickfixes popup", new ArrayList<SheepDogIssueProposal>());
     }
 
     @Override
@@ -65,6 +76,23 @@ public class TestObjectSheepDogImpl extends TestObject {
         ITestSuite parent = (ITestSuite) getProperty("cursor");
         ITestCase testCase = SheepDogBuilder.createTestCase(parent, name);
         setProperty("cursor", testCase);
+    }
+
+    protected IDescription getDescriptionFromCursor() {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof ITestSuite)
+            return ((ITestSuite) cursor).getDescription();
+        else if (cursor instanceof ITestStepContainer)
+            return ((ITestStepContainer) cursor).getDescription();
+        else if (cursor instanceof IStepObject)
+            return ((IStepObject) cursor).getDescription();
+        else if (cursor instanceof IStepDefinition)
+            return ((IStepDefinition) cursor).getDescription();
+        else if (cursor instanceof IStepParameters)
+            return ((IStepParameters) cursor).getDescription();
+        else if (cursor instanceof ITestData)
+            return ((ITestData) cursor).getDescription();
+        return null;
     }
 
 }
