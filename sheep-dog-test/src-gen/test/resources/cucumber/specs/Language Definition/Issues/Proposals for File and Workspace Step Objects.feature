@@ -32,3 +32,25 @@ Feature: Proposals for File and Workspace Step Objects
           | The daily batchjob Output file | daily batchjob/Output file |
           | The daily batchjob Input file  | Input file                 |
 
+  @ListProposalsAction
+  Scenario: Has component has existing
+
+    \@ListProposalsAction
+    If a step has a component and workspace step objects exist, proposals combine objects from previous steps and objects from the workspace.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                       |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+          | TestStepContainerList/1/TestStepList | The daily batchjob                        |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is present           |
+     When The xtext plugin list proposals action is performed as follows
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/2 |
+     Then The xtext plugin list proposals popup will be set as follows
+          | Proposal Value                 | Proposal Id                |
+          | The Output file                | Output file                |
+          | The daily batchjob Output file | daily batchjob/Output file |
+          | The daily batchjob Input file  | Input file                 |
+
