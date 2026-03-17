@@ -8,6 +8,7 @@ import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.StepObjectRefFragments;
 import org.farhan.dsl.grammar.TestStepIssueResolver;
 import org.farhan.objects.xtext.ListProposalsAction;
 import org.junit.jupiter.api.Assertions;
@@ -35,8 +36,14 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
         try {
             Object cursor = getProperty("cursor");
             if (cursor instanceof ITestStep) {
-                ((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))
-                        .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) cursor));
+                ITestStep testStep = (ITestStep) cursor;
+                if (!StepObjectRefFragments.getObjectType(testStep.getFullName()).isEmpty()) {
+                    ((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))
+                            .addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep));
+                } else {
+                    ((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))
+                            .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep));
+                }
             } else if (cursor instanceof IRow) {
                 ITable table = ((IRow) cursor).getParent();
                 if (table != null && table.getParent() instanceof ITestStep) {

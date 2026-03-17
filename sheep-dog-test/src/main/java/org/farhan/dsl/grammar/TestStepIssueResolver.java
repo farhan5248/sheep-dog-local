@@ -80,6 +80,52 @@ public class TestStepIssueResolver {
         return proposals;
     }
 
+    public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep)
+            throws Exception {
+        logger.debug("suggestStepDefinitionNameWorkspace(theTestStep={})", theTestStep);
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+        String fullName = theTestStep.getFullName();
+        if (fullName == null || fullName.isEmpty()) {
+            logger.debug("suggestStepDefinitionNameWorkspace() = {}", proposals);
+            return proposals;
+        }
+        String component = StepObjectRefFragments.getComponent(fullName);
+        String objectName = StepObjectRefFragments.getObject(fullName);
+        if (objectName.isEmpty()) {
+            logger.debug("suggestStepDefinitionNameWorkspace() = {}", proposals);
+            return proposals;
+        }
+        ITestProject workspace = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+        if (workspace == null) {
+            logger.debug("suggestStepDefinitionNameWorkspace() = {}", proposals);
+            return proposals;
+        }
+        for (ITestDocument doc : workspace.getTestDocumentList()) {
+            if (!(doc instanceof IStepObject)) continue;
+            IStepObject stepObject = (IStepObject) doc;
+            if (!stepObject.getName().equals(objectName)) continue;
+            String stepObjectFullName = stepObject.getFullName();
+            String[] parts = stepObjectFullName.split("/");
+            if (parts.length < 3) continue;
+            String docComponent = String.join("/", Arrays.copyOfRange(parts, 1, parts.length - 1));
+            if (!component.isEmpty() && !docComponent.equals(component)) continue;
+            for (IStepDefinition stepDef : stepObject.getStepDefinitionList()) {
+                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                proposal.setValue(stepDef.getName());
+                proposal.setId(stepDef.getName());
+                String descContent = "";
+                IDescription desc = stepDef.getDescription();
+                if (desc != null && !desc.getLineList().isEmpty()) {
+                    descContent = desc.getLine(0).getName();
+                }
+                proposal.setDescription(descContent);
+                proposals.add(proposal);
+            }
+        }
+        logger.debug("suggestStepDefinitionNameWorkspace() = {}", proposals);
+        return proposals;
+    }
+
     private static void addProposalsFromSteps(List<ITestStep> steps, ArrayList<SheepDogIssueProposal> proposals) {
         for (ITestStep step : steps) {
             String stepObjectName = step.getStepObjectName();
