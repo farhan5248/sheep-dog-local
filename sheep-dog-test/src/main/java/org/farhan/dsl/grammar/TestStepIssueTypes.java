@@ -30,7 +30,7 @@ public enum TestStepIssueTypes {
 	TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE("TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE",
 			"The step definition doesn't exist for the step object"),
 
-	TEST_STEP_STEP_PARAMETERS_WORKSPACE("TEST_STEP_STEP_PARAMETERS_WORKSPACE",
+	TEST_STEP_STEP_PARAMETER_LIST_WORKSPACE("TEST_STEP_STEP_PARAMETER_LIST_WORKSPACE",
 			"The step parameters don't exist for the step definition");
 
 	public final String id;

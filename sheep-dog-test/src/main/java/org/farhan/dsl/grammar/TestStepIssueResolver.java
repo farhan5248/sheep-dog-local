@@ -72,31 +72,31 @@ public class TestStepIssueResolver {
         return proposals;
     }
 
-    public static ArrayList<SheepDogIssueProposal> correctStepParametersWorkspace(IRow row) throws Exception {
-        logger.debug("correctStepParametersWorkspace(row={})", row);
+    public static ArrayList<SheepDogIssueProposal> correctStepParameterListWorkspace(IRow row) throws Exception {
+        logger.debug("correctStepParameterListWorkspace(row={})", row);
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         ITable table = row.getParent();
         Object tableParent = table.getParent();
         if (!(tableParent instanceof ITestStep)) {
-            logger.debug("correctStepParametersWorkspace() = {}", proposals);
+            logger.debug("correctStepParameterListWorkspace() = {}", proposals);
             return proposals;
         }
         ITestStep testStep = (ITestStep) tableParent;
         String stepDefinitionName = testStep.getStepDefinitionName();
         if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
-            logger.debug("correctStepParametersWorkspace() = {}", proposals);
+            logger.debug("correctStepParameterListWorkspace() = {}", proposals);
             return proposals;
         }
         String stepObjectName = testStep.getStepObjectName();
         String component = StepObjectRefFragments.getComponent(stepObjectName);
         String objectName = StepObjectRefFragments.getObject(stepObjectName);
         if (objectName.isEmpty()) {
-            logger.debug("correctStepParametersWorkspace() = {}", proposals);
+            logger.debug("correctStepParameterListWorkspace() = {}", proposals);
             return proposals;
         }
         ITestProject workspace = SheepDogUtility.getTestProjectParentForTestStep(testStep);
         if (workspace == null) {
-            logger.debug("correctStepParametersWorkspace() = {}", proposals);
+            logger.debug("correctStepParameterListWorkspace() = {}", proposals);
             return proposals;
         }
         for (IStepObject stepObject : getMatchingStepObjects(workspace, objectName, component)) {
@@ -119,7 +119,7 @@ public class TestStepIssueResolver {
             generateProposal.setValue(cellNamesCsv);
             proposals.add(generateProposal);
         }
-        logger.debug("correctStepParametersWorkspace() = {}", proposals);
+        logger.debug("correctStepParameterListWorkspace() = {}", proposals);
         return proposals;
     }
 

@@ -72,9 +72,9 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
                             .addAll(TestStepIssueResolver.correctStepDefinitionNameWorkspace((ITestStep) cursor));
                 }
             } else if (cursor instanceof IRow) {
-                if (validateResult.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_PARAMETERS_WORKSPACE.description)) {
+                if (validateResult.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_PARAMETER_LIST_WORKSPACE.description)) {
                     ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))
-                            .addAll(TestStepIssueResolver.correctStepParametersWorkspace((IRow) cursor));
+                            .addAll(TestStepIssueResolver.correctStepParameterListWorkspace((IRow) cursor));
                 }
             } else if (cursor instanceof IText) {
                 if (validateResult.contentEquals(TextIssueTypes.TEXT_STEP_PARAMETER_LIST_WORKSPACE.description)) {
