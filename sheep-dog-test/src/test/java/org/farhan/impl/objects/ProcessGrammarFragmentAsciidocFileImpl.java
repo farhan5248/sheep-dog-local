@@ -30,9 +30,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getStepObjectRefComponentFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
-        setProperty("cursor", doc);
+        setProperty("cursor", getDocument());
         return "";
     }
 
@@ -62,9 +60,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getStepObjectRefObjectFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
-        setProperty("cursor", doc);
+        setProperty("cursor", getDocument());
         return "";
     }
 
@@ -88,9 +84,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getStepObjectRefObjectVertexFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
-        setProperty("cursor", doc);
+        setProperty("cursor", getDocument());
         return "";
     }
 
@@ -108,9 +102,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getStepObjectRefObjectEdgeFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
-        setProperty("cursor", doc);
+        setProperty("cursor", getDocument());
         return "";
     }
 
@@ -128,9 +120,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
-        setProperty("cursor", doc);
+        setProperty("cursor", getDocument());
         return "";
     }
 
@@ -160,9 +150,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
-        setProperty("cursor", doc);
+        setProperty("cursor", getDocument());
         return "";
     }
 
@@ -202,9 +190,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getPhraseTagFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
-        setProperty("cursor", doc);
+        setProperty("cursor", getDocument());
         return "";
     }
 
@@ -215,9 +201,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getPhraseTodoFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
-        setProperty("cursor", doc);
+        setProperty("cursor", getDocument());
         return "";
     }
 
@@ -231,9 +215,11 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
         return PhraseTodoFragments.getTodoDesc((String) getProperty("Line"));
     }
 
+    private ITestSuite getDocument() {
+        return (ITestSuite) ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath());
+    }
+
     private ITestStep getFirstTestStep() {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
-        return doc.getTestStepContainer(0).getTestStepList().get(0);
+        return getDocument().getTestStepContainer(0).getTestStepList().get(0);
     }
 }
