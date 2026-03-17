@@ -26,17 +26,25 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
         setProperty("cursor", doc);
     }
 
-    @Override
-    public String getDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
+    private String navigateToDocumentAndGetCursor() {
         navigateToDocument();
         return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
+    private String navigateToNodeAndGetCursor(String nodePath) {
+        navigateToDocument();
+        setCursorAtNode(nodePath);
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
+        return navigateToDocumentAndGetCursor();
+    }
+
     @Override
     public String getDescriptionNodeNodePath(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToNodeAndGetCursor(keyMap.get("Node Path"));
     }
 
     @Override
@@ -47,15 +55,12 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepContainerListNodeAsFollows(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToDocumentAndGetCursor();
     }
 
     @Override
     public String getTestStepContainerListNodeNodePath(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToNodeAndGetCursor(keyMap.get("Node Path"));
     }
 
     @Override
@@ -104,8 +109,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepContainerListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToDocumentAndGetCursor();
     }
 
     @Override
@@ -122,15 +126,12 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestDataListNodeAsFollows(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToDocumentAndGetCursor();
     }
 
     @Override
     public String getTestDataListNodeNodePath(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToNodeAndGetCursor(keyMap.get("Node Path"));
     }
 
     @Override
@@ -144,15 +145,12 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepListNodeAsFollows(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToDocumentAndGetCursor();
     }
 
     @Override
     public String getTestStepListNodeNodePath(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToNodeAndGetCursor(keyMap.get("Node Path"));
     }
 
     @Override
@@ -166,15 +164,12 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTableNodeAsFollows(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToDocumentAndGetCursor();
     }
 
     @Override
     public String getTableNodeNodePath(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToNodeAndGetCursor(keyMap.get("Node Path"));
     }
 
     @Override
@@ -203,8 +198,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToDocumentAndGetCursor();
     }
 
     @Override
@@ -240,8 +234,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToDocumentAndGetCursor();
     }
 
     @Override
@@ -318,15 +311,12 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTextNodeAsFollows(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToDocumentAndGetCursor();
     }
 
     @Override
     public String getTextNodeNodePath(HashMap<String, String> keyMap) {
-        navigateToDocument();
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return navigateToNodeAndGetCursor(keyMap.get("Node Path"));
     }
 
     @Override

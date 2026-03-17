@@ -58,12 +58,16 @@ public class SheepDogBuilder {
         return stepParameters;
     }
 
+    private static String getNameFromFullName(String fullName) {
+        String[] parts = fullName.split("/");
+        return parts[parts.length - 1].replaceFirst("\\.[^.]+$", "");
+    }
+
     public static ITestSuite createTestSuite(ITestProject parent, String fullName) {
         logger.debug("createTestSuite(parent={}, fullName={})", parent, fullName);
         ITestSuite testSuite = SheepDogFactory.instance.createTestSuite();
         testSuite.setFullName(fullName);
-        String[] parts = fullName.split("/");
-        String name = parts[parts.length - 1].replaceFirst("\\.[^.]+$", "");
+        String name = getNameFromFullName(fullName);
         testSuite.setName(name);
         if (parent != null)
             parent.addTestSuite(testSuite);
@@ -144,8 +148,7 @@ public class SheepDogBuilder {
         logger.debug("createStepObject(parent={}, fullName={})", parent, fullName);
         IStepObject stepObject = SheepDogFactory.instance.createStepObject();
         stepObject.setFullName(fullName);
-        String[] parts = fullName.split("/");
-        String name = parts[parts.length - 1].replaceFirst("\\.[^.]+$", "");
+        String name = getNameFromFullName(fullName);
         stepObject.setName(name);
         if (parent != null)
             parent.addStepObject(stepObject);
