@@ -144,8 +144,10 @@ public class SheepDogBuilder {
             table = parent.getTable();
         if (table == null) {
             table = SheepDogFactory.instance.createTable();
-            if (parent != null)
+            if (parent != null) {
+                table.setParent(parent);
                 parent.setTable(table);
+            }
         }
         logger.debug("createTable() = {}", table);
         return table;

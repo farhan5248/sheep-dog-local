@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
@@ -35,6 +36,9 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
             if (cursor instanceof ITestStep) {
                 ((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))
                         .addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace((ITestStep) cursor));
+            } else if (cursor instanceof IRow) {
+                ((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))
+                        .addAll(TestStepIssueResolver.suggestStepParametersWorkspace((IRow) cursor));
             }
         } catch (Exception e) {
             Assertions.fail(e);

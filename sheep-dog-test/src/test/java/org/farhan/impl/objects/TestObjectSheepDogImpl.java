@@ -148,8 +148,11 @@ public class TestObjectSheepDogImpl extends TestObject {
             if (parent instanceof ITestStep) {
                 ITestStep testStep = (ITestStep) parent;
                 ITable table = testStep.getTable();
-                if (table == null)
-                    return SheepDogBuilder.createTable(testStep);
+                if (table == null) {
+                    table = SheepDogFactory.instance.createTable();
+                    table.setParent(testStep);
+                    testStep.setTable(table);
+                }
                 return table;
             }
             if (parent instanceof ITestData) {
