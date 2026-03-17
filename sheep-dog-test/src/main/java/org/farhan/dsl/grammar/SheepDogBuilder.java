@@ -4,6 +4,21 @@ import org.slf4j.Logger;
 
 public class SheepDogBuilder {
 
+    public static ITestCase createTestCase(ITestSuite parent, String name) {
+        logger.debug("createTestCase(parent={}, name={})", parent, name);
+        ITestCase testCase = null;
+        if (parent != null)
+            testCase = (ITestCase) parent.getTestStepContainer(name);
+        if (testCase == null) {
+            testCase = SheepDogFactory.instance.createTestCase();
+            testCase.setName(name);
+            if (parent != null)
+                parent.addTestCase(testCase);
+        }
+        logger.debug("createTestCase() = {}", testCase);
+        return testCase;
+    }
+
     private static final Logger logger = SheepDogLoggerFactory.getLogger(SheepDogBuilder.class);
 
     public static ITestProject createTestProject() {
@@ -41,6 +56,20 @@ public class SheepDogBuilder {
         }
         logger.debug("createStepParameters() = {}", stepParameters);
         return stepParameters;
+    }
+
+    public static ITestSuite createTestSuite(ITestProject parent, String fullName) {
+        logger.debug("createTestSuite(parent={}, fullName={})", parent, fullName);
+        ITestSuite testSuite = SheepDogFactory.instance.createTestSuite();
+        testSuite.setFullName(fullName);
+        String[] parts = fullName.split("/");
+        String lastPart = parts[parts.length - 1];
+        String name = lastPart.replaceFirst("\\.[^.]+$", "");
+        testSuite.setName(name);
+        if (parent != null)
+            parent.addTestSuite(testSuite);
+        logger.debug("createTestSuite() = {}", testSuite);
+        return testSuite;
     }
 
     public static IStepObject createStepObject(ITestProject parent, String fullName) {

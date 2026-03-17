@@ -46,7 +46,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public ITestCase createTestCase() {
-        return null;
+        return new TestCaseImpl();
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public ITestSuite createTestSuite() {
-        return null;
+        return new TestSuiteImpl();
     }
 
     @Override

@@ -19,4 +19,9 @@ public class XtextAddDocumentActionSteps extends TestSteps {
     public void isPerformedToCreateAStepObjectWith(DataTable dataTable) {
         object.doEdgeStep("", "", "is", "performed to create a StepObject with", dataTable);
     }
+
+    @Given("^The xtext plugin add document action is performed to create a TestSuite with$")
+    public void isPerformedToCreateATestSuiteWith(DataTable dataTable) {
+        object.doEdgeStep("", "", "is", "performed to create a TestSuite with", dataTable);
+    }
 }

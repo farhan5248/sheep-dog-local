@@ -4,7 +4,11 @@ import org.farhan.impl.objects.AddDocumentActionImpl;
 import org.farhan.impl.objects.EditDocumentActionImpl;
 import org.farhan.impl.objects.Input2FileAsciidocFileImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;
+import org.farhan.impl.objects.ProcessIssues2AsciidocFileImpl;
+import org.farhan.impl.objects.ProcessIssuesAsciidocFileImpl;
 import org.farhan.impl.objects.TestObjectSheepDogImpl;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssues2AsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.Input2FileAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.AddDocumentAction;
@@ -37,6 +41,8 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(EditDocumentAction.class).to(EditDocumentActionImpl.class);
         bind(InputFileAsciidocFile.class).to(InputFileAsciidocFileImpl.class);
         bind(Input2FileAsciidocFile.class).to(Input2FileAsciidocFileImpl.class);
+        bind(ProcessIssues2AsciidocFile.class).to(ProcessIssues2AsciidocFileImpl.class);
+        bind(ProcessIssuesAsciidocFile.class).to(ProcessIssuesAsciidocFileImpl.class);
     }
 
 }

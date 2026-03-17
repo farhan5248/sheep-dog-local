@@ -19,4 +19,15 @@ public class AddDocumentActionImpl extends TestObjectSheepDogImpl implements Add
         setProperty("cursor", getProperty("workspace"));
         addStepObjectWithFullName((String) getProperty("Step Object Full Name"));
     }
+
+    @Override
+    public void setTestSuiteFullName(HashMap<String, String> keyMap) {
+        setProperty("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+    }
+
+    @Override
+    public void setPerformedToCreateATestSuiteWith(HashMap<String, String> keyMap) {
+        setProperty("cursor", getProperty("workspace"));
+        addTestSuiteWithFullName((String) getProperty("Test Suite Full Name"));
+    }
 }
