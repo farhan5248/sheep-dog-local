@@ -1,13 +1,89 @@
-File: Language Definition/Issues/Validation for Only Issues
-  Scenario: Header row Cell names should start with a capital letter validation
-    Tag: ValidateAction
-  Scenario: Body row Cell names can be any case validation
-    Tag: ValidateAction
-  Scenario: Test suite name should start with a capital letter validation
-    Tag: ValidateAction
-  Scenario: Test case name should start with a capital letter validation
-    Tag: ValidateAction
-  Scenario: Test step must have a valid object name validation
-    Tag: ValidateAction
-  Scenario: Test step must have a valid step definition name validation
-    Tag: ValidateAction
+File: Language Definition/Grammar/StepObject Type
+  Scenario: Initial State
+    Tag: AddDocumentAction
+  Scenario: Duplicate Step Object Full Name
+    Tag: AddDocumentAction
+
+File: Language Definition/Grammar/StepDefinition Type
+  Scenario: Step Definition
+    Tag: EditDocumentAction
+  Scenario: Duplicate Step Definition Name
+    Tag: EditDocumentAction
+  Scenario: Sorted Step Definition Name
+    Tag: EditDocumentAction
+
+File: Language Definition/Grammar/StepParameters Type
+  Scenario: Step Parameters
+    Tag: EditDocumentAction
+  Scenario: Duplicate Step Parameters Name
+    Tag: EditDocumentAction
+  Scenario: Sorted Step Parameters Name
+    Tag: EditDocumentAction
+
+File: Language Definition/Grammar/TestSuite Type
+  Scenario: Initial State
+    Tag: AddDocumentAction
+  Scenario: Duplicate Test Suite Full Name
+    Tag: AddDocumentAction
+
+File: Language Definition/Grammar/TestSetup Type
+  Scenario: Test Setup
+    Tag: EditDocumentAction
+  Scenario: Duplicate Test Setup Name
+    Tag: EditDocumentAction
+  Scenario: Test Setup Is First
+    Tag: EditDocumentAction
+
+File: Language Definition/Grammar/TestCase Type
+  Scenario: Test Case
+    Tag: EditDocumentAction
+  Scenario: Duplicate Test Case Name
+    Tag: EditDocumentAction
+  Scenario: Test Case Insertion Order
+    Tag: EditDocumentAction
+
+File: Language Definition/Grammar/TestData Type
+  Scenario: Test Data
+    Tag: EditDocumentAction
+  Scenario: Duplicate Test Data Name
+    Tag: EditDocumentAction
+  Scenario: Test Data Insertion Order
+    Tag: EditDocumentAction
+
+File: Language Definition/Grammar/TestStep Keyword Type
+  Scenario: Initial State Given
+    Tag: EditDocumentAction
+  Scenario: Initial State When
+    Tag: EditDocumentAction
+  Scenario: Initial State Then
+    Tag: EditDocumentAction
+  Scenario: Initial State And
+    Tag: EditDocumentAction
+
+File: Language Definition/Grammar/TestStep Attachment Type
+  Scenario: Table Excludes Text
+    Tag: EditDocumentAction
+  Scenario: Text Excludes Table
+    Tag: EditDocumentAction
+  Scenario: Duplicate Test Step
+    Tag: EditDocumentAction
+  Scenario: Test Step Insertion Order
+    Tag: EditDocumentAction
+
+File: Language Definition/Grammar/Table Type
+  Scenario: Row
+    Tag: EditDocumentAction
+  Scenario: Cell
+    Tag: EditDocumentAction
+  Scenario: Duplicate Row
+    Tag: EditDocumentAction
+  Scenario: Row Insertion Order
+    Tag: EditDocumentAction
+  Scenario: Cell Insertion Order
+    Tag: EditDocumentAction
+
+File: Language Definition/Grammar/Description Type
+  Scenario: Initial State
+    Tag: EditDocumentAction
+  Scenario: Line Insertion Order
+    Tag: EditDocumentAction
