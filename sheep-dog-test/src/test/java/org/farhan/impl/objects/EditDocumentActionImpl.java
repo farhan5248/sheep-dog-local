@@ -2,7 +2,6 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.objects.xtext.EditDocumentAction;
 
@@ -12,13 +11,20 @@ import io.cucumber.guice.ScenarioScoped;
 public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements EditDocumentAction {
 
     private void navigateToDocument() {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestDocument doc = workspace.getTestDocument((String) getProperty("Step Object Full Name"));
-        setProperty("cursor", doc);
+        if (getProperty("Test Suite Full Name") != null) {
+            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
+            properties.remove("Test Suite Full Name");
+        } else if (getProperty("Step Object Full Name") != null) {
+            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Step Object Full Name").toString())));
+            properties.remove("Step Object Full Name");
+        }
     }
 
     private void navigateToNode() {
-        setCursorAtNode((String) getProperty("Node Path"));
+        if (getProperty("Node Path") != null) {
+            setCursorAtNode(getProperty("Node Path").toString());
+            properties.remove("Node Path");
+        }
     }
 
     @Override
@@ -40,7 +46,10 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
     public void setPerformedToModifyStepDefinitionListWith(HashMap<String, String> keyMap) {
         navigateToDocument();
         navigateToNode();
-        addStepDefinitionWithName((String) getProperty("Step Definition Name"));
+        if (getProperty("Step Definition Name") != null) {
+            addStepDefinitionWithName(replaceKeyword(getProperty("Step Definition Name").toString()));
+            properties.remove("Step Definition Name");
+        }
     }
 
     @Override
@@ -52,7 +61,10 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
     public void setPerformedToModifyStepParametersListWith(HashMap<String, String> keyMap) {
         navigateToDocument();
         navigateToNode();
-        addStepParametersWithName((String) getProperty("Step Parameters Name"));
+        if (getProperty("Step Parameters Name") != null) {
+            addStepParametersWithName(replaceKeyword(getProperty("Step Parameters Name").toString()));
+            properties.remove("Step Parameters Name");
+        }
     }
 
     @Override
@@ -72,10 +84,11 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
 
     @Override
     public void setPerformedToModifyTestStepContainerListWith(HashMap<String, String> keyMap) {
-        ITestProject workspace = (ITestProject) getProperty("workspace");
-        ITestDocument doc = workspace.getTestDocument((String) getProperty("Test Suite Full Name"));
-        setProperty("cursor", doc);
+        navigateToDocument();
         navigateToNode();
-        addTestSetupWithName((String) getProperty("Test Setup Name"));
+        if (getProperty("Test Setup Name") != null) {
+            addTestSetupWithName(replaceKeyword(getProperty("Test Setup Name").toString()));
+            properties.remove("Test Setup Name");
+        }
     }
 }
