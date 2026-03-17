@@ -4,6 +4,7 @@ import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.SheepDogFactory;
 import org.farhan.impl.ide.SheepDogFactoryImpl;
@@ -17,6 +18,20 @@ public class TestObjectSheepDogImpl extends TestObject {
 
     @Override
     protected Object getOrCreateNode(Object parent, String elementType, int index) {
+        if ("StepDefinitionList".equals(elementType) && parent instanceof IStepObject) {
+            IStepObject stepObject = (IStepObject) parent;
+            if (index < stepObject.getStepDefinitionList().size()) {
+                return stepObject.getStepDefinition(index);
+            }
+            return SheepDogBuilder.createStepDefinition(stepObject, "StepDefinition" + (index + 1));
+        }
+        if ("StepParametersList".equals(elementType) && parent instanceof IStepDefinition) {
+            IStepDefinition stepDef = (IStepDefinition) parent;
+            if (index < stepDef.getStepParameterList().size()) {
+                return stepDef.getStepParameters(index);
+            }
+            return SheepDogBuilder.createStepParameters(stepDef, "StepParameters" + (index + 1));
+        }
         return null;
     }
 
@@ -24,6 +39,12 @@ public class TestObjectSheepDogImpl extends TestObject {
         IStepObject parent = (IStepObject) getProperty("cursor");
         IStepDefinition stepDef = SheepDogBuilder.createStepDefinition(parent, name);
         setProperty("cursor", stepDef);
+    }
+
+    protected void addStepParametersWithName(String name) {
+        IStepDefinition parent = (IStepDefinition) getProperty("cursor");
+        IStepParameters stepParams = SheepDogBuilder.createStepParameters(parent, name);
+        setProperty("cursor", stepParams);
     }
 
     protected void addStepObjectWithFullName(String fullName) {

@@ -42,4 +42,16 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
         navigateToNode();
         addStepDefinitionWithName((String) getProperty("Step Definition Name"));
     }
+
+    @Override
+    public void setStepParametersName(HashMap<String, String> keyMap) {
+        setProperty("Step Parameters Name", keyMap.get("Step Parameters Name"));
+    }
+
+    @Override
+    public void setPerformedToModifyStepParametersListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        addStepParametersWithName((String) getProperty("Step Parameters Name"));
+    }
 }

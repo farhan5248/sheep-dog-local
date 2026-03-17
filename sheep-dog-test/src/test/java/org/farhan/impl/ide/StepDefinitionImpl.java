@@ -42,7 +42,15 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     @Override
     public boolean addStepParameters(IStepParameters value) {
-        return stepParameterList.add(value);
+        int insertIndex = stepParameterList.size();
+        for (int i = 0; i < stepParameterList.size(); i++) {
+            if (value.getName().compareTo(stepParameterList.get(i).getName()) < 0) {
+                insertIndex = i;
+                break;
+            }
+        }
+        stepParameterList.add(insertIndex, value);
+        return true;
     }
 
     @Override

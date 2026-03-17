@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
@@ -118,7 +119,61 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getStepParametersListNodeState(HashMap<String, String> keyMap) {
         IStepDefinition sd = (IStepDefinition) getProperty("cursor");
+        if (sd == null) {
+            return null;
+        }
         return listToString(sd.getStepParameterList());
+    }
+
+    @Override
+    public void setStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        ITestProject workspace = (ITestProject) getProperty("workspace");
+        ITestDocument doc = workspace.getTestDocument(getFullNameFromPath());
+        if (doc == null) {
+            addStepObjectWithFullName(getFullNameFromPath());
+        } else {
+            setProperty("cursor", doc);
+        }
+    }
+
+    @Override
+    public void setStepParametersListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setStepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
+        addStepParametersWithName(keyMap.get("Step Parameters Name"));
+    }
+
+    @Override
+    public String getStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return null;
+    }
+
+    @Override
+    public String getStepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
+        IStepParameters sp = (IStepParameters) getProperty("cursor");
+        return sp.getName();
+    }
+
+    @Override
+    public String getTableNodeAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return null;
+    }
+
+    @Override
+    public String getTableNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        setCursorAtNode(keyMap.get("Node Path"));
+        return null;
+    }
+
+    @Override
+    public String getTableNodeState(HashMap<String, String> keyMap) {
+        return null;
     }
 
 }

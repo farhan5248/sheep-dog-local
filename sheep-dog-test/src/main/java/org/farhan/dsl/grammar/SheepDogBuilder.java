@@ -28,6 +28,21 @@ public class SheepDogBuilder {
         return stepDefinition;
     }
 
+    public static IStepParameters createStepParameters(IStepDefinition parent, String name) {
+        logger.debug("createStepParameters(parent={}, name={})", parent, name);
+        IStepParameters stepParameters = null;
+        if (parent != null)
+            stepParameters = parent.getStepParameters(name);
+        if (stepParameters == null) {
+            stepParameters = SheepDogFactory.instance.createStepParameters();
+            stepParameters.setName(name);
+            if (parent != null)
+                parent.addStepParameters(stepParameters);
+        }
+        logger.debug("createStepParameters() = {}", stepParameters);
+        return stepParameters;
+    }
+
     public static IStepObject createStepObject(ITestProject parent, String fullName) {
         logger.debug("createStepObject(parent={}, fullName={})", parent, fullName);
         IStepObject stepObject = SheepDogFactory.instance.createStepObject();

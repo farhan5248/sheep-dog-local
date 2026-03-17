@@ -36,7 +36,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public IStepParameters createStepParameters() {
-        return null;
+        return new StepParametersImpl();
     }
 
     @Override
