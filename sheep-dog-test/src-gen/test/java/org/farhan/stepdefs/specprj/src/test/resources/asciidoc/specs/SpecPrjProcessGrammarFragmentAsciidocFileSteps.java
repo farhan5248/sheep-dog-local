@@ -49,4 +49,19 @@ public class SpecPrjProcessGrammarFragmentAsciidocFileSteps extends TestSteps {
     public void stepDefinitionRefStateFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
         object.assertVertexStep("StepDefinitionRef state", "fragment", "will be", "decomposed as follows", dataTable);
     }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file Line type is created as follows$")
+    public void lineTypeIsCreatedAsFollows(DataTable dataTable) {
+        object.setVertexStep("Line", "type", "is", "created as follows", dataTable);
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file Phrase tag fragment will be decomposed as follows$")
+    public void phraseTagFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
+        object.assertVertexStep("Phrase tag", "fragment", "will be", "decomposed as follows", dataTable);
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file Phrase todo fragment will be decomposed as follows$")
+    public void phraseTodoFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
+        object.assertVertexStep("Phrase todo", "fragment", "will be", "decomposed as follows", dataTable);
+    }
 }

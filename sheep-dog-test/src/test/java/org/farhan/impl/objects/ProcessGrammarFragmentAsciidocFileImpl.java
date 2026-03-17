@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.PhraseTagFragments;
+import org.farhan.dsl.grammar.PhraseTodoFragments;
 import org.farhan.dsl.grammar.StepDefinitionRefFragments;
 import org.farhan.dsl.grammar.StepObjectRefFragments;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarFragmentAsciidocFile;
@@ -186,6 +188,47 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
     public String getStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap) {
         ITestStep testStep = getFirstTestStep();
         return StepDefinitionRefFragments.getStateTypeDesc(testStep.getFullName());
+    }
+
+    @Override
+    public void setLineTypeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addTestSuiteWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setLineTypeLine(HashMap<String, String> keyMap) {
+        setProperty("Line", keyMap.get("Line"));
+    }
+
+    @Override
+    public String getPhraseTagFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        ITestProject workspace = (ITestProject) getProperty("workspace");
+        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
+        setProperty("cursor", doc);
+        return "";
+    }
+
+    @Override
+    public String getPhraseTagFragmentTagList(HashMap<String, String> keyMap) {
+        return PhraseTagFragments.getTagList((String) getProperty("Line"));
+    }
+
+    @Override
+    public String getPhraseTodoFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        ITestProject workspace = (ITestProject) getProperty("workspace");
+        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
+        setProperty("cursor", doc);
+        return "";
+    }
+
+    @Override
+    public String getPhraseTodoFragmentTodoType(HashMap<String, String> keyMap) {
+        return PhraseTodoFragments.getTodoType((String) getProperty("Line"));
+    }
+
+    @Override
+    public String getPhraseTodoFragmentTodoDescription(HashMap<String, String> keyMap) {
+        return PhraseTodoFragments.getTodoDesc((String) getProperty("Line"));
     }
 
     private ITestStep getFirstTestStep() {
