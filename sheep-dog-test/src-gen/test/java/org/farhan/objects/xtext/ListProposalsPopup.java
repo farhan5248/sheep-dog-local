@@ -11,4 +11,6 @@ public interface ListProposalsPopup {
     public String getProposalId(HashMap<String, String> keyMap);
 
     public String getProposalDescription(HashMap<String, String> keyMap);
+
+    public String getEmpty(HashMap<String, String> keyMap);
 }

@@ -38,9 +38,15 @@ public class TestStepIssueResolver {
         // Collect object names from previous steps in the same container
         collectProposalsFromContainer(container, theTestStep, proposals, processedObjectNames, components);
 
-        // Collect proposals from workspace step objects for components used in previous steps
-        if (workspace != null && !components.isEmpty()) {
-            collectProposalsFromWorkspace(workspace, components, proposals, processedObjectNames);
+        // Collect proposals from workspace step objects
+        if (workspace != null) {
+            if (!components.isEmpty()) {
+                // If components were found, collect only step objects for those components
+                collectProposalsFromWorkspace(workspace, components, proposals, processedObjectNames);
+            } else {
+                // If no components were found, collect all step objects with descriptions
+                collectAllProposalsFromWorkspace(workspace, proposals, processedObjectNames);
+            }
         }
 
         logger.debug("Exiting suggestStepObjectNameWorkspace with " + proposals.size() + " proposals");
@@ -133,6 +139,68 @@ public class TestStepIssueResolver {
                 }
             }
         }
+    }
+
+    private static void collectAllProposalsFromWorkspace(ITestProject workspace,
+            ArrayList<SheepDogIssueProposal> proposals, HashSet<String> processedObjectNames) {
+
+        // Iterate through all documents in workspace
+        for (ITestDocument doc : workspace.getTestDocumentList()) {
+            // Only process step objects, not test suites
+            if (doc instanceof IStepObject) {
+                IStepObject stepObject = (IStepObject) doc;
+                String stepObjectFullName = stepObject.getFullName();
+
+                // Step object full name format: "stepdefs/component/object.asciidoc"
+                // Parse the full name to extract component and object
+                if (stepObjectFullName.startsWith("stepdefs/")) {
+                    String pathAfterStepdefs = stepObjectFullName.substring("stepdefs/".length());
+                    // Strip file extension
+                    pathAfterStepdefs = pathAfterStepdefs.replaceFirst("\\.[^.]+$", "");
+
+                    // Split by "/" to get component and object
+                    String[] parts = pathAfterStepdefs.split("/");
+                    if (parts.length >= 2) {
+                        String component = parts[0];
+                        String objectName = parts[1];
+                        String fullObjectName = component + "/" + objectName;
+
+                        // Check if we haven't already added this
+                        if (!processedObjectNames.contains(objectName)) {
+                            processedObjectNames.add(objectName);
+
+                            // Extract description from step object
+                            String description = extractDescription(stepObject);
+
+                            // Add proposal for workspace step object
+                            String fullObjectProposalName = "The " + component + " " + objectName;
+                            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                            proposal.setValue(fullObjectProposalName);
+                            proposal.setId(objectName);
+                            if (description != null && !description.isEmpty()) {
+                                proposal.setDescription(description);
+                            }
+                            proposals.add(proposal);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static String extractDescription(IStepObject stepObject) {
+        IDescription description = stepObject.getDescription();
+        if (description != null && description.getLineList() != null && !description.getLineList().isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ILine line : description.getLineList()) {
+                if (sb.length() > 0) {
+                    sb.append(" ");
+                }
+                sb.append(line.getName());
+            }
+            return sb.toString();
+        }
+        return "";
     }
 
     private static String[] extractComponentAndObject(String fullName) {

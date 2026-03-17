@@ -64,4 +64,11 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
         SheepDogIssueProposal proposal = findProposal(keyMap);
         return proposal != null ? proposal.getDescription() : "";
     }
+
+    @Override
+    public String getEmpty(HashMap<String, String> keyMap) {
+        @SuppressWarnings("unchecked")
+        ArrayList<SheepDogIssueProposal> proposals = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
+        return (proposals == null || proposals.isEmpty()) ? "true" : "false";
+    }
 }

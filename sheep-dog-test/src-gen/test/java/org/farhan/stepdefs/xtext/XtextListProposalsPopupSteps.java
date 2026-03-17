@@ -19,4 +19,9 @@ public class XtextListProposalsPopupSteps extends TestSteps {
     public void willBeSetAsFollows(DataTable dataTable) {
         object.assertVertexStep("", "", "will be", "set as follows", dataTable);
     }
+
+    @Given("^The xtext plugin list proposals popup will be empty$")
+    public void willBeEmpty() {
+        object.assertVertexStep("", "", "will be", "empty");
+    }
 }
