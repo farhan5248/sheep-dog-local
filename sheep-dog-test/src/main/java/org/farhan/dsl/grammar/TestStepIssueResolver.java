@@ -12,13 +12,13 @@ public class TestStepIssueResolver {
 
     private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
 
-    public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameOnly(ITestStep theTestStep,
-            ITestProject workspace) throws Exception {
-        logger.debug("suggestStepObjectNameOnly(theTestStep={})", theTestStep);
+    public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep)
+            throws Exception {
+        logger.debug("suggestStepObjectNameWorkspace(theTestStep={})", theTestStep);
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         ITestStepContainer parent = theTestStep.getParent();
         if (parent == null) {
-            logger.debug("suggestStepObjectNameOnly() = {}", proposals);
+            logger.debug("suggestStepObjectNameWorkspace() = {}", proposals);
             return proposals;
         }
         if (!(parent instanceof ITestSetup) && parent.getParent() != null) {
@@ -30,8 +30,8 @@ public class TestStepIssueResolver {
             }
         }
         addProposalsFromSteps(SheepDogUtility.getTestStepListUpToTestStep(theTestStep), proposals);
-        addProposalsFromStepDefs(workspace, proposals);
-        logger.debug("suggestStepObjectNameOnly() = {}", proposals);
+        addProposalsFromStepDefs(SheepDogUtility.getTestProjectParentForTestStep(theTestStep), proposals);
+        logger.debug("suggestStepObjectNameWorkspace() = {}", proposals);
         return proposals;
     }
 

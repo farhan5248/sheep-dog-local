@@ -8,6 +8,7 @@ public class TestSuiteImpl implements ITestSuite {
 
     private String fullName;
     private String name;
+    private ITestProject parent;
     private IDescription description;
     private List<ITestStepContainer> testStepContainerList = new ArrayList<>();
 
@@ -52,7 +53,12 @@ public class TestSuiteImpl implements ITestSuite {
 
     @Override
     public ITestProject getParent() {
-        return null;
+        return parent;
+    }
+
+    @Override
+    public void setParent(ITestProject value) {
+        this.parent = value;
     }
 
     @Override
