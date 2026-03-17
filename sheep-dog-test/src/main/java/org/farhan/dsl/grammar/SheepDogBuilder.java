@@ -72,6 +72,21 @@ public class SheepDogBuilder {
         return testSuite;
     }
 
+    public static ITestSetup createTestSetup(ITestSuite parent, String name) {
+        logger.debug("createTestSetup(parent={}, name={})", parent, name);
+        ITestSetup testSetup = null;
+        if (parent != null)
+            testSetup = (ITestSetup) parent.getTestStepContainer(name);
+        if (testSetup == null) {
+            testSetup = SheepDogFactory.instance.createTestSetup();
+            testSetup.setName(name);
+            if (parent != null)
+                parent.addTestSetup(testSetup);
+        }
+        logger.debug("createTestSetup() = {}", testSetup);
+        return testSetup;
+    }
+
     public static IStepObject createStepObject(ITestProject parent, String fullName) {
         logger.debug("createStepObject(parent={}, fullName={})", parent, fullName);
         IStepObject stepObject = SheepDogFactory.instance.createStepObject();

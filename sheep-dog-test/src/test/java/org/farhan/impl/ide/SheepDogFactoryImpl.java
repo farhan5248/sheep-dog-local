@@ -56,7 +56,7 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public ITestSetup createTestSetup() {
-        return null;
+        return new TestSetupImpl();
     }
 
     @Override

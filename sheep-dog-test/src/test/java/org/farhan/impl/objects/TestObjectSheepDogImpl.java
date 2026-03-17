@@ -10,6 +10,7 @@ import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestSetup;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogBuilder;
@@ -70,6 +71,12 @@ public class TestObjectSheepDogImpl extends TestObject {
         ITestProject workspace = (ITestProject) getProperty("workspace");
         IStepObject stepObject = SheepDogBuilder.createStepObject(workspace, fullName);
         setProperty("cursor", stepObject);
+    }
+
+    protected void addTestSetupWithName(String name) {
+        ITestSuite parent = (ITestSuite) getProperty("cursor");
+        ITestSetup testSetup = SheepDogBuilder.createTestSetup(parent, name);
+        setProperty("cursor", testSetup);
     }
 
     protected void addTestCaseWithName(String name) {

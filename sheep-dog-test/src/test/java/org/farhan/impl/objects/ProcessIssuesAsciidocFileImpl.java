@@ -6,6 +6,7 @@ import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestSetup;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
 
@@ -92,7 +93,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public void setTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap) {
-        throw new UnsupportedOperationException();
+        addTestSetupWithName(keyMap.get("Test Setup Name"));
     }
 
     @Override
@@ -109,6 +110,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap) {
-        throw new UnsupportedOperationException();
+        ITestSetup ts = (ITestSetup) getProperty("cursor");
+        return ts.getName();
     }
 }

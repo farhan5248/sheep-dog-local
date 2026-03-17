@@ -23,7 +23,14 @@ public class TestSuiteImpl implements ITestSuite {
 
     @Override
     public boolean addTestSetup(ITestSetup value) {
-        return false;
+        int insertIndex = 0;
+        for (int i = 0; i < testStepContainerList.size(); i++) {
+            if (testStepContainerList.get(i) instanceof ITestSetup) {
+                insertIndex = i + 1;
+            }
+        }
+        testStepContainerList.add(insertIndex, value);
+        return true;
     }
 
     @Override
