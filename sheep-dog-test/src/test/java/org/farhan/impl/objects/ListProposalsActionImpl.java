@@ -34,7 +34,8 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
             Object cursor = getProperty("cursor");
             if (cursor instanceof ITestStep) {
                 ((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup"))
-                        .addAll(TestStepIssueResolver.suggestStepObjectNameOnly((ITestStep) cursor));
+                        .addAll(TestStepIssueResolver.suggestStepObjectNameOnly((ITestStep) cursor,
+                                (ITestProject) getProperty("workspace")));
             }
         } catch (Exception e) {
             Assertions.fail(e);

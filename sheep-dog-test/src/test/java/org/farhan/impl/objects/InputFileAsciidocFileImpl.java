@@ -209,4 +209,19 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
         return line.getName();
     }
 
+    @Override
+    public void setCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
+    }
+
+    @Override
+    public void setStepDefinitionName(HashMap<String, String> keyMap) {
+        addStepDefinitionWithName(keyMap.get("Step Definition Name"));
+    }
+
+    @Override
+    public void setStepParametersName(HashMap<String, String> keyMap) {
+        addStepParametersWithName(keyMap.get("Step Parameters Name"));
+    }
+
 }
