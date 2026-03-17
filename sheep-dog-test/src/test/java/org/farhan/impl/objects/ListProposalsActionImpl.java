@@ -77,7 +77,7 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
             ArrayList<SheepDogIssueProposal> proposals;
             if (shouldSuggestDefinitions) {
                 // Suggest step definitions for test steps with full object names
-                proposals = TestStepIssueResolver.suggestStepDefinitionsWorkspace(testStep, workspace);
+                proposals = TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep, workspace);
             } else {
                 // Suggest step objects for test steps without full object names
                 proposals = TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep, workspace);

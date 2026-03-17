@@ -348,27 +348,27 @@ public class TestStepIssueResolver {
         return "";
     }
 
-    public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionsWorkspace(ITestStep theTestStep, ITestProject workspace) {
+    public static ArrayList<SheepDogIssueProposal> suggestStepDefinitionNameWorkspace(ITestStep theTestStep, ITestProject workspace) {
         Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
-        logger.debug("Entering suggestStepDefinitionsWorkspace");
+        logger.debug("Entering suggestStepDefinitionNameWorkspace");
 
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
 
         if (workspace == null) {
-            logger.debug("Exiting suggestStepDefinitionsWorkspace - no workspace");
+            logger.debug("Exiting suggestStepDefinitionNameWorkspace - no workspace");
             return proposals;
         }
 
         String fullName = theTestStep.getFullName();
         if (fullName == null || fullName.trim().isEmpty() || fullName.equals("empty")) {
-            logger.debug("Exiting suggestStepDefinitionsWorkspace - test step has no full name");
+            logger.debug("Exiting suggestStepDefinitionNameWorkspace - test step has no full name");
             return proposals;
         }
 
         // Extract component and object from the test step
         String[] parts = extractComponentAndObject(fullName);
         if (parts == null) {
-            logger.debug("Exiting suggestStepDefinitionsWorkspace - cannot extract component and object");
+            logger.debug("Exiting suggestStepDefinitionNameWorkspace - cannot extract component and object");
             return proposals;
         }
 
@@ -376,7 +376,7 @@ public class TestStepIssueResolver {
         String object = parts[1];
 
         if (component.isEmpty()) {
-            logger.debug("Exiting suggestStepDefinitionsWorkspace - component is empty");
+            logger.debug("Exiting suggestStepDefinitionNameWorkspace - component is empty");
             return proposals;
         }
 
@@ -395,7 +395,7 @@ public class TestStepIssueResolver {
         }
 
         if (stepObject == null) {
-            logger.debug("Exiting suggestStepDefinitionsWorkspace - step object not found: " + stepObjectPath);
+            logger.debug("Exiting suggestStepDefinitionNameWorkspace - step object not found: " + stepObjectPath);
             return proposals;
         }
 
@@ -417,7 +417,7 @@ public class TestStepIssueResolver {
             }
         }
 
-        logger.debug("Exiting suggestStepDefinitionsWorkspace with " + proposals.size() + " proposals");
+        logger.debug("Exiting suggestStepDefinitionNameWorkspace with " + proposals.size() + " proposals");
         return proposals;
     }
 
