@@ -22,9 +22,16 @@ public interface IText {
 
 	/**
 	 * Gets the parent test step containing this text.
-	 * 
+	 *
 	 * @return the parent ITestStep (Given/When/Then/And)
 	 */
 	ITestStep getParent();
+
+	/**
+	 * Sets the parent test step containing this text.
+	 *
+	 * @param value the parent ITestStep
+	 */
+	void setParent(ITestStep value);
 
 }

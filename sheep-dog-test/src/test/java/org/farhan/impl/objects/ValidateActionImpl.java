@@ -4,13 +4,17 @@ import java.util.HashMap;
 
 import org.farhan.dsl.grammar.CellIssueDetector;
 import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.RowIssueDetector;
 import org.farhan.dsl.grammar.TestStepContainerIssueDetector;
 import org.farhan.dsl.grammar.TestStepIssueDetector;
 import org.farhan.dsl.grammar.TestSuiteIssueDetector;
+import org.farhan.dsl.grammar.TextIssueDetector;
 import org.farhan.objects.xtext.ValidateAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -46,10 +50,21 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
 			} else if (cursor instanceof ITestStep) {
 				ITestStep testStep = (ITestStep) cursor;
 				String result = TestStepIssueDetector.validateNameOnly(testStep);
+				if (result.isEmpty()) {
+					result = TestStepIssueDetector.validateNameWorkspace(testStep);
+				}
 				setProperty("validate annotation.Content", result);
 			} else if (cursor instanceof ITestStepContainer) {
 				ITestStepContainer testStepContainer = (ITestStepContainer) cursor;
 				String result = TestStepContainerIssueDetector.validateNameOnly(testStepContainer);
+				setProperty("validate annotation.Content", result);
+			} else if (cursor instanceof IRow) {
+				IRow row = (IRow) cursor;
+				String result = RowIssueDetector.validateCellListWorkspace(row);
+				setProperty("validate annotation.Content", result);
+			} else if (cursor instanceof IText) {
+				IText text = (IText) cursor;
+				String result = TextIssueDetector.validateNameWorkspace(text);
 				setProperty("validate annotation.Content", result);
 			}
 		} catch (Exception e) {

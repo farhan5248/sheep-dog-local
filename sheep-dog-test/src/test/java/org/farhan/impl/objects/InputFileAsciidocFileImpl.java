@@ -224,4 +224,19 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
         addStepParametersWithName(keyMap.get("Step Parameters Name"));
     }
 
+    @Override
+    public void setCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToOrCreateDocument();
+    }
+
+    @Override
+    public void setCellListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setCellListNodeCellName(HashMap<String, String> keyMap) {
+        addCellWithName(keyMap.get("Cell Name"));
+    }
+
 }

@@ -121,8 +121,10 @@ public class SheepDogBuilder {
         if (text == null) {
             text = SheepDogFactory.instance.createText();
             text.setName(name);
-            if (parent != null)
+            if (parent != null) {
+                text.setParent(parent);
                 parent.setText(text);
+            }
         }
         logger.debug("createText() = {}", text);
         return text;

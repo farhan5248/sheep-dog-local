@@ -162,6 +162,16 @@ public class TestObjectSheepDogImpl extends TestObject {
                     return SheepDogBuilder.createTable(testData);
                 return table;
             }
+            if (parent instanceof IStepParameters) {
+                IStepParameters stepParams = (IStepParameters) parent;
+                ITable table = stepParams.getTable();
+                if (table == null) {
+                    table = SheepDogFactory.instance.createTable();
+                    table.setParent(stepParams);
+                    stepParams.setTable(table);
+                }
+                return table;
+            }
             return null;
         }
         default:
