@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.StepDefinitionRefFragments;
 import org.farhan.dsl.grammar.StepObjectRefFragments;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarFragmentAsciidocFile;
 
@@ -121,6 +122,70 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
     public String getStepObjectRefObjectEdgeFragmentObjectTypeDescription(HashMap<String, String> keyMap) {
         ITestStep testStep = getFirstTestStep();
         return StepObjectRefFragments.getObjectEdgeTypeDesc(testStep.getFullName());
+    }
+
+    @Override
+    public String getStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        ITestProject workspace = (ITestProject) getProperty("workspace");
+        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
+        setProperty("cursor", doc);
+        return "";
+    }
+
+    @Override
+    public String getStepDefinitionRefPartFragmentPart(HashMap<String, String> keyMap) {
+        ITestStep testStep = getFirstTestStep();
+        return StepDefinitionRefFragments.getPart(testStep.getFullName());
+    }
+
+    @Override
+    public String getStepDefinitionRefPartFragmentPartDescription(HashMap<String, String> keyMap) {
+        ITestStep testStep = getFirstTestStep();
+        return StepDefinitionRefFragments.getPartDesc(testStep.getFullName());
+    }
+
+    @Override
+    public String getStepDefinitionRefPartFragmentPartType(HashMap<String, String> keyMap) {
+        ITestStep testStep = getFirstTestStep();
+        return StepDefinitionRefFragments.getPartType(testStep.getFullName());
+    }
+
+    @Override
+    public String getStepDefinitionRefPartFragmentPartTypeDescription(HashMap<String, String> keyMap) {
+        ITestStep testStep = getFirstTestStep();
+        return StepDefinitionRefFragments.getPartTypeDesc(testStep.getFullName());
+    }
+
+    @Override
+    public String getStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap) {
+        ITestProject workspace = (ITestProject) getProperty("workspace");
+        ITestSuite doc = (ITestSuite) workspace.getTestDocument(getFullNameFromPath());
+        setProperty("cursor", doc);
+        return "";
+    }
+
+    @Override
+    public String getStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap) {
+        ITestStep testStep = getFirstTestStep();
+        return StepDefinitionRefFragments.getState(testStep.getFullName());
+    }
+
+    @Override
+    public String getStepDefinitionRefStateFragmentStateDescription(HashMap<String, String> keyMap) {
+        ITestStep testStep = getFirstTestStep();
+        return StepDefinitionRefFragments.getStateDesc(testStep.getFullName());
+    }
+
+    @Override
+    public String getStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap) {
+        ITestStep testStep = getFirstTestStep();
+        return StepDefinitionRefFragments.getStateType(testStep.getFullName());
+    }
+
+    @Override
+    public String getStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap) {
+        ITestStep testStep = getFirstTestStep();
+        return StepDefinitionRefFragments.getStateTypeDesc(testStep.getFullName());
     }
 
     private ITestStep getFirstTestStep() {

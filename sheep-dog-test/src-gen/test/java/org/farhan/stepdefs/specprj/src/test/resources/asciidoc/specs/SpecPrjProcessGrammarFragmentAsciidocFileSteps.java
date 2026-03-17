@@ -39,4 +39,14 @@ public class SpecPrjProcessGrammarFragmentAsciidocFileSteps extends TestSteps {
     public void stepObjectRefObjectEdgeFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
         object.assertVertexStep("StepObjectRef object edge", "fragment", "will be", "decomposed as follows", dataTable);
     }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepDefinitionRef part fragment will be decomposed as follows$")
+    public void stepDefinitionRefPartFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
+        object.assertVertexStep("StepDefinitionRef part", "fragment", "will be", "decomposed as follows", dataTable);
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepDefinitionRef state fragment will be decomposed as follows$")
+    public void stepDefinitionRefStateFragmentWillBeDecomposedAsFollows(DataTable dataTable) {
+        object.assertVertexStep("StepDefinitionRef state", "fragment", "will be", "decomposed as follows", dataTable);
+    }
 }

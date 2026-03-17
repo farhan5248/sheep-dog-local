@@ -37,4 +37,24 @@ public interface ProcessGrammarFragmentAsciidocFile {
     public String getStepObjectRefObjectEdgeFragmentObjectType(HashMap<String, String> keyMap);
 
     public String getStepObjectRefObjectEdgeFragmentObjectTypeDescription(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefPartFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefPartFragmentPart(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefPartFragmentPartDescription(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefPartFragmentPartType(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefPartFragmentPartTypeDescription(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefStateFragmentDecomposedAsFollows(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefStateFragmentState(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefStateFragmentStateDescription(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefStateFragmentStateType(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap);
 }
