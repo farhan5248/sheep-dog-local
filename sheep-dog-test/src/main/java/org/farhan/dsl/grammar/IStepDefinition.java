@@ -14,6 +14,8 @@ public interface IStepDefinition {
 
     IStepObject getParent();
 
+    void setParent(IStepObject value);
+
     IDescription getDescription();
 
     List<IStepParameters> getStepParameterList();

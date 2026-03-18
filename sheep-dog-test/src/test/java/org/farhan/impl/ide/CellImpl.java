@@ -24,6 +24,11 @@ public class CellImpl implements ICell {
     }
 
     @Override
+    public void setParent(IRow value) {
+        this.parent = value;
+    }
+
+    @Override
     public String toString() {
         return name != null ? name : "";
     }

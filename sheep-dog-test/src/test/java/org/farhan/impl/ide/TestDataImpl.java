@@ -41,6 +41,8 @@ public class TestDataImpl implements ITestData {
     @Override
     public void setTable(ITable value) {
         this.table = value;
+        if (value != null)
+            value.setParent(this);
     }
 
     @Override

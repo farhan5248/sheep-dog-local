@@ -4,17 +4,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
+import org.farhan.dsl.issues.RowIssueResolver;
+import org.farhan.dsl.issues.RowIssueTypes;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.issues.TestStepContainerIssueTypes;
+import org.farhan.dsl.issues.TestStepIssueResolver;
+import org.farhan.dsl.issues.TestStepIssueTypes;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueTypes;
+import org.farhan.dsl.issues.TextIssueResolver;
+import org.farhan.dsl.issues.TextIssueTypes;
 import org.farhan.objects.xtext.ListQuickfixesAction;
 import org.slf4j.Logger;
 
@@ -74,6 +83,7 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
             return;
         }
         logger.debug("Cursor type: " + cursor.getClass().getName());
+        logger.debug("Cursor implements IText: " + (cursor instanceof IText));
 
         // Match cursor type and validation message against issue types and call appropriate resolver
         // Check cursor type first, then validation message
@@ -86,6 +96,22 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
         } else if (cursor instanceof ITestStepContainer && TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description.equals(validationMessage)) {
             logger.debug("TestStepContainer issue detected, calling TestStepContainerIssueResolver");
             proposals.addAll(TestStepContainerIssueResolver.correctCapitalizeNameOnly((ITestStepContainer) cursor));
+        } else if (cursor instanceof ITestStep && TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description.equals(validationMessage)) {
+            logger.debug("TestStep workspace issue detected, calling TestStepIssueResolver.correctStepObjectNameWorkspace");
+            ITestProject workspace = (ITestProject) getProperty("workspace");
+            proposals.addAll(TestStepIssueResolver.correctStepObjectNameWorkspace((ITestStep) cursor, workspace));
+        } else if (cursor instanceof ITestStep && TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description.equals(validationMessage)) {
+            logger.debug("TestStep step definition workspace issue detected, calling TestStepIssueResolver.correctStepDefinitionNameWorkspace");
+            ITestProject workspace = (ITestProject) getProperty("workspace");
+            proposals.addAll(TestStepIssueResolver.correctStepDefinitionNameWorkspace((ITestStep) cursor, workspace));
+        } else if (cursor instanceof IRow && RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description.equals(validationMessage)) {
+            logger.debug("Row cell list workspace issue detected, calling RowIssueResolver.correctCellListWorkspace");
+            ITestProject workspace = (ITestProject) getProperty("workspace");
+            proposals.addAll(RowIssueResolver.correctCellListWorkspace((IRow) cursor, workspace));
+        } else if (cursor instanceof IText && TextIssueTypes.TEXT_CONTENT_WORKSPACE.description.equals(validationMessage)) {
+            logger.debug("Text content workspace issue detected, calling TextIssueResolver.correctContentWorkspace");
+            ITestProject workspace = (ITestProject) getProperty("workspace");
+            proposals.addAll(TextIssueResolver.correctContentWorkspace((IText) cursor, workspace));
         } else {
             logger.debug("No matching issue type");
         }

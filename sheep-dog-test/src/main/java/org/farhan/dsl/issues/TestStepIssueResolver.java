@@ -437,4 +437,127 @@ public class TestStepIssueResolver {
         }
         return "";
     }
+
+    public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep theTestStep, ITestProject workspace) {
+        Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
+        logger.debug("Entering correctStepObjectNameWorkspace");
+
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        String fullName = theTestStep.getFullName();
+        if (fullName == null || fullName.trim().isEmpty() || fullName.equals("empty")) {
+            logger.debug("Exiting correctStepObjectNameWorkspace - test step has no full name");
+            return proposals;
+        }
+
+        // Extract component and object from the test step
+        String[] parts = extractComponentAndObject(fullName);
+        if (parts == null) {
+            logger.debug("Exiting correctStepObjectNameWorkspace - cannot extract component and object");
+            return proposals;
+        }
+
+        String component = parts[0];
+        String object = parts[1];
+
+        if (component.isEmpty()) {
+            logger.debug("Exiting correctStepObjectNameWorkspace - component is empty");
+            return proposals;
+        }
+
+        // Build the step object path
+        String stepObjectPath = "stepdefs/" + component + "/" + object + ".asciidoc";
+
+        // Create proposal to generate the missing step object file
+        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+        proposal.setId("Generate " + object + " - " + stepObjectPath);
+        proposal.setDescription("");
+        proposal.setValue(stepObjectPath);
+        proposals.add(proposal);
+
+        logger.debug("Exiting correctStepObjectNameWorkspace with " + proposals.size() + " proposals");
+        return proposals;
+    }
+
+    public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep, ITestProject workspace) {
+        Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueResolver.class);
+        logger.debug("Entering correctStepDefinitionNameWorkspace");
+
+        ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+
+        if (workspace == null) {
+            logger.debug("Exiting correctStepDefinitionNameWorkspace - no workspace");
+            return proposals;
+        }
+
+        String fullName = theTestStep.getFullName();
+        if (fullName == null || fullName.trim().isEmpty() || fullName.equals("empty")) {
+            logger.debug("Exiting correctStepDefinitionNameWorkspace - test step has no full name");
+            return proposals;
+        }
+
+        // Extract component and object from the test step
+        String[] parts = extractComponentAndObject(fullName);
+        if (parts == null) {
+            logger.debug("Exiting correctStepDefinitionNameWorkspace - cannot extract component and object");
+            return proposals;
+        }
+
+        String component = parts[0];
+        String object = parts[1];
+
+        if (component.isEmpty()) {
+            logger.debug("Exiting correctStepDefinitionNameWorkspace - component is empty");
+            return proposals;
+        }
+
+        // Build the step object path
+        String stepObjectPath = "stepdefs/" + component + "/" + object + ".asciidoc";
+
+        // Find the step object
+        IStepObject stepObject = null;
+        for (ITestDocument doc : workspace.getTestDocumentList()) {
+            if (doc instanceof IStepObject) {
+                if (doc.getFullName().equals(stepObjectPath)) {
+                    stepObject = (IStepObject) doc;
+                    break;
+                }
+            }
+        }
+
+        if (stepObject == null) {
+            logger.debug("Exiting correctStepDefinitionNameWorkspace - step object not found: " + stepObjectPath);
+            return proposals;
+        }
+
+        // Get the expected step definition name from the test step
+        String expectedStepDefinitionName = theTestStep.getStepDefinitionName();
+        if (expectedStepDefinitionName == null || expectedStepDefinitionName.trim().isEmpty()) {
+            logger.debug("Exiting correctStepDefinitionNameWorkspace - no step definition name in test step");
+            return proposals;
+        }
+
+        // Add proposals for existing step definitions in the step object
+        for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+            String definitionName = stepDefinition.getName();
+            if (definitionName != null && !definitionName.trim().isEmpty()) {
+                // Create proposal to switch to existing step definition
+                SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+                proposal.setValue(definitionName);
+                proposal.setId(definitionName);
+                proposal.setDescription("");
+                proposals.add(proposal);
+            }
+        }
+
+        // Add proposal to generate the missing step definition
+        SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
+        generateProposal.setId("Generate " + expectedStepDefinitionName);
+        generateProposal.setDescription("");
+        generateProposal.setValue(expectedStepDefinitionName);
+        proposals.add(generateProposal);
+
+        logger.debug("Exiting correctStepDefinitionNameWorkspace with " + proposals.size() + " proposals");
+        return proposals;
+    }
 }

@@ -12,6 +12,8 @@ public interface IStepParameters {
 
     void setName(String value);
 
+    void setParent(IStepDefinition value);
+
     void setDescription(IDescription value);
 
     boolean addLine(ILine value);

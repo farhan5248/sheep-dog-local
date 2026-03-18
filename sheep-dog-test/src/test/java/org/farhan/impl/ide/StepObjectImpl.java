@@ -82,6 +82,7 @@ public class StepObjectImpl implements IStepObject {
 
     @Override
     public boolean addStepDefinition(IStepDefinition value) {
+        value.setParent(this);
         int i = 0;
         while (i < stepDefinitionList.size() && stepDefinitionList.get(i).getName().compareTo(value.getName()) < 0) {
             i++;

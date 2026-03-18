@@ -8,6 +8,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     private String name;
     private IDescription description;
+    private IStepObject parent;
     private List<IStepParameters> stepParameterList = new ArrayList<>();
 
     @Override
@@ -22,7 +23,12 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     @Override
     public IStepObject getParent() {
-        return null;
+        return parent;
+    }
+
+    @Override
+    public void setParent(IStepObject value) {
+        this.parent = value;
     }
 
     @Override
@@ -42,6 +48,7 @@ public class StepDefinitionImpl implements IStepDefinition {
 
     @Override
     public boolean addStepParameters(IStepParameters value) {
+        value.setParent(this);
         int insertIndex = stepParameterList.size();
         for (int i = 0; i < stepParameterList.size(); i++) {
             if (value.getName().compareTo(stepParameterList.get(i).getName()) < 0) {

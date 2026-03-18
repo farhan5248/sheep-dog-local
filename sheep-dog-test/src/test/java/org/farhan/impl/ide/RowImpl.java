@@ -34,6 +34,7 @@ public class RowImpl implements IRow {
 
     @Override
     public boolean addCell(ICell value) {
+        value.setParent(this);
         return cellList.add(value);
     }
 

@@ -70,11 +70,16 @@ public class TestStepImpl implements ITestStep {
     @Override
     public void setTable(ITable value) {
         this.table = value;
+        if (value != null)
+            value.setParent(this);
     }
 
     @Override
     public void setText(IText value) {
         this.text = value;
+        if (value != null && value instanceof TextImpl) {
+            ((TextImpl) value).parent = this;
+        }
     }
 
     @Override

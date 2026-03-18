@@ -25,6 +25,11 @@ public class StepParametersImpl implements IStepParameters {
     }
 
     @Override
+    public void setParent(IStepDefinition value) {
+        this.parent = value;
+    }
+
+    @Override
     public IDescription getDescription() {
         return description;
     }
@@ -42,6 +47,8 @@ public class StepParametersImpl implements IStepParameters {
     @Override
     public void setTable(ITable value) {
         this.table = value;
+        if (value != null)
+            value.setParent(this);
     }
 
     @Override

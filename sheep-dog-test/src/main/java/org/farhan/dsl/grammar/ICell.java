@@ -7,4 +7,6 @@ public interface ICell {
 	void setName(String value);
 
 	IRow getParent();
+
+	void setParent(IRow value);
 }
