@@ -9,7 +9,7 @@ import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
-import org.farhan.dsl.grammar.TestStepIssueResolver;
+import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.objects.xtext.ListProposalsAction;
 
 import io.cucumber.guice.ScenarioScoped;

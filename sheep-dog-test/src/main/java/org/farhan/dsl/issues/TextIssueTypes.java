@@ -1,4 +1,4 @@
-package org.farhan.dsl.grammar;
+package org.farhan.dsl.issues;
 
 public enum TextIssueTypes {
 	TEXT_CONTENT_WORKSPACE("TEXT_CONTENT_WORKSPACE",

@@ -1,4 +1,4 @@
-package org.farhan.dsl.grammar;
+package org.farhan.dsl.issues;
 
 public enum TestStepIssueTypes {
 	TEST_STEP_STEP_OBJECT_NAME_ONLY("TEST_STEP_STEP_OBJECT_NAME_ONLY",

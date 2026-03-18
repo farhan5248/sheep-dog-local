@@ -1,4 +1,6 @@
-package org.farhan.dsl.grammar;
+package org.farhan.dsl.issues;
+
+import org.farhan.dsl.grammar.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;

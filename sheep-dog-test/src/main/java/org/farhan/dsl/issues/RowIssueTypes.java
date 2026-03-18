@@ -1,4 +1,4 @@
-package org.farhan.dsl.grammar;
+package org.farhan.dsl.issues;
 
 public enum RowIssueTypes {
 	ROW_CELL_LIST_WORKSPACE("ROW_CELL_LIST_WORKSPACE",

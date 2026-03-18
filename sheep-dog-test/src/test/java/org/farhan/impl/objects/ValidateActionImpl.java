@@ -2,7 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
-import org.farhan.dsl.grammar.CellIssueDetector;
+import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
@@ -10,11 +10,11 @@ import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
-import org.farhan.dsl.grammar.RowIssueDetector;
-import org.farhan.dsl.grammar.TestStepContainerIssueDetector;
-import org.farhan.dsl.grammar.TestStepIssueDetector;
-import org.farhan.dsl.grammar.TestSuiteIssueDetector;
-import org.farhan.dsl.grammar.TextIssueDetector;
+import org.farhan.dsl.issues.RowIssueDetector;
+import org.farhan.dsl.issues.TestStepContainerIssueDetector;
+import org.farhan.dsl.issues.TestStepIssueDetector;
+import org.farhan.dsl.issues.TestSuiteIssueDetector;
+import org.farhan.dsl.issues.TextIssueDetector;
 import org.farhan.objects.xtext.ValidateAction;
 
 import io.cucumber.guice.ScenarioScoped;

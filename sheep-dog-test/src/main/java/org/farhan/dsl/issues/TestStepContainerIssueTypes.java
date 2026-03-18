@@ -1,4 +1,4 @@
-package org.farhan.dsl.grammar;
+package org.farhan.dsl.issues;
 
 public enum TestStepContainerIssueTypes {
 	TEST_STEP_CONTAINER_NAME_ONLY("TEST_STEP_CONTAINER_NAME_ONLY", "Name should start with a capital"),

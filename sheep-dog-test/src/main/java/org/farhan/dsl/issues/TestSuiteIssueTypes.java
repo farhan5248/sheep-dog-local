@@ -1,4 +1,4 @@
-package org.farhan.dsl.grammar;
+package org.farhan.dsl.issues;
 
 public enum TestSuiteIssueTypes {
 	TEST_SUITE_NAME_ONLY("TEST_SUITE_NAME_ONLY", "Name should start with a capital");
