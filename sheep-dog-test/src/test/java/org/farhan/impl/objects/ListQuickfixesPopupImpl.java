@@ -40,6 +40,42 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
     }
 
     @SuppressWarnings("unchecked")
+    @Override
+    public void setSetAsFollows(HashMap<String, String> keyMap) {
+        setProperty("list quickfixes popup", new ArrayList<SheepDogIssueProposal>());
+    }
+
+    @Override
+    public void setProposalId(HashMap<String, String> keyMap) {
+        SheepDogIssueProposal proposal = getOrCreateCurrentProposal();
+        proposal.setId(keyMap.get("Proposal Id"));
+    }
+
+    @Override
+    public void setProposalDescription(HashMap<String, String> keyMap) {
+        SheepDogIssueProposal proposal = getOrCreateCurrentProposal();
+        proposal.setDescription(keyMap.get("Proposal Description"));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void setProposalValue(HashMap<String, String> keyMap) {
+        SheepDogIssueProposal proposal = getOrCreateCurrentProposal();
+        proposal.setValue(keyMap.get("Proposal Value"));
+        ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")).add(proposal);
+        setProperty("currentProposal", null);
+    }
+
+    private SheepDogIssueProposal getOrCreateCurrentProposal() {
+        SheepDogIssueProposal proposal = (SheepDogIssueProposal) getProperty("currentProposal");
+        if (proposal == null) {
+            proposal = new SheepDogIssueProposal();
+            setProperty("currentProposal", proposal);
+        }
+        return proposal;
+    }
+
+    @SuppressWarnings("unchecked")
     private ArrayList<SheepDogIssueProposal> getListQuickfixesDialog() {
         return (ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup");
     }
