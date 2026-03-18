@@ -12,7 +12,7 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
 
     @Override
     public String getEmpty(HashMap<String, String> keyMap) {
-        return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
+        return listToCsvString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
 
     @Override
     public String getSetAsFollows(HashMap<String, String> keyMap) {
-        return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
+        return listToCsvString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
     }
 
 }

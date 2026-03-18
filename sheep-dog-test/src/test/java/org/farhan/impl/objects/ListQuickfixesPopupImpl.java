@@ -12,7 +12,7 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
 
     @Override
     public String getEmpty(HashMap<String, String> keyMap) {
-        return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")));
+        return listToCsvString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")));
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
 
     @Override
     public String getSetAsFollows(HashMap<String, String> keyMap) {
-        return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")));
+        return listToCsvString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")));
     }
 
     @Override

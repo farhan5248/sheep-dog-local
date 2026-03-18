@@ -1,5 +1,6 @@
 package org.farhan.impl.objects;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -18,15 +19,16 @@ import org.junit.jupiter.api.Assertions;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogImpl implements ProcessGrammarFragmentAsciidocFile {
+public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogImpl
+        implements ProcessGrammarFragmentAsciidocFile {
 
     @Override
     public String getPhraseTagFragmentTagList(HashMap<String, String> keyMap) {
         String expected = replaceKeyword(keyMap.get("Tag List"));
-        java.util.List<String> actual = PhraseFragments.getTagAsList(getProperty("Line").toString());
-        Assertions.assertTrue(actual
-                .containsAll(expected.isEmpty() ? Arrays.asList() : Arrays.asList(expected.split(", "))));
-        return listToString(actual);
+        ArrayList<String> actual = PhraseFragments.getTagAsList(getProperty("Line").toString());
+        Assertions.assertTrue(
+                actual.containsAll(expected.isEmpty() ? Arrays.asList() : Arrays.asList(expected.split(", "))));
+        return listToCsvString(actual);
     }
 
     @Override
@@ -78,8 +80,8 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
     @Override
     public String getStepDefinitionRefStateFragmentStateTypeDescription(HashMap<String, String> keyMap) {
         String stateType = StepDefinitionRefFragments.getStateType(getStepDefinitionRef());
-        return Arrays.stream(StepDefinitionRefStateTypes.values()).filter(e -> e.value.equals(stateType))
-                .findFirst().orElseThrow().description;
+        return Arrays.stream(StepDefinitionRefStateTypes.values()).filter(e -> e.value.equals(stateType)).findFirst()
+                .orElseThrow().description;
     }
 
     @Override
@@ -99,8 +101,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getStepObjectRefComponentFragmentComponentTypeDescription(HashMap<String, String> keyMap) {
-        String componentType = StepObjectRefFragments
-                .getComponentType(getProperty("Test Step Full Name").toString());
+        String componentType = StepObjectRefFragments.getComponentType(getProperty("Test Step Full Name").toString());
         return StepObjectRefComponentTypes.valueOf(componentType.toUpperCase()).description;
     }
 
@@ -111,8 +112,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getStepObjectRefObjectEdgeFragmentObjectTypeDescription(HashMap<String, String> keyMap) {
-        String objectType = StepObjectRefFragments
-                .getObjectEdgeType(getProperty("Test Step Full Name").toString());
+        String objectType = StepObjectRefFragments.getObjectEdgeType(getProperty("Test Step Full Name").toString());
         return StepObjectRefObjectEdgeTypes.valueOf(objectType.toUpperCase()).description;
     }
 
@@ -138,8 +138,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getStepObjectRefObjectVertexFragmentObjectTypeDescription(HashMap<String, String> keyMap) {
-        String objectType = StepObjectRefFragments
-                .getObjectVertexType(getProperty("Test Step Full Name").toString());
+        String objectType = StepObjectRefFragments.getObjectVertexType(getProperty("Test Step Full Name").toString());
         return StepObjectRefObjectVertexTypes.valueOf(objectType.toUpperCase()).description;
     }
 

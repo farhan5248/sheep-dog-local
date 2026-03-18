@@ -14,7 +14,7 @@ Feature: Description Type
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows
           | Node Path            | Line Content |
           | Description/LineList | First Line   |
-     When The xtext plugin edit document node action is performed to modify LineList with
+     When The xtext plugin edit document action is performed to modify LineList with
           | Step Object Full Name                       | Node Path            | Line Content |
           | stepdefs/daily batchjob/Input file.asciidoc | Description/LineList | Second Line  |
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node will be created as follows
@@ -28,7 +28,7 @@ Feature: Description Type
     Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node is created as follows
           | Node Path            | Line Content |
           | Description/LineList | Second Line  |
-     When The xtext plugin edit document node action is performed to modify LineList with
+     When The xtext plugin edit document action is performed to modify LineList with
           | Step Object Full Name                       | Node Path            | Line Content |
           | stepdefs/daily batchjob/Input file.asciidoc | Description/LineList | First Line   |
      Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file LineList node will be created as follows

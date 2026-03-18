@@ -418,16 +418,19 @@ protected String getFullNameFromPath() {
 }
 ```
 
-### listToString
+### listToCsvString
 
-Converts an ArrayList to a newline-separated string for assertion mapping.
+Converts a List to a comma-separated string for assertion mapping.
 
-**Example: listToString implementation**
+**Example: listToCsvString implementation**
 ```java
-protected String listToString(ArrayList<?> list) {
+protected String listToCsvString(List<?> list) {
     StringBuilder sb = new StringBuilder();
-    for (Object item : list) {
-        sb.append("\n").append(item.toString());
+    for (int i = 0; i < list.size(); i++) {
+        if (i > 0) {
+            sb.append(", ");
+        }
+        sb.append(list.get(i).toString());
     }
     return sb.toString();
 }
@@ -445,12 +448,11 @@ Vertex getter that operates directly on the document model (patterns 1, 2).
 ```java
 @Override
 public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
-    setCursorAtNode(keyMap.get("Node Path"));
-    return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
 }
 ```
 
-**Example: Pattern 1 — get + State → return state/listToString**
+**Example: Pattern 1 — get + State → return state/listToCsvString**
 ```java
 @Override
 public String getDescriptionNodeState(HashMap<String, String> keyMap) {
@@ -459,13 +461,13 @@ public String getDescriptionNodeState(HashMap<String, String> keyMap) {
 }
 ```
 
-**Example: Pattern 1 — get + State → return listToString for collection**
+**Example: Pattern 1 — get + State → return listToCsvString for collection**
 ```java
 @Override
 public String getStepDefinitionListNodeState(HashMap<String, String> keyMap) {
     if (getProperty("cursor") == null)
         return null;
-    return listToString(((IStepObject) getProperty("cursor")).getStepDefinitionList());
+    return listToCsvString(((IStepObject) getProperty("cursor")).getStepDefinitionList());
 }
 ```
 
@@ -534,11 +536,11 @@ public String getEmpty(HashMap<String, String> keyMap) {
 }
 ```
 
-**Example: Pattern 5 — Dialog read, return listToString (Popup)**
+**Example: Pattern 5 — Dialog read, return listToCsvString (Popup)**
 ```java
 @Override
 public String getEmpty(HashMap<String, String> keyMap) {
-    return listToString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
+    return listToCsvString(((java.util.ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
 }
 ```
 

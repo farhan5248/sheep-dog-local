@@ -24,14 +24,12 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
     }
 
     @Override
     public String getDescriptionNodeNodePath(HashMap<String, String> keyMap) {
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
     }
 
     @Override
@@ -42,8 +40,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getRowListNodeNodePath(HashMap<String, String> keyMap) {
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
     }
 
     @Override
@@ -53,8 +50,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTableNodeNodePath(HashMap<String, String> keyMap) {
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
     }
 
     @Override
@@ -65,15 +61,14 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestDataListNodeNodePath(HashMap<String, String> keyMap) {
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
     }
 
     @Override
     public String getTestDataListNodeState(HashMap<String, String> keyMap) {
         if (getProperty("cursor") == null)
             return null;
-        return listToString(((ITestCase) getProperty("cursor")).getTestDataList());
+        return listToCsvString(((ITestCase) getProperty("cursor")).getTestDataList());
     }
 
     @Override
@@ -83,15 +78,14 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepContainerListNodeNodePath(HashMap<String, String> keyMap) {
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
     }
 
     @Override
     public String getTestStepContainerListNodeState(HashMap<String, String> keyMap) {
         if (getProperty("cursor") == null)
             return null;
-        return listToString(((ITestSuite) getProperty("cursor")).getTestStepContainerList());
+        return listToCsvString(((ITestSuite) getProperty("cursor")).getTestStepContainerList());
     }
 
     @Override
@@ -136,13 +130,12 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepListNodeNodePath(HashMap<String, String> keyMap) {
-        setCursorAtNode(keyMap.get("Node Path"));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
     }
 
     @Override
     public String getTestStepListNodeState(HashMap<String, String> keyMap) {
-        return listToString(((ITestStepContainer) getProperty("cursor")).getTestStepList());
+        return listToCsvString(((ITestStepContainer) getProperty("cursor")).getTestStepList());
     }
 
     @Override
@@ -177,10 +170,7 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTextNodeNodePath(HashMap<String, String> keyMap) {
-        String path = keyMap.get("Node Path");
-        String parentPath = path.substring(0, path.lastIndexOf("/"));
-        setCursorAtNode(parentPath);
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
     }
 
     @Override

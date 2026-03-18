@@ -14,7 +14,7 @@ Feature: Table Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
           | Node Path                                            | Row Content |
           | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
-     When The xtext plugin edit document node action is performed to modify RowList with
+     When The xtext plugin edit document action is performed to modify RowList with
           | Test Suite Full Name         | Node Path                                            | Row Content |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList | Second Row  |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
@@ -33,7 +33,7 @@ Feature: Table Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
           | Node Path                                                       | Cell Name  |
           | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | First Cell |
-     When The xtext plugin edit document node action is performed to modify CellList with
+     When The xtext plugin edit document action is performed to modify CellList with
           | Test Suite Full Name         | Node Path                                                       | Cell Name   |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | Second Cell |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows
@@ -47,7 +47,7 @@ Feature: Table Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
           | Node Path                                            | Row Content |
           | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
-     When The xtext plugin edit document node action is performed to modify RowList with
+     When The xtext plugin edit document action is performed to modify RowList with
           | Test Suite Full Name         | Node Path                                            | Row Content |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
@@ -61,7 +61,7 @@ Feature: Table Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
           | Node Path                                            | Row Content |
           | TestStepContainerList/1/TestDataList/1/Table/RowList | Second Row  |
-     When The xtext plugin edit document node action is performed to modify RowList with
+     When The xtext plugin edit document action is performed to modify RowList with
           | Test Suite Full Name         | Node Path                                            | Row Content |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
@@ -76,7 +76,7 @@ Feature: Table Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
           | Node Path                                                       | Cell Name   |
           | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | Second Cell |
-     When The xtext plugin edit document node action is performed to modify CellList with
+     When The xtext plugin edit document action is performed to modify CellList with
           | Test Suite Full Name         | Node Path                                                       | Cell Name  |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | First Cell |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows

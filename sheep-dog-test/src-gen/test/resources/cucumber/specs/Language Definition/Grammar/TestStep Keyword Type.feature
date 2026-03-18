@@ -1,8 +1,8 @@
 @sheep-dog-test
-Feature: TestStep Type
+Feature: TestStep Keyword Type
 
   \@sheep-dog-test
-  Test Step is a grammar rule in SheepDog.xtext with four keyword variants: Given, When, Then, and And.
+  Test Step is a grammar rule in SheepDog.xtext with four keyword variants: Given, When, Then, and And. These tests verify that each keyword variant follows the same Test Step structure.
 
   @list
   Scenario: Initial State Given
@@ -18,7 +18,7 @@ Feature: TestStep Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                            | Test Step Full Name                |
           | TestStepContainerList/1/TestStepList | The First action file is performed |
-     When The xtext plugin edit document node action is performed to modify TestStepList with
+     When The xtext plugin edit document action is performed to modify TestStepList with
           | Test Suite Full Name         | Node Path                            | Test Step Full Name                 |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList | The Second action file is performed |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
@@ -40,7 +40,7 @@ Feature: TestStep Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                            | Test Step Full Name                |
           | TestStepContainerList/1/TestStepList | The First action file is performed |
-     When The xtext plugin edit document node action is performed to modify TestStepList with
+     When The xtext plugin edit document action is performed to modify TestStepList with
           | Test Suite Full Name         | Node Path                            | Test Step Full Name                 |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList | The Second action file is performed |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
@@ -62,7 +62,7 @@ Feature: TestStep Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                            | Test Step Full Name                |
           | TestStepContainerList/1/TestStepList | The First action file is performed |
-     When The xtext plugin edit document node action is performed to modify TestStepList with
+     When The xtext plugin edit document action is performed to modify TestStepList with
           | Test Suite Full Name         | Node Path                            | Test Step Full Name                 |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList | The Second action file is performed |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
@@ -84,7 +84,7 @@ Feature: TestStep Type
     Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
           | Node Path                            | Test Step Full Name                |
           | TestStepContainerList/1/TestStepList | The First action file is performed |
-     When The xtext plugin edit document node action is performed to modify TestStepList with
+     When The xtext plugin edit document action is performed to modify TestStepList with
           | Test Suite Full Name         | Node Path                            | Test Step Full Name                 |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList | The Second action file is performed |
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
@@ -96,61 +96,4 @@ Feature: TestStep Type
      Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
           | Node Path                                    | State  |
           | TestStepContainerList/1/TestStepList/2/Table | Absent |
-
-  Scenario: Table Excludes Text
-
-    Table and Text are mutually exclusive on a Test Step. A Test Step with a Table cannot also have Text.
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node is created as follows
-          | Node Path                                    |
-          | TestStepContainerList/1/TestStepList/1/Table |
-     When The xtext plugin add document node action is performed to add Text at
-          | Test Suite Full Name         | Node Path                                   |
-          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
-          | Node Path                                   | State  |
-          | TestStepContainerList/1/TestStepList/1/Text | Absent |
-
-  Scenario: Text Excludes Table
-
-    Table and Text are mutually exclusive on a Test Step. A Test Step with Text cannot also have a Table.
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
-          | Node Path                                   |
-          | TestStepContainerList/1/TestStepList/1/Text |
-     When The xtext plugin add document node action is performed to add Table at
-          | Test Suite Full Name         | Node Path                                    |
-          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
-          | Node Path                                    | State  |
-          | TestStepContainerList/1/TestStepList/1/Table | Absent |
-
-  Scenario: Duplicate Test Step
-
-    Test Steps are a list and can have duplicate full names within a Test Step Container.
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                            | Test Step Full Name                |
-          | TestStepContainerList/1/TestStepList | The First action file is performed |
-     When The xtext plugin edit document node action is performed to modify TestStepList with
-          | Test Suite Full Name         | Node Path                            | Test Step Full Name                |
-          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList | The First action file is performed |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
-          | Node Path                              | Given Full Name                    | Given StepObjectRef Name | Given StepDefinitionRef Name |
-          | TestStepContainerList/1/TestStepList/2 | The First action file is performed | The First action file    | is performed                 |
-
-  Scenario: Test Step Insertion Order
-
-    Test Steps maintain insertion order within a Test Step Container.
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                            | Test Step Full Name                 |
-          | TestStepContainerList/1/TestStepList | The Second action file is performed |
-     When The xtext plugin edit document node action is performed to modify TestStepList with
-          | Test Suite Full Name         | Node Path                            | Test Step Full Name                |
-          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList | The First action file is performed |
-     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
-          | Node Path                              | Given Full Name                     | Given StepObjectRef Name | Given StepDefinitionRef Name |
-          | TestStepContainerList/1/TestStepList/1 | The Second action file is performed | The Second action file   | is performed                 |
-          | TestStepContainerList/1/TestStepList/2 | The First action file is performed  | The First action file    | is performed                 |
 

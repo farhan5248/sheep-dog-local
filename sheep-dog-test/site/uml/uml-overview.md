@@ -25,7 +25,7 @@ Pattern variables used in UML files to represent families of classes following s
    - Case variants: `{type}` (camelCase), `{TYPE}` (UPPER_SNAKE_CASE)
 
 3. **{Assignment}** - Named assignments within grammar rules
-   - Values: `(Content|Name|Description|FullName|Parent|LineList|StepDefinitionList|StepParameterList|Table|TestStepContainerList|TestStepList|TestDataList|StepObjectName|StepDefinitionName|Text|RowList|CellList|TestDocumentList)`
+   - Values: `(Content|Name|Description|LineList|StepDefinitionList|StepParameterList|Table|TestStepContainerList|TestStepList|TestDataList|StepObjectName|StepDefinitionName|Text|RowList|CellList|TestDocumentList)`
    - Used in: validate{Assignment}{Scope}(), correct{Assignment}{Scope}(), suggest{Assignment}{Scope}()
    - Case variants: `{assignment}` (camelCase for get/set methods), `{ASSIGNMENT}` (UPPER_SNAKE_CASE for enum constants)
 
