@@ -5,8 +5,9 @@ import org.slf4j.Logger;
 
 public class TestStepContainerIssueDetector {
 
+	private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepContainerIssueDetector.class);
+
 	public static String validateNameOnly(ITestStepContainer theTestStepContainer) {
-		Logger logger = SheepDogLoggerFactory.getLogger(TestStepContainerIssueDetector.class);
 		logger.debug("Entering validateNameOnly");
 
 		String name = theTestStepContainer.getName();
@@ -30,7 +31,7 @@ public class TestStepContainerIssueDetector {
 				String component = StepObjectRefFragments.getComponent(firstStepFullName);
 				if (component.isEmpty()) {
 					logger.debug("Exiting validateNameOnly - first step doesn't have a component");
-					return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_FIRST_STEP_COMPONENT.description;
+					return TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_ONLY.description;
 				}
 			}
 		}

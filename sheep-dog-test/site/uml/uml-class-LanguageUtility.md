@@ -83,3 +83,16 @@ Static helper methods for grammar element operations. Separates utility operatio
 
 **Examples**:
  - `public static IStepObject cloneStepObject(IStepObject original)`
+
+## startsWithCapital
+
+**Desc**: Validates that a string starts with an uppercase letter. Used by IssueDetector classes to enforce naming conventions.
+
+**Rule**: ONE method validates capital letter start.
+ - **Name**: `^startsWithCapital$`
+ - **Return**: `^boolean$`
+ - **Parameters**: `^\(String\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static boolean startsWithCapital(String text)`
