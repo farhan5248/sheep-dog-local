@@ -23,4 +23,14 @@ public class XtextValidateAnnotationSteps extends TestSteps {
     public void willBeEmpty() {
         object.assertVertexStep("", "", "will be", "empty");
     }
+
+    @Given("^The xtext plugin validate annotation is set as follows$")
+    public void isSetAsFollows(String docString) {
+        object.setVertexStep("", "", "is", "set as follows", docString);
+    }
+
+    @Given("^The xtext plugin validate annotation is empty$")
+    public void isEmpty() {
+        object.setVertexStep("", "", "is", "empty");
+    }
 }
