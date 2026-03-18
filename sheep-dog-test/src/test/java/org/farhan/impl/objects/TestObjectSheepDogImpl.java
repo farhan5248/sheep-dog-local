@@ -150,7 +150,6 @@ public class TestObjectSheepDogImpl extends TestObject {
                 ITable table = testStep.getTable();
                 if (table == null) {
                     table = SheepDogFactory.instance.createTable();
-                    table.setParent(testStep);
                     testStep.setTable(table);
                 }
                 return table;
@@ -167,7 +166,6 @@ public class TestObjectSheepDogImpl extends TestObject {
                 ITable table = stepParams.getTable();
                 if (table == null) {
                     table = SheepDogFactory.instance.createTable();
-                    table.setParent(stepParams);
                     stepParams.setTable(table);
                 }
                 return table;

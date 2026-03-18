@@ -5,8 +5,7 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestSuite;
-import org.farhan.dsl.grammar.PhraseTagFragments;
-import org.farhan.dsl.grammar.PhraseTodoFragments;
+import org.farhan.dsl.grammar.PhraseFragments;
 import org.farhan.dsl.grammar.StepDefinitionRefFragments;
 import org.farhan.dsl.grammar.StepObjectRefFragments;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessGrammarFragmentAsciidocFile;
@@ -196,7 +195,7 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getPhraseTagFragmentTagList(HashMap<String, String> keyMap) {
-        return PhraseTagFragments.getTagList((String) getProperty("Line"));
+        return PhraseFragments.getTagList((String) getProperty("Line"));
     }
 
     @Override
@@ -207,12 +206,12 @@ public class ProcessGrammarFragmentAsciidocFileImpl extends TestObjectSheepDogIm
 
     @Override
     public String getPhraseTodoFragmentTodoType(HashMap<String, String> keyMap) {
-        return PhraseTodoFragments.getTodoType((String) getProperty("Line"));
+        return PhraseFragments.getTodoType((String) getProperty("Line"));
     }
 
     @Override
     public String getPhraseTodoFragmentTodoDescription(HashMap<String, String> keyMap) {
-        return PhraseTodoFragments.getTodoDesc((String) getProperty("Line"));
+        return PhraseFragments.getTodoDesc((String) getProperty("Line"));
     }
 
     private ITestSuite getDocument() {

@@ -16,8 +16,10 @@ public class TestProjectImpl implements ITestProject {
 
     @Override
     public boolean addTestSuite(ITestSuite value) {
-        value.setParent(this);
-        return testDocumentList.add(value);
+        TestSuiteImpl impl = (TestSuiteImpl) value;
+        testDocumentList.add(impl);
+        impl.parent = this;
+        return true;
     }
 
     @Override

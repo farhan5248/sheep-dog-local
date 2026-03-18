@@ -40,7 +40,8 @@ public class TestDataImpl implements ITestData {
 
     @Override
     public void setTable(ITable value) {
-        this.table = value;
+        table = (TableImpl) value;
+        ((TableImpl) value).parent = this;
     }
 
     @Override

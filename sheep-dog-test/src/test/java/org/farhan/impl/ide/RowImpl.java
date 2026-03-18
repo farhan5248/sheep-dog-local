@@ -9,7 +9,7 @@ import org.farhan.dsl.grammar.ITable;
 public class RowImpl implements IRow {
 
     private String name;
-    private ITable parent;
+    ITable parent;
     private List<ICell> cellList = new ArrayList<>();
 
     @Override
@@ -25,11 +25,6 @@ public class RowImpl implements IRow {
     @Override
     public ITable getParent() {
         return parent;
-    }
-
-    @Override
-    public void setParent(ITable value) {
-        parent = value;
     }
 
     @Override

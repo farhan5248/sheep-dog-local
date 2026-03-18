@@ -28,8 +28,6 @@ public interface ITestSuite extends ITestDocument {
 
     void setName(String value);
 
-    void setParent(ITestProject value);
-
     void setDescription(IDescription value);
 
 }

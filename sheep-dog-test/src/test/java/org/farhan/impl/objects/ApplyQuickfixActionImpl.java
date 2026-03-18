@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import org.farhan.dsl.grammar.CellIssueResolver;
-import org.farhan.dsl.grammar.CellIssueTypes;
+import org.farhan.dsl.issues.CellIssueResolver;
+import org.farhan.dsl.issues.CellIssueTypes;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
@@ -22,14 +22,14 @@ import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
-import org.farhan.dsl.grammar.TestStepContainerIssueResolver;
-import org.farhan.dsl.grammar.TestStepContainerIssueTypes;
-import org.farhan.dsl.grammar.TestStepIssueResolver;
-import org.farhan.dsl.grammar.TestStepIssueTypes;
-import org.farhan.dsl.grammar.TestSuiteIssueResolver;
-import org.farhan.dsl.grammar.TestSuiteIssueTypes;
-import org.farhan.dsl.grammar.TextIssueResolver;
-import org.farhan.dsl.grammar.TextIssueTypes;
+import org.farhan.dsl.issues.TestStepContainerIssueResolver;
+import org.farhan.dsl.issues.TestStepContainerIssueTypes;
+import org.farhan.dsl.issues.TestStepIssueResolver;
+import org.farhan.dsl.issues.TestStepIssueTypes;
+import org.farhan.dsl.issues.TestSuiteIssueResolver;
+import org.farhan.dsl.issues.TestSuiteIssueTypes;
+import org.farhan.dsl.issues.TextIssueResolver;
+import org.farhan.dsl.issues.TextIssueTypes;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -146,7 +146,6 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
                     IStepParameters stepParams = SheepDogBuilder.createStepParameters(stepDef, value);
                     if (stepParams.getTable() == null) {
                         ITable spTable = SheepDogFactory.instance.createTable();
-                        spTable.setParent(stepParams);
                         stepParams.setTable(spTable);
                         IRow headerRow = SheepDogBuilder.createRow(spTable);
                         SheepDogBuilder.createCell(headerRow, value);
@@ -178,7 +177,6 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
                         IStepParameters stepParams = SheepDogBuilder.createStepParameters(stepDef, value);
                         if (stepParams.getTable() == null) {
                             ITable spTable = SheepDogFactory.instance.createTable();
-                            spTable.setParent(stepParams);
                             stepParams.setTable(spTable);
                             IRow headerRow = SheepDogBuilder.createRow(spTable);
                             for (ICell cell : theRow.getCellList()) {

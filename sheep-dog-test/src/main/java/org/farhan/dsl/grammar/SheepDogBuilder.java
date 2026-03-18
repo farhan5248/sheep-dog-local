@@ -105,10 +105,8 @@ public class SheepDogBuilder {
         logger.debug("createTestStep(parent={}, fullName={})", parent, fullName);
         ITestStep testStep = SheepDogFactory.instance.createTestStep();
         testStep.setFullName(fullName);
-        if (parent != null) {
-            testStep.setParent(parent);
+        if (parent != null)
             parent.addTestStep(testStep);
-        }
         logger.debug("createTestStep() = {}", testStep);
         return testStep;
     }
@@ -121,10 +119,8 @@ public class SheepDogBuilder {
         if (text == null) {
             text = SheepDogFactory.instance.createText();
             text.setName(name);
-            if (parent != null) {
-                text.setParent(parent);
+            if (parent != null)
                 parent.setText(text);
-            }
         }
         logger.debug("createText() = {}", text);
         return text;
@@ -146,10 +142,8 @@ public class SheepDogBuilder {
             table = parent.getTable();
         if (table == null) {
             table = SheepDogFactory.instance.createTable();
-            if (parent != null) {
-                table.setParent(parent);
+            if (parent != null)
                 parent.setTable(table);
-            }
         }
         logger.debug("createTable() = {}", table);
         return table;

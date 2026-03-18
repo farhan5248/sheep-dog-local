@@ -20,8 +20,6 @@ public interface ITestStep {
 
     void setStepDefinitionName(String value);
 
-    void setParent(ITestStepContainer value);
-
     void setTable(ITable value);
 
     void setText(IText value);

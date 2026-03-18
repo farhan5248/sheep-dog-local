@@ -41,7 +41,8 @@ public class StepParametersImpl implements IStepParameters {
 
     @Override
     public void setTable(ITable value) {
-        this.table = value;
+        table = (TableImpl) value;
+        ((TableImpl) value).parent = this;
     }
 
     @Override

@@ -8,7 +8,7 @@ public class TestSuiteImpl implements ITestSuite {
 
     private String fullName;
     private String name;
-    private ITestProject parent;
+    ITestProject parent;
     private IDescription description;
     private List<ITestStepContainer> testStepContainerList = new ArrayList<>();
 
@@ -19,20 +19,23 @@ public class TestSuiteImpl implements ITestSuite {
 
     @Override
     public boolean addTestCase(ITestCase value) {
-        value.setParent(this);
-        return testStepContainerList.add(value);
+        TestCaseImpl impl = (TestCaseImpl) value;
+        testStepContainerList.add(impl);
+        impl.parent = this;
+        return true;
     }
 
     @Override
     public boolean addTestSetup(ITestSetup value) {
-        value.setParent(this);
+        TestSetupImpl impl = (TestSetupImpl) value;
+        impl.parent = this;
         int insertIndex = 0;
         for (int i = 0; i < testStepContainerList.size(); i++) {
             if (testStepContainerList.get(i) instanceof ITestSetup) {
                 insertIndex = i + 1;
             }
         }
-        testStepContainerList.add(insertIndex, value);
+        testStepContainerList.add(insertIndex, impl);
         return true;
     }
 
@@ -54,11 +57,6 @@ public class TestSuiteImpl implements ITestSuite {
     @Override
     public ITestProject getParent() {
         return parent;
-    }
-
-    @Override
-    public void setParent(ITestProject value) {
-        this.parent = value;
     }
 
     @Override

@@ -18,6 +18,4 @@ public interface IRow {
 
 	ITable getParent();
 
-	void setParent(ITable value);
-
 }

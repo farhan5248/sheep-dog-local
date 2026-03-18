@@ -27,11 +27,4 @@ public interface IText {
 	 */
 	ITestStep getParent();
 
-	/**
-	 * Sets the parent test step containing this text.
-	 *
-	 * @param value the parent ITestStep
-	 */
-	void setParent(ITestStep value);
-
 }

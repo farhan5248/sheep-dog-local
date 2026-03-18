@@ -18,8 +18,6 @@ public interface ITestStepContainer {
 
     void setName(String value);
 
-    void setParent(ITestSuite value);
-
     boolean addLine(ILine value);
 
     boolean addTestStep(ITestStep value);

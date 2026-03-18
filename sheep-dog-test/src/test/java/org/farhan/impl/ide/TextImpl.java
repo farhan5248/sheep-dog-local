@@ -24,11 +24,6 @@ public class TextImpl implements IText {
     }
 
     @Override
-    public void setParent(ITestStep value) {
-        parent = value;
-    }
-
-    @Override
     public String toString() {
         return name != null ? name : "";
     }

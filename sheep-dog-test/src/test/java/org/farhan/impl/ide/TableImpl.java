@@ -7,7 +7,7 @@ import org.farhan.dsl.grammar.ITable;
 
 public class TableImpl implements ITable {
 
-    private Object parent;
+    Object parent;
     private List<IRow> rowList = new ArrayList<>();
 
     @Override
@@ -16,14 +16,11 @@ public class TableImpl implements ITable {
     }
 
     @Override
-    public void setParent(Object value) {
-        parent = value;
-    }
-
-    @Override
     public boolean addRow(IRow value) {
-        value.setParent(this);
-        return rowList.add(value);
+        RowImpl impl = (RowImpl) value;
+        rowList.add(impl);
+        impl.parent = this;
+        return true;
     }
 
     @Override

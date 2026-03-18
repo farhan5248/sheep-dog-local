@@ -9,7 +9,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatc
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class InputFileAsciidocFileAppImpl extends TestObjectSheepDogImpl implements InputFileAsciidocFile {
+public class AppInputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements InputFileAsciidocFile {
 
     @Override
     public void setCreatedAsFollows(HashMap<String, String> keyMap) {
