@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
@@ -118,42 +121,177 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
         } else if (cursor instanceof ITestStep && TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description.equals(validationMessage)) {
             logger.debug("TestStep workspace issue detected, calling TestStepIssueResolver.correctStepObjectNameWorkspace");
             ITestProject workspace = (ITestProject) getProperty("workspace");
-            proposals.addAll(TestStepIssueResolver.correctStepObjectNameWorkspace((ITestStep) cursor, workspace));
+            ITestStep testStep = (ITestStep) cursor;
+            proposals.addAll(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep, workspace));
             // Apply proposals
             for (SheepDogIssueProposal proposal : proposals) {
                 logger.debug("Applying proposal: " + proposal.getValue());
-                // TODO: Implement workspace modification when needed
-                throw new UnsupportedOperationException("Workspace modification not yet implemented for TestStep");
+                // Apply by adding step object to workspace
+                addStepObjectWithFullName(proposal.getValue().toString());
+                // Also add the step definition from the test step to the newly created step object
+                String stepDefinitionName = testStep.getStepDefinitionName();
+                if (stepDefinitionName != null && !stepDefinitionName.trim().isEmpty()) {
+                    logger.debug("Adding step definition: " + stepDefinitionName);
+                    addStepDefinitionWithName(stepDefinitionName);
+                }
             }
         } else if (cursor instanceof ITestStep && TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description.equals(validationMessage)) {
             logger.debug("TestStep step definition workspace issue detected, calling TestStepIssueResolver.correctStepDefinitionNameWorkspace");
             ITestProject workspace = (ITestProject) getProperty("workspace");
-            proposals.addAll(TestStepIssueResolver.correctStepDefinitionNameWorkspace((ITestStep) cursor, workspace));
+            ITestStep testStep = (ITestStep) cursor;
+            proposals.addAll(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep, workspace));
             // Apply proposals
             for (SheepDogIssueProposal proposal : proposals) {
                 logger.debug("Applying proposal: " + proposal.getValue());
-                // TODO: Implement workspace modification when needed
-                throw new UnsupportedOperationException("Workspace modification not yet implemented for TestStep");
+                // Get the step object path from the test step
+                String stepObjectFullName = org.farhan.dsl.grammar.SheepDogUtility.getStepObjectFullNameForTestStep(testStep, workspace);
+                if (stepObjectFullName != null && !stepObjectFullName.isEmpty()) {
+                    logger.debug("Step object full name: " + stepObjectFullName);
+                    // Navigate to the step object
+                    Object stepObjectDoc = workspace.getTestDocument(stepObjectFullName);
+                    if (stepObjectDoc != null) {
+                        setProperty("cursor", stepObjectDoc);
+                        // Add the step definition to the existing step object
+                        addStepDefinitionWithName(proposal.getValue().toString());
+                    } else {
+                        logger.debug("Step object not found: " + stepObjectFullName);
+                    }
+                }
             }
         } else if (cursor instanceof IRow && RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description.equals(validationMessage)) {
             logger.debug("Row cell list workspace issue detected, calling RowIssueResolver.correctCellListWorkspace");
             ITestProject workspace = (ITestProject) getProperty("workspace");
-            proposals.addAll(RowIssueResolver.correctCellListWorkspace((IRow) cursor, workspace));
+            IRow row = (IRow) cursor;
+            proposals.addAll(RowIssueResolver.correctCellListWorkspace(row, workspace));
             // Apply proposals
             for (SheepDogIssueProposal proposal : proposals) {
-                logger.debug("Applying proposal: " + proposal.getValue());
-                // TODO: Implement workspace modification when needed
-                throw new UnsupportedOperationException("Workspace modification not yet implemented for Row");
+                logger.debug("Applying proposal: " + proposal.getId() + " with value: " + proposal.getValue());
+                // Check if this is a "Generate" proposal
+                if (proposal.getId() != null && proposal.getId().startsWith("Generate ")) {
+                    // This is a proposal to add a new parameter set
+                    // Navigate to the step object and step definition
+                    ITable table = row.getParent();
+                    if (table != null && table.getParent() instanceof ITestStep) {
+                        ITestStep testStep = (ITestStep) table.getParent();
+                        String stepObjectFullName = org.farhan.dsl.grammar.SheepDogUtility.getStepObjectFullNameForTestStep(testStep, workspace);
+                        if (stepObjectFullName != null && !stepObjectFullName.isEmpty()) {
+                            logger.debug("Step object full name: " + stepObjectFullName);
+                            // Navigate to the step object
+                            Object stepObjectDoc = workspace.getTestDocument(stepObjectFullName);
+                            if (stepObjectDoc instanceof IStepObject) {
+                                IStepObject stepObject = (IStepObject) stepObjectDoc;
+                                // Find the step definition
+                                String stepDefinitionName = testStep.getStepDefinitionName();
+                                if (stepDefinitionName != null) {
+                                    for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                                        if (stepDefinition.getName().equals(stepDefinitionName)) {
+                                            logger.debug("Found step definition: " + stepDefinitionName);
+                                            // Set cursor to step definition
+                                            setProperty("cursor", stepDefinition);
+                                            // Add the step parameters
+                                            addStepParametersWithName(proposal.getValue().toString());
+                                            // After adding step parameters, cursor is at the new StepParameters
+                                            // Add cells to the newly created step parameters
+                                            String parametersValue = proposal.getValue().toString();
+                                            if (parametersValue != null && !parametersValue.trim().isEmpty()) {
+                                                // Parse comma-separated cell names
+                                                String[] cellNames = parametersValue.split(",");
+                                                if (cellNames.length > 0) {
+                                                    // Create table and row structure
+                                                    Object stepParamsObj = getProperty("cursor");
+                                                    if (stepParamsObj instanceof org.farhan.dsl.grammar.IStepParameters) {
+                                                        org.farhan.dsl.grammar.IStepParameters stepParams = (org.farhan.dsl.grammar.IStepParameters) stepParamsObj;
+                                                        // Create table if it doesn't exist
+                                                        org.farhan.dsl.grammar.ITable paramTable = stepParams.getTable();
+                                                        if (paramTable == null) {
+                                                            paramTable = org.farhan.dsl.grammar.SheepDogBuilder.createTable(stepParams);
+                                                        }
+                                                        // Create row
+                                                        org.farhan.dsl.grammar.IRow paramRow = org.farhan.dsl.grammar.SheepDogBuilder.createRow(paramTable);
+                                                        // Add cells
+                                                        for (String cellName : cellNames) {
+                                                            String trimmedCellName = cellName.trim();
+                                                            if (!trimmedCellName.isEmpty()) {
+                                                                logger.debug("Adding cell: " + trimmedCellName);
+                                                                setProperty("cursor", paramRow);
+                                                                addCellWithName(trimmedCellName);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            } else {
+                                logger.debug("Step object not found: " + stepObjectFullName);
+                            }
+                        }
+                    }
+                } else {
+                    // This is a proposal to add a step object
+                    addStepObjectWithFullName(proposal.getValue().toString());
+                }
             }
         } else if (cursor instanceof IText && TextIssueTypes.TEXT_CONTENT_WORKSPACE.description.equals(validationMessage)) {
             logger.debug("Text content workspace issue detected, calling TextIssueResolver.correctContentWorkspace");
             ITestProject workspace = (ITestProject) getProperty("workspace");
-            proposals.addAll(TextIssueResolver.correctContentWorkspace((IText) cursor, workspace));
+            IText text = (IText) cursor;
+            proposals.addAll(TextIssueResolver.correctContentWorkspace(text, workspace));
             // Apply proposals
             for (SheepDogIssueProposal proposal : proposals) {
-                logger.debug("Applying proposal: " + proposal.getValue());
-                // TODO: Implement workspace modification when needed
-                throw new UnsupportedOperationException("Workspace modification not yet implemented for Text");
+                logger.debug("Applying proposal: " + proposal.getId() + " with value: " + proposal.getValue());
+                // Check if this is a "Generate Content" proposal
+                if ("Generate Content".equals(proposal.getId())) {
+                    // This is a proposal to add a new parameter set for text content
+                    // Navigate to the step object and step definition
+                    if (text.getParent() instanceof ITestStep) {
+                        ITestStep testStep = (ITestStep) text.getParent();
+                        String stepObjectFullName = org.farhan.dsl.grammar.SheepDogUtility.getStepObjectFullNameForTestStep(testStep, workspace);
+                        if (stepObjectFullName != null && !stepObjectFullName.isEmpty()) {
+                            logger.debug("Step object full name: " + stepObjectFullName);
+                            // Navigate to the step object
+                            Object stepObjectDoc = workspace.getTestDocument(stepObjectFullName);
+                            if (stepObjectDoc instanceof IStepObject) {
+                                IStepObject stepObject = (IStepObject) stepObjectDoc;
+                                // Find the step definition
+                                String stepDefinitionName = testStep.getStepDefinitionName();
+                                if (stepDefinitionName != null) {
+                                    for (IStepDefinition stepDefinition : stepObject.getStepDefinitionList()) {
+                                        if (stepDefinition.getName().equals(stepDefinitionName)) {
+                                            logger.debug("Found step definition: " + stepDefinitionName);
+                                            // Set cursor to step definition
+                                            setProperty("cursor", stepDefinition);
+                                            // Add the step parameters
+                                            addStepParametersWithName(proposal.getValue().toString());
+                                            // After adding step parameters, cursor is at the new StepParameters
+                                            // Add cells to the newly created step parameters
+                                            Object stepParamsObj = getProperty("cursor");
+                                            if (stepParamsObj instanceof org.farhan.dsl.grammar.IStepParameters) {
+                                                org.farhan.dsl.grammar.IStepParameters stepParams = (org.farhan.dsl.grammar.IStepParameters) stepParamsObj;
+                                                // Create table if it doesn't exist
+                                                org.farhan.dsl.grammar.ITable paramTable = stepParams.getTable();
+                                                if (paramTable == null) {
+                                                    paramTable = org.farhan.dsl.grammar.SheepDogBuilder.createTable(stepParams);
+                                                }
+                                                // Create row
+                                                org.farhan.dsl.grammar.IRow paramRow = org.farhan.dsl.grammar.SheepDogBuilder.createRow(paramTable);
+                                                // Add cell with name "Content"
+                                                logger.debug("Adding cell: Content");
+                                                setProperty("cursor", paramRow);
+                                                addCellWithName("Content");
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            } else {
+                                logger.debug("Step object not found: " + stepObjectFullName);
+                            }
+                        }
+                    }
+                }
             }
         } else {
             logger.debug("No matching issue type");

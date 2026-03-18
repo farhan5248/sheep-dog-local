@@ -105,12 +105,17 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
         IStepDefinition sd = (IStepDefinition) getProperty("cursor");
+        if (sd == null) {
+            return null;
+        }
         return sd.getName();
     }
 
     @Override
     public String getStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
         navigateToDocument();
+        // Reset the row counter when starting a new assertion
+        setProperty("stepParametersRowCounter", 0);
         return null;
     }
 
@@ -153,7 +158,40 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getStepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
-        IStepParameters sp = (IStepParameters) getProperty("cursor");
+        Object cursor = getProperty("cursor");
+        if (cursor == null) {
+            return null;
+        }
+
+        // When cursor is at StepDefinition level (path like "StepDefinitionList/1/StepParametersList"),
+        // we need to iterate through StepParameters using a row counter
+        if (cursor instanceof IStepDefinition) {
+            IStepDefinition sd = (IStepDefinition) cursor;
+            if (sd.getStepParameterList() == null || sd.getStepParameterList().isEmpty()) {
+                return null;
+            }
+
+            // Get or initialize the row counter for this assertion
+            String counterKey = "stepParametersRowCounter";
+            Object counterObj = getProperty(counterKey);
+            int rowIndex = 0;
+            if (counterObj != null) {
+                rowIndex = (Integer) counterObj;
+            }
+
+            // Get the step parameters at the current row index
+            if (rowIndex < sd.getStepParameterList().size()) {
+                String result = sd.getStepParameters(rowIndex).getName();
+                // Increment counter for next row
+                setProperty(counterKey, rowIndex + 1);
+                return result;
+            }
+
+            return null;
+        }
+
+        // When cursor is at specific StepParameters (path like "StepDefinitionList/1/StepParametersList/2")
+        IStepParameters sp = (IStepParameters) cursor;
         return sp.getName();
     }
 
@@ -243,6 +281,121 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public void setCellListNodeCellName(HashMap<String, String> keyMap) {
         addCellWithName(keyMap.get("Cell Name"));
+    }
+
+    @Override
+    public String getCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return null;
+    }
+
+    @Override
+    public String getStepDefinitionName(HashMap<String, String> keyMap) {
+        Object cursor = getProperty("cursor");
+        IStepDefinition sd;
+
+        if (cursor instanceof IStepObject) {
+            // Cursor is at document level, navigate to first step definition
+            IStepObject doc = (IStepObject) cursor;
+            sd = doc.getStepDefinition(0);
+        } else {
+            // Cursor should already be at step definition
+            sd = (IStepDefinition) cursor;
+        }
+
+        if (sd == null) {
+            return null;
+        }
+        return sd.getName();
+    }
+
+    @Override
+    public String getStepParametersName(HashMap<String, String> keyMap) {
+        Object cursor = getProperty("cursor");
+        IStepParameters sp;
+
+        if (cursor instanceof IStepObject) {
+            // Cursor is at document level, navigate to first step definition, then first step parameters
+            IStepObject doc = (IStepObject) cursor;
+            IStepDefinition sd = doc.getStepDefinition(0);
+            if (sd == null || sd.getStepParameterList() == null || sd.getStepParameterList().isEmpty()) {
+                return null;
+            }
+            sp = sd.getStepParameters(0);
+        } else if (cursor instanceof IStepDefinition) {
+            // Cursor is at step definition level, navigate to first step parameters
+            IStepDefinition sd = (IStepDefinition) cursor;
+            if (sd.getStepParameterList() == null || sd.getStepParameterList().isEmpty()) {
+                return null;
+            }
+            sp = sd.getStepParameters(0);
+        } else {
+            // Cursor should already be at step parameters
+            sp = (IStepParameters) cursor;
+        }
+
+        if (sp == null) {
+            return null;
+        }
+        return sp.getName();
+    }
+
+    @Override
+    public String getCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        // Reset the row counter when starting a new assertion
+        setProperty("cellListRowCounter", 0);
+        return null;
+    }
+
+    @Override
+    public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        setCursorAtNode(keyMap.get("Node Path"));
+        return null;
+    }
+
+    @Override
+    public String getCellListNodeCellName(HashMap<String, String> keyMap) {
+        Object cursor = getProperty("cursor");
+        if (cursor == null) {
+            return null;
+        }
+
+        // When cursor is at Row level (path like "...Table/RowList/1/CellList"),
+        // we need to iterate through Cells using a row counter
+        if (cursor instanceof org.farhan.dsl.grammar.IRow) {
+            org.farhan.dsl.grammar.IRow row = (org.farhan.dsl.grammar.IRow) cursor;
+            if (row.getCellList() == null || row.getCellList().isEmpty()) {
+                return null;
+            }
+
+            // Get or initialize the row counter for this assertion
+            String counterKey = "cellListRowCounter";
+            Object counterObj = getProperty(counterKey);
+            int rowIndex = 0;
+            if (counterObj != null) {
+                rowIndex = (Integer) counterObj;
+            }
+
+            // Get the cell at the current row index
+            if (rowIndex < row.getCellList().size()) {
+                String result = row.getCell(rowIndex).getName();
+                // Increment counter for next row
+                setProperty(counterKey, rowIndex + 1);
+                return result;
+            }
+
+            return null;
+        }
+
+        // When cursor is at specific Cell (path with cell index)
+        if (cursor instanceof org.farhan.dsl.grammar.ICell) {
+            org.farhan.dsl.grammar.ICell cell = (org.farhan.dsl.grammar.ICell) cursor;
+            return cell.getName();
+        }
+
+        return null;
     }
 
 }

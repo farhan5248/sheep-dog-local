@@ -73,4 +73,16 @@ public interface InputFileAsciidocFile {
     public void setCellListNodeNodePath(HashMap<String, String> keyMap);
 
     public void setCellListNodeCellName(HashMap<String, String> keyMap);
+
+    public String getCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public String getStepDefinitionName(HashMap<String, String> keyMap);
+
+    public String getStepParametersName(HashMap<String, String> keyMap);
+
+    public String getCellListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public String getCellListNodeNodePath(HashMap<String, String> keyMap);
+
+    public String getCellListNodeCellName(HashMap<String, String> keyMap);
 }
