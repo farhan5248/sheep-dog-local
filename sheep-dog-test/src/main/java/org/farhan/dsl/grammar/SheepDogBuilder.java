@@ -149,6 +149,20 @@ public class SheepDogBuilder {
         return table;
     }
 
+    public static ITable createTable(IStepParameters parent) {
+        logger.debug("createTable(parent={})", parent);
+        ITable table = null;
+        if (parent != null)
+            table = parent.getTable();
+        if (table == null) {
+            table = SheepDogFactory.instance.createTable();
+            if (parent != null)
+                parent.setTable(table);
+        }
+        logger.debug("createTable() = {}", table);
+        return table;
+    }
+
     public static IRow createRow(ITable parent) {
         logger.debug("createRow(parent={})", parent);
         IRow row = SheepDogFactory.instance.createRow();

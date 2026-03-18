@@ -19,7 +19,11 @@ public enum TestStepIssueTypes {
 		"State determines what gets converted to setters or assertions in the test automation.\n" +
 		"Next it's followed by the state description which is optional and can be any word.\n" +
 		"The state types are: is, isn't, will be, won't be.\n" +
-		"Examples are: \"is present\" or \"will be created as follows\"");
+		"Examples are: \"is present\" or \"will be created as follows\""),
+	TEST_STEP_STEP_OBJECT_NAME_WORKSPACE("TEST_STEP_STEP_OBJECT_NAME_WORKSPACE",
+		"The step object file doesn't exist for the component"),
+	TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE("TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE",
+		"The step definition doesn't exist for the step object");
 
 	public final String id;
 	public final String description;

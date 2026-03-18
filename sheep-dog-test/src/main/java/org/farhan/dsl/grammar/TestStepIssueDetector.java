@@ -59,4 +59,79 @@ public class TestStepIssueDetector {
 		logger.debug("Exiting validateNameOnly - validation passed");
 		return "";
 	}
+
+	public static String validateStepObjectNameWorkspace(ITestStep theTestStep, ITestProject testProject) {
+		Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueDetector.class);
+		logger.debug("Entering validateStepObjectNameWorkspace");
+
+		if (testProject == null) {
+			logger.debug("Exiting validateStepObjectNameWorkspace - no test project");
+			return "";
+		}
+
+		// Get the step object full name
+		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep, testProject);
+		if (stepObjectFullName == null || stepObjectFullName.isEmpty()) {
+			logger.debug("Exiting validateStepObjectNameWorkspace - no step object name");
+			return "";
+		}
+
+		// Check if the step object file exists in the workspace
+		ITestDocument stepObjectDoc = testProject.getTestDocument(stepObjectFullName);
+		if (stepObjectDoc == null) {
+			logger.debug("Exiting validateStepObjectNameWorkspace - step object file does not exist");
+			return TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description;
+		}
+
+		logger.debug("Exiting validateStepObjectNameWorkspace - validation passed");
+		return "";
+	}
+
+	public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep, ITestProject testProject) {
+		Logger logger = SheepDogLoggerFactory.getLogger(TestStepIssueDetector.class);
+		logger.debug("Entering validateStepDefinitionNameWorkspace");
+
+		if (testProject == null) {
+			logger.debug("Exiting validateStepDefinitionNameWorkspace - no test project");
+			return "";
+		}
+
+		// Get the step object full name
+		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep, testProject);
+		if (stepObjectFullName == null || stepObjectFullName.isEmpty()) {
+			logger.debug("Exiting validateStepDefinitionNameWorkspace - no step object name");
+			return "";
+		}
+
+		// Check if the step object file exists in the workspace
+		ITestDocument stepObjectDoc = testProject.getTestDocument(stepObjectFullName);
+		if (stepObjectDoc == null) {
+			logger.debug("Exiting validateStepDefinitionNameWorkspace - step object file does not exist");
+			return "";
+		}
+
+		// Check if the step object file is an IStepObject
+		if (!(stepObjectDoc instanceof IStepObject)) {
+			logger.debug("Exiting validateStepDefinitionNameWorkspace - step object file is not an IStepObject");
+			return "";
+		}
+
+		// Get the step definition name from the test step
+		String stepDefinitionName = theTestStep.getStepDefinitionName();
+		if (stepDefinitionName == null || stepDefinitionName.isEmpty()) {
+			logger.debug("Exiting validateStepDefinitionNameWorkspace - no step definition name");
+			return "";
+		}
+
+		// Check if the step definition exists in the step object file
+		IStepObject stepObject = (IStepObject) stepObjectDoc;
+		IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefinitionName);
+		if (stepDefinition == null) {
+			logger.debug("Exiting validateStepDefinitionNameWorkspace - step definition does not exist");
+			return TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
+		}
+
+		logger.debug("Exiting validateStepDefinitionNameWorkspace - validation passed");
+		return "";
+	}
 }
