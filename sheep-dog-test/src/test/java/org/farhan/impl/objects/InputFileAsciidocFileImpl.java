@@ -3,7 +3,9 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.ILine;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
@@ -117,7 +119,13 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getStepParametersListNodeNodePath(HashMap<String, String> keyMap) {
         navigateToDocument();
-        setCursorAtNode(keyMap.get("Node Path"));
+        String path = keyMap.get("Node Path");
+        String lastPath = getProperty("lastStepParamsPath") != null ? getProperty("lastStepParamsPath").toString() : "";
+        if (!path.equals(lastPath)) {
+            setProperty("stepParamsIndex", 0);
+            setProperty("lastStepParamsPath", path);
+        }
+        setCursorAtNode(path);
         return null;
     }
 
@@ -153,7 +161,15 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getStepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
-        IStepParameters sp = (IStepParameters) getProperty("cursor");
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof IStepDefinition) {
+            IStepDefinition sd = (IStepDefinition) cursor;
+            int index = getProperty("stepParamsIndex") != null ? ((Integer) getProperty("stepParamsIndex")) : 0;
+            IStepParameters sp = sd.getStepParameters(index);
+            setProperty("stepParamsIndex", index + 1);
+            return sp.getName();
+        }
+        IStepParameters sp = (IStepParameters) cursor;
         return sp.getName();
     }
 
@@ -225,6 +241,37 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     }
 
     @Override
+    public String getCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return null;
+    }
+
+    @Override
+    public String getStepDefinitionName(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") instanceof IStepObject) {
+            IStepObject doc = (IStepObject) getProperty("cursor");
+            IStepDefinition sd = doc.getStepDefinition(0);
+            setProperty("cursor", sd);
+            return sd != null ? sd.getName() : null;
+        }
+        IStepDefinition sd = (IStepDefinition) getProperty("cursor");
+        return sd.getName();
+    }
+
+    @Override
+    public String getStepParametersName(HashMap<String, String> keyMap) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof IStepDefinition) {
+            IStepDefinition sd = (IStepDefinition) cursor;
+            IStepParameters sp = sd.getStepParameters(0);
+            setProperty("cursor", sp);
+            return sp != null ? sp.getName() : null;
+        }
+        IStepParameters sp = (IStepParameters) cursor;
+        return sp.getName();
+    }
+
+    @Override
     public void setCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
         navigateToOrCreateDocument();
     }
@@ -238,6 +285,39 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public void setCellListNodeCellName(HashMap<String, String> keyMap) {
         addCellWithName(keyMap.get("Cell Name"));
+    }
+
+    @Override
+    public String getCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        return null;
+    }
+
+    @Override
+    public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        String path = keyMap.get("Node Path");
+        String lastPath = getProperty("lastCellListPath") != null ? getProperty("lastCellListPath").toString() : "";
+        if (!path.equals(lastPath)) {
+            setProperty("cellListIndex", 0);
+            setProperty("lastCellListPath", path);
+        }
+        setCursorAtNode(path);
+        return null;
+    }
+
+    @Override
+    public String getCellListNodeCellName(HashMap<String, String> keyMap) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof IRow) {
+            IRow row = (IRow) cursor;
+            int index = getProperty("cellListIndex") != null ? ((Integer) getProperty("cellListIndex")) : 0;
+            ICell cell = row.getCell(index);
+            setProperty("cellListIndex", index + 1);
+            return cell.getName();
+        }
+        ICell cell = (ICell) cursor;
+        return cell.getName();
     }
 
 }

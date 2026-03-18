@@ -1,17 +1,26 @@
 package org.farhan.impl.objects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.CellIssueResolver;
 import org.farhan.dsl.grammar.CellIssueTypes;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.ITable;
+import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.SheepDogFactory;
+import org.farhan.dsl.grammar.StepObjectRefFragments;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.TestStepContainerIssueResolver;
 import org.farhan.dsl.grammar.TestStepContainerIssueTypes;
@@ -90,8 +99,94 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
                 ((ITestStepContainer) cursor).setName(proposal.getValue().toString());
             } else if (cursor instanceof ICell) {
                 ((ICell) cursor).setName(proposal.getValue().toString());
-            } else {
-                throw new UnsupportedOperationException();
+            } else if (cursor instanceof ITestStep) {
+                ITestProject workspace = (ITestProject) getProperty("workspace");
+                String value = proposal.getValue().toString();
+                if (value.contains("/")) {
+                    IStepObject newStepObject = SheepDogBuilder.createStepObject(workspace, value);
+                    SheepDogBuilder.createStepDefinition(newStepObject, ((ITestStep) cursor).getStepDefinitionName());
+                } else {
+                    String fullName = ((ITestStep) cursor).getFullName();
+                    String component = StepObjectRefFragments.getComponent(fullName);
+                    String objectName = StepObjectRefFragments.getObject(fullName);
+                    for (ITestDocument doc : workspace.getTestDocumentList()) {
+                        if (!(doc instanceof IStepObject)) continue;
+                        IStepObject stepObject = (IStepObject) doc;
+                        if (!stepObject.getName().equals(objectName)) continue;
+                        if (!component.isEmpty()) {
+                            String docFullName = stepObject.getFullName();
+                            String[] parts = docFullName.split("/");
+                            if (parts.length < 3) continue;
+                            String docComponent = String.join("/", Arrays.copyOfRange(parts, 1, parts.length - 1));
+                            if (!docComponent.equals(component)) continue;
+                        }
+                        SheepDogBuilder.createStepDefinition(stepObject, value);
+                    }
+                }
+            } else if (cursor instanceof IText) {
+                IText theText = (IText) cursor;
+                ITestStep testStep = theText.getParent();
+                String stepDefinitionName = testStep.getStepDefinitionName();
+                String stepObjectName = testStep.getStepObjectName();
+                String component = StepObjectRefFragments.getComponent(stepObjectName);
+                String objectName = StepObjectRefFragments.getObject(stepObjectName);
+                ITestProject workspace = (ITestProject) getProperty("workspace");
+                for (ITestDocument doc : workspace.getTestDocumentList()) {
+                    if (!(doc instanceof IStepObject)) continue;
+                    IStepObject stepObject = (IStepObject) doc;
+                    if (!stepObject.getName().equals(objectName)) continue;
+                    String docFullName = stepObject.getFullName();
+                    String[] parts = docFullName.split("/");
+                    if (parts.length < 3) continue;
+                    String docComponent = String.join("/", Arrays.copyOfRange(parts, 1, parts.length - 1));
+                    if (!component.isEmpty() && !docComponent.equals(component)) continue;
+                    IStepDefinition stepDef = stepObject.getStepDefinition(stepDefinitionName);
+                    if (stepDef == null) continue;
+                    String value = proposal.getValue().toString();
+                    IStepParameters stepParams = SheepDogBuilder.createStepParameters(stepDef, value);
+                    if (stepParams.getTable() == null) {
+                        ITable spTable = SheepDogFactory.instance.createTable();
+                        spTable.setParent(stepParams);
+                        stepParams.setTable(spTable);
+                        IRow headerRow = SheepDogBuilder.createRow(spTable);
+                        SheepDogBuilder.createCell(headerRow, value);
+                    }
+                }
+            } else if (cursor instanceof IRow) {
+                IRow theRow = (IRow) cursor;
+                ITable table = theRow.getParent();
+                Object tableParent = table.getParent();
+                if (tableParent instanceof ITestStep) {
+                    ITestStep testStep = (ITestStep) tableParent;
+                    String stepDefinitionName = testStep.getStepDefinitionName();
+                    String stepObjectName = testStep.getStepObjectName();
+                    String component = StepObjectRefFragments.getComponent(stepObjectName);
+                    String objectName = StepObjectRefFragments.getObject(stepObjectName);
+                    ITestProject workspace = (ITestProject) getProperty("workspace");
+                    for (ITestDocument doc : workspace.getTestDocumentList()) {
+                        if (!(doc instanceof IStepObject)) continue;
+                        IStepObject stepObject = (IStepObject) doc;
+                        if (!stepObject.getName().equals(objectName)) continue;
+                        String docFullName = stepObject.getFullName();
+                        String[] parts = docFullName.split("/");
+                        if (parts.length < 3) continue;
+                        String docComponent = String.join("/", Arrays.copyOfRange(parts, 1, parts.length - 1));
+                        if (!component.isEmpty() && !docComponent.equals(component)) continue;
+                        IStepDefinition stepDef = stepObject.getStepDefinition(stepDefinitionName);
+                        if (stepDef == null) continue;
+                        String value = proposal.getValue().toString();
+                        IStepParameters stepParams = SheepDogBuilder.createStepParameters(stepDef, value);
+                        if (stepParams.getTable() == null) {
+                            ITable spTable = SheepDogFactory.instance.createTable();
+                            spTable.setParent(stepParams);
+                            stepParams.setTable(spTable);
+                            IRow headerRow = SheepDogBuilder.createRow(spTable);
+                            for (ICell cell : theRow.getCellList()) {
+                                SheepDogBuilder.createCell(headerRow, cell.getName());
+                            }
+                        }
+                    }
+                }
             }
         }
     }
