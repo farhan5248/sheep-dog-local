@@ -114,4 +114,9 @@ public class SpecPrjProcessIssuesAsciidocFileSteps extends TestSteps {
     public void isCreatedAsFollows(DataTable dataTable) {
         object.setVertexStep("", "", "is", "created as follows", dataTable);
     }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file will be created as follows$")
+    public void willBeCreatedAsFollows(DataTable dataTable) {
+        object.assertVertexStep("", "", "will be", "created as follows", dataTable);
+    }
 }

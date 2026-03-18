@@ -2,6 +2,7 @@ package org.farhan.common;
 
 import org.farhan.impl.objects.AddDocumentActionImpl;
 import org.farhan.impl.objects.AppInputFileAsciidocFileImpl;
+import org.farhan.impl.objects.ApplyQuickfixActionImpl;
 import org.farhan.impl.objects.EditDocumentActionImpl;
 import org.farhan.impl.objects.Input2FileAsciidocFileImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;
@@ -21,6 +22,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssue
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.Input2FileAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.AddDocumentAction;
+import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.farhan.objects.xtext.EditDocumentAction;
 import org.farhan.objects.xtext.ListProposalsAction;
 import org.farhan.objects.xtext.ListProposalsPopup;
@@ -53,6 +55,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
     @Override
     protected void configure() {
         bind(AddDocumentAction.class).to(AddDocumentActionImpl.class);
+        bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);
         bind(EditDocumentAction.class).to(EditDocumentActionImpl.class);
         bind(ListProposalsAction.class).to(ListProposalsActionImpl.class);
         bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);

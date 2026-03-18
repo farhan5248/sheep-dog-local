@@ -139,4 +139,8 @@ public interface ProcessIssuesAsciidocFile {
     public void setCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setTestSuiteName(HashMap<String, String> keyMap);
+
+    public String getCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public String getTestSuiteName(HashMap<String, String> keyMap);
 }

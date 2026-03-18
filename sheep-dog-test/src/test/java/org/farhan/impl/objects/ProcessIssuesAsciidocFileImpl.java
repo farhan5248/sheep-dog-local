@@ -415,8 +415,17 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getCellListNodeCellName(HashMap<String, String> keyMap) {
-        ICell cell = (ICell) getProperty("cursor");
-        return cell == null ? null : cell.getName();
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof ICell) {
+            return ((ICell) cursor).getName();
+        } else if (cursor instanceof IRow) {
+            IRow row = (IRow) cursor;
+            java.util.List<ICell> cells = row.getCellList();
+            if (cells != null && !cells.isEmpty()) {
+                return cells.get(0).getName();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -430,5 +439,16 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
         if (suite != null) {
             suite.setName(keyMap.get("Test Suite Name"));
         }
+    }
+
+    @Override
+    public String getCreatedAsFollows(HashMap<String, String> keyMap) {
+        return navigateToDocumentAndGetCursor();
+    }
+
+    @Override
+    public String getTestSuiteName(HashMap<String, String> keyMap) {
+        ITestSuite suite = (ITestSuite) getProperty("cursor");
+        return suite == null ? null : suite.getName();
     }
 }

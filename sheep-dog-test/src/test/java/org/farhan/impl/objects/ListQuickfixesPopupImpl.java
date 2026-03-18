@@ -71,4 +71,24 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
         ArrayList<SheepDogIssueProposal> proposals = (ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup");
         return (proposals == null || proposals.isEmpty()) ? "true" : "false";
     }
+
+    @Override
+    public void setSetAsFollows(HashMap<String, String> keyMap) {
+        // No-op: This popup is for assertions only
+    }
+
+    @Override
+    public void setProposalId(HashMap<String, String> keyMap) {
+        // No-op: This popup is for assertions only
+    }
+
+    @Override
+    public void setProposalDescription(HashMap<String, String> keyMap) {
+        // No-op: This popup is for assertions only
+    }
+
+    @Override
+    public void setProposalValue(HashMap<String, String> keyMap) {
+        // No-op: This popup is for assertions only
+    }
 }

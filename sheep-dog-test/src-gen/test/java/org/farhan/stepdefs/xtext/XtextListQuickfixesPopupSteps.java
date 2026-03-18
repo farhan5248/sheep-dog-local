@@ -24,4 +24,9 @@ public class XtextListQuickfixesPopupSteps extends TestSteps {
     public void willBeEmpty() {
         object.assertVertexStep("", "", "will be", "empty");
     }
+
+    @Given("^The xtext plugin list quickfixes popup is set as follows$")
+    public void isSetAsFollows(DataTable dataTable) {
+        object.setVertexStep("", "", "is", "set as follows", dataTable);
+    }
 }
