@@ -7,8 +7,9 @@ import org.slf4j.Logger;
 
 public class TestStepContainerIssueResolver {
 
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(TestStepContainerIssueResolver.class);
+
     public static ArrayList<SheepDogIssueProposal> correctCapitalizeNameOnly(ITestStepContainer theTestStepContainer) {
-        Logger logger = SheepDogLoggerFactory.getLogger(TestStepContainerIssueResolver.class);
         logger.debug("Entering correctCapitalizeNameOnly");
 
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
@@ -26,14 +27,11 @@ public class TestStepContainerIssueResolver {
 
         // Check if the name starts with a lowercase letter
         if (!SheepDogUtility.startsWithCapital(testStepContainerName)) {
-            // Create a proposal to capitalize the first letter
-            String capitalizedName = Character.toUpperCase(testStepContainerName.charAt(0)) + testStepContainerName.substring(1);
-
-            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-            proposal.setId("Capitalize test step container name");
-            proposal.setDescription("Capitalize the first letter of the name");
-            proposal.setValue(capitalizedName);
-            proposals.add(proposal);
+            proposals.add(SheepDogUtility.createProposal(
+                "Capitalize test step container name",
+                "Capitalize the first letter of the name",
+                SheepDogUtility.capitalizeFirstLetter(testStepContainerName)
+            ));
         }
 
         logger.debug("Exiting correctCapitalizeNameOnly with " + proposals.size() + " proposals");

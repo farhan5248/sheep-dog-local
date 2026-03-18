@@ -7,8 +7,9 @@ import org.slf4j.Logger;
 
 public class CellIssueResolver {
 
+    private static final Logger logger = SheepDogLoggerFactory.getLogger(CellIssueResolver.class);
+
     public static ArrayList<SheepDogIssueProposal> correctCapitalizeNameOnly(ICell theCell) {
-        Logger logger = SheepDogLoggerFactory.getLogger(CellIssueResolver.class);
         logger.debug("Entering correctCapitalizeNameOnly");
 
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
@@ -26,14 +27,11 @@ public class CellIssueResolver {
 
         // Check if the name starts with a lowercase letter
         if (!SheepDogUtility.startsWithCapital(cellName)) {
-            // Create a proposal to capitalize the first letter
-            String capitalizedName = Character.toUpperCase(cellName.charAt(0)) + cellName.substring(1);
-
-            SheepDogIssueProposal proposal = new SheepDogIssueProposal();
-            proposal.setId("Capitalize cell name");
-            proposal.setDescription("Capitalize the first letter of the name");
-            proposal.setValue(capitalizedName);
-            proposals.add(proposal);
+            proposals.add(SheepDogUtility.createProposal(
+                "Capitalize cell name",
+                "Capitalize the first letter of the name",
+                SheepDogUtility.capitalizeFirstLetter(cellName)
+            ));
         }
 
         logger.debug("Exiting correctCapitalizeNameOnly with " + proposals.size() + " proposals");

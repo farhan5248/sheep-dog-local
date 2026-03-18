@@ -73,4 +73,33 @@ public class SheepDogUtility {
 		}
 		return grandParent.getParent();
 	}
+
+	/**
+	 * Capitalizes the first letter of a string.
+	 *
+	 * @param text the text to capitalize
+	 * @return the text with first letter capitalized, or the original text if null/empty
+	 */
+	public static String capitalizeFirstLetter(String text) {
+		if (text == null || text.isEmpty()) {
+			return text;
+		}
+		return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+	}
+
+	/**
+	 * Creates a SheepDogIssueProposal with the given id, description, and value.
+	 *
+	 * @param id the proposal id
+	 * @param description the proposal description
+	 * @param value the proposal value
+	 * @return a new SheepDogIssueProposal
+	 */
+	public static SheepDogIssueProposal createProposal(String id, String description, Object value) {
+		SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+		proposal.setId(id);
+		proposal.setDescription(description);
+		proposal.setValue(value);
+		return proposal;
+	}
 }
