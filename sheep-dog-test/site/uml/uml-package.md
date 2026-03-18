@@ -132,6 +132,8 @@
  - `StepObjectRefFragments`
  - `StepDefinitionRefFragments`
  - `TitleFragments`
+ - `PhraseTodoFragments`
+ - `PhraseTagFragments`
 
 ### {Type}{Fragment}Types
 

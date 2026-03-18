@@ -9,7 +9,7 @@ Validation logic for grammar elements at different scopes. Separates validation 
 **Rule**: ALL method names follow validate{Assignment}{Scope} pattern.
  - **Name**: `^validate{Assignment}{Scope}$`
  - **Return**: `^String$`
- - **Parameters**: `^\(I{Type}\s+[a-z]\w+\)$`
+ - **Parameters**: `^\(I{Type}\s+[a-z]\w+(,\s*I{Type}\s+[a-z]\w+)?\)$`
  - **Modifier**: `^public\s+static$`
 
 **Examples**:
@@ -17,7 +17,8 @@ Validation logic for grammar elements at different scopes. Separates validation 
  - `public static String validateNameOnly(ITestStepContainer theTestStepContainer)`
  - `public static String validateTestStepListFile(ITestStepContainer theTestStepContainer)`
  - `public static String validateStepObjectNameOnly(ITestStep theTestStep)`
- - `public static String validateStepObjectNameWorkspace(ITestStep theTestStep)`
+ - `public static String validateStepObjectNameWorkspace(ITestStep theTestStep, ITestProject testProject)`
  - `public static String validateStepDefinitionNameOnly(ITestStep theTestStep)`
- - `public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep)`
- - `public static String validateCellListWorkspace(IRow theRow)`
+ - `public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep, ITestProject testProject)`
+ - `public static String validateCellListWorkspace(IRow theRow, ITestProject testProject)`
+ - `public static String validateContentWorkspace(IText theText, ITestProject testProject)`

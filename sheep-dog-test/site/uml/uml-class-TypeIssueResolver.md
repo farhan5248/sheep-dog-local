@@ -32,3 +32,18 @@ Quick fix proposal generation for validation errors. Separates fix proposal logi
  - `public static ArrayList<SheepDogIssueProposal> correctStepObjectNameWorkspace(ITestStep theTestStep, ITestProject workspace)`
  - `public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep, ITestProject workspace)`
  - `public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(ITestStep theTestStep, ITestProject workspace)`
+
+## correct{Assignment}Only(I{Type})
+
+**Desc**: Generates proposals correcting element-local values without workspace context.
+
+**Rule**: SOME method names follow correct{Assignment}Only pattern.
+ - **Name**: `^correct{Assignment}Only$`
+ - **Return**: `^ArrayList<{Language}IssueProposal>$`
+ - **Parameters**: `^\(I{Type}\s+[a-z]\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static ArrayList<SheepDogIssueProposal> correctCapitalizeNameOnly(ITestSuite theTestSuite)`
+ - `public static ArrayList<SheepDogIssueProposal> correctCapitalizeNameOnly(ITestStepContainer theTestStepContainer)`
+ - `public static ArrayList<SheepDogIssueProposal> correctCapitalizeNameOnly(ICell theCell)`

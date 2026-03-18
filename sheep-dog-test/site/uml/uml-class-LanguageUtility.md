@@ -96,3 +96,29 @@ Static helper methods for grammar element operations. Separates utility operatio
 
 **Examples**:
  - `public static boolean startsWithCapital(String text)`
+
+## capitalizeFirstLetter
+
+**Desc**: Capitalizes the first letter of a string. Used by IssueResolver classes to generate corrected values.
+
+**Rule**: ONE method capitalizes first letter.
+ - **Name**: `^capitalizeFirstLetter$`
+ - **Return**: `^String$`
+ - **Parameters**: `^\(String\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static String capitalizeFirstLetter(String text)`
+
+## createProposal
+
+**Desc**: Creates a proposal object with id, description, and value. Used by IssueResolver classes to generate quick fix proposals.
+
+**Rule**: ONE method creates proposal objects.
+ - **Name**: `^createProposal$`
+ - **Return**: `^{Language}IssueProposal$`
+ - **Parameters**: `^\(String\s+\w+,\s*String\s+\w+,\s*Object\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static SheepDogIssueProposal createProposal(String id, String description, Object value)`
