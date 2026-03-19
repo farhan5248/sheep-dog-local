@@ -23,4 +23,8 @@ public interface EditDocumentAction {
     public void setTestCaseName(HashMap<String, String> keyMap);
 
     public void setTestSetupName(HashMap<String, String> keyMap);
+
+    public void setPerformedToModifyTestDataListWith(HashMap<String, String> keyMap);
+
+    public void setTestDataName(HashMap<String, String> keyMap);
 }

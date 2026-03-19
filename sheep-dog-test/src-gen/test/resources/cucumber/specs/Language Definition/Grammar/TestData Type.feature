@@ -1,0 +1,32 @@
+@sheep-dog-test
+Feature: TestData Type
+
+  \@sheep-dog-test
+  Test Data is a grammar rule in SheepDog.xtext contained within a Test Case. These tests verify editing Test Data elements within a document.
+
+  @list @EditDocumentAction
+  Scenario: Test Data
+
+    \@list \@EditDocumentAction
+    Test Data must have
+    - Name
+    and optionally have these
+    - Description
+    - Table
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node is created as follows
+          | Node Path                            | Test Data Name  |
+          | TestStepContainerList/1/TestDataList | First Test Data |
+     When The xtext plugin edit document action is performed to modify TestDataList with
+          | Test Suite Full Name         | Node Path                            | Test Data Name   |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList | Second Test Data |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node will be created as follows
+          | Node Path                              | Test Data Name   |
+          | TestStepContainerList/1/TestDataList/2 | Second Test Data |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Description node will be as follows
+          | Node Path                                          | State  |
+          | TestStepContainerList/1/TestDataList/1/Description | Absent |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
+          | Node Path                                    | State  |
+          | TestStepContainerList/1/TestDataList/1/Table | Absent |
+
