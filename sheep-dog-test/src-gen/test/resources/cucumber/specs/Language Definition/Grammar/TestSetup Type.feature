@@ -1,0 +1,27 @@
+@sheep-dog-test
+Feature: TestSetup Type
+
+  \@sheep-dog-test
+  Test Setup is a grammar rule in SheepDog.xtext contained within a Test Suite. These tests verify editing Test Setup elements within a document.
+
+  @list @EditDocumentAction
+  Scenario: Test Setup
+
+    \@list \@EditDocumentAction
+    Test Setup must have
+    - Name
+    and optionally have these
+    - Description
+    - Test Step List
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Setup Name  |
+          | TestStepContainerList | First Test Setup |
+     When The xtext plugin edit document action is performed to modify TestStepContainerList with
+          | Test Suite Full Name         | Node Path             | Test Setup Name   |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList | Second Test Setup |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows
+          | Node Path               | Test Setup Name   |
+          | TestStepContainerList/1 | First Test Setup  |
+          | TestStepContainerList/2 | Second Test Setup |
+

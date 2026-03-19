@@ -15,4 +15,12 @@ public interface EditDocumentAction {
     public void setPerformedToModifyStepParametersListWith(HashMap<String, String> keyMap);
 
     public void setStepParametersName(HashMap<String, String> keyMap);
+
+    public void setPerformedToModifyTestStepContainerListWith(HashMap<String, String> keyMap);
+
+    public void setTestSuiteFullName(HashMap<String, String> keyMap);
+
+    public void setTestCaseName(HashMap<String, String> keyMap);
+
+    public void setTestSetupName(HashMap<String, String> keyMap);
 }
