@@ -1,7 +1,3 @@
-File: Language Definition/Grammar/StepParameters Type
-  Scenario: Sorted Step Parameters Name
-    Tag: EditDocumentAction
-
 File: Language Definition/Grammar/TestSuite Type
   Scenario: Initial State
     Tag: AddDocumentAction
