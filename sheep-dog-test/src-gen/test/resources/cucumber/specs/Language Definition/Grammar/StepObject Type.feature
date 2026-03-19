@@ -1,0 +1,30 @@
+@sheep-dog-test
+Feature: StepObject Type
+
+  \@sheep-dog-test
+  Step Object is a top-level grammar rule in SheepDog.xtext. These tests verify adding a Step Object document to the workspace.
+
+  @list @AddDocumentAction
+  Scenario: Initial State
+
+    \@list \@AddDocumentAction
+    Step Object must have
+    - Name
+    and optionally have these
+    - Description
+    - Step Definition List
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created
+     When The xtext plugin add document action is performed to create a StepObject with
+          | Step Object Full Name                        |
+          | stepdefs/daily batchjob/Input2 file.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input2 file.asciidoc file will be created as follows
+          | Step Object Name |
+          | Input2 file      |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be as follows
+          | Node Path          | State |
+          | StepDefinitionList | Empty |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Description node will be as follows
+          | Node Path   | State  |
+          | Description | Absent |
+
