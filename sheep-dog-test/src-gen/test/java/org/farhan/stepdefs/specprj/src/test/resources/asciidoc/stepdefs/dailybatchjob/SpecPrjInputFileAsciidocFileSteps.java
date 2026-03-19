@@ -39,4 +39,9 @@ public class SpecPrjInputFileAsciidocFileSteps extends TestSteps {
     public void stepDefinitionListNodeWillBeCreatedAsFollows(DataTable dataTable) {
         object.assertVertexStep("StepDefinitionList", "node", "will be", "created as follows", dataTable);
     }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node will be as follows$")
+    public void stepParametersListNodeWillBeAsFollows(DataTable dataTable) {
+        object.assertVertexStep("StepParametersList", "node", "will be", "as follows", dataTable);
+    }
 }
