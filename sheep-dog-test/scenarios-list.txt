@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/TestSuite Type
-  Scenario: Initial State
-    Tag: AddDocumentAction
   Scenario: Duplicate Test Suite Full Name
     Tag: AddDocumentAction
 

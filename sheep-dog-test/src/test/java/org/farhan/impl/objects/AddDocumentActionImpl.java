@@ -22,4 +22,18 @@ public class AddDocumentActionImpl extends TestObjectSheepDogImpl implements Add
         }
     }
 
+    @Override
+    public void setTestSuiteFullName(HashMap<String, String> keyMap) {
+        setProperty("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+    }
+
+    @Override
+    public void setPerformedToCreateATestSuiteWith(HashMap<String, String> keyMap) {
+        setProperty("cursor", getProperty("workspace"));
+        if (getProperty("Test Suite Full Name") != null) {
+            addTestSuiteWithFullName(replaceKeyword(getProperty("Test Suite Full Name").toString()));
+            properties.remove("Test Suite Full Name");
+        }
+    }
+
 }
