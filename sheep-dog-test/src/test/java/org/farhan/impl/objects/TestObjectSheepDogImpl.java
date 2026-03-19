@@ -39,6 +39,14 @@ public class TestObjectSheepDogImpl extends TestObject {
                 SheepDogBuilder.createTestSuite((ITestProject) getProperty("workspace"), testSuiteFullName));
     }
 
+    protected void addStepDefinitionWithName(String name) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof IStepDefinition) {
+            cursor = ((IStepDefinition) cursor).getParent();
+        }
+        setProperty("cursor", SheepDogBuilder.createStepDefinition((IStepObject) cursor, name));
+    }
+
     protected IDescription getDescriptionFromCursor() {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestSuite)

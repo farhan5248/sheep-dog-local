@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
@@ -47,6 +48,34 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
         if (getProperty("cursor") == null)
             return null;
         return listToCsvString(((IStepObject) getProperty("cursor")).getStepDefinitionList());
+    }
+
+    @Override
+    public void setStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addStepObjectWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setStepDefinitionListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
+        addStepDefinitionWithName(keyMap.get("Step Definition Name"));
+    }
+
+    @Override
+    public String getStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getStepDefinitionListNodeStepDefinitionName(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((IStepDefinition) getProperty("cursor")).getName();
     }
 
 }

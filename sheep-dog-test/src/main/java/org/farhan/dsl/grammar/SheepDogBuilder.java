@@ -7,10 +7,18 @@ public class SheepDogBuilder {
     }
 
     public static IStepObject createStepObject(ITestProject parent, String fullName) {
-        IStepObject stepObject = SheepDogFactory.instance.createStepObject();
-        stepObject.setFullName(fullName);
-        if (parent != null)
-            parent.addStepObject(stepObject);
+        IStepObject stepObject = null;
+        if (parent != null) {
+            ITestDocument existing = parent.getTestDocument(fullName);
+            if (existing instanceof IStepObject)
+                stepObject = (IStepObject) existing;
+        }
+        if (stepObject == null) {
+            stepObject = SheepDogFactory.instance.createStepObject();
+            stepObject.setFullName(fullName);
+            if (parent != null)
+                parent.addStepObject(stepObject);
+        }
         return stepObject;
     }
 
