@@ -125,18 +125,18 @@
 **Examples**:
  - `protected String getFullNameFromPath()`
 
-## listToString
+## listToCsvString
 
-**Desc**: Converts an ArrayList to a newline-separated string for assertion mapping.
+**Desc**: Converts a List to a comma-separated string for assertion mapping.
 
-**Rule**: ALL method names follow listToString pattern.
- - **Name**: `^listToString$`
+**Rule**: ALL method names follow listToCsvString pattern.
+ - **Name**: `^listToCsvString$`
  - **Return**: `^String$`
- - **Parameters**: `^\(ArrayList<\?>\s+\w+\)$`
+ - **Parameters**: `^\(List<\?>\s+\w+\)$`
  - **Modifier**: `^protected$`
 
 **Examples**:
- - `protected String listToString(ArrayList<?> list)`
+ - `protected String listToCsvString(List<?> list)`
 
 ## getOrCreateNode
 
