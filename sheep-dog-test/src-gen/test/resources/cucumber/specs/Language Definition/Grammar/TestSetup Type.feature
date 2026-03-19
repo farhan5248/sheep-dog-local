@@ -41,3 +41,19 @@ Feature: TestSetup Type
           | Node Path               | State  |
           | TestStepContainerList/2 | Absent |
 
+  @EditDocumentAction
+  Scenario: Test Setup Is First
+
+    \@EditDocumentAction
+    Test Setup is always at position 1 in the Test Step Container list, even when added after Test Cases.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name  |
+          | TestStepContainerList | First Test Case |
+     When The xtext plugin edit document action is performed to modify TestStepContainerList with
+          | Test Suite Full Name         | Node Path             | Test Setup Name |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList | Background      |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows
+          | Node Path               | Test Setup Name |
+          | TestStepContainerList/1 | Background      |
+

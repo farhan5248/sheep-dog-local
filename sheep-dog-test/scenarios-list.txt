@@ -1,7 +1,3 @@
-File: Language Definition/Grammar/TestSetup Type
-  Scenario: Test Setup Is First
-    Tag: EditDocumentAction
-
 File: Language Definition/Grammar/TestCase Type
   Scenario: Test Case
     Tag: EditDocumentAction
