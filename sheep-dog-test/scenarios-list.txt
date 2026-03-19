@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/Table Type
-  Scenario: Row
-    Tag: EditDocumentAction
   Scenario: Cell
     Tag: EditDocumentAction
   Scenario: Duplicate Row

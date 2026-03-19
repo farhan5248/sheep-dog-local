@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
@@ -299,6 +300,38 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
     @Override
     public void setTextNodeTextContent(HashMap<String, String> keyMap) {
         addTextWithContent(keyMap.get("Text Content"));
+    }
+
+    @Override
+    public void setRowListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addTestSuiteWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setRowListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setRowListNodeRowContent(HashMap<String, String> keyMap) {
+        addRowWithContent(keyMap.get("Row Content"));
+    }
+
+    @Override
+    public String getRowListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getRowListNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getRowListNodeRowContent(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((IRow) getProperty("cursor")).toString();
     }
 
 }

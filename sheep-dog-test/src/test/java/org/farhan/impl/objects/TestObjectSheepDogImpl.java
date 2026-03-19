@@ -100,6 +100,16 @@ public class TestObjectSheepDogImpl extends TestObject {
         setProperty("cursor", text);
     }
 
+    protected void addRowWithContent(String content) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof IRow) {
+            cursor = ((IRow) cursor).getParent();
+        }
+        IRow row = SheepDogBuilder.createRow((ITable) cursor);
+        SheepDogBuilder.createCell(row, content);
+        setProperty("cursor", row);
+    }
+
     protected void addTestDataWithName(String name) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestData) {
