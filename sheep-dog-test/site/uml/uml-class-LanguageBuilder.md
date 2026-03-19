@@ -1,5 +1,7 @@
 # {Language}Builder
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Static factory for creating and initializing grammar elements. Separates object construction and initialization logic from factory operations and grammar model definitions.
 
 ## create{Type}

@@ -1,5 +1,7 @@
 # {Type}IssueDetector
 
+**Directory**: `src/main/java/org/farhan/dsl/issues`
+
 Validation logic for grammar elements at different scopes. Separates validation rules from grammar model and UI, enabling reuse across editors and build tools.
 
 ## validate{Assignment}{Scope}

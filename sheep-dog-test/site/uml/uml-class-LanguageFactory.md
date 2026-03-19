@@ -1,5 +1,7 @@
 # {Language}Factory
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Singleton holder that provides global access to the concrete factory instance. Separates factory instance management from factory operations and builder logic.
 
 ## instance

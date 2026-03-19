@@ -1,5 +1,7 @@
 # I{Type}
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Grammar element interface contracts. Separates interface definitions from implementations, allowing multiple backends (EMF, POJO) for the same grammar model.
 
 **Grammar-to-Interface Mapping**

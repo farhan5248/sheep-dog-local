@@ -1,5 +1,7 @@
 # {Type}{Fragment}Types
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Enum constants for test step keyword patterns. Separates keyword definitions from parsing logic, enabling centralized maintenance of domain vocabulary.
 
 ## {FRAGMENT}

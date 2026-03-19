@@ -1,5 +1,7 @@
 # {Language}Utility
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Static helper methods for grammar element operations. Separates utility operations from grammar model classes, keeping interfaces focused on data access.
 
 ## get{Assignment}AsString

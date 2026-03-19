@@ -1,5 +1,7 @@
 # {Type}IssueTypes
 
+**Directory**: `src/main/java/org/farhan/dsl/issues`
+
 Enum constants for validation error types. Separates error type definitions from validation logic, providing stable identifiers for detector-resolver coordination.
 
 ## {TYPE}{ASSIGNMENT}{SCOPE}
