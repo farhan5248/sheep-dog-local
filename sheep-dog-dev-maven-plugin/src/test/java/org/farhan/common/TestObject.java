@@ -1,8 +1,11 @@
 package org.farhan.common;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
@@ -26,10 +29,22 @@ import io.cucumber.datatable.DataTable;
 
 public abstract class TestObject {
 
+    public enum TestState {
+        Absent, Empty, Present;
+
+        private static final Set<String> NAMES = Arrays.stream(values()).map(Enum::name).collect(Collectors.toSet());
+
+        public static boolean contains(String value) {
+            return NAMES.contains(value);
+        }
+    }
+
     public static HashMap<String, Object> properties = new HashMap<String, Object>();
+
     public static void reset() {
         TestObject.properties.clear();
     }
+
     private static Object getDocumentFromNode(Object node) {
         Object current = node;
         while (current != null && !(current instanceof ITestDocument)) {
@@ -151,37 +166,43 @@ public abstract class TestObject {
         return result.toString();
     }
 
-    private void navigateToNode(String path, boolean create) {
-        String[] parts = path.split("/");
-        Object current = getDocumentFromNode(getProperty("cursor"));
-        int i = 0;
-        while (i < parts.length && current != null) {
-            String elementType = parts[i];
-            if (elementType.endsWith("List")) {
-                if (i + 1 >= parts.length || !parts[i + 1].matches("\\d+")) {
-                    break;
-                }
-                int index = Integer.parseInt(parts[i + 1]) - 1;
-                if (create) {
-                    current = getOrCreateNode(current, elementType, index);
-                } else {
-                    try {
-                        current = getChildNode(current, elementType, index);
-                    } catch (IndexOutOfBoundsException e) {
-                        setProperty("cursor", null);
-                        return;
+    private boolean navigateToNode(String path, boolean create) {
+        try {
+            String[] parts = path.split("/");
+            Object current = getDocumentFromNode(getProperty("cursor"));
+            int i = 0;
+            while (i < parts.length && current != null) {
+                String elementType = parts[i];
+                if (elementType.endsWith("List")) {
+                    if (i + 1 >= parts.length || !parts[i + 1].matches("\\d+")) {
+                        break;
                     }
+                    int index = Integer.parseInt(parts[i + 1]) - 1;
+                    if (create) {
+                        current = getOrCreateNode(current, elementType, index);
+                    } else {
+                        try {
+                            current = getChildNode(current, elementType, index);
+                        } catch (IndexOutOfBoundsException e) {
+                            setProperty("cursor", null);
+                            return true;
+                        }
+                    }
+                    i += 2;
+                } else {
+                    if (create && elementType.equals("Text")) {
+                        break;
+                    }
+                    current = create ? getOrCreateNode(current, elementType, 0) : getChildNode(current, elementType, 0);
+                    i++;
                 }
-                i += 2;
-            } else {
-                if (create && elementType.equals("Text")) {
-                    break;
-                }
-                current = create ? getOrCreateNode(current, elementType, 0) : getChildNode(current, elementType, 0);
-                i++;
+                if (current != null)
+                    setProperty("cursor", current);
             }
-            if (current != null)
-                setProperty("cursor", current);
+            return true;
+        } catch (Exception e) {
+            setProperty("cursor", null);
+            return false;
         }
     }
 
@@ -191,7 +212,41 @@ public abstract class TestObject {
         if (stateType.contentEquals("isn't") || stateType.contentEquals("won't be")) {
             negativeTest = true;
         }
-        processInputOutputs(stateDesc, "", operation, (partDesc + " " + partType).trim(), negativeTest);
+        String sectionName = (partDesc + " " + partType).trim();
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(stateDesc, "");
+        try {
+            Object returnValue = this.getClass()
+                    .getMethod(operation + convertToPascalCase(sectionName) + convertToPascalCase(stateDesc),
+                            HashMap.class)
+                    .invoke(this, row);
+            if (operation.equals("get")) {
+                String expectedValue = convertToPascalCase(stateDesc);
+                String actual = returnValue == null ? null : returnValue.toString();
+                if (TestState.contains(convertToPascalCase(stateDesc))) {
+                    String mappedActual;
+                    if (actual == null)
+                        mappedActual = TestState.Absent.name();
+                    else if (actual.isEmpty())
+                        mappedActual = TestState.Empty.name();
+                    else
+                        mappedActual = TestState.Present.name();
+                    if (negativeTest) {
+                        Assertions.assertNotEquals(expectedValue, mappedActual);
+                    } else {
+                        Assertions.assertEquals(expectedValue, mappedActual);
+                    }
+                } else {
+                    if (negativeTest) {
+                        Assertions.assertNull(actual);
+                    } else {
+                        Assertions.assertNotNull(actual);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Assertions.fail(e);
+        }
     }
 
     private void processInputOutputsTable(DataTable dataTable, String operation, String partDesc, String partType,
@@ -200,7 +255,52 @@ public abstract class TestObject {
         if (stateType.contentEquals("isn't") || stateType.contentEquals("won't be")) {
             negativeTest = true;
         }
-        processInputOutputs(dataTable, operation, (partDesc + " " + partType).trim(), negativeTest);
+        String sectionName = (partDesc + " " + partType).trim();
+        List<List<String>> data = dataTable.asLists();
+        ArrayList<String> headers = new ArrayList<String>();
+        for (String cell : data.get(0)) {
+            headers.add(cell);
+        }
+        for (int i = 1; i < data.size(); i++) {
+            HashMap<String, String> row = new HashMap<String, String>();
+            for (int j = 0; j < headers.size(); j++) {
+                row.put(headers.get(j), data.get(i).get(j));
+            }
+            for (String fieldName : headers) {
+                try {
+                    Object returnValue = this.getClass()
+                            .getMethod(operation + convertToPascalCase(sectionName) + convertToPascalCase(fieldName),
+                                    HashMap.class)
+                            .invoke(this, row);
+                    if (operation.equals("get")) {
+                        String expectedValue = replaceKeyword(row.get(fieldName));
+                        String actual = returnValue == null ? null : returnValue.toString();
+                        if (fieldName.equals("State") && TestState.contains(expectedValue)) {
+                            String mappedActual;
+                            if (actual == null)
+                                mappedActual = TestState.Absent.name();
+                            else if (actual.isEmpty())
+                                mappedActual = TestState.Empty.name();
+                            else
+                                mappedActual = TestState.Present.name();
+                            if (negativeTest) {
+                                Assertions.assertNotEquals(expectedValue, mappedActual);
+                            } else {
+                                Assertions.assertEquals(expectedValue, mappedActual);
+                            }
+                        } else {
+                            if (negativeTest) {
+                                Assertions.assertNotEquals(expectedValue, actual);
+                            } else {
+                                Assertions.assertEquals(expectedValue, actual);
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    Assertions.fail(e);
+                }
+            }
+        }
     }
 
     private void processInputOutputsText(String text, String operation, String partDesc, String partType,
@@ -209,7 +309,26 @@ public abstract class TestObject {
         if (stateType.contentEquals("isn't") || stateType.contentEquals("won't be")) {
             negativeTest = true;
         }
-        processInputOutputs("Content", text, operation, (partDesc + " " + partType).trim(), negativeTest);
+        String fieldName = "Content";
+        String sectionName = (partDesc + " " + partType).trim();
+        HashMap<String, String> row = new HashMap<String, String>();
+        row.put(fieldName, text);
+        try {
+            Object returnValue = this.getClass()
+                    .getMethod(operation + convertToPascalCase(sectionName) + convertToPascalCase(fieldName),
+                            HashMap.class)
+                    .invoke(this, row);
+            if (operation.equals("get")) {
+                String actual = returnValue == null ? null : returnValue.toString();
+                if (negativeTest) {
+                    Assertions.assertNotEquals(text, actual);
+                } else {
+                    Assertions.assertEquals(text, actual);
+                }
+            }
+        } catch (Exception e) {
+            Assertions.fail(e);
+        }
     }
 
     private void putProperties(String partDesc, String partType, String stateType, String stateDesc) {
@@ -226,8 +345,8 @@ public abstract class TestObject {
         properties.remove("stateDesc");
     }
 
-    protected void createNodeDependencies(String path) {
-        navigateToNode(path, true);
+    protected boolean createNodeDependencies(String path) {
+        return navigateToNode(path, true);
     }
 
     protected Object getChildNode(Object parent, String elementType, int index) {
@@ -280,101 +399,15 @@ public abstract class TestObject {
 
     abstract protected Object getOrCreateNode(Object parent, String elementType, int index);
 
-    protected String listToString(ArrayList<?> list) {
+    protected String listToCsvString(List<?> list) {
         StringBuilder sb = new StringBuilder();
-        for (Object item : list) {
-            sb.append("\n").append(item.toString());
+        for (int i = 0; i < list.size(); i++) {
+            if (i > 0) {
+                sb.append(", ");
+            }
+            sb.append(list.get(i).toString());
         }
         return sb.toString();
-    }
-
-    protected String listToString(List<?> list) {
-        if (list == null)
-            return null;
-        if (list.isEmpty())
-            return "";
-        return list.toString();
-    }
-
-    protected void processInputOutputs(DataTable dataTable, String operation, String sectionName,
-            boolean negativeTest) {
-
-        List<List<String>> data = dataTable.asLists();
-        ArrayList<String> headers = new ArrayList<String>();
-        for (String cell : data.get(0)) {
-            headers.add(cell);
-        }
-        for (int i = 1; i < data.size(); i++) {
-            HashMap<String, String> row = new HashMap<String, String>();
-            for (int j = 0; j < headers.size(); j++) {
-                row.put(headers.get(j), data.get(i).get(j));
-            }
-            for (String fieldName : headers) {
-                try {
-                    Object returnValue = this.getClass()
-                            .getMethod(operation + convertToPascalCase(sectionName) + convertToPascalCase(fieldName),
-                                    HashMap.class)
-                            .invoke(this, row);
-                    if (operation.equals("get") && !fieldName.contains("Node Path") && !fieldName.equals("Tag List")) {
-                        String expected = replaceKeyword(row.get(fieldName));
-                        String actual = returnValue == null ? null : returnValue.toString();
-                        if (fieldName.equals("State") && (expected.equals("Absent") || expected.equals("Empty")
-                                || expected.equals("Present"))) {
-                            String mappedActual;
-                            if (actual == null)
-                                mappedActual = "Absent";
-                            else if (actual.isEmpty())
-                                mappedActual = "Empty";
-                            else
-                                mappedActual = "Present";
-                            if (negativeTest) {
-                                Assertions.assertNotEquals(expected, mappedActual);
-                            } else {
-                                Assertions.assertEquals(expected, mappedActual);
-                            }
-                        } else {
-                            if (negativeTest) {
-                                Assertions.assertNotEquals(expected, actual);
-                            } else {
-                                Assertions.assertEquals(expected, actual);
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    Assertions.fail(e);
-                }
-            }
-        }
-    }
-
-    protected void processInputOutputs(String key, String value, String operation, String sectionName,
-            boolean negativeTest) {
-
-        HashMap<String, String> row = new HashMap<String, String>();
-        row.put(key, value);
-        try {
-            Object returnValue = this.getClass()
-                    .getMethod(operation + convertToPascalCase(sectionName) + convertToPascalCase(key), HashMap.class)
-                    .invoke(this, row);
-            if (operation.equals("get")) {
-                String actual = returnValue == null ? null : returnValue.toString();
-                if (negativeTest) {
-                    if (value.equals("true")) {
-                        Assertions.assertNull(actual);
-                    } else if (!value.isEmpty()) {
-                        Assertions.assertNotEquals(replaceKeyword(value), actual);
-                    }
-                } else {
-                    if (value.equals("true")) {
-                        Assertions.assertNotNull(actual);
-                    } else if (!value.isEmpty()) {
-                        Assertions.assertEquals(replaceKeyword(value), actual);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            Assertions.fail(e);
-        }
     }
 
     protected String replaceKeyword(String value) {
@@ -389,8 +422,8 @@ public abstract class TestObject {
         this.component = component;
     }
 
-    protected void setCursorAtNode(String path) {
-        navigateToNode(path, false);
+    protected boolean setCursorAtNode(String path) {
+        return navigateToNode(path, false);
     }
 
     protected void setObject(String object) {
