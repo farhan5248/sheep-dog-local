@@ -21,3 +21,22 @@ Feature: Table Type
           | Node Path                                              | Row Content |
           | TestStepContainerList/1/TestDataList/1/Table/RowList/2 | Second Row  |
 
+  @list @EditDocumentAction
+  Scenario: Cell
+
+    \@list \@EditDocumentAction
+    Row must have
+    - Cell List
+    Cell must have
+    - Name
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name  |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | First Cell |
+     When The xtext plugin edit document action is performed to modify CellList with
+          | Test Suite Full Name         | Node Path                                                       | Cell Name   |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | Second Cell |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows
+          | Node Path                                                         | Cell Name   |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList/2 | Second Cell |
+

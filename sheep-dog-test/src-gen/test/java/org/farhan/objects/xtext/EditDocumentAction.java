@@ -39,4 +39,8 @@ public interface EditDocumentAction {
     public void setPerformedToModifyRowListWith(HashMap<String, String> keyMap);
 
     public void setRowContent(HashMap<String, String> keyMap);
+
+    public void setPerformedToModifyCellListWith(HashMap<String, String> keyMap);
+
+    public void setCellName(HashMap<String, String> keyMap);
 }
