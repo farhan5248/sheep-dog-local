@@ -33,10 +33,18 @@ public class SheepDogBuilder {
 
     public static ITestSuite createTestSuite(ITestProject parent, String fullName) {
         logger.debug("createTestSuite: parent={}, fullName={}", parent, fullName);
-        ITestSuite testSuite = SheepDogFactory.instance.createTestSuite();
-        testSuite.setFullName(fullName);
-        if (parent != null)
-            parent.addTestSuite(testSuite);
+        ITestSuite testSuite = null;
+        if (parent != null) {
+            ITestDocument existing = parent.getTestDocument(fullName);
+            if (existing instanceof ITestSuite)
+                testSuite = (ITestSuite) existing;
+        }
+        if (testSuite == null) {
+            testSuite = SheepDogFactory.instance.createTestSuite();
+            testSuite.setFullName(fullName);
+            if (parent != null)
+                parent.addTestSuite(testSuite);
+        }
         logger.debug("createTestSuite: return {}", testSuite);
         return testSuite;
     }
@@ -49,6 +57,16 @@ public class SheepDogBuilder {
             parent.addTestCase(testCase);
         logger.debug("createTestCase: return {}", testCase);
         return testCase;
+    }
+
+    public static ITestSetup createTestSetup(ITestSuite parent, String name) {
+        logger.debug("createTestSetup: parent={}, name={}", parent, name);
+        ITestSetup testSetup = SheepDogFactory.instance.createTestSetup();
+        testSetup.setName(name);
+        if (parent != null)
+            parent.addTestSetup(testSetup);
+        logger.debug("createTestSetup: return {}", testSetup);
+        return testSetup;
     }
 
     public static ITestStep createTestStep(ITestStepContainer parent, String fullName) {

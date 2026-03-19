@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
 
@@ -44,6 +45,45 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
         if (getProperty("cursor") == null)
             return null;
         return listToCsvString(((ITestSuite) getProperty("cursor")).getTestStepContainerList());
+    }
+
+    @Override
+    public void setTestStepContainerListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addTestSuiteWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setTestStepContainerListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTestStepContainerListNodeTestCaseName(HashMap<String, String> keyMap) {
+        addTestCaseWithName(keyMap.get("Test Case Name"));
+    }
+
+    @Override
+    public void setTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap) {
+        addTestSetupWithName(keyMap.get("Test Setup Name"));
+    }
+
+    @Override
+    public String getTestStepContainerListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getTestStepContainerListNodeTestCaseName(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((ITestStepContainer) getProperty("cursor")).getName();
+    }
+
+    @Override
+    public String getTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((ITestStepContainer) getProperty("cursor")).getName();
     }
 
 }

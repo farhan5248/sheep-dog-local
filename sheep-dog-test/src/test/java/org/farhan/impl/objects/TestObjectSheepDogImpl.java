@@ -12,6 +12,7 @@ import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
+import org.farhan.dsl.grammar.ITestSetup;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogFactory;
@@ -57,6 +58,22 @@ public class TestObjectSheepDogImpl extends TestObject {
             cursor = ((IStepParameters) cursor).getParent();
         }
         setProperty("cursor", SheepDogBuilder.createStepParameters((IStepDefinition) cursor, name));
+    }
+
+    protected void addTestCaseWithName(String name) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof ITestCase) {
+            cursor = ((ITestCase) cursor).getParent();
+        }
+        setProperty("cursor", SheepDogBuilder.createTestCase((ITestSuite) cursor, name));
+    }
+
+    protected void addTestSetupWithName(String name) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof ITestSetup) {
+            cursor = ((ITestSetup) cursor).getParent();
+        }
+        setProperty("cursor", SheepDogBuilder.createTestSetup((ITestSuite) cursor, name));
     }
 
     protected String getDocumentFromWorkspaceAsString() {
