@@ -1,7 +1,3 @@
-File: Language Definition/Grammar/TestStep Attachment Type
-  Scenario: Test Step Insertion Order
-    Tag: EditDocumentAction
-
 File: Language Definition/Grammar/Table Type
   Scenario: Row
     Tag: EditDocumentAction
