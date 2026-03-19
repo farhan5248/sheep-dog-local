@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/StepDefinition Type
-  Scenario: Duplicate Step Definition Name
-    Tag: EditDocumentAction
   Scenario: Sorted Step Definition Name
     Tag: EditDocumentAction
 

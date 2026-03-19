@@ -30,3 +30,19 @@ Feature: StepDefinition Type
           | Node Path                        | State  |
           | StepDefinitionList/1/Description | Absent |
 
+  @EditDocumentAction
+  Scenario: Duplicate Step Definition Name
+
+    \@EditDocumentAction
+    Step Definition name must be unique within a Step Object. Creating a Step Definition with an existing name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node is created as follows
+          | Node Path          | Step Definition Name  |
+          | StepDefinitionList | First Step Definition |
+     When The xtext plugin edit document action is performed to modify StepDefinitionList with
+          | Step Object Full Name                       | Node Path          | Step Definition Name  |
+          | stepdefs/daily batchjob/Input file.asciidoc | StepDefinitionList | First Step Definition |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be as follows
+          | Node Path            | State  |
+          | StepDefinitionList/2 | Absent |
+
