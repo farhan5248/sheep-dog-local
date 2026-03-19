@@ -110,10 +110,7 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
 
     @Override
     public void setPerformedToAddTextAt(HashMap<String, String> keyMap) {
-        if (getProperty("Test Suite Full Name") != null) {
-            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
-            properties.remove("Test Suite Full Name");
-        }
+        navigateToDocument();
         if (getProperty("Node Path") != null) {
             setCursorAtNode(getProperty("Node Path").toString());
             addTextWithContent("Text");
@@ -123,10 +120,7 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
 
     @Override
     public void setPerformedToAddTableAt(HashMap<String, String> keyMap) {
-        if (getProperty("Test Suite Full Name") != null) {
-            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
-            properties.remove("Test Suite Full Name");
-        }
+        navigateToDocument();
         if (getProperty("Node Path") != null) {
             setCursorAtNode(getProperty("Node Path").toString());
             setProperty("cursor", SheepDogBuilder.createTable((ITestStep) getProperty("cursor")));
