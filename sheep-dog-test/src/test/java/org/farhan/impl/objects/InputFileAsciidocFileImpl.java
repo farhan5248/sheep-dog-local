@@ -17,8 +17,7 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
-        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return getDocumentFromWorkspaceAsString();
     }
 
     @Override
@@ -34,8 +33,7 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getStepDefinitionListNodeAsFollows(HashMap<String, String> keyMap) {
-        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return getDocumentFromWorkspaceAsString();
     }
 
     @Override
@@ -67,8 +65,7 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getStepDefinitionListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
-        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+        return getDocumentFromWorkspaceAsString();
     }
 
     @Override
@@ -80,6 +77,10 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
 
     @Override
     public String getStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    private String getDocumentFromWorkspaceAsString() {
         setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
         return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
