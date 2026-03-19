@@ -46,3 +46,20 @@ Feature: StepDefinition Type
           | Node Path            | State  |
           | StepDefinitionList/2 | Absent |
 
+  @EditDocumentAction
+  Scenario: Sorted Step Definition Name
+
+    \@EditDocumentAction
+    Step Definitions are sorted alphabetically by name within a Step Object.
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node is created as follows
+          | Node Path          | Step Definition Name   |
+          | StepDefinitionList | Second Step Definition |
+     When The xtext plugin edit document action is performed to modify StepDefinitionList with
+          | Step Object Full Name                       | Node Path          | Step Definition Name  |
+          | stepdefs/daily batchjob/Input file.asciidoc | StepDefinitionList | First Step Definition |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be created as follows
+          | Node Path            | Step Definition Name   |
+          | StepDefinitionList/1 | First Step Definition  |
+          | StepDefinitionList/2 | Second Step Definition |
+
