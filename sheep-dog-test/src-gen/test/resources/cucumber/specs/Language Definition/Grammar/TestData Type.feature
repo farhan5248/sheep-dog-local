@@ -30,3 +30,19 @@ Feature: TestData Type
           | Node Path                                    | State  |
           | TestStepContainerList/1/TestDataList/1/Table | Absent |
 
+  @EditDocumentAction
+  Scenario: Duplicate Test Data Name
+
+    \@EditDocumentAction
+    Test Data name must be unique within a Test Case. Creating Test Data with an existing name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node is created as follows
+          | Node Path                            | Test Data Name  |
+          | TestStepContainerList/1/TestDataList | First Test Data |
+     When The xtext plugin edit document action is performed to modify TestDataList with
+          | Test Suite Full Name         | Node Path                            | Test Data Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList | First Test Data |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node will be as follows
+          | Node Path                              | State  |
+          | TestStepContainerList/1/TestDataList/2 | Absent |
+
