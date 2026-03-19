@@ -153,10 +153,15 @@ public class SheepDogBuilder {
     }
 
     public static IStepParameters createStepParameters(IStepDefinition parent, String name) {
-        IStepParameters stepParameters = SheepDogFactory.instance.createStepParameters();
-        stepParameters.setName(name);
+        IStepParameters stepParameters = null;
         if (parent != null)
-            parent.addStepParameters(stepParameters);
+            stepParameters = parent.getStepParameters(name);
+        if (stepParameters == null) {
+            stepParameters = SheepDogFactory.instance.createStepParameters();
+            stepParameters.setName(name);
+            if (parent != null)
+                parent.addStepParameters(stepParameters);
+        }
         return stepParameters;
     }
 
