@@ -1,0 +1,52 @@
+package org.farhan.impl.objects;
+
+import java.util.HashMap;
+
+import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
+
+public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements InputFileAsciidocFile {
+
+    @Override
+    public void setCreated(HashMap<String, String> keyMap) {
+        addStepObjectWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public String getDescriptionNodeAsFollows(HashMap<String, String> keyMap) {
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getDescriptionNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getDescriptionNodeState(HashMap<String, String> keyMap) {
+        IDescription desc = getDescriptionFromCursor();
+        return desc == null ? null : desc.toString();
+    }
+
+    @Override
+    public String getStepDefinitionListNodeAsFollows(HashMap<String, String> keyMap) {
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getStepDefinitionListNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getStepDefinitionListNodeState(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return listToCsvString(((IStepObject) getProperty("cursor")).getStepDefinitionList());
+    }
+
+}

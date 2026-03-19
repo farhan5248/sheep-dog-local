@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/StepObject Type
-  Scenario: Initial State
-    Tag: AddDocumentAction
   Scenario: Duplicate Step Object Full Name
     Tag: AddDocumentAction
 
