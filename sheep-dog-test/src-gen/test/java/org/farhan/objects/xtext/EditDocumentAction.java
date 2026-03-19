@@ -33,4 +33,6 @@ public interface EditDocumentAction {
     public void setTestStepFullName(HashMap<String, String> keyMap);
 
     public void setPerformedToAddTextAt(HashMap<String, String> keyMap);
+
+    public void setPerformedToAddTableAt(HashMap<String, String> keyMap);
 }

@@ -105,4 +105,10 @@ public interface ProcessIssuesAsciidocFile {
     public void setTableNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public void setTableNodeNodePath(HashMap<String, String> keyMap);
+
+    public void setTextNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public void setTextNodeNodePath(HashMap<String, String> keyMap);
+
+    public void setTextNodeTextContent(HashMap<String, String> keyMap);
 }

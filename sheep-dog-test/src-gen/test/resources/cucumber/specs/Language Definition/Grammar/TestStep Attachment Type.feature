@@ -20,3 +20,19 @@ Feature: TestStep Attachment Type
           | Node Path                                   | State  |
           | TestStepContainerList/1/TestStepList/1/Text | Absent |
 
+  @EditDocumentAction
+  Scenario: Text Excludes Table
+
+    \@EditDocumentAction
+    Table and Text are mutually exclusive on a Test Step. A Test Step with Text cannot also have a Table.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
+          | Node Path                                   |
+          | TestStepContainerList/1/TestStepList/1/Text |
+     When The xtext plugin edit document action is performed to add Table at
+          | Test Suite Full Name         | Node Path                                    |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
+          | Node Path                                    | State  |
+          | TestStepContainerList/1/TestStepList/1/Table | Absent |
+
