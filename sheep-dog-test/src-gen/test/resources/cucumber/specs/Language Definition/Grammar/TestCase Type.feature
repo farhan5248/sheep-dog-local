@@ -50,3 +50,20 @@ Feature: TestCase Type
           | Node Path               | State  |
           | TestStepContainerList/2 | Absent |
 
+  @EditDocumentAction
+  Scenario: Test Case Insertion Order
+
+    \@EditDocumentAction
+    Test Cases maintain insertion order within a Test Suite.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name   |
+          | TestStepContainerList | Second Test Case |
+     When The xtext plugin edit document action is performed to modify TestStepContainerList with
+          | Test Suite Full Name         | Node Path             | Test Case Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList | First Test Case |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows
+          | Node Path               | Test Case Name   |
+          | TestStepContainerList/1 | Second Test Case |
+          | TestStepContainerList/2 | First Test Case  |
+
