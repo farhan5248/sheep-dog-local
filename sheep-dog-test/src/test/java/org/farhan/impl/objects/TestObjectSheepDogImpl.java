@@ -102,6 +102,30 @@ public class TestObjectSheepDogImpl extends TestObject {
         return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
+    protected String assertTestStepFullName() {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((ITestStep) getProperty("cursor")).getFullName();
+    }
+
+    protected String assertTestStepObjectName() {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((ITestStep) getProperty("cursor")).getStepObjectName();
+    }
+
+    protected String assertTestStepDefinitionName() {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((ITestStep) getProperty("cursor")).getStepDefinitionName();
+    }
+
+    protected String assertTestStepContainerName() {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((ITestStepContainer) getProperty("cursor")).getName();
+    }
+
     protected IDescription getDescriptionFromCursor() {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestSuite)

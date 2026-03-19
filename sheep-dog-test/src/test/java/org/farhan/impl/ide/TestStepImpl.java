@@ -82,9 +82,7 @@ public class TestStepImpl implements ITestStep {
 
     @Override
     public String toString() {
-        String obj = stepObjectName != null ? stepObjectName : "";
-        String def = stepDefinitionName != null ? stepDefinitionName : "";
-        return (obj + " " + def).trim();
+        return getFullName();
     }
 
 }

@@ -79,16 +79,12 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepContainerListNodeTestCaseName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStepContainer) getProperty("cursor")).getName();
+        return assertTestStepContainerName();
     }
 
     @Override
     public String getTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStepContainer) getProperty("cursor")).getName();
+        return assertTestStepContainerName();
     }
 
     @Override
@@ -202,86 +198,62 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
 
     @Override
     public String getTestStepListNodeAndFullName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getFullName();
+        return assertTestStepFullName();
     }
 
     @Override
     public String getTestStepListNodeAndStepObjectRefName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getStepObjectName();
+        return assertTestStepObjectName();
     }
 
     @Override
     public String getTestStepListNodeAndStepDefinitionRefName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getStepDefinitionName();
+        return assertTestStepDefinitionName();
     }
 
     @Override
     public String getTestStepListNodeGivenFullName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getFullName();
+        return assertTestStepFullName();
     }
 
     @Override
     public String getTestStepListNodeGivenStepObjectRefName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getStepObjectName();
+        return assertTestStepObjectName();
     }
 
     @Override
     public String getTestStepListNodeGivenStepDefinitionRefName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getStepDefinitionName();
+        return assertTestStepDefinitionName();
     }
 
     @Override
     public String getTestStepListNodeThenFullName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getFullName();
+        return assertTestStepFullName();
     }
 
     @Override
     public String getTestStepListNodeThenStepObjectRefName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getStepObjectName();
+        return assertTestStepObjectName();
     }
 
     @Override
     public String getTestStepListNodeThenStepDefinitionRefName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getStepDefinitionName();
+        return assertTestStepDefinitionName();
     }
 
     @Override
     public String getTestStepListNodeWhenFullName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getFullName();
+        return assertTestStepFullName();
     }
 
     @Override
     public String getTestStepListNodeWhenStepObjectRefName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getStepObjectName();
+        return assertTestStepObjectName();
     }
 
     @Override
     public String getTestStepListNodeWhenStepDefinitionRefName(HashMap<String, String> keyMap) {
-        if (getProperty("cursor") == null)
-            return null;
-        return ((ITestStep) getProperty("cursor")).getStepDefinitionName();
+        return assertTestStepDefinitionName();
     }
 
     @Override
