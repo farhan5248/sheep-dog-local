@@ -78,4 +78,22 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
         return ((IStepDefinition) getProperty("cursor")).getName();
     }
 
+    @Override
+    public String getStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    @Override
+    public String getStepParametersListNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getStepParametersListNodeState(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return listToCsvString(((IStepDefinition) getProperty("cursor")).getStepParameterList());
+    }
+
 }

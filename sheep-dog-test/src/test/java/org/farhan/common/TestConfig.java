@@ -1,6 +1,7 @@
 package org.farhan.common;
 
 import org.farhan.impl.objects.AddDocumentActionImpl;
+import org.farhan.impl.objects.EditDocumentActionImpl;
 import org.farhan.impl.objects.Input2FileAsciidocFileImpl;
 import org.farhan.impl.objects.InputFileAsciidocFileImpl;
 import org.farhan.impl.objects.TestObjectSheepDogImpl;
@@ -29,6 +30,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
     @Override
     protected void configure() {
         bind(org.farhan.objects.xtext.AddDocumentAction.class).to(AddDocumentActionImpl.class);
+        bind(org.farhan.objects.xtext.EditDocumentAction.class).to(EditDocumentActionImpl.class);
         bind(org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile.class)
                 .to(InputFileAsciidocFileImpl.class);
         bind(org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.Input2FileAsciidocFile.class)
