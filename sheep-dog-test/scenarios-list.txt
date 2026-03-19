@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/TestData Type
-  Scenario: Test Data
-    Tag: EditDocumentAction
   Scenario: Duplicate Test Data Name
     Tag: EditDocumentAction
   Scenario: Test Data Insertion Order

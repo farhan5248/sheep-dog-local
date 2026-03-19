@@ -3,7 +3,9 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
+import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
@@ -119,6 +121,53 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
         if (getProperty("cursor") == null)
             return null;
         return listToCsvString(((ITestStepContainer) getProperty("cursor")).getTestStepList());
+    }
+
+    @Override
+    public String getTableNodeAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getTableNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getTableNodeState(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        ITable table = null;
+        if (getProperty("cursor") instanceof ITestData)
+            table = ((ITestData) getProperty("cursor")).getTable();
+        return table == null ? null : table.toString();
+    }
+
+    @Override
+    public void setTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addTestSuiteWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setTestDataListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTestDataListNodeTestDataName(HashMap<String, String> keyMap) {
+        addTestDataWithName(keyMap.get("Test Data Name"));
+    }
+
+    @Override
+    public String getTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getTestDataListNodeTestDataName(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((ITestData) getProperty("cursor")).getName();
     }
 
 }

@@ -76,6 +76,14 @@ public class TestObjectSheepDogImpl extends TestObject {
         setProperty("cursor", SheepDogBuilder.createTestSetup((ITestSuite) cursor, name));
     }
 
+    protected void addTestDataWithName(String name) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof ITestData) {
+            cursor = ((ITestData) cursor).getParent();
+        }
+        setProperty("cursor", SheepDogBuilder.createTestData((ITestCase) cursor, name));
+    }
+
     protected String getDocumentFromWorkspaceAsString() {
         setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
         return getProperty("cursor") == null ? null : getProperty("cursor").toString();
