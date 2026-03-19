@@ -1,0 +1,32 @@
+@sheep-dog-test
+Feature: StepParameters Type
+
+  \@sheep-dog-test
+  Step Parameters is a grammar rule in SheepDog.xtext contained within a Step Definition. These tests verify editing Step Parameters elements within a document.
+
+  @list @EditDocumentAction
+  Scenario: Step Parameters
+
+    \@list \@EditDocumentAction
+    Step Parameters must have
+    - Name
+    and optionally have these
+    - Description
+    - Table
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node is created as follows
+          | Node Path                               | Step Parameters Name  |
+          | StepDefinitionList/1/StepParametersList | First Step Parameters |
+     When The xtext plugin edit document action is performed to modify StepParametersList with
+          | Step Object Full Name                       | Node Path                               | Step Parameters Name   |
+          | stepdefs/daily batchjob/Input file.asciidoc | StepDefinitionList/1/StepParametersList | Second Step Parameters |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepParametersList node will be created as follows
+          | Node Path                                 | Step Parameters Name   |
+          | StepDefinitionList/1/StepParametersList/2 | Second Step Parameters |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Description node will be as follows
+          | Node Path                                             | State  |
+          | StepDefinitionList/1/StepParametersList/2/Description | Absent |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Table node will be as follows
+          | Node Path                                       | State  |
+          | StepDefinitionList/1/StepParametersList/2/Table | Absent |
+

@@ -33,4 +33,20 @@ public interface InputFileAsciidocFile {
     public String getStepParametersListNodeNodePath(HashMap<String, String> keyMap);
 
     public String getStepParametersListNodeState(HashMap<String, String> keyMap);
+
+    public void setStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public void setStepParametersListNodeNodePath(HashMap<String, String> keyMap);
+
+    public void setStepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
+
+    public String getStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public String getStepParametersListNodeStepParametersName(HashMap<String, String> keyMap);
+
+    public String getTableNodeAsFollows(HashMap<String, String> keyMap);
+
+    public String getTableNodeNodePath(HashMap<String, String> keyMap);
+
+    public String getTableNodeState(HashMap<String, String> keyMap);
 }
