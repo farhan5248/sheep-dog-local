@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 
@@ -95,6 +96,53 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
         if (getProperty("cursor") == null)
             return null;
         return listToCsvString(((IStepDefinition) getProperty("cursor")).getStepParameterList());
+    }
+
+    @Override
+    public void setStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addStepObjectWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setStepParametersListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setStepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
+        addStepParametersWithName(keyMap.get("Step Parameters Name"));
+    }
+
+    @Override
+    public String getStepParametersListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getStepParametersListNodeStepParametersName(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((IStepParameters) getProperty("cursor")).getName();
+    }
+
+    @Override
+    public String getTableNodeAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getTableNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getTableNodeState(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        IStepParameters sp = (IStepParameters) getProperty("cursor");
+        if (sp.getTable() == null)
+            return null;
+        return listToCsvString(sp.getTable().getRowList());
     }
 
 }

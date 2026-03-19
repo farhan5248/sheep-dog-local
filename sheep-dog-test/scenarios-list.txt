@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/StepParameters Type
-  Scenario: Step Parameters
-    Tag: EditDocumentAction
   Scenario: Duplicate Step Parameters Name
     Tag: EditDocumentAction
   Scenario: Sorted Step Parameters Name

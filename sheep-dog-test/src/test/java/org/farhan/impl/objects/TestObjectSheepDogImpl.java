@@ -47,6 +47,14 @@ public class TestObjectSheepDogImpl extends TestObject {
         setProperty("cursor", SheepDogBuilder.createStepDefinition((IStepObject) cursor, name));
     }
 
+    protected void addStepParametersWithName(String name) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof IStepParameters) {
+            cursor = ((IStepParameters) cursor).getParent();
+        }
+        setProperty("cursor", SheepDogBuilder.createStepParameters((IStepDefinition) cursor, name));
+    }
+
     protected IDescription getDescriptionFromCursor() {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestSuite)
