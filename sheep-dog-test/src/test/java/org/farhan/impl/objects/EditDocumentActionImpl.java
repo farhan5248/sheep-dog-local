@@ -3,6 +3,8 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.objects.xtext.EditDocumentAction;
 
 public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements EditDocumentAction {
@@ -115,6 +117,19 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
         if (getProperty("Node Path") != null) {
             setCursorAtNode(getProperty("Node Path").toString());
             addTextWithContent("Text");
+            properties.remove("Node Path");
+        }
+    }
+
+    @Override
+    public void setPerformedToAddTableAt(HashMap<String, String> keyMap) {
+        if (getProperty("Test Suite Full Name") != null) {
+            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
+            properties.remove("Test Suite Full Name");
+        }
+        if (getProperty("Node Path") != null) {
+            setCursorAtNode(getProperty("Node Path").toString());
+            setProperty("cursor", SheepDogBuilder.createTable((ITestStep) getProperty("cursor")));
             properties.remove("Node Path");
         }
     }

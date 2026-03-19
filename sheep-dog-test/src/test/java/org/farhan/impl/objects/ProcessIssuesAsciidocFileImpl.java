@@ -286,4 +286,19 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
         return text == null ? null : text.toString();
     }
 
+    @Override
+    public void setTextNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addTestSuiteWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setTextNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setTextNodeTextContent(HashMap<String, String> keyMap) {
+        addTextWithContent(keyMap.get("Text Content"));
+    }
+
 }
