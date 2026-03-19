@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/TestStep Keyword Type
-  Scenario: Initial State When
-    Tag: EditDocumentAction
   Scenario: Initial State Then
     Tag: EditDocumentAction
   Scenario: Initial State And
