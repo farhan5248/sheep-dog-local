@@ -1,5 +1,7 @@
 # {Language}LoggerProvider
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Interface for custom logger implementations. Separates logger provider contract from logger usage, enabling dependency injection in environments without SLF4J.
 
 ## getLogger

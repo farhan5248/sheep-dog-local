@@ -1,5 +1,7 @@
 # {Language}IssueProposal
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Data transfer object holding quick fix proposal data. Separates proposal data (id, description, value) from proposal generation and application logic.
 
 ## {Language}IssueProposal

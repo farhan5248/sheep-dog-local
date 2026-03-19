@@ -1,5 +1,7 @@
 # {Type}Fragments
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Parser utilities for extracting typed fragments from formatted text strings. Separates parsing logic from grammar model classes, using regex patterns to extract components based on domain-specific syntax rules.
 
 ## get{Fragment}

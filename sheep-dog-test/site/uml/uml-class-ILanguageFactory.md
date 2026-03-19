@@ -1,5 +1,7 @@
 # I{Language}Factory
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Factory interface for creating empty grammar instances. Separates factory contract from initialization logic and concrete implementations (EMF vs POJO).
 
 ## create{Type}

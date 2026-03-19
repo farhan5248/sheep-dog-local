@@ -1,5 +1,7 @@
 # {Language}LoggerFactory
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Facade for logger creation that abstracts SLF4J vs custom logger providers. Separates logging infrastructure concerns from business logic by hiding provider selection and fallback.
 
 ## getLogger

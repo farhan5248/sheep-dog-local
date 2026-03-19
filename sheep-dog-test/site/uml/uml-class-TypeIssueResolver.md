@@ -1,5 +1,7 @@
 # {Type}IssueResolver
 
+**Directory**: `src/main/java/org/farhan/dsl/issues`
+
 Quick fix proposal generation for validation errors. Separates fix proposal logic from detection and application, enabling IDE-independent validation tooling.
 
 ## suggest{Assignment}{Scope}(I{Type})

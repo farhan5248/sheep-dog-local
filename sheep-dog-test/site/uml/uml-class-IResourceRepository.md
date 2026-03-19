@@ -1,5 +1,7 @@
 # IResourceRepository
 
+**Directory**: `src/main/java/org/farhan/dsl/grammar`
+
 Repository interface for file I/O operations. Separates persistence contracts from business logic, allowing different implementations (filesystem, in-memory, Eclipse workspace).
 
 ## get
