@@ -4,6 +4,8 @@ import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.StepDefinitionRefFragments;
+import org.farhan.dsl.grammar.StepObjectRefFragments;
 
 public class TestStepImpl implements ITestStep {
 
@@ -23,7 +25,8 @@ public class TestStepImpl implements ITestStep {
 
     @Override
     public void setFullName(String value) {
-        // TODO split using StepDefinitionRefFragments and StepObjectRefFragments
+        stepObjectName = StepObjectRefFragments.getAll(value);
+        stepDefinitionName = StepDefinitionRefFragments.getAll(value.replace(stepObjectName, ""));
     }
 
     @Override
