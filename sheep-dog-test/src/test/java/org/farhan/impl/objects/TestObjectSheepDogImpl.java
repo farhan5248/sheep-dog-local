@@ -2,11 +2,15 @@ package org.farhan.impl.objects;
 
 import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.ITable;
+import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogBuilder;
@@ -55,6 +59,11 @@ public class TestObjectSheepDogImpl extends TestObject {
         setProperty("cursor", SheepDogBuilder.createStepParameters((IStepDefinition) cursor, name));
     }
 
+    protected String getDocumentFromWorkspaceAsString() {
+        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
     protected IDescription getDescriptionFromCursor() {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestSuite)
@@ -79,8 +88,8 @@ public class TestObjectSheepDogImpl extends TestObject {
             Object child = getChildNode(parent, elementType, index);
             if (child != null)
                 return child;
-            if (parent instanceof org.farhan.dsl.grammar.ITestStep)
-                return SheepDogBuilder.createTable((org.farhan.dsl.grammar.ITestStep) parent);
+            if (parent instanceof ITestStep)
+                return SheepDogBuilder.createTable((ITestStep) parent);
             if (parent instanceof ITestData)
                 return SheepDogBuilder.createTable((ITestData) parent);
             return SheepDogBuilder.createTable((IStepParameters) parent);
@@ -111,9 +120,9 @@ public class TestObjectSheepDogImpl extends TestObject {
                 case "TestStepList":
                     return SheepDogBuilder.createTestStep((ITestStepContainer) parent, "");
                 case "RowList":
-                    return SheepDogBuilder.createRow((org.farhan.dsl.grammar.ITable) parent);
+                    return SheepDogBuilder.createRow((ITable) parent);
                 case "CellList":
-                    return SheepDogBuilder.createCell((org.farhan.dsl.grammar.IRow) parent, "");
+                    return SheepDogBuilder.createCell((IRow) parent, "");
                 case "StepDefinitionList":
                     return SheepDogBuilder.createStepDefinition((IStepObject) parent, "");
                 case "StepParametersList":
@@ -121,7 +130,7 @@ public class TestObjectSheepDogImpl extends TestObject {
                 case "LineList":
                     return SheepDogBuilder.createLine((IDescription) parent, "");
                 case "TestDataList":
-                    return SheepDogBuilder.createTestData((org.farhan.dsl.grammar.ITestCase) parent, "");
+                    return SheepDogBuilder.createTestData((ITestCase) parent, "");
                 default:
                     throw new IllegalArgumentException("Unknown element type: " + elementType);
                 }

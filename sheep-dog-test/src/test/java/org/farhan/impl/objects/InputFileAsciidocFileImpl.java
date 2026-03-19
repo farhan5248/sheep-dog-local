@@ -6,7 +6,6 @@ import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
-import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 
 public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements InputFileAsciidocFile {
@@ -79,11 +78,6 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
     @Override
     public String getStepParametersListNodeAsFollows(HashMap<String, String> keyMap) {
         return getDocumentFromWorkspaceAsString();
-    }
-
-    private String getDocumentFromWorkspaceAsString() {
-        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
-        return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 
     @Override
