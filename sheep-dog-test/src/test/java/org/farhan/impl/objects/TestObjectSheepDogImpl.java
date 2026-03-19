@@ -1,5 +1,7 @@
 package org.farhan.impl.objects;
 
+import java.util.ArrayList;
+
 import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IRow;
@@ -25,6 +27,9 @@ public class TestObjectSheepDogImpl extends TestObject {
         ITestProject workspace = SheepDogBuilder.createTestProject();
         setProperty("workspace", workspace);
         setProperty("cursor", workspace);
+        setProperty("validate annotation.Content", "");
+        setProperty("list proposals popup", new ArrayList<>());
+        setProperty("list quickfixes popup", new ArrayList<>());
     }
 
     protected void addStepObjectWithFullName(String stepObjectFullName) {
