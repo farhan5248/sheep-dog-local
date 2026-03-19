@@ -17,4 +17,18 @@ public interface ProcessIssuesAsciidocFile {
     public String getTestStepContainerListNodeState(HashMap<String, String> keyMap);
 
     public void setCreated(HashMap<String, String> keyMap);
+
+    public void setTestStepContainerListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public void setTestStepContainerListNodeNodePath(HashMap<String, String> keyMap);
+
+    public void setTestStepContainerListNodeTestCaseName(HashMap<String, String> keyMap);
+
+    public void setTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap);
+
+    public String getTestStepContainerListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public String getTestStepContainerListNodeTestCaseName(HashMap<String, String> keyMap);
+
+    public String getTestStepContainerListNodeTestSetupName(HashMap<String, String> keyMap);
 }

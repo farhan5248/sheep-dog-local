@@ -28,3 +28,19 @@ Feature: TestSuite Type
           | Node Path   | State  |
           | Description | Absent |
 
+  @AddDocumentAction
+  Scenario: Duplicate Test Suite Full Name
+
+    \@AddDocumentAction
+    Test Suite full name must be unique within a Test Project. Creating a Test Suite with an existing full name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name  |
+          | TestStepContainerList | First Test Case |
+     When The xtext plugin add document action is performed to create a TestSuite with
+          | Test Suite Full Name         |
+          | specs/ProcessIssues.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows
+          | Node Path               | Test Case Name  |
+          | TestStepContainerList/1 | First Test Case |
+

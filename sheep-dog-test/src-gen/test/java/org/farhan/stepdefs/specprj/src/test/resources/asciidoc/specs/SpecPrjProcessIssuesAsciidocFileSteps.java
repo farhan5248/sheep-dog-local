@@ -29,4 +29,14 @@ public class SpecPrjProcessIssuesAsciidocFileSteps extends TestSteps {
     public void isCreated() {
         object.setVertexStep("", "", "is", "created");
     }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows$")
+    public void testStepContainerListNodeIsCreatedAsFollows(DataTable dataTable) {
+        object.setVertexStep("TestStepContainerList", "node", "is", "created as follows", dataTable);
+    }
+
+    @Given("^The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be created as follows$")
+    public void testStepContainerListNodeWillBeCreatedAsFollows(DataTable dataTable) {
+        object.assertVertexStep("TestStepContainerList", "node", "will be", "created as follows", dataTable);
+    }
 }
