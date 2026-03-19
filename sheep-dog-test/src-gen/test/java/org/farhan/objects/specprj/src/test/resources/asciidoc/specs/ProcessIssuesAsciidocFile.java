@@ -111,4 +111,16 @@ public interface ProcessIssuesAsciidocFile {
     public void setTextNodeNodePath(HashMap<String, String> keyMap);
 
     public void setTextNodeTextContent(HashMap<String, String> keyMap);
+
+    public void setRowListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public void setRowListNodeNodePath(HashMap<String, String> keyMap);
+
+    public void setRowListNodeRowContent(HashMap<String, String> keyMap);
+
+    public String getRowListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public String getRowListNodeNodePath(HashMap<String, String> keyMap);
+
+    public String getRowListNodeRowContent(HashMap<String, String> keyMap);
 }

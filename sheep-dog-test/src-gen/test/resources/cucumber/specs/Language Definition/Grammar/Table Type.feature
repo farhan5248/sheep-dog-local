@@ -1,0 +1,23 @@
+@sheep-dog-test
+Feature: Table Type
+
+  \@sheep-dog-test
+  Table is a grammar rule in SheepDog.xtext used by Test Step, Step Parameters, and Test Data. A Table contains Rows which contain Cells.
+
+  @list @EditDocumentAction
+  Scenario: Row
+
+    \@list \@EditDocumentAction
+    Table must have
+    - Row List
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
+          | Node Path                                            | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
+     When The xtext plugin edit document action is performed to modify RowList with
+          | Test Suite Full Name         | Node Path                                            | Row Content |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList | Second Row  |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
+          | Node Path                                              | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/2 | Second Row  |
+

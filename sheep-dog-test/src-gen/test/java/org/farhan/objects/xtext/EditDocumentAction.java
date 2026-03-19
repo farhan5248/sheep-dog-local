@@ -35,4 +35,8 @@ public interface EditDocumentAction {
     public void setPerformedToAddTextAt(HashMap<String, String> keyMap);
 
     public void setPerformedToAddTableAt(HashMap<String, String> keyMap);
+
+    public void setPerformedToModifyRowListWith(HashMap<String, String> keyMap);
+
+    public void setRowContent(HashMap<String, String> keyMap);
 }
