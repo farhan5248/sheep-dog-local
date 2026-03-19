@@ -28,3 +28,19 @@ Feature: StepObject Type
           | Node Path   | State  |
           | Description | Absent |
 
+  @AddDocumentAction
+  Scenario: Duplicate Step Object Full Name
+
+    \@AddDocumentAction
+    Step Object full name must be unique within a Test Project. Creating a Step Object with an existing full name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node is created as follows
+          | Node Path          | Step Definition Name  |
+          | StepDefinitionList | First Step Definition |
+     When The xtext plugin add document action is performed to create a StepObject with
+          | Step Object Full Name                       |
+          | stepdefs/daily batchjob/Input file.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be created as follows
+          | Node Path            | Step Definition Name  |
+          | StepDefinitionList/1 | First Step Definition |
+
