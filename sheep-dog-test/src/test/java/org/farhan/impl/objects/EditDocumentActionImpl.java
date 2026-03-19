@@ -106,6 +106,19 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
         }
     }
 
+    @Override
+    public void setPerformedToAddTextAt(HashMap<String, String> keyMap) {
+        if (getProperty("Test Suite Full Name") != null) {
+            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
+            properties.remove("Test Suite Full Name");
+        }
+        if (getProperty("Node Path") != null) {
+            setCursorAtNode(getProperty("Node Path").toString());
+            addTextWithContent("Text");
+            properties.remove("Node Path");
+        }
+    }
+
     private void navigateToDocument() {
         if (getProperty("Test Suite Full Name") != null) {
             setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));

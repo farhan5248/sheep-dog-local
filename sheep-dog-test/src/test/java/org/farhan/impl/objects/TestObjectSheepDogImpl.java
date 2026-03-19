@@ -16,6 +16,7 @@ import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSetup;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogFactory;
 import org.farhan.impl.ide.SheepDogFactoryImpl;
@@ -87,6 +88,16 @@ public class TestObjectSheepDogImpl extends TestObject {
             cursor = ((ITestStep) cursor).getParent();
         }
         setProperty("cursor", SheepDogBuilder.createTestStep((ITestStepContainer) cursor, fullName));
+    }
+
+    protected void addTextWithContent(String content) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof IText) {
+            cursor = ((IText) cursor).getParent();
+        }
+        IText text = SheepDogBuilder.createText((ITestStep) cursor);
+        text.setName(content);
+        setProperty("cursor", text);
     }
 
     protected void addTestDataWithName(String name) {

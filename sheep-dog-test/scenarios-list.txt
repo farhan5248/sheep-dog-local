@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/TestStep Attachment Type
-  Scenario: Table Excludes Text
-    Tag: EditDocumentAction
   Scenario: Text Excludes Table
     Tag: EditDocumentAction
   Scenario: Duplicate Test Step

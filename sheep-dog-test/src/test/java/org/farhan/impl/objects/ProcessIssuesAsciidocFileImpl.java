@@ -122,6 +122,16 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
     }
 
     @Override
+    public void setTableNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addTestSuiteWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setTableNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
     public String getTableNodeAsFollows(HashMap<String, String> keyMap) {
         return getDocumentFromWorkspaceAsString();
     }
