@@ -34,3 +34,19 @@ Feature: TestCase Type
           | Node Path                           | State  |
           | TestStepContainerList/1/Description | Absent |
 
+  @EditDocumentAction
+  Scenario: Duplicate Test Case Name
+
+    \@EditDocumentAction
+    Test Case name must be unique within a Test Suite. Creating a Test Case with an existing name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name  |
+          | TestStepContainerList | First Test Case |
+     When The xtext plugin edit document action is performed to modify TestStepContainerList with
+          | Test Suite Full Name         | Node Path             | Test Case Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList | First Test Case |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node will be as follows
+          | Node Path               | State  |
+          | TestStepContainerList/2 | Absent |
+
