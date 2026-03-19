@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/TestSetup Type
-  Scenario: Duplicate Test Setup Name
-    Tag: EditDocumentAction
   Scenario: Test Setup Is First
     Tag: EditDocumentAction
 
