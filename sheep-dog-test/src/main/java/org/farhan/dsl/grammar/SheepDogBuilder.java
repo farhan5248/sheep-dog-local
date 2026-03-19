@@ -246,10 +246,15 @@ public class SheepDogBuilder {
 
     public static ITestData createTestData(ITestCase parent, String name) {
         logger.debug("createTestData: parent={}, name={}", parent, name);
-        ITestData testData = SheepDogFactory.instance.createTestData();
-        testData.setName(name);
+        ITestData testData = null;
         if (parent != null)
-            parent.addTestData(testData);
+            testData = parent.getTestData(name);
+        if (testData == null) {
+            testData = SheepDogFactory.instance.createTestData();
+            testData.setName(name);
+            if (parent != null)
+                parent.addTestData(testData);
+        }
         logger.debug("createTestData: return {}", testData);
         return testData;
     }
