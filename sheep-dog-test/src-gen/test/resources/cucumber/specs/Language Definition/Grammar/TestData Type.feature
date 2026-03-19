@@ -46,3 +46,20 @@ Feature: TestData Type
           | Node Path                              | State  |
           | TestStepContainerList/1/TestDataList/2 | Absent |
 
+  @EditDocumentAction
+  Scenario: Test Data Insertion Order
+
+    \@EditDocumentAction
+    Test Data entries maintain insertion order within a Test Case.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node is created as follows
+          | Node Path                            | Test Data Name   |
+          | TestStepContainerList/1/TestDataList | Second Test Data |
+     When The xtext plugin edit document action is performed to modify TestDataList with
+          | Test Suite Full Name         | Node Path                            | Test Data Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList | First Test Data |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestDataList node will be created as follows
+          | Node Path                              | Test Data Name   |
+          | TestStepContainerList/1/TestDataList/1 | Second Test Data |
+          | TestStepContainerList/1/TestDataList/2 | First Test Data  |
+

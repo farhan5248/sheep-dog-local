@@ -1,7 +1,3 @@
-File: Language Definition/Grammar/TestData Type
-  Scenario: Test Data Insertion Order
-    Tag: EditDocumentAction
-
 File: Language Definition/Grammar/TestStep Keyword Type
   Scenario: Initial State Given
     Tag: EditDocumentAction
