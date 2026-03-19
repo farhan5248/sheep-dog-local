@@ -47,8 +47,40 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
         }
     }
 
+    @Override
+    public void setPerformedToModifyTestStepContainerListWith(HashMap<String, String> keyMap) {
+        navigateToDocument();
+        navigateToNode();
+        if (getProperty("Test Case Name") != null) {
+            addTestCaseWithName(getProperty("Test Case Name").toString());
+            properties.remove("Test Case Name");
+        }
+        if (getProperty("Test Setup Name") != null) {
+            addTestSetupWithName(getProperty("Test Setup Name").toString());
+            properties.remove("Test Setup Name");
+        }
+    }
+
+    @Override
+    public void setTestSuiteFullName(HashMap<String, String> keyMap) {
+        setProperty("Test Suite Full Name", keyMap.get("Test Suite Full Name"));
+    }
+
+    @Override
+    public void setTestCaseName(HashMap<String, String> keyMap) {
+        setProperty("Test Case Name", keyMap.get("Test Case Name"));
+    }
+
+    @Override
+    public void setTestSetupName(HashMap<String, String> keyMap) {
+        setProperty("Test Setup Name", keyMap.get("Test Setup Name"));
+    }
+
     private void navigateToDocument() {
-        if (getProperty("Step Object Full Name") != null) {
+        if (getProperty("Test Suite Full Name") != null) {
+            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
+            properties.remove("Test Suite Full Name");
+        } else if (getProperty("Step Object Full Name") != null) {
             setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Step Object Full Name").toString())));
             properties.remove("Step Object Full Name");
         }
