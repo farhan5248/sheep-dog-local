@@ -34,4 +34,9 @@ public class XtextEditDocumentActionSteps extends TestSteps {
     public void isPerformedToModifyTestDataListWith(DataTable dataTable) {
         object.doEdgeStep("", "", "is", "performed to modify TestDataList with", dataTable);
     }
+
+    @Given("^The xtext plugin edit document action is performed to modify TestStepList with$")
+    public void isPerformedToModifyTestStepListWith(DataTable dataTable) {
+        object.doEdgeStep("", "", "is", "performed to modify TestStepList with", dataTable);
+    }
 }

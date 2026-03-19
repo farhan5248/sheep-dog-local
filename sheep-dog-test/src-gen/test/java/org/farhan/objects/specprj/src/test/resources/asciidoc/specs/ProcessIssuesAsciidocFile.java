@@ -59,4 +59,46 @@ public interface ProcessIssuesAsciidocFile {
     public String getTestDataListNodeCreatedAsFollows(HashMap<String, String> keyMap);
 
     public String getTestDataListNodeTestDataName(HashMap<String, String> keyMap);
+
+    public void setTestStepListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public void setTestStepListNodeNodePath(HashMap<String, String> keyMap);
+
+    public void setTestStepListNodeGivenStepObjectRefName(HashMap<String, String> keyMap);
+
+    public void setTestStepListNodeGivenStepDefinitionRefName(HashMap<String, String> keyMap);
+
+    public void setTestStepListNodeTestStepFullName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeCreatedAsFollows(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeAndFullName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeAndStepObjectRefName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeAndStepDefinitionRefName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeGivenFullName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeGivenStepObjectRefName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeGivenStepDefinitionRefName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeThenFullName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeThenStepObjectRefName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeThenStepDefinitionRefName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeWhenFullName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeWhenStepObjectRefName(HashMap<String, String> keyMap);
+
+    public String getTestStepListNodeWhenStepDefinitionRefName(HashMap<String, String> keyMap);
+
+    public String getTextNodeAsFollows(HashMap<String, String> keyMap);
+
+    public String getTextNodeNodePath(HashMap<String, String> keyMap);
+
+    public String getTextNodeState(HashMap<String, String> keyMap);
 }

@@ -27,4 +27,8 @@ public interface EditDocumentAction {
     public void setPerformedToModifyTestDataListWith(HashMap<String, String> keyMap);
 
     public void setTestDataName(HashMap<String, String> keyMap);
+
+    public void setPerformedToModifyTestStepListWith(HashMap<String, String> keyMap);
+
+    public void setTestStepFullName(HashMap<String, String> keyMap);
 }

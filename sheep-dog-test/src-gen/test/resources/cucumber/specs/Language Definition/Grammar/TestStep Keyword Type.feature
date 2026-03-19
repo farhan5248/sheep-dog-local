@@ -1,0 +1,33 @@
+@sheep-dog-test
+Feature: TestStep Keyword Type
+
+  \@sheep-dog-test
+  Test Step is a grammar rule in SheepDog.xtext with four keyword variants: Given, When, Then, and And. These tests verify that each keyword variant follows the same Test Step structure.
+
+  @list @EditDocumentAction
+  Scenario: Initial State Given
+
+    \@list \@EditDocumentAction
+    Test Step must have
+    - StepObjectRef Name
+    - StepDefinitionRef Name
+    and optionally have one of these
+    - Table
+    - Text
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                |
+          | TestStepContainerList/1/TestStepList | The First action file is performed |
+     When The xtext plugin edit document action is performed to modify TestStepList with
+          | Test Suite Full Name         | Node Path                            | Test Step Full Name                 |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList | The Second action file is performed |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
+          | Node Path                              | Given Full Name                     | Given StepObjectRef Name | Given StepDefinitionRef Name |
+          | TestStepContainerList/1/TestStepList/2 | The Second action file is performed | The Second action file   | is performed                 |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
+          | Node Path                                   | State  |
+          | TestStepContainerList/1/TestStepList/2/Text | Absent |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
+          | Node Path                                    | State  |
+          | TestStepContainerList/1/TestStepList/2/Table | Absent |
+
