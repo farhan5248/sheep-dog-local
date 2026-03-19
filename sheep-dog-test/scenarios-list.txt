@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/TestCase Type
-  Scenario: Test Case
-    Tag: EditDocumentAction
   Scenario: Duplicate Test Case Name
     Tag: EditDocumentAction
   Scenario: Test Case Insertion Order

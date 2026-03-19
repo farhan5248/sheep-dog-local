@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
@@ -84,6 +85,40 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
         if (getProperty("cursor") == null)
             return null;
         return ((ITestStepContainer) getProperty("cursor")).getName();
+    }
+
+    @Override
+    public String getTestDataListNodeAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getTestDataListNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getTestDataListNodeState(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return listToCsvString(((ITestCase) getProperty("cursor")).getTestDataList());
+    }
+
+    @Override
+    public String getTestStepListNodeAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getTestStepListNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getTestStepListNodeState(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return listToCsvString(((ITestStepContainer) getProperty("cursor")).getTestStepList());
     }
 
 }
