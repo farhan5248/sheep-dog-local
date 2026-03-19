@@ -8,7 +8,7 @@
 
 ## get{Type}{Assignment}
 
-**Desc**: Vertex getter that operates directly on the document model. If Param=NodePath, navigates via setCursorAtNode and returns cursor. If Param=State, returns state or listToString. Otherwise, asserts via assert{Type}{Assignment}.
+**Desc**: Vertex getter that operates directly on the document model. If Param=NodePath, navigates via setCursorAtNode and returns cursor. If Param=State, returns state or listToCsvString. Otherwise, asserts via assert{Type}{Assignment}.
 
 **Rule**: ALL method names follow get{Type}{Assignment} pattern.
  - **Name**: `^get{Type}{Assignment}$`
@@ -40,7 +40,7 @@
 
 ## get{StateDesc}
 
-**Desc**: Vertex getter for document-level or dialog-level state. Document get retrieves via testProject.getTestDocument. Dialog read returns dialog string or listToString(dialog). Proposal read iterates dialog list, matches by Id, and returns field.
+**Desc**: Vertex getter for document-level or dialog-level state. Document get retrieves via testProject.getTestDocument. Dialog read returns dialog string or listToCsvString(dialog). Proposal read iterates dialog list, matches by Id, and returns field.
 
 **Rule**: ALL method names follow get{StateDesc} pattern.
  - **Name**: `^get{StateDesc}$`
