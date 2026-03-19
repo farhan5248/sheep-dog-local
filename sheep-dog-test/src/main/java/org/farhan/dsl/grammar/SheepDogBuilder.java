@@ -51,10 +51,18 @@ public class SheepDogBuilder {
 
     public static ITestCase createTestCase(ITestSuite parent, String name) {
         logger.debug("createTestCase: parent={}, name={}", parent, name);
-        ITestCase testCase = SheepDogFactory.instance.createTestCase();
-        testCase.setName(name);
-        if (parent != null)
-            parent.addTestCase(testCase);
+        ITestCase testCase = null;
+        if (parent != null) {
+            ITestStepContainer existing = parent.getTestStepContainer(name);
+            if (existing instanceof ITestCase)
+                testCase = (ITestCase) existing;
+        }
+        if (testCase == null) {
+            testCase = SheepDogFactory.instance.createTestCase();
+            testCase.setName(name);
+            if (parent != null)
+                parent.addTestCase(testCase);
+        }
         logger.debug("createTestCase: return {}", testCase);
         return testCase;
     }
