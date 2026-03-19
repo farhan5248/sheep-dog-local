@@ -75,3 +75,25 @@ Feature: TestStep Keyword Type
           | Node Path                                    | State  |
           | TestStepContainerList/1/TestStepList/2/Table | Absent |
 
+  @list @EditDocumentAction
+  Scenario: Initial State And
+
+    \@list \@EditDocumentAction
+    Verify the And keyword variant follows the same Test Step structure.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                |
+          | TestStepContainerList/1/TestStepList | The First action file is performed |
+     When The xtext plugin edit document action is performed to modify TestStepList with
+          | Test Suite Full Name         | Node Path                            | Test Step Full Name                 |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList | The Second action file is performed |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node will be created as follows
+          | Node Path                              | And Full Name                       | And StepObjectRef Name | And StepDefinitionRef Name |
+          | TestStepContainerList/1/TestStepList/2 | The Second action file is performed | The Second action file | is performed               |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node will be as follows
+          | Node Path                                   | State  |
+          | TestStepContainerList/1/TestStepList/2/Text | Absent |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Table node will be as follows
+          | Node Path                                    | State  |
+          | TestStepContainerList/1/TestStepList/2/Table | Absent |
+
