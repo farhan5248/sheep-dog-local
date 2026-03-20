@@ -1,3 +1,0 @@
-File: Language Definition/Grammar/Description Type
-  Scenario: Line Insertion Order
-    Tag: EditDocumentAction
