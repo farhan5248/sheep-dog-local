@@ -73,3 +73,20 @@ Feature: Table Type
           | TestStepContainerList/1/TestDataList/1/Table/RowList/1 | Second Row  |
           | TestStepContainerList/1/TestDataList/1/Table/RowList/2 | First Row   |
 
+  @EditDocumentAction
+  Scenario: Cell Insertion Order
+
+    \@EditDocumentAction
+    Cells maintain insertion order within a Row.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name   |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | Second Cell |
+     When The xtext plugin edit document action is performed to modify CellList with
+          | Test Suite Full Name         | Node Path                                                       | Cell Name  |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList | First Cell |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node will be created as follows
+          | Node Path                                                         | Cell Name   |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList/1 | Second Cell |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1/CellList/2 | First Cell  |
+
