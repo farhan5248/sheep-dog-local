@@ -91,3 +91,28 @@ Feature: Quickfixes for Only Issues
           | Proposal Id                         | Proposal Description                    | Proposal Value      |
           | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
 
+  @ListQuickfixesAction
+  Scenario: Test step must have a valid object name quickfix
+
+    \@ListQuickfixesAction
+    No quickfix is available for invalid object names. The user must manually correct the step object reference.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name |
+          | TestStepContainerList/1/TestStepList | The is present      |
+      And The xtext plugin validate annotation is set as follows
+          """
+          Every test case must have at least one component specified.
+          This should be the first part of the test step name.
+          The component is optional.
+          Component ending words are: application, service, plugin, batchjob, project.
+          Examples are: "The something application," or "The something service,"Every test step must have the object specified.
+          The object can have the complete path or not.
+          Object ending words are: file, page, response, popup, annotation, hover, tooltip, directory, request, goal, job, action.
+          Examples are: "src/test/resources/file.txt file" or "Home page"
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
+     Then The xtext plugin list quickfixes popup will be empty
+
