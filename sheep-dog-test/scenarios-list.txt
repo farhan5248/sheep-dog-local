@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Validation for File Issues
-  Scenario: The first step needs to have a component specified validation
-    Tag: ValidateAction
   Scenario: No component in the first step triggers an error validation
     Tag: ValidateAction
 
