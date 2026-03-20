@@ -102,3 +102,28 @@ Feature: Validation for Only Issues
           Examples are: "src/test/resources/file.txt file" or "Home page"
           """
 
+  @ValidateAction
+  Scenario: Test step must have a valid step definition name validation
+
+    \@ValidateAction
+    TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY validates that the step definition reference has a valid part and state. The validation message describes the expected format.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name           |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file |
+     When The xtext plugin validate action is performed as follows
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
+     Then The xtext plugin validate annotation will be set as follows
+          """
+          After specifying the step object name, a step definition name is specified.
+          It has a part (optional) and state.
+          Part is used to specify a part in a document, like the header or body.
+          The part types are: language, type, assignment, fragment, scope.
+          Examples are: "Customer details section" or "Order History table"
+          State determines what gets converted to setters or assertions in the test automation.
+          Next it's followed by the state description which is optional and can be any word.
+          The state types are: is, isn't, will be, won't be.
+          Examples are: "is present" or "will be created as follows"
+          """
+

@@ -2,6 +2,7 @@ package org.farhan.dsl.issues;
 
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
+import org.farhan.dsl.grammar.StepDefinitionRefFragments;
 import org.farhan.dsl.grammar.StepObjectRefFragments;
 import org.slf4j.Logger;
 
@@ -19,6 +20,21 @@ public class TestStepIssueDetector {
 			}
 		}
 		logger.debug("Exit: validateStepObjectNameOnly({})", message);
+		return message;
+	}
+
+	public static String validateStepDefinitionNameOnly(ITestStep theTestStep) throws Exception {
+		logger.debug("Entry: validateStepDefinitionNameOnly({})", theTestStep);
+		String message = "";
+		String text = theTestStep.getFullName();
+		if (text != null && !text.isEmpty()) {
+			String stepObjectRef = StepObjectRefFragments.getAll(text);
+			String remainingText = text.substring(stepObjectRef.length()).trim();
+			if (StepDefinitionRefFragments.getAll(remainingText).isEmpty()) {
+				message = TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_ONLY.description;
+			}
+		}
+		logger.debug("Exit: validateStepDefinitionNameOnly({})", message);
 		return message;
 	}
 }
