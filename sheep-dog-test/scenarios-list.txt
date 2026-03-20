@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Validation for Workspace Issues
-  Scenario: This object step definition text parameter exists validation
-    Tag: ValidateAction
   Scenario: This object step definition text parameter doesn't exist validation
     Tag: ValidateAction
 
