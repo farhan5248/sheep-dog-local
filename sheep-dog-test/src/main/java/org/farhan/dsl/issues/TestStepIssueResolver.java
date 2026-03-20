@@ -1,17 +1,12 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
-import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
-import org.farhan.dsl.grammar.ITestSetup;
 import org.farhan.dsl.grammar.ITestStep;
-import org.farhan.dsl.grammar.ITestStepContainer;
-import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
@@ -45,26 +40,7 @@ public class TestStepIssueResolver {
 			throws Exception {
 		logger.debug("Entry: suggestStepObjectNameFile({})", theTestStep);
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-		ITestStepContainer container = theTestStep.getParent();
-		collectProposalsFromContainer(proposals, container, theTestStep);
-		if (container instanceof ITestCase) {
-			ITestSuite suite = container.getParent();
-			for (ITestStepContainer sibling : suite.getTestStepContainerList()) {
-				if (sibling instanceof ITestSetup) {
-					collectProposalsFromContainer(proposals, sibling, null);
-				}
-			}
-		}
-		logger.debug("Exit: suggestStepObjectNameFile({})", proposals);
-		return proposals;
-	}
-
-	private static void collectProposalsFromContainer(ArrayList<SheepDogIssueProposal> proposals,
-			ITestStepContainer container, ITestStep stopAt) {
-		List<ITestStep> steps = container.getTestStepList();
-		for (ITestStep step : steps) {
-			if (step == stopAt)
-				break;
+		for (ITestStep step : SheepDogUtility.getTestStepListUpToTestStep(theTestStep)) {
 			String stepObjectName = step.getStepObjectName();
 			if (stepObjectName != null && !stepObjectName.isEmpty()) {
 				String object = StepObjectRefFragments.getObject(stepObjectName);
@@ -85,6 +61,8 @@ public class TestStepIssueResolver {
 				}
 			}
 		}
+		logger.debug("Exit: suggestStepObjectNameFile({})", proposals);
+		return proposals;
 	}
 
 	public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep)
