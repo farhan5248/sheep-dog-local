@@ -71,3 +71,23 @@ Feature: Quickfixes for Only Issues
           | Proposal Id                | Proposal Description                    | Proposal Value    |
           | Capitalize test suite name | Capitalize the first letter of the name | Lowercase process |
 
+  @ListQuickfixesAction
+  Scenario: Test case name should start with a capital letter quickfix
+
+    \@ListQuickfixesAction
+    The quickfix capitalizes the first letter of a test case name that starts with a lowercase letter.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name      |
+          | TestStepContainerList | lowercase test case |
+      And The xtext plugin validate annotation is set as follows
+          """
+          Name should start with a capital
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Test Suite Full Name         | Node Path               |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1 |
+     Then The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id                         | Proposal Description                    | Proposal Value      |
+          | Capitalize test step container name | Capitalize the first letter of the name | Lowercase test case |
+
