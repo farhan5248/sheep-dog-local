@@ -24,12 +24,14 @@ public class SheepDogUtility {
      * @return list of ITestSuite instances from the project's document list
      */
     public static List<ITestSuite> getTestSuiteList(ITestProject project) {
+        logger.debug("Entering getTestSuiteList for project: {}", project != null ? "non-null" : "null");
         List<ITestSuite> result = new ArrayList<>();
         for (ITestDocument doc : project.getTestDocumentList()) {
             if (doc instanceof ITestSuite) {
                 result.add((ITestSuite) doc);
             }
         }
+        logger.debug("Exiting getTestSuiteList with result: {} items", result.size());
         return result;
     }
 

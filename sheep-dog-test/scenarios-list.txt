@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Validation for TestStep Full Name
-  Scenario: With Path Resolution
-    Tag: ValidateAction
   Scenario: Without Path Resolution
     Tag: ValidateAction
 
