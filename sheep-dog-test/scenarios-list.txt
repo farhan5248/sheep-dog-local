@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Validation for Only Issues
-  Scenario: Test suite name should start with a capital letter validation
-    Tag: ValidateAction
   Scenario: Test case name should start with a capital letter validation
     Tag: ValidateAction
   Scenario: Test step must have a valid object name validation

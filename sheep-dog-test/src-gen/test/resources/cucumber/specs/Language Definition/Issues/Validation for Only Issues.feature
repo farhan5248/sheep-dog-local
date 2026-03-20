@@ -44,3 +44,20 @@ Feature: Validation for Only Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList/1 |
      Then The xtext plugin validate annotation will be empty
 
+  @ValidateAction
+  Scenario: Test suite name should start with a capital letter validation
+
+    \@ValidateAction
+    TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY validates that the test suite name starts with a capital letter.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file is created as follows
+          | Test Suite Name   |
+          | lowercase process |
+     When The xtext plugin validate action is performed as follows
+          | Test Suite Full Name         |
+          | specs/ProcessIssues.asciidoc |
+     Then The xtext plugin validate annotation will be set as follows
+          """
+          Name should start with a capital
+          """
+

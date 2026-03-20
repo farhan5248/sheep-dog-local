@@ -4,7 +4,9 @@ import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.issues.CellIssueDetector;
+import org.farhan.dsl.issues.TestSuiteIssueDetector;
 import org.farhan.objects.xtext.ValidateAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -33,6 +35,14 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
                 ICell cell = (ICell) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
                     validateDialog = CellIssueDetector.validateNameOnly(cell);
+                    if (validateDialog == null) {
+                        validateDialog = "";
+                    }
+                }
+            } else if (getProperty("cursor") instanceof ITestSuite) {
+                ITestSuite testSuite = (ITestSuite) getProperty("cursor");
+                if (validateDialog == null || validateDialog.isEmpty()) {
+                    validateDialog = TestSuiteIssueDetector.validateNameOnly(testSuite);
                     if (validateDialog == null) {
                         validateDialog = "";
                     }

@@ -11,14 +11,12 @@ public class ValidateAnnotationImpl extends TestObjectSheepDogImpl implements Va
 
     @Override
     public String getSetAsFollows(HashMap<String, String> keyMap) {
-        Object content = getProperty("validate annotation.Content");
-        return content == null ? null : content.toString();
+        return (String) getProperty("validate annotation.Content");
     }
 
     @Override
     public String getContent(HashMap<String, String> keyMap) {
-        Object content = getProperty("validate annotation.Content");
-        return content == null ? null : content.toString();
+        return (String) getProperty("validate annotation.Content");
     }
 
     @Override
