@@ -25,7 +25,10 @@ public enum TestStepIssueTypes {
 					+ "Examples are: \"is present\" or \"will be created as follows\""),
 
 	TEST_STEP_STEP_OBJECT_NAME_WORKSPACE("TEST_STEP_STEP_OBJECT_NAME_WORKSPACE",
-			"The step object file doesn't exist for the component");
+			"The step object file doesn't exist for the component"),
+
+	TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE("TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE",
+			"The step definition doesn't exist for the step object");
 
 	public final String id;
 	public final String description;

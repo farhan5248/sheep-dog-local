@@ -1,5 +1,7 @@
 package org.farhan.dsl.issues;
 
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
@@ -51,6 +53,28 @@ public class TestStepIssueDetector {
 			}
 		}
 		logger.debug("Exit: validateStepDefinitionNameOnly({})", message);
+		return message;
+	}
+
+	public static String validateStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
+		logger.debug("Entry: validateStepDefinitionNameWorkspace({})", theTestStep);
+		String message = "";
+		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
+		if (!stepObjectFullName.isEmpty()) {
+			ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+			if (project != null) {
+				ITestDocument stepObjectDoc = project.getTestDocument(stepObjectFullName);
+				if (stepObjectDoc instanceof IStepObject) {
+					IStepObject stepObject = (IStepObject) stepObjectDoc;
+					String stepDefName = theTestStep.getStepDefinitionName();
+					if (stepDefName != null && !stepDefName.isEmpty()
+							&& stepObject.getStepDefinition(stepDefName) == null) {
+						message = TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description;
+					}
+				}
+			}
+		}
+		logger.debug("Exit: validateStepDefinitionNameWorkspace({})", message);
 		return message;
 	}
 }

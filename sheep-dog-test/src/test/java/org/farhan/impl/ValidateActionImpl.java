@@ -77,6 +77,12 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
                         validateDialog = "";
                     }
                 }
+                if (validateDialog == null || validateDialog.isEmpty()) {
+                    validateDialog = TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep);
+                    if (validateDialog == null) {
+                        validateDialog = "";
+                    }
+                }
             } else if (getProperty("cursor") instanceof ITestSuite) {
                 ITestSuite testSuite = (ITestSuite) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
