@@ -61,3 +61,20 @@ Feature: Validation for Only Issues
           Name should start with a capital
           """
 
+  @ValidateAction
+  Scenario: Test case name should start with a capital letter validation
+
+    \@ValidateAction
+    TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY validates that the test case name starts with a capital letter.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Case Name      |
+          | TestStepContainerList | lowercase test case |
+     When The xtext plugin validate action is performed as follows
+          | Test Suite Full Name         | Node Path               |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1 |
+     Then The xtext plugin validate annotation will be set as follows
+          """
+          Name should start with a capital
+          """
+
