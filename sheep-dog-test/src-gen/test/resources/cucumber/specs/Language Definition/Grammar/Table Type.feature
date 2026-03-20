@@ -56,3 +56,20 @@ Feature: Table Type
           | Node Path                                              | Row Content |
           | TestStepContainerList/1/TestDataList/1/Table/RowList/2 | First Row   |
 
+  @EditDocumentAction
+  Scenario: Row Insertion Order
+
+    \@EditDocumentAction
+    Rows maintain insertion order within a Table.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node is created as follows
+          | Node Path                                            | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList | Second Row  |
+     When The xtext plugin edit document action is performed to modify RowList with
+          | Test Suite Full Name         | Node Path                                            | Row Content |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestDataList/1/Table/RowList | First Row   |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file RowList node will be created as follows
+          | Node Path                                              | Row Content |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/1 | Second Row  |
+          | TestStepContainerList/1/TestDataList/1/Table/RowList/2 | First Row   |
+
