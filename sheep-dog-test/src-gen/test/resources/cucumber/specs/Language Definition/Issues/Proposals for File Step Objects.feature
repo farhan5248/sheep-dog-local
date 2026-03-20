@@ -28,3 +28,21 @@ Feature: Proposals for File Step Objects
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
           | The daily batchjob Output file | daily batchjob/Output file | Referred in: The daily batchjob Output file is present |
 
+  @ListProposalsAction
+  Scenario: Has component no existing
+
+    \@ListProposalsAction
+    If a step has a component but no object, proposals still come from objects referenced in previous steps. The component doesn't filter the proposals from previous steps.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                       |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+          | TestStepContainerList/1/TestStepList | The daily batchjob                        |
+     When The xtext plugin list proposals action is performed as follows
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/2 |
+     Then The xtext plugin list proposals popup will be set as follows
+          | Proposal Value                 | Proposal Id                | Proposal Description                                   |
+          | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
+          | The daily batchjob Output file | daily batchjob/Output file | Referred in: The daily batchjob Output file is present |
+
