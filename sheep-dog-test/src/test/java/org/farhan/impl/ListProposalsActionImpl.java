@@ -3,6 +3,7 @@ package org.farhan.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
@@ -35,7 +36,13 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
             @SuppressWarnings("unchecked")
             ArrayList<SheepDogIssueProposal> listProposalsDialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
             listProposalsDialog.clear();
-            if (cursor instanceof ITestStep) {
+            if (cursor instanceof IRow) {
+                Object tableParent = ((IRow) cursor).getParent().getParent();
+                if (tableParent instanceof ITestStep) {
+                    listProposalsDialog.addAll(
+                            TestStepIssueResolver.suggestStepParameterListWorkspace((ITestStep) tableParent));
+                }
+            } else if (cursor instanceof ITestStep) {
                 ITestStep testStep = (ITestStep) cursor;
                 String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
                 if (!stepObjectFullName.isEmpty()) {

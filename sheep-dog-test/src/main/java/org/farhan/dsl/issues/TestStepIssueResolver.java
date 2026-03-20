@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
@@ -125,6 +126,50 @@ public class TestStepIssueResolver {
 			proposals.add(proposal);
 		}
 		logger.debug("Exit: suggestStepDefinitionNameWorkspace({})", proposals);
+		return proposals;
+	}
+
+	public static ArrayList<SheepDogIssueProposal> suggestStepParameterListWorkspace(ITestStep theTestStep)
+			throws Exception {
+		logger.debug("Entry: suggestStepParameterListWorkspace({})", theTestStep);
+		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
+		if (stepObjectFullName.isEmpty()) {
+			logger.debug("Exit: suggestStepParameterListWorkspace({})", proposals);
+			return proposals;
+		}
+		ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+		if (project == null) {
+			logger.debug("Exit: suggestStepParameterListWorkspace({})", proposals);
+			return proposals;
+		}
+		ITestDocument doc = project.getTestDocument(stepObjectFullName);
+		if (!(doc instanceof IStepObject)) {
+			logger.debug("Exit: suggestStepParameterListWorkspace({})", proposals);
+			return proposals;
+		}
+		IStepObject stepObject = (IStepObject) doc;
+		String stepDefName = theTestStep.getStepDefinitionName();
+		if (stepDefName == null || stepDefName.isEmpty()) {
+			logger.debug("Exit: suggestStepParameterListWorkspace({})", proposals);
+			return proposals;
+		}
+		IStepDefinition stepDefinition = stepObject.getStepDefinition(stepDefName);
+		if (stepDefinition == null) {
+			logger.debug("Exit: suggestStepParameterListWorkspace({})", proposals);
+			return proposals;
+		}
+		for (IStepParameters sp : stepDefinition.getStepParameterList()) {
+			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+			proposal.setId(sp.getName());
+			proposal.setValue(sp.getName());
+			String description = (sp.getDescription() != null)
+					? SheepDogUtility.getLineListAsString(sp.getDescription().getLineList())
+					: "";
+			proposal.setDescription(description);
+			proposals.add(proposal);
+		}
+		logger.debug("Exit: suggestStepParameterListWorkspace({})", theTestStep);
 		return proposals;
 	}
 
