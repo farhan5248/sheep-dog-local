@@ -38,3 +38,23 @@ Feature: Proposals for Workspace Step Parameters
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin list proposals popup will be empty
 
+  @ListProposalsAction
+  Scenario: Has existing step definition without parameters
+
+    \@ListProposalsAction
+    If the step definition exists but the test step uses a different step definition name, no parameter proposals are available.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | empty     |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name  | Step Parameters Name |
+          | is created as follows | H1, H2, H3           |
+     When The xtext plugin list proposals action is performed as follows
+          | Test Suite Full Name         | Node Path                                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
+     Then The xtext plugin list proposals popup will be empty
+

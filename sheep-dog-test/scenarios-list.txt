@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Proposals for Workspace Step Parameters
-  Scenario: Has existing step definition without parameters
-    Tag: ListProposalsAction
   Scenario: Has existing step definition with parameters
     Tag: ListProposalsAction
   Scenario: Has existing step definition with Content parameter
