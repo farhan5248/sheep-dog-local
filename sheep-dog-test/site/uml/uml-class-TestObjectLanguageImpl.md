@@ -1,6 +1,6 @@
 # TestObject{Language}Impl
 
-**Directory**: `src/test/java/org/farhan/impl/objects`
+**Directory**: `src/test/java/org/farhan/impl`
 
 **Extends**: TestObject
 
@@ -74,71 +74,6 @@
 **Examples**:
  - `protected IDescription getDescriptionFromCursor()`
  - `protected ITable getTableFromCursor()`
-
-## getDocumentFromNode
-
-**Desc**: Walks up the grammar tree from any node to find the containing ITestDocument. Declared in TestObject.
-
-**Rule**: ALL method names follow getDocumentFromNode pattern.
- - **Name**: `^getDocumentFromNode$`
- - **Return**: `^Object$`
- - **Parameters**: `^\(Object\s+\w+\)$`
- - **Modifier**: `^private\s+static$`
-
-**Examples**:
- - `private static Object getDocumentFromNode(Object node)`
-
-## setCursorAtNode
-
-**Desc**: Navigates cursor along a path string using element type names and 1-based indices. Delegates to `navigateToNode(path, false)`.
-
-**Rule**: ALL method names follow setCursorAtNode pattern.
- - **Name**: `^setCursorAtNode$`
- - **Return**: `^void$`
- - **Parameters**: `^\(String\s+\w+\)$`
- - **Modifier**: `^protected$`
-
-**Examples**:
- - `protected void setCursorAtNode(String path)`
-
-## createNodeDependencies
-
-**Desc**: Ensures all intermediate nodes exist along a path, creating them via {Language}Builder if missing. Delegates to `navigateToNode(path, true)`.
-
-**Rule**: ALL method names follow createNodeDependencies pattern.
- - **Name**: `^createNodeDependencies$`
- - **Return**: `^void$`
- - **Parameters**: `^\(String\s+\w+\)$`
- - **Modifier**: `^protected$`
-
-**Examples**:
- - `protected void createNodeDependencies(String path)`
-
-## getFullNameFromPath
-
-**Desc**: Extracts the document full name from the `object` field, stripping the base path prefix using regex.
-
-**Rule**: ALL method names follow getFullNameFromPath pattern.
- - **Name**: `^getFullNameFromPath$`
- - **Return**: `^String$`
- - **Parameters**: `^\(\)$`
- - **Modifier**: `^protected$`
-
-**Examples**:
- - `protected String getFullNameFromPath()`
-
-## listToCsvString
-
-**Desc**: Converts a List to a comma-separated string for assertion mapping.
-
-**Rule**: ALL method names follow listToCsvString pattern.
- - **Name**: `^listToCsvString$`
- - **Return**: `^String$`
- - **Parameters**: `^\(List<\?>\s+\w+\)$`
- - **Modifier**: `^protected$`
-
-**Examples**:
- - `protected String listToCsvString(List<?> list)`
 
 ## getOrCreateNode
 

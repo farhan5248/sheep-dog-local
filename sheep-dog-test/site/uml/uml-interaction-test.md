@@ -10,9 +10,9 @@ binds a `src-gen/test/java/org/farhan/objects` interface to `src/test/java/org/f
 
 **Example: configure method body**
 ```java
-package org.farhan.common;
+package org.farhan.impl;
 
-import org.farhan.impl.objects.AppInputFileAsciidocFileImpl;
+import org.farhan.impl.AppInputFileAsciidocFileImpl;
 
 public final class TestConfig extends AbstractModule implements InjectorSource {
     @Override
@@ -23,68 +23,28 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
 }
 ```
 
-## {Language}FactoryImpl
+### getInjector
 
-### create{Type}
+Creates a Guice injector with DEVELOPMENT stage, Cucumber scenario module, and this TestConfig module.
 
-Creates a new POJO implementation of a grammar element interface.
-
-**Example: Factory method body**
+**Example: getInjector method body**
 ```java
 @Override
-public ICell createCell() {
-    return new CellImpl();
+public Injector getInjector() {
+    return Guice.createInjector(Stage.DEVELOPMENT, CucumberModules.createScenarioModule(), new TestConfig());
 }
 ```
 
-## {Type}Impl
+### resetTestProject
 
-### set{Assignment}
+Cucumber @Before hook that resets TestObject and TestObjectSheepDogImpl static state before each scenario.
 
-Setters for child elements cast to impl type and wire the parent reference. Some setFullName implementations parse the value to extract sub-fields.
-
-**Example: Setting a child with parent wiring**
+**Example: resetTestProject method body**
 ```java
-@Override
-public void setTable(ITable value) {
-    table = (TableImpl) value;
-    table.parent = this;
-}
-```
-
-**Example: Parsing fullName into parts**
-```java
-@Override
-public void setFullName(String value) {
-    stepObjectName = StepObjectRefFragments.getAll(value);
-    stepDefinitionName = StepDefinitionRefFragments.getAll(value.replace(stepObjectName, ""));
-}
-```
-
-### add{Type}
-
-Adders cast to impl type, add to the internal list, and wire the parent reference.
-
-**Example: Adding a child to a collection**
-```java
-@Override
-public boolean addTestCase(ITestCase value) {
-    TestCaseImpl impl = (TestCaseImpl) value;
-    testStepContainerList.add(impl);
-    impl.parent = this;
-    return true;
-}
-```
-
-### toString
-
-Returns a string representation, typically the name or fullName field.
-
-**Example: toString implementation**
-```java
-@Override
-public String toString() {
-    return name != null ? name : "";
+@Before
+public void resetTestProject() throws Exception {
+    TestObject.reset();
+    TestObjectSheepDogImpl.reset();
 }
 ```
 
@@ -191,84 +151,6 @@ protected IDescription getDescriptionFromCursor() {
     else if (cursor instanceof ITestData)
         return ((ITestData) cursor).getDescription();
     return null;
-}
-```
-
-### getDocumentFromNode
-
-Walks up the grammar tree from any node to find the containing ITestDocument. Defined in TestObject as private static.
-
-**Example: getDocumentFromNode implementation**
-```java
-private static Object getDocumentFromNode(Object node) {
-    Object current = node;
-    while (current != null && !(current instanceof ITestDocument)) {
-        if (current instanceof ICell) {
-            current = ((ICell) current).getParent();
-        } else if (current instanceof IRow) {
-            current = ((IRow) current).getParent();
-        } else if (current instanceof ITable) {
-            current = ((ITable) current).getParent();
-        } else if (current instanceof IText) {
-            current = ((IText) current).getParent();
-        } else if (current instanceof ILine) {
-            current = ((ILine) current).getParent();
-        } else if (current instanceof IDescription) {
-            current = ((IDescription) current).getParent();
-        } else if (current instanceof ITestStep) {
-            current = ((ITestStep) current).getParent();
-        } else if (current instanceof ITestData) {
-            current = ((ITestData) current).getParent();
-        } else if (current instanceof ITestStepContainer) {
-            current = ((ITestStepContainer) current).getParent();
-        } else if (current instanceof IStepParameters) {
-            current = ((IStepParameters) current).getParent();
-        } else if (current instanceof IStepDefinition) {
-            current = ((IStepDefinition) current).getParent();
-        } else if (current instanceof ITestProject) {
-            return null;
-        } else {
-            return null;
-        }
-    }
-    return current;
-}
-```
-
-**Example: navigateToNode implementation (in TestObject)**
-```java
-private void navigateToNode(String path, boolean create) {
-    String[] parts = path.split("/");
-    Object current = getDocumentFromNode(getProperty("cursor"));
-    int i = 0;
-    while (i < parts.length && current != null) {
-        String elementType = parts[i];
-        if (elementType.endsWith("List")) {
-            if (i + 1 >= parts.length || !parts[i + 1].matches("\\d+")) {
-                break;
-            }
-            int index = Integer.parseInt(parts[i + 1]) - 1;
-            if (create) {
-                current = getOrCreateNode(current, elementType, index);
-            } else {
-                try {
-                    current = getChildNode(current, elementType, index);
-                } catch (IndexOutOfBoundsException e) {
-                    setProperty("cursor", null);
-                    return;
-                }
-            }
-            i += 2;
-        } else {
-            if (create && elementType.equals("Text")) {
-                break;
-            }
-            current = create ? getOrCreateNode(current, elementType, 0) : getChildNode(current, elementType, 0);
-            i++;
-        }
-        if (current != null)
-            setProperty("cursor", current);
-    }
 }
 ```
 

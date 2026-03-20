@@ -1,6 +1,6 @@
 # {ObjectName}{ObjectType}Impl
 
-**Directory**: `src/test/java/org/farhan/impl/objects`
+**Directory**: `src/test/java/org/farhan/impl`
 
 **Extends**: TestObject{Language}Impl
 

@@ -146,37 +146,13 @@
  - `StepDefinitionRefPartTypes`
  - `StepDefinitionRefStateTypes`
 
-## src/test/java/org/farhan/impl/ide
-
-**Desc**: Concrete implementations of grammar model interfaces and factory. Provides POJO-based grammar elements for test environments where EMF is not available.
-
-### {Language}FactoryImpl
-
-**Desc**: Concrete factory that creates POJO implementations of grammar element interfaces. Implements I{Language}Factory to provide {Type}Impl instances for each create{Type}() method.
-
-**Rule**: ONE class matches {Language}FactoryImpl pattern
-
-**Regex**: `^{Language}FactoryImpl$`
- - `SheepDogFactoryImpl`
-
-### {Type}Impl
-
-**Desc**: POJO implementation of I{Type} grammar element interface. Uses package-private fields typed as impl classes, with parent wiring in setters and adders.
-
-**Rule**: SOME class matches {Type}Impl pattern
-
-**Regex**: `^{Type}Impl$`
- - `CellImpl`
- - `TestSuiteImpl`
- - `TestProjectImpl`
-
-## src/test/java/org/farhan/impl/objects
+## src/test/java/org/farhan/impl
 
 **Desc**: Test object implementations that bridge Cucumber step definitions to grammar model operations. Base classes provide shared cursor navigation and model manipulation; specific impls implement generated src-gen interfaces.
 
 ### TestObject{Language}Impl
 
-**Desc**: Language-specific base class providing shared static state (cursor, testProject, dialogs), grammar element creation/assertion helpers, and node navigation methods. All impl/objects classes inherit from this.
+**Desc**: Language-specific base class providing shared static state (cursor, testProject, dialogs), grammar element creation/assertion helpers, and node navigation methods. All impl classes inherit from this.
 
 **Rule**: ONE class matches TestObject{Language}Impl pattern
 
