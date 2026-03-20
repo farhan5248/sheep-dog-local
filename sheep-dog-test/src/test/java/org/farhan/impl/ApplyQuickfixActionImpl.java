@@ -27,7 +27,6 @@ import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueTypes;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueTypes;
-import org.farhan.dsl.issues.TextIssueResolver;
 import org.farhan.dsl.issues.TextIssueTypes;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.junit.jupiter.api.Assertions;
@@ -90,7 +89,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
             } else if (cursor instanceof IText) {
                 IText text = (IText) cursor;
                 if (validateDialog.contentEquals(TextIssueTypes.TEXT_CONTENT_WORKSPACE.description)) {
-                    applyProposal(TextIssueResolver.correctContentWorkspace(text));
+                    applyTextContentWorkspaceQuickfix(text);
                 }
             }
         } catch (Exception e) {
@@ -120,13 +119,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
         if (table == null || !(table.getParent() instanceof ITestStep))
             return;
         ITestStep testStep = (ITestStep) table.getParent();
-        String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
-        if (stepObjectFullName.isEmpty())
-            return;
-        ITestDocument doc = ((ITestProject) getProperty("workspace")).getTestDocument(stepObjectFullName);
-        if (!(doc instanceof IStepObject))
-            return;
-        IStepDefinition stepDef = ((IStepObject) doc).getStepDefinition(testStep.getStepDefinitionName());
+        IStepDefinition stepDef = getStepDefinitionForTestStep(testStep);
         if (stepDef == null)
             return;
         String rowCells = SheepDogUtility.getCellListAsString(row.getCellList());
@@ -136,6 +129,29 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
         for (ICell cell : row.getCellList()) {
             SheepDogBuilder.createCell(newRow, cell.getName());
         }
+    }
+
+    private void applyTextContentWorkspaceQuickfix(IText text) throws Exception {
+        ITestStep testStep = text.getParent();
+        if (testStep == null)
+            return;
+        IStepDefinition stepDef = getStepDefinitionForTestStep(testStep);
+        if (stepDef == null)
+            return;
+        IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDef, "Content");
+        ITable newTable = SheepDogBuilder.createTable(stepParameters);
+        IRow newRow = SheepDogBuilder.createRow(newTable);
+        SheepDogBuilder.createCell(newRow, "Content");
+    }
+
+    private IStepDefinition getStepDefinitionForTestStep(ITestStep testStep) throws Exception {
+        String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+        if (stepObjectFullName.isEmpty())
+            return null;
+        ITestDocument doc = ((ITestProject) getProperty("workspace")).getTestDocument(stepObjectFullName);
+        if (!(doc instanceof IStepObject))
+            return null;
+        return ((IStepObject) doc).getStepDefinition(testStep.getStepDefinitionName());
     }
 
     private void navigateToDocument() {

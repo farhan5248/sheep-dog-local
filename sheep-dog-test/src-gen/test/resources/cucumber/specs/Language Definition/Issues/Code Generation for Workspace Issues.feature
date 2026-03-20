@@ -107,3 +107,35 @@ Feature: Code Generation for Workspace Issues
           | StepDefinitionList/1/StepParametersList/2/Table/RowList/1/CellList | N1        |
           | StepDefinitionList/1/StepParametersList/2/Table/RowList/1/CellList | N2        |
 
+  @ApplyQuickfixAction
+  Scenario: This object step definition text parameter doesn't exist generation
+
+    \@ApplyQuickfixAction
+    Applying the quickfix adds the Content parameter to the step definition for text blocks.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
+          | Node Path                                   | Text Content |
+          | TestStepContainerList/1/TestStepList/1/Text | Some text    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is set as follows    |
+      And The xtext plugin validate annotation is set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
+      And The xtext plugin list quickfixes popup is set as follows
+          | Proposal Id      | Proposal Description |
+          | Generate Content | empty                |
+     When The xtext plugin apply quickfix action is performed as follows
+          | Test Suite Full Name         | Node Path                                    |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
+          | Step Definition Name | Step Parameters Name |
+          | is set as follows    | Content              |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node will be created as follows
+          | Node Path                                                          | Cell Name |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Content   |
+
