@@ -11,10 +11,9 @@ import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements ListProposalsPopup {
 
-    @SuppressWarnings("unchecked")
     @Override
     public String getSetAsFollows(HashMap<String, String> keyMap) {
-        return listToCsvString(((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
+        return getProposalsAsCsv();
     }
 
     @SuppressWarnings("unchecked")
@@ -52,9 +51,13 @@ public class ListProposalsPopupImpl extends TestObjectSheepDogImpl implements Li
         return null;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public String getEmpty(HashMap<String, String> keyMap) {
+        return getProposalsAsCsv();
+    }
+
+    @SuppressWarnings("unchecked")
+    private String getProposalsAsCsv() {
         return listToCsvString(((ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup")));
     }
 }

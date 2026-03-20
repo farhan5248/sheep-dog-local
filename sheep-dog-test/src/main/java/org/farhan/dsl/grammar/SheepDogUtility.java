@@ -18,6 +18,24 @@ public class SheepDogUtility {
     private static final Logger logger = SheepDogLoggerFactory.getLogger(SheepDogUtility.class);
 
     /**
+     * Returns all StepObjects from a project's unified TestDocumentList.
+     *
+     * @param project the test project to filter
+     * @return list of IStepObject instances from the project's document list
+     */
+    public static List<IStepObject> getStepObjectList(ITestProject project) {
+        logger.debug("Entering getStepObjectList for project: {}", project != null ? "non-null" : "null");
+        List<IStepObject> result = new ArrayList<>();
+        for (ITestDocument doc : project.getTestDocumentList()) {
+            if (doc instanceof IStepObject) {
+                result.add((IStepObject) doc);
+            }
+        }
+        logger.debug("Exiting getStepObjectList with result: {} items", result.size());
+        return result;
+    }
+
+    /**
      * Returns all TestSuites from a project's unified TestDocumentList.
      *
      * @param project the test project to filter

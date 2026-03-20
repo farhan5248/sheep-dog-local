@@ -35,6 +35,7 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
             ArrayList<SheepDogIssueProposal> listProposalsDialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
             if (cursor instanceof ITestStep) {
                 ITestStep testStep = (ITestStep) cursor;
+                listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep));
                 listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameFile(testStep));
             }
         } catch (Exception e) {

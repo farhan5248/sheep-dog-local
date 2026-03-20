@@ -36,6 +36,36 @@ public class TestStepIssueResolver {
 		return proposals;
 	}
 
+	public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameWorkspace(ITestStep theTestStep)
+			throws Exception {
+		logger.debug("Entry: suggestStepObjectNameWorkspace({})", theTestStep);
+		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+		ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+		if (project == null) {
+			logger.debug("Exit: suggestStepObjectNameWorkspace({})", proposals);
+			return proposals;
+		}
+		for (IStepObject stepObject : SheepDogUtility.getStepObjectList(project)) {
+			String stripped = stepObject.getFullName().replaceFirst("^stepdefs/", "").replaceAll("\\.asciidoc$", "");
+			String[] parts = stripped.split("/");
+			String objectName = parts[parts.length - 1];
+			String value = parts.length > 1
+					? "The " + stripped.substring(0, stripped.lastIndexOf("/")) + " " + objectName
+					: "The " + objectName;
+			String description = "";
+			if (stepObject.getDescription() != null && !stepObject.getDescription().getLineList().isEmpty()) {
+				description = stepObject.getDescription().getLineList().get(0).getName();
+			}
+			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+			proposal.setId(objectName);
+			proposal.setValue(value);
+			proposal.setDescription(description);
+			proposals.add(proposal);
+		}
+		logger.debug("Exit: suggestStepObjectNameWorkspace({})", proposals);
+		return proposals;
+	}
+
 	public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameFile(ITestStep theTestStep)
 			throws Exception {
 		logger.debug("Entry: suggestStepObjectNameFile({})", theTestStep);
