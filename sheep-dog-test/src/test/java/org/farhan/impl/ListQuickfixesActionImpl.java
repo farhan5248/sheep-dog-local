@@ -58,6 +58,8 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
                 ITestStep testStep = (ITestStep) cursor;
                 if (validateDialog.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description)) {
                     listQuickfixesDialog.addAll(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
+                } else if (validateDialog.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
+                    listQuickfixesDialog.addAll(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
                 }
             } else if (cursor instanceof ITestSuite) {
                 ITestSuite testSuite = (ITestSuite) cursor;
