@@ -4,10 +4,12 @@ import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.issues.TestStepContainerIssueDetector;
+import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.issues.TestSuiteIssueDetector;
 import org.farhan.objects.xtext.ValidateAction;
 import org.junit.jupiter.api.Assertions;
@@ -45,6 +47,14 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
                 ITestStepContainer testStepContainer = (ITestStepContainer) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
                     validateDialog = TestStepContainerIssueDetector.validateNameOnly(testStepContainer);
+                    if (validateDialog == null) {
+                        validateDialog = "";
+                    }
+                }
+            } else if (getProperty("cursor") instanceof ITestStep) {
+                ITestStep testStep = (ITestStep) getProperty("cursor");
+                if (validateDialog == null || validateDialog.isEmpty()) {
+                    validateDialog = TestStepIssueDetector.validateStepObjectNameOnly(testStep);
                     if (validateDialog == null) {
                         validateDialog = "";
                     }
