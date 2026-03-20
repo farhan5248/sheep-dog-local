@@ -5,9 +5,12 @@ import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
+import org.farhan.dsl.issues.TestSuiteIssueResolver;
+import org.farhan.dsl.issues.TestSuiteIssueTypes;
 import org.farhan.objects.xtext.ListQuickfixesAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -39,6 +42,11 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
                 ICell cell = (ICell) cursor;
                 if (validateDialog.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                     listQuickfixesDialog.addAll(CellIssueResolver.correctNameOnly(cell));
+                }
+            } else if (cursor instanceof ITestSuite) {
+                ITestSuite testSuite = (ITestSuite) cursor;
+                if (validateDialog.contentEquals(TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description)) {
+                    listQuickfixesDialog.addAll(TestSuiteIssueResolver.correctNameOnly(testSuite));
                 }
             }
         } catch (Exception e) {

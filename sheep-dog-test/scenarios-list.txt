@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Quickfixes for Only Issues
-  Scenario: Test suite name should start with a capital letter quickfix
-    Tag: ListQuickfixesAction
   Scenario: Test case name should start with a capital letter quickfix
     Tag: ListQuickfixesAction
   Scenario: Test step must have a valid object name quickfix
