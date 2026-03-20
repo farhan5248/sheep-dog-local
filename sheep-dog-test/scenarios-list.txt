@@ -1,7 +1,3 @@
-File: Language Definition/Issues/Proposals for File and Workspace Step Objects
-  Scenario: Has component has existing
-    Tag: ListProposalsAction
-
 File: Language Definition/Issues/Proposals for Workspace Step Definitions
   Scenario: Has component no existing step object
     Tag: ListProposalsAction
