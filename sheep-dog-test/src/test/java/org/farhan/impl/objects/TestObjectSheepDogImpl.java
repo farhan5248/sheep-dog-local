@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.ArrayList;
 
 import org.farhan.common.TestObject;
+import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
@@ -110,6 +111,14 @@ public class TestObjectSheepDogImpl extends TestObject {
         setProperty("cursor", row);
     }
 
+    protected void addCellWithName(String name) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof ICell) {
+            cursor = ((ICell) cursor).getParent();
+        }
+        setProperty("cursor", SheepDogBuilder.createCell((IRow) cursor, name));
+    }
+
     protected void addTestDataWithName(String name) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestData) {
@@ -121,6 +130,12 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected String getDocumentFromWorkspaceAsString() {
         setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
         return getProperty("cursor") == null ? null : getProperty("cursor").toString();
+    }
+
+    protected String assertCellName(String name) {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((ICell) getProperty("cursor")).getName();
     }
 
     protected String assertTestStepFullName() {

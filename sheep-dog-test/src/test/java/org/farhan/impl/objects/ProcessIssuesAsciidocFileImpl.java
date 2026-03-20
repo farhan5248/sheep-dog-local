@@ -2,6 +2,7 @@ package org.farhan.impl.objects;
 
 import java.util.HashMap;
 
+import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITable;
@@ -332,6 +333,36 @@ public class ProcessIssuesAsciidocFileImpl extends TestObjectSheepDogImpl implem
         if (getProperty("cursor") == null)
             return null;
         return ((IRow) getProperty("cursor")).toString();
+    }
+
+    @Override
+    public void setCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addTestSuiteWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setCellListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setCellListNodeCellName(HashMap<String, String> keyMap) {
+        addCellWithName(keyMap.get("Cell Name"));
+    }
+
+    @Override
+    public String getCellListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getCellListNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getCellListNodeCellName(HashMap<String, String> keyMap) {
+        return assertCellName(replaceKeyword(keyMap.get("Cell Name")));
     }
 
 }
