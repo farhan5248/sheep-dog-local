@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.objects.xtext.ListProposalsAction;
 import org.junit.jupiter.api.Assertions;
@@ -33,10 +34,16 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
             Object cursor = getProperty("cursor");
             @SuppressWarnings("unchecked")
             ArrayList<SheepDogIssueProposal> listProposalsDialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
+            listProposalsDialog.clear();
             if (cursor instanceof ITestStep) {
                 ITestStep testStep = (ITestStep) cursor;
-                listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep));
-                listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameFile(testStep));
+                String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+                if (!stepObjectFullName.isEmpty()) {
+                    listProposalsDialog.addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep));
+                } else {
+                    listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep));
+                    listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameFile(testStep));
+                }
             }
         } catch (Exception e) {
             Assertions.fail(e);

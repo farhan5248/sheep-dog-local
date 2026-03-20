@@ -70,10 +70,7 @@ public class SheepDogUtility {
 
         // Clone lines
         if (original.getDescription() != null) {
-            IDescription clonedDescription = SheepDogBuilder.createDescription(clone);
-            for (ILine line : original.getDescription().getLineList()) {
-                SheepDogBuilder.createLine(clonedDescription, line.getName());
-            }
+            cloneDescriptionLines(original.getDescription(), SheepDogBuilder.createDescription(clone));
         }
 
         // Clone step definitions
@@ -82,10 +79,7 @@ public class SheepDogUtility {
 
             // Clone lines for step definition
             if (stepDefinition.getDescription() != null) {
-                IDescription clonedStepDefDescription = SheepDogBuilder.createDescription(clonedStepDef);
-                for (ILine line : stepDefinition.getDescription().getLineList()) {
-                    SheepDogBuilder.createLine(clonedStepDefDescription, line.getName());
-                }
+                cloneDescriptionLines(stepDefinition.getDescription(), SheepDogBuilder.createDescription(clonedStepDef));
             }
 
             // Clone step parameters
@@ -95,10 +89,7 @@ public class SheepDogUtility {
 
                 // Clone lines for step parameters
                 if (stepParameters.getDescription() != null) {
-                    IDescription clonedDescription = SheepDogBuilder.createDescription(clonedStepParams);
-                    for (ILine line : stepParameters.getDescription().getLineList()) {
-                        SheepDogBuilder.createLine(clonedDescription, line.getName());
-                    }
+                    cloneDescriptionLines(stepParameters.getDescription(), SheepDogBuilder.createDescription(clonedStepParams));
                 }
 
                 // Clone table
@@ -328,7 +319,7 @@ public class SheepDogUtility {
      * @param theRow the row element to navigate from
      * @return the IStepDefinition, or null if any precondition fails
      */
-    public static IStepDefinition getStepDefinitionParentForRow(IRow theRow) throws Exception {
+    public static IStepDefinition getStepDefinitionParentForRow(IRow theRow) {
         logger.debug("Entry: getStepDefinitionParentForRow({})", theRow);
         ITable table = theRow.getParent();
         if (table == null) {
@@ -411,5 +402,11 @@ public class SheepDogUtility {
         }
         logger.debug("Exit: getTestStepListUpToTestStep({})", steps.size());
         return steps;
+    }
+
+    private static void cloneDescriptionLines(IDescription source, IDescription target) {
+        for (ILine line : source.getLineList()) {
+            SheepDogBuilder.createLine(target, line.getName());
+        }
     }
 }
