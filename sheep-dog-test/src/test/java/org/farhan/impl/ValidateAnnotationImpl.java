@@ -20,4 +20,9 @@ public class ValidateAnnotationImpl extends TestObjectSheepDogImpl implements Va
         Object content = getProperty("validate annotation.Content");
         return content == null ? null : content.toString();
     }
+
+    @Override
+    public String getEmpty(HashMap<String, String> keyMap) {
+        return (String) getProperty("validate annotation.Content");
+    }
 }

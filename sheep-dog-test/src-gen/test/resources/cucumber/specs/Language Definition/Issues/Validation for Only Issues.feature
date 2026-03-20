@@ -24,3 +24,23 @@ Feature: Validation for Only Issues
           Name should start with a capital
           """
 
+  @ValidateAction
+  Scenario: Body row Cell names can be any case validation
+
+    \@ValidateAction
+    Body rows (non-header rows) contain data values. The capitalization rule only applies to header row cells.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | Header    |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList | value     |
+     When The xtext plugin validate action is performed as follows
+          | Test Suite Full Name         | Node Path                                                         |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/2/CellList/1 |
+     Then The xtext plugin validate annotation will be empty
+
