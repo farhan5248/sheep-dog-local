@@ -90,16 +90,16 @@
 
 ## setCursorAtNode
 
-**Desc**: Navigates cursor along a path string using element type names and 1-based indices. Delegates to `navigateToNode(path, false)`.
+**Desc**: Navigates cursor along a path string using element type names and 1-based indices. Delegates to `navigateToNode(path, false)`. Returns true if the cursor was successfully set.
 
 **Rule**: ALL method names follow setCursorAtNode pattern.
  - **Name**: `^setCursorAtNode$`
- - **Return**: `^void$`
+ - **Return**: `^boolean$`
  - **Parameters**: `^\(String\s+\w+\)$`
  - **Modifier**: `^protected$`
 
 **Examples**:
- - `protected void setCursorAtNode(String path)`
+ - `protected boolean setCursorAtNode(String path)`
 
 ## createNodeDependencies
 

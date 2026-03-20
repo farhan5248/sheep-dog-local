@@ -39,7 +39,7 @@ public ICell createCell() {
 
 ## {Type}Impl
 
-### set{Assignment}
+### {Assignment}
 
 Setters for child elements cast to impl type and wire the parent reference. Some setFullName implementations parse the value to extract sub-fields.
 
@@ -61,7 +61,7 @@ public void setFullName(String value) {
 }
 ```
 
-### add{Type}
+### {Type}
 
 Adders cast to impl type, add to the internal list, and wire the parent reference.
 
@@ -73,6 +73,73 @@ public boolean addTestCase(ITestCase value) {
     testStepContainerList.add(impl);
     impl.parent = this;
     return true;
+}
+```
+
+### FullName
+
+Returns the stored fullName field. Some setFullName implementations parse the value to extract sub-fields.
+
+**Example: getFullName**
+```java
+// (get|set)FullName() {
+@Override
+public String getFullName() {
+    return fullName;
+}
+```
+
+**Example: setFullName with sub-field parsing**
+```java
+@Override
+public void setFullName(String value) {
+    stepObjectName = StepObjectRefFragments.getAll(value);
+    stepDefinitionName = StepDefinitionRefFragments.getAll(value.replace(stepObjectName, ""));
+}
+```
+
+### Parent
+
+Returns the parent element for upward tree traversal.
+
+**Example: getParent**
+```java
+@Override
+public IRow getParent() {
+    return parent;
+}
+```
+
+### Content
+
+Gets or sets raw file content for grammar elements backed by files.
+
+**Example: getContent**
+```java
+// (get|set)Content() {
+@Override
+public String getContent() throws Exception {
+    return content;
+}
+```
+
+**Example: setContent**
+```java
+@Override
+public void setContent(String text) throws Exception {
+    content = text;
+}
+```
+
+### FileExtension
+
+Returns the file extension for determining the grammar syntax.
+
+**Example: getFileExtension**
+```java
+@Override
+public String getFileExtension() {
+    return "feature";
 }
 ```
 
@@ -269,6 +336,51 @@ private void navigateToNode(String path, boolean create) {
         if (current != null)
             setProperty("cursor", current);
     }
+}
+```
+
+### setCursorAtNode
+
+Navigates cursor to a path position using element type names and 1-based indices. Delegates to `navigateToNode(path, false)`.
+
+**Example: setCursorAtNode implementation**
+```java
+protected boolean setCursorAtNode(String path) {
+    navigateToNode(path, false);
+    return getProperty("cursor") != null;
+}
+```
+
+### createNodeDependencies
+
+Ensures all intermediate nodes exist along a path, creating via Builder if missing. Delegates to `navigateToNode(path, true)`.
+
+**Example: createNodeDependencies implementation**
+```java
+protected void createNodeDependencies(String path) {
+    navigateToNode(path, true);
+}
+```
+
+### getFullNameFromPath
+
+Extracts the document full name from the `object` field, stripping the base path prefix using regex.
+
+**Example: getFullNameFromPath implementation**
+```java
+protected String getFullNameFromPath() {
+    return object.toString().replaceAll(".*src/test/resources/", "").replaceAll("\\.[^.]+$", "");
+}
+```
+
+### listToCsvString
+
+Converts a List to a comma-separated string for assertion mapping.
+
+**Example: listToCsvString implementation**
+```java
+protected String listToCsvString(List<?> list) {
+    return list.stream().map(Object::toString).collect(Collectors.joining(","));
 }
 ```
 
