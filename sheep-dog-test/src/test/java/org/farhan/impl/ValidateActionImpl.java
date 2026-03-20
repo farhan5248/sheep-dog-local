@@ -102,11 +102,7 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
 
     private void navigateToNode() {
         if (getProperty("Node Path") != null) {
-            String path = getProperty("Node Path").toString();
-            if (path.endsWith("/")) {
-                path = path.substring(0, path.length() - 1);
-            }
-            setCursorAtNode(path);
+            setCursorAtNode(getProperty("Node Path").toString());
             properties.remove("Node Path");
         }
     }

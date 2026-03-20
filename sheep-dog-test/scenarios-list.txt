@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Code Generation for Only Issues
-  Scenario: Test suite name should start with a capital letter generation
-    Tag: ApplyQuickfixAction
   Scenario: Test case name should start with a capital letter generation
     Tag: ApplyQuickfixAction
 
