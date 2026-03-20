@@ -8,6 +8,8 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatc
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.EditDocumentAction;
 import org.farhan.objects.xtext.AddDocumentAction;
+import org.farhan.objects.xtext.ValidateAction;
+import org.farhan.objects.xtext.ValidateAnnotation;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -42,6 +44,8 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
         bind(EditDocumentAction.class).to(EditDocumentActionImpl.class);
         bind(AddDocumentAction.class).to(AddDocumentActionImpl.class);
+        bind(ValidateAction.class).to(ValidateActionImpl.class);
+        bind(ValidateAnnotation.class).to(ValidateAnnotationImpl.class);
     }
 
 }

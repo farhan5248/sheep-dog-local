@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Validation for Only Issues
-  Scenario: Header row Cell names should start with a capital letter validation
-    Tag: ValidateAction
   Scenario: Body row Cell names can be any case validation
     Tag: ValidateAction
   Scenario: Test suite name should start with a capital letter validation
