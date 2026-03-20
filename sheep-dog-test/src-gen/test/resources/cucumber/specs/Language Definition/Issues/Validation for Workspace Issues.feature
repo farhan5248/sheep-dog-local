@@ -44,3 +44,29 @@ Feature: Validation for Workspace Issues
           The step definition doesn't exist for the step object
           """
 
+  @ValidateAction
+  Scenario: This object step definition parameter set doesn't exist validation
+
+    \@ValidateAction
+    RowIssueTypes.ROW_CELL_LIST_WORKSPACE validates that the header row cells in the test step match a parameter set defined in the step definition.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name  |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | New Header |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name | Step Parameters Name |
+          | is set as follows    | Existing Header      |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows
+          | Node Path                                                          | Cell Name       |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | Existing Header |
+     When The xtext plugin validate action is performed as follows
+          | Test Suite Full Name         | Node Path                                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
+     Then The xtext plugin validate annotation will be set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
+

@@ -3,11 +3,13 @@ package org.farhan.impl;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.issues.CellIssueDetector;
+import org.farhan.dsl.issues.RowIssueDetector;
 import org.farhan.dsl.issues.TestStepContainerIssueDetector;
 import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.issues.TestSuiteIssueDetector;
@@ -79,6 +81,14 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
                 }
                 if (validateDialog == null || validateDialog.isEmpty()) {
                     validateDialog = TestStepIssueDetector.validateStepDefinitionNameWorkspace(testStep);
+                    if (validateDialog == null) {
+                        validateDialog = "";
+                    }
+                }
+            } else if (getProperty("cursor") instanceof IRow) {
+                IRow row = (IRow) getProperty("cursor");
+                if (validateDialog == null || validateDialog.isEmpty()) {
+                    validateDialog = RowIssueDetector.validateCellListWorkspace(row);
                     if (validateDialog == null) {
                         validateDialog = "";
                     }
