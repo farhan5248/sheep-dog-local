@@ -292,8 +292,10 @@ public class SheepDogBuilder {
         logger.debug("Entering createTable for parent: {}", parent != null ? parent.getStepObjectName() : "null");
         ITable table;
         if (parent != null) {
-            if (parent.getText() != null)
+            if (parent.getText() != null) {
+                logger.debug("Exiting createTable with result: null");
                 return null;
+            }
             table = parent.getTable();
             if (table == null) {
                 table = SheepDogFactory.instance.createTable();
@@ -411,8 +413,10 @@ public class SheepDogBuilder {
      */
     public static IText createText(ITestStep parent, String name) {
         logger.debug("Entering createText for name: {}", name);
-        if (parent != null && parent.getTable() != null)
+        if (parent != null && parent.getTable() != null) {
+            logger.debug("Exiting createText with result: null");
             return null;
+        }
         IText text = SheepDogFactory.instance.createText();
         text.setName(name);
         if (parent != null)
