@@ -6,16 +6,8 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssue
 import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessIssuesAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.Input2FileAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
-import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.farhan.objects.xtext.EditDocumentAction;
 import org.farhan.objects.xtext.AddDocumentAction;
-import org.farhan.objects.xtext.ListProposalsAction;
-import org.farhan.objects.xtext.ListProposalsPopup;
-import org.farhan.objects.xtext.ListQuickfixesAction;
-import org.farhan.objects.xtext.ListQuickfixesPopup;
-import org.farhan.objects.xtext.ValidateAction;
-import org.farhan.objects.xtext.ValidateAnnotation;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -48,15 +40,8 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(ProcessIssues2AsciidocFile.class).to(ProcessIssues2AsciidocFileImpl.class);
         bind(ProcessIssuesAsciidocFile.class).to(ProcessIssuesAsciidocFileImpl.class);
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
-        bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);
         bind(EditDocumentAction.class).to(EditDocumentActionImpl.class);
         bind(AddDocumentAction.class).to(AddDocumentActionImpl.class);
-        bind(ListProposalsAction.class).to(ListProposalsActionImpl.class);
-        bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);
-        bind(ListQuickfixesAction.class).to(ListQuickfixesActionImpl.class);
-        bind(ListQuickfixesPopup.class).to(ListQuickfixesPopupImpl.class);
-        bind(ValidateAction.class).to(ValidateActionImpl.class);
-        bind(ValidateAnnotation.class).to(ValidateAnnotationImpl.class);
     }
 
 }
