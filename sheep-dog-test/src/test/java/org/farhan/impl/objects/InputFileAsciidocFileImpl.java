@@ -3,6 +3,7 @@ package org.farhan.impl.objects;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
@@ -117,6 +118,38 @@ public class InputFileAsciidocFileImpl extends TestObjectSheepDogImpl implements
         if (getProperty("cursor") == null)
             return null;
         return ((IStepParameters) getProperty("cursor")).getName();
+    }
+
+    @Override
+    public void setLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        addStepObjectWithFullName(getFullNameFromPath());
+    }
+
+    @Override
+    public void setLineListNodeNodePath(HashMap<String, String> keyMap) {
+        createNodeDependencies(keyMap.get("Node Path"));
+    }
+
+    @Override
+    public void setLineListNodeLineContent(HashMap<String, String> keyMap) {
+        addLineWithContent(keyMap.get("Line Content"));
+    }
+
+    @Override
+    public String getLineListNodeCreatedAsFollows(HashMap<String, String> keyMap) {
+        return getDocumentFromWorkspaceAsString();
+    }
+
+    @Override
+    public String getLineListNodeNodePath(HashMap<String, String> keyMap) {
+        return setCursorAtNode(keyMap.get("Node Path")) ? keyMap.get("Node Path") : null;
+    }
+
+    @Override
+    public String getLineListNodeLineContent(HashMap<String, String> keyMap) {
+        if (getProperty("cursor") == null)
+            return null;
+        return ((ILine) getProperty("cursor")).getName();
     }
 
     @Override

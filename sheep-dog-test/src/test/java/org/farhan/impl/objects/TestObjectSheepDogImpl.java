@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
+import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
@@ -117,6 +118,14 @@ public class TestObjectSheepDogImpl extends TestObject {
             cursor = ((ICell) cursor).getParent();
         }
         setProperty("cursor", SheepDogBuilder.createCell((IRow) cursor, name));
+    }
+
+    protected void addLineWithContent(String content) {
+        Object cursor = getProperty("cursor");
+        if (cursor instanceof ILine) {
+            cursor = ((ILine) cursor).getParent();
+        }
+        setProperty("cursor", SheepDogBuilder.createLine((IDescription) cursor, content));
     }
 
     protected void addTestDataWithName(String name) {
