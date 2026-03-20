@@ -13,4 +13,12 @@ public interface ListQuickfixesPopup {
     public String getProposalValue(HashMap<String, String> keyMap);
 
     public String getEmpty(HashMap<String, String> keyMap);
+
+    public void setSetAsFollows(HashMap<String, String> keyMap);
+
+    public void setProposalId(HashMap<String, String> keyMap);
+
+    public void setProposalDescription(HashMap<String, String> keyMap);
+
+    public void setProposalValue(HashMap<String, String> keyMap);
 }

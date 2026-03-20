@@ -57,4 +57,26 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
     public String getEmpty(HashMap<String, String> keyMap) {
         return listToCsvString(((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")));
     }
+
+    @Override
+    public void setSetAsFollows(HashMap<String, String> keyMap) {
+    }
+
+    @Override
+    public void setProposalId(HashMap<String, String> keyMap) {
+    }
+
+    @Override
+    public void setProposalDescription(HashMap<String, String> keyMap) {
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void setProposalValue(HashMap<String, String> keyMap) {
+        SheepDogIssueProposal proposal = new SheepDogIssueProposal();
+        proposal.setId(keyMap.get("Proposal Id"));
+        proposal.setDescription(keyMap.get("Proposal Description"));
+        proposal.setValue(keyMap.get("Proposal Value"));
+        ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")).add(proposal);
+    }
 }

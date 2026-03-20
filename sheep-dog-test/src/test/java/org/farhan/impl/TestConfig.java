@@ -8,6 +8,7 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatc
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile;
 import org.farhan.objects.xtext.AddDocumentAction;
 import org.farhan.objects.xtext.AddDocumentNodeAction;
+import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.farhan.objects.xtext.EditDocumentAction;
 import org.farhan.objects.xtext.EditDocumentNodeAction;
 import org.farhan.objects.xtext.ListQuickfixesAction;
@@ -46,6 +47,7 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(ProcessIssues2AsciidocFile.class).to(ProcessIssues2AsciidocFileImpl.class);
         bind(ProcessIssuesAsciidocFile.class).to(ProcessIssuesAsciidocFileImpl.class);
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
+        bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);
         bind(AddDocumentAction.class).to(AddDocumentActionImpl.class);
         bind(AddDocumentNodeAction.class).to(AddDocumentNodeActionImpl.class);
         bind(EditDocumentAction.class).to(EditDocumentActionImpl.class);
