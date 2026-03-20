@@ -5,7 +5,10 @@ import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
@@ -17,7 +20,6 @@ import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
-import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.RowIssueTypes;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.issues.TestStepContainerIssueTypes;
@@ -60,7 +62,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
             } else if (cursor instanceof IRow) {
                 IRow row = (IRow) cursor;
                 if (validateDialog.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
-                    applyProposal(RowIssueResolver.correctCellListWorkspace(row));
+                    applyRowCellListWorkspaceQuickfix(row);
                 }
             } else if (cursor instanceof ITestStepContainer) {
                 ITestStepContainer tsc = (ITestStepContainer) cursor;
@@ -110,6 +112,29 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
                     ((ITestStepContainer) cursor).setName(proposal.getValue().toString());
                 }
             }
+        }
+    }
+
+    private void applyRowCellListWorkspaceQuickfix(IRow row) throws Exception {
+        ITable table = row.getParent();
+        if (table == null || !(table.getParent() instanceof ITestStep))
+            return;
+        ITestStep testStep = (ITestStep) table.getParent();
+        String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+        if (stepObjectFullName.isEmpty())
+            return;
+        ITestDocument doc = ((ITestProject) getProperty("workspace")).getTestDocument(stepObjectFullName);
+        if (!(doc instanceof IStepObject))
+            return;
+        IStepDefinition stepDef = ((IStepObject) doc).getStepDefinition(testStep.getStepDefinitionName());
+        if (stepDef == null)
+            return;
+        String rowCells = SheepDogUtility.getCellListAsString(row.getCellList());
+        IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDef, rowCells);
+        ITable newTable = SheepDogBuilder.createTable(stepParameters);
+        IRow newRow = SheepDogBuilder.createRow(newTable);
+        for (ICell cell : row.getCellList()) {
+            SheepDogBuilder.createCell(newRow, cell.getName());
         }
     }
 

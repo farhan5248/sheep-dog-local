@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Code Generation for Workspace Issues
-  Scenario: This object step definition parameter set doesn't exist generation
-    Tag: ApplyQuickfixAction
   Scenario: This object step definition text parameter doesn't exist generation
     Tag: ApplyQuickfixAction
 
