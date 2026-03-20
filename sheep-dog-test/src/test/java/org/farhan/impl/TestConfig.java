@@ -10,6 +10,8 @@ import org.farhan.objects.xtext.AddDocumentAction;
 import org.farhan.objects.xtext.AddDocumentNodeAction;
 import org.farhan.objects.xtext.EditDocumentAction;
 import org.farhan.objects.xtext.EditDocumentNodeAction;
+import org.farhan.objects.xtext.ListQuickfixesAction;
+import org.farhan.objects.xtext.ListQuickfixesPopup;
 import org.farhan.objects.xtext.ValidateAction;
 import org.farhan.objects.xtext.ValidateAnnotation;
 import com.google.inject.AbstractModule;
@@ -48,6 +50,8 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(AddDocumentNodeAction.class).to(AddDocumentNodeActionImpl.class);
         bind(EditDocumentAction.class).to(EditDocumentActionImpl.class);
         bind(EditDocumentNodeAction.class).to(EditDocumentNodeActionImpl.class);
+        bind(ListQuickfixesAction.class).to(ListQuickfixesActionImpl.class);
+        bind(ListQuickfixesPopup.class).to(ListQuickfixesPopupImpl.class);
         bind(ValidateAction.class).to(ValidateActionImpl.class);
         bind(ValidateAnnotation.class).to(ValidateAnnotationImpl.class);
     }

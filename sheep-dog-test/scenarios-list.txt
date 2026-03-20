@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Quickfixes for Only Issues
-  Scenario: Cell name should start with a capital letter quickfix
-    Tag: ListQuickfixesAction
   Scenario: Body row Cell names can be any case quickfix
     Tag: ListQuickfixesAction
   Scenario: Test suite name should start with a capital letter quickfix
