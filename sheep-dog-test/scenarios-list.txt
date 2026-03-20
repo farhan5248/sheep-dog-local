@@ -1,7 +1,3 @@
-File: Language Definition/Issues/Validation for Workspace Issues
-  Scenario: This object step definition text parameter doesn't exist validation
-    Tag: ValidateAction
-
 File: Language Definition/Issues/Quickfixes for Only Issues
   Scenario: Cell name should start with a capital letter quickfix
     Tag: ListQuickfixesAction

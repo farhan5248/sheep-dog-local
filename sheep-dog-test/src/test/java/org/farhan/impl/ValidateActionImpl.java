@@ -4,12 +4,19 @@ import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.IStepDefinition;
+import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.issues.RowIssueDetector;
+import org.farhan.dsl.issues.RowIssueTypes;
 import org.farhan.dsl.issues.TestStepContainerIssueDetector;
 import org.farhan.dsl.issues.TestStepIssueDetector;
 import org.farhan.dsl.issues.TestSuiteIssueDetector;
@@ -93,6 +100,14 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
                         validateDialog = "";
                     }
                 }
+            } else if (getProperty("cursor") instanceof IText) {
+                IText text = (IText) getProperty("cursor");
+                if (validateDialog == null || validateDialog.isEmpty()) {
+                    validateDialog = validateTextContentWorkspace(text);
+                    if (validateDialog == null) {
+                        validateDialog = "";
+                    }
+                }
             } else if (getProperty("cursor") instanceof ITestSuite) {
                 ITestSuite testSuite = (ITestSuite) getProperty("cursor");
                 if (validateDialog == null || validateDialog.isEmpty()) {
@@ -122,8 +137,50 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
 
     private void navigateToNode() {
         if (getProperty("Node Path") != null) {
-            setCursorAtNode(getProperty("Node Path").toString());
+            String path = getProperty("Node Path").toString();
+            if (path.endsWith("/")) {
+                path = path.substring(0, path.length() - 1);
+            }
+            setCursorAtNode(path);
             properties.remove("Node Path");
         }
+    }
+
+    private String validateTextContentWorkspace(IText text) throws Exception {
+        ITestStep testStep = text.getParent();
+        if (testStep == null) {
+            return "";
+        }
+        String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+        if (stepObjectFullName.isEmpty()) {
+            return "";
+        }
+        ITestProject project = (ITestProject) getProperty("workspace");
+        if (project == null) {
+            return "";
+        }
+        ITestDocument stepObjectDoc = project.getTestDocument(stepObjectFullName);
+        if (!(stepObjectDoc instanceof IStepObject)) {
+            return "";
+        }
+        IStepObject stepObject = (IStepObject) stepObjectDoc;
+        String stepDefName = testStep.getStepDefinitionName();
+        if (stepDefName == null || stepDefName.isEmpty()) {
+            return "";
+        }
+        IStepDefinition stepDef = stepObject.getStepDefinition(stepDefName);
+        if (stepDef == null) {
+            return "";
+        }
+        for (IStepParameters sp : stepDef.getStepParameterList()) {
+            if (sp.getTable() != null && !sp.getTable().getRowList().isEmpty()) {
+                IRow headerRow = sp.getTable().getRow(0);
+                String paramCells = SheepDogUtility.getCellListAsString(headerRow.getCellList());
+                if ("Content".equals(paramCells)) {
+                    return "";
+                }
+            }
+        }
+        return RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description;
     }
 }
