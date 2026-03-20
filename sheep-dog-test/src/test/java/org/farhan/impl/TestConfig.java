@@ -11,6 +11,8 @@ import org.farhan.objects.xtext.AddDocumentNodeAction;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.farhan.objects.xtext.EditDocumentAction;
 import org.farhan.objects.xtext.EditDocumentNodeAction;
+import org.farhan.objects.xtext.ListProposalsAction;
+import org.farhan.objects.xtext.ListProposalsPopup;
 import org.farhan.objects.xtext.ListQuickfixesAction;
 import org.farhan.objects.xtext.ListQuickfixesPopup;
 import org.farhan.objects.xtext.ValidateAction;
@@ -48,6 +50,8 @@ public final class TestConfig extends AbstractModule implements InjectorSource {
         bind(ProcessIssuesAsciidocFile.class).to(ProcessIssuesAsciidocFileImpl.class);
         bind(ProcessGrammarFragmentAsciidocFile.class).to(ProcessGrammarFragmentAsciidocFileImpl.class);
         bind(ApplyQuickfixAction.class).to(ApplyQuickfixActionImpl.class);
+        bind(ListProposalsAction.class).to(ListProposalsActionImpl.class);
+        bind(ListProposalsPopup.class).to(ListProposalsPopupImpl.class);
         bind(AddDocumentAction.class).to(AddDocumentActionImpl.class);
         bind(AddDocumentNodeAction.class).to(AddDocumentNodeActionImpl.class);
         bind(EditDocumentAction.class).to(EditDocumentActionImpl.class);

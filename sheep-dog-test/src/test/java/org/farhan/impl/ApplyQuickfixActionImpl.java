@@ -20,6 +20,7 @@ import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
+import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.RowIssueTypes;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.issues.TestStepContainerIssueTypes;
@@ -27,6 +28,7 @@ import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueTypes;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueTypes;
+import org.farhan.dsl.issues.TextIssueResolver;
 import org.farhan.dsl.issues.TextIssueTypes;
 import org.farhan.objects.xtext.ApplyQuickfixAction;
 import org.junit.jupiter.api.Assertions;
@@ -61,7 +63,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
             } else if (cursor instanceof IRow) {
                 IRow row = (IRow) cursor;
                 if (validateDialog.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
-                    applyRowCellListWorkspaceQuickfix(row);
+                    applyProposal(RowIssueResolver.correctCellListWorkspace(row));
                 }
             } else if (cursor instanceof ITestStepContainer) {
                 ITestStepContainer tsc = (ITestStepContainer) cursor;
@@ -73,13 +75,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
                 if (validateDialog.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description)) {
                     applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
                 } else if (validateDialog.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
-                    String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
-                    if (!stepObjectFullName.isEmpty()) {
-                        ITestDocument doc = ((ITestProject) getProperty("workspace")).getTestDocument(stepObjectFullName);
-                        if (doc instanceof IStepObject) {
-                            SheepDogBuilder.createStepDefinition((IStepObject) doc, testStep.getStepDefinitionName());
-                        }
-                    }
+                    applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
                 }
             } else if (cursor instanceof ITestSuite) {
                 ITestSuite testSuite = (ITestSuite) cursor;
@@ -89,7 +85,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
             } else if (cursor instanceof IText) {
                 IText text = (IText) cursor;
                 if (validateDialog.contentEquals(TextIssueTypes.TEXT_CONTENT_WORKSPACE.description)) {
-                    applyTextContentWorkspaceQuickfix(text);
+                    applyProposal(TextIssueResolver.correctContentWorkspace(text));
                 }
             }
         } catch (Exception e) {
@@ -109,12 +105,31 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
                     ((ITestSuite) cursor).setName(proposal.getValue().toString());
                 } else if (cursor instanceof ITestStepContainer) {
                     ((ITestStepContainer) cursor).setName(proposal.getValue().toString());
+                } else if (cursor instanceof IRow && proposal.getId().startsWith("Generate")) {
+                    applyRowCellListWorkspaceQuickfix((IRow) cursor);
+                    return;
+                } else if (cursor instanceof IText && proposal.getId().startsWith("Generate")) {
+                    applyTextContentWorkspaceQuickfix((IText) cursor);
+                    return;
+                } else if (cursor instanceof ITestStep && proposal.getId().startsWith("Generate")) {
+                    applyStepDefinitionWorkspaceQuickfix((ITestStep) cursor);
+                    return;
                 }
             }
         }
     }
 
-    private void applyRowCellListWorkspaceQuickfix(IRow row) throws Exception {
+    private static void applyStepDefinitionWorkspaceQuickfix(ITestStep testStep) throws Exception {
+        String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+        if (!stepObjectFullName.isEmpty()) {
+            ITestDocument doc = ((ITestProject) getProperty("workspace")).getTestDocument(stepObjectFullName);
+            if (doc instanceof IStepObject) {
+                SheepDogBuilder.createStepDefinition((IStepObject) doc, testStep.getStepDefinitionName());
+            }
+        }
+    }
+
+    private static void applyRowCellListWorkspaceQuickfix(IRow row) throws Exception {
         ITable table = row.getParent();
         if (table == null || !(table.getParent() instanceof ITestStep))
             return;
@@ -131,7 +146,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
         }
     }
 
-    private void applyTextContentWorkspaceQuickfix(IText text) throws Exception {
+    private static void applyTextContentWorkspaceQuickfix(IText text) throws Exception {
         ITestStep testStep = text.getParent();
         if (testStep == null)
             return;
@@ -144,7 +159,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
         SheepDogBuilder.createCell(newRow, "Content");
     }
 
-    private IStepDefinition getStepDefinitionForTestStep(ITestStep testStep) throws Exception {
+    private static IStepDefinition getStepDefinitionForTestStep(ITestStep testStep) throws Exception {
         String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
         if (stepObjectFullName.isEmpty())
             return null;

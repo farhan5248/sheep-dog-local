@@ -1,12 +1,14 @@
 package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
@@ -33,6 +35,39 @@ public class TestStepIssueResolver {
 			proposals.add(proposal);
 		}
 		logger.debug("Exit: correctStepObjectNameWorkspace({})", proposals);
+		return proposals;
+	}
+
+	public static ArrayList<SheepDogIssueProposal> suggestStepObjectNameFile(ITestStep theTestStep)
+			throws Exception {
+		logger.debug("Entry: suggestStepObjectNameFile({})", theTestStep);
+		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
+		ITestStepContainer container = theTestStep.getParent();
+		List<ITestStep> steps = container.getTestStepList();
+		for (ITestStep step : steps) {
+			if (step == theTestStep)
+				break;
+			String stepObjectName = step.getStepObjectName();
+			if (stepObjectName != null && !stepObjectName.isEmpty()) {
+				String object = StepObjectRefFragments.getObject(stepObjectName);
+				String component = StepObjectRefFragments.getComponent(stepObjectName);
+				if (!object.isEmpty()) {
+					SheepDogIssueProposal p1 = new SheepDogIssueProposal();
+					p1.setId(object);
+					p1.setValue("The " + object);
+					p1.setDescription("Referred in: " + step.getFullName());
+					proposals.add(p1);
+					if (!component.isEmpty()) {
+						SheepDogIssueProposal p2 = new SheepDogIssueProposal();
+						p2.setId(component + "/" + object);
+						p2.setValue(stepObjectName);
+						p2.setDescription("Referred in: " + step.getFullName());
+						proposals.add(p2);
+					}
+				}
+			}
+		}
+		logger.debug("Exit: suggestStepObjectNameFile({})", proposals);
 		return proposals;
 	}
 
