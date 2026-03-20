@@ -52,10 +52,9 @@ public class TestStepIssueResolver {
 			String value = parts.length > 1
 					? "The " + stripped.substring(0, stripped.lastIndexOf("/")) + " " + objectName
 					: "The " + objectName;
-			String description = "";
-			if (stepObject.getDescription() != null && !stepObject.getDescription().getLineList().isEmpty()) {
-				description = stepObject.getDescription().getLineList().get(0).getName();
-			}
+			String description = (stepObject.getDescription() != null)
+					? SheepDogUtility.getLineListAsString(stepObject.getDescription().getLineList())
+					: "";
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId(objectName);
 			proposal.setValue(value);
