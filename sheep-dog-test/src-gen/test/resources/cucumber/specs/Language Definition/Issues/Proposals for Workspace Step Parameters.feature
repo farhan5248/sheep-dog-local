@@ -84,3 +84,23 @@ Feature: Proposals for Workspace Step Parameters
           | Proposal Value | Proposal Id | Proposal Description         |
           | H1, H2, H3     | H1, H2, H3  | Header parameters for tables |
 
+  @ListProposalsAction
+  Scenario: Has existing step definition with Content parameter
+
+    \@ListProposalsAction
+    Content parameters shouldn't be proposed as they are for text blocks, not table rows.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                                 |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is created as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | empty     |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name  | Step Parameters Name |
+          | is created as follows | Content              |
+     When The xtext plugin list proposals action is performed as follows
+          | Test Suite Full Name         | Node Path                                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
+     Then The xtext plugin list proposals popup will be empty
+

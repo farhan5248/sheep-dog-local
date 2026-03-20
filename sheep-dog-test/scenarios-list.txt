@@ -1,3 +1,0 @@
-File: Language Definition/Issues/Proposals for Workspace Step Parameters
-  Scenario: Has existing step definition with Content parameter
-    Tag: ListProposalsAction

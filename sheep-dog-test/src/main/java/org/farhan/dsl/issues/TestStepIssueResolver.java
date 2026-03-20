@@ -99,22 +99,11 @@ public class TestStepIssueResolver {
 			throws Exception {
 		logger.debug("Entry: suggestStepDefinitionNameWorkspace({})", theTestStep);
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
-		if (stepObjectFullName.isEmpty()) {
+		IStepObject stepObject = getStepObjectForTestStep(theTestStep);
+		if (stepObject == null) {
 			logger.debug("Exit: suggestStepDefinitionNameWorkspace({})", proposals);
 			return proposals;
 		}
-		ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-		if (project == null) {
-			logger.debug("Exit: suggestStepDefinitionNameWorkspace({})", proposals);
-			return proposals;
-		}
-		ITestDocument doc = project.getTestDocument(stepObjectFullName);
-		if (!(doc instanceof IStepObject)) {
-			logger.debug("Exit: suggestStepDefinitionNameWorkspace({})", proposals);
-			return proposals;
-		}
-		IStepObject stepObject = (IStepObject) doc;
 		for (IStepDefinition sd : stepObject.getStepDefinitionList()) {
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId(sd.getName());
@@ -133,22 +122,11 @@ public class TestStepIssueResolver {
 			throws Exception {
 		logger.debug("Entry: suggestStepParameterListWorkspace({})", theTestStep);
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
-		if (stepObjectFullName.isEmpty()) {
+		IStepObject stepObject = getStepObjectForTestStep(theTestStep);
+		if (stepObject == null) {
 			logger.debug("Exit: suggestStepParameterListWorkspace({})", proposals);
 			return proposals;
 		}
-		ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-		if (project == null) {
-			logger.debug("Exit: suggestStepParameterListWorkspace({})", proposals);
-			return proposals;
-		}
-		ITestDocument doc = project.getTestDocument(stepObjectFullName);
-		if (!(doc instanceof IStepObject)) {
-			logger.debug("Exit: suggestStepParameterListWorkspace({})", proposals);
-			return proposals;
-		}
-		IStepObject stepObject = (IStepObject) doc;
 		String stepDefName = theTestStep.getStepDefinitionName();
 		if (stepDefName == null || stepDefName.isEmpty()) {
 			logger.debug("Exit: suggestStepParameterListWorkspace({})", proposals);
@@ -160,6 +138,9 @@ public class TestStepIssueResolver {
 			return proposals;
 		}
 		for (IStepParameters sp : stepDefinition.getStepParameterList()) {
+			if ("Content".equals(sp.getName())) {
+				continue;
+			}
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId(sp.getName());
 			proposal.setValue(sp.getName());
@@ -171,6 +152,22 @@ public class TestStepIssueResolver {
 		}
 		logger.debug("Exit: suggestStepParameterListWorkspace({})", theTestStep);
 		return proposals;
+	}
+
+	private static IStepObject getStepObjectForTestStep(ITestStep theTestStep) {
+		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
+		if (stepObjectFullName.isEmpty()) {
+			return null;
+		}
+		ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+		if (project == null) {
+			return null;
+		}
+		ITestDocument doc = project.getTestDocument(stepObjectFullName);
+		if (!(doc instanceof IStepObject)) {
+			return null;
+		}
+		return (IStepObject) doc;
 	}
 
 	public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep)
