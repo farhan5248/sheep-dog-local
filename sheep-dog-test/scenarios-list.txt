@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Proposals for Workspace Step Definitions
-  Scenario: Has component no existing step definition
-    Tag: ListProposalsAction
   Scenario: Has component has existing step definition
     Tag: ListProposalsAction
   Scenario: No component has existing step definition

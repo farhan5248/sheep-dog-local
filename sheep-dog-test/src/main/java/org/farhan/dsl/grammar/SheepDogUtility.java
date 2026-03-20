@@ -328,42 +328,42 @@ public class SheepDogUtility {
      * @param theRow the row element to navigate from
      * @return the IStepDefinition, or null if any precondition fails
      */
-    public static IStepDefinition getStepDefinitionForRow(IRow theRow) throws Exception {
-        logger.debug("Entry: getStepDefinitionForRow({})", theRow);
+    public static IStepDefinition getStepDefinitionParentForRow(IRow theRow) throws Exception {
+        logger.debug("Entry: getStepDefinitionParentForRow({})", theRow);
         ITable table = theRow.getParent();
         if (table == null) {
-            logger.debug("Exit: getStepDefinitionForRow({})", "null");
+            logger.debug("Exit: getStepDefinitionParentForRow({})", "null");
             return null;
         }
         Object tableParent = table.getParent();
         if (!(tableParent instanceof ITestStep)) {
-            logger.debug("Exit: getStepDefinitionForRow({})", "null");
+            logger.debug("Exit: getStepDefinitionParentForRow({})", "null");
             return null;
         }
         ITestStep testStep = (ITestStep) tableParent;
         String stepObjectFullName = getStepObjectFullNameForTestStep(testStep);
         if (stepObjectFullName.isEmpty()) {
-            logger.debug("Exit: getStepDefinitionForRow({})", "null");
+            logger.debug("Exit: getStepDefinitionParentForRow({})", "null");
             return null;
         }
         ITestProject project = getTestProjectParentForRow(theRow);
         if (project == null) {
-            logger.debug("Exit: getStepDefinitionForRow({})", "null");
+            logger.debug("Exit: getStepDefinitionParentForRow({})", "null");
             return null;
         }
         ITestDocument doc = project.getTestDocument(stepObjectFullName);
         if (!(doc instanceof IStepObject)) {
-            logger.debug("Exit: getStepDefinitionForRow({})", "null");
+            logger.debug("Exit: getStepDefinitionParentForRow({})", "null");
             return null;
         }
         IStepObject stepObject = (IStepObject) doc;
         String stepDefName = testStep.getStepDefinitionName();
         if (stepDefName == null || stepDefName.isEmpty()) {
-            logger.debug("Exit: getStepDefinitionForRow({})", "null");
+            logger.debug("Exit: getStepDefinitionParentForRow({})", "null");
             return null;
         }
         IStepDefinition result = stepObject.getStepDefinition(stepDefName);
-        logger.debug("Exit: getStepDefinitionForRow({})", result);
+        logger.debug("Exit: getStepDefinitionParentForRow({})", result);
         return result;
     }
 

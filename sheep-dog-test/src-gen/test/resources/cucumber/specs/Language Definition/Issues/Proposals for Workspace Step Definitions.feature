@@ -24,3 +24,17 @@ Feature: Proposals for Workspace Step Definitions
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin list proposals popup will be empty
 
+  @ListProposalsAction
+  Scenario: Has component no existing step definition
+
+    \@ListProposalsAction
+    If the step object file exists but has no matching step definition, no proposals are available.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name           |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file |
+     When The xtext plugin list proposals action is performed as follows
+          | Test Suite Full Name         | Node Path                                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
+     Then The xtext plugin list proposals popup will be empty
+

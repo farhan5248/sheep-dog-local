@@ -17,7 +17,7 @@ public class RowIssueResolver {
 	public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(IRow theRow) throws Exception {
 		logger.debug("Entry: correctCellListWorkspace({})", theRow);
 		ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
-		IStepDefinition stepDef = SheepDogUtility.getStepDefinitionForRow(theRow);
+		IStepDefinition stepDef = SheepDogUtility.getStepDefinitionParentForRow(theRow);
 		if (stepDef != null) {
 			for (IStepParameters sp : stepDef.getStepParameterList()) {
 				SheepDogIssueProposal proposal = new SheepDogIssueProposal();

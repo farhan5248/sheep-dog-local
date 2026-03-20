@@ -14,7 +14,7 @@ public class RowIssueDetector {
 	public static String validateCellListWorkspace(IRow theRow) throws Exception {
 		logger.debug("Entry: validateCellListWorkspace({})", theRow);
 		String message = "";
-		IStepDefinition stepDef = SheepDogUtility.getStepDefinitionForRow(theRow);
+		IStepDefinition stepDef = SheepDogUtility.getStepDefinitionParentForRow(theRow);
 		if (stepDef != null) {
 			String rowCells = SheepDogUtility.getCellListAsString(theRow.getCellList());
 			for (IStepParameters sp : stepDef.getStepParameterList()) {
