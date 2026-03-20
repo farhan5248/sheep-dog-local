@@ -26,3 +26,22 @@ Feature: Validation for File Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1 |
      Then The xtext plugin validate annotation will be empty
 
+  @ValidateAction
+  Scenario: No component in the first step triggers an error validation
+
+    \@ValidateAction
+    The first step needs to have a component specified.
+    The other steps default to that one.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                         |
+          | TestStepContainerList/1/TestStepList | The Input file is present                   |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is downloaded |
+     When The xtext plugin validate action is performed as follows
+          | Test Suite Full Name         | Node Path               |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1 |
+     Then The xtext plugin validate annotation will be set as follows
+          """
+          The first step must have a component
+          """
+

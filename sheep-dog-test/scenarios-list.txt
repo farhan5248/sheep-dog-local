@@ -1,7 +1,3 @@
-File: Language Definition/Issues/Validation for File Issues
-  Scenario: No component in the first step triggers an error validation
-    Tag: ValidateAction
-
 File: Language Definition/Issues/Validation for TestStep Full Name
   Scenario: With Path Resolution
     Tag: ValidateAction

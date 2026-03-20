@@ -111,16 +111,12 @@ public class SheepDogUtility {
      */
     public static String getCellListAsString(List<ICell> list) {
         logger.debug("Entering getCellListAsString for list: {} items", list != null ? list.size() : "null");
-        String cellsAsString = "";
         List<String> theList = new ArrayList<String>();
         for (ICell cell : list) {
             theList.add(cell.getName());
         }
         Collections.sort(theList);
-        for (String cell : theList) {
-            cellsAsString += ", " + cell;
-        }
-        String result = cellsAsString.replaceFirst(", ", "").trim();
+        String result = String.join(", ", theList);
         logger.debug("Exiting getCellListAsString with result: {}", result);
         return result;
     }
@@ -135,10 +131,11 @@ public class SheepDogUtility {
     public static String getLineListAsString(List<ILine> lineList) {
         logger.debug("Entering getLineListAsString for lineList: {} items",
                 lineList != null ? lineList.size() : "null");
-        String documentation = "";
+        StringBuilder sb = new StringBuilder();
         for (ILine s : lineList) {
-            documentation += s.getName();
+            sb.append(s.getName());
         }
+        String documentation = sb.toString();
         logger.debug("Exiting getLineListAsString with result: {}", documentation);
         return documentation;
     }
@@ -154,28 +151,34 @@ public class SheepDogUtility {
     public static String getStepObjectFullNameForTestStep(ITestStep theStep) {
         logger.debug("Entering getStepObjectFullNameForTestStep for theStep: {}",
                 theStep != null ? theStep.getStepObjectName() : "null");
-        if (theStep != null) {
-            String stepFullName = SheepDogUtility.getTestStepFullName(theStep);
-            if (stepFullName != null && !stepFullName.isEmpty()) {
-                String component = StepObjectRefFragments.getComponent(stepFullName);
-                String object = StepObjectRefFragments.getObject(stepFullName);
-
-                if (!component.isEmpty() && !object.isEmpty()) {
-                    // Use the new utility method to navigate to project
-                    ITestProject project = getTestProjectParentForTestStep(theStep);
-                    if (project != null) {
-                        String fileExt = project.getFileExtension();
-                        if (fileExt != null && !fileExt.isEmpty()) {
-                            String result = "stepdefs/" + component + "/" + object + fileExt;
-                            logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", result);
-                            return result;
-                        }
-                    }
-                }
-            }
+        if (theStep == null) {
+            logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", "");
+            return "";
         }
-        logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", "");
-        return "";
+        String stepFullName = SheepDogUtility.getTestStepFullName(theStep);
+        if (stepFullName == null || stepFullName.isEmpty()) {
+            logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", "");
+            return "";
+        }
+        String component = StepObjectRefFragments.getComponent(stepFullName);
+        String object = StepObjectRefFragments.getObject(stepFullName);
+        if (component.isEmpty() || object.isEmpty()) {
+            logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", "");
+            return "";
+        }
+        ITestProject project = getTestProjectParentForTestStep(theStep);
+        if (project == null) {
+            logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", "");
+            return "";
+        }
+        String fileExt = project.getFileExtension();
+        if (fileExt == null || fileExt.isEmpty()) {
+            logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", "");
+            return "";
+        }
+        String result = "stepdefs/" + component + "/" + object + fileExt;
+        logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", result);
+        return result;
     }
 
     /**
