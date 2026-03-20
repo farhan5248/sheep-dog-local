@@ -116,3 +116,33 @@ Feature: Quickfixes for Only Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
      Then The xtext plugin list quickfixes popup will be empty
 
+  @ListQuickfixesAction
+  Scenario: Test step must have a valid step definition name quickfix
+
+    \@ListQuickfixesAction
+    No quickfix is available for invalid step definition names. The user must manually correct the step definition reference.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name           |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file |
+      And The xtext plugin validate annotation is set as follows
+          """
+          After specifying the step object name, a step definition name is specified.
+          It has 3 parts, details (optional), state and time (optional).
+          Details is used to specify a part in a document, like the header or body.
+          The details ending words are: type, fragment, table, snippet, list.
+          Examples are: "Customer details section" or "Order History table"
+          State part begins with words like is or isn't which get converted to setters or assertions in the test automation.
+          Next it's followed by the state attribute which is optional and can be any word.
+          The state starting words are: is, isn't, will be, won't be.
+          Examples are: "is present" or "will be created as follows"
+          A test step can end with the time specified.
+          Time was useful running describing a sequence of steps like submitting an order before 5pm.
+          The time endings are: early, late, on time, at, before, after, in, on.
+          Examples are: "after the next day" or "on time"
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
+     Then The xtext plugin list quickfixes popup will be empty
+
