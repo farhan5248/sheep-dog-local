@@ -1,6 +1,4 @@
 File: Language Definition/Grammar/Table Type
-  Scenario: Duplicate Row
-    Tag: EditDocumentAction
   Scenario: Row Insertion Order
     Tag: EditDocumentAction
   Scenario: Cell Insertion Order
