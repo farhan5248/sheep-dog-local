@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
+import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
@@ -11,6 +12,8 @@ import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
+import org.farhan.dsl.issues.RowIssueResolver;
+import org.farhan.dsl.issues.RowIssueTypes;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.issues.TestStepContainerIssueTypes;
 import org.farhan.dsl.issues.TestStepIssueResolver;
@@ -48,6 +51,11 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
                 ICell cell = (ICell) cursor;
                 if (validateDialog.contentEquals(CellIssueTypes.CELL_NAME_ONLY.description)) {
                     listQuickfixesDialog.addAll(CellIssueResolver.correctNameOnly(cell));
+                }
+            } else if (cursor instanceof IRow) {
+                IRow row = (IRow) cursor;
+                if (validateDialog.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
+                    listQuickfixesDialog.addAll(RowIssueResolver.correctCellListWorkspace(row));
                 }
             } else if (cursor instanceof ITestStepContainer) {
                 ITestStepContainer tsc = (ITestStepContainer) cursor;

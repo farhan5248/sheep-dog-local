@@ -53,3 +53,38 @@ Feature: Quickfixes for Workspace Issues
           | Proposal Id         | Proposal Description |
           | Generate is present | empty                |
 
+  @ListQuickfixesAction
+  Scenario: This object step definition parameter set doesn't exist quickfix
+
+    \@ListQuickfixesAction
+    The quickfix proposes two options: switching to an existing parameter set, or generating the new parameter set in the step definition.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | N1        |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | N2        |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name | Step Parameters Name |
+          | is set as follows    | E1, E2, E3           |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows
+          | Node Path                                                          | Cell Name |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E1        |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E2        |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | E3        |
+      And The xtext plugin validate annotation is set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Test Suite Full Name         | Node Path                                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
+     Then The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id | Proposal Description | Proposal Value |
+          | E1, E2, E3  | empty                | E1, E2, E3     |
+      And The xtext plugin list quickfixes popup will be set as follows
+          | Proposal Id     | Proposal Description |
+          | Generate N1, N2 | empty                |
+
