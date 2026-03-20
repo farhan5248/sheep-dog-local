@@ -1,6 +1,4 @@
 File: Language Definition/Issues/Quickfixes for File Issues
-  Scenario: The first step needs to have a component specified quickfix
-    Tag: ListQuickfixesAction
   Scenario: No component in the first step triggers an error quickfix
     Tag: ListQuickfixesAction
 
