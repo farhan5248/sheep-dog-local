@@ -46,3 +46,26 @@ Feature: Proposals for File Step Objects
           | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
           | The daily batchjob Output file | daily batchjob/Output file | Referred in: The daily batchjob Output file is present |
 
+  @ListProposalsAction
+  Scenario: No component no existing has background
+
+    \@ListProposalsAction
+    If a test case step has no component and no object, proposals include objects from the test setup (background) steps.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepContainerList node is created as follows
+          | Node Path             | Test Setup Name |
+          | TestStepContainerList | Background      |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                       |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Output file is present |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name |
+          | TestStepContainerList/2/TestStepList | empty               |
+     When The xtext plugin list proposals action is performed as follows
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/2/TestStepList/1 |
+     Then The xtext plugin list proposals popup will be set as follows
+          | Proposal Value                 | Proposal Id                | Proposal Description                                   |
+          | The Output file                | Output file                | Referred in: The daily batchjob Output file is present |
+          | The daily batchjob Output file | daily batchjob/Output file | Referred in: The daily batchjob Output file is present |
+
