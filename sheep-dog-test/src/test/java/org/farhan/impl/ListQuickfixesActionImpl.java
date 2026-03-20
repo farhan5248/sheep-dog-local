@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
@@ -12,6 +13,8 @@ import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
 import org.farhan.dsl.issues.TestStepContainerIssueResolver;
 import org.farhan.dsl.issues.TestStepContainerIssueTypes;
+import org.farhan.dsl.issues.TestStepIssueResolver;
+import org.farhan.dsl.issues.TestStepIssueTypes;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueTypes;
 import org.farhan.objects.xtext.ListQuickfixesAction;
@@ -50,6 +53,11 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
                 ITestStepContainer tsc = (ITestStepContainer) cursor;
                 if (validateDialog.contentEquals(TestStepContainerIssueTypes.TEST_STEP_CONTAINER_NAME_ONLY.description)) {
                     listQuickfixesDialog.addAll(TestStepContainerIssueResolver.correctNameOnly(tsc));
+                }
+            } else if (cursor instanceof ITestStep) {
+                ITestStep testStep = (ITestStep) cursor;
+                if (validateDialog.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description)) {
+                    listQuickfixesDialog.addAll(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
                 }
             } else if (cursor instanceof ITestSuite) {
                 ITestSuite testSuite = (ITestSuite) cursor;

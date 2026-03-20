@@ -33,7 +33,7 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
     public String getProposalDescription(HashMap<String, String> keyMap) {
         for (SheepDogIssueProposal p : ((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup"))) {
             if (p.getId().equals(keyMap.get("Proposal Id"))
-                    && p.getDescription().equals(keyMap.get("Proposal Description"))) {
+                    && p.getDescription().equals(replaceKeyword(keyMap.get("Proposal Description")))) {
                 return p.getDescription();
             }
         }
