@@ -6,12 +6,15 @@ import java.util.HashMap;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
 import org.farhan.dsl.issues.RowIssueResolver;
@@ -69,7 +72,13 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
                 if (validateDialog.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_OBJECT_NAME_WORKSPACE.description)) {
                     applyProposal(TestStepIssueResolver.correctStepObjectNameWorkspace(testStep));
                 } else if (validateDialog.contentEquals(TestStepIssueTypes.TEST_STEP_STEP_DEFINITION_NAME_WORKSPACE.description)) {
-                    applyProposal(TestStepIssueResolver.correctStepDefinitionNameWorkspace(testStep));
+                    String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+                    if (!stepObjectFullName.isEmpty()) {
+                        ITestDocument doc = ((ITestProject) getProperty("workspace")).getTestDocument(stepObjectFullName);
+                        if (doc instanceof IStepObject) {
+                            SheepDogBuilder.createStepDefinition((IStepObject) doc, testStep.getStepDefinitionName());
+                        }
+                    }
                 }
             } else if (cursor instanceof ITestSuite) {
                 ITestSuite testSuite = (ITestSuite) cursor;

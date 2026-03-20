@@ -37,3 +37,30 @@ Feature: Code Generation for Workspace Issues
           | Step Definition Name |
           | is present           |
 
+  @ApplyQuickfixAction
+  Scenario: This object step definition doesn't exist generation
+
+    \@ApplyQuickfixAction
+    Applying the quickfix adds the missing step definition to the existing step object file.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is absent            |
+      And The xtext plugin validate annotation is set as follows
+          """
+          The step definition doesn't exist for the step object
+          """
+      And The xtext plugin list quickfixes popup is set as follows
+          | Proposal Id         | Proposal Description |
+          | Generate is present | empty                |
+     When The xtext plugin apply quickfix action is performed as follows
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be created as follows
+          | Node Path            | Step Definition Name |
+          | StepDefinitionList/1 | is absent            |
+          | StepDefinitionList/2 | is present           |
+

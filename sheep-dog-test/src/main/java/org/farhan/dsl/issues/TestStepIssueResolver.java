@@ -7,7 +7,7 @@ import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
-import org.farhan.dsl.grammar.SheepDogFactory;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.farhan.dsl.grammar.SheepDogUtility;
@@ -25,14 +25,10 @@ public class TestStepIssueResolver {
 		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
 		if (!stepObjectFullName.isEmpty()) {
 			String object = StepObjectRefFragments.getObject(theTestStep.getStepObjectName());
-			IStepObject stepObject = SheepDogFactory.instance.createStepObject();
-			stepObject.setFullName(stepObjectFullName);
-			IStepDefinition stepDefinition = SheepDogFactory.instance.createStepDefinition();
-			stepDefinition.setName(theTestStep.getStepDefinitionName());
-			stepObject.addStepDefinition(stepDefinition);
+			IStepObject stepObject = SheepDogBuilder.createStepObject(null, stepObjectFullName);
+			SheepDogBuilder.createStepDefinition(stepObject, theTestStep.getStepDefinitionName());
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate " + object + " - " + stepObjectFullName);
-			proposal.setDescription("");
 			proposal.setValue(stepObject);
 			proposals.add(proposal);
 		}
@@ -57,7 +53,6 @@ public class TestStepIssueResolver {
 				for (IStepDefinition sd : stepObject.getStepDefinitionList()) {
 					SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 					proposal.setId(sd.getName());
-					proposal.setDescription("");
 					proposal.setValue(sd.getName());
 					proposals.add(proposal);
 				}
@@ -65,7 +60,6 @@ public class TestStepIssueResolver {
 		}
 		SheepDogIssueProposal generateProposal = new SheepDogIssueProposal();
 		generateProposal.setId("Generate " + theTestStep.getStepDefinitionName());
-		generateProposal.setDescription("");
 		proposals.add(generateProposal);
 		logger.debug("Exit: correctStepDefinitionNameWorkspace({})", proposals);
 		return proposals;
