@@ -1,7 +1,3 @@
-File: Language Definition/Issues/Quickfixes for Workspace Issues
-  Scenario: This object step definition text parameter doesn't exist quickfix
-    Tag: ListQuickfixesAction
-
 File: Language Definition/Issues/Code Generation for Only Issues
   Scenario: Cell name should start with a capital letter generation
     Tag: ApplyQuickfixAction

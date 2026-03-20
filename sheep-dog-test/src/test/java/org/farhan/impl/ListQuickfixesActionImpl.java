@@ -9,6 +9,7 @@ import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
@@ -20,6 +21,8 @@ import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueTypes;
 import org.farhan.dsl.issues.TestSuiteIssueResolver;
 import org.farhan.dsl.issues.TestSuiteIssueTypes;
+import org.farhan.dsl.issues.TextIssueResolver;
+import org.farhan.dsl.issues.TextIssueTypes;
 import org.farhan.objects.xtext.ListQuickfixesAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -73,6 +76,11 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
                 ITestSuite testSuite = (ITestSuite) cursor;
                 if (validateDialog.contentEquals(TestSuiteIssueTypes.TEST_SUITE_NAME_ONLY.description)) {
                     listQuickfixesDialog.addAll(TestSuiteIssueResolver.correctNameOnly(testSuite));
+                }
+            } else if (cursor instanceof IText) {
+                IText text = (IText) cursor;
+                if (validateDialog.contentEquals(TextIssueTypes.TEXT_CONTENT_WORKSPACE.description)) {
+                    listQuickfixesDialog.addAll(TextIssueResolver.correctContentWorkspace(text));
                 }
             }
         } catch (Exception e) {
