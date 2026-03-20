@@ -51,4 +51,10 @@ public class ListQuickfixesPopupImpl extends TestObjectSheepDogImpl implements L
         }
         return null;
     }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public String getEmpty(HashMap<String, String> keyMap) {
+        return listToCsvString(((ArrayList<SheepDogIssueProposal>) getProperty("list quickfixes popup")));
+    }
 }

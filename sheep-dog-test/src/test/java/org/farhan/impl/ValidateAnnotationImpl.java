@@ -33,4 +33,9 @@ public class ValidateAnnotationImpl extends TestObjectSheepDogImpl implements Va
     public void setContent(HashMap<String, String> keyMap) {
         setProperty("validate annotation.Content", keyMap.get("Content"));
     }
+
+    @Override
+    public void setEmpty(HashMap<String, String> keyMap) {
+        setProperty("validate annotation.Content", replaceKeyword("empty"));
+    }
 }

@@ -20,33 +20,44 @@ public class TextIssueDetector {
 		logger.debug("Entry: validateContentWorkspace({})", theText);
 		String message = "";
 		ITestStep testStep = theText.getParent();
-		if (testStep != null) {
-			String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
-			if (!stepObjectFullName.isEmpty()) {
-				ITestProject project = SheepDogUtility.getTestProjectParentForText(theText);
-				if (project != null) {
-					ITestDocument stepObjectDoc = project.getTestDocument(stepObjectFullName);
-					if (stepObjectDoc instanceof IStepObject) {
-						IStepObject stepObject = (IStepObject) stepObjectDoc;
-						String stepDefName = testStep.getStepDefinitionName();
-						if (stepDefName != null && !stepDefName.isEmpty()) {
-							IStepDefinition stepDef = stepObject.getStepDefinition(stepDefName);
-							if (stepDef != null) {
-								message = TextIssueTypes.TEXT_CONTENT_WORKSPACE.description;
-								for (IStepParameters sp : stepDef.getStepParameterList()) {
-									if (sp.getTable() != null && !sp.getTable().getRowList().isEmpty()) {
-										IRow headerRow = sp.getTable().getRow(0);
-										String paramCells = SheepDogUtility
-												.getCellListAsString(headerRow.getCellList());
-										if ("Content".equals(paramCells)) {
-											message = "";
-											break;
-										}
-									}
-								}
-							}
-						}
-					}
+		if (testStep == null) {
+			logger.debug("Exit: validateContentWorkspace({})", message);
+			return message;
+		}
+		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+		if (stepObjectFullName.isEmpty()) {
+			logger.debug("Exit: validateContentWorkspace({})", message);
+			return message;
+		}
+		ITestProject project = SheepDogUtility.getTestProjectParentForText(theText);
+		if (project == null) {
+			logger.debug("Exit: validateContentWorkspace({})", message);
+			return message;
+		}
+		ITestDocument stepObjectDoc = project.getTestDocument(stepObjectFullName);
+		if (!(stepObjectDoc instanceof IStepObject)) {
+			logger.debug("Exit: validateContentWorkspace({})", message);
+			return message;
+		}
+		IStepObject stepObject = (IStepObject) stepObjectDoc;
+		String stepDefName = testStep.getStepDefinitionName();
+		if (stepDefName == null || stepDefName.isEmpty()) {
+			logger.debug("Exit: validateContentWorkspace({})", message);
+			return message;
+		}
+		IStepDefinition stepDef = stepObject.getStepDefinition(stepDefName);
+		if (stepDef == null) {
+			logger.debug("Exit: validateContentWorkspace({})", message);
+			return message;
+		}
+		message = TextIssueTypes.TEXT_CONTENT_WORKSPACE.description;
+		for (IStepParameters sp : stepDef.getStepParameterList()) {
+			if (sp.getTable() != null && !sp.getTable().getRowList().isEmpty()) {
+				IRow headerRow = sp.getTable().getRow(0);
+				String paramCells = SheepDogUtility.getCellListAsString(headerRow.getCellList());
+				if ("Content".equals(paramCells)) {
+					message = "";
+					break;
 				}
 			}
 		}

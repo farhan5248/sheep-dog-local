@@ -13,4 +13,6 @@ public interface ValidateAnnotation {
     public void setSetAsFollows(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
+
+    public void setEmpty(HashMap<String, String> keyMap);
 }
