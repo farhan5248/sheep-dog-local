@@ -7,6 +7,7 @@ import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.SheepDogFactory;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.farhan.dsl.grammar.SheepDogUtility;
@@ -24,9 +25,15 @@ public class TestStepIssueResolver {
 		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
 		if (!stepObjectFullName.isEmpty()) {
 			String object = StepObjectRefFragments.getObject(theTestStep.getStepObjectName());
+			IStepObject stepObject = SheepDogFactory.instance.createStepObject();
+			stepObject.setFullName(stepObjectFullName);
+			IStepDefinition stepDefinition = SheepDogFactory.instance.createStepDefinition();
+			stepDefinition.setName(theTestStep.getStepDefinitionName());
+			stepObject.addStepDefinition(stepDefinition);
 			SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 			proposal.setId("Generate " + object + " - " + stepObjectFullName);
 			proposal.setDescription("");
+			proposal.setValue(stepObject);
 			proposals.add(proposal);
 		}
 		logger.debug("Exit: correctStepObjectNameWorkspace({})", proposals);
