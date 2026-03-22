@@ -170,21 +170,6 @@ public class TestStepIssueResolver {
 		return (IStepObject) doc;
 	}
 
-	public static void applyStepDefinitionNameWorkspace(ITestStep theTestStep) throws Exception {
-		logger.debug("Entry: applyStepDefinitionNameWorkspace({})", theTestStep);
-		String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
-		if (!stepObjectFullName.isEmpty()) {
-			ITestProject project = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
-			if (project != null) {
-				ITestDocument doc = project.getTestDocument(stepObjectFullName);
-				if (doc instanceof IStepObject) {
-					SheepDogBuilder.createStepDefinition((IStepObject) doc, theTestStep.getStepDefinitionName());
-				}
-			}
-		}
-		logger.debug("Exit: applyStepDefinitionNameWorkspace");
-	}
-
 	public static ArrayList<SheepDogIssueProposal> correctStepDefinitionNameWorkspace(ITestStep theTestStep)
 			throws Exception {
 		logger.debug("Entry: correctStepDefinitionNameWorkspace({})", theTestStep);
@@ -199,7 +184,12 @@ public class TestStepIssueResolver {
 			ITestDocument doc = project.getTestDocument(stepObjectFullName);
 			if (doc instanceof IStepObject) {
 				IStepObject stepObject = (IStepObject) doc;
+				String stepDefName = theTestStep.getStepDefinitionName();
 				for (IStepDefinition sd : stepObject.getStepDefinitionList()) {
+					if (sd.getName().equals(stepDefName)) {
+						logger.debug("Exit: correctStepDefinitionNameWorkspace({})", proposals);
+						return proposals;
+					}
 					SheepDogIssueProposal proposal = new SheepDogIssueProposal();
 					proposal.setId(sd.getName());
 					proposal.setValue(sd.getName());

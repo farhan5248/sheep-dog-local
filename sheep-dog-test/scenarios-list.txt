@@ -1,7 +1,4 @@
 File: Language Definition/Issues/Quickfixes for Workspace Issues
-  Scenario: This object step definition parameter set exists quickfix
-    Tag: ListQuickfixesAction
-File: Language Definition/Issues/Quickfixes for Workspace Issues
   Scenario: This object step definition exists quickfix
     Tag: ListQuickfixesAction
 File: Language Definition/Issues/Proposals for Workspace Step Definitions

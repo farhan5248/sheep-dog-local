@@ -18,12 +18,11 @@ import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogFactory;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
-import org.farhan.dsl.issues.RowIssueResolver;
-import org.farhan.dsl.issues.TestStepIssueResolver;
-import org.farhan.dsl.issues.TextIssueResolver;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.mock.SheepDogFactoryImpl;
 
 public class TestObjectSheepDogImpl extends TestObject {
@@ -51,13 +50,46 @@ public class TestObjectSheepDogImpl extends TestObject {
                 } else if (cursor instanceof ITestStepContainer) {
                     ((ITestStepContainer) cursor).setName(p.getValue().toString());
                 } else if (cursor instanceof IRow && p.getId().startsWith("Generate")) {
-                    RowIssueResolver.applyRowCellListWorkspace((IRow) cursor);
+                    IRow theRow = (IRow) cursor;
+                    IStepDefinition stepDef = SheepDogUtility.getStepDefinitionParentForRow(theRow);
+                    if (stepDef != null) {
+                        String rowCells = SheepDogUtility.getCellListAsString(theRow.getCellList());
+                        IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDef, rowCells);
+                        ITable newTable = SheepDogBuilder.createTable(stepParameters);
+                        IRow newRow = SheepDogBuilder.createRow(newTable);
+                        for (ICell cell : theRow.getCellList()) {
+                            SheepDogBuilder.createCell(newRow, cell.getName());
+                        }
+                    }
                     return;
                 } else if (cursor instanceof IText && p.getId().startsWith("Generate")) {
-                    TextIssueResolver.applyTextContentWorkspace((IText) cursor);
+                    IText theText = (IText) cursor;
+                    ITestStep testStep = theText.getParent();
+                    if (testStep != null) {
+                        String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
+                        if (!stepObjectFullName.isEmpty()) {
+                            ITestDocument doc = ((ITestProject) getProperty("workspace")).getTestDocument(stepObjectFullName);
+                            if (doc instanceof IStepObject) {
+                                IStepDefinition stepDef = ((IStepObject) doc).getStepDefinition(testStep.getStepDefinitionName());
+                                if (stepDef != null) {
+                                    IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDef, "Content");
+                                    ITable newTable = SheepDogBuilder.createTable(stepParameters);
+                                    IRow newRow = SheepDogBuilder.createRow(newTable);
+                                    SheepDogBuilder.createCell(newRow, "Content");
+                                }
+                            }
+                        }
+                    }
                     return;
                 } else if (cursor instanceof ITestStep && p.getId().startsWith("Generate")) {
-                    TestStepIssueResolver.applyStepDefinitionNameWorkspace((ITestStep) cursor);
+                    ITestStep theTestStep = (ITestStep) cursor;
+                    String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
+                    if (!stepObjectFullName.isEmpty()) {
+                        ITestDocument doc = ((ITestProject) getProperty("workspace")).getTestDocument(stepObjectFullName);
+                        if (doc instanceof IStepObject) {
+                            SheepDogBuilder.createStepDefinition((IStepObject) doc, theTestStep.getStepDefinitionName());
+                        }
+                    }
                     return;
                 }
             }
