@@ -1,0 +1,12 @@
+File: Language Definition/Issues/Validation for Workspace Issues
+  Scenario: This object step definition text parameter exists with other parameters validation
+    Tag: ValidateAction
+File: Language Definition/Issues/Quickfixes for Workspace Issues
+  Scenario: This object step definition parameter set exists quickfix
+    Tag: ListQuickfixesAction
+File: Language Definition/Issues/Quickfixes for Workspace Issues
+  Scenario: This object step definition exists quickfix
+    Tag: ListQuickfixesAction
+File: Language Definition/Issues/Proposals for Workspace Step Definitions
+  Scenario: Has component has existing step definition and step object proposals
+    Tag: ListProposalsAction

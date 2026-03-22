@@ -6,7 +6,6 @@ import org.farhan.common.TestObject;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ILine;
-
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
@@ -18,9 +17,13 @@ import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogFactory;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.issues.RowIssueResolver;
+import org.farhan.dsl.issues.TestStepIssueResolver;
+import org.farhan.dsl.issues.TextIssueResolver;
 import org.farhan.mock.SheepDogFactoryImpl;
 
 public class TestObjectSheepDogImpl extends TestObject {
@@ -35,6 +38,31 @@ public class TestObjectSheepDogImpl extends TestObject {
         setProperty("list quickfixes popup", new ArrayList<SheepDogIssueProposal>());
     }
 
+    protected void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
+        for (SheepDogIssueProposal p : proposals) {
+            if (p.getValue() instanceof IStepObject) {
+                ((ITestProject) getProperty("workspace")).addStepObject((IStepObject) p.getValue());
+            } else {
+                Object cursor = getProperty("cursor");
+                if (cursor instanceof ICell) {
+                    ((ICell) cursor).setName(p.getValue().toString());
+                } else if (cursor instanceof ITestSuite) {
+                    ((ITestSuite) cursor).setName(p.getValue().toString());
+                } else if (cursor instanceof ITestStepContainer) {
+                    ((ITestStepContainer) cursor).setName(p.getValue().toString());
+                } else if (cursor instanceof IRow && p.getId().startsWith("Generate")) {
+                    RowIssueResolver.applyRowCellListWorkspace((IRow) cursor);
+                    return;
+                } else if (cursor instanceof IText && p.getId().startsWith("Generate")) {
+                    TextIssueResolver.applyTextContentWorkspace((IText) cursor);
+                    return;
+                } else if (cursor instanceof ITestStep && p.getId().startsWith("Generate")) {
+                    TestStepIssueResolver.applyStepDefinitionNameWorkspace((ITestStep) cursor);
+                    return;
+                }
+            }
+        }
+    }
     // === add* helpers ===
 
     protected void addCellWithName(String name) {

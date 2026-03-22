@@ -2,9 +2,12 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepParameters;
+import org.farhan.dsl.grammar.ITable;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.farhan.dsl.grammar.SheepDogUtility;
@@ -13,6 +16,23 @@ import org.slf4j.Logger;
 public class RowIssueResolver {
 
 	private static final Logger logger = SheepDogLoggerFactory.getLogger(RowIssueResolver.class);
+
+	public static void applyRowCellListWorkspace(IRow theRow) throws Exception {
+		logger.debug("Entry: applyRowCellListWorkspace({})", theRow);
+		IStepDefinition stepDef = SheepDogUtility.getStepDefinitionParentForRow(theRow);
+		if (stepDef == null) {
+			logger.debug("Exit: applyRowCellListWorkspace(null stepDef)");
+			return;
+		}
+		String rowCells = SheepDogUtility.getCellListAsString(theRow.getCellList());
+		IStepParameters stepParameters = SheepDogBuilder.createStepParameters(stepDef, rowCells);
+		ITable newTable = SheepDogBuilder.createTable(stepParameters);
+		IRow newRow = SheepDogBuilder.createRow(newTable);
+		for (ICell cell : theRow.getCellList()) {
+			SheepDogBuilder.createCell(newRow, cell.getName());
+		}
+		logger.debug("Exit: applyRowCellListWorkspace");
+	}
 
 	public static ArrayList<SheepDogIssueProposal> correctCellListWorkspace(IRow theRow) throws Exception {
 		logger.debug("Entry: correctCellListWorkspace({})", theRow);
