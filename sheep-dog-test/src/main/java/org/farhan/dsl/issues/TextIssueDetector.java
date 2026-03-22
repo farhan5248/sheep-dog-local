@@ -1,5 +1,6 @@
 package org.farhan.dsl.issues;
 
+import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
@@ -54,9 +55,13 @@ public class TextIssueDetector {
 		for (IStepParameters sp : stepDef.getStepParameterList()) {
 			if (sp.getTable() != null && !sp.getTable().getRowList().isEmpty()) {
 				IRow headerRow = sp.getTable().getRow(0);
-				String paramCells = SheepDogUtility.getCellListAsString(headerRow.getCellList());
-				if ("Content".equals(paramCells)) {
-					message = "";
+				for (ICell cell : headerRow.getCellList()) {
+					if ("Content".equals(cell.getName())) {
+						message = "";
+						break;
+					}
+				}
+				if (message.isEmpty()) {
 					break;
 				}
 			}
