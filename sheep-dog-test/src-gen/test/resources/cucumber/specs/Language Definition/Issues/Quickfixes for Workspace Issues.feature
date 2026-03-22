@@ -128,3 +128,49 @@ Feature: Quickfixes for Workspace Issues
           | Proposal Id      | Proposal Description |
           | Generate Content | empty                |
 
+  Scenario: This object step definition exists quickfix
+
+    No quickfix is needed if the step definition already exists in the step object file.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                      |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is present |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is present           |
+      And The xtext plugin validate annotation is set as follows
+          """
+          The step definition doesn't exist for the step object
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
+     Then The xtext plugin list quickfixes popup will be empty
+
+  Scenario: This object step definition parameter set exists quickfix
+
+    No quickfix is needed if the row cells already match an existing step parameter set.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file CellList node is created as follows
+          | Node Path                                                       | Cell Name |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | N1        |
+          | TestStepContainerList/1/TestStepList/1/Table/RowList/1/CellList | N2        |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name | Step Parameters Name |
+          | is set as follows    | N1, N2               |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file CellList node is created as follows
+          | Node Path                                                          | Cell Name |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | N1        |
+          | StepDefinitionList/1/StepParametersList/1/Table/RowList/1/CellList | N2        |
+      And The xtext plugin validate annotation is set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
+     When The xtext plugin list quickfixes action is performed as follows
+          | Test Suite Full Name         | Node Path                                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
+     Then The xtext plugin list quickfixes popup will be empty
+
