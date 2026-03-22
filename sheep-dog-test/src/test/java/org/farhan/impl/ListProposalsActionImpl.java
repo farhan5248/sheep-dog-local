@@ -47,10 +47,9 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
                 String stepObjectFullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
                 if (!stepObjectFullName.isEmpty()) {
                     listProposalsDialog.addAll(TestStepIssueResolver.suggestStepDefinitionNameWorkspace(testStep));
-                } else {
-                    listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep));
-                    listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameFile(testStep));
                 }
+                listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameWorkspace(testStep));
+                listProposalsDialog.addAll(TestStepIssueResolver.suggestStepObjectNameFile(testStep));
             }
         } catch (Exception e) {
             Assertions.fail(e);
