@@ -2,6 +2,7 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.objects.xtext.EditDocumentAction;
 
@@ -169,10 +170,10 @@ public class EditDocumentActionImpl extends TestObjectSheepDogImpl implements Ed
 
     private void navigateToDocument() {
         if (getProperty("Test Suite Full Name") != null) {
-            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
+            setProperty("cursor", SheepDogUtility.getTestDocument((ITestProject) getProperty("workspace"), replaceKeyword(getProperty("Test Suite Full Name").toString())));
             properties.remove("Test Suite Full Name");
         } else if (getProperty("Step Object Full Name") != null) {
-            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Step Object Full Name").toString())));
+            setProperty("cursor", SheepDogUtility.getTestDocument((ITestProject) getProperty("workspace"), replaceKeyword(getProperty("Step Object Full Name").toString())));
             properties.remove("Step Object Full Name");
         }
     }

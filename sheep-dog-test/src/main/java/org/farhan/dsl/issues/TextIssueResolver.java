@@ -2,6 +2,10 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
+import org.farhan.dsl.grammar.SheepDogBuilder;
+import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
@@ -10,10 +14,6 @@ import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
-import org.farhan.dsl.grammar.SheepDogBuilder;
-import org.farhan.dsl.grammar.SheepDogIssueProposal;
-import org.farhan.dsl.grammar.SheepDogLoggerFactory;
-import org.farhan.dsl.grammar.SheepDogUtility;
 import org.slf4j.Logger;
 
 /**
@@ -33,14 +33,14 @@ public class TextIssueResolver {
         ArrayList<SheepDogIssueProposal> proposals = new ArrayList<>();
         String stepDefinitionName = theTestStep.getStepDefinitionName();
         if (!stepDefinitionName.isEmpty()) {
-            ITestProject theProject = SheepDogUtility.getTestProjectParentForTestStep(theTestStep);
+            ITestProject theProject = SheepDogUtility.getTestProjectParent(theTestStep);
             String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(theTestStep);
-            IStepObject theStepObject = (IStepObject) theProject.getTestDocument(fullName);
+            IStepObject theStepObject = (IStepObject) SheepDogUtility.getTestDocument(theProject, fullName);
             if (theStepObject != null) {
-                IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                IStepDefinition theStepDefinition = SheepDogUtility.getStepDefinition(theStepObject, stepDefinitionName);
                 if (theStepDefinition != null && !hasContentCell(theStepDefinition)) {
                     IStepObject clonedStepObject = SheepDogUtility.cloneStepObject(theStepObject);
-                    IStepDefinition clonedStepDefinition = clonedStepObject.getStepDefinition(stepDefinitionName);
+                    IStepDefinition clonedStepDefinition = SheepDogUtility.getStepDefinition(clonedStepObject, stepDefinitionName);
                     IStepParameters newStepParameters = SheepDogBuilder.createStepParameters(clonedStepDefinition, "Content");
                     ITable newTable = SheepDogBuilder.createTable(newStepParameters);
                     IRow newRow = SheepDogBuilder.createRow(newTable);
@@ -61,7 +61,7 @@ public class TextIssueResolver {
         for (IStepParameters stepParameters : theStepDefinition.getStepParameterList()) {
             ITable paramsTable = stepParameters.getTable();
             if (paramsTable != null && !paramsTable.getRowList().isEmpty()) {
-                for (ICell cell : paramsTable.getRow(0).getCellList()) {
+                for (ICell cell : paramsTable.getRowList().get(0).getCellList()) {
                     if ("Content".equals(cell.getName())) {
                         return true;
                     }

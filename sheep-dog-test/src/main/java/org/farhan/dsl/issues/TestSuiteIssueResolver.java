@@ -2,9 +2,9 @@ package org.farhan.dsl.issues;
 
 import java.util.ArrayList;
 
-import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
+import org.farhan.dsl.grammar.ITestSuite;
 import org.slf4j.Logger;
 
 /**

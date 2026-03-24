@@ -1,5 +1,8 @@
 package org.farhan.dsl.grammar;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 
 /**
@@ -16,6 +19,16 @@ public class SheepDogBuilder {
     // pattern
     private static final Logger logger = SheepDogLoggerFactory.getLogger(SheepDogBuilder.class);
 
+    private static <T> void addSorted(List<T> list, T element, java.util.function.Function<T, String> nameExtractor) {
+        String name = nameExtractor.apply(element);
+        int insertIndex = Collections.binarySearch(
+                list.stream().map(nameExtractor).toList(), name);
+        if (insertIndex < 0) {
+            insertIndex = -(insertIndex + 1);
+        }
+        list.add(insertIndex, element);
+    }
+
     /**
      * Creates grammar element using factory, initializes attributes, establishes
      * parent-child relationships, and handles singleton lookups where needed.
@@ -29,7 +42,7 @@ public class SheepDogBuilder {
         ICell cell = SheepDogFactory.instance.createCell();
         cell.setName(name);
         if (parent != null)
-            parent.addCell(cell);
+            parent.getCellList().add(cell);
         logger.debug("Exiting createCell with result: {}", cell != null ? cell.getName() : "null");
         return cell;
     }
@@ -117,12 +130,12 @@ public class SheepDogBuilder {
         logger.debug("Entering createTestData for name: {}", name);
         ITestData testData = null;
         if (parent != null)
-            testData = parent.getTestData(name);
+            testData = SheepDogUtility.getTestData(parent, name);
         if (testData == null) {
             testData = SheepDogFactory.instance.createTestData();
             testData.setName(name);
             if (parent != null)
-                parent.addTestData(testData);
+                parent.getTestDataList().add(testData);
         }
         logger.debug("Exiting createTestData with result: {}", testData != null ? testData.getName() : "null");
         return testData;
@@ -141,7 +154,7 @@ public class SheepDogBuilder {
         ILine line = SheepDogFactory.instance.createLine();
         line.setContent(name);
         if (parent != null)
-            parent.addLine(line);
+            parent.getLineList().add(line);
         logger.debug("Exiting createLine with result: {}", line != null ? line.getContent() : "null");
         return line;
     }
@@ -157,7 +170,7 @@ public class SheepDogBuilder {
         logger.debug("Entering createRow for parent: {}", parent != null ? "non-null" : "null");
         IRow row = SheepDogFactory.instance.createRow();
         if (parent != null)
-            parent.addRow(row);
+            parent.getRowList().add(row);
         logger.debug("Exiting createRow with result: {}", row != null ? "non-null" : "null");
         return row;
     }
@@ -174,14 +187,15 @@ public class SheepDogBuilder {
         logger.debug("Entering createStepDefinition for name: {}", name);
         IStepDefinition stepDefinition = null;
         if (parent != null)
-            stepDefinition = parent.getStepDefinition(name);
+            stepDefinition = SheepDogUtility.getStepDefinition(parent, name);
         if (stepDefinition == null) {
             stepDefinition = SheepDogFactory.instance.createStepDefinition();
             stepDefinition.setName(name);
             if (parent != null)
-                parent.addStepDefinition(stepDefinition);
+                addSorted(parent.getStepDefinitionList(), stepDefinition, IStepDefinition::getName);
         }
-        logger.debug("Exiting createStepDefinition with result: {}", stepDefinition != null ? stepDefinition.getName() : "null");
+        logger.debug("Exiting createStepDefinition with result: {}",
+                stepDefinition != null ? stepDefinition.getName() : "null");
         return stepDefinition;
     }
 
@@ -197,14 +211,17 @@ public class SheepDogBuilder {
         logger.debug("Entering createStepObject for fullName: {}", fullName);
         IStepObject stepObject = null;
         if (parent != null)
-            stepObject = (IStepObject) parent.getTestDocument(fullName);
+            stepObject = (IStepObject) SheepDogUtility.getTestDocument(parent, fullName);
         if (stepObject == null) {
             stepObject = SheepDogFactory.instance.createStepObject();
             stepObject.setFullName(fullName);
+            String[] nameParts = fullName.split("/");
+            stepObject.setName(nameParts[nameParts.length - 1].replaceAll("\\.[^.]+$", ""));
             if (parent != null)
-                parent.addStepObject(stepObject);
+                parent.getTestDocumentList().add(stepObject);
         }
-        logger.debug("Exiting createStepObject with result: {}", stepObject != null ? stepObject.getFullName() : "null");
+        logger.debug("Exiting createStepObject with result: {}",
+                stepObject != null ? stepObject.getFullName() : "null");
         return stepObject;
     }
 
@@ -220,14 +237,15 @@ public class SheepDogBuilder {
         logger.debug("Entering createStepParameters for name: {}", name);
         IStepParameters stepParameters = null;
         if (parent != null)
-            stepParameters = parent.getStepParameters(name);
+            stepParameters = SheepDogUtility.getStepParameters(parent, name);
         if (stepParameters == null) {
             stepParameters = SheepDogFactory.instance.createStepParameters();
             stepParameters.setName(name);
             if (parent != null)
-                parent.addStepParameters(stepParameters);
+                addSorted(parent.getStepParameterList(), stepParameters, IStepParameters::getName);
         }
-        logger.debug("Exiting createStepParameters with result: {}", stepParameters != null ? stepParameters.getName() : "null");
+        logger.debug("Exiting createStepParameters with result: {}",
+                stepParameters != null ? stepParameters.getName() : "null");
         return stepParameters;
     }
 
@@ -291,12 +309,12 @@ public class SheepDogBuilder {
      */
     public static ITestCase createTestCase(ITestSuite parent, String name) {
         logger.debug("Entering createTestCase for name: {}", name);
-        ITestCase testCase = (ITestCase) parent.getTestStepContainer(name);
+        ITestCase testCase = (ITestCase) SheepDogUtility.getTestStepContainer(parent, name);
         if (testCase == null) {
             testCase = SheepDogFactory.instance.createTestCase();
             testCase.setName(name);
             if (parent != null)
-                parent.addTestCase(testCase);
+                parent.getTestStepContainerList().add(testCase);
         }
         logger.debug("Exiting createTestCase with result: {}", testCase != null ? testCase.getName() : "null");
         return testCase;
@@ -312,6 +330,7 @@ public class SheepDogBuilder {
     public static ITestProject createTestProject() {
         logger.debug("Entering createTestProject");
         ITestProject testProject = SheepDogFactory.instance.createTestProject();
+        testProject.setFileExtension(".asciidoc");
         logger.debug("Exiting createTestProject with result: {}", testProject != null ? "non-null" : "null");
         return testProject;
     }
@@ -326,32 +345,37 @@ public class SheepDogBuilder {
      */
     public static ITestSetup createTestSetup(ITestSuite parent, String name) {
         logger.debug("Entering createTestSetup for name: {}", name);
-        ITestSetup testSetup = (ITestSetup) parent.getTestStepContainer(name);
+        ITestSetup testSetup = (ITestSetup) SheepDogUtility.getTestStepContainer(parent, name);
         if (testSetup == null) {
             testSetup = SheepDogFactory.instance.createTestSetup();
             testSetup.setName(name);
-            if (parent != null)
-                parent.addTestSetup(testSetup);
+            if (parent != null) {
+                int insertIndex = 0;
+                for (ITestStepContainer c : parent.getTestStepContainerList()) {
+                    if (c instanceof ITestSetup)
+                        insertIndex++;
+                    else
+                        break;
+                }
+                parent.getTestStepContainerList().add(insertIndex, testSetup);
+            }
         }
         logger.debug("Exiting createTestSetup with result: {}", testSetup != null ? testSetup.getName() : "null");
         return testSetup;
     }
 
-    /**
-     * Creates grammar element using factory, initializes attributes, establishes
-     * parent-child relationships, and handles singleton lookups where needed.
-     *
-     * @param parent   the parent element (or null if root)
-     * @param fullName the full name of the test step
-     * @return the created and initialized instance
-     */
-    public static ITestStep createTestStep(ITestStepContainer parent, String fullName) {
-        logger.debug("Entering createTestStep for fullName: {}", fullName);
+    public static ITestStep createTestStep(ITestStepContainer parent, String stepObjectName,
+            String stepDefinitionName) {
+        logger.debug("Entering createTestStep for stepObjectName and stepDefinitionName: {} {}", stepObjectName,
+                stepDefinitionName);
         ITestStep testStep = SheepDogFactory.instance.createTestStep();
-        testStep.setFullName(fullName);
+        testStep.setStepObjectName(stepObjectName);
+        testStep.setStepDefinitionName(stepDefinitionName);
+        testStep.setFullName(stepObjectName + (stepDefinitionName.isEmpty() ? "" : " " + stepDefinitionName));
         if (parent != null)
-            parent.addTestStep(testStep);
-        logger.debug("Exiting createTestStep with result: {}", testStep != null ? testStep.getStepObjectName() : "null");
+            parent.getTestStepList().add(testStep);
+        logger.debug("Exiting createTestStep with result: {}",
+                testStep != null ? testStep.getStepObjectName() : "null");
         return testStep;
     }
 
@@ -365,12 +389,14 @@ public class SheepDogBuilder {
      */
     public static ITestSuite createTestSuite(ITestProject parent, String fullName) {
         logger.debug("Entering createTestSuite for fullName: {}", fullName);
-        ITestSuite testSuite = (ITestSuite) parent.getTestDocument(fullName);
+        ITestSuite testSuite = (ITestSuite) SheepDogUtility.getTestDocument(parent, fullName);
         if (testSuite == null) {
             testSuite = SheepDogFactory.instance.createTestSuite();
             testSuite.setFullName(fullName);
+            String[] nameParts = fullName.split("/");
+            testSuite.setName(nameParts[nameParts.length - 1].replaceAll("\\.[^.]+$", ""));
             if (parent != null)
-                parent.addTestSuite(testSuite);
+                parent.getTestDocumentList().add(testSuite);
         }
         logger.debug("Exiting createTestSuite with result: {}", testSuite != null ? testSuite.getFullName() : "null");
         return testSuite;

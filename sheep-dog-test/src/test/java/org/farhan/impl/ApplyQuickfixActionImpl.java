@@ -3,16 +3,17 @@ package org.farhan.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepObject;
+import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
-import org.farhan.dsl.grammar.SheepDogIssueProposal;
-import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
 import org.farhan.dsl.issues.RowIssueResolver;
@@ -35,7 +36,13 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
     private static void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
         for (SheepDogIssueProposal p : proposals) {
             if (p.getValue() instanceof IStepObject) {
-                ((ITestProject) getProperty("workspace")).addStepObject((IStepObject) p.getValue());
+                ITestProject workspace = (ITestProject) getProperty("workspace");
+                IStepObject newStepObject = (IStepObject) p.getValue();
+                ITestDocument existing = SheepDogUtility.getTestDocument(workspace, newStepObject.getFullName());
+                if (existing != null) {
+                    workspace.getTestDocumentList().remove(existing);
+                }
+                workspace.getTestDocumentList().add(newStepObject);
             } else {
                 Object cursor = getProperty("cursor");
                 if (cursor instanceof ICell) {
@@ -62,7 +69,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
     @Override
     public void setPerformedAsFollows(HashMap<String, String> keyMap) {
         if (getProperty("Test Suite Full Name") != null) {
-            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
+            setProperty("cursor", SheepDogUtility.getTestDocument((ITestProject) getProperty("workspace"), replaceKeyword(getProperty("Test Suite Full Name").toString())));
             properties.remove("Test Suite Full Name");
         }
         if (getProperty("Node Path") != null) {
@@ -79,7 +86,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
                 }
             } else if (cursor instanceof IRow) {
                 IRow row = (IRow) cursor;
-                ITestStep testStep = SheepDogUtility.getAncestor(row, ITestStep.class);
+                ITestStep testStep = SheepDogUtility.getTestStepParent(row);
                 if (validateDialog.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
                     if (testStep.getTable() != null) {
                         if (testStep.getTable().getRowList() != null) {
@@ -91,7 +98,7 @@ public class ApplyQuickfixActionImpl extends TestObjectSheepDogImpl implements A
                 }
             } else if (cursor instanceof IText) {
                 IText text = (IText) cursor;
-                ITestStep testStep = (ITestStep) text.getParent();
+                ITestStep testStep = (ITestStep) text.eContainer();
                 if (validateDialog.contentEquals(TextIssueTypes.TEXT_NAME_WORKSPACE.description)) {
                     applyProposal(TextIssueResolver.correctNameWorkspace(testStep));
                 }

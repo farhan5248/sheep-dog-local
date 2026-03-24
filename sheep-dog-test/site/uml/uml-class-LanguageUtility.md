@@ -73,38 +73,20 @@ Static helper methods for grammar element operations. Separates utility operatio
 **Examples**:
  - `public static List<ITestSuite> getTestSuiteList(ITestProject project)`
 
-## getParent
+## get{Type}Parent
 
-**Desc**: Gets the parent container of any grammar node. Consolidates typed getParent() calls into a single dispatch point for EMF cutover preparation.
+**Desc**: Walks up the eContainer() chain to find the nearest ancestor of the given type.
 
-**Rule**: ONE method named getParent.
- - **Name**: `^getParent$`
- - **Return**: `^Object$`
- - **Parameters**: `^\(Object\s+\w+\)$`
+**Rule**: SOME method names follow get{Type}Parent pattern.
+ - **Name**: `^get{Type}Parent$`
+ - **Return**: `^I{Type}$`
+ - **Parameters**: `^\(EObject\s+\w+\)$`
  - **Modifier**: `^public\s+static$`
 
 **Examples**:
- - `public static Object getParent(Object node)`
-
-## getAncestor
-
-**Desc**: Walks up the parent chain to find the nearest ancestor of the given type.
-
-**Rule**: ONE method named getAncestor.
- - **Name**: `^getAncestor$`
-
-**Examples**:
- - `public static <T> T getAncestor(Object node, Class<T> type)`
-
-## addSorted
-
-**Desc**: Inserts an element into a sorted list at the correct position using binary search.
-
-**Rule**: ONE method named addSorted.
- - **Name**: `^addSorted$`
-
-**Examples**:
- - `public static <T> void addSorted(List<T> list, T element, java.util.function.Function<T, String> nameExtractor)`
+ - `public static ITestProject getTestProjectParent(EObject node)`
+ - `public static ITestStep getTestStepParent(EObject node)`
+ - `public static ITestDocument getTestDocumentParent(EObject node)`
 
 ## get{Type}
 

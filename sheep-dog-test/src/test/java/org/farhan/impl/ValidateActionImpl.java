@@ -2,13 +2,14 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
+import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
-import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.issues.CellIssueDetector;
 import org.farhan.dsl.issues.RowIssueDetector;
 import org.farhan.dsl.issues.TestStepContainerIssueDetector;
@@ -36,7 +37,7 @@ public class ValidateActionImpl extends TestObjectSheepDogImpl implements Valida
     @Override
     public void setPerformedAsFollows(HashMap<String, String> keyMap) {
         if (getProperty("Test Suite Full Name") != null) {
-            setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(replaceKeyword(getProperty("Test Suite Full Name").toString())));
+            setProperty("cursor", SheepDogUtility.getTestDocument((ITestProject) getProperty("workspace"), replaceKeyword(getProperty("Test Suite Full Name").toString())));
             properties.remove("Test Suite Full Name");
         }
         if (getProperty("Node Path") != null) {

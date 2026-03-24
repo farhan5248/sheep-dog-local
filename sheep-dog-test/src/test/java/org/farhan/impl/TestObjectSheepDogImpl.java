@@ -1,12 +1,17 @@
 package org.farhan.impl;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.farhan.common.TestObject;
+import org.farhan.dsl.grammar.SheepDogBuilder;
+import org.farhan.dsl.grammar.SheepDogFactory;
+import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ILine;
-
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
@@ -18,15 +23,12 @@ import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
-import org.farhan.dsl.grammar.SheepDogBuilder;
-import org.farhan.dsl.grammar.SheepDogFactory;
-import org.farhan.dsl.grammar.SheepDogIssueProposal;
-import org.farhan.mock.SheepDogFactoryImpl;
+import org.farhan.dsl.grammar.ISheepDogFactory;
 
 public class TestObjectSheepDogImpl extends TestObject {
 
     public static void reset() {
-        SheepDogFactory.instance = new SheepDogFactoryImpl();
+        SheepDogFactory.instance = ISheepDogFactory.eINSTANCE;
         ITestProject workspace = SheepDogBuilder.createTestProject();
         setProperty("workspace", workspace);
         setProperty("cursor", workspace);
@@ -40,7 +42,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addCellWithName(String name) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ICell) {
-            cursor = ((ICell) cursor).getParent();
+            cursor = ((ICell) cursor).eContainer();
         }
         setProperty("cursor", SheepDogBuilder.createCell((IRow) cursor, name));
     }
@@ -48,7 +50,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addLineWithContent(String content) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ILine) {
-            cursor = ((ILine) cursor).getParent();
+            cursor = ((ILine) cursor).eContainer();
         }
         setProperty("cursor", SheepDogBuilder.createLine((IDescription) cursor, content));
     }
@@ -56,7 +58,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addRowWithContent(String content) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof IRow) {
-            cursor = ((IRow) cursor).getParent();
+            cursor = ((IRow) cursor).eContainer();
         }
         IRow row = SheepDogBuilder.createRow((ITable) cursor);
         SheepDogBuilder.createCell(row, content);
@@ -66,7 +68,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addStepDefinitionWithName(String name) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof IStepDefinition) {
-            cursor = ((IStepDefinition) cursor).getParent();
+            cursor = ((IStepDefinition) cursor).eContainer();
         }
         setProperty("cursor", SheepDogBuilder.createStepDefinition((IStepObject) cursor, name));
     }
@@ -74,7 +76,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addStepObjectWithFullName(String stepObjectName) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof IStepObject) {
-            cursor = ((IStepObject) cursor).getParent();
+            cursor = ((IStepObject) cursor).eContainer();
         }
         setProperty("cursor",
                 SheepDogBuilder.createStepObject((ITestProject) getProperty("workspace"), stepObjectName));
@@ -83,7 +85,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addStepParametersWithName(String name) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof IStepParameters) {
-            cursor = ((IStepParameters) cursor).getParent();
+            cursor = ((IStepParameters) cursor).eContainer();
         }
         setProperty("cursor", SheepDogBuilder.createStepParameters((IStepDefinition) cursor, name));
     }
@@ -100,7 +102,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addTestCaseWithName(String testStepContainerName) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestCase) {
-            cursor = ((ITestCase) cursor).getParent();
+            cursor = ((ITestCase) cursor).eContainer();
         }
         setProperty("cursor", SheepDogBuilder.createTestCase((ITestSuite) cursor, testStepContainerName));
     }
@@ -108,7 +110,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addTestDataWithName(String name) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestData) {
-            cursor = ((ITestData) cursor).getParent();
+            cursor = ((ITestData) cursor).eContainer();
         }
         setProperty("cursor", SheepDogBuilder.createTestData((ITestCase) cursor, name));
     }
@@ -116,7 +118,7 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addTestSetupWithName(String testSetupName) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestStepContainer) {
-            cursor = ((ITestStepContainer) cursor).getParent();
+            cursor = ((ITestStepContainer) cursor).eContainer();
         }
         setProperty("cursor", SheepDogBuilder.createTestSetup((ITestSuite) cursor, testSetupName));
     }
@@ -124,15 +126,28 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected void addTestStepWithFullName(String stepName) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestStep) {
-            cursor = ((ITestStep) cursor).getParent();
+            cursor = ((ITestStep) cursor).eContainer();
         }
-        setProperty("cursor", SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepName));
+
+        String stepObjectName, stepDefinitionName;
+        Matcher m = Pattern.compile(
+                "^(.+\\s(?:file|page|response|dialog|directory|request|goal|job|action|popup|annotation|hover|tooltip))(?:\\s+(.+))?$")
+                .matcher(stepName);
+        if (m.find()) {
+            stepObjectName = m.group(1);
+            stepDefinitionName = m.group(2) != null ? m.group(2) : "";
+        } else {
+            stepObjectName = stepName;
+            stepDefinitionName = "";
+        }
+        setProperty("cursor",
+                SheepDogBuilder.createTestStep((ITestStepContainer) cursor, stepObjectName, stepDefinitionName));
     }
 
     protected void addTestSuiteWithFullName(String testSuiteFullName) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ITestSuite) {
-            cursor = ((ITestSuite) cursor).getParent();
+            cursor = ((ITestSuite) cursor).eContainer();
         }
         setProperty("cursor",
                 SheepDogBuilder.createTestSuite((ITestProject) getProperty("workspace"), testSuiteFullName));
@@ -179,7 +194,7 @@ public class TestObjectSheepDogImpl extends TestObject {
         if (cursor instanceof ICell) {
             return ((ICell) cursor).getName();
         } else {
-            Object cell = ((IRow) cursor).getCell(name);
+            Object cell = SheepDogUtility.getCell((IRow) cursor, name);
             setProperty("cursor", cell);
             return cell == null ? null : ((ICell) cell).getName();
         }
@@ -190,14 +205,14 @@ public class TestObjectSheepDogImpl extends TestObject {
         if (cursor instanceof ILine) {
             return ((ILine) cursor).getContent();
         } else {
-            Object line = ((IDescription) cursor).getLine(content);
+            Object line = SheepDogUtility.getLine((IDescription) cursor, content);
             setProperty("cursor", line);
             return line == null ? null : ((ILine) line).getContent();
         }
     }
 
     protected String assertRowContent(String content) {
-        Object cell = ((IRow) getProperty("cursor")).getCell(content);
+        Object cell = SheepDogUtility.getCell((IRow) getProperty("cursor"), content);
         setProperty("cursor", cell);
         return cell == null ? null : ((ICell) cell).getName();
     }
@@ -207,7 +222,7 @@ public class TestObjectSheepDogImpl extends TestObject {
         if (cursor instanceof IStepDefinition) {
             return ((IStepDefinition) cursor).getName();
         } else {
-            Object sd = ((IStepObject) cursor).getStepDefinition(name);
+            Object sd = SheepDogUtility.getStepDefinition((IStepObject) cursor, name);
             setProperty("cursor", sd);
             return sd == null ? null : ((IStepDefinition) sd).getName();
         }
@@ -222,7 +237,7 @@ public class TestObjectSheepDogImpl extends TestObject {
         if (cursor instanceof IStepParameters) {
             return ((IStepParameters) cursor).getName();
         } else {
-            Object sp = ((IStepDefinition) cursor).getStepParameters(name);
+            Object sp = SheepDogUtility.getStepParameters((IStepDefinition) cursor, name);
             setProperty("cursor", sp);
             return sp == null ? null : ((IStepParameters) sp).getName();
         }
@@ -233,7 +248,7 @@ public class TestObjectSheepDogImpl extends TestObject {
         if (cursor instanceof ITestData) {
             return ((ITestData) cursor).getName();
         } else {
-            Object td = ((ITestCase) cursor).getTestData(name);
+            Object td = SheepDogUtility.getTestData((ITestCase) cursor, name);
             setProperty("cursor", td);
             return td == null ? null : ((ITestData) td).getName();
         }
@@ -244,7 +259,7 @@ public class TestObjectSheepDogImpl extends TestObject {
         if (cursor instanceof ITestStepContainer) {
             return ((ITestStepContainer) cursor).getName();
         } else {
-            Object tsc = ((ITestSuite) cursor).getTestStepContainer(name);
+            Object tsc = SheepDogUtility.getTestStepContainer((ITestSuite) cursor, name);
             setProperty("cursor", tsc);
             return tsc == null ? null : ((ITestStepContainer) tsc).getName();
         }
@@ -317,7 +332,7 @@ public class TestObjectSheepDogImpl extends TestObject {
                 case "TestStepContainerList":
                     return SheepDogBuilder.createTestCase((ITestSuite) parent, "Test Case");
                 case "TestStepList":
-                    return SheepDogBuilder.createTestStep((ITestStepContainer) parent, "");
+                    return SheepDogBuilder.createTestStep((ITestStepContainer) parent, "", "");
                 case "RowList":
                     return SheepDogBuilder.createRow((ITable) parent);
                 case "CellList":

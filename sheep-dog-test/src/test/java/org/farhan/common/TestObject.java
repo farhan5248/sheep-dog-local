@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.ecore.EObject;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
@@ -15,11 +17,9 @@ import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
-import org.farhan.dsl.grammar.ITestDocument;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
-import org.farhan.dsl.grammar.SheepDogUtility;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
@@ -40,10 +40,6 @@ public abstract class TestObject {
 
     public static void reset() {
         TestObject.properties.clear();
-    }
-
-    private static Object getDocumentFromNode(Object node) {
-        return SheepDogUtility.getAncestor(node, ITestDocument.class);
     }
 
     protected static Object getProperty(String key) {
@@ -136,7 +132,7 @@ public abstract class TestObject {
     private boolean navigateToNode(String path, boolean create) {
         try {
             String[] parts = path.split("/");
-            Object current = getDocumentFromNode(getProperty("cursor"));
+            Object current = SheepDogUtility.getTestDocumentParent((EObject) getProperty("cursor"));
             int i = 0;
             while (i < parts.length && current != null) {
                 String elementType = parts[i];
@@ -346,21 +342,21 @@ public abstract class TestObject {
                 return ((IStepParameters) parent).getDescription();
             return ((ITestData) parent).getDescription();
         case "TestStepContainerList":
-            return ((ITestSuite) parent).getTestStepContainer(index);
+            return ((ITestSuite) parent).getTestStepContainerList().get(index);
         case "TestStepList":
-            return ((ITestStepContainer) parent).getTestStep(index);
+            return ((ITestStepContainer) parent).getTestStepList().get(index);
         case "RowList":
-            return ((ITable) parent).getRow(index);
+            return ((ITable) parent).getRowList().get(index);
         case "CellList":
-            return ((IRow) parent).getCell(index);
+            return ((IRow) parent).getCellList().get(index);
         case "StepDefinitionList":
-            return ((IStepObject) parent).getStepDefinition(index);
+            return ((IStepObject) parent).getStepDefinitionList().get(index);
         case "StepParametersList":
-            return ((IStepDefinition) parent).getStepParameters(index);
+            return ((IStepDefinition) parent).getStepParameterList().get(index);
         case "LineList":
-            return ((IDescription) parent).getLine(index);
+            return ((IDescription) parent).getLineList().get(index);
         case "TestDataList":
-            return ((ITestCase) parent).getTestData(index);
+            return ((ITestCase) parent).getTestDataList().get(index);
         default:
             throw new IllegalArgumentException("Unknown element type: " + elementType);
         }

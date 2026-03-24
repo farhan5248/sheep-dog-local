@@ -2,6 +2,7 @@ package org.farhan.impl;
 
 import java.util.HashMap;
 
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.Input2FileAsciidocFile;
 
@@ -17,7 +18,7 @@ public class Input2FileAsciidocFileImpl extends TestObjectSheepDogImpl implement
 
     @Override
     public String getCreatedAsFollows(HashMap<String, String> keyMap) {
-        setProperty("cursor", ((ITestProject) getProperty("workspace")).getTestDocument(getFullNameFromPath()));
+        setProperty("cursor", SheepDogUtility.getTestDocument((ITestProject) getProperty("workspace"), getFullNameFromPath()));
         return getProperty("cursor") == null ? null : getProperty("cursor").toString();
     }
 }

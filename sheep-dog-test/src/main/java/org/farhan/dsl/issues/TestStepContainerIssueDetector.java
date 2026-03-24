@@ -1,9 +1,9 @@
 package org.farhan.dsl.issues;
 
-import org.farhan.dsl.grammar.ITestStep;
-import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.farhan.dsl.grammar.StepObjectRefFragments;
+import org.farhan.dsl.grammar.ITestStep;
+import org.farhan.dsl.grammar.ITestStepContainer;
 import org.slf4j.Logger;
 
 /**
@@ -49,7 +49,7 @@ public class TestStepContainerIssueDetector {
     public static String validateTestStepListFile(ITestStepContainer theTestStepContainer) throws Exception {
         logger.debug("Entering validateTestStepListFile for theTestStepContainer: {}", theTestStepContainer != null ? theTestStepContainer.getName() : "null");
         if (!theTestStepContainer.getTestStepList().isEmpty()) {
-            ITestStep firstTestStep = theTestStepContainer.getTestStep(0);
+            ITestStep firstTestStep = theTestStepContainer.getTestStepList().get(0);
             String stepObjectName = firstTestStep.getStepObjectName();
             if (StepObjectRefFragments.getComponent(stepObjectName).isEmpty()) {
                 logger.debug("Exiting validateTestStepListFile with result: {}", TestStepContainerIssueTypes.TEST_STEP_CONTAINER_TEST_STEP_LIST_FILE.description);

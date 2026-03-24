@@ -1,7 +1,7 @@
 package org.farhan.dsl.issues;
 
-import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.SheepDogLoggerFactory;
+import org.farhan.dsl.grammar.ITestSuite;
 import org.slf4j.Logger;
 
 /**

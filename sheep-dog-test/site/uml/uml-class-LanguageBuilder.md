@@ -11,13 +11,12 @@ Static factory for creating and initializing grammar elements. Separates object 
 **Rule**: ALL method names follow create{Type} pattern.
  - **Name**: `^create{Type}$`
  - **Return**: `^I{Type}$`
- - **Parameters**: `^\((I{Type}\s+parent(,\s*String\s+[a-z]\w*)?)?\)$`
+ - **Parameters**: `^\((I{Type}\s+parent(,\s*String\s+[a-z]\w*)*)?\)$`
  - **Modifier**: `^public\s+static$`
 
 **Examples**:
  - `public static ICell createCell(IRow parent, String name)`
  - `public static IRow createRow(ITable parent)`
- - `public static IStatement createStatement(IStepDefinition parent, String name)`
  - `public static IStepDefinition createStepDefinition(IStepObject parent, String name)`
  - `public static IStepObject createStepObject(ITestProject parent, String fullName)`
  - `public static IStepParameters createStepParameters(IStepDefinition parent, String headers)`
@@ -25,6 +24,6 @@ Static factory for creating and initializing grammar elements. Separates object 
  - `public static IText createText(ITestStep parent, String name)`
  - `public static ITestCase createTestCase(ITestSuite parent, String name)`
  - `public static ITestSetup createTestSetup(ITestSuite parent, String name)`
- - `public static ITestStep createTestStep(ITestStepContainer parent, String fullName)`
+ - `public static ITestStep createTestStep(ITestStepContainer parent, String stepObjectName, String stepDefinitionName)`
  - `public static ITestSuite createTestSuite(ITestProject parent, String fullName)`
  - `public static ITestProject createTestProject()`

@@ -1,9 +1,9 @@
 package org.farhan.dsl.issues;
 
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITable;
-import org.farhan.dsl.grammar.SheepDogLoggerFactory;
 import org.slf4j.Logger;
 
 /**
@@ -26,8 +26,8 @@ public class CellIssueDetector {
      */
     public static String validateNameOnly(ICell theCell) {
         logger.debug("Entering validateNameOnly for theCell: {}", theCell != null ? theCell.getName() : "null");
-        IRow parentRow = theCell.getParent();
-        ITable parentTable = parentRow.getParent();
+        IRow parentRow = (IRow) theCell.eContainer();
+        ITable parentTable = (ITable) parentRow.eContainer();
         boolean isHeaderRow = parentTable.getRowList().indexOf(parentRow) == 0;
         if (isHeaderRow) {
             String name = theCell.getName();

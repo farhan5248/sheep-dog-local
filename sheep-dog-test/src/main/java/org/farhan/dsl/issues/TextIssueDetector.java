@@ -1,5 +1,7 @@
 package org.farhan.dsl.issues;
 
+import org.farhan.dsl.grammar.SheepDogLoggerFactory;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
@@ -8,8 +10,6 @@ import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.IText;
-import org.farhan.dsl.grammar.SheepDogLoggerFactory;
-import org.farhan.dsl.grammar.SheepDogUtility;
 import org.slf4j.Logger;
 
 /**
@@ -34,20 +34,20 @@ public class TextIssueDetector {
     public static String validateNameWorkspace(IText theText) throws Exception {
         logger.debug("Entering validateNameWorkspace for theText: {}", theText != null ? theText.getContent() : "null");
         String message = "";
-        ITestStep testStep = theText.getParent();
-        ITestProject testProject = SheepDogUtility.getTestProjectParentForText(theText);
+        ITestStep testStep = (ITestStep) theText.eContainer();
+        ITestProject testProject = SheepDogUtility.getTestProjectParent(theText);
         if (testProject != null) {
             String fullName = SheepDogUtility.getStepObjectFullNameForTestStep(testStep);
-            IStepObject theStepObject = (IStepObject) testProject.getTestDocument(fullName);
+            IStepObject theStepObject = (IStepObject) SheepDogUtility.getTestDocument(testProject, fullName);
             if (theStepObject != null) {
                 String stepDefinitionName = testStep.getStepDefinitionName();
-                IStepDefinition theStepDefinition = theStepObject.getStepDefinition(stepDefinitionName);
+                IStepDefinition theStepDefinition = SheepDogUtility.getStepDefinition(theStepObject, stepDefinitionName);
                 if (theStepDefinition != null) {
                     boolean found = false;
                     for (IStepParameters stepParameters : theStepDefinition.getStepParameterList()) {
                         ITable paramsTable = stepParameters.getTable();
                         if (paramsTable != null && !paramsTable.getRowList().isEmpty()) {
-                            for (ICell cell : paramsTable.getRow(0).getCellList()) {
+                            for (ICell cell : paramsTable.getRowList().get(0).getCellList()) {
                                 if ("Content".equals(cell.getName())) {
                                     found = true;
                                     break;

@@ -13,6 +13,6 @@ public class SheepDogFactory {
 	 * Stores the concrete factory implementation, allowing builders and other
 	 * consumers to create grammar instances.
 	 */
-	public static ISheepDogFactory instance;
+	public static ISheepDogFactory instance = ISheepDogFactory.eINSTANCE;
 
 }

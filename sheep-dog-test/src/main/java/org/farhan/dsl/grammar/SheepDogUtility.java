@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
 
 /**
@@ -16,22 +17,6 @@ import org.slf4j.Logger;
 public class SheepDogUtility {
 
     private static final Logger logger = SheepDogLoggerFactory.getLogger(SheepDogUtility.class);
-
-    /**
-     * Returns all TestSuites from a project's unified TestDocumentList.
-     *
-     * @param project the test project to filter
-     * @return list of ITestSuite instances from the project's document list
-     */
-    public static List<ITestSuite> getTestSuiteList(ITestProject project) {
-        List<ITestSuite> result = new ArrayList<>();
-        for (ITestDocument doc : project.getTestDocumentList()) {
-            if (doc instanceof ITestSuite) {
-                result.add((ITestSuite) doc);
-            }
-        }
-        return result;
-    }
 
     /**
      * Creates a deep clone of a step object without parent association.
@@ -103,6 +88,34 @@ public class SheepDogUtility {
     }
 
     /**
+     * Walks up the eContainer() chain to find the nearest ancestor of the given
+     * type.
+     */
+    private static <T> T getAncestor(Object node, Class<T> type) {
+        Object current = node;
+        while (current != null) {
+            if (type.isInstance(current)) {
+                return (T) current;
+            }
+            if (current instanceof EObject) {
+                current = ((EObject) current).eContainer();
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public static ICell getCell(IRow row, String name) {
+        for (ICell c : row.getCellList()) {
+            if (c.getName().contentEquals(name)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Converts a list of grammar elements into a formatted string representation
      * for display or comparison purposes.
      *
@@ -125,6 +138,15 @@ public class SheepDogUtility {
         return result;
     }
 
+    public static ILine getLine(IDescription description, String content) {
+        for (ILine l : description.getLineList()) {
+            if (l.getContent().equals(content)) {
+                return l;
+            }
+        }
+        return null;
+    }
+
     /**
      * Converts a list of grammar elements into a formatted string representation
      * for display or comparison purposes.
@@ -141,6 +163,15 @@ public class SheepDogUtility {
         }
         logger.debug("Exiting getLineListAsString with result: {}", documentation);
         return documentation;
+    }
+
+    public static IStepDefinition getStepDefinition(IStepObject stepObject, String name) {
+        for (IStepDefinition sd : stepObject.getStepDefinitionList()) {
+            if (sd.getName().contentEquals(name)) {
+                return sd;
+            }
+        }
+        return null;
     }
 
     /**
@@ -162,7 +193,7 @@ public class SheepDogUtility {
 
                 if (!component.isEmpty() && !object.isEmpty()) {
                     // Use the new utility method to navigate to project
-                    ITestProject project = getTestProjectParentForTestStep(theStep);
+                    ITestProject project = getTestProjectParent(theStep);
                     if (project != null) {
                         String fileExt = project.getFileExtension();
                         if (fileExt != null && !fileExt.isEmpty()) {
@@ -176,6 +207,63 @@ public class SheepDogUtility {
         }
         logger.debug("Exiting getStepObjectFullNameForTestStep with result: {}", "");
         return "";
+    }
+
+    public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String name) {
+        for (IStepParameters sp : stepDefinition.getStepParameterList()) {
+            if (name.contentEquals(sp.getName())) {
+                return sp;
+            }
+        }
+        return null;
+    }
+
+    public static ITestData getTestData(ITestCase testCase, String name) {
+        for (ITestData td : testCase.getTestDataList()) {
+            if (td.getName().contentEquals(name)) {
+                return td;
+            }
+        }
+        return null;
+    }
+
+    public static ITestDocument getTestDocument(ITestProject project, String fullName) {
+        for (ITestDocument td : project.getTestDocumentList()) {
+            if (td.getFullName().contentEquals(fullName)) {
+                return td;
+            }
+        }
+        return null;
+    }
+
+    public static ITestDocument getTestDocumentParent(EObject node) {
+        return getAncestor(node, ITestDocument.class);
+    }
+
+    public static ITestStep getTestStepParent(EObject node) {
+        return getAncestor(node, ITestStep.class);
+    }
+
+    public static ITestProject getTestProjectParent(EObject node) {
+        return getAncestor(node, ITestProject.class);
+    }
+
+    public static ITestStep getTestStep(ITestStepContainer container, String name) {
+        for (ITestStep ts : container.getTestStepList()) {
+            if (name.contentEquals(ts.getStepObjectName() + " " + ts.getStepDefinitionName())) {
+                return ts;
+            }
+        }
+        return null;
+    }
+
+    public static ITestStepContainer getTestStepContainer(ITestSuite testSuite, String name) {
+        for (ITestStepContainer tsc : testSuite.getTestStepContainerList()) {
+            if (tsc.getName().contentEquals(name)) {
+                return tsc;
+            }
+        }
+        return null;
     }
 
     /**
@@ -228,171 +316,6 @@ public class SheepDogUtility {
     }
 
     /**
-     * Gets the TestProject ancestor for a Text element.
-     */
-    public static ITestProject getTestProjectParentForText(IText theText) {
-        logger.debug("Entering getTestProjectParentForText for theText: {}",
-                theText != null ? theText.getContent() : "null");
-        ITestProject result = getAncestor(theText, ITestProject.class);
-        logger.debug("Exiting getTestProjectParentForText with result: {}",
-                result != null ? "non-null" : "null");
-        return result;
-    }
-
-    /**
-     * Gets the TestProject ancestor for a TestStep element.
-     */
-    public static ITestProject getTestProjectParentForTestStep(ITestStep theTestStep) {
-        logger.debug("Entering getTestProjectParentForTestStep for theTestStep: {}",
-                theTestStep != null ? theTestStep.getStepObjectName() : "null");
-        ITestProject result = getAncestor(theTestStep, ITestProject.class);
-        logger.debug("Exiting getTestProjectParentForTestStep with result: {}",
-                result != null ? "non-null" : "null");
-        return result;
-    }
-
-    /**
-     * Gets the TestProject ancestor for a Row element.
-     */
-    public static ITestProject getTestProjectParentForRow(IRow theRow) {
-        logger.debug("Entering getTestProjectParentForRow for theRow: {}", theRow != null ? "non-null" : "null");
-        ITestProject result = getAncestor(theRow, ITestProject.class);
-        logger.debug("Exiting getTestProjectParentForRow with result: {}",
-                result != null ? "non-null" : "null");
-        return result;
-    }
-
-    // === Parent navigation utility methods ===
-    // These consolidate getParent() calls, preparing for EMF cutover
-    // where eContainer() replaces all typed getParent() methods.
-
-    /**
-     * Gets the parent container of any grammar node. Replaces the typed
-     * getParent() calls across all interfaces with a single dispatch point.
-     * In Phase 2 (EMF cutover), this becomes: return ((EObject) node).eContainer()
-     */
-    public static Object getParent(Object node) {
-        if (node instanceof ICell) return ((ICell) node).getParent();
-        if (node instanceof IRow) return ((IRow) node).getParent();
-        if (node instanceof ITable) return ((ITable) node).getParent();
-        if (node instanceof IText) return ((IText) node).getParent();
-        if (node instanceof ILine) return ((ILine) node).getParent();
-        if (node instanceof IDescription) return ((IDescription) node).getParent();
-        if (node instanceof ITestStep) return ((ITestStep) node).getParent();
-        if (node instanceof ITestData) return ((ITestData) node).getParent();
-        if (node instanceof ITestStepContainer) return ((ITestStepContainer) node).getParent();
-        if (node instanceof IStepParameters) return ((IStepParameters) node).getParent();
-        if (node instanceof IStepDefinition) return ((IStepDefinition) node).getParent();
-        if (node instanceof IStepObject) return ((IStepObject) node).getParent();
-        if (node instanceof ITestSuite) return ((ITestSuite) node).getParent();
-        return null;
-    }
-
-    /**
-     * Walks up the parent chain to find the nearest ancestor of the given type.
-     * In Phase 2 (EMF cutover), this becomes a loop over eContainer().
-     */
-    public static <T> T getAncestor(Object node, Class<T> type) {
-        Object current = node;
-        while (current != null) {
-            if (type.isInstance(current)) {
-                return (T) current;
-            }
-            current = getParent(current);
-        }
-        return null;
-    }
-
-    // === Sorted insertion utility ===
-    // Extracts the binary search + insert pattern used by mock impls, preparing for EMF cutover
-    // where EList.add(index, element) works the same way.
-
-    /**
-     * Inserts an element into a sorted list at the correct position using binary search.
-     *
-     * @param list          the sorted list to insert into
-     * @param element       the element to insert
-     * @param nameExtractor function to extract the sort key from elements
-     * @param <T>           the element type
-     */
-    public static <T> void addSorted(List<T> list, T element, java.util.function.Function<T, String> nameExtractor) {
-        String name = nameExtractor.apply(element);
-        int insertIndex = Collections.binarySearch(
-                list.stream().map(nameExtractor).toList(), name);
-        if (insertIndex < 0) {
-            insertIndex = -(insertIndex + 1);
-        }
-        list.add(insertIndex, element);
-    }
-
-    // === Lookup-by-name utility methods ===
-    // These replace the get(String name) methods on interfaces, preparing for EMF cutover
-    // where interfaces only expose getXxxList() and lookups must be external.
-
-    public static ICell getCell(IRow row, String name) {
-        for (ICell c : row.getCellList()) {
-            if (c.getName().contentEquals(name)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    public static ILine getLine(IDescription description, String content) {
-        for (ILine l : description.getLineList()) {
-            if (l.getContent().equals(content)) {
-                return l;
-            }
-        }
-        return null;
-    }
-
-    public static IStepDefinition getStepDefinition(IStepObject stepObject, String name) {
-        for (IStepDefinition sd : stepObject.getStepDefinitionList()) {
-            if (sd.getName().contentEquals(name)) {
-                return sd;
-            }
-        }
-        return null;
-    }
-
-    public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String name) {
-        for (IStepParameters sp : stepDefinition.getStepParameterList()) {
-            if (name.contentEquals(sp.getName())) {
-                return sp;
-            }
-        }
-        return null;
-    }
-
-    public static ITestStepContainer getTestStepContainer(ITestSuite testSuite, String name) {
-        for (ITestStepContainer tsc : testSuite.getTestStepContainerList()) {
-            if (tsc.getName().contentEquals(name)) {
-                return tsc;
-            }
-        }
-        return null;
-    }
-
-    public static ITestStep getTestStep(ITestStepContainer container, String name) {
-        for (ITestStep ts : container.getTestStepList()) {
-            if (name.contentEquals(ts.getStepObjectName() + " " + ts.getStepDefinitionName())) {
-                return ts;
-            }
-        }
-        return null;
-    }
-
-    public static ITestData getTestData(ITestCase testCase, String name) {
-        for (ITestData td : testCase.getTestDataList()) {
-            if (td.getName().contentEquals(name)) {
-                return td;
-            }
-        }
-        return null;
-    }
-
-    /**
      * Gets a list of elements up to (but not including) the specified element.
      * Returns elements in reverse chronological order (most recent first) for
      * context inference. Includes background/setup steps when processing
@@ -406,8 +329,8 @@ public class SheepDogUtility {
         logger.debug("Entering getTestStepListUpToTestStep for theTestStep: {}",
                 theTestStep != null ? theTestStep.getStepObjectName() : "null");
         ArrayList<ITestStep> steps = new ArrayList<ITestStep>();
-        if (theTestStep != null && theTestStep.getParent() != null) {
-            ITestStepContainer currentContainer = theTestStep.getParent();
+        if (theTestStep != null && theTestStep.eContainer() != null) {
+            ITestStepContainer currentContainer = (ITestStepContainer) theTestStep.eContainer();
 
             // First, add steps from current container up to theTestStep
             for (ITestStep t : currentContainer.getTestStepList()) {
@@ -421,7 +344,7 @@ public class SheepDogUtility {
             // If current container is a TestCase, also include all steps from TestSetup
             // (Background)
             if (currentContainer instanceof ITestCase) {
-                ITestSuite suite = currentContainer.getParent();
+                ITestSuite suite = (ITestSuite) currentContainer.eContainer();
                 if (suite != null) {
                     for (ITestStepContainer container : suite.getTestStepContainerList()) {
                         if (container instanceof ITestSetup) {
@@ -437,5 +360,21 @@ public class SheepDogUtility {
         }
         logger.debug("Exiting getTestStepListUpToTestStep with result: {} steps", steps.size());
         return steps;
+    }
+
+    /**
+     * Returns all TestSuites from a project's unified TestDocumentList.
+     *
+     * @param project the test project to filter
+     * @return list of ITestSuite instances from the project's document list
+     */
+    public static List<ITestSuite> getTestSuiteList(ITestProject project) {
+        List<ITestSuite> result = new ArrayList<>();
+        for (ITestDocument doc : project.getTestDocumentList()) {
+            if (doc instanceof ITestSuite) {
+                result.add((ITestSuite) doc);
+            }
+        }
+        return result;
     }
 }
