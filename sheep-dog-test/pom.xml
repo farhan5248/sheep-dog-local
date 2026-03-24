@@ -36,6 +36,10 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
+		<pluginRepository>
+			<id>eclipse-releases-plugin</id>
+			<url>https://repo.eclipse.org/content/groups/releases/</url>
+		</pluginRepository>
 	</pluginRepositories>
 
 	<repositories>
@@ -48,6 +52,10 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>eclipse-releases</id>
+			<url>https://repo.eclipse.org/content/groups/releases/</url>
 		</repository>
 	</repositories>
 
@@ -66,6 +74,113 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.6.3</version>
+				<executions>
+					<execution>
+						<id>mwe2Launcher</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
+					<arguments>
+						<argument>file:///${project.basedir}/src/main/java/org/farhan/dsl/grammar/GenerateSheepDogModel.mwe2</argument>
+						<argument>-p</argument>
+						<argument>rootPath=${project.basedir}/..</argument>
+					</arguments>
+					<classpathScope>compile</classpathScope>
+					<includePluginDependencies>true</includePluginDependencies>
+					<cleanupDaemonThreads>false</cleanupDaemonThreads>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.text</groupId>
+						<artifactId>org.eclipse.text</artifactId>
+						<version>3.5.101</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.core</groupId>
+						<artifactId>org.eclipse.core.resources</artifactId>
+						<version>3.7.100</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext</artifactId>
+						<version>2.40.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.ecore</artifactId>
+						<version>2.40.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.common.types</artifactId>
+						<version>2.40.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+						<version>2.40.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+						<version>2.23.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.mwe2.language</artifactId>
+						<version>2.23.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.mwe2.runtime</artifactId>
+						<version>2.23.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
+						<version>2.23.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.codegen.ecore.xtext</artifactId>
+						<version>1.8.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.common</artifactId>
+						<version>2.43.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.ecore</artifactId>
+						<version>2.39.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+						<version>2.39.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.codegen</artifactId>
+						<version>2.27.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+						<version>2.27.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 			<plugin>
 				<groupId>org.farhan</groupId>
 				<artifactId>sheep-dog-dev-svc-maven-plugin</artifactId>
@@ -99,6 +214,18 @@
 				<artifactId>build-helper-maven-plugin</artifactId>
 				<version>3.3.0</version>
 				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src-gen/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
 					<execution>
 						<id>add-test-source</id>
 						<phase>initialize</phase>
@@ -237,6 +364,17 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- EMF Ecore -->
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>ecore</artifactId>
+			<version>2.35.0.v20230829-0934</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>common</artifactId>
+			<version>2.29.0.v20230916-0637</version>
+		</dependency>
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
