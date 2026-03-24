@@ -24,7 +24,7 @@ public class DescriptionImpl implements IDescription {
 	@Override
 	public ILine getLine(String name) {
 		for (ILine l : lineList) {
-			if (l.getName().equals(name)) {
+			if (l.getContent().equals(name)) {
 				return l;
 			}
 		}

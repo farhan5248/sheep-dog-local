@@ -73,6 +73,58 @@ Static helper methods for grammar element operations. Separates utility operatio
 **Examples**:
  - `public static List<ITestSuite> getTestSuiteList(ITestProject project)`
 
+## getParent
+
+**Desc**: Gets the parent container of any grammar node. Consolidates typed getParent() calls into a single dispatch point for EMF cutover preparation.
+
+**Rule**: ONE method named getParent.
+ - **Name**: `^getParent$`
+ - **Return**: `^Object$`
+ - **Parameters**: `^\(Object\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static Object getParent(Object node)`
+
+## getAncestor
+
+**Desc**: Walks up the parent chain to find the nearest ancestor of the given type.
+
+**Rule**: ONE method named getAncestor.
+ - **Name**: `^getAncestor$`
+
+**Examples**:
+ - `public static <T> T getAncestor(Object node, Class<T> type)`
+
+## addSorted
+
+**Desc**: Inserts an element into a sorted list at the correct position using binary search.
+
+**Rule**: ONE method named addSorted.
+ - **Name**: `^addSorted$`
+
+**Examples**:
+ - `public static <T> void addSorted(List<T> list, T element, java.util.function.Function<T, String> nameExtractor)`
+
+## get{Type}
+
+**Desc**: Looks up a child element by name from a parent's list. Replaces the get(String name) methods on interfaces, preparing for EMF cutover where interfaces only expose getXxxList().
+
+**Rule**: SOME method names follow get{Type} pattern with a parent and name parameter.
+ - **Name**: `^get{Type}$`
+ - **Return**: `^I{Type}$`
+ - **Parameters**: `^\(I{Type}\s+\w+,\s+String\s+\w+\)$`
+ - **Modifier**: `^public\s+static$`
+
+**Examples**:
+ - `public static ICell getCell(IRow row, String name)`
+ - `public static ILine getLine(IDescription description, String content)`
+ - `public static IStepDefinition getStepDefinition(IStepObject stepObject, String name)`
+ - `public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String name)`
+ - `public static ITestStepContainer getTestStepContainer(ITestSuite testSuite, String name)`
+ - `public static ITestStep getTestStep(ITestStepContainer container, String name)`
+ - `public static ITestData getTestData(ITestCase testCase, String name)`
+
 ## clone{Type}
 
 **Desc**: Creates deep clones of grammar elements to avoid side effects during operations like proposal generation. Clones are created without parent associations to prevent modification of the original element tree.

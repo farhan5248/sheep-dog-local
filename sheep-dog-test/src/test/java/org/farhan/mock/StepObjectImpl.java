@@ -9,6 +9,8 @@ import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.ITestProject;
+import org.farhan.dsl.grammar.SheepDogBuilder;
+import org.farhan.dsl.grammar.SheepDogUtility;
 
 public class StepObjectImpl implements IStepObject {
 
@@ -95,10 +97,7 @@ public class StepObjectImpl implements IStepObject {
 
     @Override
     public boolean addLine(ILine value) {
-        if (description == null) {
-            description = new DescriptionImpl();
-            description.parent = this;
-        }
+        description = (DescriptionImpl) SheepDogBuilder.createDescription(this);
         description.addLine(value);
         return true;
     }
@@ -106,13 +105,7 @@ public class StepObjectImpl implements IStepObject {
     @Override
     public boolean addStepDefinition(IStepDefinition value) {
         StepDefinitionImpl impl = (StepDefinitionImpl) value;
-        int insertIndex = Collections.binarySearch(
-                stepDefinitionList.stream().map(StepDefinitionImpl::getName).toList(),
-                impl.getName());
-        if (insertIndex < 0) {
-            insertIndex = -(insertIndex + 1);
-        }
-        stepDefinitionList.add(insertIndex, impl);
+        SheepDogUtility.addSorted(stepDefinitionList, impl, StepDefinitionImpl::getName);
         impl.parent = this;
         return true;
     }

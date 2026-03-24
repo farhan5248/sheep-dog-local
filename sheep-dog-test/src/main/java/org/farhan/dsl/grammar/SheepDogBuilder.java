@@ -43,101 +43,76 @@ public class SheepDogBuilder {
      */
     public static IDescription createDescription(IStepObject parent) {
         logger.debug("Entering createDescription for parent: {}", parent != null ? parent.getName() : "null");
-        IDescription description = SheepDogFactory.instance.createDescription();
-        if (parent != null)
-            parent.setDescription(description);
+        IDescription description = parent != null ? parent.getDescription() : null;
+        if (description == null) {
+            description = SheepDogFactory.instance.createDescription();
+            if (parent != null)
+                parent.setDescription(description);
+        }
         logger.debug("Exiting createDescription with result: {}", description != null ? "non-null" : "null");
         return description;
     }
 
-    /**
-     * Creates grammar element using factory, initializes attributes, establishes
-     * parent-child relationships, and handles singleton lookups where needed.
-     *
-     * @param parent the parent element (or null if root)
-     * @return the created and initialized instance
-     */
     public static IDescription createDescription(IStepDefinition parent) {
         logger.debug("Entering createDescription for parent: {}", parent != null ? parent.getName() : "null");
-        IDescription description = SheepDogFactory.instance.createDescription();
-        if (parent != null)
-            parent.setDescription(description);
+        IDescription description = parent != null ? parent.getDescription() : null;
+        if (description == null) {
+            description = SheepDogFactory.instance.createDescription();
+            if (parent != null)
+                parent.setDescription(description);
+        }
         logger.debug("Exiting createDescription with result: {}", description != null ? "non-null" : "null");
         return description;
     }
 
-    /**
-     * Creates grammar element using factory, initializes attributes, establishes
-     * parent-child relationships, and handles singleton lookups where needed.
-     *
-     * @param parent the parent element (or null if root)
-     * @return the created and initialized instance
-     */
     public static IDescription createDescription(ITestSuite parent) {
         logger.debug("Entering createDescription for parent: {}", parent != null ? parent.getName() : "null");
-        IDescription description = SheepDogFactory.instance.createDescription();
-        if (parent != null)
-            parent.setDescription(description);
+        IDescription description = parent != null ? parent.getDescription() : null;
+        if (description == null) {
+            description = SheepDogFactory.instance.createDescription();
+            if (parent != null)
+                parent.setDescription(description);
+        }
         logger.debug("Exiting createDescription with result: {}", description != null ? "non-null" : "null");
         return description;
     }
 
-    /**
-     * Creates grammar element using factory, initializes attributes, establishes
-     * parent-child relationships, and handles singleton lookups where needed.
-     *
-     * @param parent the parent element (or null if root)
-     * @return the created and initialized instance
-     */
     public static IDescription createDescription(ITestStepContainer parent) {
         logger.debug("Entering createDescription for parent: {}", parent != null ? parent.getName() : "null");
-        IDescription description = SheepDogFactory.instance.createDescription();
-        if (parent != null)
-            parent.setDescription(description);
+        IDescription description = parent != null ? parent.getDescription() : null;
+        if (description == null) {
+            description = SheepDogFactory.instance.createDescription();
+            if (parent != null)
+                parent.setDescription(description);
+        }
         logger.debug("Exiting createDescription with result: {}", description != null ? "non-null" : "null");
         return description;
     }
 
-    /**
-     * Creates grammar element using factory, initializes attributes, establishes
-     * parent-child relationships, and handles singleton lookups where needed.
-     *
-     * @param parent the parent element (or null if root)
-     * @return the created and initialized instance
-     */
     public static IDescription createDescription(IStepParameters parent) {
         logger.debug("Entering createDescription for parent: {}", parent != null ? parent.getName() : "null");
-        IDescription description = SheepDogFactory.instance.createDescription();
-        if (parent != null)
-            parent.setDescription(description);
+        IDescription description = parent != null ? parent.getDescription() : null;
+        if (description == null) {
+            description = SheepDogFactory.instance.createDescription();
+            if (parent != null)
+                parent.setDescription(description);
+        }
         logger.debug("Exiting createDescription with result: {}", description != null ? "non-null" : "null");
         return description;
     }
 
-    /**
-     * Creates grammar element using factory, initializes attributes, establishes
-     * parent-child relationships, and handles singleton lookups where needed.
-     *
-     * @param parent the parent element (or null if root)
-     * @return the created and initialized instance
-     */
     public static IDescription createDescription(ITestData parent) {
         logger.debug("Entering createDescription for parent: {}", parent != null ? parent.getName() : "null");
-        IDescription description = SheepDogFactory.instance.createDescription();
-        if (parent != null)
-            parent.setDescription(description);
+        IDescription description = parent != null ? parent.getDescription() : null;
+        if (description == null) {
+            description = SheepDogFactory.instance.createDescription();
+            if (parent != null)
+                parent.setDescription(description);
+        }
         logger.debug("Exiting createDescription with result: {}", description != null ? "non-null" : "null");
         return description;
     }
 
-    /**
-     * Creates grammar element using factory, initializes attributes, establishes
-     * parent-child relationships, and handles singleton lookups where needed.
-     *
-     * @param parent the parent element (or null if root)
-     * @param name   the name of the test data
-     * @return the created and initialized instance
-     */
     public static ITestData createTestData(ITestCase parent, String name) {
         logger.debug("Entering createTestData for name: {}", name);
         ITestData testData = null;
@@ -164,10 +139,10 @@ public class SheepDogBuilder {
     public static ILine createLine(IDescription parent, String name) {
         logger.debug("Entering createLine for name: {}", name);
         ILine line = SheepDogFactory.instance.createLine();
-        line.setName(name);
+        line.setContent(name);
         if (parent != null)
             parent.addLine(line);
-        logger.debug("Exiting createLine with result: {}", line != null ? line.getName() : "null");
+        logger.debug("Exiting createLine with result: {}", line != null ? line.getContent() : "null");
         return line;
     }
 
@@ -414,10 +389,10 @@ public class SheepDogBuilder {
         if (parent != null && parent.getTable() != null)
             return null;
         IText text = SheepDogFactory.instance.createText();
-        text.setName(name);
+        text.setContent(name);
         if (parent != null)
             parent.setText(text);
-        logger.debug("Exiting createText with result: {}", text != null ? text.getName() : "null");
+        logger.debug("Exiting createText with result: {}", text != null ? text.getContent() : "null");
         return text;
     }
 

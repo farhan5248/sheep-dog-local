@@ -11,6 +11,7 @@ import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
 import org.farhan.dsl.grammar.IText;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.issues.CellIssueResolver;
 import org.farhan.dsl.issues.CellIssueTypes;
 import org.farhan.dsl.issues.RowIssueResolver;
@@ -63,7 +64,7 @@ public class ListQuickfixesActionImpl extends TestObjectSheepDogImpl implements 
                 }
             } else if (cursor instanceof IRow) {
                 IRow row = (IRow) cursor;
-                ITestStep testStep = (ITestStep) row.getParent().getParent();
+                ITestStep testStep = SheepDogUtility.getAncestor(row, ITestStep.class);
                 if (validateDialog.contentEquals(RowIssueTypes.ROW_CELL_LIST_WORKSPACE.description)) {
                     if (testStep.getTable() != null) {
                         if (testStep.getTable().getRowList() != null) {

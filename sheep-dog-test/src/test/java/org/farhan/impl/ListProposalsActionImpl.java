@@ -7,6 +7,7 @@ import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.SheepDogIssueProposal;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.issues.RowIssueResolver;
 import org.farhan.dsl.issues.TestStepIssueResolver;
 import org.farhan.objects.xtext.ListProposalsAction;
@@ -43,7 +44,7 @@ public class ListProposalsActionImpl extends TestObjectSheepDogImpl implements L
             ArrayList<SheepDogIssueProposal> listProposalsDialog = (ArrayList<SheepDogIssueProposal>) getProperty("list proposals popup");
             if (cursor instanceof IRow) {
                 IRow row = (IRow) cursor;
-                ITestStep testStep = (ITestStep) row.getParent().getParent();
+                ITestStep testStep = SheepDogUtility.getAncestor(row, ITestStep.class);
                 listProposalsDialog
                         .addAll(RowIssueResolver.suggestCellListWorkspace((ITestStep) testStep));
             } else if (cursor instanceof ITestStep) {

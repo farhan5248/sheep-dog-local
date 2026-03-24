@@ -288,6 +288,48 @@ public static String getTestStepFullName(ITestStep theStep) {
 }
 ```
 
+### getParent
+
+Gets the parent container of any grammar node. Consolidates typed getParent() calls into a single dispatch point. In Phase 2 (EMF cutover), this becomes `return ((EObject) node).eContainer()`.
+
+```java
+public static Object getParent(Object node) {
+    if (node instanceof ICell) return ((ICell) node).getParent();
+    if (node instanceof IRow) return ((IRow) node).getParent();
+    // ... dispatch for all grammar types
+    return null;
+}
+```
+
+### getAncestor
+
+Walks up the parent chain via `getParent()` to find the nearest ancestor of the given type. In Phase 2 (EMF cutover), this becomes a loop over `eContainer()`.
+
+```java
+public static <T> T getAncestor(Object node, Class<T> type) {
+    Object current = node;
+    while (current != null) {
+        if (type.isInstance(current)) return (T) current;
+        current = getParent(current);
+    }
+    return null;
+}
+```
+
+### addSorted
+
+Inserts an element into a sorted list at the correct position using binary search on a name extracted by the provided function.
+
+```java
+public static <T> void addSorted(List<T> list, T element, Function<T, String> nameExtractor) {
+    String name = nameExtractor.apply(element);
+    int insertIndex = Collections.binarySearch(
+            list.stream().map(nameExtractor).toList(), name);
+    if (insertIndex < 0) insertIndex = -(insertIndex + 1);
+    list.add(insertIndex, element);
+}
+```
+
 ### clone{Type}
 
 Utility methods create deep clones of grammar elements to avoid side effects during operations like proposal generation. Clones are created without parent associations to prevent modification of the original element tree.

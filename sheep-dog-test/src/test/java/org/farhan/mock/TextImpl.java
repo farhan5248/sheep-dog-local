@@ -6,19 +6,19 @@ import org.farhan.dsl.grammar.IText;
 public class TextImpl implements IText {
 
 	TestStepImpl parent;
-	String name;
+	String content;
 
 	public TextImpl() {
 	}
 
 	@Override
-	public String getName() {
-		return name;
+	public String getContent() {
+		return content;
 	}
 
 	@Override
-	public void setName(String value) {
-		name = value;
+	public void setContent(String value) {
+		content = value;
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class TextImpl implements IText {
 
 	@Override
 	public String toString() {
-		return name != null ? name : "";
+		return content != null ? content : "";
 	}
 
 }

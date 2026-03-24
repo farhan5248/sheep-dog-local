@@ -32,7 +32,7 @@ public class TextIssueDetector {
      * @throws Exception if validation fails
      */
     public static String validateNameWorkspace(IText theText) throws Exception {
-        logger.debug("Entering validateNameWorkspace for theText: {}", theText != null ? theText.getName() : "null");
+        logger.debug("Entering validateNameWorkspace for theText: {}", theText != null ? theText.getContent() : "null");
         String message = "";
         ITestStep testStep = theText.getParent();
         ITestProject testProject = SheepDogUtility.getTestProjectParentForText(theText);

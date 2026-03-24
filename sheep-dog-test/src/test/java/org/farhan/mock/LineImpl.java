@@ -4,20 +4,20 @@ import org.farhan.dsl.grammar.ILine;
 
 public class LineImpl implements ILine {
 
-	String name;
+	String content;
 	Object parent;
 
 	LineImpl() {
 	}
 
 	@Override
-	public String getName() {
-		return name;
+	public String getContent() {
+		return content;
 	}
 
 	@Override
-	public void setName(String value) {
-		this.name = value;
+	public void setContent(String value) {
+		this.content = value;
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class LineImpl implements ILine {
 
 	@Override
 	public String toString() {
-		return name != null ? name : "";
+		return content != null ? content : "";
 	}
 
 }

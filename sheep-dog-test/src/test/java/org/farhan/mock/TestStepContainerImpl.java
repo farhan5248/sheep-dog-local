@@ -9,6 +9,7 @@ import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 
 public class TestStepContainerImpl implements ITestStepContainer {
 
@@ -63,10 +64,7 @@ public class TestStepContainerImpl implements ITestStepContainer {
 
     @Override
     public boolean addLine(ILine value) {
-        if (description == null) {
-            description = new DescriptionImpl();
-            description.parent = this;
-        }
+        description = (DescriptionImpl) SheepDogBuilder.createDescription(this);
         description.addLine(value);
         return true;
     }

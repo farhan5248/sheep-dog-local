@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
-import org.farhan.dsl.grammar.ILine;
 import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
@@ -18,11 +16,10 @@ import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
 import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestDocument;
-import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestStep;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
-import org.farhan.dsl.grammar.IText;
+import org.farhan.dsl.grammar.SheepDogUtility;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
@@ -46,37 +43,7 @@ public abstract class TestObject {
     }
 
     private static Object getDocumentFromNode(Object node) {
-        Object current = node;
-        while (current != null && !(current instanceof ITestDocument)) {
-            if (current instanceof ICell) {
-                current = ((ICell) current).getParent();
-            } else if (current instanceof IRow) {
-                current = ((IRow) current).getParent();
-            } else if (current instanceof ITable) {
-                current = ((ITable) current).getParent();
-            } else if (current instanceof IText) {
-                current = ((IText) current).getParent();
-            } else if (current instanceof ILine) {
-                current = ((ILine) current).getParent();
-            } else if (current instanceof IDescription) {
-                current = ((IDescription) current).getParent();
-            } else if (current instanceof ITestStep) {
-                current = ((ITestStep) current).getParent();
-            } else if (current instanceof ITestData) {
-                current = ((ITestData) current).getParent();
-            } else if (current instanceof ITestStepContainer) {
-                current = ((ITestStepContainer) current).getParent();
-            } else if (current instanceof IStepParameters) {
-                current = ((IStepParameters) current).getParent();
-            } else if (current instanceof IStepDefinition) {
-                current = ((IStepDefinition) current).getParent();
-            } else if (current instanceof ITestProject) {
-                return null;
-            } else {
-                return null;
-            }
-        }
-        return current;
+        return SheepDogUtility.getAncestor(node, ITestDocument.class);
     }
 
     protected static Object getProperty(String key) {

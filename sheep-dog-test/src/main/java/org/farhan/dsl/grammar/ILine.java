@@ -2,9 +2,9 @@ package org.farhan.dsl.grammar;
 
 public interface ILine {
 
-	String getName();
+	String getContent();
 
-	void setName(String value);
+	void setContent(String value);
 
 	Object getParent();
 }

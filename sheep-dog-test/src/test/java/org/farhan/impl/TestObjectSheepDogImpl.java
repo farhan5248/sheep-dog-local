@@ -188,11 +188,11 @@ public class TestObjectSheepDogImpl extends TestObject {
     protected String assertLineContent(String content) {
         Object cursor = getProperty("cursor");
         if (cursor instanceof ILine) {
-            return ((ILine) cursor).getName();
+            return ((ILine) cursor).getContent();
         } else {
             Object line = ((IDescription) cursor).getLine(content);
             setProperty("cursor", line);
-            return line == null ? null : ((ILine) line).getName();
+            return line == null ? null : ((ILine) line).getContent();
         }
     }
 

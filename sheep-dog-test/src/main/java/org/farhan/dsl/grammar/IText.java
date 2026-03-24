@@ -8,17 +8,17 @@ public interface IText {
 
 	/**
 	 * Gets the raw text content (without delimiters).
-	 * 
+	 *
 	 * @return the text content
 	 */
-	String getName();
+	String getContent();
 
 	/**
 	 * Sets the raw text content.
-	 * 
+	 *
 	 * @param value the text content
 	 */
-	void setName(String value);
+	void setContent(String value);
 
 	/**
 	 * Gets the parent test step containing this text.

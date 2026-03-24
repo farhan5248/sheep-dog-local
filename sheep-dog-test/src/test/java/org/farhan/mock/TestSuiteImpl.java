@@ -11,6 +11,7 @@ import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSetup;
 import org.farhan.dsl.grammar.ITestStepContainer;
 import org.farhan.dsl.grammar.ITestSuite;
+import org.farhan.dsl.grammar.SheepDogBuilder;
 
 public class TestSuiteImpl implements ITestSuite {
 
@@ -94,10 +95,7 @@ public class TestSuiteImpl implements ITestSuite {
 
 	@Override
 	public boolean addLine(ILine value) {
-		if (description == null) {
-			description = new DescriptionImpl();
-			description.parent = this;
-		}
+		description = (DescriptionImpl) SheepDogBuilder.createDescription(this);
 		description.addLine(value);
 		return true;
 	}
