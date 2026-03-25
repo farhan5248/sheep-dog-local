@@ -6,7 +6,7 @@ Bundle-Vendor: My Company
 Bundle-Version: 1.45.0.qualifier
 Bundle-SymbolicName: sheepdogxtextplugin; singleton:=true
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: lib/sheep-dog-test.jar,
+Bundle-ClassPath: lib/sheep-dog-grammar.jar,
  .
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,

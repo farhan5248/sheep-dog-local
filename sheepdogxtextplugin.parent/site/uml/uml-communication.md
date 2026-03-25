@@ -1,6 +1,6 @@
 # UML Communication Patterns
 
-Collaboration patterns for sheepdogxtextplugin IDE integration. Business logic patterns are documented in sheep-dog-test/site/uml/uml-communication.md.
+Collaboration patterns for sheepdogxtextplugin IDE integration. Business logic patterns are documented in sheep-dog-grammar/site/uml/uml-communication.md.
 
 ## Suggest
 
@@ -26,21 +26,21 @@ Wrapper class that adapts EMF objects to business logic interfaces by delegating
 
 ### {Type}IssueResolver
 
-Business logic class from sheep-dog-test (not in sheepdogxtextplugin) that suggests alternatives for absent grammar elements.
+Business logic class from sheep-dog-grammar (not in sheepdogxtextplugin) that suggests alternatives for absent grammar elements.
 
 **Methods**
 - `suggest{Assignment}(I{Type} type)`
 
 ### {Language}Factory
 
-Singleton from sheep-dog-test (not in sheepdogxtextplugin) that creates and manages project instances.
+Singleton from sheep-dog-grammar (not in sheepdogxtextplugin) that creates and manages project instances.
 
 **Methods**
 - `createTestProject()`
 
 ### {Language}IssueProposal
 
-Data container from sheep-dog-test (not in sheepdogxtextplugin) that holds proposal information for content assist.
+Data container from sheep-dog-grammar (not in sheepdogxtextplugin) that holds proposal information for content assist.
 
 **Properties:** id, description, value, qualifiedName
 
@@ -68,14 +68,14 @@ Wrapper class that adapts EMF objects to business logic interfaces by delegating
 
 ### {Type}IssueDetector
 
-Business logic class from sheep-dog-test (not in sheepdogxtextplugin) that provides pure validation logic for grammar elements.
+Business logic class from sheep-dog-grammar (not in sheepdogxtextplugin) that provides pure validation logic for grammar elements.
 
 **Methods**
 - `validate{Aspect}(I{Type} type)`
 
 ### {Language}Factory
 
-Singleton from sheep-dog-test (not in sheepdogxtextplugin) that creates and manages project instances.
+Singleton from sheep-dog-grammar (not in sheepdogxtextplugin) that creates and manages project instances.
 
 **Methods**
 - `createTestProject()`
@@ -113,20 +113,20 @@ Wrapper class that adapts EMF objects to business logic interfaces by delegating
 
 ### {Type}IssueResolver
 
-Business logic class from sheep-dog-test (not in sheepdogxtextplugin) that generates corrections for invalid grammar elements.
+Business logic class from sheep-dog-grammar (not in sheepdogxtextplugin) that generates corrections for invalid grammar elements.
 
 **Methods**
 - `correct{Aspect}(I{Type} type)`
 
 ### {Language}Factory
 
-Singleton from sheep-dog-test (not in sheepdogxtextplugin) that creates and manages project instances.
+Singleton from sheep-dog-grammar (not in sheepdogxtextplugin) that creates and manages project instances.
 
 **Methods**
 - `createTestProject()`
 
 ### {Language}IssueProposal
 
-Data container from sheep-dog-test (not in sheepdogxtextplugin) that holds proposal information for quick fixes.
+Data container from sheep-dog-grammar (not in sheepdogxtextplugin) that holds proposal information for quick fixes.
 
 **Properties:** id, description, value, qualifiedName

@@ -1,0 +1,123 @@
+@sheep-dog-grammar
+Feature: StepObjectRef Fragment
+
+  \@sheep-dog-grammar
+  A StepObjectRef identifies the component and object in a test step.
+
+  Scenario Outline: Component Fragment
+
+    The component regex in StepObjectRefFragments captures the system name and type from a StepObjectRef. The StepObjectRef grammar rule is WORD+ followed by an object type keyword in SheepDog.xtext. When no component is present the result is empty.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
+          | Test Step Full Name   |
+          | <Test Step Full Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepObjectRef component fragment will be decomposed as follows
+          | Component   | Component Name   | Component Type   |
+          | <Component> | <Component Name> | <Component Type> |
+
+    Examples: Component and object
+
+          | Test Step Full Name                                                   | Component                | Component Name | Component Type |
+          | The graph-viewer application uml-to-cucumber request is executed with | graph-viewer application | graph-viewer   | application    |
+          | The graph-viewer application uml-to-cucumber request                  | graph-viewer application | graph-viewer   | application    |
+          | The uml-to-cucumber request is empty                                  | empty                    | empty          | empty          |
+
+  Scenario Outline: Component Fragment Types
+
+    The component type keywords are defined in StepObjectRefComponentTypes enum.
+    - application - GUI web application
+    - project - Collection of files such as a Maven project
+    - service - RESTful or SOAP webservice
+    - batchjob - EOD or ETL batchjob
+    - plugin - Maven or Eclipse plugin
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
+          | Test Step Full Name   |
+          | <Test Step Full Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepObjectRef component fragment will be decomposed as follows
+          | Component Type   | Component Type Description   |
+          | <Component Type> | <Component Type Description> |
+
+    Examples: Types
+
+          | Test Step Full Name           | Component Type | Component Type Description                  |
+          | The graph-viewer application  | application    | GUI web application                         |
+          | The spec-prj project          | project        | Collection of files such as a Maven project |
+          | The sheep-dog-dev-svc service | service        | RESTful or SOAP webservice                  |
+          | The nightly batchjob          | batchjob       | EOD or ETL batchjob                         |
+          | The xtext plugin              | plugin         | Maven or Eclipse plugin                     |
+
+  Scenario Outline: Object Fragment
+
+    The object regex in StepObjectRefFragments captures the object name and type from a StepObjectRef. The object type is the terminal keyword defined in the StepObjectRef grammar rule in SheepDog.xtext. Object types are split into vertex types (state holders) and edge types (actions).
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
+          | Test Step Full Name   |
+          | <Test Step Full Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepObjectRef object fragment will be decomposed as follows
+          | Object   | Object Name   | Object Type   |
+          | <Object> | <Object Name> | <Object Type> |
+
+    Examples: Fragments
+
+          | Test Step Full Name                                                              | Object                  | Object Name     | Object Type |
+          | The graph-viewer application uml-to-cucumber request StepObjectRef type is empty | uml-to-cucumber request | uml-to-cucumber | request     |
+          | The graph-viewer application uml-to-cucumber request is executed with            | uml-to-cucumber request | uml-to-cucumber | request     |
+          | The graph-viewer application uml-to-cucumber request                             | uml-to-cucumber request | uml-to-cucumber | request     |
+
+  Scenario Outline: Object Vertex Fragment
+
+    Vertex object types are defined in StepObjectRefObjectVertexTypes enum and represent state holders.
+    - file - Any sort of file
+    - directory - File directory
+    - page - Web page
+    - dialog - Window dialog box
+    - response - Web service response
+    - popup - List of options for quickfix or content proposal
+    - annotation - Visual indicator for error or warning messages
+    - hover - Popup displaying information on mouse hover
+    - tooltip - Small popup displaying descriptive text
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
+          | Test Step Full Name   |
+          | <Test Step Full Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepObjectRef object vertex fragment will be decomposed as follows
+          | Object Type   | Object Type Description   |
+          | <Object Type> | <Object Type Description> |
+
+    Examples: Fragments
+
+          | Test Step Full Name                            | Object Type | Object Type Description                          |
+          | The xtext plugin input file is empty           | file        | Any sort of file                                 |
+          | The xtext plugin output directory is empty     | directory   | File directory                                   |
+          | The xtext plugin home page is empty            | page        | Web page                                         |
+          | The xtext plugin settings dialog is empty      | dialog      | Window dialog box                                |
+          | The xtext plugin validate response is empty    | response    | Web service response                             |
+          | The xtext plugin list proposals popup is empty | popup       | List of options for quickfix or content proposal |
+          | The xtext plugin validate annotation is empty  | annotation  | Visual indicator for error or warning messages   |
+          | The xtext plugin description hover is empty    | hover       | Popup displaying information on mouse hover      |
+          | The xtext plugin status tooltip is empty       | tooltip     | Small popup displaying descriptive text          |
+
+  Scenario Outline: Object Edge Fragment
+
+    Edge object types are defined in StepObjectRefObjectEdgeTypes enum and represent actions or transitions.
+    - request - Web-service request
+    - goal - Maven plugin goal
+    - action - Eclipse plugin action
+    - job - EOD or ETL batchjob
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
+          | Test Step Full Name   |
+          | <Test Step Full Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepObjectRef object edge fragment will be decomposed as follows
+          | Object Type   | Object Type Description   |
+          | <Object Type> | <Object Type Description> |
+
+    Examples: Fragments
+
+          | Test Step Full Name                                                   | Object Type | Object Type Description |
+          | The graph-viewer application uml-to-cucumber request is executed with | request     | Web-service request     |
+          | The maven plugin asciidoctor-to-uml goal is executed                  | goal        | Maven plugin goal       |
+          | The xtext plugin validate action is performed                         | action      | Eclipse plugin action   |
+          | The nightly batchjob process job is executed with                     | job         | EOD or ETL batchjob     |
+

@@ -1,13 +1,10 @@
 package org.farhan.dsl.sheepdog.impl;
 
 import org.farhan.dsl.grammar.ICell;
-import org.farhan.dsl.grammar.IRow;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
 
 public class CellImpl implements ICell {
 
-	private RowImpl parent;
 	Cell eObject;
 
 	public CellImpl(Cell cell) {
@@ -22,14 +19,6 @@ public class CellImpl implements ICell {
 	@Override
 	public void setName(String value) {
 		eObject.setName(value);
-	}
-
-	@Override
-	public IRow getParent() {
-		if (parent == null) {
-			parent = new RowImpl((Row) eObject.eContainer());
-		}
-		return parent;
 	}
 
 }

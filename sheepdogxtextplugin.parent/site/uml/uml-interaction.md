@@ -20,7 +20,7 @@ See [arch-xtext-logging.md](sheep-dog-main/site/arch/arch-xtext-logging.md) "Whe
 
 ### Entry/Exit Logging Pattern
 
-Methods that delegate to sheep-dog-test business logic use entry/exit debug logging.
+Methods that delegate to sheep-dog-grammar business logic use entry/exit debug logging.
 
 See [impl-log4j.md](sheep-dog-main/site/impl/impl-log4j.md) for entry, exit, and error logging patterns.
 

@@ -3,16 +3,13 @@ package org.farhan.dsl.sheepdog.impl;
 import org.farhan.dsl.grammar.ICell;
 import org.farhan.dsl.grammar.IDescription;
 import org.farhan.dsl.grammar.ILine;
-
 import org.farhan.dsl.grammar.IResourceRepository;
 import org.farhan.dsl.grammar.IRow;
-import org.farhan.dsl.grammar.ISheepDogFactory;
 import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepObject;
 import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITable;
 import org.farhan.dsl.grammar.ITestCase;
-import org.farhan.dsl.grammar.ITestData;
 import org.farhan.dsl.grammar.ITestProject;
 import org.farhan.dsl.grammar.ITestSetup;
 import org.farhan.dsl.grammar.ITestStep;
@@ -28,7 +25,7 @@ import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.Text;
 
-public class SheepDogFactoryImpl implements ISheepDogFactory {
+public class SheepDogFactoryImpl extends org.farhan.dsl.grammar.impl.SheepDogFactoryImpl {
 
     private TestProjectImpl testProject;
     private IResourceRepository sr;
@@ -39,31 +36,42 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
 
     @Override
     public IDescription createDescription() {
-        Description description = SheepDogFactory.eINSTANCE.createDescription();
-        return new DescriptionImpl(description);
+        return new DescriptionImpl(SheepDogFactory.eINSTANCE.createDescription());
     }
 
     @Override
     public IStepDefinition createStepDefinition() {
-        StepDefinition stepDefinition = SheepDogFactory.eINSTANCE.createStepDefinition();
-        return new StepDefinitionImpl(stepDefinition);
+        return new StepDefinitionImpl(SheepDogFactory.eINSTANCE.createStepDefinition());
     }
 
     @Override
     public IStepObject createStepObject() {
-        StepObject eObject = SheepDogFactory.eINSTANCE.createStepObject();
-        return new StepObjectImpl(eObject);
+        return new StepObjectImpl(SheepDogFactory.eINSTANCE.createStepObject());
     }
 
     @Override
     public IStepParameters createStepParameters() {
-        StepParameters parameters = SheepDogFactory.eINSTANCE.createStepParameters();
-        return new StepParametersImpl(parameters);
+        return new StepParametersImpl(SheepDogFactory.eINSTANCE.createStepParameters());
     }
 
     @Override
     public ITestCase createTestCase() {
-        throw new UnsupportedOperationException("createTestCase(String value) is not implemented");
+        return new TestCaseImpl(SheepDogFactory.eINSTANCE.createTestCase());
+    }
+
+    @Override
+    public ITestSetup createTestSetup() {
+        return new TestSetupImpl(SheepDogFactory.eINSTANCE.createTestSetup());
+    }
+
+    @Override
+    public ITestStep createTestStep() {
+        return new TestStepImpl(SheepDogFactory.eINSTANCE.createTestStep());
+    }
+
+    @Override
+    public ITestSuite createTestSuite() {
+        return new TestSuiteImpl(SheepDogFactory.eINSTANCE.createTestSuite());
     }
 
     @Override
@@ -75,52 +83,28 @@ public class SheepDogFactoryImpl implements ISheepDogFactory {
     }
 
     @Override
-    public ITestSetup createTestSetup() {
-        throw new UnsupportedOperationException("createTestSetup(String name) is not implemented");
-    }
-
-    @Override
-    public ITestStep createTestStep() {
-        throw new UnsupportedOperationException("createTestStep(String value) is not implemented");
-    }
-
-    @Override
-    public ITestSuite createTestSuite() {
-        throw new UnsupportedOperationException("createTestSuite(String qualifiedName) is not implemented");
-    }
-
-    @Override
     public ILine createLine() {
         return new LineImpl(SheepDogFactory.eINSTANCE.createLine());
     }
 
     @Override
     public ITable createTable() {
-        Table table = SheepDogFactory.eINSTANCE.createTable();
-        return new TableImpl(table);
+        return new TableImpl(SheepDogFactory.eINSTANCE.createTable());
     }
 
     @Override
     public IRow createRow() {
-        Row row = SheepDogFactory.eINSTANCE.createRow();
-        return new RowImpl(row);
+        return new RowImpl(SheepDogFactory.eINSTANCE.createRow());
     }
 
     @Override
     public ICell createCell() {
-        Cell cell = SheepDogFactory.eINSTANCE.createCell();
-        return new CellImpl(cell);
+        return new CellImpl(SheepDogFactory.eINSTANCE.createCell());
     }
 
     @Override
     public IText createText() {
-        Text text = SheepDogFactory.eINSTANCE.createText();
-        return new TextImpl(text);
-    }
-
-    @Override
-    public ITestData createTestData() {
-        throw new UnsupportedOperationException("createTestData() is not implemented");
+        return new TextImpl(SheepDogFactory.eINSTANCE.createText());
     }
 
 }

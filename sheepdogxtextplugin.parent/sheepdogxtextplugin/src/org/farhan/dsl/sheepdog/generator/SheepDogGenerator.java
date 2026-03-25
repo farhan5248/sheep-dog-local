@@ -27,6 +27,7 @@ import org.farhan.dsl.grammar.SheepDogBuilder;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.impl.RowImpl;
+import org.farhan.dsl.sheepdog.impl.TestProjectImpl;
 import org.farhan.dsl.sheepdog.impl.TestStepImpl;
 import org.farhan.dsl.sheepdog.impl.TextImpl;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
@@ -85,7 +86,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 	private void applyProposal(ArrayList<SheepDogIssueProposal> proposals) throws Exception {
 		for (SheepDogIssueProposal p : proposals) {
 			if (p.getValue() instanceof IStepObject) {
-				testProject.addStepObject((IStepObject) p.getValue());
+				((TestProjectImpl) testProject).addStepObject((IStepObject) p.getValue());
 			}
 		}
 	}

@@ -14,14 +14,14 @@ permissions:
   packages: write
 
 jobs:
-  sheep-dog-test:
+  sheep-dog-grammar:
     uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
-      project: 'sheep-dog-test'
+      project: 'sheep-dog-grammar'
     secrets: inherit
 
   sheep-dog-xtext-plugin:
-    needs: [sheep-dog-test]
+    needs: [sheep-dog-grammar]
     uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
       project: 'sheepdogxtextplugin.parent'

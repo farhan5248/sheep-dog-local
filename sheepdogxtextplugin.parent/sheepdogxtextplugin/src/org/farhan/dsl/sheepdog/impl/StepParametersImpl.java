@@ -1,16 +1,11 @@
 package org.farhan.dsl.sheepdog.impl;
 
 import org.farhan.dsl.grammar.IDescription;
-import org.farhan.dsl.grammar.ILine;
-import org.farhan.dsl.grammar.IStepDefinition;
 import org.farhan.dsl.grammar.IStepParameters;
 import org.farhan.dsl.grammar.ITable;
-import org.farhan.dsl.sheepdog.sheepDog.Description;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
-import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 
 public class StepParametersImpl implements IStepParameters {
-    private StepDefinitionImpl parent;
     StepParameters eObject;
 
     public StepParametersImpl(StepParameters stepParameters) {
@@ -20,14 +15,6 @@ public class StepParametersImpl implements IStepParameters {
     @Override
     public String getName() {
         return eObject.getName();
-    }
-
-    @Override
-    public IStepDefinition getParent() {
-        if (parent == null) {
-            parent = new StepDefinitionImpl((StepDefinition) eObject.eContainer());
-        }
-        return parent;
     }
 
     @Override
@@ -56,17 +43,6 @@ public class StepParametersImpl implements IStepParameters {
     @Override
     public void setDescription(IDescription value) {
         eObject.setDescription(((DescriptionImpl) value).eObject);
-    }
-
-    @Override
-    public boolean addLine(ILine value) {
-        Description list = eObject.getDescription();
-        if (list == null) {
-            list = org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory.eINSTANCE.createDescription();
-            eObject.setDescription(list);
-        }
-        list.getLineList().add(((LineImpl) value).eObject);
-        return true;
     }
 
 }

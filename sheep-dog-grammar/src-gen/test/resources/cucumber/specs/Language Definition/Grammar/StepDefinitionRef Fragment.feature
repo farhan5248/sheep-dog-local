@@ -1,0 +1,56 @@
+@sheep-dog-grammar
+Feature: StepDefinitionRef Fragment
+
+  \@sheep-dog-grammar
+  A StepDefinitionRef identifies the part and state in a test step.
+
+  Scenario Outline: Part Fragment
+
+    The part regex in StepDefinitionRefFragments captures a grammar element name and its type category from a StepDefinitionRef. The StepDefinitionRef grammar rule is WORD+ in SheepDog.xtext. The part types are defined in StepDefinitionRefPartTypes enum.
+    - type - Grammar types (non-terminal rules) defined in the .xtext file
+    - language - The name of the Xtext grammar/language implementation
+    - assignment - Named assignments within grammar rules
+    - fragment - Test step regex fragments defining type enumerations
+    - scope - Issue scope levels from TypeIssueTypes enum
+    - node - AST node elements in the parsed syntax tree
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
+          | Test Step Full Name                                       |
+          | The daily batchjob Output file <Step Definition Ref Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepDefinitionRef part fragment will be decomposed as follows
+          | Part   | Part Description   | Part Type   | Part Type Description   |
+          | <Part> | <Part Description> | <Part Type> | <Part Type Description> |
+
+    Examples: Fragments
+
+          | Step Definition Ref Name            | Part                      | Part Description | Part Type  | Part Type Description                                         |
+          | StepObjectRef type is absent        | StepObjectRef type        | StepObjectRef    | type       | Grammar types (non-terminal rules) defined in the .xtext file |
+          | SheepDog language is absent         | SheepDog language         | SheepDog         | language   | The name of the Xtext grammar/language implementation         |
+          | StepObjectName assignment is absent | StepObjectName assignment | StepObjectName   | assignment | Named assignments within grammar rules                        |
+          | Component fragment is absent        | Component fragment        | Component        | fragment   | Test step regex fragments defining type enumerations          |
+          | Only scope is absent                | Only scope                | Only             | scope      | Issue scope levels from TypeIssueTypes enum                   |
+          | StepObjectRef node is absent        | StepObjectRef node        | StepObjectRef    | node       | AST node elements in the parsed syntax tree                   |
+
+  Scenario Outline: State Fragment
+
+    The state regex in StepDefinitionRefFragments captures the verb and description from a StepDefinitionRef. The verb maps to setter or assertion methods in the generated code. The state types are defined in StepDefinitionRefStateTypes enum.
+    - is - Maps to setter method
+    - isn't - Maps to setter method but used to remove something
+    - will be - Maps to assertion method
+    - won't be - Maps to assertion method for negative testing
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file TestStep type is created as follows
+          | Test Step Full Name                                       |
+          | The daily batchjob Output file <Step Definition Ref Name> |
+     Then The spec-prj project src/test/resources/asciidoc/specs/ProcessGrammarFragment.asciidoc file StepDefinitionRef state fragment will be decomposed as follows
+          | State   | State Description   | State Type   | State Type Description   |
+          | <State> | <State Description> | <State Type> | <State Type Description> |
+
+    Examples: Fragments
+
+          | Step Definition Ref Name    | State                       | State Type | State Description  | State Type Description                             |
+          | is created as follows       | is created as follows       | is         | created as follows | Maps to setter method                              |
+          | isn't created as follows    | isn't created as follows    | isn't      | created as follows | Maps to setter method but used to remove something |
+          | will be created as follows  | will be created as follows  | will be    | created as follows | Maps to assertion method                           |
+          | won't be created as follows | won't be created as follows | won't be   | created as follows | Maps to assertion method for negative testing      |
+

@@ -1,0 +1,44 @@
+@sheep-dog-grammar
+Feature: StepObject Type
+
+  \@sheep-dog-grammar
+  Step Object is a top-level grammar rule in SheepDog.xtext. These tests verify adding a Step Object document to the workspace.
+
+  @list
+  Scenario: Initial State
+
+    \@list
+    Step Object must have
+    - Name
+    and optionally have these
+    - Description
+    - Step Definition List
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created
+     When The xtext plugin add document action is performed to create a StepObject with
+          | Step Object Full Name                        |
+          | stepdefs/daily batchjob/Input2 file.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input2 file.asciidoc file will be created as follows
+          | Step Object Name |
+          | Input2 file      |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be as follows
+          | Node Path          | State |
+          | StepDefinitionList | Empty |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file Description node will be as follows
+          | Node Path   | State  |
+          | Description | Absent |
+
+  Scenario: Duplicate Step Object Full Name
+
+    Step Object full name must be unique within a Test Project. Creating a Step Object with an existing full name returns the existing one.
+
+    Given The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node is created as follows
+          | Node Path          | Step Definition Name  |
+          | StepDefinitionList | First Step Definition |
+     When The xtext plugin add document action is performed to create a StepObject with
+          | Step Object Full Name                       |
+          | stepdefs/daily batchjob/Input file.asciidoc |
+     Then The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file StepDefinitionList node will be created as follows
+          | Node Path            | Step Definition Name  |
+          | StepDefinitionList/1 | First Step Definition |
+
