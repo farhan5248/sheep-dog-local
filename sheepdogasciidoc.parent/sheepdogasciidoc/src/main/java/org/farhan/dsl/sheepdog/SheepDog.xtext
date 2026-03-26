@@ -1,0 +1,118 @@
+// TODO try using the built in terminals instead and override them
+grammar org.farhan.dsl.sheepdog.SheepDog hidden(WS, SL_COMMENT)
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate sheepDog "http://www.farhan.org/dsl/sheepdog"
+
+Model:
+	StepObject | TestSuite;
+
+StepObject:
+	'=' 'Step-Object:' name=Phrase EOL
+	description=Description?
+	stepDefinitionList+=StepDefinition*;
+
+StepDefinition:
+	'==' 'Step-Definition:' name=Phrase EOL
+	description=Description?
+	stepParameterList+=StepParameters*;
+
+StepParameters:
+	'===' 'Step-Parameters:' name=Phrase EOL
+	description=Description?
+	table=Table?;
+
+TestSuite:
+	'=' 'Test-Suite:' name=Phrase EOL
+	description=Description?
+	testStepContainerList+=TestStepContainer*;
+
+TestStepContainer:
+	TestSetup | TestCase;
+
+TestSetup:
+	'==' 'Test-Setup:' name=Phrase EOL
+	description=Description?
+	testStepList+=TestStep*;
+
+TestCase:
+	'==' 'Test-Case:' name=Phrase EOL
+	description=Description?
+	testStepList+=TestStep*
+	testDataList+=TestData*;
+
+TestData:
+	'===' 'Test-Data:' name=Phrase EOL
+	description=Description?
+	table=Table?;
+
+TestStep:
+	Given | When | Then | And;
+
+Given:
+	'===' 'Given:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+	table=Table?
+	text=Text?;
+
+When:
+	'===' 'When:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+	table=Table?
+	text=Text?;
+
+Then:
+	'===' 'Then:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+	table=Table?
+	text=Text?;
+
+And:
+	'===' 'And:' stepObjectName=StepObjectRef stepDefinitionName=StepDefinitionRef EOL
+	table=Table?
+	text=Text?;
+
+Text:
+	content=TEXT_BLOCK EOL;
+
+Table:
+	'|===' EOL
+	rowList+=Row+
+	'|===' EOL;
+
+Row:
+	cellList+=Cell+ EOL;
+
+Cell:
+	'|' name=Phrase;
+
+Description:
+	lineList+=Line+;
+
+Line:
+	content=Phrase EOL;
+
+Phrase:
+	WORD+;
+
+// TODO the regular expression here is a partial duplication of what's in sheep-dog-test
+// It should only be defined here but that is more work than I want to do right now
+StepObjectRef:
+	WORD+ ('file' | 'page' | 'response' | 'dialog' | 'directory' | 'request' | 'goal' | 'job' | 'action' | 'popup' | 'annotation' | 'hover' | 'tooltip');
+
+StepDefinitionRef:
+	WORD+;
+
+terminal WS:
+	(' ' | '\t' | '\r')+;
+
+terminal SL_COMMENT:
+	'#' !('\n')* EOL;
+
+terminal EOL:
+	('\n')+;
+
+terminal TEXT_BLOCK:
+	'----' '\n' (.)+ '\n' '----';
+
+terminal WORD:
+	!(' ' | '\t' | '\r' | '\n')+;
+
+	
