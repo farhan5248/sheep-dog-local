@@ -41,7 +41,7 @@ jobs:
     secrets: inherit
 
   sheep-dog-dev:
-    needs: [sheep-dog-xtext-plugin, sheep-dog-cucumber]
+    needs: [sheep-dog-asciidoc, sheep-dog-cucumber]
     uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
       project: 'sheep-dog-dev'
