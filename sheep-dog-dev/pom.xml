@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
 		<sheepdogcucumber.version>1.4.0-SNAPSHOT</sheepdogcucumber.version>
-		<sheepdogasciidoc.version>1.0.0-SNAPSHOT</sheepdogasciidoc.version>
+		<sheepdogxtextplugin.version>1.45.0-SNAPSHOT</sheepdogxtextplugin.version>
 	</properties>
 
 	<scm>
@@ -326,8 +326,18 @@
 		<!-- Xtext AsciiDoctor -->
 		<dependency>
 			<groupId>org.farhan</groupId>
-			<artifactId>sheepdogasciidoc</artifactId>
-			<version>${sheepdogasciidoc.version}</version>
+			<artifactId>sheepdogxtextplugin</artifactId>
+			<version>${sheepdogxtextplugin.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mortbay.jasper</groupId>
+					<artifactId>apache-jsp</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-slf4j-impl</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- Xtext Cucumber -->
 		<dependency>
