@@ -32,6 +32,7 @@ import org.farhan.dsl.grammar.IStepParameters;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.dsl.grammar.impl.StepDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.grammar.impl.StepDefinitionImpl#getContainer <em>Container</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.StepDefinitionImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.StepDefinitionImpl#getStepParameterList <em>Step Parameter List</em>}</li>
  * </ul>
@@ -59,6 +60,26 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Object CONTAINER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object container = CONTAINER_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
@@ -124,6 +145,31 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ISheepDogPackage.STEP_DEFINITION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getContainer()
+	{
+		return container;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setContainer(Object newContainer)
+	{
+		Object oldContainer = container;
+		container = newContainer;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ISheepDogPackage.STEP_DEFINITION__CONTAINER, oldContainer, container));
 	}
 
 	/**
@@ -221,6 +267,8 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
 		{
 			case ISheepDogPackage.STEP_DEFINITION__NAME:
 				return getName();
+			case ISheepDogPackage.STEP_DEFINITION__CONTAINER:
+				return getContainer();
 			case ISheepDogPackage.STEP_DEFINITION__DESCRIPTION:
 				return getDescription();
 			case ISheepDogPackage.STEP_DEFINITION__STEP_PARAMETER_LIST:
@@ -242,6 +290,9 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
 		{
 			case ISheepDogPackage.STEP_DEFINITION__NAME:
 				setName((String)newValue);
+				return;
+			case ISheepDogPackage.STEP_DEFINITION__CONTAINER:
+				setContainer(newValue);
 				return;
 			case ISheepDogPackage.STEP_DEFINITION__DESCRIPTION:
 				setDescription((IDescription)newValue);
@@ -267,6 +318,9 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
 			case ISheepDogPackage.STEP_DEFINITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ISheepDogPackage.STEP_DEFINITION__CONTAINER:
+				setContainer(CONTAINER_EDEFAULT);
+				return;
 			case ISheepDogPackage.STEP_DEFINITION__DESCRIPTION:
 				setDescription((IDescription)null);
 				return;
@@ -289,6 +343,8 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
 		{
 			case ISheepDogPackage.STEP_DEFINITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ISheepDogPackage.STEP_DEFINITION__CONTAINER:
+				return CONTAINER_EDEFAULT == null ? container != null : !CONTAINER_EDEFAULT.equals(container);
 			case ISheepDogPackage.STEP_DEFINITION__DESCRIPTION:
 				return description != null;
 			case ISheepDogPackage.STEP_DEFINITION__STEP_PARAMETER_LIST:
@@ -310,6 +366,8 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", container: ");
+		result.append(container);
 		result.append(')');
 		return result.toString();
 	}

@@ -131,13 +131,22 @@ public interface ISheepDogPackage extends EPackage
 	int TEST_DOCUMENT__FULL_NAME = 1;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_DOCUMENT__CONTAINER = 2;
+
+	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_DOCUMENT__DESCRIPTION = 2;
+	int TEST_DOCUMENT__DESCRIPTION = 3;
 
 	/**
 	 * The number of structural features of the '<em>Test Document</em>' class.
@@ -146,7 +155,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_DOCUMENT_FEATURE_COUNT = 3;
+	int TEST_DOCUMENT_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.StepObjectImpl <em>Step Object</em>}' class.
@@ -175,6 +184,15 @@ public interface ISheepDogPackage extends EPackage
 	 * @ordered
 	 */
 	int STEP_OBJECT__FULL_NAME = TEST_DOCUMENT__FULL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_OBJECT__CONTAINER = TEST_DOCUMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
@@ -223,13 +241,22 @@ public interface ISheepDogPackage extends EPackage
 	int STEP_DEFINITION__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_DEFINITION__CONTAINER = 1;
+
+	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEP_DEFINITION__DESCRIPTION = 1;
+	int STEP_DEFINITION__DESCRIPTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Step Parameter List</b></em>' containment reference list.
@@ -238,7 +265,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int STEP_DEFINITION__STEP_PARAMETER_LIST = 2;
+	int STEP_DEFINITION__STEP_PARAMETER_LIST = 3;
 
 	/**
 	 * The number of structural features of the '<em>Step Definition</em>' class.
@@ -247,7 +274,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int STEP_DEFINITION_FEATURE_COUNT = 3;
+	int STEP_DEFINITION_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.StepParametersImpl <em>Step Parameters</em>}' class.
@@ -269,13 +296,22 @@ public interface ISheepDogPackage extends EPackage
 	int STEP_PARAMETERS__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_PARAMETERS__CONTAINER = 1;
+
+	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEP_PARAMETERS__DESCRIPTION = 1;
+	int STEP_PARAMETERS__DESCRIPTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -284,7 +320,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int STEP_PARAMETERS__TABLE = 2;
+	int STEP_PARAMETERS__TABLE = 3;
 
 	/**
 	 * The number of structural features of the '<em>Step Parameters</em>' class.
@@ -293,7 +329,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int STEP_PARAMETERS_FEATURE_COUNT = 3;
+	int STEP_PARAMETERS_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.TestSuiteImpl <em>Test Suite</em>}' class.
@@ -322,6 +358,15 @@ public interface ISheepDogPackage extends EPackage
 	 * @ordered
 	 */
 	int TEST_SUITE__FULL_NAME = TEST_DOCUMENT__FULL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_SUITE__CONTAINER = TEST_DOCUMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
@@ -370,13 +415,22 @@ public interface ISheepDogPackage extends EPackage
 	int TEST_STEP_CONTAINER__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_STEP_CONTAINER__CONTAINER = 1;
+
+	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_STEP_CONTAINER__DESCRIPTION = 1;
+	int TEST_STEP_CONTAINER__DESCRIPTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Test Step List</b></em>' containment reference list.
@@ -385,7 +439,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_STEP_CONTAINER__TEST_STEP_LIST = 2;
+	int TEST_STEP_CONTAINER__TEST_STEP_LIST = 3;
 
 	/**
 	 * The number of structural features of the '<em>Test Step Container</em>' class.
@@ -394,7 +448,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_STEP_CONTAINER_FEATURE_COUNT = 3;
+	int TEST_STEP_CONTAINER_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.TestSetupImpl <em>Test Setup</em>}' class.
@@ -414,6 +468,15 @@ public interface ISheepDogPackage extends EPackage
 	 * @ordered
 	 */
 	int TEST_SETUP__NAME = TEST_STEP_CONTAINER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_SETUP__CONTAINER = TEST_STEP_CONTAINER__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
@@ -460,6 +523,15 @@ public interface ISheepDogPackage extends EPackage
 	 * @ordered
 	 */
 	int TEST_CASE__NAME = TEST_STEP_CONTAINER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_CASE__CONTAINER = TEST_STEP_CONTAINER__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
@@ -517,13 +589,22 @@ public interface ISheepDogPackage extends EPackage
 	int TEST_DATA__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_DATA__CONTAINER = 1;
+
+	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_DATA__DESCRIPTION = 1;
+	int TEST_DATA__DESCRIPTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -532,7 +613,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_DATA__TABLE = 2;
+	int TEST_DATA__TABLE = 3;
 
 	/**
 	 * The number of structural features of the '<em>Test Data</em>' class.
@@ -541,7 +622,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_DATA_FEATURE_COUNT = 3;
+	int TEST_DATA_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.TestStepImpl <em>Test Step</em>}' class.
@@ -581,13 +662,22 @@ public interface ISheepDogPackage extends EPackage
 	int TEST_STEP__FULL_NAME = 2;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEST_STEP__CONTAINER = 3;
+
+	/**
 	 * The feature id for the '<em><b>Table</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_STEP__TABLE = 3;
+	int TEST_STEP__TABLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' containment reference.
@@ -596,7 +686,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_STEP__TEXT = 4;
+	int TEST_STEP__TEXT = 5;
 
 	/**
 	 * The number of structural features of the '<em>Test Step</em>' class.
@@ -605,7 +695,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TEST_STEP_FEATURE_COUNT = 5;
+	int TEST_STEP_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.GivenImpl <em>Given</em>}' class.
@@ -643,6 +733,15 @@ public interface ISheepDogPackage extends EPackage
 	 * @ordered
 	 */
 	int GIVEN__FULL_NAME = TEST_STEP__FULL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GIVEN__CONTAINER = TEST_STEP__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -709,6 +808,15 @@ public interface ISheepDogPackage extends EPackage
 	int WHEN__FULL_NAME = TEST_STEP__FULL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHEN__CONTAINER = TEST_STEP__CONTAINER;
+
+	/**
 	 * The feature id for the '<em><b>Table</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -771,6 +879,15 @@ public interface ISheepDogPackage extends EPackage
 	 * @ordered
 	 */
 	int THEN__FULL_NAME = TEST_STEP__FULL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THEN__CONTAINER = TEST_STEP__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -837,6 +954,15 @@ public interface ISheepDogPackage extends EPackage
 	int AND__FULL_NAME = TEST_STEP__FULL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AND__CONTAINER = TEST_STEP__CONTAINER;
+
+	/**
 	 * The feature id for the '<em><b>Table</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -883,13 +1009,22 @@ public interface ISheepDogPackage extends EPackage
 	int TEXT__CONTENT = 0;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT__CONTAINER = 1;
+
+	/**
 	 * The number of structural features of the '<em>Text</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEXT_FEATURE_COUNT = 1;
+	int TEXT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.TableImpl <em>Table</em>}' class.
@@ -902,13 +1037,22 @@ public interface ISheepDogPackage extends EPackage
 	int TABLE = 16;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE__CONTAINER = 0;
+
+	/**
 	 * The feature id for the '<em><b>Row List</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TABLE__ROW_LIST = 0;
+	int TABLE__ROW_LIST = 1;
 
 	/**
 	 * The number of structural features of the '<em>Table</em>' class.
@@ -917,7 +1061,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TABLE_FEATURE_COUNT = 1;
+	int TABLE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.RowImpl <em>Row</em>}' class.
@@ -930,13 +1074,22 @@ public interface ISheepDogPackage extends EPackage
 	int ROW = 17;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROW__CONTAINER = 0;
+
+	/**
 	 * The feature id for the '<em><b>Cell List</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROW__CELL_LIST = 0;
+	int ROW__CELL_LIST = 1;
 
 	/**
 	 * The number of structural features of the '<em>Row</em>' class.
@@ -945,7 +1098,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ROW_FEATURE_COUNT = 1;
+	int ROW_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.CellImpl <em>Cell</em>}' class.
@@ -967,13 +1120,22 @@ public interface ISheepDogPackage extends EPackage
 	int CELL__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CELL__CONTAINER = 1;
+
+	/**
 	 * The number of structural features of the '<em>Cell</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CELL_FEATURE_COUNT = 1;
+	int CELL_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.DescriptionImpl <em>Description</em>}' class.
@@ -986,13 +1148,22 @@ public interface ISheepDogPackage extends EPackage
 	int DESCRIPTION = 19;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION__CONTAINER = 0;
+
+	/**
 	 * The feature id for the '<em><b>Line List</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION__LINE_LIST = 0;
+	int DESCRIPTION__LINE_LIST = 1;
 
 	/**
 	 * The number of structural features of the '<em>Description</em>' class.
@@ -1001,7 +1172,7 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_FEATURE_COUNT = 1;
+	int DESCRIPTION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.farhan.dsl.grammar.impl.LineImpl <em>Line</em>}' class.
@@ -1023,13 +1194,22 @@ public interface ISheepDogPackage extends EPackage
 	int LINE__CONTENT = 0;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINE__CONTAINER = 1;
+
+	/**
 	 * The number of structural features of the '<em>Line</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINE_FEATURE_COUNT = 1;
+	int LINE_FEATURE_COUNT = 2;
 
 
 	/**
@@ -1108,6 +1288,17 @@ public interface ISheepDogPackage extends EPackage
 	EAttribute getTestDocument_FullName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.ITestDocument#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.ITestDocument#getContainer()
+	 * @see #getTestDocument()
+	 * @generated
+	 */
+	EAttribute getTestDocument_Container();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.farhan.dsl.grammar.ITestDocument#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1161,6 +1352,17 @@ public interface ISheepDogPackage extends EPackage
 	EAttribute getStepDefinition_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.IStepDefinition#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.IStepDefinition#getContainer()
+	 * @see #getStepDefinition()
+	 * @generated
+	 */
+	EAttribute getStepDefinition_Container();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.farhan.dsl.grammar.IStepDefinition#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1202,6 +1404,17 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getStepParameters_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.IStepParameters#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.IStepParameters#getContainer()
+	 * @see #getStepParameters()
+	 * @generated
+	 */
+	EAttribute getStepParameters_Container();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.farhan.dsl.grammar.IStepParameters#getDescription <em>Description</em>}'.
@@ -1266,6 +1479,17 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getTestStepContainer_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.ITestStepContainer#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.ITestStepContainer#getContainer()
+	 * @see #getTestStepContainer()
+	 * @generated
+	 */
+	EAttribute getTestStepContainer_Container();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.farhan.dsl.grammar.ITestStepContainer#getDescription <em>Description</em>}'.
@@ -1342,6 +1566,17 @@ public interface ISheepDogPackage extends EPackage
 	EAttribute getTestData_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.ITestData#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.ITestData#getContainer()
+	 * @see #getTestData()
+	 * @generated
+	 */
+	EAttribute getTestData_Container();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.farhan.dsl.grammar.ITestData#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1405,6 +1640,17 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getTestStep_FullName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.ITestStep#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.ITestStep#getContainer()
+	 * @see #getTestStep()
+	 * @generated
+	 */
+	EAttribute getTestStep_Container();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.farhan.dsl.grammar.ITestStep#getTable <em>Table</em>}'.
@@ -1490,6 +1736,17 @@ public interface ISheepDogPackage extends EPackage
 	EAttribute getText_Content();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.IText#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.IText#getContainer()
+	 * @see #getText()
+	 * @generated
+	 */
+	EAttribute getText_Container();
+
+	/**
 	 * Returns the meta object for class '{@link org.farhan.dsl.grammar.ITable <em>Table</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1498,6 +1755,17 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 */
 	EClass getTable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.ITable#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.ITable#getContainer()
+	 * @see #getTable()
+	 * @generated
+	 */
+	EAttribute getTable_Container();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.farhan.dsl.grammar.ITable#getRowList <em>Row List</em>}'.
@@ -1519,6 +1787,17 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 */
 	EClass getRow();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.IRow#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.IRow#getContainer()
+	 * @see #getRow()
+	 * @generated
+	 */
+	EAttribute getRow_Container();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.farhan.dsl.grammar.IRow#getCellList <em>Cell List</em>}'.
@@ -1553,6 +1832,17 @@ public interface ISheepDogPackage extends EPackage
 	EAttribute getCell_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.ICell#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.ICell#getContainer()
+	 * @see #getCell()
+	 * @generated
+	 */
+	EAttribute getCell_Container();
+
+	/**
 	 * Returns the meta object for class '{@link org.farhan.dsl.grammar.IDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1561,6 +1851,17 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 */
 	EClass getDescription();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.IDescription#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.IDescription#getContainer()
+	 * @see #getDescription()
+	 * @generated
+	 */
+	EAttribute getDescription_Container();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.farhan.dsl.grammar.IDescription#getLineList <em>Line List</em>}'.
@@ -1593,6 +1894,17 @@ public interface ISheepDogPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getLine_Content();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.farhan.dsl.grammar.ILine#getContainer <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container</em>'.
+	 * @see org.farhan.dsl.grammar.ILine#getContainer()
+	 * @see #getLine()
+	 * @generated
+	 */
+	EAttribute getLine_Container();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1678,6 +1990,14 @@ public interface ISheepDogPackage extends EPackage
 		EAttribute TEST_DOCUMENT__FULL_NAME = eINSTANCE.getTestDocument_FullName();
 
 		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEST_DOCUMENT__CONTAINER = eINSTANCE.getTestDocument_Container();
+
+		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1722,6 +2042,14 @@ public interface ISheepDogPackage extends EPackage
 		EAttribute STEP_DEFINITION__NAME = eINSTANCE.getStepDefinition_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STEP_DEFINITION__CONTAINER = eINSTANCE.getStepDefinition_Container();
+
+		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1754,6 +2082,14 @@ public interface ISheepDogPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute STEP_PARAMETERS__NAME = eINSTANCE.getStepParameters_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STEP_PARAMETERS__CONTAINER = eINSTANCE.getStepParameters_Container();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
@@ -1806,6 +2142,14 @@ public interface ISheepDogPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute TEST_STEP_CONTAINER__NAME = eINSTANCE.getTestStepContainer_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEST_STEP_CONTAINER__CONTAINER = eINSTANCE.getTestStepContainer_Container();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
@@ -1870,6 +2214,14 @@ public interface ISheepDogPackage extends EPackage
 		EAttribute TEST_DATA__NAME = eINSTANCE.getTestData_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEST_DATA__CONTAINER = eINSTANCE.getTestData_Container();
+
+		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1918,6 +2270,14 @@ public interface ISheepDogPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute TEST_STEP__FULL_NAME = eINSTANCE.getTestStep_FullName();
+
+		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEST_STEP__CONTAINER = eINSTANCE.getTestStep_Container();
 
 		/**
 		 * The meta object literal for the '<em><b>Table</b></em>' containment reference feature.
@@ -1994,6 +2354,14 @@ public interface ISheepDogPackage extends EPackage
 		EAttribute TEXT__CONTENT = eINSTANCE.getText_Content();
 
 		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEXT__CONTAINER = eINSTANCE.getText_Container();
+
+		/**
 		 * The meta object literal for the '{@link org.farhan.dsl.grammar.impl.TableImpl <em>Table</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2002,6 +2370,14 @@ public interface ISheepDogPackage extends EPackage
 		 * @generated
 		 */
 		EClass TABLE = eINSTANCE.getTable();
+
+		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TABLE__CONTAINER = eINSTANCE.getTable_Container();
 
 		/**
 		 * The meta object literal for the '<em><b>Row List</b></em>' containment reference list feature.
@@ -2020,6 +2396,14 @@ public interface ISheepDogPackage extends EPackage
 		 * @generated
 		 */
 		EClass ROW = eINSTANCE.getRow();
+
+		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ROW__CONTAINER = eINSTANCE.getRow_Container();
 
 		/**
 		 * The meta object literal for the '<em><b>Cell List</b></em>' containment reference list feature.
@@ -2048,6 +2432,14 @@ public interface ISheepDogPackage extends EPackage
 		EAttribute CELL__NAME = eINSTANCE.getCell_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CELL__CONTAINER = eINSTANCE.getCell_Container();
+
+		/**
 		 * The meta object literal for the '{@link org.farhan.dsl.grammar.impl.DescriptionImpl <em>Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2056,6 +2448,14 @@ public interface ISheepDogPackage extends EPackage
 		 * @generated
 		 */
 		EClass DESCRIPTION = eINSTANCE.getDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DESCRIPTION__CONTAINER = eINSTANCE.getDescription_Container();
 
 		/**
 		 * The meta object literal for the '<em><b>Line List</b></em>' containment reference list feature.
@@ -2082,6 +2482,14 @@ public interface ISheepDogPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute LINE__CONTENT = eINSTANCE.getLine_Content();
+
+		/**
+		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LINE__CONTAINER = eINSTANCE.getLine_Container();
 
 	}
 

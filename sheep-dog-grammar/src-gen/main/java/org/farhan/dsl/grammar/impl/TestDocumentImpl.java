@@ -25,6 +25,7 @@ import org.farhan.dsl.grammar.ITestDocument;
  * <ul>
  *   <li>{@link org.farhan.dsl.grammar.impl.TestDocumentImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.TestDocumentImpl#getFullName <em>Full Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.grammar.impl.TestDocumentImpl#getContainer <em>Container</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.TestDocumentImpl#getDescription <em>Description</em>}</li>
  * </ul>
  *
@@ -71,6 +72,26 @@ public abstract class TestDocumentImpl extends MinimalEObjectImpl.Container impl
 	 * @ordered
 	 */
 	protected String fullName = FULL_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Object CONTAINER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object container = CONTAINER_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
@@ -159,6 +180,31 @@ public abstract class TestDocumentImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	@Override
+	public Object getContainer()
+	{
+		return container;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setContainer(Object newContainer)
+	{
+		Object oldContainer = container;
+		container = newContainer;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ISheepDogPackage.TEST_DOCUMENT__CONTAINER, oldContainer, container));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public IDescription getDescription()
 	{
 		return description;
@@ -233,6 +279,8 @@ public abstract class TestDocumentImpl extends MinimalEObjectImpl.Container impl
 				return getName();
 			case ISheepDogPackage.TEST_DOCUMENT__FULL_NAME:
 				return getFullName();
+			case ISheepDogPackage.TEST_DOCUMENT__CONTAINER:
+				return getContainer();
 			case ISheepDogPackage.TEST_DOCUMENT__DESCRIPTION:
 				return getDescription();
 		}
@@ -254,6 +302,9 @@ public abstract class TestDocumentImpl extends MinimalEObjectImpl.Container impl
 				return;
 			case ISheepDogPackage.TEST_DOCUMENT__FULL_NAME:
 				setFullName((String)newValue);
+				return;
+			case ISheepDogPackage.TEST_DOCUMENT__CONTAINER:
+				setContainer(newValue);
 				return;
 			case ISheepDogPackage.TEST_DOCUMENT__DESCRIPTION:
 				setDescription((IDescription)newValue);
@@ -278,6 +329,9 @@ public abstract class TestDocumentImpl extends MinimalEObjectImpl.Container impl
 			case ISheepDogPackage.TEST_DOCUMENT__FULL_NAME:
 				setFullName(FULL_NAME_EDEFAULT);
 				return;
+			case ISheepDogPackage.TEST_DOCUMENT__CONTAINER:
+				setContainer(CONTAINER_EDEFAULT);
+				return;
 			case ISheepDogPackage.TEST_DOCUMENT__DESCRIPTION:
 				setDescription((IDescription)null);
 				return;
@@ -299,6 +353,8 @@ public abstract class TestDocumentImpl extends MinimalEObjectImpl.Container impl
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ISheepDogPackage.TEST_DOCUMENT__FULL_NAME:
 				return FULL_NAME_EDEFAULT == null ? fullName != null : !FULL_NAME_EDEFAULT.equals(fullName);
+			case ISheepDogPackage.TEST_DOCUMENT__CONTAINER:
+				return CONTAINER_EDEFAULT == null ? container != null : !CONTAINER_EDEFAULT.equals(container);
 			case ISheepDogPackage.TEST_DOCUMENT__DESCRIPTION:
 				return description != null;
 		}
@@ -320,6 +376,8 @@ public abstract class TestDocumentImpl extends MinimalEObjectImpl.Container impl
 		result.append(name);
 		result.append(", fullName: ");
 		result.append(fullName);
+		result.append(", container: ");
+		result.append(container);
 		result.append(')');
 		return result.toString();
 	}

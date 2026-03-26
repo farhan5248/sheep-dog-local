@@ -15,6 +15,7 @@ package org.farhan.dsl.grammar;
  *   <li>{@link org.farhan.dsl.grammar.ITestStep#getStepObjectName <em>Step Object Name</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.ITestStep#getStepDefinitionName <em>Step Definition Name</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.ITestStep#getFullName <em>Full Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.grammar.ITestStep#getContainer <em>Container</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.ITestStep#getTable <em>Table</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.ITestStep#getText <em>Text</em>}</li>
  * </ul>
@@ -90,6 +91,28 @@ public interface ITestStep
 	 * @generated
 	 */
 	void setFullName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Container</em>' attribute.
+	 * @see #setContainer(Object)
+	 * @see org.farhan.dsl.grammar.ISheepDogPackage#getTestStep_Container()
+	 * @model
+	 * @generated
+	 */
+	Object getContainer();
+
+	/**
+	 * Sets the value of the '{@link org.farhan.dsl.grammar.ITestStep#getContainer <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Container</em>' attribute.
+	 * @see #getContainer()
+	 * @generated
+	 */
+	void setContainer(Object value);
 
 	/**
 	 * Returns the value of the '<em><b>Table</b></em>' containment reference.

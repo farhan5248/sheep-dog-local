@@ -27,6 +27,7 @@ import org.farhan.dsl.grammar.IText;
  *   <li>{@link org.farhan.dsl.grammar.impl.TestStepImpl#getStepObjectName <em>Step Object Name</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.TestStepImpl#getStepDefinitionName <em>Step Definition Name</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.TestStepImpl#getFullName <em>Full Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.grammar.impl.TestStepImpl#getContainer <em>Container</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.TestStepImpl#getTable <em>Table</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.TestStepImpl#getText <em>Text</em>}</li>
  * </ul>
@@ -94,6 +95,26 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements ITestS
 	 * @ordered
 	 */
 	protected String fullName = FULL_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Object CONTAINER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object container = CONTAINER_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTable() <em>Table</em>}' containment reference.
@@ -209,6 +230,31 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements ITestS
 		fullName = newFullName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ISheepDogPackage.TEST_STEP__FULL_NAME, oldFullName, fullName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getContainer()
+	{
+		return container;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setContainer(Object newContainer)
+	{
+		Object oldContainer = container;
+		container = newContainer;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ISheepDogPackage.TEST_STEP__CONTAINER, oldContainer, container));
 	}
 
 	/**
@@ -345,6 +391,8 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements ITestS
 				return getStepDefinitionName();
 			case ISheepDogPackage.TEST_STEP__FULL_NAME:
 				return getFullName();
+			case ISheepDogPackage.TEST_STEP__CONTAINER:
+				return getContainer();
 			case ISheepDogPackage.TEST_STEP__TABLE:
 				return getTable();
 			case ISheepDogPackage.TEST_STEP__TEXT:
@@ -371,6 +419,9 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements ITestS
 				return;
 			case ISheepDogPackage.TEST_STEP__FULL_NAME:
 				setFullName((String)newValue);
+				return;
+			case ISheepDogPackage.TEST_STEP__CONTAINER:
+				setContainer(newValue);
 				return;
 			case ISheepDogPackage.TEST_STEP__TABLE:
 				setTable((ITable)newValue);
@@ -401,6 +452,9 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements ITestS
 			case ISheepDogPackage.TEST_STEP__FULL_NAME:
 				setFullName(FULL_NAME_EDEFAULT);
 				return;
+			case ISheepDogPackage.TEST_STEP__CONTAINER:
+				setContainer(CONTAINER_EDEFAULT);
+				return;
 			case ISheepDogPackage.TEST_STEP__TABLE:
 				setTable((ITable)null);
 				return;
@@ -427,6 +481,8 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements ITestS
 				return STEP_DEFINITION_NAME_EDEFAULT == null ? stepDefinitionName != null : !STEP_DEFINITION_NAME_EDEFAULT.equals(stepDefinitionName);
 			case ISheepDogPackage.TEST_STEP__FULL_NAME:
 				return FULL_NAME_EDEFAULT == null ? fullName != null : !FULL_NAME_EDEFAULT.equals(fullName);
+			case ISheepDogPackage.TEST_STEP__CONTAINER:
+				return CONTAINER_EDEFAULT == null ? container != null : !CONTAINER_EDEFAULT.equals(container);
 			case ISheepDogPackage.TEST_STEP__TABLE:
 				return table != null;
 			case ISheepDogPackage.TEST_STEP__TEXT:
@@ -452,6 +508,8 @@ public class TestStepImpl extends MinimalEObjectImpl.Container implements ITestS
 		result.append(stepDefinitionName);
 		result.append(", fullName: ");
 		result.append(fullName);
+		result.append(", container: ");
+		result.append(container);
 		result.append(')');
 		return result.toString();
 	}

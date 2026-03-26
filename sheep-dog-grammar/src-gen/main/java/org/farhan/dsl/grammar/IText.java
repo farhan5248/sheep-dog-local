@@ -13,6 +13,7 @@ package org.farhan.dsl.grammar;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.dsl.grammar.IText#getContent <em>Content</em>}</li>
+ *   <li>{@link org.farhan.dsl.grammar.IText#getContainer <em>Container</em>}</li>
  * </ul>
  *
  * @see org.farhan.dsl.grammar.ISheepDogPackage#getText()
@@ -42,5 +43,27 @@ public interface IText
 	 * @generated
 	 */
 	void setContent(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Container</em>' attribute.
+	 * @see #setContainer(Object)
+	 * @see org.farhan.dsl.grammar.ISheepDogPackage#getText_Container()
+	 * @model
+	 * @generated
+	 */
+	Object getContainer();
+
+	/**
+	 * Sets the value of the '{@link org.farhan.dsl.grammar.IText#getContainer <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Container</em>' attribute.
+	 * @see #getContainer()
+	 * @generated
+	 */
+	void setContainer(Object value);
 
 } // IText

@@ -11,6 +11,7 @@ import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 public class StepDefinitionImpl implements IStepDefinition {
 
     StepDefinition eObject;
+    private Object container;
 
     public StepDefinitionImpl(StepDefinition value) {
         this.eObject = value;
@@ -47,6 +48,17 @@ public class StepDefinitionImpl implements IStepDefinition {
     @Override
     public void setName(String value) {
         eObject.setName(value);
+    }
+
+    @Override
+    public Object getContainer() {
+        if (container != null) return container;
+        return new StepObjectImpl((org.farhan.dsl.sheepdog.sheepDog.StepObject) eObject.eContainer());
+    }
+
+    @Override
+    public void setContainer(Object value) {
+        this.container = value;
     }
 
 }

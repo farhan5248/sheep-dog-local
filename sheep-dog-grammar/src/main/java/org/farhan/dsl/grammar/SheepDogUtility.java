@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
 
 /**
@@ -97,12 +96,24 @@ public class SheepDogUtility {
             if (type.isInstance(current)) {
                 return (T) current;
             }
-            if (current instanceof EObject) {
-                current = ((EObject) current).eContainer();
-            } else {
-                return null;
-            }
+            current = getContainerOf(current);
         }
+        return null;
+    }
+
+    private static Object getContainerOf(Object node) {
+        if (node instanceof ITestDocument) return ((ITestDocument) node).getContainer();
+        if (node instanceof IStepDefinition) return ((IStepDefinition) node).getContainer();
+        if (node instanceof IStepParameters) return ((IStepParameters) node).getContainer();
+        if (node instanceof ITestStepContainer) return ((ITestStepContainer) node).getContainer();
+        if (node instanceof ITestData) return ((ITestData) node).getContainer();
+        if (node instanceof ITestStep) return ((ITestStep) node).getContainer();
+        if (node instanceof IText) return ((IText) node).getContainer();
+        if (node instanceof ITable) return ((ITable) node).getContainer();
+        if (node instanceof IRow) return ((IRow) node).getContainer();
+        if (node instanceof ICell) return ((ICell) node).getContainer();
+        if (node instanceof IDescription) return ((IDescription) node).getContainer();
+        if (node instanceof ILine) return ((ILine) node).getContainer();
         return null;
     }
 

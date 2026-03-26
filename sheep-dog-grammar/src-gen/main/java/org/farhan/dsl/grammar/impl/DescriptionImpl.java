@@ -4,6 +4,7 @@ package org.farhan.dsl.grammar.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -11,6 +12,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -28,6 +30,7 @@ import org.farhan.dsl.grammar.ISheepDogPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.farhan.dsl.grammar.impl.DescriptionImpl#getContainer <em>Container</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.DescriptionImpl#getLineList <em>Line List</em>}</li>
  * </ul>
  *
@@ -35,6 +38,26 @@ import org.farhan.dsl.grammar.ISheepDogPackage;
  */
 public class DescriptionImpl extends MinimalEObjectImpl.Container implements IDescription
 {
+	/**
+	 * The default value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Object CONTAINER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object container = CONTAINER_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getLineList() <em>Line List</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -64,6 +87,31 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements IDe
 	protected EClass eStaticClass()
 	{
 		return ISheepDogPackage.Literals.DESCRIPTION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getContainer()
+	{
+		return container;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setContainer(Object newContainer)
+	{
+		Object oldContainer = container;
+		container = newContainer;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ISheepDogPackage.DESCRIPTION__CONTAINER, oldContainer, container));
 	}
 
 	/**
@@ -107,6 +155,8 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements IDe
 	{
 		switch (featureID)
 		{
+			case ISheepDogPackage.DESCRIPTION__CONTAINER:
+				return getContainer();
 			case ISheepDogPackage.DESCRIPTION__LINE_LIST:
 				return getLineList();
 		}
@@ -124,6 +174,9 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements IDe
 	{
 		switch (featureID)
 		{
+			case ISheepDogPackage.DESCRIPTION__CONTAINER:
+				setContainer(newValue);
+				return;
 			case ISheepDogPackage.DESCRIPTION__LINE_LIST:
 				getLineList().clear();
 				getLineList().addAll((Collection<? extends ILine>)newValue);
@@ -142,6 +195,9 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements IDe
 	{
 		switch (featureID)
 		{
+			case ISheepDogPackage.DESCRIPTION__CONTAINER:
+				setContainer(CONTAINER_EDEFAULT);
+				return;
 			case ISheepDogPackage.DESCRIPTION__LINE_LIST:
 				getLineList().clear();
 				return;
@@ -159,10 +215,29 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements IDe
 	{
 		switch (featureID)
 		{
+			case ISheepDogPackage.DESCRIPTION__CONTAINER:
+				return CONTAINER_EDEFAULT == null ? container != null : !CONTAINER_EDEFAULT.equals(container);
 			case ISheepDogPackage.DESCRIPTION__LINE_LIST:
 				return lineList != null && !lineList.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (container: ");
+		result.append(container);
+		result.append(')');
+		return result.toString();
 	}
 
 } //DescriptionImpl

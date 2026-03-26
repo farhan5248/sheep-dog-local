@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.dsl.grammar.ITestStepContainer#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.grammar.ITestStepContainer#getContainer <em>Container</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.ITestStepContainer#getDescription <em>Description</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.ITestStepContainer#getTestStepList <em>Test Step List</em>}</li>
  * </ul>
@@ -45,6 +46,28 @@ public interface ITestStepContainer
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Container</em>' attribute.
+	 * @see #setContainer(Object)
+	 * @see org.farhan.dsl.grammar.ISheepDogPackage#getTestStepContainer_Container()
+	 * @model
+	 * @generated
+	 */
+	Object getContainer();
+
+	/**
+	 * Sets the value of the '{@link org.farhan.dsl.grammar.ITestStepContainer#getContainer <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Container</em>' attribute.
+	 * @see #getContainer()
+	 * @generated
+	 */
+	void setContainer(Object value);
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' containment reference.

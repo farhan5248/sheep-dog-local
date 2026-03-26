@@ -13,6 +13,7 @@ package org.farhan.dsl.grammar;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.dsl.grammar.ITestData#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.dsl.grammar.ITestData#getContainer <em>Container</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.ITestData#getDescription <em>Description</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.ITestData#getTable <em>Table</em>}</li>
  * </ul>
@@ -44,6 +45,28 @@ public interface ITestData
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Container</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Container</em>' attribute.
+	 * @see #setContainer(Object)
+	 * @see org.farhan.dsl.grammar.ISheepDogPackage#getTestData_Container()
+	 * @model
+	 * @generated
+	 */
+	Object getContainer();
+
+	/**
+	 * Sets the value of the '{@link org.farhan.dsl.grammar.ITestData#getContainer <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Container</em>' attribute.
+	 * @see #getContainer()
+	 * @generated
+	 */
+	void setContainer(Object value);
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' containment reference.

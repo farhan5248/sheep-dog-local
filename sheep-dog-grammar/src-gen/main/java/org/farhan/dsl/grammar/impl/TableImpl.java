@@ -4,6 +4,7 @@ package org.farhan.dsl.grammar.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -11,6 +12,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -28,6 +30,7 @@ import org.farhan.dsl.grammar.ITable;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.farhan.dsl.grammar.impl.TableImpl#getContainer <em>Container</em>}</li>
  *   <li>{@link org.farhan.dsl.grammar.impl.TableImpl#getRowList <em>Row List</em>}</li>
  * </ul>
  *
@@ -35,6 +38,26 @@ import org.farhan.dsl.grammar.ITable;
  */
 public class TableImpl extends MinimalEObjectImpl.Container implements ITable
 {
+	/**
+	 * The default value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Object CONTAINER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object container = CONTAINER_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getRowList() <em>Row List</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -64,6 +87,31 @@ public class TableImpl extends MinimalEObjectImpl.Container implements ITable
 	protected EClass eStaticClass()
 	{
 		return ISheepDogPackage.Literals.TABLE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getContainer()
+	{
+		return container;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setContainer(Object newContainer)
+	{
+		Object oldContainer = container;
+		container = newContainer;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ISheepDogPackage.TABLE__CONTAINER, oldContainer, container));
 	}
 
 	/**
@@ -107,6 +155,8 @@ public class TableImpl extends MinimalEObjectImpl.Container implements ITable
 	{
 		switch (featureID)
 		{
+			case ISheepDogPackage.TABLE__CONTAINER:
+				return getContainer();
 			case ISheepDogPackage.TABLE__ROW_LIST:
 				return getRowList();
 		}
@@ -124,6 +174,9 @@ public class TableImpl extends MinimalEObjectImpl.Container implements ITable
 	{
 		switch (featureID)
 		{
+			case ISheepDogPackage.TABLE__CONTAINER:
+				setContainer(newValue);
+				return;
 			case ISheepDogPackage.TABLE__ROW_LIST:
 				getRowList().clear();
 				getRowList().addAll((Collection<? extends IRow>)newValue);
@@ -142,6 +195,9 @@ public class TableImpl extends MinimalEObjectImpl.Container implements ITable
 	{
 		switch (featureID)
 		{
+			case ISheepDogPackage.TABLE__CONTAINER:
+				setContainer(CONTAINER_EDEFAULT);
+				return;
 			case ISheepDogPackage.TABLE__ROW_LIST:
 				getRowList().clear();
 				return;
@@ -159,10 +215,29 @@ public class TableImpl extends MinimalEObjectImpl.Container implements ITable
 	{
 		switch (featureID)
 		{
+			case ISheepDogPackage.TABLE__CONTAINER:
+				return CONTAINER_EDEFAULT == null ? container != null : !CONTAINER_EDEFAULT.equals(container);
 			case ISheepDogPackage.TABLE__ROW_LIST:
 				return rowList != null && !rowList.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (container: ");
+		result.append(container);
+		result.append(')');
+		return result.toString();
 	}
 
 } //TableImpl

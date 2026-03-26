@@ -21,6 +21,7 @@ import org.farhan.dsl.grammar.ISheepDogPackage;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.dsl.grammar.impl.LineImpl#getContent <em>Content</em>}</li>
+ *   <li>{@link org.farhan.dsl.grammar.impl.LineImpl#getContainer <em>Container</em>}</li>
  * </ul>
  *
  * @generated
@@ -46,6 +47,26 @@ public class LineImpl extends MinimalEObjectImpl.Container implements ILine
 	 * @ordered
 	 */
 	protected String content = CONTENT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Object CONTAINER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContainer() <em>Container</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object container = CONTAINER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -99,12 +120,39 @@ public class LineImpl extends MinimalEObjectImpl.Container implements ILine
 	 * @generated
 	 */
 	@Override
+	public Object getContainer()
+	{
+		return container;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setContainer(Object newContainer)
+	{
+		Object oldContainer = container;
+		container = newContainer;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ISheepDogPackage.LINE__CONTAINER, oldContainer, container));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
 		switch (featureID)
 		{
 			case ISheepDogPackage.LINE__CONTENT:
 				return getContent();
+			case ISheepDogPackage.LINE__CONTAINER:
+				return getContainer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -121,6 +169,9 @@ public class LineImpl extends MinimalEObjectImpl.Container implements ILine
 		{
 			case ISheepDogPackage.LINE__CONTENT:
 				setContent((String)newValue);
+				return;
+			case ISheepDogPackage.LINE__CONTAINER:
+				setContainer(newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,6 +190,9 @@ public class LineImpl extends MinimalEObjectImpl.Container implements ILine
 			case ISheepDogPackage.LINE__CONTENT:
 				setContent(CONTENT_EDEFAULT);
 				return;
+			case ISheepDogPackage.LINE__CONTAINER:
+				setContainer(CONTAINER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -155,6 +209,8 @@ public class LineImpl extends MinimalEObjectImpl.Container implements ILine
 		{
 			case ISheepDogPackage.LINE__CONTENT:
 				return CONTENT_EDEFAULT == null ? content != null : !CONTENT_EDEFAULT.equals(content);
+			case ISheepDogPackage.LINE__CONTAINER:
+				return CONTAINER_EDEFAULT == null ? container != null : !CONTAINER_EDEFAULT.equals(container);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -172,6 +228,8 @@ public class LineImpl extends MinimalEObjectImpl.Container implements ILine
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (content: ");
 		result.append(content);
+		result.append(", container: ");
+		result.append(container);
 		result.append(')');
 		return result.toString();
 	}

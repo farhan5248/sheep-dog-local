@@ -41,6 +41,7 @@ public class SheepDogBuilder {
         logger.debug("Entering createCell for name: {}", name);
         ICell cell = SheepDogFactory.instance.createCell();
         cell.setName(name);
+        cell.setContainer(parent);
         if (parent != null)
             parent.getCellList().add(cell);
         logger.debug("Exiting createCell with result: {}", cell != null ? cell.getName() : "null");
@@ -59,6 +60,7 @@ public class SheepDogBuilder {
         IDescription description = parent != null ? parent.getDescription() : null;
         if (description == null) {
             description = SheepDogFactory.instance.createDescription();
+            description.setContainer(parent);
             if (parent != null)
                 parent.setDescription(description);
         }
@@ -71,6 +73,7 @@ public class SheepDogBuilder {
         IDescription description = parent != null ? parent.getDescription() : null;
         if (description == null) {
             description = SheepDogFactory.instance.createDescription();
+            description.setContainer(parent);
             if (parent != null)
                 parent.setDescription(description);
         }
@@ -83,6 +86,7 @@ public class SheepDogBuilder {
         IDescription description = parent != null ? parent.getDescription() : null;
         if (description == null) {
             description = SheepDogFactory.instance.createDescription();
+            description.setContainer(parent);
             if (parent != null)
                 parent.setDescription(description);
         }
@@ -95,6 +99,7 @@ public class SheepDogBuilder {
         IDescription description = parent != null ? parent.getDescription() : null;
         if (description == null) {
             description = SheepDogFactory.instance.createDescription();
+            description.setContainer(parent);
             if (parent != null)
                 parent.setDescription(description);
         }
@@ -107,6 +112,7 @@ public class SheepDogBuilder {
         IDescription description = parent != null ? parent.getDescription() : null;
         if (description == null) {
             description = SheepDogFactory.instance.createDescription();
+            description.setContainer(parent);
             if (parent != null)
                 parent.setDescription(description);
         }
@@ -119,6 +125,7 @@ public class SheepDogBuilder {
         IDescription description = parent != null ? parent.getDescription() : null;
         if (description == null) {
             description = SheepDogFactory.instance.createDescription();
+            description.setContainer(parent);
             if (parent != null)
                 parent.setDescription(description);
         }
@@ -134,6 +141,7 @@ public class SheepDogBuilder {
         if (testData == null) {
             testData = SheepDogFactory.instance.createTestData();
             testData.setName(name);
+            testData.setContainer(parent);
             if (parent != null)
                 parent.getTestDataList().add(testData);
         }
@@ -153,6 +161,7 @@ public class SheepDogBuilder {
         logger.debug("Entering createLine for name: {}", name);
         ILine line = SheepDogFactory.instance.createLine();
         line.setContent(name);
+        line.setContainer(parent);
         if (parent != null)
             parent.getLineList().add(line);
         logger.debug("Exiting createLine with result: {}", line != null ? line.getContent() : "null");
@@ -169,6 +178,7 @@ public class SheepDogBuilder {
     public static IRow createRow(ITable parent) {
         logger.debug("Entering createRow for parent: {}", parent != null ? "non-null" : "null");
         IRow row = SheepDogFactory.instance.createRow();
+        row.setContainer(parent);
         if (parent != null)
             parent.getRowList().add(row);
         logger.debug("Exiting createRow with result: {}", row != null ? "non-null" : "null");
@@ -191,6 +201,7 @@ public class SheepDogBuilder {
         if (stepDefinition == null) {
             stepDefinition = SheepDogFactory.instance.createStepDefinition();
             stepDefinition.setName(name);
+            stepDefinition.setContainer(parent);
             if (parent != null)
                 addSorted(parent.getStepDefinitionList(), stepDefinition, IStepDefinition::getName);
         }
@@ -215,6 +226,7 @@ public class SheepDogBuilder {
         if (stepObject == null) {
             stepObject = SheepDogFactory.instance.createStepObject();
             stepObject.setFullName(fullName);
+            stepObject.setContainer(parent);
             String[] nameParts = fullName.split("/");
             stepObject.setName(nameParts[nameParts.length - 1].replaceAll("\\.[^.]+$", ""));
             if (parent != null)
@@ -241,6 +253,7 @@ public class SheepDogBuilder {
         if (stepParameters == null) {
             stepParameters = SheepDogFactory.instance.createStepParameters();
             stepParameters.setName(name);
+            stepParameters.setContainer(parent);
             if (parent != null)
                 addSorted(parent.getStepParameterList(), stepParameters, IStepParameters::getName);
         }
@@ -259,6 +272,7 @@ public class SheepDogBuilder {
     public static ITable createTable(IStepParameters parent) {
         logger.debug("Entering createTable for parent: {}", parent != null ? parent.getName() : "null");
         ITable table = SheepDogFactory.instance.createTable();
+        table.setContainer(parent);
         if (parent != null)
             parent.setTable(table);
         logger.debug("Exiting createTable with result: {}", table != null ? "non-null" : "null");
@@ -268,6 +282,7 @@ public class SheepDogBuilder {
     public static ITable createTable(ITestData parent) {
         logger.debug("Entering createTable for parent: {}", parent != null ? parent.getName() : "null");
         ITable table = SheepDogFactory.instance.createTable();
+        table.setContainer(parent);
         if (parent != null)
             parent.setTable(table);
         logger.debug("Exiting createTable with result: {}", table != null ? "non-null" : "null");
@@ -290,6 +305,7 @@ public class SheepDogBuilder {
             table = parent.getTable();
             if (table == null) {
                 table = SheepDogFactory.instance.createTable();
+                table.setContainer(parent);
                 parent.setTable(table);
             }
         } else {
@@ -313,6 +329,7 @@ public class SheepDogBuilder {
         if (testCase == null) {
             testCase = SheepDogFactory.instance.createTestCase();
             testCase.setName(name);
+            testCase.setContainer(parent);
             if (parent != null)
                 parent.getTestStepContainerList().add(testCase);
         }
@@ -349,6 +366,7 @@ public class SheepDogBuilder {
         if (testSetup == null) {
             testSetup = SheepDogFactory.instance.createTestSetup();
             testSetup.setName(name);
+            testSetup.setContainer(parent);
             if (parent != null) {
                 int insertIndex = 0;
                 for (ITestStepContainer c : parent.getTestStepContainerList()) {
@@ -372,6 +390,7 @@ public class SheepDogBuilder {
         testStep.setStepObjectName(stepObjectName);
         testStep.setStepDefinitionName(stepDefinitionName);
         testStep.setFullName(stepObjectName + (stepDefinitionName.isEmpty() ? "" : " " + stepDefinitionName));
+        testStep.setContainer(parent);
         if (parent != null)
             parent.getTestStepList().add(testStep);
         logger.debug("Exiting createTestStep with result: {}",
@@ -393,6 +412,7 @@ public class SheepDogBuilder {
         if (testSuite == null) {
             testSuite = SheepDogFactory.instance.createTestSuite();
             testSuite.setFullName(fullName);
+            testSuite.setContainer(parent);
             String[] nameParts = fullName.split("/");
             testSuite.setName(nameParts[nameParts.length - 1].replaceAll("\\.[^.]+$", ""));
             if (parent != null)
@@ -416,6 +436,7 @@ public class SheepDogBuilder {
             return null;
         IText text = SheepDogFactory.instance.createText();
         text.setContent(name);
+        text.setContainer(parent);
         if (parent != null)
             parent.setText(text);
         logger.debug("Exiting createText with result: {}", text != null ? text.getContent() : "null");
