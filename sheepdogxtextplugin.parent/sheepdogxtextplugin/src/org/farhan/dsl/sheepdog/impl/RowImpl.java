@@ -39,6 +39,12 @@ public class RowImpl implements IRow {
 	@Override
 	public void setContainer(Object value) {
 		this.container = value;
+		if (value instanceof TableImpl) {
+			TableImpl parent = (TableImpl) value;
+			if (!parent.eObject.getRowList().contains(this.eObject)) {
+				parent.eObject.getRowList().add(this.eObject);
+			}
+		}
 	}
 
 }
