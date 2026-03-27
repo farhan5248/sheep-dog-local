@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import org.farhan.common.Utilities;
 import org.farhan.mbt.asciidoctor.AsciiDoctorStepObject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
-import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
-import org.farhan.dsl.sheepdog.sheepDog.Cell;
-import org.farhan.dsl.sheepdog.sheepDog.TestData;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
-import org.farhan.dsl.sheepdog.sheepDog.TestStep;
-import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
-import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
+import org.farhan.dsl.asciidoc.asciiDoc.TestStepContainer;
+import org.farhan.dsl.asciidoc.asciiDoc.Cell;
+import org.farhan.dsl.asciidoc.asciiDoc.TestData;
+import org.farhan.dsl.asciidoc.asciiDoc.Row;
+import org.farhan.dsl.asciidoc.asciiDoc.TestStep;
+import org.farhan.dsl.asciidoc.asciiDoc.StepDefinition;
+import org.farhan.dsl.asciidoc.asciiDoc.StepParameters;
 import org.junit.jupiter.api.Assertions;
 
 public class TestObjectFileAdocImpl extends TestObjectFileImpl {

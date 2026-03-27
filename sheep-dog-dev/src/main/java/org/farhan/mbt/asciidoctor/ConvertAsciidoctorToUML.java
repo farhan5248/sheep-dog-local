@@ -14,14 +14,14 @@ import org.farhan.mbt.core.UMLTestSuite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.farhan.mbt.core.UMLTestProject;
-import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
-import org.farhan.dsl.sheepdog.sheepDog.TestData;
-import org.farhan.dsl.sheepdog.impl.SheepDogFactoryImpl;
-import org.farhan.dsl.sheepdog.impl.TestStepImpl;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
-import org.farhan.dsl.sheepdog.sheepDog.TestStep;
-import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
-import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
+import org.farhan.dsl.asciidoc.asciiDoc.TestStepContainer;
+import org.farhan.dsl.asciidoc.asciiDoc.TestData;
+import org.farhan.dsl.asciidoc.impl.AsciiDocFactoryImpl;
+import org.farhan.dsl.asciidoc.impl.TestStepImpl;
+import org.farhan.dsl.asciidoc.asciiDoc.Row;
+import org.farhan.dsl.asciidoc.asciiDoc.TestStep;
+import org.farhan.dsl.asciidoc.asciiDoc.StepDefinition;
+import org.farhan.dsl.asciidoc.asciiDoc.StepParameters;
 
 public class ConvertAsciidoctorToUML extends Converter {
 
@@ -169,7 +169,7 @@ public class ConvertAsciidoctorToUML extends Converter {
         project.init();
         model.init();
         pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorTestProject) project);
-        SheepDogFactory.instance = new SheepDogFactoryImpl(this.fa);
+        SheepDogFactory.instance = new AsciiDocFactoryImpl(this.fa);
     }
 
     private boolean isAnyTestCaseSelected() {

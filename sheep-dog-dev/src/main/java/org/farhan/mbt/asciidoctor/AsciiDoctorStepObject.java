@@ -15,14 +15,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.SaveOptions;
-import org.farhan.dsl.sheepdog.sheepDog.Cell;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
-import org.farhan.dsl.sheepdog.sheepDog.Description;
-import org.farhan.dsl.sheepdog.sheepDog.Line;
-import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
-import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
-import org.farhan.dsl.sheepdog.sheepDog.StepObject;
-import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
+import org.farhan.dsl.asciidoc.asciiDoc.Cell;
+import org.farhan.dsl.asciidoc.asciiDoc.Row;
+import org.farhan.dsl.asciidoc.asciiDoc.Description;
+import org.farhan.dsl.asciidoc.asciiDoc.Line;
+import org.farhan.dsl.asciidoc.asciiDoc.AsciiDocFactory;
+import org.farhan.dsl.asciidoc.asciiDoc.StepDefinition;
+import org.farhan.dsl.asciidoc.asciiDoc.StepObject;
+import org.farhan.dsl.asciidoc.asciiDoc.StepParameters;
 import org.farhan.mbt.core.IConvertibleObject;
 
 public class AsciiDoctorStepObject implements IConvertibleObject {
@@ -34,7 +34,7 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 		this.thePath = thePath;
 		String[] pathParts = thePath.split("/");
 		String name = pathParts[pathParts.length - 1].replace(".asciidoc", "");
-		theStepObject = SheepDogFactory.eINSTANCE.createStepObject();
+		theStepObject = AsciiDocFactory.eINSTANCE.createStepObject();
 		theStepObject.setName(name);
 	}
 
@@ -48,23 +48,23 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 
 	public StepDefinition addStepDefinition(String stepDefinitionName) {
 		deleteStepDefinition(stepDefinitionName);
-		StepDefinition stepDefinition = SheepDogFactory.eINSTANCE.createStepDefinition();
+		StepDefinition stepDefinition = AsciiDocFactory.eINSTANCE.createStepDefinition();
 		stepDefinition.setName(stepDefinitionName);
 		theStepObject.getStepDefinitionList().add(stepDefinition);
 		return stepDefinition;
 	}
 
 	public StepParameters addStepParameters(StepDefinition stepDefinition, String stepParametersName) {
-		StepParameters stepParameters = SheepDogFactory.eINSTANCE.createStepParameters();
+		StepParameters stepParameters = AsciiDocFactory.eINSTANCE.createStepParameters();
 		stepParameters.setName(stepParametersName);
 		stepDefinition.getStepParameterList().add(stepParameters);
 		return stepParameters;
 	}
 
 	public void createStepParametersRow(StepParameters stepParameters, ArrayList<String> stepParametersRow) {
-		Row row = SheepDogFactory.eINSTANCE.createRow();
+		Row row = AsciiDocFactory.eINSTANCE.createRow();
 		for (String srcCell : stepParametersRow) {
-			Cell cell = SheepDogFactory.eINSTANCE.createCell();
+			Cell cell = AsciiDocFactory.eINSTANCE.createCell();
 			cell.setName(srcCell);
 			row.getCellList().add(cell);
 		}
@@ -72,10 +72,10 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 	}
 
 	public void addStepParametersTable(StepParameters stepParameters, ArrayList<String> headers) {
-		stepParameters.setTable(SheepDogFactory.eINSTANCE.createTable());
-		Row row = SheepDogFactory.eINSTANCE.createRow();
+		stepParameters.setTable(AsciiDocFactory.eINSTANCE.createTable());
+		Row row = AsciiDocFactory.eINSTANCE.createRow();
 		for (String srcCell : headers) {
-			Cell cell = SheepDogFactory.eINSTANCE.createCell();
+			Cell cell = AsciiDocFactory.eINSTANCE.createCell();
 			cell.setName(srcCell);
 			row.getCellList().add(cell);
 		}
@@ -178,10 +178,10 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 
 	public void setStepDefinitionDescription(StepDefinition stepDefinition, String stepDefinitionDescription) {
 		if (!stepDefinitionDescription.isEmpty()) {
-			Description desc = SheepDogFactory.eINSTANCE.createDescription();
+			Description desc = AsciiDocFactory.eINSTANCE.createDescription();
 			stepDefinition.setDescription(desc);
 			for (String line : stepDefinitionDescription.split("\n")) {
-				Line l = SheepDogFactory.eINSTANCE.createLine();
+				Line l = AsciiDocFactory.eINSTANCE.createLine();
 				l.setContent(line);
 				desc.getLineList().add(l);
 			}
@@ -190,10 +190,10 @@ public class AsciiDoctorStepObject implements IConvertibleObject {
 
 	public void setStepObjectDescription(String stepObjectDescription) {
 		if (!stepObjectDescription.isEmpty()) {
-			Description desc = SheepDogFactory.eINSTANCE.createDescription();
+			Description desc = AsciiDocFactory.eINSTANCE.createDescription();
 			theStepObject.setDescription(desc);
 			for (String line : stepObjectDescription.split("\n")) {
-				Line l = SheepDogFactory.eINSTANCE.createLine();
+				Line l = AsciiDocFactory.eINSTANCE.createLine();
 				l.setContent(line);
 				desc.getLineList().add(l);
 			}

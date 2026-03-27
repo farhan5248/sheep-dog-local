@@ -13,12 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.mbt.core.UMLTestSetup;
 import org.farhan.mbt.core.UMLTestStep;
-import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
-import org.farhan.dsl.sheepdog.sheepDog.TestData;
-import org.farhan.dsl.sheepdog.sheepDog.TestCase;
-import org.farhan.dsl.sheepdog.sheepDog.TestStep;
-import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
-import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
+import org.farhan.dsl.asciidoc.asciiDoc.TestSetup;
+import org.farhan.dsl.asciidoc.asciiDoc.TestData;
+import org.farhan.dsl.asciidoc.asciiDoc.TestCase;
+import org.farhan.dsl.asciidoc.asciiDoc.TestStep;
+import org.farhan.dsl.asciidoc.asciiDoc.StepDefinition;
+import org.farhan.dsl.asciidoc.asciiDoc.StepParameters;
 
 public class ConvertUMLToAsciidoctor extends Converter {
 

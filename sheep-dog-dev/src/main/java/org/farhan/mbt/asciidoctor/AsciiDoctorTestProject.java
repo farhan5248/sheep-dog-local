@@ -3,7 +3,7 @@ package org.farhan.mbt.asciidoctor;
 
 import java.util.ArrayList;
 
-import org.farhan.dsl.sheepdog.SheepDogStandaloneSetup;
+import org.farhan.dsl.asciidoc.AsciiDocStandaloneSetup;
 import org.farhan.mbt.core.IConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.dsl.grammar.IResourceRepository;
@@ -67,7 +67,7 @@ public class AsciiDoctorTestProject extends ConvertibleProject {
 
 	@Override
 	public void init() throws Exception {
-		SheepDogStandaloneSetup.doSetup();
+		AsciiDocStandaloneSetup.doSetup();
 	}
 
 	@Override

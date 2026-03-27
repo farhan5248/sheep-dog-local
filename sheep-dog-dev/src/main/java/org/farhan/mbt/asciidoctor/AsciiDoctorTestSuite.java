@@ -17,24 +17,24 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
-import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
-import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
+import org.farhan.dsl.asciidoc.asciiDoc.TestStepContainer;
+import org.farhan.dsl.asciidoc.asciiDoc.TestSetup;
 import org.farhan.dsl.grammar.SheepDogUtility;
 import org.farhan.dsl.grammar.StepObjectRefFragments;
 import org.farhan.dsl.grammar.PhraseFragments;
-import org.farhan.dsl.sheepdog.impl.TestStepImpl;
-import org.farhan.dsl.sheepdog.sheepDog.Cell;
-import org.farhan.dsl.sheepdog.sheepDog.TestData;
-import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
+import org.farhan.dsl.asciidoc.impl.TestStepImpl;
+import org.farhan.dsl.asciidoc.asciiDoc.Cell;
+import org.farhan.dsl.asciidoc.asciiDoc.TestData;
+import org.farhan.dsl.asciidoc.asciiDoc.TestSuite;
 import org.farhan.mbt.core.IConvertibleObject;
-import org.farhan.dsl.sheepdog.sheepDog.Row;
-import org.farhan.dsl.sheepdog.sheepDog.TestCase;
-import org.farhan.dsl.sheepdog.sheepDog.Description;
-import org.farhan.dsl.sheepdog.sheepDog.Line;
-import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
-import org.farhan.dsl.sheepdog.sheepDog.TestStep;
-import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
-import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
+import org.farhan.dsl.asciidoc.asciiDoc.Row;
+import org.farhan.dsl.asciidoc.asciiDoc.TestCase;
+import org.farhan.dsl.asciidoc.asciiDoc.Description;
+import org.farhan.dsl.asciidoc.asciiDoc.Line;
+import org.farhan.dsl.asciidoc.asciiDoc.AsciiDocFactory;
+import org.farhan.dsl.asciidoc.asciiDoc.TestStep;
+import org.farhan.dsl.asciidoc.asciiDoc.StepDefinition;
+import org.farhan.dsl.asciidoc.asciiDoc.StepParameters;
 
 public class AsciiDoctorTestSuite implements IConvertibleObject {
 
@@ -45,29 +45,29 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
         this.thePath = thePath;
         String[] pathParts = thePath.split("/");
         String name = pathParts[pathParts.length - 1].replace(".asciidoc", "");
-        theTestSuite = SheepDogFactory.eINSTANCE.createTestSuite();
+        theTestSuite = AsciiDocFactory.eINSTANCE.createTestSuite();
         theTestSuite.setName(name);
     }
 
     public TestSetup addBackground(String backgroundName) {
         deleteAbstractScenario(backgroundName);
-        TestSetup background = SheepDogFactory.eINSTANCE.createTestSetup();
+        TestSetup background = AsciiDocFactory.eINSTANCE.createTestSetup();
         background.setName(backgroundName);
         theTestSuite.getTestStepContainerList().add(background);
         return background;
     }
 
     public TestData addExamples(TestCase abstractScenario, String examplesName) {
-        TestData examples = SheepDogFactory.eINSTANCE.createTestData();
+        TestData examples = AsciiDocFactory.eINSTANCE.createTestData();
         examples.setName(examplesName);
         abstractScenario.getTestDataList().add(examples);
         return examples;
     }
 
     public void addExamplesRow(TestData examples, ArrayList<String> examplesRow) {
-        Row row = SheepDogFactory.eINSTANCE.createRow();
+        Row row = AsciiDocFactory.eINSTANCE.createRow();
         for (String srcCell : examplesRow) {
-            Cell cell = SheepDogFactory.eINSTANCE.createCell();
+            Cell cell = AsciiDocFactory.eINSTANCE.createCell();
             cell.setName(srcCell);
             row.getCellList().add(cell);
         }
@@ -76,7 +76,7 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public TestCase addScenario(String scenarioName) {
         deleteAbstractScenario(scenarioName);
-        TestCase scenario = SheepDogFactory.eINSTANCE.createTestCase();
+        TestCase scenario = AsciiDocFactory.eINSTANCE.createTestCase();
         scenario.setName(scenarioName);
         theTestSuite.getTestStepContainerList().add(scenario);
         return scenario;
@@ -88,16 +88,16 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
         TestStep step = null;
         switch (keyword) {
         case "Given:":
-            step = SheepDogFactory.eINSTANCE.createGiven();
+            step = AsciiDocFactory.eINSTANCE.createGiven();
             break;
         case "When:":
-            step = SheepDogFactory.eINSTANCE.createWhen();
+            step = AsciiDocFactory.eINSTANCE.createWhen();
             break;
         case "Then:":
-            step = SheepDogFactory.eINSTANCE.createThen();
+            step = AsciiDocFactory.eINSTANCE.createThen();
             break;
         case "And:":
-            step = SheepDogFactory.eINSTANCE.createAnd();
+            step = AsciiDocFactory.eINSTANCE.createAnd();
             break;
         }
         String stepName = name.substring(keyword.length() + 1);
@@ -122,11 +122,11 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     }
 
     public void createStepTable(TestStep step, ArrayList<ArrayList<String>> stepTableRowList) {
-        step.setTable(SheepDogFactory.eINSTANCE.createTable());
+        step.setTable(AsciiDocFactory.eINSTANCE.createTable());
         for (ArrayList<String> srcRow : stepTableRowList) {
-            Row row = SheepDogFactory.eINSTANCE.createRow();
+            Row row = AsciiDocFactory.eINSTANCE.createRow();
             for (String srcCell : srcRow) {
-                Cell cell = SheepDogFactory.eINSTANCE.createCell();
+                Cell cell = AsciiDocFactory.eINSTANCE.createCell();
                 srcCell = srcCell.replace("<", "{").replace(">", "}");
                 cell.setName(srcCell);
                 row.getCellList().add(cell);
@@ -386,10 +386,10 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     private void setDescription(TestStepContainer abstractScenario, String scenarioDescription) {
         if (!scenarioDescription.isEmpty()) {
-            Description desc = SheepDogFactory.eINSTANCE.createDescription();
+            Description desc = AsciiDocFactory.eINSTANCE.createDescription();
             abstractScenario.setDescription(desc);
             for (String line : scenarioDescription.split("\n")) {
-                Line l = SheepDogFactory.eINSTANCE.createLine();
+                Line l = AsciiDocFactory.eINSTANCE.createLine();
                 l.setContent(line);
                 desc.getLineList().add(l);
             }
@@ -397,20 +397,20 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
     }
 
     public void setDocString(TestStep step, String docString) {
-        step.setText(SheepDogFactory.eINSTANCE.createText());
+        step.setText(AsciiDocFactory.eINSTANCE.createText());
         step.getText().setContent("----\n" + docString.replace("----", "\\----") + "\n----");
     }
 
     public void setExamplesTable(TestData examples) {
-        examples.setTable(SheepDogFactory.eINSTANCE.createTable());
+        examples.setTable(AsciiDocFactory.eINSTANCE.createTable());
     }
 
     public void setFeatureDescription(String featureDescription) {
         if (!featureDescription.isEmpty()) {
-            Description desc = SheepDogFactory.eINSTANCE.createDescription();
+            Description desc = AsciiDocFactory.eINSTANCE.createDescription();
             theTestSuite.setDescription(desc);
             for (String line : featureDescription.split("\n")) {
-                Line l = SheepDogFactory.eINSTANCE.createLine();
+                Line l = AsciiDocFactory.eINSTANCE.createLine();
                 l.setContent(line);
                 desc.getLineList().add(l);
             }
@@ -431,10 +431,10 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public void setStepDefinitionDescription(StepDefinition stepDefinition, String stepDefinitionDescription) {
         if (!stepDefinitionDescription.isEmpty()) {
-            Description desc = SheepDogFactory.eINSTANCE.createDescription();
+            Description desc = AsciiDocFactory.eINSTANCE.createDescription();
             stepDefinition.setDescription(desc);
             for (String line : stepDefinitionDescription.split("\n")) {
-                Line l = SheepDogFactory.eINSTANCE.createLine();
+                Line l = AsciiDocFactory.eINSTANCE.createLine();
                 // TODO test what happens if there's multiple \n, don't assume there's just one.
                 // Then create the EOL like Given is created
                 l.setContent(line);
@@ -475,10 +475,10 @@ public class AsciiDoctorTestSuite implements IConvertibleObject {
 
     public void setExamplesDescription(TestData examples, String description) {
         if (!description.isEmpty()) {
-            Description nd = SheepDogFactory.eINSTANCE.createDescription();
+            Description nd = AsciiDocFactory.eINSTANCE.createDescription();
             examples.setDescription(nd);
             for (String line : description.split("\n")) {
-                Line l = SheepDogFactory.eINSTANCE.createLine();
+                Line l = AsciiDocFactory.eINSTANCE.createLine();
                 l.setContent(line);
                 nd.getLineList().add(l);
             }

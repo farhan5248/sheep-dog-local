@@ -20,11 +20,11 @@ jobs:
       project: 'sheep-dog-grammar'
     secrets: inherit
 
-  sheep-dog-xtext-plugin:
+  sheep-dog-asciidoc:
     needs: [sheep-dog-grammar]
     uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
-      project: 'sheepdogxtextplugin.parent'
+      project: 'sheepdogasciidoc.parent'
     secrets: inherit
 
   sheep-dog-cucumber:
@@ -34,21 +34,14 @@ jobs:
     secrets: inherit
 
   sheep-dog-dev:
-    needs: [sheep-dog-xtext-plugin, sheep-dog-cucumber]
+    needs: [sheep-dog-asciidoc, sheep-dog-cucumber]
     uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
     with:
       project: 'sheep-dog-dev'
     secrets: inherit
 
-  sheep-dog-dev-maven-plugin:
-    needs: [sheep-dog-dev]
-    uses: farhan5248/sheep-dog-ops/.github/workflows/maven-snapshot.yml@main
-    with:
-      project: 'sheep-dog-dev-maven-plugin'
-    secrets: inherit
-
   merge-into-main:
-    needs: [sheep-dog-dev-maven-plugin]
+    needs: [sheep-dog-dev]
     uses: farhan5248/sheep-dog-ops/.github/workflows/merge.yml@main
     with:
       source: 'develop'
