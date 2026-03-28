@@ -14,6 +14,7 @@ import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CreateFile;
 import org.eclipse.lsp4j.CreateFileOptions;
 import org.eclipse.lsp4j.Diagnostic;
+import org.eclipse.lsp4j.DiagnosticSeverity;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextDocumentEdit;
@@ -21,14 +22,19 @@ import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.codeActions.QuickFixCodeActionService;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.resource.XtextResource;
 import org.farhan.dsl.asciidoc.asciiDoc.Cell;
 import org.farhan.dsl.asciidoc.asciiDoc.TestStep;
 import org.farhan.dsl.asciidoc.asciiDoc.TestStepContainer;
@@ -59,8 +65,24 @@ public class AsciiDocQuickFixCodeActionService extends QuickFixCodeActionService
 	public List<Either<Command, CodeAction>> getCodeActions(Options options) {
 		logger.debug("Entering getCodeActions with options {}", options.getURI());
 
+		List<Diagnostic> diagnostics = options.getCodeActionParams().getContext().getDiagnostics();
+		logger.debug("Diagnostics count from client: {}", diagnostics.size());
+
+		// If client sent no diagnostics (e.g. LSP4E), compute them from the resource
+		if (diagnostics.isEmpty()) {
+			Range requestedRange = options.getCodeActionParams().getRange();
+			logger.debug("Client sent no diagnostics, computing from resource for range {}", requestedRange);
+			diagnostics = options.getLanguageServerAccess()
+					.doSyncRead(options.getURI(), (ILanguageServerAccess.Context context) -> {
+						options.setDocument(context.getDocument());
+						options.setResource(context.getResource());
+						return computeDiagnosticsFromResource(context, requestedRange);
+					});
+			logger.debug("Computed {} diagnostics from resource", diagnostics.size());
+		}
+
 		List<Either<Command, CodeAction>> codeActions = new ArrayList<>();
-		for (Diagnostic diagnostic : options.getCodeActionParams().getContext().getDiagnostics()) {
+		for (Diagnostic diagnostic : diagnostics) {
 			logger.debug("Examining diagnostic {} ", diagnostic.getCode().get().toString());
 			if (canHandleDiagnostic(diagnostic)) {
 				logger.debug("Handling diagnostic {} ", diagnostic.getCode().get().toString());
@@ -74,6 +96,54 @@ public class AsciiDocQuickFixCodeActionService extends QuickFixCodeActionService
 		}
 		logger.debug("Exiting getCodeActions");
 		return codeActions;
+	}
+
+	private List<Diagnostic> computeDiagnosticsFromResource(ILanguageServerAccess.Context context, Range requestedRange) {
+		List<Diagnostic> diagnostics = new ArrayList<>();
+		if (!(context.getResource() instanceof XtextResource)) {
+			return diagnostics;
+		}
+		XtextResource resource = (XtextResource) context.getResource();
+		IResourceValidator validator = resource.getResourceServiceProvider().getResourceValidator();
+		List<Issue> issues = validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl);
+		Document document = context.getDocument();
+
+		for (Issue issue : issues) {
+			if (issue.getCode() == null) continue;
+
+			Position start = document.getPosition(issue.getOffset());
+			Position end = document.getPosition(issue.getOffset() + issue.getLength());
+			Range issueRange = new Range(start, end);
+
+			// Only include diagnostics that overlap with the requested range
+			if (rangesOverlap(requestedRange, issueRange)) {
+				Diagnostic diagnostic = new Diagnostic();
+				diagnostic.setRange(issueRange);
+				diagnostic.setMessage(issue.getMessage());
+				diagnostic.setCode(issue.getCode());
+				diagnostic.setSeverity(issue.getSeverity() == Severity.ERROR
+						? DiagnosticSeverity.Error : DiagnosticSeverity.Warning);
+				diagnostics.add(diagnostic);
+				logger.debug("  Computed diagnostic: code={}, range={}", issue.getCode(), issueRange);
+			}
+		}
+		return diagnostics;
+	}
+
+	private boolean rangesOverlap(Range a, Range b) {
+		// a ends before b starts
+		if (a.getEnd().getLine() < b.getStart().getLine()
+				|| (a.getEnd().getLine() == b.getStart().getLine()
+						&& a.getEnd().getCharacter() < b.getStart().getCharacter())) {
+			return false;
+		}
+		// b ends before a starts
+		if (b.getEnd().getLine() < a.getStart().getLine()
+				|| (b.getEnd().getLine() == a.getStart().getLine()
+						&& b.getEnd().getCharacter() < a.getStart().getCharacter())) {
+			return false;
+		}
+		return true;
 	}
 
 	private boolean canHandleDiagnostic(Diagnostic diagnostic) {
@@ -184,8 +254,10 @@ public class AsciiDocQuickFixCodeActionService extends QuickFixCodeActionService
 		URI uri = URI.createFileURI(testProject.getName() + "/" + testProject.baseDir
 				+ "/" + stepObject.getFullName());
 		createFile.setUri(uri.toString());
-		createFile.setOptions(new CreateFileOptions());
-		createFile.getOptions().setOverwrite(true);
+		CreateFileOptions options = new CreateFileOptions();
+		options.setOverwrite(true);
+		options.setIgnoreIfExists(false);
+		createFile.setOptions(options);
 		return createFile;
 	}
 
@@ -209,7 +281,9 @@ public class AsciiDocQuickFixCodeActionService extends QuickFixCodeActionService
 		}
 		TextDocumentEdit textDocEdit = new TextDocumentEdit();
 		textDocEdit.setTextDocument(textDocId);
-		textDocEdit.setEdits(List.of(textEdit));
+		@SuppressWarnings("unchecked")
+		List edits = List.of(Either.forLeft(textEdit));
+		textDocEdit.setEdits(edits);
 		return textDocEdit;
 	}
 

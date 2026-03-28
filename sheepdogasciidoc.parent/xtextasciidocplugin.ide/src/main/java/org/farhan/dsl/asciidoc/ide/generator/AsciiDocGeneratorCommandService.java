@@ -1,5 +1,6 @@
 package org.farhan.dsl.asciidoc.ide.generator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -36,35 +37,13 @@ public class AsciiDocGeneratorCommandService implements IExecutableCommandServic
 
 		try {
 			if ("asciidoc.generate2".equals(commandName)) {
-				// TODO perhaps get all the files in the specs directory and generate for each?
 				JsonPrimitive uriArg = (JsonPrimitive) Iterables.getFirst(params.getArguments(), null);
 				final String uri = (uriArg != null) ? uriArg.getAsString() : null;
 
 				logger.debug("Command {} parameters: {uri: {}}", commandName, uri);
 
 				if (uri != null && !uri.isEmpty()) {
-					try {
-						Object result = access.doRead(uri, (ILanguageServerAccess.Context context) -> {
-							Resource resource = context.getResource();
-							if (resource != null) {
-								logger.debug("Command {} executing generator for resource: {}", commandName,
-										resource.getURI());
-								AsciiDocGenerator.generateFromResource(resource);
-								return "Code generation completed successfully";
-							}
-							logger.warn("Command {} failed: Resource not found for uri: {}", commandName, uri);
-							return "Resource not found";
-						}).get();
-
-						long duration = System.currentTimeMillis() - startTime;
-						logger.info("Command {} completed successfully in {}ms: {}", commandName, duration, result);
-						return result;
-					} catch (InterruptedException | ExecutionException e) {
-						long duration = System.currentTimeMillis() - startTime;
-						String errorMsg = "Code generation failed: " + e.getMessage();
-						logger.error("Command {} failed after {}ms: {}", commandName, duration, errorMsg, e);
-						return errorMsg;
-					}
+					return generateForAllIndexedResources(access, commandName, startTime);
 				} else {
 					String errorMsg = "Document URI missing";
 					logger.error("Command {} failed: {}", commandName, errorMsg);
@@ -77,6 +56,60 @@ public class AsciiDocGeneratorCommandService implements IExecutableCommandServic
 			return errorMsg;
 		} finally {
 			logger.debug("Exiting execute for command: {}", commandName);
+		}
+	}
+
+	private Object generateForAllIndexedResources(ILanguageServerAccess access, String commandName, long startTime) {
+		try {
+			// Get all indexed .asciidoc URIs from the Xtext index
+			List<String> asciidocUris = access.doReadIndex((ILanguageServerAccess.IndexContext indexContext) -> {
+				List<String> uris = new ArrayList<>();
+				for (org.eclipse.xtext.resource.IResourceDescription desc : indexContext.getIndex().getAllResourceDescriptions()) {
+					String uri = desc.getURI().toString();
+					if (uri.endsWith(".asciidoc")) {
+						uris.add(uri);
+					}
+				}
+				return uris;
+			}).get();
+
+			logger.info("Command {} found {} .asciidoc resources in index", commandName, asciidocUris.size());
+
+			int successCount = 0;
+			int errorCount = 0;
+
+			for (String resourceUri : asciidocUris) {
+				try {
+					Object result = access.doRead(resourceUri, (ILanguageServerAccess.Context context) -> {
+						Resource resource = context.getResource();
+						if (resource != null) {
+							logger.debug("Command {} executing generator for resource: {}", commandName,
+									resource.getURI());
+							AsciiDocGenerator.generateFromResource(resource);
+							return "success";
+						}
+						return "not found";
+					}).get();
+
+					if ("success".equals(result)) {
+						successCount++;
+					}
+				} catch (InterruptedException | ExecutionException e) {
+					errorCount++;
+					logger.error("Command {} failed for {}: {}", commandName, resourceUri, e.getMessage(), e);
+				}
+			}
+
+			long duration = System.currentTimeMillis() - startTime;
+			String result = String.format("Code generation completed in %dms: %d succeeded, %d failed",
+					duration, successCount, errorCount);
+			logger.info("Command {} result: {}", commandName, result);
+			return result;
+		} catch (InterruptedException | ExecutionException e) {
+			long duration = System.currentTimeMillis() - startTime;
+			String errorMsg = "Failed to read index: " + e.getMessage();
+			logger.error("Command {} failed after {}ms: {}", commandName, duration, errorMsg, e);
+			return errorMsg;
 		}
 	}
 }
