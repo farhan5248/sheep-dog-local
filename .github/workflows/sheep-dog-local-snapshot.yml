@@ -44,6 +44,6 @@ jobs:
     needs: [sheep-dog-dev]
     uses: farhan5248/sheep-dog-ops/.github/workflows/merge.yml@main
     with:
-      source: 'develop'
-      target: 'main'
+      source: 'main'
+      target: 'develop'
     secrets: inherit
