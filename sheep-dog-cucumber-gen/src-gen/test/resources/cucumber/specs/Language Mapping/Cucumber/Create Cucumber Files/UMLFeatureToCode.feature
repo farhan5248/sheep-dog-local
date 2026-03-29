@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: UMLFeatureToCode
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: No tags, no statements
 

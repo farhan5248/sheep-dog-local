@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: StepDefinition Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Step Definition is a grammar rule in SheepDog.xtext contained within a Step Object. These tests verify editing Step Definition elements within a document.
 
   @list

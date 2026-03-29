@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: DocumentExamplesTableToUML
 
-  \@api
+  \@asciidoc-api
 
   Scenario: Three rows, three cells
 

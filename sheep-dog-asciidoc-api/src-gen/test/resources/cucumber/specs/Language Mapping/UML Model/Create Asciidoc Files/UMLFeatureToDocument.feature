@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: UMLFeatureToDocument
 
-  \@api
+  \@asciidoc-api
 
   Scenario: No tags, no statements
 

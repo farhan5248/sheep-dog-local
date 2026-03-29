@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Phrase Fragment
 
-  \@sheep-dog-grammar
+  \@grammar
   A phrase is a sequence of words. Tags and TODOs are special phrases.
 
   Scenario Outline: Tag Fragment

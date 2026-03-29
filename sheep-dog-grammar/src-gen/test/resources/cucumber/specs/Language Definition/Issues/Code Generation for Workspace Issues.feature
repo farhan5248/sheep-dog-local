@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Code Generation for Workspace Issues
 
-  \@sheep-dog-grammar
+  \@grammar
   TODO Add tests for each quickfix one
   TODO Add test step ensuring step object isn't changed until after the quickfix is applied
   The Xtext framework lets you map the DSL to Java so that you can generate the Java code with minimal coding.

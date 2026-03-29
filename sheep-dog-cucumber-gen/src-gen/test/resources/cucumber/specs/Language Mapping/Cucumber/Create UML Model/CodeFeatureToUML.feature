@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: CodeFeatureToUML
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: No tags, no statements
 

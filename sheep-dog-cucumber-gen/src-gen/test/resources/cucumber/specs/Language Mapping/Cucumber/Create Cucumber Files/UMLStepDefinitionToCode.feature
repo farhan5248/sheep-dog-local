@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: UMLStepDefinitionToCode
 
-  \@gen
+  \@cucumber-gen
 
   Background: Create model
 

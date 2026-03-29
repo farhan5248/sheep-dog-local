@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: UMLStepParametersTableToDocument
 
-  \@api
+  \@asciidoc-api
 
   Background: Create a test case
 

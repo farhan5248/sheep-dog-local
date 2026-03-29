@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Description Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Description is a grammar rule in SheepDog.xtext used by Step Object, Step Definition, Test Suite, Test Setup, and Test Case.
 
   @list

@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: CodeScenarioOutlineToUML
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: No tags, no statement, one step, one example
 

@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: TestStep Keyword Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Test Step is a grammar rule in SheepDog.xtext with four keyword variants: Given, When, Then, and And. These tests verify that each keyword variant follows the same Test Step structure.
 
   @list

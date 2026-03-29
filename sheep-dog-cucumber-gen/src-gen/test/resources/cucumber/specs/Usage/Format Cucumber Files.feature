@@ -1,8 +1,8 @@
-@gen @round-trip
+@cucumber-gen @svc-maven-plugin
 Feature: Format Cucumber Files
 
-  \@gen
-  \@round-trip
+  \@cucumber-gen
+  \@svc-maven-plugin
   TODO Make more changes to the source file to demonstrate all the formatting changes.
 
   Scenario: Format a feature file

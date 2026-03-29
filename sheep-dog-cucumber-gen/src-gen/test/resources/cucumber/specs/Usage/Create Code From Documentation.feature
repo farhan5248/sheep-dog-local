@@ -1,8 +1,8 @@
-@gen @round-trip
+@cucumber-gen @svc-maven-plugin
 Feature: Create Code From Documentation
 
-  \@gen
-  \@round-trip
+  \@cucumber-gen
+  \@svc-maven-plugin
   This is the most common usage of the sheep-dog plugin, create test automation code from documentation.
   The sheep-dog plugin will create feature files, step definition glue code and Java interfaces from the documentation.
   The feature files will be created in the src-gen/test/resources/cucumber/specs directory.

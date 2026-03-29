@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: CodeDocStringToUML
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: One line
 

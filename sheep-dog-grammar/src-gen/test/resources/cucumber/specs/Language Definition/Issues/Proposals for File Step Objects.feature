@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Proposals for File Step Objects
 
-  \@sheep-dog-grammar
+  \@grammar
   TODO Add more background tests
   The general idea behind these tests is that when no object is specified in the test step, you get a list of proposals.
   The variables are:

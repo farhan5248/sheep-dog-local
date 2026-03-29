@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: DocumentStepObjectToUML
 
-  \@api
+  \@asciidoc-api
   I need a test here for selected tags that tests only objects referenced in a selected test case are reversed
 
   Scenario: No statements

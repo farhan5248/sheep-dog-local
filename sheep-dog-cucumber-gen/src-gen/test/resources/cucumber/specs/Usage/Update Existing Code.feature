@@ -1,8 +1,8 @@
-@gen @round-trip
+@cucumber-gen @svc-maven-plugin
 Feature: Update Existing Code
 
-  \@gen
-  \@round-trip
+  \@cucumber-gen
+  \@svc-maven-plugin
   By being able to generate test automation for selected test cases on demand, means you don't need to maintain the code.
   This is one of the advantages of model based testing.
   Sometimes I only select a few test cases to generate the code for which means only a subset of the interfaces methods are generated.

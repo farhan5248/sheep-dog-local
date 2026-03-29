@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: UMLStepObjectToCode
 
-  \@gen
+  \@cucumber-gen
   TODO map uml layer 2 documentation to java code
 
   Background: Create model

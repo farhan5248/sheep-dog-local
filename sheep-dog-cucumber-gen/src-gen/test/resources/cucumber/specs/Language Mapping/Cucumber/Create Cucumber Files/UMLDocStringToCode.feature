@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: UMLDocStringToCode
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: One line
 

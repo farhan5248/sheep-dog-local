@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: StepParameters Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Step Parameters is a grammar rule in SheepDog.xtext contained within a Step Definition. These tests verify editing Step Parameters elements within a document.
 
   @list

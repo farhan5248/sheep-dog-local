@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: DocumentStepToUML
 
-  \@api
+  \@asciidoc-api
 
   Scenario: Convert step keywords
 

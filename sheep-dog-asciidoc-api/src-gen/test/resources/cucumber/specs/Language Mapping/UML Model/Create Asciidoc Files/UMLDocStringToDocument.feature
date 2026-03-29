@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: UMLDocStringToDocument
 
-  \@api
+  \@asciidoc-api
 
   Scenario: One line
 

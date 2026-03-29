@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: TestData Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Test Data is a grammar rule in SheepDog.xtext contained within a Test Case. These tests verify editing Test Data elements within a document.
 
   @list

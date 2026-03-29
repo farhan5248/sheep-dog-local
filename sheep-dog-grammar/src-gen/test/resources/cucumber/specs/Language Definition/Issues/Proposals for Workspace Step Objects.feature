@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Proposals for Workspace Step Objects
 
-  \@sheep-dog-grammar
+  \@grammar
   TODO Collapse all these tests into fewer ones using Test Data
   The general idea behind these tests is that when no object is specified in the test step, you get a list of proposals.
   The variables are:

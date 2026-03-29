@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: UMLStepParametersTableToCode
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: Three cells
 

@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: TestSuite Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Test Suite is a top-level grammar rule in SheepDog.xtext. These tests verify adding a Test Suite document to the workspace.
 
   @list

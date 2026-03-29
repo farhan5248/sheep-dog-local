@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: StepDefinitionRef Fragment
 
-  \@sheep-dog-grammar
+  \@grammar
   A StepDefinitionRef identifies the part and state in a test step.
 
   Scenario Outline: Part Fragment

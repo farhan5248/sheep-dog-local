@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: UMLStepObjectToDocument
 
-  \@api
+  \@asciidoc-api
 
   Scenario: No statements
 

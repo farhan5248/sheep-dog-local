@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Code Generation for Only Issues
 
-  \@sheep-dog-grammar
+  \@grammar
   These tests verify that code generation works correctly when names follow proper capitalization rules.
 
   Scenario: Cell name should start with a capital letter generation

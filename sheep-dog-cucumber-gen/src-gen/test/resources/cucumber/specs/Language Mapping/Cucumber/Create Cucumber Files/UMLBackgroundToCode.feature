@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: UMLBackgroundToCode
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: One statement, one step, one scenario
 

@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: UMLExamplesTableToCode
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: Three rows, three cells
 

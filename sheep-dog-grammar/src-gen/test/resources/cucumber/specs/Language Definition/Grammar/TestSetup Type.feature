@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: TestSetup Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Test Setup is a grammar rule in SheepDog.xtext contained within a Test Suite. These tests verify editing Test Setup elements within a document.
 
   @list

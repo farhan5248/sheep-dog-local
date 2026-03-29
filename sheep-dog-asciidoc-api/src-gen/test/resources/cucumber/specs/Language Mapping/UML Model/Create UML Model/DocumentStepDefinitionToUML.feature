@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: DocumentStepDefinitionToUML
 
-  \@api
+  \@asciidoc-api
   TODO add tests for document parameters
 
   Background: Create a test case

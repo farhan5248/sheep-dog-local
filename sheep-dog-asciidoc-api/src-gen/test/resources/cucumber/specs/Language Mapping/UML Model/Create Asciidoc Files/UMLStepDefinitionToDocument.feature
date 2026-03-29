@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: UMLStepDefinitionToDocument
 
-  \@api
+  \@asciidoc-api
   TODO there's no test for no parameters and docstring vs datatable. Other tests implicitly cover docstring as a special parameter with the name content
 
   Background: Create a test case

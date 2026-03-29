@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: StepObjectRef Fragment
 
-  \@sheep-dog-grammar
+  \@grammar
   A StepObjectRef identifies the component and object in a test step.
 
   Scenario Outline: Component Fragment

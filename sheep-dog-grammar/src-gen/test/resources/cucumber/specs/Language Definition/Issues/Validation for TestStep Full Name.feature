@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Validation for TestStep Full Name
 
-  \@sheep-dog-grammar
+  \@grammar
   getTestStepFullName resolves shortened StepObjectRef Names by looking at previous steps to fill in missing component and object path.
 
   Scenario Outline: With Path Resolution

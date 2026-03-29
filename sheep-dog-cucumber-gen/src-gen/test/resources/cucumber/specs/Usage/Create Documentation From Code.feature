@@ -1,8 +1,8 @@
-@gen @round-trip
+@cucumber-gen @svc-maven-plugin
 Feature: Create Documentation From Code
 
-  \@gen
-  \@round-trip
+  \@cucumber-gen
+  \@svc-maven-plugin
   When coding these projects, I start with the asciidoc file and then generate the code.
   However while debugging, I might have to change the cucumber feature file and then regenerate the asciidoc file.
   This is what this test case is about.

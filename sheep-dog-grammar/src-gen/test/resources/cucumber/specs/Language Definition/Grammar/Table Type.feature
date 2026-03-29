@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Table Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Table is a grammar rule in SheepDog.xtext used by Test Step, Step Parameters, and Test Data. A Table contains Rows which contain Cells.
 
   @list

@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: UMLStepToCode
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: Convert step keywords
 

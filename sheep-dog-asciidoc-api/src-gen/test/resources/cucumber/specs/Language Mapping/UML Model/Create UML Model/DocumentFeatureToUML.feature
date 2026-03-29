@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: DocumentFeatureToUML
 
-  \@api
+  \@asciidoc-api
 
   Scenario: No statements
 

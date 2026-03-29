@@ -183,7 +183,7 @@
 			</plugin>
 			<plugin>
 				<groupId>org.farhan</groupId>
-				<artifactId>sheep-dog-dev-svc-maven-plugin</artifactId>
+				<artifactId>sheep-dog-svc-maven-plugin</artifactId>
 				<version>1.48</version>
 			</plugin>
 			<plugin>

@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: CodeStepTableToUML
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: Three rows, three cells
 

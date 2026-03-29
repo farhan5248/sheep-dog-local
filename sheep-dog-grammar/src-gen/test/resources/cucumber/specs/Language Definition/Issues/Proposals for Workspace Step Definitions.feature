@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Proposals for Workspace Step Definitions
 
-  \@sheep-dog-grammar
+  \@grammar
   Because a step can have a component or not and the full path specified or not, you can have 4 keywords like:
   1. The daily batchjob path/to/file/Input file is empty
   2. The daily batchjob Input file is empty

@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: UMLScenarioOutlineToDocument
 
-  \@api
+  \@asciidoc-api
 
   Scenario: No tags, no statement, one step, one example
 

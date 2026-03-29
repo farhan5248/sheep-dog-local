@@ -1,7 +1,7 @@
-@api
+@asciidoc-api
 Feature: UMLBackgroundToDocument
 
-  \@api
+  \@asciidoc-api
 
   Scenario: One statement, one step, one scenario
 

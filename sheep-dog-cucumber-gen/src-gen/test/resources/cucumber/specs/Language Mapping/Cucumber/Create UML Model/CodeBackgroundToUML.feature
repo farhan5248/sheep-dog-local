@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: CodeBackgroundToUML
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: One statement, one step, one scenario
 

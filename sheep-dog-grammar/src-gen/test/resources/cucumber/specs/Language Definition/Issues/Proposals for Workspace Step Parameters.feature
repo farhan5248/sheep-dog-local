@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: Proposals for Workspace Step Parameters
 
-  \@sheep-dog-grammar
+  \@grammar
   If the step definition has step parameters, they'll be proposed.
 
   Scenario: No existing step object

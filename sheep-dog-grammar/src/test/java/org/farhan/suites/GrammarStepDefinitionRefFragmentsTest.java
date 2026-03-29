@@ -13,7 +13,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("cucumber/specs/Language Definition/Grammar/StepDefinitionRef Fragment.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
-@IncludeTags("sheep-dog-grammar")
+@IncludeTags("grammar")
 public class GrammarStepDefinitionRefFragmentsTest {
 
 }

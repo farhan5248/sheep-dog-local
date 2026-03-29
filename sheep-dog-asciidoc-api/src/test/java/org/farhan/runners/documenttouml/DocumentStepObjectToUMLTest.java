@@ -14,7 +14,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("cucumber/specs/Language Mapping/UML Model/Create UML Model/DocumentStepObjectToUML.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
-@IncludeTags("api")
+@IncludeTags("asciidoc-api")
 public class DocumentStepObjectToUMLTest {
 
 }

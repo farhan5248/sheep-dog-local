@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: TestStep Attachment Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Test Step attachments (Text and Table) are mutually exclusive within a Test Step. These tests verify attachment constraints, duplicate behavior, and insertion order.
 
   Scenario: Table Excludes Text

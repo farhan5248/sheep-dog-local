@@ -1,7 +1,7 @@
-@sheep-dog-grammar
+@grammar
 Feature: StepObject Type
 
-  \@sheep-dog-grammar
+  \@grammar
   Step Object is a top-level grammar rule in SheepDog.xtext. These tests verify adding a Step Object document to the workspace.
 
   @list

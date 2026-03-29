@@ -1,7 +1,7 @@
-@gen
+@cucumber-gen
 Feature: CodeStepToUML
 
-  \@gen
+  \@cucumber-gen
 
   Scenario: Convert step keywords
 
