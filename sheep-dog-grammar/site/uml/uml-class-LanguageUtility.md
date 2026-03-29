@@ -80,13 +80,13 @@ Static helper methods for grammar element operations. Separates utility operatio
 **Rule**: SOME method names follow get{Type}Parent pattern.
  - **Name**: `^get{Type}Parent$`
  - **Return**: `^I{Type}$`
- - **Parameters**: `^\(EObject\s+\w+\)$`
+ - **Parameters**: `^\(Object\s+\w+\)$`
  - **Modifier**: `^public\s+static$`
 
 **Examples**:
- - `public static ITestProject getTestProjectParent(EObject node)`
- - `public static ITestStep getTestStepParent(EObject node)`
- - `public static ITestDocument getTestDocumentParent(EObject node)`
+ - `public static ITestProject getTestProjectParent(Object node)`
+ - `public static ITestStep getTestStepParent(Object node)`
+ - `public static ITestDocument getTestDocumentParent(Object node)`
 
 ## get{Type}
 

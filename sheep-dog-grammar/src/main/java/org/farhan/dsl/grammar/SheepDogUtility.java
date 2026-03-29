@@ -118,11 +118,14 @@ public class SheepDogUtility {
     }
 
     public static ICell getCell(IRow row, String name) {
+        logger.debug("Entering getCell for row: {}, name: {}", row, name);
         for (ICell c : row.getCellList()) {
             if (c.getName().contentEquals(name)) {
+                logger.debug("Exiting getCell with result: {}", c);
                 return c;
             }
         }
+        logger.debug("Exiting getCell with result: null");
         return null;
     }
 
@@ -150,11 +153,14 @@ public class SheepDogUtility {
     }
 
     public static ILine getLine(IDescription description, String content) {
+        logger.debug("Entering getLine for description: {}, content: {}", description, content);
         for (ILine l : description.getLineList()) {
             if (l.getContent().equals(content)) {
+                logger.debug("Exiting getLine with result: {}", l);
                 return l;
             }
         }
+        logger.debug("Exiting getLine with result: null");
         return null;
     }
 
@@ -177,11 +183,14 @@ public class SheepDogUtility {
     }
 
     public static IStepDefinition getStepDefinition(IStepObject stepObject, String name) {
+        logger.debug("Entering getStepDefinition for stepObject: {}, name: {}", stepObject, name);
         for (IStepDefinition sd : stepObject.getStepDefinitionList()) {
             if (sd.getName().contentEquals(name)) {
+                logger.debug("Exiting getStepDefinition with result: {}", sd);
                 return sd;
             }
         }
+        logger.debug("Exiting getStepDefinition with result: null");
         return null;
     }
 
@@ -221,91 +230,139 @@ public class SheepDogUtility {
     }
 
     public static IStepParameters getStepParameters(IStepDefinition stepDefinition, String name) {
+        logger.debug("Entering getStepParameters for stepDefinition: {}, name: {}", stepDefinition, name);
         for (IStepParameters sp : stepDefinition.getStepParameterList()) {
             if (name.contentEquals(sp.getName())) {
+                logger.debug("Exiting getStepParameters with result: {}", sp);
                 return sp;
             }
         }
+        logger.debug("Exiting getStepParameters with result: null");
         return null;
     }
 
     public static ITestData getTestData(ITestCase testCase, String name) {
+        logger.debug("Entering getTestData for testCase: {}, name: {}", testCase, name);
         for (ITestData td : testCase.getTestDataList()) {
             if (td.getName().contentEquals(name)) {
+                logger.debug("Exiting getTestData with result: {}", td);
                 return td;
             }
         }
+        logger.debug("Exiting getTestData with result: null");
         return null;
     }
 
     public static ITestDocument getTestDocument(ITestProject project, String fullName) {
+        logger.debug("Entering getTestDocument for project: {}, fullName: {}", project, fullName);
         for (ITestDocument td : project.getTestDocumentList()) {
             if (td.getFullName().contentEquals(fullName)) {
+                logger.debug("Exiting getTestDocument with result: {}", td);
                 return td;
             }
         }
+        logger.debug("Exiting getTestDocument with result: null");
         return null;
     }
 
     public static IDescription getDescriptionParent(Object node) {
-        return getAncestor(node, IDescription.class);
+        logger.debug("Entering getDescriptionParent for node: {}", node);
+        IDescription result = getAncestor(node, IDescription.class);
+        logger.debug("Exiting getDescriptionParent with result: {}", result);
+        return result;
     }
 
     public static IRow getRowParent(Object node) {
-        return getAncestor(node, IRow.class);
+        logger.debug("Entering getRowParent for node: {}", node);
+        IRow result = getAncestor(node, IRow.class);
+        logger.debug("Exiting getRowParent with result: {}", result);
+        return result;
     }
 
     public static ITable getTableParent(Object node) {
-        return getAncestor(node, ITable.class);
+        logger.debug("Entering getTableParent for node: {}", node);
+        ITable result = getAncestor(node, ITable.class);
+        logger.debug("Exiting getTableParent with result: {}", result);
+        return result;
     }
 
     public static IStepDefinition getStepDefinitionParent(Object node) {
-        return getAncestor(node, IStepDefinition.class);
+        logger.debug("Entering getStepDefinitionParent for node: {}", node);
+        IStepDefinition result = getAncestor(node, IStepDefinition.class);
+        logger.debug("Exiting getStepDefinitionParent with result: {}", result);
+        return result;
     }
 
     public static IStepObject getStepObjectParent(Object node) {
-        return getAncestor(node, IStepObject.class);
+        logger.debug("Entering getStepObjectParent for node: {}", node);
+        IStepObject result = getAncestor(node, IStepObject.class);
+        logger.debug("Exiting getStepObjectParent with result: {}", result);
+        return result;
     }
 
     public static ITestCase getTestCaseParent(Object node) {
-        return getAncestor(node, ITestCase.class);
+        logger.debug("Entering getTestCaseParent for node: {}", node);
+        ITestCase result = getAncestor(node, ITestCase.class);
+        logger.debug("Exiting getTestCaseParent with result: {}", result);
+        return result;
     }
 
     public static ITestStepContainer getTestStepContainerParent(Object node) {
-        return getAncestor(node, ITestStepContainer.class);
+        logger.debug("Entering getTestStepContainerParent for node: {}", node);
+        ITestStepContainer result = getAncestor(node, ITestStepContainer.class);
+        logger.debug("Exiting getTestStepContainerParent with result: {}", result);
+        return result;
     }
 
     public static ITestSuite getTestSuiteParent(Object node) {
-        return getAncestor(node, ITestSuite.class);
+        logger.debug("Entering getTestSuiteParent for node: {}", node);
+        ITestSuite result = getAncestor(node, ITestSuite.class);
+        logger.debug("Exiting getTestSuiteParent with result: {}", result);
+        return result;
     }
 
     public static ITestDocument getTestDocumentParent(Object node) {
-        return getAncestor(node, ITestDocument.class);
+        logger.debug("Entering getTestDocumentParent for node: {}", node);
+        ITestDocument result = getAncestor(node, ITestDocument.class);
+        logger.debug("Exiting getTestDocumentParent with result: {}", result);
+        return result;
     }
 
     public static ITestStep getTestStepParent(Object node) {
-        return getAncestor(node, ITestStep.class);
+        logger.debug("Entering getTestStepParent for node: {}", node);
+        ITestStep result = getAncestor(node, ITestStep.class);
+        logger.debug("Exiting getTestStepParent with result: {}", result);
+        return result;
     }
 
     public static ITestProject getTestProjectParent(Object node) {
-        return getAncestor(node, ITestProject.class);
+        logger.debug("Entering getTestProjectParent for node: {}", node);
+        ITestProject result = getAncestor(node, ITestProject.class);
+        logger.debug("Exiting getTestProjectParent with result: {}", result);
+        return result;
     }
 
     public static ITestStep getTestStep(ITestStepContainer container, String name) {
+        logger.debug("Entering getTestStep for container: {}, name: {}", container, name);
         for (ITestStep ts : container.getTestStepList()) {
             if (name.contentEquals(ts.getStepObjectName() + " " + ts.getStepDefinitionName())) {
+                logger.debug("Exiting getTestStep with result: {}", ts);
                 return ts;
             }
         }
+        logger.debug("Exiting getTestStep with result: null");
         return null;
     }
 
     public static ITestStepContainer getTestStepContainer(ITestSuite testSuite, String name) {
+        logger.debug("Entering getTestStepContainer for testSuite: {}, name: {}", testSuite, name);
         for (ITestStepContainer tsc : testSuite.getTestStepContainerList()) {
             if (tsc.getName().contentEquals(name)) {
+                logger.debug("Exiting getTestStepContainer with result: {}", tsc);
                 return tsc;
             }
         }
+        logger.debug("Exiting getTestStepContainer with result: null");
         return null;
     }
 

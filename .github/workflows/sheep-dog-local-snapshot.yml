@@ -33,6 +33,13 @@ jobs:
       project: 'sheepdogcucumber.parent'
     secrets: inherit
 
+  sheep-dog-asciidoc-api:
+    needs: [sheep-dog-asciidoc]
+    uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot-maven.yml@main
+    with:
+      project: 'sheep-dog-asciidoc-api'
+    secrets: inherit
+
   sheep-dog-dev:
     needs: [sheep-dog-asciidoc, sheep-dog-cucumber]
     uses: farhan5248/sheep-dog-ops/.github/workflows/snapshot-maven.yml@main
@@ -41,7 +48,7 @@ jobs:
     secrets: inherit
 
   merge-into-main:
-    needs: [sheep-dog-dev]
+    needs: [sheep-dog-asciidoc-api, sheep-dog-dev]
     uses: farhan5248/sheep-dog-ops/.github/workflows/merge.yml@main
     with:
       source: 'main'

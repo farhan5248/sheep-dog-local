@@ -1,4 +1,4 @@
 cd ..
 call mvn clean
-call mvn org.farhan:sheep-dog-dev-maven-plugin:uml-to-cucumber-guice -DrepoDir="../../sheep-dog-qa/sheep-dog-specs/" -Dtags="sheep-dog-dev"
-cd scripts 
+call mvn org.farhan:sheep-dog-dev-svc-maven-plugin:uml-to-cucumber-guice -Dtags="sheep-dog-dev" -Dhost="dev.sheepdogdev.io"
+cd scripts
