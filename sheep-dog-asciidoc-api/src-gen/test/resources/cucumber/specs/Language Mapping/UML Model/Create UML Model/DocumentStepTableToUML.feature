@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: DocumentStepTableToUML
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Scenario: Three rows, three cells
 

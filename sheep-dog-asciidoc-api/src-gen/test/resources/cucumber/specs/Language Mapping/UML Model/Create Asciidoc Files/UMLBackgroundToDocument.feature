@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: UMLBackgroundToDocument
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Scenario: One statement, one step, one scenario
 

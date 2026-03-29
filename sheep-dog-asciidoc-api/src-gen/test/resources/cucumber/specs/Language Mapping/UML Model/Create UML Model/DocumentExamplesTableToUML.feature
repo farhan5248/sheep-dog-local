@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: DocumentExamplesTableToUML
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Scenario: Three rows, three cells
 

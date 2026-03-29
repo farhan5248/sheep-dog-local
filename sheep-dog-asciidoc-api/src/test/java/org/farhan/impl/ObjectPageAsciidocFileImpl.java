@@ -78,6 +78,17 @@ public class ObjectPageAsciidocFileImpl extends TestObjectFileAdocImpl implement
 	}
 
 	@Override
+	public String getContent(HashMap<String, String> keyMap) {
+		return getContent();
+	}
+
+	@Override
+	public String getCreatedAsFollows(HashMap<String, String> keyMap) {
+		// TODO implement later
+		return "";
+	}
+
+	@Override
 	public void setDeleted(HashMap<String, String> keyMap) {
 		deleteObject();
 	}

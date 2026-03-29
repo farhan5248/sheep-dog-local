@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: UMLStepObjectToDocument
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Scenario: No statements
 

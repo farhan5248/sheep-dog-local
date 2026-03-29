@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: DocumentFeatureToUML
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Scenario: No statements
 

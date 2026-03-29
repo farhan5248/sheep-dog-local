@@ -40,6 +40,11 @@ public class SpecPrjObjectPageAsciidocFileSteps extends TestSteps {
         object.setVertexStep("", "", "is", "deleted");
     }
 
+    @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be created as follows$")
+    public void willBeCreatedAsFollows(String docString) {
+        object.assertVertexStep("", "", "will be", "created as follows", docString);
+    }
+
     @Given("^The spec-prj project src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present$")
     public void willBePresent() {
         object.assertVertexStep("", "", "will be", "present");

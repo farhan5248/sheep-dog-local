@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: UMLFeatureToDocument
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Scenario: No tags, no statements
 

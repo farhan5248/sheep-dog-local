@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: DocumentStepObjectToUML
 
-  \@sheep-dog-dev \@api
+  \@api
   I need a test here for selected tags that tests only objects referenced in a selected test case are reversed
 
   Scenario: No statements

@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: UMLStepParametersTableToDocument
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Background: Create a test case
 

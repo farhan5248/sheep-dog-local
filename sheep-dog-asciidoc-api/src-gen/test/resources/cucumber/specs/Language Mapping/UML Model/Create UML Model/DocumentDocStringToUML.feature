@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: DocumentDocStringToUML
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Scenario: One line
 

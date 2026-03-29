@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: UMLScenarioOutlineToDocument
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Scenario: No tags, no statement, one step, one example
 

@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: UMLStepDefinitionToDocument
 
-  \@sheep-dog-dev \@api
+  \@api
   TODO there's no test for no parameters and docstring vs datatable. Other tests implicitly cover docstring as a special parameter with the name content
 
   Background: Create a test case

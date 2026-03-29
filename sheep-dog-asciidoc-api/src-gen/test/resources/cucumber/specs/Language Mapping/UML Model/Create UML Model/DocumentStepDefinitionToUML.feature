@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: DocumentStepDefinitionToUML
 
-  \@sheep-dog-dev \@api
+  \@api
   TODO add tests for document parameters
 
   Background: Create a test case

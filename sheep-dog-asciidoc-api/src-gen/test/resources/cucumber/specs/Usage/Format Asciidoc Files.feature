@@ -1,7 +1,7 @@
-@gen @round-trip
+@api @asciidoc-api-svc @round-trip
 Feature: Format Asciidoc Files
 
-  \@gen
+  \@api \@asciidoc-api-svc
   \@round-trip
   TODO Make more changes to the source file to demonstrate all the formatting changes.
   One of the more important uses of going from asciidoc to uml and back to asciidoc is to update the files after changing the grammar.

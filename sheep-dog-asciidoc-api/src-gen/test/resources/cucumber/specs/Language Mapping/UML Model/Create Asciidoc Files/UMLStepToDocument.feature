@@ -1,7 +1,7 @@
-@sheep-dog-dev @api
+@api
 Feature: UMLStepToDocument
 
-  \@sheep-dog-dev \@api
+  \@api
 
   Scenario: Convert step keywords
 
