@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
 	<artifactId>sheep-dog-cucumber-gen</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<name>Sheep Dog Cucumber Gen</name>
 	<description>Generates Cucumber test cases from UML models and vice-versa</description>
 
@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
 		<sheepdogcucumber.version>1.4.0-SNAPSHOT</sheepdogcucumber.version>
-		<sheep-dog-asciidoc-api.version>1.0.0-SNAPSHOT</sheep-dog-asciidoc-api.version>
+		<sheep-dog-asciidoc-api.version>1.0-SNAPSHOT</sheep-dog-asciidoc-api.version>
 	</properties>
 
 	<scm>
@@ -80,7 +80,7 @@
 			<plugin>
 				<groupId>org.farhan</groupId>
 				<artifactId>sheep-dog-svc-maven-plugin</artifactId>
-				<version>1.47</version>
+				<version>1.0-SNAPSHOT</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
