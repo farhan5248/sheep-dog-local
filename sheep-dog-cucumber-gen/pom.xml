@@ -11,6 +11,7 @@
 		<java.version>21</java.version>
 		<sheepdogcucumber.version>1.4.0-SNAPSHOT</sheepdogcucumber.version>
 		<sheep-dog-asciidoc-api.version>1.0-SNAPSHOT</sheep-dog-asciidoc-api.version>
+		<sheep-dog-grammar.version>1.41-SNAPSHOT</sheep-dog-grammar.version>
 	</properties>
 
 	<scm>
@@ -342,7 +343,7 @@
 		<dependency>
 			<groupId>org.farhan</groupId>
 			<artifactId>sheep-dog-grammar</artifactId>
-			<version>1.41-SNAPSHOT</version>
+			<version>${sheep-dog-grammar.version}</version>
 		</dependency>
 		<!-- GitHub Java -->
 		<dependency>
