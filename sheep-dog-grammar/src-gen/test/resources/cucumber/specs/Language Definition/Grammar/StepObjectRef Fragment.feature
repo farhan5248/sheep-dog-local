@@ -43,7 +43,7 @@ Feature: StepObjectRef Fragment
           | Test Step Full Name           | Component Type | Component Type Description                  |
           | The graph-viewer application  | application    | GUI web application                         |
           | The spec-prj project          | project        | Collection of files such as a Maven project |
-          | The sheep-dog-dev-svc service | service        | RESTful or SOAP webservice                  |
+          | The sheep-dog-svc service     | service        | RESTful or SOAP webservice                  |
           | The nightly batchjob          | batchjob       | EOD or ETL batchjob                         |
           | The xtext plugin              | plugin         | Maven or Eclipse plugin                     |
 
