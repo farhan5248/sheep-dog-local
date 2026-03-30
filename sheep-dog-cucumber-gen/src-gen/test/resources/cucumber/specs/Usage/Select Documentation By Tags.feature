@@ -1,8 +1,7 @@
-@cucumber-gen @svc-maven-plugin
+@cucumber-gen @cucumber-gen-svc @svc-maven-plugin
 Feature: Select Documentation By Tags
 
-  \@cucumber-gen
-  \@svc-maven-plugin
+  \@cucumber-gen \@cucumber-gen-svc \@svc-maven-plugin
   The goal is to specify that if you have two test cases with different tags you can generate two different models.
   Each model will contain the test cases that are tagged with the same tag.
   So the resulting feature file will contain the selected test case only.

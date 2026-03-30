@@ -54,6 +54,23 @@ Feature: Proposals for Workspace Step Definitions
           | Proposal Value | Proposal Id | Proposal Description |
           | is present     | is present  | Creates empty file   |
 
+  Scenario: Has component has existing step definition and step object proposals
+
+    Even when the step object is resolved, step object proposals should still be available alongside step definition proposals.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name           |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is present           |
+     When The xtext plugin list proposals action is performed as follows
+          | Test Suite Full Name         | Node Path                              |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
+     Then The xtext plugin list proposals popup will be set as follows
+          | Proposal Value                | Proposal Id | Proposal Description |
+          | The daily batchjob Input file | Input file  | empty                |
+
   Scenario: No component has existing step definition
 
     If a step omits the component but a previous step specified it, the component is inferred and step definitions are proposed from the matching step object.
@@ -74,21 +91,4 @@ Feature: Proposals for Workspace Step Definitions
      Then The xtext plugin list proposals popup will be set as follows
           | Proposal Value | Proposal Id | Proposal Description |
           | is present     | is present  | Creates empty file   |
-
-  Scenario: Has component has existing step definition and step object proposals
-
-    Even when the step object is resolved, step object proposals should still be available alongside step definition proposals.
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                            | Test Step Full Name           |
-          | TestStepContainerList/1/TestStepList | The daily batchjob Input file |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Definition Name |
-          | is present           |
-     When The xtext plugin list proposals action is performed as follows
-          | Test Suite Full Name         | Node Path                              |
-          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1 |
-     Then The xtext plugin list proposals popup will be set as follows
-          | Proposal Value                | Proposal Id | Proposal Description |
-          | The daily batchjob Input file | Input file  | empty                |
 

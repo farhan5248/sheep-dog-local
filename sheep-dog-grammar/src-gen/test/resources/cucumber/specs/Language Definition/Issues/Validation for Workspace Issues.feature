@@ -85,27 +85,6 @@ Feature: Validation for Workspace Issues
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
      Then The xtext plugin validate annotation will be empty
 
-  Scenario: This object step definition text parameter doesn't exist validation
-
-    If there isn't a step definition in the step object file with a Content header, then a warning is displayed.
-
-    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
-          | Node Path                            | Test Step Full Name                             |
-          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
-      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
-          | Node Path                                   | Text Content |
-          | TestStepContainerList/1/TestStepList/1/Text | Some text    |
-      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
-          | Step Definition Name |
-          | is set as follows    |
-     When The xtext plugin validate action is performed as follows
-          | Test Suite Full Name         | Node Path                                    |
-          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
-     Then The xtext plugin validate annotation will be set as follows
-          """
-          The step parameters don't exist for the step definition
-          """
-
   Scenario: This object step definition text parameter exists with other parameters validation
 
     Even when the step definition has multiple parameters, the Content parameter should still be found.
@@ -180,4 +159,25 @@ Feature: Validation for Workspace Issues
           | Test Suite Full Name         | Node Path                                              |
           | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Table/RowList/1 |
      Then The xtext plugin validate annotation will be empty
+
+  Scenario: This object step definition text parameter doesn't exist validation
+
+    If there isn't a step definition in the step object file with a Content header, then a warning is displayed.
+
+    Given The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file TestStepList node is created as follows
+          | Node Path                            | Test Step Full Name                             |
+          | TestStepContainerList/1/TestStepList | The daily batchjob Input file is set as follows |
+      And The spec-prj project src/test/resources/asciidoc/specs/ProcessIssues.asciidoc file Text node is created as follows
+          | Node Path                                   | Text Content |
+          | TestStepContainerList/1/TestStepList/1/Text | Some text    |
+      And The spec-prj project src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file is created as follows
+          | Step Definition Name |
+          | is set as follows    |
+     When The xtext plugin validate action is performed as follows
+          | Test Suite Full Name         | Node Path                                    |
+          | specs/ProcessIssues.asciidoc | TestStepContainerList/1/TestStepList/1/Text/ |
+     Then The xtext plugin validate annotation will be set as follows
+          """
+          The step parameters don't exist for the step definition
+          """
 
