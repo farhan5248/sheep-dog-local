@@ -22,16 +22,24 @@ jobs:
       plugin: 'Sheep'
     secrets: inherit
 
-  sheep-dog-dev:
+  sheep-dog-asciidoc-api:
     needs: [sheep-dog-asciidoc]
     uses: farhan5248/sheep-dog-ops/.github/workflows/release-maven.yml@main
     with:
-      project: 'sheep-dog-dev'
+      project: 'sheep-dog-asciidoc-api'
+      plugin: 'Maven'
+    secrets: inherit
+
+  sheep-dog-cucumber-gen:
+    needs: [sheep-dog-asciidoc-api]
+    uses: farhan5248/sheep-dog-ops/.github/workflows/release-maven.yml@main
+    with:
+      project: 'sheep-dog-cucumber-gen'
       plugin: 'Maven'
     secrets: inherit
 
   merge-into-develop:
-    needs: [sheep-dog-dev]
+    needs: [sheep-dog-cucumber-gen]
     uses: farhan5248/sheep-dog-ops/.github/workflows/merge.yml@main
     with:
       source: 'main'

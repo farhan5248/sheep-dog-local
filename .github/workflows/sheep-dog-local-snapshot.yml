@@ -47,7 +47,7 @@ jobs:
       project: 'sheep-dog-cucumber-gen'
     secrets: inherit
 
-  merge-into-main:
+  merge-into-develop:
     needs: [sheep-dog-asciidoc-api, sheep-dog-cucumber-gen]
     uses: farhan5248/sheep-dog-ops/.github/workflows/merge.yml@main
     with:

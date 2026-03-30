@@ -1,4 +1,4 @@
-name: Publish Sheep Dog Cucumber Release
+name: Publish Sheep Dog Cucumber Gen Release
 
 on:
   workflow_dispatch:
@@ -7,15 +7,7 @@ permissions:
   packages: write
 
 jobs:
-  sheep-dog-cucumber:
-    uses: farhan5248/sheep-dog-ops/.github/workflows/release-maven.yml@main
-    with:
-      project: 'sheepdogcucumber.parent'
-      plugin: 'Sheep'
-    secrets: inherit
-
   sheep-dog-cucumber-gen:
-    needs: [sheep-dog-cucumber]
     uses: farhan5248/sheep-dog-ops/.github/workflows/release-maven.yml@main
     with:
       project: 'sheep-dog-cucumber-gen'

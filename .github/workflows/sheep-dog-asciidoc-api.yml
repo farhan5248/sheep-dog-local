@@ -1,4 +1,4 @@
-name: Publish Sheep Dog Dev Release
+name: Publish Sheep Dog AsciiDoc API Release
 
 on:
   workflow_dispatch:
@@ -7,15 +7,15 @@ permissions:
   packages: write
 
 jobs:
-  sheep-dog-dev:
+  sheep-dog-asciidoc-api:
     uses: farhan5248/sheep-dog-ops/.github/workflows/release-maven.yml@main
     with:
-      project: 'sheep-dog-dev'
+      project: 'sheep-dog-asciidoc-api'
       plugin: 'Maven'
     secrets: inherit
 
   merge-into-develop:
-    needs: [sheep-dog-dev]
+    needs: [sheep-dog-asciidoc-api]
     uses: farhan5248/sheep-dog-ops/.github/workflows/merge.yml@main
     with:
       source: 'main'
