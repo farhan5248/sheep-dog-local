@@ -20,6 +20,7 @@ Feature: Format Asciidoc Files
           """
           = Test-Suite: Process
           
+          @only-api
           Desc 1
           
           == Test-Case: Story One
@@ -82,12 +83,17 @@ Feature: Format Asciidoc Files
           | Content
           |===
           """
-     When The maven plugin asciidoctor-to-uml goal is executed
-      And The maven plugin uml-to-asciidoctor goal is executed
+     When The maven plugin asciidoctor-to-uml goal is executed with
+          | Tags     |
+          | only-api |
+      And The maven plugin uml-to-asciidoctor goal is executed with
+          | Tags     |
+          | only-api |
      Then The spec-prj project src/test/resources/asciidoc/specs/app/Process.asciidoc file will be created as follows
           """
           = Test-Suite: Process
           
+          @only-api
           Desc 1
           
           == Test-Case: Story One

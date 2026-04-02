@@ -19,7 +19,7 @@ Feature: Select Documentation By Tags
           
           == Test-Case: Submit
           
-          @tag1
+          @api-and-gen
           
           === Given: The Object1 page is empty
           """
@@ -34,22 +34,22 @@ Feature: Select Documentation By Tags
           === Given: The Object1 page is empty
           """
      When The maven plugin asciidoctor-to-uml goal is executed with
-          | Tags |
-          | tag1 |
+          | Tags        |
+          | api-and-gen |
       And The maven plugin asciidoctor-to-uml goal is executed with
           | Tags |
           | tag2 |
       And The maven plugin uml-to-cucumber goal is executed with
-          | Tags |
-          | tag1 |
+          | Tags        |
+          | api-and-gen |
      Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be created as follows
           """
           Feature: Process
           
-            @tag1
+            @api-and-gen
             Scenario: Submit
           
-              \@tag1
+              \@api-and-gen
           
               Given The Unknown service Object1 page is empty
           """

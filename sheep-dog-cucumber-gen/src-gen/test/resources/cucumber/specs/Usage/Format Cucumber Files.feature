@@ -22,7 +22,7 @@ Feature: Format Cucumber Files
                     Text 2
                     \"\"\"
           
-            @tag1
+            @only-gen
             Scenario: Submit One
           
               Basic EDI claim
@@ -43,11 +43,11 @@ Feature: Format Cucumber Files
                     | v31 | v41 |
           """
      When The maven plugin cucumber-to-uml goal is executed with
-          | Tags |
-          | tag1 |
+          | Tags     |
+          | only-gen |
       And The maven plugin uml-to-cucumber goal is executed with
-          | Tags |
-          | tag1 |
+          | Tags     |
+          | only-gen |
      Then The code-prj project src-gen/test/resources/cucumber/specs/Process.feature file will be created as follows
           """
           @tag2 @tag3
@@ -62,7 +62,7 @@ Feature: Format Cucumber Files
                     Text 2
                     \"\"\"
           
-            @tag1
+            @only-gen
             Scenario: Submit One
           
               Basic EDI claim

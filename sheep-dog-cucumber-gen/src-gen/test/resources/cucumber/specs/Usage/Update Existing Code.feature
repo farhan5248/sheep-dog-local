@@ -14,6 +14,8 @@ Feature: Update Existing Code
           """
           = Test-Suite: Process
           
+          @api-and-gen
+          
           == Test-Case: Submit
           
           === Given: The blah application Object page is empty
@@ -24,7 +26,9 @@ Feature: Update Existing Code
           
           == Step-Definition: is empty
           """
-      And The maven plugin asciidoctor-to-uml goal is executed
+      And The maven plugin asciidoctor-to-uml goal is executed with
+          | Tags        |
+          | api-and-gen |
 
   Scenario: Update existing step definitions with a new method
 
@@ -53,7 +57,9 @@ Feature: Update Existing Code
               }
           }
           """
-     When The maven plugin uml-to-cucumber goal is executed
+     When The maven plugin uml-to-cucumber goal is executed with
+          | Tags        |
+          | api-and-gen |
      Then The code-prj project src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
@@ -97,7 +103,9 @@ Feature: Update Existing Code
               public void setInvalid(HashMap<String, String> keyMap);
           }
           """
-     When The maven plugin uml-to-cucumber goal is executed
+     When The maven plugin uml-to-cucumber goal is executed with
+          | Tags        |
+          | api-and-gen |
      Then The code-prj project src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows
           """
           package org.farhan.objects.blah;

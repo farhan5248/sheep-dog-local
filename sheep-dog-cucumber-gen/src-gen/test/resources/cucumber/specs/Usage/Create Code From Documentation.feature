@@ -18,7 +18,7 @@ Feature: Create Code From Documentation
           """
           = Test-Suite: Process
           
-          @tag1
+          @api-and-gen
           Desc 1
           
           == Test-Case: Story One
@@ -88,10 +88,10 @@ Feature: Create Code From Documentation
      When The maven plugin uml-to-cucumber goal is executed
      Then The code-prj project src-gen/test/resources/cucumber/specs/app/Process.feature file will be created as follows
           """
-          @tag1
+          @api-and-gen
           Feature: Process
           
-            \@tag1
+            \@api-and-gen
             Desc 1
           
             @tag2

@@ -16,7 +16,7 @@ Feature: Create Documentation From Code
 
     Given The code-prj project src-gen/test/resources/cucumber/specs/app/Process.feature file is created as follows
           """
-          @tag1
+          @api-and-gen
           Feature: Process
           
             Desc 1
@@ -62,11 +62,11 @@ Feature: Create Documentation From Code
                     |   6 |
           """
      When The maven plugin cucumber-to-uml goal is executed with
-          | Tags |
-          | tag1 |
+          | Tags        |
+          | api-and-gen |
       And The maven plugin uml-to-asciidoctor goal is executed with
-          | Tags |
-          | tag1 |
+          | Tags        |
+          | api-and-gen |
      Then The spec-prj project src/test/resources/asciidoc/specs/app/Process.asciidoc file will be created as follows
           """
           = Test-Suite: Process

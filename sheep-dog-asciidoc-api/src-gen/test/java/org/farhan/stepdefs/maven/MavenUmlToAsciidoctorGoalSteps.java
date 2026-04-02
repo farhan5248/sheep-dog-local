@@ -1,6 +1,7 @@
 package org.farhan.stepdefs.maven;
 
 import com.google.inject.Inject;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
@@ -17,5 +18,10 @@ public class MavenUmlToAsciidoctorGoalSteps extends TestSteps {
     @Given("^The maven plugin uml-to-asciidoctor goal is executed$")
     public void isExecuted() {
         object.doEdgeStep("", "", "is", "executed");
+    }
+
+    @Given("^The maven plugin uml-to-asciidoctor goal is executed with$")
+    public void isExecutedWith(DataTable dataTable) {
+        object.doEdgeStep("", "", "is", "executed with", dataTable);
     }
 }
